@@ -1,0 +1,112 @@
+{
+  "schema": "dnbox-product-regression-derivation/1",
+  "sourceEventShimNotBrowser": true,
+  "runtime": "Actual shipped product modules except platform planning policy helper; Cfixtures compile and execute locally, not target firmware.",
+  "files": [
+    {
+      "from": "remote-workspace-r11/frame.test.mjs",
+      "sourceSha256": "8f5324e78ded952eb9362530ac906044dc5f97a9a84a34fb540156e6e2b95d20",
+      "path": "tests/product-workspace/frame.test.mjs",
+      "derivedSha256": "eaffa12479ee71b4fdf681f267d31aa493167d08e372af54fe8d743f825567bd",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/group-gestures.test.mjs",
+      "sourceSha256": "6bf5475a76afc350a5e16135f4a5d21ce085511a9fdc825f8b60746d2a647ec1",
+      "path": "tests/product-workspace/group-gestures.test.mjs",
+      "derivedSha256": "1f2c6311d2709bd975279cab3fbe7a226a31a24205a74a338a86d81de635fb32",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/model.test.mjs",
+      "sourceSha256": "551b23fbd7388d45cb8f2adaad66a4b967189609624b2618450fb2d8f34dd151",
+      "path": "tests/product-workspace/model.test.mjs",
+      "derivedSha256": "62bf7e80bd1deca581cf5e0ad08deb81a875bcbfd15a96a5d2484734a563f538",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/motion.test.mjs",
+      "sourceSha256": "6012cbd560214dd58e71bf5855b53604c0a63474fe008ce95df5cbdf5041b903",
+      "path": "tests/product-workspace/motion.test.mjs",
+      "derivedSha256": "b1da9a62a78e482381ebe91c3b183660803f2b81b95f02160712eda8f1807031",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/parameter.test.mjs",
+      "sourceSha256": "db5e6e1b2f9d528581e6f3f8a3436361b6ac2f93f834916686f457c0a099a627",
+      "path": "tests/product-workspace/parameter.test.mjs",
+      "derivedSha256": "fb93f56ad476e4cf27f9cbd01b916fd0da111ae070008b8eab9e787d4c7e192b",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/roll.test.mjs",
+      "sourceSha256": "c3fb3cdb858e84a34f9b7783f3ef4d7e40cf99716ea70d3330d62a79a3325d1d",
+      "path": "tests/product-workspace/roll.test.mjs",
+      "derivedSha256": "441d733c3a2b40d24246d212ab9603823094255660edd1a51753de7214d66ad8",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/sequence.test.mjs",
+      "sourceSha256": "9ffdeef294aab6c1f7a883aebcf91c400069a3fd9ddc1cc8f931a05a592f402d",
+      "path": "tests/product-workspace/sequence.test.mjs",
+      "derivedSha256": "5ff4922276dc6710db83140a794d1cf4e039d179308270117c15a78ad164bcda",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/workspace.test.mjs",
+      "sourceSha256": "53285c75384985288b77c393b062db207fd014627df458c5bb9c0939839d2909",
+      "path": "tests/product-workspace/workspace.test.mjs",
+      "derivedSha256": "513e241987bccacb0ec855af463029bbec0e7275cb75b4a9c3425008aff850d0",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-workspace-r11/app-regression.mjs",
+      "sourceSha256": "d3c9d55f94ef59ea2f8a0294280451ad8d482652a98e91d7045b51be890eda8e",
+      "path": "tests/product-workspace/app-regression.mjs",
+      "derivedSha256": "97f93f798b789566624724c2ded314cc81333b49aa27948c8b16819c12c1d2b1",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/c-source.test.mjs",
+      "sourceSha256": "0511a193115ad5425b7ea2d1e696db6123eecc10608569e8003bdc7aa52382f5",
+      "path": "tests/product-remote/c-source.test.mjs",
+      "derivedSha256": "cf3d293687138d45ac3b71fdfbbeedb1943b87cf10a044231d68ae7793afebb3",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/connection.test.mjs",
+      "sourceSha256": "f1445086d52c07acfb06867f5f1ec1fe1ecadc524f8f4ac24f94c9fb123d75f0",
+      "path": "tests/product-remote/connection.test.mjs",
+      "derivedSha256": "78cc5518a15caa1a5e1136f5cdc9b5ff519beecf731ed0d95a32274478a8edd1",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/late-close.test.mjs",
+      "sourceSha256": "941f84e315bedea668224f6c18b6534b4f4ae82386fc08ac85ec8ca4caba683a",
+      "path": "tests/product-remote/late-close.test.mjs",
+      "derivedSha256": "833ca6a3134afc919d34cdd025d3a9160f1599f72db9c61365addb7c11d5ab0e",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/page.test.mjs",
+      "sourceSha256": "31a9cad88331f7a0e0b2f1cb496367837ac220a452afc5370583b823b3b33003",
+      "path": "tests/product-remote/page.test.mjs",
+      "derivedSha256": "73ec6f02b6fb961a31d4cac8b9c362b51027203b32f01cb1860b8b8e85c6cb68",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/paired-client.test.mjs",
+      "sourceSha256": "d6e398ae38a85495f6a628b85c1fe74619ab748ecd31671c134889b7742c7501",
+      "path": "tests/product-remote/paired-client.test.mjs",
+      "derivedSha256": "eba3dd95246a62b8a4cb3b8b438d6e09c3e1c1e51e7a2bba1a726a88a1d732b9",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    },
+    {
+      "from": "remote-product-v6/view.test.mjs",
+      "sourceSha256": "a1ba57d751e7463587ea920169dcc89148f17050cf6d4a5a4d52c19d60ff2b40",
+      "path": "tests/product-remote/view.test.mjs",
+      "derivedSha256": "8277d2e19568f93ce56df9410ed77aef1bd47855edd41a9e8e200222f0fe75a0",
+      "adaptation": "Only module imports and data/app URLs redirected to shipped product subtree; no assertions weakened."
+    }
+  ]
+}

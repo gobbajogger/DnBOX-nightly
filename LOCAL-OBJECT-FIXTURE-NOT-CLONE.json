@@ -1,0 +1,9 @@
+{
+  "purpose": "Existing tests require git cat-file pinned public blobs. This is a partial local object fixture, NOT recovered Git checkout or remote ancestry.",
+  "blobs": [
+    "15d43a0a8398a69c70e73aa7b6a6dc6bbe5bace0",
+    "24a8b208aa01d539b5ef4e23af73d9c4aa2ac3d8"
+  ],
+  "commit_created": false,
+  "network_git": false
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "dnbox-original-public-installer-asset-recovery/1",
+  "source": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+  "pages": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
+  "allSixGitBlobsSameAcrossSourceAndPages": true,
+  "files": [
+    {
+      "path": "assets/firmware-ui/home.png",
+      "bytes": 173118,
+      "git_blob": "15a78518a570cc9784fb948aa89edb0bdcfafa07",
+      "sha256": "bed528235341197ab8cbb0640eef46cdce53ad74e6eb232d809414d410199ee5",
+      "sourcePath": "docs/assets/firmware-ui/home.png"
+    },
+    {
+      "path": "assets/firmware-ui/home.svg",
+      "bytes": 69205,
+      "git_blob": "50eeb66bea7f17ee0290fe0d374fb5887d7a5ca0",
+      "sha256": "b478f2c18def0b7fc6a43470785af2656add7ee3700360b8a630803e3025cced",
+      "sourcePath": "docs/assets/firmware-ui/home.svg"
+    },
+    {
+      "path": "assets/firmware-ui/mixer.png",
+      "bytes": 173118,
+      "git_blob": "c04929a717eeb630ba038477bdba118de4cd96dd",
+      "sha256": "1768d2ba62beeb4dee6a2bc412134fd928f7fe2524ac7cf8eb55a3fcb563a627",
+      "sourcePath": "docs/assets/firmware-ui/mixer.png"
+    },
+    {
+      "path": "assets/firmware-ui/mixer.svg",
+      "bytes": 68575,
+      "git_blob": "e9bb4fd0abf630060253e3bf68ed08d6fb683efb",
+      "sha256": "c955b6f38f8518b2e8d0bc2a1769b1f3c8823299b759b5380e1710f57a5e8e1d",
+      "sourcePath": "docs/assets/firmware-ui/mixer.svg"
+    },
+    {
+      "path": "assets/firmware-ui/smc-pr168.png",
+      "bytes": 173118,
+      "git_blob": "848571ffa9aa54f78b4c9d600c3e1ca9263535c3",
+      "sha256": "0a2f3c58743c07fdad5e5320fd9efbd899d5035282585d94ec4d161a01ef60aa",
+      "sourcePath": "docs/assets/firmware-ui/smc-pr168.png"
+    },
+    {
+      "path": "assets/firmware-ui/smc-pr168.svg",
+      "bytes": 160691,
+      "git_blob": "4427df82ffa9a36a8c47db98e77f854458c3999d",
+      "sha256": "df9c985974a91c205f7d7c8c37fe98abf9ebaea4580c19f117270a7a67108774",
+      "sourcePath": "docs/assets/firmware-ui/smc-pr168.svg"
+    }
+  ],
+  "actualReadAndGitBlobSHA1AndSHA256Verified": true,
+  "notClaimed": "Actual browser/visual acceptance or latest native UI; these restore existing exact historical linked assets."
+}

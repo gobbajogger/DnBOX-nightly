@@ -1,0 +1,97 @@
+{
+  "schema": "dnbox-r13-test-derivation/1",
+  "files": [
+    {
+      "source": "remote-workspace-r13/frame.test.mjs",
+      "sha256": "8f5324e78ded952eb9362530ac906044dc5f97a9a84a34fb540156e6e2b95d20",
+      "path": "tests/product-workspace/frame.test.mjs",
+      "derivedSha256": "eaffa12479ee71b4fdf681f267d31aa493167d08e372af54fe8d743f825567bd",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/group-gestures.test.mjs",
+      "sha256": "6bf5475a76afc350a5e16135f4a5d21ce085511a9fdc825f8b60746d2a647ec1",
+      "path": "tests/product-workspace/group-gestures.test.mjs",
+      "derivedSha256": "1f2c6311d2709bd975279cab3fbe7a226a31a24205a74a338a86d81de635fb32",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/model.test.mjs",
+      "sha256": "551b23fbd7388d45cb8f2adaad66a4b967189609624b2618450fb2d8f34dd151",
+      "path": "tests/product-workspace/model.test.mjs",
+      "derivedSha256": "62bf7e80bd1deca581cf5e0ad08deb81a875bcbfd15a96a5d2484734a563f538",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/motion.test.mjs",
+      "sha256": "6012cbd560214dd58e71bf5855b53604c0a63474fe008ce95df5cbdf5041b903",
+      "path": "tests/product-workspace/motion.test.mjs",
+      "derivedSha256": "b1da9a62a78e482381ebe91c3b183660803f2b81b95f02160712eda8f1807031",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/parameter.test.mjs",
+      "sha256": "db5e6e1b2f9d528581e6f3f8a3436361b6ac2f93f834916686f457c0a099a627",
+      "path": "tests/product-workspace/parameter.test.mjs",
+      "derivedSha256": "fb93f56ad476e4cf27f9cbd01b916fd0da111ae070008b8eab9e787d4c7e192b",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/roll.test.mjs",
+      "sha256": "c3fb3cdb858e84a34f9b7783f3ef4d7e40cf99716ea70d3330d62a79a3325d1d",
+      "path": "tests/product-workspace/roll.test.mjs",
+      "derivedSha256": "441d733c3a2b40d24246d212ab9603823094255660edd1a51753de7214d66ad8",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/sequence.test.mjs",
+      "sha256": "9ffdeef294aab6c1f7a883aebcf91c400069a3fd9ddc1cc8f931a05a592f402d",
+      "path": "tests/product-workspace/sequence.test.mjs",
+      "derivedSha256": "5ff4922276dc6710db83140a794d1cf4e039d179308270117c15a78ad164bcda",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/sound.test.mjs",
+      "sha256": "370e81e253ce1f603878af5ec118de777a06a830095a1c54c83316089c8e6897",
+      "path": "tests/product-workspace/sound.test.mjs",
+      "derivedSha256": "2a12505f7ff0f926c75609be5ab72686d5d0a4845a4fd442ee7aacaaa668d68b",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/timeline.test.mjs",
+      "sha256": "9655a9b28269e238f613c4f70abcb87cb1516b27ca42978cb7de71de7237df15",
+      "path": "tests/product-workspace/timeline.test.mjs",
+      "derivedSha256": "87c22e130f4b74644f4fd93d693f662d0fa33221142e569cd3b6382f227b790a",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/workspace.test.mjs",
+      "sha256": "53285c75384985288b77c393b062db207fd014627df458c5bb9c0939839d2909",
+      "path": "tests/product-workspace/workspace.test.mjs",
+      "derivedSha256": "513e241987bccacb0ec855af463029bbec0e7275cb75b4a9c3425008aff850d0",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/app-regression.mjs",
+      "sha256": "221bdd6dd257653f94e9c17784544bc0cffec48317e9d1e1eeae86a6a344564d",
+      "path": "tests/product-workspace/app-regression.mjs",
+      "derivedSha256": "099e3e5d80f2111b81c1eda9b383938c4f1a879fea6dd35674aa5a3817143650",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/app-correction-regression.mjs",
+      "sha256": "dc7d236a3e80cd56fd008f047f7d6e07f683237a6c3e7742e1228d3c2071e172",
+      "path": "tests/product-workspace/app-correction-regression.mjs",
+      "derivedSha256": "9cefe0f4a3b5f0ad2acb4a1b9a0872c659c7a4e3b3e4dd0cb518edfe1aff7682",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    },
+    {
+      "source": "remote-workspace-r13/app-sound-regression.mjs",
+      "sha256": "bc4bf18bafb35f4aa2b5c944458a561560d10fea44f0a9a58ccdfbc3c63f0f86",
+      "path": "tests/product-workspace/app-sound-regression.mjs",
+      "derivedSha256": "320a5392fd578ec5080560b241d380c20109384e8c2f05d9e9606077af42200e",
+      "adaptation": "Only imports/data/app root directed to shipped source; assertions unchanged."
+    }
+  ],
+  "engine": "Node source/event stub, NOT DOM/touch"
+}

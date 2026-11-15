@@ -1,0 +1,1 @@
+export function matchesRecord(record,{channel='all',model='all',query=''}={}){if(channel!=='all'&&record.channel!==channel)return false;if(model!=='all'&&record.models.length&&!record.models.includes(model))return false;return JSON.stringify(record.original).toLowerCase().includes(query.trim().toLowerCase());}

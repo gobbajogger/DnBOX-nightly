@@ -1,0 +1,56 @@
+import fs from'node:fs';import assert from'node:assert/strict';import{pathToFileURL,fileURLToPath}from'node:url';import{resolve}from'node:path';
+const base=new URL('../../web/product-site/remote/',import.meta.url);let bootId=0;
+class Node {
+ constructor(id=''){Object.assign(this,{id,handlers:{},dataset:{},style:{setProperty(){}},innerHTML:'',textContent:'',value:'',scrollLeft:0,scrollTop:0,clientHeight:300,disabled:false,captured:new Set(),attributes:{},hidden:false});this.classList={toggle:()=>false};}
+ addEventListener(type,fn){(this.handlers[type]??=[]).push(fn)}
+ removeEventListener(type,fn){this.handlers[type]=(this.handlers[type]??[]).filter(x=>x!==fn)}
+ emit(type,e){for(const fn of this.handlers[type]??[])fn(e)}
+ setAttribute(k,v){this.attributes[k]=v} removeAttribute(k){delete this.attributes[k]}
+ setPointerCapture(p){this.captured.add(p)} hasPointerCapture(p){return this.captured.has(p)} releasePointerCapture(p){this.captured.delete(p)}
+ getBoundingClientRect(){return{left:0,top:0,width:100,height:100}}
+ closest(s){if(s==='button')return this;const m=s.match(/^\[data-(note|select|param|edge)\]$/);return m&&this.dataset[m[1]]!==undefined?this:null}
+ querySelector(s){if(s==='span')return(this.span??=new Node());const m=s.match(/^\[data-(note|select)="([^"]+)"\]$/);if(m){const n=new Node();n.dataset[m[1]]=m[2];return n}return null}
+ focus(){document.activeElement=this} showModal(){this.open=true} close(){this.open=false;this.onclose?.()}
+}
+async function boot(){
+let downloaded=null;globalThis.URL.createObjectURL=b=>{downloaded=b;return'blob:source-event-double'};globalThis.URL.revokeObjectURL=()=>{};globalThis.setTimeout=()=>0;const nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,new Node(id));return nodes.get(id)};
+const views=['roll','drums','locks','sound','mix','patterns','song','files'].map(v=>Object.assign(new Node(),{dataset:{view:v}})),modes=['select','move','draw','length','pan'].map(v=>Object.assign(new Node(),{dataset:{mode:v}}));
+const documentListeners={};
+globalThis.document={createElement:()=>({click(){}}),activeElement:null,getElementById:get,querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new Node(),addEventListener(t,f){(documentListeners[t]??=[]).push(f)}};
+const windowListeners={};globalThis.window={addEventListener(t,f){(windowListeners[t]??=[]).push(f)}};
+globalThis.fetch=async p=>({ok:true,text:async()=>fs.readFileSync(new URL(p,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(p,base),'utf8'))});
+get('zoom').value='1';get('lane-kind').value='velocity';get('part').value='chicago';get('part').selectedOptions=[{textContent:'Bass A Chicago'}];
+await import(new URL('app.mjs?correctionProbe='+(bootId++),base));
+const view=v=>views.find(x=>x.dataset.view===v).onclick();
+const changePart=(v,label=v)=>{get('part').value=v;get('part').selectedOptions=[{textContent:label}];get('part').onchange()};
+const press=id=>get(id).onclick();
+return{get,view,changePart,press,windowListeners,documentListeners,download:async()=>downloaded?.text()};}
+
+const event=(target,pointerId=1,extra={})=>({target,pointerId,button:0,clientX:0,clientY:40,preventDefault(){},...extra});
+function review(x){x.press('review');return x.get('changes').textContent}
+function drive(x,id=8,dx=14){x.view('mix');const controls=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.find(s=>s.path.endsWith('/mix-master.svg')).controls;const target=Object.assign(new Node(),{dataset:{param:'current-state-and-reference/mix-master.svg|1:4:0:2',paramOccurrence:String(controls.findIndex(c=>c.identity==='1:4:0:2'))}});x.get('other-view').emit('pointerdown',event(target,id));const before=Number(x.get('parameter-value').value);x.get('other-view').emit('pointermove',event(target,id,{clientX:dx}));x.get('other-view').emit('pointerup',event(target,id));return{before,after:Number(x.get('parameter-value').value),target}}
+function motion(x,id=9){x.view('locks');const n=x.get('motion-grid'),e=event(n,id,{clientX:10,clientY:50});n.onpointerdown(e);n.onpointerup(e)}
+function song(x){x.view('patterns');for(let p=0;p<5;p++){const t=Object.assign(new Node(),{dataset:{launchPart:String(p),pattern:String(p+1)}});x.get('other-view').emit('click',{target:t})}x.view('song');x.get('other-view').emit('click',{target:new Node('song-add')})}
+
+const x=await boot();
+// Actual shipped app code runs against event doubles, not a rendered DOM or touch browser.
+drive(x);motion(x);song(x);x.changePart('chicago','Bass A');x.view('sound');
+const bank=Object.assign(new Node('sound-bank'),{value:'MIAMI'});x.get('other-view').emit('change',{target:bank});
+assert.match(x.get('other-view').innerHTML,/Sound · Bass A \/ MIAMI local bank preview/);assert.match(x.get('other-view').innerHTML,/<h3>CARRIER<\/h3>/);assert.match(x.get('other-view').innerHTML,/<h3>XMOD<\/h3>/);
+const sound=JSON.parse(fs.readFileSync(new URL('source-sounds.json',base))).contexts.find(c=>c.bank==='MIAMI'&&c.bassSlot===0).controls.find(c=>c.kind===1&&c.sourceSection==='XMOD'&&c.name==='WAVE'),id='source-sound/MIAMI/0|'+[sound.kind,sound.target,sound.voice,sound.parameter,sound.sourceBank].join(':');
+const t=Object.assign(new Node(),{dataset:{param:id}});x.get('other-view').emit('pointerdown',event(t,71));x.get('other-view').emit('pointerup',event(t,71));x.get('parameter-value').value=String(sound.raw===127?126:sound.raw+1);x.get('parameter-value').onchange();assert.match(review(x),/MIAMI \/ XMOD.*WAVE/);
+x.press('draft-save');const text=await x.download();assert.ok(text);const doc=JSON.parse(text);assert.equal(doc.parameters.length,2);assert.equal(doc.song.length,1);assert.ok(doc.motion.values.some(v=>v!==null));assert.equal(doc.soundBanks[0],'MIAMI');assert.match(x.get('status').textContent,/Download requested/);assert.equal(doc.context.view,'sound');const before=review(x);
+x.press('undo');assert.notEqual(review(x),before);x.press('undo');assert.notEqual(review(x),before);
+await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});assert.equal(x.get('draft-dialog').open,true);assert.notEqual(review(x),before);x.press('draft-replace');assert.equal(review(x),before);assert.equal(x.get('undo').disabled,true);assert.equal(x.get('redo').disabled,true);assert.equal(x.get('part').value,'chicago');assert.match(x.get('other-view').innerHTML,/Sound · Bass A \/ MIAMI local bank preview/);
+// New edits after restore participate in a fresh timeline and Undo returns to restored local data.
+x.view('mix');const value=drive(x,90).after;x.press('undo');assert.equal(review(x),before);x.press('redo');assert.ok(review(x).includes('Drive'));
+// Actual app and draft-file lifecycle listeners both run, so a hidden page cannot revive a pending import.
+x.press('draft-save');const lifecycleText=await x.download();let resolveFile;
+const pendingRead=x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(lifecycleText),text:()=>new Promise(r=>resolveFile=r)}]}});
+for(const fn of x.windowListeners.pagehide??[])fn({persisted:true});resolveFile(lifecycleText);await pendingRead;
+assert.equal(x.get('draft-dialog').open,false);assert.equal(x.get('draft-replace').disabled,true);
+for(const fn of x.windowListeners.pageshow??[])fn({persisted:true});
+await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(lifecycleText),text:async()=>lifecycleText}]}});
+assert.equal(x.get('draft-dialog').open,true);x.press('draft-cancel');
+console.log('PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof');
+console.log('PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem');

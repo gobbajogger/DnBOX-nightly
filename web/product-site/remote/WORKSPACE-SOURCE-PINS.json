@@ -1,0 +1,71 @@
+{
+  "scope": "R16 isolated correction of three sealed R15 findings; exact bounded unused note IDs and draft-file departure invalidation. Source context/body geometry and all original safeguards retained. Independent successor recheck/browser/workflow/delivery pending.",
+  "inputs": [
+    {
+      "source": "project-source-trace-20261115/SOURCE-EXECUTED-TRACE.json",
+      "path": "trace.json",
+      "bytes": 4133,
+      "sha256": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55"
+    },
+    {
+      "source": "firmware-remote-native-completion-20261115/CATALOG-v3.json",
+      "path": "catalog.json",
+      "bytes": 100463,
+      "sha256": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0"
+    }
+  ],
+  "pattern_semantics": "firmware/src/seq/pattern.h/sequencer.h/motion.h and app/project.c at ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+  "drum_midi_map": "exact sequencer.c lines30-31",
+  "state_authority": "notes are a finite source-executed example. UI edits are an independent local draft, not executed firmware state or native pattern application.",
+  "catalog_admitted": false,
+  "semantic_components": {
+    "source": "semantic-components-r22-v1/SOURCE-FREEZE-v2.json",
+    "sha256": "67b21142b1539c9b519597bff5624fbce225fbca0be6f1f19ad781f614a576d5",
+    "sourceFreeze": "dc0f8a080843b427cda17e6c55e80043aef40788e5d711e7c6f13382c5c966ff",
+    "selection": "26 captured frames/124controls, all22drumvoices/83slots; those exact SVGs unchanged fromR21. The30correctedvoiceMIX/mute source views are in separate R22reference, not this projection.",
+    "authority": "fixed source-example body glyphs; draft raw readout separate, no rerender/nativeformatter"
+  },
+  "native_drum_contract": {
+    "ui_sha256": "d7f9db8ec08f62ae65a6a6d6e9a25f26aaf7069143a8b4b54a78d7d6f6d6526a",
+    "sequencer_sha256": "40a393b76de9f11d41bf99828fab99f87f91e29ed3b21f672c9ab1cf984b8156",
+    "velocity": "T_VEL, kit<<4|voice, pattern unbound in this local draft"
+  },
+  "sourceSounds": {
+    "source": "ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+    "observationFreeze": "e90ecc69cd301664175086c6d498659bab76d1ea7c64d2423186e97b2ae8a058",
+    "path": "source-sounds.json",
+    "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+    "contexts": 7,
+    "currentBassScalars": 104,
+    "authority": "Actual native-list names/snapshots/domains and matrix section-title/ref provenance. R13 bounded source observation review accepted; R15 section derivation/local draft controls newly awaiting affected review. No R22 bass/BREAK glyph/physical hit binding."
+  },
+  "bodyViewport": {
+    "path": "BODY-VIEWPORT-PROOF.json",
+    "sha256": "c680c932026e0942d4de9e2789dc966ec7589cd8e9c92ccd97ea65c943b9fcf6",
+    "viewBox": [
+      0,
+      20,
+      240,
+      220
+    ],
+    "authority": "Outer viewport only, inverse source-body bytes exact; not geometry/value/engine redraw or browser result"
+  },
+  "sourceSections": {
+    "path": "SOURCE-SECTION-PROOF.json",
+    "sha256": "0a5a5de0c348bdf80754e033d12421a7e65666dbce2eaa13109a5d4062409bf8",
+    "controls": 104,
+    "authority": "Actual draw command at allocation top matched by full typed ref and source bank, repeated matrix captures agree"
+  },
+  "localDraft": {
+    "schema": "dnbox-local-workspace-draft/1",
+    "authority": "Explicit exact-source local file only; all domains preserved, no native format/application or playback. Download request is not proof of filesystem persistence. Import clears Undo/Redo/clipboard after explicit replacement.",
+    "identityPolicy": "One bounded unused-ID allocator shared by Add/Paste and codec domain0..1000000000; imported IDs are not renamed. Upper-bound allocation wraps/skips occupied IDs.",
+    "lifecycle": "Pagehide invalidates pending file generations, clears preview/replacement and closes it. Pageshow permits a new intentional file choice; real browser/BFCache remains NOT_RUN."
+  },
+  "R15IndependentReview": {
+    "reportSHA256": "fb3e333d8721524e4d022b4e99c9ebb2eead32ff891464368097ed47df115195",
+    "JSONSHA256": "9a61f38d986ab668c77cc5ef9c927d24853ccf0902d590762f3b2ad7b38f2898",
+    "disposition": "CHANGES_REQUIRED",
+    "scope": "Bounded predecessor source review only, three genuine defects now corrected by producer but not independently rechecked"
+  }
+}

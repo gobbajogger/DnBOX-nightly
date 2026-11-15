@@ -1,0 +1,54 @@
+{
+  "schema": "dnbox-entry-availability-disclosure/1",
+  "scope": "Only truthful entry copy. Not provider/engine/playback or installer handoff implementation; all original scripts preserved.",
+  "files": [
+    {
+      "path": "index.html",
+      "beforeSHA256": "df475aae3990a260cfe5140f9c24bd61e5f59c8bfa8a3977b4b3e47cf214e1a2",
+      "afterSHA256": "4592681a2d887932fcebb5d51c06215a4e2b4a6e73b48f2e8d42d974f8db5b11",
+      "changes": [
+        {
+          "before": "<strong>Remote control</strong><span>Connect your browser to the instrument.</span>",
+          "after": "<strong>Local workspace preview</strong><span>Edit and save local drafts. No connected control or playback.</span>"
+        }
+      ]
+    },
+    {
+      "path": "tools/index.html",
+      "beforeSHA256": "ced5b0c3d98efa58ca2ab286081fe1216396c05b2bc1505651f918247764d280",
+      "afterSHA256": "7d93b950c2ae7bcf853288ea55dfa28e53fc0816ce8a6bd0d194acc52d0468e6",
+      "changes": [
+        {
+          "before": "<h2>Remote control</h2><p>Bring the instrument\u2019s controls into your browser.</p>",
+          "after": "<h2>Local remote workspace preview</h2><p>Notes, raw control drafts, Motion and song studies. Draft download/open keeps this exact local version. No connected control or playback in this preview.</p>"
+        },
+        {
+          "before": ">Open Remote control</a>",
+          "after": ">Open workspace preview</a>"
+        }
+      ]
+    },
+    {
+      "path": "projects/index.html",
+      "beforeSHA256": "9058a5e65ab363a6bd72d46f53445be994580ecc52699b157d27d99973f8ecd0",
+      "afterSHA256": "a5ebe29c27918afd9e0a0e613d29e77b5ae8df8e4993acf8a3e99f7a76c7965f",
+      "changes": [
+        {
+          "before": "<section id=\"project-exchange-root\" style=\"max-width:1100px;margin:40px auto;padding:24px\"></section>",
+          "after": "<section id=\"project-exchange-availability\" style=\"max-width:1100px;margin:40px auto;padding:24px\"><h2>MIDI exchange availability</h2><p>Browser MIDI export is unavailable: no qualified source-executed browser provider is installed. File inspection and the original full-project backup/restore tools remain separate. A local workspace draft is not a native project or MIDI export.</p></section><section id=\"project-exchange-root\" style=\"max-width:1100px;margin:40px auto;padding:24px\"></section>"
+        }
+      ]
+    },
+    {
+      "path": "starting-breaks/index.html",
+      "beforeSHA256": "d175cff7958877ac44968fd73d2b14acfc8be3109599d7724685130de32dd4c5",
+      "afterSHA256": "b5d8cc6df72fe9bba419e7a1952d69d40e2e15b54ba139d2bcf1c80ed3e710aa",
+      "changes": [
+        {
+          "before": "<h1>Make it your instrument.</h1>",
+          "after": "<h1>Make it your instrument.</h1><p>Starting-break choices are a separate preparation preview. They do not change the firmware installer\u2019s model or package selection. Keep your prepared sample files and use Samples for the separate import workflow.</p>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1771 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-only
+     X0X break loops: your loops on the FM-1 as one list, BR1, BR2 ... as LOOP A / LOOP B show them (Chrome or
+     Edge, Web MIDI). Connect reads the sample slots back (X0X's SMP_INFO, 15, gives their count and size;
+     SMP_READ, 16); add, replace and remove loops; Send repacks the list in order into the slots and rewrites only
+     the slots that changed, a loop read back kept as it is (no re-encoding). Back up saves every slot to an
+     .x0xslots file and Restore writes one back (tools/x0x_slots.py's format). The slot images are tools/upload_breaks.py's (web/x0x_breaks.js), sent
+     with Felucca's sample-slot protocol (web/EDITOR_PROTOCOL.md, 11-15). tools/make_pages.py inlines
+     x0x_breaks.js at LIB. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DnBOX break loops</title>
+<style>
+  :root { --bg: #fff; --fg: #000; --dim: #777; --rule: #ddd; --wave: #999; --accent: #c8700a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #000; --fg: #fff; --dim: #888; --rule: #333; --wave: #666; --accent: #f0a043; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #000; --fg: #fff; --dim: #888; --rule: #333; --wave: #666; --accent: #f0a043; color-scheme: dark; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding-inline: 16px; padding-block: 48px; }
+  h1 { font-size: 24px; font-weight: 600; margin: 0 0 16px; }
+  p { margin: 0 0 16px; }
+  .small { color: var(--dim); font-size: 13px; }
+  button { font: inherit; font-size: 14px; background: var(--fg); color: var(--bg); border: 0; padding: 6px 16px; cursor: pointer; }
+  button.quiet { background: none; color: var(--fg); border: 1px solid var(--rule); }
+  button.link { background: none; color: var(--dim); border: 0; padding: 0 4px; text-decoration: underline; font-size: 13px; }
+  button:disabled { opacity: .3; cursor: default; }
+  .bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 20px; }
+  #status { color: var(--dim); font-size: 14px; }
+  label { font-size: 14px; display: inline-flex; gap: 6px; align-items: center; }
+  #list { border-top: 1px solid var(--rule); margin: 0 0 12px; }
+  #list.over { outline: 1px dashed var(--accent); outline-offset: 4px; }
+  .loop { display: grid; grid-template-columns: 4.5em 1fr auto; gap: 12px; align-items: center;
+          padding: 8px 0; border-bottom: 1px solid var(--rule); }
+  .loop.over { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+  .loop .name { font-weight: 600; line-height: 1.25; }
+  .loop .name small { display: block; font-weight: 400; font-size: 12px; color: var(--dim); }
+  .loop.new .name { color: var(--accent); }
+  .loop canvas { display: block; width: 100%; height: 40px; min-width: 0; }
+  .loop .acts { display: flex; gap: 4px; }
+  .empty { color: var(--dim); font-size: 14px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .full { height: 4px; background: var(--rule); margin: 16px 0 6px; }
+  .full > div { height: 100%; background: var(--accent); }
+  #room { font-size: 13px; color: var(--dim); margin: 0 0 16px; }
+  #room.bad { color: #d33; }
+  progress { width: 100%; height: 4px; }
+  .home { display: inline-block; font-weight: 700; letter-spacing: .03em; color: var(--dim); text-decoration: none; margin: 0 0 12px; }
+  .home:hover, .home:focus-visible { color: var(--accent); }
+  input[type=file] { display: none; }
+  select { font:inherit; max-width:100%; min-height:44px; color:var(--fg); background:#1b2225; border:1px solid var(--rule); border-radius:8px; padding:8px; }
+  dialog { color:var(--fg); background:var(--bg); border:1px solid var(--rule); border-radius:12px; width:min(640px,calc(100% - 32px)); max-height:85vh; padding:20px; }
+  dialog::backdrop { background:rgba(0,0,0,.65); }
+  .preview-row { border-top:1px solid var(--rule); padding:12px 0; overflow-wrap:anywhere; }
+  .preview-row p { font-size:13px; color:var(--dim); margin:4px 0 8px; }
+  .preview-row .bar { padding:0; }
+  #import-help,#savings { color:var(--dim); font-size:13px; }
+  select:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+
+  [hidden] { display: none !important; }
+  :root.embedded { --bg:#14191c; --fg:#eff3ef; --dim:#a1ada9; --rule:#343e3a; --wave:#77847f; --accent:#ccfc76; color-scheme:dark; }
+  .embedded main { max-width:none; padding:24px; box-sizing:border-box; }
+  .embedded button { border-radius:8px; min-height:44px; }
+  .embedded button:focus-visible, .embedded input:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  .embedded .loop { grid-template-columns:4em minmax(0,1fr) auto; }
+
+  /* Shared control-desk presentation; no change to sample state or writes. */
+  :root { --bg:#0b0e10; --fg:#eff3ef; --dim:#a1ada9; --rule:#343e3a; --wave:#77847f; --accent:#ccfc76; color-scheme:dark; }
+  * { box-sizing:border-box; }
+  main { max-width:960px; padding:32px 24px; }
+  h1 { font-size:30px; letter-spacing:-.035em; line-height:1.2; }
+  p { font-size:14px; }
+  button { min-height:44px; padding:10px 16px; border-radius:8px; background:var(--accent); color:#121c0b; font-weight:650; }
+  button.quiet { background:#1b2225; color:var(--fg); }
+  button.link { min-height:36px; background:none; color:var(--dim); font-weight:500; }
+  button:focus-visible,a:focus-visible,input:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  button:disabled { opacity:.46; }
+  .bar { gap:12px; padding:16px 0; margin-bottom:4px; }
+  #list { border:1px solid var(--rule); border-radius:10px; padding:0 16px; background:#101719; }
+  .empty { border:0; padding:28px 0; }
+  .full { height:6px; border-radius:4px; overflow:hidden; }
+  label { font-size:13px; }
+  input[type=checkbox] { width:18px; height:18px; accent-color:var(--accent); }
+  .loop .acts { flex-wrap:wrap; }
+  @media(max-width:530px){ main,.embedded main { padding:22px 16px; } h1 { font-size:26px; }.loop,.embedded .loop { grid-template-columns:3.5em minmax(0,1fr); gap:8px; }.loop .acts { grid-column:2; } }
+  .embedded main{padding:0 0 16px;background:#0b0e10}.embedded{--bg:#0b0e10}p{max-width:76ch}h1{font-size:24px;margin-bottom:8px}.bar{padding:10px 0}.sample-warning{font-size:14px;color:var(--dim);margin:12px 0 0}.sample-help>summary{min-height:44px;align-content:center;color:var(--dim)}label{min-height:44px}button,a,input,summary{touch-action:manipulation}
+  .embedded p{font-weight:400}.embedded main>p:last-child{display:none}
+.empty{padding:14px 0}.embedded .empty{padding:14px 0}
+</style>
+<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
+<body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX</a><nav aria-label="Main"><a href="../index.html#sounds">Capabilities</a><a href="../manual/">Manual</a><a href="../builds/">Build history</a><a href="../tools/">Tools</a><a class="install-link" href="../install/">Get firmware</a></nav></header></div>
+<main id="dnbox-tool-main">
+  <a class="home" href="../">DnBOX</a>
+  <h1>Import samples</h1>
+  <p>Connect your keyboard by USB with DnBOX running. Use Chrome or Edge to add or replace loops.</p>
+
+  <div class="bar">
+    <button id="connect">Connect</button>
+    <span id="status" role="status" aria-live="polite"></span>
+  </div>
+
+  <div id="list"><div class="empty">Connect to read your keyboard’s sample slots.</div></div>
+  <div class="bar">
+    <button class="quiet" id="add">Add loops</button>
+    <span class="small">or drop files here. Drop one on a loop to replace it.</span>
+    <label title="Keeps only the first bar of each file you add (its length tells how many bars it has), so more loops fit">
+      <input type="checkbox" id="bars" checked> Detect first bar</label>
+    <label title="Cuts the silence before and after the sound (below -60 dB). A loop's length sets its tempo, so this is off for loops">
+      <input type="checkbox" id="trim"> Trim silence</label>
+    <label title="Stores new loops at 22 kHz instead of 44.1 kHz: twice as many fit, but they sound duller">
+      <input type="checkbox" id="half"> 22.05 kHz (more room)</label>
+    <label for="grit">Oldschool space saver
+      <select id="grit" aria-describedby="import-help">
+        <option value="">Off</option><option value="light">Light · 1.5×</option>
+        <option value="medium">Medium · 2×</option><option value="heavy">Heavy · 3×</option><option value="max">Max · 4×</option>
+      </select>
+    </label>
+  </div>
+  <p id="import-help">Store fewer samples with a matching lower playback rate: retain the prepared loop’s duration and pitch at its original tempo, with less bandwidth and an oldschool texture. Other BREAK tempo and pitch settings still change playback. Off by default; original files stay untouched. First-bar and trim settings apply before rate reduction.</p>
+  <section aria-labelledby="auditionTitle">
+    <h2 id="auditionTitle">Listen locally before connecting</h2>
+    <label for="auditionFile">Choose an audio file to compare</label>
+    <input id="auditionFile" style="display:block;max-width:100%;margin:12px 0" type="file" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
+    <p class="small">Mono reference uses the same trim and bar cut, at the decoded source rate. Both paths are peak normalized, not perceived-loudness matched. Encoded loop plays the saved ADPCM and rate; compare texture rather than loudness. Device tempo and effects are not included.</p>
+    <div class="bar"><button type="button" class="quiet" id="auditionReference" disabled>Play mono reference</button><button type="button" id="auditionEncoded" disabled>Play encoded loop</button><button type="button" class="quiet" id="auditionStop">Stop audio</button></div>
+    <p id="auditionStatus" role="status" aria-live="polite">Choose a file above. Listening is local and does not require MIDI or change device samples.</p>
+  </section>
+  <div class="full"><div id="fill"></div></div>
+  <p id="room"></p>
+  <p id="savings" role="status" aria-live="polite"></p>
+  <dialog id="previewDlg" aria-labelledby="previewTitle">
+    <h2 id="previewTitle">Compare before adding</h2>
+    <p id="previewNotice">Mono reference uses the same trim and bar cut, at the decoded source rate. The reference and import are peak normalized; this is not perceived-loudness matching. Encoded loop plays the actual saved ADPCM at its saved playback rate. Compare texture rather than loudness. Device tempo, pitch and performance effects are not included.</p>
+    <div id="previewList"></div>
+    <p id="previewStatus" role="status" aria-live="polite"></p>
+    <div class="bar"><button type="button" class="quiet" id="previewStop">Stop audio</button><button type="button" id="previewGo">Add these loops</button><button type="button" class="quiet" id="previewCancel">Cancel</button></div>
+  </dialog>
+
+  <p class="sample-warning">Back up important slots first. Send replaces changed slots and applies removals; Restore replaces slots from your backup.</p>
+  <div class="bar">
+    <button id="send" disabled>Send samples to device</button>
+    <button class="quiet" id="discard" hidden>Discard changes</button>
+  </div>
+  <progress id="progress" max="100" value="0" hidden></progress>
+  <input type="file" id="files" multiple accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
+  <input type="file" id="archive" accept=".x0xslots">
+
+  <div class="bar" style="margin-top:24px">
+    <button class="quiet" id="backup" disabled>Back up all slots</button>
+    <button class="quiet" id="restore" disabled>Restore a backup</button>
+    
+  </div>
+
+  <details class="sample-help"><summary>Loop playback &amp; file tips</summary><p class="small">Your loops appear as BR1, BR2 and so on, after the built-in loops. Choose BREAK → EDIT, then turn LOOP A or LOOP B.</p>
+  <p class="small">New loops are stored at 44.1 kHz. A one-bar loop at 120 BPM takes
+    about 86 KB; tick "22 kHz" to fit twice as many at a lower quality. Loops follow the tempo by playing faster or slower, so their pitch
+    follows it too; the break's PITCH knob shifts it. Removing a loop renumbers the ones after it, so patterns
+    that used them play the next loop instead.
+    <a href="https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/docs/MANUAL.md#8-break" style="color:inherit">The manual's BREAK section</a> says how DnBOX plays a loop.</p></details>
+  <p class="small">DnBOX builds on X0X and Felucca by Hügelton Instruments (GPL-3.0); the break generator is BB Gen's.
+    <a href="https://github.com/gobbajogger/X0X37-for-Loopy-Pro" style="color:inherit">github.com/gobbajogger/X0X37-for-Loopy-Pro</a></p>
+</main>
+<script type="module">
+// SPDX-License-Identifier: GPL-3.0-only
+// X0X break loops in the browser: tools/upload_breaks.py and its helpers (tools/sampleio.py,
+// Felucca's encoder; tools/import_breaks.py's bar guess) as plain functions, so the page
+// (web/x0x_breaks.html) builds the same slot images the command line does, byte for byte
+// (web/test_breaks.mjs checks it against upload_breaks.py --dry-run).
+//
+// The float arithmetic follows sampleio.py's order of operations: keep it when touching these.
+
+const SLOT_SIZE = 0x14000, SLOT_DATA_OFF = 512, SLOT_ZONES = 16;
+const SLOT_HDR_LEN = 32 + SLOT_ZONES * 28;
+const SLOT_MAX_DATA = SLOT_SIZE - SLOT_DATA_OFF;
+const ROOT_BASE = 36;              // loop i is zone root 36 + i: the slot sorts its zones by root
+const RATE = 44100, RATE_HALF = 22050;   // 44.1 kHz by default; 22.05 kHz only when asked for
+const OLDSCHOOL_FACTOR = 2;              // --oldschool CLI default (medium grit)
+const MIN_LOOP_SAMPLES = 64;           // firmware breaks_set_loop minimum
+/** @type {{ key: string, label: string, factor: number }[]} */
+const OLDSCHOOL_GRIT = [
+  { key: "", label: "Off (clean)", factor: 1 },
+  { key: "light", label: "Light", factor: 1.5 },
+  { key: "medium", label: "Medium", factor: 2 },
+  { key: "heavy", label: "Heavy", factor: 3 },
+  { key: "max", label: "Max", factor: 4 },
+];
+const DRY_SLOT_KB = [80, 120, 44]; // upload_breaks.py --dry-run's default layout: the SMK-37's slots (KiB)
+
+const IMA_STEP = [7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 21, 23, 25, 28, 31, 34, 37, 41, 45, 50, 55, 60, 66, 73, 80, 88,
+  97, 107, 118, 130, 143, 157, 173, 190, 209, 230, 253, 279, 307, 337, 371, 408, 449, 494, 544, 598, 658,
+  724, 796, 876, 963, 1060, 1166, 1282, 1411, 1552, 1707, 1878, 2066, 2272, 2499, 2749, 3024, 3327, 3660,
+  4026, 4428, 4871, 5358, 5894, 6484, 7132, 7845, 8630, 9493, 10442, 11487, 12635, 13899, 15289, 16818,
+  18500, 20350, 22385, 24623, 27086, 29794, 32767];
+const IMA_IDX = [-1, -1, -1, -1, 2, 4, 6, 8];
+
+// import_breaks.bars_of: the bar count (1, 2 or 4) that puts the loop's tempo nearest 120 inside 80-180
+function barsOf(seconds) {
+  let best = null;
+  for (const b of [1, 2, 4]) {
+    const bpm = b * 240.0 / seconds;
+    if (bpm >= 80 && bpm <= 180 && (best === null || Math.abs(bpm - 120) < Math.abs(best[1] - 120))) best = [b, bpm];
+  }
+  return best || [1, 240.0 / seconds];
+}
+
+// sampleio.resample: a moving average over the ratio, then linear interpolation
+function resample(x, sr, to) {
+  if (sr === to) return x;
+  if (sr > to) {
+    const k = Math.max(1, Math.round(sr / to));
+    if (k === 2) {
+      const y = new Array(x.length);
+      for (let i = 0; i + 1 < x.length; i++) y[i] = (x[i] + x[i + 1]) / 2;
+      if (x.length) y[x.length - 1] = x[x.length - 1] / 2;
+      x = y;
+    } else if (k > 1) {
+      const y = new Array(x.length);
+      for (let i = 0; i < x.length; i++) {
+        let acc = x[i];                           // reduce(add, x[i:i + k]): left to right
+        for (let j = i + 1; j < i + k && j < x.length; j++) acc += x[j];
+        y[i] = acc / k;
+      }
+      x = y;
+    }
+  }
+  const step = sr / to, out = [], last = x.length - 1;
+  let p = 0.0;
+  while (p < last) {
+    const i = Math.trunc(p), f = p - i;
+    out.push(x[i] * (1 - f) + x[i + 1] * f);
+    p += step;
+  }
+  return out;
+}
+
+function peak(x, floor = 1e-9) {
+  let m = floor;
+  for (const v of x) { const a = Math.abs(v); if (a > m) m = a; }
+  return m;
+}
+
+// sampleio.to_int16: peak normalised to 30000
+function toInt16(x) {
+  const pk = peak(x), out = new Int16Array(x.length);
+  for (let i = 0; i < x.length; i++) out[i] = Math.max(-32768, Math.min(32767, Math.trunc(x[i] / pk * 30000)));
+  return out;
+}
+
+// sampleio.trim_silence: cut the silence at both ends (floor 0.001 = -60 dBFS), keep 1 ms before the
+// sound, keep 5 ms after it and fade that tail to 0
+function trimSilence(x, sr, floor = 0.001, preMs = 1, fadeMs = 5) {
+  let first = -1, last = -1;
+  for (let i = 0; i < x.length; i++) if (Math.abs(x[i]) > floor) { if (first < 0) first = i; last = i; }
+  if (first < 0) return x;
+  const pre = Math.floor(sr * preMs / 1000), nf = Math.floor(sr * fadeMs / 1000);
+  const y = x.slice(Math.max(0, first - pre), Math.min(x.length, last + 1 + nf)), m = Math.min(nf, y.length);
+  for (let j = 0; j < m; j++) { const k = y.length - m + j; y[k] = y[k] * ((m - 1 - j) / m); }
+  return y;
+}
+
+// Shared source selection keeps A/B on the same trim and one-bar cut.
+function selectLoopSource(x, sr, bars, trim) {
+  if (trim) x = trimSilence(x, sr);
+  if (bars) {
+    const n = barsOf(x.length / sr)[0];
+    x = x.slice(0, Math.round(x.length / n));
+  }
+  return x;
+}
+
+// upload_breaks.cut: mono floats at their rate -> int16 at `rate` (one bar if bars; silence cut if trim)
+function cut(x, sr, bars, rate = RATE, trim = false) {
+  const y = resample(selectLoopSource(x, sr, bars, trim), sr, rate);
+  const pk = peak(y);
+  return toInt16(y.map((v) => v * (0.95 / pk)));
+}
+
+// PR362 import method: downsample to fewer stored samples and write the matching lower zone rate.
+// n/rate retains the loop duration; lower bandwidth and the IMA encode/decode change its texture.
+function applyOldschool(s, storageRate, factor = OLDSCHOOL_FACTOR) {
+  if (!Number.isFinite(factor) || factor < 1 || factor > 8) throw new Error("Invalid oldschool factor.");
+  if (factor === 1) return { s, rate: storageRate };
+  const x = [];
+  for (let i = 0; i < s.length; i++) x.push(s[i] / 32768);
+  const y = resample(x, storageRate, storageRate / factor);
+  const out = toInt16(y.map((v) => v * 0.95));
+  const playbackRate = Math.round(storageRate / factor);
+  if (out.length < MIN_LOOP_SAMPLES)
+    throw new Error(`too short after oldschool processing (${out.length} samples)`);
+  return { s: out, rate: playbackRate };
+}
+
+function cutLoop(x, sr, bars, storageRate = RATE, trim = false, gritFactor = 1) {
+  let s = cut(x, sr, bars, storageRate, trim);
+  let rate = storageRate;
+  if (gritFactor > 1) ({ s, rate } = applyOldschool(s, storageRate, gritFactor));
+  return { s, rate };
+}
+
+function gritLabel(factor) {
+  const g = OLDSCHOOL_GRIT.find((o) => o.factor === factor);
+  return g && g.factor > 1 ? g.label : "";
+}
+
+// Encoded preview at the saved zone rate; device tempo, pitch and performance controls remain separate.
+function loopPreviewPcm(s, playbackRate, roundTrip = true) {
+  const pcm = roundTrip ? imaDecode(imaEncode(s), s.length) : s;
+  const samples = new Float32Array(pcm.length);
+  for (let i = 0; i < pcm.length; i++) samples[i] = pcm[i] / 32768;
+  return { samples, rate: playbackRate };
+}
+
+// Prepare from the retained decoded original, never from an already processed loop.
+// The baseline is the same bar/trim at 44.1 kHz; actual ADPCM bytes include odd-sample nibble padding.
+function prepareLoopImport(x, sr, { bars = true, trim = false, storageRate = RATE, gritFactor = 1, maxData = SLOT_MAX_DATA } = {}) {
+  if (!Number.isFinite(sr) || sr <= 0 || !x.length || !Array.from(x).every(Number.isFinite))
+    throw new Error("The source audio has invalid samples or sample rate.");
+  if (storageRate !== RATE && storageRate !== RATE_HALF) throw new Error("Invalid import rate.");
+  if (!Number.isFinite(gritFactor) || gritFactor < 1 || gritFactor > 8) throw new Error("Invalid oldschool factor.");
+  if (!Number.isSafeInteger(maxData) || maxData < 1 || maxData > 0x20000 - SLOT_DATA_OFF)
+    throw new Error("Invalid BREAK slot capacity.");
+  const selected = selectLoopSource(x, sr, bars, trim);
+  // Bound the eventual ADPCM before either the reference or stored-rate
+  // resamplers allocate. Positive low rates remain valid when the result fits.
+  // Floor is a lower bound: floating-point stepping can add a sample at an
+  // exact boundary, which the final size check below also rejects.
+  const projected = storageRate === sr && gritFactor === 1 ? selected.length :
+    Math.floor(Math.max(0, selected.length - 1) * storageRate / sr / gritFactor);
+  const tooLong = () => Object.assign(new Error("This loop exceeds the BREAK slot capacity. Use a shorter cut, lower storage rate or stronger oldschool setting."), { code: "BREAK_SLOT_CAPACITY" });
+  if (!Number.isSafeInteger(projected) || Math.ceil(projected / 2) > maxData) throw tooLong();
+  // A same-cut mono reference at the decoded source rate, before resampling/codec.
+  // Match the import peak target, not perceived loudness; encoded playback stays exact.
+  const scale = (30000 / 32768) / peak(selected);
+  const reference = Float32Array.from(selected, v => v * scale);
+  const baseline = cut(x, sr, bars, RATE, trim);
+  const { s, rate } = cutLoop(x, sr, bars, storageRate, trim, gritFactor);
+  if (Math.ceil(s.length / 2) > maxData) throw tooLong();
+  if (s.length < MIN_LOOP_SAMPLES) throw new Error("This loop is too short for BREAK playback (64 samples minimum).");
+  const adpcm = imaEncode(s), baselineBytes = Math.ceil(baseline.length / 2);
+  return { s, rate, n: s.length, adpcm, baselineSamples: baseline.length, baselineBytes,
+    savedBytes: baselineBytes - adpcm.length, gritFactor, storageRate, reference, referenceRate: sr };
+}
+
+// sampleio.ima_encode: 4-bit IMA ADPCM, low nibble first, from predictor 0 / index 0
+function imaEncode(s) {
+  let pred = 0, idx = 0;
+  const out = new Uint8Array((s.length + 1) >> 1);
+  for (let n = 0; n < s.length; n++) {
+    const step = IMA_STEP[idx];
+    let diff = s[n] - pred, code = 0;
+    if (diff < 0) { code = 8; diff = -diff; }
+    let vd = step >> 3;
+    if (diff >= step) { code |= 4; diff -= step; vd += step; }
+    if (diff >= step >> 1) { code |= 2; diff -= step >> 1; vd += step >> 1; }
+    if (diff >= step >> 2) { code |= 1; vd += step >> 2; }
+    pred = code & 8 ? pred - vd : pred + vd;
+    if (pred > 32767) pred = 32767; else if (pred < -32768) pred = -32768;
+    idx += IMA_IDX[code & 7];
+    if (idx < 0) idx = 0; else if (idx > 88) idx = 88;
+    out[n >> 1] |= n & 1 ? code << 4 : code;
+  }
+  return out;
+}
+
+// the reverse, for drawing a slot read back from the FM-1: nibbles -> int16, from predictor 0 / index 0
+function imaDecode(b, n) {
+  let pred = 0, idx = 0;
+  const out = new Int16Array(n);
+  for (let i = 0; i < n; i++) {
+    const code = (b[i >> 1] >> (i & 1 ? 4 : 0)) & 15, step = IMA_STEP[idx];
+    let vd = step >> 3;
+    if (code & 4) vd += step;
+    if (code & 2) vd += step >> 1;
+    if (code & 1) vd += step >> 2;
+    pred = code & 8 ? pred - vd : pred + vd;
+    if (pred > 32767) pred = 32767; else if (pred < -32768) pred = -32768;
+    idx += IMA_IDX[code & 7];
+    if (idx < 0) idx = 0; else if (idx > 88) idx = 88;
+    out[i] = pred;
+  }
+  return out;
+}
+
+// a slot header (userSlot's layout) -> {nz, name, dataLen, zones: [{off, n, rate}]}, or null if not a slot
+function parseSlot(hdr) {
+  const v = new DataView(hdr.buffer || hdr, hdr.byteOffset || 0, hdr.byteLength);
+  if (hdr.byteLength < SLOT_HDR_LEN || v.getUint32(0, true) !== 0x504D5346) return null;
+  const nz = hdr[6], zones = [];
+  let name = "";
+  for (let i = 8; i < 16 && hdr[i]; i++) name += String.fromCharCode(hdr[i]);
+  for (let i = 0; i < nz && i < SLOT_ZONES; i++)
+    zones.push({ off: v.getUint32(32 + i * 28, true), n: v.getUint32(32 + i * 28 + 4, true),
+      rate: Math.round(v.getUint32(32 + i * 28 + 16, true) * 44100 / 65536) });
+  return { nz, name, dataLen: v.getUint32(16, true), zones };
+}
+
+let CRC_T = null;
+function crc32(b) {                    // zlib.crc32
+  if (!CRC_T) {
+    CRC_T = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+      CRC_T[n] = c >>> 0;
+    }
+  }
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < b.length; i++) c = CRC_T[(c ^ b[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+function keySplit(roots) {
+  const n = roots.length;
+  return roots.map((r, j) => [j === 0 ? 0 : ((roots[j - 1] + r) >> 1) + 1, j === n - 1 ? 127 : (r + roots[j + 1]) >> 1]);
+}
+
+// sampleio.user_slot for loops at `rate` (each its own zone, roots ROOT_BASE + i): -> {hdr, data}
+function userSlot(name, loops, rate = RATE, slotSize = SLOT_SIZE) {
+  return userSlotRaw(name, loops.map((s) => ({ adpcm: imaEncode(s), n: s.length, rate })), slotSize);
+}
+
+// the same from loops already encoded ({adpcm, n, rate}: the break page keeps a loop read back as it is,
+// at its own rate)
+function userSlotRaw(name, parts, slotSize = SLOT_SIZE) {
+  const total = parts.reduce((a, p) => a + p.adpcm.length, 0), max = slotSize - SLOT_DATA_OFF;
+  if (total > max) throw new Error(`too long: ${total} B of ADPCM, a slot holds ${max} B`);
+  if (parts.length < 1 || parts.length > SLOT_ZONES) throw new Error(`1..${SLOT_ZONES} loops per slot`);
+  const data = new Uint8Array(total);
+  const zs = [];
+  let off = 0;
+  parts.forEach((p, i) => {
+    data.set(p.adpcm, off);
+    zs.push({ off, n: p.n, root: ROOT_BASE + i, q16: Math.round(p.rate / 44100 * 65536) });
+    off += p.adpcm.length;
+  });
+  const split = keySplit(zs.map((z) => z.root));
+  const hdr = new Uint8Array(SLOT_HDR_LEN), v = new DataView(hdr.buffer);
+  v.setUint32(0, 0x504D5346, true);
+  v.setUint16(4, 1, true);
+  hdr[6] = zs.length;
+  const nm = name.toUpperCase().replace(/[^\x20-\x7E]/g, "").slice(0, 8);
+  for (let i = 0; i < nm.length; i++) hdr[8 + i] = nm.charCodeAt(i);
+  v.setUint32(16, data.length, true);
+  v.setUint32(20, crc32(data), true);
+  zs.forEach((z, i) => {
+    const o = 32 + i * 28;
+    v.setUint32(o, z.off, true);
+    v.setUint32(o + 4, z.n, true);
+    v.setUint32(o + 8, 0, true);               // loop start
+    v.setUint32(o + 12, z.n - 1, true);        // loop end
+    v.setUint32(o + 16, z.q16, true);
+    v.setInt16(o + 20, z.root * 16, true);
+    v.setInt16(o + 22, 0, true);               // predictor and index at the loop start: from 0
+    hdr[o + 24] = 0;
+    hdr[o + 25] = split[i][0];
+    hdr[o + 26] = split[i][1];
+  });
+  return { hdr, data };
+}
+
+// upload_breaks.pack: loops [{label, s}] in order into at most nslots slots; cap: ADPCM bytes a slot, one
+// number or one per slot -> {slots: one list per slot (empty ones included, none after the last used one),
+// skipped}. A loop goes into the current slot if it fits, else into the next slot that can take it.
+function pack(loops, nslots, cap = SLOT_MAX_DATA) {
+  const caps = Array.isArray(cap) ? cap : new Array(nslots).fill(cap);
+  const slots = Array.from({ length: nslots }, () => []), skipped = [];
+  let cur = 0, used = 0;
+  for (const l of loops) {
+    const need = (l.s.length + 1) >> 1;
+    let j = cur;
+    while (j < nslots && !((j === cur ? used : 0) + need <= caps[j] && slots[j].length < SLOT_ZONES)) j++;
+    if (j >= nslots) { skipped.push(l.label); continue; }
+    if (j !== cur) { cur = j; used = 0; }
+    slots[cur].push(l);
+    used += need;
+  }
+  while (slots.length && !slots[slots.length - 1].length) slots.pop();
+  return { slots, skipped };
+}
+
+// fm1_sample_upload.pack7: groups of up to 7 bytes, each preceded by their top bits (7 to 8: the slot
+// commands' packing; fm1ota.js's pack7 is the update protocol's bit stream, another thing)
+function pack78(b) {
+  const out = [];
+  for (let i = 0; i < b.length; i += 7) {
+    const g = b.slice(i, i + 7);
+    let m = 0;
+    g.forEach((x, j) => { m |= ((x >> 7) & 1) << j; });
+    out.push(m);
+    for (const x of g) out.push(x & 0x7F);
+  }
+  return out;
+}
+
+// a 16-bit / 24-bit / float WAV -> {rate, x: mono floats} (sampleio.read_any_wav; the page decodes
+// other formats with the browser's decoder)
+function readWav(buf) {
+  const d = new DataView(buf.buffer || buf, buf.byteOffset || 0, buf.byteLength);
+  const tag4 = (o) => String.fromCharCode(d.getUint8(o), d.getUint8(o + 1), d.getUint8(o + 2), d.getUint8(o + 3));
+  if (d.byteLength < 12 || tag4(0) !== "RIFF" || tag4(8) !== "WAVE") throw new Error("not a WAV file");
+  const ch = {};
+  for (let i = 12; i + 8 <= d.byteLength;) {
+    const id = tag4(i), n = d.getUint32(i + 4, true);
+    if (!(id in ch)) ch[id] = [i + 8, n];
+    i += 8 + n + (n & 1);
+  }
+  if (!ch["fmt "]) throw new Error("WAV without a fmt chunk");
+  const fo = ch["fmt "][0];
+  let tag = d.getUint16(fo, true);
+  const nch = d.getUint16(fo + 2, true), sr = d.getUint32(fo + 4, true), bits = d.getUint16(fo + 14, true);
+  if (tag === 0xFFFE) tag = d.getUint16(fo + 24, true);
+  const bps = bits >> 3;
+  if ((tag !== 1 && tag !== 3) || !bps || !nch) throw new Error(`unsupported WAV (tag ${tag}, ${bits} bit)`);
+  const [o, n] = ch.data || [0, 0];
+  const frame = bps * nch, nfr = Math.floor(Math.min(n, d.byteLength - o) / frame);
+  const val = (p) => {
+    if (tag === 3) return bps === 4 ? d.getFloat32(p, true) : d.getFloat64(p, true);
+    if (bps === 2) return d.getInt16(p, true) / 32768;
+    if (bps === 3) return ((d.getUint8(p) << 8 | d.getUint8(p + 1) << 16 | d.getUint8(p + 2) << 24) >> 0) / 2147483648;
+    if (bps === 4) return d.getInt32(p, true) / 2147483648;
+    return (d.getUint8(p) - 128) / 128;
+  };
+  const x = new Array(nfr);
+  for (let f = 0; f < nfr; f++) {
+    const p = o + f * frame;
+    if (nch === 1) x[f] = val(p);
+    else if (nch === 2) x[f] = (val(p) + val(p + bps)) / 2;
+    else { let acc = 0.0; for (let c = 0; c < nch; c++) acc += val(p + c * bps); x[f] = acc / nch; }
+  }
+  return { rate: sr, x };
+}
+
+// ---- slot backup and restore: tools/x0x_slots.py's .x0xslots archive, byte for byte ----------
+// "X0XSLOTS", u16 version 1, u16 0, u32 L, L bytes of JSON, the slot images, u32 CRC-32 of all before.
+// An image is a slot from its start: the 512-byte header area, then the ADPCM data.
+
+const SLOT_HDR_AREA = 512;
+const ARCH_MAGIC = "X0XSLOTS";
+
+// a slot name as text: printable ASCII kept, anything else "?" (x0x_slots.ascii_name)
+function asciiName(b) {
+  let s = "";
+  for (const c of b) s += c >= 32 && c < 127 ? String.fromCharCode(c) : "?";
+  return s;
+}
+
+// SMP_INFO reply (the bytes after the command) -> {count, size, ext, slots: [{nz, name, kb, size, off, used}]}
+// (x0x_slots.parse_info). size: the reply's one size (KiB, 7 bits: the smallest slot). Per slot size, flash
+// offset (null if unknown) and used KiB come from X0X's extension ('X', 1, then per slot offset and size in
+// 4 KiB sectors and used KiB, 14 bits each); without it every slot has the one size.
+function parseInfo(r) {
+  if (!r || r.length < 2) throw new Error("short SMP_INFO reply");
+  if (Array.from(r).some(b => !Number.isInteger(b) || b < 0 || b > 127))
+    throw new Error("invalid SMP_INFO MIDI data");
+  const count = r[0], size = r[1] * 1024, slots = [];
+  if (count < 1 || count > 16 || !size) throw new Error("invalid SMP_INFO slot count or size");
+  let i = 2;
+  for (let k = 0; k < count; k++) {
+    if (i >= r.length || r[i] > 16) throw new Error("invalid SMP_INFO slot record");
+    const nz = r[i], j = r.indexOf(0, i + 1);
+    if (j < 0 || j > i + 9 || j + 1 >= r.length)
+      throw new Error("truncated SMP_INFO slot record");
+    if (nz === 0 && (j !== i + 1 || r[j + 1] !== 0))
+      throw new Error(`slot ${k + 1}: empty SMP_INFO slot has occupied metadata`);
+    slots.push({ nz, name: asciiName(r.slice(i + 1, j)), kb: r[j + 1], size, off: null, used: r[j + 1] });
+    i = j + 2;
+  }
+  const ext = r[i] === 0x58;
+  // Unknown metadata after the descriptors cannot become a legacy preservation map.
+  if (i < r.length && !ext) throw new Error("unknown SMP_INFO trailing metadata");
+  if (ext && (r[i + 1] !== 1 || r.length !== i + 2 + 6 * count))
+    throw new Error("truncated or unsupported SMP_INFO flash-map extension");
+  if (ext) {
+    const ranges = [];
+    slots.forEach((sl, k) => {
+      const v = [0, 1, 2].map((m) => r[i + 2 + 6 * k + 2 * m] | r[i + 3 + 6 * k + 2 * m] << 7);
+      const off = v[0] * 0x1000, size = v[1] * 0x1000, end = off + size;
+      // Validate every range before preservation decisions: two occupied slots
+      // must never alias one kept destination and silently bypass the backup.
+      if (!off || size < SLOT_HDR_AREA || v[2] * 1024 > size ||
+          ranges.some(([lo, hi]) => off < hi && lo < end))
+        throw new Error(`slot ${k + 1}: invalid or overlapping SMP_INFO flash range`);
+      // Firmware saturates only the legacy byte; both fields describe the same used KiB.
+      if (sl.kb !== Math.min(127, v[2]))
+        throw new Error(`slot ${k + 1}: legacy/extended used-size disagreement`);
+      ranges.push([off, end]);
+      Object.assign(sl, { off, size, used: v[2] });
+    });
+  }
+  return { count, size, ext, slots };
+}
+
+// a slot's first 480 bytes -> {nz, name, dataLen, crc, zones: [{off, n, rate}]} or null (x0x_slots.parse_header)
+function parseHeader(b) {
+  if (b.length < SLOT_HDR_LEN) return null;
+  const v = new DataView(b.buffer, b.byteOffset, b.byteLength);
+  const nz = b[6];
+  if (v.getUint32(0, true) !== 0x504D5346 || v.getUint16(4, true) !== 1 || nz < 1 || nz > 16) return null;
+  let e = 8;
+  while (e < 16 && b[e]) e++;
+  const zones = [];
+  for (let z = 0; z < nz; z++) {
+    const o = 32 + z * 28, q16 = v.getUint32(o + 16, true);
+    zones.push({ off: v.getUint32(o, true), n: v.getUint32(o + 4, true), rate: Number((BigInt(q16) * 44100n + 32768n) >> 16n) });
+  }
+  return { nz, name: asciiName(b.subarray(8, e)), dataLen: v.getUint32(16, true), crc: v.getUint32(20, true), zones };
+}
+
+// layout: parseInfo(); images: per slot, Uint8Array or null -> the archive (x0x_slots.make_archive)
+function makeArchive(layout, images, created) {
+  const entries = [], blobs = [];
+  let off = 0;
+  images.forEach((img, k) => {
+    const sl = layout.slots[k] || {};
+    const e = { slot: k + 1, size: sl.size ?? layout.size, empty: img === null };
+    if (sl.off !== null && sl.off !== undefined) e.flash = sl.off;
+    if (img !== null) {
+      const h = parseHeader(img);
+      Object.assign(e, { name: h.name, zones: h.nz, samples: h.zones.map((z) => z.n), rates: h.zones.map((z) => z.rate),
+        data_len: h.dataLen, data_crc32: h.crc, offset: off, length: img.length, crc32: crc32(img) });
+      blobs.push(img);
+      off += img.length;
+    }
+    entries.push(e);
+  });
+  const meta = { format: "x0xslots", version: 1, created, count: layout.count, size: layout.size, slots: entries };
+  const js = new TextEncoder().encode(JSON.stringify(meta));
+  const out = new Uint8Array(16 + js.length + off + 4), v = new DataView(out.buffer);
+  for (let i = 0; i < 8; i++) out[i] = ARCH_MAGIC.charCodeAt(i);
+  v.setUint16(8, 1, true);
+  v.setUint16(10, 0, true);
+  v.setUint32(12, js.length, true);
+  out.set(js, 16);
+  let p = 16 + js.length;
+  for (const b of blobs) { out.set(b, p); p += b.length; }
+  v.setUint32(p, crc32(out.subarray(0, p)), true);
+  return out;
+}
+
+// archive bytes -> {meta, images}; throws on any damage (x0x_slots.read_archive)
+function readArchive(b) {
+  const bad = (m) => { throw new Error(m); };
+  const uint = (x, max = Number.MAX_SAFE_INTEGER) => Number.isSafeInteger(x) && x >= 0 && x <= max;
+  if (b.length < 20 || String.fromCharCode(...b.subarray(0, 8)) !== ARCH_MAGIC) bad("This is not an .x0xslots backup.");
+  const v = new DataView(b.buffer, b.byteOffset, b.byteLength);
+  if (v.getUint32(b.length - 4, true) !== crc32(b.subarray(0, b.length - 4))) bad("The backup file is damaged (CRC).");
+  if (v.getUint16(8, true) !== 1 || v.getUint16(10, true) !== 0) bad("This backup has an unsupported format.");
+  const n = v.getUint32(12, true), base = 16 + n;
+  if (base > b.length - 4) bad("The backup metadata exceeds the file length.");
+  const meta = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(b.subarray(16, base)));
+  // Both archive writers serialize one contiguous image per populated slot, in slot order.
+  // Require that exact layout: a valid outer CRC alone cannot establish which data a slot owns.
+  const slots = meta && meta.slots;
+  if (!meta || meta.format !== "x0xslots" || meta.version !== 1 || !Array.isArray(slots) ||
+      !uint(meta.count) || meta.count !== slots.length || !uint(meta.size) || meta.size < SLOT_HDR_AREA)
+    bad("The backup file has invalid slot metadata.");
+  const imageFields = ["name", "zones", "samples", "rates", "data_len", "data_crc32", "offset", "length", "crc32"];
+  const images = [];
+  let used = 0;
+  for (let k = 0; k < slots.length; k++) {
+    const e = slots[k];
+    if (!e || typeof e !== "object" || Array.isArray(e) || e.slot !== k + 1)
+      bad(`The backup file has a bad slot number for entry ${k + 1}.`);
+    if (!uint(e.size) || e.size < SLOT_HDR_AREA || ("flash" in e && !uint(e.flash)) || typeof e.empty !== "boolean")
+      bad(`Slot ${e.slot} in the backup has invalid metadata.`);
+    if (e.empty) {
+      if (imageFields.some((f) => f in e)) bad(`Slot ${e.slot} has conflicting empty/image metadata.`);
+      images.push(null);
+      continue;
+    }
+    if (!uint(e.offset) || e.offset !== used || !uint(e.length) || e.length < SLOT_HDR_AREA ||
+        e.length > b.length - 4 - base - used || e.length > e.size || !uint(e.crc32, 0xFFFFFFFF))
+      bad(`Slot ${e.slot} in the backup has invalid image range metadata.`);
+    const img = b.slice(base + used, base + used + e.length), h = parseHeader(img);
+    if (crc32(img) !== e.crc32) bad(`Slot ${e.slot} in the backup is damaged.`);
+    if (!h || img.length !== SLOT_HDR_AREA + h.dataLen || crc32(img.subarray(SLOT_HDR_AREA)) !== h.crc)
+      bad(`Slot ${e.slot} in the backup is not a valid slot.`);
+    // Match the device scanner before restore is allowed to erase a destination.
+    const iv = new DataView(img.buffer, img.byteOffset, img.byteLength);
+    for (let z = 0; z < h.nz; z++) {
+      const o = 32 + z * 28, zone = h.zones[z], q16 = iv.getUint32(o + 16, true);
+      if (zone.off > h.dataLen || Math.ceil(zone.n / 2) > h.dataLen - zone.off ||
+          img[o + 24] > 88 || q16 === 0 || q16 > (4 << 16))
+        bad(`Slot ${e.slot} in the backup has an invalid sample zone.`);
+    }
+    const equalArray = (a, expected) => Array.isArray(a) && a.length === expected.length && a.every((x, i) => x === expected[i]);
+    if (e.name !== h.name || e.zones !== h.nz || e.data_len !== h.dataLen || e.data_crc32 !== h.crc ||
+        !equalArray(e.samples, h.zones.map((z) => z.n)) || !equalArray(e.rates, h.zones.map((z) => z.rate)))
+      bad(`Slot ${e.slot} metadata does not match its original header.`);
+    images.push(img);
+    used += img.length;
+  }
+  if (base + used !== b.length - 4) bad("The backup contains unreferenced sample data.");
+  return { meta, images };
+}
+
+// a slot's size on a device with this layout (per slot with X0X's SMP_INFO extension)
+const slotSize = (layout, k) => (layout.slots[k] && layout.slots[k].size) || layout.size;
+
+// which archive slots go where on a device with this layout -> {todo: [{k, img}], skipped: [text]}
+function planRestore(layout, images) {
+  const todo = [], skipped = [];
+  images.forEach((img, k) => {
+    if (k >= layout.count) skipped.push(`slot ${k + 1}: this device has ${layout.count} slots`);
+    else if (img !== null && img.length > slotSize(layout, k)) skipped.push(`slot ${k + 1}: too large for this device's slot ${k + 1}`);
+    else todo.push({ k, img });
+  });
+  return { todo, skipped };
+}
+
+// ---- an install that changes the slot map (tools/x0x_slots.py and tools/fm1_install.py, the same rules) ----
+// A slot keeps its data over an install when the new firmware has a slot at the same flash offset that is
+// large enough: no install writes the slots. The others are saved first and written back after.
+const LEGACY_BASE = { smk: 0xC2000, fm1: 0xA0000 };   // X0X before the SMP_INFO extension: equal slots
+const SLOTMAP_MAGIC = "X0X-SLOTMAP-1\0\0\0", LOADER_MARK = "FELUCCA-LOADER-1";
+
+function findBytes(b, text) {
+  const t = [...text].map((c) => c.charCodeAt(0));
+  outer: for (let i = b.indexOf(t[0]); i >= 0 && i + t.length <= b.length; i = b.indexOf(t[0], i + 1)) {
+    for (let j = 1; j < t.length; j++) if (b[i + j] !== t[j]) continue outer;
+    return i;
+  }
+  return -1;
+}
+
+// [{off, size}] per slot of a parseInfo() layout (x0x_slots.flash_map)
+function flashMap(layout, board = "smk") {
+  if (layout.ext) return layout.slots.map((sl) => ({ off: sl.off, size: sl.size }));
+  return layout.slots.map((_, k) => ({ off: LEGACY_BASE[board] + k * layout.size, size: layout.size }));
+}
+
+// Read only CRC-checked package files, never trust markers in header/padding.
+function slotPackageFiles(image) {
+  const crc16 = b => {
+    let c = 0;
+    for (const x of b) {
+      c ^= x << 8;
+      for (let k = 0; k < 8; k++) c = c & 0x8000 ? ((c << 1) ^ 0x1021) & 0xFFFF : (c << 1) & 0xFFFF;
+    }
+    return c;
+  };
+  const decode = b => {
+    const out = Uint8Array.from(b); let key = 0xFFFF;
+    for (let j = 0; j < out.length; j++) {
+      out[j] ^= key & 0xFF;
+      key = ((key << 1) ^ (key & 0x8000 ? 0x1021 : 0)) & 0xFFFF;
+    }
+    return out;
+  };
+  if (image.length < 64) return null;
+  const hdr = decode(image.subarray(0, 64)), h = new DataView(hdr.buffer, hdr.byteOffset, hdr.byteLength);
+  const count = h.getUint16(8, true), end = 64 + count * 80;
+  if (crc16(hdr.subarray(2)) !== h.getUint16(0, true) || h.getUint32(4, true) !== image.length ||
+      count < 1 || count > 8 || end > image.length || crc16(image.subarray(64, end)) !== h.getUint16(2, true)) return null;
+  const files = {}; let priorEnd = end;
+  for (let j = 0; j < count; j++) {
+    const entry = decode(image.subarray(64 + j * 80, 144 + j * 80));
+    const v = new DataView(entry.buffer, entry.byteOffset, entry.byteLength);
+    const off = v.getUint32(8, true), size = v.getUint32(12, true);
+    if (!size || off < priorEnd || off + size > image.length) return null;
+    const data = image.subarray(off, off + size);
+    if (crc16(data) !== v.getUint16(4, true)) return null;
+    for (const [name, type] of [["flash.bin", 0], ["ota.bin", 100]]) {
+      if (v.getUint16(0, true) === type) {
+        if (files[name] || findBytes(entry.subarray(64), name + "\0") !== 0) return null;
+        files[name] = data;
+      }
+    }
+    priorEnd = off + size;
+  }
+  return files["flash.bin"] ? files : null;
+}
+
+// the slot map of a package's logical image (fm1pkg_make.slotmap_of): its slot map record; for an older X0X
+// (Felucca loader, no record) the equal 80 KiB slots of that time; [] for any other package (stock firmware)
+function packageSlotMap(image, board = "smk") {
+  const files = slotPackageFiles(image);
+  if (!files) return [];
+  const flash = files["flash.bin"], i = board === "fm1" ? 0x92F00 : 0x9CF00;
+  if (i + 24 <= flash.length && findBytes(flash.subarray(i, i + 16), SLOTMAP_MAGIC) === 0) {
+    const v = new DataView(flash.buffer, flash.byteOffset, flash.byteLength), n = v.getUint32(i + 16, true);
+    const end = i + 20 + 8 * n;
+    if (n <= 16 && end + 4 <= flash.length && v.getUint32(end, true) === crc32(flash.subarray(i, end))) {
+      const m = [];
+      for (let k = 0; k < n; k++) m.push({ off: v.getUint32(i + 20 + 8 * k, true), size: v.getUint32(i + 24 + 8 * k, true) });
+      return m;
+    }
+    return []; // A damaged current record cannot claim the legacy layout.
+  }
+  if (!files["ota.bin"] || findBytes(files["ota.bin"], LOADER_MARK) < 0) return [];
+  return Array.from({ length: board === "smk" ? 2 : 3 }, (_, k) => ({ off: LEGACY_BASE[board] + k * 0x14000, size: 0x14000 }));
+}
+
+// slot indexes that hold samples and that the new map does not keep (x0x_slots.at_risk)
+function atRisk(layout, oldMap, newMap) {
+  const risk = [];
+  layout.slots.forEach((sl, k) => {
+    if (!sl.nz) return;
+    const off = oldMap[k].off, need = SLOT_HDR_AREA + sl.used * 1024;
+    if (!newMap.some((m) => m.off === off && m.size >= need)) risk.push(k);
+  });
+  return risk;
+}
+
+// -> {todo: [{k: old slot, j: new slot}], skipped: [text]} (x0x_slots.plan_migration): a slot at risk goes back
+// to the slot with its number if it fits there, else to the first other slot that is empty, not kept and large enough
+function planMigration(images, risk, oldMap, newLayout, newMap) {
+  const kept = new Set();
+  newMap.forEach((m, j) => oldMap.forEach((o, k) => { if (images[k] !== null && !risk.includes(k) && o.off === m.off) kept.add(j); }));
+  const taken = new Set(kept), todo = [], skipped = [];
+  for (const k of risk) {
+    const img = images[k], order = (k < newMap.length ? [k] : []).concat(newMap.map((_, j) => j).filter((j) => j !== k));
+    const j = order.find((j) => !taken.has(j) && img.length <= newMap[j].size && !newLayout.slots[j].nz);
+    if (j === undefined) skipped.push(`slot ${k + 1} (${img.length} B): no free slot of that size on the new firmware`);
+    else { todo.push({ k, j }); taken.add(j); }
+  }
+  return { todo, skipped };
+}
+
+const X0X_NBREAKS_BUILTIN = 2;
+const LOOP_MENU_GUARD = "LOOP menu order or indices would change; saved break pattern A/B indices could point at different loops. "
+  + "The backup is retained. Restore samples manually to a compatible layout, then check and re-assign LOOP A/B in every saved pattern before playback.";
+
+function userLoopMenuIds(layout, images, origins = null) {
+  // scan_loops lists each zone, not each slot. Preserve original slot identity:
+  // identical sample bytes in distinct slots are not interchangeable indices.
+  const ids = [];
+  layout.slots.forEach((sl, k) => {
+    for (let z = 0; z < sl.nz; z++)
+      ids.push(origins === null ? `old:${k}:${z}` : origins[k] === null ? `new:${k}:${z}` : `old:${origins[k]}:${z}`);
+  });
+  return ids;
+}
+
+function loopMenuAfterMigration(oldLayout, images, risk, oldMap, newMap, newLayout, todo) {
+  const imgs = newMap.map(() => null), origins = newMap.map(() => null);
+  const slots = newLayout.slots.map((sl) => ({ ...sl }));
+  images.forEach((img, k) => {
+    if (risk.includes(k) || !img) return;
+    const off = oldMap[k].off;
+    const j = newMap.findIndex((m) => m.off === off);
+    if (j < 0) return;
+    imgs[j] = img; origins[j] = k;
+    slots[j] = { ...oldLayout.slots[k] };
+  });
+  todo.forEach(({ k, j }) => { imgs[j] = images[k]; origins[j] = k; slots[j] = { ...oldLayout.slots[k] }; });
+  return userLoopMenuIds({ ...newLayout, slots }, imgs, origins);
+}
+
+function migrationReordersLoopMenu(oldLayout, images, risk, oldMap, newLayout, newMap, todo) {
+  if (!todo.length) return false;
+  const before = userLoopMenuIds(oldLayout, images);
+  const after = loopMenuAfterMigration(oldLayout, images, risk, oldMap, newMap, newLayout, todo);
+  // Compare absolute common positions; skipped middle slots can shift indices
+  // even when surviving entries retain their relative order. Trailing-only
+  // omissions or additions leave all remaining original positions unchanged.
+  return before.slice(0, after.length).some((id, i) => id !== after[i]);
+}
+
+function guardMigrationLoopMenu(oldLayout, images, risk, oldMap, newLayout, newMap, todo, skipped) {
+  if (!migrationReordersLoopMenu(oldLayout, images, risk, oldMap, newLayout, newMap, todo)) return { todo, skipped };
+  const extra = [...skipped];
+  for (const { k } of todo) extra.push(`slot ${k + 1}: not restored automatically (${LOOP_MENU_GUARD})`);
+  return { todo: [], skipped: extra };
+}
+
+// ---- the slot commands over a link with send / read / drain (fm1ota.js's Link): SysEx F0 7D 46 4C cmd .. F7 ----
+const ED = [0xF0, 0x7D, 0x46, 0x4C];
+
+function unpack78(a) {
+  const out = [];
+  for (let i = 0; i < a.length;) {
+    const m = a[i++];
+    for (let j = 0; j < 7 && i < a.length; j++) out.push(a[i++] | ((m >> j) & 1) << 7);
+  }
+  return new Uint8Array(out);
+}
+
+// one command -> the reply's bytes after the command; a lost frame is sent again (every slot command is safe to repeat)
+async function slotReq(link, cmd, args, ms = 3000, tries = 3) {
+  for (let t = 0; t < tries; t++) {
+    link.drain();
+    if (!link.send([...ED, cmd, ...args, 0xF7])) throw new Error("The USB connection was lost.");
+    const end = Date.now() + ms;
+    while (Date.now() < end) {
+      const p = await link.read(end - Date.now());
+      if (!p) break;
+      if (p.length > 5 && p[1] === ED[1] && p[2] === ED[2] && p[3] === ED[3] && p[4] === cmd) return p.slice(5, p.length - 1);
+    }
+  }
+  throw new Error(`The keyboard did not answer (slot command ${cmd}).`);
+}
+
+async function readSlotLayout(link, ms = 3000, tries = 3) { return parseInfo(await slotReq(link, 15, [], ms, tries)); }
+
+async function readSlotBytes(link, k, off, n, onPart) {
+  const out = new Uint8Array(n);
+  for (let at = 0; at < n;) {
+    const want = Math.min(224, n - at), adr = off + at;
+    const b = unpack78((await slotReq(link, 16, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1])).slice(4));
+    if (!b.length) throw new Error(`slot ${k + 1}: no data`);
+    out.set(b.subarray(0, Math.min(b.length, n - at)), at);
+    at += Math.min(b.length, n - at);
+    if (onPart) onPart(at, n);
+  }
+  return out;
+}
+
+// slot k as an image (the 512-byte header area, then the data), or null if it is empty. Reads only.
+// Layout-aware callers pass the actual capacity; standalone legacy reads retain the 80 KiB default.
+async function readSlotImage(link, k, nz, onPart, capacity = SLOT_SIZE) {
+  if (!nz) return null;
+  if (!Number.isSafeInteger(capacity) || capacity < SLOT_HDR_AREA)
+    throw new Error(`slot ${k + 1}: invalid sample slot capacity`);
+  const area = await readSlotBytes(link, k, 0, SLOT_HDR_AREA), h = parseHeader(area.subarray(0, SLOT_HDR_LEN));
+  if (!h) throw new Error(`slot ${k + 1}: occupied sample slot has an invalid header; backup stopped`);
+  if (h.dataLen > capacity - SLOT_HDR_AREA)
+    throw new Error(`slot ${k + 1}: sample data exceeds slot capacity`);
+  const data = await readSlotBytes(link, k, SLOT_HDR_AREA, h.dataLen, onPart);
+  if (crc32(data) !== h.crc) throw new Error(`slot ${k + 1}: the data read back does not match its CRC`);
+  const img = new Uint8Array(SLOT_HDR_AREA + data.length);
+  img.set(area);
+  img.set(data, SLOT_HDR_AREA);
+  return img;
+}
+
+// every slot -> {layout, images} (x0x_slots.backup): SMP_INFO and SMP_READ only
+async function backupSlots(link, onPart) {
+  const layout = await readSlotLayout(link), images = [];
+  for (let k = 0; k < layout.count; k++)
+    images.push(await readSlotImage(link, k, layout.slots[k].nz, onPart && ((d, n) => onPart(k, d, n)), slotSize(layout, k)));
+  return { layout, images };
+}
+
+// erase slot k and write the image (null: erase only); throws on a device error (x0x_slots.write_slot)
+async function writeSlotImage(link, k, img, onPart) {
+  if (!img) {
+    if ((await slotReq(link, 14, [k], 30000))[1]) throw new Error(`slot ${k + 1}: erase failed`);
+    return;
+  }
+  if ((await slotReq(link, 11, [k], 10000))[1]) throw new Error(`slot ${k + 1}: begin (erase) failed`);
+  const data = img.subarray(SLOT_HDR_AREA);
+  for (let off = 0; off < data.length; off += 256) {
+    const adr = SLOT_HDR_AREA + off;
+    const r = await slotReq(link, 12, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, ...pack78(data.subarray(off, off + 256))]);
+    if (r[4]) throw new Error(`slot ${k + 1}: write at 0x${adr.toString(16)} failed (${r[4]})`);
+    if (onPart) onPart(Math.min(off + 256, data.length), data.length);
+  }
+  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);
+  if (e[1]) throw new Error(`slot ${k + 1}: the keyboard refused the header (${e[1]})`);
+}
+
+// write images[k] into new slot j for each {k, j}, then read each back and compare (x0x_slots.restore_mapped)
+async function restoreMapped(link, todo, images, onPart) {
+  for (const { k, j } of todo) await writeSlotImage(link, j, images[k], onPart && ((d, n) => onPart(j, d, n)));
+  const after = await readSlotLayout(link);
+  for (const { k, j } of todo) {
+    const got = await readSlotImage(link, j, after.slots[j].nz, undefined, slotSize(after, j));
+    if (!got || got.length !== images[k].length || crc32(got) !== crc32(images[k]) ||
+        !got.every((byte, i) => byte === images[k][i]))
+      throw new Error(`slot ${j + 1}: read back differs from the backup of slot ${k + 1}`);
+  }
+}
+
+// an archive file name for now: x0x-slots-before-install-YYYYMMDD-HHMMSS.x0xslots, and its "created" text
+function archiveStamp(t = new Date()) {
+  const p = (v) => String(v).padStart(2, "0");
+  const created = `${t.getFullYear()}-${p(t.getMonth() + 1)}-${p(t.getDate())}T${p(t.getHours())}:${p(t.getMinutes())}:${p(t.getSeconds())}`;
+  return { created, name: `x0x-slots-before-install-${created.replace(/[-:]/g, "").replace("T", "-")}.x0xslots` };
+}
+
+const SNAPSHOT_COMMAND = 48, SNAPSHOT_TOKEN_SIZE = 16;
+const snapshotFail = (message) => Object.assign(new Error(message), { code: "slotbackup" });
+
+// Only an exact, read-only INFO capability permits a new command. Old X0X,
+// stock and other custom firmware must not receive an unknown write command.
+async function hasInstallSnapshot(link) {
+  let info;
+  try { info = await slotReq(link, 1, [], 1000, 1); }
+  catch (e) {
+    if (/did not answer \(slot command 1\)/.test(e.message)) return false;
+    throw e;
+  }
+  const z = info.indexOf(0);
+  if (z < 0 || !/^X0X [\x20-\x7e]{1,20}$/.test(String.fromCharCode(...info.slice(0, z)))) return false;
+  return info.length === z + 12 && info.slice(z + 7).every((b, k) => b === [0x58, 0x53, 0x47, 1, SNAPSHOT_COMMAND][k]);
+}
+
+// One request, never an authorization retry. Responses from another operation,
+// token or ticket cannot authorize this backup. Leave later queued OTA reads
+// untouched when returning the matching ACK.
+async function snapshotRequest(link, op, token, ticket = null) {
+  if (link.lost) throw snapshotFail("The USB connection was lost. Start a new install attempt.");
+  const encoded = ticket === null ? [] : Array.from({ length: 4 }, (_, k) => (ticket >>> (7 * k)) & 127);
+  link.drain();
+  if (!link.send([...ED, SNAPSHOT_COMMAND, op, ...token, ...encoded, 0xF7]))
+    throw snapshotFail("The USB connection was lost; no snapshot authorization was retried.");
+  const end = Date.now() + 3000;
+  while (Date.now() < end) {
+    const p = await link.read(end - Date.now());
+    if (!p) break;
+    if (p.length < 6 || p[0] !== 0xF0 || p.at(-1) !== 0xF7 ||
+        p[1] !== ED[1] || p[2] !== ED[2] || p[3] !== ED[3] || p[4] !== SNAPSHOT_COMMAND) continue;
+    const r = Array.from(p).slice(5, -1);
+    if (r[0] !== op) continue;
+    if (r.length !== 22 || r.some(b => !Number.isInteger(b) || b < 0 || b > 127) || r[1] > 5)
+      throw snapshotFail("The keyboard returned a malformed sample-snapshot acknowledgement.");
+    if (!token.every((b, k) => r[k + 2] === b)) continue;
+    const got = r.slice(18).reduce((n, b, k) => n + b * 2 ** (7 * k), 0);
+    if (ticket !== null && got !== ticket) continue;
+    if (r[1]) throw snapshotFail(r[1] === 4 ?
+      "The samples changed after this backup began. No update was started. Make and retain a fresh backup before retrying." :
+      "The sample snapshot is unavailable, busy or expired. No update was started. Finish other transfers and start a new install attempt.");
+    if (!got) throw snapshotFail("The keyboard returned an invalid sample-snapshot ticket.");
+    if (link.lost) throw snapshotFail("The USB connection was lost. The authorization was not retried.");
+    return got;
+  }
+  throw snapshotFail("The keyboard did not acknowledge the sample snapshot. The authorization was not retried.");
+}
+
+async function beginInstallSnapshot(link) {
+  if (!globalThis.crypto?.getRandomValues)
+    throw snapshotFail("Secure random tokens are unavailable. Use a supported secure browser; no update was started.");
+  const token = new Uint8Array(SNAPSHOT_TOKEN_SIZE);
+  do { crypto.getRandomValues(token); token.forEach((b, k) => { token[k] = b & 127; }); }
+  while (token.every(b => b === 0));
+  const ticket = await snapshotRequest(link, 1, token);
+  return { token, ticket, consumed: false };
+}
+
+async function commitInstallSnapshot(link, snapshot, admitted = () => true) {
+  if (snapshot.consumed) throw snapshotFail("This sample snapshot has already been consumed. Start a new install attempt.");
+  snapshot.consumed = true; // A lost reply may follow device admission. Never replay it.
+  if (link.lost) throw snapshotFail("The USB connection was lost. Start a new install attempt.");
+  // The Updater reacquires a link after backup. Same keyboard family is not a
+  // capability promise: a restart/reconnect may expose older or stock firmware.
+  // Recheck read-only INFO here, but never START again with this older archive.
+  let capable;
+  try { capable = await hasInstallSnapshot(link); }
+  catch (e) { throw snapshotFail(`The final sample-snapshot capability check failed (${e.message}). No update was started.`); }
+  if (!capable) throw snapshotFail("The reconnected keyboard does not support atomic sample-snapshot admission. No update was started. Start a new install attempt.");
+  // No await follows this last caller approval before COMMIT sends the
+  // token-bound atomic update command. Rechecking only before INFO is racy.
+  if (!admitted()) throw snapshotFail("The selected package is no longer approved. No update was started.");
+  await snapshotRequest(link, 3, snapshot.token, snapshot.ticket);
+}
+
+async function cancelInstallSnapshot(link, snapshot) {
+  if (!snapshot || snapshot.consumed) return;
+  snapshot.consumed = true;
+  try { await snapshotRequest(link, 2, snapshot.token, snapshot.ticket); }
+  catch (_) { /* A passive watch holds no audio, UI or storage; preserve the original error. */ }
+}
+
+// The install with the slots kept (fm1_install.py's flow, for the installer page). up: fm1ota.js's Updater;
+// hooks: {step(k, a) for up.install, say(key, detail), save(bytes, name) -> true / Promise<true> only after the backup is retained, progress(f),
+// sameKeyboard(model, packageModel) (fm1ota.js's: the slots are read only when the install can go ahead)}.
+// 1. If slots are at risk, attempt an .x0xslots archive and download.
+//    Backup errors warn but never prevent OTA.
+//    2. Install. 3. Reconnect to the new firmware, write the slots back into its map, read them back.
+// Throws the install's errors as they are; a failure in step 3 throws code "slots" (the archive is saved).
+// -> {product, move: null or {risk, todo, skipped, name}}
+async function installKeepingSlots(up, image, product, board, hooks) {
+  const h = Object.assign({ step() {}, say() {}, save() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
+  const fail = (code, msg, detail = "") => Object.assign(new Error(msg), { code, detail });
+  let move = null, snapshot = null, unprotected = false;
+  const dev = await up.find((id) => !/^ota-/i.test(id.model));
+  if (!dev) throw fail("notfound", "No running keyboard was found for sample preflight; no update was started.");
+  if (!h.sameKeyboard(dev.id.model, product.split("_")[0])) {
+    dev.link.close();
+    throw fail("model", "The keyboard does not match this package; no update was started.");
+  }
+  {
+    up.bind(dev);
+    try {
+      // Arm before FIRST layout/occupancy/risk reads, including empty slots.
+      // Otherwise empty-to-occupied and in-progress-import races escape backup.
+      try {
+        if (await hasInstallSnapshot(dev.link)) snapshot = await beginInstallSnapshot(dev.link);
+      } catch (e) { throw fail("slotbackup", `The sample snapshot could not be established (${e.message}). No update was started.`); }
+      let layout;
+      try { layout = await readSlotLayout(dev.link, 1000, 2); }
+      catch (e) {
+        // Any unsupported/failed slot INFO uses the outer warning-only path.
+        throw fail("slotbackup", `Sample layout unavailable (${e.message}); continuing without backup.`);
+      }
+      if (layout && !snapshot)
+        throw fail("slotbackup", "Atomic sample backup unsupported; continuing without backup.");
+      if (layout && layout.slots.some((sl) => sl.nz)) {
+        const oldMap = flashMap(layout, board), newMap = packageSlotMap(image, board);
+        const risk = atRisk(layout, oldMap, newMap);
+        if (risk.length) {
+          h.say("slotsave", risk.map((k) => k + 1).join(", "));
+          let saved;
+          try {
+            saved = await backupSlots(dev.link, (k, d, n) => h.progress((k + d / n) / layout.count));
+          } catch (e) { throw fail("slotbackup", e.message); }
+          const st = archiveStamp();
+          let file;
+          try {
+            file = makeArchive(saved.layout, saved.images, st.created);
+            readArchive(file);                                // verify the in-memory archive
+          } catch (e) { throw fail("slotbackup", e.message); }
+          let retained;
+          try { retained = await h.save(file, st.name); }
+          catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
+          if (retained !== true)
+            throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
+          // SMP_INFO can change while the backup is read. Use the exact verified
+          // snapshot for preservation, just as the Python SlotMove.backup does.
+          const savedMap = flashMap(saved.layout, board);
+          move = { risk: atRisk(saved.layout, savedMap, newMap), oldMap: savedMap, newMap,
+            layout: saved.layout, images: saved.images, name: st.name, todo: [], skipped: [] };
+        }
+      }
+    } catch (e) {
+      // Sample preservation is best effort on legacy firmware. Never bypass
+      // keyboard model or package/controller admission: those remain enforced
+      // independently by Updater.install() and admitted().
+      await cancelInstallSnapshot(dev.link, snapshot);
+      snapshot = null;
+      move = null; // No verified recovery archive exists.
+      unprotected = true;
+      h.say("slotunprotectedwarning", e?.message || String(e));
+    } finally { dev.link.close(); }
+  }
+  if (!h.admitted()) throw fail("unapproved", "The selected package is no longer approved. No update was started.");
+  const ran = await up.install(image, product, h.step,
+    snapshot ? (dev) => commitInstallSnapshot(dev.link, snapshot, h.admitted) : null, h.admitted);
+  if (!move || !move.newMap.length) return { product: ran, move, unprotected };
+  h.say("slotback");
+  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
+  if (!back) throw fail("slots", "the keyboard did not answer after the install", move.name);
+  try {
+    up.bind(back);
+    const layout = await readSlotLayout(back.link);
+    let plan = planMigration(move.images, move.risk, move.oldMap, layout, flashMap(layout, board));
+    plan = guardMigrationLoopMenu(move.layout, move.images, move.risk, move.oldMap, layout,
+      flashMap(layout, board), plan.todo, plan.skipped);
+    move.todo = plan.todo;
+    move.skipped = plan.skipped;
+    const total = plan.todo.length || 1;
+    await restoreMapped(back.link, plan.todo, move.images, (j, d, n) => h.progress(d / n / total));
+  } catch (e) {
+    throw fail("slots", e.message, move.name);
+  } finally { back.link.close(); }
+  return { product: ran, move, unprotected };
+}
+
+const $ = (id) => document.getElementById(id);
+const HDR = [0x7D, 0x46, 0x4C];
+const KB = (b) => `${(b / 1024).toFixed(0)} KB`;
+let link = null, busy = false, readOk = false;
+let sampleActive = true, savedMidiHandler = null;
+// the device's slots (SMP_INFO): their count and sizes (one size each with X0X's extension, e.g. 80, 120 and
+// 44 KB on the SMK-37); nothing here assumes 2 or 3 slots of 80 KB
+let lay = { count: 0, size: SLOT_SIZE, slots: [] };
+const nslot = () => lay.count, slotMax = (k) => slotSize(lay, k) - SLOT_DATA_OFF;
+const cap = () => Array.from({ length: nslot() }, (_, k) => slotMax(k)).reduce((a, b) => a + b, 0);
+
+// the loops in order, as the FM-1 numbers them: {adpcm, n, s, file, isNew} (adpcm, n: as stored, adpcm null for a
+// new one until it's encoded; s: the samples, for the picture), and the slots as read ({hdr, data} or null)
+let loops = [], dev = [], replaceAt = -1;
+
+function say(t) { $("status").textContent = t; }
+const bytesOf = (l) => (l.n + 1) >> 1;
+
+// ---- the list ----------------------------------------------------------------
+function render() {
+  const list = $("list");
+  list.textContent = "";
+  if (!readOk)
+    list.innerHTML = `<div class="empty">${link ? "Reading…" : "Connect to read your keyboard’s sample slots."}</div>`;
+  else if (!loops.length)
+    list.innerHTML = '<div class="empty">No loops yet. Add some below.</div>';
+  loops.forEach((l, i) => {
+    const r = document.createElement("div");
+    r.className = l.isNew ? "loop new" : "loop";
+    const rateTag = l.rate === RATE ? "" : ` · ${(l.rate / 1000).toFixed(2)} kHz`;
+    const gritTag = l.isNew && l.gritFactor > 1 ? ` · ${gritLabel(l.gritFactor)}` : "";
+    r.innerHTML = `<div class="name">BR${i + 1}<small>${(l.n / l.rate).toFixed(2)} s${rateTag}${gritTag}${l.isNew ? " · new" : ""}</small></div>
+      <canvas width="900" height="80"></canvas>
+      <div class="acts"><button class="link prv">Compare</button><button class="link rep">Replace</button><button class="link del">Remove</button></div>`;
+    if (l.file) r.title = l.file;
+    r.querySelector(".prv").onclick = () => run(() => reviewLoops([l], "Compare loop", "Close"));
+    r.querySelector(".prv").disabled = busy;
+    r.querySelector(".rep").onclick = () => { replaceAt = i; $("files").multiple = false; $("files").click(); };
+    r.querySelector(".del").onclick = () => { loops.splice(i, 1); render(); };
+    r.querySelector(".rep").disabled = r.querySelector(".del").disabled = busy;
+    r.ondragover = (ev) => { ev.preventDefault(); ev.stopPropagation(); r.classList.add("over"); };
+    r.ondragleave = () => r.classList.remove("over");
+    r.ondrop = (ev) => { ev.preventDefault(); ev.stopPropagation(); r.classList.remove("over"); addFiles([...ev.dataTransfer.files], i); };
+    list.appendChild(r);
+    wave(r.querySelector("canvas"), l.s, l.isNew ? "--accent" : "--wave");
+  });
+  const used = loops.reduce((a, l) => a + bytesOf(l), 0), plan = packLoops();
+  $("fill").style.width = `${cap() ? Math.min(100, used / cap() * 100) : 0}%`;
+  $("room").className = plan ? "" : "bad";
+  $("room").textContent = !readOk ? "" : plan ? `${loops.length} loop${loops.length === 1 ? "" : "s"}, ${KB(used)} of ${KB(cap())} (${nslot()} slots: ${lay.slots.map((_, k) => KB(slotSize(lay, k))).join(", ")}).`
+    : `Too much: ${KB(used)} of ${KB(cap())}. Remove a loop, or use shorter ones.`;
+  const changed = readOk && plan && changedSlots(plan).length > 0;
+  $("send").disabled = busy || !changed;
+  $("discard").hidden = !changed;
+  $("discard").disabled = busy;
+  $("add").disabled = busy || !readOk;
+  $("connect").disabled = busy;
+  $("backup").disabled = busy || !readOk;
+  $("restore").disabled = busy || !readOk;
+  for (const id of ["bars", "trim", "half", "grit"]) $(id).disabled = busy;
+  const newLoops = loops.filter(l => l.isNew), baseline = newLoops.reduce((n,l) => n + l.baselineBytes,0);
+  const actual = newLoops.reduce((n,l) => n + bytesOf(l),0), saved = baseline - actual;
+  const occupied = plan ? plan.filter(ls => ls.length).length : 0;
+  $("savings").textContent = !readOk || !newLoops.length ? "" :
+    `New loops: ${actual.toLocaleString()} B sample data vs ${baseline.toLocaleString()} B for the same cut at 44.1 kHz (${saved.toLocaleString()} B saved, ${baseline ? (100 * saved / baseline).toFixed(1) : "0"}%). ` +
+    (plan ? `Packed images: ${(used + occupied * SLOT_DATA_OFF).toLocaleString()} B including ${occupied} × 512 B slot headers. ` : "") +
+    "ADPCM uses one byte per sample pair, including an odd final nibble; no per-loop codec block headers. Flash slot capacities stay fixed.";
+}
+
+// one loop's waveform: its peak in each pixel column
+function wave(cv, s, colour) {
+  const g = cv.getContext("2d"), W = cv.width, H = cv.height, css = getComputedStyle(document.documentElement);
+  g.clearRect(0, 0, W, H);
+  g.fillStyle = css.getPropertyValue(colour);
+  for (let x = 0; x < W; x++) {
+    let pk = 0;
+    for (let i = Math.floor(x * s.length / W), e = Math.floor((x + 1) * s.length / W); i < e; i++) {
+      const v = Math.abs(s[i]);
+      if (v > pk) pk = v;
+    }
+    const h = Math.max(1, pk / 32768 * H);
+    g.fillRect(x, (H - h) / 2, 1, h);
+  }
+}
+
+// ---- the list -> the device's slots ---------------------------------------------------
+// in order, a slot filled before the next (16 loops or the slot's size a slot); a loop that does not fit
+// goes into the next slot that can take it (a smaller slot between stays empty); null if it doesn't all fit
+function packLoops() {
+  if (!nslot()) return loops.length ? null : [];
+  const slots = Array.from({ length: nslot() }, () => []);
+  let cur = 0, used = 0;
+  for (const l of loops) {
+    const b = bytesOf(l);
+    let j = cur;
+    while (j < nslot() && !((j === cur ? used : 0) + b <= slotMax(j) && slots[j].length < SLOT_ZONES)) j++;
+    if (j >= nslot()) return null;
+    if (j !== cur) { cur = j; used = 0; }
+    slots[cur].push(l);
+    used += b;
+  }
+  return slots;
+}
+
+function image(k, ls) {
+  if (!ls.length) return null;
+  for (const l of ls) if (!l.adpcm) l.adpcm = imaEncode(l.s);
+  return userSlotRaw(`BR${k + 1}`, ls.map((l) => ({ adpcm: l.adpcm, n: l.n, rate: l.rate })), slotSize(lay, k));
+}
+
+function same(a, b) {
+  if (!a || !b) return !a && !b;
+  if (a.data.length !== b.data.length) return false;
+  for (let i = 0; i < a.hdr.length; i++) if (a.hdr[i] !== b.hdr[i]) return false;
+  for (let i = 0; i < a.data.length; i++) if (a.data[i] !== b.data[i]) return false;
+  return true;
+}
+
+function changedSlots(plan) {
+  const out = [];
+  plan.forEach((ls, k) => { const im = image(k, ls); if (!same(im, dev[k])) out.push({ k, im }); });
+  return out;
+}
+
+// ---- files -> loops ------------------------------------------------------------
+async function decode(file) {
+  const buf = new Uint8Array(await file.arrayBuffer());
+  try { return readWav(buf); } catch (_) { /* not a WAV the reader takes: the browser's decoder */ }
+  const ctx = new OfflineAudioContext(1, 1, 44100);
+  const ab = await ctx.decodeAudioData(buf.buffer.slice(0));
+  const n = ab.length, x = new Array(n), chs = [];
+  for (let c = 0; c < ab.numberOfChannels; c++) chs.push(ab.getChannelData(c));
+  for (let i = 0; i < n; i++) { let acc = 0.0; for (const ch of chs) acc += ch[i]; x[i] = acc / chs.length; }
+  return { rate: ab.sampleRate, x };
+}
+
+// Reuse PR362's rate-reduction method, retaining the unprocessed decoded source for every change.
+const newRate = () => ($("half").checked ? RATE_HALF : RATE);
+const gritFactor = () => (OLDSCHOOL_GRIT.find(g => g.key === $("grit").value) || OLDSCHOOL_GRIT[0]).factor;
+const importSettings = () => ({ bars: $("bars").checked, trim: $("trim").checked, storageRate: newRate(), gritFactor: gritFactor() });
+let acceptedSettings = importSettings();
+function restoreSettings(settings) {
+  $("bars").checked = settings.bars; $("trim").checked = settings.trim;
+  $("half").checked = settings.storageRate === RATE_HALF;
+  $("grit").value = (OLDSCHOOL_GRIT.find(g => g.factor === settings.gritFactor) || OLDSCHOOL_GRIT[0]).key;
+}
+function prepareImportedLoop(x, srcRate, file, settings) {
+  const maxData = lay.count ? Math.max(...lay.slots.map((_, k) => slotMax(k))) : SLOT_MAX_DATA;
+  return { ...prepareLoopImport(x, srcRate, { ...settings, maxData }), file, isNew: true, srcRate, x };
+}
+let auditionSource = null, auditionLoop = null, auditionSerial = 0;
+function refreshAudition() {
+  stopLoopPreview(); auditionLoop = null;
+  try {
+    if (auditionSource) {
+      auditionLoop = prepareImportedLoop(auditionSource.x,auditionSource.rate,auditionSource.name,importSettings());
+      const l=auditionLoop;
+      $("auditionStatus").textContent = `${l.file} · ${(l.n/l.rate).toFixed(3)} s · ${l.adpcm.length.toLocaleString()} B ADPCM vs ${l.baselineBytes.toLocaleString()} B clean 44.1 kHz (${l.savedBytes.toLocaleString()} B saved). Preview only; not added to device slots.`;
+    }
+  } catch(e) { $("auditionStatus").textContent = `Preview unavailable: ${e.message || e}`; }
+  $("auditionReference").disabled = $("auditionEncoded").disabled = !auditionLoop;
+}
+async function chooseAuditionFile(file) {
+  const serial=++auditionSerial; stopLoopPreview(); auditionSource=null; auditionLoop=null;
+  $("auditionReference").disabled=$("auditionEncoded").disabled=true;
+  if (!file) { $("auditionStatus").textContent="Choose a file above. Listening is local and does not require MIDI or change device samples."; return; }
+  $("auditionStatus").textContent="Decoding local audio…";
+  try {
+    const decoded=await decode(file);
+    if(serial!==auditionSerial)return;
+    auditionSource={x:Array.from(decoded.x),rate:decoded.rate,name:file.name};refreshAudition();
+  } catch(e) { if(serial===auditionSerial)$("auditionStatus").textContent=`Couldn't read local audio: ${e.message || e}`; }
+}
+let previewAudio = null, previewNode = null, previewSerial = 0;
+function stopLoopPreview() {
+  previewSerial++;
+  const node = previewNode; previewNode = null;
+  if (node) { try { node.stop(); } catch (_) { /* already ended */ } node.disconnect(); }
+}
+async function playLoopPreview(loop, original = false) {
+  stopLoopPreview(); const serial = previewSerial;
+  if (!previewAudio) previewAudio = new AudioContext();
+  if (previewAudio.state === "suspended") await previewAudio.resume();
+  if (serial !== previewSerial) return;
+  const samples = original ? Float32Array.from(loop.reference) : loopPreviewPcm(imaDecode(loop.adpcm || imaEncode(loop.s), loop.n), loop.rate, false).samples;
+  const rate = original ? loop.referenceRate : loop.rate;
+  // A fixed supported buffer rate plus rate ratio handles even the lowest stored rates.
+  const buffer = previewAudio.createBuffer(1, samples.length, RATE); buffer.copyToChannel(samples, 0);
+  const node = previewAudio.createBufferSource(); node.buffer = buffer; node.playbackRate.value = rate / RATE;
+  node.connect(previewAudio.destination); previewNode = node;
+  node.onended = () => { if (previewNode === node) previewNode = null; node.disconnect(); };
+  node.start();
+}
+function reviewLoops(items, title, action) {
+  const dialog = $("previewDlg"), list = $("previewList");
+  $("previewTitle").textContent = title; $("previewGo").textContent = action; $("previewStatus").textContent = ""; list.textContent = "";
+  for (const [i,loop] of items.entries()) {
+    const row = document.createElement("div"); row.className = "preview-row";
+    const name = document.createElement("strong"); name.textContent = loop.file || `Loop ${i + 1}`; row.appendChild(name);
+    const detail = document.createElement("p"), bytes = (loop.adpcm || imaEncode(loop.s)).length;
+    detail.textContent = `${(loop.n / loop.rate).toFixed(3)} s · saved rate ${loop.rate.toLocaleString()} Hz · ${bytes.toLocaleString()} B ADPCM` +
+      (loop.isNew ? ` vs ${loop.baselineBytes.toLocaleString()} B clean 44.1 kHz (${loop.savedBytes.toLocaleString()} B saved)` : " · original file unavailable for a loop read from the device");
+    row.appendChild(detail);
+    const buttons = document.createElement("div"); buttons.className = "bar";
+    for (const [label,original] of [["Mono reference (same cut)",true],["Encoded loop",false]]) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "quiet"; button.textContent = label;
+      button.disabled = original && !loop.reference;
+      button.onclick = () => playLoopPreview(loop,original).catch(e => { $("previewStatus").textContent = `Preview unavailable: ${e.message || e}`; });
+      buttons.appendChild(button);
+    }
+    row.appendChild(buttons); list.appendChild(row);
+  }
+  if (!items.length) list.textContent = "The changed slots will be cleared. No loop audio remains to preview.";
+  return new Promise(resolve => {
+    let settled = false;
+    const done = ok => {
+      if (settled) return; settled = true; stopLoopPreview();
+      dialog.oncancel = dialog.onclose = null; dialog.close(); resolve(ok);
+    };
+    $("previewGo").onclick = () => done(true); $("previewCancel").onclick = () => done(false);
+    dialog.oncancel = ev => { ev.preventDefault(); done(false); }; dialog.onclose = () => done(false);
+    dialog.showModal();
+  });
+}
+async function addFiles(list, at = -1) {
+  if (busy || !sampleActive || !readOk || !list.length) return;
+  stopLoopPreview(); busy = true; render(); const settings = importSettings();
+  const got = [], bad = [];
+  try {
+    for (const f of at >= 0 ? list.slice(0,1) : list) {
+      try {
+        const { rate: srcRate, x } = await decode(f);
+        got.push(prepareImportedLoop(Array.from(x),srcRate,f.name,settings));
+      } catch (e) { bad.push(`${f.name}: ${e.message || e}`); }
+    }
+    if (got.length && settings.gritFactor > 1 && !await reviewLoops(got,"Compare before adding","Add these loops")) return;
+    if (!sampleActive || !readOk) throw new Error("Read the device again before adding prepared loops.");
+    if (at >= 0 && got.length) loops[at] = got[0]; else loops.push(...got);
+    acceptedSettings = settings; restoreSettings(settings);
+    say(bad.length ? `Couldn't read ${bad.join("; ")}.` : "Prepared locally. Send applies changes to the device.");
+  } catch (e) { say(e.message || String(e)); }
+  finally { busy = false; render(); }
+}
+
+// ---- the FM-1 ------------------------------------------------------------------
+class Link {
+  constructor(input, output) {
+    this.input = input; this.output = output; this.wait = null;
+    input.onmidimessage = (ev) => {
+      const d = ev.data;
+      if (d.length < 6 || d[0] !== 0xF0 || d[1] !== HDR[0] || d[2] !== HDR[1] || d[3] !== HDR[2] || d[d.length - 1] !== 0xF7 || !this.wait || d[4] !== this.wait.cmd) return;
+      const w = this.wait;
+      // SMP_READ echoes slot + three offset bytes. A delayed retry must not
+      // consume the next chunk's wait, even though both replies use command 16.
+      if (w.readAddress && (d.length < 12 || !w.readAddress.every((a, i) => d[5 + i] === a))) return;
+      if (w.slot !== null && d[5] !== w.slot) return;
+      if (w.writeAddress && (d.length !== 11 || !w.writeAddress.every((a, i) => d[5 + i] === a))) return;
+      if (w.slot !== null && !w.writeAddress && d.length !== 8) return;
+      this.wait = null;
+      clearTimeout(w.timer);
+      w.resolve([...d.slice(5, d.length - 1)]);
+    };
+  }
+  req(cmd, args, ms = 3000) {
+    return new Promise((resolve, reject) => {
+      // Own the timer by request identity so a failed send's timeout cannot clear a newer wait.
+      if (this.wait) { reject(new Error("A MIDI request is already in progress.")); return; }
+      const entry = { cmd, resolve, timer: null, readAddress: cmd === 16 ? args.slice(0, 4) : null,
+        slot: [11, 12, 13, 14].includes(cmd) ? args[0] : null,
+        writeAddress: cmd === 12 ? args.slice(0, 4) : null };
+      entry.timer = setTimeout(() => {
+        if (this.wait === entry) this.wait = null;
+        reject(new Error("The SMK-37 stopped answering."));
+      }, ms);
+      this.wait = entry;
+      try {
+        this.output.send([0xF0, ...HDR, cmd, ...args, 0xF7]);
+      } catch (e) {
+        clearTimeout(entry.timer);
+        if (this.wait === entry) this.wait = null;
+        reject(e);
+      }
+    });
+  }
+  async retry(cmd, args, ms, tries = 3) {
+    for (let k = 1; ; k++) { try { return await this.req(cmd, args, ms); } catch (e) { if (k >= tries) throw e; } }
+  }
+}
+
+async function connect() {
+  function validInfo(r) {
+    if (r.some(b => !Number.isInteger(b) || b < 0 || b > 127)) return false;
+    const z = r.indexOf(0);
+    if (z < 1 || z > 24 || r.length < z + 6) return false;
+    const id = String.fromCharCode(...r.slice(0, z));
+    const [engines, params, globals, steps, engineBase] = r.slice(z + 1, z + 6);
+    if (!steps) return false;
+    let at = z + 6;
+    if (/^X0X [\x20-\x7e]+$/.test(id)) {
+      // X0X INFO has no editor engines/parameters/tracks; production may append XSG v1.
+      if (engines || params || globals || engineBase || r[at++] !== 0) return false;
+      return at === r.length || r.length === at + 5 && [0x58, 0x53, 0x47, 1, 48].every((b, i) => r[at + i] === b);
+    }
+    if (!/^FELUCCA [\x20-\x7e]+$/.test(id) || !engines) return false;
+    for (let k = 0; k < engines; k++) {
+      const end = r.indexOf(0, at);
+      if (end <= at || end - at > 8 || r.slice(at, end).some(b => b < 32 || b > 126)) return false;
+      at = end + 1;
+    }
+    // Legacy INFO ends after engine names, or includes the v3 track count.
+    return at === r.length || at + 1 === r.length && r[at] > 0;
+  }
+  if (!navigator.requestMIDIAccess) throw new Error("Web MIDI is unavailable. Use desktop Chrome or Edge over HTTPS or localhost and allow MIDI / SysEx. Safari and iOS browsers are unsupported.");
+  const midi = await navigator.requestMIDIAccess({ sysex: true });
+  midi.onstatechange = () => {
+    if (link && (link.input.state === "disconnected" || link.output.state === "disconnected")) {
+      readOk = false; render(); say("Device disconnected. Prepared loops are retained. Reconnect and read slots again before sending.");
+    }
+  };
+  const outs = [...midi.outputs.values()];
+  for (const input of midi.inputs.values()) {
+    if (input.state === "disconnected" || !(/x0x|felucca/i.test(input.name || "") || /\bDnBOX\b.*\b(?:SMK-37 (?:Elite|Pro)|37(?:ELITE|PRO))\b/i.test(input.name || ""))) continue;
+    const output = outs.find((o) => o.state !== "disconnected" && o.name === input.name);
+    if (!output) continue;
+    const previousHandler = input.onmidimessage;
+    const inputWasClosed = input.connection === "closed", outputWasClosed = output.connection === "closed";
+    let handler = null, outputAttempted = false;
+    try {
+      await input.open();
+      outputAttempted = true;
+      await output.open();
+      const l = new Link(input, output);
+      handler = input.onmidimessage;
+      if (!validInfo(await l.retry(1, [], 1000))) throw new Error("Invalid firmware INFO reply.");
+      return l;
+    } catch (_) {
+      if (handler && input.onmidimessage === handler) input.onmidimessage = previousHandler;
+      // Release only ports this attempt opened; preserve preexisting shared connections.
+      for (const port of [inputWasClosed ? input : null, outputAttempted && outputWasClosed ? output : null]) {
+        if (port) try { await port.close(); } catch (_) { /* cleanup must not stop discovery */ }
+      }
+    }
+  }
+  throw new Error("No SMK-37 running DnBOX found. Connect it by USB, and close other apps that use its MIDI port.");
+}
+
+function unpack7(a) {
+  const out = [];
+  for (let i = 0; i < a.length;) {
+    const m = a[i++];
+    for (let j = 0; j < 7 && i < a.length; j++) out.push(a[i++] | ((m >> j) & 1) << 7);
+  }
+  return new Uint8Array(out);
+}
+
+// a slot's bytes from `off` (SMP_READ: up to 224 a request, asked for in pairs)
+async function readBytes(k, off, n, onPart) {
+  const out = new Uint8Array(n);
+  for (let at = 0; at < n;) {
+    const want = Math.min(224, n - at), adr = off + at;
+    const r = await link.retry(16, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1], 3000);
+    const b = unpack7(r.slice(4));
+    if (!b.length) throw new Error("no data");
+    out.set(b.subarray(0, Math.min(b.length, n - at)), at);
+    at += Math.min(b.length, n - at);
+    if (onPart) onPart(at / n);
+  }
+  return out;
+}
+
+// every slot as it is on the device: {lay, dev: per slot {hdr, data, image} or null}. Reads only.
+async function readSlots() {
+  const l = parseInfo(await link.req(15, [])), d = [], bar = $("progress");
+  bar.hidden = false;
+  try {
+    for (let k = 0; k < l.count; k++) {
+      d.push(null);
+      if (!l.slots[k].nz) continue;
+      const area = await readBytes(k, 0, SLOT_DATA_OFF), hdr = area.slice(0, SLOT_HDR_LEN), h = parseSlot(hdr);
+      const capacity = l.slots[k].size || l.size;
+      if (!h || h.nz !== l.slots[k].nz || !Number.isSafeInteger(capacity) || capacity < SLOT_DATA_OFF ||
+          !Number.isSafeInteger(h.dataLen) || h.dataLen < 1 || h.dataLen > capacity - SLOT_DATA_OFF)
+        throw new Error(`Slot ${k + 1}: invalid header or slot capacity.`);
+      const data = await readBytes(k, SLOT_DATA_OFF, h.dataLen, (f) => { bar.value = (k + f) / l.count * 100; });
+      if (crc32(data) !== new DataView(hdr.buffer).getUint32(20, true)) throw new Error("crc");
+      const image = new Uint8Array(SLOT_DATA_OFF + data.length);
+      image.set(area);
+      image.set(data, SLOT_DATA_OFF);
+      d[k] = { hdr, data, image };
+    }
+  } catch (_) {
+    bar.hidden = true;
+    throw new Error("This firmware can't send its loops back to the page. Update DnBOX, then connect again.");
+  }
+  bar.hidden = true;
+  return { lay: l, dev: d };
+}
+
+async function readAll() {
+  const r = await readSlots();
+  lay = r.lay;
+  dev = r.dev;
+  loops = [];
+  dev.forEach((sl) => {
+    if (!sl) return;
+    for (const z of parseSlot(sl.hdr).zones) {
+      const adpcm = sl.data.slice(z.off, z.off + ((z.n + 1) >> 1));
+      loops.push({ adpcm, n: z.n, s: imaDecode(adpcm, z.n), rate: z.rate, isNew: false });
+    }
+  });
+  readOk = true;
+}
+
+// write one slot image (the 512-byte header area + data), or null: erase it. As Send does.
+async function writeImage(k, img, onPart) {
+  if (!img) {
+    const r = await link.req(14, [k], 30000);
+    if (r[1]) throw new Error("The SMK-37 couldn't clear its memory.");
+    return;
+  }
+  const b = await link.req(11, [k], 10000);
+  if (b[1]) throw new Error("The SMK-37 couldn't erase its memory.");
+  const data = img.subarray(SLOT_DATA_OFF);
+  for (let off = 0; off < data.length; off += 256) {
+    const adr = SLOT_DATA_OFF + off;
+    const r = await link.retry(12, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, ...pack78(data.subarray(off, off + 256))], 3000);
+    if (r[4]) throw new Error("Writing to the SMK-37 failed.");
+    if (onPart) onPart(Math.min(256, data.length - off));
+  }
+  const e = await link.req(13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);
+  if (e[1]) throw new Error("The SMK-37 didn't accept the loops.");
+}
+
+function sampleLayoutKey(layout) {
+  return JSON.stringify([layout.count, layout.size, layout.ext,
+    layout.slots.map(slot => [slot.size, slot.off])]);
+}
+function captureSampleSnapshot() {
+  return { layout: sampleLayoutKey(lay), images: dev.map(slot => slot ? slot.image.slice() : null) };
+}
+function requireFreshSampleSnapshot(expected, fresh) {
+  if (sampleLayoutKey(fresh.lay) !== expected.layout || fresh.dev.length !== expected.images.length ||
+      fresh.dev.some((slot, k) => {
+        const got = slot ? slot.image : null, want = expected.images[k];
+        return (got === null) !== (want === null) || got &&
+          (got.length !== want.length || !got.every((byte, i) => byte === want[i]));
+      })) {
+    readOk = false;
+    throw new Error("The device samples changed after they were read. No further samples were written. Read the device and review the changes again.");
+  }
+  // This detects stale previews, including same-size/CRC collisions. Legacy
+  // firmware has no client-bound atomic sample-write lease: a separate client
+  // could still race the following send. Do not call this an exclusive lock.
+}
+
+async function run(fn) {
+  if (busy || !sampleActive) return;
+  busy = true;
+  render();
+  try { await fn(); } catch (e) { say(e.message || String(e)); }
+  busy = false;
+  render();
+}
+
+async function readFromDevice() {
+  if ((loops.some(l => l.isNew) || (packLoops() && changedSlots(packLoops()).length)) && !confirm("Read device slots again and discard prepared sample changes?")) return;
+  say("Connecting…");
+  readOk = false;
+  link = await connect();
+  render();
+  say("Reading the loops…");
+  await readAll();
+  $("connect").textContent = "Read again";
+  say("");
+}
+
+$("connect").onclick = () => run(readFromDevice);
+$("discard").onclick = () => run(readFromDevice);
+
+$("send").onclick = () => run(async () => {
+  const plan = packLoops(), todo = changedSlots(plan), bar = $("progress");
+  const expected = captureSampleSnapshot();
+  const review = todo.flatMap(({ k }) => plan[k]);
+  if (!await reviewLoops(review, "Compare before sending — changed slots will be replaced", "Send to the device")) return;
+  if (!sampleActive || !readOk) throw new Error("Read the device again before sending prepared loops.");
+  const total = todo.reduce((a, t) => a + (t.im ? t.im.data.length : 1), 0);
+  let sent = 0;
+  bar.hidden = false;
+  bar.value = 0;
+  for (const { k, im } of todo) {
+    requireFreshSampleSnapshot(expected, await readSlots());
+    if (!sampleActive || !readOk) throw new Error("Read the device again before sending prepared loops.");
+    if (!im) {                                       // nothing left in this slot: clear it
+      say("Clearing…");
+      await writeImage(k, null);
+      expected.images[k] = null;
+      sent += 1;
+      continue;
+    }
+    say("Sending…");
+    const img = new Uint8Array(SLOT_DATA_OFF + im.data.length);
+    img.fill(0xFF);                                  // the header area past the header stays erased
+    img.set(im.hdr);
+    img.set(im.data, SLOT_DATA_OFF);
+    await writeImage(k, img, (n) => { sent += n; bar.value = sent / total * 100; });
+    expected.images[k] = img;
+  }
+  bar.hidden = true;
+  say("Reading back…");
+  requireFreshSampleSnapshot(expected, await readSlots());
+  await readAll();
+  say("Done. On the SMK-37: BREAK, then EDIT, then LOOP A or LOOP B.");
+});
+
+$("backup").onclick = () => run(async () => {
+  say("Reading every slot…");
+  const r = await readSlots();
+  const t = new Date(), p = (v) => String(v).padStart(2, "0");
+  const stamp = `${t.getFullYear()}-${p(t.getMonth() + 1)}-${p(t.getDate())}T${p(t.getHours())}:${p(t.getMinutes())}:${p(t.getSeconds())}`;
+  const file = makeArchive(r.lay, r.dev.map((d) => (d ? d.image : null)), stamp);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([file], { type: "application/octet-stream" }));
+  a.download = `DnBOX-slots-${stamp.replace(/[-:]/g, "").replace("T", "-")}.x0xslots`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+  say(`Saved ${a.download} (${KB(file.length)}).`);
+});
+$("restore").onclick = () => $("archive").click();
+$("archive").onchange = (ev) => {
+  const f = ev.target.files[0];
+  ev.target.value = "";
+  if (!f) return;
+  run(async () => {
+    const expected = captureSampleSnapshot();
+    const { meta, images } = readArchive(new Uint8Array(await f.arrayBuffer()));
+    const { todo, skipped } = planRestore(lay, images);
+    const what = meta.slots.map((e) => `slot ${e.slot}: ${e.empty ? "empty" : `${e.name || "-"}, ${e.zones} loop(s)`}`).join("\n");
+    if (!todo.length) throw new Error("Nothing in this backup fits this device.");
+    if (!confirm(`Restore ${f.name} (saved ${meta.created})?\n${what}${skipped.length ? `\nSkipped: ${skipped.join("; ")}` : ""}\n\n` +
+      `This replaces slot ${todo.map((t) => t.k + 1).join(", ")} on the device. Unsent changes on this page are lost.`)) return;
+    const bar = $("progress"), total = todo.reduce((a, t) => a + (t.img ? t.img.length - SLOT_DATA_OFF : 1), 0);
+    let sent = 0;
+    bar.hidden = false;
+    for (const { k, img } of todo) {
+      requireFreshSampleSnapshot(expected, await readSlots());
+      if (!sampleActive || !readOk) throw new Error("Read the device again before restoring samples.");
+      say(`Restoring slot ${k + 1}…`);
+      await writeImage(k, img, (n) => { sent += n; bar.value = sent / total * 100; });
+      expected.images[k] = img;
+      if (!img) sent += 1;
+    }
+    bar.hidden = true;
+    say("Reading back…");
+    const back = await readSlots();
+    for (const { k, img } of todo) {
+      const got = back.dev[k] ? back.dev[k].image : null;
+      if ((got === null) !== (img === null) || (got && (got.length !== img.length || crc32(got) !== crc32(img) ||
+          !got.every((byte, i) => byte === img[i]))))
+        throw new Error(`Slot ${k + 1} reads back different from the backup.`);
+    }
+    await readAll();
+    say(`Restored${skipped.length ? ` (skipped ${skipped.join("; ")})` : ""}.`);
+  });
+};
+
+$("add").onclick = () => { replaceAt = -1; $("files").multiple = true; $("files").click(); };
+$("files").onchange = (ev) => { addFiles([...ev.target.files], replaceAt); ev.target.value = ""; replaceAt = -1; };
+document.body.ondragover = (ev) => { if (readOk) { ev.preventDefault(); $("list").classList.add("over"); } };
+document.body.ondragleave = (ev) => { if (!ev.relatedTarget) $("list").classList.remove("over"); };
+document.body.ondrop = (ev) => { ev.preventDefault(); $("list").classList.remove("over"); addFiles([...ev.dataTransfer.files]); };
+async function recutNewLoops() {
+  stopLoopPreview();
+  if (busy || !sampleActive) { restoreSettings(acceptedSettings); return; }
+  const settings = importSettings();
+  await run(async () => {
+    try {
+      const replacements = loops.map(loop => loop.isNew ? prepareImportedLoop(loop.x,loop.srcRate,loop.file,settings) : loop);
+      const changed = replacements.filter(loop => loop.isNew);
+      if (changed.length && settings.gritFactor > 1 && !await reviewLoops(changed,"Compare changed import settings","Apply to new loops")) {
+        restoreSettings(acceptedSettings); return;
+      }
+      loops = replacements; acceptedSettings = settings; restoreSettings(settings);
+      say("New loops rebuilt from their retained original audio. Device samples are unchanged until Send.");
+    } catch (e) { restoreSettings(acceptedSettings); throw e; }
+  });
+  refreshAudition();
+}
+$("bars").onchange = $("trim").onchange = $("half").onchange = $("grit").onchange = recutNewLoops;
+$("previewStop").onclick = $("auditionStop").onclick = stopLoopPreview;
+$("auditionFile").onchange = () => chooseAuditionFile($("auditionFile").files[0]);
+for (const [id,original] of [["auditionReference",true],["auditionEncoded",false]])
+  $(id).onclick = () => { if(auditionLoop) return playLoopPreview(auditionLoop,original).catch(e=>{ $("auditionStatus").textContent=`Preview unavailable: ${e.message || e}`; }); };
+window.sampleWorkspace = {
+  busy: () => busy,
+  activate: active => {
+    if (sampleActive === active) return;
+    sampleActive = active;
+    if (!active) stopLoopPreview();
+    if (link) {
+      if (!active) { savedMidiHandler = link.input.onmidimessage; link.input.onmidimessage = null; }
+      else if (savedMidiHandler) { link.input.onmidimessage = savedMidiHandler; savedMidiHandler = null; }
+    }
+  },
+  invalidate: () => { stopLoopPreview(); readOk = false; render(); say("Read device slots again before sending. Prepared loops are retained; reading replaces the draft after confirmation."); }
+};
+if (new URLSearchParams(location.search).has("embedded")) {
+  document.querySelector(".home").hidden = true;
+  document.documentElement.classList.add("embedded");
+  const fitWorkspace = () => {
+    if (parent === window) return;
+    const frame = parent.document.getElementById("sample-frame");
+    if (frame) frame.style.height = Math.ceil(document.querySelector("main").getBoundingClientRect().height + 8) + "px";
+  };
+  new ResizeObserver(fitWorkspace).observe(document.querySelector("main"));
+  sampleActive = false;
+}
+render();
+</script>
+</body>
+</html>

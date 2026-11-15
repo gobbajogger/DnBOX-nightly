@@ -1,0 +1,23 @@
+[
+  {
+    "source": "original-presets-v3-final/test-duplicates.mjs",
+    "sha256": "a51811ffe738c60ee63919c412e115ada259cb16906304ca10f0f66d360e728a",
+    "derived": "1239cbd3191e57328f0e810f71e95c3e001d359a9409b3e63597a1e5fdc3ed78",
+    "path": "tests/product-presets/test-duplicates.mjs",
+    "adaptation": "Imports only, actual shipped parser/page used; assertions unchanged."
+  },
+  {
+    "source": "original-presets-v3-final/test-page.mjs",
+    "sha256": "bd52e7f7430d01ef050a94486ed5747177929277b51a114796393d875d7530a4",
+    "derived": "c02d5015b57042b36f9ffc8a66adf4ae07ad48a8cecd5f2bdc78ecd56e27da4e",
+    "path": "tests/product-presets/test-page.mjs",
+    "adaptation": "Imports only, actual shipped parser/page used; assertions unchanged."
+  },
+  {
+    "source": "original-presets-v3-final/test.mjs",
+    "sha256": "c181a244c2be02b672d61fadb2072aa61f908e66adfe098e4f0f903137b76ee3",
+    "derived": "bca0b365f091568cc5827d5b413720d5699d981fbcf0036a073fb08d526f5eb2",
+    "path": "tests/product-presets/test.mjs",
+    "adaptation": "Imports only, actual shipped parser/page used; assertions unchanged."
+  }
+]

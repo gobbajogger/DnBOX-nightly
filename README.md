@@ -1,7 +1,19 @@
 # DnBOX nightly
 
+## Current local candidate: R16 / V10
+
+Producer correction of the three sealed R15 findings. Combined local build and full npm test returned 0: 704 summarized Node tests, 7 static Python tests and standalone source-event regressions. Independent successor recheck remains pending. Imported IDs remain unchanged while Add/Paste allocate unused bounded IDs; page departure cancels draft file generations; Projects availability text survives mounting outside its replacement root. Original provider/device gates remain. No browser, touch, BFCache, download filesystem or delivery acceptance is implied. Earlier stage notes below are historical, not automatic current qualification.
+
+
+## Historical verified predecessor: R15 / V9
+
+Unpublished exact-source local candidate, not an owner-usable or qualified delivery. Full `npm run build` and `npm test` returned0:700 summarized Node tests plus standalone regressions and7 static Python tests. Product build has167 byte-verified payloads. New R15 draft/context/viewport/entry delta is awaiting independent affected review; actual browser/touch/download filesystem, complete native/connected musical workflow and authorized Git/hosting delivery remain open. Earlier sections preserve stage history; their pending states are historical unless repeated here. See the R15 section below for the current scope.
+
+
 This repository is the **beta / nightly channel** for DnBOX firmware and its web installer.
 The production repository is [gobbajogger/X0X37-for-Loopy-Pro](https://github.com/gobbajogger/X0X37-for-Loopy-Pro).
+
+The complete-site source candidate is documented in [docs/PRODUCT_SITE.md](docs/PRODUCT_SITE.md). It is not the deployed website. Build it locally with `npm run build:product`; the existing installer/catalog build stays separate.
 
 DnBOX is firmware for the **M-VAVE SMK-37 Elite** and the **SMK-37 Pro**.
 It turns the keyboard into a groovebox.
@@ -206,3 +218,30 @@ If you want to support it, support the original creators directly:
 - [ble/README.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/ble/README.md) — Bluetooth MIDI
 
 Use the GitHub issue tracker on the [production repository](https://github.com/gobbajogger/X0X37-for-Loopy-Pro) to report a problem.
+
+
+### Isolated R10 complete-site source successor
+The complete local product candidate now retains150 source payloads, including both full manuals,197history records and exact retained legacy scripts. R10 adds local group/edge/chance/keyboard editing while device admission remainsnull. Earlier artwork is not the newest R21design. This is unreviewed local composition, not remote integration/publication, and does not retry the denied website branch action. See[the current source scope and gates](docs/PRODUCT_SITE.md).
+
+
+Local R12 website correction candidate preserves161product payloads, restores original installer assets and verified Samples discovery safeguards, and coordinates local change Review/Undo. See [product-source status](docs/PRODUCT_SITE.md). It is not a finished connected remote: sound/bank coverage, actual DOM/touch, final independent review and authorized Git/hosted delivery remain open. Full R22 interface studies are separate from native/runtime admission.
+
+
+Local R13 source candidate:163preserved/composed product payloads; all104 current bank-qualified bass scalar drafts and lossless repeated original J6 record preservation. See [current product source status](docs/PRODUCT_SITE.md). These new corrections are not independently accepted, fully connected/runtime-capable, browser/touch tested or Git/hosted delivered. Earlier local R12 status above is predecessor history, not the final current qualification.
+
+
+Current R14 local successor:164product payloads; exact frozen R22 paired hi-hats replace14 earlier website-artwork occurrences, with all other index bytes preserved. Actual full test recheck passed after a stale lineage assertion was strengthened for the new explicit pins. R13 bounded source fixes now have independent support; this newer artwork/composition still needs affected independent review, actual browser/runtime/design follow-through and authorized delivery. See current [product-source status](docs/PRODUCT_SITE.md).
+
+
+# R15 local workspace recovery and source context
+
+Exact R15 workspace37a4e6f7 and composition3fc39d0b preserve all164 predecessor output paths,150 byte-identical, with14 declared changes and3 additions. Strict exact-source local draft JSON download/open/preview/explicit replacement retains all current local domains/context and resets Undo/Redo/clipboard without altering originals or enabling native state. Download request is not filesystem persistence; dirty-content navigation guard remains. All26 captured body viewports are expanded invertibly; static Master and909 vector crop pairs were actually inspected. All104 bass refs gain actual source matrix section context, not native glyph/formatter application.
+
+Home/Tools disclose local preview, Projects discloses missing browser MIDI provider before file selection, and starting-break preparation remains separate from firmware model/package choice. Original scripts and provider-null safeguards remain. R13/R14 bounded predecessor acceptance is retained; R15 delta needs independent affected review. Source tests/event doubles are not actual DOM/browser/touch or filesystem download evidence. General musical timing/pattern binding, native/engine/connected transport/preset/audio, full design and usable Git/hosting delivery remain open. PublicationQualified stays false; no denied browser/branch action was retried.
+
+
+# R16 confirmed R15 finding corrections
+
+Exact R15 report fb3e333d8721524e4d022b4e99c9ebb2eead32ff891464368097ed47df115195 remains CHANGES REQUIRED for frozen V9. This isolated successor consumes workspace0013f29a and compositionb12bf655; all167 prior product paths remain,159 byte-identical,8 changed and1 added. Three requirement regressions first failed, then passed for upper ID wrap/skip/group paste, departure invalidation/new selection, and actual mounted provider disclosure survival. The original panel/provider/scripts and native-format/application safeguards are unchanged. R16 needs independent affected recheck before closure of findings.
+
+A producer reproduction once rewrote the reviewer's fixed-path generated JSON; this scope mistake was disclosed. The reviewer independently regenerated its matching output before seal, and its ownership note is preserved. Future producer reproductions use isolated output paths. R15 source/body/context preservation support is retained, not misreported as whole-workflow or R16 acceptance. Full musical timing/pattern binding/general Motion/native engine/preset/glyph/connected/audio/browser/device and authorized Git/hosting delivery remain open.
