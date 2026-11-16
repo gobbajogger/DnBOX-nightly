@@ -1,0 +1,16 @@
+...F.........
+======================================================================
+FAIL: test_git_replace_cannot_forge_harness_at_pinned_commit (__main__.Comparison.test_git_replace_cannot_forge_harness_at_pinned_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/web-v2-work/tests/product-firmware-html-diff.py", line 70, in test_git_replace_cannot_forge_harness_at_pinned_commit
+    self.assertEqual(module.verify_inventory_provenance(root,forged,pin,'harness.c')['status'],'FAIL')
+AssertionError: 'PASS' != 'FAIL'
+- PASS
++ FAIL
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.342s
+
+FAILED (failures=1)

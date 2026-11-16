@@ -24,6 +24,8 @@ def verify_inventory_provenance(repo, inventory, firmware_sha, harness_path):
         errors.append('inventory production source mismatch')
     if inventory.get('sourceInventoryCommit', firmware_sha) != firmware_sha:
         errors.append('runtime and inventory harness must share one source commit')
+    if inventory.get('sourceInventoryPath', harness_path) != harness_path:
+        errors.append('inventory harness path mismatch')
     blob = inventory.get('sourceInventoryGitBlob')
     if not isinstance(blob, str) or not SHA.fullmatch(blob):
         errors.append('exact harness blob required')
@@ -33,7 +35,7 @@ def verify_inventory_provenance(repo, inventory, firmware_sha, harness_path):
         errors.append('repository-relative harness path required')
     if not errors:
         def git(*args):
-            return subprocess.run(['git', '--literal-pathspecs', '-C', str(repo), *args],
+            return subprocess.run(['git', '--no-replace-objects', '--literal-pathspecs', '-C', str(repo), *args],
                                   capture_output=True, check=True, timeout=10).stdout
         try:
             if git('cat-file', '-t', firmware_sha).strip() != b'commit':

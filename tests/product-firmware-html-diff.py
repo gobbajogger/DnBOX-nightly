@@ -44,7 +44,7 @@ class Comparison(unittest.TestCase):
             result=module.verify_inventory_provenance(root,manifest,pin,'harness.c')
             self.assertEqual(result['status'],'PASS');self.assertEqual(result['resolvedBlob'],blob)
             self.assertIn('not-coverage',result['scope'])
-            for mutant,path in [(dict(manifest,sourceInventoryGitBlob='f'*40),'harness.c'),(manifest,'missing.c'),(manifest,'../harness.c'),(dict(manifest,sourceInventoryCommit='f'*40),'harness.c')]:
+            for mutant,path in [(dict(manifest,sourceInventoryGitBlob='f'*40),'harness.c'),(manifest,'missing.c'),(dict(manifest,sourceInventoryPath='other.c'),'harness.c'),(manifest,'../harness.c'),(dict(manifest,sourceInventoryCommit='f'*40),'harness.c')]:
                 self.assertEqual(module.verify_inventory_provenance(root,mutant,pin,path)['status'],'FAIL')
             (root/'new-harness.c').write_text('int later;\n');git('add','new-harness.c')
             git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','later harness')
@@ -55,6 +55,21 @@ class Comparison(unittest.TestCase):
             git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','symlink fixture')
             symlink_pin=git('rev-parse','HEAD');symlink=dict(productionSourceCommit=symlink_pin,sourceInventoryGitBlob=git('rev-parse','HEAD:alias.c'))
             self.assertEqual(module.verify_inventory_provenance(root,symlink,symlink_pin,'alias.c')['status'],'FAIL')
+    def test_git_replace_cannot_forge_harness_at_pinned_commit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            def git(*args):
+                return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.DEVNULL).decode().strip()
+            git('init');(root/'harness.c').write_text('int original;\n');git('add','harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','original')
+            pin=git('rev-parse','HEAD');original=git('rev-parse','HEAD:harness.c')
+            (root/'harness.c').write_text('int replacement;\n');git('add','harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','replacement')
+            later=git('rev-parse','HEAD');replacement=git('rev-parse','HEAD:harness.c');git('replace',pin,later)
+            forged={'productionSourceCommit':pin,'sourceInventoryGitBlob':replacement}
+            self.assertEqual(module.verify_inventory_provenance(root,forged,pin,'harness.c')['status'],'FAIL')
+            genuine=dict(forged,sourceInventoryGitBlob=original)
+            self.assertEqual(module.verify_inventory_provenance(root,genuine,pin,'harness.c')['status'],'PASS')
     def test_cli_rejects_provenance_before_opening_capture_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);data,digest=expected();inventory=root/'inventory.json';inventory.write_bytes(data)
