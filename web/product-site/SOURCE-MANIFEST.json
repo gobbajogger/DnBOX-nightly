@@ -29,8 +29,8 @@
     },
     {
       "path": "SITE-R22-CHANGES.json",
-      "bytes": 85320,
-      "sha256": "1d8a925fb3fe56507d8747b2e013b034a08668da594fa3190ab630ffbd47f436"
+      "bytes": 85836,
+      "sha256": "ef8b27a17309971f7ccffd1a4780ac16d977f04916d4c71af96d74a5ca688057"
     },
     {
       "path": "SOURCE-TRACE.json",
@@ -639,8 +639,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 119393,
-      "sha256": "4ad1a3e74590b6805f4a8c9930fb7cd11d40b3d739f8de5c8e4d9546893ddeaf"
+      "bytes": 119356,
+      "sha256": "45c2e2ed47c039dad2b3874156f746ddd652c9283aac77691f5043c371f1ace0"
     },
     {
       "path": "r22-tokens.css",

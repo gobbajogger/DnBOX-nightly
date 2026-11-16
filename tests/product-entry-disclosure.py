@@ -15,7 +15,7 @@ class EntryDisclosure(unittest.TestCase):
   out=B;home=(out/'index.html').read_text();tools=(out/'tools/index.html').read_text();project=(out/'projects/index.html').read_text();starting=(out/'starting-breaks/index.html').read_text()
   self.assertIn('Local workspace preview',home);self.assertNotIn('Connect your browser to the instrument.',home)
   self.assertIn('No connected control or playback in this preview.',tools);self.assertIn('Draft download/open',tools)
-  self.assertIn('Browser MIDI export is unavailable',project);self.assertIn('source-executed browser provider',project)
+  self.assertIn('Browser MIDI export is unavailable',project);self.assertIn('Local workspace drafts are not native projects or MIDI exports.',project)
   self.assertIn('Starting-break choices are a separate preparation preview',starting)
   self.assertIn('export const provider=null;',(out/'projects/exchange/provider.mjs').read_text());self.assertIn('null',(out/'remote/device/catalog.mjs').read_text())
  def test_entry_copy_is_exact_reversible_and_does_not_remove_any_tool_script(self):
