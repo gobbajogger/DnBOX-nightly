@@ -848,6 +848,11 @@
       "sha256": "85b0a30fd96585c676a6c8d2809627a5114c3104a58ab9f676de6e1f319c2b60"
     },
     {
+      "path": "remote/touchosc/dnr2-session.lua",
+      "bytes": 3951,
+      "sha256": "3651097f0957a39569c1f55e54e05d5ad9e51e94e25d7bd14bdff0d05fa2bf90"
+    },
+    {
       "path": "remote/trace.json",
       "bytes": 4133,
       "sha256": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55"

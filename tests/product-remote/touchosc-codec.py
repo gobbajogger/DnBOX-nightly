@@ -56,5 +56,27 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
         assert run('local ok=pcall(codec.encodeCommand,{version=2,op=8});assert(not ok);return "PASS"')=='PASS'
         assert run('local ok=pcall(codec.decodeReply,{});assert(not ok);return "PASS"')=='PASS'
         assert run("local base={version=2,op=0,unit=268435455,unitHigh={4294967295,2147483648,305419896},client=268435455,epoch=268435455,request=268435455,revision=268435455,control=16383,token=16383,value=4294967295};local b=codec.encodeCommand(base);assert(#b==51 and b[35]==15 and b[40]==15);for _,bad in ipairs({-1,1.5,4294967296,math.huge}) do base.value=bad;assert(not pcall(codec.encodeCommand,base)) end;return 'PASS'")=='PASS'
+        session_path=ROOT/'web/product-site/remote/touchosc/dnr2-session.lua'
+        prefix='local S=dofile('+json.dumps(str(session_path))+');local s=S.new(codec,{testOnly=true,client=92,catalogCrc=305419896,catalogCount=3,controls={{id=1,kind=1,min=0,max=1000}}});\n'
+        def session_exchange(expression):
+            global prefix
+            packet=run(prefix+'local b='+expression+';local text="";for _,v in ipairs(b) do text=text..string.format("%02x",v) end;return text')
+            process.stdin.write(packet+'\n');process.stdin.flush();reply=json.loads(process.stdout.readline())['hex']
+            table='{'+','.join(str(b) for b in bytes.fromhex(reply))+'}'
+            prefix+=expression+';s:accept('+table+');\n'
+            assert run(prefix+'return "PASS"')=='PASS'
+            return reply
+        hello_reply=session_exchange('s:hello()');session_exchange('s:open()');read_reply=session_exchange('s:read(1)');session_exchange('s:set(1,900)')
+        assert run(prefix+'assert(s.values[1]==900);assert(not pcall(function() s:set(1,1001) end));assert(not pcall(function() s:set(99,1) end));return "PASS"')=='PASS'
+        ready_prefix=prefix
+        session_exchange('s:close()')
+        assert run(prefix+'assert(s.phase=="closed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
+        assert run(ready_prefix+'s:read(1);assert(not pcall(function() s:read(1) end));assert(not pcall(function() s:timeout() end));assert(s.phase=="failed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
+        read_table='{'+','.join(str(b) for b in bytes.fromhex(read_reply))+'}'
+        assert run(ready_prefix+'s:read(1);local b='+read_table+';b[21]=5;b[25]=3;s:accept(b);assert(s.phase=="ready");return "PASS"')=='PASS'
+        for mutation in ['b[25]=0','b[21]=6','b[9]=43','b[50]=2','b[7]=5','b[29]=99','b[8]=2','b[1]=0']:
+            assert run(ready_prefix+'s:read(1);local b='+read_table+';b[21]=5;b[25]=3;'+mutation+';assert(not pcall(function() s:accept(b) end));assert(s.phase=="failed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
+        assert run('local S=dofile('+json.dumps(str(session_path))+');assert(not pcall(S.new,codec,{testOnly=false}));return "PASS"')=='PASS'
+        print('PASS simulator-only Lua session -> C host identity/catalog/lease/read/set/close; limits, pending transaction and timeout fail closed')
         print('PASS Lua codec -> pinned C host HELLO/OPEN/READ/SET/CONFLICT/CLOSE; no TouchOSC or device claim')
     finally:process.terminate();process.wait()
