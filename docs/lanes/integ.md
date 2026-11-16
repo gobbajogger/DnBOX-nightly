@@ -115,3 +115,7 @@ Normal composition of Web58ec562e7cb698384cc4a9666b100a44e381b13e retains indepe
 The fixture pins exact firmware1ab15cf2 source; test-only stdin binding negotiates a genuine lease and ordinary production unadmitted-open rejection remains tested. Lua diagnostics use host Lua5.4, not actual TouchOSC Lua5.1/customVM qualification. The new real DOM browser assertions encode independently observed readout regressions, but automated browser execution remains NOT_RUN here. No full Local/Review or native endpoint admission.
 
 Producer exact staged consumer replay against independently built1ab host passes unchanged browser/Lua/timeout diagnostics plus product241build. Normal-sandbox source policy14PASS; no actual browser launcher executed. Log: evidence/integ-host-consumer-composition.log. Existing exact17ea no-loss/limits independentlyPASS and all241product closure matched8ce; those results remain input-scoped, not full current Local.
+
+## Bounded Web keyboard evidence composition
+
+Normal composition of reviewed Web 1a1d3a975562e1459037ee6938d1f4e551878a36 adds only two documentation files over previously composed 58ec. Actual 8ce keyboard Menu/Escape/navigation observation remains bounded evidence, not complete viewport/Local qualification. All production product rows and current gate policies remain unchanged from 1d068. Firmware current draft is 6fc998c95a9ab436c8bc46b6cd74c16fe868d242, identical production 646; targets remain e742/9165, unmerged.
