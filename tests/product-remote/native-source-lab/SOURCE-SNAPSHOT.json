@@ -62,5 +62,21 @@
   "native-presentation-work/build-reference.py": "e0d67db75c4bb3d9d07b5a89bf1c33dbaeedbe679490d4eb94e3956674f8c6c4",
   "native-presentation-work/parity.mjs": "bf5ae4d1c1adbac39d3e9a3a0e78a9929972b2239106099de7eae163afa6a605",
   "native-presentation-work/presentation.mjs": "5424a50b9ce84e881f077b0fba85205f46624b032841eff3df25e9a80c1da0a4",
-  "native-presentation-work/presentation.test.mjs": "d1878d3d7c1f26009696be3eef49241da90b0994f4c88998b7d892a7f807cdc3"
+  "native-presentation-work/presentation.test.mjs": "d1878d3d7c1f26009696be3eef49241da90b0994f4c88998b7d892a7f807cdc3",
+  "native-bank-work/bd-formatters.json": "b3a55c271fb89bc90430eb26817c2abf02ec77a691493e31b9bf799b27135fe6",
+  "native-bank-work/raster-onto.mjs": "ed9fa4d67f36861dd81747ccfa556dabbd4e7b1349a09a20a1aa097c5900f3f3",
+  "native-bank-work/corners.json": "e9af5e3b2e5842e03392f5b8cca6cb293aedefa5625892dffe750a7f1c4f30f5",
+  "native-bank-work/bank.mjs": "445dce05815745b4a54a9931b7529c58828e339129896d976fdc5b05db726ab4",
+  "native-drum-inventory-work/panels.test.mjs": "70ca13cd6c14a645a89565e2a2ed7627493464e113b8e72d0ab7e6d935f682d4",
+  "native-drum-inventory-work/layout.mjs": "6369729135eb7ffc479e43e49b2da23629197b03493486cfa2e81eb8a584d021",
+  "native-drum-inventory-work/format-data.json": "a3df213f02d338a8b7371625b30937144f6e80d99ffb7130d480f59ac8478785",
+  "native-drum-inventory-work/panels.mjs": "f7a4baf09fa495c98a868c909818782108726062618ebc24ef77ca0ad58c82b8",
+  "native-drum-inventory-work/grouping-source-bridge.json": "46729c97f732ef943b2b899c1e16e662d9b42169b49971b8100706b24d9c45e1",
+  "native-drum-inventory-work/layout.test.mjs": "5ed21cc88ad73e4dab2895e97fd73dd8a23b2d46638035c05f62e68a00755437",
+  "native-drum-inventory-work/inventory.json": "f252f0a18c1304d2b84277ea8b50ca696367a834b8e17b4bf1a64f3b78475818",
+  "native-drum-inventory-work/native-panel-comparison.json": "319a35ac5895215cc11de8b30d271265d351b3d029fa627a1c4711b36a0b7029",
+  "native-bank-presentation-work/lifecycle.mjs": "8cc4bcf1c3d7b41ca56c7a8b5ff006d70bc8911811fe8c980bdbadd097b6363b",
+  "native-bank-presentation-work/bank.test.mjs": "1325eb6b25005750e8f4b53c0743a51ff8ed15415c9694b037107f5fd2ed6024",
+  "native-bank-presentation-work/lifecycle.test.mjs": "1e2d22ad6db3833d36557d6130bc529b8d1d62f3ee4ce2f71120f64940db42db",
+  "native-bank-presentation-work/bank.mjs": "8d0d74ea30f1ee6dbe25b04b97e624e60c5990e3d42df7797e32db9c8825c869"
 }
