@@ -29,3 +29,9 @@ test('all five admitted previews validate original PCM before choosing any break
  const corrupt=createStartingBreakPreview({fetchImpl:async url=>{const bytes=new Uint8Array(readFileSync(new URL(url)));bytes[bytes.length-1]^=1;return response([bytes]);}});
  await assert.rejects(picker.preview(contract.assets[0].id,corrupt),/hash\/size mismatch/);assert.deepEqual(picker.selectedIds(),[]);
 });
+test('stored selection normalization retains only known unique IDs without adding choices',async()=>{
+ const {normalizeStartingBreakSelection:n}=await import('../web/product-site/starting-break-preview.mjs');
+ assert.deepEqual(n([]),[]);assert.equal(n(null),undefined);assert.equal(n({}),undefined);
+ assert.deepEqual(n(['old-id',null,{},'__proto__']),[]);
+ assert.deepEqual(n(['personal-br2-zone2','personal-br2-zone2','personal-br1-zone1']),['personal-br2-zone2','personal-br1-zone1']);
+});

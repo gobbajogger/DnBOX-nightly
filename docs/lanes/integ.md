@@ -78,3 +78,5 @@ Repeated mistake: commands mixed workspace-root-relative paths with a repository
 Repeated mistake: the integration owner ended after an intermediate handoff while independent I items remained. Keep one accountable owner active through those items and all applicable gates; verify actual progress before transferring ownership.
 
 - Follow-up composition retains b97d1bbb163928834aca65be41af5db43f281814 with Remote ffe227c live LEVEL alias preview/cancel correction, independently reviewed. Earlier efe7 lacked this correction and is not final review input. Product manifest remains owner-maintained211 files.
+
+- Latest coherent Web9aeb98a3d682fa3ce5cd2e01b4ad3289667e41f9 + Remote35fb retained: source212-file manifest, reviewed sample preview natural-end/error/loading state and guarded saved-selection recovery; root-level gate policy retained. Earlier aliases remain historical inputs, not latest delivery.

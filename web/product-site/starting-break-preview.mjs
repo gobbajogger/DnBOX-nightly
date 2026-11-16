@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Contract-verified public preview transport only. No selection or device writes.
 const SIZES=Object.freeze({'personal-br1-zone1':69644,'personal-br1-zone2':83620,'personal-br1-zone3':85768,'personal-br2-zone1':92412,'personal-br2-zone2':105870});
+// Browser preference recovery only; the picker still verifies the pinned contract.
+export function normalizeStartingBreakSelection(value){
+ if(!Array.isArray(value))return undefined;
+ return [...new Set(value.filter(id=>typeof id==='string'&&Object.hasOwn(SIZES,id)))];
+}
 export function createStartingBreakPreview({baseURL=import.meta.url,fetchImpl=globalThis.fetch}={}){
  const urls=new Map(Object.entries(SIZES).map(([id,size])=>[new URL(`./assets/starting-breaks/${id}.wav`,baseURL).href,{id,size}]));
  return Object.freeze({

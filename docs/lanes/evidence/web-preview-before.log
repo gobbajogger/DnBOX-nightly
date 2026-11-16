@@ -1,0 +1,64 @@
+✖ verified preview ended resets transport label and pressed state (25.869798ms)
+✖ verified preview error resets transport label and pressed state (10.216556ms)
+✖ switching previews immediately clears old pressed state while bytes verify (16.481403ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 406.675729
+
+✖ failing tests:
+
+test at tests/product-preview-lifecycle.test.mjs:16:41
+✖ verified preview ended resets transport label and pressed state (25.869798ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'Stop' !== 'Play'
+
+      at TestContext.<anonymous> (file://<checkout>/tests/product-preview-lifecycle.test.mjs:18:36)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Stop',
+    expected: 'Play',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/product-preview-lifecycle.test.mjs:16:41
+✖ verified preview error resets transport label and pressed state (10.216556ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'Stop' !== 'Play'
+
+      at TestContext.<anonymous> (file://<checkout>/tests/product-preview-lifecycle.test.mjs:18:36)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Stop',
+    expected: 'Play',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/product-preview-lifecycle.test.mjs:22:1
+✖ switching previews immediately clears old pressed state while bytes verify (16.481403ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'true' !== 'false'
+
+      at TestContext.<anonymous> (file://<checkout>/tests/product-preview-lifecycle.test.mjs:24:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'true',
+    expected: 'false',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

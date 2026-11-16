@@ -1,8 +1,8 @@
 import {mountPreparedChoices} from './components/installer-binding/binding.mjs';
 import {SAMPLE_CONTRACT_SHA256} from './sample-pin.mjs';
-import {createStartingBreakPreview} from './starting-break-preview.mjs';
+import {createStartingBreakPreview,normalizeStartingBreakSelection} from './starting-break-preview.mjs';
 const $=id=>document.getElementById(id);const SELECTION_KEY='dnbox-starting-break-selection';let panel=null,generation=0,suspended=false,disposed=false,savedSelection=undefined;
-try{const stored=JSON.parse(localStorage.getItem(SELECTION_KEY)||'');if(Array.isArray(stored)) savedSelection=stored;}catch{}
+try{const stored=JSON.parse(localStorage.getItem(SELECTION_KEY)||'');savedSelection=normalizeStartingBreakSelection(stored);}catch{}
 for(const b of document.querySelectorAll('[data-model]'))b.onclick=()=>{document.querySelectorAll('[data-model]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('model-status').textContent=`SMK-37 ${b.dataset.model} selected. Use its matching package in the installer.`;};
 // Register cancellation BEFORE either metadata/network or cryptographic admission can await.
 window.addEventListener('pagehide',event=>{generation++;suspended=true;disposed=!event.persisted;if(panel)savedSelection=panel.selectedIds();panel?.destroy();panel=null;});
