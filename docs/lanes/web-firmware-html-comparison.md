@@ -26,3 +26,9 @@ The threshold is fixed at zero differing pixels. The report includes per-screen 
 Firmware baseline `4bacd2e7d1bca1bf4de026befc0572e0b2489b8f` has 135 ordinary-state captures, but its manifest explicitly says coverage is incomplete (alternate engine and transient states missing). No final complete authoritative inventory or matching real HTML capture is available. Running admission against that baseline and missing HTML returns FAIL before any pixel comparison. This is not W3 completion.
 
 Synthetic unit tests exercise the comparator, including a changed pixel, malformed/source-mismatched manifests, file-hash mismatch, dimensions and symlinks. Their PASS says only that the checker behaves as tested, not that any actual firmware/HTML pair matches.
+
+## Later incomplete inventories (not final W3 inputs)
+
+The later 172 ordinary/GLOBAL inventory records runtime source `1bd5f6854486b8cb1dadec08cc1c33c01f9f35a0`, harness blob `c604b9070f21ed576d113feeedf59c087297dcb0`, and `coverageComplete: false`. Alternate engines, overlays/transients, hardware clip/PADCAL and full geometry/visual approval remain missing.
+
+The 500-state deep-list extension at firmware commit `7ea37ab8cef8b911f47b08e251877eee69a39068` also remains incomplete. Its `sourceInventoryGitBlob` identifies `tests/host/ui_overlay_inventory.c`, not the JSON manifest. The firmware owner confirms its runtime pin predates that harness commit: resolving the harness at the earlier runtime SHA must fail rather than silently treating the two commits as identical. Historical receipts can record separate runtime and harness pins, but final same-source captures must run at one commit containing both runtime and harness, with the resulting manifest published afterward. Neither partial inventory qualifies W3.

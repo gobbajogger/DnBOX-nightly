@@ -116,6 +116,11 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
             assert vals['x']>=0 and vals['y']>=0 and vals['x']+vals['w']<=480 and vals['y']+vals['h']<=240
         no_io='root={findByName=function() return {values={}} end};function sendMIDI() error("Unexpected default send") end;function getMillis() return 0 end;'
         assert run(no_io+pack['root_script']()+'init();onReceiveNotify("dnr2",{action="connect"});return "PASS"')=='PASS'
+        connect_button=next(n for n in buttons if any(p.nodeType==p.ELEMENT_NODE and p.getElementsByTagName('key')[0].firstChild.data=='name' and p.getElementsByTagName('value')[0].firstChild.data=='connect' for p in n.getElementsByTagName('properties')[0].childNodes))
+        button_script=next(p.getElementsByTagName('value')[0].firstChild.data for p in connect_button.getElementsByTagName('properties')[0].childNodes if p.nodeType==p.ELEMENT_NODE and p.getElementsByTagName('key')[0].firstChild.data=='script')
+        runtime_stub='local out={};root={findByName=function()return {values={}}end,notify=function(_,key,value)onReceiveNotify(key,value)end};function sendMIDI(b,r)out[#out+1]=b;assert(r[1]==true)end;function getMillis()return 0 end;'
+        assert run(runtime_stub+pack['root_script']()+button_script+'\ninit();self={values={x=1}};onValueChanged("x");assert(#out==0);return "PASS"')=='PASS'
+        assert run(runtime_stub+pack['root_script'](True)+button_script+'\ninit();self={values={x=0}};onValueChanged("x");assert(#out==0);self.values.x=1;onValueChanged("text");assert(#out==0);onValueChanged("x");assert(#out==1 and out[1][6]==0);self.values.x=0;onValueChanged("x");assert(#out==1);return "PASS"')=='PASS'
         assert b'DNBOX_SIMULATOR_PIN=nil' in xml and b'DNBOX_SIMULATOR_PIN={testOnly=true' in pack['make_xml'](True)
         print('PASS deterministic source XML, five bounded controls, exact embedded Lua and default no-send; TouchOSC application open NOT_RUN')
         print('PASS TouchOSC root-callback source -> C host; explicit simulator connect, route1 only, no-pin no-send, pending/timeout failclosed; NOT actual TouchOSC runtime')

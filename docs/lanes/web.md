@@ -1,15 +1,15 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 272af49f4db58c8b223fb6ef0a4bda80c2afe47e   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: d3154518ee51b3edf348ef1292f567da8f59b68d   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
 ## Checklist
 | ID | Check | Status | Evidence or missing requirement |
 |---|---|---|---|
-| C1 | Local gate at head | FAIL | Combined 3ed source available; browser assertions NOT_RUN and latest integ preflight must be retained. No full gate qualification. |
-| C2 | Contains consolidated; no unexplained deletions | FAIL | Last independent PASS at exact1f0d15fd14625079cf05884540b456a34c656cc1 against fresh connector9165; current composition recheck requested. Two prep deletions remain explained below. |
+| C1 | Local gate at head | FAIL | Exact d315 has bounded actual-browser checks; full scripted Local remains NOT_RUN and latest integ preflight must be retained. |
+| C2 | Contains consolidated; no unexplained deletions | FAIL | Last independent PASS at exact485f2a666a427e56807ec4f2b03252eb968dce4d against fresh connector9165; current head recheck required. Two prep deletions remain explained below. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | FAIL | Earlier limits() stage PASS was narrower than full C4: script does not scan PSRAM or all ≥50MB files. Supplemental exact-head audit requested; no complete C4 claim. |
+| C4 | Hard-limit scan | FAIL | Independent full C4 supplemental scan PASS at485; current d315 head recheck required. No limits-only overcredit. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
 | W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm reached workspace and failed stale archive-wrapper selector; corrected without changing token assertions, workspace PASS; Remote40/40 PASS. Visual/browser gate still blocked; no W1 PASS claim. |
@@ -19,8 +19,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: source/transport coverage at combined 3ed; normal-sandbox browser blocked in both tested environments, no retry of denied boundaries.
-- Next: compose next stable Remote snapshot and integ preflight; extend nonbrowser W2 coverage while awaiting a permitted browser environment and complete native inventory.
+- Now: exactd315 corrected source serving locally through the existing native Chromium; independent bounded browser checks recorded. Earlier scripted browser boundaries remain denied, not retried.
+- Next: continue actual browser interactions at exactd315; retain latest integ preflight for full gate, extend W2 source workflow coverage, and await complete native inventory for W3.
 
 ## Blockers and recovery
 - Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
@@ -42,7 +42,7 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 - Existing draft #133 uses feature/website-r22 while v2 asks lane/web-*; preserve the existing review/history and avoid duplicate PR, root directs authorized lane/web-v2 continuation PR, preserving #133 untouched.
 
 ## What's left
-C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be checked at changed heads. No lane completion or design approval claimed.
+C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be checked at changed heads. No lane completion or design approval claimed.
 
 ## Verified focused work
 - Stale SOURCE-MANIFEST had mismatched breaks/index.html and omitted runtime files. Refreshed all187 product-source entries without changing historical provenance; current snapshot explicitly UNREVIEWED and publicationQualified:false. Build now PASS, drift safety retained.
@@ -111,3 +111,23 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be
 - C4 evidence correction: prior lane table overcredited limits() stage as the entire checklist line; independent review identified absent PSRAM/large-file coverage. Full C4 remains FAIL until supplemental exact-head audit, with no safety threshold weakened.
 
 - Remote review identified simulator callback deadline bug; consumed corrected1fcd1950dd85387b240f4867911fb527ba82b5fa unchanged with normal ancestry. Callback now rejects1000/1001ms and clock rollback before update; default-no-send XML source fixture included. Product80 Node+29 Python plus corrected Lua/XML-to-C-host checks PASS (web-deadline-*). App JS unchanged from prior composition; earlier workspace84/Remote70 evidence retained only for unchanged inputs, not a rerun claim. No actual TouchOSC/browser/full gate acceptance.
+
+- Independent exact485f2a666a427e56807ec4f2b03252eb968dce4d clean/no_loss/limits PASS against9165 plus supplemental all-tracked-blob scan (no≥50MB) and PSRAM activation0 now supports C2/C4 at that exact SHA. Log independent-review/web485-safe-checks.log. Earlier limits-only C4 overcredit remains corrected; recheck changed heads.
+- W2 project inspection controller coverage adds5 source-event cases: unavailable renderer never enables export, oversized file rejected before read/parser, old read cannot replace new selection, dispose prevents late parsing, malformed parser output fails closed. Actual panel/adapter runs with file/parser doubles and provider=null. No new renderer/device/browser capability.
+
+- Distinct permitted browser route recovered: ordinary Python static server in the existing desktop environment, bound only127.0.0.1:37847, serves exact485 product bytes through already-running Chromium. No browser launch, security/permission changes or sandbox flags. At1331x894, actual starting-breaks UI None leaves0 selected; BR1 1 creates media duration1.578231/errornull with paused=false initially; later Play/aria-pressed=false and0 selected. Audible output not verified. This is bounded real-browser functional evidence, not full automated Local, prescribed viewport Review or delivery. Reviewer owns subsequent desktop review; prior EPERM/SUID boundaries remain untouched.
+- Project-inspection extension product suite PASS85 Node+29 Python; actual source with event/file/parser doubles, not browser import/export acceptance.
+
+- Independent existing-browser review at485 found native audio controls left attached after natural end: src removal/load showed an empty disabled player announcing Unable to play media. Three source lifecycle assertions reproduced missing detachment. Cleanup now removes DOM-backed audio after pausing and before clearing its resource; optional remove preserves injected non-DOM media interfaces. End/error/replacement/destroy and cancellation checks14/14 PASS, including one additional stale-parser inspection case. Corrected browser rerun remains required; old served output kept stable during reviewer ownership. No audible-output claim.
+
+- Corrected preview product suite86 Node+29 Python PASS; browser runner now asserts natural-end DOM audio removal and transport reset (scripted runner not executed). Existing-browser independent after check requested.
+
+- Independent actual-browser after check at d315 fixes the preview-control defect:0selected during play, correct1.578231 duration/errornull; natural end removes all audio nodes and resets Play/unpressed without false media error. All214 served files match exact source manifest. Receipt web-d315-browser-preview.json; prescribed viewport Review/full W2/Local still open. Reviewer continues ordinary routes.
+
+- Exact detached d315 full nonbrowser diagnostic completed exit0, tracked files unchanged: every npm test command except final visual stage, including493 edge cases, product86 Node+29 Python, workspace84+app scenarios, Remote70, presets and origin tests. Log/receipt web-d315-nonbrowser-*; not full npm test or Local. Independent browser observations are separate bounded evidence, not a substitute for omitted visual stage.
+
+- Next coherent source composition consumes exact Remote5bd58acf49d38a8d2607d99f6fbcbf58a76e53c4 with normal ancestry at1fcd, preserving all68 Remote blobs and214 whole-site manifest rows. Includes source-reviewed approved baseline mixer order/roles and broker deadline/ownership correction (independent broker verdict pending). No speculative layout edits. Alternate isolated output build214,86 Node product,21 Python admission/content checks, workspace84+app scenarios, Remote72 and Lua-source-to-C host PASS. Existing browser remains on d315 output until reviewer yields; no combined browser/Local qualification.
+
+- Review isolation correction: Node product content test invokes buildProductSite() at its default output, so it unexpectedly advanced the live preview Remote bytes from d315 to abfe during preset review. Detected by hash audit; all214 served files verified abfe, reviewer/root informed immediately. Non-Remote preset/installer bytes were unchanged. Future browser reviews must serve a separate exact-head snapshot outside mutable build output; prepared hash-verified abfe copy. Do not claim output is frozen from intention alone.
+
+- Consumed Remote d3d3a54fefa609824b295d1ea6209d49f8edf0d7 drums resize correction through normal ancestry, without changing frozen review snapshot. Isolated candidate worktree product86 Node+29 Python and workspace84+app scenarios PASS; first candidate test correctly rejected stale publication-manifest hash, which was refreshed before green rerun (no assertion weakening). Broker/resize independent verdict still pending; do not qualify combined runtime.

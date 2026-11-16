@@ -4,7 +4,7 @@ const base=new URL('../../web/product-site/remote/',import.meta.url);
 // Deterministic source-event shim only. No DOM engine, browser, server or rendering.
 class E{constructor(id=''){this.id=id;this.handlers={};this.captureHandlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}appendChild(child){child.parentElement=this;return child;}addEventListener(k,f,options){if(options?.capture)this.captureHandlers[k]=f;else this.handlers[k]=f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
 const nodes=new Map(),views=['roll','drums','locks','sound','mix','patterns','song','files'].map(view=>{const e=new E();e.dataset.view=view;return e;}),modes=['select','move','draw','length','pan'].map(mode=>{const e=new E();e.dataset.mode=mode;return e;});
-globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new E(),addEventListener(){}};globalThis.window={addEventListener(){}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
+globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new E(),addEventListener(){}};const windowEvents=new Map();globalThis.window={addEventListener(k,f){const list=windowEvents.get(k)??[];list.push(f);windowEvents.set(k,list);}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
 const $=document.getElementById;$('zoom').value='1';$('lane-kind').value='velocity';$('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];const sharedLaneNode=new E('shared-lane');$('roll-view').appendChild(sharedLaneNode);const originalQuery=document.querySelector;document.querySelector=s=>s==='.lane'?sharedLaneNode:originalQuery(s);await import(new URL('app.mjs',base));
 // Repro 1: existing focus A, pointer selects B, repaint restores A, keyboard edits A.
 const a=new E();a.dataset.note='n1';document.activeElement=a;const b=new E();b.dataset.note='n5';const down={button:0,pointerId:1,clientX:0,clientY:0,target:b,preventDefault(){}};$('roll-scroll').handlers.pointerdown(down);$('roll-scroll').handlers.pointerup(down);
@@ -175,4 +175,19 @@ check('shipped touch roll draws, resizes and cancels through actual pointer hand
  const resize={...down,pointerId:1201,target:edge,clientX:300};viewport.handlers.pointerdown(resize);viewport.handlers.pointermove({...resize,clientX:360});viewport.handlers.pointerup(resize);assert.notEqual(geometry(),drawn);
  $('undo').onclick();assert.equal(geometry(),drawn);$('undo').onclick();assert.deepEqual(ids(),before);
  const canceled={...down,pointerId:1202};viewport.handlers.pointerdown(canceled);viewport.handlers.pointermove({...canceled,clientX:400});viewport.handlers.pointercancel(canceled);assert.deepEqual(ids(),before);assert.equal(viewport.hasPointerCapture(1202),false);
+});assert.equal(failures,0);
+check('shipped mixer uses approved part order and source-catalog roles, not captured engine aliases',()=>{
+ views.find(e=>e.dataset.view==='mix').onclick();const html=$('other-view').innerHTML;
+ const roleNames=[...html.matchAll(/class="mixer-channel-name">([^<]+)</g)].map(m=>m[1]);assert.deepEqual(roleNames,['909','808','BASS A','BASS B','BREAK']);
+ const ids=[...html.matchAll(/class="mixer-fader"[^>]*data-native-param="([^"]+)"/g)].map(m=>m[1].split('|')[1]);assert.deepEqual(ids,['1:5:0:0','1:5:1:0','1:5:2:0','1:5:3:0','1:5:4:0']);
+});assert.equal(failures,0);
+
+check('shipped drum lane resizes with its viewport and roll restores its own width',()=>{
+ const emit=k=>{for(const fn of windowEvents.get(k)??[])fn({});};
+ const slot=$('drum-lane-slot'),roll=$('roll-scroll');slot.clientWidth=600;roll.clientWidth=700;$('zoom').value='1';
+ views.find(e=>e.dataset.view==='drums').onclick();assert.match($('velocity').innerHTML,/lane-track" style="width:600px/);
+ slot.clientWidth=320;emit('resize');assert.match($('velocity').innerHTML,/lane-track" style="width:320px/);
+ slot.clientWidth=740;emit('resize');assert.match($('velocity').innerHTML,/lane-track" style="width:740px/);
+ views.find(e=>e.dataset.view==='roll').onclick();assert.match($('velocity').innerHTML,/lane-track" style="width:700px/);
+ assert.equal($('roll-grid').style.width,'700px');
 });assert.equal(failures,0);

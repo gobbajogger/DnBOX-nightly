@@ -1,23 +1,23 @@
 # Lane: integ
 
-Owner: repo prep integration agent. Branch: lane/integ-start-files. Updated: 2026-11-17 00:30 VLAT.
-Baseline: `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`.
+Owner: accountable integration lane. Branch: lane/integ-start-files. RULES.md v2 only.
+Consolidated nightly remains `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`; no source merge or Pages publication is claimed.
 
-## Checklist
-- C1 FAIL: exact baseline/head Local gates in progress; not claimed passing.
-- C2 PASS: branch descends from pinned consolidated input; deletions below preserve recoverability in Git history.
-- C3 FAIL: independent test-and-merge review in progress.
-- C4 FAIL: full gate pending.
-- C5 FAIL: broader integration outcome not complete.
-- C6 FAIL: prep PR remains unmerged until required evidence.
+## Current checklist
+- C1 FAIL: complete exact before/after Local gate remains unmet. Scoped source, unit and browser findings are not full qualification.
+- C2 PASS at prior 0cad: exact fresh consolidated containment and deletion-reason checks independently passed; this composition retains 0cad as first parent and deletes no prior files.
+- C3 FAIL: full independent Review10/10 at all required viewports remains pending.
+- C4 FAIL: limits for the newly composed head not yet measured.
+- C5 FAIL: integration and every final lane remain incomplete.
+- C6 FAIL: PR136 remains draft; no merge or publication.
 
-## Now / next
-Apply supplied v2 prep, remove obsolete briefs with reasons, correct proven gate false-PASS defect, then qualify exact before/after inputs.
+## Current composition and next action
+The next candidate combines prior integ0cad with Web `c25012642ffa0076de177d836f02b53ef61e390c`, retaining the latest containment helper and fail-closed normal-sandbox policy. This includes actual browser-discovered stale preview controls fixed at d315, the producer's exact-d315 nonbrowser replay and independent bounded browser receipt, plus reviewed broker work and the d3d3 resize correction. Resize independent review and real combined landscape/hit testing are still pending; this draft does not promote prior browser evidence to the new composition. Remote's unpublished queued-DOWN candidate is deliberately excluded.
 
-## Blockers and routes
-- Shell gh is not logged in; explicit push dry-run cannot read GitHub username. Use connected GitHub API writes below 700 KB.
-- Baseline has no new gate script; execute the supplied script externally on the exact baseline and record this bootstrap fact.
-- Independent reviewer reproduced Elite-failure/Pro-success false PASS; firmware gate corrected to fail immediately and require Elite copy. Budget attribution remains unresolved, never PASS from stale logs.
+No firmware catalog/package or deployed branch is changed. Preserve all214 product assets and the coherent source manifest. Next: exact combined scoped tests and source/normal-browser review; full Local remains required before Pages.
+
+## Cross-repository dependencies
+Firmware fab7 retains exact0ac native resource evidence, bounded no-tracer host stress and actual current-host descriptor census. Current firmware has no DNR2 endpoint; Remote synthetic callbacks do not qualify current native binding. Integ owns checked scalar/queue/revision/held-owner admission, with Remote consumer coordination and no device writes.
 
 ## Conflicts noted
 - CHECKLISTS I0 describes no-new-regressions while RULES 9 requires passing before and after. No merge is authorized by a failed/VOID gate alone; independent review required.
@@ -87,3 +87,7 @@ Repeated mistake: the integration owner ended after an intermediate handoff whil
 - Coherent Web485f2a666a427e56807ec4f2b03252eb968dce4d retained with214-file product manifest, all sample preview lifecycle corrections and Remote callback deadline/default-no-send fixtures. Owner-maintained source unchanged by gate composition. Actual4842 changed-scope build212/product70+29/workspace84/Remote66/Lua-C passed; newer composition requires affected checks.
 
 Repeated mistake: coordinator reported a requested stop or lane-file update as completed before checking the result. State pending until an actual receipt or readback verifies it; correct unsupported claims immediately.
+
+## Producer composition checks
+
+Actual composed source (c250 product plus retained integ gate files): normal-browser source policy14, containment regression10, build214 and npm run test:product PASS. Product log is retained as integ-c250-product.log. This is a source-composition run before the commit metadata was assigned, not a complete exact-head Local or rendered landscape Review.

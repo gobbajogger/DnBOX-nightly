@@ -199,8 +199,8 @@
     },
     {
       "path": "components/break-audition/audition.mjs",
-      "bytes": 2957,
-      "sha256": "5b8f4964f5db208b6f2ba085d593bf11e27a8648e317f34866489dc22c0b9b89"
+      "bytes": 2978,
+      "sha256": "5a7c49fb0abc3019daa2923570e86ba3d231d51edfffbd01ae9cc5f5e27d5e9d"
     },
     {
       "path": "components/break-panel/panel.css",
@@ -694,8 +694,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 46568,
-      "sha256": "442f998500c561dcfe1115727727a96ed9f96ee33d75de1e59c277a36a5da977"
+      "bytes": 46831,
+      "sha256": "14da9e14371f7f6358ead39b45b714de9d82c0a90c3d28b12569f7a61f724494"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -774,8 +774,8 @@
     },
     {
       "path": "remote/device/vendor/client.mjs",
-      "bytes": 11188,
-      "sha256": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b"
+      "bytes": 12012,
+      "sha256": "a68ca59e0b7052a878ce7c5be6cc96ef325e5a19cb7379c0d4c002caa2985908"
     },
     {
       "path": "remote/device/vendor/codec.mjs",
@@ -869,8 +869,8 @@
     },
     {
       "path": "remote/long-press.mjs",
-      "bytes": 1743,
-      "sha256": "25a144b8062dd1b1fcf74bca6078e95ff83538490d24756a8c8d9aa4e5d3653b"
+      "bytes": 1833,
+      "sha256": "955dddad665ecd37b81982179c562daab1f406be8ea39519a4ec4b4f823be420"
     },
     {
       "path": "remote/mixer-format.json",
@@ -949,8 +949,8 @@
     },
     {
       "path": "remote/touchosc/README.md",
-      "bytes": 2954,
-      "sha256": "c2b84282aef70079ceabe92e7208ec1b70d513e8f2e1ed0cae69e1839a8afe14"
+      "bytes": 2947,
+      "sha256": "c4ea384078e1d223b3e78373f1dbf5f0cae30d110e6f73645d1a3659e163548b"
     },
     {
       "path": "remote/touchosc/dnr2-codec.lua",
@@ -990,7 +990,7 @@
     {
       "path": "remote/vendor/funkybeats-provenance.json",
       "bytes": 1912,
-      "sha256": "6d5f905c6cba25f158687e8d19a152c407a6b693765e6fd8f903a6a1dc86fbe3"
+      "sha256": "a8aa321898781c68489fbbcef24fda5cbf8adf849f768105805c614674e92735"
     },
     {
       "path": "remote/view.mjs",
