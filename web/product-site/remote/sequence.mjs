@@ -26,3 +26,13 @@ export class Arrangement{
 
 export function drumLaneTarget(track,note){const kit=track==='drum909'?0:track==='drum808'?1:-1,notes=kit===0?[36,38,41,45,50,37,39,42,46,49,51]:[36,38,41,45,50,37,39,56,49,46,42];const voice=notes.indexOf(note);if(kit<0||voice<0)throw Error('Unknown drum voice');return{part:kit,kit,voice,packedVoice:(kit<<4)|voice,pattern:null,authority:'local-draft-unbound-pattern',velocityStorage:'T_VEL',none:'legacy-accent-law'};}
 export function encodeChance(value){if(!chanceDomain.includes(value))throw Error('Unsupported UI chance');if(value.endsWith('%'))return Number(value.slice(0,-1));const[a,b]=value.split(':').map(Number);return 101+(b*(b-1)/2-1)+(a-1);}
+// Same pixel scale as a 5–100 step-5 drag (span 144). Past 5% the next steps are 1:2 … 8:8.
+export function chanceFromDrag(start,upPx,{span=144,range=95,step=5}={}){
+ if(!chanceDomain.includes(start))start='100%';
+ const index=chanceDomain.indexOf(start);
+ const startUnclamped=start.endsWith('%')?Number(start.slice(0,-1)):5-(index-19)*step;
+ const unclamped=startUnclamped+(upPx/span)*range;
+ if(unclamped>=2.5){const clamped=Math.max(5,Math.min(100,unclamped));return (5+Math.round((clamped-5)/step)*step)+'%';}
+ const stepsBelow=Math.round((5-unclamped)/step);
+ return chanceDomain[Math.max(20,Math.min(chanceDomain.length-1,19+stepsBelow))];
+}

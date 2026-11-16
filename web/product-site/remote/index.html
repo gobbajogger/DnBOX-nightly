@@ -30,12 +30,10 @@
 <button type="button" data-view="files">Files</button>
 </nav>
 <main>
-<div class="context">
-<label>Part <select id="part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label>
-<span id="context-title">Roll</span>
-</div>
 <section id="roll-view">
 <div class="toolbar" role="toolbar" aria-label="Roll tools">
+<label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label>
+<span id="context-title">Roll</span>
 <button type="button" data-mode="select" aria-pressed="true">Select</button>
 <button type="button" data-mode="move">Move</button>
 <button type="button" data-mode="draw">Draw</button>
@@ -45,7 +43,7 @@
 <button type="button" id="copy">Copy</button>
 <button type="button" id="paste">Paste</button>
 <button type="button" id="delete">Delete</button>
-<label>Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
+<label class="zoom">Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
 </div>
 <div class="editor">
 <div class="roll-stack">

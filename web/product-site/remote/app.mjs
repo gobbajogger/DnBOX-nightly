@@ -4,7 +4,7 @@ import{SourceSounds}from'./sound.mjs';
 import{WorkspaceTimeline}from'./timeline.mjs';
 import{sourceFrame}from'./frame.mjs';
 import{MotionDraft}from'./motion.mjs';
-import{SequenceDraft,chanceDomain,Arrangement}from'./sequence.mjs';
+import{SequenceDraft,chanceDomain,chanceFromDrag,Arrangement}from'./sequence.mjs';
 import{ParameterGesture}from'./parameter.mjs';
 import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs';
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
@@ -72,23 +72,38 @@ function setView(v){gesture.cancel();cancelParameters();view=v;$('roll-view').hi
 for(const b of document.querySelectorAll('[data-view]'))b.onclick=()=>setView(b.dataset.view);$('other-view').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='drum-edit'){drumEdit=!drumEdit;other();return;}if(drumEdit&&b.dataset.drumNote!==undefined){model.toggleHit(b.dataset.drumTrack,Number(b.dataset.drumNote),Number(b.dataset.drumStart));other();status();return;}if(b.id==='song-add'){if(launch.targets.some(n=>n===null)){status('Select a pattern for all five parts first.');return;}arrangement.add(launch.targets);other();return;}if(b.id==='song-undo'){performHistory();return;}if(b.id==='song-redo'){performHistory(true);return;}if(b.dataset.step){$('step-detail').textContent='Step '+(Number(b.dataset.step)+1)+' · Not loaded';}if(b.dataset.pattern!==undefined){const state=launch.choose(Number(b.dataset.launchPart),Number(b.dataset.pattern));other();document.querySelector(`[data-launch-part="${b.dataset.launchPart}"][data-pattern="${b.dataset.pattern}"]`)?.focus({preventScroll:true});status(`${state.part} · P${state.selected+1} selected · Not loaded`);}if(b.dataset.hit){const n=model.notes.find(n=>n.id===b.dataset.hit);$('part').value=n.track;selected=n.id;setView('roll');scroll.scrollTop=(127-n.note)*row-scroll.clientHeight/2;}});
 $('part').onchange=()=>{gesture.cancel();cancelParameters();model.selectIds([]);drumVoice=0;selected=null;if(view==='roll'){paintNotes();scroll.scrollTop=(127-(notes()[0]?.note??60))*row-scroll.clientHeight/2;}else other();};$('undo').onclick=()=>performHistory();$('redo').onclick=()=>performHistory(true);if($('inspector-toggle'))$('inspector-toggle').onclick=()=>{const closed=document.querySelector('.editor').classList.toggle('closed');$('inspector-toggle').setAttribute('aria-expanded',String(!closed));};$('review').onclick=()=>{gesture.cancel();cancelParameters();$('changes').textContent=changeLines().join('\n')||'No changes.';$('review-dialog').showModal();};
 
-let laneOwner=null,paramOwner=null,activeParameter=null,activePresentation=null;
+let laneOwner=null,chanceDrag=null,paramOwner=null,activeParameter=null,activePresentation=null;
 const laneGesture=new ParameterGesture({onPreview:s=>{const kind=laneKind();model.previewGesture(laneOwner,kind==='chance'?{chance:s.value+'%'}:kind==='pitch'?{note:s.value}:{velocity:s.value});paintNotes();status(`${name(current().note)} · ${kind==='chance'?s.value+'%':kind==='pitch'?name(s.value):'Velocity '+s.value} · Draft`);},onCommit:()=>{model.commitGesture(laneOwner);laneOwner=null;paintNotes();},onCancel:()=>{model.cancelAll();laneOwner=null;paintNotes();}});
 function lanePoint(e){return{x:e.clientX,y:e.clientY,fine:e.shiftKey};}
+function chanceNow(id){return model.notes.find(n=>n.id===id)?.chance??null;}
+function previewChance(owner,id,value){if(chanceNow(id)===value)return;model.previewGesture(owner,{chance:value});paintNotes();status(`${name(current().note)} · ${value} · Draft`);}
 $('velocity').addEventListener('pointerdown',e=>{
  if(e.button!==0)return;
  // A second pointer cancels the first owner before selection or context can change.
+ if(chanceDrag){model.cancelAll();chanceDrag=null;paintNotes();return;}
  if(laneGesture.current){laneGesture.begin(e.pointerId,laneGesture.current.target,lanePoint(e));return;}
  const t=e.target.closest('[data-select]');if(!t)return;
  const n=model.notes.find(n=>n.id===t.dataset.select);if(!n)return;
  const kind=laneKind(),chance=kind==='chance';selected=n.id;
- // Conditions are cycle selectors, not percentages. Never scrub their ordinal as probability.
- if(chance&&!n.chance?.endsWith('%')){paintNotes();$('chance-value')?.focus();return;}
- const spec=chance?{id:n.id,label:'Chance',context:n.track,value:Number(n.chance.slice(0,-1)),min:5,max:100,step:5}:kind==='pitch'?{id:n.id,label:'Pitch',context:n.track,value:n.note,min:0,max:127,step:1}:{id:n.id,label:'Velocity',context:n.track,value:n.velocity,min:1,max:127,step:1};
+ if(chance){
+  const start=chanceDomain.includes(n.chance)?n.chance:'100%';
+  if(!model.beginGesture(e.pointerId,n.id))return;
+  chanceDrag={owner:e.pointerId,id:n.id,y:e.clientY,start};
+  $('velocity').setPointerCapture(e.pointerId);e.preventDefault();paintNotes();return;
+ }
+ const spec=kind==='pitch'?{id:n.id,label:'Pitch',context:n.track,value:n.note,min:0,max:127,step:1}:{id:n.id,label:'Velocity',context:n.track,value:n.velocity,min:1,max:127,step:1};
  if(!laneGesture.begin(e.pointerId,spec,lanePoint(e)))return;
  laneOwner=e.pointerId;model.beginGesture(e.pointerId,n.id);$('velocity').setPointerCapture(e.pointerId);e.preventDefault();paintNotes();
 });
-$('velocity').addEventListener('pointermove',e=>laneGesture.move(e.pointerId,lanePoint(e)));$('velocity').addEventListener('pointerup',e=>{laneGesture.end(e.pointerId);if(laneOwner===e.pointerId){model.cancelAll();laneOwner=null;}paintNotes();});for(const event of['pointercancel','lostpointercapture'])$('velocity').addEventListener(event,()=>laneGesture.cancel());
+$('velocity').addEventListener('pointermove',e=>{
+ if(chanceDrag&&e.pointerId===chanceDrag.owner){previewChance(e.pointerId,chanceDrag.id,chanceFromDrag(chanceDrag.start,chanceDrag.y-e.clientY));return;}
+ laneGesture.move(e.pointerId,lanePoint(e));
+});
+$('velocity').addEventListener('pointerup',e=>{
+ if(chanceDrag&&e.pointerId===chanceDrag.owner){const changed=chanceNow(chanceDrag.id)!==chanceDrag.start;chanceDrag=null;if(changed)model.commitGesture(e.pointerId);else model.cancelAll();paintNotes();return;}
+ laneGesture.end(e.pointerId);if(laneOwner===e.pointerId){model.cancelAll();laneOwner=null;}paintNotes();
+});
+for(const event of['pointercancel','lostpointercapture'])$('velocity').addEventListener(event,()=>{if(chanceDrag){model.cancelAll();chanceDrag=null;paintNotes();}laneGesture.cancel();});
 $('velocity').addEventListener('keydown',e=>{
  if(e.key==='Escape'){laneGesture.cancel();return;}
  const t=e.target.closest('[data-select]'),n=t&&model.notes.find(n=>n.id===t.dataset.select);if(!n)return;
@@ -96,14 +111,14 @@ $('velocity').addEventListener('keydown',e=>{
  if(['Enter',' '].includes(e.key)){e.preventDefault();laneGesture.cancel();selected=n.id;paintNotes();if(chance)$('chance-value')?.focus();else if(kind!=='pitch')$('inspector')?.querySelector('input[data-field="velocity"]')?.focus();return;}
  if(!['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key))return;
  e.preventDefault();laneGesture.cancel();selected=n.id;const direction=['ArrowUp','ArrowRight'].includes(e.key)?1:-1;
- if(chance){if(n.chance?.endsWith('%'))edit({chance:Math.max(5,Math.min(100,Number(n.chance.slice(0,-1))+direction*5))+'%'});else{paintNotes();$('chance-value')?.focus();}}else if(kind==='pitch')edit({note:Math.max(0,Math.min(127,n.note+direction))});else edit({velocity:Math.max(1,Math.min(127,n.velocity+direction))});
+ if(chance){const i=Math.max(0,chanceDomain.indexOf(n.chance));edit({chance:chanceDomain[Math.max(0,Math.min(chanceDomain.length-1,i-direction))]});}else if(kind==='pitch')edit({note:Math.max(0,Math.min(127,n.note+direction))});else edit({velocity:Math.max(1,Math.min(127,n.velocity+direction))});
 });
 scroll.addEventListener('scroll',()=>$('velocity').scrollLeft=scroll.scrollLeft);$('velocity').addEventListener('scroll',()=>{if(Math.abs(scroll.scrollLeft-$('velocity').scrollLeft)>1)scroll.scrollLeft=$('velocity').scrollLeft;});
 const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const value=parameterDraft.has(id)?parameterDraft.get(id):Number(c.context.raw);if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;return{id,label:c.context.name,context:[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};};
 function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const shown=formatParameterValue(activePresentation.label,value);for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=false;field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=!timeline.canUndo);paintLivePan();}
 function paintLivePan(){for(const btn of document.querySelectorAll('[data-param]')){const s=findSpec(btn.dataset.param,btn.dataset.paramOccurrence);if(!s||!isPanLabel(s.label))continue;btn.dataset.live='pan';btn.textContent=formatPan(s.value);}}
 const parameterGesture=new ParameterGesture({onPreview:s=>{parameterDraft.set(s.id,s.value);showParameter(s.id,s.value);status(`${s.label} · ${formatParameterValue(s.label,s.value)} · Draft`);},onCommit:c=>{recordParameter(c);showParameter(c.id,c.after);status();},onCancel:c=>{if(c.restore!==null){parameterDraft.set(c.id,c.restore);showParameter(c.id,c.restore);}}});
-function cancelParameters(){motion.cancel();laneGesture.cancel();parameterGesture.cancel();paramOwner=null;if(view==='locks')motionPaint();status();}
+function cancelParameters(){motion.cancel();laneGesture.cancel();if(chanceDrag){model.cancelAll();chanceDrag=null;}parameterGesture.cancel();paramOwner=null;if(view==='locks')motionPaint();status();}
 function bindParameterFields(){const f=$('parameter-value'),u=$('parameter-undo');if(f)f.onchange=()=>{const s=findSpec(activeParameter),v=Number(f.value);if(!s||!Number.isFinite(v)||v<s.min||v>s.max||Math.abs((v-s.min)/s.step-Math.round((v-s.min)/s.step))>1e-6){if(s)showParameter(s.id,s.value);return;}recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v);status();};if(u)u.onclick=()=>performHistory();}
 $('other-view').addEventListener('pointerdown',e=>{const t=e.target.closest('[data-param]');if(!t||e.button!==0)return;const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;paramOwner=e.pointerId;$('other-view').setPointerCapture(e.pointerId);parameterGesture.begin(e.pointerId,s,lanePoint(e));showParameter(s.id,s.value,s);e.preventDefault();});$('other-view').addEventListener('pointermove',e=>parameterGesture.move(e.pointerId,lanePoint(e)));$('other-view').addEventListener('pointerup',e=>parameterGesture.end(e.pointerId));for(const event of['pointercancel','lostpointercapture'])$('other-view').addEventListener(event,()=>parameterGesture.cancel());$('other-view').addEventListener('keydown',e=>{const t=e.target.closest('[data-param]');if(e.key==='Escape'){parameterGesture.cancel();return;}if(!t)return;const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;if(['Enter',' '].includes(e.key)){showParameter(s.id,s.value,s);$('parameter-value')?.focus();e.preventDefault();}if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key)){e.preventDefault();const v=Math.max(s.min,Math.min(s.max,s.value+(['ArrowUp','ArrowRight'].includes(e.key)?s.step:-s.step)));recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v,s);status();}});
 function motionPaint(){const el=$('motion-grid');if(!el)return;el.innerHTML=motion.values.map((v,i)=>`<button data-motion-step="${i}" style="left:${i/16*100}%;height:${v===null?6:Math.max(6,v/127*100)}%" aria-label="Step ${i+1}, ${v===null?'unset':v}" aria-pressed="${motionSelected===i}">${v??'—'}</button>`).join('');$('motion-step').value=motionSelected+1;$('motion-value').value=motion.values[motionSelected]??'';status();}

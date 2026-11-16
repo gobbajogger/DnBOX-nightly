@@ -104,7 +104,8 @@ main{min-height:0;min-width:0;display:flex;flex-direction:column;overflow:hidden
 #roll-view{flex:1;min-height:0;min-width:0;display:flex;flex-direction:column}
 #roll-view[hidden],#other-view[hidden]{display:none}
 .toolbar{flex:none;flex-wrap:wrap}
-.toolbar label{margin-left:auto}
+.toolbar label.zoom{margin-left:auto}
+.toolbar label.part{margin-left:0}
 .toolbar input[type=range]{width:min(110px,22vw);min-height:var(--hit)}
 .editor{min-height:0;min-width:0;flex:1;display:flex;padding:0 var(--pad-x) 8px}
 .roll-stack{
@@ -341,11 +342,14 @@ dialog::backdrop{background:#0009}
  header .connection-link{margin-right:auto}
 }
 @media(max-height:430px){
- :root{--lane-h:calc(var(--u) * 12);--pad-x:var(--u);--gap:var(--u);--lane-label:76px}
+ :root{--lane-h:40px;--pad-x:var(--u);--gap:var(--u);--lane-label:72px}
+ #context-title,.part{font-size:var(--fs)}
  #context-title{display:none}
- footer{min-height:18px;padding-top:0;padding-bottom:0}
- .editor{padding-bottom:4px}
- header,nav,.context,.toolbar{padding-top:0;padding-bottom:0}
+ .toolbar{flex-wrap:nowrap}
+ .toolbar input[type=range]{width:64px}
+ footer{min-height:16px;padding-top:0;padding-bottom:0}
+ .editor{padding-bottom:0}
+ header,nav,.toolbar{padding-top:0;padding-bottom:0}
 }
 @media(max-width:420px){
  :root{--lane-label:72px}
