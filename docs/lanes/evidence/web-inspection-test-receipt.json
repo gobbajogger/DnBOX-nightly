@@ -1,0 +1,35 @@
+{
+  "scope": "Source regression evidence; no full Local/browser/device claim",
+  "inspectorComposition": "8eb31e86c204279f86f73805d690728f24944fe8",
+  "realParserTestCommit": "25ff1c25f05790a8d7f54a9eab515109b7f7749e",
+  "results": {
+    "inspectorProductNode": 86,
+    "inspectorProductPython": 32,
+    "workspaceNode": 84,
+    "realParserTargeted": 8,
+    "realParserProductNode": 88,
+    "realParserProductPython": 32
+  },
+  "logs": [
+    {
+      "path": "docs/lanes/evidence/web-inspector-product.log",
+      "bytes": 10931,
+      "sha256": "d32323b8315727677c74d07aeb770cde0745846521c2c6a80a804f87531c4ab2"
+    },
+    {
+      "path": "docs/lanes/evidence/web-inspector-workspace.log",
+      "bytes": 12689,
+      "sha256": "d75f745a649de44844d3787e6bad8138e6c64020068a39f1025db348f88b6862"
+    },
+    {
+      "path": "docs/lanes/evidence/web-inspection-real-parser.log",
+      "bytes": 884,
+      "sha256": "963bbf05576304930311f72756dbb5eabb54795d22a36648cc1edf4d18560480"
+    },
+    {
+      "path": "docs/lanes/evidence/web-inspection-real-product.log",
+      "bytes": 11162,
+      "sha256": "3d1e16ec7d5d0d830be6ce615cf3d3214ef48314bc05e6148c07130bf6ffd06f"
+    }
+  ]
+}
