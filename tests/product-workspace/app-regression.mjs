@@ -176,3 +176,8 @@ check('shipped touch roll draws, resizes and cancels through actual pointer hand
  $('undo').onclick();assert.equal(geometry(),drawn);$('undo').onclick();assert.deepEqual(ids(),before);
  const canceled={...down,pointerId:1202};viewport.handlers.pointerdown(canceled);viewport.handlers.pointermove({...canceled,clientX:400});viewport.handlers.pointercancel(canceled);assert.deepEqual(ids(),before);assert.equal(viewport.hasPointerCapture(1202),false);
 });assert.equal(failures,0);
+check('shipped mixer uses approved part order and source-catalog roles, not captured engine aliases',()=>{
+ views.find(e=>e.dataset.view==='mix').onclick();const html=$('other-view').innerHTML;
+ const roleNames=[...html.matchAll(/class="mixer-channel-name">([^<]+)</g)].map(m=>m[1]);assert.deepEqual(roleNames,['909','808','BASS A','BASS B','BREAK']);
+ const ids=[...html.matchAll(/class="mixer-fader"[^>]*data-native-param="([^"]+)"/g)].map(m=>m[1].split('|')[1]);assert.deepEqual(ids,['1:5:0:0','1:5:1:0','1:5:2:0','1:5:3:0','1:5:4:0']);
+});assert.equal(failures,0);

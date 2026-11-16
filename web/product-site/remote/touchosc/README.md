@@ -15,7 +15,7 @@ its original files.
   advance the session. Timeout, clock rollback and cancellation discard the
   session. There are no HELD commands, timers that renew a lease, or native pins.
 
-A future document builder must inject `DNBOX_CODEC`, `DNBOX_SESSION` and
+A document builder must inject `DNBOX_CODEC`, `DNBOX_SESSION` and
 `DNBOX_SIMULATOR_PIN` before the controller script. An optional
 `DNBOX_ON_STATE(phase, value)` callback receives confirmed values. Notify actions
 are `connect`, `read` with `id`, `set` with `id` and integer `value`, `close`, and
