@@ -123,3 +123,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Corrected preview product suite86 Node+29 Python PASS; browser runner now asserts natural-end DOM audio removal and transport reset (scripted runner not executed). Existing-browser independent after check requested.
 
 - Independent actual-browser after check at d315 fixes the preview-control defect:0selected during play, correct1.578231 duration/errornull; natural end removes all audio nodes and resets Play/unpressed without false media error. All214 served files match exact source manifest. Receipt web-d315-browser-preview.json; prescribed viewport Review/full W2/Local still open. Reviewer continues ordinary routes.
+
+- Exact detached d315 full nonbrowser diagnostic completed exit0, tracked files unchanged: every npm test command except final visual stage, including493 edge cases, product86 Node+29 Python, workspace84+app scenarios, Remote70, presets and origin tests. Log/receipt web-d315-nonbrowser-*; not full npm test or Local. Independent browser observations are separate bounded evidence, not a substitute for omitted visual stage.
