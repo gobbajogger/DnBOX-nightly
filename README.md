@@ -1,5 +1,7 @@
 # DnBOX nightly
 
+[Repository maintenance](docs/repository-maintenance/README.md): rename preparation, complete branch/PR snapshot, retention and feature-request status. Current repository and installer URLs remain unchanged.
+
 This repository is the **beta / nightly channel** for DnBOX firmware and its web installer.
 The production repository is [gobbajogger/X0X37-for-Loopy-Pro](https://github.com/gobbajogger/X0X37-for-Loopy-Pro).
 

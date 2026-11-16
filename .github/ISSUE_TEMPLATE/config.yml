@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: DnBOX bug report
+    url: https://github.com/gobbajogger/X0X37-for-Loopy-Pro/issues/new?template=bug_report.yml
+    about: Use the existing canonical project inbox, including browser and installer bugs. Do not post private files.
+  - name: DnBOX feature request
+    url: https://github.com/gobbajogger/X0X37-for-Loopy-Pro/issues/new?template=feature_request.yml
+    about: Search existing requests first. Reactions are not owner approval or a delivery promise.
+  - name: Manual
+    url: https://gobbajogger.github.io/X0X37-for-Loopy-Pro/manual/
+    about: Existing DnBOX manual. Repository rename and Pages cutover have not occurred.

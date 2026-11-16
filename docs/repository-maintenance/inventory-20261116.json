@@ -1,0 +1,1467 @@
+{
+  "schema": 1,
+  "repository": "gobbajogger/x0x37-for-Loopy-Pro_nightly",
+  "source": "Authenticated GitHub REST, all paginated branches and open pull requests",
+  "branch_count": 131,
+  "open_pr_count": 9,
+  "policy": "KEEP every branch; no deletion batch approved, no archive tags created. A name/archive prefix does not prove retention or inactivity. Inventory is not an exhaustive content-equivalence or active-worker audit.",
+  "branches": [
+    {
+      "name": "archive/box-20261114/wip-nightly-main",
+      "sha": "424f3afa121f950f0b2aa086dfa30a7bdcb4a74b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "archive/box-20261114/wip-ns-gh",
+      "sha": "085483e16e33ac1698eb30ea14ccda520bb67fea",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "backup/nightly-smc-connect-fix-local-65ef47f8",
+      "sha": "65ef47f8850ce65a66ab386ae2bc9924bab5851d",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "chat/smc-source-export",
+      "sha": "cf55d5a41504843873f7264a3f6777a7c953f395",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/archive-midi-preservation-20261026",
+      "sha": "33c316feb04717f8f2666df9d256337465f2f176",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/ec012-preflash-map-20261026",
+      "sha": "8f4fa6b0d58b9236fbbf5bd79dea97519da66693",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/nightly-installer-sample-prep-20261026",
+      "sha": "f10033e2cf19757452f4f9ddbe128048d9e06f4f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/oldschool-nightly-importer-scoped",
+      "sha": "241ddb8a2f35e1787d70a2a079d3f5987b126dd9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/ota-identity-integrity-20261026",
+      "sha": "a17487fe7657d891f73ad9aa369dc8cb6b0a43d9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/project-export-compat-20261026",
+      "sha": "57124e472b96d01917770b55529df69cc20d94d7",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/restore-logical-indices-20261026",
+      "sha": "1b2b687b0c572602debbe2bba4cde9dfa647f774",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/sample-preview-below-installer",
+      "sha": "3809fad332f08a0aa25c8a39cd56968e37260e21",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "codex/site-integrated-20261026",
+      "sha": "fa89b8381b7587c7c6320c3e5f64055e296b5f86",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "cursor/drop-distribution-license-gate",
+      "sha": "8ee089485aeaf8b19376b19a359fee9252f69e7a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "cursor/nb-edge-archive-midi-fix-edd1",
+      "sha": "bb6279dc895932c15022eb7102bfb76c7125e75c",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "cursor/qualified-admission-bridge-rebased-535f",
+      "sha": "feeedeafceaaf471c80cab3137c295d57e5ea802",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "cursor/remote-parameter-lane-bdb9",
+      "sha": "9809abc0ef1e620c8d04c46735e2c92e6f7100c9",
+      "protected": false,
+      "prs": [
+        {
+          "number": 132,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/132"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "delivery/reviewed-version-labels-e8578ce",
+      "sha": "ad4bc9fd236448cfa02654070440a0cffc6ca24f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "dnbox-base-smc-20261029",
+      "sha": "77b1ba80102d9d8c9e2dfcebb439c4703fc51cba",
+      "protected": false,
+      "prs": [
+        {
+          "number": 94,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/94"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "edgecase/ec013-zero-count-smp-info-20261026",
+      "sha": "3b40dd1001b320a66a0891e6a327ff811a3855e2",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-42de2893-20261110",
+      "sha": "fc42a402f01e90338bf86d9f560875002139d6db",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-42de2893-catalog-dryrun-20261110",
+      "sha": "d9180ca6dd7608fa7eac38604ae9762cd8baaebc",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-617c0ff1-20261109",
+      "sha": "699ff769dafa1c8a59fe2800082d8a78970a0faf",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-617c0ff1-catalog-dryrun-20261109",
+      "sha": "8e8dfe8c922ec7483555e13171d5670e5036c406",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-2287f113-20261109",
+      "sha": "a3e8e30e72feb9be1a6c663e544cdbf7e111ed44",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-2287f113-catalog-dryrun-20261109",
+      "sha": "1abdb9eb86ddcfb8107a5d84b4cda606ee04f454",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-d3510b82-20261109",
+      "sha": "3d23c85f8ec346853d1cefeda7520a1c5c3f09f7",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-d3510b82-catalog-dryrun-20261109",
+      "sha": "5988d83ee8ef366f2f60ce9538b7eee6ef521d9a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/d6n-e3a48f3e-20261109",
+      "sha": "40fb611d1956e3bfc377305f45e2d3439f797c57",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushc-dryrun-ce278129-devchecked-20261105",
+      "sha": "972995560eed516df39fcd532b85836993374f28",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushc-installer-42de2893-20261110",
+      "sha": "c6cdb94e4e9be8654fed399943b63c2593a2c195",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushc-installer-617c0ff1-20261109",
+      "sha": "3ecc8e676bebf889779ab2fd4ad2c3489648d83f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushc-installer-d3510b82-20261109",
+      "sha": "2a2e81466cce0af635440f9cf62f0e909fb6d2a3",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushd2-ce278129-title-20261106",
+      "sha": "8b74bfad37c4071e02798d3b4d079b35dc64e79a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "evidence/pushd-ce278129-label-20261106",
+      "sha": "866f5d3522e7d21e1e436d02a9e4587da9967491",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "feature/installer-density-20261025",
+      "sha": "63664686825feb883b33aad25d35404be73d376b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "feature/installer-owner-ux-20261025",
+      "sha": "08b7e2a9ff01bfcfe4edb439ad43302af8c8ad8d",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "feature/offline-sequencer-editor-stage2",
+      "sha": "7b962858d802588ed1733c07572429e91bb5639f",
+      "protected": false,
+      "prs": [
+        {
+          "number": 93,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/93"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "feature/song-project-workflows-20261025",
+      "sha": "e8ffcf04f7eb39c15cdbaa6d646a53aedf2ff07a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/adaptive-automation-entrypoint-20261028",
+      "sha": "14aad7125f727571825d350acd990cc85d26b646",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/assigned-package-versions",
+      "sha": "210baba55721c1fd75bb4c326a5d32b6a5d8bd55",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ec013-zero-slot-info",
+      "sha": "fbe74f9315b8dbe01f16cf0c566dd8d6136d067d",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ec028-terminal-contract-20261027",
+      "sha": "5e1881d2ac54efc2408cd070029f4eadfb247e80",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ec029-exact-sample-readback-20261027",
+      "sha": "5bbb35de76a4eef354253606b77eefb96e2e7931",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/install-visible-errors",
+      "sha": "38f4041cc53bf68c1c644c4b091319e3208390d6",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/installer-pages-regression-20261029",
+      "sha": "9df2dfb7afe172f75d1ca8866edffc72657beb12",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ios-inpage-confirm",
+      "sha": "ac0cf5e5640c12b6f8abbe65deb37945297641d0",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ios-spurious-continuity",
+      "sha": "8642c0d124a0d6d07601acc5c3c8ba4a15c1b27e",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/manual-help-links-20261027",
+      "sha": "20708bb408dff416ef1967e1cef9258607abf908",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ota-discovery-deadline-20261113",
+      "sha": "7fff448ad64cac02badd58a9a31d98065c2f9936",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/ota-terminal-retry-20261113",
+      "sha": "f40007f6baa6c4427a6ee512e63536fd848d0696",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/remove-withdrawn-026-artifacts-20261113",
+      "sha": "7653732232252d75f54a66a50442323834b6db50",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/retained-package-map-compatibility-20261029",
+      "sha": "af7085d4af2e6ca70bc9b223623cb814c27316a9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/smk-identity-live-20261113",
+      "sha": "405444b7af3e53d7271922612eece72c5c801c27",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/strict-model-match",
+      "sha": "9e2d35fec81694715496f4212d68d5b43858d7b6",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/withdraw-026-installer-20261113",
+      "sha": "7376702577c56586d426e338927d54f3da0c05e9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "fix/workflow-main-continuation-20261028",
+      "sha": "745c6b2d34566971b6e7e2fd17348587d219f7ae",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "gh-pages",
+      "sha": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
+      "protected": true,
+      "prs": [
+        {
+          "number": 128,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/128"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "handoff/dot-20261116/web-wip",
+      "sha": "0164a64f1ec7ba7d4806c8fcd3b16414fd25cd9b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/dk-rules-controller-evidence-20261105",
+      "sha": "e30bf6e49061c95b73e547fc757107e970c39541",
+      "protected": false,
+      "prs": [
+        {
+          "number": 115,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/115"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/dk-rules-controller-evidence-v3-20261105",
+      "sha": "519a10fa6ba2b09d08bd48000d4112b36b3bcf54",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/dk-rules-controller-evidence-v7-20261105",
+      "sha": "2286878ebe60b59a42adcc367e4f64cf2bbcebb6",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/dk-rules-controller-evidence-v71-20261105",
+      "sha": "c1675214da52e16799d5047f26209d9d76d70cce",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/dnbox-pages-clarity-20261113",
+      "sha": "2fe7697306aff4101149210897a6d7868405aa2c",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/docs-lightweight-rules-20261106",
+      "sha": "0f01128b356861cdf07295db6708a63a581cfac4",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/ec026-atomic-preservation-contract-20261027",
+      "sha": "11a07367174dbcfee414d0bae05c00b4c15d0a9c",
+      "protected": false,
+      "prs": [
+        {
+          "number": 58,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/58"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-ec023-webmidi-output-pair-20261027",
+      "sha": "c4bbf0a0b544ed4924ef0ca2b4cc0823085fec7f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-ec036-premature-finish-20261027",
+      "sha": "a422c8b924f99db63514ae96a178ae0279286874",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-midi-stale-timeout-20261026",
+      "sha": "929e71d784ea34d4b9d906bd3415937f1bab1b8b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-smp-info-false-empty-20261027",
+      "sha": "2de5d7a6b4c31538ebeee904716544acf68b9ab8",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-web-archive-aliased-payload-20261026",
+      "sha": "4406f7a2ed3014b2bbb17800329f827487c19ae0",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/edgecase-web-archive-slot-identity-20261026",
+      "sha": "27a54e3b1d0f5d4b9450ea170e9589e5f914f160",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/nightly-permission-progress-20261023",
+      "sha": "850a5fefb347234e26097eb7326333c7fec2b10f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/pages-r35-history-125-20261025",
+      "sha": "1fc6f9a372b2d326934411a12a18af707c3e7cee",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr8-independent-20261024",
+      "sha": "76e059e17db12265bf2062144eb7feee1df7e5f8",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr8-r2-independent-20261024",
+      "sha": "809965b4ddc4e2363e7344227adcf1b93f68005b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr8-r3-independent-20261024",
+      "sha": "8357bea49e1b80c1d6b315dc749692c92424b0eb",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr8-r4-independent-20261024",
+      "sha": "7318f2affd81c52827e5aa3c45c234440f4f55d3",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr8-r5-independent-20261024",
+      "sha": "e203fb56395eb2785261ac864d35f05b03968cf3",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr10-combined-20261024",
+      "sha": "5dc20385aa82df067fdf6fa726dbc356ad897638",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/qa-pr11-local-file-bounds-20261024",
+      "sha": "bcc6e2742d0e9e88c2bc8f461f9231a00542908e",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/remote-git-delivery-policy-20261023",
+      "sha": "89db69080d794f72f505a82a511ac9bc07dc5d67",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lane/rp-manual-026-notice-20261113",
+      "sha": "a93f26822fd7f3061dab323509086756e68e4d1a",
+      "protected": false,
+      "prs": [
+        {
+          "number": 128,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/128"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "lead/r039-rename-prep-20261116",
+      "sha": "addc3e518c4374895f23448b484462afc9100a4a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "main",
+      "sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "protected": true,
+      "prs": [
+        {
+          "number": 131,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/131"
+        },
+        {
+          "number": 115,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/115"
+        },
+        {
+          "number": 93,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/93"
+        },
+        {
+          "number": 74,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/74"
+        },
+        {
+          "number": 70,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/70"
+        },
+        {
+          "number": 58,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/58"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/current-source-site-20261029",
+      "sha": "c5dc8830db9de038670532c43991f8596187276f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-2ad1b517-0.0.16",
+      "sha": "69c05887e5e892377c191d3c4321b663cc80a1c0",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-02cc7d10-0.0.11",
+      "sha": "367ead3c4104767d8ff5ab8216dfeced4f04b774",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-5ae6265e-0.0.15",
+      "sha": "8901f15cda03a4f94119527d432c39bbafecb1c1",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-5bff28ca-pro-0.0.10",
+      "sha": "cfa0aefce4a792e6f53069f39e61580482bc2a36",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-600b3b45-0.0.26",
+      "sha": "8ec81bf7d55258e7e1082658080299e3cfe0dcdc",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-6319ffec-0.0.17",
+      "sha": "f9b4d776d113bbea091e68db51370ac288a2a007",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-8424c3bb-0.0.14",
+      "sha": "90a7f7c836635c142f99a12df2c219b63ddea09b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-2456968b-0.0.22",
+      "sha": "06f15ac5aaceafa87ee4d6d8ccc96d9a867329b9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-bb33a8fe-0.0.13",
+      "sha": "22fe60ef22391372fa995b23efd89628042c3c78",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-bb190749-0.0.23",
+      "sha": "1c3318d690b50b58a3245b899032f22614cfc213",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-bed393e1-0.0.20",
+      "sha": "3aff9b53c35844de14281c7138f8b97d5189f5b4",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-c8e1599b-0.0.12-bt",
+      "sha": "ee5040cfc2ecef28546d90a13bcb6629483ccef1",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-c8e1599b-0.0.12",
+      "sha": "2982fc131435ca3856f14717970d470f99d7c58f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-d8086cc0-0.0.24",
+      "sha": "71f4f3eea0ccff72d44b8dfe914224cc1e02534c",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-dd442625-0.0.21",
+      "sha": "146805a24134e89d33318606403c94d4633df752",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-dffd05f0-0.0.18",
+      "sha": "cc224f06b4b90282d75ffc298b017d19fac6f50a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/nightly-ed85f5a6-0.0.19",
+      "sha": "13be7e59e3e82bebd106698a3496d291cf1e5642",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "publish/retained-package-map-compatibility-20261029",
+      "sha": "ec762b10210a40908866725b47162675d20b03c5",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "qualify/pr38-on-main",
+      "sha": "9f90c197b911d685ceec0f47b74052395c9da53a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "repair/adaptive-break-project-schema-20261027",
+      "sha": "e098d2e5f14aa0858b6865cde9a6ccf57f38ee7b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "smc-mixer-bluetooth-connect-fix",
+      "sha": "ac7b73b162ca0f58dd7039883720c00ff24b6b47",
+      "protected": false,
+      "prs": [
+        {
+          "number": 94,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/94"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-ec014-slotmap-padding-20261026",
+      "sha": "3bc045aa083a026c05cbc79494011f72af10ddcb",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-ec028-firmware-finish-eight-byte-contract-20261027",
+      "sha": "ff22dfb1bb1bcce2036d2b33427cb94f18290c0f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-ec029-exact-sample-readback-20261027",
+      "sha": "9ede1edc305b5d43ebd9dc55bdea2e44f245056b",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-ota-identity-frame-ec009-20261026",
+      "sha": "fade4bd5147e002685a74adbee785047e89ee86f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-ota-read-declared-length-ec010-20261026",
+      "sha": "887ef20178d07b99184c37ff450b345561000e68",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-preflash-sample-drift-ec026-20261027",
+      "sha": "d62a479d42fb44a2a60568d6c72ed442c9862988",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-project-busy-export-peer-abort-20261027",
+      "sha": "a1db2017e3132e6d55c4daefe52a69006431df3f",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edge-project-sysex-byte-budget-ec027-20261027",
+      "sha": "1f4dc397014e66412592da7c8e3162fc29a03bd6",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec032-ota-zero-nonterminal-20261027",
+      "sha": "bbcca916899814d4ece6a0f41bb44d03fe0dd6cc",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec033-sample-occupied-invalid-header-20261027",
+      "sha": "106496789660938625cecfdc715b7b994eef2497",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec034-sample-overcapacity-read-20261027",
+      "sha": "950903df1c7744c289db6d3987e47abe19c0f359",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec035-sample-workspace-stale-send-20261027",
+      "sha": "26fc56098aaac95b86a8e42be0c4e2a41a41cf20",
+      "protected": false,
+      "prs": [
+        {
+          "number": 70,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/70"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec037-installer-stale-download-20261028",
+      "sha": "b2f28533c723e143e072afd31f208bed7dce3612",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec038-stale-ota-scan-listener-20261028",
+      "sha": "21b2a6208e0e84451174b80064d6fbbc7cb79de6",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec039-project-rollback-peer-20261028",
+      "sha": "b2b5a1a222ad7cf27e68b24153b9a145e9312ccf",
+      "protected": false,
+      "prs": [
+        {
+          "number": 74,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/74"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec040-revoked-preflight-20261028",
+      "sha": "f5f31e111948ce238a0944a32aa7290717fddc7a",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec041-sample-slot-ack-correlation-20261028",
+      "sha": "aa2c6c8fe6cef16c0eba1635361f8c8b69132a96",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec042-project-midi-pending-read-20261028",
+      "sha": "8f625e428fbf7026c262720f79d2c651586b4b81",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec043-installer-empty-chunks-20261028",
+      "sha": "42aab66f9b75b110c909908ee2f1a2664a244074",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec044-truncated-smp-info-20261028",
+      "sha": "3fe38d62684fabc2e988261dc14a24087d9e00b4",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec045-project-rapid-reconnect-20261028",
+      "sha": "dd6d51745f579af42a1c20b9431f94f78ffd23c9",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "test/edgecase-ec046-low-rate-wav-amplification-20261028",
+      "sha": "e0d43f96e38e5d4060664c8cdaa04b3cb4a1b7c4",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "ux/compact-installer-final",
+      "sha": "ee1ba86ecc4fae4ec2bfec27927b1d60b3f6fdcf",
+      "protected": false,
+      "prs": [],
+      "disposition": "KEEP",
+      "ownership": "UNVERIFIED: preserve; do not infer absent writer",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    },
+    {
+      "name": "wip/dnbox-complete-web-20261115",
+      "sha": "22ac90332b5f6511387caaa791fc386bfc9c381d",
+      "protected": false,
+      "prs": [
+        {
+          "number": 132,
+          "relationship": "base",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/132"
+        },
+        {
+          "number": 131,
+          "relationship": "head",
+          "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/131"
+        }
+      ],
+      "disposition": "KEEP",
+      "ownership": "PR author gobbajogger; actual current writer must be rechecked",
+      "retention_evidence": "Named live branch at exact SHA; unique-content/ancestry and automation dependencies not fully assessed"
+    }
+  ],
+  "open_pull_requests": [
+    {
+      "number": 132,
+      "title": "Draft: live R22 glyph readouts on the shared Remote lane",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/132",
+      "head": {
+        "ref": "cursor/remote-parameter-lane-bdb9",
+        "sha": "9809abc0ef1e620c8d04c46735e2c92e6f7100c9"
+      },
+      "base": {
+        "ref": "wip/dnbox-complete-web-20261115",
+        "sha": "22ac90332b5f6511387caaa791fc386bfc9c381d"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-11-16T04:26:22Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "22ac90332b5f6511387caaa791fc386bfc9c381d",
+      "comparison_status": "behind"
+    },
+    {
+      "number": 131,
+      "title": "Preserve DnBOX website and Remote source preview",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/131",
+      "head": {
+        "ref": "wip/dnbox-complete-web-20261115",
+        "sha": "22ac90332b5f6511387caaa791fc386bfc9c381d"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-11-15T23:53:14Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "behind"
+    },
+    {
+      "number": 128,
+      "title": "docs(manual): replace stale \"0.0.26 is withdrawn\" notice",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/128",
+      "head": {
+        "ref": "lane/rp-manual-026-notice-20261113",
+        "sha": "a93f26822fd7f3061dab323509086756e68e4d1a"
+      },
+      "base": {
+        "ref": "gh-pages",
+        "sha": "6a9953dee4d31ac741ae90ec4bec70f2a10f9240"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-11-13T16:03:12Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
+      "comparison_status": "diverged"
+    },
+    {
+      "number": 115,
+      "title": "docs: ground controller classification in component evidence",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/115",
+      "head": {
+        "ref": "lane/dk-rules-controller-evidence-20261105",
+        "sha": "e30bf6e49061c95b73e547fc757107e970c39541"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "a8205aff483dce09414093defdc19cf79d57b719"
+      },
+      "author": "gobbajogger",
+      "draft": false,
+      "updated_at": "2026-11-05T07:07:31Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "diverged"
+    },
+    {
+      "number": 94,
+      "title": "Fix SMC Bluetooth being disabled at boot after an incompatible project",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/94",
+      "head": {
+        "ref": "smc-mixer-bluetooth-connect-fix",
+        "sha": "ac7b73b162ca0f58dd7039883720c00ff24b6b47"
+      },
+      "base": {
+        "ref": "dnbox-base-smc-20261029",
+        "sha": "77b1ba80102d9d8c9e2dfcebb439c4703fc51cba"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-10-29T19:56:42Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "77b1ba80102d9d8c9e2dfcebb439c4703fc51cba",
+      "comparison_status": "behind"
+    },
+    {
+      "number": 93,
+      "title": "feat(editor): draw offline patterns and import MIDI",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/93",
+      "head": {
+        "ref": "feature/offline-sequencer-editor-stage2",
+        "sha": "7b962858d802588ed1733c07572429e91bb5639f"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "a8205aff483dce09414093defdc19cf79d57b719"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-10-29T14:00:10Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "diverged"
+    },
+    {
+      "number": 74,
+      "title": "test(EC039): fail stale project rollback after a peer updates a sample",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/74",
+      "head": {
+        "ref": "test/edgecase-ec039-project-rollback-peer-20261028",
+        "sha": "b2b5a1a222ad7cf27e68b24153b9a145e9312ccf"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "3735b1e41a6673675f9cb796b6ac7307308a4f6f"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-10-29T05:56:14Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "diverged"
+    },
+    {
+      "number": 70,
+      "title": "test(EC035): prevent stale Sample Workspace send after peer sample write",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/70",
+      "head": {
+        "ref": "test/edgecase-ec035-sample-workspace-stale-send-20261027",
+        "sha": "26fc56098aaac95b86a8e42be0c4e2a41a41cf20"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "3735b1e41a6673675f9cb796b6ac7307308a4f6f"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-10-29T05:53:16Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "diverged"
+    },
+    {
+      "number": 58,
+      "title": "Keep confirmed sample backups fresh through atomic OTA entry",
+      "url": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/58",
+      "head": {
+        "ref": "lane/ec026-atomic-preservation-contract-20261027",
+        "sha": "11a07367174dbcfee414d0bae05c00b4c15d0a9c"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "eb21335dd040fe358694f79c0427f8310986919b"
+      },
+      "author": "gobbajogger",
+      "draft": true,
+      "updated_at": "2026-10-29T05:37:03Z",
+      "disposition": "KEEP: independent exact-head/actual-target review; not integrated, no verified complete replacement",
+      "actual_target_sha": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+      "comparison_status": "diverged"
+    }
+  ],
+  "assembled_utc": "2026-11-16T04:52:34Z",
+  "snapshot_date_utc": "2026-11-16",
+  "verification_note": "Paged live reads assembled into this snapshot; not an atomic server snapshot. Re-read live refs/owners before any later mutation."
+}
