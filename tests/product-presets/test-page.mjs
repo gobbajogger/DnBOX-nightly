@@ -9,3 +9,19 @@ test('destroy is terminal and stale controls cannot read or download',async()=>{
 test('oversized file is refused before allocating its arrayBuffer',async()=>{let reads=0;const {es}=setup(async()=>{reads++;return new ArrayBuffer(0)});es.file.files=[{name:'huge.json',size:9*1024*1024}];await es.file.fire('change');assert.equal(reads,0);assert.equal(es.keep.disabled,true);});
 
 test('duplicate-bearing J6 bank previews expose preservation warning and never enable apply',async()=>{const raw='{"name":"Bank","uuid":"b","midiBankChangeNumber":0,"canDelete":true,"presets":[{"uid":"p","name":"P","parameterValues":[{"identifier":"x","value":1},{"identifier":"x","value":2}]}]}';const {es,api,downloads}=setup(async()=>new TextEncoder().encode(raw).buffer);es.profile.value='superj6';es.file.files=[{name:'duplicates.json',size:raw.length}];await es.file.fire('change');assert.equal(api.canApply,false);assert.equal(es.keep.disabled,false);assert.match(es.status.textContent,/duplicate.*preserv/i);assert.match(es.status.textContent,/not.*(?:appl|qualif)|(?:appl|qualif).*not/i);await es.keep.fire('click');await es.export.fire('click');assert.equal(new TextDecoder().decode(downloads[0][0]),raw);});
+
+test('real Document root has no ownerDocument and still populates original-file presets',async()=>{
+ const es=Object.fromEntries('file profile preset name keep edit original export cancel status'.split(' ').map(k=>[k,new E()]));es.profile.value='synthone';es.file.files=[{name:'valid.json',size:source.length}];
+ const doc={ownerDocument:null,createElement:()=>new E(),querySelector:s=>es[s.slice(1)]};
+ mount(doc,{read:async()=>new TextEncoder().encode(source).buffer});
+ await es.file.fire('change');assert.equal(es.keep.disabled,false);assert.equal(es.edit.disabled,false);assert.equal(es.preset.children[0].textContent,'First');
+});
+
+test('preview fields clear and disable until a valid file is inspected, without losing kept bytes',async()=>{
+ const{es,downloads}=setup();
+ assert.equal(es.preset.disabled,true);assert.equal(es.name.disabled,true);assert.equal(es.name.value,'');
+ es.file.files=[{name:'valid.json'}];await es.file.fire('change');assert.equal(es.preset.disabled,false);assert.equal(es.name.disabled,false);assert.equal(es.preset.children.length,1);
+ await es.keep.fire('click');await es.cancel.fire('click');assert.equal(es.preset.disabled,true);assert.equal(es.name.disabled,true);assert.equal(es.preset.children.length,0);assert.equal(es.name.value,'');
+ await es.export.fire('click');assert.equal(new TextDecoder().decode(downloads[0][0]),source);
+ es.file.files=[{name:'valid.json'}];await es.file.fire('change');es.profile.value='superj6';await es.profile.fire('change');assert.equal(es.preset.children.length,0);assert.equal(es.name.value,'');assert.equal(es.name.disabled,true);
+});

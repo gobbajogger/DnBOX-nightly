@@ -1,0 +1,294 @@
+{
+  "historicalFixture": true,
+  "activeProduct": false,
+  "origin": "Actual R4 measured DOM header geometry, no invented capture. Source/PNG hashes remain in exact report.",
+  "reportSHA256": "63d4c401657e243978e5061078e050379a19db15f7271cfc1c11df28fe307472",
+  "measurements": [
+    {
+      "route": "",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "install/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "manual/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "manual/legacy.html",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "manual/protocol.html",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "manual/original/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "presets/legacy/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "help/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "new/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "presets/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "projects/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "breaks/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "starting-breaks/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "builds/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "tools/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "reference/",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "reference/r22.html",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "reference/current-ui.html",
+      "size": "desktop",
+      "height": 88
+    },
+    {
+      "route": "",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "install/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "manual/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "manual/legacy.html",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "manual/protocol.html",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "manual/original/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "presets/legacy/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "help/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "new/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "presets/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "projects/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "breaks/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "starting-breaks/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "builds/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "tools/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "reference/",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "reference/r22.html",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "reference/current-ui.html",
+      "size": "phone",
+      "height": 76
+    },
+    {
+      "route": "",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "install/",
+      "size": "landscape",
+      "height": 77
+    },
+    {
+      "route": "manual/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "manual/legacy.html",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "manual/protocol.html",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "manual/original/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "presets/legacy/",
+      "size": "landscape",
+      "height": 77
+    },
+    {
+      "route": "help/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "new/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "presets/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "projects/",
+      "size": "landscape",
+      "height": 77
+    },
+    {
+      "route": "breaks/",
+      "size": "landscape",
+      "height": 77
+    },
+    {
+      "route": "starting-breaks/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "builds/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "tools/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "reference/",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "reference/r22.html",
+      "size": "landscape",
+      "height": 69
+    },
+    {
+      "route": "reference/current-ui.html",
+      "size": "landscape",
+      "height": 69
+    }
+  ],
+  "expectedRejectedCondition": "Landscape header height spread8px exceeds common geometry1px bound."
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "ACTUAL_FIRST_WEBSITE_WIP_INCOMPLETE_SHARED_COMPOSITION",
+  "repository": "gobbajogger/x0x37-for-Loopy-Pro_nightly",
+  "commit": "d8be251816b8dd3d195fcbf861e5abbc93048b2e",
+  "tree": "2b512c339157b4aed578e9d56e08f9c999819fe2",
+  "entries": [
+    "hero.mjs",
+    "site.css",
+    "tool-theme.css"
+  ],
+  "missing": [
+    "r22-tokens.css",
+    "remote/wave-display.mjs"
+  ],
+  "files": [
+    {
+      "path": "hero.mjs",
+      "bytes": 4786,
+      "sha256": "c4e3748f446491bc54259d9182661233bd3e11fd3dedb8ff1e5570b336c69ad0",
+      "gitBlob": "39ab2739ae4df45b2c5d62db1f0fbc6fbefc1f6c"
+    },
+    {
+      "path": "remote/aa-ease.mjs",
+      "bytes": 8094,
+      "sha256": "3206359dd72f6e551676f7cf8a81178b34e96b04ea2e64700c6abcb54a49e11d",
+      "gitBlob": "359c4521c0799756e252588a783d8def960d00a0"
+    },
+    {
+      "path": "remote/glyph-live.mjs",
+      "bytes": 4680,
+      "sha256": "15be6702765d4d968b2540fd48defc57c20767f1494d16ac6fe021601eb422d8",
+      "gitBlob": "99a42156a0fd2d597e9fa405f82955483e817caa"
+    },
+    {
+      "path": "remote/glyph-render.mjs",
+      "bytes": 16791,
+      "sha256": "1bd27aad7485b22e9fbcea8fd5ad8a1100ec74db14c065442b5fd8b6770409cc",
+      "gitBlob": "ebb014291b5f3a96ac36bfacd043cf044d9464ad"
+    },
+    {
+      "path": "remote/pan.mjs",
+      "bytes": 1564,
+      "sha256": "c07a75811fd0df011d5226963eda44b01acd28398018f85dcfb9c4ca78a536a6",
+      "gitBlob": "e608cd7e7ba78bd78871e43533580ef5ce32bbd7"
+    },
+    {
+      "path": "site.css",
+      "bytes": 43415,
+      "sha256": "e72e8527308a6cc6908742edb70da4011ca6f5449c44f4f305751726c4d60881",
+      "gitBlob": "611b454de655a0479555381af697add54ae5d500"
+    },
+    {
+      "path": "tool-theme.css",
+      "bytes": 14070,
+      "sha256": "631d73e834c398ec678d6ca0d5dac00ce5c1d022afcd0b11f2f471d3d8dd3f1b",
+      "gitBlob": "ea9749134183df82115b0ff18040a53f15a6fe77"
+    }
+  ],
+  "scope": "Exact recursively imported JS/CSS from the first public Website WIP. Missing shared files are deliberately absent. Font/image/HTML/dynamic-import behavior is outside this static probe."
+}

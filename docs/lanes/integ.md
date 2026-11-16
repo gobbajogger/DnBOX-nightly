@@ -60,3 +60,7 @@ Repeated mistake: browser-sandbox fixes missed launchers in the full gate call g
 
 Repeated mistake: browser launch policy checks missed a launcher invoked indirectly by the firmware host suite. Audit cross-repository and transitive test call graphs before running any suite, not just named browser scripts; never launch with default-off sandbox.
 - Browser source policy now scans repository Python and JavaScript launchers and runs before npm unit/browser suites. Unsafe or missing policy skips those suites with FAIL/NOT_RUN, never launches them with disabled sandbox. Static policy is not runtime coverage.
+
+## Combined nightly candidate
+- Normal two-parent composition of web68f4b7b718a45291c86d4548b996c5095e8353a4 (including authentic five assets and real preview/provider allowlist) with integ b0a66ec5bd1f38234e0540d3267ea68a854a58fc (fail-closed browser policy). No consolidated/gh-pages/main merge or publication.
+- Web source evidence build203files, product57Node+15Python and asset/provider21 checks PASS applies to web68f input; combined exact-head gate and independent review remain required. Runtime browser unavailable here, no live404 resolution claimed.

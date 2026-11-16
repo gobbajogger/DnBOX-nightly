@@ -1,0 +1,42 @@
+{
+  "schema": "dnbox-actual-full-page-height-regression/1",
+  "sourceRun": "site-actual-r3",
+  "reportSHA256": "24caeb49c3031b441479a09e53b4d4588f7d1c4fac79e5a203dea141dbf0bdec",
+  "originalWrapperSHA256": {
+    "reference/r22.html": "9f94c762c6414870e52f43f2e084242c12815b5d55c60c4f4a4d5f2ab9c0c548",
+    "reference/current-ui.html": "b5df000d93d41f4f63f45364464fead7756f53a900bf80183d28a9b2cc3a3a2a"
+  },
+  "expectedRejectedCondition": "A claimed full-page PNG height differs from its stable DOM scroll height; the wrapper footer is absent and frame grows after capture. Exact real R3 metadata, no fabricated render.",
+  "screens": [
+    {
+      "route": "reference/r22.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "imageHeight": 1569,
+      "domHeightAfterScreenshot": 3999,
+      "screenshotSHA256": "1471d532c88280871b3848e017f74f7e8e21f270e375b0deea8235e8aff42246"
+    },
+    {
+      "route": "reference/current-ui.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "imageHeight": 1590,
+      "domHeightAfterScreenshot": 4951,
+      "screenshotSHA256": "054a0e33897cb4689dd371e48f54ee3dab1ca12ca5ed3065bde94ec6159783be"
+    },
+    {
+      "route": "reference/current-ui.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "imageHeight": 2779,
+      "domHeightAfterScreenshot": 5157,
+      "screenshotSHA256": "d41ec465d7e8f9ca149dda2af181434418c9f5a0e50b0fe2cdd6693a86a36111"
+    }
+  ]
+}

@@ -1,6 +1,15 @@
 import unittest,json,hashlib
 from pathlib import Path
 B=Path(__file__).resolve().parents[1]/'web/product-site'
+def historical(path):
+ text=(B/path).read_text()
+ proof=json.loads((B/'SITE-R22-CHANGES.json').read_text())
+ row=next((r for r in proof['files'] if r['path']==path),None)
+ if row:
+  for change in reversed(row['changes']):
+   assert change['after'] in text
+   text=text.replace(change['after'],change['before'],1)
+ return text
 class EntryDisclosure(unittest.TestCase):
  def test_remote_preview_and_unavailable_export_disclosed_before_file_or_connection(self):
   out=B;home=(out/'index.html').read_text();tools=(out/'tools/index.html').read_text();project=(out/'projects/index.html').read_text();starting=(out/'starting-breaks/index.html').read_text()
@@ -13,7 +22,7 @@ class EntryDisclosure(unittest.TestCase):
   out=B;proof=json.loads((out/'ENTRY-DISCLOSURE.json').read_text())
   self.assertEqual(len(proof['files']),4)
   for row in proof['files']:
-   text=(out/row['path']).read_text();self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),row['afterSHA256'])
+   text=historical(row['path']);self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),row['afterSHA256'])
    for change in reversed(row['changes']):self.assertEqual(text.count(change['after']),1);text=text.replace(change['after'],change['before'],1)
    self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),row['beforeSHA256'])
 

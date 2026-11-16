@@ -1,0 +1,57 @@
+{
+  "schema": "dnbox-locked-reference-port-negative/1",
+  "referencePDFSHA256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+  "relevantReferencePages": [
+    4,
+    12,
+    18,
+    20,
+    21,
+    22,
+    23
+  ],
+  "sourceState": "Owned R5 after correctness fixes, before locked-reference port. Full R5 native render was paused; these are authentic source negatives, not claimed screenshots.",
+  "expectedRejectedConditions": [
+    "Per-parameter card borders instead of one instrument plate",
+    "WAVE percent-only readout",
+    "No visible real increment/decrement controls"
+  ],
+  "files": [
+    {
+      "source": "hero.mjs",
+      "fixture": "site-before-locked-port-hero.mjs",
+      "sha256": "3802bdbfdd8f85f4066263ee77d374f975c877fbe210c7cf0972a17cda9409e7",
+      "sourceOnly": true,
+      "notAnActualR5Render": true
+    },
+    {
+      "source": "site.css",
+      "fixture": "site-before-locked-port-site.css",
+      "sha256": "bd84a6faa41fe42f7feb7cf0a3704f44a864aeaa3b1840376c0e56d5ac592e4d",
+      "sourceOnly": true,
+      "notAnActualR5Render": true
+    },
+    {
+      "source": "tool-theme.css",
+      "fixture": "site-before-locked-port-tool-theme.css",
+      "sha256": "f86171da9008cd0add581526a6dd8ee5ba9cfcef2fc139ca42f576171b4a35d5",
+      "sourceOnly": true,
+      "notAnActualR5Render": true
+    }
+  ],
+  "nativeFixture": [
+    {
+      "file": "site-before-locked-port-browser.css",
+      "sha256": "a470187c01c7c2cec77636b3f648b4bfecb85b6e17927f0fedf4a7f852347dd6"
+    },
+    {
+      "file": "site-before-locked-port-browser.mjs",
+      "sha256": "090ac8e274809ad01f0af5cd890971a70c9459d89f701921a36c7d3ce8a1af97"
+    },
+    {
+      "file": "site-before-locked-port-browser.html",
+      "sha256": "644076c109ed16f1d9ce6c7e7dda8067d32e2e6c02a0b23febc4a63c7e34f247"
+    }
+  ],
+  "nativeAdaptations": "Actual pre-port hero section and runtime/CSS. Only local import/font/stylesheet URLs rooted, no markup/control/value or style-law inventions. Current shared renderer paints glyphs; the negative concerns authentic old card/readout/control composition, not old renderer colour qualification."
+}
