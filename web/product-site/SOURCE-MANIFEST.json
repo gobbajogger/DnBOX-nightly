@@ -674,8 +674,8 @@
     },
     {
       "path": "remote/device/vendor/client.mjs",
-      "bytes": 11188,
-      "sha256": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b"
+      "bytes": 12012,
+      "sha256": "a68ca59e0b7052a878ce7c5be6cc96ef325e5a19cb7379c0d4c002caa2985908"
     },
     {
       "path": "remote/device/vendor/codec.mjs",
