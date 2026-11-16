@@ -1,0 +1,74 @@
+{
+  "schema": "dnbox-web-structural-fixtures/1",
+  "provenance": {
+    "r3ComponentsSha256": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+    "r3PresentationSha256": "755ab99e64a71c4fa2c6ed82d03462fbc0badb9b3290e04328bce12d14c22ea7",
+    "source": "Immutable remote-review-r3/source/remote; all excerpts are GPL project source, not raw captures",
+    "r3Sparse": "Minimized808voice00instrument-controls source excerpt: original SOUND+KIT source groups and240x220viewport retained; unrelated read-onlypattern context removed. Not claimed as a complete oldrender.",
+    "r3Fork": "Exact controlSection output for909voice00. Tune c0andPitch c5are DISTINCT; checks1/2mustPASS. Its P.DEPTH caption fails4.",
+    "duplicateMutation": "Explicit same-ref/same-type mutation, NOT claimed as recovered original909defect.",
+    "r3FullSource": "Separate r3-808-full-source.html retains exact full body_svg including read-only patterncontext; actual status must be observed, not assumed."
+  },
+  "cases": [
+    {
+      "file": "r3-909-distinct-fork.html",
+      "expected": {
+        "1": "PASS",
+        "2": "PASS",
+        "4": "FAIL"
+      }
+    },
+    {
+      "file": "duplicate-ref-mutant.html",
+      "expected": {
+        "1": "FAIL",
+        "2": "FAIL",
+        "4": "FAIL"
+      }
+    },
+    {
+      "file": "r3-808-sparse.html",
+      "expected": {
+        "3": "FAIL"
+      }
+    },
+    {
+      "file": "r3-808-full-source.html",
+      "expected": {},
+      "purpose": "Observe completeR3source layout; do not assume fail or pass from minimized counterpart."
+    },
+    {
+      "file": "r3-cryptic-caption.html",
+      "expected": {
+        "4": "FAIL"
+      }
+    },
+    {
+      "file": "missing-caption-mutant.html",
+      "expected": {
+        "4": "FAIL"
+      }
+    },
+    {
+      "file": "positive-dense.html",
+      "expected": {
+        "1": "PASS",
+        "2": "PASS",
+        "3": "PASS",
+        "4": "PASS"
+      }
+    },
+    {
+      "file": "hidden-caption-mutant.html",
+      "expected": {
+        "4": "FAIL"
+      }
+    },
+    {
+      "file": "aria-only-caption-mutant.html",
+      "expected": {
+        "4": "FAIL"
+      }
+    }
+  ]
+}

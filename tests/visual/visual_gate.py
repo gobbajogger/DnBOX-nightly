@@ -3,24 +3,27 @@
 """Visual-regression gate for the DnBOX website, Remote, emulator and offline edition.
 
   python3 tests/visual/visual_gate.py            # compare against approved baselines (fails on any diff)
-  python3 tests/visual/visual_gate.py --update   # rewrite baselines; commit with a message saying what was approved
+  python3 tests/visual/visual_gate.py --update   # capture proposals; requires independent review before acceptance
 
 Baselines: tests/visual/__snapshots__/<name>.png (approved reference, generated from the polished head).
 Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's chosen top section).
 Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions off, fixed clock and random seed,
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
-import os, sys, json, socket, subprocess, time, re
+import os, sys, json, socket, subprocess, time, re, hashlib, shutil
 from pathlib import Path
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
+from grid_continuity import assert_grid_continuity
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
 FIX = ROOT / 'tests/visual/fixtures/page-01.png'
 OUT = Path(os.environ.get('VISUAL_OUT', ROOT / 'test-results/visual'))
 UPDATE = '--update' in sys.argv
+APPROVALS_FILE = Path(__file__).parent / 'approvals.json'
+APPROVALS = json.loads(APPROVALS_FILE.read_text()) if APPROVALS_FILE.exists() else {}
 ONLY = os.environ.get('VISUAL_ONLY')  # regex filter
 MAX_DIFF_RATIO = 0.001      # ~ toHaveScreenshot maxDiffPixelRatio
 PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as different (AA noise)
@@ -45,11 +48,10 @@ def remote_states():
         def f(pg):
             for _ in range(n): pg.click('#lane-param')
         return f
-    def overflow(pg): pg.click('details.overflow > summary')
     def tab(name):
         def f(pg): pg.click(f'[data-view="{name}"]')
         return f
-    st = [('sequence', None), ('lane-chance', lane(1)), ('lane-pitch', lane(2)), ('lane-pan', lane(3)), ('overflow', overflow)]
+    st = [('sequence', None), ('lane-chance', lane(1)), ('lane-pitch', lane(2)), ('lane-pan', lane(3))]
     for t in ['sound', 'mix', 'patterns', 'files']:
         st.append((t, tab(t)))
     return st
@@ -75,8 +77,16 @@ def compare(name, png_bytes, results):
     SNAP.mkdir(parents=True, exist_ok=True); OUT.mkdir(parents=True, exist_ok=True)
     base = SNAP / f'{name}.png'
     tmp = OUT / f'{name}-actual.png'; tmp.write_bytes(png_bytes)
-    if UPDATE or not base.exists():
-        base.write_bytes(png_bytes); results.append((name, 'BASELINE', 0.0)); return
+    if UPDATE:
+        base.write_bytes(png_bytes); results.append((name, 'BASELINE', 0.0))
+        APPROVALS[name] = {'status': 'PENDING-INDEPENDENT-REVIEW', 'sha256': hashlib.sha256(png_bytes).hexdigest()}; return
+    if not base.exists():
+        # Missing, unreviewed or modified baselines are never accepted automatically.
+        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: no baseline'); return
+    entry = APPROVALS.get(name, {})
+    digest = hashlib.sha256(base.read_bytes()).hexdigest()
+    if not isinstance(entry, dict) or entry.get('status') != 'APPROVED' or entry.get('sha256') != digest or not entry.get('reviewer') or not entry.get('evidence'):
+        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: baseline lacks exact-byte independent acceptance'); return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
     if a.shape != b.shape:
@@ -104,6 +114,8 @@ HEADER_JS = """
   project:vis(q('.hdr .project-name, #project-name'))?q('.hdr .project-name, #project-name').innerText.trim():'',
   readout:(q('.hdr .pattern-readout')?.innerText||'').replace(/\\s+/g,' ').trim(),
   connect:vis(q('#connect'))?q('#connect').innerText.trim():'',
+  connState:vis(q('#conn-state'))?q('#conn-state').innerText.trim():'', connRow:box(q('#conn-state'))?.top, connectRow:box(q('#connect'))?.top,
+  connWrapped:lines(q('#conn-state')||document.body)>1, rowOneOverflow:[...document.querySelectorAll('.hdr details, .hdr summary')].filter(vis).length+[...document.querySelectorAll('.hdr *')].filter(e=>vis(e)&&e.children.length===0&&e.textContent.trim()==='…').length,
   tabs:tabs.map(t=>t.innerText.trim()), tabClipped:tabs.filter(clipped).map(t=>t.innerText.trim()),
   tabWrapped:tabs.filter(t=>lines(t)>1).map(t=>t.innerText.trim()),
   activeTabUnderline: active? (cs(active).borderBottomColor||'')+'|'+(cs(active).textDecorationColor||'')+'|'+cs(active).boxShadow+'|'+(cs(active,'::after'),getComputedStyle(active,'::after').backgroundColor): '',
@@ -130,6 +142,10 @@ def header_checks(h, w, fails):
     need(bool(h['project']), 'project name missing')
     need('P01' in h['readout'] and '120 BPM' in h['readout'], f"readout {h['readout']!r}")
     need(h['connect'] == 'Connect', f"connect {h['connect']!r}")
+    need(h['connState'] == 'Not connected', f"connection state {h['connState']!r}")
+    need(not h['connWrapped'], 'connection state wraps')
+    need(h['connRow'] is not None and h['connectRow'] is not None and abs(h['connRow'] - h['connectRow']) < 24, f"connection state not in row 1 with Connect ({h['connRow']} vs {h['connectRow']})")
+    need(h['rowOneOverflow'] == 0, "overflow '…' present in row 1")
     need(h['tabs'] == ['Sequence', 'Sound', 'Mix & FX', 'Patterns & Song', 'Projects'], f"tabs {h['tabs']}")
     need(not h['tabClipped'] and not h['tabWrapped'], f"tabs clipped {h['tabClipped']} wrapped {h['tabWrapped']}")
     need([e.replace(' ', '') for e in h['engines']] == ['909', '808', 'BASSA', 'BASSB', 'BREAK'], f"engines {h['engines']}")
@@ -152,6 +168,10 @@ def header_checks(h, w, fails):
     need(h['scrollW'] <= h['innerW'], f"horizontal overflow {h['scrollW']}>{h['innerW']}")
     need(not h['pageScrollable'], 'page scrolls')
 
+def exit_status(results, header_fails, errors):
+    # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
+    return int(bool(ONLY) or not results or any(r[1] != 'PASS' for r in results) or bool(header_fails) or bool(errors))
+
 def main():
     p = port()
     srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -160,7 +180,7 @@ def main():
     base = f'http://127.0.0.1:{p}'
     try:
         with sync_playwright() as pw:
-            b = pw.chromium.launch(args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
+            b = pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), args=['--no-sandbox', '--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
             def ctx(w, h):
                 c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
                 c.add_init_script(FREEZE_JS); return c
@@ -178,10 +198,14 @@ def main():
                     pg.goto(base + '/product-site/remote/index.html'); settle(pg)
                     if name == 'sequence':
                         header_checks(pg.evaluate(HEADER_JS), tag, header_fails)
+                        try:
+                            coverage=assert_grid_continuity(pg);results.append((f'grid-continuity-{tag}', 'PASS', coverage['samples']))
+                        except AssertionError as error:
+                            header_fails.append(f'grid-continuity-{tag}: {error}')
                         if (w, h) == (1024, 640):
                             # Perceptual: Gaussian blur r=2 (viewing distance), page-01 scaled to 1024 css px, compared on
-                            # x 0..720 — the right block intentionally differs (QA 2: no 'Not connected' text, '…' overflow,
-                            # compact Undo/Redo); that block is asserted structurally by header_checks instead.
+                            # x 0..720; connection status and Connect are asserted structurally on the right.
+                            # Undo/Redo live in the engine row, not an overflow menu.
                             from PIL import ImageFilter
                             shot = Image.open(__import__('io').BytesIO(pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148}))).convert('L')
                             ref = Image.open(FIX).convert('L'); s = ref.width / 1024
@@ -210,10 +234,14 @@ def main():
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')
     for f in header_fails: print('FAIL header', f)
     for e in errors: print('PAGEERROR', e)
-    summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors)}
+    if UPDATE:
+        APPROVALS_FILE.write_text(json.dumps(dict(sorted(APPROVALS.items())), indent=1) + '\n')
+    pending = sorted(k for k, v in APPROVALS.items() if not isinstance(v, dict) or v.get('status') != 'APPROVED')
+    if pending: print(f'NOTE {len(pending)} baselines pending independent review (not accepted)')
+    summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors), 'pending_independent_review': len(pending)}
     OUT.mkdir(parents=True, exist_ok=True); (OUT / 'summary.json').write_text(json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors}, indent=1))
     print('VISUAL', json.dumps(summary))
-    sys.exit(1 if failed or header_fails else 0)
+    sys.exit(exit_status(results, header_fails, errors))
 
 if __name__ == '__main__':
     main()

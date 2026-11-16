@@ -255,3 +255,9 @@ dialog::backdrop{background:#000a}
 .glyph-canvas{display:block;width:100%;height:100%;border-radius:3px}
 #parameter-inspector{display:flex;gap:8px;align-items:center;margin-top:12px}
 #parameter-inspector input{width:88px}
+
+/* One pixel-aligned time layer above pitch shading, including fractional subdivisions. */
+#roll-grid{background:repeating-linear-gradient(to bottom,var(--grid-16) 0 1px,transparent 1px var(--row)),var(--bg)}
+#roll-grid .black-key{z-index:0}
+#roll-grid::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--vertical-grid);background-repeat:repeat-y;background-size:100% 1px}
+#roll-grid .note{z-index:2}

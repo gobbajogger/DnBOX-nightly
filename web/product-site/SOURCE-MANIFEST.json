@@ -594,8 +594,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 42489,
-      "sha256": "ee7eb975c97f2213d1f1d395f39646307036047956f1d223ae1c34f344ea3f6f"
+      "bytes": 42589,
+      "sha256": "36e274db4eb14ed4d479e259c7b80053be28988aa2df9a0c51cecd3f0da773b7"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -723,6 +723,11 @@
       "sha256": "a38e4f963613bcee8fdf2af5248a130bae1f97d7334bd7c904d92d82fcff04af"
     },
     {
+      "path": "remote/grid.mjs",
+      "bytes": 738,
+      "sha256": "6a14e0e046eed76a41c541e5bc205fce1ee4fa8a7a54be1ebf820ec16b1382c3"
+    },
+    {
       "path": "remote/identity/app.mjs",
       "bytes": 3339,
       "sha256": "9eba18e1d701402c1eac4a329fc7cdb5411b5093c0c1b53b8babd8481b8dcfee"
@@ -804,8 +809,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 20094,
-      "sha256": "c90e5edd54c631585948a63cf5194c58316e0a97da16ea1bdba6596cccdc5ccf"
+      "bytes": 20541,
+      "sha256": "064c4d2c94f6807196902b6825bfa5f91d7bb332aaa0022421be203a150d562f"
     },
     {
       "path": "remote/timeline.mjs",
@@ -919,5 +924,9 @@
     "exactSourceFreeze": "26484834b933c85cf90769bafa0cf4cab786cdbeb82d583fd79ecb1ae4d41a68",
     "disposition": "CHANGES_REQUIRED",
     "scope": "Three confirmed defects in frozen predecessor; R16 producer fixes require exact successor independent recheck. Source context/viewport/preservation support remains bounded."
+  },
+  "firstUiGateSlice": {
+    "status": "SOURCE_ONLY_NOT_QUALIFIED",
+    "purpose": "Continuous vertical grid plus local structural detectors; no native/browser/publication acceptance."
   }
 }

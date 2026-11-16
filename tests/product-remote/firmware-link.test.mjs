@@ -8,7 +8,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {mountFirmwareLink} from '../../web/product-site/remote/firmware-link.mjs';
-import {OP,encodeCommand,decodeReply} from '../../web/product-site/remote/device/vendor/codec.mjs';
+import {OP,encodeCommand,decodeCommand,decodeReply} from '../../web/product-site/remote/device/vendor/codec.mjs';
 
 const dir=fileURLToPath(new URL('./tests/',import.meta.url));
 const binary=join(mkdtempSync(join(tmpdir(),'dnr2-remote-')),'fixture');
