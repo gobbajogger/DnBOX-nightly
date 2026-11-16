@@ -1,0 +1,18 @@
+{
+  "status": "FAIL",
+  "scope": "strict-pixel-and-inventory-comparison-not-independent-review",
+  "provenance": {
+    "status": "FAIL",
+    "scope": "git-harness-identity-not-coverage-or-derivation-approval",
+    "firmwareSourceCommit": "1bd5f6854486b8cb1dadec08cc1c33c01f9f35a0",
+    "harnessPath": "tests/host/ui_screen_inventory.c",
+    "resolvedBlob": null,
+    "errors": [
+      "harness provenance could not be verified at exact firmware commit"
+    ]
+  },
+  "screens": [],
+  "errors": [
+    "harness provenance could not be verified at exact firmware commit"
+  ]
+}

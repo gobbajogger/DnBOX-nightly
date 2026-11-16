@@ -6,10 +6,57 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 from PIL import Image
 
 SHA = re.compile(r'^[0-9a-f]{40}$')
 HASH = re.compile(r'^[0-9a-f]{64}$')
+
+def verify_inventory_provenance(repo, inventory, firmware_sha, harness_path):
+    """Verify Git identity only; the reviewer still verifies inventory derivation."""
+    errors = []
+    resolved = None
+    if not isinstance(inventory, dict):
+        inventory = {}; errors.append('inventory object required')
+    if not isinstance(firmware_sha, str) or not SHA.fullmatch(firmware_sha):
+        errors.append('exact firmware commit required')
+    if inventory.get('productionSourceCommit') != firmware_sha:
+        errors.append('inventory production source mismatch')
+    if inventory.get('sourceInventoryCommit', firmware_sha) != firmware_sha:
+        errors.append('runtime and inventory harness must share one source commit')
+    if inventory.get('sourceInventoryPath', harness_path) != harness_path:
+        errors.append('inventory harness path mismatch')
+    blob = inventory.get('sourceInventoryGitBlob')
+    if not isinstance(blob, str) or not SHA.fullmatch(blob):
+        errors.append('exact harness blob required')
+    if (not isinstance(harness_path, str) or not harness_path or '\\' in harness_path
+            or any(ord(c) < 32 for c in harness_path) or harness_path.startswith('/')
+            or any(part in ('', '.', '..') for part in harness_path.split('/'))):
+        errors.append('repository-relative harness path required')
+    if not errors:
+        def git(*args):
+            return subprocess.run(['git', '--no-replace-objects', '--literal-pathspecs', '-C', str(repo), *args],
+                                  capture_output=True, check=True, timeout=10).stdout
+        try:
+            if git('cat-file', '-t', firmware_sha).strip() != b'commit':
+                raise ValueError('firmware pin must resolve to a commit')
+            rows = git('ls-tree', '-z', firmware_sha, '--', harness_path).split(b'\0')
+            rows = [r for r in rows if r]
+            if len(rows) != 1:
+                raise ValueError('harness missing or ambiguous at firmware commit')
+            meta, path = rows[0].split(b'\t', 1)
+            mode, kind, object_id = meta.decode('ascii').split(' ')
+            if mode not in ('100644', '100755') or kind != 'blob' or path.decode('utf-8') != harness_path:
+                raise ValueError('regular exact-path harness blob required')
+            resolved = object_id
+            if resolved != blob:
+                raise ValueError('harness Git blob mismatch')
+        except (OSError, subprocess.SubprocessError, ValueError, UnicodeError):
+            errors.append('harness provenance could not be verified at exact firmware commit')
+    return {'status': 'FAIL' if errors else 'PASS',
+            'scope': 'git-harness-identity-not-coverage-or-derivation-approval',
+            'firmwareSourceCommit': firmware_sha, 'harnessPath': harness_path,
+            'resolvedBlob': resolved, 'errors': errors}
 
 def compare(native, html, firmware_sha, website_sha, load_pixels, inventory_bytes=None, inventory_sha256=None):
     errors, screens = [], []
@@ -118,12 +165,23 @@ if __name__ == '__main__':
     parser.add_argument('--html', required=True, type=Path)
     parser.add_argument('--inventory', required=True, type=Path)
     parser.add_argument('--inventory-sha256', required=True)
+    parser.add_argument('--firmware-repo', required=True, type=Path)
+    parser.add_argument('--source-inventory-path', required=True)
     parser.add_argument('--firmware-sha', required=True)
     parser.add_argument('--website-sha', required=True)
     args = parser.parse_args()
-    report = compare(json.loads(args.native.read_text()), json.loads(args.html.read_text()),
-                     args.firmware_sha, args.website_sha,
-                     file_loader({'native': args.native.parent, 'html': args.html.parent}),
-                     args.inventory.read_bytes(), args.inventory_sha256)
+    inventory_bytes = args.inventory.read_bytes()
+    provenance = verify_inventory_provenance(args.firmware_repo, json.loads(inventory_bytes),
+                                             args.firmware_sha, args.source_inventory_path)
+    if provenance['status'] != 'PASS':
+        # Do not open capture manifests/images before Git identity admission.
+        report = {'status': 'FAIL', 'scope': 'strict-pixel-and-inventory-comparison-not-independent-review',
+                  'provenance': provenance, 'screens': [], 'errors': provenance['errors']}
+    else:
+        report = compare(json.loads(args.native.read_text()), json.loads(args.html.read_text()),
+                         args.firmware_sha, args.website_sha,
+                         file_loader({'native': args.native.parent, 'html': args.html.parent}),
+                         inventory_bytes, args.inventory_sha256)
+        report['provenance'] = provenance
     print(json.dumps(report, indent=2))
     raise SystemExit(0 if report['status'] == 'PASS' else 1)

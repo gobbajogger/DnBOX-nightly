@@ -6,6 +6,8 @@ from unittest.mock import patch
 import importlib.util
 import hashlib
 import tempfile
+import subprocess
+import sys
 from PIL import Image
 from pathlib import Path
 import unittest
@@ -30,6 +32,55 @@ def run(native,html,firmware,website,loader):
     return module.compare(native,html,firmware,website,loader,*expected())
 
 class Comparison(unittest.TestCase):
+    def test_provenance_resolves_exact_harness_blob_at_runtime_commit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            def git(*args):
+                return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.DEVNULL).decode().strip()
+            git('init');(root/'harness.c').write_text('int inventory;\n');git('add','harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','fixture')
+            pin=git('rev-parse','HEAD');blob=git('rev-parse','HEAD:harness.c')
+            manifest={'productionSourceCommit':pin,'sourceInventoryGitBlob':blob,'sourceInventoryCommit':pin}
+            result=module.verify_inventory_provenance(root,manifest,pin,'harness.c')
+            self.assertEqual(result['status'],'PASS');self.assertEqual(result['resolvedBlob'],blob)
+            self.assertIn('not-coverage',result['scope'])
+            for mutant,path in [(dict(manifest,sourceInventoryGitBlob='f'*40),'harness.c'),(manifest,'missing.c'),(dict(manifest,sourceInventoryPath='other.c'),'harness.c'),(manifest,'../harness.c'),(dict(manifest,sourceInventoryCommit='f'*40),'harness.c')]:
+                self.assertEqual(module.verify_inventory_provenance(root,mutant,pin,path)['status'],'FAIL')
+            (root/'new-harness.c').write_text('int later;\n');git('add','new-harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','later harness')
+            later=git('rev-parse','HEAD');later_blob=git('rev-parse','HEAD:new-harness.c')
+            split=dict(manifest,sourceInventoryGitBlob=later_blob,sourceInventoryCommit=later)
+            self.assertEqual(module.verify_inventory_provenance(root,split,pin,'new-harness.c')['status'],'FAIL')
+            (root/'alias.c').symlink_to('harness.c');git('add','alias.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','symlink fixture')
+            symlink_pin=git('rev-parse','HEAD');symlink=dict(productionSourceCommit=symlink_pin,sourceInventoryGitBlob=git('rev-parse','HEAD:alias.c'))
+            self.assertEqual(module.verify_inventory_provenance(root,symlink,symlink_pin,'alias.c')['status'],'FAIL')
+    def test_git_replace_cannot_forge_harness_at_pinned_commit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            def git(*args):
+                return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.DEVNULL).decode().strip()
+            git('init');(root/'harness.c').write_text('int original;\n');git('add','harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','original')
+            pin=git('rev-parse','HEAD');original=git('rev-parse','HEAD:harness.c')
+            (root/'harness.c').write_text('int replacement;\n');git('add','harness.c')
+            git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','replacement')
+            later=git('rev-parse','HEAD');replacement=git('rev-parse','HEAD:harness.c');git('replace',pin,later)
+            forged={'productionSourceCommit':pin,'sourceInventoryGitBlob':replacement}
+            self.assertEqual(module.verify_inventory_provenance(root,forged,pin,'harness.c')['status'],'FAIL')
+            genuine=dict(forged,sourceInventoryGitBlob=original)
+            self.assertEqual(module.verify_inventory_provenance(root,genuine,pin,'harness.c')['status'],'PASS')
+    def test_cli_rejects_provenance_before_opening_capture_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);data,digest=expected();inventory=root/'inventory.json';inventory.write_bytes(data)
+            result=subprocess.run([sys.executable,str(Path(module.__file__)),
+                '--native',str(root/'absent-native.json'),'--html',str(root/'absent-html.json'),
+                '--inventory',str(inventory),'--inventory-sha256',digest,
+                '--firmware-repo',str(root),'--source-inventory-path','harness.c',
+                '--firmware-sha',FIRMWARE,'--website-sha',WEBSITE],capture_output=True,text=True)
+            self.assertEqual(result.returncode,1);report=json.loads(result.stdout)
+            self.assertEqual(report['status'],'FAIL');self.assertEqual(report['screens'],[])
+            self.assertEqual(report['provenance']['status'],'FAIL');self.assertEqual(result.stderr,'')
     def test_identical_synthetic_pixels_pass_only_scoped_comparison(self):
         n, h = manifests()
         result = run(n, h, FIRMWARE, WEBSITE, lambda *args: bytes(240 * 240 * 4))

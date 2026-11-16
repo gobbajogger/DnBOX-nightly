@@ -91,3 +91,11 @@ Repeated mistake: coordinator reported a requested stop or lane-file update as c
 ## Producer composition checks
 
 Actual composed source (c250 product plus retained integ gate files): normal-browser source policy14, containment regression10, build214 and npm run test:product PASS. Product log is retained as integ-c250-product.log. This is a source-composition run before the commit metadata was assigned, not a complete exact-head Local or rendered landscape Review.
+
+## Nightly tracked-object gate correction
+
+Independent review identified missing retained-workflow, blob-size/LFS and PSRAM checks in the supplied nightly limits function. Actual extracted-function fixtures reproduced four false PASS cases: retained workflow,50MiB non-LFS blob, direct PSRAM activation and named SuperJ6 AU installer. Added fail-closed tracked-object metadata inspection, retained workflow inventory, direct source/config activation detection (including nested inline JSON), and AU filename/component archive inventory. LFS pointers remain small stored Git blobs; this does not verify remote LFS recovery.
+
+Final13 producer and independent fixtures PASS after inline-JSON and three source-grammar red/green corrections (parenthesized defines, Kconfig y, typed bool). The common gate runs these regressions before limits. The prior05850 source inventory of1126 tracked blobs passes the bounded helper; this is not a comprehensive secret or opaque binary/content audit and is not C4/full Local acceptance. Missing/unmerged/uninspectable objects fail closed. Independent final source review and exact-head gate remain required.
+
+The next source composition also retains all20 exact Web8eb31e86c204279f86f73805d690728f24944fe8 changes since c250, including the independently source-reviewed Remote inspector crash correction and stronger firmware-render provenance tests. No product code/manifest has been rewritten by integration; real browser after-state and full gates remain unqualified.
