@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/long-press.mjs",
-      "bytes": 1743,
-      "sha256": "25a144b8062dd1b1fcf74bca6078e95ff83538490d24756a8c8d9aa4e5d3653b"
+      "bytes": 1833,
+      "sha256": "955dddad665ecd37b81982179c562daab1f406be8ea39519a4ec4b4f823be420"
     },
     {
       "path": "remote/mixer-format.json",
@@ -844,8 +844,8 @@
     },
     {
       "path": "remote/touchosc/README.md",
-      "bytes": 2954,
-      "sha256": "c2b84282aef70079ceabe92e7208ec1b70d513e8f2e1ed0cae69e1839a8afe14"
+      "bytes": 2947,
+      "sha256": "c4ea384078e1d223b3e78373f1dbf5f0cae30d110e6f73645d1a3659e163548b"
     },
     {
       "path": "remote/touchosc/dnr2-codec.lua",
@@ -885,7 +885,7 @@
     {
       "path": "remote/vendor/funkybeats-provenance.json",
       "bytes": 1912,
-      "sha256": "6d5f905c6cba25f158687e8d19a152c407a6b693765e6fd8f903a6a1dc86fbe3"
+      "sha256": "a8aa321898781c68489fbbcef24fda5cbf8adf849f768105805c614674e92735"
     },
     {
       "path": "remote/view.mjs",
