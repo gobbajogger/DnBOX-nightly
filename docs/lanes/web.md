@@ -19,8 +19,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: immutable c250 runtime serving locally through existing Chromium at observed844x390; later commits change only provenance tests/docs. Browser-discovered inspector readout failure is owned by Remote. Earlier scripted browser boundaries remain denied, not retried.
-- Next: consume independently checked inspector correction, verify actual click/readout/Undo in the browser; continue prescribed viewport review and remaining W2 workflows. Retain latest integ preflight; complete native inventory remains required for W3.
+- Now: immutable8ce runtime served; independent real-keyboard native readouts passed. Own19-route landscape-width observations and five actual preview transports recorded. Full prescribed visual Review and Local remain open.
+- Next: complete independent responsive/workflow review in a permitted capable environment; genuine preset file delivery remains unresolved after bounded native typing attempt. Native complete same-SHA inventory/render projection remains required forW3. Retain latest integ gate guards and all publication restrictions.
 
 ## Blockers and recovery
 - Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
@@ -161,3 +161,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Independent actual8ce Decay keyboard check PASS: click/Ctrl+A/type0/Tab displays100ms;127 displays4.0s; inspectorUndo restores0/100ms. Earlier locator.fill path did not update draft, but real keyboard did; no production source regression established and no patch made. Receipt web-8ce-browser-readouts.json.
 - All19 route document widths now observed at actual844x390 with829px client/scroll widths, no horizontal document overflow. Detailed ledger web-landscape-route-ledger.json. Own narrow measurements are not independent visual Review, inner archive gallery qualification or complete interaction checks; W4/C3 remainFAIL.
 - Independent exact8ce no_loss PASS against connector-verified9165; corrected external containment/hard-limit helper scanned1169 tracked blobsPASS without modifying8ce source. Log independent-review/web8ce-stages.log. Not fullLocal or comprehensive C4 secret/opaque-content assurance; no fullC4 credit.
+
+- Actual8ce all5 preview transports checked with0selected: media paused=false/errornull and contract-matching durations; final0audio/0pressed/0selected. Receipt web-8ce-five-previews.json. No audible-output claim. Native chooser alternate App.typeCharacters entered exact synthetic invalid file path (screenshot verified), but Return closed picker without file delivery; page No file chosen, import NOT_RUN. Picker safely closed; no repeated retry.
