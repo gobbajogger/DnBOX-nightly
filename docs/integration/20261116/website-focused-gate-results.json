@@ -1,0 +1,23 @@
+[
+  {
+    "case": "website-build",
+    "command": [
+      "node",
+      "scripts/build-product-site.mjs"
+    ],
+    "exit": 1,
+    "seconds": 0.1993509779968008,
+    "log": "logs/website-build-attempt-01.log"
+  },
+  {
+    "case": "website-mechanics",
+    "command": [
+      "node",
+      "--test",
+      "tests/product-site-build.test.mjs"
+    ],
+    "exit": 0,
+    "seconds": 1.9551875209981517,
+    "log": "logs/website-mechanics-attempt-01.log"
+  }
+]

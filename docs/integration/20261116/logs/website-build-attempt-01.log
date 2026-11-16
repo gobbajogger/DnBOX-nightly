@@ -1,0 +1,14 @@
+Path-only sanitized rawstdout/stderr; originalSHA256 7970d943e82dd395dc159af2b2bcf55b0235bc342c44918e5edc4ea438841288
+COMMAND ["node", "scripts/build-product-site.mjs"]
+file://PROJECT_WORKSPACE/consolidation-20261116/website-candidate-1/scripts/build-product-site.mjs:23
+  if(data.length!==row.bytes||createHash('sha256').update(data).digest('hex')!==row.sha256)throw Error('Product source drift: '+row.path);
+                                                                                                 ^
+
+Error: Product source drift: breaks/index.html
+    at buildProductSite (file://PROJECT_WORKSPACE/consolidation-20261116/website-candidate-1/scripts/build-product-site.mjs:23:98)
+    at file://PROJECT_WORKSPACE/consolidation-20261116/website-candidate-1/scripts/build-product-site.mjs:36:29
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.1
