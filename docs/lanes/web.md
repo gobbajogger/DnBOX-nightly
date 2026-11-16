@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 3edfb16374c99c9ccb99e27d45e3d1af25360185   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 9b3e23ef749da25f613400842e841a3cb992aa6e   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -82,3 +82,6 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be
 - Product suite with lifecycle coverage PASS63 Node+29 Python; log docs/lanes/evidence/web-installer-lifecycle-product.log. W2 remains FAIL until real browser execution.
 
 - W4 project-entry prose removes implementation-only provider jargon, retaining unavailable MIDI export, separate original backup/restore tools, non-native local drafts and every format/size limit. One paragraph only; no controls, attributes, scripts, layout or glyph changes. New content regression red before/green after. Existing mounted/Python disclosure checks now assert the replacement caution while retaining disabled-export/provider-null/reversible-source checks. Plan manifest hash repinned; nothing published. Product64 Node+29 Python PASS.
+
+- Composed Remote12440ea3955ba85370c7ee529e7fb522c7786e62 with web9b3e via normal merge at common ancestorcac407. Exact65 Remote source files verified against GitHub tree5999aa18; no Remote edits by web. Combined manifest211 paths, unqualified status retained. Build211, product64 Node+29 Python (incl HTTP211 bytes), workspace84+app scenarios, Remote66 and Lua-to-C-host protocol PASS; logs web-mixer-*. No full Local/browser or device claims.
+- Frozen nonbrowser replay of bd8 initially used a Git archive; repository-dependent test correctly failed missing .git. Recovered immediately with an exact detached worktree, no assertions weakened; replay still running separately. No full npm test claimed because visual command is intentionally excluded from this diagnostic chain.

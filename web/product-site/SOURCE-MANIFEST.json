@@ -674,8 +674,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1826,
-      "sha256": "98a4108eec19c9a257b96aff196e859a46c377cc7f66a72174b9cf9537587442"
+      "bytes": 1898,
+      "sha256": "9b2fb5c7dc8aaf336a2eed5bea9dbfee8e0aac4bc2cfd7253a9e0a9a9719f504"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -694,8 +694,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 43279,
-      "sha256": "79cea5f33a435f91f82a6c79a623fe4f49184751c05be1f142fc57b93d1b1b32"
+      "bytes": 46439,
+      "sha256": "7aad027c8c6660337c21d7141f8cc8a6f06f566dbf5ce84b796c33788760e0a8"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -814,8 +814,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 5784,
-      "sha256": "1d09c9a489379c808c393157a0231aa1429eda9ea0271bafa226e4c2cbb16685"
+      "bytes": 9095,
+      "sha256": "8dfd2fa6060799737cee42e37aa362be75a3c1985c027260c2d9d39e8d4908c3"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -866,6 +866,16 @@
       "path": "remote/lane.mjs",
       "bytes": 2450,
       "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d"
+    },
+    {
+      "path": "remote/mixer-format.json",
+      "bytes": 59444,
+      "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
+    },
+    {
+      "path": "remote/mixer-format.mjs",
+      "bytes": 712,
+      "sha256": "f63b485884244656a7853c6fb858baf67b00118172974a9007c4505f8158f404"
     },
     {
       "path": "remote/model.mjs",
@@ -924,8 +934,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 23415,
-      "sha256": "a6a4d7934fb998c62626b5d38559ba870f057de02d2f77d11fb3fa81a560180e"
+      "bytes": 24682,
+      "sha256": "aee80568c59a50ce5bf9f6e3a1546d4986ac4268ba547ce6aad77a4fed225916"
     },
     {
       "path": "remote/timeline.mjs",
@@ -959,13 +969,13 @@
     },
     {
       "path": "remote/vendor/funkybeats-core.mjs",
-      "bytes": 15539,
-      "sha256": "2a202220d198a18e2daed119096a7873d3d3399bd93351b4063286dc43e9f916"
+      "bytes": 24430,
+      "sha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c"
     },
     {
       "path": "remote/vendor/funkybeats-provenance.json",
-      "bytes": 1282,
-      "sha256": "2e894887bd887181e1445c06caac6be0b9428fb4530964f61d354aa145f229d5"
+      "bytes": 1725,
+      "sha256": "85d867cc368003d65d168bfd87df9f3e5c6803a999c0bcbd999f01ca03177f47"
     },
     {
       "path": "remote/view.mjs",
@@ -1091,8 +1101,8 @@
   },
   "previousSourceReview": "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY",
   "snapshotInputs": {
-    "website": "f73a68b0d2f3ead524629de53b37489334675c2c",
+    "website": "9b3e23ef749da25f613400842e841a3cb992aa6e",
     "prepAndAssets": "6a9607e886aab06ce0b1813321629b67239057b5",
-    "remote": "cac407222ab23b72e801293afcf32ed44c10d36b"
+    "remote": "12440ea3955ba85370c7ee529e7fb522c7786e62"
   }
 }

@@ -138,3 +138,29 @@ check('shipped pointer binding preserves note geometry through small touch jitte
  $('roll-scroll').handlers.pointerdown(e);$('roll-scroll').handlers.pointermove({...e,clientX:103,clientY:104});$('roll-scroll').handlers.pointerup(e);
  assert.equal(geometry(),before);
 });assert.equal(failures,0);
+check('shipped typed synth slider previews cancel and change commits one source-domain Undo',()=>{
+ $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='sound').onclick();
+ const group=JSON.parse(fs.readFileSync(new URL('source-sounds.json',base))).contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0);
+ const c=group.controls.find(c=>c.kind===1&&c.parameter===0),id='source-sound/CHICAGO/0|'+[c.kind,c.target,c.voice,c.parameter,c.sourceBank].join(':');
+ assert.equal(($('other-view').innerHTML.match(/data-native-param=/g)||[]).length,1);
+ assert.match($('other-view').innerHTML,/class="parameter encoder"/);
+ const input=new E();input.dataset={param:id,nativeParam:id};input.value=String(c.raw===c.max?c.raw-1:c.raw+1);
+ $('review').onclick();const before=$('changes').textContent;
+ let prevented=false;$('other-view').handlers.pointerdown({button:0,pointerId:991,target:input,preventDefault(){prevented=true}});assert.equal(prevented,false);
+ $('other-view').handlers.input({target:input});assert.doesNotMatch(input.attrs['aria-valuetext'],/raw|%/);$('other-view').handlers.pointercancel();assert.equal(Number(input.value),c.raw);
+ $('review').onclick();assert.equal($('changes').textContent,before);
+ input.value=String(c.raw===c.max?c.raw-1:c.raw+1);$('other-view').handlers.input({target:input});$('other-view').handlers.change({target:input});
+ $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);
+ input.value=String(c.max+1);$('other-view').handlers.change({target:input});$('review').onclick();assert.equal($('changes').textContent,before);
+});assert.equal(failures,0);
+check('shipped mixer has all source controls and typed faders sync LEVEL alias with source units and Undo',()=>{
+ views.find(e=>e.dataset.view==='mix').onclick();const html=$('other-view').innerHTML;
+ assert.equal((html.match(/class="mixer-fader"/g)||[]).length,5);assert.equal((html.match(/data-native-param=/g)||[]).length,9);
+ assert.match(html,/mix-master.svg/);assert.match(html,/fx-reverb-direct.svg/);assert.match(html,/fx-delay-direct.svg/);assert.doesNotMatch(html,/mixer-vu|mixer-eq|bus-channel/);
+ const id='current-state-and-reference/mix-parts-live.svg|1:5:0:0',input=new E(),alias=new E();input.dataset={param:id,nativeParam:id,paramOccurrence:'0'};alias.dataset={param:id,nativeParam:id,paramOccurrence:'5'};
+ const old=document.querySelectorAll;document.querySelectorAll=s=>s==='[data-native-param]'?[input,alias]:old(s);
+ $('review').onclick();const before=$('changes').textContent;
+ input.value='100';$('other-view').handlers.input({target:input});assert.equal(input.attrs['aria-valuetext'],'0dB');$('other-view').handlers.change({target:input});assert.equal(alias.value,'100');assert.equal(alias.attrs['aria-valuetext'],'0dB');
+ $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);assert.match($('other-view').innerHTML,/aria-valuetext="-5dB"/);
+ document.querySelectorAll=old;
+});assert.equal(failures,0);

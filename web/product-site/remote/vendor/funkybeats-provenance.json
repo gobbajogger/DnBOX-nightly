@@ -9,7 +9,9 @@
     "el DOM helper original body",
     "buildSequencerGrid original body with accessible step div\u2192button adaptation",
     "note duration and velocity expressions",
-    "buildPerformGrid original body with typed local launch-selection adapter"
+    "buildPerformGrid original body with typed local launch-selection adapter",
+    "createParamSlider original body, fed explicit typed native domains",
+    "buildMixer original body with source-domain projection excluding unsupported controls"
   ],
   "excluded": [
     "AudioEngine",
@@ -23,9 +25,11 @@
     "Configuration supplied through lexical constants, preserving upstream class body.",
     "Step nodes use native button type=button instead of div.",
     "DnBOX typed source rows supply actual values and native writes remain fail-closed.",
-    "Performance mode/queued playback toolbar excluded; serialized launch cells delegate to the existing typed local app selection."
+    "Performance mode/queued playback toolbar excluded; serialized launch cells delegate to the existing typed local app selection.",
+    "Synth slider cells use shared R22 glyphs and native-domain input/change events; upstream generic percent mappings are not imported.",
+    "Mixer projection retains exactly five source faders; upstream VU meters, EQ, mute/solo, bus and master defaults are not admitted."
   ],
-  "sourceSha256": "2a202220d198a18e2daed119096a7873d3d3399bd93351b4063286dc43e9f916",
+  "sourceSha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c",
   "copyright": "Copyright (c) 2026 FunkyBeats Contributors",
-  "licenseNoticeSha256": "c1ad67e3fbc657c71f439c388b11802688b3d4471b2f090d9124f766cda03f0b"
+  "licenseNoticeSha256": "9b2fb5c7dc8aaf336a2eed5bea9dbfee8e0aac4bc2cfd7253a9e0a9a9719f504"
 }

@@ -1,11 +1,11 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "bd8b77646542eac5875af5442a819d9f0a233f17",
+  "sourceHead": "9b3e23ef749da25f613400842e841a3cb992aa6e",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
-  "productCount": 209,
+  "productCount": 211,
   "deletePaths": [],
   "retention": "Overlay built product blobs onto exact existing gh-pages tree, never replace base tree. Keep all non-product paths and package bytes unchanged.",
   "critical": [
@@ -183,6 +183,8 @@
     "remote/identity/remote.mjs",
     "remote/index.html",
     "remote/lane.mjs",
+    "remote/mixer-format.json",
+    "remote/mixer-format.mjs",
     "remote/model.mjs",
     "remote/motion.mjs",
     "remote/page.mjs",
@@ -401,9 +403,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "0e6fc134b1b8aa4f9501061f38737f6e886d882333ed879c56a449f6d3e9b64f",
+  "productManifestSha256": "2b0a796a39586c07c685100c0161d9e4d450128d91865e5d5bacb0f0c47179b5",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "cac407222ab23b72e801293afcf32ed44c10d36b",
-  "sourceNote": "Planning snapshot includes follow-up project-entry prose correction, bound by exact product manifest SHA256; not publication qualification."
+  "remoteCompositionIncludes": "12440ea3955ba85370c7ee529e7fb522c7786e62",
+  "sourceNote": "Planning snapshot composes website9b3e plus Remote12440, pinned by exact manifest digest; not publication qualification."
 }

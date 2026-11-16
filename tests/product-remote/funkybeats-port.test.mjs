@@ -53,4 +53,32 @@ test('port provenance pins the shipped MIT source bytes',()=>{
  const provenance=JSON.parse(readFileSync(new URL('../../web/product-site/remote/vendor/funkybeats-provenance.json',import.meta.url)));
  assert.equal(createHash('sha256').update(readFileSync(target)).digest('hex'),provenance.sourceSha256);
  assert.ok(provenance.scope.some(scope=>scope.startsWith('buildPerformGrid')));
+ assert.equal(createHash('sha256').update(readFileSync(new URL('../../web/product-site/remote/FUNKYBEATS-MIT-NOTICE.md',import.meta.url))).digest('hex'),provenance.licenseNoticeSha256);
+});
+test('actual synth slider builder retains explicit native domains and escaped values',async()=>{
+ const {renderTypedFunkyBeatsParameter}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const html=renderTypedFunkyBeatsParameter({id:'native/"<control>',label:'Attack',value:25,min:3,max:9000,step:.25,display:'25 ms'});
+ assert.match(html,/min="3" max="9000" value="25" step="0.25"/);
+ assert.match(html,/aria-valuetext="25 ms"/);assert.doesNotMatch(html,/<control>/);assert.match(html,/data-param="native\/&quot;&lt;control&gt;"/);
+ assert.match(html,/data-native-param="native\/&quot;&lt;control&gt;"/);
+ assert.match(renderTypedFunkyBeatsParameter({id:'x',label:'Wave',value:0,min:0,max:0,display:'SAW',enabled:false}),/disabled="disabled"/);
+ assert.throws(()=>renderTypedFunkyBeatsParameter({id:'x',label:'Wrong',value:128,min:0,max:127,display:'wrong'}));
+});
+test('upstream mixer projection retains typed faders, not fabricated meters or controls',async()=>{
+ const {renderTypedFunkyBeatsMixer}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const channels=['909','808','BREAK','CHICAGO','MIAMI'].map((label,i)=>({id:'parts|1:5:'+i+':0',label,value:75+i,min:0,max:127,step:1,display:'-5dB',occurrence:i}));
+ const html=renderTypedFunkyBeatsMixer({channels});
+ assert.equal((html.match(/class="mixer-fader"/g)||[]).length,5);assert.equal((html.match(/max="127"/g)||[]).length,5);
+ for(let i=0;i<5;i++){assert.ok(html.includes('data-param="'+channels[i].id+'"'));assert.ok(html.includes('value="'+channels[i].value+'"'));}
+ assert.doesNotMatch(html,/mixer-vu|mixer-eq|mixer-send|mixer-mute|mixer-solo|bus-channel|master-fader|0\.0dB/);
+ assert.throws(()=>renderTypedFunkyBeatsMixer({channels:channels.slice(1)}));
+});
+test('mixer values reproduce exact production formatter table without inferred units',async()=>{
+ const {mixerDisplay,mixerFormatTable}=await import('../../web/product-site/remote/mixer-format.mjs');
+ assert.equal(mixerFormatTable.productionSourceCommit,'65a24027883dfd166221f44de364f446cf79efbe');
+ assert.equal(mixerFormatTable.runtimeAdmission,'NOT_ADMITTED');
+ for(const voice of mixerFormatTable.voices)for(const control of mixerFormatTable.controls)for(const row of control.values)assert.equal(mixerDisplay(`parts|1:5:${voice}:${control.slot}`,row.raw),row.number+row.unit);
+ assert.equal(mixerDisplay('p|1:5:0:0',0),'OFF');assert.equal(mixerDisplay('p|1:5:0:0',100),'0dB');
+ assert.equal(mixerDisplay('p|1:5:0:3',0),'L50');assert.equal(mixerDisplay('p|1:5:0:3',64),'C');assert.equal(mixerDisplay('p|1:5:0:3',127),'R50');
+ assert.equal(mixerDisplay('p|1:2:0:0',10),null);assert.equal(mixerDisplay('p|1:5:0:0',.5),null);
 });
