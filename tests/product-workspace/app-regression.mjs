@@ -130,3 +130,11 @@ check('actual drum page reuses live lane controls and returns them intact on lea
  assert.equal($('velocity').handlers.pointerdown,handler);
  views.find(e=>e.dataset.view==='roll').onclick();assert.equal(sharedLaneNode.parentElement.id,'roll-view');
 });assert.equal(failures,0);
+check('shipped pointer binding preserves note geometry through small touch jitter',()=>{
+ $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();
+ const id=$('roll-grid').innerHTML.match(/data-note="([^"]+)"/)[1],target=new E();target.dataset.note=id;
+ const geometry=()=>$('roll-grid').innerHTML.match(new RegExp('data-note="'+id+'"[^>]*style="([^"]+)"'))[1];
+ const before=geometry(),e={button:0,pointerId:990,pointerType:'touch',clientX:100,clientY:100,target,preventDefault(){}};
+ $('roll-scroll').handlers.pointerdown(e);$('roll-scroll').handlers.pointermove({...e,clientX:103,clientY:104});$('roll-scroll').handlers.pointerup(e);
+ assert.equal(geometry(),before);
+});assert.equal(failures,0);

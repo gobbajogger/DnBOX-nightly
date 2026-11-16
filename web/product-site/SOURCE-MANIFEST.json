@@ -794,8 +794,8 @@
     },
     {
       "path": "remote/roll.mjs",
-      "bytes": 5321,
-      "sha256": "0f613f9c1f4fe046314474c0e19dce7a2603a52c20ce4457d01df69e7be401a4"
+      "bytes": 5558,
+      "sha256": "4cce712b49d80ee58639e0a07149ed45fbe5bbdde19ade72d6cd0aa244532a80"
     },
     {
       "path": "remote/sequence.mjs",

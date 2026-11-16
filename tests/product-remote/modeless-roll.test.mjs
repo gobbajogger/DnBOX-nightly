@@ -39,3 +39,17 @@ test('modeless draw uses upstream bounded duration with integer sample edges on 
   model.undo();assert.equal(model.notes.length,0);
  }
 });
+test('touch body jitter selects without moving or creating an undo item',()=>{
+ const {model,id,gesture}=setup();const before=model.notes,history=model.history.length;
+ const down={pointerId:44,clientX:100,clientY:100,pointerType:'touch'};
+ gesture.down(down,{mode:'auto',id,point:{sample:2000,note:60}});
+ gesture.move({...down,clientX:103,clientY:104},{sample:2500,note:61});gesture.up(down);
+ assert.deepEqual(model.notes,before);assert.equal(model.history.length,history);assert.ok(model.selection.has(id));
+});
+test('touch move crosses slop once and remains one cancellable transaction',()=>{
+ const {model,id,gesture}=setup();const before=model.notes,history=model.history.length;
+ const down={pointerId:45,clientX:100,clientY:100,pointerType:'touch'};
+ gesture.down(down,{mode:'auto',id,point:{sample:2000,note:60}});
+ gesture.move({...down,clientX:120},{sample:2500,note:61});assert.equal(model.notes[0].start,2500);
+ gesture.cancelPointer(down);assert.deepEqual(model.notes,before);assert.equal(model.history.length,history);
+});
