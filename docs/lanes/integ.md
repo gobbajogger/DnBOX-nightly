@@ -35,3 +35,6 @@ Apply supplied v2 prep, remove obsolete briefs with reasons, correct proven gate
 - Independent regression: firmware fail-fast/exact-model budget fixtures PASS 6/6; connector-base validation, ancestry and documented deletion fixtures PASS 12/12 across both gates. These are focused tests, not a full Local PASS.
 - Firmware baseline host sanitizer tests fail because LeakSanitizer cannot operate under ptrace; current cloud and elevated tiny probe reproduce. Mac mini is offline; cloud is the only connected environment. Keep FAIL and rerun in a compatible environment, never disable sanitizer to claim PASS.
 - Firmware build gate now fails immediately for either model and budget reads only exact-SHA, per-model logs/receipts in a fresh run directory. Missing actual metrics remain FAIL.
+
+## Follow-up gate corrections
+- Baseline build PASS, browser harness correction requires chromium_sandbox=True and removes explicit no-sandbox in common admission/visual launchers. AST regression PASS for both launchers and syntax checks PASS. Actual normal sandbox fails cloud socket permissions; Mac offline, no browser PASS claimed.
