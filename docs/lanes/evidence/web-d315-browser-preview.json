@@ -1,0 +1,45 @@
+{
+  "schema": "dnbox-web-existing-browser/1",
+  "sourceCommit": "d3154518ee51b3edf348ef1292f567da8f59b68d",
+  "sourceTree": "fb20ca63b2c98bb93a6db10b452ad50a85083b64",
+  "manifestSha256": "471d1b95f3dd850ded37cb7dd16050b7afa2e1231364547c440d3b42198f7278",
+  "verifiedBuiltFiles": 214,
+  "browser": "already-running native Chromium",
+  "serving": "ordinary loopback-only static server in same desktop environment",
+  "securityChanges": false,
+  "scope": "Independent actual-browser preview cleanup regression only, not full Local, W2, C3, audible output or release qualification",
+  "before": {
+    "commit": "485f2a666a427e56807ec4f2b03252eb968dce4d",
+    "finding": "Natural end retained empty disabled audio controls announcing Unable to play media."
+  },
+  "after": {
+    "reviewer": "test-and-merge",
+    "playbackObservation": {
+      "duration": 1.578231,
+      "paused": false,
+      "error": null,
+      "selectedCount": 0
+    },
+    "naturalEnd": {
+      "audioNodeCount": 0,
+      "selectedCount": 0,
+      "transport": "Play",
+      "pressed": false,
+      "falseMediaErrorAbsent": true
+    }
+  },
+  "viewport": {
+    "width": 1331,
+    "height": 894,
+    "requiredReviewViewportsQualified": false
+  },
+  "evidenceLimit": "Screenshots retained in independent reviewer browser tab; screenshot file not yet exported.",
+  "additionalReviewerRouteChecks": [
+    "Installer disclaimer visible; Pro to Elite changes model, install disabled without consent/connection.",
+    "Samples Add/Send/Backup/Restore disabled while disconnected.",
+    "Projects revision13 unavailable and renderer unavailable disclosures retained; writes/export disabled.",
+    "Presets original-format safeguards visible; editing/downloads disabled without a file."
+  ],
+  "deviceOrConsentActions": false,
+  "responsiveQualification": false
+}
