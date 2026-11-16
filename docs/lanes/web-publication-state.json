@@ -1,7 +1,7 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "ffaa7ba92b303c40c3a30c01c719d3dfacc56ae1",
+  "sourceHead": "abfe4546c0ddc3751dde8ad06fcb54682d9894ae",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
@@ -406,9 +406,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "a124cea810ff71ae5b3f7d1e519e50530c1e732a6db879b280c3218c9932c888",
+  "productManifestSha256": "dc71f5d8f927ee1c8506fb2ea55783777473f3ebc841273a0a714913519b07a2",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "5bd58acf49d38a8d2607d99f6fbcbf58a76e53c4",
-  "sourceNote": "Planning snapshot includes source-reviewed baseline mixer roles and broker deadline fixes; full gates and combined browser qualification remain open."
+  "remoteCompositionIncludes": "d3d3a54fefa609824b295d1ea6209d49f8edf0d7",
+  "sourceNote": "Planning snapshot includes source-tested drums resize correction; independent review and combined browser/full gates remain open."
 }
