@@ -98,3 +98,7 @@ check('modeless Delete removes the focused note and Undo restores it',()=>{
  assert.ok(!$('roll-grid').innerHTML.includes(`data-note="${id}"`));
  $('undo').onclick();assert.ok($('roll-grid').innerHTML.includes(`data-note="${id}"`));
 });assert.equal(failures,0);
+
+await $('connect').handlers.click({preventDefault(){}});
+assert.match($('conn-state').textContent,/Apply stays off/);assert.equal($('apply').disabled,true);
+console.log('PASS actual page Connect fails closed without admitted simulator catalog');

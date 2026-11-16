@@ -19,8 +19,8 @@ Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92
 | R7 | Structural Chromium fixtures | FAIL | Exact-head run pending. |
 
 ## Now / next
-- Now: recover exact consolidated source; investigate firmware-link failures and modeless gesture risks.
-- Next: reuse verified source from existing Remote work, port missing behavior, add focused regressions and request independent checks.
+- Now: finish modeless touch and per-step lanes; consume source-derived engine descriptors only after live engine admission.
+- Next: independent exact-source review of 9d16027; fix findings, finish remaining FunkyBeats components and normal permitted browser qualification.
 
 ## Blockers and routes
 - No shell GitHub authentication: use GitHub connector, each write under 700 KB.
@@ -46,3 +46,6 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Browser fixture correction: replace nonexistent Chrome default and forbidden --no-sandbox with configurable system Chromium and chromium_sandbox=True. Browser remains FAIL: local launch fails socket() EPERM; retried workspace HOME/TMPDIR, shorter /tmp HOME, and escalated test launch, same result. Mac environment offline, cloud connected; next route is managed cloud browser/native test runner, not disabling sandbox. Independent common harness fixes owned by integ. Workspace regression suite 84/84 PASS on current source composition.
 - R2 partial: recovered real FunkyBeats SequencerState (verbatim verified against upstream app Git blob f31a9a5b4fa10bfcf4ee634360f1d9320ef3a4d7), DOM sequencer builder, duration/velocity primitives and full MIT notice. Remote drum page now consumes that builder with typed 909/808 events and modeless step toggles; 176 cells per kit, escaping and source state undo tests PASS. R2 remains FAIL: roll/mixer/launcher/synth complete port and visual validation pending. Focused Remote50/50, workspace84/84 and actual-app regression PASS; no browser PASS.
 - R3 partial: removed legacy mode buttons and force modeless pointer routing even after importing old draft context. Recovered bounded viewport wheel/pinch pan+zoom with sample anchoring, second-pointer edit cancellation, and keyboard Delete/Undo. Remote55/55 focused tests plus actual-app Delete/Undo regression PASS. Normal-sandbox browser remains unavailable due host socket denial; no alternative security bypass attempted. Touch delete and full rendered gesture review remain unchecked.
+
+- Repeated browser EPERM occurred independently in Remote and Web; both schedules now carry prevention. Shared record: [browser-environment.md](browser-environment.md). No further denied-boundary retries.
+- R6 wiring gap: baseline app never mounted its tested firmware-link module. Entry now mounts fail-closed with only explicit testOnly simulator admission; absent/non-test bundles cannot request MIDI. Actual-page source-event Connect test PASS; browser/device admission remains FAIL.

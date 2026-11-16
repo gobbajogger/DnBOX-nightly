@@ -1,3 +1,4 @@
+import{mountFirmwareLink}from'./firmware-link.mjs';
 import{bindViewportGestures}from'./viewport.mjs';
 import{renderFunkyBeatsDrums}from'./funkybeats-view.mjs';
 import{verticalGrid}from'./grid.mjs';
@@ -142,3 +143,8 @@ bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:dra
 // Fit the pattern once layout has settled, and again when the screen turns.
 if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>{fitted=false;if(view==='roll')paintNotes();});
 if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{fitted=false;if(view==='roll')paintNotes();});
+
+// Explicit simulator admission only. Native endpoint/catalog admission is not yet qualified.
+const simulatorBundle=globalThis.__DNBOX_FIRMWARE_BUNDLE?.admission?.testOnly===true?globalThis.__DNBOX_FIRMWARE_BUNDLE:null;
+if(simulatorBundle){for(const id of['firmware-safety','firmware-controls'])if($(id))$(id).hidden=false;}
+mountFirmwareLink({bundle:simulatorBundle});
