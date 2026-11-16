@@ -76,6 +76,9 @@ class Server(BaseHTTPRequestHandler):
 srv=ThreadingHTTPServer(('127.0.0.1',0),Server);threading.Thread(target=srv.serve_forever,daemon=True).start()
 INIT='''window.pending=[];window.fetch=(url,opts)=>new Promise((resolve,reject)=>pending.push({url,opts,resolve,reject}));'''
 checks=0; failures=[]
+async def accept_confirm(p):
+    # Install now asks with the in-page write confirmation. window.confirm is not the gate.
+    await p.locator('#inconfirmok').click()
 def check(ok,label):
     global checks
     checks+=1
@@ -239,7 +242,7 @@ async def main():
    print(json.dumps({'checks':checks,'failed':len(failures),'failures':failures,'scope':'actual generated local File handlers; synthetic size/read fixtures, no giant allocation or hardware'}),flush=True)
    await browser.close();srv.shutdown();raise SystemExit(1 if failures else 0)
   if args.race_only:
-   p,e=await ready(browser);await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await p.wait_for_function('permissions===1')
+   p,e=await ready(browser);await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await accept_confirm(p);await p.wait_for_function('permissions===1')
    await p.evaluate("$('stockgo').dispatchEvent(new MouseEvent('click'))")
    check(await p.evaluate('permissions===1 && qa.state().writing'),'pre-MIDI lock rejects second path')
    await p.evaluate('midiResolvers.forEach(r=>r())');await p.wait_for_timeout(50)
@@ -373,7 +376,7 @@ async def main():
    check(boundary['buffers']==0 and (boundary['cancelled']>0 and boundary['pulls']<5 if mode=='oversized-stream' else True),'bounded resource behavior '+mode+' '+json.dumps(boundary))
    await p.close()
   p,e=await fresh(browser)
-  await p.evaluate("window.cancelledStream=0;pending.shift().resolve(new Response(new ReadableStream({start(c){window.streamChunk=()=>c.enqueue(new Uint8Array([1]));},cancel(){cancelledStream++;}})))")
+  await p.evaluate("window.cancelledStream=0;window.streamEnqueueError='';pending.shift().resolve(new Response(new ReadableStream({start(c){window.streamChunk=()=>{try{c.enqueue(new Uint8Array([1]));}catch(err){window.streamEnqueueError=String(err);}};},cancel(){cancelledStream++;}})))")
   await p.wait_for_timeout(25);await p.evaluate("()=>{qa.select('elite');}");await reply(p,'elite')
   st=await state(p);await p.evaluate('streamChunk()');await p.wait_for_timeout(25)
   check(await p.evaluate('cancelledStream===1') and (await state(p))==st,'stale in-flight stream cancelled without replacing current model')
@@ -382,7 +385,7 @@ async def main():
   for outcome in ['grant','deny','selection-change','revoked','interrupt','lookup-change']:
    p,e=await ready(browser);await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();
    if outcome=='lookup-change':await p.evaluate('qa.holdLookup()')
-   await p.locator('#go').click()
+   await p.locator('#go').click();await accept_confirm(p)
    await p.wait_for_function('window.permissions===1')
    await p.evaluate("$('stockgo').dispatchEvent(new MouseEvent('click'));$('go').dispatchEvent(new MouseEvent('click'))")
    check(await p.evaluate('permissions===1 && qa.state().writing'),'single writer before MIDI '+outcome)
@@ -398,7 +401,7 @@ async def main():
     await p.evaluate('installFail()' if outcome=='interrupt' else 'installDone()');await p.wait_for_function('!qa.state().writing')
    check(not (await state(p))['writing'],'write lock released '+outcome)
    if outcome in ['deny','interrupt']:
-    await p.locator('#go').click()
+    await p.locator('#go').click();await accept_confirm(p)
     if outcome=='deny':
      await p.wait_for_function('permissions===2');await p.evaluate('midiGrant()')
     await p.wait_for_function('entries.length==='+str(1 if outcome=='deny' else 2))
@@ -409,30 +412,31 @@ async def main():
   p,e=await ready(browser);await p.evaluate('qa.installMocks()');await p.locator('#devagree').check()
   # The optional local-package UI is collapsed by default; open it as a user would.
   await p.locator('.stock-options > summary').click()
-  await p.locator('#stockgo').click();await p.evaluate("$('go').dispatchEvent(new MouseEvent('click'));$('stockgo').dispatchEvent(new MouseEvent('click'))")
+  await p.locator('#stockgo').click();await accept_confirm(p);await p.wait_for_function('permissions===1')
+  await p.evaluate("$('go').dispatchEvent(new MouseEvent('click'));$('stockgo').dispatchEvent(new MouseEvent('click'))")
   check(await p.evaluate('permissions===1 && qa.state().writing'),'stock-first locks both paths')
   await p.evaluate('midiGrant()');await p.wait_for_timeout(30)
   check(await p.evaluate("entries.length===1 && entries[0].product==='SMK-37 Pro_016' && entries[0].bytes[0]===99"),'stock target preserved')
   await p.evaluate('installDone()');await p.close()
   p,e=await ready(browser);await p.evaluate('qa.holdScan()');await p.wait_for_function("typeof scanRelease==='function'")
-  await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await p.wait_for_function('permissions===1')
+  await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await accept_confirm(p);await p.wait_for_function('permissions===1')
   await p.evaluate("scanRelease({id:{model:'SMK-37 Elite',text:'synthetic'},link:{close(){closedLinks++;}}})");await p.wait_for_timeout(25)
   check(await p.evaluate("closedLinks===1 && qa.state().product==='SMK-37 Pro_900' && qa.state().writing"),'stale scan cannot switch model during pending write')
   await p.evaluate('midiDeny()');await p.close()
   p,e=await ready(browser);await p.evaluate('qa.holdScanPermission()');await p.wait_for_function("typeof scanMidiGrant==='function'")
-  await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await p.wait_for_function('permissions===1')
+  await p.evaluate('qa.installMocks()');await p.locator('#devagree').check();await p.locator('#go').click();await accept_confirm(p);await p.wait_for_function('permissions===1')
   await p.evaluate('scanMidiGrant({})');await p.wait_for_timeout(25)
   check(await p.evaluate('lookups===0 && qa.state().writing'),'stale scan permission cannot start device lookup during write')
   await p.evaluate('midiDeny()');await p.close()
   # Controller rejection/retry and mutation during its actual async digest.
   for kind in ['missing','wrong','changed','insert-fail']:
    p,e=await ready(browser);await p.evaluate('qa.installMocks()');await p.locator('#devagree').check()
-   await p.evaluate({'missing':'ctl=null','wrong':'ctl=new Uint8Array([9])','changed':'qa.hashHold()','insert-fail':'qa.badController()'}[kind]);await p.locator('#go').click()
+   await p.evaluate({'missing':'ctl=null','wrong':'ctl=new Uint8Array([9])','changed':'qa.hashHold()','insert-fail':'qa.badController()'}[kind]);await p.locator('#go').click();await accept_confirm(p)
    if kind=='changed':
     await p.wait_for_function("typeof window.hashRelease === 'function'");await p.evaluate("qa.select('elite');hashRelease()")
    await p.wait_for_timeout(30);check(await p.evaluate('permissions===0'),'controller '+kind+' blocks MIDI')
    if kind not in ['changed','insert-fail']:
-    await p.evaluate('ctl=new Uint8Array([1,2,3])');await p.locator('#go').click();await p.wait_for_function('permissions===1');await p.evaluate('midiDeny()')
+    await p.evaluate('ctl=new Uint8Array([1,2,3])');await p.locator('#go').click();await accept_confirm(p);await p.wait_for_function('permissions===1');await p.evaluate('midiDeny()')
     check(True,'controller '+kind+' retry')
    await p.close()
   await browser.close()
