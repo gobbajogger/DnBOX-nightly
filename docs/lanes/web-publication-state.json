@@ -1,11 +1,11 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "651b127b926886b088c72916be97505e23cba557",
+  "sourceHead": "2e04ffb89a6cbb115fcac27569fd1d96454b6867",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "baseBlobCount": 561,
-  "productCount": 187,
+  "productCount": 203,
   "deletePaths": [],
   "retention": "Overlay built product blobs onto exact existing gh-pages tree, never replace base tree. Keep all non-product paths and package bytes unchanged.",
   "critical": [
@@ -36,6 +36,21 @@
     "assets/Barlow-OFL.txt",
     "assets/BarlowSemiCondensed-Bold.ttf",
     "assets/BarlowSemiCondensed-Medium.ttf",
+    "assets/starting-breaks/NOTICE.md",
+    "assets/starting-breaks/README.md",
+    "assets/starting-breaks/personal-br1-zone1.adpcm",
+    "assets/starting-breaks/personal-br1-zone1.wav",
+    "assets/starting-breaks/personal-br1-zone2.adpcm",
+    "assets/starting-breaks/personal-br1-zone2.wav",
+    "assets/starting-breaks/personal-br1-zone3.adpcm",
+    "assets/starting-breaks/personal-br1-zone3.wav",
+    "assets/starting-breaks/personal-br2-zone1.adpcm",
+    "assets/starting-breaks/personal-br2-zone1.wav",
+    "assets/starting-breaks/personal-br2-zone2.adpcm",
+    "assets/starting-breaks/personal-br2-zone2.wav",
+    "assets/starting-breaks/provenance.json",
+    "assets/starting-breaks/sample-contract.json",
+    "assets/starting-breaks/verify_assets.py",
     "builds/history-filter.mjs",
     "builds/history.mjs",
     "components/archive/store.mjs",
@@ -193,6 +208,7 @@
     "site-origin.mjs",
     "site-shell.mjs",
     "site.css",
+    "starting-break-preview.mjs",
     "starting-breaks/index.html",
     "tool-theme.css",
     "tools/index.html",
@@ -379,5 +395,7 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
+  "productManifestSha256": "a9498f6b081d878eb578c70dcc6004098527066ab40ffc774b59b2267e85ae64",
+  "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified."
 }

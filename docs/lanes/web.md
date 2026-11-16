@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: b7bf2c5e0576b95eb4546e60d0057df06b34ad0c   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 2e04ffb89a6cbb115fcac27569fd1d96454b6867   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -35,7 +35,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 3. Browser environment may not support normal sandbox; must run elsewhere rather than weaken it.
 
 ## Deletes
-None.
+- coordination/edge-case-hunt/EC-20261026-011.json — inherited authorized prep removal of superseded brief; retained in parent history.
+- docs/nightly-first-development-gate.md — inherited authorized prep removal of superseded gate instructions; retained in parent history.
 
 ## Conflicts noted (RULES 23)
 - Existing draft #133 uses feature/website-r22 while v2 asks lane/web-*; preserve the existing review/history and avoid duplicate PR, root directs authorized lane/web-v2 continuation PR, preserving #133 untouched.
@@ -60,3 +61,8 @@ C1–C6 and W1–W5 above. No lane completion or design approval claimed.
 - W5 read-only Pages inventory at gh-pages241196130538b5e6da7738f0c2ebbbdc57fce02e: product catalog and build-status Git blobs exactly match existing Pages;37 releases and18 same-origin package paths with expected tree sizes retained. Candidate overlay adds172 paths/changes7/keeps8 identical product paths, deletes none, and retains all non-product paths. No package bytes downloaded/requalified or branch changed. docs/lanes/web-publication-state.json explicitly BLOCKED_NOT_PUBLISHED.3/3 preservation guards reject the empty preview catalog and changed release claims; product49 Node+15 Python PASS.
 - Independent test-and-merge review of651b127 confirms precisely two prose substitutions and no control/attribute/script changes; R22 focused24/24 and route contract4/4 independently PASS, not screen approval.
 - Remote-only manifest185-row composition validated with0 byte/hash findings and handed back to Remote. Delegated future exact remote/** row repins to Remote owner, preserving all non-Remote rows and unqualified status; web retains whole-site combined manifest ownership.
+
+- Composed exact prep/assets6a9607e886aab06ce0b1813321629b67239057b5 with normal ancestry; resolved only web-lane template conflict by retaining current web record. New AGENTS/RULES/CHECKLISTS and normal-sandbox launchers retained. Local fetch initially encountered absent historical trees in materialized repo; depth-one exact tree plus hash-verified ancestor commit objects restored real merge-base9165adb9, no synthetic ancestry.
+- I5/Web preview wiring now uses admitted exact five WAV assets through module-relative public URLs, no private-audio request. Streaming is bounded to each contract size, credentials omitted, picker independently checks WAV/PCM hashes and rate before media creation. Preview works with empty selection in source tests; choices remain browser-only with no device writes. Browser media assertions added but NOT_RUN.
+- Builder audio boundary now admits only exact five contract IDs .wav/.adpcm when pinned contractdf61cfe0, size and SHA256 match; all other binaries remain rejected. Tests reject forged manifest bytes/IDs, changed/symlink/FIFO contracts, truncated/oversized streams, HTTP failures, and bit-flipped actual samples. All ten real assets build byte-identically.
+- Combined source build PASS203 files, focused asset/provider21/21 PASS, product57 Node+15 Python PASS. Whole Local/browser/independent visual review still FAIL. Exact assets are recovered encoded zones and deterministic previews, not recovered original pre-backup WAVs.

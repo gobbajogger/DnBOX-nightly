@@ -29,8 +29,8 @@
     },
     {
       "path": "SITE-R22-CHANGES.json",
-      "bytes": 85137,
-      "sha256": "e55fa7ac91f0118b6f293d4c3034e564ea77499915110c5d4a275344d6321704"
+      "bytes": 85320,
+      "sha256": "1d8a925fb3fe56507d8747b2e013b034a08668da594fa3190ab630ffbd47f436"
     },
     {
       "path": "SOURCE-TRACE.json",
@@ -91,6 +91,81 @@
       "path": "assets/firmware-ui/smc-pr168.svg",
       "bytes": 160691,
       "sha256": "df9c985974a91c205f7d7c8c37fe98abf9ebaea4580c19f117270a7a67108774"
+    },
+    {
+      "path": "assets/starting-breaks/NOTICE.md",
+      "bytes": 1163,
+      "sha256": "ae893dfce1c75542c51ee5d849b0540817504bde7436913bc495e7e4b328a757"
+    },
+    {
+      "path": "assets/starting-breaks/README.md",
+      "bytes": 476,
+      "sha256": "31b173fd6f5e2de3f51306edd7592fd23db26bd34d7e264274f45387285d2383"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone1.adpcm",
+      "bytes": 17400,
+      "sha256": "e31e12c634892f111cec79c039d1f03557e285d2150039e23e812d65fac57cb7"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone1.wav",
+      "bytes": 69644,
+      "sha256": "06ee634369363b5019453f66c9178f781e24371675636e47c66875bdf662187a"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone2.adpcm",
+      "bytes": 20894,
+      "sha256": "86e1b81443ae4855f5400c967dcd549adaf12d95820fbc02ecdbd37116ab9e65"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone2.wav",
+      "bytes": 83620,
+      "sha256": "b0f072a149e2dafe6c4bfe58ddb036c82a1beb04a7e96f397ee405248fabc514"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone3.adpcm",
+      "bytes": 21431,
+      "sha256": "4902fac640c81d9bdf7b80d690a881415687e6bb5ac2b128762c50bac78355ad"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone3.wav",
+      "bytes": 85768,
+      "sha256": "06d3cf354ce390e6656df07bee889ce8aff46c479a9edd2e3c752cdc6ea88845"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone1.adpcm",
+      "bytes": 23092,
+      "sha256": "fe7c05941ac762a48031139f0ada046bb43b39cc8a48d63ffa059c2e73447544"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone1.wav",
+      "bytes": 92412,
+      "sha256": "acb6d13f270ac562b0be0819b3e3f56b31d406281c841fe08c18284432804661"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone2.adpcm",
+      "bytes": 26457,
+      "sha256": "fa00ba42e238c900746e5e397eb0a46ec17b2b2cca1387822f44b8544a2f2a05"
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone2.wav",
+      "bytes": 105870,
+      "sha256": "3ea78e9a407e1c8e0b45e8979d2ba43efaabc2de8e82098c901fd69e90ad2cf1"
+    },
+    {
+      "path": "assets/starting-breaks/provenance.json",
+      "bytes": 7454,
+      "sha256": "7030582de5624bf6608050ec8643df081a798dfb657cbe99aced89958353f983"
+    },
+    {
+      "path": "assets/starting-breaks/sample-contract.json",
+      "bytes": 2702,
+      "sha256": "df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f"
+    },
+    {
+      "path": "assets/starting-breaks/verify_assets.py",
+      "bytes": 7525,
+      "sha256": "043fd5948bc98e6a2b80f046df15341ea1ab34bff8fa07299b2c5add11ed5ff4"
     },
     {
       "path": "breaks/index.html",
@@ -194,8 +269,8 @@
     },
     {
       "path": "install.mjs",
-      "bytes": 2442,
-      "sha256": "4f15fe53e82b067408e73afe59472143d5a01231b85cae8865cb3edcdbc538bc"
+      "bytes": 2546,
+      "sha256": "de6da6e8b6bb72ce5fadbd8b31ad11c9772c5d967fc356e9da98dc20462c99db"
     },
     {
       "path": "manual/img/fm1-keys.svg",
@@ -918,9 +993,14 @@
       "sha256": "e72e8527308a6cc6908742edb70da4011ca6f5449c44f4f305751726c4d60881"
     },
     {
+      "path": "starting-break-preview.mjs",
+      "bytes": 1826,
+      "sha256": "07cb2f6e06d661fc79f185818c10715c5f208e36decef16ef779230deec4fbb1"
+    },
+    {
       "path": "starting-breaks/index.html",
-      "bytes": 3754,
-      "sha256": "5227e41bce8fde0430c2f26f1c930a155b1ff41aa0a7b07873add7113484bf0f"
+      "bytes": 3740,
+      "sha256": "daf198e3e5319c94b2daef9226b5ae1c35b4edf6b561ee1e1397ff7b6cb10eb4"
     },
     {
       "path": "tool-theme.css",
@@ -981,7 +1061,8 @@
   },
   "previousSourceReview": "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY",
   "snapshotInputs": {
-    "website": "13c83e0a7e84e0a041bea9f3c44b4c1c79d603e5",
+    "website": "2e04ffb89a6cbb115fcac27569fd1d96454b6867",
+    "prepAndAssets": "6a9607e886aab06ce0b1813321629b67239057b5",
     "remoteProjection": "4c443839cad7b5fe50a88adc70e0acf90327062d"
   }
 }

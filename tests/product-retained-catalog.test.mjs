@@ -39,7 +39,7 @@ test('read-only publication inventory never claims a gate or performs deletion',
  assert.equal(plan.status,'BLOCKED_NOT_PUBLISHED');
  assert.deepEqual(plan.deletePaths,[]);
  assert.equal(plan.baseBlobCount,561);
- assert.equal(plan.productCount,187);
+ assert.equal(createHash('sha256').update(read('web/product-site/SOURCE-MANIFEST.json')).digest('hex'),plan.productManifestSha256);
  assert.equal(plan.productCount,JSON.parse(read('web/product-site/SOURCE-MANIFEST.json')).files.length);
  for(const path of [...plan.addedPaths,...plan.changedPaths])assert.doesNotMatch(path,/^(artifacts|firmware|packages)\//);
 });

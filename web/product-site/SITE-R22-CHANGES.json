@@ -534,7 +534,7 @@
     {
       "path": "starting-breaks/index.html",
       "beforeSHA256": "0e110504bc67f6ff2f0a394d9ddc837c55694d4d39c9cfa1c666c84e412a9ed8",
-      "afterSHA256": "5227e41bce8fde0430c2f26f1c930a155b1ff41aa0a7b07873add7113484bf0f",
+      "afterSHA256": "daf198e3e5319c94b2daef9226b5ae1c35b4edf6b561ee1e1397ff7b6cb10eb4",
       "changes": [
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
@@ -559,6 +559,10 @@
         {
           "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
           "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "Audio previews of this set are unavailable on the public website.",
+          "after": "Press Play to listen to a break before choosing it."
         }
       ]
     },

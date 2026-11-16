@@ -173,10 +173,14 @@ with sync_playwright()as p:
      check(page.locator('#go').is_disabled(),'returning to firmware does not enable write')
     if route=='starting-breaks/':
      check(page.locator('[data-action=play]').count()==5,'five starting breaks retained')
-     check(page.locator('[data-action=play]:disabled').count()==5,'private previews unavailable, not fake audio')
-     page.locator('[data-action=none]').click();check(page.locator('[data-asset]:checked').count()==0,'clear selection');check(all(t=='Preview unavailable' for t in page.locator('[data-action=play]').all_inner_texts()),'None never relabels unavailable audio as Play');state(page,'starting-breaks-none',size)
-     page.locator('[data-action=all]').click();check(page.locator('[data-asset]:checked').count()==5,'all selected');check(all(t=='Preview unavailable' for t in page.locator('[data-action=play]').all_inner_texts()),'All preserves unavailable preview labels');state(page,'starting-breaks-all',size)
-     page.locator('[data-asset]').first.uncheck();check(page.locator('[data-asset]:checked').count()==4 and all(t=='Preview unavailable' for t in page.locator('[data-action=play]').all_inner_texts()),'individual selection preserves unavailable audio state');state(page,'starting-breaks-individual',size)
+     check(page.locator('[data-action=play]:enabled').count()==5,'five contract-pinned public previews available')
+     page.locator('[data-action=none]').click();check(page.locator('[data-asset]:checked').count()==0,'clear selection')
+     page.locator('[data-action=play]').first.click();page.wait_for_function("document.querySelector('[data-audio-status]').textContent.startsWith('Playing ')")
+     check(page.locator('[data-asset]:checked').count()==0,'preview before choosing does not select a break')
+     check(page.locator('[data-audio] audio').evaluate('(a)=>a.src.startsWith("blob:")&&a.playbackRate===1'),'verified preview uses original-speed local blob; not audible-output proof')
+     page.locator('[data-action=none]').click();state(page,'starting-breaks-none',size)
+     page.locator('[data-action=all]').click();check(page.locator('[data-asset]:checked').count()==5,'all selected');check(page.locator('[data-action=play]:enabled').count()==5,'All preserves independent preview actions');state(page,'starting-breaks-all',size)
+     page.locator('[data-asset]').first.uncheck();check(page.locator('[data-asset]:checked').count()==4 and page.locator('[data-action=play]:enabled').count()==5,'individual selection does not disable preview');state(page,'starting-breaks-individual',size)
      page.locator('[data-model=Elite]').click();check(page.locator('[data-model=Elite]').get_attribute('aria-pressed')=='true','model selected state')
     if route=='builds/':
      check(page.locator('#history-prev-bottom').is_disabled(),'bottom history pager starts at first page')
