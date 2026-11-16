@@ -50,7 +50,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 .overflow-list{position:absolute;right:0;top:calc(100% + 8px);z-index:10;display:none;flex-direction:column;align-items:stretch;gap:8px;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);min-width:max-content}
 .overflow[open] .overflow-list{display:flex}
 .draft-open input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
-.tabs{display:flex;gap:var(--tab-gap);height:34px;margin-top:8px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+.tabs{display:flex;gap:var(--tab-gap);height:34px;margin-top:5px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:none;width:var(--tab-w);height:26px;padding:0;margin:0;background:none;border:0;border-bottom:1px solid transparent;border-radius:0;text-align:left;color:var(--muted);font-weight:700;font-size:16px;white-space:nowrap}
 .tab[aria-current]{color:var(--accent);border-bottom-color:var(--accent)}
@@ -244,7 +244,7 @@ dialog::backdrop{background:#000a}
  .roll-tools{visibility:hidden;overflow:hidden;height:0}
 }
 /* Narrow desktop / tablet */
-@media (min-width:601px) and (max-width:1100px) and (min-height:501px){
+@media (min-width:601px) and (max-width:999px) and (min-height:501px){
  :root{--tab-gap:24px;--tab-w:auto;--eng-gap:8px;--eng-w:auto}
  .brand{width:auto;margin-right:32px}
  .project-name{width:auto;margin-right:32px}

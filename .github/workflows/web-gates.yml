@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Website / Remote / emulator gates. A gh-pages deploy is allowed only for a SHA where
+# this workflow passed (npm test incl. test:visual, and npm run test:browser).
+name: web-gates
+on:
+  push:
+    branches: ['cursor/remote-parameter-lane-bdb9']
+  pull_request:
+    branches: ['wip/dnbox-complete-web-20261115']
+permissions:
+  contents: read
+jobs:
+  gates:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '24' }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - run: pip install numpy pillow playwright==1.65.2 && python -m playwright install --with-deps chromium
+      - name: npm test (includes test:visual)
+        run: npm test
+      - name: browser tests
+        run: npm run test:browser
+      - name: upload visual diffs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with: { name: visual-diffs, path: test-results/visual }
