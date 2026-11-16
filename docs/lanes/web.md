@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: db009d9a5181f2588bcde12b18689aa85b4c96c9   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 25ff1c25f05790a8d7f54a9eab515109b7f7749e   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -144,3 +144,6 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Coherent normal composition consumes Remote8a3e637ce7c3684a4f54fb4e2626adead24ad78a inspector correction through a333/d3d3 ancestry. Independent exact938-blob source review and actual-app click34/edit35/Undo34 regression PASS. Combined product86 Node+32 Python and workspace84+app scenarios PASS (web-inspector-* logs). Browser stays immutable c250 before-state until exact composed snapshot is served; actual after check and missing native captions remain open.
 
 - W2 inspection tests now exercise the exact shipped vendor parser/container producer with hash-verified synthetic v6 bytes through the actual panel/adapter: valid bundle is checked but export stays unavailable; CRC corruption fails closed. Targeted8/8 and full product88 Node+32 Python PASS. Earlier parser-double tests remain useful for races but are not represented as real parsing. No hardware, real-user file, browser chooser or MIDI renderer claim; runtime served to reviewer remains immutable8eb31.
+
+- Independent actual8eb31 browser inspector after-check PASS at reviewer tab1331x894: Tune caption/readout34, ArrowUp35/one draft change, Undo34 then disabled. This fixes the observed readout failure, not missing native captions or full Review. Receipt web-8eb31-inspector-browser.json. Ordinary native border resizing to390x844 clamps width500, yielding actual500x844; exact390 remains NOT_RUN, no DevTools/settings workaround.
+- Continued bounded own500x844 inspection: Setup/help and Samples render without document horizontal overflow (485 client/scroll width), mobile Menu reaches Samples, disconnected Add/Send/Backup/Restore remain disabled; no Connect, file chooser or device action. This narrower-than-desktop observation does not substitute for required390x844 or full responsive Review.
