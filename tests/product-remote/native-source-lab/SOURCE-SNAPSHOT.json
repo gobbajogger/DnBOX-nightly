@@ -43,5 +43,19 @@
   "native-cache-work/build-reference.py": "04def2afd6bbb98b2c83a776a34ae3e0f87d9cc8d8d41cc2a80f4235a70b143c",
   "native-cache-work/cache.test.mjs": "0048f88ff35e5d2854068e1f2c0da258be9ce8e39a3df6c3f9be573f9d4ec427",
   "native-cache-work/cache.mjs": "c531a2a9dedc9cb60d5a782b2105f6c3b874812562bff62aabd0c5fb4082f81a",
-  "native-cache-work/parity.mjs": "509a5e8e0b4430c6abe357cb84a4d65f443616eaa6c05455de57ab4daea1de50"
+  "native-cache-work/parity.mjs": "509a5e8e0b4430c6abe357cb84a4d65f443616eaa6c05455de57ab4daea1de50",
+  "native-font-work/README.md": "b1b50c159b8e3dec9d8df94725bccf61c587c11086f7f5af35fb31364b2ccac2",
+  "native-font-work/Barlow-OFL.txt": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+  "native-font-work/build-reference.py": "4f72b14f6b123f23573ffb3f94a35faa99ed37c1fc22b32940506a52ae7ecd3f",
+  "native-font-work/font.mjs": "5a0b35b9610922c2092a314efa98a2b0fee1870d575fed17b9dafbc4687fe3d5",
+  "native-font-work/check-regeneration.py": "b9f0af9fb1e19ea4d834d3525feb08f97381a55a10639cdf064058dc03f12d9d",
+  "native-font-work/font.test.mjs": "0a64e30f01e9639db39bff13eec056f9fb300719c5dd596e0fb8113b7265128f",
+  "native-font-work/export-data.py": "38b6eddee305c8a0624b606dd6a3a1a6ed5aee984f19e9745b374171965e4a03",
+  "native-font-work/felucca_font.h": "5d895596344a94798b95b86137805bdb685b2e0263f20d2824dea37dbf99e352",
+  "native-font-work/regeneration.json": "9ec6b2f7f3a17759a61d7f0d5e851433319e633fa7bc037ea6fd15a1963f0cf3",
+  "native-font-work/source-tree.json": "5fcbc2c94240dd414750d2461987d3997a2aa9d6bc0aac79d47b467518decb77",
+  "native-font-work/parity.mjs": "72a480b452fa6d9f1d079a8a7e2f7da5a9c5cd58dcd30ea4e4c274dc3fd2339e",
+  "native-font-work/gfx.c": "3efcbeafea44c2754cca3d43bf32aeec70ddc57f49e7344f2931cc165b909fab",
+  "native-font-work/fonts.json": "28170be3963cddffee53a502bdf61d6f26ce6bc915862c6053f2d6cc2d3e6f46",
+  "native-font-work/pins.json": "cf06152fe6f967d0cf9bde3ec260de17ab54516f7331e003dfa32f308213a4ea"
 }
