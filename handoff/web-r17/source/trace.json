@@ -1,0 +1,229 @@
+{
+  "schema": "dnbox-midi-trace/1",
+  "authority": {
+    "kind": "source-executed",
+    "source": "ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+    "projectSha256": "56c451e60cbde73663ec4204973d40131bcc3e99bcac8c48e98464830900b1b0",
+    "seed": 625341585
+  },
+  "sampleRate": 44100,
+  "endSample": 88200,
+  "tracks": [
+    {
+      "id": "drum909",
+      "name": "909"
+    },
+    {
+      "id": "drum808",
+      "name": "808"
+    },
+    {
+      "id": "chicago",
+      "name": "Chicago"
+    },
+    {
+      "id": "miami",
+      "name": "Miami"
+    },
+    {
+      "id": "breaks",
+      "name": "BREAK"
+    }
+  ],
+  "tempos": [
+    {
+      "sample": 0,
+      "microsecondsPerQuarter": 500000
+    }
+  ],
+  "timeSignatures": [],
+  "markers": [
+    {
+      "sample": 0,
+      "label": "Source fixture: patterns 1, 120 BPM, 2 seconds"
+    }
+  ],
+  "annotations": [],
+  "events": [
+    {
+      "sample": 0,
+      "order": 0,
+      "track": "drum909",
+      "type": "noteOn",
+      "channel": 9,
+      "note": 36,
+      "velocity": 88
+    },
+    {
+      "sample": 0,
+      "order": 1,
+      "track": "drum909",
+      "type": "noteOff",
+      "channel": 9,
+      "note": 36,
+      "velocity": 0
+    },
+    {
+      "sample": 0,
+      "order": 2,
+      "track": "chicago",
+      "type": "noteOn",
+      "channel": 1,
+      "note": 48,
+      "velocity": 93
+    },
+    {
+      "sample": 8268,
+      "order": 3,
+      "track": "chicago",
+      "type": "noteOff",
+      "channel": 1,
+      "note": 48,
+      "velocity": 0
+    },
+    {
+      "sample": 11025,
+      "order": 4,
+      "track": "drum808",
+      "type": "noteOn",
+      "channel": 10,
+      "note": 38,
+      "velocity": 88
+    },
+    {
+      "sample": 11025,
+      "order": 5,
+      "track": "drum808",
+      "type": "noteOff",
+      "channel": 10,
+      "note": 38,
+      "velocity": 0
+    },
+    {
+      "sample": 11025,
+      "order": 6,
+      "track": "miami",
+      "type": "noteOn",
+      "channel": 2,
+      "note": 60,
+      "velocity": 81
+    },
+    {
+      "sample": 13781,
+      "order": 7,
+      "track": "miami",
+      "type": "noteOff",
+      "channel": 2,
+      "note": 60,
+      "velocity": 0
+    },
+    {
+      "sample": 22050,
+      "order": 8,
+      "track": "drum909",
+      "type": "noteOn",
+      "channel": 9,
+      "note": 36,
+      "velocity": 88
+    },
+    {
+      "sample": 22050,
+      "order": 9,
+      "track": "drum909",
+      "type": "noteOff",
+      "channel": 9,
+      "note": 36,
+      "velocity": 0
+    },
+    {
+      "sample": 22050,
+      "order": 10,
+      "track": "chicago",
+      "type": "noteOn",
+      "channel": 1,
+      "note": 55,
+      "velocity": 117
+    },
+    {
+      "sample": 27562,
+      "order": 11,
+      "track": "chicago",
+      "type": "noteOn",
+      "channel": 1,
+      "note": 57,
+      "velocity": 100
+    },
+    {
+      "sample": 28444,
+      "order": 12,
+      "track": "chicago",
+      "type": "noteOff",
+      "channel": 1,
+      "note": 55,
+      "velocity": 0
+    },
+    {
+      "sample": 30318,
+      "order": 13,
+      "track": "chicago",
+      "type": "noteOff",
+      "channel": 1,
+      "note": 57,
+      "velocity": 0
+    },
+    {
+      "sample": 33075,
+      "order": 14,
+      "track": "drum808",
+      "type": "noteOn",
+      "channel": 10,
+      "note": 38,
+      "velocity": 88
+    },
+    {
+      "sample": 33075,
+      "order": 15,
+      "track": "drum808",
+      "type": "noteOff",
+      "channel": 10,
+      "note": 38,
+      "velocity": 0
+    },
+    {
+      "sample": 88200,
+      "order": 16,
+      "track": "drum909",
+      "type": "noteOn",
+      "channel": 9,
+      "note": 36,
+      "velocity": 88
+    },
+    {
+      "sample": 88200,
+      "order": 17,
+      "track": "drum909",
+      "type": "noteOff",
+      "channel": 9,
+      "note": 36,
+      "velocity": 0
+    },
+    {
+      "sample": 88200,
+      "order": 18,
+      "track": "chicago",
+      "type": "noteOn",
+      "channel": 1,
+      "note": 48,
+      "velocity": 93
+    },
+    {
+      "sample": 88200,
+      "order": 19,
+      "track": "chicago",
+      "type": "noteOff",
+      "channel": 1,
+      "note": 48,
+      "velocity": 0
+    }
+  ]
+}

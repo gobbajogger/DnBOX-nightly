@@ -1,0 +1,60 @@
+{
+  "schema": "dnbox-local-source-section-proof/1",
+  "sourceFreezeSHA256": "e90ecc69cd301664175086c6d498659bab76d1ea7c64d2423186e97b2ae8a058",
+  "basis": "actual matrix section title draw command at exact allocation top; same full ref including sourceBank; verified repeated captures agree",
+  "controls": 104,
+  "usedObservations": [
+    {
+      "path": "observed/000-CHICAGO-b0-p0-page.json",
+      "bytes": 37026,
+      "sha256": "4d8b9114c77ea20a93696f38d2d50f5660464683792bdb85b52bd53633072f3e"
+    },
+    {
+      "path": "observed/004-CHICAGO-b0-p4-page.json",
+      "bytes": 44845,
+      "sha256": "48b978b80bc451c02013d820ea7ae5ddc65f05043d6033f3f4a56ef70bb1d290"
+    },
+    {
+      "path": "observed/012-MIAMI-b0-p0-page.json",
+      "bytes": 39106,
+      "sha256": "5555198d4876281fb23d1dc2c13b3717e849388526e6db7a64d523a5f90ed661"
+    },
+    {
+      "path": "observed/016-MIAMI-b0-p4-page.json",
+      "bytes": 20204,
+      "sha256": "c2cdeac2e15b465f0ecfe60b1e828055a349cc1d728af47a344652aa84f29bbd"
+    },
+    {
+      "path": "observed/022-JUNO-b0-p0-page.json",
+      "bytes": 30782,
+      "sha256": "e917baa0345a11565887d6ce670476f436165a7d3572a7dce058ab026e99fbd7"
+    },
+    {
+      "path": "observed/031-CHICAGO-b1-p0-page.json",
+      "bytes": 37026,
+      "sha256": "81c56f46d16e7492fc9e70e54b1bcc7de226aeb5f6d797b45b0fbb3b4319fb02"
+    },
+    {
+      "path": "observed/035-CHICAGO-b1-p4-page.json",
+      "bytes": 44845,
+      "sha256": "b023c4d83a2d3deb17c5d557128388e8fa0c44dbdb7dd608fff79f5bbe265003"
+    },
+    {
+      "path": "observed/043-MIAMI-b1-p0-page.json",
+      "bytes": 39105,
+      "sha256": "558747b1ab92b36b6b329cb893b8bc3d2e5e1c4d2d938ac519c6e382099d3ca9"
+    },
+    {
+      "path": "observed/047-MIAMI-b1-p4-page.json",
+      "bytes": 20204,
+      "sha256": "a274e19f7717adc5e20ea7770d5ffd0858c2000f28437c6aadcdf81d8cc589c7"
+    },
+    {
+      "path": "observed/053-JUNO-b1-p0-page.json",
+      "bytes": 30783,
+      "sha256": "f4a4ffa50031c91d052f094fa3a20e28ff5befd85bea684739cb3eb66b20d3a8"
+    }
+  ],
+  "nativePointerContract": false,
+  "runtimeAdmitted": false
+}

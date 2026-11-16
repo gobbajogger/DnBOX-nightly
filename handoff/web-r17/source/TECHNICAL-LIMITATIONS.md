@@ -1,0 +1,7 @@
+# Technical source and qualification notes
+
+The interface uses one Example / Not connected state instead of repeating engineering prose beside controls. This documentation retains those distinctions. Captured source artwork is not live feedback for local raw drafts; original formatting/value-law admission has not been fabricated. Production native/device/project providers remain unavailable. Source glyphs, graphs, empty P1 rails and source values retain their captured identity. Current Juno is not future SuperJ; new SuperJ must reuse the approved Juno language under the firmware design owner.
+
+The local file format is version-specific and resets Undo/Redo on explicit replacement; Snap is a transient editor preference, not a native/project field. Draft files are not native project backups or MIDI exports. Discrete chance conditions remain selectors, not probability ordinals; continuous local percentages use the same aligned lane as velocity.
+
+Dedicated mobile landscape CSS is scoped to landscape, width<=1000 and height<=500. It preserves full-width roll/ruler/lane alignment, places part/tools/lane choice in a compact44px row, keeps original top actions reachable in one horizontal top bar, retains44px control targets and gives notes the remaining grid row rather than stacking a portrait inspector. Actual browser viewport/touch/navigation checks are NOT_RUN/held. Source structure and static844x390/932x430 design images cannot qualify real DOM, touch, native dialogs, BFCache, downloads or devices.

@@ -1,0 +1,19 @@
+{
+  "remote-workspace-r16/index.html": {
+    "sha256": "85e893c64e834d1e521f77d9094a47645b78382d61ecf822898e846d600aa224",
+    "header": "<header><strong>DnBOX <small>REMOTE</small></strong><span class=\"source\">Example \u00b7 Not connected</span><button id=\"undo\">Undo</button><button id=\"redo\">Redo</button><button id=\"review\">Review</button><button id=\"draft-save\">Download draft</button><label class=\"draft-open\">Open draft<input id=\"draft-file\" type=\"file\" accept=\".json,application/json\"></label><button disabled title=\"Not connected\">Apply to instrument</button></header>"
+  },
+  "repo-integration-v10/web/product-site/remote/index.html": {
+    "sha256": "fef4ee9750431491304f23a68305fe128b4cc75c6abcff446d0bb79742de8acb",
+    "header": "<header><a class=\"brand\" href=\"../\">DnBOX <small>REMOTE</small></a><span class=\"source\">Example \u00b7 Not connected</span><a class=\"connection-link\" href=\"device/\">Connection</a><button id=\"undo\">Undo</button><button id=\"redo\">Redo</button><button id=\"review\">Review</button><button id=\"draft-save\">Download draft</button><label class=\"draft-open\">Open draft<input id=\"draft-file\" type=\"file\" accept=\".json,application/json\"></label><button disabled title=\"Not connected\">Apply to instrument</button></header>"
+  },
+  "remote-workspace-r17/index.html": {
+    "sha256": "97ea289f4099f0549adc5ac17a3e4f91e82013e13760e528737d267165d9ba95",
+    "header": "<header><strong>DnBOX <small>REMOTE</small></strong><span class=\"source\">Local example \u00b7 Not connected</span><div class=\"primary-actions\"><button id=\"undo\">Undo</button><button id=\"redo\">Redo</button><button id=\"review\">Review</button></div><details id=\"workspace-file\"><summary>File</summary><div class=\"file-actions\"><button id=\"draft-save\">Download draft</button><label class=\"draft-open\">Open draft<input id=\"draft-file\" type=\"file\" accept=\".json,application/json\"></label><button id=\"apply-unavailable\" disabled title=\"Not connected\">Apply to instrument</button><p>No connected instrument, playback or native export. Opening restores only this exact source version and resets Undo/Redo. Snap is a transient editor preference, not a native/project field.</p></div></details></header>"
+  },
+  "R22-native-shared-header": {
+    "source": "whole-ui-preservation-r19/r22/semantic-source-v2/current-state-and-reference/home-01-16.svg",
+    "sha256": "e9813b4ca765d391ffbf6ba4c75ac9425be88c9e66cd9a0732fdc44ff1654686",
+    "order": "P -> transport -> tempo; battery/save/REC/cues according to exact R22 contract; source presentation not current local trace state"
+  }
+}

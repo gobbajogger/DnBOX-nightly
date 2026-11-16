@@ -1,0 +1,406 @@
+{
+  "status": "WIP_UNREVIEWED_STOPPED_SOURCE_ONLY",
+  "sourceBase": "22ac90332b5f6511387caaa791fc386bfc9c381d",
+  "sourceBaseTree": "990aa9e74add89e560242ecd2c4a9e21f27cb11c",
+  "contentEquivalentFrozenBaseline": "4d3d6d2fd742b72bc3128510dcfa694ae8989c2b4a43fe09cd5d32966f26df46",
+  "files": [
+    {
+      "path": "handoff/web-r17/source/DESIGN-R17.md",
+      "bytes": 2976,
+      "sha256": "daf333da4483f1e4d6310616d3c6a6dc9117869da511353c4a37cd89935bd5bc",
+      "gitSHA": "149ec1fe54d362c4623e996500423d30b8903800",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/FUNKYBEATS-MIT-NOTICE.md",
+      "bytes": 1092,
+      "sha256": "a75974a3a21cd30a01b57a035a9035cee4199e8d563a3c1c116bd107cfd062be",
+      "gitSHA": "e071c5a57757a70363f510d19a581254b4e86d5b",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/OWNER-CORRECTION-20261116.md",
+      "bytes": 3038,
+      "sha256": "d8df1198abd22f8beb0cc00ae7ac9408430d2300a89f04de1d8a68488bc9a25e",
+      "gitSHA": "dc8c5d854b8efad19ce7a71bcbf375bf1d7c2b70",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/PLAN-R17.md",
+      "bytes": 1144,
+      "sha256": "42b662113717b8ea817b30fd478356db431ffd2e4d13d0530c9ae675ec190a5f",
+      "gitSHA": "8acf45b475e4b12632bf76c36cdc300abc16ab8c",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/SOURCE-PINS.json",
+      "bytes": 4316,
+      "sha256": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4",
+      "gitSHA": "19465eaa37d3de1a0181c7d17fd294b7b4562211",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/SOURCE-SECTION-PROOF.json",
+      "bytes": 2109,
+      "sha256": "0a5a5de0c348bdf80754e033d12421a7e65666dbce2eaa13109a5d4062409bf8",
+      "gitSHA": "4dca376c975a4ce17b8cd79e4720eb7a2562bca5",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/TECHNICAL-LIMITATIONS.md",
+      "bytes": 1519,
+      "sha256": "32902337118dfd70bef1dff6775fb2c3c2f5632c6987669ec8ef17330fa2ee10",
+      "gitSHA": "cb06f954c25e593802d743bcd1d12a9febdd61fc",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/TOP-BAR-SOURCE-INTAKE.json",
+      "bytes": 2646,
+      "sha256": "aaa4473400b4b9d2e2a3c87b3dddf8dc55567fe9b9f0eb9142ff7318f33426a3",
+      "gitSHA": "6f9cabe0b373a9d462b756adfe4666abfa435f95",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-correction-regression.mjs",
+      "bytes": 8361,
+      "sha256": "757824748013199cc51cd29f9c35f5f640dac6bfd6b8ff5c927523dd2d07d73e",
+      "gitSHA": "d1bba9cdb450adc183d5397a1a750f3b80eca9c8",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-draft-regression.mjs",
+      "bytes": 7845,
+      "sha256": "065103d5929a7659de51e75145979374b6131d4ac456c51a80629dc0f0e90149",
+      "gitSHA": "42a9f4208dfe3f3009a3249d91503b3707b4b8bb",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-lane-regression.mjs",
+      "bytes": 7346,
+      "sha256": "5ba074af253b67c9d82cf63a688deb2d30bb2701f633979c1af4620f0c18f682",
+      "gitSHA": "b8dedd8b7715b900db9816f0fda9b662b0915caa",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-musical-regression.mjs",
+      "bytes": 6253,
+      "sha256": "4bf6bfc73e68d47a6f19ec97196fde03ecdd3bc1aa007fe56f30e80a8bd8b406",
+      "gitSHA": "17a24b210d2b18f28045d0c16d4a8e5c8d5d72b7",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-owner-lane-regression.mjs",
+      "bytes": 7177,
+      "sha256": "900ce8e33f87597973878ca509c2cec94259f7991c5c01d3f0e51beb043bfcac",
+      "gitSHA": "9e3fe94476ae375803bba5f4ce8994bad356adc8",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-regression.mjs",
+      "bytes": 15434,
+      "sha256": "5af5e2a7e8b13c6d535fef70824b298ca31e5cdd8673db232674674b7bb11107",
+      "gitSHA": "0ebc8e7040708daa68cc3f46cb11bc183fafb7c4",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app-sound-regression.mjs",
+      "bytes": 8222,
+      "sha256": "4f895be5ac1031cf4f918abadf4debb7ef9e3ef113a778195a4182c9965ed0e5",
+      "gitSHA": "9a9e3b01de957be69dc28d462eb3358355771023",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/app.mjs",
+      "bytes": 33327,
+      "sha256": "a2f8140d7e8761f60e75a04fadadc10d56fe986be4d8d3c393451cd03c6e815a",
+      "gitSHA": "e197f3634c7955b0a08559e37a4cd3c3bee72cd8",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/assets/Barlow-OFL.txt",
+      "bytes": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+      "gitSHA": "2f22ba6ca4dbc12145ae40b14c3368f387cba0e2",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/assets/BarlowSemiCondensed-Bold.ttf",
+      "bytes": 111772,
+      "sha256": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb",
+      "gitSHA": "ee04b09e31e98d2509354d7003797ec6540e796f",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/assets/BarlowSemiCondensed-Medium.ttf",
+      "bytes": 105560,
+      "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+      "gitSHA": "415429b64420872f198e76cbb1d309db5bfb1df4",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/catalog.json",
+      "bytes": 100463,
+      "sha256": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+      "gitSHA": "c42fcc65520d4469961b34ad63d2cc45036a61b9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/components.json",
+      "bytes": 1190626,
+      "sha256": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+      "gitSHA": "ece2cdfa0c7478588c5ae898d1a52a847a45cea9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/draft-file.mjs",
+      "bytes": 9251,
+      "sha256": "b5d85ed064ca5ae7dcf74330540d1e8d833fff20c6a8aec60fbc4a012427ac48",
+      "gitSHA": "a7be0f79ff047d941121e3de884d4fc093493f1b",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/draft-file.test.mjs",
+      "bytes": 9098,
+      "sha256": "b6322029cba52c10aa846a87981d48ea62cf9614c7015c56db69061b3d6729af",
+      "gitSHA": "eaf4358272087dde88a3f25c3da2eea56d728b3a",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/draft-identity.mjs",
+      "bytes": 839,
+      "sha256": "46b03d40fd30b8e08de33e234d24c67fcbda7af9c8ed662f9eacb3974b206753",
+      "gitSHA": "4c00a5b01a97f89e3e4d19893045197af2a9d4e3",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/draft-ui.mjs",
+      "bytes": 2692,
+      "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a",
+      "gitSHA": "c68e6e230bc9ebe98e123b2dd5b6137792fd3d1a",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/draft-ui.test.mjs",
+      "bytes": 5049,
+      "sha256": "542301d2f7d45a3f65ef26c521bf74ab233f61ae969a1baa9f0329a001b8214f",
+      "gitSHA": "35a84cd03f98354d335caecc0c82a6db30a84bc2",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/frame.mjs",
+      "bytes": 1584,
+      "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f",
+      "gitSHA": "3728d5b2c615865e8ed999acc814d164983da79f",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/frame.test.mjs",
+      "bytes": 2781,
+      "sha256": "cd0d4b788965dce86b2e0d85b5948690a475251f2af7fbc5196b12141809ace2",
+      "gitSHA": "72b8cc216462c042187b31c892b0819f3fd44bda",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/group-gestures.test.mjs",
+      "bytes": 3062,
+      "sha256": "6bf5475a76afc350a5e16135f4a5d21ce085511a9fdc825f8b60746d2a647ec1",
+      "gitSHA": "17c48d375f60b822ae50fea4178c5770aea9aa62",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/index.html",
+      "bytes": 3632,
+      "sha256": "d919555c30ac9e1cc202709acc1264bad0cd94534f634f75c9d5ea70bed7e6eb",
+      "gitSHA": "ac982b0c37044baf5e53955ae29307be4a4dab20",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/lane.mjs",
+      "bytes": 2915,
+      "sha256": "3a4de789099def0092aa13101f8fb3b890959f4ea22ee7fd45f5d70c4499de5a",
+      "gitSHA": "bc3393d9b216e15220816e2bd899a20e87ba74f9",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/lane.test.mjs",
+      "bytes": 2103,
+      "sha256": "ab02600bf0440ddf28ab6e2cc0a36ab909c8df214e0a747bd6cac3d2d0bff9c0",
+      "gitSHA": "0d9e656dafac15b4fb5d42aaf68552eda1ece86b",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/model.mjs",
+      "bytes": 5168,
+      "sha256": "f6773866a57f0bc23b96b6b94f42b0ebf782aa8bd7f5af186549ff5e65f8577c",
+      "gitSHA": "11673bb58a7841fd72955ab64d8eb1273342002c",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/model.test.mjs",
+      "bytes": 3718,
+      "sha256": "551b23fbd7388d45cb8f2adaad66a4b967189609624b2618450fb2d8f34dd151",
+      "gitSHA": "62f631a1d2abe376e740c100fddfc7686adf67b4",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/motion.mjs",
+      "bytes": 1438,
+      "sha256": "f65eedc0c106b2259b9a64c2c29d22d52fb963742138d207f46ba086551f3eab",
+      "gitSHA": "ace5517e08be878ff434f047612a062d1e6672a9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/motion.test.mjs",
+      "bytes": 1160,
+      "sha256": "6012cbd560214dd58e71bf5855b53604c0a63474fe008ce95df5cbdf5041b903",
+      "gitSHA": "064a148ae6b1834786597c955a2f233721e8379e",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/musical-time.mjs",
+      "bytes": 3655,
+      "sha256": "b3c831270d069f65ec1fe4afa967de09fcf270991085a0f00483d4ab90232a19",
+      "gitSHA": "4c82f534eac1fc0edbf6bd721e3774b7c15b0e31",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/musical-time.test.mjs",
+      "bytes": 2208,
+      "sha256": "380b35e9b2fb544ac8920a2960e60fe94d6cd92779c4e1ecaaf3cce0743b45ba",
+      "gitSHA": "3884ced09f4ee25f45d7ffaa043f1d6e8a75edf1",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/parameter.mjs",
+      "bytes": 3257,
+      "sha256": "e60e3c71f3024254b0a1b5e0fa12784d7e246397f7664d1b7a7a3726a94736d4",
+      "gitSHA": "b2cf7aaf9509af9ca16621a682c937021b84d6af",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/parameter.test.mjs",
+      "bytes": 3009,
+      "sha256": "db5e6e1b2f9d528581e6f3f8a3436361b6ac2f93f834916686f457c0a099a627",
+      "gitSHA": "c5f43a5bc30666e7032528a9370be8a3b1b352b6",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/roll.mjs",
+      "bytes": 4278,
+      "sha256": "24ede46cfa0bff7b68005cdf3f5efceb52e53c5cc4f7468e16b413c8dd92de66",
+      "gitSHA": "8bbe4b8488f6d8b64191a2003cce27c445d10f6d",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/roll.test.mjs",
+      "bytes": 3272,
+      "sha256": "c3fb3cdb858e84a34f9b7783f3ef4d7e40cf99716ea70d3330d62a79a3325d1d",
+      "gitSHA": "2c010dc73e3dc87a210065bbc98d5c8e988bbcc7",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/sequence.mjs",
+      "bytes": 5813,
+      "sha256": "7f03b4e9a8e0a72c3926511f5461fae963f52337cb8ba01e5c830ecaf8fb14a5",
+      "gitSHA": "c4ed501fbc785f0a36d726ee054880a96ea0c5e2",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/sequence.test.mjs",
+      "bytes": 3751,
+      "sha256": "9ffdeef294aab6c1f7a883aebcf91c400069a3fd9ddc1cc8f931a05a592f402d",
+      "gitSHA": "fce437a92f374ae7d95722d4ba12b590ee4c0cee",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/sound.mjs",
+      "bytes": 3782,
+      "sha256": "f3edc4e9660afbaf1a3b4f37b3ac636eebba7b69356223f225164b106d1868b8",
+      "gitSHA": "11ee2f6c0a385e3bb44e22ef72f8d35abff4929d",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/sound.test.mjs",
+      "bytes": 2522,
+      "sha256": "1a971e5bb548dac11b8c63102b6e871023f1132b4448c21a082d4924615a956b",
+      "gitSHA": "ebd2dd5973c9539c02283e9bce55bb6af103d8b8",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/source-context.test.mjs",
+      "bytes": 2232,
+      "sha256": "9b6b126f105965f23cb936087dd5db2471c40256f1115cbe5f38d937a853dab8",
+      "gitSHA": "bfb25e7f2c692ec963caa02cd6dceb8510c25308",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/source-sounds.json",
+      "bytes": 64780,
+      "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+      "gitSHA": "fcbd6cb6b45c5449be0ff2d3c350790c04966fe9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/style.css",
+      "bytes": 18771,
+      "sha256": "88f539dec8aceb4a7a80eaaa7703758cdcd76646757608ba9e0617442026ea80",
+      "gitSHA": "c2f13a9b457ebf43f7fe997ed5cbe955f3d701b7",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/test_closure.py",
+      "bytes": 2090,
+      "sha256": "50f59140bdc025acd8d11e309583f73147d29ed14f4b44722fec45c58d854f27",
+      "gitSHA": "0705fc3396ebd334c7ccd629f6e49778b2b52f4b",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/test_responsive_shell.py",
+      "bytes": 2608,
+      "sha256": "116d3eb15ea413626e71962438c879aef994c89e6287d009523cfac2bacae442",
+      "gitSHA": "e52dc98d2b8edafe660f5c0b1352fcbc4f4df798",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/timeline.mjs",
+      "bytes": 1055,
+      "sha256": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152",
+      "gitSHA": "9d617cd3bbcb50e67727710006979375f5705263",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/timeline.test.mjs",
+      "bytes": 1814,
+      "sha256": "9655a9b28269e238f613c4f70abcb87cb1516b27ca42978cb7de71de7237df15",
+      "gitSHA": "7252615304d3c964bb12bd1de0f93c851de43eca",
+      "inheritedByteIdentical": false
+    },
+    {
+      "path": "handoff/web-r17/source/trace.json",
+      "bytes": 4133,
+      "sha256": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55",
+      "gitSHA": "d2f9d01f784166fb1d03b8ce483991172454fcf9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/workspace.mjs",
+      "bytes": 1801,
+      "sha256": "52ec3e4258ba976e5dd021e91e59cfda3b74b890d1f418335f2b04525de7fb2e",
+      "gitSHA": "d1d2e1362144c5a13d5e53d935fdc0a2698604f9",
+      "inheritedByteIdentical": true
+    },
+    {
+      "path": "handoff/web-r17/source/workspace.test.mjs",
+      "bytes": 3744,
+      "sha256": "53285c75384985288b77c393b062db207fd014627df458c5bb9c0939839d2909",
+      "gitSHA": "5a3af7ed652f4214ff073edd09de449336f5012f",
+      "inheritedByteIdentical": false
+    }
+  ],
+  "notPublished": [
+    "all broad historical archive members",
+    "all visual/source proposal archives and images",
+    "private receipts/captures/unknown provenance or different-base material"
+  ],
+  "scope": "Current R17 runtime/tests/docs only, no integrated product or runtime acceptance"
+}
