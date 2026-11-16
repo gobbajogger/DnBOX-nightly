@@ -38,5 +38,10 @@
   "glyph-sweep-work/native/firmware/src/dsp/fastmath.h": "fbe052086010b17d8194b9cd3d61d3cb349cc1def3817ae9651a6683d7850b09",
   "glyph-sweep-work/native/firmware/src/app/ui_drum_voice.inc": "7386bab5b37ca6583ab8e956e7a0e867c166c7a0c64d0c8d43bcefc0fe00fdb3",
   "glyph-sweep-work/native/firmware/src/app/ui_glyph_renderer.h": "ebee44c751965bf29734fc98e8b984c7841c94b9b23ad73d77f1b28fd69a0b20",
-  "glyph-sweep-work/native/firmware/src/app/ui.c": "892773492da1ecd7d2084a0e6ea0ac1d0e9dfbe2d0c4482f9130d0fccb762101"
+  "glyph-sweep-work/native/firmware/src/app/ui.c": "892773492da1ecd7d2084a0e6ea0ac1d0e9dfbe2d0c4482f9130d0fccb762101",
+  "native-cache-work/README.md": "16e4dff32297477ce9d54f3032125901774169fd3b65aa3de66eef6890e53fa6",
+  "native-cache-work/build-reference.py": "04def2afd6bbb98b2c83a776a34ae3e0f87d9cc8d8d41cc2a80f4235a70b143c",
+  "native-cache-work/cache.test.mjs": "0048f88ff35e5d2854068e1f2c0da258be9ce8e39a3df6c3f9be573f9d4ec427",
+  "native-cache-work/cache.mjs": "c531a2a9dedc9cb60d5a782b2105f6c3b874812562bff62aabd0c5fb4082f81a",
+  "native-cache-work/parity.mjs": "509a5e8e0b4430c6abe357cb84a4d65f443616eaa6c05455de57ab4daea1de50"
 }

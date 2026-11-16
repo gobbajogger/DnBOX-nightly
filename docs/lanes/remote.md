@@ -124,3 +124,5 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Separate file-writing tool calls from checkout-scoped test commands; all file writes use verified absolute workspace paths.
 
 - Cadence correction: preceding Remote checkpoint25036cb3 was published at19:48UTC; this source-completion checkpoint exceeded the30-minute push interval while closing/reviewing the lab package. Keep a source-preservation checkpoint queued before that deadline rather than waiting for all independent candidates. No gate status was upgraded.
+
+- Source presentation cache now preserves actual native16-slot replacement, family/unsigned frame and clock semantics: independently replayed661events/10576slot snapshots plus2invalid/nonmutation tests. This is an unbound model, not browser RAF/lifecycle or live audio qualification. Current firmware2bfa value placement moves4px down; relevant glyph/ease/SI functions remain byte-identical to b341 per source comparison. Next: current-native supplementary projection with source-exact font/caption/value rendering; full R1–R7 remain FAIL.
