@@ -209,8 +209,8 @@
     },
     {
       "path": "components/break-panel/panel.mjs",
-      "bytes": 5316,
-      "sha256": "2a77d15b67e9c85cfb0cd3e2ceef09f754043d126fc40f15d2bfd2d8b45ecc84"
+      "bytes": 5322,
+      "sha256": "d67de007d5904c9122847ed7cbbf59035851ba964bc9bb784b94c13590f3d494"
     },
     {
       "path": "components/break-picker/picker.mjs",

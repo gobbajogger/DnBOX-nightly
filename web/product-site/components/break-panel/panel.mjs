@@ -10,7 +10,7 @@ export async function mountBreakPanel(root,options={}){
  const inputs=[...root.querySelectorAll('[data-asset]')],status=root.querySelector('[data-selection-status]'),capacity=root.querySelector('[data-capacity]'),audioStatus=root.querySelector('[data-audio-status]');
  const assetName=id=>assets.find(a=>a.id===id)?.name??'';
  const previewAvailable=options.previewAvailable!==false;
- const audition=previewAvailable?createAudition(picker,{...options,createAudio:options.createAudio??(()=>{const audio=root.ownerDocument.createElement('audio');audio.controls=true;root.querySelector('[data-audio]').replaceChildren(audio);return audio;}),onState:state=>{audioStatus.textContent=state.status==='loading'?'Loading '+assetName(state.id)+'…':state.status==='playing'?'Playing '+assetName(state.id):state.status==='error'?state.error:'';options.onAudioState?.(state);}}):{state:()=>({status:'unavailable'}),stop(){},destroy(){}};
+ const audition=previewAvailable?createAudition(picker,{...options,createAudio:options.createAudio??(()=>{const audio=root.ownerDocument.createElement('audio');audio.controls=true;root.querySelector('[data-audio]').replaceChildren(audio);return audio;}),onState:state=>{audioStatus.textContent=state.status==='loading'?'Loading '+assetName(state.id)+'…':state.status==='playing'?'Playing '+assetName(state.id):state.status==='error'?state.error:'';paintPlay(state);options.onAudioState?.(state);}}):{state:()=>({status:'unavailable'}),stop(){},destroy(){}};
  if(!previewAvailable){audioStatus.textContent='Audio previews are unavailable on this site.';for(const button of root.querySelectorAll('[data-action="play"]')){button.disabled=true;button.textContent='Preview unavailable';button.setAttribute('aria-label',`Preview unavailable: ${assetName(button.dataset.id)}`);}}
  let disposed=false;
  function sync(notify=true){
@@ -21,8 +21,7 @@ export async function mountBreakPanel(root,options={}){
   capacity.textContent=check.status==='insufficient-capacity'?`Insufficient capacity for this selection (${check.encodedPayloadBytes.toLocaleString()} sample bytes before package overhead).`:'';
   if(notify)options.onSelection?.(picker.summary());
  }
- const paintPlay=()=>{
-  const playing=audition.state();
+ function paintPlay(playing=audition.state()){
   const active=playing.status==='playing'?playing.id:null;
   for(const button of root.querySelectorAll('[data-action="play"]')){
    const on=active===button.dataset.id;
@@ -31,7 +30,7 @@ export async function mountBreakPanel(root,options={}){
    button.textContent=previewAvailable?(on?'Stop':'Play'):'Preview unavailable';
    button.setAttribute('aria-label',previewAvailable?`${on?'Stop':'Play'} ${assetName(button.dataset.id)}`:`Preview unavailable: ${assetName(button.dataset.id)}`);
   }
- };
+ }
  const listen=async id=>{
   if(disposed||!previewAvailable)return false;
   const playing=audition.state();
