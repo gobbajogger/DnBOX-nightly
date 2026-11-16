@@ -1,0 +1,81 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:remote
+> node --test tests/product-remote/*.test.mjs tests/product-remote/platform/*.test.mjs
+
+✔ vendored Wu/px_blend coverage buffers are identical to the reference (68.134138ms)
+✔ live glyphs use the reference painter for its four kinds (20.656432ms)
+✔ ease is the reference critically damped law; idle schedules no frame (17.966197ms)
+✔ reduced motion jumps instantly (11.600339ms)
+✔ exact C v2 wire/core with synthetic callbacks verifies float/scalar CAS and two original held owners (48.517491ms)
+✔ actual C inactive-control UNSUPPORTED stays one unavailable row without failing snapshot (17.697559ms)
+✔ lost C OPEN remains unconfirmed; explicit source tick separately proves expiry (15.873902ms)
+✔ actualC nativeprimitiveand affectedonly samples match Float32 exactly at65declaredphases and5rawstates (10.166149ms)
+✔ mapping retains128nativegainpairs, no rawfraction-as-gainratio or fullprogramclaim (12.578438ms)
+✔ Chicago WAVE renderer uses native affected-layer path at every raw value (126.94365ms)
+✔ port open is bounded and cancellation settles without stale readiness (2516.207137ms)
+✔ cancel while opening prevents late session; closes original ports (2523.196604ms)
+✔ session close precedes broker/port disposal and unconfirmed cleanup remains explicit (1.545663ms)
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (7.118771ms)
+✔ the C fixture handshake reads confirmed values and Apply is the only write (91.25609ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (35.517493ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (71.474493ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (1.598999ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (100.690384ms)
+✔ actual upstream launcher renders all five local rows without fake playback (8.962544ms)
+✔ port provenance pins the shipped MIT source bytes (2.021016ms)
+✔ registry: all 82 ids map to a renderer family (6.230759ms)
+✔ registry: every glyph changes shape with its value (no static icons) (163.012799ms)
+✔ drum voice glyphs react to level, hit pulse and decay (1.918313ms)
+✔ step lane label cycles all four parameters and no selected-note inspector is mounted (2.601461ms)
+✔ final per-step style uses thin value bars rather than mixer caps (0.906673ms)
+✔ late-open stale close must stay owned until it settles before same-port reconnect (14.493815ms)
+✔ modeless note body moves preserving duration rather than defaulting to end resize (12.24066ms)
+✔ explicit modeless handles still resize only the indicated endpoint (0.846236ms)
+✔ modeless draw uses upstream bounded duration with integer sample edges on fractional grids (1.300993ms)
+✔ touch body jitter selects without moving or creating an undo item (0.650013ms)
+✔ touch move crosses slop once and remains one cancellable transaction (0.985916ms)
+✔ no native admission means no permission request or fabricated controls (4.619636ms)
+✔ actual page uses typed descriptors and returned state; blur uses paired DNR2 aggregate owner CLOSE before port disposal (28.73464ms)
+✔ late permission result after final departure cannot attach listeners (1.013717ms)
+✔ cached return requires fresh manual connection and obtains new firmware epoch (5.004267ms)
+✔ same-name ports remain visibly distinct through stable source IDs (2.276794ms)
+✔ pending port open immediately locks the displayed pair and allows explicit cancel (6.282874ms)
+✔ DNR2 full incarnation and inactive-bank UNSUPPORTED survive one coherent snapshot (7.916293ms)
+✔ heartbeat and conflict do not acknowledge unseen revision for subsequent CAS (2.391998ms)
+✔ queued UP/CLOSE retain exact command/request until OK and never release ownership early (0.981607ms)
+✔ bounded queued cleanup remains unconfirmed instead of falsely reporting released (2.596061ms)
+✔ owning snapshots renew lease inline but readers do not (5.781478ms)
+✔ reply with matching low unit but different incarnation word is not correlated (0.945751ms)
+✔ aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts (1.229179ms)
+✔ exhaustive raw 0..127 -> display (2.494149ms)
+✔ display -> raw round trip for every d, extremes 0/127 (1.746443ms)
+✔ drag edits in display units, extremes send 0/127; marker from the same d (0.617987ms)
+✔ import keeps raw untouched (raw 3 stays 3, shows L48) (4.170864ms)
+✔ API availability is not firmware admission or proof of a Bluetooth port (2.23347ms)
+✔ no API on mobile gives an honest platform route, no made-up PWA fallback (0.441186ms)
+✔ secure context, explicit transport admission and user action are all separate (0.265047ms)
+✔ descriptor controls only, acknowledged values replace pending edits and held original owners survive capture loss (4.225239ms)
+✔ unsupported descriptor roles never fabricate a 37-key or pad layout (0.388207ms)
+✔ inactive-bank rows are unavailable rather than editable stale values (0.211302ms)
+✔ zoom keeps the sample under the pointer and clamps finite extent (3.257699ms)
+✔ pinch settles only on 1/2/4/8 units without a zoom tool (0.369389ms)
+✔ plain and shifted wheel pan, control wheel zooms around pointer (2.999234ms)
+✔ second pointer cancels note preview and remaining finger cannot edit (1.292536ms)
+✔ vertical pinch enlarges pitch rows without changing time width, anchoring vertical location (0.7632ms)
+✔ third pointer freezes navigation without throwing or reviving note edits (1.199414ms)
+✔ Chicago continuous source uses names without changing scalar endpoints (2.395295ms)
+✔ unsupported engines and invalid raw values do not invent wave mappings (0.435013ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5529.147279
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

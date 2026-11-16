@@ -4,7 +4,7 @@
 
 ## Inputs
 
-- Separate authoritative inventory: schema `dnbox-firmware-screen-inventory/1`, `productionSourceCommit`, `sourceInventoryGitBlob`, `coverageComplete: true`, `notRun: []`, and complete unique `screenIds`. The exact file SHA256 must be supplied independently from its source/review record. Matching two truncated capture inventories is not sufficient.
+- Separate authoritative inventory: schema `dnbox-firmware-screen-inventory/1`, `productionSourceCommit`, `sourceInventoryGitBlob`, `coverageComplete: true`, `notRun: []`, and complete unique `screenIds`. The exact file SHA256 must be supplied independently from its source/review record. Matching two truncated capture inventories is not sufficient. The source-inventory Git-blob field is syntax-checked here; the caller/reviewer must independently resolve it against the pinned firmware repository and verify derivation/completeness. A self-authored JSON claim is not provenance.
 - Native manifest: `productionSourceCommit`, `coverageComplete: true`, `notRun: []`, and nonempty `screens` records with unique `id`, relative PNG `path`, `width: 240`, `height: 240`, file `sha256`.
 - HTML manifest: the same fields and exact native screen IDs, plus `websiteSourceCommit` and `browserCapture: true`. These fields must describe an actual browser capture, never a copied native image or an inferred result.
 - Both exact commit pins must be supplied explicitly. Each PNG must match its recorded file digest; decoding uses those same in-memory hashed bytes, not a second path open. Paths may not escape the manifest directory or use symlinks; each image is bounded to 2 MiB and must decode to 240×240.

@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 68f4b7b718a45291c86d4548b996c5095e8353a4   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: f73a68b0d2f3ead524629de53b37489334675c2c   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -70,3 +70,6 @@ C1–C6 and W1–W5 above. No lane completion or design approval claimed.
 - W3 checker implemented in scripts/compare-firmware-html.py: exact firmware+website pins, complete matching inventories, genuine browser-capture metadata, bounded hash-verified240x240 PNGs and zero pixel tolerance.8 synthetic/unit tests PASS. Actual native4bacd2e7135-screen baseline remains incomplete; missing HTML receipt causes FAIL before any image comparison. Usage/evidence boundary in docs/lanes/web-firmware-html-comparison.md. No W3 or Review PASS claimed.
 
 - Independent W3 review found two checker gaps before integration: path reopen after hash and equally truncated self-declared inventories. Fixed decode to use the already-hashed BytesIO; now require separately pinned source-derived inventory bytes/SHA256, source Git blob and complete expected IDs. Path-replacement and matching-truncated-capture regressions added;10/10 synthetic/unit PASS. Final authoritative inventory remains missing, so W3 remains FAIL.
+
+- Combined stable Remote cac407222ab23b72e801293afcf32ed44c10d36b with webf73 and prep/assets6a using exact Git objects/normal ancestry. All Remote source retained; remote lane conflict kept owner record; only whole-site manifest regenerated209 files. Focused composition PASS: build209, product57 Node+25 Python, workspace84+app scenarios, Remote63, actual Lua5.4→pinned C host protocol. Logs/receipt in docs/lanes/evidence/web-remote-cac407-*. Browser/full Local remains FAIL/NOT_RUN.
+- W3 corrected checker independently replayed10/10 PASS. The separate inventory Git-blob pin is syntactically validated; authoritative provenance must still be verified externally against firmware Git, not self-authenticated by JSON.
