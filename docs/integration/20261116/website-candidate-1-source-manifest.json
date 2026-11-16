@@ -1,0 +1,1310 @@
+{
+  "baseCommit": "3f22e000ad17456318cde997067c7fd45dd7e3b3",
+  "baseBlobs": 900,
+  "baseTree": "6c155c71fa7c86ee1bf798edbdcc5912dd95e435",
+  "overlap": [
+    {
+      "path": "web/product-site/remote/aa-ease.mjs",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/chicago-wave-projection.mjs",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/glyph-live.mjs",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/glyph-render.mjs",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/pan.mjs",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/source-sounds.json",
+      "identical": true
+    },
+    {
+      "path": "web/product-site/remote/wave-display.mjs",
+      "identical": true
+    }
+  ],
+  "overlays": [
+    {
+      "path": "web/product-site/remote/FUNKYBEATS-MIT-NOTICE.md",
+      "source": "Remote-frozen69",
+      "sha": "e071c5a57757a70363f510d19a581254b4e86d5b",
+      "sha256": "a75974a3a21cd30a01b57a035a9035cee4199e8d563a3c1c116bd107cfd062be",
+      "bytes": 1092,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/SOURCE-PINS.json",
+      "source": "Remote-frozen69",
+      "sha": "db48f045184fbfd72aa7b71305268d0654af3a60",
+      "sha256": "a0084bd01f70e6adb19fc4e78a3e2b9e860524ff19014822c0cd29b264fa536d",
+      "bytes": 1225,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/WORKSPACE-SOURCE-PINS.json",
+      "source": "Remote-frozen69",
+      "sha": "19465eaa37d3de1a0181c7d17fd294b7b4562211",
+      "sha256": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4",
+      "bytes": 4316,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/aa-ease.mjs",
+      "source": "Website-frozen97",
+      "sha": "2cabe10b97dcabb03fe9249819657bac1d0464f5",
+      "sha256": "ddb876ffa437ed9ed21ee1f6f126471512dad250cfc437abaeda6f78dca05706",
+      "bytes": 9163,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/app.mjs",
+      "source": "Remote-frozen69",
+      "sha": "6e83fe7da319714d63af073609ed2337ef3082e9",
+      "sha256": "5837fac20a90854212f604fefa70cd2a228882a02f7276fb87a005166e0b6cb0",
+      "bytes": 51504,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/assets/Barlow-OFL.txt",
+      "source": "Remote-frozen69",
+      "sha": "2f22ba6ca4dbc12145ae40b14c3368f387cba0e2",
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+      "bytes": 4377,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/assets/BarlowSemiCondensed-Bold.ttf",
+      "source": "Remote-frozen69",
+      "sha": "ee04b09e31e98d2509354d7003797ec6540e796f",
+      "sha256": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb",
+      "bytes": 111772,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/assets/BarlowSemiCondensed-Medium.ttf",
+      "source": "Remote-frozen69",
+      "sha": "415429b64420872f198e76cbb1d309db5bfb1df4",
+      "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+      "bytes": 105560,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/bank-ui.mjs",
+      "source": "Remote-frozen69",
+      "sha": "0a7a305a65cca631988c9e54a0ef1114a67d75bc",
+      "sha256": "41da046f08e755c1726e8553c97bfeebec6be8dd297d1c9a5f7609981a9611c9",
+      "bytes": 1249,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/catalog.json",
+      "source": "Remote-frozen69",
+      "sha": "c42fcc65520d4469961b34ad63d2cc45036a61b9",
+      "sha256": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+      "bytes": 100463,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/catalog.mjs",
+      "source": "Remote-frozen69",
+      "sha": "983d75af8f18b4ff48fbf4c9b58a02e67fbe92a2",
+      "sha256": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "bytes": 209,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/chicago-wave-projection.mjs",
+      "source": "Website-frozen97",
+      "sha": "d617de497056f9bd1b921b22eb2a09eb5ffa4ae8",
+      "sha256": "0938e1e9549bc8e7e463115e6b79426c4ff4b8fad41a6f13d5366a475b7d4558",
+      "bytes": 4449,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/components.json",
+      "source": "Remote-frozen69",
+      "sha": "ece2cdfa0c7478588c5ae898d1a52a847a45cea9",
+      "sha256": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+      "bytes": 1190626,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/connection.mjs",
+      "source": "Remote-frozen69",
+      "sha": "362c07b0d519b6ad608ab58102a8783318c77aa5",
+      "sha256": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+      "bytes": 2696,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/control-grid.mjs",
+      "source": "Remote-frozen69",
+      "sha": "ce80a0a4fc424e4c39f90fcf7f0790517b7a3bbb",
+      "sha256": "6f87592446002eff21c05e865606ffafccd97633cdbe2a19e4c1b5eb0c5beb03",
+      "bytes": 616,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/device/app.mjs",
+      "source": "Remote-frozen69",
+      "sha": "f067e2b399ddfc3ba8a77f8e67b9ff355632de48",
+      "sha256": "e2b87b25b03a1340958154b593692f254f94201b9bfb1e7096199089d351d8ae",
+      "bytes": 152,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/catalog.mjs",
+      "source": "Remote-frozen69",
+      "sha": "983d75af8f18b4ff48fbf4c9b58a02e67fbe92a2",
+      "sha256": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "bytes": 209,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/connection.mjs",
+      "source": "Remote-frozen69",
+      "sha": "362c07b0d519b6ad608ab58102a8783318c77aa5",
+      "sha256": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+      "bytes": 2696,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/index.html",
+      "source": "Remote-frozen69",
+      "sha": "a562434c15e9f3a09ef1cb3d76b88d932b2a8aa2",
+      "sha256": "01969f586abd6ff903d163f4eb977d141e43484c91d67ff908265e20c032c601",
+      "bytes": 2171,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/page.mjs",
+      "source": "Remote-frozen69",
+      "sha": "2bb448c6f06d0edc79f02189e5a7e84ab1b5a752",
+      "sha256": "8ff67bf4d71dc2153aa91e25e66f7bf8e44da32497f8fdd599cb8c3d885b083b",
+      "bytes": 5527,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/session.mjs",
+      "source": "Remote-frozen69",
+      "sha": "eb8464a821bdba3e263ba16b781a2f033f20b61b",
+      "sha256": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+      "bytes": 6552,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/style.css",
+      "source": "Remote-frozen69",
+      "sha": "4e2aa505dd796771cb092f12995bfb65889efe34",
+      "sha256": "625520075159dce6f6b50ae9d88e8c3961999d47823e3f62223cecabee79d257",
+      "bytes": 1683,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/vendor/client.mjs",
+      "source": "Remote-frozen69",
+      "sha": "0e98cda49cf1ae5f03428f282b6405aae77169f3",
+      "sha256": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+      "bytes": 11188,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/vendor/codec.mjs",
+      "source": "Remote-frozen69",
+      "sha": "e5663eafcbe88a620f132ea12b028fbb2f266954",
+      "sha256": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+      "bytes": 3309,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/device/view.mjs",
+      "source": "Remote-frozen69",
+      "sha": "691ebcd9cea943b595acde862631abfa61a61529",
+      "sha256": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba",
+      "bytes": 3064,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/display-profile.json",
+      "source": "Remote-frozen69",
+      "sha": "d4ffd6bdb4ebc5ee0223bd532487f01f1ae50973",
+      "sha256": "7308bc077d1c357c024915380bab1dfcde2708f7b6454f905f3b6c78a88b2f12",
+      "bytes": 911142,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/display.mjs",
+      "source": "Remote-frozen69",
+      "sha": "69b28de91445ceaa6d3598ccb941e579cce08d10",
+      "sha256": "b8c8a4160c2312001379ed7c16b2c2e26ca1573abdfdff9739c5c45e27a06214",
+      "bytes": 3143,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/draft-file.mjs",
+      "source": "Remote-frozen69",
+      "sha": "94a17b925a9a441a3b7e9fd40ec028877128ea8f",
+      "sha256": "fb0a7b65f42c9b6441e92460fdc5528f853c66bd4bc45de58c4f081c427d0712",
+      "bytes": 9250,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/draft-identity.mjs",
+      "source": "Remote-frozen69",
+      "sha": "4c00a5b01a97f89e3e4d19893045197af2a9d4e3",
+      "sha256": "46b03d40fd30b8e08de33e234d24c67fcbda7af9c8ed662f9eacb3974b206753",
+      "bytes": 839,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/draft-ui.mjs",
+      "source": "Remote-frozen69",
+      "sha": "c68e6e230bc9ebe98e123b2dd5b6137792fd3d1a",
+      "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a",
+      "bytes": 2692,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/firmware-link.mjs",
+      "source": "Remote-frozen69",
+      "sha": "b20bdb1712f4dd8e585a091fe47dc1f197dda582",
+      "sha256": "590825006c26ab329d3f0a3f64d0c69f0c97cd4285cf992b027fbfb68078c59a",
+      "bytes": 6997,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/frame.mjs",
+      "source": "Remote-frozen69",
+      "sha": "3728d5b2c615865e8ed999acc814d164983da79f",
+      "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f",
+      "bytes": 1584,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/glyph-control.mjs",
+      "source": "Remote-frozen69",
+      "sha": "3086ce6e6d379a627c9b01f43c390b6cecfb013c",
+      "sha256": "68bb774799ab265f19f46f21cf0540c0641517e4a1479d9068014b507b081045",
+      "bytes": 2795,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/glyph-live.mjs",
+      "source": "Website-frozen97",
+      "sha": "1c3ad41e123507a9772ffeb39d76f2cb97cd41a8",
+      "sha256": "3d3bd1b4935c945d56ced25c985c79c15f8c0d6b0fae02ca3727d9e6d2234e14",
+      "bytes": 6549,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/glyph-registry.mjs",
+      "source": "Remote-frozen69",
+      "sha": "34205dcc61b990fbd43cba3a9a0c1cdc00725216",
+      "sha256": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+      "bytes": 71505,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/glyph-render.mjs",
+      "source": "Website-frozen97",
+      "sha": "68698821839aeba3f47755345fc1a6279d58a7bc",
+      "sha256": "9a5845620bea3a1ff1652973178445f569209e0f29b5377c82629d39b8b4361a",
+      "bytes": 21858,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/glyphs.mjs",
+      "source": "Remote-frozen69",
+      "sha": "e536240ab87be5f284b9a9a7785e77c70d7c8504",
+      "sha256": "8911331bd38e038bb2ff645a777b165a6122b8973d20b9cb812be97dafc2db00",
+      "bytes": 4754,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/grid.mjs",
+      "source": "Remote-frozen69",
+      "sha": "93aabd9c0118525cbe5d0c0a0427d04dbabca627",
+      "sha256": "b8490d77908c013365ba7c37d0d010f0b5bd9525f901b0f148d8dc8af1b7be3b",
+      "bytes": 850,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/identity/app.mjs",
+      "source": "Remote-frozen69",
+      "sha": "4297935e374743a9a6e44a34027c0c31af62f568",
+      "sha256": "9eba18e1d701402c1eac4a329fc7cdb5411b5093c0c1b53b8babd8481b8dcfee",
+      "bytes": 3339,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/identity/index.html",
+      "source": "Remote-frozen69",
+      "sha": "74149fd9dd7502b638f9f5b53303a4b2bbf86a99",
+      "sha256": "cea341a3fdff2b9461b368977b65e38586e5056a54ab89efefbc94866b91673e",
+      "bytes": 1133,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/identity/remote.mjs",
+      "source": "Remote-frozen69",
+      "sha": "550e079c6504dac61e6ca06e50ec3c0dee55b22a",
+      "sha256": "edc5331481e0d6047fbdfdbe4845f07b4b623b3a852ae11af01875e164934dab",
+      "bytes": 4547,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/index.html",
+      "source": "Remote-frozen69",
+      "sha": "7eba8be912ad759501bc1b6beca08c814512b6da",
+      "sha256": "b2126182f8ad1baf063f8da07f90045c9bb1c7593a562b4a77b6647608f66d80",
+      "bytes": 7545,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/lane-stroke.mjs",
+      "source": "Remote-frozen69",
+      "sha": "e6feae3baafaab666721f889478a1f4925d8fd7f",
+      "sha256": "9c53522b9f0557e22890b08621181109c56436f75dcb5a6011b548de3d72bfcc",
+      "bytes": 2033,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/lane.mjs",
+      "source": "Remote-frozen69",
+      "sha": "7991e6561ea028ccc53a77651cac4c111a11a824",
+      "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d",
+      "bytes": 2450,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/mixer.mjs",
+      "source": "Remote-frozen69",
+      "sha": "c669f4e5ebfc9c6285ee48d4341c0fb098a1a0ff",
+      "sha256": "25ac44c0b931b3cdb542efd3262e182c9362579abbfca94ca479dee4a5ddbbc9",
+      "bytes": 3598,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/model.mjs",
+      "source": "Remote-frozen69",
+      "sha": "11673bb58a7841fd72955ab64d8eb1273342002c",
+      "sha256": "f6773866a57f0bc23b96b6b94f42b0ebf782aa8bd7f5af186549ff5e65f8577c",
+      "bytes": 5168,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/motion.mjs",
+      "source": "Remote-frozen69",
+      "sha": "474c21cb61f5a0838c31202c5e641b5c7620234a",
+      "sha256": "e0a0621427d183f7e5cb90456234c5ece71af27b36c3c940c1e96f19f33db4f3",
+      "bytes": 1703,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/page.mjs",
+      "source": "Remote-frozen69",
+      "sha": "8f8beaa7755ecfed94290f2f20316d8d7d5a65ff",
+      "sha256": "19dc0169e109ce5e6b7619bca40f33001d4569ae1c0be7bfd320d9c72a1c4ac6",
+      "bytes": 5500,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/pan.mjs",
+      "source": "Website-frozen97",
+      "sha": "e608cd7e7ba78bd78871e43533580ef5ce32bbd7",
+      "sha256": "c07a75811fd0df011d5226963eda44b01acd28398018f85dcfb9c4ca78a536a6",
+      "bytes": 1564,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/parameter.mjs",
+      "source": "Remote-frozen69",
+      "sha": "21a12e52adfcfe58509f995bdfe48507e22e8935",
+      "sha256": "0cad6cffbc0f5ff58765eed37082303380045a9517dd9de02deb4c7d6d8b63d6",
+      "bytes": 3335,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/pitch-layout.mjs",
+      "source": "Remote-frozen69",
+      "sha": "662899d67e18793bd4dfb459b699acceb66e1bec",
+      "sha256": "f2c62b73a28653a835d96d2f155d284e33c749cbfcbc98ec014ea582ccfaf720",
+      "bytes": 885,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/presentation.mjs",
+      "source": "Remote-frozen69",
+      "sha": "340330f25f68377bb5336b984e21780dd6dd8bd0",
+      "sha256": "b2cb20be064c2b87866f59951aa3f77a85e1268168e7b84239c5fb4e4236a195",
+      "bytes": 2076,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/remote.mjs",
+      "source": "Remote-frozen69",
+      "sha": "550e079c6504dac61e6ca06e50ec3c0dee55b22a",
+      "sha256": "edc5331481e0d6047fbdfdbe4845f07b4b623b3a852ae11af01875e164934dab",
+      "bytes": 4547,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/roll.mjs",
+      "source": "Remote-frozen69",
+      "sha": "7a78251632b9f2c504c59c741dbffada3504b67d",
+      "sha256": "ad719a5aee13b31d564697d4a26091734f372c85a71be8522a490425081e1ae4",
+      "bytes": 7419,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/row-layout.mjs",
+      "source": "Remote-frozen69",
+      "sha": "d4e600a69b7d652252c7b61747b85762e3e80807",
+      "sha256": "fb26f3d311faee899c69bf1253857d022f5608c3af204ce48bde9a6b1dd96219",
+      "bytes": 453,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/sequence.mjs",
+      "source": "Remote-frozen69",
+      "sha": "07145f085fb3c32f2ddb5c012d3c06c977a8dafa",
+      "sha256": "63bcd62d88448aceaa2608fd83bb9ea43a958bf18ec2016fba4144eb899dce9f",
+      "bytes": 7426,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/session.mjs",
+      "source": "Remote-frozen69",
+      "sha": "14ff3198cd16ddb3e759024d91326b4b885ed05c",
+      "sha256": "7ccfbb84d1700a81dfd2c6a1ebbc433aefea6780177f33abefd5817a646ce521",
+      "bytes": 6205,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/sound.mjs",
+      "source": "Remote-frozen69",
+      "sha": "11ee2f6c0a385e3bb44e22ef72f8d35abff4929d",
+      "sha256": "f3edc4e9660afbaf1a3b4f37b3ac636eebba7b69356223f225164b106d1868b8",
+      "bytes": 3782,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/source-sounds.json",
+      "source": "Website-frozen97",
+      "sha": "fcbd6cb6b45c5449be0ff2d3c350790c04966fe9",
+      "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+      "bytes": 64780,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/style.css",
+      "source": "Remote-frozen69",
+      "sha": "0d72bb061a50694198fef91d7f6b530c9edeaf12",
+      "sha256": "642d2a29170b0e83962ed205c9bed0620c95124278e98dc51e29beb0e208260a",
+      "bytes": 38941,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/timeline.mjs",
+      "source": "Remote-frozen69",
+      "sha": "9d617cd3bbcb50e67727710006979375f5705263",
+      "sha256": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152",
+      "bytes": 1055,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/trace-cursor.mjs",
+      "source": "Remote-frozen69",
+      "sha": "88764b34ec3fbb6fb694de407f03e7e0579d5a15",
+      "sha256": "085418624c2c0831e37595b7594ce613597b8aff0df65ec7af818b4d08b6286e",
+      "bytes": 1346,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/trace.json",
+      "source": "Remote-frozen69",
+      "sha": "d2f9d01f784166fb1d03b8ce483991172454fcf9",
+      "sha256": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55",
+      "bytes": 4133,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/vendor/client.mjs",
+      "source": "Remote-frozen69",
+      "sha": "196dd16a2a2936f8fb0f9f6d041c56c5a6034c35",
+      "sha256": "0a9a11b4514fab1fdbb905f1385c1c5f54986acae924fd6de5f9f5ec71a3176c",
+      "bytes": 8742,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/vendor/codec.mjs",
+      "source": "Remote-frozen69",
+      "sha": "307605e7a5aafded10836f706d93cbbc2ec622fb",
+      "sha256": "c4836c6aff371cc21ae790b51804b9634d9118c2ef3d05da9d05b54388303d40",
+      "bytes": 2928,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/view.mjs",
+      "source": "Remote-frozen69",
+      "sha": "750447c1fe1c3b29f291c79f954c854e57a1d731",
+      "sha256": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9",
+      "bytes": 2773,
+      "changedFromPublic": false
+    },
+    {
+      "path": "web/product-site/remote/viewport.mjs",
+      "source": "Remote-frozen69",
+      "sha": "ce4d4b2b9762fbd6a43e4e4d3f968f4457207f37",
+      "sha256": "45366beaf1c72af64014014d06f41459ebc036e374d1e2098374708d735f0305",
+      "bytes": 3397,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/wave-display.mjs",
+      "source": "Website-frozen97",
+      "sha": "6c4bb09e12d2f9522ee4d49828aa42c4e32ce73f",
+      "sha256": "62bdd5faf403bba7759085620fb2f30d7a014040627aa6d75fb42268001bcbe4",
+      "bytes": 790,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/remote/workspace.mjs",
+      "source": "Remote-frozen69",
+      "sha": "91a8a6273b3c1165444e5673bf2cf7d9ba086034",
+      "sha256": "3526933303b0db8a4bc3f7abd8cc20ecd5c39bf5eb4fde04ce2c656f191d5652",
+      "bytes": 1824,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/fixtures/build-product-site-missing-guard-mutant.json",
+      "source": "Website-frozen97",
+      "sha": "ed71b34eb606c138cfe1c86b82d4f67f86d21311",
+      "sha256": "2537dcf5092256d1b0b6f35d1aa134c6b5fd3452550b7d568efdd7e565751cab",
+      "bytes": 976,
+      "changedFromPublic": false
+    },
+    {
+      "path": "tests/fixtures/build-product-site-missing-guard-mutant.mjs",
+      "source": "Website-frozen97",
+      "sha": "824d0ab98aeccd95f9827a2d989167b43f19e81b",
+      "sha256": "3eb31c54a0d75397dbc81d77d2c45349bce811b28699b9e4ad6954f118959eea",
+      "bytes": 3867,
+      "changedFromPublic": false
+    },
+    {
+      "path": "tests/product-entry-disclosure.py",
+      "source": "Website-frozen97",
+      "sha": "40f55cc123585dc3868007e4bbe6bf527ff3691d",
+      "sha256": "e4519ea6ad968ec36ed6f407a6802609a8b5f6085bd1037b23feacc1f31674ba",
+      "bytes": 1967,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-html-closure.py",
+      "source": "Website-frozen97",
+      "sha": "11b25c63c7677040a7817a21bff1064f26cd840e",
+      "sha256": "c88532439584ab6b410615a72fc2b03da2ab7987cf948922024856665f313016",
+      "bytes": 2254,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-presets/test-page.mjs",
+      "source": "Website-frozen97",
+      "sha": "c906d985fa2854343291ca224f342c8386564c1e",
+      "sha256": "f20e3b84fa26ec71b3391fd41732088d7c8a3f384a993e94da5a05fe1fbc9cf4",
+      "bytes": 5165,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-presets/test-retired-engine.mjs",
+      "source": "Website-frozen97",
+      "sha": "59f0b58cd3b08913335a577ce58541fbd97fdad0",
+      "sha256": "231f3c5e50a2d845a45218d03b6b07bf20fc128060d69e027b427c36fabb1aa8",
+      "bytes": 1268,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-r22-hihat.py",
+      "source": "Website-frozen97",
+      "sha": "f790bb753ecf40fcdc08632df14ae71e8078970b",
+      "sha256": "3dd2cd98084d66067c6e6426ad7044aa87cec72721352df742bf2fa6167a8068",
+      "bytes": 2016,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-animation-browser.py",
+      "source": "Website-frozen97",
+      "sha": "fa4e9c90079ade12f42dd1949bf9e7fa8d505dba",
+      "sha256": "2801de4f84a115c015c64beb1b2269aa2db991ad9140da7b111c4e98b8266c00",
+      "bytes": 9270,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-animation-metrics.mjs",
+      "source": "Website-frozen97",
+      "sha": "a0cb030eb7bb3e4c1862652e0ded1a391b92587c",
+      "sha256": "a1f077da51d8074abac517b4c8b50eee63f7233087e04b4cec2741000d6b9769",
+      "bytes": 1168,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-animation-metrics.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "af0663ddb207e1997aeed16e0c33002ae1d6aa6f",
+      "sha256": "f38fab6ba7348d3fb34e5091877ed1ac7f9ada4315f208fb322827446bed7cd8",
+      "bytes": 1098,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-browser.py",
+      "source": "Website-frozen97",
+      "sha": "dd744f4386944da20f8a81426a705f4b9b074c0c",
+      "sha256": "78b0924f606187078fc188885da3c7a5db2379efc9152d9150d7fce48b1eaaf8",
+      "bytes": 39331,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-build.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "0755092ddd8a237d96d75848ed997b6f1a34b2ab",
+      "sha256": "3cde4110f698b9bc2f6f44cf6a4273e156d63c86369c96f442d7d5d004c2c389",
+      "bytes": 9779,
+      "changedFromPublic": false
+    },
+    {
+      "path": "tests/product-site-engine-exposure.py",
+      "source": "Website-frozen97",
+      "sha": "5306000c0a67d930d411ea892fb904cde2fa9a92",
+      "sha256": "05aab31469e7263c4219ce5fc8cffe26e77cb8fdeddaec5d1760aafffddc256c",
+      "bytes": 2379,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-hygiene.mjs",
+      "source": "Website-frozen97",
+      "sha": "2a9f5d33587b593e8b69a6f75a4a5b251c47e358",
+      "sha256": "d09205aeedb157c8abdc58b885f900aa0ba5d1d21be4dd9993f2da57f7888a1d",
+      "bytes": 4318,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-hygiene.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "dbc86e316f9b688fd455a91dd7553a0fb891aec3",
+      "sha256": "ff75b89d76ecfb1ed1ed074f5b48f6b3eb82d52bdddbf7406b52215546d7cb26",
+      "bytes": 958,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-locked-port.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "86067b4f49ef3d59b80c9004e3e68cc679a3dea4",
+      "sha256": "7315e459385c37b7dfa506009f6fe50c5ecc915bd5aebc61e802e605a3b9b8b6",
+      "bytes": 3296,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-r22.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "f043ea644e557d01aad990e61b4b9b89c9b884d2",
+      "sha256": "9025cde16aab24c47b2904d374b5c8bebeb55265d46e0110a9455f768191945c",
+      "bytes": 12991,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/product-site-review-r4.test.mjs",
+      "source": "Website-frozen97",
+      "sha": "1256974340332dfbbb425c0b4ceb57503f761162",
+      "sha256": "47efad1d760088b4215b61d67d00a54069816e702193129c1c0c73e801cdbb6f",
+      "bytes": 7559,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-disabled-controls.html",
+      "source": "Website-frozen97",
+      "sha": "0ede3db20e59e0580c56dfe749ada5ac728a0154",
+      "sha256": "046000f32f52f85f68280f42ab25975aaa17aca8ab46f566b501bca559bb55e2",
+      "bytes": 22720,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-disabled-controls.json",
+      "source": "Website-frozen97",
+      "sha": "9e996ac194c97e7b93041e18ef840f35899f00c4",
+      "sha256": "c4aa1444e5ce982bfc511aa5b0e1648e39ccc5c3faf9d3ee5b9d904e63dbcab9",
+      "bytes": 683,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-browser.css",
+      "source": "Website-frozen97",
+      "sha": "1f329b2f34c11211249a385d4335784b33fd8932",
+      "sha256": "a470187c01c7c2cec77636b3f648b4bfecb85b6e17927f0fedf4a7f852347dd6",
+      "bytes": 37532,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-browser.html",
+      "source": "Website-frozen97",
+      "sha": "759510428686917320ac94c73266cb653b289483",
+      "sha256": "644076c109ed16f1d9ce6c7e7dda8067d32e2e6c02a0b23febc4a63c7e34f247",
+      "bytes": 93910,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-browser.mjs",
+      "source": "Website-frozen97",
+      "sha": "25a2b31fba481a7188fcb52b9860c2b6885fc744",
+      "sha256": "090ac8e274809ad01f0af5cd890971a70c9459d89f701921a36c7d3ce8a1af97",
+      "bytes": 3102,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-hero.mjs",
+      "source": "Website-frozen97",
+      "sha": "97f2b50278acfea75d86a8575338cd129de273fe",
+      "sha256": "3802bdbfdd8f85f4066263ee77d374f975c877fbe210c7cf0972a17cda9409e7",
+      "bytes": 3103,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-site.css",
+      "source": "Website-frozen97",
+      "sha": "b6671dfa34cea71f8e96cf55e5389b901286fc5c",
+      "sha256": "bd84a6faa41fe42f7feb7cf0a3704f44a864aeaa3b1840376c0e56d5ac592e4d",
+      "bytes": 37531,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port-tool-theme.css",
+      "source": "Website-frozen97",
+      "sha": "3b6b677e2133dccf14b8618d7bf3c4f5bdc9358d",
+      "sha256": "f86171da9008cd0add581526a6dd8ee5ba9cfcef2fc139ca42f576171b4a35d5",
+      "bytes": 12947,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-locked-port.json",
+      "source": "Website-frozen97",
+      "sha": "519874ed235ca738dc113f3d9f2745da8935e77f",
+      "sha256": "d22e3c7edf503823a839ca8fa255c0e12b2bbad30c20122807b22b3176a17655",
+      "bytes": 2140,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-static-hero.html",
+      "source": "Website-frozen97",
+      "sha": "89a64f5fa8b82e4894baad7676575910f8ec2b83",
+      "sha256": "787e1bf6d02aaac466c280476cad0e951105ea0cda6858679f78b63098682142",
+      "bytes": 105162,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-before-static-hero.json",
+      "source": "Website-frozen97",
+      "sha": "d41aacd0b5b46e2c1fd8661b20c5ccfd3bd2383f",
+      "sha256": "93739616e85012f6457c1f11c87c386830d31e40990b270fdd04bd86a73ed9bc",
+      "bytes": 645,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-archive-fit.html",
+      "source": "Website-frozen97",
+      "sha": "e89a10a553961242c695ed3b94bc018176d8ac28",
+      "sha256": "7a38b05c08ea38aa5f7003cabd09b7d657c3e8a485bbd2b452fe0d24e869f1c1",
+      "bytes": 36185,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-archive-fit.json",
+      "source": "Website-frozen97",
+      "sha": "007b6a4b23107206c819dfbea4b4658fac1d9162",
+      "sha256": "386ee2693d466fafd036b40e985e4cad12ae711cbfe1e5e1b9ae527ab37f1393",
+      "bytes": 648,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-archive-height.json",
+      "source": "Website-frozen97",
+      "sha": "0055b9f69aad6ddd33f6a6ea30dd6d7adbb261f6",
+      "sha256": "4f5a47495c53c7d761ba673648600282ce19c14d1bcf5ccfa5cd0949f2a918fd",
+      "bytes": 1449,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-defects.json",
+      "source": "Website-frozen97",
+      "sha": "2b001e476fff5c56af4c43664f5e0ca5a8e8e107",
+      "sha256": "01e8777cb47fa35247472a3051f5f8605e3373bc8cf994d50be0bbc700978158",
+      "bytes": 4872,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-emoji-play.html",
+      "source": "Website-frozen97",
+      "sha": "afc862c0ef77c152934b5f72ee62010b320e2798",
+      "sha256": "434b837c0bfd911b4075d90c47fcd62132b21c676957327c6dc43567cf2f8328",
+      "bytes": 87403,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-juno-preview.html",
+      "source": "Website-frozen97",
+      "sha": "ca74c878ad706ec6583867330055cbcb330a44e2",
+      "sha256": "8c51d149c7513eff78e457589810e8466648eea0aada552f295f3ef5fdc8cd74",
+      "bytes": 754,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-juno-preview.json",
+      "source": "Website-frozen97",
+      "sha": "10c026e912a7973fbb976485476dbfef4504f689",
+      "sha256": "b3c080c59ec384cf14244f533c401d87fcb39613db3d90acda7760204c560fe6",
+      "bytes": 553,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-legacy-column.html",
+      "source": "Website-frozen97",
+      "sha": "bc81a245bb49b139b950ad093213e604c94b2f3d",
+      "sha256": "019d05009affb657e7eaf51aea25b6183bdfaaecdfada12515a3a1aac09d5fd6",
+      "bytes": 53663,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-nav-hidden.html",
+      "source": "Website-frozen97",
+      "sha": "c27a824485bd86cf4b77a7a9c26bb4c4629890e3",
+      "sha256": "9e03e287146239826e464b679156d39f26e633c193009700db43de85f7a3eb31",
+      "bytes": 34900,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-project-task-nav.html",
+      "source": "Website-frozen97",
+      "sha": "45231a78164d632ef3d527b71705253ba4f609d9",
+      "sha256": "ef151f3a14a998c9cf40656790e2d0f9e12c9c9dcb09b46e1477118e3966859f",
+      "bytes": 49668,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-protocol-columns.html",
+      "source": "Website-frozen97",
+      "sha": "a11a5eb11755cb145a68fd106ab54cdbbc169689",
+      "sha256": "f5079c5b63505d27fd14762945befc6057a6ad09ef251583a4b21650883aa0b4",
+      "bytes": 38271,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-small-controls.html",
+      "source": "Website-frozen97",
+      "sha": "b6aa63f896d15a6e6cb95dfb1969030c8bb9e28b",
+      "sha256": "c6408b56acffdd5cafe97ed045144005f35006c5c28e80743fc42a806bb1c95b",
+      "bytes": 84805,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-tool-header.html",
+      "source": "Website-frozen97",
+      "sha": "d64e0f3bafb17d815625133f47145b1320041d9a",
+      "sha256": "b117a3ded494cf5082312887abdc635a79b98662e2a93ee05b0d4dcf214d623a",
+      "bytes": 50380,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-emoji-variation.html",
+      "source": "Website-frozen97",
+      "sha": "6bfb7384bf3805745bceb13ff0024740720f1d92",
+      "sha256": "23cfeb77a183cd5886b87cc52cbffa7acd6420d6a1c4fbf1502e7cf92216a022",
+      "bytes": 49086,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-fm1-notes.html",
+      "source": "Website-frozen97",
+      "sha": "89716f1500ea160f3971fb030e1920805f930944",
+      "sha256": "0cba42e4e12588d3996c28a7ae2b17a25aeaba8dca327366729473caa176eb94",
+      "bytes": 18374,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-header-height.json",
+      "source": "Website-frozen97",
+      "sha": "e29625228a35796f4b0139bb62bcd4ee573c4c26",
+      "sha256": "4efd2d325b46c5687e6fde24ecb445cee3905175d741ddda7494739288a713d6",
+      "bytes": 5395,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-preset-filename-copy.html",
+      "source": "Website-frozen97",
+      "sha": "9bd5837083d24a5f3bf61c41bee612ff230733e7",
+      "sha256": "0afb681253e6100646ec80f41d7a051c50ec07048ef1db5ccc2b91f61d5bf08d",
+      "bytes": 3468,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-project-schema-claim.html",
+      "source": "Website-frozen97",
+      "sha": "9e9d193eb58cf00cb59a997cfe68cfc0647d4edc",
+      "sha256": "050c5807f257a8cb982afa2f55b972c6362e4b136c47f70e0e700df1038615af",
+      "bytes": 14453,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-review-findings.json",
+      "source": "Website-frozen97",
+      "sha": "54283de414911f46d7dd9c29d6c358f5c715509a",
+      "sha256": "b2e82a005eee6ad63cf18faa95777262181e3a401dae4d5857d5636c28385763",
+      "bytes": 2500,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-unavailable-preview.mjs",
+      "source": "Website-frozen97",
+      "sha": "b6e2f98c01ee2b4f847316245504a12777990f0c",
+      "sha256": "d5b6791b4057caa20af1d603de92aba4195a8dd78e0142bc1d2a264f3892b858",
+      "bytes": 5165,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-r4-unqualified-midi-offer.mjs",
+      "source": "Website-frozen97",
+      "sha": "6a97e00e2823788cdbbf8c92f0cf34104c1b3770",
+      "sha256": "dee45550a751671b4a0b7dbde1ab4430accfcf488f133c96ff1c09d56631148d",
+      "bytes": 2202,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-retired-engine4.json",
+      "source": "Website-frozen97",
+      "sha": "9eebe1e9026297fbb7e98c40fef4db102590eae1",
+      "sha256": "a85e5ceccf1ba9c996b5b3281eb5128c95a8e56d10d8f8b0f3f296d70a81a55b",
+      "bytes": 508,
+      "changedFromPublic": true
+    },
+    {
+      "path": "tests/visual/fixtures/site-valid-project.json",
+      "source": "Website-frozen97",
+      "sha": "33a21cd7f455e16b8cd1803ff1fd0659e75cdcb0",
+      "sha256": "2874f6d6947d45a1f00955c400bfdd55fc98059c6e741a4b1f9804b05a7788eb",
+      "bytes": 50188,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/SITE-R22-CHANGES.json",
+      "source": "Website-frozen97",
+      "sha": "819962c652ae51ed0b0c7321e20691541847e677",
+      "sha256": "2884d2d5a72234df6db30ee73ea2fe6b2df4ee91e410773bfa7f71fb4d138e31",
+      "bytes": 84663,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/archive-frame.mjs",
+      "source": "Website-frozen97",
+      "sha": "a4659f8b0cbccbaa7c1e3b5894999d9b25eac5db",
+      "sha256": "d8e57654caee6fcc7305eacde9671f44d3ca0c5b757e6cea2b38e95d01139d91",
+      "bytes": 1556,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/breaks/index.html",
+      "source": "Website-frozen97",
+      "sha": "10c528c771eac5c868907cb7188d95ce2ff5e984",
+      "sha256": "27f891c1c3033bf8d9da898e8b9a689e7dd4deeb571f18a6450743be218aaa3e",
+      "bytes": 96993,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/builds/history-filter.mjs",
+      "source": "Website-frozen97",
+      "sha": "1eafa8eeb54b7315f8998a74a5dbe49dfa34a1cc",
+      "sha256": "494674e2000ee4683f35fe635d76f73733037cfa909eff2707d7c070d945ddf5",
+      "bytes": 1257,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/builds/history.mjs",
+      "source": "Website-frozen97",
+      "sha": "43ec746c514f54be2e7b73e386fc01fed1e22ca1",
+      "sha256": "d8f0fd4d08fce867de537631a5d22c9a87f8fbd25b71984fed0e42c10e174150",
+      "bytes": 2477,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/builds/index.html",
+      "source": "Website-frozen97",
+      "sha": "136f375111728d209f25edeb19b62a5669bf1a3a",
+      "sha256": "112f5eeedfe44103cf22fac749f9c924fd3f3f8f1602376e542615e88ba937af",
+      "bytes": 591248,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/components/break-panel/panel.mjs",
+      "source": "Website-frozen97",
+      "sha": "7bd48ff0321a0c5a4880e0a2d75ca380d46fcecd",
+      "sha256": "2a77d15b67e9c85cfb0cd3e2ceef09f754043d126fc40f15d2bfd2d8b45ecc84",
+      "bytes": 5316,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/help/index.html",
+      "source": "Website-frozen97",
+      "sha": "907f8ce93b84a2d722198d19586b069149be76d2",
+      "sha256": "57b8e97c30b5eeed6272efee0de5f5d1bb5d70ae7ec050293512c12bf4d4866c",
+      "bytes": 3957,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/hero.mjs",
+      "source": "Website-frozen97",
+      "sha": "39ab2739ae4df45b2c5d62db1f0fbc6fbefc1f6c",
+      "sha256": "c4e3748f446491bc54259d9182661233bd3e11fd3dedb8ff1e5570b336c69ad0",
+      "bytes": 4786,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/index.html",
+      "source": "Website-frozen97",
+      "sha": "55a1a7f8aa16f876db7e86b85b4671fa0592e2ed",
+      "sha256": "f25e4ce5a653333ed2f58fca602f46f9d073fd5783f2e18c5e6c6870d8a1b54d",
+      "bytes": 5431982,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/install.mjs",
+      "source": "Website-frozen97",
+      "sha": "9ddeb92fb3022430be06ba04fc0a90055db5e308",
+      "sha256": "4f15fe53e82b067408e73afe59472143d5a01231b85cae8865cb3edcdbc538bc",
+      "bytes": 2442,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/install/index.html",
+      "source": "Website-frozen97",
+      "sha": "35941d138d246259c5c52fbf746b8cac6d73c49b",
+      "sha256": "0f6368293913fe1cc0a07187219fe4f8a6df0c014705b9cf8ee1c0992cd6826d",
+      "bytes": 630437,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/manual/index.html",
+      "source": "Website-frozen97",
+      "sha": "62be1dceb224fcef7a216a9582ef32513e2efa5d",
+      "sha256": "eb7b0b25ad3678c6b0175a97ec3a273870eebbb72da9c9d09af56b9faf7568e2",
+      "bytes": 14515,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/manual/legacy.html",
+      "source": "Website-frozen97",
+      "sha": "d177ae38e4583d11caa5c3d87bcaaca1ce364e7f",
+      "sha256": "46f976cadec88ad151a92d93acdb4f26d25873e0855a46033544e491c4cd6a00",
+      "bytes": 65638,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/manual/original/index.html",
+      "source": "Website-frozen97",
+      "sha": "c1bf8e449c25889606fff7f1ddb931e7271f75b6",
+      "sha256": "0529cea3de509b6979e4fec843e72345926ffdb3d35a585b132922ee3c6f251b",
+      "bytes": 60647,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/manual/projects-guide.html",
+      "source": "Website-frozen97",
+      "sha": "0ae582887ae89424430986116f47e9a66bdbf7ab",
+      "sha256": "eac0d29fe10f70537ed3669a9068f57f8de747c535ef47483fc396bd2b8d6dd5",
+      "bytes": 17234,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/manual/protocol.html",
+      "source": "Website-frozen97",
+      "sha": "ffcd143cf3217e2c214a3cae63a293f5d9a07ba5",
+      "sha256": "13edfa68c710e3b3577202e93806cd163dd8a3b1cae7f089d27e156ec7db1a68",
+      "bytes": 6045,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/new/index.html",
+      "source": "Website-frozen97",
+      "sha": "81da9e04367801608de638b96529c7c4faed0557",
+      "sha256": "9583445f1bac7384c523c48a6ebd834626cbf9502d624fa1e78aba372197b602",
+      "bytes": 18605,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/app.mjs",
+      "source": "Website-frozen97",
+      "sha": "37eb8ef6eb439c8fefa5c79cf5123c2979d93543",
+      "sha256": "890bbf2bd33803658f9313faece759d87f7d2cbd97d9baa3e371ae4a9ca9f9aa",
+      "bytes": 11381,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/codec.mjs",
+      "source": "Website-frozen97",
+      "sha": "8fc9ceb5e27305aa3f1fc4a7d8b80810901507b2",
+      "sha256": "6fc04531b7ad12f7fa5ab110b609104f7f368e02802c46d235e801efecaf04cc",
+      "bytes": 11791,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/index.html",
+      "source": "Website-frozen97",
+      "sha": "ed00bbda1d7956b3bb2e2caba50ebb60da44044a",
+      "sha256": "aebe5888e2369423d2f0597d4cd6df2b31c42dc32de024a81a103422502ba235",
+      "bytes": 3485,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/legacy/app.mjs",
+      "source": "Website-frozen97",
+      "sha": "37eb8ef6eb439c8fefa5c79cf5123c2979d93543",
+      "sha256": "890bbf2bd33803658f9313faece759d87f7d2cbd97d9baa3e371ae4a9ca9f9aa",
+      "bytes": 11381,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/legacy/codec.mjs",
+      "source": "Website-frozen97",
+      "sha": "8fc9ceb5e27305aa3f1fc4a7d8b80810901507b2",
+      "sha256": "6fc04531b7ad12f7fa5ab110b609104f7f368e02802c46d235e801efecaf04cc",
+      "bytes": 11791,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/legacy/index.html",
+      "source": "Website-frozen97",
+      "sha": "d3bfbe3340d10fff6181cc6da50255476abbd462",
+      "sha256": "bc96dde4513f9f332edcdb536f397513dd3f2aa48b031e2562eff99f3ebc9223",
+      "bytes": 10825,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/presets/page.mjs",
+      "source": "Website-frozen97",
+      "sha": "19e7f16e817b5c841101c5e0658a721b65af81d9",
+      "sha256": "d5f71c16b76c7a677869a09d5e800d0994e255a3c6217d118c4a6a3c6d436c45",
+      "bytes": 3991,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/projects/exchange/panel.mjs",
+      "source": "Website-frozen97",
+      "sha": "a18d684f50988bb4c7e998d65f2df87580f3330e",
+      "sha256": "66145eb36d9ad7d63c6e4361dadc1d4113b74d3e188b09132332a5cc157b1756",
+      "bytes": 2239,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/projects/index.html",
+      "source": "Website-frozen97",
+      "sha": "a3a4256dcdad13325642c028f88f05c14990d820",
+      "sha256": "4ad1a3e74590b6805f4a8c9930fb7cd11d40b3d739f8de5c8e4d9546893ddeaf",
+      "bytes": 119393,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/r22-tokens.css",
+      "source": "Website-frozen97",
+      "sha": "89d7c6c124b4656525038809f0eaf3d75b6563c5",
+      "sha256": "d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10",
+      "bytes": 942,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/reference/current-ui-source.html",
+      "source": "Website-frozen97",
+      "sha": "9caa469ced5559441677671d3594707fe0d51ab7",
+      "sha256": "ab53d6b81e1cf58e7fc4c496b99a68ccefdfd4bbd01b8338fa32fefe078e6399",
+      "bytes": 5371231,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/reference/current-ui.html",
+      "source": "Website-frozen97",
+      "sha": "e8d357143b03643f3c39b54ef961d16dfdd52738",
+      "sha256": "88c40bf93cbd96e8b3d58679992c3e3b32a131796490624be762974302f01622",
+      "bytes": 2221,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/reference/index.html",
+      "source": "Website-frozen97",
+      "sha": "cb8a660656f1e95af64681d4c2c2732f2a074b9e",
+      "sha256": "864e1fafd8f10dc22a120d99ed546d925f020d252b19de1d78ef07f2a81ec816",
+      "bytes": 2125,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/reference/r22-source.html",
+      "source": "Website-frozen97",
+      "sha": "714a3f5b16b83f3624225734093f937817482e91",
+      "sha256": "722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986",
+      "bytes": 9521075,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/reference/r22.html",
+      "source": "Website-frozen97",
+      "sha": "b8dc8bcce4a1b6aa0922ccca92b58c301a2ef3fd",
+      "sha256": "ad2c25b14d4656da808610501768d6dc5a46383438d9738c6d54d89b12f69785",
+      "bytes": 2179,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/site-shell.mjs",
+      "source": "Website-frozen97",
+      "sha": "a28181dfa90c19bdceef95d1070b5881f3bebf97",
+      "sha256": "5eacabd9c4787ae7128c2b5fa4b33e2193f2266b9f4accdc53f36407aa0b5f6f",
+      "bytes": 1940,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/site.css",
+      "source": "Website-frozen97",
+      "sha": "611b454de655a0479555381af697add54ae5d500",
+      "sha256": "e72e8527308a6cc6908742edb70da4011ca6f5449c44f4f305751726c4d60881",
+      "bytes": 43415,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/starting-breaks/index.html",
+      "source": "Website-frozen97",
+      "sha": "96adaf7cfe2fc19b698989e34a662476dbea9546",
+      "sha256": "5227e41bce8fde0430c2f26f1c930a155b1ff41aa0a7b07873add7113484bf0f",
+      "bytes": 3754,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/tool-theme.css",
+      "source": "Website-frozen97",
+      "sha": "ea9749134183df82115b0ff18040a53f15a6fe77",
+      "sha256": "631d73e834c398ec678d6ca0d5dac00ce5c1d022afcd0b11f2f471d3d8dd3f1b",
+      "bytes": 14070,
+      "changedFromPublic": true
+    },
+    {
+      "path": "web/product-site/tools/index.html",
+      "source": "Website-frozen97",
+      "sha": "bc42ef35243869a92e9606a5d18c314d47a453a8",
+      "sha256": "1ef3dc3fdc996dc78163215d99d0749d3c14f731d04bd1a6f79e6bd617001526",
+      "bytes": 2655,
+      "changedFromPublic": true
+    }
+  ],
+  "status": "UNQUALIFIED_FROZEN_REMOTE_WEBSITE_COMPOSITION"
+}

@@ -1,0 +1,26 @@
+Path-only sanitized rawstdout/stderr; originalSHA256 0f0b7bc7bb007d6ee7aaf15c4bcd40cee03bc5abdb9aaf2e2cbf4a5adba6382f
+COMMAND ["node", "--test", "tests/product-site-build.test.mjs"]
+✔ normal deterministic source build/check never changes Pages/catalog/source (4.562189ms)
+✔ all source identities checked before first output write (1.189793ms)
+✔ unsafe destinations and malformed paths fail closed (6.41275ms)
+✔ private/binary assets, duplicate inputs and symlinks are refused (3.963988ms)
+✔ source ancestor symlink and output symlink never escape the scoped build tree (1.289134ms)
+✔ a stale unrelated output is not silently carried into a later publisher input (0.996634ms)
+✔ recognized output hardlink cannot overwrite a protected synthetic catalog (2.164204ms)
+✔ recognized output special files refuse without opening or blocking (8.087112ms)
+✔ FIFO manifest rejects after import-ready without blocking the operation (174.343848ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":157.25973,"operationElapsedMs":8.976053000000036}
+✔ slow child startup does not consume the500ms FIFO operation watchdog (806.694859ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":779.2703069999999,"operationElapsedMs":16.670197000000144}
+✔ controlled missing-guard fixture is exact current code minus the declared preflight, never claimed historical (3.211739ms)
+✔ controlled missing-guard mutant blocks after readiness and trips only the operation watchdog (630.089679ms)
+ℹ {"code":null,"signal":"SIGKILL","result":null,"timedOut":"operation","stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":109.08239200000003,"operationElapsedMs":505.46097999999984}
+✔ symlink manifest refuses without reading an outside manifest (1.227775ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1824.123156

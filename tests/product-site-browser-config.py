@@ -16,6 +16,11 @@ def violations(source):
 class BrowserLaunchContract(unittest.TestCase):
  def test_main_runner_uses_normal_sandbox_without_attempting_launch(self):self.assertEqual(violations((ROOT/'product-site-browser.py').read_text()),[])
  def test_animation_runner_uses_normal_sandbox_without_attempting_launch(self):self.assertEqual(violations((ROOT/'product-site-animation-browser.py').read_text()),[])
+ def test_runners_honor_gate_browser_without_disabling_sandbox(self):
+  for name in ['product-site-browser.py','product-site-animation-browser.py']:
+   source=(ROOT/name).read_text()
+   self.assertIn("os.environ.get('CHROMIUM_EXECUTABLE'",source,name)
+   self.assertEqual(violations(source),[])
  def test_actual_old_public_launch_lines_are_rejected(self):
   m=json.loads((ROOT/'fixtures/site-browser-sandbox-before.json').read_text());self.assertEqual(len(m['rows']),2)
   for row in m['rows']:

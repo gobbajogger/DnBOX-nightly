@@ -46,7 +46,7 @@ probe=r'''async selector=>{
 }'''
 try:
  with sync_playwright()as p:
-  b=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,chromium_sandbox=True);result['browserVersion']=b.version
+  b=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or p.chromium.executable_path,headless=True,chromium_sandbox=True);result['browserVersion']=b.version
   for size,wh in [('desktop',(1440,900)),('phone',(390,844)),('landscape',(844,390))]:
    ctx=b.new_context(viewport={'width':wh[0],'height':wh[1]},device_scale_factor=1,reduced_motion='no-preference');page=ctx.new_page();page.on('pageerror',lambda e:result['errors'].append(str(e)));page.goto(base+'/');page.evaluate('document.fonts.ready')
    for selector in['.hero-ui .hero-parameter:first-child','.source-preview-live .hero-parameter']:
