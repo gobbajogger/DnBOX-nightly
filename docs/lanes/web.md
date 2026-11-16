@@ -76,3 +76,7 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be
 
 - W1/I5 real loopback HTTP checks PASS4/4: all19 routes return exact built HTML, all209 manifested assets return matching length/SHA256, all5 public WAV URLs return pinned bytes, both legacy redirect documents exist; private-audio paths remain404 and are never used by provider. This is transport/source proof only, not browser playback or live Pages delivery.
 - Reviewer independently verified exact3ed clean/no_loss/limits functions exit0, clearing C2/C4 at that SHA; no full gate/browser run. Final integ composition must retain newer b0a66/c93 fail-closed browser preflight before any full gate, do not run stale3ed full gate.
+
+- Independent reviewer replayed exact77c66ba1 HTTP4/4 PASS; transport scope accurately limited, no browser/live Pages claim.
+- W2 installer orchestration now has6 actual-source lifecycle checks: cancel before metadata/body/mount completion, BFCache selection restoration, stale callback isolation, overlapping restore candidate disposal and network failure disclosure. DOM/network/media admission are mocked; these do not claim browser or device execution. No production behavior changed.
+- Product suite with lifecycle coverage PASS63 Node+29 Python; log docs/lanes/evidence/web-installer-lifecycle-product.log. W2 remains FAIL until real browser execution.
