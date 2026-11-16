@@ -28,4 +28,46 @@ Remaining checks: exact shared-input pin; all19×3current-palette locked-referen
 
 ## Clock and next update
 
-First public website WIP push target09:50UTC, hard owner deadline10:00UTC. Next code checkpoint no later than30minutes after the verified push. All19×3captured+own-reviewed WIP target10:30UTC, not acceptance. Top risks: mutable shared renderer/API pin; unqualified native/emulator/1:1UI evidence; complete capture/review window. Public-safe artifacts are paired to private Library by the verified commit/hash filename; secrets/tokens are excluded.
+First public website WIP was pushed at09:59UTC2026-11-16 and independently read back through the GitHub API: `feature/website-r22` at `d8be251816b8dd3d195fcbf861e5abbc93048b2e`, parent `3f22e000ad17456318cde997067c7fd45dd7e3b3`, tree `2b512c339157b4aed578e9d56e08f9c999819fe2`. All91owned staged paths match the returned Git tree. The09:50target was missed during connector blob upload; the10:00hard deadline was met. Next checkpoint by10:29UTC.
+
+Paired Library artifact: `Website-WIP-2026-11-16-095923UTC-d8be251816b8dd3d195fcbf861e5abbc93048b2e.zip`, SHA256 `d6c12bbce389c6fe0cab04244768b785975e9bcfa59383b33e420acc6d382af1`. Materialized Library readback and all91member hashes match. Library record is retained in the lane's preservation receipt.
+
+Important composition gap: inherited3f22does not contain shared `r22-tokens.css` or `remote/wave-display.mjs`; its renderer is also older. The Website branch preserves unique work but is NOT a standalone runnable/qualified composition. Remote owns those shared files; Integration owns the exact manifest/package refresh. Do not deploy this branch as-is.
+
+All19×3captured+own-reviewed WIP target10:30UTC is now blocked, not promised as complete. The denied Chromium operation is not retried through another profile or execution route. Current browser checks are NOT_RUN unless a genuinely independent authorized executor becomes available. Existing R4renders retain their old input/palette labels. Top3risks: missing shared-source composition; denied current browser/visual checks; unqualified native/emulator/1:1UI evidence. Secrets/tokens remain excluded from public artifacts.
+
+
+## Route-by-route finishing checklist
+
+Every route below is retained in source and included in the prepared1440×900,390×844and844×390browser matrix. Current-palette visual score is NOT_REVIEWED for every route. Old R4reviews do not transfer to this source. Source preservation or a scheduled run does not close these rows.
+
+| Route | Content/control obligation retained | Current missing proof |
+|---|---|---|
+| `/` | Full instrument explanation, source glyph preview, original demonstrations, setup and sound discovery | Locked-panel actual layout, genuine+/−and range interaction, all4replay states, animated AA/cadence |
+| `/install/` | Model/package/local-file chooser, explicit write agreement, backup/readback/recovery and existing preparation tasks | Current responsive/negative browser checks; no package or device claim |
+| `/manual/` | Current task discovery and exact version-status disclosure | Actual wrapping, links and shared-shell review |
+| `/manual/legacy.html` | Complete21-section version-labelled SMKmanual and chapter controls | Complete long-page clipping/link/anchor review |
+| `/manual/protocol.html` | Complete historical protocol and schema identities | Wide-table containment and current visual review |
+| `/manual/projects-guide.html` | Actual supported parser revisions and preserved recovery guidance | Current copy/layout and complete destination verification |
+| `/manual/original/` | Original FM1manual, images and actual legacy-tool destinations | Full long-document visual/link review |
+| `/presets/legacy/` | Legacy read/export, retired engine4unchangedbytes, no new retired-engine creation | Real malformed/positive/download tests after composition |
+| `/help/` | Three real setup paths and source/manual discovery | Current3size visual/link review |
+| `/new/` | Actual saved checkpoints and full original version history | Expand legacy notes, anchor uniqueness and legacy-tool destinations |
+| `/presets/` | Original preset formats, import/inspect/rename/keep/export | Browser download naming, malformed/positive controls and actual current layout |
+| `/projects/` | Existing project parser/device recovery, fail-closed unqualified MIDI preview | Supported-revision roundtrip, revision13rejection, provider-negative and visual tests |
+| `/breaks/` | Actual sample preparation/import/backup/restore paths and codec behavior | Real sample fixture selection, rate/details/processing and safety-negative tests |
+| `/starting-breaks/` | Five metadata choices, model/capacity selection, unavailable audio clearly disabled | None/All/individual state labels, no unavailable network/audio requests |
+| `/builds/` | All197records, filters,20/50/100paging, deep links and full data | Filter-before-pagination, both navigation rails, offline fallback and visual review |
+| `/tools/` | Individual real project/sample/preset/manual destinations with availability limits | Current navigation and locked visual-language review |
+| `/reference/` | Clear design archive discovery, not current native qualification | Current shell and exact archive destination review |
+| `/reference/r22.html` | Exact original R22gallery via common-shell historical wrapper | Current screenshot-through intrinsic-height stability |
+| `/reference/current-ui.html` | Exact original earlier UIgallery, clearly archived | Current screenshot-through intrinsic-height stability |
+
+Compatibility `install.html` and `remote.html` aliases remain. The Remote application itself has a separate writer; Website is accountable for the published entry and truthful capability boundary, not duplicate Remote implementation. R032and emulatorR029/R037require current source-linked firmware/render/provider evidence and independent review, which remain open.
+
+
+## Firmware/emulator interface received10:11UTC
+
+Firmware owner supplied source-only WIP `9da1c410d883f486071004590774d67a290fdd54` on `fix/r22-drum-glyphs`, tree `5a07f50d08e27c3f17d1fd0be572c3d475240deb`. Relevant files are `firmware/src/ui_theme.h`, `app/ui_r22_components.h`, `app/ui_glyph_renderer.h`, `app/ui_r22_pages.inc`. This is not whole-UI/native acceptance and has not yet been admitted into the Website composition.
+
+Existing870constructed native frame PNGs are pinned only to `22c589ef678f48fcdcb45b83386b626f3fa8b2a5`, with a known PAN50%defect. Do not relabel them as9daor current accepted output. Genuine current schema remains Chicago0/Miami1 and legacy Drone2/Juno3under `original_sound.h`; these are not new SynthOne/SuperJ6IDs. The actual new backend/descriptor and stable state/schema admission are pending the Sound/Firmware owners. Website consumes that contract when frozen rather than inventing current functions or presenting historical stills as1:1emulation.
