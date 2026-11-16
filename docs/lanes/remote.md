@@ -1,5 +1,5 @@
 # Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 05:06 VLAT.
+Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 05:43 VLAT.
 
 ## Checklist
 | ID | Check | Status | Evidence |
@@ -19,8 +19,8 @@ Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92
 | R7 | Structural Chromium fixtures | FAIL | Exact-head run pending. |
 
 ## Now / next
-- Now: runtime frozen at d3d3a54fefa609824b295d1ea6209d49f8edf0d7 for independent source/browser review; all lane completion gates remain open. Work continues on isolated queued-DOWN and pitch-row regressions, not published runtime changes.
-- Next: consume independent broker/resize review and actual browser findings, then qualify one coherent composition. Coordinate real native catalog/atomic transaction with integ; do not infer native admission from retained-core fixtures.
+- Now: published head80a6fa43 host diagnostics reviewed; native source geometry package is unbound, so actual browser runtime remains unchanged from 9d71/9bf. Exact live browser source is Web8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e. No lane completion claim.
+- Next: bind source-native glyphs only after typed context and raster/easing/layout comparison; preserve existing UI until a coherent reviewed candidate exists. Current package ports Tune/Attack and Decay numeric geometry without changing app rendering. Continue native protocol work with integ, never substitute preview IDs or infer native admission.
 
 ## Blockers and routes
 - No shell GitHub authentication: use GitHub connector, each write under 700 KB.
@@ -111,3 +111,8 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 
 - R6 actual-host extension: independently replayed 22 checks against exact 1ab15cf2f684ed2aa72a82e44ce82ab506ddd0f7: actual queue saturation rejects without target/revision mutation, drain restores capacity, stable multi-read retries and unstable reads fail closed without SET. Old preview catalog fails HELLO matching. Typed catalog audit finds 315 of 326 wire IDs differ despite matching scalar tuples/ranges; no alias or native admission inferred. Runtime consumer unchanged; no HELD or browser/device transport claim. Logs and catalog audit under docs/evidence/remote/actual-host-consumer/.
 - Actual keyboard readout review applies to immutable Web 8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e, receipt at Web 340d5b44f65525691b54127df6e2d38bcecf3279/docs/lanes/evidence/web-8ce-browser-readouts.json. Earlier locator fill behavior was a tool event-semantics limitation, not a confirmed production bug.
+
+- Source-native glyph groundwork: unbound Tune/Attack/Decay helpers preserve native b341 float32 math, typed source identity and exact numeric SI branches. C-reference parity covers7,280 Tune/Attack cases,12,258 math cases and11,264 Decay cases. Independent scoped reviews accepted geometry/typed source; SI producer32,589 checks and independent receipt/context verification are distinguished. No raw raster archive, binary, app binding, visual/easing or native admission claim. Reproducible test fixtures under tests/product-remote/native-geometry/; full R1/R2/R7 remain FAIL.
+- Before writing files in an isolated checkout, use an absolute workspace path or assert cwd; do not combine a repository-relative prefix with that checkout as workdir.
+
+- Repeated mistake: tests hashed inputs then compiled reread mutable paths. Capture exact input bytes once, hash-check and stage them, then compile only staged inputs and verify them around execution.
