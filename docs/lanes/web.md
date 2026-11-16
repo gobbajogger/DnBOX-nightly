@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 7cce9b485ef619f59227ceb1b5abef4700d87dd9   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: b7bf2c5e0576b95eb4546e60d0057df06b34ad0c   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -53,3 +53,6 @@ C1–C6 and W1–W5 above. No lane completion or design approval claimed.
 - Added W1 route contract: all19 routes present in source manifest and byte-identical build; browser runner covers identical route list; both legacy redirects keep immediate local destination and accessible fallback; six redirect mutants rejected.4/4 PASS; strengthened product tests45 Node +15 Python PASS. This is source/build coverage, not HTTP/browser acceptance.
 - Shared mistake: web and Remote independently retried the same normal-sandbox socket EPERM boundary; sanctioned workspace-HOME escalation still failed, with sandbox enabled. Do not retry this boundary. Remote owns common docs/lanes/browser-environment.md; pursue a genuinely distinct supported environment only.
 - Fresh-container discovery found saved X0X37-for-Loopy-Pro configuration for both repos; sent root for one shared alternate-runtime task, no duplicate task created by web.
+
+- W4 prose-only preset correction: replaced internal UID/wrapper/validation jargon with musician actions. Preserved every control, scripts, filename prefixes, format extensions, original-byte retention and name-only edit limits. Reversible SITE-R22-CHANGES provenance retains exact earlier text. New regression failed before and passes after; build PASS187 files and product46 Node+15 Python PASS. No visual design change or browser acceptance.
+- Root-owned distinct managed Codex browser attempt also stopped before assertions: SUID sandbox helper incorrectly configured (nobody:nogroup,4755). No flags/permissions/security settings changed. Shared browser record: https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/blob/587a6198fa5310a575cdb755686ece13da1a90c0/docs/lanes/browser-environment.md. Do not repeat either environment boundary.

@@ -117,3 +117,12 @@ test('earlier JUNO scalar is versioned, never relabelled as the new SuperJ6 engi
  const s=read('index.html');assert.match(s,/Earlier JUNO bank · WIDTH specimen/);assert.match(s,/not current SuperJ6/);assert.doesNotMatch(read('hero.mjs'),/engine:\s*['"]superj6/);
  const f=JSON.parse(readFileSync(new URL('visual/fixtures/site-r3-juno-preview.json',import.meta.url))),old=readFileSync(new URL('visual/fixtures/site-r3-juno-preview.html',import.meta.url));assert.equal(createHash('sha256').update(old).digest('hex'),f.fixtureSHA256);assert.match(old.toString(),/>Juno source preview</);assert.doesNotMatch(old.toString(),/Earlier JUNO bank/);
 });
+
+test('preset guidance uses musician actions while preserving file and edit limits',()=>{
+ const page=read('presets/index.html');
+ assert.match(page,/Your sequences, arpeggios, effects, tuning and all other preset data stay unchanged\./);
+ assert.match(page,/You can edit only an existing preset name\./);
+ assert.match(page,/The file is checked before you can keep a copy\./);
+ for(const term of ['original-','kept-','.synth1','.json','Download original bytes unchanged','Download kept original-format file'])assert.ok(page.includes(term),term);
+ assert.doesNotMatch(page,/Content is validated, not trusted by extension|UID, wrapper and unknown fields/);
+});

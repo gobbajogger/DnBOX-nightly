@@ -137,7 +137,7 @@
     {
       "path": "presets/index.html",
       "beforeSHA256": "fe98204b04e2f64d5275a78bccaa96c9d9f0adcc32284371823130441fbe0f98",
-      "afterSHA256": "aebe5888e2369423d2f0597d4cd6df2b31c42dc32de024a81a103422502ba235",
+      "afterSHA256": "9ec6304039dba2487ab907058ae5922a19bacf06deed517be4fdee7e608bbe00",
       "changes": [
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
@@ -171,6 +171,14 @@
           "before": "Content is validated, not trusted by extension. Original filenames are retained on download; SynthOne upstream single exports use .synth1 and bank imports use .json.",
           "after": "Content is validated, not trusted by extension. Download names start with original- or kept-. Kept copies use the format\u2019s extension: .synth1 for SynthOne singles, .json for banks.",
           "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "Content is validated, not trusted by extension.",
+          "after": "The file is checked before you can keep a copy."
+        },
+        {
+          "before": "All sequence, arp, FX, tuning, UID, wrapper and unknown fields remain intact. Only existing name text is editable here.",
+          "after": "Your sequences, arpeggios, effects, tuning and all other preset data stay unchanged. You can edit only an existing preset name."
         }
       ]
     },
