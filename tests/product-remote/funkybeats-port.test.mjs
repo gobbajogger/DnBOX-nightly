@@ -53,6 +53,7 @@ test('port provenance pins the shipped MIT source bytes',()=>{
  const provenance=JSON.parse(readFileSync(new URL('../../web/product-site/remote/vendor/funkybeats-provenance.json',import.meta.url)));
  assert.equal(createHash('sha256').update(readFileSync(target)).digest('hex'),provenance.sourceSha256);
  assert.ok(provenance.scope.some(scope=>scope.startsWith('buildPerformGrid')));
+ assert.equal(createHash('sha256').update(readFileSync(new URL('../../web/product-site/remote/FUNKYBEATS-MIT-NOTICE.md',import.meta.url))).digest('hex'),provenance.licenseNoticeSha256);
 });
 test('actual synth slider builder retains explicit native domains and escaped values',async()=>{
  const {renderTypedFunkyBeatsParameter}=await import('../../web/product-site/remote/funkybeats-view.mjs');

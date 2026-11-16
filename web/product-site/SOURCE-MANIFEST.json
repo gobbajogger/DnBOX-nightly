@@ -860,7 +860,7 @@
     {
       "path": "remote/vendor/funkybeats-provenance.json",
       "bytes": 1495,
-      "sha256": "e9878c4d9ec14eb75c0956cbbabf617949bd2d217af70a0e05afe3216741b9ac"
+      "sha256": "91818bb26d04e5bf287542769f904e5d2aff5a5beddef7dc431395e51e41d9c9"
     },
     {
       "path": "remote/view.mjs",
