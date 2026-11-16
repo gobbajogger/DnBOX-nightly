@@ -65,7 +65,7 @@ def state(page,label,size):
  path=OUT/f'{label}-{size}.png';page.screenshot(path=str(path),full_page=True)
  result['states'].append({'label':label,'size':size,'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
 with sync_playwright()as p:
- browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,chromium_sandbox=True)
  for size,wh in [('desktop',(1440,900)),('phone',(390,844)),('landscape',(844,390))]:
   context=browser.new_context(viewport={'width':wh[0],'height':wh[1]},device_scale_factor=1)
   page=context.new_page();page.on('pageerror',lambda e:result['errors'].append(str(e)))

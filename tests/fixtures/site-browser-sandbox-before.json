@@ -1,0 +1,20 @@
+{
+  "kind": "ACTUAL_PUBLIC_TOOL_CONFIGURATION",
+  "rows": [
+    {
+      "path": "tests/product-site-browser.py",
+      "sourceCommit": "93b6f0991147be97c89b82e5039267c546608469",
+      "sourceGitBlob": "dd744f4386944da20f8a81426a705f4b9b074c0c",
+      "sourceSHA256": "78b0924f606187078fc188885da3c7a5db2379efc9152d9150d7fce48b1eaaf8",
+      "launchSource": "browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])"
+    },
+    {
+      "path": "tests/product-site-animation-browser.py",
+      "sourceCommit": "93b6f0991147be97c89b82e5039267c546608469",
+      "sourceGitBlob": "fa4e9c90079ade12f42dd1949bf9e7fa8d505dba",
+      "sourceSHA256": "2801de4f84a115c015c64beb1b2269aa2db991ad9140da7b111c4e98b8266c00",
+      "launchSource": "b=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);result['browserVersion']=b.version"
+    }
+  ],
+  "requirement": "User RULES9a normal Chromium sandbox on. This fixture checks source configuration only and never executes a browser."
+}
