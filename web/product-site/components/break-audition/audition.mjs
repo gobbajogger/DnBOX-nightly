@@ -6,7 +6,7 @@ export function createAudition(picker,{resolvePrivateUrl,fetchBytes,createAudio=
  function cleanup(){
   const old=active;active=null;if(!old)return;
   old.audio.removeEventListener('ended',old.ended);old.audio.removeEventListener('error',old.error);
-  try{old.audio.pause();old.audio.removeAttribute('src');old.audio.load();}finally{revokeUrl(old.url);}
+  try{old.audio.pause();old.audio.remove?.();old.audio.removeAttribute('src');old.audio.load();}finally{revokeUrl(old.url);}
  }
  function stop(){generation++;pendingFetch?.abort();pendingFetch=null;cleanup();emit({status:'idle',id:null,sampleRate:null,error:null});}
  return Object.freeze({

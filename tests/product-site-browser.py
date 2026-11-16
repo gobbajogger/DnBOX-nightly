@@ -178,6 +178,8 @@ with sync_playwright()as p:
      page.locator('[data-action=play]').first.click();page.wait_for_function("document.querySelector('[data-audio-status]').textContent.startsWith('Playing ')")
      check(page.locator('[data-asset]:checked').count()==0,'preview before choosing does not select a break')
      check(page.locator('[data-audio] audio').evaluate('(a)=>a.src.startsWith("blob:")&&a.playbackRate===1'),'verified preview uses original-speed local blob; not audible-output proof')
+     page.wait_for_function("document.querySelectorAll('[data-audio] audio').length===0")
+     check(page.locator('[data-action=play]').first.get_attribute('aria-pressed')=='false','natural end removes obsolete native player and resets transport')
      page.locator('[data-action=none]').click();state(page,'starting-breaks-none',size)
      page.locator('[data-action=all]').click();check(page.locator('[data-asset]:checked').count()==5,'all selected');check(page.locator('[data-action=play]:enabled').count()==5,'All preserves independent preview actions');state(page,'starting-breaks-all',size)
      page.locator('[data-asset]').first.uncheck();check(page.locator('[data-asset]:checked').count()==4 and page.locator('[data-action=play]:enabled').count()==5,'individual selection does not disable preview');state(page,'starting-breaks-individual',size)

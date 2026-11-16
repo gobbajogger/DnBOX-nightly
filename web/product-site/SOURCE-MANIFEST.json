@@ -199,8 +199,8 @@
     },
     {
       "path": "components/break-audition/audition.mjs",
-      "bytes": 2957,
-      "sha256": "5b8f4964f5db208b6f2ba085d593bf11e27a8648e317f34866489dc22c0b9b89"
+      "bytes": 2978,
+      "sha256": "5a7c49fb0abc3019daa2923570e86ba3d231d51edfffbd01ae9cc5f5e27d5e9d"
     },
     {
       "path": "components/break-panel/panel.css",

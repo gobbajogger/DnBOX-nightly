@@ -1,0 +1,22 @@
+✔ stop aborts in-flight preview transport without creating media (8.117539ms)
+✔ destroy aborts in-flight preview transport without creating media (4.728826ms)
+✔ public provider forwards explicit cancellation signal while still omitting credentials (2.127675ms)
+✔ replacement aborts old request without letting its completion detach the current cancellation (1.958781ms)
+✔ verified preview ended resets transport label and pressed state (19.26869ms)
+✔ verified preview error resets transport label and pressed state (4.303808ms)
+✔ switching previews immediately clears old pressed state while bytes verify (16.585669ms)
+✔ None cancels pending preview and destroyed panel cannot start another (7.614182ms)
+✔ verified file inspection never enables unavailable renderer or returns export files (33.349868ms)
+✔ oversized project rejects before allocating or calling parser (0.689257ms)
+✔ new selection prevents a late old file read from replacing current inspection (11.73534ms)
+✔ dispose while file read is pending prevents parsing and removes event handlers (10.165244ms)
+✔ invalid parsed project remains unavailable and discloses verification failure (2.798521ms)
+✔ obsolete parser failure cannot overwrite a newer verified selection message (2.535918ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2496.416184

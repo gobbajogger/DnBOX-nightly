@@ -18,3 +18,8 @@ test('dispose while file read is pending prevents parsing and removes event hand
 test('invalid parsed project remains unavailable and discloses verification failure',async()=>{
  const f=fixture(async()=>({project:'not bytes'}));f.file.files=[{size:1,arrayBuffer:async()=>new ArrayBuffer(1)}];await f.file.onchange();assert.equal(f.button.disabled,true);assert.match(f.status.textContent,/could not be verified/);assert.equal(f.exports(),0);f.api.dispose();
 });
+test('obsolete parser failure cannot overwrite a newer verified selection message',async()=>{
+ let rejectOld;const old=new Promise((_,reject)=>{rejectOld=reject;});let calls=0;const f=fixture(async project=>{calls++;if(calls===1)return old;return{project};});
+ f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([1]).buffer}];const pending=f.file.onchange();await Promise.resolve();await Promise.resolve();
+ f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([2]).buffer}];await f.file.onchange();const current=f.status.textContent;rejectOld(Error('old parse failed'));await pending;assert.equal(f.status.textContent,current);assert.equal(f.button.disabled,true);f.api.dispose();
+});
