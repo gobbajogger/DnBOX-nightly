@@ -37,6 +37,9 @@ build()   { npm run build; }
 unit()    { npm test; }
 browser() { npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py; }
 step clean-tree clean; step setup setup; step no-loss no_loss; step limits limits
-if [ $void = 0 ]; then step build build; step unit-tests unit; step browser-tests browser; fi
+browser_safe=1
+browser_policy() { python3 tests/normal-sandbox-regression.py || { browser_safe=0; return 1; }; }
+step browser-sandbox-policy browser_policy
+if [ $void = 0 ]; then step build build; if [ $browser_safe = 1 ]; then step unit-tests unit; step browser-tests browser; else echo "[FAIL] unit/browser-tests NOT_RUN: browser policy unsafe or unavailable"; fail=1; fi; fi
 R=PASS; [ $fail = 1 ] && R=FAIL; [ $void = 1 ] && R=VOID
 echo "DNBOX-GATE RESULT $R sha=$SHA lane=$LANE log=$LOG"; [ $R = PASS ] && exit 0; [ $R = VOID ] && exit 2; exit 1
