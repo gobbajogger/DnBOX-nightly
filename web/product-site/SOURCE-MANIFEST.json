@@ -764,13 +764,13 @@
     },
     {
       "path": "remote/pan.mjs",
-      "bytes": 1076,
-      "sha256": "35d1defe54066f730c38de40b0bada11a2de1202bf2ad8a876f9a53fc6c4ea0a"
+      "bytes": 1564,
+      "sha256": "c07a75811fd0df011d5226963eda44b01acd28398018f85dcfb9c4ca78a536a6"
     },
     {
       "path": "remote/parameter.mjs",
-      "bytes": 3593,
-      "sha256": "b67e48b97623cfc4ddb2bae49480550b1863beba32d441438cb5621d8430a13f"
+      "bytes": 3335,
+      "sha256": "0cad6cffbc0f5ff58765eed37082303380045a9517dd9de02deb4c7d6d8b63d6"
     },
     {
       "path": "remote/remote.mjs",
@@ -784,8 +784,8 @@
     },
     {
       "path": "remote/sequence.mjs",
-      "bytes": 6757,
-      "sha256": "dc07d938daa402954589d3400be9b77c000d2f1d321a2dff7356e70faa963a99"
+      "bytes": 6738,
+      "sha256": "de3d3765fb9e4db4d363a6f2900e537b14f8cb06230ab385e9743a73acb67823"
     },
     {
       "path": "remote/session.mjs",

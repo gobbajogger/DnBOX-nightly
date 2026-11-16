@@ -3,15 +3,15 @@ import assert from'node:assert/strict';
 import{readFileSync}from'node:fs';
 import{GLYPH_CELL,GLYPH_SCALE,R22_TOKENS,formatPan,formatParameterValue,glyphMarkup,isPanLabel,panCell,STEP_LANES}from'../../web/product-site/remote/glyphs.mjs';
 
-// User rule 2026-11-16 "The panning must clip at 50" (provisional 64±50 mapping).
+// User rule 2026-11-16 "The panning must clip at 50" (Lead's final display mapping).
 test('pan notation clips at L50 / C / R50',()=>{
  assert.equal(formatPan(0),'L50');
- assert.equal(formatPan(52),'L12');
+ assert.equal(formatPan(52),'L10');
  assert.equal(formatPan(64),'C');
- assert.equal(formatPan(94),'R30');
+ assert.equal(formatPan(94),'R24');
  assert.equal(formatPan(127),'R50');
  assert.equal(formatParameterValue('PAN',64),'C');
- assert.equal(formatParameterValue('Pan',94),'R30');
+ assert.equal(formatParameterValue('Pan',94),'R24');
  assert.equal(formatParameterValue('Level',64),'64');
  assert.equal(isPanLabel('pan'),true);
  assert.deepEqual(STEP_LANES.map(l=>l.id),['velocity','chance','pitch']);
