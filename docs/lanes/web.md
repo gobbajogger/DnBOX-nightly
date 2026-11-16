@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head before this documentation update: 63c03d626f21f855f0c77ae21d5db4876576dd4f   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified Web parent: 9313226761e5f0a7b1dc5803c26b06336575215b; composed Remote source: 4561e81e1f492b8951a993e8add5e3b7c6f63595   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -12,7 +12,7 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | C4 | Hard-limit scan | FAIL | Independent external reviewed hard-limit scanner PASS at58ec (1192 tracked blobs); not comprehensive secret/opaque-content assurance or full C4. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
-| W1 | 19 routes, redirects and npm test | FAIL | 241 manifest-pinned product files build. Latest58ec product88 Node+32 Python and Remote80 PASS; full14968 previsual diagnostic passed, but full npm visual/browser stages remain NOT_RUN. |
+| W1 | 19 routes, redirects and npm test | FAIL | 246 manifest-pinned product files build. Current4561 composition product88 Node+32 Python and Remote89 PASS; full14968 previsual diagnostic passed, but full npm visual/browser stages remain NOT_RUN. |
 | W2 | Installer/emulator/import-export and browser | FAIL | Actual preview cleanup and native readout keyboard edit/Undo verified on immutable8ce; real-parser8 source tests PASS. Genuine preset chooser delivery unresolved; native/MIDI export and full browser gate unqualified. |
 | W3 | HTML/firmware same-SHA match | FAIL | Provenance/comparator13 tests independently accepted, identity-only. Supplementary fixed909BD crop16416/0 and bounded browser screenshot accepted. Complete same-source inventory and full-frame HTML projection unavailable; no theme/animation/generalization claim. |
 | W4 | Musician-facing pages and landscape | FAIL | All19 route document widths observed at844x390, keyboard Menu navigation and three independent bounded route checks retained. Exact390 viewport unavailable (native minimum500); full prescribed independent Review remains open. |
@@ -173,3 +173,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Recovery reconciliation: current63c03 remotely verified and local clean; top checklist evidence refreshed to latest bounded results rather than stale early counts. Fwui confirms no complete authoritative same-SHA inventory; current LIGHT active-bank regression is owned by fwui. Fixed dark factory BD fixture must not be generalized to themes. Existing screenshots/crop results remain historical scoped evidence.
 
 - Supplementary20-file native lifecycle fixture actual-browser change/reset/Stop checked:Attack10%→100% with changed settled glyph→10%;STOPPED603 remained603 later. Optional tab-return check interrupted by CUA timeout/reset; one inventory recovery also timed out. Native tab-away observed but hidden=false, so visibility event/persistence NOT_RUN. No production app/main8ce changes; receipt web-native-lifecycle-fixture.json.
+
+- Normal source composition consumes Remote4561 reviewed source laboratories and five unbound native-geometry files; all246 whole-site manifest rows hash-verified, app/glyph binding remains unchanged from8ce. Product88 Node+32 Python,workspace84+four app scripts,Remote89 PASS including source parity diagnostics. No app/native/whole-screen/theme qualification; current LIGHT update remains separate. Machine-specific prefix removed only from imported native-fixture log; source/license bytes preserved verbatim (their whitespace warnings retained). Receipt web-panels-composition.json. Browser visibility follow-up remains blocked; source composition was the independent alternate route.

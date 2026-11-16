@@ -1,0 +1,113 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:remote
+> node --test tests/product-remote/*.test.mjs tests/product-remote/platform/*.test.mjs
+
+✔ vendored Wu/px_blend coverage buffers are identical to the reference (91.700545ms)
+✔ live glyphs use the reference painter for its four kinds (73.768121ms)
+✔ ease is the reference critically damped law; idle schedules no frame (5.961282ms)
+✔ reduced motion jumps instantly (0.333584ms)
+✔ standalone Remote manifest retains every static app module dependency (36.044714ms)
+✔ exact C v2 wire/core with synthetic callbacks verifies float/scalar CAS and two original held owners (41.157182ms)
+✔ actual C inactive-control UNSUPPORTED stays one unavailable row without failing snapshot (33.253048ms)
+✔ lost C OPEN remains unconfirmed; explicit source tick separately proves expiry (28.38176ms)
+✔ actualC nativeprimitiveand affectedonly samples match Float32 exactly at65declaredphases and5rawstates (24.726255ms)
+✔ mapping retains128nativegainpairs, no rawfraction-as-gainratio or fullprogramclaim (5.828329ms)
+✔ Chicago WAVE renderer uses native affected-layer path at every raw value (224.891189ms)
+✔ port open is bounded and cancellation settles without stale readiness (2523.765866ms)
+✔ cancel while opening prevents late session; closes original ports (2509.153291ms)
+✔ session close precedes broker/port disposal and unconfirmed cleanup remains explicit (2.548102ms)
+✔ all197 typed controls preserve all21924 native formatted readouts verbatim (80.112975ms)
+✔ no invented units or labels and no ordinal/voice aliasing (11.856007ms)
+✔ malformed, duplicate and incomplete table domains are rejected (5.497607ms)
+✔ different source revisions cannot silently form one formatter projection (1.725431ms)
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (1.783284ms)
+✔ the C fixture handshake reads confirmed values and Apply is the only write (148.706512ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (33.763046ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (27.087178ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (1.017938ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (100.040571ms)
+✔ actual upstream launcher renders all five local rows without fake playback (35.403237ms)
+✔ port provenance pins the shipped MIT source bytes (2.771349ms)
+✔ actual synth slider builder retains explicit native domains and escaped values (12.790517ms)
+✔ upstream mixer projection retains typed faders, not fabricated meters or controls (6.512604ms)
+✔ mixer values reproduce exact production formatter table without inferred units (24.533202ms)
+✔ registry: all 82 ids map to a renderer family (2.789628ms)
+✔ registry: every glyph changes shape with its value (no static icons) (292.237661ms)
+✔ drum voice glyphs react to level, hit pulse and decay (1.13782ms)
+✔ step lane label cycles all four parameters and no selected-note inspector is mounted (4.787707ms)
+✔ final per-step style uses thin value bars rather than mixer caps (1.224521ms)
+✔ late-open stale close must stay owned until it settles before same-port reconnect (9.418112ms)
+✔ upstream hold contract fires once only for stationary qualified note (6.993609ms)
+✔ move, release, cancellation, capture loss and leave cancel pending hold (2.349033ms)
+✔ multitouch never opens a stale hold menu, and fresh pointer can rearm (0.375543ms)
+✔ unqualified targets, right button and disposed timers do not trigger (0.279954ms)
+✔ stale timer callback cannot consume or fire a rearmed pointer hold (0.616316ms)
+✔ modeless note body moves preserving duration rather than defaulting to end resize (7.432698ms)
+✔ explicit modeless handles still resize only the indicated endpoint (1.549132ms)
+✔ modeless draw uses upstream bounded duration with integer sample edges on fractional grids (3.095305ms)
+✔ touch body jitter selects without moving or creating an undo item (1.215907ms)
+✔ touch move crosses slop once and remains one cancellable transaction (1.209835ms)
+{"sourceNativeStep":"native-raster-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-raster-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1028 source-native RGB565 raster cases byte-identical; transient local buffers only, no browser/layout claim"}
+{"sourceNativeStep":"native-ease-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-ease-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1820 native analytical presentation steps match float32; no slot/clock ownership or browser proof"}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"29954 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-pitch-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":9216,\"float32Coordinates\":534528,\"result\":\"PASS\",\"scope\":\"source dependent geometry; sampled dependency grid, no UI/raster/device admission\"}"}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"45955 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-extra-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":8164,\"float32Coordinates\":236696,\"result\":\"PASS\",\"scope\":\"idle source geometry only; fractional raw interpolation diagnostic, not engine writes\"}"}
+{"sourceNativeStep":"native-drum-binding-work","command":"node","args":["--test","drum.test.mjs"],"exitCode":0,"stdout":""}
+✔ complete source-native lab replays only captured staged inputs (7187.011351ms)
+✔ captured source fixtures and staged modules match reviewed hashes (5.407351ms)
+✔ native Tune/Attack matches C in7280 cases (846.122679ms)
+✔ native Exp2/Sqrt matches C in12258 cases (345.426657ms)
+✔ native Decay/NTAIL matches SI contexts in11264 cases (966.0368ms)
+✔ typed adapter preserves source identity/domain and excludes Pitch/Depth (59.512456ms)
+✔ geometry rejects float32 overflow (1.494551ms)
+✔ duplicate typed registry fails before selection (64.061598ms)
+✔ compiler consumes captured C/header after original source changes (131.244583ms)
+✔ no native admission means no permission request or fabricated controls (4.345363ms)
+✔ actual page uses typed descriptors and returned state; blur uses paired DNR2 aggregate owner CLOSE before port disposal (25.11825ms)
+✔ late permission result after final departure cannot attach listeners (1.626757ms)
+✔ cached return requires fresh manual connection and obtains new firmware epoch (9.984034ms)
+✔ same-name ports remain visibly distinct through stable source IDs (5.061411ms)
+✔ pending port open immediately locks the displayed pair and allows explicit cancel (94.277357ms)
+✔ DNR2 full incarnation and inactive-bank UNSUPPORTED survive one coherent snapshot (9.968672ms)
+✔ heartbeat and conflict do not acknowledge unseen revision for subsequent CAS (4.258341ms)
+✔ queued UP/CLOSE retain exact command/request until OK and never release ownership early (2.143935ms)
+✔ bounded queued cleanup remains unconfirmed instead of falsely reporting released (3.326002ms)
+✔ owning snapshots renew lease inline but readers do not (18.582015ms)
+✔ reply with matching low unit but different incarnation word is not correlated (2.160195ms)
+✔ aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts (1.998873ms)
+✔ MIDI broker rejects elapsed deadline even when timeout task has not run (30.033123ms)
+✔ MIDI broker receive enforces exact deadline, rollback and invalid clocks without timer delivery (4.992769ms)
+✔ MIDI broker retry keeps identical bytes inside absolute total budget and cannot send after deadline (1.576228ms)
+✔ MIDI broker captures request ownership and stale retry cannot disturb a later request (1.19354ms)
+✔ exhaustive raw 0..127 -> display (1.827835ms)
+✔ display -> raw round trip for every d, extremes 0/127 (0.480298ms)
+✔ drag edits in display units, extremes send 0/127; marker from the same d (3.839476ms)
+✔ import keeps raw untouched (raw 3 stays 3, shows L48) (4.019136ms)
+✔ API availability is not firmware admission or proof of a Bluetooth port (6.960852ms)
+✔ no API on mobile gives an honest platform route, no made-up PWA fallback (0.789756ms)
+✔ secure context, explicit transport admission and user action are all separate (0.657558ms)
+✔ descriptor controls only, acknowledged values replace pending edits and held original owners survive capture loss (3.647642ms)
+✔ unsupported descriptor roles never fabricate a 37-key or pad layout (0.50077ms)
+✔ inactive-bank rows are unavailable rather than editable stale values (0.240228ms)
+✔ zoom keeps the sample under the pointer and clamps finite extent (6.177328ms)
+✔ pinch settles only on 1/2/4/8 units without a zoom tool (0.932527ms)
+✔ plain and shifted wheel pan, control wheel zooms around pointer (2.395395ms)
+✔ second pointer cancels note preview and remaining finger cannot edit (1.856028ms)
+✔ vertical pinch enlarges pitch rows without changing time width, anchoring vertical location (1.840857ms)
+✔ third pointer freezes navigation without throwing or reviving note edits (1.52374ms)
+✔ Chicago continuous source uses names without changing scalar endpoints (2.633245ms)
+✔ unsupported engines and invalid raw values do not invent wave mappings (0.380997ms)
+ℹ tests 89
+ℹ suites 0
+ℹ pass 89
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8770.766691

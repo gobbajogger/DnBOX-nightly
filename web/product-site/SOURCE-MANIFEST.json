@@ -1033,6 +1033,31 @@
       "sha256": "f65eedc0c106b2259b9a64c2c29d22d52fb963742138d207f46ba086551f3eab"
     },
     {
+      "path": "remote/native-geometry/decay.mjs",
+      "bytes": 1297,
+      "sha256": "6ff7f4bc4c4b3941a5e67121494cd26901b0f34adeae4b6450127b98bca41062"
+    },
+    {
+      "path": "remote/native-geometry/fastmath.mjs",
+      "bytes": 895,
+      "sha256": "e4b1cc440f5001aac251db73b6a5e4dd6aa59939dae141b846a40068673f1bed"
+    },
+    {
+      "path": "remote/native-geometry/tune-attack.mjs",
+      "bytes": 1549,
+      "sha256": "64f575a6875b4caf6d104cc99a8cc6da458e4093d05926dc275076554dc41bb9"
+    },
+    {
+      "path": "remote/native-geometry/typed-adapter.mjs",
+      "bytes": 1090,
+      "sha256": "312eabb775ad84f8662e46bd4c95542cd39d2774f0b50a46520dab209949f1a8"
+    },
+    {
+      "path": "remote/native-geometry/typed-controls.json",
+      "bytes": 5733,
+      "sha256": "ca918e3466711fe74f0d95b2d459b5abe742abf1a261ce77368c17fcad6608ae"
+    },
+    {
       "path": "remote/page.mjs",
       "bytes": 5500,
       "sha256": "19dc0169e109ce5e6b7619bca40f33001d4569ae1c0be7bfd320d9c72a1c4ac6"

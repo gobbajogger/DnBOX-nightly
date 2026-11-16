@@ -1,0 +1,58 @@
+{
+  "oldSource": "b341436ff8087c20b8ef51765f986736473611b0",
+  "currentSource": "2bfae5ef1fce4cb71c7002722c141613e04521de",
+  "uiGitBlob": "8fafa3d260b5d0392732bef88b801022aba44e54",
+  "functions": {
+    "build_pages": {
+      "unchanged": true,
+      "oldSha256": "453453808dfa788933d3892dd10b32425cd1db5fee39ff29c7175fa9cc3a8d8f",
+      "currentSha256": "453453808dfa788933d3892dd10b32425cd1db5fee39ff29c7175fa9cc3a8d8f"
+    },
+    "pref_desc": {
+      "unchanged": true,
+      "oldSha256": "887d9a03eac51408faee92ccae9840858d34760c30ed5fa4523a091441a27814",
+      "currentSha256": "887d9a03eac51408faee92ccae9840858d34760c30ed5fa4523a091441a27814"
+    },
+    "pref_get": {
+      "unchanged": true,
+      "oldSha256": "f90b6eb61f884564703d741a0d62e15714c8210a550f7b5c1f7578e6056c2668",
+      "currentSha256": "f90b6eb61f884564703d741a0d62e15714c8210a550f7b5c1f7578e6056c2668"
+    },
+    "matrix_value": {
+      "unchanged": true,
+      "oldSha256": "984bc04461dbc66f24fe46438a64bf8f24a55e61d57c9cd143c92e8f858df1b3",
+      "currentSha256": "984bc04461dbc66f24fe46438a64bf8f24a55e61d57c9cd143c92e8f858df1b3"
+    },
+    "pref_value_of": {
+      "unchanged": true,
+      "oldSha256": "0a3a8176fa5f6e1bc122173387c6e31638d9fca96b1dbd8f1a14616f94abf458",
+      "currentSha256": "0a3a8176fa5f6e1bc122173387c6e31638d9fca96b1dbd8f1a14616f94abf458"
+    },
+    "part_col": {
+      "unchanged": true,
+      "oldSha256": "72abebefe76c19412c497bcb5f4abfecaeaf218a2b74b6e31146fef51e4db1f5",
+      "currentSha256": "72abebefe76c19412c497bcb5f4abfecaeaf218a2b74b6e31146fef51e4db1f5"
+    },
+    "px_blend": {
+      "unchanged": true,
+      "oldSha256": "10812589e3587ac3b98376737ec2ed37e5b5a932763f2e74483e900e5bd48c04",
+      "currentSha256": "10812589e3587ac3b98376737ec2ed37e5b5a932763f2e74483e900e5bd48c04"
+    },
+    "drum_strip_role": {
+      "unchanged": true,
+      "oldSha256": "7eba949c0c6b6ae0bde662d122573a9c5cf6a34c0b769d6069d6d11accd07c78",
+      "currentSha256": "7eba949c0c6b6ae0bde662d122573a9c5cf6a34c0b769d6069d6d11accd07c78"
+    },
+    "drum_live": {
+      "unchanged": true,
+      "oldSha256": "b2d8cf8ad938e6bc7adf7caa7cd6370975789f949a9dfc459204802c30e4aa53",
+      "currentSha256": "b2d8cf8ad938e6bc7adf7caa7cd6370975789f949a9dfc459204802c30e4aa53"
+    },
+    "dg_si": {
+      "unchanged": true,
+      "oldSha256": "86411617d754b66ecf6354996967af84d7a96b8aa69f74b2015259ab98d077ed",
+      "currentSha256": "86411617d754b66ecf6354996967af84d7a96b8aa69f74b2015259ab98d077ed"
+    }
+  },
+  "scope": "source-function equality only; not new full-layout qualification"
+}
