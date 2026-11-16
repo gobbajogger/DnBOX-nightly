@@ -1,21 +1,21 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head before this documentation update: 63c03d626f21f855f0c77ae21d5db4876576dd4f   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
 ## Checklist
 | ID | Check | Status | Evidence or missing requirement |
 |---|---|---|---|
-| C1 | Local gate at head | FAIL | Exact d315 has bounded actual-browser checks; full scripted Local remains NOT_RUN and latest integ preflight must be retained. |
-| C2 | Contains consolidated; no unexplained deletions | FAIL | Last independent PASS at exact485f2a666a427e56807ec4f2b03252eb968dce4d against fresh connector9165; current head recheck required. Two prep deletions remain explained below. |
+| C1 | Local gate at head | FAIL | Exact runtime8ce has bounded actual-browser checks; full scripted Local is NOT_RUN. Retain latest integ preflight; no retry of denied Chromium launch boundary. |
+| C2 | Contains consolidated; no unexplained deletions | FAIL | Independent scoped no-loss PASS at58ec against freshly verified9165; later docs heads require exact-head recheck. No unexplained deletion introduced. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | FAIL | Independent full C4 supplemental scan PASS at485; current head recheck required. No limits-only overcredit. |
+| C4 | Hard-limit scan | FAIL | Independent external reviewed hard-limit scanner PASS at58ec (1192 tracked blobs); not comprehensive secret/opaque-content assurance or full C4. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
-| W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm reached workspace and failed stale archive-wrapper selector; corrected without changing token assertions, workspace PASS; Remote40/40 PASS. Visual/browser gate still blocked; no W1 PASS claim. |
-| W2 | Installer/emulator/import-export and browser | FAIL | Browser runners now honor Local gate CHROMIUM_EXECUTABLE or bundled Playwright Chromium, retaining sandbox; regression test 4/4 passes. Product browser not yet qualified. |
-| W3 | HTML/firmware same-SHA match | FAIL | Requires fwui exact render inputs and pixel/structure comparison. |
-| W4 | Musician-facing pages and landscape | FAIL | Exact composition browser checks still required. |
+| W1 | 19 routes, redirects and npm test | FAIL | 241 manifest-pinned product files build. Latest58ec product88 Node+32 Python and Remote80 PASS; full14968 previsual diagnostic passed, but full npm visual/browser stages remain NOT_RUN. |
+| W2 | Installer/emulator/import-export and browser | FAIL | Actual preview cleanup and native readout keyboard edit/Undo verified on immutable8ce; real-parser8 source tests PASS. Genuine preset chooser delivery unresolved; native/MIDI export and full browser gate unqualified. |
+| W3 | HTML/firmware same-SHA match | FAIL | Provenance/comparator13 tests independently accepted, identity-only. Supplementary fixed909BD crop16416/0 and bounded browser screenshot accepted. Complete same-source inventory and full-frame HTML projection unavailable; no theme/animation/generalization claim. |
+| W4 | Musician-facing pages and landscape | FAIL | All19 route document widths observed at844x390, keyboard Menu navigation and three independent bounded route checks retained. Exact390 viewport unavailable (native minimum500); full prescribed independent Review remains open. |
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
@@ -169,3 +169,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Actual immutable8ce keyboard Menu check at844x390: Enter expands, Tab reaches Remote, Escape collapses and restores Menu focus; Projects Enter navigates to guarded disconnected page with Menu collapsed. Own bounded behavior only, not full Review. Receipt web-8ce-keyboard-menu.json. Independent58ec composition check accepts unchanged browser scope and same reviewed Lua bytes; scoped no-loss/limits PASS1192 tracked blobs (web58ec-stages.log), not fullLocal/C4. W3 helper/test hashes at58ec independently confirmed13 tests PASS in identity-only scope.
 
 - Supplementary Remote native-bank-v1 fixture independently exercised in existing browser:17 hash-pinned files, actual844x390, four readable captions/glyphs/values, no document horizontal overflow. Replayed factory native2bfa crop comparison16416 pixels/0mismatch. This fixed active-bank fixture is not bound to Remote and does not qualify whole-screenW3, animation, gestures or Local. Main8ce preview unchanged. Receipt web-native-bank-fixture.json; test-and-merge owns independent visual follow-up.
+
+- Recovery reconciliation: current63c03 remotely verified and local clean; top checklist evidence refreshed to latest bounded results rather than stale early counts. Fwui confirms no complete authoritative same-SHA inventory; current LIGHT active-bank regression is owned by fwui. Fixed dark factory BD fixture must not be generalized to themes. Existing screenshots/crop results remain historical scoped evidence.
