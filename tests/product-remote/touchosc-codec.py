@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """System Lua codec against pinned C DNR2 host. NOT a TouchOSC/runtime/device test."""
-import ctypes, ctypes.util, hashlib, json, subprocess, tempfile
+import ctypes, ctypes.util, hashlib, json, subprocess, tempfile, runpy
+from xml.dom import minidom
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 CODEC=ROOT/'web/product-site/remote/touchosc/dnr2-codec.lua'
@@ -93,7 +94,7 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
         controller_exchange();controller_exchange();last_reply=controller_exchange()
         assert run(controller_prefix+'assert(phase=="ready" and #out==3);return "PASS"')=='PASS'
         controller_prefix+='onReceiveNotify("dnr2",{action="set",id=1,value=950});'
-        controller_exchange()
+        set_reply=controller_exchange()
         assert run(controller_prefix+'assert(phase=="ready" and #out==4);return "PASS"')=='PASS'
         ready_controller=controller_prefix
         controller_prefix+='onReceiveNotify("dnr2",{action="close"});';controller_exchange()
@@ -101,6 +102,22 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
         assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});onReceiveNotify("dnr2",{action="set",id=1,value=1});assert(#out==5);onReceiveMIDI({144,60,100},{true});onReceiveMIDI('+last_reply+',{false,true});assert(phase=="pending");now=1001;update();assert(phase=="failed");onReceiveNotify("dnr2",{action="set",id=1,value=1});assert(#out==5);return "PASS"')=='PASS'
         assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});now=-1;update();assert(phase=="failed");return "PASS"')=='PASS'
         assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});onReceiveNotify("dnr2",{action="cancel"});assert(phase=="disconnected" and #out==5);onReceiveMIDI('+last_reply+',{true});assert(#out==5);return "PASS"')=='PASS'
+        for when,expected in [(999,'ready'),(1000,'failed'),(1001,'failed'),(-1,'failed')]:
+            assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});local b='+set_reply+';b[6]=66;b[21]=5;now='+str(when)+';onReceiveMIDI(b,{true});assert(phase=="'+expected+'","deadline '+str(when)+' expected '+expected+' got "..tostring(phase));assert(#out==5);return "PASS"')=='PASS'
+        pack=runpy.run_path(str(ROOT/'tests/product-remote/build-touchosc-harness.py'))
+        xml=pack['make_xml']();assert xml==pack['make_xml']()
+        assert xml==(ROOT/'tests/product-remote/fixtures/touchosc/source-harness.xml').read_bytes()
+        document=minidom.parseString(xml);nodes=document.getElementsByTagName('node');ids=[n.getAttribute('ID') for n in nodes];assert len(ids)==len(set(ids))
+        buttons=[n for n in nodes if n.getAttribute('type')=='BUTTON'];assert len(buttons)==5
+        for n in nodes:
+            frames=[p for p in n.getElementsByTagName('properties')[0].childNodes if p.nodeType==p.ELEMENT_NODE and p.getElementsByTagName('key')[0].firstChild.data=='frame']
+            if n is nodes[0]:continue
+            frame=frames[0].getElementsByTagName('value')[0];vals={k:float(frame.getElementsByTagName(k)[0].firstChild.data) for k in 'xywh'}
+            assert vals['x']>=0 and vals['y']>=0 and vals['x']+vals['w']<=480 and vals['y']+vals['h']<=240
+        no_io='root={findByName=function() return {values={}} end};function sendMIDI() error("Unexpected default send") end;function getMillis() return 0 end;'
+        assert run(no_io+pack['root_script']()+'init();onReceiveNotify("dnr2",{action="connect"});return "PASS"')=='PASS'
+        assert b'DNBOX_SIMULATOR_PIN=nil' in xml and b'DNBOX_SIMULATOR_PIN={testOnly=true' in pack['make_xml'](True)
+        print('PASS deterministic source XML, five bounded controls, exact embedded Lua and default no-send; TouchOSC application open NOT_RUN')
         print('PASS TouchOSC root-callback source -> C host; explicit simulator connect, route1 only, no-pin no-send, pending/timeout failclosed; NOT actual TouchOSC runtime')
         print('PASS simulator-only Lua session -> C host identity/catalog/lease/read/set/close; limits, pending transaction and timeout fail closed')
         print('PASS Lua codec -> pinned C host HELLO/OPEN/READ/SET/CONFLICT/CLOSE; no TouchOSC or device claim')

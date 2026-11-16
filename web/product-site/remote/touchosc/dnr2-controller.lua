@@ -47,6 +47,8 @@ function onReceiveMIDI(message, connections)
   if not session or not session.pending or type(connections)~='table' or connections[1]~=true or type(message)~='table' then return end
   -- Unrelated musical MIDI must never be mistaken for a protocol reply.
   if message[1]~=240 or message[2]~=125 or message[3]~=68 or message[4]~=78 then return end
+  local now=getMillis()
+  if not deadline or not started or now<started or now>=deadline then abort();return true end
   local ok,reply=pcall(session.accept,session,message)
   deadline=nil
   if not ok then abort();return true end
