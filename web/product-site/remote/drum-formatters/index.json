@@ -1,0 +1,235 @@
+{
+  "schema": "dnbox-drum-formatter-index/1",
+  "productionSourceCommit": "b341436ff8087c20b8ef51765f986736473611b0",
+  "tables": 24,
+  "controls": 197,
+  "rawValues": 21924,
+  "producerAssertions": 421,
+  "previousChicagoMiamiMixerControls": "BYTE_EQUIVALENT_JSON_DATA",
+  "files": [
+    {
+      "path": "909-voice-00.json",
+      "target": 0,
+      "voice": 0,
+      "voiceName": "BD",
+      "bytes": 49567,
+      "sha256": "b3a55c271fb89bc90430eb26817c2abf02ec77a691493e31b9bf799b27135fe6",
+      "controls": 11
+    },
+    {
+      "path": "909-voice-01.json",
+      "target": 0,
+      "voice": 1,
+      "voiceName": "SD",
+      "bytes": 45650,
+      "sha256": "476c52fa9abfd75a748a9db3c555bfe080692e6f1735c02d35074c44cf59861f",
+      "controls": 10
+    },
+    {
+      "path": "909-voice-02.json",
+      "target": 0,
+      "voice": 2,
+      "voiceName": "LT",
+      "bytes": 40384,
+      "sha256": "3377b0d7576a6c88c234da1b9002a71203bb8f1d96fab0c7cb9410bd953ab8b5",
+      "controls": 9
+    },
+    {
+      "path": "909-voice-03.json",
+      "target": 0,
+      "voice": 3,
+      "voiceName": "MT",
+      "bytes": 40449,
+      "sha256": "373324c5bf702c4d04e15316caaf1e09fa0cc611781302cbbe28a32c270609bd",
+      "controls": 9
+    },
+    {
+      "path": "909-voice-04.json",
+      "target": 0,
+      "voice": 4,
+      "voiceName": "HT",
+      "bytes": 40510,
+      "sha256": "b6ba3b9da41198179f15633e43253c35d474d480cc908e6b765a7d852144103b",
+      "controls": 9
+    },
+    {
+      "path": "909-voice-05.json",
+      "target": 0,
+      "voice": 5,
+      "voiceName": "RS",
+      "bytes": 30764,
+      "sha256": "7179b7d4438f681524a51f8713cdb30e5da2473ac5e736c28594adc3f2228822",
+      "controls": 7
+    },
+    {
+      "path": "909-voice-06.json",
+      "target": 0,
+      "voice": 6,
+      "voiceName": "CP",
+      "bytes": 35847,
+      "sha256": "31e1676c88f5d7e520a3c8f67186ba556d10e32ff7eea519455b55d59ebc7045",
+      "controls": 8
+    },
+    {
+      "path": "909-voice-07.json",
+      "target": 0,
+      "voice": 7,
+      "voiceName": "CH",
+      "bytes": 35762,
+      "sha256": "924eadb07b9588e26c2afb8cee24e2921227a5c6271a4c6c8778c95fe04056a6",
+      "controls": 8
+    },
+    {
+      "path": "909-voice-08.json",
+      "target": 0,
+      "voice": 8,
+      "voiceName": "OH",
+      "bytes": 35787,
+      "sha256": "883f0aa3c9db62e21b2e3451d68bf5262aa614cd7825c1e3a57f1c7be0892ebc",
+      "controls": 8
+    },
+    {
+      "path": "909-voice-09.json",
+      "target": 0,
+      "voice": 9,
+      "voiceName": "CR",
+      "bytes": 35802,
+      "sha256": "71901a79485560448b636024ebfe148d910ae7386fb4cf904bcaada62d14b2a8",
+      "controls": 8
+    },
+    {
+      "path": "909-voice-10.json",
+      "target": 0,
+      "voice": 10,
+      "voiceName": "RD",
+      "bytes": 35811,
+      "sha256": "6f4ed1514bbc6513921acced3f9ae22bfae44a20ee0989464c10692958077a05",
+      "controls": 8
+    },
+    {
+      "path": "909-voice-11.json",
+      "target": 0,
+      "voice": 11,
+      "voiceName": "KIT",
+      "bytes": 10632,
+      "sha256": "5e23e365d6d5b683ae62d925b1120ab84e060dadbcb8f2778d62b92bc9866a97",
+      "controls": 2
+    },
+    {
+      "path": "808-voice-00.json",
+      "target": 1,
+      "voice": 0,
+      "voiceName": "BD",
+      "bytes": 45063,
+      "sha256": "d2cce09d13bef3aa37d76a461c9c63db0e3ee063ff17b72ac007db4498b2756b",
+      "controls": 10
+    },
+    {
+      "path": "808-voice-01.json",
+      "target": 1,
+      "voice": 1,
+      "voiceName": "SD",
+      "bytes": 45064,
+      "sha256": "c0d44b6243d8cd3fce112bd7587432acc999a08fb11a18ba4b5168a920b010e7",
+      "controls": 10
+    },
+    {
+      "path": "808-voice-02.json",
+      "target": 1,
+      "voice": 2,
+      "voiceName": "LT",
+      "bytes": 36096,
+      "sha256": "37f1231b32957213254e724f559a969fcb79040de0bb54687310359049b2955c",
+      "controls": 9
+    },
+    {
+      "path": "808-voice-03.json",
+      "target": 1,
+      "voice": 3,
+      "voiceName": "MT",
+      "bytes": 36096,
+      "sha256": "6819fe00df9854c52ee601176b4799d95e8c88450272cb39f23eeab365c36a20",
+      "controls": 9
+    },
+    {
+      "path": "808-voice-04.json",
+      "target": 1,
+      "voice": 4,
+      "voiceName": "HT",
+      "bytes": 36096,
+      "sha256": "cac60a7dbff56e98c66583757123525dd6b3aec52e62649632da358b1533cc5a",
+      "controls": 9
+    },
+    {
+      "path": "808-voice-05.json",
+      "target": 1,
+      "voice": 5,
+      "voiceName": "RS",
+      "bytes": 35757,
+      "sha256": "65f6ecbc749fde9a2d6c7c179ec184ebe2dfef56653da2129f221e5560f67d8d",
+      "controls": 9
+    },
+    {
+      "path": "808-voice-06.json",
+      "target": 1,
+      "voice": 6,
+      "voiceName": "CP",
+      "bytes": 40423,
+      "sha256": "9ff077c99eed721f3326b5b1600ae93870e1f37e5edc7d8fd3207f0245351b2c",
+      "controls": 10
+    },
+    {
+      "path": "808-voice-07.json",
+      "target": 1,
+      "voice": 7,
+      "voiceName": "CB",
+      "bytes": 35541,
+      "sha256": "ecca8a50fc97167a3cc07fd5163fb9270739e67a3c59bb7475bcb800bbf46b16",
+      "controls": 8
+    },
+    {
+      "path": "808-voice-08.json",
+      "target": 1,
+      "voice": 8,
+      "voiceName": "CY",
+      "bytes": 35541,
+      "sha256": "76f4093eb97de1235ce8fb4c763044f624c12f0b99f66519684bb8e28361a157",
+      "controls": 8
+    },
+    {
+      "path": "808-voice-09.json",
+      "target": 1,
+      "voice": 9,
+      "voiceName": "OH",
+      "bytes": 35541,
+      "sha256": "ec1e0550d79e80ecbc1901d3f74ec4264d6e1e6017a34b205959a9f902f64380",
+      "controls": 8
+    },
+    {
+      "path": "808-voice-10.json",
+      "target": 1,
+      "voice": 10,
+      "voiceName": "CH",
+      "bytes": 35550,
+      "sha256": "005575eebba4e28f644ed733e829484b3f4ce1f7a527bd053384542a0149eda1",
+      "controls": 8
+    },
+    {
+      "path": "808-voice-11.json",
+      "target": 1,
+      "voice": 11,
+      "voiceName": "KIT",
+      "bytes": 10632,
+      "sha256": "7552042b5111a85f0b87df6dd5c702c8c7f97f97c7ea0661d57c1cc5ad2e1f2d",
+      "controls": 2
+    }
+  ],
+  "sourceSha256": {
+    "firmware/src/app/ui.c": "892773492da1ecd7d2084a0e6ea0ac1d0e9dfbe2d0c4482f9130d0fccb762101",
+    "firmware/src/app/engine.c": "40179b0573ef892742f450ff9a72ccb0f77dd27b8177a53a0a78f68118dd0145",
+    "firmware/src/dsp/drum909.c": "d558f150acfafa82eb5cc7fdd1d384e8bb18b3cf773032507cad3ff3675df584",
+    "firmware/src/dsp/drum808.c": "643ffb949b394c9a7d50cc7cbe83aa0720bda06bf68335841b33c12fcba3d23b",
+    "firmware/src/dsp/fastmath.h": "fbe052086010b17d8194b9cd3d61d3cb349cc1def3817ae9651a6683d7850b09"
+  },
+  "qualification": "SOURCE_FORMATTER_EXPORT_ONLY; no full lane/device admission"
+}

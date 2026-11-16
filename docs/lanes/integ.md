@@ -99,3 +99,11 @@ Independent review identified missing retained-workflow, blob-size/LFS and PSRAM
 Final13 producer and independent fixtures PASS after inline-JSON and three source-grammar red/green corrections (parenthesized defines, Kconfig y, typed bool). The common gate runs these regressions before limits. The prior05850 source inventory of1126 tracked blobs passes the bounded helper; this is not a comprehensive secret or opaque binary/content audit and is not C4/full Local acceptance. Missing/unmerged/uninspectable objects fail closed. Independent final source review and exact-head gate remain required.
 
 The next source composition also retains all20 exact Web8eb31e86c204279f86f73805d690728f24944fe8 changes since c250, including the independently source-reviewed Remote inspector crash correction and stronger firmware-render provenance tests. No product code/manifest has been rewritten by integration; real browser after-state and full gates remain unqualified.
+
+## Current native-unit readout and browser evidence composition
+
+Normal composition retains the full50-path Web340d5b44f65525691b54127df6e2d38bcecf3279 delta since8eb, including Remote9d71 source-native drum formatters and all241manifest paths. Latest common fail-closed gate and tracked-object scanner remain unchanged. Product runtime equals reviewed Web8ce; later files are bounded browser/evidence records, not a full visual or Local gate.
+
+Producer Web checks report product88Node+32Python, workspace84plus apps and Remote checks. Independent actual browser evidence covers native readout changes. Web producer browser evidence covers all five sample previews without media errors/selection changes, at the recorded viewport only. Preset file import and complete required viewport/Local qualification remain unmet. This composition still needs its exact source checks. No Pages publication or consolidated merge is claimed.
+
+Producer selected composition checks pass: build241, product/workspace/Remote chain exit0, normal-sandbox source policy14, tracked-object audit1183blobs. No browser/full Local run. An initial policy filename typo produced no policy result; correct gate-selected policy ran successfully. One existing donor evidence log absolute workspace prefix was sanitized to <source>; no product byte changed.
