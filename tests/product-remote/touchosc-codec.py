@@ -77,6 +77,31 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
         for mutation in ['b[25]=0','b[21]=6','b[9]=43','b[50]=2','b[7]=5','b[29]=99','b[8]=2','b[1]=0']:
             assert run(ready_prefix+'s:read(1);local b='+read_table+';b[21]=5;b[25]=3;'+mutation+';assert(not pcall(function() s:accept(b) end));assert(s.phase=="failed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
         assert run('local S=dofile('+json.dumps(str(session_path))+');assert(not pcall(S.new,codec,{testOnly=false}));return "PASS"')=='PASS'
+        controller_path=ROOT/'web/product-site/remote/touchosc/dnr2-controller.lua'
+        setup='local out={};local phase;local now=0;function getMillis() return now end;function DNBOX_ON_STATE(p) phase=p end;function sendMIDI(b,r) assert(r[1]==true);for i=2,#r do assert(r[i]==false) end;out[#out+1]=b end;DNBOX_CODEC=codec;DNBOX_SESSION=dofile('+json.dumps(str(session_path))+');'
+        pin='DNBOX_SIMULATOR_PIN={testOnly=true,client=93,catalogCrc=305419896,catalogCount=3,controls={{id=1,kind=1,min=0,max=1000}}};'
+        load_controller='dofile('+json.dumps(str(controller_path))+');init();'
+        assert run(setup+load_controller+'onReceiveNotify("dnr2",{action="connect"});assert(#out==0);return "PASS"')=='PASS'
+        controller_prefix=setup+pin+load_controller+'onReceiveNotify("dnr2",{action="connect"});'
+        def controller_exchange():
+            global controller_prefix
+            packet=run(controller_prefix+'local text="";for _,v in ipairs(out[#out]) do text=text..string.format("%02x",v) end;return text')
+            process.stdin.write(packet+'\n');process.stdin.flush();reply=json.loads(process.stdout.readline())['hex']
+            table='{'+','.join(str(b) for b in bytes.fromhex(reply))+'}'
+            controller_prefix+='onReceiveMIDI('+table+',{true,false,false,false,false,false,false,false,false,false});'
+            return table
+        controller_exchange();controller_exchange();last_reply=controller_exchange()
+        assert run(controller_prefix+'assert(phase=="ready" and #out==3);return "PASS"')=='PASS'
+        controller_prefix+='onReceiveNotify("dnr2",{action="set",id=1,value=950});'
+        controller_exchange()
+        assert run(controller_prefix+'assert(phase=="ready" and #out==4);return "PASS"')=='PASS'
+        ready_controller=controller_prefix
+        controller_prefix+='onReceiveNotify("dnr2",{action="close"});';controller_exchange()
+        assert run(controller_prefix+'assert(phase=="disconnected" and #out==5);onReceiveNotify("dnr2",{action="set",id=1,value=1});assert(#out==5);return "PASS"')=='PASS'
+        assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});onReceiveNotify("dnr2",{action="set",id=1,value=1});assert(#out==5);onReceiveMIDI({144,60,100},{true});onReceiveMIDI('+last_reply+',{false,true});assert(phase=="pending");now=1001;update();assert(phase=="failed");onReceiveNotify("dnr2",{action="set",id=1,value=1});assert(#out==5);return "PASS"')=='PASS'
+        assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});now=-1;update();assert(phase=="failed");return "PASS"')=='PASS'
+        assert run(ready_controller+'onReceiveNotify("dnr2",{action="read",id=1});onReceiveNotify("dnr2",{action="cancel"});assert(phase=="disconnected" and #out==5);onReceiveMIDI('+last_reply+',{true});assert(#out==5);return "PASS"')=='PASS'
+        print('PASS TouchOSC root-callback source -> C host; explicit simulator connect, route1 only, no-pin no-send, pending/timeout failclosed; NOT actual TouchOSC runtime')
         print('PASS simulator-only Lua session -> C host identity/catalog/lease/read/set/close; limits, pending transaction and timeout fail closed')
         print('PASS Lua codec -> pinned C host HELLO/OPEN/READ/SET/CONFLICT/CLOSE; no TouchOSC or device claim')
     finally:process.terminate();process.wait()

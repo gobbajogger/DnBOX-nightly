@@ -1,7 +1,43 @@
-# TouchOSC DNR2 wire foundation
+# TouchOSC DNR2 source harness
 
-`dnr2-codec.lua` is a Lua 5.1-compatible byte codec for the same 51-byte DNR2 contract as the browser and pinned C host core. It does not send MIDI, create a lease, admit a device, or map controls.
+**Source only. R6 remains FAIL.** No TouchOSC application/document execution,
+MIDI endpoint routing, native engine admission or hardware test is claimed.
+This is not the historical musical-note companion and does not substitute for
+its original files.
 
-TouchOSC's documented `sendMIDI` and `onReceiveMIDI` interfaces use lists of message bytes. Any later adapter must choose an explicit connection mask because omitting it broadcasts to configured connections. See [official TouchOSC scripting API](https://downloads.hexler.net/touchosc/scripting-api.html).
+- `dnr2-codec.lua`: Lua 5.1-compatible exact 51-byte DNR2 command/reply framing.
+- `dnr2-session.lua`: no-I/O simulator-only U32 session, catalog/incarnation and
+  lease correlation, one pending command, bounds and failure guards.
+- `dnr2-controller.lua`: TouchOSC root callback source with injected codec,
+  session module and explicit simulator pin. With no pin it sends nothing.
+  Only an explicit `dnr2` connect notification starts HELLO/OPEN/READ.
+  Connection 1 is the sole send route. Unrelated MIDI and other routes do not
+  advance the session. Timeout, clock rollback and cancellation discard the
+  session. There are no HELD commands, timers that renew a lease, or native pins.
 
-Remaining before R6 can pass: TouchOSC document/runtime integration, reviewed native catalog, complete incarnation and request correlation, lease lifecycle, typed float conversion, conflict handling, explicit user connect/apply actions, and a real TouchOSC-to-host test. Testing this codec with system Lua and the host C fixture is not a TouchOSC runtime or hardware test. Never emit messages merely by loading this file.
+A future document builder must inject `DNBOX_CODEC`, `DNBOX_SESSION` and
+`DNBOX_SIMULATOR_PIN` before the controller script. An optional
+`DNBOX_ON_STATE(phase, value)` callback receives confirmed values. Notify actions
+are `connect`, `read` with `id`, `set` with `id` and integer `value`, `close`, and
+`cancel`. This interface is tested source, not a qualified document artifact.
+Do not route this harness to a physical device or present it as a native Remote.
+
+## Verification
+
+```
+python3 tests/product-remote/touchosc-codec.py
+```
+
+The test compiles the hash-pinned actual DNR2 C core/wire with synthetic host
+callbacks, then runs the Lua source using the system Lua 5.4 library. It checks
+actual command/reply bytes, session transitions, source-domain bounds and
+root-callback routing with a stubbed `sendMIDI`; no MIDI API or device is used.
+The callbacks are replayed deterministically between C-host exchanges. This is
+not proof of the Lua 5.1/custom TouchOSC VM, UI controls, or real transport.
+
+TouchOSC documents the callback/message interface in its official
+[control API](https://hexler.net/touchosc/manual/script-objects-control) and
+[scripting API](https://downloads.hexler.net/touchosc/scripting-api.html).
+Those contracts inform the source binding; actual application acceptance is
+still required. Document layout, runtime admission, lease keepalive/HELD behavior
+and full native control coverage remain open.
