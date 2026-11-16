@@ -76,3 +76,5 @@ Repeated mistake: commands mixed workspace-root-relative paths with a repository
 - No consolidated merge or Pages publication. Normal sandbox remains required, tests that cannot run remain NOT_RUN/FAIL.
 
 Repeated mistake: the integration owner ended after an intermediate handoff while independent I items remained. Keep one accountable owner active through those items and all applicable gates; verify actual progress before transferring ownership.
+
+- Follow-up composition retains b97d1bbb163928834aca65be41af5db43f281814 with Remote ffe227c live LEVEL alias preview/cancel correction, independently reviewed. Earlier efe7 lacked this correction and is not final review input. Product manifest remains owner-maintained211 files.
