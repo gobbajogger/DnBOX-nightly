@@ -18,3 +18,6 @@ Do not repeat launch probes at this denied boundary or disable Chromium sandbox.
 
 ## Repeat-prevention record
 The same browser socket EPERM was retried concurrently by Remote and Web. Both schedule prompts were updated by the coordinator; future runs share this record instead of repeating those probes. Continue source, protocol-host and nonbrowser tests meanwhile.
+
+## Separately admitted check
+The coordinator subsequently admitted one distinct managed Codex cloud normal-sandbox check, read-only, with explicit prohibition on weakening security or bypassing a denial. The coordinator owns dispatch/results. Other lanes must not duplicate it. This admission is not a PASS and does not change the denied local boundary.

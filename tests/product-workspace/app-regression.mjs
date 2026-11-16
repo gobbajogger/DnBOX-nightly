@@ -2,7 +2,7 @@ let failures=0;function check(name,fn){try{fn();console.log('PASS',name);}catch(
 import fs from 'node:fs';import assert from 'node:assert/strict';
 const base=new URL('../../web/product-site/remote/',import.meta.url);
 // Deterministic source-event shim only. No DOM engine, browser, server or rendering.
-class E{constructor(id=''){this.id=id;this.handlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}addEventListener(k,f){this.handlers[k]=f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
+class E{constructor(id=''){this.id=id;this.handlers={};this.captureHandlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}addEventListener(k,f,options){if(options?.capture)this.captureHandlers[k]=f;else this.handlers[k]=f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
 const nodes=new Map(),views=['roll','drums','locks','sound','mix','patterns','song','files'].map(view=>{const e=new E();e.dataset.view=view;return e;}),modes=['select','move','draw','length','pan'].map(mode=>{const e=new E();e.dataset.mode=mode;return e;});
 globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new E(),addEventListener(){}};globalThis.window={addEventListener(){}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
 const $=document.getElementById;$('zoom').value='1';$('lane-kind').value='velocity';$('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];await import(new URL('app.mjs',base));
@@ -102,3 +102,14 @@ check('modeless Delete removes the focused note and Undo restores it',()=>{
 await $('connect').handlers.click({preventDefault(){}});
 assert.match($('conn-state').textContent,/Apply stays off/);assert.equal($('apply').disabled,true);
 console.log('PASS actual page Connect fails closed without admitted simulator catalog');
+
+check('actual app binds vertical pitch pinch independently of time zoom',()=>{
+ const el=$('roll-scroll'),h=el.captureHandlers;
+ const event=(id,y)=>({button:0,pointerId:id,clientX:100,clientY:y,preventDefault(){},stopImmediatePropagation(){}});
+ const initial=Number.parseFloat($('roll-grid').style.height)/128,width=$('roll-grid').style.width;
+ h.pointerdown(event(500,100));h.pointerdown(event(501,200));
+ h.pointermove(event(500,50));h.pointermove(event(501,250));
+ assert.equal(Number.parseFloat($('roll-grid').style.height)/128,Math.min(80,initial*2));
+ assert.equal($('roll-grid').style.width,width);
+ h.pointerup(event(500,50));h.pointerup(event(501,250));
+});assert.equal(failures,0);

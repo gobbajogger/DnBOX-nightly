@@ -49,3 +49,6 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 
 - Repeated browser EPERM occurred independently in Remote and Web; both schedules now carry prevention. Shared record: [browser-environment.md](browser-environment.md). No further denied-boundary retries.
 - R6 wiring gap: baseline app never mounted its tested firmware-link module. Entry now mounts fail-closed with only explicit testOnly simulator admission; absent/non-test bundles cannot request MIDI. Actual-page source-event Connect test PASS; browser/device admission remains FAIL.
+- Independent review found production viewport binding omitted vertical row callbacks although helper tests passed. Added bounded 8–80 px row binding and actual-app capture-phase pinch regression: fails before, passes after; time width unchanged. Source-event regression is not browser evidence.
+- For helper/API changes, verify the shipped app imports/binds the behavior and add an app-entry regression; helper-only PASS does not qualify integration.
+- Single distinct managed cloud normal-sandbox browser check admitted and dispatched by coordinator. Do not duplicate; wait for actual results while continuing source work.
