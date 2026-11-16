@@ -201,7 +201,7 @@ dialog::backdrop{background:#000a}
 
 /* Phone landscape: same three rows, compressed; lane 88 */
 @media (orientation:landscape) and (max-height:500px){
- :root{--margin:12px;--key-w:56px;--lane-h:88px;--tab-gap:20px;--tab-w:auto;--eng-w:auto;--eng-gap:12px;--btn-h:28px}
+ :root{--margin:12px;--key-w:56px;--lane-h:80px;--tab-gap:20px;--tab-w:auto;--eng-w:auto;--eng-gap:12px;--btn-h:28px}
  .hdr{height:36px}
  .brand{width:auto;font-size:18px;gap:8px;margin-right:24px}
  .project-name{width:auto;font-size:14px;margin-right:24px}
