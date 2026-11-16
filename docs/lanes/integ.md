@@ -3,21 +3,22 @@
 Owner: accountable integration lane. Branch: lane/integ-start-files. RULES.md v2 only.
 Consolidated nightly remains `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`; no source merge or Pages publication is claimed.
 
-## Current checklist
-- C1 FAIL: complete exact before/after Local gate remains unmet. Scoped source, unit and browser findings are not full qualification.
-- C2 PASS at prior 0cad: exact fresh consolidated containment and deletion-reason checks independently passed; this composition retains 0cad as first parent and deletes no prior files.
-- C3 FAIL: full independent Review10/10 at all required viewports remains pending.
-- C4 FAIL: limits for the newly composed head not yet measured.
-- C5 FAIL: integration and every final lane remain incomplete.
-- C6 FAIL: PR136 remains draft; no merge or publication.
+## Current checklist and exact scope
+- C1 FAIL: complete before/after Local gate is not qualified; source-diagnostic tests are not browser or release qualification.
+- C2: prior exact 7ca561b50833d2d6a38e10ada05b80047391f41a no-loss independently PASS against fresh 9165adb9; this normal two-parent candidate preserves that first parent and deletes no files. Exact new-head check remains required.
+- C3 FAIL: required full independent viewport Review 10/10 remains incomplete.
+- C4 FAIL: prior 7ca bounded limits passed 1,354 tracked blobs; exact new-head scan and residual content review remain required.
+- C5/C6 FAIL: all lane finish lines remain open; draft PR136 is unmerged and unpublished.
 
 ## Current composition and next action
-The next candidate combines prior integ0cad with Web `c25012642ffa0076de177d836f02b53ef61e390c`, retaining the latest containment helper and fail-closed normal-sandbox policy. This includes actual browser-discovered stale preview controls fixed at d315, the producer's exact-d315 nonbrowser replay and independent bounded browser receipt, plus reviewed broker work and the d3d3 resize correction. Resize independent review and real combined landscape/hit testing are still pending; this draft does not promote prior browser evidence to the new composition. Remote's unpublished queued-DOWN candidate is deliberately excluded.
+Normal composition of prior integ 7ca561b50833d2d6a38e10ada05b80047391f41a and Web 7b32261a9e709e7bf0a267de84c10e730b70e2f3. Includes the complete reviewed source-only color, lifecycle, explicit-envelope and LIGHT-theme diagnostic dependencies, not merely their aggregate runner. The 246 product files, source manifest and common gate policies remain unchanged. Actual native state in these labs is supplied fixture input, not admitted firmware telemetry, current full-screen W3 parity or browser qualification.
 
-No firmware catalog/package or deployed branch is changed. Preserve all214 product assets and the coherent source manifest. Next: exact combined scoped tests and source/normal-browser review; full Local remains required before Pages.
+The prior 30-minute push interval was exceeded during environment recovery and priority combined-firmware native/map qualification. Recovery verified the live 7ca ref and absence of an uncertain write, then resumed this coherent source-lab batch instead of creating an empty checkpoint. Next: independent exact-head no-loss/limits and affected-source review, while QA continues the corrected firmware host batch.
 
 ## Cross-repository dependencies
-Firmware fab7 retains exact0ac native resource evidence, bounded no-tracer host stress and actual current-host descriptor census. Current firmware has no DNR2 endpoint; Remote synthetic callbacks do not qualify current native binding. Integ owns checked scalar/queue/revision/held-owner admission, with Remote consumer coordination and no device writes.
+Latest measured firmware runtime is 2d86f59491d3ec33c1ab586a62ae0f4e9ff0a490; docs-only f2f337b7e3243d57ffd66c35c2c81f6c43c4777f preserves it. Independent default-PADCAL1 Elite/Pro native builds leave 2,548/2,556 B XIP, 1,096 B ordinary RAM and 836 B pool margin above the 8,192 B reserve. Exact map-only ELFs match independent native outputs. Corrected affected-host execution remains QA-owned; no full Local or all-final-engine claim. The native DNR2 endpoint remains unadmitted. Scalar host diagnostics do not qualify native transport, HELD ownership or activity telemetry.
+
+Earlier dated composition entries below are retained history, not current status. Consolidated targets remain e742be7b (firmware) and 9165adb9 (nightly); no main, gh-pages or settings changes.
 
 ## Conflicts noted
 - CHECKLISTS I0 describes no-new-regressions while RULES 9 requires passing before and after. No merge is authorized by a failed/VOID gate alone; independent review required.
@@ -149,3 +150,6 @@ Actual adapted replay exit0:23 subprocess steps, six nested TAP suites with22 ex
 Normal composition of Web ab2685b8ad6e9731515877b86dedfba7af8f1481 adds the missing native-body diagnostic dependencies and corrected 27-step runner together. Preserved the independently accepted null-safe spawn-output diagnostic; all product bytes, policies and publication state remain unchanged. The earlier 23-step/22-test correction remains historical evidence, not evidence for these additional inputs. Current exact replay is required; no W3, browser or full Local claim.
 
 Actual full-closure replay exit0:27 steps, seven actual nested TAP suites totaling25 tests, outer2PASS including intentional failing-child detection. Independent source acceptance applies to the complete donor closure plus unchanged null-safe diagnostic. Logs/receipt: docs/lanes/evidence/integ-full-lab. This does not promote historical source frames to current UI/W3 qualification.
+
+## Current theme-source diagnostic replay
+- Actual composed aggregate exit 0: 36 child steps, 12 nested TAP suites / 42 tests, and three outer tests including executed failing-child and missing-cwd regressions. Receipt/log: docs/lanes/evidence/integ-theme-composition/. No skipped-child coverage inferred from an outer exit alone.
