@@ -119,3 +119,7 @@ Producer exact staged consumer replay against independently built1ab host passes
 ## Bounded Web keyboard evidence composition
 
 Normal composition of reviewed Web 1a1d3a975562e1459037ee6938d1f4e551878a36 adds only two documentation files over previously composed 58ec. Actual 8ce keyboard Menu/Escape/navigation observation remains bounded evidence, not complete viewport/Local qualification. All production product rows and current gate policies remain unchanged from 1d068. Firmware current draft is 6fc998c95a9ab436c8bc46b6cd74c16fe868d242, identical production 646; targets remain e742/9165, unmerged.
+
+## Shared roadmap reconciliation
+
+Working/Pending/Complete queues are synchronized with firmware7f6d8a44396e8d7da28f66e6fcc712c537494b1b: actual consolidated e742/9165 remain unmerged; latest default combined firmware fef9 resources and bounded read-only collector observation are recorded without finished-lane or native endpoint claims. Five encoded samples109274B cannot fit the recorded stock app headroom unchanged. Production website and current gate policies are unchanged from4c9.
