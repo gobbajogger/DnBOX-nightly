@@ -70,3 +70,9 @@ Repeated mistake: commands mixed workspace-root-relative paths with a repository
 ## Remote plus web composition
 - Updated normal two-parent composition consumes exact3edfb16374c99c9ccb99e27d45e3d1af25360185 (web plus Remote cac407) while retaining integ fail-closed policy. Source manifest209 files belongs to web and is retained unchanged. Producer product57Node+25Python/workspace84/Remote63/protocol evidence belongs to3ed input, not an automatic full combined PASS.
 - Native/TouchOSC device acceptance, live Pages byte validation and full normal-browser gate remain unqualified; no consolidated or gh-pages merge.
+
+## Stable Web/Remote mixer composition
+- Normal composition retains exact e7da6cf6e7f475388c31e0b64c5768355e1dc9fb Web+Remote source and its211-file manifest with latest integ cd2 fail-closed browser policy. Web producer reports build211/product64+29/workspace84+apps/Remote66/Lua-C-host PASS; these scoped results do not substitute for this head's independent gate or browser runtime.
+- No consolidated merge or Pages publication. Normal sandbox remains required, tests that cannot run remain NOT_RUN/FAIL.
+
+Repeated mistake: the integration owner ended after an intermediate handoff while independent I items remained. Keep one accountable owner active through those items and all applicable gates; verify actual progress before transferring ownership.

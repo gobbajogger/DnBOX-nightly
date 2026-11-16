@@ -347,7 +347,7 @@
     {
       "path": "projects/index.html",
       "beforeSHA256": "2b95a7e35882626eecb93f2e1ccbfb2db2c96274b622eb82075d8624a78151c7",
-      "afterSHA256": "4ad1a3e74590b6805f4a8c9930fb7cd11d40b3d739f8de5c8e4d9546893ddeaf",
+      "afterSHA256": "45c2e2ed47c039dad2b3874156f746ddd652c9283aac77691f5043c371f1ace0",
       "changes": [
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
@@ -373,6 +373,10 @@
           "before": "<p class=\"small\">Move your whole live project\u2014song arrangement, patterns and sounds\u2014to or from a file. Include samples for a portable copy.</p>",
           "after": "<p class=\"small\">Earlier full-project workspace. Back up song arrangement, patterns and sounds with their original firmware. Revision 13 import is unavailable here.</p><details class=\"project-compatibility\"><summary>Earlier project compatibility</summary><p class=\"small\">Supported pattern/sound schema pairs: 3/4, 3/10, 6/10, 6/11, 8/10, 8/11 and 9/11. Tagged sound-11 projects must have the expected 36,452-byte layout. File inspection does not prove device compatibility. Keep firmware-matched backups. <a href=\"../manual/projects-guide.html\">Format and recovery reference</a>.</p></details>",
           "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "Browser MIDI export is unavailable: no qualified source-executed browser provider is installed. File inspection and the original full-project backup/restore tools remain separate. A local workspace draft is not a native project or MIDI export.",
+          "after": "Browser MIDI export is unavailable in this preview. You can inspect files here; use the original full-project backup/restore tools separately. Local workspace drafts are not native projects or MIDI exports."
         }
       ]
     },
