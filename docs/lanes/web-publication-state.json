@@ -1,7 +1,7 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "2e04ffb89a6cbb115fcac27569fd1d96454b6867",
+  "sourceHead": "68f4b7b718a45291c86d4548b996c5095e8353a4",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "baseBlobCount": 561,

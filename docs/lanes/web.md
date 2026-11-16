@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 2e04ffb89a6cbb115fcac27569fd1d96454b6867   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 68f4b7b718a45291c86d4548b996c5095e8353a4   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -66,3 +66,5 @@ C1–C6 and W1–W5 above. No lane completion or design approval claimed.
 - I5/Web preview wiring now uses admitted exact five WAV assets through module-relative public URLs, no private-audio request. Streaming is bounded to each contract size, credentials omitted, picker independently checks WAV/PCM hashes and rate before media creation. Preview works with empty selection in source tests; choices remain browser-only with no device writes. Browser media assertions added but NOT_RUN.
 - Builder audio boundary now admits only exact five contract IDs .wav/.adpcm when pinned contractdf61cfe0, size and SHA256 match; all other binaries remain rejected. Tests reject forged manifest bytes/IDs, changed/symlink/FIFO contracts, truncated/oversized streams, HTTP failures, and bit-flipped actual samples. All ten real assets build byte-identically.
 - Combined source build PASS203 files, focused asset/provider21/21 PASS, product57 Node+15 Python PASS. Whole Local/browser/independent visual review still FAIL. Exact assets are recovered encoded zones and deterministic previews, not recovered original pre-backup WAVs.
+
+- W3 checker implemented in scripts/compare-firmware-html.py: exact firmware+website pins, complete matching inventories, genuine browser-capture metadata, bounded hash-verified240x240 PNGs and zero pixel tolerance.8 synthetic/unit tests PASS. Actual native4bacd2e7135-screen baseline remains incomplete; missing HTML receipt causes FAIL before any image comparison. Usage/evidence boundary in docs/lanes/web-firmware-html-comparison.md. No W3 or Review PASS claimed.
