@@ -23,3 +23,24 @@ test('obsolete parser failure cannot overwrite a newer verified selection messag
  f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([1]).buffer}];const pending=f.file.onchange();await Promise.resolve();await Promise.resolve();
  f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([2]).buffer}];await f.file.onchange();const current=f.status.textContent;rejectOld(Error('old parse failed'));await pending;assert.equal(f.status.textContent,current);assert.equal(f.button.disabled,true);f.api.dispose();
 });
+
+// Shipped parser + actual adapter/panel, synthetic source fixture, no renderer/device.
+import{readFileSync}from'node:fs';
+import{inflateSync}from'node:zlib';
+import{createHash}from'node:crypto';
+import{makeProjectFile,readProjectFile}from'../web/product-site/projects/exchange/vendor/x0x_projects.js';
+async function realBundle(){
+ const spec=JSON.parse(readFileSync(new URL('./fixtures/project-v6-sound11-wbl0.json',import.meta.url)));
+ assert.equal(spec.synthetic,true);assert.equal(spec.contains_user_data,false);
+ const project=new Uint8Array(inflateSync(Buffer.from(spec.zlib_base64,'base64')));
+ assert.equal(createHash('sha256').update(project).digest('hex'),spec.sha256);
+ return makeProjectFile(project,{layout:{count:1,size:4096,ext:true,slots:[{size:4096,off:65536,nz:0,name:'',used:0,kb:0}]},images:[null]}, {portable:false,name:'Synthetic inspection',created:'2026-11-16T00:00:00.000Z'});
+}
+test('shipped parser accepts real synthetic bundle through panel but never enables absent renderer',async()=>{
+ const bytes=await realBundle(),f=fixture(readProjectFile);f.file.files=[{size:bytes.length,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}];
+ await f.file.onchange();assert.equal(f.parsed(),1);assert.match(f.status.textContent,/Project checked/);assert.equal(f.button.disabled,true);assert.equal(f.exports(),0);f.api.dispose();
+});
+test('shipped parser rejects CRC-corrupted bundle through panel without enabling export',async()=>{
+ const bytes=await realBundle();bytes[bytes.length-1]^=1;const f=fixture(readProjectFile);f.file.files=[{size:bytes.length,arrayBuffer:async()=>bytes.buffer}];
+ await f.file.onchange();assert.equal(f.parsed(),1);assert.match(f.status.textContent,/could not be verified/);assert.equal(f.button.disabled,true);assert.equal(f.exports(),0);f.api.dispose();
+});
