@@ -50,3 +50,14 @@ test fixture, not an approved product layout or usable-delivery claim. XML
 packing and source execution pass; opening in TouchOSC remains NOT_RUN.
 TouchOSC is not installed in the selected cloud workspace; the available Mac
 was checked and remains offline.
+
+## Actual-app host diagnostics (still not native admission)
+
+`tests/product-remote/actual-host/` pins the genuine firmware host adapter and
+replays these unchanged wire callbacks against actual stored UI/engine targets.
+Scalar SET may return QUEUED: the session accepts that status only for SET and
+requires exactly one own revision increment. The callback value includes
+`queued:true`, which does not mean audio has applied the target. An extra SET
+revision fails closed; a newer READ discards other cached values until refreshed.
+The exported catalog/native flags remain false. Actual TouchOSC document opening,
+MIDI routing, native endpoint/HELD qualification and full R6 acceptance remain open.

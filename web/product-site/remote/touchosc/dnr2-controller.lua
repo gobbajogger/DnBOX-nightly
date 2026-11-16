@@ -55,7 +55,7 @@ function onReceiveMIDI(message, connections)
   if reply.op==0 then invoke(session.open)
   elseif reply.op==1 then invoke(session.read,pin.controls[1].id)
   elseif reply.op==7 then session=nil;state('disconnected')
-  else state('ready',{id=reply.control,value=reply.value,kind=reply.kind}) end
+  else state('ready',{id=reply.control,value=reply.value,kind=reply.kind,queued=reply.status==1}) end
   return true
 end
 function update()

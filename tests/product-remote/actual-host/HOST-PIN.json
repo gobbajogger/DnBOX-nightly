@@ -1,0 +1,12 @@
+{
+  "repository": "gobbajogger/X0X37-for-Loopy-Pro",
+  "commit": "1ab15cf2f684ed2aa72a82e44ce82ab506ddd0f7",
+  "tree": "96895a7fa5cdf433353a658ef81a57e743667122",
+  "selector": "remote-actual-core",
+  "catalogCrc": 4005792705,
+  "catalogCount": 326,
+  "nativeAdmitted": false,
+  "admitted": false,
+  "testOnly": true,
+  "browserClientSha256": "a68ca59e0b7052a878ce7c5be6cc96ef325e5a19cb7379c0d4c002caa2985908"
+}

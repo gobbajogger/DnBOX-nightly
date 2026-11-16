@@ -1,0 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
+import test from'node:test';import assert from'node:assert/strict';import{createHostTransport}from'./actual-host-transport.mjs';
+test('silent host has a finite exchange budget and child cleanup',async()=>{const h=createHostTransport({binary:process.execPath,args:['-e','setInterval(()=>{},1000)'],timeoutMs:100});try{await assert.rejects(h.line('request'),/timed out/);const result=await h.closed;assert.ok(result.signal||result.code!==null);await assert.rejects(h.line('later'),/closed/);}finally{await h.close();}});
+test('early host exit rejects pending exchange and cleans up',async()=>{const h=createHostTransport({binary:process.execPath,args:['-e','process.exit(3)'],timeoutMs:1000});try{await assert.rejects(h.line('request'),/exited|EPIPE/);await h.closed;}finally{await h.close();}});
