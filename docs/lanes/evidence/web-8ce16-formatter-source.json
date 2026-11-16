@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e",
+  "remoteParent": "9d71bf8ee1be3c27870b8d45ceaa6e3f593a04de",
+  "productFiles": 241,
+  "scope": "Source composition regression checks, not full Local or device qualification",
+  "counts": {
+    "productNode": 88,
+    "productPython": 32,
+    "workspaceNode": 84,
+    "remoteNode": 80
+  },
+  "logs": [
+    {
+      "path": "web-formatter-product.log",
+      "bytes": 11134,
+      "sha256": "1c6962846ff1c0118b3584e308000540c4d20f1d6045e5f82159e82f793c30df"
+    },
+    {
+      "path": "web-formatter-workspace.log",
+      "bytes": 12769,
+      "sha256": "9050596b2b1f488c743eb249fc07f26db86e1ab9d6f6985db1ac4dc348642118"
+    },
+    {
+      "path": "web-formatter-remote.log",
+      "bytes": 7849,
+      "sha256": "87a609e23d031697c54b59215da5828028f275c1b733fc569c8ae5e2f2cacd8f"
+    }
+  ]
+}

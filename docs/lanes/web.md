@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 25ff1c25f05790a8d7f54a9eab515109b7f7749e   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -155,3 +155,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Full current nonbrowser diagnostic completed exit0: exact14968 source/test closure, with only this lane's observation text dirty; npm test command unchanged except final visual stage deliberately omitted. Log web-14968-nonbrowser.log. All tests before visual passed, not full npm test/clean-tree Local. Immutable browser8eb source remained unchanged throughout.
 
 - Coherent Remote9d71 native formatter composition retains all214 prior product paths and adds27 formatter files,241 hash-verified rows. Shared manifest conflict resolved only with Remote-owned rows; no unrelated source replacement. Product88 Node+32 Python,workspace84+app scenarios and Remote suite PASS. Actual readout browser after check remains required; no rejected6px geometry included. Logs web-formatter-*; main8eb review snapshot unchanged.
+
+- Exact8ce formatter composition source evidence persisted with hashes: product88 Node+32 Python, workspace84+four actual-app scripts, Remote80 PASS; sourceReceipt web-8ce16-formatter-source.json. Independent9d71 typed-table review accepted, but browser-after and full gates remain separate. Immutable241-file8ce snapshot now served; tester owns unit-readout edit/Undo check.
