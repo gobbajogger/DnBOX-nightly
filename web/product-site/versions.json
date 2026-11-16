@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "repo": "https://github.com/gobbajogger/{{nightlyRepo}}",
-  "pages": "https://gobbajogger.github.io/{{nightlyRepo}}/",
+  "repo": "https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly",
+  "pages": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/",
   "latest": "nightly-94197fc8-dev",
   "versions": [
     {
@@ -15,7 +15,7 @@
       "source_tree": "72d28fbc741244d18fa3d18495da16ab0fcb1d24",
       "title": "DnBOX 0.0.26 — corrected boot-guard hardware test (94197fc8)",
       "description": "Owner-test candidate, not hardware-proven or production. Replaces the withdrawn 600b build; includes the reviewed retained-RAM boot-guard correction, SMK-37 identity, sample-integrity fixes and host fixture repair. Physical startup/restart and recovery still require owner testing. Keep a backup and the known-good 0.0.25.1 package. Exact-head Elite/Pro native builds PASS: app544232/544224B, free flash8440/8448B, pool8340B each. SDKV1.2.14/PADCAL0; bundledBTa334208b61552B CRC32564a8f55; package checks PASS. Full-suite raw434PASS/6FAIL/2NOT_RUN retained; subsequent focused checks close the four fixture failures, Lua,808/909 reference gaps and hiddenTB3PO gap; browser-only test N/A, not passed. Owner strict emu360 on unchanged d408 production inputs: Elite11406us/Pro11410us, zero late,648halves,3repeats. Not a measurement of these newly rebuilt image hashes. Boot-guard native checks and90seeded cases/model PASS, not hardware proof.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/869",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/869",
       "models": {
         "elite": {
           "product": "SMK-37 Elite_900",
@@ -24,7 +24,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -33,7 +33,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc"
         }
       }
     },
@@ -53,7 +53,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -62,13 +62,13 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"
         }
       },
       "display_version": "0.0.25.1",
       "title": "Elite and Pro (DN Box 0.0.25.1 79280e76: pattern chain uses the longest playing part)",
       "description": "DEVICE NOT TESTED. Source lane/025-zero-dropout 79280e763341d03ba43266d3e25dad66f12de860 (tree ab2e16a61c81abbcb6c4a71bd83bf0b5d943c120): a chain slot lasts for the longest playing part in the current pattern (909, 808, both 303s and BREAK), counting length and rate, rounded up to a whole 909 bar. Muted, part-off and empty parts do not extend the slot. Chaining stays live-only and is not saved. Firmware reports 0.0.25, GIT 79280e76. JieLi SDK V1.2.14, X0X_DEV_PADCAL=0. Elite_900 and Pro_900; app 547,880 B; RAM .data+.bss 95,556 of 98,304 B (2,748 B free); pool 335,744 of 344,064 B (8,320 B free, 8,192 B minimum). Bundled Bluetooth controller a334208b (61,552 B, CRC32 564a8f55); package_nightly --check exit 0 for both. Official emu360 gate (fm1-live, 360 MHz, 0 late during the test, worst under 11,609 µs): Elite 11,548 µs PASS, Pro 11,564 µs PASS. These are 52 µs and 76 µs above the 1ec5d683 figures (11,496 / 11,488); that sits inside the same-day passing run-to-run range (about 11,484–11,578 µs). Host suite: 415 ok, 0 FAIL, 1 skip (Pro package tests need a build.sh tree), 0 not-run; chain-longest-playing PASS. The previous 0.0.25 package (nightly-1ec5d683-dev) and 0.0.24.5 stay listed. Owner-operated test build, not production.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/79280e763341d03ba43266d3e25dad66f12de860"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/79280e763341d03ba43266d3e25dad66f12de860"
     },
     {
       "version": "nightly-1ec5d683-dev",
@@ -86,7 +86,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/11b0795fce853bd2ca648a8afe399ce84bf25c572796840ebc9b08581528039a/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/11b0795fce853bd2ca648a8afe399ce84bf25c572796840ebc9b08581528039a/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -95,13 +95,13 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/f8b2aa2e1f27ea0fc8a1a4f818bffa2bd188f7a1eaa62788c1787c67c0c75d1b/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/f8b2aa2e1f27ea0fc8a1a4f818bffa2bd188f7a1eaa62788c1787c67c0c75d1b/x0x37-pro-dev.fwsc"
         }
       },
       "display_version": "0.0.25",
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.25 1ec5d683: zero dropouts, Chicago accent +6 dB, combined 0.0.25)",
       "description": "DEVICE NOT TESTED. Source lane/025-zero-dropout 1ec5d683cd5d70ef99415509ff3460c33152bcca (tree 150c68305df079d2738785b5e5d3de1205df239e): combined 0.0.25 with zero-dropout cuts (808, 909/Miami, sequencer drain, 808 BD/SD on core 1, 32-frame same-block FX/master pipeline), Chicago accent (velocity-like level, +6 dB, 200 ms decay, accent sweep) and Chicago cuts. Firmware reports 0.0.25, GIT 1ec5d683. The only source change vs cd3128e45 is a test-only engine-brk-mute extract; Elite and Pro ELFs are byte-identical to cd3128e45 after swapping the 8-character GIT string. JieLi SDK V1.2.14, X0X_DEV_PADCAL=0. Elite_900 and Pro_900; app 547,496 B; RAM .data+.bss 95,556 of 98,304 B (2,748 B free); pool 335,744 of 344,064 B (8,320 B free, 8,192 B minimum). Bundled Bluetooth controller a334208b (61,552 B, CRC32 564a8f55); package_nightly --check exit 0 for both. Official emu360 gate (fm1-live, 360 MHz, 0 late during the test, worst under 11,609 µs): Elite 11,496 µs PASS, Pro 11,488 µs PASS. Same-gate ABBA vs 0.0.24.5 (8be16486) on cd3128e45: 0.0.24.5 Elite 20,736 µs / 420 late, Pro 21,270 µs / 424 late, FAIL; 0.0.25 is under the deadline with 0 late. Host suite on 1ec5d683: 413 ok, 1 FAIL (ctl-compile stdout/stderr order flake, same on two reruns, not firmware), 1 skip (Pro package tests need a build.sh tree), 0 not-run; engine-brk-mute PASS. Device tests remain NOT_RUN. Owner-operated test build, not production.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/1ec5d683cd5d70ef99415509ff3460c33152bcca"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/1ec5d683cd5d70ef99415509ff3460c33152bcca"
     },
     {
       "version": "nightly-fc65ca31-dev",
@@ -119,7 +119,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/268882188b5e694547dc56d234705c6a546dc2ca39acc5cb6e854650a71747d2/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/268882188b5e694547dc56d234705c6a546dc2ca39acc5cb6e854650a71747d2/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -128,13 +128,13 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/ffa446e58c74b9f01e95ad928b548a98b50c33d5acb73e192df05b0ecd83d49d/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/ffa446e58c74b9f01e95ad928b548a98b50c33d5acb73e192df05b0ecd83d49d/x0x37-pro-dev.fwsc"
         }
       },
       "display_version": "0.0.24.11",
       "title": "DN Box 0.0.24.11 — PANIC, sound-only reset, PLAY answers, part ON/OFF core, 1/8 and 1/4 timing core",
       "description": "DEVICE NOT TESTED. Source lane/build-025-real-20261112 fc65ca314334651059d21e5c244212d4594bb52d (tree aa432b209ac5e0adcac627276d7ec903a1dfa9b1): recovered 0.0.25 (8984a297, superset of 0.0.24.5 8be16486) merged onto 42de2893 with the 42de command-queue accept order. Embedded firmware reports 0.0.25. JieLi SDK V1.2.14, X0X_DEV_PADCAL=0. Elite_900 and Pro_900 native builds exit 0; app 523,704 B; RAM .data+.bss 97,588 of 98,304 B; pool 335,736 of 344,064 B (8,328 B free each, 8,192 B minimum). Bundled Bluetooth controller a334208b (61,552 B, CRC32 564a8f55); package_nightly --check exit 0 for both. Host suite on firmware-identical 28456b3b: 412 ok / 0 FAIL / 0 NOT_RUN; added tests on fc65ca31: optimization-equivalence PASS (mix-LUT check removed: this tree keeps its own bit-exact LUT; ima-delta clang leg not run, gcc leg PASS), usb-retry PASS. Audio vs 0.0.24.5: 57 scenarios bit-identical; plock differs (0.0.24.5 fails its own check, 0.0.25 passes); upload/upload44 need a slot image in both. Host ABBA vs 0.0.24.5, 15 rounds with A/A: 8 workloads, 0 SLOWER (cpu ratio 0.919-0.989). Device CPU and latency not measured. Not in this build: L14 SMC paint snapshot (re-adds the withdrawn page peek; +1,888 B .bss vs 716 B RAM headroom), M12 completeness gate (#822), M6 presentation and M7/M13 UI (await owner mockups), M5 undefined. Installer backup warning, no-force policy and earlier firmware entries unchanged. Owner-operated test build, not production.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/fc65ca314334651059d21e5c244212d4594bb52d"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/fc65ca314334651059d21e5c244212d4594bb52d"
     },
     {
       "version": "nightly-42de2893-dev",
@@ -152,7 +152,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/8997b5e437892bb0c543702c042ff304f924f860c272a15b88a42182130b36c2/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/8997b5e437892bb0c543702c042ff304f924f860c272a15b88a42182130b36c2/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -161,12 +161,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/0ff74548a1a83ead811b5c5d6780df47788947877c948ffac800f955815cb8fd/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/0ff74548a1a83ead811b5c5d6780df47788947877c948ffac800f955815cb8fd/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.24.10 — 0.0.25-candidate line, D6-N preview (SDK V1.2.14)",
       "description": "UNREVIEWED · DEVICE NOT TESTED — Host 348 ok / 0 FAIL / 2 NOT_RUN (drum909/drum808 ran ok with explicit donor heads). Device: NOT_RUN. D6-N preview of 0.0.25 candidate source 42de2893 (parents 7af8dca1 + 71c0a932), built with JieLi SDK V1.2.14 and X0X_DEV_PADCAL=0. Known limitation: a Note On accepted in the same drain as PANIC is silenced (at most one drain, ~11.6 ms). PR #698 / wip/one-build not updated. No numeric openbeta allocation.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/42de289338e3fb718423b4eafbefd567115b81bf",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/42de289338e3fb718423b4eafbefd567115b81bf",
       "display_version": "0.0.24.10"
     },
     {
@@ -185,7 +185,7 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/1e6d56a3c4d4bf8d90c8a04f32abadb0b7ca58f5523f45c3036a7d05f8cefbb7/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/1e6d56a3c4d4bf8d90c8a04f32abadb0b7ca58f5523f45c3036a7d05f8cefbb7/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -194,12 +194,12 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/d997fea7b95e157f5c35271c95087d37abab7904668714631162250e8ea867db/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/d997fea7b95e157f5c35271c95087d37abab7904668714631162250e8ea867db/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.24.9 — REC pattern-cell cutover D6-N preview",
       "description": "UNREVIEWED · DEVICE NOT TESTED — Host 348 ok / 0 FAIL / 0 NOT_RUN. Device: NOT_RUN. D6-N preview of REC pattern-cell cutover source d3510b82 (parent 617c0ff1). Native six steps and MKE ok. Decision (A): 6ccc91ca and b01fb2d6 not applied. PR #698 / wip/one-build not updated. No numeric openbeta allocation.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/d3510b8274d5c737e1a1aab93f65081b9e28b5e8",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/d3510b8274d5c737e1a1aab93f65081b9e28b5e8",
       "display_version": "0.0.24.9"
     },
     {
@@ -218,7 +218,7 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/a79a26b7b2bd14e3e32e2234c076fcd8275788ec2d8f77dfa371ac46c8be570f/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/a79a26b7b2bd14e3e32e2234c076fcd8275788ec2d8f77dfa371ac46c8be570f/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -227,12 +227,12 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/a4f93edb6a963e6797e3e12aabc3cca62cc653e6fa8f2a23f3017425de823752/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/a4f93edb6a963e6797e3e12aabc3cca62cc653e6fa8f2a23f3017425de823752/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.24.8 — V3-PANIC-REARM-01 D6-N preview",
       "description": "UNREVIEWED · DEVICE NOT TESTED — Host 348 ok / 0 FAIL / 0 NOT_RUN. Device: NOT_RUN. D6-N preview of V3-PANIC-REARM-01 source 617c0ff1 (parent 2287f113). Native six steps and MKE ok. Decision (A): 6ccc91ca and b01fb2d6 not applied. PR #698 / wip/one-build not updated. No numeric openbeta allocation.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/617c0ff1d49ccfdd789d358dc962fbfea5f94c15",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/617c0ff1d49ccfdd789d358dc962fbfea5f94c15",
       "display_version": "0.0.24.8"
     },
     {
@@ -251,7 +251,7 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/df0b1f82ffd374ee1628e7cd1b9f0276a761abeb45770f06616bbceb7838560a/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/df0b1f82ffd374ee1628e7cd1b9f0276a761abeb45770f06616bbceb7838560a/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -260,12 +260,12 @@
           "controller_sha256": "aafb4542336d7ed192d97052b2effa3929cc3740a0e4051ec43b21be26866af7",
           "controller_strategy": "bundled",
           "controller_size": 61088,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/2a7ddfcab3299367354f4263efa5ec93710c494f9895362f9f418948b033a770/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/2a7ddfcab3299367354f4263efa5ec93710c494f9895362f9f418948b033a770/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.24.7 — combined UI+PANIC D6-N preview",
       "description": "UNREVIEWED · DEVICE NOT TESTED — Host 344 ok / 1 FAIL / 3 NOT_RUN (raw runner 2, conditional omissions 1). Host FAIL: optimization-equivalence. Host NOT_RUN: drum909, drum808, smk-build-package-mke. Device: NOT_RUN. D6-N preview of combined UI+PANIC source 2287f113 (parent e3a48f3e UI/ask-idle-poll + #853 PANIC from fc0669cc). Decision (A): 6ccc91ca and b01fb2d6 not applied. PR #698 / wip/one-build not updated. No numeric openbeta allocation.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/2287f113fa4bf74757b4e6d758c2e5464eb47036",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/2287f113fa4bf74757b4e6d758c2e5464eb47036",
       "display_version": "0.0.24.7"
     },
     {
@@ -284,7 +284,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/4ca8b7b3f3c10ee5ca46639635cca4da7f13f49791a3b8a9d5d5cf59df2c8deb/x0x37-elite-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/4ca8b7b3f3c10ee5ca46639635cca4da7f13f49791a3b8a9d5d5cf59df2c8deb/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -293,13 +293,13 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://gobbajogger.github.io/{{nightlyRepo}}/artifacts/nightly-dev/cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7/x0x37-pro-dev.fwsc"
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7/x0x37-pro-dev.fwsc"
         }
       },
       "display_version": "0.0.24.6",
       "title": "DN Box 0.0.24.6 — DEV · HOST-CHECKED · NOT TESTED ON DEVICE",
       "description": "DEV · HOST-CHECKED · NOT TESTED ON DEVICE. Host run measured 391 ok, 6 FAIL, 0 NOT_RUN. FAIL: original-release-ui, smc-ui, offline-sequencer-browser, ui-feedback, ui-glyph-polish, scenario-plock. NOT_RUN: none. package_nightly --check was NOT_RUN: there is no canonical X.Y.Z version for this build, and there is no installer and no package_check digest. The firmware images show \"DnBOX DEV\". display_version 0.0.24.5 is a carried catalog label only. It is not the firmware's own string.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/ce27812951555ff7ed9694bf99d20a65dd5f410b"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/ce27812951555ff7ed9694bf99d20a65dd5f410b"
     },
     {
       "version": "nightly-8be16486-dev",
@@ -317,7 +317,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/f857ffbb369e0ab7e4aca5109b8334cb3a490557/artifacts/nightly/dev-20261101-8be16486/d0080061064a66b9d203dd9e75956cd59ab9372c2f4fd15769fa9b06b5f2073f/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/f857ffbb369e0ab7e4aca5109b8334cb3a490557/artifacts/nightly/dev-20261101-8be16486/d0080061064a66b9d203dd9e75956cd59ab9372c2f4fd15769fa9b06b5f2073f/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -326,13 +326,13 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/f857ffbb369e0ab7e4aca5109b8334cb3a490557/artifacts/nightly/dev-20261101-8be16486/9ae7214baa0dd79a3709f3845da4481b15311d40c37a8be033dce07c95475dcd/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/f857ffbb369e0ab7e4aca5109b8334cb3a490557/artifacts/nightly/dev-20261101-8be16486/9ae7214baa0dd79a3709f3845da4481b15311d40c37a8be033dce07c95475dcd/x0x37-pro-dev.fwsc"
         }
       },
       "display_version": "0.0.24.5",
       "title": "QA IN PROGRESS — Elite and Pro (DN Box 0.0.24.5: bounded LCD and SMC repaint)",
       "description": "QA IN PROGRESS — DEVICE NOT TESTED. Owner explicitly authorized early 0.0.24.5 NIGHTLY publication while qualification continues. Exact firmware source build/0.0.24.5 8be16486e33f65b31c76710e1d825b6aa701c2c9 (tree f952ab4455723e4a1a68fdb3a8eea22d2da59710). Includes #821 bounded LCD/key dispatch, SMC alignment, #820 decorative/SMC popup repaint and cold hash fix. SDK V1.2.1 Elite and Pro native builds exit 0 with X0X_DEV_PADCAL=0, strict Elite_900/Pro_900 model identities, bundled Bluetooth controller a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984 (61,552 bytes, block CRC32 564a8f55), package_nightly --check exit 0, and 8,328 B pool headroom each (8,192 B minimum). Existing 15-round interleaved ABBA plus same-binary A/A compares the final production renderer with 0.0.24.3: 32 metrics, zero SLOWER beyond A/A spread; no real-device latency measured. Fresh exact-final-source audio identity versus 0.0.24.3 baseline PASS: 17 scenarios and 50 audio/state files bit-identical, superseding the prior audio PENDING statement. Full exact-final-source cloud host suite (task 01a1972f-3ebb-70c0-86fb-c574af261037) exits 1: 366 PASS / 18 FAIL / 0 reported NOT_RUN, so full host-suite qualification remains FAIL. Native-package test group was separately SKIPPED in cloud; 0 reported NOT_RUN must not be treated as zero skipped native qualification. Existing recovered Mac SDK V1.2.1 native/package receipts remain the evidence for both models. Follow-up selectors: 3 setup selectors PASS; 15 remain unresolved, of which 14 reproduce on baseline 0.0.24.3 and 1 new smc-remainder selector fails candidate compilation because smc_button_symbol now requires a caption argument. Internal chorus stress reports a host timing FAIL despite its wrapper PASS; do not treat the wrapper PASS as a resolved timing gate. A disjoint tests-only fixture repair plan is being prepared and does not change this published 8be16486 firmware candidate or establish a source PASS. No standalone performance rerun was performed. ROADMAP #822 completeness proof is INCOMPLETE (last review: 2 PRESENT, 144 MISSING, 62 QUEUED); queued features remain queued. Physical-device qualification, installer/hardware tests and release approval remain NOT_RUN/PENDING. This is an owner-operated testing candidate, NOT production and NOT device verified. Embedded firmware reports 0.0.24; 0.0.24.5 is a NIGHTLY catalog/build-branch label only. Installer backup warning, no-force policy and prior firmware versions remain unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/commit/8be16486e33f65b31c76710e1d825b6aa701c2c9"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/8be16486e33f65b31c76710e1d825b6aa701c2c9"
     },
     {
       "version": "nightly-179ab384-dev",
@@ -350,7 +350,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/8200d95c9cb116e54d5a31a1a6b7c4d95fe505d2/artifacts/nightly/dev-20261101-179ab384/7187cdf57161f21aecb1cd576f27fe21d1094212be0fffe3dd491d05ecc07679/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/8200d95c9cb116e54d5a31a1a6b7c4d95fe505d2/artifacts/nightly/dev-20261101-179ab384/7187cdf57161f21aecb1cd576f27fe21d1094212be0fffe3dd491d05ecc07679/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -359,12 +359,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/8200d95c9cb116e54d5a31a1a6b7c4d95fe505d2/artifacts/nightly/dev-20261101-179ab384/8ae1ee345d1324968e563af45b97c6a95ba8cea83a1500b372415ca41d16f18c/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/8200d95c9cb116e54d5a31a1a6b7c4d95fe505d2/artifacts/nightly/dev-20261101-179ab384/8ae1ee345d1324968e563af45b97c6a95ba8cea83a1500b372415ca41d16f18c/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.24.3: bounded LCD input dispatch)",
       "description": "Owner-approved 0.0.24.3 testing candidate from build/0.0.24.1 plus bounded 16x16 LCD tiles, foreground key/MIDI dispatch, fixed opt-in trace RAM and faster full-row DMA. SDK V1.2.1 Elite/Pro builds PASS with PADCAL=0, strict model identities, BT a334208b, package_nightly --check and pool headroom 8,328 B each. Fifteen alternating host benchmark pairs show full-frame aggregate median 6.94% faster and steady-frame median 0.48% faster; three individual case medians had small positive differences up to 1.4%. The owner explicitly waived audio identity and framebuffer comparisons for this version. These were not performed for the candidate. Default hardware trace is off. No alignment commit included. Internal firmware VERSION reports 0.0.24; NIGHTLY catalog labels this package 0.0.24.3. DEVICE NOT TESTED; use hardware-test workflow with full backup and strict model checks.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/821",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/821",
       "display_version": "0.0.24.3"
     },
     {
@@ -383,7 +383,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/130220e1d1f30413439c1e9cd618066569f8805c/artifacts/nightly/dev-20261101-3d8131f7/13231af941bfbbad7a7669379f9a34388139ec593cd97848bf36dcaf4ed267db/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/130220e1d1f30413439c1e9cd618066569f8805c/artifacts/nightly/dev-20261101-3d8131f7/13231af941bfbbad7a7669379f9a34388139ec593cd97848bf36dcaf4ed267db/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -392,12 +392,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/130220e1d1f30413439c1e9cd618066569f8805c/artifacts/nightly/dev-20261101-3d8131f7/d98a634542cefe483793f677dcbac07a223b47adb6747c8dd3ddf25dc4190ac2/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/130220e1d1f30413439c1e9cd618066569f8805c/artifacts/nightly/dev-20261101-3d8131f7/d98a634542cefe483793f677dcbac07a223b47adb6747c8dd3ddf25dc4190ac2/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.24.1: #809 performance revert)",
       "description": "Owner-accepted NIGHTLY 0.0.24.1, reverting the #809 UI regression; same tree as e3e82141. Elite/Pro native SDK V1.2.1 builds, exact model identities, bundled BT a334208b, nightly package checks and 8,328-byte pool headroom passed. Host suite 348 PASS / 33 FAIL / 2 NOT_RUN, unchanged from 0.0.24 and expressly accepted for this owner-operated hardware test. Audio identity 17 scenarios / 50 files passed. DEVICE NOT TESTED. Firmware displays 0.0.24 internally; package version here is 0.0.24.1. Prior version 0.0.24 remains selectable.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/build/0.0.24.1/docs/evidence/build-0.0.24.1",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/build/0.0.24.1/docs/evidence/build-0.0.24.1",
       "display_version": "0.0.24.1"
     },
     {
@@ -416,7 +416,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/7a3d50951ab23a56823fc5d2a9963a9edf0a5b99/artifacts/nightly/dev-20261101-d8086cc0/de00013dfe988f66855a7e7cbac392813bb6b711e63a1b7effc90e4911074b0d/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/7a3d50951ab23a56823fc5d2a9963a9edf0a5b99/artifacts/nightly/dev-20261101-d8086cc0/de00013dfe988f66855a7e7cbac392813bb6b711e63a1b7effc90e4911074b0d/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -425,12 +425,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/7a3d50951ab23a56823fc5d2a9963a9edf0a5b99/artifacts/nightly/dev-20261101-d8086cc0/97b8708a608a6f3ed379bd2bf4151b474e6037ae2706b1fc414a582d58290f32/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/7a3d50951ab23a56823fc5d2a9963a9edf0a5b99/artifacts/nightly/dev-20261101-d8086cc0/97b8708a608a6f3ed379bd2bf4151b474e6037ae2706b1fc414a582d58290f32/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.24 d8086cc0: 23 PRs #789-#811)",
       "description": "DEV firmware d8086cc0 (build/0.0.24): on 0.0.23 bb190749 with PRs #789-#811 (OPT-A audio path, bit-identical except the intended #810 instant-unmute change; SMC part context; mixer F4 pictograms; strict installer model match #806; B4 synth param ownership; waveform cache). Host suite 374 pass, 0 new non-environment failures. 2432 B static RAM free. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 9BB1DE35, Pro CRC32 8DCA80F6. DEVICE NOT TESTED. Supersedes nightly-bb190749-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/build/0.0.24"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/build/0.0.24"
     },
     {
       "version": "nightly-bb190749-dev",
@@ -448,7 +448,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/28da4323c2f14b0741dcf9b51ec3e5af10cf3ee3/artifacts/nightly/dev-20261031-bb190749/cf89c1e4d4845644e1ca834f9a3f6e04a89e5650c5c4fa41f58c68f0ae5b384e/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/28da4323c2f14b0741dcf9b51ec3e5af10cf3ee3/artifacts/nightly/dev-20261031-bb190749/cf89c1e4d4845644e1ca834f9a3f6e04a89e5650c5c4fa41f58c68f0ae5b384e/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -457,12 +457,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/28da4323c2f14b0741dcf9b51ec3e5af10cf3ee3/artifacts/nightly/dev-20261031-bb190749/cf9312a418e38cb65af3697fbcb23f8a30fbf8096770faaea7e51d0851beb52f/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/28da4323c2f14b0741dcf9b51ec3e5af10cf3ee3/artifacts/nightly/dev-20261031-bb190749/cf9312a418e38cb65af3697fbcb23f8a30fbf8096770faaea7e51d0851beb52f/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.23 bb190749: BLE handle-0 + 2 KiB RAM)",
       "description": "DEV firmware bb190749: on 0.0.22 2456968b: BLE connection handle 0 is now treated as a valid peer (#782); the 808 scratch buffers live in the engine out window, freeing 2048 B static RAM (#784, audio bit-identical to 0.0.22). 2352 B static RAM free. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 E4EDF63A, Pro CRC32 F2ACE7EE (blank 2C158F0C/3A549ED8). DEVICE NOT TESTED. Supersedes nightly-2456968b-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/785"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/785"
     },
     {
       "version": "nightly-2456968b-dev",
@@ -480,7 +480,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/0fd51894c7a3ac7db1c85207a416b09eb22d1347/artifacts/nightly/dev-20261031-2456968b/e4af37f9ee4ef06db1f61de50b3390cbd63a2ae35a38ae69f137a03fd9c80032/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/0fd51894c7a3ac7db1c85207a416b09eb22d1347/artifacts/nightly/dev-20261031-2456968b/e4af37f9ee4ef06db1f61de50b3390cbd63a2ae35a38ae69f137a03fd9c80032/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -489,12 +489,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/0fd51894c7a3ac7db1c85207a416b09eb22d1347/artifacts/nightly/dev-20261031-2456968b/332b695d9ebc5eefd5c71865cb13d45088975e92466490ffa67472062f85606f/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/0fd51894c7a3ac7db1c85207a416b09eb22d1347/artifacts/nightly/dev-20261031-2456968b/332b695d9ebc5eefd5c71865cb13d45088975e92466490ffa67472062f85606f/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.22 2456968b: iPhone USB audio in+out)",
       "description": "DEV firmware 2456968b: on 0.0.21 dd442625: USB audio now has a UAC1 playback (OUT) stream next to the input, so iPhone/iPad see the device as an audio interface; USB playback is mixed into the line out with the engines (#779, engine sound bit-identical to 0.0.21). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 571F9204, Pro CRC32 A45D883B (blank 9FE7EB32/6CA5F10D). DEVICE NOT TESTED. Supersedes nightly-dd442625-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/779"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/779"
     },
     {
       "version": "nightly-dd442625-dev",
@@ -512,7 +512,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/7b572ba76aa46ccf947a0994fe1c364c901afe0e/artifacts/nightly/dev-20261031-dd442625/4b7e46fd758327cf17fdab818a30afa24c21e06c0d37f81abc2bd61e449b39ba/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/7b572ba76aa46ccf947a0994fe1c364c901afe0e/artifacts/nightly/dev-20261031-dd442625/4b7e46fd758327cf17fdab818a30afa24c21e06c0d37f81abc2bd61e449b39ba/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -521,12 +521,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/7b572ba76aa46ccf947a0994fe1c364c901afe0e/artifacts/nightly/dev-20261031-dd442625/5608eab00eb47fd34a2c9cd14a1b276215854b7877231038a7da300447a13f9c/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/7b572ba76aa46ccf947a0994fe1c364c901afe0e/artifacts/nightly/dev-20261031-dd442625/5608eab00eb47fd34a2c9cd14a1b276215854b7877231038a7da300447a13f9c/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.21 dd442625: lower Free Play key latency on synth EDIT)",
       "description": "DEV firmware dd442625: on 0.0.20 bed393e1: knob strip sends only changed rectangles, so Free Play keys no longer wait ~26 ms behind the screen transfer (Miami EDIT host-model latency mean 37.7->21.5 ms, worst 58.7->35.7 ms; #778, sound bit-identical). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 DB4914BB, Pro CRC32 A12ADFCF (blank 13B16D8D/69D2A6F9). DEVICE NOT TESTED. Supersedes nightly-bed393e1-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/778"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/778"
     },
     {
       "version": "nightly-bed393e1-dev",
@@ -544,7 +544,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/1cb839c85654510f3645946cbe765f1050f77ab9/artifacts/nightly/dev-20261031-bed393e1/33ae9075cd8bea7df3b0c193aa62b3e950b77d11da8b2dc8c65038ddcfd88dc6/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/1cb839c85654510f3645946cbe765f1050f77ab9/artifacts/nightly/dev-20261031-bed393e1/33ae9075cd8bea7df3b0c193aa62b3e950b77d11da8b2dc8c65038ddcfd88dc6/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -553,12 +553,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/1cb839c85654510f3645946cbe765f1050f77ab9/artifacts/nightly/dev-20261031-bed393e1/3e5b606c9a382e015c321d0684954d34e9874e89f414da312bc509d918ba90ef/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/1cb839c85654510f3645946cbe765f1050f77ab9/artifacts/nightly/dev-20261031-bed393e1/3e5b606c9a382e015c321d0684954d34e9874e89f414da312bc509d918ba90ef/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.20 bed393e1: Miami pulse widths precomputed, lighter peaks)",
       "description": "DEV firmware bed393e1: on 0.0.19 ed85f5a6: Miami pulse widths are precomputed outside note/control ticks, lighter spike path (#774, sound bit-identical). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 2C34C436, Pro CRC32 47DD7E41 (blank E4CCBD00/8F250777). DEVICE NOT TESTED. Supersedes nightly-ed85f5a6-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/777"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/777"
     },
     {
       "version": "nightly-ed85f5a6-dev",
@@ -576,7 +576,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/45a6100d7294bd3ea87d9ce1a4c18d8e1b7cb0f3/artifacts/nightly/dev-20261031-ed85f5a6/426667e3488773f4f55e6955354553cd10a0eb0fc8bf6a944c4cf0ff035dc6f0/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/45a6100d7294bd3ea87d9ce1a4c18d8e1b7cb0f3/artifacts/nightly/dev-20261031-ed85f5a6/426667e3488773f4f55e6955354553cd10a0eb0fc8bf6a944c4cf0ff035dc6f0/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -585,12 +585,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/45a6100d7294bd3ea87d9ce1a4c18d8e1b7cb0f3/artifacts/nightly/dev-20261031-ed85f5a6/98629a8dd0a53d09547ed9ae43ee27e2877f5df65d07edb417d94f4407a096ac/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/45a6100d7294bd3ea87d9ce1a4c18d8e1b7cb0f3/artifacts/nightly/dev-20261031-ed85f5a6/98629a8dd0a53d09547ed9ae43ee27e2877f5df65d07edb417d94f4407a096ac/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.19 ed85f5a6: wobble shape pads, SMC lock banks, lighter output)",
       "description": "DEV firmware ed85f5a6: on 0.0.18 dffd05f0: Free Play bottom pads pick the Miami wobble shape (#773); locked SMC bank buttons retarget faders and knobs (#775); lighter Chicago/Miami output chains and master (#776, sound bit-identical). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 8DD49E6D, Pro CRC32 7CEB5047 (blank 452CE75B/B4132971). DEVICE NOT TESTED. Supersedes nightly-dffd05f0-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/776"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/776"
     },
     {
       "version": "nightly-dffd05f0-dev",
@@ -608,7 +608,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/e7f5f96ce468a26ae26656074ebcc8296695e7f2/artifacts/nightly/dev-20261031-dffd05f0/cf21ce1c901ca22dc4f2a671c82ebe86d1fa26090e1f4f4fb90fb99cea7fa990/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/e7f5f96ce468a26ae26656074ebcc8296695e7f2/artifacts/nightly/dev-20261031-dffd05f0/cf21ce1c901ca22dc4f2a671c82ebe86d1fa26090e1f4f4fb90fb99cea7fa990/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -617,12 +617,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/e7f5f96ce468a26ae26656074ebcc8296695e7f2/artifacts/nightly/dev-20261031-dffd05f0/ee2c99755331c49135e62348c61a0aaae00b64038b81833324e9143faf0a78ae/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/e7f5f96ce468a26ae26656074ebcc8296695e7f2/artifacts/nightly/dev-20261031-dffd05f0/ee2c99755331c49135e62348c61a0aaae00b64038b81833324e9143faf0a78ae/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.18 dffd05f0: pads work under settings/HELP)",
       "description": "DEV firmware dffd05f0: on 0.0.17 6319ffec: pads keep working under settings lists and HELP, as their labels show (PR #772). Includes faster synths from #769 (host vs 0.0.13: Miami 2.25x, Chicago 1.62x). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 D51C2984, Pro CRC32 3C4F9089 (blank 1DE450B2/F4B7E9BF). DEVICE NOT TESTED. Supersedes nightly-6319ffec-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/769"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/769"
     },
     {
       "version": "nightly-6319ffec-dev",
@@ -640,7 +640,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/cbc0892874d9b8db74ad212c4eccf4ad9d8644ed/artifacts/nightly/dev-20261031-6319ffec/5207dc012c44360c209629e6b6ed80452c3fb8ee260e5c894a9f9e545d8e329e/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/cbc0892874d9b8db74ad212c4eccf4ad9d8644ed/artifacts/nightly/dev-20261031-6319ffec/5207dc012c44360c209629e6b6ed80452c3fb8ee260e5c894a9f9e545d8e329e/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -649,12 +649,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/cbc0892874d9b8db74ad212c4eccf4ad9d8644ed/artifacts/nightly/dev-20261031-6319ffec/80ed187001a059996ebee596bf8fd881687b753b7262f0118ecda9a288ba7b45/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/cbc0892874d9b8db74ad212c4eccf4ad9d8644ed/artifacts/nightly/dev-20261031-6319ffec/80ed187001a059996ebee596bf8fd881687b753b7262f0118ecda9a288ba7b45/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.17 6319ffec: faster Miami/Chicago synths)",
       "description": "DEV firmware 6319ffec: on 0.0.16 2ad1b517: faster synths (PR #769: Chicago span voice render, exact fast FX conversion, Miami decimator blocks and settled FX mix). Host vs 0.0.13: Miami 2.25x, Chicago 1.62x. Host A/B bit-identical to 0.0.15. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 01794E97, Pro CRC32 9879F972 (blank C98137A1/50818044). DEVICE NOT TESTED. Supersedes nightly-2ad1b517-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/769"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/769"
     },
     {
       "version": "nightly-2ad1b517-dev",
@@ -672,7 +672,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/46323823a65ecc1c65269f6ece2937df9abc0ba8/artifacts/nightly/dev-20261031-2ad1b517/2093edc109136fc58b1a51e1f94da3f3fbe18c7b620de73e5b50e73d8f6c462d/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/46323823a65ecc1c65269f6ece2937df9abc0ba8/artifacts/nightly/dev-20261031-2ad1b517/2093edc109136fc58b1a51e1f94da3f3fbe18c7b620de73e5b50e73d8f6c462d/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -681,12 +681,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/46323823a65ecc1c65269f6ece2937df9abc0ba8/artifacts/nightly/dev-20261031-2ad1b517/cf57c7c1fc67809e9f3f7a201ddcf291a3a29df118e56c8b41e8390739ae6d78/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/46323823a65ecc1c65269f6ece2937df9abc0ba8/artifacts/nightly/dev-20261031-2ad1b517/cf57c7c1fc67809e9f3f7a201ddcf291a3a29df118e56c8b41e8390739ae6d78/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.16 2ad1b517: faster Miami/Chicago synths)",
       "description": "DEV firmware 2ad1b517: on 0.0.15 5ae6265e: faster synths round 4 (PR #769: Chicago span voice render, Miami scheduler skip, exact fast conversions; host vs 0.0.14: Miami 1.92x, Chicago 1.64x). Host A/B vs 0.0.15: bit-identical. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 327B5343, Pro CRC32 BB6F8A69 (blank FA832A75/7397F35F). DEVICE NOT TESTED. Supersedes nightly-5ae6265e-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/769"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/769"
     },
     {
       "version": "nightly-5ae6265e-dev",
@@ -704,7 +704,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/151656c3010b2c17eafc87fff9fb2f3d921acce6/artifacts/nightly/dev-20261031-5ae6265e/c36b3c86cd797fc817f8ed1f793aca73277ea2e69ff0cb6563bb6883b2b51a37/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/151656c3010b2c17eafc87fff9fb2f3d921acce6/artifacts/nightly/dev-20261031-5ae6265e/c36b3c86cd797fc817f8ed1f793aca73277ea2e69ff0cb6563bb6883b2b51a37/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -713,12 +713,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/151656c3010b2c17eafc87fff9fb2f3d921acce6/artifacts/nightly/dev-20261031-5ae6265e/1598e6634525f20601d6394daae6ffbe0ee27f83155cce717b3896b610fd7d2d/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/151656c3010b2c17eafc87fff9fb2f3d921acce6/artifacts/nightly/dev-20261031-5ae6265e/1598e6634525f20601d6394daae6ffbe0ee27f83155cce717b3896b610fd7d2d/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.15 5ae6265e: faster Miami/Chicago synths)",
       "description": "DEV firmware 5ae6265e: on 0.0.14 8424c3bb: faster synths (PR #767: Miami fused span render + device fast interpolation, ~1.5x on host; Chicago fused voice kernel), resting wheel noise no longer moves params (#766), freeplay all keys (#765). Host A/B: bit-identical, except 1 LSB from the Miami interpolation. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 D5F7AC06, Pro CRC32 F3447365 (blank 1D0FD530/3BBC0A53). DEVICE NOT TESTED. Supersedes nightly-8424c3bb-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/767"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/767"
     },
     {
       "version": "nightly-8424c3bb-dev",
@@ -736,7 +736,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/34309997968b92a16f0ef1e3f1e99e6b38890552/artifacts/nightly/dev-20261031-8424c3bb/2bf69b09afbad9cb094279b79891c6f7938a1b4bd28a4b91dac2a08f8f96579c/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/34309997968b92a16f0ef1e3f1e99e6b38890552/artifacts/nightly/dev-20261031-8424c3bb/2bf69b09afbad9cb094279b79891c6f7938a1b4bd28a4b91dac2a08f8f96579c/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -745,12 +745,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/34309997968b92a16f0ef1e3f1e99e6b38890552/artifacts/nightly/dev-20261031-8424c3bb/c43d64f8a4ab4ae1aef88941df1f6c366b4cdecf1697f65fdca7742637c06936/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/34309997968b92a16f0ef1e3f1e99e6b38890552/artifacts/nightly/dev-20261031-8424c3bb/c43d64f8a4ab4ae1aef88941df1f6c366b4cdecf1697f65fdca7742637c06936/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DEV / HARDWARE TEST — Elite and Pro (DN Box 0.0.14 8424c3bb: faster engines + Chicago ADSR/ENV)",
       "description": "DEV firmware 8424c3bb: faster engines (PR #758: Chicago/Miami -O2, cheaper master/output, fxbus/808/break inlining) plus Chicago ADSR, bipolar ENV knee, wobble and glide (PR #759), BT reset test (#756), installer six-stage flow (#754), SMC two-page momentary FX strip (#750), USB MIDI model name (#749), one SMC peer (#760). Tests and benchmarks skipped by owner request. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 4081580F, Pro CRC32 67C7B93C (blank 88792139/AF3FC00A). DEVICE NOT TESTED. Supersedes nightly-bb33a8fe-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/759"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/759"
     },
     {
       "version": "nightly-bb33a8fe-dev",
@@ -768,7 +768,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/a0e7b14f14d0a8292d97c6a650803a8ee36cde7a/artifacts/nightly/dev-20261031-bb33a8fe/da044b62c9079bfd3592fb90eb417168470d2efb097322b908a15eee385c8139/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/a0e7b14f14d0a8292d97c6a650803a8ee36cde7a/artifacts/nightly/dev-20261031-bb33a8fe/da044b62c9079bfd3592fb90eb417168470d2efb097322b908a15eee385c8139/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -777,12 +777,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/a0e7b14f14d0a8292d97c6a650803a8ee36cde7a/artifacts/nightly/dev-20261031-bb33a8fe/3bf33b161a393888af64b396ebf0afd88765808f5833c2d1e65d00c5147bb08e/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/a0e7b14f14d0a8292d97c6a650803a8ee36cde7a/artifacts/nightly/dev-20261031-bb33a8fe/3bf33b161a393888af64b396ebf0afd88765808f5833c2d1e65d00c5147bb08e/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.13 — DEV / HARDWARE TEST — Elite and Pro (perf/engines-2 bb33a8fe, faster engines)",
       "description": "DEV firmware bb33a8fe: faster engines on nightly 0.0.12 (PR #758). Chicago/Miami DSP at -O2, Miami zero-gain oscillator shapers skipped, cheaper master soft clip/limiter and output conversion, Chicago drive settle, fxbus/808/break inlining; same sound, chicago_voice exact FMA. Tests and benchmarks skipped by owner request (owner measures load). SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B, BT reset fix). Page serves bundled bytes: Elite CRC32 A4C37749, Pro CRC32 FCB15471 (blank 6C3B0E7F/34492D47). DEVICE NOT TESTED. Supersedes nightly-c8e1599b-bt-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/758"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/758"
     },
     {
       "version": "nightly-c8e1599b-bt-dev",
@@ -800,7 +800,7 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/469ad3b459321e297cdee1077cdcf6038f00d9c1/artifacts/nightly/dev-20261031-c8e1599b-bt/27788268f57fcd6d53c690ced54cd1907d427798fadd73dad785e206d8b4f615/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/469ad3b459321e297cdee1077cdcf6038f00d9c1/artifacts/nightly/dev-20261031-c8e1599b-bt/27788268f57fcd6d53c690ced54cd1907d427798fadd73dad785e206d8b4f615/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -809,12 +809,12 @@
           "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
           "controller_strategy": "bundled",
           "controller_size": 61552,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/469ad3b459321e297cdee1077cdcf6038f00d9c1/artifacts/nightly/dev-20261031-c8e1599b-bt/dffb6a5e0f319f02ead442fea3e8c5ec59f0f212215eb107e5d2c7005ff22bb7/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/469ad3b459321e297cdee1077cdcf6038f00d9c1/artifacts/nightly/dev-20261031-c8e1599b-bt/dffb6a5e0f319f02ead442fea3e8c5ec59f0f212215eb107e5d2c7005ff22bb7/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.12.1 — Elite and Pro (wip/one-build c8e1599b, bundled BT controller)",
       "description": "DEV firmware, unified build c8e1599b (PR #753 onto wip/one-build 02cc7d10: one-peer SMC, BT reset fix, settings tabs, three-loop bank, MBOOT wire, BT peer names, device FMA). Only gating BLE/SMC host tests ran; full suite deferred. SMK-37 Elite PASS, Pro PASS. Bundled controller a334208b (61,552 B) carrying the BT reset fix; same app images as nightly-c8e1599b-dev. Page serves bundled bytes: Elite CRC32 8BB8BD24, Pro CRC32 65EAB985 (blank 4340C412/AD12C0B3). DEVICE NOT TESTED. Supersedes nightly-c8e1599b-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/753",
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/753",
       "display_version": "0.0.12.1"
     },
     {
@@ -833,7 +833,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/637798e077fd0896ad467152f8fd71e57c6927ce/artifacts/nightly/dev-20261031-c8e1599b/395cc75fd50a66b2b72ada97ab19bd84982cd5cf9038fe73564e53a46502e2fa/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/637798e077fd0896ad467152f8fd71e57c6927ce/artifacts/nightly/dev-20261031-c8e1599b/395cc75fd50a66b2b72ada97ab19bd84982cd5cf9038fe73564e53a46502e2fa/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -842,12 +842,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/637798e077fd0896ad467152f8fd71e57c6927ce/artifacts/nightly/dev-20261031-c8e1599b/c89cd42438bf149cb51a03a6ed70cd7c4c087e0459ce674ee9488af49e790f98/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/637798e077fd0896ad467152f8fd71e57c6927ce/artifacts/nightly/dev-20261031-c8e1599b/c89cd42438bf149cb51a03a6ed70cd7c4c087e0459ce674ee9488af49e790f98/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.12 — DEV / HARDWARE TEST — Elite and Pro (wip/one-build c8e1599b, unified build)",
       "description": "DEV firmware, unified build c8e1599b (PR #753 onto wip/one-build 02cc7d10: one-peer SMC, BT reset fix, settings tabs, three-loop bank, MBOOT wire, BT peer names, device FMA). Only gating BLE/SMC host tests ran; full suite deferred. SMK-37 Elite PASS, Pro PASS. Bundled controller. Page serves bundled bytes: Elite CRC32 C0F6CCF5, Pro CRC32 2EA4C854 (blank 4340C412/AD12C0B3). DEVICE NOT TESTED. Supersedes nightly-02cc7d10-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/753"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/753"
     },
     {
       "version": "nightly-02cc7d10-dev",
@@ -865,7 +865,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/4c592b4a04de146bc4b9caa56b0c97e604d8e3c7/artifacts/nightly/dev-20261031-02cc7d10/61c9e8be681be2442b47f3e1184661b7a0afb6bbd61dd6f364d727b553207b34/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/4c592b4a04de146bc4b9caa56b0c97e604d8e3c7/artifacts/nightly/dev-20261031-02cc7d10/61c9e8be681be2442b47f3e1184661b7a0afb6bbd61dd6f364d727b553207b34/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -874,12 +874,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/4c592b4a04de146bc4b9caa56b0c97e604d8e3c7/artifacts/nightly/dev-20261031-02cc7d10/92c43ac0efd2450a5929da0eef4aa25c1f287076e2b817b775569bb5a8d91fad/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/4c592b4a04de146bc4b9caa56b0c97e604d8e3c7/artifacts/nightly/dev-20261031-02cc7d10/92c43ac0efd2450a5929da0eef4aa25c1f287076e2b817b775569bb5a8d91fad/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.11 — DEV / HARDWARE TEST — Elite and Pro (wip/one-build 02cc7d10, glyph merge)",
       "description": "Software-checked DEV firmware from wip/one-build 02cc7d10 (UI glyph merge on 5bff28ca). Host suite 322 ok / 0 fail / 2 notrun (drum refs missing) / 1 skip; SMK-37 Elite PASS, Pro PASS. Bundled controller. Page serves bundled bytes: Elite CRC32 0F4F0654, Pro CRC32 4E7A4FDD (blank 8CF90EB3/CDCC473A). DEVICE NOT TESTED. Supersedes nightly-5bff28ca-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/698"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/698"
     },
     {
       "version": "nightly-5bff28ca-dev",
@@ -897,7 +897,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/a03bb93f97786bdd9fa71d8a80351489ea915aac/artifacts/nightly/dev-20261031-5bff28ca/b9a2370557e73ea9373a642f0e67d776e9e0d0dd84813f76fa532fb967c07dcf/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/a03bb93f97786bdd9fa71d8a80351489ea915aac/artifacts/nightly/dev-20261031-5bff28ca/b9a2370557e73ea9373a642f0e67d776e9e0d0dd84813f76fa532fb967c07dcf/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -906,12 +906,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/a03bb93f97786bdd9fa71d8a80351489ea915aac/artifacts/nightly/dev-20261031-5bff28ca/965ca2a0eb9a51e295742e78ca9ffb39f5972405a67f184525e8255ec63cef9b/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/a03bb93f97786bdd9fa71d8a80351489ea915aac/artifacts/nightly/dev-20261031-5bff28ca/965ca2a0eb9a51e295742e78ca9ffb39f5972405a67f184525e8255ec63cef9b/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.10 — DEV / HARDWARE TEST — Elite and Pro (wip/one-build 5bff28ca)",
       "description": "Software-checked DEV firmware from wip/one-build 5bff28ca (#748 lost-release Note-Off fix on rev13 integration). Host suite: no new failures vs known set; SMK-37 Elite PASS, Pro PASS. Bundled controller. Page serves bundled bytes: Elite CRC32 C1FC30BC, Pro CRC32 727F27DD (blank Pro F1C92F3A). DEVICE NOT TESTED. Supersedes nightly-0e77d923-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/698"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/698"
     },
     {
       "version": "nightly-0e77d923-dev",
@@ -929,7 +929,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/5f48ec6541ca670739574ce3dae217b4b39d223e/artifacts/nightly/dev-20261026-0e77d923/afea412ddfe07388be6644f203288ee8afd525b96b3709a03980b6dc17875725/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/5f48ec6541ca670739574ce3dae217b4b39d223e/artifacts/nightly/dev-20261026-0e77d923/afea412ddfe07388be6644f203288ee8afd525b96b3709a03980b6dc17875725/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -938,12 +938,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/5f48ec6541ca670739574ce3dae217b4b39d223e/artifacts/nightly/dev-20261026-0e77d923/d05bf2afb76039a2f74d6053afcb228495bb4d90fd87b5404d8bb90ce4dc26b4/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/5f48ec6541ca670739574ce3dae217b4b39d223e/artifacts/nightly/dev-20261026-0e77d923/d05bf2afb76039a2f74d6053afcb228495bb4d90fd87b5404d8bb90ce4dc26b4/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.9 — DEV / HARDWARE TEST — WBL1 Elite/Pro (final nightly)",
       "description": "Software-checked DEV firmware from 0e77d923 (WBL1 #606, CQ/MIDI #602–#612, size #611 −220 B at 37a768f3). Bundled controller. DEVICE NOT TESTED. Blank Elite/Pro b1be499d/e986db96; page serves bundled bytes. pool_free 21092. Supersedes nightly-b48cd800-dev. Production unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/nightly/evidence/final-wbl1-tip-packages"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/nightly/evidence/final-wbl1-tip-packages"
     },
     {
       "version": "nightly-b48cd800-dev",
@@ -961,7 +961,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/646631f5a8b534a483f2fe484054440ea03c8228/artifacts/nightly/dev-20261025-b48cd800/81aaf361cb11717ad0bcee325453e361064506e4d6720781e8eb8ffcc1dadae2/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/646631f5a8b534a483f2fe484054440ea03c8228/artifacts/nightly/dev-20261025-b48cd800/81aaf361cb11717ad0bcee325453e361064506e4d6720781e8eb8ffcc1dadae2/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -970,12 +970,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/646631f5a8b534a483f2fe484054440ea03c8228/artifacts/nightly/dev-20261025-b48cd800/e0ac6b68e117ac42eac97944430d1a7ed2cacfba38336676096fa8a09f57319a/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/646631f5a8b534a483f2fe484054440ea03c8228/artifacts/nightly/dev-20261025-b48cd800/e0ac6b68e117ac42eac97944430d1a7ed2cacfba38336676096fa8a09f57319a/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.8 — DEV / HARDWARE TEST — Elite and Pro (F14 tip)",
       "description": "Software-checked DEV firmware from validated source b48cd800 (F14 tip packages; BF-013 already on nightly). Bundled controller. DEVICE NOT TESTED. Stage-4/prerelease blank package hashes 4dc49bad/3f3b5c00; page serves bundled installable bytes. Content-tree 4eef581e… / firmware-tree 1924e2cf… match DEV CHECKED records. Supersedes nightly-092589b8-dev (LX-73). Does not publish 07773682 (RAM fail) or #322/656d70e9 packages. Stage-6 Elite install PASS on Mac; hardware_tested stays false for the nightly page. Production main/Pages unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/aae7a287456948eead257e894e2c910b44126403/evidence/f14-tip-packages"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/aae7a287456948eead257e894e2c910b44126403/evidence/f14-tip-packages"
     },
     {
       "version": "nightly-092589b8-dev",
@@ -993,7 +993,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/bb8543371761e75b7a89a422f00f9fe501bb338f/artifacts/nightly/dev-20261025-092589b8/3d107710cde229d7faf3e007ae14e324d7ea5ce209a802642dacf40608b2895e/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/bb8543371761e75b7a89a422f00f9fe501bb338f/artifacts/nightly/dev-20261025-092589b8/3d107710cde229d7faf3e007ae14e324d7ea5ce209a802642dacf40608b2895e/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1002,12 +1002,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/bb8543371761e75b7a89a422f00f9fe501bb338f/artifacts/nightly/dev-20261025-092589b8/60dc7fda13fdaa3ee456736588e18b2d9e7e50cc34a800504bde678e14ba12d3/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/bb8543371761e75b7a89a422f00f9fe501bb338f/artifacts/nightly/dev-20261025-092589b8/60dc7fda13fdaa3ee456736588e18b2d9e7e50cc34a800504bde678e14ba12d3/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.7 — DEV / HARDWARE TEST — Elite and Pro (F13 LX-73)",
       "description": "Software-checked DEV firmware from validated source 092589b8 (F13 after BF-012 #308 land + LX-73 Elite/Pro DEV CHECK). Bundled controller. DEVICE NOT TESTED. Stage-4/prerelease blank package hashes 9c1168cf/3a29723e; page serves bundled installable bytes. Content-tree 25ada1f0… / firmware-tree a5ba0804… match DEV CHECKED records. Stage-6 Elite install PASS on Mac; hardware_tested stays false for the nightly page. Production main/Pages unchanged.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/ec7b02a291357ce099539898c5ca5969f0fd0752/evidence/f13-stage5/lx73-devcheck"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/ec7b02a291357ce099539898c5ca5969f0fd0752/evidence/f13-stage5/lx73-devcheck"
     },
     {
       "version": "nightly-b42bcba4-dev",
@@ -1025,7 +1025,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/d8a03d45881ea0d26eedddcc30ffd71a94f42374/artifacts/nightly/dev-20261026-b42bcba4/82ee29d3ede1c17427f2689fbcdd2ab7e2eca7c72df73dcd7694078c9e313b14/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/d8a03d45881ea0d26eedddcc30ffd71a94f42374/artifacts/nightly/dev-20261026-b42bcba4/82ee29d3ede1c17427f2689fbcdd2ab7e2eca7c72df73dcd7694078c9e313b14/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1034,12 +1034,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/d8a03d45881ea0d26eedddcc30ffd71a94f42374/artifacts/nightly/dev-20261026-b42bcba4/bc6c04229840c6342f6b8a696939bab7763a934b41d90a95f201250a42bfad34/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/d8a03d45881ea0d26eedddcc30ffd71a94f42374/artifacts/nightly/dev-20261026-b42bcba4/bc6c04229840c6342f6b8a696939bab7763a934b41d90a95f201250a42bfad34/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.6 — DEV / HARDWARE TEST — Elite and Pro (F13)",
       "description": "Software-checked DEV firmware from validated source b42bcba4 (F13 BF-012 master limiter OFF→ON look-ahead clear). Bundled controller. DEVICE NOT TESTED. Stage-4 blank package hashes d9a9ccf4/a6a2387c; page serves bundled installable bytes. Content-tree 519ccdf2… / firmware-tree 5facb3b4… match DEV CHECKED records. Firmware nightly remains diverged (FF refused at stage 5); publish authenticates b42bcba4. Installer fingerprint uses current nightly main receipt; FP-001 dual-digest and BF-001–BF-008 host regressions still PASS; BF-012 host PASS.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/tree/a5fd33534916dec5cae8abbf4525e0b97295afb4/evidence/f13-stage7"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/a5fd33534916dec5cae8abbf4525e0b97295afb4/evidence/f13-stage7"
     },
     {
       "version": "nightly-de11b6d7-dev",
@@ -1057,7 +1057,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/02f4f4f48408db96e01b143d5410b7fb00a5a70a/artifacts/nightly/dev-20261025-4f96b0d9/4841110a274e2212d56abf9234cf0d921b45d915d1ff25fad0727e52edb7d18a/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/02f4f4f48408db96e01b143d5410b7fb00a5a70a/artifacts/nightly/dev-20261025-4f96b0d9/4841110a274e2212d56abf9234cf0d921b45d915d1ff25fad0727e52edb7d18a/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1066,12 +1066,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/02f4f4f48408db96e01b143d5410b7fb00a5a70a/artifacts/nightly/dev-20261025-4f96b0d9/b35d587557d9f1d4c72b2c81bc944a1dd129bee625e98ae35f06fe7f653fc720/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/02f4f4f48408db96e01b143d5410b7fb00a5a70a/artifacts/nightly/dev-20261025-4f96b0d9/b35d587557d9f1d4c72b2c81bc944a1dd129bee625e98ae35f06fe7f653fc720/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.5 — DEV / HARDWARE TEST — Elite and Pro (F12)",
       "description": "Software-checked DEV firmware from validated source de11b6d7 (F12 BF-008 fm_exp2_nf defined unsigned exponent shift). Bundled controller. DEVICE NOT TESTED. Stage-4 blank package hashes 829bb6da/d2186cb0 match F11 (identical object code for the defined cast); page serves the same immutable bundled installable bytes. Content-tree 43e97f34… / firmware-tree 9195dce5… match DEV CHECKED records. Supersedes nightly-4f96b0d9-dev in the flashable picker (same package digests cannot carry two source commits). Firmware nightly remains diverged (FF refused at stage 5); publish authenticates de11b6d7. Installer fingerprint uses current nightly main receipt; FP-001 dual-digest and BF-001–BF-008 host regressions still PASS.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/272"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/272"
     },
     {
       "version": "nightly-af494784-dev",
@@ -1089,7 +1089,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/2363c07f334747208831923a4f9fa4332cbbe472/artifacts/nightly/dev-20261025-d0d00da2/9cba1f3d0bebc2113d59b9bbb3f1ca1a67bb396183be279b74486319ddae8e11/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/2363c07f334747208831923a4f9fa4332cbbe472/artifacts/nightly/dev-20261025-d0d00da2/9cba1f3d0bebc2113d59b9bbb3f1ca1a67bb396183be279b74486319ddae8e11/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1098,12 +1098,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/2363c07f334747208831923a4f9fa4332cbbe472/artifacts/nightly/dev-20261025-d0d00da2/5dda4eecd74d96237a3d457a026d7bc04eb3ed570705179ab8e6c15a198fa739/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/2363c07f334747208831923a4f9fa4332cbbe472/artifacts/nightly/dev-20261025-d0d00da2/5dda4eecd74d96237a3d457a026d7bc04eb3ed570705179ab8e6c15a198fa739/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.4 — DEV / HARDWARE TEST — Elite and Pro (F10)",
       "description": "Software-checked DEV firmware from validated source af494784 (F10 BF-006 d8_exp2_cr defined exponent bias shift). Bundled controller. DEVICE NOT TESTED. Stage-4 blank package hashes de0bb077/25bebb26 match F09 (identical object code for the defined cast); page serves the same immutable bundled installable bytes. Content-tree 1da3bbfb… / firmware-tree bcc21733… match DEV CHECKED records. Supersedes nightly-d0d00da2-dev in the flashable picker (same package digests cannot carry two source commits). Firmware nightly remains diverged (FF refused); publish authenticates af494784. Installer fingerprint uses current nightly main receipt; FP-001 dual-digest and BF-001–BF-006 host regressions still PASS.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/253"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/253"
     },
     {
       "version": "nightly-8a74ff52-dev",
@@ -1121,7 +1121,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/82622c1f9561bd23bbf785c165d66e11e68820ca/artifacts/nightly/dev-20261025-8a74ff52/d7767bebf1413b5d6fb918ba3893335a7b9fae86078ce895aa3b72df48bedb93/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/82622c1f9561bd23bbf785c165d66e11e68820ca/artifacts/nightly/dev-20261025-8a74ff52/d7767bebf1413b5d6fb918ba3893335a7b9fae86078ce895aa3b72df48bedb93/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1130,12 +1130,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/82622c1f9561bd23bbf785c165d66e11e68820ca/artifacts/nightly/dev-20261025-8a74ff52/b0cecbcff42589cdc71231a16098b7cfc8301a8562aba25362d552b3dcdc5fa0/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/82622c1f9561bd23bbf785c165d66e11e68820ca/artifacts/nightly/dev-20261025-8a74ff52/b0cecbcff42589cdc71231a16098b7cfc8301a8562aba25362d552b3dcdc5fa0/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.3 — DEV / HARDWARE TEST — Elite and Pro (F08)",
       "description": "Software-checked DEV firmware from validated source 8a74ff52 (F08 BF-004). Bundled controller. DEVICE NOT TESTED. Retained after F09 latest promotion.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/232"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/232"
     },
     {
       "version": "nightly-6df0f81f-dev",
@@ -1153,7 +1153,7 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/f917b636ba00d7dbef18fd00d1f0af15299a0a24/artifacts/nightly/dev-20261025-4ee8f377/8ba23a89f50c70b631927077ec4cfe7c98593870035455261842f1b245b82278/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/f917b636ba00d7dbef18fd00d1f0af15299a0a24/artifacts/nightly/dev-20261025-4ee8f377/8ba23a89f50c70b631927077ec4cfe7c98593870035455261842f1b245b82278/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
@@ -1162,12 +1162,12 @@
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
           "controller_strategy": "bundled",
           "controller_size": 65492,
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/f917b636ba00d7dbef18fd00d1f0af15299a0a24/artifacts/nightly/dev-20261025-4ee8f377/d90932115ff47cf421b0ef5caab3b93e730da5810e5b26d4c3ecd2c61c58fecb/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/f917b636ba00d7dbef18fd00d1f0af15299a0a24/artifacts/nightly/dev-20261025-4ee8f377/d90932115ff47cf421b0ef5caab3b93e730da5810e5b26d4c3ecd2c61c58fecb/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.2 — DEV / HARDWARE TEST — Elite and Pro (F07)",
       "description": "Software-checked DEV firmware from validated source 6df0f81f (F07 FP-001). Bundled controller. DEVICE NOT TESTED. Retained after F08 latest promotion.",
-      "evidence_url": "https://github.com/gobbajogger/{{firmwareRepo}}/pull/222"
+      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/222"
     },
     {
       "version": "nightly-54f2ffbc-dev",
@@ -1183,19 +1183,19 @@
           "sha256": "d14877d6592e6dc158460e960ac5aefd1b2b775588b9f896d3c83f672d61c86c",
           "size": 651396,
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/172d99d6d417d72bbd8f473ec1c66d5994c3d0c3/artifacts/nightly/dev-20261024-dc466908/d14877d6592e6dc158460e960ac5aefd1b2b775588b9f896d3c83f672d61c86c/x0x37-elite-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/172d99d6d417d72bbd8f473ec1c66d5994c3d0c3/artifacts/nightly/dev-20261024-dc466908/d14877d6592e6dc158460e960ac5aefd1b2b775588b9f896d3c83f672d61c86c/x0x37-elite-dev.fwsc"
         },
         "pro": {
           "product": "SMK-37 Pro_900",
           "sha256": "cde289d422b61ee8b1f0a9f04ca92d244f07856667c85d757b9563e0479d3f3c",
           "size": 651392,
           "controller_sha256": "956e3e214658aeaa06a8c122809399ef3e430c7192291f4d918b7b1181ec2d0a",
-          "pkg": "https://raw.githubusercontent.com/gobbajogger/{{firmwareRepo}}/172d99d6d417d72bbd8f473ec1c66d5994c3d0c3/artifacts/nightly/dev-20261024-dc466908/cde289d422b61ee8b1f0a9f04ca92d244f07856667c85d757b9563e0479d3f3c/x0x37-pro-dev.fwsc"
+          "pkg": "https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/172d99d6d417d72bbd8f473ec1c66d5994c3d0c3/artifacts/nightly/dev-20261024-dc466908/cde289d422b61ee8b1f0a9f04ca92d244f07856667c85d757b9563e0479d3f3c/x0x37-pro-dev.fwsc"
         }
       },
       "title": "DN Box 0.0.1 — DEV / HARDWARE TEST — Elite and Pro",
       "description": "Software-checked DEV firmware from accepted NIGHTLY source. DEVICE NOT TESTED. Requires the exact matching owner-supplied local controller; no controller is hosted. Browser-route qualification only; not the legacy native CLI or bundled installer.",
-      "evidence_url": "https://api.github.com/repos/gobbajogger/{{nightlyRepo}}/pulls/10/reviews/5638858728"
+      "evidence_url": "https://api.github.com/repos/gobbajogger/x0x37-for-Loopy-Pro_nightly/pulls/10/reviews/5638858728"
     }
   ]
 }
