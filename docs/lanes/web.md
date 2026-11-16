@@ -1,15 +1,15 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: f73a68b0d2f3ead524629de53b37489334675c2c   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 3edfb16374c99c9ccb99e27d45e3d1af25360185   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
 ## Checklist
 | ID | Check | Status | Evidence or missing requirement |
 |---|---|---|---|
-| C1 | Local gate at head | FAIL | Combined head not yet available; no gate qualification claimed. |
-| C2 | Contains consolidated; no unexplained deletions | PASS | At7cce9b485ef619f59227ceb1b5abef4700d87dd9, fresh connector target9165adb92fcdaab756c4e59e3d4a8ee22437ca5a is ancestor (exit0); diff --diff-filter=D empty. Recheck if consolidated moves. |
+| C1 | Local gate at head | FAIL | Combined 3ed source available; browser assertions NOT_RUN and latest integ preflight must be retained. No full gate qualification. |
+| C2 | Contains consolidated; no unexplained deletions | PASS | Independent exact3edfb16374c99c9ccb99e27d45e3d1af25360185 clean/no_loss exit0 against fresh connector9165; two prep deletions explained below. Recheck if consolidated moves. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | FAIL | Exact-head gate required. |
+| C4 | Hard-limit scan | PASS | Independent exact3ed limits() stage exit0; evidence independent-review/web3ed-safe-checks.log. Full Local remains FAIL. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
 | W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm reached workspace and failed stale archive-wrapper selector; corrected without changing token assertions, workspace PASS; Remote40/40 PASS. Visual/browser gate still blocked; no W1 PASS claim. |
@@ -19,8 +19,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: finish full npm test and recover browser execution on an eligible host.
-- Next: merge prep update and Remote ancestry; run full Local gate, fix failing interactions and independent browser review.
+- Now: source/transport coverage at combined 3ed; normal-sandbox browser blocked in both tested environments, no retry of denied boundaries.
+- Next: compose next stable Remote snapshot and integ preflight; extend nonbrowser W2 coverage while awaiting a permitted browser environment and complete native inventory.
 
 ## Blockers and recovery
 - Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
@@ -42,7 +42,7 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 - Existing draft #133 uses feature/website-r22 while v2 asks lane/web-*; preserve the existing review/history and avoid duplicate PR, root directs authorized lane/web-v2 continuation PR, preserving #133 untouched.
 
 ## What's left
-C1–C6 and W1–W5 above. No lane completion or design approval claimed.
+C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be checked at changed heads. No lane completion or design approval claimed.
 
 ## Verified focused work
 - Stale SOURCE-MANIFEST had mismatched breaks/index.html and omitted runtime files. Refreshed all187 product-source entries without changing historical provenance; current snapshot explicitly UNREVIEWED and publicationQualified:false. Build now PASS, drift safety retained.
@@ -73,3 +73,6 @@ C1–C6 and W1–W5 above. No lane completion or design approval claimed.
 
 - Combined stable Remote cac407222ab23b72e801293afcf32ed44c10d36b with webf73 and prep/assets6a using exact Git objects/normal ancestry. All Remote source retained; remote lane conflict kept owner record; only whole-site manifest regenerated209 files. Focused composition PASS: build209, product57 Node+25 Python, workspace84+app scenarios, Remote63, actual Lua5.4→pinned C host protocol. Logs/receipt in docs/lanes/evidence/web-remote-cac407-*. Browser/full Local remains FAIL/NOT_RUN.
 - W3 corrected checker independently replayed10/10 PASS. The separate inventory Git-blob pin is syntactically validated; authoritative provenance must still be verified externally against firmware Git, not self-authenticated by JSON.
+
+- W1/I5 real loopback HTTP checks PASS4/4: all19 routes return exact built HTML, all209 manifested assets return matching length/SHA256, all5 public WAV URLs return pinned bytes, both legacy redirect documents exist; private-audio paths remain404 and are never used by provider. This is transport/source proof only, not browser playback or live Pages delivery.
+- Reviewer independently verified exact3ed clean/no_loss/limits functions exit0, clearing C2/C4 at that SHA; no full gate/browser run. Final integ composition must retain newer b0a66/c93 fail-closed browser preflight before any full gate, do not run stale3ed full gate.
