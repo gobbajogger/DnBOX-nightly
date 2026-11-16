@@ -1,5 +1,5 @@
 # Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: to be recorded. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 00:24 VLAT.
+Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 00:27 VLAT.
 
 ## Checklist
 | ID | Check | Status | Evidence |
@@ -37,3 +37,7 @@ None.
 
 ## Conflicts noted
 README prep sequencing depends on independent reviewer; lane starts independent work while prep gate is unresolved, without merging or changing rules.
+
+## Focused evidence (not full Local gate)
+- Exact base 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a Remote blobs SHA-1 verified before test. `node --test tests/product-remote/*.test.mjs`: 37/37 PASS (Node v24.22.1, GCC 14.2.0, Linux); `firmware-link.test.mjs`: 3/3 PASS against freshly compiled C host fixture. Historical two-failure hypothesis not reproduced; no hardware claim.
+- Restore unchanged Chicago wave-display module from preserved website source; its absence breaks website import closure. New focused formatter tests 2/2 PASS. No design change or fabricated SuperJ6 mapping.
