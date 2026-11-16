@@ -153,3 +153,6 @@ Actual full-closure replay exit0:27 steps, seven actual nested TAP suites totali
 
 ## Current theme-source diagnostic replay
 - Actual composed aggregate exit 0: 36 child steps, 12 nested TAP suites / 42 tests, and three outer tests including executed failing-child and missing-cwd regressions. Receipt/log: docs/lanes/evidence/integ-theme-composition/. No skipped-child coverage inferred from an outer exit alone.
+
+## Roadmap status reconciliation
+- Replaced stale Working table with verified 50823d5/c9f09 draft scopes, unchanged consolidated targets, actual ca0bbb reference outcomes and terminal 2d86 affected-host 45 PASS / 2 FAIL. Pending BREAK headroom now uses 2d86, not historical 7e398. No lane marked complete; two-selector corrected managed replay remains QA-owned after FWUI review.
