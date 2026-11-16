@@ -1,7 +1,7 @@
 {
   "schema": "dnbox-product-site-source/1",
   "publicationQualified": false,
-  "sourceReview": "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY",
+  "sourceReview": "DNBOX_V2_REMOTE_SOURCE_SNAPSHOT_UNREVIEWED_NOT_PUBLICATION_QUALIFIED",
   "sourceRepositoryBase": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
   "nativeBaseline": "3c41ef4bedf9701f549ce2752b73306e2fab1eb8",
   "retainedPages": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
@@ -574,8 +574,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1092,
-      "sha256": "a75974a3a21cd30a01b57a035a9035cee4199e8d563a3c1c116bd107cfd062be"
+      "bytes": 1803,
+      "sha256": "c1ad67e3fbc657c71f439c388b11802688b3d4471b2f090d9124f766cda03f0b"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -594,8 +594,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 42589,
-      "sha256": "36e274db4eb14ed4d479e259c7b80053be28988aa2df9a0c51cecd3f0da773b7"
+      "bytes": 42793,
+      "sha256": "792be0ddc92d06c7a057ce4df6687dfbc5076ffa2676e89d37592b6c547bf4bb"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -621,6 +621,11 @@
       "path": "remote/catalog.mjs",
       "bytes": 209,
       "sha256": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0"
+    },
+    {
+      "path": "remote/chicago-wave-projection.mjs",
+      "bytes": 4449,
+      "sha256": "0938e1e9549bc8e7e463115e6b79426c4ff4b8fad41a6f13d5366a475b7d4558"
     },
     {
       "path": "remote/components.json",
@@ -703,6 +708,11 @@
       "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
     },
     {
+      "path": "remote/funkybeats-view.mjs",
+      "bytes": 3935,
+      "sha256": "c0f457bf863606c650e88c9cb839ca031f2f5600fa3d8f927345ae54069e720e"
+    },
+    {
       "path": "remote/glyph-live.mjs",
       "bytes": 4680,
       "sha256": "15be6702765d4d968b2540fd48defc57c20767f1494d16ac6fe021601eb422d8"
@@ -714,8 +724,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 16791,
-      "sha256": "1bd27aad7485b22e9fbcea8fd5ad8a1100ec74db14c065442b5fd8b6770409cc"
+      "bytes": 16944,
+      "sha256": "05e63c13f1c59069ae8d3869c19978986d84a0b8d1d7af2a642a282b7c3649b7"
     },
     {
       "path": "remote/glyphs.mjs",
@@ -744,8 +754,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7356,
-      "sha256": "9ee77d05cfedbce22538f4bfbb0591fa98dd977339297e0eee0fcd9abdfa1c23"
+      "bytes": 7032,
+      "sha256": "2c50c6f9ae50cf8412ef440573dc64138f3c26f65c6f0ca1b809c533e5dae37c"
     },
     {
       "path": "remote/lane.mjs",
@@ -784,8 +794,8 @@
     },
     {
       "path": "remote/roll.mjs",
-      "bytes": 5217,
-      "sha256": "075fab3b4a3d2c5f526e06ddc7bcb03aa15813d311f26b9ec018094c2c66014b"
+      "bytes": 5216,
+      "sha256": "2feceee1f2db4f6167c8f5cf9c8eee192feb2713499438d3edb99da4a6152bfa"
     },
     {
       "path": "remote/sequence.mjs",
@@ -809,13 +819,23 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 20541,
-      "sha256": "064c4d2c94f6807196902b6825bfa5f91d7bb332aaa0022421be203a150d562f"
+      "bytes": 22650,
+      "sha256": "ce7514f000517efbcec9f6725b28860065e76cd00f58b2dc3c816b2be2aa0480"
     },
     {
       "path": "remote/timeline.mjs",
       "bytes": 1055,
       "sha256": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152"
+    },
+    {
+      "path": "remote/touchosc/README.md",
+      "bytes": 960,
+      "sha256": "39393eb88c5f653417dc1015218c697141c7012d46928e78055f74728aeb680e"
+    },
+    {
+      "path": "remote/touchosc/dnr2-codec.lua",
+      "bytes": 2416,
+      "sha256": "85b0a30fd96585c676a6c8d2809627a5114c3104a58ab9f676de6e1f319c2b60"
     },
     {
       "path": "remote/trace.json",
@@ -833,9 +853,29 @@
       "sha256": "c4836c6aff371cc21ae790b51804b9634d9118c2ef3d05da9d05b54388303d40"
     },
     {
+      "path": "remote/vendor/funkybeats-core.mjs",
+      "bytes": 11966,
+      "sha256": "02c07dbf36779197373868ad6f08f4e4321cb42c22b842046a057f4753c081e2"
+    },
+    {
+      "path": "remote/vendor/funkybeats-provenance.json",
+      "bytes": 1068,
+      "sha256": "ab137177ecb3da5d82ecdf4de5f0bb3c940fcf492d0a0b448be32c52bf2f6c8a"
+    },
+    {
       "path": "remote/view.mjs",
       "bytes": 2773,
       "sha256": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9"
+    },
+    {
+      "path": "remote/viewport.mjs",
+      "bytes": 3397,
+      "sha256": "45366beaf1c72af64014014d06f41459ebc036e374d1e2098374708d735f0305"
+    },
+    {
+      "path": "remote/wave-display.mjs",
+      "bytes": 790,
+      "sha256": "62bdd5faf403bba7759085620fb2f30d7a014040627aa6d75fb42268001bcbe4"
     },
     {
       "path": "remote/workspace.mjs",
@@ -928,5 +968,13 @@
   "firstUiGateSlice": {
     "status": "SOURCE_ONLY_NOT_QUALIFIED",
     "purpose": "Continuous vertical grid plus local structural detectors; no native/browser/publication acceptance."
-  }
+  },
+  "sourceReviewHistory": [
+    "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY"
+  ],
+  "remoteSnapshotInput": "c7394f59839a3c18eeebfe02c01f8192ac237150",
+  "remoteSnapshotAdditions": [
+    "remote/touchosc/dnr2-codec.lua",
+    "remote/touchosc/README.md"
+  ]
 }

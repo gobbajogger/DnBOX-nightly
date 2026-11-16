@@ -1,5 +1,5 @@
 # Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 00:27 VLAT.
+Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 00:49 VLAT.
 
 ## Checklist
 | ID | Check | Status | Evidence |
@@ -54,3 +54,5 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Single distinct managed cloud normal-sandbox browser check admitted and dispatched by coordinator. Do not duplicate; wait for actual results while continuing source work.
 - Distinct admitted cloud check also failed before assertions on Remote9d16027c: Chromium SUID sandbox helper owner nobody:nogroup, mode4755 misconfigured. Assertions NOT_RUN; no security settings/permissions/flags changed. See shared record; coordinator owns task evidence.
 - R4 partial: per-step lane now renders thin value bars instead of mixer-style caps; all four label choices cycle, and no selected-note inspector is mounted in actual HTML. Structural source contracts2/2 PASS only; drum-page lane integration and rendered review remain FAIL.
+- R6 partial: new no-I/O Lua5.1-compatible DNR2 codec uses the same51-byte wire layout. Actual system Lua5.4 -> freshly compiled pinned C host passes HELLO/OPEN/READ/SET/stale CONFLICT/CLOSE plus integer bounds; not a TouchOSC app/runtime or hardware test. R6 remains FAIL for document/session/runtime integration and native engine admission.
+- Web-owned Remote-only manifest refresh validates185 source files, preserving unrelated baseline rows and publicationQualified:false. `npm run build` now PASS on this source composition; no publication, firmware writes or catalog mutation. Current Remote+platform57/57 PASS. Full Local gate and both browser environments remain unqualified.
