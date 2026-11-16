@@ -1,5 +1,8 @@
 """Synthetic algorithm tests only, never a claim that real HTML matches firmware."""
 import copy
+import io
+import json
+from unittest.mock import patch
 import importlib.util
 import hashlib
 import tempfile
@@ -17,10 +20,19 @@ def manifests():
     html = dict(copy.deepcopy(native), websiteSourceCommit=WEBSITE, browserCapture=True)
     return native, html
 
+def expected(ids=None):
+    value={'schema':'dnbox-firmware-screen-inventory/1','productionSourceCommit':FIRMWARE,
+           'sourceInventoryGitBlob':'e'*40,'coverageComplete':True,'notRun':[],
+           'screenIds':ids if ids is not None else ['screen']}
+    data=json.dumps(value).encode()
+    return data,hashlib.sha256(data).hexdigest()
+def run(native,html,firmware,website,loader):
+    return module.compare(native,html,firmware,website,loader,*expected())
+
 class Comparison(unittest.TestCase):
     def test_identical_synthetic_pixels_pass_only_scoped_comparison(self):
         n, h = manifests()
-        result = module.compare(n, h, FIRMWARE, WEBSITE, lambda *args: bytes(240 * 240 * 4))
+        result = run(n, h, FIRMWARE, WEBSITE, lambda *args: bytes(240 * 240 * 4))
         self.assertEqual(result['status'], 'PASS')
         self.assertEqual(result['allowedDifferentPixels'], 0)
         self.assertIn('not-independent-review', result['scope'])
@@ -30,7 +42,7 @@ class Comparison(unittest.TestCase):
             b = bytearray(240 * 240 * 4)
             if kind == 'html': b[0] = 1
             return bytes(b)
-        result = module.compare(n, h, FIRMWARE, WEBSITE, pixels)
+        result = run(n, h, FIRMWARE, WEBSITE, pixels)
         self.assertEqual(result['status'], 'FAIL')
         self.assertEqual(result['screens'][0]['differentPixels'], 1)
     def test_source_coverage_capture_and_inventory_mutants_fail_before_read(self):
@@ -42,16 +54,16 @@ class Comparison(unittest.TestCase):
         for change in changes:
             n,h=manifests(); change(n,h)
             def forbidden(*args): self.fail('unadmitted screenshot read')
-            self.assertEqual(module.compare(n,h,FIRMWARE,WEBSITE,forbidden)['status'],'FAIL')
+            self.assertEqual(run(n,h,FIRMWARE,WEBSITE,forbidden)['status'],'FAIL')
     def test_missing_pin_and_bad_pixel_dimensions_fail(self):
         n,h=manifests()
-        self.assertEqual(module.compare(n,h,'',WEBSITE,lambda *args:b'')['status'],'FAIL')
-        self.assertEqual(module.compare(n,h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
+        self.assertEqual(run(n,h,'',WEBSITE,lambda *args:b'')['status'],'FAIL')
+        self.assertEqual(run(n,h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
     def test_invalid_manifest_and_digest_types_fail_closed(self):
         n,h=manifests(); h['screens'][0]['sha256']=3
-        self.assertEqual(module.compare(n,h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
-        self.assertEqual(module.compare([],h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
-        self.assertEqual(module.compare(n,h,3,WEBSITE,lambda *args:b'')['status'],'FAIL')
+        self.assertEqual(run(n,h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
+        self.assertEqual(run([],h,FIRMWARE,WEBSITE,lambda *args:b'')['status'],'FAIL')
+        self.assertEqual(run(n,h,3,WEBSITE,lambda *args:b'')['status'],'FAIL')
     def test_bounded_real_png_load_checks_digest_and_exact_dimensions(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'frame.png'; Image.new('RGBA',(240,240),(1,2,3,255)).save(path)
@@ -66,6 +78,27 @@ class Comparison(unittest.TestCase):
             path=Path(directory)/'frame.png'; Image.new('RGBA',(240,240)).save(path)
             (Path(directory)/'alias.png').symlink_to(path)
             with self.assertRaises(ValueError): module.file_loader({'native':directory})('native',{'path':'alias.png','sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    def test_same_truncated_captures_fail_against_authoritative_inventory(self):
+        n,h=manifests()
+        def forbidden(*args): self.fail('truncated capture read')
+        result=module.compare(n,h,FIRMWARE,WEBSITE,forbidden,*expected(['screen','missing-screen']))
+        self.assertEqual(result['status'],'FAIL')
+        self.assertIn('capture inventories do not cover authoritative expected IDs',result['errors'])
+        self.assertEqual(module.compare(n,h,FIRMWARE,WEBSITE,forbidden)['status'],'FAIL')
+        data,digest=expected();self.assertEqual(module.compare(n,h,FIRMWARE,WEBSITE,forbidden,data+b' ',digest)['status'],'FAIL')
+    def test_decode_uses_hashed_bytes_even_if_path_replaced_after_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'frame.png';Image.new('RGBA',(240,240),(1,2,3,255)).save(path)
+            row={'path':'frame.png','sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+            open_image=module.Image.open
+            def replace_then_open(value,*args,**kwargs):
+                self.assertIsInstance(value,io.BytesIO)
+                Image.new('RGBA',(240,240),(9,8,7,255)).save(path)
+                return open_image(value,*args,**kwargs)
+            with patch.object(module.Image,'open',replace_then_open):
+                pixels=module.file_loader({'native':directory})('native',row)
+            self.assertEqual(pixels,bytes([1,2,3,255])*(240*240))
+            self.assertNotEqual(hashlib.sha256(path.read_bytes()).hexdigest(),row['sha256'])
     def test_path_escape_and_missing_files_refused(self):
         loader=module.file_loader({'native':Path(__file__).parent})
         for path in ['../outside.png','/tmp/outside.png','missing.png','image.svg']:
