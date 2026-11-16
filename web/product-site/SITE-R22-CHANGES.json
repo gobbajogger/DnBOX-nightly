@@ -1,0 +1,871 @@
+{
+  "schema": "dnbox-site-r22-source-patch/1",
+  "source": "9809abc0ef1e620c8d04c46735e2c92e6f7100c9",
+  "scope": "Public website shell, tool presentation and plain-language entry points. Source-only; not published or device-qualified. Exact prior source recoverable by reversing these edits. Embedded R22 and current-ui archive data remain unchanged.",
+  "files": [
+    {
+      "path": "index.html",
+      "beforeSHA256": "392afcc5e401b52ef61967901279d5f1b0dbe7cf5c11381fd38e1dbf4fa5bec3",
+      "afterSHA256": "f25e4ce5a653333ed2f58fca602f46f9d073fd5783f2e18c5e6c6870d8a1b54d",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"index.html#sounds\">Sounds</a><a href=\"remote/\">Remote</a><a href=\"breaks/\">Samples</a><a href=\"projects/\">Projects</a><a href=\"presets/\">Presets</a><a href=\"manual/\">Manual</a><a href=\"builds/\">History</a><a class=\"install-link\" href=\"install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"remote/\">Remote</a><a href=\"breaks/\">Samples</a><a href=\"projects/\">Projects</a><a href=\"presets/\">Presets</a><a href=\"manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"starting-breaks/\">Starting breaks</a><a href=\"builds/\">Build history</a><a href=\"new/\">What\u2019s new</a><a href=\"tools/\">Tools</a><a href=\"help/\">Setup &amp; help</a><a href=\"reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"#main\">DnBOX</a><nav aria-label=\"Project\"><a href=\"https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/install/\">Current installer</a><a href=\"manual/\">Manual</a><a href=\"new/\">What\u2019s new</a><a href=\"builds/\">Build history</a><a href=\"tools/\">Tools</a><a href=\"help/\">Help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"manual/\">Manual</a><a href=\"builds/\">Build history</a><a href=\"tools/\">Tools</a><a href=\"help/\">Setup &amp; help</a><a href=\"reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<p>Synths, drums, patterns and performance.<br>The same glyphs. The same musical context.</p>",
+          "after": "<p>Build a beat, shape a bass line,<br>make the break your own.</p>"
+        },
+        {
+          "before": "<span class=\"model\">Instrument connection is not available.</span>",
+          "after": "<span class=\"model\">For SMK-37 Elite and Pro</span>"
+        },
+        {
+          "before": "Two synth slots. Distinct voices.<br>Chicago, Miami and Juno, with the controls in reach.",
+          "after": "Two synth slots. A choice of voices.<br>Shape Chicago, Miami and Juno with the controls in reach."
+        },
+        {
+          "before": "<div class=\"hero-ui\" aria-label=\"Chicago oscillator and filter controls\">",
+          "after": "<div class=\"hero-ui\" aria-label=\"Chicago oscillator and filter controls\"><div class=\"instrument-heading\"><b>BASS A <span>/ CHICAGO</span></b><span>P1</span></div>"
+        },
+        {
+          "before": "Preview samples, choose your starting set and keep them with your projects.",
+          "after": "Prepare your own audio, choose a starting set and keep sample backups with your projects."
+        },
+        {
+          "before": "<a href=\"reference/index.html\">Interface studies</a>",
+          "after": "<a href=\"reference/index.html\">Design archive</a>"
+        },
+        {
+          "before": "<body id=\"top\">",
+          "after": "<body id=\"top\" class=\"home-page\">"
+        },
+        {
+          "before": "<script type=\"module\" src=\"site-shell.mjs\"></script>",
+          "after": "<script type=\"module\" src=\"site-shell.mjs\"></script><script type=\"module\" src=\"hero.mjs\"></script>"
+        },
+        {
+          "before": "<a href=\"builds/\">Build history</a><a href=\"tools/\">",
+          "after": "<a href=\"builds/\">Build history</a><a href=\"install/#firmware\">Firmware versions</a><a href=\"tools/\">"
+        },
+        {
+          "before": "<span class=\"model\">For SMK-37 Elite and Pro</span>",
+          "after": "<span class=\"model\">Turn your SMK-37 Elite or Pro into a standalone groovebox.</span>"
+        },
+        {
+          "before": "Choose your model and starting samples.",
+          "after": "Choose the firmware for your keyboard."
+        },
+        {
+          "before": "<div class=\"firmware-demo\"><div id=\"replay-display\">",
+          "after": "<div class=\"firmware-demo\"><p class=\"demo-provenance\">Earlier captured interface \u00b7 <a href=\"reference/current-ui.html\">Design archive</a></p><div id=\"replay-display\" aria-label=\"Earlier captured instrument interface, not current R22\">"
+        },
+        {
+          "before": "<div class=\"sound-description\"><p>Turn a wave into something of your own.</p>",
+          "after": "<div class=\"sound-description\"><p>Turn a wave into something of your own.</p><div class=\"source-preview\" data-source=\"remote/source-sounds.json:027-JUNO-b0-p0-list.json\"><p class=\"source-preview-title\">Juno source preview</p><div class=\"source-preview-live\" aria-label=\"Juno oscillator width source preview, not connected instrument control\"></div></div>"
+        },
+        {
+          "before": "<article><h3>Patterns and song</h3>",
+          "after": "<article><figure class=\"feature-control-map pad-map\" role=\"img\" aria-label=\"Physical control map:16 pads in two rows of eight, not pattern content\"><div class=\"map-pads\"><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i><i class=\"map-pad\" aria-hidden=\"true\"></i></div><figcaption>Physical pads 1\u201316</figcaption></figure><h3>Patterns and song</h3>"
+        },
+        {
+          "before": "<article><h3>Record the movement</h3>",
+          "after": "<article><figure class=\"feature-control-map knob-map\" role=\"img\" aria-label=\"Physical control map:K5,K6,K7,K8 sound-editing knobs, no live values\"><div class=\"map-knobs\"><span><i class=\"map-knob\" aria-hidden=\"true\"></i><b>K5</b></span><span><i class=\"map-knob\" aria-hidden=\"true\"></i><b>K6</b></span><span><i class=\"map-knob\" aria-hidden=\"true\"></i><b>K7</b></span><span><i class=\"map-knob\" aria-hidden=\"true\"></i><b>K8</b></span></div><figcaption>Physical control map</figcaption></figure><h3>Record the movement</h3>"
+        },
+        {
+          "before": "<article><h3>Mix and perform</h3>",
+          "after": "<article><figure class=\"feature-control-map fader-map\" role=\"img\" aria-label=\"SMC physical control map in source order:909,808,BREAK,Chicago,Miami,reverb,delay,master filter; no live values\"><div class=\"map-faders\"><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>909</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>808</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>BRK</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>CHI</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>MIA</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>REV</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>DLY</b></span><span><i class=\"map-fader\" aria-hidden=\"true\"></i><b>FILT</b></span></div><figcaption>SMC control map</figcaption></figure><h3>Mix and perform</h3>"
+        },
+        {
+          "before": "<div class=\"hero-ui\" aria-label=\"Chicago oscillator and filter controls\">",
+          "after": "<div class=\"hero-ui\" aria-label=\"Chicago oscillator and filter controls\"><noscript><p class=\"demo-provenance\">Earlier captured controls. Enable JavaScript for the current source preview.</p></noscript>"
+        },
+        {
+          "before": "Shape Chicago, Miami and Juno with the controls in reach.",
+          "after": "Shape each voice with the controls in reach.",
+          "scope": "Retain exact old JUNO bank provenance; do not relabel as new SuperJ6."
+        },
+        {
+          "before": "<p class=\"source-preview-title\">Juno source preview</p>",
+          "after": "<p class=\"source-preview-title\">Earlier JUNO bank \u00b7 WIDTH specimen</p>",
+          "scope": "Retain exact old JUNO bank provenance; do not relabel as new SuperJ6."
+        },
+        {
+          "before": "aria-label=\"Juno oscillator width source preview, not connected instrument control\"",
+          "after": "aria-label=\"Earlier JUNO bank oscillator width specimen, not current SuperJ6 or connected instrument control\"",
+          "scope": "Retain exact old JUNO bank provenance; do not relabel as new SuperJ6."
+        },
+        {
+          "before": "<div class=\"voice-names\"><span>Chicago</span><span>Miami</span><span>Juno</span></div>",
+          "after": "<div class=\"voice-names\"><span>Chicago</span><span>Miami</span><span>Earlier JUNO</span></div>",
+          "scope": "Retain exact old JUNO bank provenance; do not relabel as new SuperJ6."
+        },
+        {
+          "before": "<p>Turn a wave into something of your own.</p><div class=\"source-preview\" data-source=\"remote/source-sounds.json:027-JUNO-b0-p0-list.json\"><p class=\"source-preview-title\">Earlier JUNO bank \u00b7 WIDTH specimen</p><div class=\"source-preview-live\" aria-label=\"Earlier JUNO bank oscillator width specimen, not current SuperJ6 or connected instrument control\"></div></div>",
+          "after": "<p>Turn a wave into something of your own.</p>",
+          "scope": "Locked FIRST DRAFT component port, gap8. Source capabilities and original art retained."
+        },
+        {
+          "before": "<p id=\"demo-status\" role=\"status\" aria-live=\"polite\">Source replay. Choose a control demo.</p></div></section>",
+          "after": "<p id=\"demo-status\" role=\"status\" aria-live=\"polite\">Source replay. Choose a control demo.</p></div><details class=\"earlier-source-specimen\"><summary>Earlier JUNO source specimen</summary><div class=\"source-preview\" data-source=\"remote/source-sounds.json:027-JUNO-b0-p0-list.json\"><p class=\"source-preview-title\">Earlier JUNO bank \u00b7 WIDTH specimen</p><div class=\"source-preview-live\" aria-label=\"Earlier JUNO bank oscillator width specimen, not current SuperJ6 or connected instrument control\"></div></div></details></section>",
+          "scope": "Locked FIRST DRAFT component port, gap8. Source capabilities and original art retained."
+        },
+        {
+          "before": "<b>BASS A <span>/ CHICAGO</span></b><span>P1</span>",
+          "after": "<b>BASS A <span>/ CHICAGO</span></b><span>SOURCE PREVIEW</span>",
+          "scope": "Locked FIRST DRAFT component port, gap8. Source capabilities and original art retained."
+        },
+        {
+          "before": "<a class=\"button\" href=\"remote/\">Open Remote</a><a class=\"button secondary\" href=\"#sounds\">Explore the sounds</a>",
+          "after": "<div class=\"hero-actions\"><a class=\"button\" href=\"remote/\">Open Remote</a><a class=\"button secondary\" href=\"#sounds\">Explore the sounds</a></div>",
+          "scope": "Locked FIRST DRAFT website port: preserve both real destinations in a compact action row."
+        }
+      ]
+    },
+    {
+      "path": "presets/index.html",
+      "beforeSHA256": "fe98204b04e2f64d5275a78bccaa96c9d9f0adcc32284371823130441fbe0f98",
+      "afterSHA256": "aebe5888e2369423d2f0597d4cd6df2b31c42dc32de024a81a103422502ba235",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<select id=\"preset\">",
+          "after": "<select id=\"preset\" disabled>"
+        },
+        {
+          "before": "<input id=\"name\" maxlength=\"8192\">",
+          "after": "<input id=\"name\" maxlength=\"8192\" disabled>"
+        },
+        {
+          "before": "Content is validated, not trusted by extension. Original filenames are retained on download; SynthOne upstream single exports use .synth1 and bank imports use .json.",
+          "after": "Content is validated, not trusted by extension. Download names start with original- or kept-. Kept copies use the format\u2019s extension: .synth1 for SynthOne singles, .json for banks.",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "tools/index.html",
+      "beforeSHA256": "0de4d34090156f8c8d40a0e27642619f120beae7c39e561da43ad75521320288",
+      "afterSHA256": "1ef3dc3fdc996dc78163215d99d0749d3c14f731d04bd1a6f79e6bd617001526",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<h2>Local remote workspace preview</h2>",
+          "after": "<h2>Remote</h2>"
+        },
+        {
+          "before": "Notes, raw control drafts, Motion and song studies. Draft download/open keeps this exact local version. No connected control or playback in this preview.",
+          "after": "Edit notes, sounds, Motion and songs as local drafts. Draft download/open keeps this exact local version. No connected control or playback in this preview."
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "Preview and organize DnBOX user presets. Download individual files or a ZIP.",
+          "after": "Inspect an original SynthOne file or SuperJ6 bank. Rename a preset and save a separate copy."
+        },
+        {
+          "before": "<main id=\"content\" class=\"document-page\">",
+          "after": "<main id=\"content\" class=\"document-page tool-directory\">",
+          "scope": "Locked FIRST DRAFT p12/p20 meaningful workflow grouping, preserve original content/actions."
+        }
+      ]
+    },
+    {
+      "path": "install/index.html",
+      "beforeSHA256": "e4ad28d321255500b2117e7ad2437c6a89b2e16c3af8500ebc94af89473c3efb",
+      "afterSHA256": "0f6368293913fe1cc0a07187219fe4f8a6df0c014705b9cf8ee1c0992cd6826d",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "</body>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer></body>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<p class=\"starting-link\"><a href=\"../starting-breaks/\">Choose starting breaks</a></p><section id=\"samples\" aria-label=\"Starting breaks\"><div id=\"sample-picker\"></div><p id=\"samples-status\" role=\"status\" aria-live=\"polite\"></p></section><script type=\"module\" src=\"../install.mjs\"></script>",
+          "after": "<!-- Starting-break choices live on their own page. -->"
+        },
+        {
+          "before": "<header class=\"site-head\">",
+          "after": "<section class=\"site-head\" aria-labelledby=\"install-title\">"
+        },
+        {
+          "before": "  </header>",
+          "after": "  </section>"
+        },
+        {
+          "before": "<div class=\"header-top\">\n      <a class=\"home\" href=\"../\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 \u00b7 NIGHTLY</span>\n      <nav class=\"head-nav\" aria-label=\"Site navigation\">\n        <a href=\"../manual/\" data-t=\"navmanual\">Manual</a><a href=\"../new/\">Changes</a><a href=\"https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly\">Source</a>\n      </nav>\n      <button class=\"lang\" id=\"lang\" type=\"button\"></button>\n    </div>",
+          "after": "<div class=\"install-utility\"><span class=\"channel-label\">SMK-37 \u00b7 NIGHTLY</span><button class=\"lang\" id=\"lang\" type=\"button\" aria-label=\"Change installer language\"></button></div>"
+        },
+        {
+          "before": "<h1 data-t=\"title\">",
+          "after": "<h1 id=\"install-title\" data-t=\"title\">"
+        },
+        {
+          "before": "<strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p>",
+          "after": "<strong>Development firmware. Device testing is incomplete.</strong><p>Choose the model printed on your keyboard. Back up your projects and samples before an update. Read the checks and known limitations for each package in <a href=\"../builds/\">Build history</a>.</p>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<section class=\"features\" aria-labelledby=\"features-title\">",
+          "after": "<details class=\"features historical-screens\" aria-labelledby=\"features-title\"><summary>Earlier firmware screen references</summary><p class=\"small\">Historical source renders, not the current Remote or a claim that R22 is installed.</p>"
+        },
+        {
+          "before": "</details></section>\n\n  <section id=\"workflows\"",
+          "after": "</details></details>\n\n  <section id=\"workflows\""
+        },
+        {
+          "before": "ctx.strokeStyle = \"#8fb9d0\";",
+          "after": "ctx.strokeStyle = getComputedStyle(canvas).getPropertyValue(\"--prep-wave\").trim() || \"#ffb337\";",
+          "scope": "Presentation-only waveform stroke. All remaining inline executable bytes preserved; no preparation/write logic change."
+        },
+        {
+          "before": "\u25b6 Reference",
+          "after": "\u25b6\ufe0e Reference"
+        },
+        {
+          "before": "\u25b6 Processed",
+          "after": "\u25b6\ufe0e Processed"
+        },
+        {
+          "before": "\u25b6\ufe0e Reference",
+          "after": "<span class=\"play-icon\" aria-hidden=\"true\"></span> Reference",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "\u25b6\ufe0e Processed",
+          "after": "<span class=\"play-icon\" aria-hidden=\"true\"></span> Processed",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "getPropertyValue(\"--prep-wave\").trim() || \"#ffb337\"",
+          "after": "getPropertyValue(\"--prep-wave\").trim() || \"#c49b45\"",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "breaks/index.html",
+      "beforeSHA256": "1826c6e84ccbc0228b8fa0cc2f8c46c7476c335a29c22fdb6213c9f67e02e274",
+      "afterSHA256": "27f891c1c3033bf8d9da898e8b9a689e7dd4deeb571f18a6450743be218aaa3e",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "</body>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer></body>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<title>DnBOX break loops</title>",
+          "after": "<title>Import samples \u00b7 DnBOX</title>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        }
+      ]
+    },
+    {
+      "path": "projects/index.html",
+      "beforeSHA256": "2b95a7e35882626eecb93f2e1ccbfb2db2c96274b622eb82075d8624a78151c7",
+      "afterSHA256": "4ad1a3e74590b6805f4a8c9930fb7cd11d40b3d739f8de5c8e4d9546893ddeaf",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "</body>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer></body>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<p class=\"small\">Move your whole live project\u2014song arrangement, patterns and sounds\u2014to or from a file. Include samples for a portable copy.</p>",
+          "after": "<p class=\"small\">Earlier full-project workspace. Back up song arrangement, patterns and sounds with their original firmware. Revision 13 import is unavailable here.</p><details class=\"project-compatibility\"><summary>Earlier project compatibility</summary><p class=\"small\">Supported pattern/sound schema pairs: 3/4, 3/10, 6/10, 6/11, 8/10, 8/11 and 9/11. Tagged sound-11 projects must have the expected 36,452-byte layout. File inspection does not prove device compatibility. Keep firmware-matched backups. <a href=\"../manual/projects-guide.html\">Format and recovery reference</a>.</p></details>",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "new/index.html",
+      "beforeSHA256": "71a5082195473477c4b3c0408d33ce76c00c375b96633be47fb8e7f6101a9b95",
+      "afterSHA256": "9583445f1bac7384c523c48a6ebd834626cbf9502d624fa1e78aba372197b602",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<h1>What\u2019s new</h1>",
+          "after": "<h1>What\u2019s new</h1><section class=\"current-notes\"><h2>Make room for the next idea.</h2><div class=\"capability-columns\"><article><h3>Shape the session</h3><p>Edit and save local Remote drafts.</p><a href=\"../remote/\">Open Remote</a></article><article><h3>Carry the sounds</h3><p>Inspect project files and original-format presets.</p><a href=\"../projects/\">Open Projects</a></article><article><h3>Follow development</h3><p>Every package, source checkpoint and known limitation.</p><a href=\"../builds/\">Open Build history</a></article></div></section>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<section class=\"current-notes\"><h2>Make room for the next idea.</h2><div class=\"capability-columns\"><article><h3>Shape the session</h3><p>Edit and save local Remote drafts.</p><a href=\"../remote/\">Open Remote</a></article><article><h3>Carry the sounds</h3><p>Inspect project files and original-format presets.</p><a href=\"../projects/\">Open Projects</a></article><article><h3>Follow development</h3><p>Every package, source checkpoint and known limitation.</p><a href=\"../builds/\">Open Build history</a></article></div></section><p><a href=\"../builds/\">Build history</a> keeps current package and development records. The earlier published project notes follow in full.</p>",
+          "after": "<section class=\"current-notes\"><h2>Development highlights</h2><p>From the saved Elite and Pro build records. These are development checkpoints, not hardware-qualified releases.</p><div class=\"capability-columns\"><article><p class=\"note-version\">0.0.26 \u00b7 94197fc8</p><h3>A safer restart path</h3><p>Corrected retained-RAM boot guard, sample-integrity fixes and SMK-37 identity.</p><p class=\"qualification-note\">BOOT/RESTART NOT YET VERIFIED</p><a href=\"../builds/?channel=night&amp;query=94197fc8\">Read the source record</a></article><article><p class=\"note-version\">0.0.25.1 \u00b7 79280e76</p><h3>Let the longest part play</h3><p>A chain slot follows the longest playing part, rounded to a whole 909 bar. Muted and empty parts do not extend it.</p><p class=\"qualification-note\">DEVICE NOT TESTED</p><a href=\"../builds/?channel=night&amp;query=79280e76\">Read the source record</a></article><article><p class=\"note-version\">Browser tools</p><h3>Keep the next idea</h3><p>Edit local Remote drafts, inspect project backups and save presets in their original format.</p><a href=\"../tools/\">Open the tools</a></article></div></section><p><a href=\"../builds/\">Build history</a> preserves all package and development records. The earlier published FM-1 project notes follow unchanged.</p>"
+        },
+        {
+          "before": "<h1>What's new</h1>",
+          "after": "<h2 id=\"fm1-release-notes\">Earlier FM-1 releases</h2>",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "The newest version first. Install it with the <a href=\"../install/\">web installer</a>; the <a href=\"../manual/\">manual</a> covers everything in detail.",
+          "after": "Original FM-1 notes, newest first. These links are for the FM-1, not SMK-37 DnBOX: <a href=\"https://charlesvestal.github.io/fm1-x0x/install/\">original FM-1 installer</a> and <a href=\"../manual/original/\">original FM-1 manual</a>.",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<a href=\"../breaks/\">break tool</a>",
+          "after": "<a href=\"https://charlesvestal.github.io/fm1-x0x/breaks/\">original FM-1 break tool</a>",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.6 \u00b7",
+          "after": "<span id=\"s1\"></span><h2 id=\"fm1-1-0-6\">1.0.6 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.5 \u00b7",
+          "after": "<h2 id=\"fm1-1-0-5\">1.0.5 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.4 \u00b7",
+          "after": "<h2 id=\"fm1-1-0-4\">1.0.4 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.3 \u00b7",
+          "after": "<h2 id=\"fm1-1-0-3\">1.0.3 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.2 \u00b7",
+          "after": "<h2 id=\"fm1-1-0-2\">1.0.2 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0.1 \u00b7",
+          "after": "<h2 id=\"fm1-1-0-1\">1.0.1 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "<h2 id=\"s1\">1.0 \u00b7",
+          "after": "<h2 id=\"fm1-1-0\">1.0 \u00b7",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "help/index.html",
+      "beforeSHA256": "19ef64c973ee9ce579ba13d83cd10e220b21148ee09a9ca8e0e13699d65959a6",
+      "afterSHA256": "57b8e97c30b5eeed6272efee0de5f5d1bb5d70ae7ec050293512c12bf4d4866c",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<section id=\"standalone\">",
+          "after": "<section class=\"panel-map\" aria-labelledby=\"panel-map-title\"><h2 id=\"panel-map-title\">The printed controls</h2><dl class=\"control-map\"><div><dt>SEQ</dt><dd>Steps</dd></div><div><dt>PARA</dt><dd>Sound</dd></div><div><dt>NOTE REPEAT</dt><dd>Mixer, outside clip mode</dd></div><div><dt>BT</dt><dd>Save, not Bluetooth</dd></div><div><dt>GLOBE</dt><dd>Settings &amp; Bluetooth</dd></div><div><dt>KNOB BANK</dt><dd>Loopy clip mode</dd></div></dl><p><a href=\"../manual/legacy.html#s2\">Full control map and version-specific behavior</a></p></section><section id=\"standalone\">"
+        }
+      ]
+    },
+    {
+      "path": "builds/index.html",
+      "beforeSHA256": "b71e86e04c0d158c8bb5d6b89350191706faad87a9360580816253811aeff3fc",
+      "afterSHA256": "112f5eeedfe44103cf22fac749f9c924fd3f3f8f1602376e542615e88ba937af",
+      "changes": [
+        {
+          "before": "<p id=\"history-status\" role=\"status\" aria-live=\"polite\">197 records</p>",
+          "after": "<div class=\"history-pagination\" aria-label=\"Build history pages\"><label>Per page <select id=\"history-page-size\"><option value=\"20\">20 records</option><option value=\"50\">50 records</option><option value=\"100\">100 records</option></select></label><button id=\"history-prev\" type=\"button\" disabled>Previous</button><output id=\"history-page\" aria-label=\"Current page\">1</output><button id=\"history-next\" type=\"button\">Next</button></div><p id=\"history-status\" role=\"status\" aria-live=\"polite\" tabindex=\"-1\">197 records</p><p id=\"history-source-status\" class=\"record-meta\" role=\"status\"></p>"
+        },
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "Every original record stays available.</p>",
+          "after": "Every original record stays available. Titles and descriptions preserve their recorded checkpoint context, not a claim of today\u2019s installed firmware.</p>"
+        },
+        {
+          "before": "</article></div><p>History identifies bytes and evidence.",
+          "after": "</article></div><nav class=\"history-pagination history-pagination-bottom\" aria-label=\"History pages\"><button id=\"history-prev-bottom\" type=\"button\" disabled>Previous</button><output id=\"history-page-bottom\" aria-label=\"Current page\">1</output><button id=\"history-next-bottom\" type=\"button\">Next</button></nav><p>History identifies bytes and evidence."
+        }
+      ]
+    },
+    {
+      "path": "starting-breaks/index.html",
+      "beforeSHA256": "0e110504bc67f6ff2f0a394d9ddc837c55694d4d39c9cfa1c666c84e412a9ed8",
+      "afterSHA256": "5227e41bce8fde0430c2f26f1c930a155b1ff41aa0a7b07873add7113484bf0f",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<p>Starting-break choices are a separate preparation preview. They do not change the firmware installer\u2019s model or package selection. Keep your prepared sample files and use Samples for the separate import workflow.</p>",
+          "after": "<p>Choose a starting set for later. Your choices stay in this browser and do not change the installer or your keyboard.</p><details><summary>About this preparation preview</summary><p>Starting-break choices are a separate preparation preview. Use Samples to import your own audio. Audio previews of this set are unavailable on the public website.</p></details>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        }
+      ]
+    },
+    {
+      "path": "manual/protocol.html",
+      "beforeSHA256": "cb0167a484b7167f1b884cbcfa89378fbaf707058052f6645f269fbd18f6a63c",
+      "afterSHA256": "13edfa68c710e3b3577202e93806cd163dd8a3b1cae7f089d27e156ec7db1a68",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "class=\"document-page\"",
+          "after": "class=\"document-page protocol-page\""
+        },
+        {
+          "before": "<div class=\"table\">",
+          "after": "<div class=\"table\" tabindex=\"0\" role=\"region\" aria-label=\"Protocol identifiers, scroll horizontally for all model columns\">"
+        },
+        {
+          "before": "<main id=\"content\" class=\"document-page protocol-page\">",
+          "after": "<main id=\"content\" class=\"document-page protocol-page\" data-historical-reference=\"0.0.26\">",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<h1>DnBOX protocol identifiers (developer reference)</h1>",
+          "after": "<p class=\"reference-version\">Earlier protocol snapshot \u00b7 0.0.26 / 94197fc8</p><h1>DnBOX protocol identifiers (developer reference)</h1>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "This book describes what the unit uses today.",
+          "after": "This table preserves what that source snapshot used.",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        }
+      ]
+    },
+    {
+      "path": "manual/index.html",
+      "beforeSHA256": "0770747fe4c1f6118ed9fb096e19e413024a2fc9223cc3a0881c155a87ef15d2",
+      "afterSHA256": "eb7b0b25ad3678c6b0175a97ec3a273870eebbb72da9c9d09af56b9faf7568e2",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Drone and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p>",
+          "after": "<p>Start with the <a href=\"legacy.html#s3\">four musical tasks</a> for your SMK-37. Check the version installed on your keyboard before following version-specific features.</p><details><summary>Versions, engine names and test status</summary><p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Drone and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p></details>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<main id=\"content\" class=\"document-page\"><p class=\"reference-version\">SMK-37 reference \u00b7 0.0.26 / 94197fc8</p><p><a href=\"original/\">Original published FM-1 reference</a></p>",
+          "after": "<main id=\"content\" class=\"document-page\"><!-- Earlier source-reference details are retained below. -->"
+        },
+        {
+          "before": "<details><summary>Versions, engine names and test status</summary>",
+          "after": "<details><summary>Versions, engine names and test status</summary><p class=\"reference-version\">SMK-37 reference \u00b7 0.0.26 / 94197fc8</p><p><a href=\"original/\">Original published FM-1 reference</a></p>"
+        },
+        {
+          "before": "Use the <a href=\"legacy.html\">SMK-37 keyboard manual</a> to play, record and navigate the instrument.",
+          "after": "Use the <a href=\"legacy.html\">earlier 0.0.26 keyboard reference</a> for that version\u2019s playing controls.",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<details><summary>Versions, engine names and test status</summary>",
+          "after": "<p class=\"release-notice\">SynthOne replaces the retired fourth engine in development. Its control reference is not available here yet. The earlier 0.0.26 manual remains below, with its original engine behavior clearly versioned.</p><details data-historical-reference=\"0.0.26\"><summary>Archived 0.0.26 reference and test status</summary>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "This browser workspace imports project revision 13. Keep a project backup made with the original firmware version; incompatible engines and older project revisions are not silently migrated.",
+          "after": "The full-project workspace is for earlier firmware. Revision 13 import is unavailable here. Keep each backup with its original firmware; engine projects are not silently migrated.",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "The browser workspace imports revision 13 only. You can inspect earlier files, but this workspace does not migrate engine projects. Keep their original firmware and backups. Import replaces the live project. Save on the keyboard stores it. Load and Reset require explicit confirmation and keep uploaded sample slots.",
+          "after": "Revision 13 import is unavailable in this workspace. Earlier files are checked against their original pattern and sound schemas; see the <a href=\"projects-guide.html\">earlier project format reference</a>. Keep their original firmware and backups. Import replaces the live project. Save on the keyboard stores it. Load and Reset require explicit confirmation and keep uploaded sample slots.",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "manual/legacy.html",
+      "beforeSHA256": "ef123ba690174e0c29b21a9aced48423a3b0683694f9523f33e198fc03cbe2aa",
+      "afterSHA256": "46f976cadec88ad151a92d93acdb4f26d25873e0855a46033544e491c4cd6a00",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<h1>DnBOX</h1>",
+          "after": "<h1>DnBOX keyboard manual</h1><details class=\"manual-jump\"><summary>Jump to a chapter</summary><a href=\"#s1\">Versions</a><a href=\"#s2\">The panel</a><a href=\"#s3\">Start making music</a><a href=\"#s8\">Save</a><a href=\"#s10\">Mix &amp; effects</a><a href=\"#s11\">Patterns &amp; song</a><a href=\"#contents\">All chapters</a></details>"
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<title>Manual \u00b7 DnBOX</title>",
+          "after": "<title>Earlier 0.0.26 keyboard reference \u00b7 DnBOX</title>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<main id=\"content\" class=\"document-page\">",
+          "after": "<main id=\"content\" class=\"document-page archived-manual\" data-historical-reference=\"0.0.26\">",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<h1>DnBOX keyboard manual</h1>",
+          "after": "<h1>Earlier 0.0.26 keyboard reference</h1><p class=\"release-notice\">Archived version reference. It includes the retired engine4 behavior, not current SynthOne controls. Follow only the instructions that match your installed firmware.</p>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        }
+      ]
+    },
+    {
+      "path": "manual/projects-guide.html",
+      "beforeSHA256": "17fc3dfaa77d21f56b4c3ea8f01114a6070af427112ae6df80936c50744c43e7",
+      "afterSHA256": "eac0d29fe10f70537ed3669a9068f57f8de747c535ef47483fc396bd2b8d6dd5",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        },
+        {
+          "before": "<h1>X0X projects</h1>",
+          "after": "<h1>Earlier project format &amp; recovery</h1><p class=\"release-notice\">This is the earlier full-project workspace reference, not the current engine format. Revision 13 import is unavailable here. The saved header example below uses pattern 3 / sound 4. Keep project backups with their original firmware.</p>",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        },
+        {
+          "before": "The payload is the firmware\u2019s canonical current persistent project schema:",
+          "after": "The payload is the corresponding earlier firmware\u2019s persistent project schema:",
+          "scope": "R4 actual independent review / source-verified R22 contract correction"
+        }
+      ]
+    },
+    {
+      "path": "presets/legacy/index.html",
+      "beforeSHA256": "9f32e43620d946cccb1f7aef58ae10bea9f13d76c5ade6b0ef46e5b0b4e9eff2",
+      "afterSHA256": "bc96dde4513f9f332edcdb536f397513dd3f2aa48b031e2562eff99f3ebc9223",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../../index.html#sounds\">Sounds</a><a href=\"../../remote/\">Remote</a><a href=\"../../breaks/\">Samples</a><a href=\"../../projects/\">Projects</a><a href=\"../../presets/\">Presets</a><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">History</a><a class=\"install-link\" href=\"../../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../../remote/\">Remote</a><a href=\"../../breaks/\">Samples</a><a href=\"../../projects/\">Projects</a><a href=\"../../presets/\">Presets</a><a href=\"../../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../../starting-breaks/\">Starting breaks</a><a href=\"../../builds/\">Build history</a><a href=\"../../new/\">What\u2019s new</a><a href=\"../../tools/\">Tools</a><a href=\"../../help/\">Setup &amp; help</a><a href=\"../../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">Build history</a><a href=\"../../new/\">What\u2019s new</a><a href=\"../../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">Build history</a><a href=\"../../tools/\">Tools</a><a href=\"../../help/\">Setup &amp; help</a><a href=\"../../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../../builds/\">Build history</a><a href=\"../../tools/\">",
+          "after": "<a href=\"../../builds/\">Build history</a><a href=\"../../install/#firmware\">Firmware versions</a><a href=\"../../tools/\">"
+        },
+        {
+          "before": "<body id=\"top\" class=\"tool-surface\">",
+          "after": "<body id=\"top\" class=\"tool-surface legacy-presets\">"
+        },
+        {
+          "before": "<span>Target engine</span>",
+          "after": "<span>File engine filter</span>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<option value=\"juno\">Juno</option><option value=\"drone\">Drone (legacy files)</option>",
+          "after": "<option value=\"juno\">Juno</option>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<option value=\"break\">BREAK</option></select>",
+          "after": "<option value=\"break\">BREAK</option><optgroup label=\"Retired file inspection\"><option value=\"4\" data-retired-engine=\"4\">Retired engine 4 (read-only)</option></optgroup></select>",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        },
+        {
+          "before": "<p class=\"help\">Hardware model is not encoded in DNPR v1.",
+          "after": "<p class=\"help\" data-retired-engine=\"4\">Engine4 is retired. Existing files stay unchanged as legacy backups, not SynthOne presets.</p><p class=\"help\">Hardware model is not encoded in DNPR v1.",
+          "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
+        }
+      ]
+    },
+    {
+      "path": "manual/original/index.html",
+      "beforeSHA256": "623de8295e5e760634555b2e8717072dc959815b26ecd9669e22ba88640b52bf",
+      "afterSHA256": "0529cea3de509b6979e4fec843e72345926ffdb3d35a585b132922ee3c6f251b",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../../index.html#sounds\">Sounds</a><a href=\"../../remote/\">Remote</a><a href=\"../../breaks/\">Samples</a><a href=\"../../projects/\">Projects</a><a href=\"../../presets/\">Presets</a><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">History</a><a class=\"install-link\" href=\"../../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../../remote/\">Remote</a><a href=\"../../breaks/\">Samples</a><a href=\"../../projects/\">Projects</a><a href=\"../../presets/\">Presets</a><a href=\"../../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../../starting-breaks/\">Starting breaks</a><a href=\"../../builds/\">Build history</a><a href=\"../../new/\">What\u2019s new</a><a href=\"../../tools/\">Tools</a><a href=\"../../help/\">Setup &amp; help</a><a href=\"../../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">Build history</a><a href=\"../../new/\">What\u2019s new</a><a href=\"../../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../../manual/\">Manual</a><a href=\"../../builds/\">Build history</a><a href=\"../../tools/\">Tools</a><a href=\"../../help/\">Setup &amp; help</a><a href=\"../../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<h1></h1>",
+          "after": "<h1>Original FM-1 manual</h1>"
+        },
+        {
+          "before": "<a href=\"../../builds/\">Build history</a><a href=\"../../tools/\">",
+          "after": "<a href=\"../../builds/\">Build history</a><a href=\"../../install/#firmware\">Firmware versions</a><a href=\"../../tools/\">"
+        }
+      ]
+    },
+    {
+      "path": "reference/index.html",
+      "beforeSHA256": "14c5cc7b66e7f16e0d24533e90ebdf1b215270bceb98f9bb6adf5cbdf12a40aa",
+      "afterSHA256": "864e1fafd8f10dc22a120d99ed546d925f020d252b19de1d78ef07f2a81ec816",
+      "changes": [
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header class=\"site-header\"><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"site-navigation\" hidden>Menu</button><nav id=\"site-navigation\" aria-label=\"Main\"><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><details class=\"more-nav\"><summary>More</summary><div><a href=\"../starting-breaks/\">Starting breaks</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a></div></details></nav><a class=\"install-link\" href=\"../install/\">Install nightly</a></header>"
+        },
+        {
+          "before": "<footer><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../new/\">What\u2019s new</a><a href=\"../help/\">Setup & help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav></footer>",
+          "after": "<footer class=\"site-footer\"><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Project\"><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a href=\"../help/\">Setup &amp; help</a><a href=\"../reference/\">Design archive</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a></nav><a class=\"back-top\" href=\"#top\">\u2191 Top</a></footer>"
+        },
+        {
+          "before": "Interface studies \u00b7 DnBOX",
+          "after": "Design archive \u00b7 DnBOX"
+        },
+        {
+          "before": "<h1>Interface studies</h1>",
+          "after": "<h1>Design archive</h1>"
+        },
+        {
+          "before": "Source-linked interface layouts and instrument views. These are presentation studies, not installed firmware.",
+          "after": "Earlier source-linked interface studies and instrument views. These are design archives, not installed firmware or the current Remote. The complete original galleries are retained below."
+        },
+        {
+          "before": "</body>",
+          "after": "<script type=\"module\" src=\"../site-shell.mjs\"></script></body>"
+        },
+        {
+          "before": "<body",
+          "after": "<body id=\"top\""
+        },
+        {
+          "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
+          "after": "<a href=\"../builds/\">Build history</a><a href=\"../install/#firmware\">Firmware versions</a><a href=\"../tools/\">"
+        }
+      ]
+    }
+  ]
+}

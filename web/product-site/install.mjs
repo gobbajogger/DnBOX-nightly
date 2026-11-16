@@ -14,9 +14,8 @@ async function initialize(){
   // Build off-document so a slow obsolete digest/mount can never replace a newer panel.
   const staging=document.createElement('div');
   const candidate=await mountPreparedChoices(staging,{contractBytes,contractSha256:SAMPLE_CONTRACT_SHA256,initialSelectedIds:savedSelection,
-   resolvePrivateUrl:id=>'/private-audio/'+encodeURIComponent(id),
-   fetchBytes:async url=>{const r=await fetch(url,{cache:'no-store',mode:'same-origin',headers:{'X-Dnbox-Private':'confirmed-five-preview'}});if(!r.ok)throw Error('preview unavailable');return new Uint8Array(await r.arrayBuffer());},
-   onSelection:s=>{if(own!==generation||suspended||disposed)return;savedSelection=[...s.selectedIds];try{localStorage.setItem(SELECTION_KEY,JSON.stringify(savedSelection));}catch{}if($('samples-status')) $('samples-status').textContent=s.count?String(s.count):'0';}});
+   previewAvailable:false,
+   onSelection:s=>{if(own!==generation||suspended||disposed)return;savedSelection=[...s.selectedIds];try{localStorage.setItem(SELECTION_KEY,JSON.stringify(savedSelection));}catch{}if($('samples-status')) $('samples-status').textContent='Choices stay in this browser. No samples are written.';}});
   if(own!==generation||suspended||disposed){candidate.destroy();return;}
   panel?.destroy();panel=candidate;$('sample-picker').replaceChildren(staging);
  }catch{if(own===generation&&!suspended&&!disposed)$('samples-status').textContent='Starting breaks could not be loaded. Reload this preview to try again.';}

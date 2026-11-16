@@ -1,0 +1,56 @@
+{
+  "schema": "dnbox-actual-r4-review-negatives/1",
+  "sourceRun": "site-actual-r4",
+  "status": "Captured while source frozen. Full native source report pending. No recovered earlier firmware claim.",
+  "fixtures": [
+    {
+      "source": "components/break-panel/panel.mjs",
+      "fixture": "site-r4-unavailable-preview.mjs",
+      "sourceSHA256": "d5b6791b4057caa20af1d603de92aba4195a8dd78e0142bc1d2a264f3892b858",
+      "fixtureSHA256": "d5b6791b4057caa20af1d603de92aba4195a8dd78e0142bc1d2a264f3892b858",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "source": "presets/index.html",
+      "fixture": "site-r4-preset-filename-copy.html",
+      "sourceSHA256": "0afb681253e6100646ec80f41d7a051c50ec07048ef1db5ccc2b91f61d5bf08d",
+      "fixtureSHA256": "0afb681253e6100646ec80f41d7a051c50ec07048ef1db5ccc2b91f61d5bf08d",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "source": "install/index.html + site.css + tool-theme.css",
+      "fixture": "site-r4-emoji-variation.html",
+      "sourceSHA256": "d1ed0307ebf5688b52e784171d1c355d2fbbc39699a74c8254bae40c5ad9a62b",
+      "fixtureSHA256": "23cfeb77a183cd5886b87cc52cbffa7acd6420d6a1c4fbf1502e7cf92216a022",
+      "adaptations": "Actual R4 section/styles isolated; font URLs rooted to unchanged bundled assets for isolated serving. No handlers or values fabricated.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "source": "manual/index.html",
+      "fixture": "site-r4-project-schema-claim.html",
+      "sourceSHA256": "050c5807f257a8cb982afa2f55b972c6362e4b136c47f70e0e700df1038615af",
+      "fixtureSHA256": "050c5807f257a8cb982afa2f55b972c6362e4b136c47f70e0e700df1038615af",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "source": "new/index.html",
+      "fixture": "site-r4-fm1-notes.html",
+      "sourceSHA256": "0cba42e4e12588d3996c28a7ae2b17a25aeaba8dca327366729473caa176eb94",
+      "fixtureSHA256": "0cba42e4e12588d3996c28a7ae2b17a25aeaba8dca327366729473caa176eb94",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "source": "projects/exchange/panel.mjs",
+      "fixture": "site-r4-unqualified-midi-offer.mjs",
+      "sourceSHA256": "dee45550a751671b4a0b7dbde1ab4430accfcf488f133c96ff1c09d56631148d",
+      "fixtureSHA256": "dee45550a751671b4a0b7dbde1ab4430accfcf488f133c96ff1c09d56631148d",
+      "historicalFixture": true,
+      "activeProduct": false
+    }
+  ]
+}
