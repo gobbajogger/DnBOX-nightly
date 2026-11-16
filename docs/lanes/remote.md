@@ -1,5 +1,5 @@
 # Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 00:49 VLAT.
+Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 04:05 VLAT.
 
 ## Checklist
 | ID | Check | Status | Evidence |
@@ -24,7 +24,7 @@ Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92
 
 ## Blockers and routes
 - No shell GitHub authentication: use GitHub connector, each write under 700 KB.
-- Shared exact nightly checkout is materializing: inspect blob identities and donor diffs now; use separate local Remote tree when ready.
+- Runtime/source snapshots are materialized and API-verified. Web/test-and-merge own shared actual-browser access; do not compete for desktop inputs.
 - Prep gate is being repaired by integ; do not claim the wider gate passed from focused tests.
 
 ## Top risks
@@ -90,3 +90,9 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Independent work during freeze: isolated queued-DOWN candidate passes18 client/compiled-C tests, preserving exact request identity, total receive deadline, pending ownership and audio acknowledgement. Missing-token cached-OK wrapper risk reproduced FAIL before/PASS with explicit fail-closed default. Not shipped/native-admitted.
 - R3 geometry regression: actual shipped pitch pinch reaches8px rows while notes remain18px high. Source-event reproduction fails; isolated minimum6px candidate passes the regression and159 existing tests, but dense labels/hit targets need rendered review before composition. Published source unchanged.
 - R1 caption audit correction: P.DPTH is glyph semantic metadata, not visible text. Retained first-bank SVG has no visible Tune/Attack/Decay/Depth captions (confirmed by path-text-role parse and source-only SVG raster). Current fwui b341436ff8087c20b8ef51765f986736473611b0 supplies authentic native PNG and typed mapping showing all four captions. Mapping bytes verified from GitHub; source capture remains immutable. A current-source projection is needed, not silent metadata renaming or bitmap substitution that drops live glyphs.
+
+- Independent source review accepted broker5bd58 (11/11 targeted), resize d3d3 (actual-app regression) and Lua1fcd deadline checks. Reviewer rehashed934blobs for each broker/resize snapshot with0 mismatches. This is bounded source acceptance, not full Local/browser/native qualification.
+- Actual c250 browser844x390 independently confirms missing909BD first-bank captions. Scrolling exposes all values and final kick strip above the sticky footer; do not claim permanently inaccessible controls from the initial overlay alone. Retained source-caption evidence and current native-reference provenance are saved in evidence/remote-caption-audit/.
+- Actual browser control regression: emitted parameter-inspector lacked the span that showParameter wrote, so selecting Tune enabled34 but aborted before readout/Undo completion. Source-event shim had manufactured that missing node. Restored the emitted caption, guarded lookup, and made the shim follow emitted markup/insertAdjacentHTML. Reproduction FAIL before/PASS after; shipped markup selection/change/Undo34→35→34 tested. No catalog/native admission change.
+- DOM test doubles must follow emitted markup, never manufacture missing selectors; validate the shipped interaction in a real browser before UI acceptance.
+- Current native glyph sweep is isolated read-only b341 source,63unique visible drum controls/22555host checks, settled raw samples only. No shared firmware/generator edits, blanket monotonicity assertion or browser projection acceptance. Exact formatter0ee85 data verified against26published blob hashes; all197native identities/names/domains match retained catalog.
