@@ -1,0 +1,31 @@
+Path-only sanitized; rawSHA256 e33df1bc2592590ea452c7c260fae3076858bdc701ab9a17f5d0fa36967017db
+✔ normal deterministic source build/check never changes Pages/catalog/source (5.14112ms)
+✔ all source identities checked before first output write (1.380804ms)
+✔ unsafe destinations and malformed paths fail closed (6.193965ms)
+✔ private/binary assets, duplicate inputs and symlinks are refused (8.649232ms)
+✔ source ancestor symlink and output symlink never escape the scoped build tree (1.856103ms)
+✔ a stale unrelated output is not silently carried into a later publisher input (1.493907ms)
+✔ recognized output hardlink cannot overwrite a protected synthetic catalog (1.011827ms)
+✔ recognized output special files refuse without opening or blocking (12.249709ms)
+✔ FIFO manifest rejects after import-ready without blocking the operation (464.921801ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":410.94755000000004,"operationElapsedMs":32.28734599999996}
+✔ slow child startup does not consume the500ms FIFO operation watchdog (1592.101347ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":1555.0592179999999,"operationElapsedMs":21.096497}
+✔ controlled missing-guard fixture is exact current code minus the declared preflight, never claimed historical (2.601017ms)
+✔ controlled missing-guard mutant blocks after readiness and trips only the operation watchdog (638.935068ms)
+ℹ {"code":null,"signal":"SIGKILL","result":null,"timedOut":"operation","stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":106.91434900000013,"operationElapsedMs":510.49182999999994}
+✔ symlink manifest refuses without reading an outside manifest (2.251443ms)
+✔ exact five pinned owner previews are included by the actual product builder (28.804803ms)
+✔ an arbitrary WAV remains rejected before any output write (42.875401ms)
+✔ a changed contract cannot authorize replacement audio even with a matching source manifest (9.148518ms)
+✔ a same-length corrupt preview with a refreshed manifest still fails the trusted contract pin (24.01627ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2995.08899
+
+ACTUAL_EXIT 0

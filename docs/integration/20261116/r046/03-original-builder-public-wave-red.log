@@ -1,0 +1,27 @@
+Path-only sanitized; rawSHA256 d2ee11636b5b89824aa7cc28a3b34a652df06125029b22adfc08ce2ade7e88cb
+✖ exact five pinned owner previews are included by the actual product builder (15.277386ms)
+✔ an arbitrary WAV remains rejected before any output write (8.32982ms)
+✔ a changed contract cannot authorize replacement audio even with a matching source manifest (7.134981ms)
+✔ a same-length corrupt preview with a refreshed manifest still fails the trusted contract pin (8.856678ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 328.764598
+
+✖ failing tests:
+
+test at tests/public-break-preview-build.test.mjs:9:1
+✖ exact five pinned owner previews are included by the actual product builder (15.277386ms)
+  Error: Firmware/private audio is not a product source asset
+      at buildProductSite (file://PROJECT_WORKSPACE/consolidation-20261116/r046-preview-stage/scripts/build-product-site.mjs:24:111)
+      at TestContext.<anonymous> (file://PROJECT_WORKSPACE/consolidation-20261116/r046-preview-stage/tests/public-break-preview-build.test.mjs:9:129)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+ACTUAL_EXIT 1

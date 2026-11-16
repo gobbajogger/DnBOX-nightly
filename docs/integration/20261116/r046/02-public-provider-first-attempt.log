@@ -1,0 +1,23 @@
+Path-only sanitized; rawSHA256 d7ca79ee5ca5d4e80b236408880d49f97ac037353b4782e681910de468d5240a
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test
+> node --test tests/public-break-previews.test.mjs
+
+✔ all five exact previews are publicly fetchable without changing default choices (107.87297ms)
+✔ public fetch sends no private authentication header (4.923138ms)
+✔ unknown ID and arbitrary URL fail closed before any HTTP request (1.209581ms)
+✔ subsets, None and audition preserve independent selection and no-erase semantics (12.394599ms)
+✔ same-length corrupt WAV is rejected by unchanged picker hash check (23.96693ms)
+✔ HTTP redirect cannot escape the public preview whitelist (3.347667ms)
+✔ real audition consumer fetches a public WAV without selecting it; media interface is a stub, not browser audio proof (14.085502ms)
+HTTP_REQUEST_RECEIPT [{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone1.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone2.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone3.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br2-zone1.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br2-zone2.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone1.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone1.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br2-zone2.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone1.wav","status":200,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone1.wav","status":302,"privateHeader":null},{"path":"/web/product-site/assets/stock-breaks/personal-br1-zone3.wav","status":200,"privateHeader":null}]
+✔ installer entry wires the public provider without changing the prepared-choice admission seam (8.192375ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 480.90893

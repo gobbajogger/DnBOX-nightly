@@ -1,0 +1,54 @@
+Path-only sanitized; rawSHA256 bdfc521d499cbf620c4adb04a459d020b02cf874d60ad178bfa5cecb3e6b3314
+HTTP_REQUEST_RECEIPT [{"path":"/private-audio/personal-br1-zone1","status":404,"privateHeader":"confirmed-five-preview"},{"path":"/private-audio/personal-br1-zone2","status":404,"privateHeader":"confirmed-five-preview"},{"path":"/private-audio/personal-br1-zone3","status":404,"privateHeader":"confirmed-five-preview"},{"path":"/private-audio/personal-br2-zone1","status":404,"privateHeader":"confirmed-five-preview"},{"path":"/private-audio/personal-br2-zone2","status":404,"privateHeader":"confirmed-five-preview"}]
+✖ all five exact previews are publicly fetchable without changing default choices (101.303452ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 449.837691
+
+✖ failing tests:
+
+test at tests/public-break-previews.test.mjs:41:1
+✖ all five exact previews are publicly fetchable without changing default choices (101.303452ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   {
+  +     error: 'preview unavailable',
+  +     id: 'personal-br1-zone1'
+  +   },
+  +   {
+  +     error: 'preview unavailable',
+  +     id: 'personal-br1-zone2'
+  +   },
+  +   {
+  +     error: 'preview unavailable',
+  +     id: 'personal-br1-zone3'
+  +   },
+  +   {
+  +     error: 'preview unavailable',
+  +     id: 'personal-br2-zone1'
+  +   },
+  +   {
+  +     error: 'preview unavailable',
+  +     id: 'personal-br2-zone2'
+  +   }
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file://PROJECT_WORKSPACE/consolidation-20261116/r046-preview-stage/tests/public-break-previews.test.mjs:44:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'personal-br1-zone1', error: 'preview unavailable' }, { id: 'personal-br1-zone2', error: 'preview unavailable' }, { id: 'personal-br1-zone3', error: 'preview unavailable' }, { id: 'personal-br2-zone1', error: 'preview unavailable' }, { id: 'personal-br2-zone2', error: 'preview unavailable' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -14,12 +14,28 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
  if(target===repoRoot||inside(repoRoot,target)||inside(target,source))throw Error('Unsafe product output');
  if(!inside(target,join(repoRoot,'.output')))throw Error('Product output must remain in the scoped .output build tree');
  noLinks(target,repoRoot);
+ // Owner-designated public previews are a narrow pinned exception, never arbitrary audio.
+ let startingPreviews=null;
+ function pinnedStartingPreview(row,data){
+  if(!/^assets\/stock-breaks\/personal-br(?:1-zone[1-3]|2-zone[1-2])\.wav$/.test(row.path))return false;
+  if(startingPreviews===null){
+   const path=join(source,'sample-contract.json');noLinks(path,repoRoot);
+   if(!lstatSync(path).isFile())throw Error('Regular starting-break contract required');
+   const raw=readFileSync(path);
+   if(createHash('sha256').update(raw).digest('hex')!=='df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f')throw Error('Starting-break contract pin mismatch');
+   const contract=JSON.parse(raw);
+   if(contract.schema!=='dnbox-owner-confirmed-break-set/1'||!Array.isArray(contract.assets))throw Error('Starting-break contract required');
+   startingPreviews=new Map(contract.assets.map(a=>['assets/stock-breaks/'+a.id+'.wav',a]));
+  }
+  const asset=startingPreviews.get(row.path);
+  return !!asset&&data.length===asset.preview_bytes&&createHash('sha256').update(data).digest('hex')===asset.preview_sha256;
+ }
  const seen=new Set(),inputs=[];
  for(const row of manifest.files){
   if(typeof row.path!=='string'||!row.path||row.path.includes('\\')||row.path.startsWith('/')||row.path.split('/').some(x=>!x||x==='.'||x==='..')||seen.has(row.path)||row.path==='SOURCE-MANIFEST.json')throw Error('Invalid or duplicate source path');
   seen.add(row.path);const input=join(source,row.path);noLinks(input,repoRoot);if(!lstatSync(input).isFile())throw Error('Regular product source files required');const data=readFileSync(input);
   if(data.length!==row.bytes||createHash('sha256').update(data).digest('hex')!==row.sha256)throw Error('Product source drift: '+row.path);
-  if(/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))throw Error('Firmware/private audio is not a product source asset');
+  if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!pinnedStartingPreview(row,data))throw Error('Firmware/binary or unpinned audio is not a product source asset');
   inputs.push([row.path,data]);
  }
  // No stale private/unrelated files may ride along in a publisher input.
