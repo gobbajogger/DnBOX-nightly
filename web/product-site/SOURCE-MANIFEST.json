@@ -839,13 +839,18 @@
     },
     {
       "path": "remote/touchosc/README.md",
-      "bytes": 960,
-      "sha256": "39393eb88c5f653417dc1015218c697141c7012d46928e78055f74728aeb680e"
+      "bytes": 2401,
+      "sha256": "66c6b95f2dd3b2b1ae719226441e0a30cbd0d00def4ece8deffe51ec8fcf7724"
     },
     {
       "path": "remote/touchosc/dnr2-codec.lua",
       "bytes": 2416,
       "sha256": "85b0a30fd96585c676a6c8d2809627a5114c3104a58ab9f676de6e1f319c2b60"
+    },
+    {
+      "path": "remote/touchosc/dnr2-controller.lua",
+      "bytes": 2976,
+      "sha256": "e395bff91c69e3f8fc778b53dc31deb63aee9f9f818e9414d8c58176eff390ac"
     },
     {
       "path": "remote/touchosc/dnr2-session.lua",
