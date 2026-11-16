@@ -64,3 +64,9 @@ Repeated mistake: browser launch policy checks missed a launcher invoked indirec
 ## Combined nightly candidate
 - Normal two-parent composition of web68f4b7b718a45291c86d4548b996c5095e8353a4 (including authentic five assets and real preview/provider allowlist) with integ b0a66ec5bd1f38234e0540d3267ea68a854a58fc (fail-closed browser policy). No consolidated/gh-pages/main merge or publication.
 - Web source evidence build203files, product57Node+15Python and asset/provider21 checks PASS applies to web68f input; combined exact-head gate and independent review remain required. Runtime browser unavailable here, no live404 resolution claimed.
+
+Repeated mistake: commands mixed workspace-root-relative paths with a repository workdir. Resolve input/output paths against the explicit working directory before running; fail closed on missing inputs.
+
+## Remote plus web composition
+- Updated normal two-parent composition consumes exact3edfb16374c99c9ccb99e27d45e3d1af25360185 (web plus Remote cac407) while retaining integ fail-closed policy. Source manifest209 files belongs to web and is retained unchanged. Producer product57Node+25Python/workspace84/Remote63/protocol evidence belongs to3ed input, not an automatic full combined PASS.
+- Native/TouchOSC device acceptance, live Pages byte validation and full normal-browser gate remain unqualified; no consolidated or gh-pages merge.

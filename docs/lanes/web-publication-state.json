@@ -1,11 +1,11 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "2e04ffb89a6cbb115fcac27569fd1d96454b6867",
+  "sourceHead": "f73a68b0d2f3ead524629de53b37489334675c2c",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
-  "pagesTree": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
+  "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
-  "productCount": 203,
+  "productCount": 209,
   "deletePaths": [],
   "retention": "Overlay built product blobs onto exact existing gh-pages tree, never replace base tree. Keep all non-product paths and package bytes unchanged.",
   "critical": [
@@ -172,6 +172,7 @@
     "remote/draft-ui.mjs",
     "remote/firmware-link.mjs",
     "remote/frame.mjs",
+    "remote/funkybeats-view.mjs",
     "remote/glyph-live.mjs",
     "remote/glyph-registry.mjs",
     "remote/glyph-render.mjs",
@@ -195,10 +196,15 @@
     "remote/source-sounds.json",
     "remote/style.css",
     "remote/timeline.mjs",
+    "remote/touchosc/README.md",
+    "remote/touchosc/dnr2-codec.lua",
     "remote/trace.json",
     "remote/vendor/client.mjs",
     "remote/vendor/codec.mjs",
+    "remote/vendor/funkybeats-core.mjs",
+    "remote/vendor/funkybeats-provenance.json",
     "remote/view.mjs",
+    "remote/viewport.mjs",
     "remote/wave-display.mjs",
     "remote/workspace.mjs",
     "remote.html",
@@ -395,7 +401,8 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "a9498f6b081d878eb578c70dcc6004098527066ab40ffc774b59b2267e85ae64",
+  "productManifestSha256": "af3404e3d7cb0f5d8070ba46a74a75aee4773b08a1f1fbe8d54569d0e6a69ade",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
-  "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified."
+  "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
+  "remoteCompositionIncludes": "cac407222ab23b72e801293afcf32ed44c10d36b"
 }
