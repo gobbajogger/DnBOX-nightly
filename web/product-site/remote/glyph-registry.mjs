@@ -173,7 +173,8 @@ export const DRAWING_STATE=Object.freeze({
  'chicago:ADSR':'full-row','juno:ADSR':'full-row','superj6:ADSR':'full-row','chicago:WAVE':'morph-trace',
  'CH:stems':'hat','OH:stems':'hat'
 });
-export const GLYPH_MOTION=Object.freeze({samples:[0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600],idleDwell:160,endDwell:300,frameMin:20,noteOff:500,cycle:3080,easing:'steps(1,end)',liveOnly:true,idleFrame:0,zeroDepth:'stable'});
+export const GLYPH_MOTION=Object.freeze({samples:[0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600],idleDwell:160,endDwell:300,frameMin:20,noteOff:500,cycle:3080,easing:'steps(1,end)',liveOnly:true,idleFrame:0,zeroDepth:'stable',sweep:[0,16,32,48,64,80,96,112,127],midStepMs:80});
+export const RENDERER_PROOF=Object.freeze({WAVE:'anim-spec',WIDTH:'anim-spec',ENV:'pending proof',LFO:'pending proof',FILTER:'pending proof',TUNE:'pending proof',DRIVE:'pending proof',SEND:'pending proof',PAN:'pending proof',DECAY:'pending proof',TAPE:'pending proof'});
 export const ENGINE_CONTROLS=Object.freeze([
 
  Object.freeze({engine:"synthone",name:"Index 1",section:"OSCILLATORS"}),

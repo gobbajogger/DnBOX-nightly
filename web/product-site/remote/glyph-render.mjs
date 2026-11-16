@@ -1,17 +1,20 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Live R22 readouts. One renderer per function. The shape is the current value
 // through that engine's transfer curve. Idle and zero-depth stay on one frame.
-// Curves cited from the firmware repository main:
-//   firmware/src/app/ui.c:6838-6924 Chicago saw↔square and Miami/Juno pulse plot
-//   experiments/original_synth/oscillator_motion.c:27-37,103-106 pulse width
-//   firmware/src/app/ui.c:7229-7319 Chicago exponential ADSR, linear other branch
+// WAVE and WIDTH follow Lead's ANIM-SPEC port (Python floor division), checked
+// against firmware commit 94197fc8. Where that C source disagrees, the proof wins.
+//   firmware/src/dsp/juno6.c:10 blep, :35-41 oscillator, :79 pulse width
+//   firmware/src/app/ui_original_wave.h:21-33,52-55,58-63,90-94 Chicago projection
+//   experiments/original_synth/chicago_program.c:17-21,54-57
+//   experiments/original_synth/chicago_program_private.h:4-5 gain maps
+// Other curves cited from firmware repository main:
 //   firmware/src/dsp/drum909.c:24-26,274-283 kick pitch drop
 //   firmware/src/app/ui.c:8047-8071 attack click and 808 tone lowpass
 //   firmware/src/app/ui.c:8084-8108 snappy noise and level meter
 // Animation is re-render after interpolating the parameter. No decorative motion.
 
 const MERGED={
- G023:'WAVE',G024:'WAVE',G025:'WAVE',
+ G023:'WAVE',G024:'WAVE',G025:'WAVE',G026:'WIDTH',G029:'WIDTH',
  G037:'ADSR',G038:'ADSR',G049:'ADSR',
  G015:'ATTACK',G048:'ATTACK',
  G016:'DECAY',G071:'DECAY',
@@ -22,7 +25,7 @@ const MERGED={
  G029:'PWM',G032:'FILTER',G033:'FILTER',G031:'ENV'
 };
 const NAMES={
- WAVE:'WAVE',ENV:'ENV',ADSR:'ADSR',PWM:'PWM',PULSE:'PWM',LFO:'LFO',
+ WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
  DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'FILTER',PEAK:'FILTER'
@@ -43,34 +46,107 @@ function path(points){
  return points.map((p,i)=>(i?'L':'M')+num(p[0])+' '+num(p[1])).join(' ');
 }
 
-// ui.c:6914-6920. mix 0 is a falling saw, mix 127 is a square. 29 samples, phase i%14.
-export function chicagoWaveSamples(mix){
- const m=Math.max(0,Math.min(127,mix|0));
+// ANIM-SPEC live readout. Python // floors; int() truncates toward zero.
+function floordiv(a,b){return Math.floor(a/b);}
+function trunc(x){return Math.trunc(x);}
+export const SWEEP_MIDI=Object.freeze([0,16,32,48,64,80,96,112,127]);
+export const SWEEP_HOLD_MS=Object.freeze([160,80,80,80,80,80,80,80,300]);
+export function junoBlep(t,dt){
+ if(t<dt){t=t/dt;return t+t-t*t-1;}
+ if(t>1-dt){t=(t-1)/dt;return t*t+t+t+1;}
+ return 0;
+}
+export function junoOscCycle(n,mix,width,dt=1/128,useBlep=true,applyGain=true){
+ width=Math.min(Math.max(width,0.05),0.95);
  const ys=[];
- for(let i=0;i<29;i++){
-  const phase=i%14;
-  const saw=15-phase*30/13;
-  const square=phase<7?15:-15;
-  ys.push((saw*(127-m)+square*m)/127);
+ for(let i=0;i<n;i++){
+  const t=i/n;
+  let saw=2*t-1, pulse=t<width?1:-1;
+  if(useBlep){
+   saw-=junoBlep(t,dt); pulse+=junoBlep(t,dt);
+   let q=t-width; if(q<0) q+=1; pulse-=junoBlep(q,dt);
+  }
+  let y=saw*(1-mix)+pulse*mix;
+  if(applyGain) y*=0.7;
+  ys.push(y);
  }
  return ys;
 }
-function wavePath(engine, value){
- const u=unit(value);
- if(engine==='juno'||engine==='miami'){
-  // oscillator_motion.c:103-106 and :33-37. Pulse width, not the Chicago crossfade.
-  const width=Math.min(.99,Math.max(.01,u));
-  const duty=engine==='juno'?width:0.10+0.8*width;
-  const pts=[];
-  for(let i=0;i<29;i++){
-   const p=i/28;
-   const y=p<duty?4:20;
-   pts.push([i*40/28,y]);
-  }
+export function junoPulseWidthFromPot(x){return 0.1+x*0.8;}
+export function junoGeomWithWrap(n,mix,width){
+ return [1*(1-mix)+(-1)*mix, ...junoOscCycle(n,mix,width,1/128,false,false)];
+}
+export function uiOriginalSaw(p){
+ const edge=Math.max(-65536,Math.min(65536,p*64));
+ return p-edge;
+}
+export function uiOriginalWave(shape,p,width){
+ if(shape===0) return floordiv(65536-2*Math.abs(p),4);
+ let z=uiOriginalSaw(p);
+ if(shape>=2){
+  let q=p+2*width;
+  if(q>65536) q-=131072;
+  z-=uiOriginalSaw(q);
+ }
+ return floordiv(z,4);
+}
+export function uiOriginalWidth(shape,nw){
+ nw=Math.min(Math.max(nw,0.01),0.99);
+ if(shape<2) return 0;
+ if(shape===2) return 32768;
+ return trunc((1-nw)*65536+0.5);
+}
+function quant(x,count){const q=trunc(x*(count-1)+0.5);return q<count?q:count-1;}
+function canonical(x,n){const q=Math.min(Math.max(trunc(x*(n-1)+0.5),0),n-1);return q/(n-1);}
+const GB_MAX=0x1.b2235cp-2;
+const SHAPE_A=quant(0.25,5), SHAPE_B=quant(0.75,5), NW=0.5;
+export function chicagoGains(x){return [canonical(1-x,1001), canonical(x*GB_MAX,1001)];}
+export function chicagoWaveZ(n,x){
+ const [ga,gb]=chicagoGains(x);
+ const gain=trunc(ga*32768+0.5), other=trunc(gb*32768+0.5);
+ const wa=uiOriginalWidth(SHAPE_A,NW), wb=uiOriginalWidth(SHAPE_B,NW);
+ const zs=[];
+ for(let i=0;i<n;i++){
+  const phase=n===1?65536:65536-trunc(131072*i/(n-1));
+  zs.push(floordiv(floordiv(uiOriginalWave(SHAPE_A,phase,wa),2)*gain+floordiv(uiOriginalWave(SHAPE_B,phase,wb),2)*other,16384));
+ }
+ return zs;
+}
+export function readoutRows(samples){
+ const w=102,h=26,n=samples.length;
+ let peak=0;
+ for(const v of samples) peak=Math.max(peak,Math.abs(v));
+ if(!(peak>0)) peak=1;
+ const xs=[], ys=[];
+ for(let i=0;i<n;i++){
+  xs.push(2+Math.round(i*(w-1-4)/(n-1)));
+  const clamped=Math.max(-1,Math.min(1,samples[i]/peak));
+  ys.push(Math.floor(h/2)-Math.round(clamped*Math.floor((h-4)/2)));
+ }
+ return {xs,ys};
+}
+function stroke(rows){return rows.xs.map((x,i)=>(i?'L':'M')+x+' '+rows.ys[i]).join(' ');}
+export function proofSamples(kind,midi){
+ const x=midi/127;
+ if(kind==='juno_wave') return junoGeomWithWrap(56,x,junoPulseWidthFromPot(64/127));
+ if(kind==='juno_width') return junoGeomWithWrap(56,1,junoPulseWidthFromPot(x));
+ return chicagoWaveZ(56,x).map(z=>z/16384);
+}
+function waveSamples(engine,value){
+ const x=unit(value);
+ if(engine==='juno') return junoGeomWithWrap(56,x,junoPulseWidthFromPot(64/127));
+ return chicagoWaveZ(56,x).map(z=>z/16384);
+}
+function wavePath(engine,value){
+ if(engine==='miami'){
+  const u=unit(value), duty=0.10+0.8*Math.min(.99,Math.max(.01,u)), pts=[];
+  for(let i=0;i<29;i++) pts.push([i*40/28, i/28<duty?4:20]);
   return path(pts);
  }
- const ys=chicagoWaveSamples(Math.round(u*127));
- return path(ys.map((y,i)=>[i*40/28, 12-y*12/15]));
+ return stroke(readoutRows(waveSamples(engine,value)));
+}
+function widthPath(_engine,value){
+ return stroke(readoutRows(junoGeomWithWrap(56,1,junoPulseWidthFromPot(unit(value)))));
 }
 
 // ui.c:7248-7256 and :7304-7308. x^4 into the RC constants, then the exponential segments.
@@ -196,7 +272,7 @@ function panPath(value){
 }
 
 const DRAW={
- WAVE:wavePath, PWM:wavePath, ADSR:adsrPath, ENV:adsrPath, FILTER:filterPath,
+ WAVE:wavePath, WIDTH:widthPath, ADSR:adsrPath, ENV:adsrPath, FILTER:filterPath,
  TUNE:tunePath, DECAY:decayPath, ATTACK:attackPath, LFO:lfoPath, TAPE:tapePath,
  TONE:tonePath, LEVEL:levelPath, GLIDE:glidePath, PAN:panPath
 };
@@ -209,20 +285,21 @@ export function render(fnId, value, engineId='chicago', state={}){
  if(fn==='LFO' && depth===0) return {fn,d:lfoPath(value,{depth:0}),live:false};
  if(!live && state.age!=null) state={...state, age:0};
  const d=draw(engineId, value, state);
- return {fn, engine:engineId, d, live};
+ const proof=(fn==='WIDTH'||(fn==='WAVE'&&engineId!=='miami'));
+ return {fn, engine:engineId, d, live, cell:proof?'102x26':null};
 }
 export function renderSvg(fnId, value, engineId, state={}){
- const {d,fn}=render(fnId,value,engineId,state);
- const motion=state.live && state.depth!==0?'':'';
- return `<svg class="glyph readout" data-fn="${fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+ const drawn=render(fnId,value,engineId,state);
+ if(drawn.cell) return `<svg class="glyph readout readout-wave" data-fn="${drawn.fn}" viewBox="0 0 102 26" width="102" height="26" aria-hidden="true"><rect width="102" height="26" fill="#101a1f"/><path d="${drawn.d}" fill="none" stroke="#dde7de" stroke-width="1"/></svg>`;
+ return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true"><path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
-// Interpolate the parameter and re-render. Idle or zero depth is one stable frame.
+// Proven WAVE and WIDTH re-render the nine MIDI steps. Other families still
+// interpolate until their proofs arrive. Idle and zero depth stay on one frame.
 export function morphFrames(fnId, from, to, engineId, state={}){
+ const fn=fnOf(fnId);
  if(!state.live || state.depth===0) return [render(fnId, from, engineId, {...state, live:false})];
+ if(fn==='WAVE'||fn==='WIDTH') return SWEEP_MIDI.map((midi,i)=>Object.assign(render(fn, midi, engineId, state),{midi, holdMs:SWEEP_HOLD_MS[i]}));
  const samples=[0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600];
  const span=samples[samples.length-1];
- return samples.map(ms=>{
-  const t=ms/span;
-  return render(fnId, from+(to-from)*t, engineId, state);
- });
+ return samples.map(ms=>render(fnId, from+(to-from)*(ms/span), engineId, state));
 }

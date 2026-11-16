@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DnBOX Remote</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+<a class="brand" href="../">DnBOX <small>REMOTE</small></a>
+<span class="source"><i class="status-dot" aria-hidden="true"></i> Local example · Not connected</span>
+<a class="pill connection" href="device/">Connection</a>
+<button id="undo" class="pill" type="button">Undo</button>
+<button id="redo" class="pill" type="button">Redo</button>
+<button id="review" class="pill" type="button">Review</button>
+<button id="draft-save" class="pill" type="button">Download draft</button>
+<label class="pill draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
+<button class="pill" type="button" disabled title="Not connected">Apply to instrument</button>
+</header>
+<div class="chrome">
+<nav aria-label="Workspace">
+<button type="button" data-view="roll" aria-current="page">Roll</button>
+<button type="button" data-view="drums">Drums</button>
+<button type="button" data-view="sound">Sound</button>
+<button type="button" data-view="locks">Motion</button>
+<button type="button" data-view="mix">Mix / FX</button>
+<button type="button" data-view="patterns">Launch</button>
+<button type="button" data-view="song">Song</button>
+<button type="button" data-view="files">Files / MIDI</button>
+</nav>
+<div class="toolbar" role="toolbar" aria-label="Roll tools">
+<div class="part-title"><strong id="part-title">CHICAGO A · P1</strong><label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label></div>
+<span id="context-title" hidden>Roll</span>
+<div id="mode-tools">
+<button type="button" data-mode="select" aria-pressed="true">Select</button>
+<button type="button" data-mode="move">Move</button>
+<button type="button" data-mode="draw">Draw</button>
+<button type="button" data-mode="length">Length</button>
+<button type="button" data-mode="pan">Pan</button>
+<button type="button" id="multi" aria-pressed="false">Group</button>
+<button type="button" id="copy">Copy</button>
+<button type="button" id="paste">Paste</button>
+<button type="button" id="delete">Delete</button>
+</div>
+<button type="button" id="snap" aria-pressed="true">Snap 1/16</button>
+<button type="button" id="zoom-step">Zoom 100%</button>
+<label class="zoom">Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
+</div>
+</div>
+<main>
+<section id="roll-view">
+<div class="workspace">
+<aside class="sound-panel">
+<h2>Sound</h2>
+<div class="glyph-card" id="glyph-card"></div>
+<button type="button" id="open-sound" class="pill wide">Sound</button>
+</aside>
+<div class="roll-panel">
+<div class="beat-ruler" id="beat-ruler" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+<div class="roll-body">
+<div id="pitch-rail" aria-hidden="true"></div>
+<div id="roll-scroll" tabindex="0" aria-label="Piano roll"><div id="roll-grid"></div></div>
+</div>
+<div class="lane">
+<div class="lane-gutter">
+<button type="button" id="lane-param" aria-controls="velocity">Velocity</button>
+<output id="lane-value"></output>
+<select id="lane-kind" class="lane-kind" tabindex="-1" aria-hidden="true">
+<option value="velocity" selected>Velocity</option>
+<option value="chance">Chance</option>
+<option value="pitch">Pitch</option>
+</select>
+</div>
+<div id="velocity" aria-label="Velocity"></div>
+</div>
+</div>
+</div>
+</section>
+<section id="other-view" hidden></section>
+</main>
+<footer id="status" role="status" aria-live="polite">Loading…</footer>
+<dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><p>Not connected.</p><button type="submit">Return</button></form></dialog>
+<dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>

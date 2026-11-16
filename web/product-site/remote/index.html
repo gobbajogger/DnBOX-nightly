@@ -15,7 +15,7 @@
 <div class="pattern-readout"><strong id="pattern-no">P01</strong><svg class="pattern-mark" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span id="tempo">120 BPM</span></div>
 <div class="header-actions">
 <span id="conn-state" class="conn-state">Not connected</span>
-<a class="hdr-btn connect" href="device/">Connect</a>
+<button id="connect" class="hdr-btn connect" type="button">Connect</button>
 <button id="undo" class="hdr-btn" type="button">Undo</button>
 <button id="redo" class="hdr-btn" type="button">Redo</button>
 <details class="overflow">
@@ -24,7 +24,9 @@
 <button id="review" class="hdr-btn" type="button">Review</button>
 <button id="draft-save" class="hdr-btn" type="button">Download draft</button>
 <label class="hdr-btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
-<button class="hdr-btn" type="button" disabled title="Not connected">Apply to instrument</button>
+<p id="firmware-safety">No reviewed firmware catalog. Apply stays off.</p>
+<div id="firmware-controls"></div>
+<button id="apply" class="hdr-btn" type="button" disabled>Apply to instrument</button>
 <button type="button" data-view="drums">Drums</button>
 <button type="button" data-view="locks">Motion</button>
 <button type="button" data-view="song">Song</button>

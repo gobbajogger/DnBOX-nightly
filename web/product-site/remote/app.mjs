@@ -9,6 +9,7 @@ import{ParameterGesture}from'./parameter.mjs';
 import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs';
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
 import{STEP_LANES,envelopeCurve,formatPan,formatParameterValue,glyphFor,isPanLabel,panCell}from'./glyphs.mjs';
+import{mountFirmwareLink}from'./firmware-link.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sourceFiles=['trace','catalog','components','source-sounds'],sourceIdentity={};
 const[trace,catalog,components,soundSource]=await Promise.all(sourceFiles.map(async p=>{const r=await fetch(p+'.json');if(!r.ok)throw Error('Example unavailable');const text=await r.text();sourceIdentity[p]=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),v=>v.toString(16).padStart(2,'0')).join('');return JSON.parse(text);}));
@@ -138,3 +139,4 @@ const draftState={model,motion,arrangement,launch,parameterDraft,parameterIdenti
 const draftCodec=new WorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean)});
 const draftContext=()=>({part:$('part').value,view,mode,lane:$('lane-kind').value,zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
 bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{gesture.cancel();cancelParameters();},restoreContext:c=>{$('part').value=c.part;selected=c.selected;mode=c.mode;multi=c.multi;drumVoice=c.drumVoice;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=1400*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
+mountFirmwareLink();
