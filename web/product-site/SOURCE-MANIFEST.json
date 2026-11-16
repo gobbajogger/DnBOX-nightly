@@ -253,16 +253,6 @@
       "sha256": "f25e4ce5a653333ed2f58fca602f46f9d073fd5783f2e18c5e6c6870d8a1b54d"
     },
     {
-      "path": "install/index.html",
-      "bytes": 630437,
-      "sha256": "0f6368293913fe1cc0a07187219fe4f8a6df0c014705b9cf8ee1c0992cd6826d"
-    },
-    {
-      "path": "install/legacy-hashes.js",
-      "bytes": 143,
-      "sha256": "cda9487c93e4ae60ccafea3f39741ff749eec824a31cfa705b328dcd97779a1c"
-    },
-    {
       "path": "install.html",
       "bytes": 122,
       "sha256": "0c33a482b4842ecd9c78774b0f3fdc73fbb498be08566e545fbc28230073781b"
@@ -271,6 +261,16 @@
       "path": "install.mjs",
       "bytes": 2585,
       "sha256": "be89c60de122e431a191e70efff2c98b77489a895ff4f6212246a3a265e2a0ba"
+    },
+    {
+      "path": "install/index.html",
+      "bytes": 630437,
+      "sha256": "0f6368293913fe1cc0a07187219fe4f8a6df0c014705b9cf8ee1c0992cd6826d"
+    },
+    {
+      "path": "install/legacy-hashes.js",
+      "bytes": 143,
+      "sha256": "cda9487c93e4ae60ccafea3f39741ff749eec824a31cfa705b328dcd97779a1c"
     },
     {
       "path": "manual/img/fm1-keys.svg",
@@ -673,6 +673,11 @@
       "sha256": "ad2c25b14d4656da808610501768d6dc5a46383438d9738c6d54d89b12f69785"
     },
     {
+      "path": "remote.html",
+      "bytes": 120,
+      "sha256": "158cbf7a2672cf5d76fe5381bd86319b9d5c833164974fbc362e1e39ce743763"
+    },
+    {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
       "bytes": 2108,
       "sha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80"
@@ -694,8 +699,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 46878,
-      "sha256": "1672d53b47f091b39d38cabaa3d4f6490614348d124e7bb700948752d96602be"
+      "bytes": 46946,
+      "sha256": "212273f18b8ef3229c47043b9ebf8010440edb5b0b865f8dfcc9cc24760b6856"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -801,6 +806,141 @@
       "path": "remote/draft-ui.mjs",
       "bytes": 2692,
       "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a"
+    },
+    {
+      "path": "remote/drum-display.mjs",
+      "bytes": 2198,
+      "sha256": "428b4005f5e305c6850278275728bf299e39f3a19b059bd9b27d1a026eebd80f"
+    },
+    {
+      "path": "remote/drum-format.mjs",
+      "bytes": 2141,
+      "sha256": "3a5f69adcebd7f6e848102fcd18c0675bc36b3f70d0c9773c76fc8d336a863a3"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-00.json",
+      "bytes": 45063,
+      "sha256": "d2cce09d13bef3aa37d76a461c9c63db0e3ee063ff17b72ac007db4498b2756b"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-01.json",
+      "bytes": 45064,
+      "sha256": "c0d44b6243d8cd3fce112bd7587432acc999a08fb11a18ba4b5168a920b010e7"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-02.json",
+      "bytes": 36096,
+      "sha256": "37f1231b32957213254e724f559a969fcb79040de0bb54687310359049b2955c"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-03.json",
+      "bytes": 36096,
+      "sha256": "6819fe00df9854c52ee601176b4799d95e8c88450272cb39f23eeab365c36a20"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-04.json",
+      "bytes": 36096,
+      "sha256": "cac60a7dbff56e98c66583757123525dd6b3aec52e62649632da358b1533cc5a"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-05.json",
+      "bytes": 35757,
+      "sha256": "65f6ecbc749fde9a2d6c7c179ec184ebe2dfef56653da2129f221e5560f67d8d"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-06.json",
+      "bytes": 40423,
+      "sha256": "9ff077c99eed721f3326b5b1600ae93870e1f37e5edc7d8fd3207f0245351b2c"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-07.json",
+      "bytes": 35541,
+      "sha256": "ecca8a50fc97167a3cc07fd5163fb9270739e67a3c59bb7475bcb800bbf46b16"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-08.json",
+      "bytes": 35541,
+      "sha256": "76f4093eb97de1235ce8fb4c763044f624c12f0b99f66519684bb8e28361a157"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-09.json",
+      "bytes": 35541,
+      "sha256": "ec1e0550d79e80ecbc1901d3f74ec4264d6e1e6017a34b205959a9f902f64380"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-10.json",
+      "bytes": 35550,
+      "sha256": "005575eebba4e28f644ed733e829484b3f4ce1f7a527bd053384542a0149eda1"
+    },
+    {
+      "path": "remote/drum-formatters/808-voice-11.json",
+      "bytes": 10632,
+      "sha256": "7552042b5111a85f0b87df6dd5c702c8c7f97f97c7ea0661d57c1cc5ad2e1f2d"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-00.json",
+      "bytes": 49567,
+      "sha256": "b3a55c271fb89bc90430eb26817c2abf02ec77a691493e31b9bf799b27135fe6"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-01.json",
+      "bytes": 45650,
+      "sha256": "476c52fa9abfd75a748a9db3c555bfe080692e6f1735c02d35074c44cf59861f"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-02.json",
+      "bytes": 40384,
+      "sha256": "3377b0d7576a6c88c234da1b9002a71203bb8f1d96fab0c7cb9410bd953ab8b5"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-03.json",
+      "bytes": 40449,
+      "sha256": "373324c5bf702c4d04e15316caaf1e09fa0cc611781302cbbe28a32c270609bd"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-04.json",
+      "bytes": 40510,
+      "sha256": "b6ba3b9da41198179f15633e43253c35d474d480cc908e6b765a7d852144103b"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-05.json",
+      "bytes": 30764,
+      "sha256": "7179b7d4438f681524a51f8713cdb30e5da2473ac5e736c28594adc3f2228822"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-06.json",
+      "bytes": 35847,
+      "sha256": "31e1676c88f5d7e520a3c8f67186ba556d10e32ff7eea519455b55d59ebc7045"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-07.json",
+      "bytes": 35762,
+      "sha256": "924eadb07b9588e26c2afb8cee24e2921227a5c6271a4c6c8778c95fe04056a6"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-08.json",
+      "bytes": 35787,
+      "sha256": "883f0aa3c9db62e21b2e3451d68bf5262aa614cd7825c1e3a57f1c7be0892ebc"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-09.json",
+      "bytes": 35802,
+      "sha256": "71901a79485560448b636024ebfe148d910ae7386fb4cf904bcaada62d14b2a8"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-10.json",
+      "bytes": 35811,
+      "sha256": "6f4ed1514bbc6513921acced3f9ae22bfae44a20ee0989464c10692958077a05"
+    },
+    {
+      "path": "remote/drum-formatters/909-voice-11.json",
+      "bytes": 10632,
+      "sha256": "5e23e365d6d5b683ae62d925b1120ab84e060dadbcb8f2778d62b92bc9866a97"
+    },
+    {
+      "path": "remote/drum-formatters/index.json",
+      "bytes": 6576,
+      "sha256": "fbe9539791127f77c03c94a971f897827074ab72d7ed9e6b2dc30f9a5827731e"
     },
     {
       "path": "remote/firmware-link.mjs",
@@ -1011,11 +1151,6 @@
       "path": "remote/workspace.mjs",
       "bytes": 1801,
       "sha256": "52ec3e4258ba976e5dd021e91e59cfda3b74b890d1f418335f2b04525de7fb2e"
-    },
-    {
-      "path": "remote.html",
-      "bytes": 120,
-      "sha256": "158cbf7a2672cf5d76fe5381bd86319b9d5c833164974fbc362e1e39ce743763"
     },
     {
       "path": "replay.mjs",

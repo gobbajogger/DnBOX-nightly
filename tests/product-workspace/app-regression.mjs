@@ -200,3 +200,10 @@ check('actual emitted parameter inspector supplies its caption and completes rea
  assert.equal($('parameter-value').value,34);assert.equal($('parameter-readout').textContent,'34');assert.match($('parameter-inspector').querySelector('span').textContent,/Tune/);
  $('other-view').handlers.keydown({key:'ArrowUp',target:hit,preventDefault(){}});assert.equal($('parameter-readout').textContent,'35');$('parameter-undo').onclick();assert.equal($('parameter-readout').textContent,'34');
 });assert.equal(failures,0);
+check('existing drum inspector preserves exact native units across raw edits and Undo',()=>{
+ $('part').value='drum909';$('part').selectedOptions=[{textContent:'909'}];views.find(e=>e.dataset.view==='sound').onclick();
+ const id=[...$('other-view').innerHTML.matchAll(/data-param="([^"]+)"/g)].map(m=>m[1]).find(id=>id.endsWith('|1:0:0:2'));assert.ok(id);
+ const hit=new E();hit.dataset.param=id;const e={button:0,pointerId:3100,clientX:0,clientY:0,target:hit,preventDefault(){}};$('other-view').handlers.pointerdown(e);$('other-view').handlers.pointerup(e);
+ const field=$('parameter-value');field.value=0;field.onchange();assert.equal($('parameter-readout').textContent,'100ms');field.value=127;field.onchange();assert.equal($('parameter-readout').textContent,'4.0s');$('parameter-undo').onclick();assert.equal($('parameter-readout').textContent,'100ms');
+ $('other-view').handlers.keydown({key:'ArrowUp',target:hit,preventDefault(){}});assert.equal($('parameter-readout').textContent,'103ms');$('parameter-undo').onclick();assert.equal($('parameter-readout').textContent,'100ms');
+});assert.equal(failures,0);
