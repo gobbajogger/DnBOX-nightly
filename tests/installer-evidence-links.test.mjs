@@ -11,7 +11,7 @@ const evidenceHelper=source.slice(first,start);
 const render=source.slice(start,source.indexOf('\nasync function sha256Hex',start));
 const element=()=>({children:[],hidden:false,textContent:'',append(...items){this.children.push(...items);},replaceChildren(){this.children=[];},removeAttribute(name){delete this[name];}});
 let checked=0;
-for(const value of ['javascript:alert(1)','data:text/html,bad','http://example.org/evidence','https://user:password@example.org/evidence','not a URL',null,'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/103#issuecomment-1']){
+for(const value of ['javascript:alert(1)','data:text/html,bad','http://example.org/evidence','https://user:password@example.org/evidence','not a URL',null,'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/103#issuecomment-1','https://github.com/gobbajogger/DnBOX/pull/103']){
  const safe=typeof value==='string'&&value.startsWith('https://github.com/');
  const elems={};const ctx={URL,$:id=>elems[id]||=element(),catalogLive:{latest:null},catalog:{history:[{id:'source-only',url:value}]},
  versions:()=>[],availableModels:()=>[],buildBadge:()=>element(),bundledController:()=>false,hasVerifiedNightlySelection:()=>false,

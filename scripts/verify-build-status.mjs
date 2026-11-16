@@ -15,7 +15,14 @@ const approvedPickerKeys = ['schema', 'repo', 'pages', 'latest', 'versions', 'hi
 assert.deepEqual(Object.keys(preview).sort(), approvedPickerKeys.sort(),
   'unapproved NIGHTLY picker field (including hidden download/approval metadata)');
 assert.equal(preview.schema, 1, 'unsupported NIGHTLY picker schema');
-assert.equal(preview.repo, 'https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly',
+// R039: the repositories are being renamed (X0X37-for-Loopy-Pro -> DnBOX,
+// x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Old and new names of the SAME two
+// repositories are accepted; nothing else is.
+const officialRepos = new Set(['https://github.com/gobbajogger/X0X37-for-Loopy-Pro',
+  'https://github.com/gobbajogger/DnBOX']);
+const nightlyRepos = new Set(['https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly',
+  'https://github.com/gobbajogger/DnBOX-nightly']);
+assert.ok(nightlyRepos.has(preview.repo),
   'NIGHTLY picker must identify the correct public browser-source repository');
 assert.equal(preview.pages, '', 'NIGHTLY picker must not advertise an unapproved hosting target');
 assert.equal(catalog.schema, 1);
@@ -51,12 +58,10 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
    const names=new Set(allowed.split(' '));
    for(const key of Object.keys(value)) assert.ok(names.has(key),at+': forbidden field '+key);
  };
- const officialRepo='https://github.com/gobbajogger/X0X37-for-Loopy-Pro';
- // NIGHTLY browser-source history may truthfully cite this public repo for
+ // NIGHTLY browser-source history may truthfully cite the nightly repo (either name) for
  // website/installer Git receipts. Firmware/upstream catalog.source stays on
- // the production repository below.
- const nightlyRepo='https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly';
- const approvedRepos=new Set([officialRepo, nightlyRepo]);
+ // the production repository (either name) below.
+ const approvedRepos=new Set([...officialRepos, ...nightlyRepos]);
  const repoBase=(value)=>{
    for(const base of approvedRepos){
      if(value===base || value.startsWith(base+'/')) return base;
@@ -120,7 +125,7 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
 
  shape(catalog,'schema kind installable source builds history policy counts versioning','manifest');
  shape(catalog.source,'repo ref commit versions_blob_sha','source');
- assert.equal(catalog.source.repo,officialRepo,'source repo');
+ assert.ok(officialRepos.has(catalog.source.repo),'source repo');
  assert.equal(catalog.source.ref,'gh-pages','source ref');
 assert.match(catalog.source.commit,/^[a-f0-9]{40}$/,'source commit requires pinned SHA');
  shape(catalog.policy,'nightly public public_device_proven_versions public_latest','policy');

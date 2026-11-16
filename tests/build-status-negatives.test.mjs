@@ -404,6 +404,13 @@ const editPickerCopies = mutate => dir => {
   fs.writeFileSync(join(dir, 'docs/versions.json'), same);
 };
 run('picker-canonical-empty-positive', editPickerCopies(()=>{}), true);
+// R039 rename: old and new names of the same two repositories pass; look-alikes do not.
+run('r039-picker-new-nightly-name', editPickerCopies(d=>{d.repo='https://github.com/gobbajogger/DnBOX-nightly';}), true);
+run('r039-picker-production-name-refused', editPickerCopies(d=>{d.repo='https://github.com/gobbajogger/DnBOX';}));
+run('r039-picker-other-owner-refused', editPickerCopies(d=>{d.repo='https://github.com/someone/DnBOX-nightly';}));
+run('r039-source-new-production-name', edit(j=>{j.source.repo='https://github.com/gobbajogger/DnBOX';}), true);
+run('r039-source-nightly-name-refused', edit(j=>{j.source.repo='https://github.com/gobbajogger/DnBOX-nightly';}));
+run('r039-source-lookalike-refused', edit(j=>{j.source.repo='https://github.com/gobbajogger/DnBOX2';}));
 for (const [label, mutation] of [
   ['picker-hidden-downloads-array', p => p.downloads=[{model:'elite',url:'https://untrusted.invalid/fwsc'}]],
   ['picker-hidden-nested-package-link', p => p.package={download_url:'https://untrusted.invalid/firmware'}],
