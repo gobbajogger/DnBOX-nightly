@@ -191,8 +191,8 @@ export function createSequencerState({channels,patternCount=32,defaultSteps=16,m
 // The adapter converts between DnBOX sample/raw domains; these helpers do not invent a native bar length.
 export const noteDuration=(currentCol,startStep,steps)=>Math.max(1,Math.min(currentCol-startStep+1,steps-startStep));
 export function velocityAt(canvasY,noteAreaH,velAreaH){const relY=canvasY-noteAreaH;const velocity=Math.max(0.05,Math.min(1,1-(relY/velAreaH)));return Math.round(velocity*100)/100;}
-export function createFunkyBeatsUI({document,channels,state,updateSequencerDisplay=()=>{}}){
- const CHANNELS=channels;
+export function createFunkyBeatsUI({document,channels,state,updateSequencerDisplay=()=>{},patternCount=32,patternColors=[]}){
+ const CHANNELS=channels,NUM_PATTERNS=patternCount,PATTERN_COLORS=patternColors;
     function el(tag, attrs, children) {
         const elem = document.createElement(tag);
         if (attrs) {
@@ -279,6 +279,76 @@ export function createFunkyBeatsUI({document,channels,state,updateSequencerDispl
             }
 
             this.updateSequencerDisplay();
+        },
+        buildPerformGrid() {
+            const container = document.getElementById('perform-content');
+            if (!container) return;
+            while (container.firstChild) container.removeChild(container.firstChild);
+
+            // Toolbar
+            const toolbar = el('div', { className: 'perform-toolbar' });
+            const indicator = el('span', { className: 'perform-mode-indicator' + (this.performMode ? ' active' : ''), text: this.performMode ? 'PERFORM MODE ACTIVE' : 'PERFORM MODE OFF' });
+            indicator.id = 'perform-mode-indicator';
+            toolbar.appendChild(indicator);
+            const helpText = el('span', { className: 'keyboard-hint', text: 'Click cells to assign patterns per channel. Changes apply at next bar.' });
+            toolbar.appendChild(helpText);
+            container.appendChild(toolbar);
+
+            // Grid
+            const grid = el('div', { className: 'perform-grid' });
+
+            // Header row
+            grid.appendChild(el('div', { className: 'perform-header', text: '' })); // empty corner
+            for (let p = 0; p < NUM_PATTERNS; p++) {
+                grid.appendChild(el('div', { className: 'perform-header', text: 'P' + (p + 1) }));
+            }
+
+            this.performCells = [];
+            for (let ch = 0; ch < CHANNELS.length; ch++) {
+                // Row label
+                const label = el('div', { className: 'perform-row-label' });
+                const colorDot = el('div');
+                colorDot.style.width = '8px';
+                colorDot.style.height = '8px';
+                colorDot.style.borderRadius = '50%';
+                colorDot.style.backgroundColor = CHANNELS[ch].color;
+                colorDot.style.flexShrink = '0';
+                label.appendChild(colorDot);
+                label.appendChild(el('span', { text: CHANNELS[ch].name }));
+                label.style.color = CHANNELS[ch].color;
+                grid.appendChild(label);
+
+                const rowCells = [];
+                for (let p = 0; p < NUM_PATTERNS; p++) {
+                    const cell = el('button', { className: 'perform-cell', text: String(p + 1) });
+                    cell.dataset.channel = ch;
+                    cell.dataset.pattern = p;
+                    if (this.performChannelPatterns[ch] === p) {
+                        cell.classList.add('active');
+                    }
+                    cell.style.borderColor = PATTERN_COLORS[p];
+                    cell.addEventListener('click', () => {
+                        if (this.playing && this.performMode) {
+                            // Queue change for next bar
+                            this.performQueuedChanges[ch] = p;
+                            // Mark as queued
+                            rowCells.forEach(c => c.classList.remove('queued'));
+                            cell.classList.add('queued');
+                        } else {
+                            // Apply immediately
+                            this.performChannelPatterns[ch] = p;
+                            rowCells.forEach(c => c.classList.remove('active', 'queued'));
+                            cell.classList.add('active');
+                        }
+                        this.autoSave();
+                    });
+                    rowCells.push(cell);
+                    grid.appendChild(cell);
+                }
+                this.performCells.push(rowCells);
+            }
+
+            container.appendChild(grid);
         }
  };return ui;
 }

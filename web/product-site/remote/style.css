@@ -283,3 +283,9 @@ dialog::backdrop{background:#000a}
 #velocity .fader i,#velocity .fader[data-bipolar] i{left:6px;width:2px;bottom:10px;height:calc(var(--v) * (100% - 20px));min-height:1px;background:var(--muted);opacity:.75}
 #velocity .fader[aria-pressed=true] i{background:var(--track);opacity:1}
 #velocity .fader:not([aria-pressed=true]) i{background:var(--muted);opacity:.55}
+/* Actual upstream launch grid, local selections in the R22 panel system. */
+.funkybeats-launcher .perform-grid{display:grid;grid-template-columns:90px repeat(32,76px);gap:5px;min-width:max-content}
+.funkybeats-launcher .perform-row-label{position:sticky;left:0;background:var(--bg);z-index:1;padding:10px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.funkybeats-launcher .perform-header{text-align:center;color:var(--muted);font-size:11px}
+.funkybeats-launcher .perform-cell{min-height:44px;padding:0 8px;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control)}
+.funkybeats-launcher .perform-cell[aria-pressed=true]{background:var(--focus-col);outline:1px solid var(--accent)}

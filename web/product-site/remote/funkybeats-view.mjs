@@ -7,6 +7,8 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 class Element{
  constructor(tag){this.tag=tag;this.attrs={};this.style={};this.dataset={};this.children=[];this.textContent='';}
  set className(v){this.attrs.class=v;}get className(){return this.attrs.class??'';}
+ get classList(){return{add:(...names)=>{this.className=[...new Set([...this.className.split(/\s+/),...names])].filter(Boolean).join(' ');},remove:(...names)=>{this.className=this.className.split(/\s+/).filter(n=>!names.includes(n)).join(' ');}};}
+ addEventListener(){} // Typed app-level delegation owns the serialized tree.
  get firstChild(){return this.children[0]??null;}
  appendChild(n){this.children.push(n);return n;}
  removeChild(n){this.children.splice(this.children.indexOf(n),1);}
@@ -38,4 +40,22 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16}){
  }
  const header='<div class="seq-row seq-numbers"><span>VOICE</span>'+Array.from({length:Math.ceil(steps/4)},(_,g)=>'<div class="seq-step-group">'+Array.from({length:Math.min(4,steps-g*4)},(_,i)=>'<span>'+String(g*4+i+1)+'</span>').join('')+'</div>').join('')+'</div>';
  return'<div class="drum-scroll funkybeats-sequencer" data-upstream="809e1e78" style="--track:'+color+'">'+header+serialize(grid)+'</div>';
+}
+
+// Actual upstream performance grid; local selection only, never queued playback.
+export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
+ if(!Array.isArray(parts)||parts.length!==5||!Array.isArray(targets)||targets.length!==5||patternCount!==32||targets.some(v=>v!==null&&(!Number.isInteger(v)||v<0||v>=patternCount)))throw Error('Invalid local launch selection');
+ const colors=['#ff9529','#ff4841','var(--fg)','var(--fg)','var(--fg)'];
+ const channels=parts.map((name,i)=>({name:String(name),type:i<2?'drum':'synth',color:colors[i]}));
+ const container=new Element('div');
+ const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),getElementById:id=>id==='perform-content'?container:null};
+ const ui=createFunkyBeatsUI({document,channels,state:null,patternCount,patternColors:Array(patternCount).fill('var(--line)')});
+ Object.assign(ui,{performMode:false,playing:false,performChannelPatterns:[...targets],performQueuedChanges:{},autoSave(){}});
+ ui.buildPerformGrid();
+ const grid=container.children.find(n=>n.className==='perform-grid');
+ for(let ch=0;ch<parts.length;ch++)for(let p=0;p<patternCount;p++){
+  const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent='P'+(p+1);cell.setAttribute('type','button');
+  cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');
+ }
+ return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';
 }

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 
@@ -38,4 +39,18 @@ test('ported upstream sequencer renders all typed drum cells with safe, stable i
   assert.equal(DRUM_VOICES[kit].length,11);assert.doesNotMatch(html,/seq-mute|seq-solo|seq-eucl|AudioContext|Not loaded/);
   const escaped=renderFunkyBeatsDrums({kit,notes:[{...notes[0],id:'"<script>'}],endSample:88200});assert.doesNotMatch(escaped,/<script>/);assert.match(escaped,/&quot;&lt;script&gt;/);
  }
+});
+test('actual upstream launcher renders all five local rows without fake playback',async()=>{
+ const {renderFunkyBeatsLauncher}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const html=renderFunkyBeatsLauncher({parts:['909','808','Bass A','Bass B','BREAK'],targets:[0,null,31,null,5]});
+ assert.equal((html.match(/data-launch-part=/g)||[]).length,160);
+ assert.equal((html.match(/aria-pressed="true"/g)||[]).length,3);
+ assert.match(html,/Bass A P32, not loaded/);assert.doesNotMatch(html,/PERFORM MODE|next bar|queued|AudioContext/);
+ assert.throws(()=>renderFunkyBeatsLauncher({parts:['909'],targets:[0]}));
+});
+
+test('port provenance pins the shipped MIT source bytes',()=>{
+ const provenance=JSON.parse(readFileSync(new URL('../../web/product-site/remote/vendor/funkybeats-provenance.json',import.meta.url)));
+ assert.equal(createHash('sha256').update(readFileSync(target)).digest('hex'),provenance.sourceSha256);
+ assert.ok(provenance.scope.some(scope=>scope.startsWith('buildPerformGrid')));
 });
