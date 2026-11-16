@@ -594,8 +594,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 42793,
-      "sha256": "792be0ddc92d06c7a057ce4df6687dfbc5076ffa2676e89d37592b6c547bf4bb"
+      "bytes": 42800,
+      "sha256": "2b99f5119ec28cdeead367333b6b11ab64da4447fda449a4b540992b72b9a95c"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -689,8 +689,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 9272,
-      "sha256": "27c711945aaf56acb41fe6ab109cafe5bf03af5c2739ab12adc5e6cdf85f8844"
+      "bytes": 9242,
+      "sha256": "66ae77063d4728988443a894cd7124ba79b4d010c74fd1d007a46488a0038d30"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -869,8 +869,8 @@
     },
     {
       "path": "remote/viewport.mjs",
-      "bytes": 3397,
-      "sha256": "45366beaf1c72af64014014d06f41459ebc036e374d1e2098374708d735f0305"
+      "bytes": 3502,
+      "sha256": "ce2129435b6069b2e7332efeb14e632a6bf65d68d79aaa1812cc35b4add808d2"
     },
     {
       "path": "remote/wave-display.mjs",
