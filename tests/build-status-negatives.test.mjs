@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const required = [
-  'scripts/verify-build-status.mjs', 'web/product-site/site-origin.mjs', 'web/product-site/remote/glyphs.mjs', 'build-status.json', 'docs/build-status.json',
+  'scripts/verify-build-status.mjs', 'build-status.json', 'docs/build-status.json',
   'preview-catalog.json', 'docs/versions.json', 'docs/builds/index.html', 'docs/index.html',
   'docs/scheduler-handoffs/catalog-sync-20261024.json',
   'docs/scheduler-handoffs/catalog-sync-20261024-r25.json',

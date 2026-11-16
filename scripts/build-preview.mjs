@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Build a source-only browser preview. It deliberately cannot add hosted firmware.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { expandOrigin } from '../web/product-site/site-origin.mjs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (name) => readFileSync(join(root, name), 'utf8');
-const catalog = JSON.parse(expandOrigin(read('preview-catalog.json')));
+const catalog = JSON.parse(read('preview-catalog.json'));
 if (catalog.latest !== null || catalog.versions.length || catalog.history.length) {
   throw new Error('Nightly UI preview must not publish firmware catalog entries');
 }
@@ -20,12 +19,12 @@ function stripModule(source) {
 }
 const installerLibraries = ['web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js']
   .map((name) => stripModule(read(name))).join('\n');
-let installer = expandOrigin(replaceOnce(read('web/x0x_installer.html'), '/*LIB*/', installerLibraries, 'installer'));
+let installer = replaceOnce(read('web/x0x_installer.html'), '/*LIB*/', installerLibraries, 'installer');
 installer = replaceOnce(installer, '/*CATALOG*/', JSON.stringify(catalog), 'installer');
 installer = replaceOnce(installer, '/*PACKAGE_VERSION_ASSIGNMENTS*/[]',
   JSON.stringify(JSON.parse(read('package-version-assignments.json')).assignments).replace(/</g, '\\u003c'), 'installer');
-const sampleImporter = expandOrigin(replaceOnce(read('web/x0x_breaks.html'), '/*LIB*/',
-  stripModule(read('web/x0x_breaks.js')), 'sample importer'));
+const sampleImporter = replaceOnce(read('web/x0x_breaks.html'), '/*LIB*/',
+  stripModule(read('web/x0x_breaks.js')), 'sample importer');
 const projects = read('web/x0x_projects.html').replace(
   /^import .* from "\.\/x0x_projects.js";$/m, '/*LIB*/');
 const projectPage = replaceOnce(projects, '/*LIB*/',

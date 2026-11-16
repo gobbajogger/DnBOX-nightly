@@ -5,7 +5,6 @@ import { join, resolve, relative, dirname, basename, sep, isAbsolute } from 'nod
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { productOf, logicalImage, controllerOf } from '../web/fm1pkg.js';
-import { expandOrigin } from '../web/product-site/site-origin.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const legacyControllers = JSON.parse(readFileSync(join(root, 'scripts/legacy-controller-packages.json'), 'utf8'));
@@ -257,7 +256,7 @@ export function renderInstaller(catalog) {
     if (html.split(marker).length !== 2) throw new Error(`expected one ${marker}`);
     html = html.replace(marker, () => content);
   }
-  return expandOrigin(html);
+  return html;
 }
 
 // Enforce the existing outside-repository contract by path segments and real
