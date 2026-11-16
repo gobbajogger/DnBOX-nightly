@@ -1,0 +1,6 @@
+Backup route test
+Date: 2026-11-16 Asia/Vladivostok
+Source: 9d983fcce6a1216e64b700034dfe9b645a12c012
+Purpose: user-requested freeze/backup only; no product integration, deployment, settings or deletion.
+GitHub connector branch/file write route succeeded if this file is read back byte-identical.
+Network Git/auth route was not usable in the recorded preliminary probe; no credential bypass.
