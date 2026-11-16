@@ -78,5 +78,21 @@
   "native-bank-presentation-work/lifecycle.mjs": "8cc4bcf1c3d7b41ca56c7a8b5ff006d70bc8911811fe8c980bdbadd097b6363b",
   "native-bank-presentation-work/bank.test.mjs": "1325eb6b25005750e8f4b53c0743a51ff8ed15415c9694b037107f5fd2ed6024",
   "native-bank-presentation-work/lifecycle.test.mjs": "1e2d22ad6db3833d36557d6130bc529b8d1d62f3ee4ce2f71120f64940db42db",
-  "native-bank-presentation-work/bank.mjs": "8d0d74ea30f1ee6dbe25b04b97e624e60c5990e3d42df7797e32db9c8825c869"
+  "native-bank-presentation-work/bank.mjs": "8d0d74ea30f1ee6dbe25b04b97e624e60c5990e3d42df7797e32db9c8825c869",
+  "native-body-work/idle-frame.mjs": "dd47c45e01ce5dfa9ebed9f21f5af20503d71f336eb07c7baf7f62f2259f374f",
+  "native-body-work/native-body-source.sha256": "c1effe6d3cf04c115747d357e207f64f5d3cfb30f67e82ece7a6f72ef9778d3b",
+  "native-body-work/body.test.mjs": "0c54ca3b494ad08babc2acfde776da7fe627a5c2c4e895e3fb5fc324d15b359f",
+  "native-body-work/build-reference.py": "36916601aa78fc5ba7ca965ed167fdb545a924e067a5e3da115f5f184e408383",
+  "native-body-work/body-data.json": "da5f3c7b0f81f4b92bb3bb658a0aecda3856e546fecc46f383ad950f1c52042c",
+  "native-body-work/idle-frame-comparison.json": "95fa3ec17402767d090cb28fdcecdab444594e27434b735653daed71d3d1b192",
+  "native-body-work/index.html": "3736ccb5155f9b01fac2fd5a32a9a943c0d067e704399e3e0ac1071af2126cfa",
+  "native-body-work/check-source.py": "98eab98ede892384118c0b29090ce37f1d82e6fefb4388ab60d70c8a3612d4fa",
+  "native-body-work/factory-patterns.json": "3ccc211d929115effa6b09aa82c1114c3ef894433ff15261251e5b8a8c327851",
+  "native-body-work/body.mjs": "869ed2680802843cd2bc8124bf1ca345f37294fca96750e9f5d527ee4045a1c8",
+  "native-body-work/main-region.mjs": "26da2df2b83b06e8a6cc449e8c9f89b4dde03d86fff2f7d77fb9781924bab21e",
+  "native-body-work/native-body-source.inc": "c39b24c268cfae9614c48095cba64ccbcc4b66633934ae52ba606bd2642ac8d1",
+  "native-body-work/parity.mjs": "706ffd44b01c9a0ad5e3025c6a16027a7d8c4f6f4e960fb1b80ea64d11894421",
+  "native-body-work/frame.test.mjs": "16011c03cc28fc1b5e0f8649cf5646f0bf9cfc090e005f0a7885cb500866ab70",
+  "native-body-work/source-ui_drum_voice.inc": "a669c3c03c19204bd26eda0bf59b2f33f43a52da8beb718df8da24ee10b45353",
+  "native-body-work/voice-names.json": "a29e70a38e27592320bc0d1061944b2fbd0d106d9bd1f412e4ff59ed6f515641"
 }

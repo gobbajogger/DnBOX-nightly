@@ -143,3 +143,9 @@ Adapted the reviewed runner correction from Remote8f28b20ba510233a3e701f5efbf2b0
 The first literal runner-copy attempt failed before lab execution: its cc8-derived step list required native-body-work absent from this earlier composition. The corrected adaptation retains the existing exact 23-step list and imports only child-context isolation, TAP/count checks and the failing-child sentinel; missing spawn output is safely logged. The failed attempt remains preserved, not counted as qualification. Donor25-test results are not the count for this earlier lab closure.
 
 Actual adapted replay exit0:23 subprocess steps, six nested TAP suites with22 executed tests, and outer2 tests including the failing-child sentinel. Independent source review accepted the narrow correction. Logs/receipt in docs/lanes/evidence/integ-nested-runner preserve the prior closure failure separately; no full Local claim.
+
+## Complete reviewed source-lab dependency closure
+
+Normal composition of Web ab2685b8ad6e9731515877b86dedfba7af8f1481 adds the missing native-body diagnostic dependencies and corrected 27-step runner together. Preserved the independently accepted null-safe spawn-output diagnostic; all product bytes, policies and publication state remain unchanged. The earlier 23-step/22-test correction remains historical evidence, not evidence for these additional inputs. Current exact replay is required; no W3, browser or full Local claim.
+
+Actual full-closure replay exit0:27 steps, seven actual nested TAP suites totaling25 tests, outer2PASS including intentional failing-child detection. Independent source acceptance applies to the complete donor closure plus unchanged null-safe diagnostic. Logs/receipt: docs/lanes/evidence/integ-full-lab. This does not promote historical source frames to current UI/W3 qualification.
