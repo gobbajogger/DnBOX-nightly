@@ -6,35 +6,32 @@
 <title>DnBOX Remote</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
-<script type="module" src="../site-origin.mjs"></script></head>
+</head>
 <body>
-<header class="shell">
-<div class="topbar">
+<header class="top">
+<div class="hdr">
 <a class="brand" href="../">DnBOX <small>REMOTE</small></a>
 <span class="project-name">Example project</span>
-<div class="pattern-readout"><strong id="pattern-no">P01</strong><svg class="pattern-mark" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span id="tempo">120 BPM</span></div>
-<div class="header-actions">
-<span id="conn-state" class="conn-state">Not connected</span>
-<button id="connect" class="hdr-btn connect" type="button">Connect</button>
-<button id="undo" class="hdr-btn" type="button">Undo</button>
-<button id="redo" class="hdr-btn" type="button">Redo</button>
+<div class="pattern-readout"><strong id="pattern-no">P01</strong><i class="pattern-mark" aria-hidden="true"></i><span id="tempo">120 BPM</span></div>
+<span id="conn-state" class="conn-state" hidden>Not connected</span>
+<div class="hdr-actions">
 <details class="overflow">
-<summary aria-label="More actions">…</summary>
+<summary class="btn" aria-label="More actions">…</summary>
 <div class="overflow-list">
-<button id="review" class="hdr-btn" type="button">Review</button>
-<button id="draft-save" class="hdr-btn" type="button">Download draft</button>
-<label class="hdr-btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
-<p id="firmware-safety">No reviewed firmware catalog. Apply stays off.</p>
-<div id="firmware-controls"></div>
-<button id="apply" class="hdr-btn" type="button" disabled>Apply to instrument</button>
-<button type="button" data-view="drums">Drums</button>
-<button type="button" data-view="locks">Motion</button>
-<button type="button" data-view="song">Song</button>
+<button id="review" class="btn" type="button">Review</button>
+<button id="draft-save" class="btn" type="button">Download draft</button>
+<label class="btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
+<button id="apply" class="btn" type="button" disabled>Apply to instrument</button>
+<p id="firmware-safety" hidden></p>
+<div id="firmware-controls" hidden></div>
+<button class="btn" type="button" data-view="drums">Drums</button>
+<button class="btn" type="button" data-view="locks">Motion</button>
+<button class="btn" type="button" data-view="song">Song</button>
 </div>
 </details>
+<button id="connect" class="btn connect" type="button">Connect</button>
 </div>
 </div>
-<div class="row-b">
 <nav class="tabs" aria-label="Workspace">
 <button class="tab" type="button" data-tab="1" data-view="roll" aria-current="page">Sequence</button>
 <button class="tab" type="button" data-tab="1" data-view="sound">Sound</button>
@@ -42,66 +39,67 @@
 <button class="tab" type="button" data-tab="1" data-view="patterns">Patterns &amp; Song</button>
 <button class="tab" type="button" data-tab="1" data-view="files">Projects</button>
 </nav>
-<div class="engine-row">
-<button type="button" class="engine" data-engine="drum909" style="--engine:#ff9529"><i></i><span>909</span></button>
-<button type="button" class="engine" data-engine="drum808" style="--engine:#ff4841"><i></i><span>808</span></button>
-<button type="button" class="engine" data-engine="chicago" style="--engine:#82f05a" aria-pressed="true"><i></i><span>BASS A</span></button>
-<button type="button" class="engine" data-engine="miami" style="--engine:#46cdff"><i></i><span>BASS B</span></button>
-<button type="button" class="engine" data-engine="breaks" style="--engine:#d678ff"><i></i><span>BREAK</span></button>
+<div class="engines">
+<div class="engine-list">
+<button type="button" class="engine" data-engine="drum909" style="--engine:#ff9529"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3.9 8.85A4 4 0 1 1 6.1 8.85" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>909</span></button>
+<button type="button" class="engine" data-engine="drum808" style="--engine:#ff4841"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3.9 8.85A4 4 0 1 1 6.1 8.85" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>808</span></button>
+<button type="button" class="engine" data-engine="chicago" style="--engine:#82f05a" aria-pressed="true"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BASS A</span></button>
+<button type="button" class="engine" data-engine="miami" style="--engine:#46cdff"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BASS B</span></button>
+<button type="button" class="engine" data-engine="breaks" style="--engine:#d678ff"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BREAK</span></button>
+</div>
 <strong id="part-title">CHICAGO / P01</strong>
-<label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label>
+<select id="part" class="part" aria-label="Part" tabindex="-1"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select>
 <div class="transport">
-<button id="play" class="hdr-btn transport-btn" type="button">Play</button>
-<button id="stop" class="hdr-btn transport-btn" type="button">Stop</button>
-<button id="rec" class="hdr-btn transport-btn" type="button" aria-pressed="false">REC</button>
+<button id="play" class="btn" type="button">Play</button>
+<button id="stop" class="btn" type="button">Stop</button>
+<button id="rec" class="btn" type="button" aria-pressed="false">REC</button>
 </div>
+<div class="history"><button id="undo" class="btn icon" type="button" aria-label="Undo" title="Undo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4 2.5 7.5 6 11M3 7.5h6.5a3.5 3.5 0 0 1 0 7H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button id="redo" class="btn icon" type="button" aria-label="Redo" title="Redo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l3.5 3.5L10 11M13 7.5H6.5a3.5 3.5 0 0 0 0 7H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
 </div>
-</div>
-<span id="context-title" hidden>Roll</span>
+<span id="context-title" hidden></span>
 <div id="mode-tools" hidden>
-<button type="button" data-mode="select" aria-pressed="true">Select</button>
-<button type="button" data-mode="draw">Draw</button>
-<button type="button" id="multi" aria-pressed="false">Group</button>
-<button type="button" data-mode="move">Move</button>
-<button type="button" data-mode="length">Length</button>
-<button type="button" data-mode="pan">Pan</button>
-<button type="button" id="copy">Copy</button>
-<button type="button" id="paste">Paste</button>
-<button type="button" id="delete">Delete</button>
-<button type="button" id="snap" aria-pressed="true">Snap 1/16</button>
-<button type="button" id="zoom-step">Zoom 100%</button>
-<label class="zoom">Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
+<button type="button" data-mode="select" aria-pressed="false" hidden>Select</button>
+<button type="button" data-mode="draw" hidden>Draw</button>
+<button type="button" data-mode="move" hidden>Move</button>
+<button type="button" data-mode="length" hidden>Length</button>
+<button type="button" data-mode="pan" hidden>Pan</button>
+<button type="button" id="multi" aria-pressed="false" hidden>Group</button>
+<button type="button" id="copy" hidden>Copy</button>
+<button type="button" id="paste" hidden>Paste</button>
+<button type="button" id="delete" hidden>Delete</button>
+<button type="button" id="snap" aria-pressed="true" hidden>Snap 1/16</button>
+<button type="button" id="zoom-step" hidden>Zoom</button>
+<input id="zoom" type="range" min="1" max="4" step=".25" value="1" hidden aria-label="Zoom">
 </div>
 </header>
 <main>
 <section id="roll-view">
-<div class="workspace">
-<aside class="sound-panel">
-<h2>Sound</h2>
-<div class="glyph-card" id="glyph-card"></div>
-<button type="button" id="open-sound" class="pill wide">Sound</button>
-</aside>
 <div class="roll-panel">
-<div class="beat-ruler" id="beat-ruler" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+<div class="roll-tools" id="sel-tools">
+<span class="roll-pos" id="roll-pos">1/16 · 1-16 / 16</span>
+<span class="sel-actions" id="sel-actions" hidden><button class="btn" type="button" data-sel="copy">Copy</button><button class="btn" type="button" data-sel="paste">Paste</button><button class="btn" type="button" data-sel="delete">Delete</button></span>
+</div>
+<div class="roll-head"><span class="key-head"></span><div class="beat-ruler" id="beat-ruler" aria-hidden="true"></div></div>
 <div class="roll-body">
 <div id="pitch-rail" aria-hidden="true"></div>
 <div id="roll-scroll" tabindex="0" aria-label="Piano roll"><div id="roll-grid"></div></div>
 </div>
 <div class="lane">
-<button type="button" id="lane-param" aria-controls="velocity">Velocity ▾</button>
+<button type="button" id="lane-param" aria-controls="velocity"><span class="lane-word">VELOCITY</span><output id="lane-value"></output><i class="lane-dots" aria-hidden="true"></i></button>
 <select id="lane-kind" class="lane-kind" tabindex="-1" aria-hidden="true">
 <option value="velocity" selected>Velocity</option>
 <option value="chance">Chance</option>
 <option value="pitch">Pitch</option>
+<option value="pan">Pan</option>
 </select>
 <div id="velocity" aria-label="Velocity"></div>
 </div>
 </div>
-</div>
+<aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
 </section>
 <section id="other-view" hidden></section>
 </main>
-<footer id="status" role="status" aria-live="polite">Loading…</footer>
+<footer id="status" class="sr-only" role="status" aria-live="polite"></footer>
 <dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><p>Not connected.</p><button type="submit">Return</button></form></dialog>
 <dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
 <script type="module" src="app.mjs"></script>

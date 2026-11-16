@@ -81,15 +81,9 @@ export function glyphMarkup(name){
  return `<svg class="glyph" viewBox="0 0 ${GLYPH_CELL} ${GLYPH_CELL}" width="${px}" height="${px}" aria-hidden="true">${rects.join('')}</svg>`;
 }
 
-// Mixer/voice pan is a stored 0–127 integer. Firmware shows L64 … C … R63.
-// Centre raw 64 is display "C" (manual/original/index.html; remote/components.json).
-export function formatPan(raw){
- const n=Number(raw);
- if(!Number.isInteger(n)||n<0||n>127) return String(raw);
- if(n===64) return 'C';
- if(n<64) return 'L'+(64-n);
- return 'R'+(n-64);
-}
+// Pan readout and clamp come from pan.mjs (L50..C..R50).
+import{formatPan as panText}from'./pan.mjs';
+export function formatPan(raw){const n=Number(raw);if(!Number.isFinite(n))return String(raw);return panText(n);}
 
 export function isPanLabel(label){
  return typeof label==='string'&&label.toUpperCase()==='PAN';
@@ -130,13 +124,14 @@ export const R22_TOKENS=Object.freeze({
 });
 
 import {renderSvg} from './glyph-render.mjs';
+import {fractionFromPan} from './pan.mjs';
 export {render,renderSvg,morphFrames,chicagoWaveSamples,chicagoLevel,chicagoTimes,adsrWidths,bd909Hz} from './glyph-render.mjs';
 // Live readout. Re-rendered from the value. No decorative motion.
 export function glyphFor(id, engine='chicago', value=0.5, state={}){
  return renderSvg(id, value, engine, state);
 }
 export function panCell(raw){
- return `<div class="readout-cell"><span class="glyph">${renderSvg('PAN', Number(raw), 'chicago', {live:false})}</span><output>${formatPan(raw)}</output><span>PAN</span></div>`;
+ return `<div class="readout-cell"><span class="glyph">${renderSvg('PAN', fractionFromPan(raw), 'chicago', {live:false})}</span><output>${formatPan(raw)}</output><span>PAN</span></div>`;
 }
 export function envelopeCurve(rows){
  const raw=name=>{const row=(rows||[]).find(c=>String(c.label).toUpperCase()===name);return Number(row?.raw??0)/127;};
