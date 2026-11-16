@@ -23,7 +23,7 @@ test('current Remote explicitly consumes source port and drum cells toggle witho
  const app=readFileSync(new URL('../../web/product-site/remote/app.mjs',import.meta.url),'utf8');
  const html=readFileSync(new URL('../../web/product-site/remote/index.html',import.meta.url),'utf8');
  assert.match(app,/renderFunkyBeatsDrums/);const adapter=readFileSync(new URL('../../web/product-site/remote/funkybeats-view.mjs',import.meta.url),'utf8');assert.match(adapter,/buildSequencerGrid/);assert.match(adapter,/funkybeats-core\.mjs/);
- assert.doesNotMatch(app,/drumEdit&&b\.dataset\.drumNote/);
+ assert.doesNotMatch(html,/data-mode=/);assert.doesNotMatch(app,/drumEdit&&b\.dataset\.drumNote/);
 });
 
 test('ported upstream sequencer renders all typed drum cells with safe, stable identities',async()=>{

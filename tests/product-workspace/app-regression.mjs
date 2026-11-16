@@ -88,3 +88,13 @@ assert.equal(failures,0);
 views.find(e=>e.dataset.view==='mix').onclick();const aliasSurface=new E();aliasSurface.dataset={param:'current-state-and-reference/mix-parts-live.svg|1:5:0:0',paramOccurrence:'5'};const aliasDown={button:0,pointerId:119,clientX:0,clientY:50,target:aliasSurface,preventDefault(){}};$('other-view').handlers.pointerdown(aliasDown);$('other-view').handlers.pointerup(aliasDown);check('same-target alias preserves actual touched occurrence name',()=>assert.match($('parameter-inspector').querySelector('span').textContent,/LEVEL/));assert.equal(failures,0);
 
 views.find(e=>e.dataset.view==='mix').onclick();check('no connection caption text in views (state shown only by Connect)',()=>assert.equal(($('other-view').innerHTML.match(/class="source-caption"/g)||[]).length,0));assert.equal(failures,0);
+
+$('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();
+check('modeless Delete removes the focused note and Undo restores it',()=>{
+ const before=$('roll-grid').innerHTML;
+ const id=before.match(/data-note="([^"]+)"/)[1];
+ const target=new E();target.dataset.note=id;
+ $('roll-scroll').handlers.keydown({key:'Delete',target,preventDefault(){}});
+ assert.ok(!$('roll-grid').innerHTML.includes(`data-note="${id}"`));
+ $('undo').onclick();assert.ok($('roll-grid').innerHTML.includes(`data-note="${id}"`));
+});assert.equal(failures,0);
