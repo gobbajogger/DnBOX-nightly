@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""Common browser harnesses must preserve Chromium's normal sandbox."""
+"""Audit every Python Chromium launcher, including the complete gate call graph."""
 import ast,pathlib
-root=pathlib.Path(__file__).resolve().parents[1]
-for path in ['tests/browser-admission.py','tests/visual/visual_gate.py']:
- tree=ast.parse((root/path).read_text());launches=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='launch']
- assert launches,path
- for call in launches:
-  keys={k.arg:k.value for k in call.keywords}
-  assert isinstance(keys.get('chromium_sandbox'),ast.Constant) and keys['chromium_sandbox'].value is True,path
-  assert not any(isinstance(n,ast.Constant) and isinstance(n.value,str) and 'no-sandbox' in n.value for n in ast.walk(call)),path
-print('PASS: both common browser launchers require normal Chromium sandbox')
+root=pathlib.Path(__file__).resolve().parent
+failures=[];count=0
+for path in root.rglob('*.py'):
+ tree=ast.parse(path.read_text())
+ for call in ast.walk(tree):
+  if not (isinstance(call,ast.Call) and isinstance(call.func,ast.Attribute) and call.func.attr=='launch' and isinstance(call.func.value,ast.Attribute) and call.func.value.attr=='chromium'):continue
+  count+=1;keys={k.arg:k.value for k in call.keywords}
+  good=isinstance(keys.get('chromium_sandbox'),ast.Constant) and keys['chromium_sandbox'].value is True
+  good=good and not any(isinstance(n,ast.Constant) and isinstance(n.value,str) and 'no-sandbox' in n.value for n in ast.walk(call))
+  if not good:failures.append(f'{path.relative_to(root)}:{call.lineno}')
+assert count,'no Chromium launchers found'
+assert not failures,'normal sandbox missing: '+', '.join(failures)
+print(f'PASS: all {count} Chromium launchers require normal sandbox')

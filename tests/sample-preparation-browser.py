@@ -18,7 +18,7 @@ def check(ok,label):
 async def main():
  s=ThreadingHTTPServer(('127.0.0.1',0),H);threading.Thread(target=s.serve_forever,daemon=True).start()
  async with async_playwright() as p:
-  b=await p.chromium.launch(executable_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless=True)
+  b=await p.chromium.launch(chromium_sandbox=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'),headless=True)
   page=await b.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   await page.add_init_script('''window.probe={midi:0,plays:[],stops:0};navigator.requestMIDIAccess=()=>{probe.midi++;throw Error("MIDI forbidden in local audition test")};const orig=AudioContext.prototype.createBufferSource;AudioContext.prototype.createBufferSource=function(){const n=orig.call(this),start=n.start.bind(n),stop=n.stop.bind(n);n.start=(...a)=>{probe.plays.push({rate:n.playbackRate.value,samples:n.buffer.length,duration:n.buffer.duration/n.playbackRate.value});return start(...a)};n.stop=(...a)=>{probe.stops++;return stop(...a)};return n};''')
   for width in [1440,390,320]:

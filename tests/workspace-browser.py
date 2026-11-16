@@ -25,7 +25,7 @@ def wav(samples):
 async def main():
  srv=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=srv.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{srv.server_port}'
  async with async_playwright() as pw:
-  browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
+  browser=await pw.chromium.launch(chromium_sandbox=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
   page=await browser.new_page(viewport={'width':1280,'height':900});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   await page.goto(base+'/install/');await page.wait_for_function('document.getElementById("sample-frame").contentWindow.sampleWorkspace')
   child=page.frames[1]
