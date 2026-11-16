@@ -1,5 +1,5 @@
 # Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 05:43 VLAT.
+Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 06:19 VLAT.
 
 ## Checklist
 | ID | Check | Status | Evidence |
@@ -116,3 +116,11 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Before writing files in an isolated checkout, use an absolute workspace path or assert cwd; do not combine a repository-relative prefix with that checkout as workdir.
 
 - Repeated mistake: tests hashed inputs then compiled reread mutable paths. Capture exact input bytes once, hash-check and stage them, then compile only staged inputs and verify them around execution.
+
+- Complete settled drum source pipeline: all63 current glyph controls now have source-native geometry and typed local-draft projection. Independent component reviews cover native math/curves,1,028 rounded-raster cases and1,820 easing arithmetic cases. Independent full local comparison matches all7,434 retained native RGB565 frames at fixed64×48, idle state, original source scales/colors. This is not browser/layout/live/easing-composition or device qualification. No raw buffers were uploaded.
+- Reviewed source inputs and repeatable component tests are preserved in tests/product-remote/native-source-lab/. The top-level runner captures and stages the whole hashed lab before invoking its scripts, verifying sources around execution. Numeric source metadata is split into three small text parts and reassembled only after capture with original SHA verification. No compiled binary or denied raster archive is included. Existing app renderer/entry and product manifest are unchanged by this source-only checkpoint.
+- Next: actual typed app and presentation-state integration, current native captions/value layout (fwui has a new value-overlap correction under review), real browser equivalent-state assessment, and live/clock/RAF ownership proof. R1–R7 and full Local remain FAIL.
+
+- Separate file-writing tool calls from checkout-scoped test commands; all file writes use verified absolute workspace paths.
+
+- Cadence correction: preceding Remote checkpoint25036cb3 was published at19:48UTC; this source-completion checkpoint exceeded the30-minute push interval while closing/reviewing the lab package. Keep a source-preservation checkpoint queued before that deadline rather than waiting for all independent candidates. No gate status was upgraded.
