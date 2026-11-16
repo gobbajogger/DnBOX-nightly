@@ -1,0 +1,15 @@
+PASS exported unadmitted catalog cannot open or SET
+PASS all326 actual descriptors traversed
+PASS boot Chicago context rejects all32 inactive Miami descriptors
+PASS out-of-domain input sends nothing
+PASS own checked SET is queued and advances exactly once
+PASS actual stored-target READ follows checked SET
+PASS real pref_set changes shared revision
+PASS external edit blocks stale SET until refresh
+PASS refresh reads actual external target
+PASS edit resumes after source refresh
+PASS actual host lease closes
+PASS cached SET target is not mistaken for current state after external mutation
+PASS lost-reply retry preserves identical request/token/revision
+PASS post-retry refresh sees actual external value
+{"checks":14,"hostCommit":"1ab15cf2f684ed2aa72a82e44ce82ab506ddd0f7","remoteCommit":"9d71bf8ee1be3c27870b8d45ceaa6e3f593a04de","clientSha256":"a68ca59e0b7052a878ce7c5be6cc96ef325e5a19cb7379c0d4c002caa2985908","scope":"actual-app host only, no native/browser/TouchOSC application admission"}

@@ -107,3 +107,11 @@ Normal composition retains the full50-path Web340d5b44f65525691b54127df6e2d38bce
 Producer Web checks report product88Node+32Python, workspace84plus apps and Remote checks. Independent actual browser evidence covers native readout changes. Web producer browser evidence covers all five sample previews without media errors/selection changes, at the recorded viewport only. Preset file import and complete required viewport/Local qualification remain unmet. This composition still needs its exact source checks. No Pages publication or consolidated merge is claimed.
 
 Producer selected composition checks pass: build241, product/workspace/Remote chain exit0, normal-sandbox source policy14, tracked-object audit1183blobs. No browser/full Local run. An initial policy filename typo produced no policy result; correct gate-selected policy ran successfully. One existing donor evidence log absolute workspace prefix was sanitized to <source>; no product byte changed.
+
+## Real-host consumer diagnostics composition
+
+Normal composition of Web58ec562e7cb698384cc4a9666b100a44e381b13e retains independently reviewed Remote9bf actual-host stdin diagnostics and typed Lua queued-SET/revision guards. Three TouchOSC rows change; browser app/geometry remains8ce and all241product manifest entries remain verified. These callbacks confirm stored-target acceptance only, never audio application. Exported/native catalog admission remainsfalse and production reviewed bundle remainsnull.
+
+The fixture pins exact firmware1ab15cf2 source; test-only stdin binding negotiates a genuine lease and ordinary production unadmitted-open rejection remains tested. Lua diagnostics use host Lua5.4, not actual TouchOSC Lua5.1/customVM qualification. The new real DOM browser assertions encode independently observed readout regressions, but automated browser execution remains NOT_RUN here. No full Local/Review or native endpoint admission.
+
+Producer exact staged consumer replay against independently built1ab host passes unchanged browser/Lua/timeout diagnostics plus product241build. Normal-sandbox source policy14PASS; no actual browser launcher executed. Log: evidence/integ-host-consumer-composition.log. Existing exact17ea no-loss/limits independentlyPASS and all241product closure matched8ce; those results remain input-scoped, not full current Local.
