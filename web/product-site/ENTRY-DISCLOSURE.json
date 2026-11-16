@@ -5,7 +5,7 @@
     {
       "path": "index.html",
       "beforeSHA256": "df475aae3990a260cfe5140f9c24bd61e5f59c8bfa8a3977b4b3e47cf214e1a2",
-      "afterSHA256": "63c3f3772d0d3a93f0d246216bf194807aa5bf793d3efcd760bb03bf88b1585a",
+      "afterSHA256": "392afcc5e401b52ef61967901279d5f1b0dbe7cf5c11381fd38e1dbf4fa5bec3",
       "changes": [
         {
           "before": "<strong>Remote control</strong><span>Connect your browser to the instrument.</span>",
@@ -22,13 +22,21 @@
         {
           "before": "<a href=\"builds/\">Build history</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a>",
           "after": "<a href=\"builds/\">Build history</a><a href=\"tools/\">Tools</a><a href=\"help/\">Help</a><a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro\">Source and credits</a>"
+        },
+        {
+          "before": "<header><a class=\"brand\" href=\"index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"index.html#sounds\">Sounds</a><a href=\"remote/\">Remote</a><a href=\"breaks/\">Samples</a><a href=\"manual/\">Manual</a><a href=\"builds/\">History</a><a class=\"install-link\" href=\"install/\">Install nightly</a></nav></header>",
+          "after": "<header><a class=\"brand\" href=\"index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"index.html#sounds\">Sounds</a><a href=\"remote/\">Remote</a><a href=\"breaks/\">Samples</a><a href=\"projects/\">Projects</a><a href=\"presets/\">Presets</a><a href=\"manual/\">Manual</a><a href=\"builds/\">History</a><a class=\"install-link\" href=\"install/\">Install nightly</a></nav></header>"
+        },
+        {
+          "before": "<a href=\"projects/\"><strong>Projects</strong><span>Keep the next session ready.</span></a>",
+          "after": "<a href=\"projects/\"><strong>Projects</strong><span>Keep the next session ready.</span></a><a href=\"presets/\"><strong>Presets</strong><span>Open an original preset file.</span></a>"
         }
       ]
     },
     {
       "path": "tools/index.html",
       "beforeSHA256": "ced5b0c3d98efa58ca2ab286081fe1216396c05b2bc1505651f918247764d280",
-      "afterSHA256": "802ce4b362949129afbc3033fe8382d9dfb1f4833cfaaaf3bb0f00fca9bd53d2",
+      "afterSHA256": "0de4d34090156f8c8d40a0e27642619f120beae7c39e561da43ad75521320288",
       "changes": [
         {
           "before": "<h2>Remote control</h2><p>Bring the instrument\u2019s controls into your browser.</p>",
@@ -41,13 +49,17 @@
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Capabilities</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a class=\"install-link\" href=\"../install/\">Get firmware</a></nav></header>",
           "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
+        },
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
         }
       ]
     },
     {
       "path": "projects/index.html",
       "beforeSHA256": "9058a5e65ab363a6bd72d46f53445be994580ecc52699b157d27d99973f8ecd0",
-      "afterSHA256": "0b58ce05d03b2d5c6c97167e06ac41221791bb259eb09cbf838dfc5b2be083f1",
+      "afterSHA256": "2b95a7e35882626eecb93f2e1ccbfb2db2c96274b622eb82075d8624a78151c7",
       "changes": [
         {
           "before": "<section id=\"project-exchange-root\" style=\"max-width:1100px;margin:40px auto;padding:24px\"></section>",
@@ -56,13 +68,17 @@
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Capabilities</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a class=\"install-link\" href=\"../install/\">Get firmware</a></nav></header>",
           "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
+        },
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
         }
       ]
     },
     {
       "path": "starting-breaks/index.html",
       "beforeSHA256": "d175cff7958877ac44968fd73d2b14acfc8be3109599d7724685130de32dd4c5",
-      "afterSHA256": "3774b296d6a07298cd2e719b560ceb54d1ffe0b103ef47a4cbb25883feb476f3",
+      "afterSHA256": "0e110504bc67f6ff2f0a394d9ddc837c55694d4d39c9cfa1c666c84e412a9ed8",
       "changes": [
         {
           "before": "<h1>Make it your instrument.</h1>",
@@ -71,6 +87,10 @@
         {
           "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX</a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Capabilities</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">Build history</a><a href=\"../tools/\">Tools</a><a class=\"install-link\" href=\"../install/\">Get firmware</a></nav></header>",
           "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
+        },
+        {
+          "before": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>",
+          "after": "<header><a class=\"brand\" href=\"../index.html\">DnBOX <small>INSTRUMENTS</small></a><nav aria-label=\"Main\"><a href=\"../index.html#sounds\">Sounds</a><a href=\"../remote/\">Remote</a><a href=\"../breaks/\">Samples</a><a href=\"../projects/\">Projects</a><a href=\"../presets/\">Presets</a><a href=\"../manual/\">Manual</a><a href=\"../builds/\">History</a><a class=\"install-link\" href=\"../install/\">Install nightly</a></nav></header>"
         }
       ]
     }

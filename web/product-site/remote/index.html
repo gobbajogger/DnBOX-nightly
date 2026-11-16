@@ -11,7 +11,7 @@
 <header class="topbar">
 <a class="brand" href="../">DnBOX <small>REMOTE</small></a>
 <span class="source"><i class="status-dot" aria-hidden="true"></i> Local example · Not connected</span>
-<a class="pill" href="device/">Connection</a>
+<a class="pill connection" href="device/">Connection</a>
 <button id="undo" class="pill" type="button">Undo</button>
 <button id="redo" class="pill" type="button">Redo</button>
 <button id="review" class="pill" type="button">Review</button>
@@ -19,6 +19,7 @@
 <label class="pill draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
 <button class="pill" type="button" disabled title="Not connected">Apply to instrument</button>
 </header>
+<div class="chrome">
 <nav aria-label="Workspace">
 <button type="button" data-view="roll" aria-current="page">Roll</button>
 <button type="button" data-view="drums">Drums</button>
@@ -29,11 +30,10 @@
 <button type="button" data-view="song">Song</button>
 <button type="button" data-view="files">Files / MIDI</button>
 </nav>
-<main>
-<section id="roll-view">
 <div class="toolbar" role="toolbar" aria-label="Roll tools">
-<label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label>
-<span id="context-title">Roll</span>
+<div class="part-title"><strong id="part-title">CHICAGO A · P1</strong><label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label></div>
+<span id="context-title" hidden>Roll</span>
+<div id="mode-tools">
 <button type="button" data-mode="select" aria-pressed="true">Select</button>
 <button type="button" data-mode="move">Move</button>
 <button type="button" data-mode="draw">Draw</button>
@@ -43,36 +43,36 @@
 <button type="button" id="copy">Copy</button>
 <button type="button" id="paste">Paste</button>
 <button type="button" id="delete">Delete</button>
+</div>
+<button type="button" id="snap" aria-pressed="true">Snap 1/16</button>
+<button type="button" id="zoom-step">Zoom 100%</button>
 <label class="zoom">Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
 </div>
+</div>
+<main>
+<section id="roll-view">
 <div class="workspace">
 <aside class="sound-panel">
 <h2>Sound</h2>
-<div class="glyph-card" aria-hidden="true">
-<strong>Chicago A</strong>
-<svg viewBox="0 0 220 148" class="fn-glyphs">
-<path d="M8 28 H70 L82 16 H120" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M140 22 H170 L182 34 H210" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M8 62 H28 L36 78 H70" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M90 70 Q110 48 130 70" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M150 62 H168 L176 78 H210" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M8 108 H24 L32 92 H52" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M120 100 Q132 84 144 100 Q156 116 168 100" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-<path d="M8 136 C40 136 48 118 80 124 C130 134 160 128 210 132" fill="none" stroke="#d7e2d4" stroke-width="1.6"/>
-</svg>
-</div>
+<div class="glyph-card" id="glyph-card"></div>
 <button type="button" id="open-sound" class="pill wide">Sound</button>
 </aside>
 <div class="roll-panel">
 <div class="beat-ruler" id="beat-ruler" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+<div class="roll-body">
+<div id="pitch-rail" aria-hidden="true"></div>
 <div id="roll-scroll" tabindex="0" aria-label="Piano roll"><div id="roll-grid"></div></div>
+</div>
 <div class="lane">
+<div class="lane-gutter">
 <button type="button" id="lane-param" aria-controls="velocity">Velocity</button>
+<output id="lane-value"></output>
 <select id="lane-kind" class="lane-kind" tabindex="-1" aria-hidden="true">
 <option value="velocity" selected>Velocity</option>
 <option value="chance">Chance</option>
 <option value="pitch">Pitch</option>
 </select>
+</div>
 <div id="velocity" aria-label="Velocity"></div>
 </div>
 </div>
