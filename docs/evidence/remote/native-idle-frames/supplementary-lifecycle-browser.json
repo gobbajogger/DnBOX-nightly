@@ -1,0 +1,19 @@
+{
+  "scope": "supplementary actual browser lifecycle only",
+  "sourceClosure": "native-lifecycle-browser-v1/SOURCE-SNAPSHOT.json",
+  "observer": "independent Web lane",
+  "verified": [
+    "20 source hashes",
+    "initialized10%",
+    "Set Attack100% rendered100% and changed settled glyph",
+    "Restore factory10%",
+    "Stop counter603 remained603 on later observation"
+  ],
+  "notRun": [
+    "visibility handling:document.hidden stayedfalse",
+    "tab-return persistence:CUA timeout/reset",
+    "full production app lifecycle"
+  ],
+  "mainApp": "8ce unchanged",
+  "deviceActions": false
+}
