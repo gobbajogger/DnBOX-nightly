@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: continuation of #133 (preserved unchanged)   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Head: 13c83e0a7e84e0a041bea9f3c44b4c1c79d603e5   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -12,20 +12,22 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | C4 | Hard-limit scan | FAIL | Exact-head gate required. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Existing draft #133 retained, not delivery. |
-| W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; focused suite24/25 PASS, remaining closure assertion expects Chicago projection module reachable. |
+| W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm test still running; no W1 PASS claim. |
 | W2 | Installer/emulator/import-export and browser | FAIL | Browser runners now honor Local gate CHROMIUM_EXECUTABLE or bundled Playwright Chromium, retaining sandbox; regression test 4/4 passes. Product browser not yet qualified. |
 | W3 | HTML/firmware same-SHA match | FAIL | Requires fwui exact render inputs and pixel/structure comparison. |
 | W4 | Musician-facing pages and landscape | FAIL | Exact composition browser checks still required. |
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: close missing runtime dependencies before building all routes.
-- Next: merge verified consolidated source, run full Local gate, fix failing interactions and independent browser review.
+- Now: finish full npm test and recover browser execution on an eligible host.
+- Next: merge prep update and Remote ancestry; run full Local gate, fix failing interactions and independent browser review.
 
 ## Blockers and recovery
-- Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now has no missing imports; expected Chicago projection reachability still fails and is coordinated with Remote.
+- Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
 - Browser tests hard-coded /usr/bin/chromium despite gate selecting Playwright executable. Fixed both website runners; new regression failed before change and passes after. Normal sandbox stays enabled.
 - CHECKLISTS W1 mentions two firmware-link failures. Remote reproduced the exact consolidated compiled fixture tests as 3/3 PASS; retain full-suite requirement rather than invent a repair.
+
+- Browser execution at published tree174f8c76: bundled Chromium absent at Playwright expected path; alternate CHROMIUM_EXECUTABLE=/usr/bin/chromium attempted immediately, failed normal-sandbox launch with socket() Operation not permitted and read-only Chromium Crash Reports. No sandbox weakening. Environment inventory: cloud connected, Mac-mini offline; continuing source/unit/build work, requires runnable alternate normal-sandbox browser environment for W2/W4. Logs: docs/lanes/evidence/web-v2-browser-bundled.log and web-v2-browser-system.log.
 
 ## Top 3 risks
 1. Combined source may expose further cross-lane runtime imports.
@@ -40,3 +42,7 @@ None.
 
 ## What's left
 C1–C6 and W1–W5 above. No lane completion or design approval claimed.
+
+## Verified focused work
+- Stale SOURCE-MANIFEST had mismatched breaks/index.html and omitted runtime files. Refreshed all187 product-source entries without changing historical provenance; current snapshot explicitly UNREVIEWED and publicationQualified:false. Build now PASS, drift safety retained.
+- test:product now includes existing R22 and runtime-closure regressions plus the browser launch contract. Result45 Node +11 Python tests PASS; no browser qualification implied.

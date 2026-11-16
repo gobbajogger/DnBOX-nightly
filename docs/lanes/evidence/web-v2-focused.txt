@@ -1,0 +1,5 @@
+Source inputs: website13c83e0a7e84e0a041bea9f3c44b4c1c79d603e5 plus unchanged Remote4c443839cad7b5fe50a88adc70e0acf90327062d projection and refreshed manifest/package tests.
+Node24.22.1.
+npm run build: exit0,187 product files, published:false, firmwareWrites:false.
+npm run test:product: exit0,45 Node tests PASS, Python3+2+2+4 tests PASS.
+Full npm test and normal-sandbox browser gate NOT qualified.
