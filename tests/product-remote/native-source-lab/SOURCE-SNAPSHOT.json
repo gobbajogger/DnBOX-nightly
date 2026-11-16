@@ -57,5 +57,10 @@
   "native-font-work/parity.mjs": "72a480b452fa6d9f1d079a8a7e2f7da5a9c5cd58dcd30ea4e4c274dc3fd2339e",
   "native-font-work/gfx.c": "3efcbeafea44c2754cca3d43bf32aeec70ddc57f49e7344f2931cc165b909fab",
   "native-font-work/fonts.json": "28170be3963cddffee53a502bdf61d6f26ce6bc915862c6053f2d6cc2d3e6f46",
-  "native-font-work/pins.json": "cf06152fe6f967d0cf9bde3ec260de17ab54516f7331e003dfa32f308213a4ea"
+  "native-font-work/pins.json": "cf06152fe6f967d0cf9bde3ec260de17ab54516f7331e003dfa32f308213a4ea",
+  "native-presentation-work/README.md": "8b3bd7ef8f33f1e75f1c662a8fb3050c42ee61834beda49d89da045e72b1ac17",
+  "native-presentation-work/build-reference.py": "e0d67db75c4bb3d9d07b5a89bf1c33dbaeedbe679490d4eb94e3956674f8c6c4",
+  "native-presentation-work/parity.mjs": "bf5ae4d1c1adbac39d3e9a3a0e78a9929972b2239106099de7eae163afa6a605",
+  "native-presentation-work/presentation.mjs": "5424a50b9ce84e881f077b0fba85205f46624b032841eff3df25e9a80c1da0a4",
+  "native-presentation-work/presentation.test.mjs": "d1878d3d7c1f26009696be3eef49241da90b0994f4c88998b7d892a7f807cdc3"
 }
