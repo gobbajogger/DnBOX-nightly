@@ -11,7 +11,8 @@
     "note duration and velocity expressions",
     "buildPerformGrid original body with typed local launch-selection adapter",
     "createParamSlider original body, fed explicit typed native domains",
-    "buildMixer original body with source-domain projection excluding unsupported controls"
+    "buildMixer original body with source-domain projection excluding unsupported controls",
+    "addLongPress adapted pointer-owned helper; app binding pending owner design approval"
   ],
   "excluded": [
     "AudioEngine",
@@ -31,5 +32,6 @@
   ],
   "sourceSha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c",
   "copyright": "Copyright (c) 2026 FunkyBeats Contributors",
-  "licenseNoticeSha256": "9b2fb5c7dc8aaf336a2eed5bea9dbfee8e0aac4bc2cfd7253a9e0a9a9719f504"
+  "licenseNoticeSha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80",
+  "longPressSourceSha256": "25a144b8062dd1b1fcf74bca6078e95ff83538490d24756a8c8d9aa4e5d3653b"
 }

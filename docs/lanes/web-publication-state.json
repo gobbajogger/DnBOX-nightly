@@ -1,11 +1,11 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "d7fbc5f04dc78c144c4b1aac5afc5eac5fe27239",
+  "sourceHead": "272af49f4db58c8b223fb6ef0a4bda80c2afe47e",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
-  "productCount": 212,
+  "productCount": 214,
   "deletePaths": [],
   "retention": "Overlay built product blobs onto exact existing gh-pages tree, never replace base tree. Keep all non-product paths and package bytes unchanged.",
   "critical": [
@@ -64,9 +64,9 @@
     "data/history.json",
     "help/index.html",
     "hero.mjs",
+    "install/legacy-hashes.js",
     "install.html",
     "install.mjs",
-    "install/legacy-hashes.js",
     "manual/img/fm1-keys.svg",
     "manual/img/fm1-panel.svg",
     "manual/img/new/1.0-303-steps.png",
@@ -144,7 +144,6 @@
     "reference/index.html",
     "reference/r22-source.html",
     "reference/r22.html",
-    "remote.html",
     "remote/FUNKYBEATS-MIT-NOTICE.md",
     "remote/SOURCE-PINS.json",
     "remote/WORKSPACE-SOURCE-PINS.json",
@@ -184,6 +183,7 @@
     "remote/identity/remote.mjs",
     "remote/index.html",
     "remote/lane.mjs",
+    "remote/long-press.mjs",
     "remote/mixer-format.json",
     "remote/mixer-format.mjs",
     "remote/model.mjs",
@@ -201,6 +201,7 @@
     "remote/timeline.mjs",
     "remote/touchosc/README.md",
     "remote/touchosc/dnr2-codec.lua",
+    "remote/touchosc/dnr2-controller.lua",
     "remote/touchosc/dnr2-session.lua",
     "remote/trace.json",
     "remote/vendor/client.mjs",
@@ -211,6 +212,7 @@
     "remote/viewport.mjs",
     "remote/wave-display.mjs",
     "remote/workspace.mjs",
+    "remote.html",
     "replay.mjs",
     "sample-contract.json",
     "sample-pin.mjs",
@@ -404,9 +406,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "b7d315162f6d88820c40379dbe622da3ec53ee13a9cfd0d2c7bd93bf938257fd",
+  "productManifestSha256": "c6a1a096c7cb289e74d5bdde99874f79e4be3dcef0541ebc080a9d81f4515de3",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "35fbebad59a06d71c06e5d3fa8d9d4d7367dfa92",
-  "sourceNote": "Planning snapshot combines preview/persistence fixes and Remote simulator-only Lua session source; not qualification."
+  "remoteCompositionIncludes": "1fcd1950dd85387b240f4867911fb527ba82b5fa",
+  "sourceNote": "Planning snapshot includes Remote simulator callback deadline correction; actual TouchOSC/browser/full gates not qualified."
 }

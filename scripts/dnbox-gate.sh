@@ -24,9 +24,9 @@ no_loss() { if [ -n "${DNBOX_BASE_SHA:-}" ]; then
                  [[ "$DNBOX_BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid connector base SHA"; return 1; }
                  [ "$(git cat-file -t "$DNBOX_BASE_SHA" 2>/dev/null)" = commit ] || { echo "connector base commit unavailable"; return 1; }
                  BASE=$DNBOX_BASE_SHA; echo "connector-pinned consolidated base=$BASE (caller must retain fresh remote receipt)"
-               else git fetch -q origin integration/dnbox-consolidated || return 1; fi
-            git merge-base --is-ancestor "$BASE" HEAD || { echo "merge $BASE in (no rebase)"; return 1; }
-            local miss=0; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$(git diff --name-only --diff-filter=D "$BASE" HEAD)"; return $miss; }
+               else git fetch -q origin integration/dnbox-consolidated || return 1; BASE=$(git rev-parse --verify "$BASE^{commit}") || return 1; echo "fetched consolidated base=$BASE"; fi
+            python3 tools/dnbox_contains_base.py "$BASE" || { echo "merge $BASE in (no rebase)"; return 1; }
+            local miss=0 del; del=$(git diff --name-only --diff-filter=D "$BASE" HEAD) || return 1; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$del"; return $miss; }
 limits()  { local bad=0
             git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' && bad=1
             git grep -lIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . && bad=1

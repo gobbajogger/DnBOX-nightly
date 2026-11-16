@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Contract-verified public preview transport only. No selection or device writes.
+// Contract-verified public preview transport and preference normalization; no device writes.
 const SIZES=Object.freeze({'personal-br1-zone1':69644,'personal-br1-zone2':83620,'personal-br1-zone3':85768,'personal-br2-zone1':92412,'personal-br2-zone2':105870});
 // Browser preference recovery only; the picker still verifies the pinned contract.
 export function normalizeStartingBreakSelection(value){
@@ -11,9 +11,9 @@ export function createStartingBreakPreview({baseURL=import.meta.url,fetchImpl=gl
  return Object.freeze({
   // Legacy picker callback name retained; resolved resources are public contract assets.
   resolvePrivateUrl(id){if(!Object.hasOwn(SIZES,id))throw Error('Unknown starting break');return new URL(`./assets/starting-breaks/${id}.wav`,baseURL).href;},
-  async fetchBytes(url){
+  async fetchBytes(url,{signal}={}){
    const asset=urls.get(url);if(!asset)throw Error('Unapproved preview URL');
-   const response=await fetchImpl(url,{credentials:'omit',cache:'force-cache'});
+   const response=await fetchImpl(url,{credentials:'omit',cache:'force-cache',...(signal?{signal}:{})});
    if(!response.ok)throw Error('Preview unavailable');
    const length=response.headers?.get('content-length');
    if(length!==null&&length!==undefined&&Number(length)!==asset.size)throw Error('Preview size mismatch');

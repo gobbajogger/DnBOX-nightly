@@ -1,0 +1,11 @@
+{
+  "scope": "independent source review and10fixture tests, not full Local gate",
+  "status": "PASS",
+  "source_sha256": {
+    "scripts/dnbox-gate.sh": "3a6e50f53fc54d8f1525cc5311a6d7784e2ebf49a4dccb9873783e00d8f5d0eb",
+    "tools/dnbox_contains_base.py": "d446b4459cece0a33104f6731cd076d797bb044768ae7acfa064ce5680e34ce2",
+    "tests/dnbox_contains_base_test.py": "de2035e4668e81bd96bcd3866a5eed72e4cd622e854659acebdb602a187a2bf0"
+  },
+  "standard_method": "git merge-base --is-ancestor",
+  "fallback": "raw-commit-hash-verified first-parent witness"
+}

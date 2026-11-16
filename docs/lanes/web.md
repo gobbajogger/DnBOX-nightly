@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 9b3e23ef749da25f613400842e841a3cb992aa6e   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 272af49f4db58c8b223fb6ef0a4bda80c2afe47e   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -7,9 +7,9 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | ID | Check | Status | Evidence or missing requirement |
 |---|---|---|---|
 | C1 | Local gate at head | FAIL | Combined 3ed source available; browser assertions NOT_RUN and latest integ preflight must be retained. No full gate qualification. |
-| C2 | Contains consolidated; no unexplained deletions | PASS | Independent exact3edfb16374c99c9ccb99e27d45e3d1af25360185 clean/no_loss exit0 against fresh connector9165; two prep deletions explained below. Recheck if consolidated moves. |
+| C2 | Contains consolidated; no unexplained deletions | FAIL | Last independent PASS at exact1f0d15fd14625079cf05884540b456a34c656cc1 against fresh connector9165; current composition recheck requested. Two prep deletions remain explained below. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | PASS | Independent exact3ed limits() stage exit0; evidence independent-review/web3ed-safe-checks.log. Full Local remains FAIL. |
+| C4 | Hard-limit scan | FAIL | Earlier limits() stage PASS was narrower than full C4: script does not scan PSRAM or all ≥50MB files. Supplemental exact-head audit requested; no complete C4 claim. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
 | W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm reached workspace and failed stale archive-wrapper selector; corrected without changing token assertions, workspace PASS; Remote40/40 PASS. Visual/browser gate still blocked; no W1 PASS claim. |
@@ -101,3 +101,13 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be
 - Saved-selection fix product70 Node+29 Python PASS; logs web-saved-before/after/product. Browser and full gate remain FAIL/NOT_RUN.
 
 - All-in composition: webd7fbc5 plus Remote35fbebad59a06d71c06e5d3fa8d9d4d7367dfa92 normal ancestry. Includes preview transport repaint, safe persisted selection recovery, and simulator-only Lua session source (no browser/device binding). Whole-site212 manifest verified. Build212/product70 Node+29 Python/workspace84+apps/Remote66/Lua session+codec to pinned C host PASS; logs web-session-*. Independent saved-preference review13 focused tests PASS; strict picker unchanged. No TouchOSC runtime, browser or full gate claim.
+
+- W2 cancellation follow-through: previous generation guards prevented stale media creation but did not cancel pending preview fetches on Stop/None/navigation or replacement. Four tests now exercise actual audition/provider cancellation contract; three red failures before. AbortController signal propagates through the unchanged strict picker callback into public fetch (credentials omitted). Old completion cannot clear the new controller. DOM/media/network are mocked; browser integration remains NOT_RUN.
+- Cancellation fix product74 Node+29 Python and ten retained focused regression tests PASS; logs web-cancel-*. These are not a visual Review score, browser or full Local gate.
+
+- W4 actual shared navigation controller now has6 event-double tests for mobile toggle/Escape focus, outside/focusout close, unsuppressed link/anchor navigation, responsive resets, desktop More focus and legacy header fallback. Source controller unchanged; no viewport or browser acceptance inferred.
+- Coherent Remote3615f2e20952ee1690fdbf4a8f01cc968ed1a806 composition retains68 exact Remote blobs with normal ancestry. New simulator-only callbacks and unbound long-press helper do not activate a touch menu or change design; that choice remains reserved to the owner. Whole214-file source/manifest verified; build214/product80 Node+29 Python/workspace84+apps/Remote70 and Lua callbacks/session/codec-to-C-host PASS. Logs web-hold-*. Full gates remain open.
+
+- C4 evidence correction: prior lane table overcredited limits() stage as the entire checklist line; independent review identified absent PSRAM/large-file coverage. Full C4 remains FAIL until supplemental exact-head audit, with no safety threshold weakened.
+
+- Remote review identified simulator callback deadline bug; consumed corrected1fcd1950dd85387b240f4867911fb527ba82b5fa unchanged with normal ancestry. Callback now rejects1000/1001ms and clock rollback before update; default-no-send XML source fixture included. Product80 Node+29 Python plus corrected Lua/XML-to-C-host checks PASS (web-deadline-*). App JS unchanged from prior composition; earlier workspace84/Remote70 evidence retained only for unchanged inputs, not a rerun claim. No actual TouchOSC/browser/full gate acceptance.

@@ -80,3 +80,10 @@ Repeated mistake: the integration owner ended after an intermediate handoff whil
 - Follow-up composition retains b97d1bbb163928834aca65be41af5db43f281814 with Remote ffe227c live LEVEL alias preview/cancel correction, independently reviewed. Earlier efe7 lacked this correction and is not final review input. Product manifest remains owner-maintained211 files.
 
 - Latest coherent Web9aeb98a3d682fa3ce5cd2e01b4ad3289667e41f9 + Remote35fb retained: source212-file manifest, reviewed sample preview natural-end/error/loading state and guarded saved-selection recovery; root-level gate policy retained. Earlier aliases remain historical inputs, not latest delivery.
+
+## Verified containment transport correction
+- Complete-graph git merge-base remains first. If unrelated historical donor objects are absent, fallback hashes every raw commit on a first-parent path and succeeds only upon reaching the exact freshly pinned consolidated base. Missing/invalid/corrupt first-parent objects fail. No invented ancestry/shallow boundary or no-loss waiver.
+- Both fetched symbolic refs and connector exact refs resolve to commit pins; deletion diff failures now fail closed rather than appearing as empty deletion lists. Independent10fixture cases PASS; no full Local qualification implied.
+- Coherent Web485f2a666a427e56807ec4f2b03252eb968dce4d retained with214-file product manifest, all sample preview lifecycle corrections and Remote callback deadline/default-no-send fixtures. Owner-maintained source unchanged by gate composition. Actual4842 changed-scope build212/product70+29/workspace84/Remote66/Lua-C passed; newer composition requires affected checks.
+
+Repeated mistake: coordinator reported a requested stop or lane-file update as completed before checking the result. State pending until an actual receipt or readback verifies it; correct unsupported claims immediately.
