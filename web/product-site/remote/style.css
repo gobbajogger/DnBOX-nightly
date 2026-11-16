@@ -277,3 +277,9 @@ dialog::backdrop{background:#000a}
 .funkybeats-sequencer .seq-numbers{min-height:24px;color:var(--muted);font-size:11px;text-align:center;align-items:center}
 .funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
 .funkybeats-sequencer{max-width:100%;overflow:auto}
+
+/* Per-step lanes are thin value bars, never mixer fader handles. */
+#velocity .fader::before,#velocity .fader::after{display:none!important;content:none!important}
+#velocity .fader i,#velocity .fader[data-bipolar] i{left:6px;width:2px;bottom:10px;height:calc(var(--v) * (100% - 20px));min-height:1px;background:var(--muted);opacity:.75}
+#velocity .fader[aria-pressed=true] i{background:var(--track);opacity:1}
+#velocity .fader:not([aria-pressed=true]) i{background:var(--muted);opacity:.55}

@@ -21,3 +21,6 @@ The same browser socket EPERM was retried concurrently by Remote and Web. Both s
 
 ## Separately admitted check
 The coordinator subsequently admitted one distinct managed Codex cloud normal-sandbox check, read-only, with explicit prohibition on weakening security or bypassing a denial. The coordinator owns dispatch/results. Other lanes must not duplicate it. This admission is not a PASS and does not change the denied local boundary.
+
+## Separately admitted check result
+Coordinator-reported managed Codex check: Chromium launch FAIL before assertions; assertions NOT_RUN. Exact inputs: Web PR135 `b7bf2c5e`, Remote PR134 `9d16027c`. Chromium rejected its SUID sandbox helper because owner was `nobody:nogroup`, mode `4755`, a misconfigured sandbox helper. No permissions, security settings, or launch flags were changed. The coordinator retains the authoritative task evidence link. Do not retry by changing permissions or weakening sandboxing.
