@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 272af49f4db58c8b223fb6ef0a4bda80c2afe47e   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: 485f2a666a427e56807ec4f2b03252eb968dce4d   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -19,8 +19,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: source/transport coverage at combined 3ed; normal-sandbox browser blocked in both tested environments, no retry of denied boundaries.
-- Next: compose next stable Remote snapshot and integ preflight; extend nonbrowser W2 coverage while awaiting a permitted browser environment and complete native inventory.
+- Now: exact485 source serving locally through the existing native Chromium; independent visual reviewer owns desktop input. Earlier scripted browser boundaries remain denied, not retried.
+- Next: review actual browser interactions at exact485; retain latest integ preflight for full gate, extend W2 source workflow coverage, and await complete native inventory for W3.
 
 ## Blockers and recovery
 - Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
@@ -111,3 +111,9 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to 3ed and must be
 - C4 evidence correction: prior lane table overcredited limits() stage as the entire checklist line; independent review identified absent PSRAM/large-file coverage. Full C4 remains FAIL until supplemental exact-head audit, with no safety threshold weakened.
 
 - Remote review identified simulator callback deadline bug; consumed corrected1fcd1950dd85387b240f4867911fb527ba82b5fa unchanged with normal ancestry. Callback now rejects1000/1001ms and clock rollback before update; default-no-send XML source fixture included. Product80 Node+29 Python plus corrected Lua/XML-to-C-host checks PASS (web-deadline-*). App JS unchanged from prior composition; earlier workspace84/Remote70 evidence retained only for unchanged inputs, not a rerun claim. No actual TouchOSC/browser/full gate acceptance.
+
+- Independent exact485f2a666a427e56807ec4f2b03252eb968dce4d clean/no_loss/limits PASS against9165 plus supplemental all-tracked-blob scan (no≥50MB) and PSRAM activation0 now supports C2/C4 at that exact SHA. Log independent-review/web485-safe-checks.log. Earlier limits-only C4 overcredit remains corrected; recheck changed heads.
+- W2 project inspection controller coverage adds5 source-event cases: unavailable renderer never enables export, oversized file rejected before read/parser, old read cannot replace new selection, dispose prevents late parsing, malformed parser output fails closed. Actual panel/adapter runs with file/parser doubles and provider=null. No new renderer/device/browser capability.
+
+- Distinct permitted browser route recovered: ordinary Python static server in the existing desktop environment, bound only127.0.0.1:37847, serves exact485 product bytes through already-running Chromium. No browser launch, security/permission changes or sandbox flags. At1331x894, actual starting-breaks UI None leaves0 selected; BR1 1 creates media duration1.578231/errornull with paused=false initially; later Play/aria-pressed=false and0 selected. Audible output not verified. This is bounded real-browser functional evidence, not full automated Local, prescribed viewport Review or delivery. Reviewer owns subsequent desktop review; prior EPERM/SUID boundaries remain untouched.
+- Project-inspection extension product suite PASS85 Node+29 Python; actual source with event/file/parser doubles, not browser import/export acceptance.
