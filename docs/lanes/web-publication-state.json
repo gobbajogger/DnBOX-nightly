@@ -1,7 +1,7 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "e17d7ab8cce0216a3caef20f7d85e68635b98f3b",
+  "sourceHead": "340d5b44f65525691b54127df6e2d38bcecf3279",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
@@ -433,9 +433,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "3d726d070d0b4222d1f5cf01aa4370623f0a61a5927c2295eb4e90ee5bfd8739",
+  "productManifestSha256": "b2c11a7c1a9bc50f71244bc2edeeaf03b377ded90dd737fb36f28ce90ea1a3a3",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "9d71bf8ee1be3c27870b8d45ceaa6e3f593a04de",
-  "sourceNote": "Native display formatter composition, not publication or browser acceptance"
+  "remoteCompositionIncludes": "9bf19cfcd56287dac1557484869b5ebc1ff7d30d",
+  "sourceNote": "Lua host-consumer composition; browser app unchanged from 8ce, not publication or full gate acceptance"
 }

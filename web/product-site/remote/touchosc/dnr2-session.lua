@@ -35,7 +35,8 @@ function M.new(codec, pin)
     local c=self.pending;assert(c,'No pending transaction')
     local ok,r=pcall(codec.decodeReply,bytes);if not ok then return fail('Malformed reply') end
     if r.op~=c.op or r.client~=pin.client or r.request~=c.request then return fail('Uncorrelated reply') end
-    if r.status~=0 then return fail('Firmware rejected transaction') end
+    -- QUEUED confirms only a checked scalar target, never audio application.
+    if r.status~=0 and not (c.op==3 and r.status==1) then return fail('Firmware rejected transaction') end
     if c.op==0 then
       if r.unit==0 or r.value~=pin.catalogCrc or r.control~=pin.catalogCount then return fail('Catalog mismatch') end
       self.unit=r.unit;self.unitHigh={r.unitHigh[1],r.unitHigh[2],r.unitHigh[3]};self.phase='identified'
@@ -49,6 +50,8 @@ function M.new(codec, pin)
         if c.op==2 or c.op==3 then
           local d=controls[c.control]
           if r.control~=c.control or r.kind~=d.kind or r.value<d.min or r.value>d.max then return fail('Invalid source value') end
+          if c.op==3 and r.revision~=self.revision+1 then return fail('Source changed during SET; reconnect and refresh') end
+          if c.op==2 and r.revision>self.revision then self.values={} end
           self.values[c.control]=r.value
         elseif c.op==7 then self.phase='closed';self.values={} end
       end

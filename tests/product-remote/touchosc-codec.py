@@ -67,17 +67,24 @@ with tempfile.TemporaryDirectory(prefix='dnbox-touchosc-') as tmp:
             prefix+=expression+';s:accept('+table+');\n'
             assert run(prefix+'return "PASS"')=='PASS'
             return reply
-        hello_reply=session_exchange('s:hello()');session_exchange('s:open()');read_reply=session_exchange('s:read(1)');session_exchange('s:set(1,900)')
+        hello_reply=session_exchange('s:hello()');session_exchange('s:open()');read_reply=session_exchange('s:read(1)');before_scalar_set=prefix;scalar_set_reply=session_exchange('s:set(1,900)')
         assert run(prefix+'assert(s.values[1]==900);assert(not pcall(function() s:set(1,1001) end));assert(not pcall(function() s:set(99,1) end));return "PASS"')=='PASS'
         ready_prefix=prefix
+        scalar_set_table='{'+','.join(str(b) for b in bytes.fromhex(scalar_set_reply))+'}'
+        assert run(before_scalar_set+'s:set(1,900);local b='+scalar_set_table+';b[7]=1;local r=s:accept(b);assert(r.status==1 and s.values[1]==900);return "PASS"')=='PASS'
+        assert run(before_scalar_set+'s:set(1,900);local b='+scalar_set_table+';b[7]=1;b[25]=b[25]+1;assert(not pcall(function()s:accept(b)end));assert(s.phase=="failed");return "PASS"')=='PASS'
         session_exchange('s:close()')
         assert run(prefix+'assert(s.phase=="closed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
         assert run(ready_prefix+'s:read(1);assert(not pcall(function() s:read(1) end));assert(not pcall(function() s:timeout() end));assert(s.phase=="failed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
         read_table='{'+','.join(str(b) for b in bytes.fromhex(read_reply))+'}'
         assert run(ready_prefix+'s:read(1);local b='+read_table+';b[21]=5;b[25]=3;s:accept(b);assert(s.phase=="ready");return "PASS"')=='PASS'
-        for mutation in ['b[25]=0','b[21]=6','b[9]=43','b[50]=2','b[7]=5','b[29]=99','b[8]=2','b[1]=0']:
+        for mutation in ['b[7]=1','b[25]=0','b[21]=6','b[9]=43','b[50]=2','b[7]=5','b[29]=99','b[8]=2','b[1]=0']:
             assert run(ready_prefix+'s:read(1);local b='+read_table+';b[21]=5;b[25]=3;'+mutation+';assert(not pcall(function() s:accept(b) end));assert(s.phase=="failed");assert(not pcall(function() s:set(1,1) end));return "PASS"')=='PASS'
         assert run('local S=dofile('+json.dumps(str(session_path))+');assert(not pcall(S.new,codec,{testOnly=false}));return "PASS"')=='PASS'
+        # Construct correlated source-codec replies for a two-control cache invariant.
+        # These manipulated bytes are unit fixtures, not a second actual C descriptor.
+        two=ready_prefix.replace('controls={{id=1,kind=1,min=0,max=1000}}','controls={{id=1,kind=1,min=0,max=1000},{id=2,kind=1,min=0,max=1000}}')
+        assert run(two+'s:read(2);local b='+read_table+';b[21]=5;b[25]=s.revision;b[29]=2;s:accept(b);assert(s.values[1]~=nil and s.values[2]~=nil);s:read(1);b[21]=6;b[25]=s.revision+1;b[29]=1;s:accept(b);assert(s.values[1]~=nil and s.values[2]==nil);assert(not pcall(function()s:set(2,1)end));return "PASS"')=='PASS'
         controller_path=ROOT/'web/product-site/remote/touchosc/dnr2-controller.lua'
         setup='local out={};local phase;local now=0;function getMillis() return now end;function DNBOX_ON_STATE(p) phase=p end;function sendMIDI(b,r) assert(r[1]==true);for i=2,#r do assert(r[i]==false) end;out[#out+1]=b end;DNBOX_CODEC=codec;DNBOX_SESSION=dofile('+json.dumps(str(session_path))+');'
         pin='DNBOX_SIMULATOR_PIN={testOnly=true,client=93,catalogCrc=305419896,catalogCount=3,controls={{id=1,kind=1,min=0,max=1000}}};'

@@ -1105,7 +1105,7 @@ BUILD PASS — self-contained nightly installer, samples, projects and empty cat
 ✔ explicit selection rechecks live ambiguity added after discovery (0.852929ms)
 ✔ disconnected duplicate labels do not invalidate the sole live matching pair (0.981185ms)
 ✔ rediscovery clears the old device when no safe pair remains (0.964775ms)
-REFUSING PUBLICATION: catalog (/workspace/scratch/857bb2409f82/web-v2-work/docs/versions.json) is empty (no versions). The in-repo docs/versions.json and preview-catalog.json are empty preview files and must never be deployed or used as a qualified-render input. Use the retained live catalog (git blob 24a8b208aa01d539b5ef4e23af73d9c4aa2ac3d8).
+REFUSING PUBLICATION: catalog (<source>/docs/versions.json) is empty (no versions). The in-repo docs/versions.json and preview-catalog.json are empty preview files and must never be deployed or used as a qualified-render input. Use the retained live catalog (git blob 24a8b208aa01d539b5ef4e23af73d9c4aa2ac3d8).
 ✔ assertPublicationCatalog refuses the empty docs/versions.json preview (3.168488ms)
 ✔ render-qualified-nightly CLI refuses an empty catalog before writing any output (158.106175ms)
 ✔ publicCatalog keeps 0.0.25.1 display_version from a live-shaped catalog (0.886013ms)

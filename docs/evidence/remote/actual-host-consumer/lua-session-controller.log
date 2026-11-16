@@ -1,0 +1,6 @@
+PASS actual-host queued scalar SET accepted as stored target
+PASS queued READ rejected rather than broadly accepting status1
+PASS actual cached SET replay after external edit fails closed on extra revision
+PASS newer READ invalidates other cached controls until each is refreshed
+PASS Lua5.4 source/actual-app host cases; no TouchOSC document, MIDI/device or native admission
+PASS actual-host queued target reaches controller callback with queued=true, no audio-applied claim
