@@ -214,6 +214,7 @@ dialog::backdrop{background:#000a}
 #mode-tools button,.selection-menu summary{flex:none}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 .glyph,.glyph svg{color:#dde7de;display:block;width:40px;height:24px}
+.glyph svg.readout-wave{width:102px;height:26px;background:#101a1f}
 .readout-cell{display:grid;justify-items:center;gap:var(--u);min-height:var(--hit);color:var(--fg)}
 .readout-cell output{font-size:var(--fs);color:var(--accent)}
 .source-sound-row:focus-visible{background:color-mix(in srgb,#dde7de 8%,#101a1f)}
