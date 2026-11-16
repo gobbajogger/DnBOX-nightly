@@ -163,16 +163,6 @@
       "sha256": "4592681a2d887932fcebb5d51c06215a4e2b4a6e73b48f2e8d42d974f8db5b11"
     },
     {
-      "path": "install/index.html",
-      "bytes": 629342,
-      "sha256": "8afe8f9a2c97b9bd005c8e744097f979a24a908eea2ab953204be07ceddbe2c4"
-    },
-    {
-      "path": "install/legacy-hashes.js",
-      "bytes": 143,
-      "sha256": "cda9487c93e4ae60ccafea3f39741ff749eec824a31cfa705b328dcd97779a1c"
-    },
-    {
       "path": "install.html",
       "bytes": 122,
       "sha256": "0c33a482b4842ecd9c78774b0f3fdc73fbb498be08566e545fbc28230073781b"
@@ -181,6 +171,16 @@
       "path": "install.mjs",
       "bytes": 2519,
       "sha256": "ba447c0b0120028510fd12ab14a59a083255686d795ec185844907d044b76b36"
+    },
+    {
+      "path": "install/index.html",
+      "bytes": 629342,
+      "sha256": "8afe8f9a2c97b9bd005c8e744097f979a24a908eea2ab953204be07ceddbe2c4"
+    },
+    {
+      "path": "install/legacy-hashes.js",
+      "bytes": 143,
+      "sha256": "cda9487c93e4ae60ccafea3f39741ff749eec824a31cfa705b328dcd97779a1c"
     },
     {
       "path": "manual/img/fm1-keys.svg",
@@ -568,6 +568,11 @@
       "sha256": "722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986"
     },
     {
+      "path": "remote.html",
+      "bytes": 120,
+      "sha256": "158cbf7a2672cf5d76fe5381bd86319b9d5c833164974fbc362e1e39ce743763"
+    },
+    {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
       "bytes": 1092,
       "sha256": "a75974a3a21cd30a01b57a035a9035cee4199e8d563a3c1c116bd107cfd062be"
@@ -584,8 +589,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 31469,
-      "sha256": "306249b91d26c4a7b47c59d28051f490def898a005c3775c08619ca6957a1a66"
+      "bytes": 33456,
+      "sha256": "64cb342d4a5dbe118a6f05974b05ae07635fb30bfc14aed2742d23f45d2cdc1e"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -674,8 +679,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 9251,
-      "sha256": "b5d85ed064ca5ae7dcf74330540d1e8d833fff20c6a8aec60fbc4a012427ac48"
+      "bytes": 9259,
+      "sha256": "79fe647693af1d7387f6d86fd7673d78705c6488f0f6d069410dddd8107e35d6"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -691,6 +696,11 @@
       "path": "remote/frame.mjs",
       "bytes": 1584,
       "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
+    },
+    {
+      "path": "remote/glyphs.mjs",
+      "bytes": 3071,
+      "sha256": "08527d989ce4aed34701c033c839517004a173615acd7c2c9bbc4fdb6f3a738f"
     },
     {
       "path": "remote/identity/app.mjs",
@@ -709,8 +719,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 3557,
-      "sha256": "fef4ee9750431491304f23a68305fe128b4cc75c6abcff446d0bb79742de8acb"
+      "bytes": 3397,
+      "sha256": "f810d4ea20a3ddc9e4611e4406c7c14a45f969b40386182c197d41d8fbebd94c"
     },
     {
       "path": "remote/model.mjs",
@@ -764,8 +774,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 10114,
-      "sha256": "0fef7598abb3e7e8e8d36f026ea7dbb3eff44a2e07890a970c982bdb91e3fa6c"
+      "bytes": 12118,
+      "sha256": "b3813ea59a6ed8546626f75ebd962f89ab63d13a29bf44255e8bb920e3f137a5"
     },
     {
       "path": "remote/timeline.mjs",
@@ -796,11 +806,6 @@
       "path": "remote/workspace.mjs",
       "bytes": 1801,
       "sha256": "52ec3e4258ba976e5dd021e91e59cfda3b74b890d1f418335f2b04525de7fb2e"
-    },
-    {
-      "path": "remote.html",
-      "bytes": 120,
-      "sha256": "158cbf7a2672cf5d76fe5381bd86319b9d5c833164974fbc362e1e39ce743763"
     },
     {
       "path": "replay.mjs",
