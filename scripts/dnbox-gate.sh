@@ -29,7 +29,7 @@ no_loss() { if [ -n "${DNBOX_BASE_SHA:-}" ]; then
             local miss=0; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$(git diff --name-only --diff-filter=D "$BASE" HEAD)"; return $miss; }
 limits()  { local bad=0
             git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' && bad=1
-            git grep -nIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . ':!*.md' && bad=1
+            git grep -lIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . && bad=1
             git ls-files | grep -iE '\.ipa$|\.fwsc$|ctl\.img$' && bad=1
             [ "$LANE" != remote ] || grep -rqi 'funkybeats' LICENSES web 2>/dev/null || { echo "FunkyBeats MIT notice missing"; bad=1; }
             return $bad; }

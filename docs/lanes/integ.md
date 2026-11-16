@@ -41,3 +41,14 @@ Apply supplied v2 prep, remove obsolete briefs with reasons, correct proven gate
 
 Repeated mistake: browser-sandbox fixes missed launchers in the full gate call graph. Inspect every invoked launcher, require explicit chromium_sandbox=True throughout, and never count a two-file policy check as full runtime coverage.
 - Expanded source audit now inspects all Python Chromium launchers, not only two common files. Remote's own harness remains its owner's correction; full regression correctly fails until that change is composed. Static policy PASS is never runtime PASS.
+- Independent review identified Markdown exclusion in secret scanning. Removed it; scan now emits filename only, never matched values. Dummy Markdown key/token regression3/3 PASS; actual Local must rerun at new head.
+
+## Integration checklist
+- I0 FAIL: full baseline/current Local not passing; normal sandbox environment unavailable. Safe subsets do not replace full gate.
+- I1 FAIL: consolidated state now recorded in both repositories; prep and lane PRs not yet merged.
+- I2 FAIL: combined firmware with all lanes not qualified.
+- I3 FAIL: all-engine dropout measurement outstanding.
+- I4 FAIL: actual LeakSanitizer blocked by tracer; no disabled-sanitizer result counts.
+- I5 FAIL: five BREAK samples, preview and published404 correction require runtime/Pages verification.
+- I6 FAIL: consolidated roadmap and voting runtime audit outstanding.
+- I7 FAIL: cleanup waits all lanes/rule9, and renames conflict with explicit no-settings instruction.
