@@ -1,11 +1,11 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "340d5b44f65525691b54127df6e2d38bcecf3279",
+  "sourceHead": "9313226761e5f0a7b1dc5803c26b06336575215b",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
-  "productCount": 241,
+  "productCount": 246,
   "deletePaths": [],
   "retention": "Overlay built product blobs onto exact existing gh-pages tree, never replace base tree. Keep all non-product paths and package bytes unchanged.",
   "critical": [
@@ -216,6 +216,11 @@
     "remote/mixer-format.mjs",
     "remote/model.mjs",
     "remote/motion.mjs",
+    "remote/native-geometry/decay.mjs",
+    "remote/native-geometry/fastmath.mjs",
+    "remote/native-geometry/tune-attack.mjs",
+    "remote/native-geometry/typed-adapter.mjs",
+    "remote/native-geometry/typed-controls.json",
     "remote/page.mjs",
     "remote/pan.mjs",
     "remote/parameter.mjs",
@@ -433,9 +438,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "b2c11a7c1a9bc50f71244bc2edeeaf03b377ded90dd737fb36f28ce90ea1a3a3",
+  "productManifestSha256": "08a355756d325b419e03f808026378b67cd44fd39ce23a9dd932036b558fe58c",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "9bf19cfcd56287dac1557484869b5ebc1ff7d30d",
-  "sourceNote": "Lua host-consumer composition; browser app unchanged from 8ce, not publication or full gate acceptance"
+  "remoteCompositionIncludes": "4561e81e1f492b8951a993e8add5e3b7c6f63595",
+  "sourceNote": "Five unbound native-geometry source modules added; app/glyph binding unchanged, no full native or publication qualification"
 }

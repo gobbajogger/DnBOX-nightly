@@ -34,7 +34,7 @@ not a claim about TouchOSC's Lua5.1/custom VM.
 Browser coverage: all326 descriptors; exact32 inactive Miami descriptors in the
 boot Chicago context; checked scalar SET accepted as QUEUED with one revision;
 actual stored-target READ; real external pref_set conflict/refresh; close;
-identical cached SET retry after external mutation forces refresh. The firmware
+identical cached SET retry after external mutation forces refresh; the retained395-control preview catalog fails identification; inconsistent actual multi-control reads retry or fail closed without SET; actual queue drain adds no duplicate revision;1024 queued targets fill capacity and rejection preserves target/revision until real drain restores capacity. The firmware
 producer's72 inactive reads span both bank passes and are a different count.
 
 Lua coverage: QUEUED accepted only for scalar SET, not READ; own SET requires

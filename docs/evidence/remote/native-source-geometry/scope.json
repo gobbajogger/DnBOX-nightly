@@ -1,0 +1,26 @@
+{
+  "nativeSource": "b341436ff8087c20b8ef51765f986736473611b0",
+  "previousRemote": "80a6fa43d22995384dbc1e9edf1122dad58d7422",
+  "sourceGeometry": {
+    "tuneAttackCases": 7280,
+    "mathCases": 12258,
+    "decayCases": 11264
+  },
+  "remoteTests": {
+    "pass": 88,
+    "fail": 0
+  },
+  "productAssemblyFiles": 223,
+  "numericSi": {
+    "fullOutputSha256": "cecd9da75b58eb96391136b3609204612fe2ef898eedc22d2c892885853e2be7",
+    "producerChecks": 32589,
+    "independentReceiptAndContextReview": true,
+    "independentFullHostRebuild": false
+  },
+  "runtimeBound": false,
+  "rasterQualified": false,
+  "browserQualified": false,
+  "nativeAdmitted": false,
+  "localGate": "FAIL",
+  "allRChecklistLines": "FAIL"
+}

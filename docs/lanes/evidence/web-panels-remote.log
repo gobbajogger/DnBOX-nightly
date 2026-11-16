@@ -1,0 +1,130 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:remote
+> node --test tests/product-remote/*.test.mjs tests/product-remote/platform/*.test.mjs
+
+✔ vendored Wu/px_blend coverage buffers are identical to the reference (28.199925ms)
+✔ live glyphs use the reference painter for its four kinds (4.147802ms)
+✔ ease is the reference critically damped law; idle schedules no frame (1.032125ms)
+✔ reduced motion jumps instantly (0.328211ms)
+✔ standalone Remote manifest retains every static app module dependency (5.463618ms)
+✔ exact C v2 wire/core with synthetic callbacks verifies float/scalar CAS and two original held owners (21.562384ms)
+✔ actual C inactive-control UNSUPPORTED stays one unavailable row without failing snapshot (11.104289ms)
+✔ lost C OPEN remains unconfirmed; explicit source tick separately proves expiry (6.590269ms)
+✔ actualC nativeprimitiveand affectedonly samples match Float32 exactly at65declaredphases and5rawstates (2.617573ms)
+✔ mapping retains128nativegainpairs, no rawfraction-as-gainratio or fullprogramclaim (0.304169ms)
+✔ Chicago WAVE renderer uses native affected-layer path at every raw value (28.498994ms)
+✔ port open is bounded and cancellation settles without stale readiness (2517.146611ms)
+✔ cancel while opening prevents late session; closes original ports (2504.79661ms)
+✔ session close precedes broker/port disposal and unconfirmed cleanup remains explicit (5.781294ms)
+✔ all197 typed controls preserve all21924 native formatted readouts verbatim (16.613745ms)
+✔ no invented units or labels and no ordinal/voice aliasing (3.640622ms)
+✔ malformed, duplicate and incomplete table domains are rejected (4.014868ms)
+✔ different source revisions cannot silently form one formatter projection (1.980212ms)
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (4.246398ms)
+✔ the C fixture handshake reads confirmed values and Apply is the only write (80.446439ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (26.029913ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (10.950752ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (0.566235ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (41.385996ms)
+✔ actual upstream launcher renders all five local rows without fake playback (6.868692ms)
+✔ port provenance pins the shipped MIT source bytes (2.150838ms)
+✔ actual synth slider builder retains explicit native domains and escaped values (1.992625ms)
+✔ upstream mixer projection retains typed faders, not fabricated meters or controls (3.844886ms)
+✔ mixer values reproduce exact production formatter table without inferred units (9.291495ms)
+✔ registry: all 82 ids map to a renderer family (3.320263ms)
+✔ registry: every glyph changes shape with its value (no static icons) (107.346949ms)
+✔ drum voice glyphs react to level, hit pulse and decay (0.981904ms)
+✔ step lane label cycles all four parameters and no selected-note inspector is mounted (4.034887ms)
+✔ final per-step style uses thin value bars rather than mixer caps (1.01651ms)
+✔ late-open stale close must stay owned until it settles before same-port reconnect (7.765598ms)
+✔ upstream hold contract fires once only for stationary qualified note (6.367661ms)
+✔ move, release, cancellation, capture loss and leave cancel pending hold (0.69593ms)
+✔ multitouch never opens a stale hold menu, and fresh pointer can rearm (0.458083ms)
+✔ unqualified targets, right button and disposed timers do not trigger (0.390788ms)
+✔ stale timer callback cannot consume or fire a rearmed pointer hold (0.602143ms)
+✔ modeless note body moves preserving duration rather than defaulting to end resize (3.956236ms)
+✔ explicit modeless handles still resize only the indicated endpoint (0.524657ms)
+✔ modeless draw uses upstream bounded duration with integer sample edges on fractional grids (0.94908ms)
+✔ touch body jitter selects without moving or creating an undo item (0.487103ms)
+✔ touch move crosses slop once and remains one cancellable transaction (0.667502ms)
+{"sourceNativeStep":"native-drum-inventory-work","command":"node","args":["--test","layout.test.mjs","panels.test.mjs"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-bank-presentation-work","command":"node","args":["--test","bank.test.mjs","lifecycle.test.mjs"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-presentation-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-presentation-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":29547,\"float32Coordinates\":1013560,\"result\":\"PASS\",\"scope\":\"bounded idle fractional source geometry with pinned SI table inputs; no actual app or clock lifecycle\"}"}
+{"sourceNativeStep":"native-presentation-work","command":"node","args":["--test","presentation.test.mjs"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-font-work","command":"python3","args":["export-data.py"],"exitCode":0,"stdout":"{\"fonts\": 6, \"sourceDataSha256\": \"28170be3963cddffee53a502bdf61d6f26ce6bc915862c6053f2d6cc2d3e6f46\", \"result\": \"PASS\"}"}
+{"sourceNativeStep":"native-font-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-font-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":1032,\"fonts\":6,\"result\":\"PASS\",\"scope\":\"source RGB565 text decoder, fixed colors, full and partial clips; not browser/layout\"}"}
+{"sourceNativeStep":"native-font-work","command":"node","args":["--test","font.test.mjs"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-cache-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-cache-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"events\":661,\"slotSnapshots\":10576,\"result\":\"PASS\",\"scope\":\"source16-slot state/cache/unsigned-clock fixture only; no browserRAF or live engine admission\"}"}
+{"sourceNativeStep":"native-cache-work","command":"node","args":["--test","cache.test.mjs"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-raster-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-raster-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1028 source-native RGB565 raster cases byte-identical; transient local buffers only, no browser/layout claim"}
+{"sourceNativeStep":"native-ease-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-ease-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1820 native analytical presentation steps match float32; no slot/clock ownership or browser proof"}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"29954 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-pitch-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":9216,\"float32Coordinates\":534528,\"result\":\"PASS\",\"scope\":\"source dependent geometry; sampled dependency grid, no UI/raster/device admission\"}"}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"45955 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-extra-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":8164,\"float32Coordinates\":236696,\"result\":\"PASS\",\"scope\":\"idle source geometry only; fractional raw interpolation diagnostic, not engine writes\"}"}
+{"sourceNativeStep":"native-drum-binding-work","command":"node","args":["--test","drum.test.mjs"],"exitCode":0,"stdout":""}
+✔ complete source-native lab replays only captured staged inputs (11285.091761ms)
+✔ captured source fixtures and staged modules match reviewed hashes (6.444816ms)
+✔ native Tune/Attack matches C in7280 cases (668.746162ms)
+✔ native Exp2/Sqrt matches C in12258 cases (120.513498ms)
+✔ native Decay/NTAIL matches SI contexts in11264 cases (536.45564ms)
+✔ typed adapter preserves source identity/domain and excludes Pitch/Depth (26.591806ms)
+✔ geometry rejects float32 overflow (0.437666ms)
+✔ duplicate typed registry fails before selection (19.367105ms)
+✔ compiler consumes captured C/header after original source changes (84.699306ms)
+✔ no native admission means no permission request or fabricated controls (1.388361ms)
+✔ actual page uses typed descriptors and returned state; blur uses paired DNR2 aggregate owner CLOSE before port disposal (18.503145ms)
+✔ late permission result after final departure cannot attach listeners (0.571797ms)
+✔ cached return requires fresh manual connection and obtains new firmware epoch (2.651389ms)
+✔ same-name ports remain visibly distinct through stable source IDs (1.605269ms)
+✔ pending port open immediately locks the displayed pair and allows explicit cancel (7.501195ms)
+✔ DNR2 full incarnation and inactive-bank UNSUPPORTED survive one coherent snapshot (6.383423ms)
+✔ heartbeat and conflict do not acknowledge unseen revision for subsequent CAS (3.196559ms)
+✔ queued UP/CLOSE retain exact command/request until OK and never release ownership early (1.159656ms)
+✔ bounded queued cleanup remains unconfirmed instead of falsely reporting released (3.500926ms)
+✔ owning snapshots renew lease inline but readers do not (3.598247ms)
+✔ reply with matching low unit but different incarnation word is not correlated (0.804ms)
+✔ aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts (0.852329ms)
+✔ MIDI broker rejects elapsed deadline even when timeout task has not run (36.177413ms)
+✔ MIDI broker receive enforces exact deadline, rollback and invalid clocks without timer delivery (4.942218ms)
+✔ MIDI broker retry keeps identical bytes inside absolute total budget and cannot send after deadline (1.026148ms)
+✔ MIDI broker captures request ownership and stale retry cannot disturb a later request (0.616853ms)
+✔ exhaustive raw 0..127 -> display (2.569275ms)
+✔ display -> raw round trip for every d, extremes 0/127 (0.378236ms)
+✔ drag edits in display units, extremes send 0/127; marker from the same d (0.321334ms)
+✔ import keeps raw untouched (raw 3 stays 3, shows L48) (2.55693ms)
+✔ API availability is not firmware admission or proof of a Bluetooth port (1.711109ms)
+✔ no API on mobile gives an honest platform route, no made-up PWA fallback (0.325394ms)
+✔ secure context, explicit transport admission and user action are all separate (0.250015ms)
+✔ descriptor controls only, acknowledged values replace pending edits and held original owners survive capture loss (4.152065ms)
+✔ unsupported descriptor roles never fabricate a 37-key or pad layout (0.503062ms)
+✔ inactive-bank rows are unavailable rather than editable stale values (0.301519ms)
+✔ zoom keeps the sample under the pointer and clamps finite extent (5.726022ms)
+✔ pinch settles only on 1/2/4/8 units without a zoom tool (0.772631ms)
+✔ plain and shifted wheel pan, control wheel zooms around pointer (1.668833ms)
+✔ second pointer cancels note preview and remaining finger cannot edit (1.797062ms)
+✔ vertical pinch enlarges pitch rows without changing time width, anchoring vertical location (0.970481ms)
+✔ third pointer freezes navigation without throwing or reviving note edits (4.127954ms)
+✔ Chicago continuous source uses names without changing scalar endpoints (1.035351ms)
+✔ unsupported engines and invalid raw values do not invent wave mappings (0.373776ms)
+ℹ tests 89
+ℹ suites 0
+ℹ pass 89
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11952.297015
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

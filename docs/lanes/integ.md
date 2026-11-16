@@ -123,3 +123,9 @@ Normal composition of reviewed Web 1a1d3a975562e1459037ee6938d1f4e551878a36 adds
 ## Shared roadmap reconciliation
 
 Working/Pending/Complete queues are synchronized with firmware7f6d8a44396e8d7da28f66e6fcc712c537494b1b: actual consolidated e742/9165 remain unmerged; latest default combined firmware fef9 resources and bounded read-only collector observation are recorded without finished-lane or native endpoint claims. Five encoded samples109274B cannot fit the recorded stock app headroom unchanged. Production website and current gate policies are unchanged from4c9.
+
+## Reviewed native-source laboratory composition
+
+Composed Web 26eb18ba989924006b395ab6aa660823e21b925c, retaining current integration gate/policy and roadmap files unchanged. The donor contains independently reviewed Remote source fixtures and five unbound native-geometry product modules; the whole product manifest is 246 files. Browser bindings remain unchanged from the prior 8ce source. Source fixtures and host parity are not native endpoint admission or complete visual qualification. Exact composed checks are pending; no full Local or publication claim.
+
+Actual composed non-browser build/product/workspace/Remote chain exit 0; Remote 89 cases pass. Exact command and original/public log hashes are retained in docs/lanes/evidence/integ-web-native-panels. Common policies unchanged; full Local and browser qualification remain open.

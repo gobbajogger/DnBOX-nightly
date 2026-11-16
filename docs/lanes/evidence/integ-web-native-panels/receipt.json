@@ -1,0 +1,9 @@
+{
+  "sourceBase": "9a883a716947df47180510d918dbe9ab6fdce3dc",
+  "donor": "26eb18ba989924006b395ab6aa660823e21b925c",
+  "command": "npm run build:product && npm run test:product && npm run test:workspace && npm run test:remote",
+  "exit": 0,
+  "rawLogSha256": "9de6c6be6880529161f85e3d2c152257b9b1aa7e9f74ef64a88c861c7c54b3da",
+  "publicLogSha256": "32110bfc021cda1244ee60b8cf61a7fd3037fe26c6dcef504c00d90cb8e7b1d4",
+  "scope": "nonbrowser producer composition checks; no full Local, browser or native admission"
+}
