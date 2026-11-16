@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: c25012642ffa0076de177d836f02b53ef61e390c   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: db009d9a5181f2588bcde12b18689aa85b4c96c9   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -9,7 +9,7 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | C1 | Local gate at head | FAIL | Exact d315 has bounded actual-browser checks; full scripted Local remains NOT_RUN and latest integ preflight must be retained. |
 | C2 | Contains consolidated; no unexplained deletions | FAIL | Last independent PASS at exact485f2a666a427e56807ec4f2b03252eb968dce4d against fresh connector9165; current head recheck required. Two prep deletions remain explained below. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | FAIL | Independent full C4 supplemental scan PASS at485; current d315 head recheck required. No limits-only overcredit. |
+| C4 | Hard-limit scan | FAIL | Independent full C4 supplemental scan PASS at485; current head recheck required. No limits-only overcredit. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
 | W1 | 19 routes, redirects and npm test | FAIL | Restored token dependency and exact Remote a2cd71a wave-display module; Remote4c443839 projection reused unchanged; focused suite25/25 PASS. npm run build PASS (187 files); strengthened test:product45/45 Node plus11/11 Python PASS. Full npm reached workspace and failed stale archive-wrapper selector; corrected without changing token assertions, workspace PASS; Remote40/40 PASS. Visual/browser gate still blocked; no W1 PASS claim. |
@@ -19,8 +19,8 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | W5 | Gated gh-pages and live hash | FAIL | No publication attempted. |
 
 ## Now / next
-- Now: exactd315 corrected source serving locally through the existing native Chromium; independent bounded browser checks recorded. Earlier scripted browser boundaries remain denied, not retried.
-- Next: continue actual browser interactions at exactd315; retain latest integ preflight for full gate, extend W2 source workflow coverage, and await complete native inventory for W3.
+- Now: immutable c250 runtime serving locally through existing Chromium at observed844x390; later commits change only provenance tests/docs. Browser-discovered inspector readout failure is owned by Remote. Earlier scripted browser boundaries remain denied, not retried.
+- Next: consume independently checked inspector correction, verify actual click/readout/Undo in the browser; continue prescribed viewport review and remaining W2 workflows. Retain latest integ preflight; complete native inventory remains required for W3.
 
 ## Blockers and recovery
 - Existing draft lacks shared runtime imports. Restore preserved token CSS unchanged (SHA256 d1cb8893ddd01faf139269d0b316b41cf82e1f3e6d1c8b47004d409961734d10; preservation manifest captured 2026-11-16T09:26:34Z). Remote owns wave-display restoration. Closure now PASS after unchanged Remote4c443839 projection wiring.
@@ -138,3 +138,5 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Provenance update full product suite86 Node+31 Python PASS; source runtime and immutable c250 browser snapshot unchanged. Current incomplete172-state inventory fails provenance admission before absent capture files are opened; that failure is not a full native coverage assessment.
 
 - Provenance self-review found Git replacement refs could redirect a pinned commit to another harness. A temp-repository forged-harness case failed before correction. Read-only Git now uses --no-replace-objects and checks optional declared harness path;13 tests PASS, including genuine original acceptance despite a replacement ref. No actual native capture had been admitted by the earlier helper. Independent final review requested.
+
+- Own bounded c250 landscape checks at actual844x390: home, installer, manual, historical manual, tools and project guide have document scrollWidth=clientWidth=829 (vertical scrollbar), shared menu fits and links navigate. Not a 19-route/full visual Review. Actual Remote drum Tune click enables value34 but leaves readout blank: emitted inspector lacks span that showParameter dereferences; Remote owns source+regression fix. Missing drum captions independently reproduced; initial footer overlap is scroll-recoverable, not permanent inaccessibility. Receipt web-c250-landscape.json.
