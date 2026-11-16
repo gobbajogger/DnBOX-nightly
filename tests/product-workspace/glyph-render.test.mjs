@@ -2,19 +2,26 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readdirSync, readFileSync, statSync} from 'node:fs';
 import {join} from 'node:path';
-import {chicagoWaveSamples, chicagoTimes, adsrWidths, bd909Hz, render, morphFrames} from '../../web/product-site/remote/glyph-render.mjs';
+import {chicagoWaveSamples, chicagoWaveZ, cdiv, readoutYs, chicagoTimes, adsrWidths, bd909Hz, render, morphFrames} from '../../web/product-site/remote/glyph-render.mjs';
 
-test('Chicago WAVE matches the firmware saw-to-square crossfade at 0, 50 and 100 percent',()=>{
- // ui.c draw_wave_glyph: mix 0 is the falling saw, mix 127 is the square.
- const saw=chicagoWaveSamples(0), mid=chicagoWaveSamples(64), square=chicagoWaveSamples(127);
- assert.ok(saw[0]>saw[13], '0% falls across the ramp');
- assert.equal(square[0], square[6]);
- assert.ok(square[0]>square[7]);
- assert.ok(mid[3]>saw[3] && mid[3]<square[3], '50% sits between saw and square');
- for(let mix=0;mix<127;mix++){
-  const a=chicagoWaveSamples(mix)[10], b=chicagoWaveSamples(mix+1)[10];
-  assert.ok(b<=a+1e-9, 'a late-ramp sample falls toward the square');
+const FIX=JSON.parse(readFileSync(new URL('../product-remote/fixtures/glyph-fixtures-102x26.json', import.meta.url),'utf8'));
+const ZFIX=JSON.parse(readFileSync(new URL('../product-remote/fixtures/chicago-wave-z-ctrunc.json', import.meta.url),'utf8'));
+
+test('WAVE and WIDTH readouts equal the golden 102x26 fixture at every sweep step',()=>{
+ for(const [key,engine,fn] of [['juno_wave','juno','WAVE'],['chicago_wave','chicago','WAVE'],['juno_width','juno','WIDTH']]){
+  assert.deepEqual(Object.keys(FIX[key]),['0','16','32','48','64','80','96','112','127']);
+  for(const [midi,ys] of Object.entries(FIX[key])) assert.deepEqual(readoutYs(fn,engine,Number(midi)),ys,`${key} ${midi}`);
  }
+});
+
+test('Chicago WAVE raw samples use C truncating division from ui_original_wave.h',()=>{
+ assert.match(ZFIX.source,/ui_original_wave\.h/);
+ for(const [midi,z] of Object.entries(ZFIX.z)) assert.deepEqual(chicagoWaveZ(56,Number(midi)/127),z,`midi ${midi}`);
+ assert.equal(cdiv(-7,4),-1);
+ const saw=chicagoWaveSamples(0), square=chicagoWaveSamples(127);
+ assert.ok(saw[1]<saw[0] && saw[27]<saw[1], '0% is a falling saw');
+ assert.equal(square[5],square[20], '100% holds flat like a pulse');
+ assert.ok(Number.isFinite(saw[3]), 'gain constant is a number');
 });
 
 test('Juno pulse width grows with the value and Chicago ADSR stage widths follow the RC law',()=>{

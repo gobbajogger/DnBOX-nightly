@@ -1,0 +1,132 @@
+{
+ "source": "/workspace/dnbox-mockups/anim/renderer-aa-ease.js (Lead, 2026-11-16 13:45 VLAT); hex-float GB_MAX evaluated as 0x1b2235c/2**26",
+ "w": 102,
+ "h": 26,
+ "face": [
+  16,
+  26,
+  31
+ ],
+ "cases": [
+  {
+   "kind": "juno-wave",
+   "v": 0,
+   "sha256": "74fd145b2ff58e7d8dedaf524ed0acfc62edc69b22767c454f1e1e593eff9e25",
+   "inked": 235
+  },
+  {
+   "kind": "juno-wave",
+   "v": 13,
+   "sha256": "aa64f79484030decd297eaae33599b11226ccdecd21bd4a55c1d2f39a8d13573",
+   "inked": 238
+  },
+  {
+   "kind": "juno-wave",
+   "v": 64,
+   "sha256": "15a72004383da04df40407eca0d7a8aee767e72f51d33a6fba00051f089de87c",
+   "inked": 236
+  },
+  {
+   "kind": "juno-wave",
+   "v": 100,
+   "sha256": "dc8d3906b1df9cd2d7cfeb556d1638853d72c7b3546e65f76fc6a79e7c6637c4",
+   "inked": 266
+  },
+  {
+   "kind": "juno-wave",
+   "v": 127,
+   "sha256": "9e8d8fb29a21ed8b2db6f5c8e5195d399e3138ec8e15c223dfff1630afb49877",
+   "inked": 189
+  },
+  {
+   "kind": "chicago-wave",
+   "v": 0,
+   "sha256": "d052812470b18277ce967c6587378307cd38c477d2ec6c7769a650935fa0ca7a",
+   "inked": 230
+  },
+  {
+   "kind": "chicago-wave",
+   "v": 13,
+   "sha256": "f3ba503d6e5f3ac564baf13b010daa86c52f53356612f0e3dd46c9f6d68ad0bf",
+   "inked": 232
+  },
+  {
+   "kind": "chicago-wave",
+   "v": 64,
+   "sha256": "2cea53e95c154f6306ca8f0d4b053667944e19ec15eec46f511c101ed6948e21",
+   "inked": 242
+  },
+  {
+   "kind": "chicago-wave",
+   "v": 100,
+   "sha256": "4aa2d77df1716c3c0e4b14080fdcd20ce84d0e575697ab86b75ed96e455f791e",
+   "inked": 256
+  },
+  {
+   "kind": "chicago-wave",
+   "v": 127,
+   "sha256": "8e788af9e020b5e42ab68c823fccd7048a0c1c4b5cc3287f82f8595443a871b9",
+   "inked": 186
+  },
+  {
+   "kind": "juno-width",
+   "v": 0,
+   "sha256": "e4db499c60c3f95e7dfe17e9f031ce44390aee9a177b3bda282bb94e4c952d81",
+   "inked": 190
+  },
+  {
+   "kind": "juno-width",
+   "v": 13,
+   "sha256": "525bd8a3bd30078a2e77867b92d850031015a08c912173718941e2a04350ff73",
+   "inked": 189
+  },
+  {
+   "kind": "juno-width",
+   "v": 64,
+   "sha256": "9e8d8fb29a21ed8b2db6f5c8e5195d399e3138ec8e15c223dfff1630afb49877",
+   "inked": 189
+  },
+  {
+   "kind": "juno-width",
+   "v": 100,
+   "sha256": "c04664dac7ce26d59167d368729e99c7108bb47cdc0d9d0508e8c616be5256a7",
+   "inked": 186
+  },
+  {
+   "kind": "juno-width",
+   "v": 127,
+   "sha256": "5dac7979d8fa8863c567b54426e876f1363b58eafc3bb1cdd5aded11016ae24b",
+   "inked": 190
+  },
+  {
+   "kind": "909-bd-decay",
+   "v": 0,
+   "sha256": "6a60a5f04cf96785eb89496a4983ed3bc4560f4faf91e3d68f827d3cfdfa8818",
+   "inked": 70
+  },
+  {
+   "kind": "909-bd-decay",
+   "v": 13,
+   "sha256": "6a60a5f04cf96785eb89496a4983ed3bc4560f4faf91e3d68f827d3cfdfa8818",
+   "inked": 70
+  },
+  {
+   "kind": "909-bd-decay",
+   "v": 64,
+   "sha256": "a3bf3a6a549398f14221694afba8a8b568f3e690298749490e24f28a8b1aadf1",
+   "inked": 99
+  },
+  {
+   "kind": "909-bd-decay",
+   "v": 100,
+   "sha256": "1365fbdcd793e5d6bc7fb0b3f5ebdec911ad70b13bb91f4f8839e6059ac540b5",
+   "inked": 141
+  },
+  {
+   "kind": "909-bd-decay",
+   "v": 127,
+   "sha256": "db9481f486f151237cf65ede7ec33851d847deb77b959e4725102cb0a1a75691",
+   "inked": 187
+  }
+ ]
+}
