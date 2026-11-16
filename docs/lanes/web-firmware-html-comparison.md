@@ -4,7 +4,7 @@
 
 ## Inputs
 
-- Separate authoritative inventory: schema `dnbox-firmware-screen-inventory/1`, `productionSourceCommit`, `sourceInventoryGitBlob`, `coverageComplete: true`, `notRun: []`, and complete unique `screenIds`. The exact file SHA256 must be supplied independently from its source/review record. Matching two truncated capture inventories is not sufficient. The source-inventory Git-blob field is syntax-checked here; the caller/reviewer must independently resolve it against the pinned firmware repository and verify derivation/completeness. A self-authored JSON claim is not provenance.
+- Separate authoritative inventory: schema `dnbox-firmware-screen-inventory/1`, `productionSourceCommit`, `sourceInventoryGitBlob`, `coverageComplete: true`, `notRun: []`, and complete unique `screenIds`. The exact file SHA256 must be supplied independently from its source/review record. Matching two truncated capture inventories is not sufficient. The CLI resolves the exact harness path at the pinned firmware commit and matches its regular Git blob to sourceInventoryGitBlob. A separate historical sourceInventoryCommit cannot override the production pin. The caller/reviewer must still independently verify derivation and completeness; Git identity is not semantic proof. Direct compare() unit calls exercise only the pixel/inventory algorithm, not the CLI provenance gate.
 - Native manifest: `productionSourceCommit`, `coverageComplete: true`, `notRun: []`, and nonempty `screens` records with unique `id`, relative PNG `path`, `width: 240`, `height: 240`, file `sha256`.
 - HTML manifest: the same fields and exact native screen IDs, plus `websiteSourceCommit` and `browserCapture: true`. These fields must describe an actual browser capture, never a copied native image or an inferred result.
 - Both exact commit pins must be supplied explicitly. Each PNG must match its recorded file digest; decoding uses those same in-memory hashed bytes, not a second path open. Paths may not escape the manifest directory or use symlinks; each image is bounded to 2 MiB and must decode to 240×240.
@@ -15,6 +15,8 @@ python3 scripts/compare-firmware-html.py \
   --html /path/to/browser/manifest.json \
   --inventory /path/to/source-derived/screen-inventory.json \
   --inventory-sha256 <independently-pinned-64-character-inventory-SHA256> \
+  --firmware-repo /path/to/pinned/firmware/repository \
+  --source-inventory-path tests/host/ui_screen_inventory.c \
   --firmware-sha <exact-40-character-firmware-SHA> \
   --website-sha <exact-40-character-website-SHA>
 ```

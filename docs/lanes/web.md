@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: d3154518ee51b3edf348ef1292f567da8f59b68d   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified head: c25012642ffa0076de177d836f02b53ef61e390c   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -131,3 +131,8 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 - Review isolation correction: Node product content test invokes buildProductSite() at its default output, so it unexpectedly advanced the live preview Remote bytes from d315 to abfe during preset review. Detected by hash audit; all214 served files verified abfe, reviewer/root informed immediately. Non-Remote preset/installer bytes were unchanged. Future browser reviews must serve a separate exact-head snapshot outside mutable build output; prepared hash-verified abfe copy. Do not claim output is frozen from intention alone.
 
 - Consumed Remote d3d3a54fefa609824b295d1ea6209d49f8edf0d7 drums resize correction through normal ancestry, without changing frozen review snapshot. Isolated candidate worktree product86 Node+29 Python and workspace84+app scenarios PASS; first candidate test correctly rejected stale publication-manifest hash, which was refreshed before green rerun (no assertion weakening). Broker/resize independent verdict still pending; do not qualify combined runtime.
+
+- Immutable c250 browser snapshot now served by ordinary loopback-only native terminal, not mutable build output. Existing browser reloaded successfully; ordinary border resizing achieved observed844x390 exactly (no DevTools, settings or new browser process). Independent reviewer owns landscape checks. Hung preset filechooser was aborted by reviewer after2036s; import remains NOT_RUN, no successful upload claim and no repeated chooser attempt.
+- W3 CLI provenance strengthened: exact firmware Git commit and harness path must resolve to the declared regular blob before capture paths are opened. Historical runtime/harness split is rejected. Red missing-helper case then12 synthetic/temp-Git/CLI tests PASS, including wrong blob/missing path/symlink/later harness and pre-image fail-closed admission. This verifies identity, not derivation/completeness; all actual incomplete captures remain FAIL.
+
+- Provenance update full product suite86 Node+31 Python PASS; source runtime and immutable c250 browser snapshot unchanged. Current incomplete172-state inventory fails provenance admission before absent capture files are opened; that failure is not a full native coverage assessment.
