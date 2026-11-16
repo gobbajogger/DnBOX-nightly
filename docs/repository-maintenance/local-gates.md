@@ -1,3 +1,47 @@
+# Qualification correction and superseding addendum (2026-11-16)
+
+This addendum corrects the earlier record retained below. Do not read the historical wording as an unqualified claim that every earlier run used a frozen final tree.
+
+## What the earlier evidence did and did not prove
+
+- Earlier executable checks were pinned to preparation parents `ca0af7fa307cd44353996f6563e96ceb57fdd100` and `addc3e518c4374895f23448b484462afc9100a4a`, not literal executions of the later pushed roots. API comparisons confirm the following commits changed only docs, templates and the two inherited workflow removals. That supports explicitly scoped reuse of unchanged executable inputs, not a whole-root execution claim.
+- The standalone negative-suite retry overlapped normalization of extra EOF newlines introduced during initial source extraction. Assertions and the 15-second child timeout were not weakened, but input bytes were not immutably frozen throughout that retry. Therefore the historical phrase “unchanged rerun” below must be read as unchanged assertions/timeouts, **not** exact-byte or exact-final-tree qualification.
+- The earlier full npm run actually failed: 487 of 490 edge tests passed and three failed because the reconstructed test input lacked two required historical Git objects. Those failures remain failures in the preserved receipt. Retrieving and verifying the two exact public blobs repaired an undeclared fixture dependency; it did not change test expectations or firmware/browser behavior.
+- The original child-spawn timeout remains an unexplained timing failure. It is not declared fixed. A separate diagnostic repeated that same historical R39 boolean mutation 40 times with the original assertions and 15-second timeout: 40 passed, but durations ranged from 116 ms to 13,665 ms. This measured timing variance is a reliability concern; passing repetitions do not establish its cause or eliminate recurrence.
+
+## Fresh clean first-run proof, separately pinned
+
+Fresh working directories, HOME, temporary directories and local Git object databases were prepared on the same execution container/runtime, not a new VM. Every tracked blob and mode was checked against the authenticated API tree, and local `git write-tree` reproduced each exact root:
+
+| Repository | Executed source pin | Reconstructed tree | Verified blobs |
+| --- | --- | --- | --- |
+| Firmware | `a894ac61e08d781c87d0b5572bba787813413f49` | `735f4bcee5c2b2a676dc4e2473d74aa7a932e150` | 5,328 |
+| Nightly browser source | `955a6d4dcf04f46c307a208c3d2eb154bba79a9a` | `752e90c1faa4f4dd0d5fed7d66cf76ecf5fc10e0` | 644 |
+
+The historical fixture blobs `15d43a0a8398a69c70e73aa7b6a6dc6bbe5bace0` and `24a8b208aa01d539b5ef4e23af73d9c4aa2ac3d8` were declared, hash-verified and present **before** the first nightly test. No network Git, source commit, test edit or timeout relaxation was used to prepare that database.
+
+All five commands passed their first invocation, with no retry and no tracked-source or mode drift before/after any command:
+
+| Command | First-run result |
+| --- | --- |
+| `python3 tests/host/remaining_feature_proof_test.py` | exit 0, 58.026 s |
+| `python3 tests/host/test_dnbox_git_author.py` | exit 0, 10 tests, 2.518 s |
+| `python3 tests/host/test_publish_nightly.py` | exit 0, 11.011 s |
+| `npm run build` | exit 0, 1.309 s |
+| `npm test` | exit 0, 231.606 s; Node summaries 37/37, 23/23, 493/493 and 12/12, all zero fail and zero skipped |
+
+The clean full npm log SHA-256 is `52ab8e5979a6cc14d95f24f36e0cf08715230241b30e8122d9ff8fc961b34079`. Original failures, intervening attempts, clean receipts, resource samples and source manifests are retained privately with provenance; none has been retroactively relabeled.
+
+## Scope after this documentation correction
+
+The clean receipts above qualify their named roots. This addendum changes documentation after those roots and does not retroactively turn that proof into an execution of a later commit. Validate the changed documentation and compare the exact executable-input closure before reusing evidence; record any further exact-root execution separately. No native firmware, visual, live cutover or hardware result follows from these CLI/browser-source checks.
+
+The repository steward owns continued timing investigation. Preserve the 15-second gate and a first failure if it recurs; use the external resource trace and the exact failed fixture to investigate rather than silently retrying or enlarging the timeout. Full-screen review, owner name/Pages decisions, R045 approval and all publication/device boundaries remain open.
+
+---
+
+## Earlier record (retained verbatim as historical evidence, corrected above)
+
 # Local preparation gate log
 
 Scope: R039 old/proposed-name compatibility guards, repository maintenance docs and issue/PR templates. Python 3.12.14, Node v24.22.1, Git 2.52.0. All checks run locally; no Actions, network Git, device write or deployment.
