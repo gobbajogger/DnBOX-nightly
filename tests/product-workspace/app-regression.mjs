@@ -160,7 +160,19 @@ check('shipped mixer has all source controls and typed faders sync LEVEL alias w
  const id='current-state-and-reference/mix-parts-live.svg|1:5:0:0',input=new E(),alias=new E();input.dataset={param:id,nativeParam:id,paramOccurrence:'0'};alias.dataset={param:id,nativeParam:id,paramOccurrence:'5'};
  const old=document.querySelectorAll;document.querySelectorAll=s=>s==='[data-native-param]'?[input,alias]:old(s);
  $('review').onclick();const before=$('changes').textContent;
- input.value='100';$('other-view').handlers.input({target:input});assert.equal(input.attrs['aria-valuetext'],'0dB');$('other-view').handlers.change({target:input});assert.equal(alias.value,'100');assert.equal(alias.attrs['aria-valuetext'],'0dB');
+ input.value='100';$('other-view').handlers.input({target:input});assert.equal(input.attrs['aria-valuetext'],'0dB');assert.equal(alias.value,'100');assert.equal(alias.attrs['aria-valuetext'],'0dB');$('other-view').handlers.pointercancel();assert.equal(input.value,'75');assert.equal(alias.value,'75');assert.equal(alias.attrs['aria-valuetext'],'-5dB');$('review').onclick();assert.equal($('changes').textContent,before);input.value='100';$('other-view').handlers.input({target:input});$('other-view').handlers.change({target:input});assert.equal(alias.value,'100');assert.equal(alias.attrs['aria-valuetext'],'0dB');
  $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);assert.match($('other-view').innerHTML,/aria-valuetext="-5dB"/);
  document.querySelectorAll=old;
+});assert.equal(failures,0);
+check('shipped touch roll draws, resizes and cancels through actual pointer handlers with exact Undo',()=>{
+ $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();
+ const grid=$('roll-grid'),viewport=$('roll-scroll'),ids=()=>[...grid.innerHTML.matchAll(/data-note="([^"]+)"/g)].map(m=>m[1]);const before=ids();
+ const empty=new E(),down={button:0,pointerId:1200,pointerType:'touch',clientX:200,clientY:100,target:empty,preventDefault(){}};
+ viewport.handlers.pointerdown(down);viewport.handlers.pointermove({...down,clientX:300});viewport.handlers.pointerup(down);
+ const added=ids().filter(id=>!before.includes(id));assert.equal(added.length,1);const id=added[0];
+ const geometry=()=>grid.innerHTML.match(new RegExp('data-note="'+id+'"[^>]*style="([^"]+)"'))[1];const drawn=geometry();
+ const note=new E();note.dataset.note=id;const move={...down,pointerId:1203,target:note};viewport.handlers.pointerdown(move);viewport.handlers.pointermove({...move,clientX:250});viewport.handlers.pointerup(move);assert.notEqual(geometry(),drawn);$('undo').onclick();assert.equal(geometry(),drawn);const edge=new E();edge.dataset.edge='end';edge.closest=s=>s==='[data-note]'?note:s==='[data-edge]'?edge:null;
+ const resize={...down,pointerId:1201,target:edge,clientX:300};viewport.handlers.pointerdown(resize);viewport.handlers.pointermove({...resize,clientX:360});viewport.handlers.pointerup(resize);assert.notEqual(geometry(),drawn);
+ $('undo').onclick();assert.equal(geometry(),drawn);$('undo').onclick();assert.deepEqual(ids(),before);
+ const canceled={...down,pointerId:1202};viewport.handlers.pointerdown(canceled);viewport.handlers.pointermove({...canceled,clientX:400});viewport.handlers.pointercancel(canceled);assert.deepEqual(ids(),before);assert.equal(viewport.hasPointerCapture(1202),false);
 });assert.equal(failures,0);
