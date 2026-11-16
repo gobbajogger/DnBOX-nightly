@@ -19,8 +19,8 @@ Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92
 | R7 | Structural Chromium fixtures | FAIL | Exact-head run pending. |
 
 ## Now / next
-- Now: finish modeless touch and per-step lanes; consume source-derived engine descriptors only after live engine admission.
-- Next: independent exact-source review of 9d16027; fix findings, finish remaining FunkyBeats components and normal permitted browser qualification.
+- Now: runtime frozen at d3d3a54fefa609824b295d1ea6209d49f8edf0d7 for independent source/browser review; all lane completion gates remain open. Work continues on isolated queued-DOWN and pitch-row regressions, not published runtime changes.
+- Next: consume independent broker/resize review and actual browser findings, then qualify one coherent composition. Coordinate real native catalog/atomic transaction with integ; do not infer native admission from retained-core fixtures.
 
 ## Blockers and routes
 - No shell GitHub authentication: use GitHub connector, each write under 700 KB.
@@ -85,3 +85,8 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 
 - R4/R5 resize regression: active drum lane retained600px after viewport narrowed to320px; returning to roll also retained drum width. Shipped-app source-event regression FAIL before/PASS after. Resize now recomputes both drum/roll lane geometry, and roll return uses its own viewport width while preserving zoom. No new design or native transport changes. Combined159/159 and all app scripts PASS; real landscape visual check remains required.
 - Native adapter audit for integ: preserved adapter emits QUEUED for DOWN before audio activation, but current browser client rejects it and sends cleanup UP; isolated source-fixture reproduction confirms DOWN→UP and zero held count. Consumers unchanged pending a real current catalog, with integ owning adapter. Qualify atomic SET/no mutation on failure, exactly-one revision hooks, HELD read0..1 versus write1..127, and queued DOWN/release cases before admission.
+
+- Review freeze: published runtime d3d3a54f is unchanged while Web/test-and-merge own the shared actual browser session. A permitted existing desktop browser/loopback route was recovered without changing security; DevTools remains organization-blocked. Old local/cloud launch failures are history, not a reason to bypass security or call browser tests PASS. Required viewport qualification remains open.
+- Independent work during freeze: isolated queued-DOWN candidate passes18 client/compiled-C tests, preserving exact request identity, total receive deadline, pending ownership and audio acknowledgement. Missing-token cached-OK wrapper risk reproduced FAIL before/PASS with explicit fail-closed default. Not shipped/native-admitted.
+- R3 geometry regression: actual shipped pitch pinch reaches8px rows while notes remain18px high. Source-event reproduction fails; isolated minimum6px candidate passes the regression and159 existing tests, but dense labels/hit targets need rendered review before composition. Published source unchanged.
+- R1 caption audit correction: P.DPTH is glyph semantic metadata, not visible text. Retained first-bank SVG has no visible Tune/Attack/Decay/Depth captions (confirmed by path-text-role parse and source-only SVG raster). Current fwui b341436ff8087c20b8ef51765f986736473611b0 supplies authentic native PNG and typed mapping showing all four captions. Mapping bytes verified from GitHub; source capture remains immutable. A current-source projection is needed, not silent metadata renaming or bitmap substitution that drops live glyphs.
