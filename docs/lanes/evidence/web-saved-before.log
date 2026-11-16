@@ -1,0 +1,34 @@
+✔ pagehide before metadata completes never mounts a stale panel (3.337023ms)
+✔ pagehide during cryptographic mounting destroys late candidate without attaching it (12.212851ms)
+✔ BFCache restores selected IDs and old callbacks cannot mutate current storage (2.42046ms)
+✔ network errors disclose failure without mounting or claiming device writes (2.07035ms)
+✔ pagehide while metadata body waits never calls mount after body arrives (1.732883ms)
+✔ overlapping restore destroys obsolete candidate and retains newest panel (1.428861ms)
+✖ stale or duplicate saved IDs cannot prevent verified panel mounting (25.334113ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287.682902
+
+✖ failing tests:
+
+test at tests/product-installer-lifecycle.test.mjs:70:1
+✖ stale or duplicate saved IDs cannot prevent verified panel mounting (25.334113ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file://<checkout>/tests/product-installer-lifecycle.test.mjs:77:26)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

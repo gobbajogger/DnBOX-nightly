@@ -3,6 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {normalizeStartingBreakSelection} from '../web/product-site/starting-break-preview.mjs';
 const source=readFileSync(new URL('../web/product-site/install.mjs',import.meta.url),'utf8');
 const body=source.replace(/^import .*;\n/gm,'');
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
@@ -21,8 +22,8 @@ function harness({fetcher,mounter,stored}={}) {
   const p={destroyed:0,selection:options.initialSelectedIds||[],selectedIds(){return this.selection;},destroy(){this.destroyed++;}};panels.push(p);return p;
  };
  // Replace only import.meta URL, whose resolved value is an injected module boundary.
- const run=new AsyncFunction('document','window','localStorage','fetch','mountPreparedChoices','SAMPLE_CONTRACT_SHA256','createStartingBreakPreview','URL',body.replaceAll('import.meta.url',JSON.stringify('https://example.invalid/install.mjs')));
- const done=run(document,window,localStorage,fetcher||(async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(2)})),mount,'pinned-contract',()=>({}),URL);
+ const run=new AsyncFunction('document','window','localStorage','fetch','mountPreparedChoices','SAMPLE_CONTRACT_SHA256','createStartingBreakPreview','normalizeStartingBreakSelection','URL',body.replaceAll('import.meta.url',JSON.stringify('https://example.invalid/install.mjs')));
+ const done=run(document,window,localStorage,fetcher||(async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(2)})),mount,'pinned-contract',()=>({}),normalizeStartingBreakSelection,URL);
  return {done,events,node,mounts,panels,storage};
 }
 test('pagehide before metadata completes never mounts a stale panel',async()=>{
@@ -66,4 +67,13 @@ test('overlapping restore destroys obsolete candidate and retains newest panel',
  old.resolve({destroy(){oldDestroyed++;},selectedIds:()=>[]});await h.done;
  assert.equal(oldDestroyed,1);assert.equal(newDestroyed,0);
  assert.equal(h.node('sample-picker').children[0],h.mounts[1].staging);
+});
+test('stale or duplicate saved IDs cannot prevent verified panel mounting',async()=>{
+ const {createPicker}=await import('../web/product-site/components/break-picker/picker.mjs');
+ const {SAMPLE_CONTRACT_SHA256}=await import('../web/product-site/sample-pin.mjs');
+ const bytes=new Uint8Array(readFileSync(new URL('../web/product-site/sample-contract.json',import.meta.url)));
+ let mounted=0;
+ const h=harness({stored:['old-version-asset','personal-br1-zone1','personal-br1-zone1',null],mounter:async(staging,options)=>{
+  const picker=await createPicker(bytes,SAMPLE_CONTRACT_SHA256);picker.select(options.initialSelectedIds);mounted++;return {destroy(){},selectedIds:picker.selectedIds};
+ }});await h.done;assert.equal(mounted,1);assert.deepEqual(h.mounts[0].options.initialSelectedIds,['personal-br1-zone1']);assert.equal(h.node('sample-picker').children.length,1);
 });

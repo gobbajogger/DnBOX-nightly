@@ -403,9 +403,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "c422a45a9e631a76095c587bcb68d1477a1c1672edde8a922f1de473c3ab91f1",
+  "productManifestSha256": "fb23d1edef85b48fe56cc9b1dbe962d4b3b25f387c21f946dbfaa3e7a54f8367",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
   "remoteCompositionIncludes": "ffe227c202318d9262f3985eec74ac2ad28d44e8",
-  "sourceNote": "Planning snapshot includes panel media-state repaint fix atop b97, manifest-pinned, not qualification."
+  "sourceNote": "Planning snapshot includes safe saved-selection recovery atop3c132, manifest-pinned; not qualification."
 }
