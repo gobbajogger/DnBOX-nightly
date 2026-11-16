@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "repository": "pepperonas/funkybeats",
+    "commit": "809e1e78407f7bf315eee8655387eca8b7ac465b",
+    "appGitBlob": "f31a9a5b4fa10bfcf4ee634360f1d9320ef3a4d7"
+  },
+  "scope": [
+    "SequencerState original body",
+    "el DOM helper original body",
+    "buildSequencerGrid original body with accessible step div\u2192button adaptation",
+    "note duration and velocity expressions"
+  ],
+  "excluded": [
+    "AudioEngine",
+    "playback/scheduler",
+    "browser bootstrap",
+    "MIDI permissions",
+    "AI/network",
+    "GitHub Actions"
+  ],
+  "adaptations": [
+    "Configuration supplied through lexical constants, preserving upstream class body.",
+    "Step nodes use native button type=button instead of div.",
+    "DnBOX typed source rows supply actual values and native writes remain fail-closed."
+  ],
+  "sourceSha256": "02c07dbf36779197373868ad6f08f4e4321cb42c22b842046a057f4753c081e2",
+  "copyright": "Copyright (c) 2026 FunkyBeats Contributors",
+  "licenseNoticeSha256": "c1ad67e3fbc657c71f439c388b11802688b3d4471b2f090d9124f766cda03f0b"
+}
