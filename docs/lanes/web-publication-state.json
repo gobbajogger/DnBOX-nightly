@@ -1,7 +1,7 @@
 {
   "schema": "dnbox-web-publication-plan/1",
   "status": "BLOCKED_NOT_PUBLISHED",
-  "sourceHead": "1f0d15fd14625079cf05884540b456a34c656cc1",
+  "sourceHead": "272af49f4db58c8b223fb6ef0a4bda80c2afe47e",
   "pagesHead": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "pagesTree": "2e2309ac6696cbb7814399e98397a8c356932983",
   "baseBlobCount": 561,
@@ -406,9 +406,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "f953895562b58c70ea75ba3d454e842b468bd1ac58e23427d2b5ca67b00c5069",
+  "productManifestSha256": "c6a1a096c7cb289e74d5bdde99874f79e4be3dcef0541ebc080a9d81f4515de3",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
-  "remoteCompositionIncludes": "3615f2e20952ee1690fdbf4a8f01cc968ed1a806",
-  "sourceNote": "Planning snapshot combines reviewed preview corrections with Remote simulator/unbound helper source; no new UI design applied. Not qualification."
+  "remoteCompositionIncludes": "1fcd1950dd85387b240f4867911fb527ba82b5fa",
+  "sourceNote": "Planning snapshot includes Remote simulator callback deadline correction; actual TouchOSC/browser/full gates not qualified."
 }
