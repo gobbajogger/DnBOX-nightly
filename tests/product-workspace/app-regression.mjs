@@ -138,3 +138,16 @@ check('shipped pointer binding preserves note geometry through small touch jitte
  $('roll-scroll').handlers.pointerdown(e);$('roll-scroll').handlers.pointermove({...e,clientX:103,clientY:104});$('roll-scroll').handlers.pointerup(e);
  assert.equal(geometry(),before);
 });assert.equal(failures,0);
+check('shipped typed synth slider previews cancel and change commits one source-domain Undo',()=>{
+ $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='sound').onclick();
+ const group=JSON.parse(fs.readFileSync(new URL('source-sounds.json',base))).contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0);
+ const c=group.controls.find(c=>c.kind===1&&c.parameter===7),id='source-sound/CHICAGO/0|'+[c.kind,c.target,c.voice,c.parameter,c.sourceBank].join(':');
+ const input=new E();input.dataset={param:id,nativeParam:id};input.value=String(c.raw===c.max?c.raw-1:c.raw+1);
+ $('review').onclick();const before=$('changes').textContent;
+ let prevented=false;$('other-view').handlers.pointerdown({button:0,pointerId:991,target:input,preventDefault(){prevented=true}});assert.equal(prevented,false);
+ $('other-view').handlers.input({target:input});$('other-view').handlers.pointercancel();assert.equal(Number(input.value),c.raw);
+ $('review').onclick();assert.equal($('changes').textContent,before);
+ input.value=String(c.raw===c.max?c.raw-1:c.raw+1);$('other-view').handlers.input({target:input});$('other-view').handlers.change({target:input});
+ $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);
+ input.value=String(c.max+1);$('other-view').handlers.change({target:input});$('review').onclick();assert.equal($('changes').textContent,before);
+});assert.equal(failures,0);

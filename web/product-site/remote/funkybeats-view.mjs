@@ -1,3 +1,4 @@
+import{renderSvg}from'./glyph-render.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX adapter for the actual MIT FunkyBeats DOM builder. The upstream methods,
 // not a screenshot recreation, construct the tree. Typed captured DnBOX events
@@ -58,4 +59,18 @@ export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
   cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');
  }
  return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';
+}
+// Native source domains are supplied explicitly; no upstream percent defaults.
+export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,display,enabled=true,engine='chicago'}){
+ if(typeof id!=='string'||typeof label!=='string'||typeof display!=='string'||![value,min,max,step].every(Number.isFinite)||min>max||step<=0||value<min||value>max)throw Error('Typed source parameter required');
+ const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s)};
+ const ui=createFunkyBeatsUI({document,channels:[],state:null});
+ const group=ui.createParamSlider(label,id,value,min,max,step,()=>display);
+ group.className+=' funkybeats-typed-param';
+ const labelSpan=new Element('span');labelSpan.textContent=group.children[0].textContent;group.children[0].textContent='';group.children[0].appendChild(labelSpan);
+ const input=group.children[1];input.dataset.nativeParam=id;input.setAttribute('aria-label',label+', '+display);input.setAttribute('aria-valuetext',display);
+ if(!enabled)input.setAttribute('disabled','disabled');
+ group.children[2].dataset.paramValue=id;
+ const glyph='<span class="glyph" data-glyph-fn="'+esc(label)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-value="'+value+'">'+renderSvg(label,value,engine,{live:false})+'</span>';
+ return '<div class="funkybeats-typed-unit encoder">'+glyph+serialize(group)+'</div>';
 }

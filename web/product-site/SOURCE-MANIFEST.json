@@ -574,8 +574,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1826,
-      "sha256": "98a4108eec19c9a257b96aff196e859a46c377cc7f66a72174b9cf9537587442"
+      "bytes": 1866,
+      "sha256": "3381506309d0a0c7cd11738a146881dbcc3edbf017d128cc4ebb00a94656b089"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -594,8 +594,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 43279,
-      "sha256": "79cea5f33a435f91f82a6c79a623fe4f49184751c05be1f142fc57b93d1b1b32"
+      "bytes": 44846,
+      "sha256": "e61b64ea1d18bed0167664d996dd44eb764c18f0d2ac3b8e9633fcb81bff07fe"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -709,8 +709,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 5784,
-      "sha256": "1d09c9a489379c808c393157a0231aa1429eda9ea0271bafa226e4c2cbb16685"
+      "bytes": 7201,
+      "sha256": "3e77bdfca402fac7d9b2fa0ac6ec7f647cbec23c22c9f9abb6db521c8f43c3a4"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -819,8 +819,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 23415,
-      "sha256": "a6a4d7934fb998c62626b5d38559ba870f057de02d2f77d11fb3fa81a560180e"
+      "bytes": 23897,
+      "sha256": "90ab1d25c5a81db4d4c88e99930c94cf27250dc7c204a4481eaa7849a0d3b582"
     },
     {
       "path": "remote/timeline.mjs",
@@ -854,13 +854,13 @@
     },
     {
       "path": "remote/vendor/funkybeats-core.mjs",
-      "bytes": 15539,
-      "sha256": "2a202220d198a18e2daed119096a7873d3d3399bd93351b4063286dc43e9f916"
+      "bytes": 16194,
+      "sha256": "f09c53c9eceabfbc1716a2957fd1821f1b2616e061c1c850ae1beac0b1051ea0"
     },
     {
       "path": "remote/vendor/funkybeats-provenance.json",
-      "bytes": 1282,
-      "sha256": "2e894887bd887181e1445c06caac6be0b9428fb4530964f61d354aa145f229d5"
+      "bytes": 1495,
+      "sha256": "e9878c4d9ec14eb75c0956cbbabf617949bd2d217af70a0e05afe3216741b9ac"
     },
     {
       "path": "remote/view.mjs",

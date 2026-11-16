@@ -54,3 +54,12 @@ test('port provenance pins the shipped MIT source bytes',()=>{
  assert.equal(createHash('sha256').update(readFileSync(target)).digest('hex'),provenance.sourceSha256);
  assert.ok(provenance.scope.some(scope=>scope.startsWith('buildPerformGrid')));
 });
+test('actual synth slider builder retains explicit native domains and escaped values',async()=>{
+ const {renderTypedFunkyBeatsParameter}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const html=renderTypedFunkyBeatsParameter({id:'native/"<control>',label:'Attack',value:25,min:3,max:9000,step:.25,display:'25 ms'});
+ assert.match(html,/min="3" max="9000" value="25" step="0.25"/);
+ assert.match(html,/aria-valuetext="25 ms"/);assert.doesNotMatch(html,/<control>/);assert.match(html,/data-param="native\/&quot;&lt;control&gt;"/);
+ assert.match(html,/data-native-param="native\/&quot;&lt;control&gt;"/);
+ assert.match(renderTypedFunkyBeatsParameter({id:'x',label:'Wave',value:0,min:0,max:0,display:'SAW',enabled:false}),/disabled="disabled"/);
+ assert.throws(()=>renderTypedFunkyBeatsParameter({id:'x',label:'Wrong',value:128,min:0,max:127,display:'wrong'}));
+});

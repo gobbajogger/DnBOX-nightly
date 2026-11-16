@@ -349,6 +349,17 @@ export function createFunkyBeatsUI({document,channels,state,updateSequencerDispl
             }
 
             container.appendChild(grid);
+        },
+        createParamSlider(label, paramName, value, min, max, step, formatFn) {
+            const group = el('div', { className: 'synth-param-group' });
+            const lbl = el('label', { text: label });
+            const input = el('input', { type: 'range', className: 'synth-range', min: String(min), max: String(max), value: String(value), step: String(step) });
+            input.dataset.param = paramName;
+            const valSpan = el('span', { className: 'param-val', text: formatFn(value) });
+            group.appendChild(lbl);
+            group.appendChild(input);
+            group.appendChild(valSpan);
+            return group;
         }
  };return ui;
 }

@@ -289,3 +289,8 @@ dialog::backdrop{background:#000a}
 .funkybeats-launcher .perform-header{text-align:center;color:var(--muted);font-size:11px}
 .funkybeats-launcher .perform-cell{min-height:44px;padding:0 8px;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control)}
 .funkybeats-launcher .perform-cell[aria-pressed=true]{background:var(--focus-col);outline:1px solid var(--accent)}
+/* Upstream synth slider structure keeps exact native domains inside R22 cells. */
+.funkybeats-typed-unit .funkybeats-typed-param{display:contents}
+.funkybeats-typed-unit label{font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
+.funkybeats-typed-unit .synth-range{width:100%;min-width:0;height:14px;margin:0;padding:0;accent-color:var(--accent);touch-action:none}
+.funkybeats-typed-unit .param-val{font-size:var(--fs-value);font-weight:700;color:var(--fg);letter-spacing:0}
