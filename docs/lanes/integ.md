@@ -52,3 +52,8 @@ Repeated mistake: browser-sandbox fixes missed launchers in the full gate call g
 - I5 FAIL: five BREAK samples, preview and published404 correction require runtime/Pages verification.
 - I6 FAIL: consolidated roadmap and voting runtime audit outstanding.
 - I7 FAIL: cleanup waits all lanes/rule9, and renames conflict with explicit no-settings instruction.
+
+## I5 authentic asset admission
+- Recovered all five original backup encoded zones and exact contract-pinned preview WAVs. Verified extraction against original slots-before-install.x0xslots SHA256239bd1d1ec5ae79ab634cbefe4817c058f357531a33774f0a5f6ecc80322df9e; contract SHA256df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f. Verification/mutation tests4/4 PASS. Pre-backup lossless WAV originals remain unknown; no synthetic replacement.
+- Files admitted under web/product-site/assets/starting-breaks/. Web owns narrow contract-hash/size builder allowlist and actual preview provider wiring. Existing builder rejects all WAV/ADPCM until that reviewed correction is composed. No live404 fix, deployment or browser playback PASS yet.
+- Firmware baseline includes zero built-in loops by default; old opt-in stock bank is three unrelated loops, not this five-zone set. Exact five encoded bytes109274 exceed current13,464/13,472 code headroom; embedded-bank fit remains open, no protected flash map changes.
