@@ -153,3 +153,14 @@ check('shipped typed synth slider previews cancel and change commits one source-
  $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);
  input.value=String(c.max+1);$('other-view').handlers.change({target:input});$('review').onclick();assert.equal($('changes').textContent,before);
 });assert.equal(failures,0);
+check('shipped mixer has all source controls and typed faders sync LEVEL alias with source units and Undo',()=>{
+ views.find(e=>e.dataset.view==='mix').onclick();const html=$('other-view').innerHTML;
+ assert.equal((html.match(/class="mixer-fader"/g)||[]).length,5);assert.equal((html.match(/data-native-param=/g)||[]).length,9);
+ assert.match(html,/mix-master.svg/);assert.match(html,/fx-reverb-direct.svg/);assert.match(html,/fx-delay-direct.svg/);assert.doesNotMatch(html,/mixer-vu|mixer-eq|bus-channel/);
+ const id='current-state-and-reference/mix-parts-live.svg|1:5:0:0',input=new E(),alias=new E();input.dataset={param:id,nativeParam:id,paramOccurrence:'0'};alias.dataset={param:id,nativeParam:id,paramOccurrence:'5'};
+ const old=document.querySelectorAll;document.querySelectorAll=s=>s==='[data-native-param]'?[input,alias]:old(s);
+ $('review').onclick();const before=$('changes').textContent;
+ input.value='100';$('other-view').handlers.input({target:input});assert.equal(input.attrs['aria-valuetext'],'0dB');$('other-view').handlers.change({target:input});assert.equal(alias.value,'100');assert.equal(alias.attrs['aria-valuetext'],'0dB');
+ $('review').onclick();assert.notEqual($('changes').textContent,before);$('undo').onclick();$('review').onclick();assert.equal($('changes').textContent,before);assert.match($('other-view').innerHTML,/aria-valuetext="-5dB"/);
+ document.querySelectorAll=old;
+});assert.equal(failures,0);

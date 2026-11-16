@@ -350,6 +350,174 @@ export function createFunkyBeatsUI({document,channels,state,updateSequencerDispl
 
             container.appendChild(grid);
         },
+        buildMixer() {
+            const container = document.getElementById('mixer-channels');
+            while (container.firstChild) container.removeChild(container.firstChild);
+            this.mixerVUs = [];
+
+            for (let i = 0; i < CHANNELS.length; i++) {
+                const ch = el('div', { className: 'mixer-channel' });
+
+                const colorDot = el('div', { className: 'mixer-color-dot' });
+                colorDot.style.backgroundColor = CHANNELS[i].color;
+
+                const name = el('div', { className: 'mixer-channel-name', text: CHANNELS[i].name });
+
+                const vuContainer = el('div', { className: 'mixer-vu' });
+                const vuFill = el('div', { className: 'mixer-vu-fill' });
+                vuFill.style.height = '0%';
+                vuContainer.appendChild(vuFill);
+                this.mixerVUs.push(vuFill);
+
+                const faderContainer = el('div', { className: 'mixer-fader-container' });
+                const fader = el('input', { type: 'range', className: 'mixer-fader', min: '0', max: '100', value: '80' });
+                fader.dataset.channel = i;
+                faderContainer.appendChild(fader);
+
+                const db = el('div', { className: 'mixer-db', text: '0.0dB' });
+
+                const panContainer = el('div', { className: 'mixer-pan-container' });
+                const panLabel = el('label', { text: 'PAN' });
+                const pan = el('input', { type: 'range', className: 'mixer-pan', min: '-100', max: '100', value: '0' });
+                pan.dataset.channel = i;
+                panContainer.appendChild(panLabel);
+                panContainer.appendChild(pan);
+
+                // EQ section
+                const eqSection = el('div', { className: 'mixer-eq-section' });
+                const eqBands = [
+                    { label: 'L', band: 'low' },
+                    { label: 'M', band: 'mid' },
+                    { label: 'H', band: 'high' }
+                ];
+                for (const eqDef of eqBands) {
+                    const eqGroup = el('div', { className: 'mixer-eq-group' });
+                    const eqLabel = el('label', { text: eqDef.label });
+                    const eqRange = el('input', {
+                        type: 'range', className: 'mixer-eq-range',
+                        min: '-12', max: '12', value: '0', step: '1'
+                    });
+                    eqRange.dataset.channel = i;
+                    eqRange.dataset.band = eqDef.band;
+                    eqGroup.appendChild(eqLabel);
+                    eqGroup.appendChild(eqRange);
+                    eqSection.appendChild(eqGroup);
+                }
+
+                // Send section
+                const sendSection = el('div', { className: 'mixer-send-section' });
+                const sends = [
+                    { label: 'REV', param: 'reverbSend', defaultVal: '20' },
+                    { label: 'DLY', param: 'delaySend', defaultVal: '0' }
+                ];
+                for (const sendDef of sends) {
+                    const sendGroup = el('div', { className: 'mixer-send-group' });
+                    const sendLabel = el('label', { text: sendDef.label });
+                    const sendRange = el('input', {
+                        type: 'range', className: 'mixer-send-range',
+                        min: '0', max: '100', value: sendDef.defaultVal, step: '1'
+                    });
+                    sendRange.dataset.channel = i;
+                    sendRange.dataset.sendParam = sendDef.param;
+                    sendGroup.appendChild(sendLabel);
+                    sendGroup.appendChild(sendRange);
+                    sendSection.appendChild(sendGroup);
+                }
+
+                const btnsDiv = el('div', { className: 'mixer-btns' });
+                const muteBtn = el('button', { className: 'mixer-mute', text: 'M' });
+                muteBtn.dataset.channel = i;
+                const soloBtn = el('button', { className: 'mixer-solo', text: 'S' });
+                soloBtn.dataset.channel = i;
+                btnsDiv.appendChild(muteBtn);
+                btnsDiv.appendChild(soloBtn);
+
+                ch.appendChild(colorDot);
+                ch.appendChild(name);
+                ch.appendChild(vuContainer);
+                ch.appendChild(faderContainer);
+                ch.appendChild(db);
+                ch.appendChild(panContainer);
+                ch.appendChild(eqSection);
+                ch.appendChild(sendSection);
+                ch.appendChild(btnsDiv);
+
+                container.appendChild(ch);
+            }
+
+            // Phase 4: Bus channel strips (DRUMS and SYNTHS)
+            const busConfigs = [
+                { name: 'DRUMS', busType: 'drums', color: '#ff6b35' },
+                { name: 'SYNTHS', busType: 'synths', color: '#00ff87' }
+            ];
+            for (const busCfg of busConfigs) {
+                const busCh = el('div', { className: 'mixer-channel bus-channel' });
+                busCh.style.borderColor = busCfg.color;
+
+                const busColorDot = el('div', { className: 'mixer-color-dot' });
+                busColorDot.style.backgroundColor = busCfg.color;
+
+                const busName = el('div', { className: 'mixer-channel-name', text: busCfg.name });
+                busName.style.color = busCfg.color;
+
+                const busVuContainer = el('div', { className: 'mixer-vu' });
+                const busVuFill = el('div', { className: 'mixer-vu-fill' });
+                busVuFill.style.height = '0%';
+                busVuContainer.appendChild(busVuFill);
+                this.mixerVUs.push(busVuFill);
+
+                const busFaderContainer = el('div', { className: 'mixer-fader-container' });
+                const busFader = el('input', { type: 'range', className: 'mixer-fader', min: '0', max: '100', value: '100' });
+                busFader.dataset.busType = busCfg.busType;
+                busFaderContainer.appendChild(busFader);
+
+                const busDb = el('div', { className: 'mixer-db', text: '0.0dB' });
+
+                // Compressor knob
+                const busCompGroup = el('div', { className: 'mixer-eq-group' });
+                const busCompLabel = el('label', { text: 'COMP' });
+                const busCompRange = el('input', {
+                    type: 'range', className: 'mixer-eq-range',
+                    min: '0', max: '100', value: '30', step: '1'
+                });
+                busCompRange.dataset.busType = busCfg.busType;
+                busCompRange.dataset.busParam = 'compressor';
+                busCompGroup.appendChild(busCompLabel);
+                busCompGroup.appendChild(busCompRange);
+
+                busCh.appendChild(busColorDot);
+                busCh.appendChild(busName);
+                busCh.appendChild(busVuContainer);
+                busCh.appendChild(busFaderContainer);
+                busCh.appendChild(busDb);
+                busCh.appendChild(busCompGroup);
+
+                container.appendChild(busCh);
+            }
+
+            // Master channel
+            const master = el('div', { className: 'mixer-channel master' });
+            const masterName = el('div', { className: 'mixer-channel-name', text: 'MASTER' });
+            masterName.style.color = '#ff6b35';
+            const masterVuContainer = el('div', { className: 'mixer-vu' });
+            const masterVuFill = el('div', { className: 'mixer-vu-fill' });
+            masterVuFill.style.height = '0%';
+            masterVuContainer.appendChild(masterVuFill);
+            this.mixerVUs.push(masterVuFill);
+
+            const masterFaderContainer = el('div', { className: 'mixer-fader-container' });
+            const masterFader = el('input', { type: 'range', className: 'mixer-fader', min: '0', max: '100', value: '80' });
+            masterFader.id = 'master-fader';
+            masterFaderContainer.appendChild(masterFader);
+            const masterDb = el('div', { className: 'mixer-db', text: '0.0dB' });
+
+            master.appendChild(masterName);
+            master.appendChild(masterVuContainer);
+            master.appendChild(masterFaderContainer);
+            master.appendChild(masterDb);
+
+            container.appendChild(master);
+        },
         createParamSlider(label, paramName, value, min, max, step, formatFn) {
             const group = el('div', { className: 'synth-param-group' });
             const lbl = el('label', { text: label });

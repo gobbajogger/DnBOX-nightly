@@ -574,8 +574,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1866,
-      "sha256": "3381506309d0a0c7cd11738a146881dbcc3edbf017d128cc4ebb00a94656b089"
+      "bytes": 1898,
+      "sha256": "9b2fb5c7dc8aaf336a2eed5bea9dbfee8e0aac4bc2cfd7253a9e0a9a9719f504"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -594,8 +594,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 45562,
-      "sha256": "821eb5ec8720f18d75d721e9c37cb54d98cfe7aff63d3350ba1045bbdd556127"
+      "bytes": 46439,
+      "sha256": "7aad027c8c6660337c21d7141f8cc8a6f06f566dbf5ce84b796c33788760e0a8"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -709,8 +709,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 7201,
-      "sha256": "3e77bdfca402fac7d9b2fa0ac6ec7f647cbec23c22c9f9abb6db521c8f43c3a4"
+      "bytes": 9095,
+      "sha256": "8dfd2fa6060799737cee42e37aa362be75a3c1985c027260c2d9d39e8d4908c3"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -761,6 +761,16 @@
       "path": "remote/lane.mjs",
       "bytes": 2450,
       "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d"
+    },
+    {
+      "path": "remote/mixer-format.json",
+      "bytes": 59444,
+      "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
+    },
+    {
+      "path": "remote/mixer-format.mjs",
+      "bytes": 712,
+      "sha256": "f63b485884244656a7853c6fb858baf67b00118172974a9007c4505f8158f404"
     },
     {
       "path": "remote/model.mjs",
@@ -819,8 +829,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 23897,
-      "sha256": "90ab1d25c5a81db4d4c88e99930c94cf27250dc7c204a4481eaa7849a0d3b582"
+      "bytes": 24682,
+      "sha256": "aee80568c59a50ce5bf9f6e3a1546d4986ac4268ba547ce6aad77a4fed225916"
     },
     {
       "path": "remote/timeline.mjs",
@@ -854,13 +864,13 @@
     },
     {
       "path": "remote/vendor/funkybeats-core.mjs",
-      "bytes": 16194,
-      "sha256": "f09c53c9eceabfbc1716a2957fd1821f1b2616e061c1c850ae1beac0b1051ea0"
+      "bytes": 24430,
+      "sha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c"
     },
     {
       "path": "remote/vendor/funkybeats-provenance.json",
-      "bytes": 1495,
-      "sha256": "91818bb26d04e5bf287542769f904e5d2aff5a5beddef7dc431395e51e41d9c9"
+      "bytes": 1725,
+      "sha256": "85d867cc368003d65d168bfd87df9f3e5c6803a999c0bcbd999f01ca03177f47"
     },
     {
       "path": "remote/view.mjs",
