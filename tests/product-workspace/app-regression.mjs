@@ -21,10 +21,12 @@ assert.equal(failures,0);
 
 // Actual-app event-shim action result, not DOM/browser proof.
 $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();
+// Lane is absolute (value follows the finger), shared lane.mjs mapping.
+const L=await import(new URL('lane.mjs',base));const vAt=y=>L.velocityFromLane(L.laneP(y,0,100)),cAt=y=>L.chanceFromLane(L.laneP(y,0,100));
 const bar=new E();bar.dataset.select='n1';const laneDown={button:0,pointerId:7,clientX:0,clientY:20,target:bar,preventDefault(){}};
 $('velocity').handlers.pointerdown(laneDown);$('velocity').handlers.pointermove({...laneDown,clientY:12});$('velocity').handlers.pointerup(laneDown);
-assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="100"/);assert.match($('velocity').innerHTML,/left:0px/);$('undo').onclick();assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);
-$('velocity').handlers.pointerdown(laneDown);$('velocity').handlers.pointermove({...laneDown,clientY:2});$('velocity').handlers.pointercancel(laneDown);assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);console.log('PASS actual-app aligned velocity 93→100, Undo93, cancel93');
+assert.match($('inspector').innerHTML,new RegExp('data-field="velocity"[^>]*value="'+vAt(12)+'"'));$('undo').onclick();assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);
+$('velocity').handlers.pointerdown(laneDown);$('velocity').handlers.pointermove({...laneDown,clientY:2});$('velocity').handlers.pointercancel(laneDown);assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);console.log('PASS actual-app aligned velocity 93→'+vAt(12)+', Undo93, cancel93');
 views.find(e=>e.dataset.view==='mix').onclick();const surface=new E();surface.dataset.param='current-state-and-reference/mix-master.svg|1:4:0:2';const paramDown={button:0,pointerId:8,clientX:0,clientY:50,target:surface,preventDefault(){}};
 $('other-view').handlers.pointerdown(paramDown);$('other-view').handlers.pointermove({...paramDown,clientX:14});$('other-view').handlers.pointerup(paramDown);assert.equal($('parameter-value').value,53);$('parameter-undo').onclick();assert.equal($('parameter-value').value,41);
 $('other-view').handlers.pointerdown(paramDown);$('other-view').handlers.pointermove({...paramDown,clientY:30});$('other-view').handlers.pointercancel(paramDown);assert.equal($('parameter-value').value,41);console.log('PASS actual-app Drive raw41→53, Undo41, cancel41');
@@ -49,8 +51,8 @@ check('conditional chips do not map their ordinal to height',()=>assert.equal(la
 check('conditional lane is correctly announced',()=>assert.match($('velocity').innerHTML,/aria-label="C3, condition 8:8, local draft"/));
 // Explicit percentage supports direct aligned drag, with one Undo and safe cancel.
 $('inspector').handlers.change({target:{id:'chance-value',value:'50%',dataset:{}}});
-$('velocity').handlers.pointerdown({...laneDown,pointerId:70});$('velocity').handlers.pointermove({...laneDown,pointerId:70,clientY:10});$('velocity').handlers.pointerup({...laneDown,pointerId:70});
-check('chance drag increases percentage rather than cycling conditions',()=>assert.match($('inspector').innerHTML,/option selected>55%/));
+$('velocity').handlers.pointerdown({...laneDown,pointerId:70});$('velocity').handlers.pointermove({...laneDown,pointerId:70,clientY:30});$('velocity').handlers.pointerup({...laneDown,pointerId:70});
+check('chance drag sets the percentage under the finger',()=>assert.match($('inspector').innerHTML,new RegExp('option selected>'+cAt(30)+'<')));
 $('undo').onclick();check('chance drag is one undoable action',()=>assert.match($('inspector').innerHTML,/option selected>50%/));
 $('velocity').handlers.pointerdown({...laneDown,pointerId:71});$('velocity').handlers.pointermove({...laneDown,pointerId:71,clientY:0});$('velocity').handlers.pointercancel({...laneDown,pointerId:71});
 check('chance drag cancellation restores percentage',()=>assert.match($('inspector').innerHTML,/option selected>50%/));
@@ -85,4 +87,4 @@ assert.equal(failures,0);
 
 views.find(e=>e.dataset.view==='mix').onclick();const aliasSurface=new E();aliasSurface.dataset={param:'current-state-and-reference/mix-parts-live.svg|1:5:0:0',paramOccurrence:'5'};const aliasDown={button:0,pointerId:119,clientX:0,clientY:50,target:aliasSurface,preventDefault(){}};$('other-view').handlers.pointerdown(aliasDown);$('other-view').handlers.pointerup(aliasDown);check('same-target alias preserves actual touched occurrence name',()=>assert.match($('parameter-inspector').querySelector('span').textContent,/LEVEL/));assert.equal(failures,0);
 
-views.find(e=>e.dataset.view==='mix').onclick();check('one captured-state notice per workspace, not repeated per control frame',()=>assert.equal(($('other-view').innerHTML.match(/class="source-caption"/g)||[]).length,1));assert.equal(failures,0);
+views.find(e=>e.dataset.view==='mix').onclick();check('no connection caption text in views (state shown only by Connect)',()=>assert.equal(($('other-view').innerHTML.match(/class="source-caption"/g)||[]).length,0));assert.equal(failures,0);

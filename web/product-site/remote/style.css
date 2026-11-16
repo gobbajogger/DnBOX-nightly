@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* DnBOX Remote. R22 language, top section measured from the approved page-01
-   (1024x640 basis). 4px module. No R23 tokens. */
+   (1024x640 basis). 4px module. */
 @font-face{font-family:Barlow;src:url(assets/BarlowSemiCondensed-Medium.ttf);font-weight:500;font-display:swap}
 @font-face{font-family:Barlow;src:url(assets/BarlowSemiCondensed-Bold.ttf);font-weight:700;font-display:swap}
 :root{

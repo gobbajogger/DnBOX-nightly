@@ -3,12 +3,13 @@ import assert from'node:assert/strict';
 import{readFileSync}from'node:fs';
 import{GLYPH_CELL,GLYPH_SCALE,R22_TOKENS,formatPan,formatParameterValue,glyphMarkup,isPanLabel,panCell,STEP_LANES}from'../../web/product-site/remote/glyphs.mjs';
 
-test('pan notation matches firmware L64 / C / R63',()=>{
- assert.equal(formatPan(0),'L64');
+// User rule 2026-11-16 "The panning must clip at 50" (provisional 64±50 mapping).
+test('pan notation clips at L50 / C / R50',()=>{
+ assert.equal(formatPan(0),'L50');
  assert.equal(formatPan(52),'L12');
  assert.equal(formatPan(64),'C');
  assert.equal(formatPan(94),'R30');
- assert.equal(formatPan(127),'R63');
+ assert.equal(formatPan(127),'R50');
  assert.equal(formatParameterValue('PAN',64),'C');
  assert.equal(formatParameterValue('Pan',94),'R30');
  assert.equal(formatParameterValue('Level',64),'64');
@@ -52,7 +53,7 @@ test('R22 gallery tokens and pan notation',()=>{
  assert.equal(R22_TOKENS.anim.cycle, 3080);
  assert.equal(R22_TOKENS.anim.noteOff, 500);
  assert.equal(R22_TOKENS.anim.easing, 'steps(1,end)');
- assert.equal(panCell(0).includes('>L64<'), true);
+ assert.equal(panCell(0).includes('>L50<'), true);
  assert.equal(panCell(64).includes('>C<'), true);
- assert.equal(panCell(127).includes('>R63<'), true);
+ assert.equal(panCell(127).includes('>R50<'), true);
 });
