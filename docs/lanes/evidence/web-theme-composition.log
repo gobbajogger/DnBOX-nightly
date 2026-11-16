@@ -1,0 +1,132 @@
+✔ vendored Wu/px_blend coverage buffers are identical to the reference (26.47467ms)
+✔ live glyphs use the reference painter for its four kinds (4.720372ms)
+✔ ease is the reference critically damped law; idle schedules no frame (1.240994ms)
+✔ reduced motion jumps instantly (0.378796ms)
+✔ standalone Remote manifest retains every static app module dependency (8.858379ms)
+✔ exact C v2 wire/core with synthetic callbacks verifies float/scalar CAS and two original held owners (35.614667ms)
+✔ actual C inactive-control UNSUPPORTED stays one unavailable row without failing snapshot (15.901112ms)
+✔ lost C OPEN remains unconfirmed; explicit source tick separately proves expiry (10.691469ms)
+✔ actualC nativeprimitiveand affectedonly samples match Float32 exactly at65declaredphases and5rawstates (11.599319ms)
+✔ mapping retains128nativegainpairs, no rawfraction-as-gainratio or fullprogramclaim (0.630859ms)
+✔ Chicago WAVE renderer uses native affected-layer path at every raw value (43.49979ms)
+✔ port open is bounded and cancellation settles without stale readiness (2518.41975ms)
+✔ cancel while opening prevents late session; closes original ports (2522.417721ms)
+✔ session close precedes broker/port disposal and unconfirmed cleanup remains explicit (1.0521ms)
+✔ all197 typed controls preserve all21924 native formatted readouts verbatim (29.885064ms)
+✔ no invented units or labels and no ordinal/voice aliasing (8.719788ms)
+✔ malformed, duplicate and incomplete table domains are rejected (8.7754ms)
+✔ different source revisions cannot silently form one formatter projection (2.692201ms)
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (4.886459ms)
+✔ the C fixture handshake reads confirmed values and Apply is the only write (67.53723ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (20.284547ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (39.337095ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (0.897018ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (64.017431ms)
+✔ actual upstream launcher renders all five local rows without fake playback (5.83983ms)
+✔ port provenance pins the shipped MIT source bytes (1.818996ms)
+✔ actual synth slider builder retains explicit native domains and escaped values (1.717391ms)
+✔ upstream mixer projection retains typed faders, not fabricated meters or controls (2.117889ms)
+✔ mixer values reproduce exact production formatter table without inferred units (6.920776ms)
+✔ registry: all 82 ids map to a renderer family (1.552646ms)
+✔ registry: every glyph changes shape with its value (no static icons) (94.082417ms)
+✔ drum voice glyphs react to level, hit pulse and decay (0.441655ms)
+✔ step lane label cycles all four parameters and no selected-note inspector is mounted (3.716177ms)
+✔ final per-step style uses thin value bars rather than mixer caps (0.567992ms)
+✔ late-open stale close must stay owned until it settles before same-port reconnect (3.425969ms)
+✔ upstream hold contract fires once only for stationary qualified note (2.324924ms)
+✔ move, release, cancellation, capture loss and leave cancel pending hold (0.743139ms)
+✔ multitouch never opens a stale hold menu, and fresh pointer can rearm (0.355337ms)
+✔ unqualified targets, right button and disposed timers do not trigger (0.311812ms)
+✔ stale timer callback cannot consume or fire a rearmed pointer hold (0.316555ms)
+✔ modeless note body moves preserving duration rather than defaulting to end resize (6.457519ms)
+✔ explicit modeless handles still resize only the indicated endpoint (1.125617ms)
+✔ modeless draw uses upstream bounded duration with integer sample edges on fractional grids (1.099183ms)
+✔ touch body jitter selects without moving or creating an undo item (0.806898ms)
+✔ touch move crosses slop once and remains one cancellable transaction (1.002243ms)
+{"sourceNativeStep":"native-body-live-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-body-live-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":8316,\"float32Values\":1612548,\"result\":\"PASS\",\"scope\":\"native body geometry/color for explicit envelope inputs; not audio activity provenance/raster/full-screen\"}"}
+{"sourceNativeStep":"native-body-live-work","command":"node","args":["--test-reporter=tap","--test","body-live.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: explicit envelope and integer RGB565 boundaries fail closed\nok 1 - explicit envelope and integer RGB565 boundaries fail closed\n  ---\n  duration_ms: 1.745724\n  type: 'test'\n  ...\n# Subtest: native threshold, endpoint color and input state preserved\nok 2 - native threshold, endpoint color and input state preserved\n  ---\n  duration_ms: 1.986204\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 119.769143"}
+{"sourceNativeStep":"native-theme-work","command":"python3","args":["build-materials.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-theme-work","command":"node","args":["--test-reporter=tap","--test","theme.test.mjs","frame.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: all45 current DARK frames preserve existing complete pixels and identities\nok 1 - all45 current DARK frames preserve existing complete pixels and identities\n  ---\n  duration_ms: 227.244991\n  type: 'test'\n  ...\n# Subtest: all45 LIGHT frames preserve complete frame dimensions and control identities\nok 2 - all45 LIGHT frames preserve complete frame dimensions and control identities\n  ---\n  duration_ms: 207.965553\n  type: 'test'\n  ...\n# Subtest: mismatched palette and unsupported live header reject\nok 3 - mismatched palette and unsupported live header reject\n  ---\n  duration_ms: 0.467682\n  type: 'test'\n  ...\n# Subtest: all45 DARK bank states retain exact existing pixels and control identities\nok 4 - all45 DARK bank states retain exact existing pixels and control identities\n  ---\n  duration_ms: 165.182353\n  type: 'test'\n  ...\n# Subtest: explicit LIGHT theme changes materials without losing any typed controls\nok 5 - explicit LIGHT theme changes materials without losing any typed controls\n  ---\n  duration_ms: 155.500505\n  type: 'test'\n  ...\n# Subtest: invalid theme values fail closed\nok 6 - invalid theme values fail closed\n  ---\n  duration_ms: 0.413606\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 628.820221"}
+{"sourceNativeStep":"native-color-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-color-work","command":"node","args":["--test-reporter=tap","--test","color.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: all65536 words match authentic native host PNG conversion\nok 1 - all65536 words match authentic native host PNG conversion\n  ---\n  duration_ms: 70.78936\n  type: 'test'\n  ...\n# Subtest: wrong type and oversized pixel input reject without mutation\nok 2 - wrong type and oversized pixel input reject without mutation\n  ---\n  duration_ms: 0.616247\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 196.86639"}
+{"sourceNativeStep":"native-body-work","command":"node","args":["--test-reporter=tap","--test","html-color.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: actual full-frame HTML module uses native PNG conversion on every selected frame\nok 1 - actual full-frame HTML module uses native PNG conversion on every selected frame\n  ---\n  duration_ms: 329.464786\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 477.412175"}
+{"sourceNativeStep":"native-panels-lifecycle-work","command":"node","args":["--test-reporter=tap","--test","lifecycle.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: stale callbacks cannot clear or mutate the new session\nok 1 - stale callbacks cannot clear or mutate the new session\n  ---\n  duration_ms: 33.801868\n  type: 'test'\n  ...\n# Subtest: captures draft once and invalid update cannot poison a running session\nok 2 - captures draft once and invalid update cannot poison a running session\n  ---\n  duration_ms: 13.703249\n  type: 'test'\n  ...\n# Subtest: invalid clock stops without render and render teardown cannot reschedule\nok 3 - invalid clock stops without render and render teardown cannot reschedule\n  ---\n  duration_ms: 10.982889\n  type: 'test'\n  ...\n# Subtest: all45 native bank sessions retain exact settled pixels and typed refs\nok 4 - all45 native bank sessions retain exact settled pixels and typed refs\n  ---\n  duration_ms: 112.443498\n  type: 'test'\n  ...\n# Subtest: invalid navigation preserves existing ownership and callbacks\nok 5 - invalid navigation preserves existing ownership and callbacks\n  ---\n  duration_ms: 3.326546\n  type: 'test'\n  ...\n# Subtest: render-triggered navigation schedules only the new typed session\nok 6 - render-triggered navigation schedules only the new typed session\n  ---\n  duration_ms: 5.301046\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 345.489305"}
+{"sourceNativeStep":"native-body-work","command":"python3","args":["check-source.py"],"exitCode":0,"stdout":"PASS actual2bfa source blob, extracted function/data and JS table provenance"}
+{"sourceNativeStep":"native-body-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-body-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":396,\"float32Values\":63990,\"result\":\"PASS\",\"scope\":\"idle native body polyline geometry/stroke width; not live color/raster/full-screen\"}"}
+{"sourceNativeStep":"native-body-work","command":"node","args":["--test-reporter=tap","--test","body.test.mjs","frame.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: float32 scale underflow and invalid identities produce no geometry\nok 1 - float32 scale underflow and invalid identities produce no geometry\n  ---\n  duration_ms: 1.462208\n  type: 'test'\n  ...\n# Subtest: all45 explicit captured factory contexts render complete source frames\nok 2 - all45 explicit captured factory contexts render complete source frames\n  ---\n  duration_ms: 122.133445\n  type: 'test'\n  ...\n# Subtest: unimplemented header/live/theme and invalid native pattern states fail closed\nok 3 - unimplemented header/live/theme and invalid native pattern states fail closed\n  ---\n  duration_ms: 0.802923\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 270.89459"}
+{"sourceNativeStep":"native-drum-inventory-work","command":"node","args":["--test-reporter=tap","--test","layout.test.mjs","panels.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: all45 native observed pages retain every typed control exactly once\nok 1 - all45 native observed pages retain every typed control exactly once\n  ---\n  duration_ms: 13.23587\n  type: 'test'\n  ...\n# Subtest: current active BD bank coordinates preserve independently matched crop\nok 2 - current active BD bank coordinates preserve independently matched crop\n  ---\n  duration_ms: 0.366002\n  type: 'test'\n  ...\n# Subtest: unknown or fractional page identities fail closed\nok 3 - unknown or fractional page identities fail closed\n  ---\n  duration_ms: 2.135526\n  type: 'test'\n  ...\n# Subtest: all45 observed dark bank layouts render every typed control without mutating state\nok 4 - all45 observed dark bank layouts render every typed control without mutating state\n  ---\n  duration_ms: 79.445764\n  type: 'test'\n  ...\n# Subtest: BD active-bank pixels preserve independently accepted current source crop\nok 5 - BD active-bank pixels preserve independently accepted current source crop\n  ---\n  duration_ms: 4.445823\n  type: 'test'\n  ...\n# Subtest: invalid selected source value fails rather than fabricating display or geometry\nok 6 - invalid selected source value fails rather than fabricating display or geometry\n  ---\n  duration_ms: 1.295754\n  type: 'test'\n  ...\n1..6\n# tests 6\n# suites 0\n# pass 6\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 288.768398"}
+{"sourceNativeStep":"native-bank-presentation-work","command":"node","args":["--test-reporter=tap","--test","bank.test.mjs","lifecycle.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: settled bank pixels remain identical with separate presentation domain\nok 1 - settled bank pixels remain identical with separate presentation domain\n  ---\n  duration_ms: 23.489439\n  type: 'test'\n  ...\n# Subtest: committed values change immediately while source cache glyph state eases independently\nok 2 - committed values change immediately while source cache glyph state eases independently\n  ---\n  duration_ms: 21.782846\n  type: 'test'\n  ...\n# Subtest: stale callbacks cannot clear or mutate the new session\nok 3 - stale callbacks cannot clear or mutate the new session\n  ---\n  duration_ms: 31.065677\n  type: 'test'\n  ...\n# Subtest: captures draft once and invalid update cannot poison a running session\nok 4 - captures draft once and invalid update cannot poison a running session\n  ---\n  duration_ms: 16.27448\n  type: 'test'\n  ...\n# Subtest: invalid clock stops without render and render teardown cannot reschedule\nok 5 - invalid clock stops without render and render teardown cannot reschedule\n  ---\n  duration_ms: 13.441343\n  type: 'test'\n  ...\n1..5\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 239.9366"}
+{"sourceNativeStep":"native-presentation-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-presentation-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":29547,\"float32Coordinates\":1013560,\"result\":\"PASS\",\"scope\":\"bounded idle fractional source geometry with pinned SI table inputs; no actual app or clock lifecycle\"}"}
+{"sourceNativeStep":"native-presentation-work","command":"node","args":["--test-reporter=tap","--test","presentation.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: settled presentation preserves all7434 integer source projections\nok 1 - settled presentation preserves all7434 integer source projections\n  ---\n  duration_ms: 282.227\n  type: 'test'\n  ...\n# Subtest: fractional glyph state never replaces committed state\nok 2 - fractional glyph state never replaces committed state\n  ---\n  duration_ms: 6.329278\n  type: 'test'\n  ...\n# Subtest: native timed SI uses selected rounded presentation while dependencies remain committed\nok 3 - native timed SI uses selected rounded presentation while dependencies remain committed\n  ---\n  duration_ms: 1.063536\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 451.904015"}
+{"sourceNativeStep":"native-font-work","command":"python3","args":["export-data.py"],"exitCode":0,"stdout":"{\"fonts\": 6, \"sourceDataSha256\": \"28170be3963cddffee53a502bdf61d6f26ce6bc915862c6053f2d6cc2d3e6f46\", \"result\": \"PASS\"}"}
+{"sourceNativeStep":"native-font-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-font-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"cases\":1032,\"fonts\":6,\"result\":\"PASS\",\"scope\":\"source RGB565 text decoder, fixed colors, full and partial clips; not browser/layout\"}"}
+{"sourceNativeStep":"native-font-work","command":"node","args":["--test-reporter=tap","--test","font.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: unsupported numeric-only text fails before any pixel changes\nok 1 - unsupported numeric-only text fails before any pixel changes\n  ---\n  duration_ms: 2.573807\n  type: 'test'\n  ...\n# Subtest: native ASCII fallback/folding and bounded inputs remain explicit\nok 2 - native ASCII fallback/folding and bounded inputs remain explicit\n  ---\n  duration_ms: 0.797472\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 139.406756"}
+{"sourceNativeStep":"native-cache-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-cache-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"{\"events\":661,\"slotSnapshots\":10576,\"result\":\"PASS\",\"scope\":\"source16-slot state/cache/unsigned-clock fixture only; no browserRAF or live engine admission\"}"}
+{"sourceNativeStep":"native-cache-work","command":"node","args":["--test-reporter=tap","--test","cache.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: invalid clock/identity/target inputs do not mutate presentation state\nok 1 - invalid clock/identity/target inputs do not mutate presentation state\n  ---\n  duration_ms: 2.155063\n  type: 'test'\n  ...\n# Subtest: presentation never changes caller committed state or native identity\nok 2 - presentation never changes caller committed state or native identity\n  ---\n  duration_ms: 1.48128\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 128.878128"}
+{"sourceNativeStep":"native-raster-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-raster-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1028 source-native RGB565 raster cases byte-identical; transient local buffers only, no browser/layout claim"}
+{"sourceNativeStep":"native-ease-work","command":"python3","args":["build-reference.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-ease-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"1820 native analytical presentation steps match float32; no slot/clock ownership or browser proof"}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"29954 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-pitch-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-pitch-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":9216,\"float32Coordinates\":534528,\"result\":\"PASS\",\"scope\":\"source dependent geometry; sampled dependency grid, no UI/raster/device admission\"}"}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["parity.mjs"],"exitCode":0,"stdout":"45955 pitch math source float32 cases PASS; unbound, no geometry/raster claim"}
+{"sourceNativeStep":"native-extra-work","command":"python3","args":["build-geometry.py"],"exitCode":0,"stdout":""}
+{"sourceNativeStep":"native-extra-work","command":"node","args":["geometry-parity.mjs"],"exitCode":0,"stdout":"{\"cases\":8164,\"float32Coordinates\":236696,\"result\":\"PASS\",\"scope\":\"idle source geometry only; fractional raw interpolation diagnostic, not engine writes\"}"}
+{"sourceNativeStep":"native-drum-binding-work","command":"node","args":["--test-reporter=tap","--test","drum.test.mjs"],"exitCode":0,"stdout":"TAP version 13\n# Subtest: all63 native settled glyph identities and7434 raw states project finitely\nok 1 - all63 native settled glyph identities and7434 raw states project finitely\n  ---\n  duration_ms: 195.762393\n  type: 'test'\n  ...\n# Subtest: unsupported identity/missing raw/fractional committed state fails closed\nok 2 - unsupported identity/missing raw/fractional committed state fails closed\n  ---\n  duration_ms: 3.954972\n  type: 'test'\n  ...\n# Subtest: dependent state is captured exactly once for each required key\nok 3 - dependent state is captured exactly once for each required key\n  ---\n  duration_ms: 1.227416\n  type: 'test'\n  ...\n# Subtest: Pitch uses current dependency state without fallback to Tune\nok 4 - Pitch uses current dependency state without fallback to Tune\n  ---\n  duration_ms: 0.561784\n  type: 'test'\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 347.204433"}
+✔ complete source-native lab replays only captured staged inputs (16775.344553ms)
+✔ nested runner executes failures rather than silently skipping test files (211.139059ms)
+✔ missing child working directory reports spawn cause, not a secondary stdout error (5.940333ms)
+✔ captured source fixtures and staged modules match reviewed hashes (2.133735ms)
+✔ native Tune/Attack matches C in7280 cases (404.605993ms)
+✔ native Exp2/Sqrt matches C in12258 cases (110.405754ms)
+✔ native Decay/NTAIL matches SI contexts in11264 cases (616.955945ms)
+✔ typed adapter preserves source identity/domain and excludes Pitch/Depth (36.842208ms)
+✔ geometry rejects float32 overflow (0.405646ms)
+✔ duplicate typed registry fails before selection (32.546885ms)
+✔ compiler consumes captured C/header after original source changes (103.934363ms)
+✔ no native admission means no permission request or fabricated controls (2.217414ms)
+✔ actual page uses typed descriptors and returned state; blur uses paired DNR2 aggregate owner CLOSE before port disposal (16.805543ms)
+✔ late permission result after final departure cannot attach listeners (0.716272ms)
+✔ cached return requires fresh manual connection and obtains new firmware epoch (3.316888ms)
+✔ same-name ports remain visibly distinct through stable source IDs (3.10663ms)
+✔ pending port open immediately locks the displayed pair and allows explicit cancel (4.970023ms)
+✔ DNR2 full incarnation and inactive-bank UNSUPPORTED survive one coherent snapshot (6.362625ms)
+✔ heartbeat and conflict do not acknowledge unseen revision for subsequent CAS (1.699913ms)
+✔ queued UP/CLOSE retain exact command/request until OK and never release ownership early (1.548275ms)
+✔ bounded queued cleanup remains unconfirmed instead of falsely reporting released (5.313248ms)
+✔ owning snapshots renew lease inline but readers do not (3.003651ms)
+✔ reply with matching low unit but different incarnation word is not correlated (0.748599ms)
+✔ aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts (1.201388ms)
+✔ MIDI broker rejects elapsed deadline even when timeout task has not run (28.218782ms)
+✔ MIDI broker receive enforces exact deadline, rollback and invalid clocks without timer delivery (2.159133ms)
+✔ MIDI broker retry keeps identical bytes inside absolute total budget and cannot send after deadline (1.010119ms)
+✔ MIDI broker captures request ownership and stale retry cannot disturb a later request (0.540761ms)
+✔ exhaustive raw 0..127 -> display (1.994986ms)
+✔ display -> raw round trip for every d, extremes 0/127 (0.512909ms)
+✔ drag edits in display units, extremes send 0/127; marker from the same d (0.33088ms)
+✔ import keeps raw untouched (raw 3 stays 3, shows L48) (2.900206ms)
+✔ descriptor controls only, acknowledged values replace pending edits and held original owners survive capture loss (2.670395ms)
+✔ unsupported descriptor roles never fabricate a 37-key or pad layout (0.521778ms)
+✔ inactive-bank rows are unavailable rather than editable stale values (0.209824ms)
+✔ zoom keeps the sample under the pointer and clamps finite extent (3.067737ms)
+✔ pinch settles only on 1/2/4/8 units without a zoom tool (0.295496ms)
+✔ plain and shifted wheel pan, control wheel zooms around pointer (0.875601ms)
+✔ second pointer cancels note preview and remaining finger cannot edit (0.697621ms)
+✔ vertical pinch enlarges pitch rows without changing time width, anchoring vertical location (0.393105ms)
+✔ third pointer freezes navigation without throwing or reviving note edits (0.612968ms)
+✔ Chicago continuous source uses names without changing scalar endpoints (1.486708ms)
+✔ unsupported engines and invalid raw values do not invent wave mappings (0.318699ms)
+ℹ tests 88
+ℹ suites 0
+ℹ pass 88
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17618.869258

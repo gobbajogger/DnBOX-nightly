@@ -1,5 +1,5 @@
 # Lane: web
-Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified Web parent: 9313226761e5f0a7b1dc5803c26b06336575215b; composed Remote source: 4561e81e1f492b8951a993e8add5e3b7c6f63595   Base: 7262bb689abd198a38c49086837941cb4b75d801
+Owner agent: web   Branch: lane/web-v2 (local continuation of feature/website-r22)   Draft PR: #135; #133 preserved unchanged   Last verified Web parent: 804a9450eae088fc5cbd4db0bd672ac7ca085e8e; composed Remote source: 0510b6412fc48f33cdc70a0c2f81254fea3b5b8a   Base: 7262bb689abd198a38c49086837941cb4b75d801
 
 Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines and approvals are historical only.
 
@@ -7,12 +7,12 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 | ID | Check | Status | Evidence or missing requirement |
 |---|---|---|---|
 | C1 | Local gate at head | FAIL | Exact runtime8ce has bounded actual-browser checks; full scripted Local is NOT_RUN. Retain latest integ preflight; no retry of denied Chromium launch boundary. |
-| C2 | Contains consolidated; no unexplained deletions | FAIL | Independent scoped no-loss PASS at58ec against freshly verified9165; later docs heads require exact-head recheck. No unexplained deletion introduced. |
+| C2 | Contains consolidated; no unexplained deletions | FAIL | Independent scoped no-loss PASS at804a against freshly verified9165; this composition requires exact-head recheck. No unexplained deletion introduced. |
 | C3 | Independent screen Review 10/10 | FAIL | New exact-head independent review required at all prescribed viewports. |
-| C4 | Hard-limit scan | FAIL | Independent external reviewed hard-limit scanner PASS at58ec (1192 tracked blobs); not comprehensive secret/opaque-content assurance or full C4. |
+| C4 | Hard-limit scan | FAIL | Independent external reviewed hard-limit scanner PASS at804a (1350 tracked blobs); not comprehensive secret/opaque-content assurance or full C4. |
 | C5 | Every line PASS; nothing left | FAIL | W1–W5 remain open. |
 | C6 | Ready and integrated | FAIL | Draft #135 active; #133 retained unchanged, not delivery. |
-| W1 | 19 routes, redirects and npm test | FAIL | 246 manifest-pinned product files build. Current4561 composition product88 Node+32 Python and Remote89 PASS; full14968 previsual diagnostic passed, but full npm visual/browser stages remain NOT_RUN. |
+| W1 | 19 routes, redirects and npm test | FAIL | 246 manifest-pinned product files build. Product88 Node+32 Python retained for unchanged product inputs; current source-lab replay88 outer +3 platform +42 nested PASS; prior89 did not establish nested execution and is explicitly retracted below; full14968 previsual diagnostic passed, but full npm visual/browser stages remain NOT_RUN. |
 | W2 | Installer/emulator/import-export and browser | FAIL | Actual preview cleanup and native readout keyboard edit/Undo verified on immutable8ce; real-parser8 source tests PASS. Genuine preset chooser delivery unresolved; native/MIDI export and full browser gate unqualified. |
 | W3 | HTML/firmware same-SHA match | FAIL | Provenance/comparator13 tests independently accepted, identity-only. Supplementary fixed909BD crop16416/0 and bounded browser screenshot accepted. Complete same-source inventory and full-frame HTML projection unavailable; no theme/animation/generalization claim. |
 | W4 | Musician-facing pages and landscape | FAIL | All19 route document widths observed at844x390, keyboard Menu navigation and three independent bounded route checks retained. Exact390 viewport unavailable (native minimum500); full prescribed independent Review remains open. |
@@ -42,7 +42,7 @@ Rules: RULES.md v2 from dnbox-repo-prep.zip. Earlier briefs, scores, deadlines a
 - Existing draft #133 uses feature/website-r22 while v2 asks lane/web-*; preserve the existing review/history and avoid duplicate PR, root directs authorized lane/web-v2 continuation PR, preserving #133 untouched.
 
 ## What's left
-C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be checked at changed heads. No lane completion or design approval claimed.
+C1/C3/C5/C6 and W1–W5 remain open. C2/C4 bounded scanner evidence is pinned to804a and must be checked at changed heads; complete C4 remains open. No lane completion or design approval claimed.
 
 ## Verified focused work
 - Stale SOURCE-MANIFEST had mismatched breaks/index.html and omitted runtime files. Refreshed all187 product-source entries without changing historical provenance; current snapshot explicitly UNREVIEWED and publicationQualified:false. Build now PASS, drift safety retained.
@@ -180,3 +180,6 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 evidence is pinned to485 and must be 
 
 - Corrected color-v2 historical frame fixture39files hash-verified, actual browser all45 selector states returned matching RENDERED IDs at844x390;909kick0 and808closedhat1 full-frame screenshots inspected. No browser pixel comparison/all45visual/currenttheme/W3 qualification. Previous RGB565 word equality remains valid, but bit-replication RGBA export was not native PNG parity; corrected reviewed helper uses exact native floor conversion. Existing8ce unaffected. Receipt web-color-frame-browser.json. Source-test first replay interrupted by environment/process disappearance, checked no live process before one fresh replay; interrupted output retained separately.
 - Corrected5bbbd composition replay91 outer tests and34 actual nested tests PASS, no product source/manifest changes. Receipt web-color-composition.json; interrupted run is not counted.
+
+- Normal 0510 source-only composition adds explicit-envelope body and pinned34ad DARK/LIGHT idle diagnostics without changing any product app/manifest bytes. Actual replay88 outer plus3 separately run platform tests and42 nested tests PASS; native source EOF whitespace retained verbatim. No actual theme browser/current whole UI/W3 credit. Receipt web-theme-composition.json. QA accepted parent804a tree/20changed blobs and bounded no-loss/limits1350; this changed head requires its own check.
+- W3 blocker advanced, not resolved: fwui reports actual172 partial captures with runtime and harness both af56 and coverageComplete=false. This removes historical split identity for those partial inputs, not missing inventory completeness or equivalent HTML captures. Remote retains renderer ownership; composing reviewed source labs is the independent alternate route while full browser and native qualification remain blocked.
