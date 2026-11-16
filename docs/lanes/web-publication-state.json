@@ -404,9 +404,9 @@
       "catalogSha256": "cbb090311d0d9f9df92bfcf99c70c9354dc135a340d7438053d1c20a66b7acf7"
     }
   ],
-  "productManifestSha256": "b7d315162f6d88820c40379dbe622da3ec53ee13a9cfd0d2c7bd93bf938257fd",
+  "productManifestSha256": "53ed1001d177e5a4f1503b5e8628548356e192818410bf7f24ebb5e40c46218a",
   "sourceCompositionIncludes": "6a9607e886aab06ce0b1813321629b67239057b5",
   "artifactVerificationScope": "Catalog identities matched exact recorded gh-pages tree path/blob/size metadata; firmware binary SHA256 contents not re-downloaded or requalified.",
   "remoteCompositionIncludes": "35fbebad59a06d71c06e5d3fa8d9d4d7367dfa92",
-  "sourceNote": "Planning snapshot combines preview/persistence fixes and Remote simulator-only Lua session source; not qualification."
+  "sourceNote": "Planning snapshot includes canceled-preview network abort atop9aeb, manifest-pinned; not qualification."
 }

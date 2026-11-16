@@ -199,8 +199,8 @@
     },
     {
       "path": "components/break-audition/audition.mjs",
-      "bytes": 2710,
-      "sha256": "0610fd4b3efae2d8e8b3d7e93877d4774846adc56faf7e8be562d0ff3136fb72"
+      "bytes": 2957,
+      "sha256": "5b8f4964f5db208b6f2ba085d593bf11e27a8648e317f34866489dc22c0b9b89"
     },
     {
       "path": "components/break-panel/panel.css",
@@ -1039,8 +1039,8 @@
     },
     {
       "path": "starting-break-preview.mjs",
-      "bytes": 2099,
-      "sha256": "a0ab3109def9d2e92903b2f35e69d377eaea01bb3895b334c82726b713d326b2"
+      "bytes": 2146,
+      "sha256": "06cba7e5a4c31defff30b37c4ec3873568e80888876376f1cc2b95c1f7abdb15"
     },
     {
       "path": "starting-breaks/index.html",

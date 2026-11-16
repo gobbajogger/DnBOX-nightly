@@ -1,22 +1,22 @@
 // Private consumer of the frozen confirmed-five picker. No fetch, samples, package or device route.
 export function createAudition(picker,{resolvePrivateUrl,fetchBytes,createAudio=()=>new Audio(),createUrl=blob=>URL.createObjectURL(blob),revokeUrl=url=>URL.revokeObjectURL(url),onState=()=>{}}={}) {
  if(!picker||typeof picker.preview!=='function'||typeof resolvePrivateUrl!=='function'||typeof fetchBytes!=='function')throw new TypeError('verified picker and private preview resolver required');
- let generation=0,closed=false,active=null,current=Object.freeze({status:'idle',id:null,sampleRate:null,error:null});
+ let generation=0,closed=false,active=null,pendingFetch=null,current=Object.freeze({status:'idle',id:null,sampleRate:null,error:null});
  const emit=state=>{current=Object.freeze({...state});onState({...current});};
  function cleanup(){
   const old=active;active=null;if(!old)return;
   old.audio.removeEventListener('ended',old.ended);old.audio.removeEventListener('error',old.error);
   try{old.audio.pause();old.audio.removeAttribute('src');old.audio.load();}finally{revokeUrl(old.url);}
  }
- function stop(){generation++;cleanup();emit({status:'idle',id:null,sampleRate:null,error:null});}
+ function stop(){generation++;pendingFetch?.abort();pendingFetch=null;cleanup();emit({status:'idle',id:null,sampleRate:null,error:null});}
  return Object.freeze({
   state:()=>({...current}),
   stop,
   async play(id){
    if(closed)throw new Error('audition is closed');
-   const own=++generation;cleanup();emit({status:'loading',id,sampleRate:null,error:null});
+   const own=++generation;pendingFetch?.abort();const controller=new AbortController();pendingFetch=controller;cleanup();emit({status:'loading',id,sampleRate:null,error:null});
    try{
-    const preview=await picker.preview(id,{resolvePrivateUrl,fetchBytes});
+    const preview=await picker.preview(id,{resolvePrivateUrl,fetchBytes:url=>fetchBytes(url,{signal:controller.signal})});
     if(closed||own!==generation)return false;
     if(preview.sampleRate!==22050||preview.playbackRate!==1)throw new Error('unsupported verified preview rate');
     const url=createUrl(new Blob([preview.bytes],{type:preview.mimeType}));
@@ -33,7 +33,7 @@ export function createAudition(picker,{resolvePrivateUrl,fetchBytes,createAudio=
    }catch(error){
     if(own!==generation||closed)return false;
     cleanup();emit({status:'error',id,sampleRate:null,error:'Could not load this preview. Please try again.'});throw error;
-   }
+   }finally{if(pendingFetch===controller)pendingFetch=null;}
   },
   destroy(){if(closed)return;closed=true;stop();}
  });

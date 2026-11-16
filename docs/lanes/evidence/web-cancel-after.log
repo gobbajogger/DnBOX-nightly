@@ -1,0 +1,12 @@
+✔ stop aborts in-flight preview transport without creating media (14.548156ms)
+✔ destroy aborts in-flight preview transport without creating media (28.017778ms)
+✔ public provider forwards explicit cancellation signal while still omitting credentials (23.565998ms)
+✔ replacement aborts old request without letting its completion detach the current cancellation (4.69154ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 266.792262
