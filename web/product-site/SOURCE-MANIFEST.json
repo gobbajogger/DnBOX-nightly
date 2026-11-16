@@ -574,8 +574,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1898,
-      "sha256": "9b2fb5c7dc8aaf336a2eed5bea9dbfee8e0aac4bc2cfd7253a9e0a9a9719f504"
+      "bytes": 2108,
+      "sha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -763,6 +763,11 @@
       "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d"
     },
     {
+      "path": "remote/long-press.mjs",
+      "bytes": 1743,
+      "sha256": "25a144b8062dd1b1fcf74bca6078e95ff83538490d24756a8c8d9aa4e5d3653b"
+    },
+    {
       "path": "remote/mixer-format.json",
       "bytes": 59444,
       "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
@@ -879,8 +884,8 @@
     },
     {
       "path": "remote/vendor/funkybeats-provenance.json",
-      "bytes": 1725,
-      "sha256": "85d867cc368003d65d168bfd87df9f3e5c6803a999c0bcbd999f01ca03177f47"
+      "bytes": 1912,
+      "sha256": "6d5f905c6cba25f158687e8d19a152c407a6b693765e6fd8f903a6a1dc86fbe3"
     },
     {
       "path": "remote/view.mjs",
