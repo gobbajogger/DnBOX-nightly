@@ -124,15 +124,15 @@ tests/host/../../host/../firmware/src/app/smk_clip_keys.h:16:9: note: this is th
    16 | #define CK_FN __attribute__((X0X_MINSIZE noinline, unused))   /* small code: the app area is almost full */
       |         ^~~~~
 In file included from tests/host/smc_ui_test.c:57:
-/workspace/scratch/857bb2409f82/remote-v2/native-panels-current-source/firmware/src/app/smc_mixer.c: In function ‘smc_fx_bus’:
-/workspace/scratch/857bb2409f82/remote-v2/native-panels-current-source/firmware/src/app/smc_mixer.c:1826:44: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
+<source>/firmware/src/app/smc_mixer.c: In function ‘smc_fx_bus’:
+<source>/firmware/src/app/smc_mixer.c:1826:44: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
  1826 |     int strip = note < 32u ? (note & 7u) : -1;
       |                                            ^~
-/workspace/scratch/857bb2409f82/remote-v2/native-panels-current-source/firmware/src/app/smc_mixer.c: At top level:
-/workspace/scratch/857bb2409f82/remote-v2/native-panels-current-source/firmware/src/app/smc_mixer.c:2290:5: warning: missing initializer for field ‘pending’ of ‘smc_panic_peer_t’ [-Wmissing-field-initializers]
+<source>/firmware/src/app/smc_mixer.c: At top level:
+<source>/firmware/src/app/smc_mixer.c:2290:5: warning: missing initializer for field ‘pending’ of ‘smc_panic_peer_t’ [-Wmissing-field-initializers]
  2290 |     {{0, 0}, 0, -1}
       |     ^
-/workspace/scratch/857bb2409f82/remote-v2/native-panels-current-source/firmware/src/app/smc_mixer.c:2287:13: note: ‘pending’ declared here
+<source>/firmware/src/app/smc_mixer.c:2287:13: note: ‘pending’ declared here
  2287 |     uint8_t pending;              /* single BANK action waits for its physical release */
       |             ^~~~~~~
 tests/host/../../host/../firmware/src/app/ui.c: In function ‘unit_value’:

@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Supplementary native idle drum frames</title>
+<style>body{margin:12px;background:#12191d;color:#eee;font:13px system-ui}canvas{image-rendering:pixelated;width:240px;height:240px;display:block}select{margin:4px;padding:6px}p{max-width:680px}</style>
+<p>Supplementary pinned 2bfa source fixture, not the production Remote. Complete factory DARK/amber/idle/saved drum frames only. Live sound, other themes and current firmware qualification are excluded. No device actions.</p>
+<label>Native frame <select id="frame"></select></label><output id="status">NOT_RENDERED</output><canvas width="240" height="240" aria-label="Pinned native idle drum frame"></canvas>
+<script type="module">
+import{drumIdleFrame}from'./idle-frame.mjs';import inputs from'./factory-patterns.json'with{type:'json'};
+const select=document.querySelector('#frame'),status=document.querySelector('#status'),canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');
+for(const name of Object.keys(inputs.frames)){const option=document.createElement('option');option.value=option.textContent=name;select.append(option);}
+function render(){const name=select.value,[,kit,voice,page]=name.match(/kit(\d)-voice(\d+)-page(\d+)/).map(Number),header={palette:1,light:false,playing:false,recording:false,saveState:'saved',pendingCue:false,battery:3,tempo:125},frame=drumIdleFrame(kit,voice,page,{...inputs.frames[name],header}),image=ctx.createImageData(240,240);
+frame.pixels.forEach((v,i)=>{const r=v>>11,g=(v>>5)&63,b=v&31;image.data.set([(r<<3)|(r>>2),(g<<2)|(g>>4),(b<<3)|(b>>2),255],i*4);});ctx.putImageData(image,0,0);status.textContent=`RENDERED ${name}: ${frame.controls.length} typed controls`;canvas.setAttribute('aria-label',name+' pinned native idle frame');}
+select.onchange=render;render();
+</script>
