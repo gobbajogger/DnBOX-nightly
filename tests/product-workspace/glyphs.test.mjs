@@ -1,6 +1,7 @@
 import test from'node:test';
 import assert from'node:assert/strict';
-import{GLYPH_CELL,GLYPH_SCALE,R23_DRAFT,formatPan,formatParameterValue,glyphMarkup,isPanLabel,r23DelayStrip,r23Glyph,r23PanCell,r23SuperJ6Amp,r23SynthOne,STEP_LANES}from'../../web/product-site/remote/glyphs.mjs';
+import{readFileSync}from'node:fs';
+import{GLYPH_CELL,GLYPH_SCALE,R22_TOKENS,formatPan,formatParameterValue,glyphMarkup,isPanLabel,panCell,STEP_LANES}from'../../web/product-site/remote/glyphs.mjs';
 
 test('pan notation matches firmware L64 / C / R63',()=>{
  assert.equal(formatPan(0),'L64');
@@ -19,37 +20,39 @@ test('pan notation matches firmware L64 / C / R63',()=>{
   const svg=glyphMarkup(lane.glyph);
   assert.match(svg,/viewBox="0 0 9 9"/);
   assert.match(svg,/width="18" height="18"/);
-  assert.match(svg,/shape-rendering="crispEdges"/);
+  assert.doesNotMatch(svg,/crispEdges/);
   assert.equal((svg.match(/<rect /g)||[]).length>0,true);
  }
  assert.equal(glyphMarkup('juno-invented'),'');
 });
 
-test('R23 draft keeps pan, tape, three type sizes and SuperJ6 without L/R',()=>{
- assert.equal(R23_DRAFT.status,'DRAFT');
- assert.equal(R23_DRAFT.pan.centre,64);
- assert.equal(R23_DRAFT.pan.min,0);
- assert.equal(R23_DRAFT.pan.max,127);
- assert.deepEqual([R23_DRAFT.type.title,R23_DRAFT.type.value,R23_DRAFT.type.label],[10.5,10.5,7]);
- assert.equal(R23_DRAFT.grid.step,2);
- assert.equal(R23_DRAFT.grid.columns,4);
- const tape=r23Glyph('tape');
- assert.equal((tape.match(/<circle /g)||[]).length,4);
- assert.match(tape,/<rect /);
- assert.match(tape,/data-r23-draft="R23 draft"/);
- const j6=r23SuperJ6Amp();
- assert.match(j6,/ADSR/);
- assert.match(j6,/LINK/);
- assert.match(j6,/is-active/);
- assert.equal([...j6.matchAll(/<output class="r23-value">([^<]*)<\/output>/g)].map(m=>m[1]).join(''),'');
- assert.doesNotMatch(j6,/RAW|>PAN</);
- assert.equal([...r23SynthOne().matchAll(/<output class="r23-value">([^<]*)<\/output>/g)].map(m=>m[1]).join(''),'');
- assert.doesNotMatch(r23SynthOne(),/RAW|>PAN</);
- const delay=r23DelayStrip([{glyph:'time',label:'TIME',value:'1/8.'}]);
- assert.match(delay,/>TAPE</);
- assert.match(delay,/>TIME</);
- assert.equal(r23PanCell(0).includes('>L64<'),true);
- assert.equal(r23PanCell(64).includes('>C<'),true);
- assert.equal(r23PanCell(127).includes('>R63<'),true);
- assert.equal(r23Glyph('missing'),'');
+test('R22 gallery tokens and pan notation',()=>{
+ const html=readFileSync(new URL('../../web/product-site/reference/r22.html',import.meta.url),'utf8');
+ const style=html.match(/<style>([\s\S]*?)<\/style>/)[1];
+ const pick=(re)=>style.match(re)[1];
+ assert.equal(R22_TOKENS.page, pick(/background:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.ink, pick(/color:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.fontPage, Number(pick(/font:(\d+)px/)));
+ assert.equal(R22_TOKENS.fontTitle, Number(pick(/h1\{font-size:(\d+)px/)));
+ assert.equal(R22_TOKENS.muted, pick(/p,small\{color:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.control, pick(/button,select,input\{background:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.line, pick(/border:1px solid (#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.radii.control, Number(pick(/border-radius:(\d+)px/)));
+ assert.equal(R22_TOKENS.radii.panel, R22_TOKENS.radii.control);
+ assert.equal(R22_TOKENS.canvas, pick(/#screen\{[^}]*background:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.panel, pick(/pre\{[^}]*background:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.fontMono, Number(pick(/font:(\d+)px ui-monospace/)));
+ assert.equal(R22_TOKENS.amber, pick(/summary\{[^}]*color:(#[0-9a-f]{6})/));
+ assert.equal(R22_TOKENS.link, pick(/a\{color:(#[0-9a-f]{6})/));
+ assert.deepEqual(R22_TOKENS.scales, {label:0.01,compact:0.012,value:0.015,readout:0.023});
+ assert.deepEqual([...R22_TOKENS.anim.frameMs], [0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600]);
+ assert.equal(R22_TOKENS.anim.frameMin, 20);
+ assert.equal(R22_TOKENS.anim.idleDwell, 160);
+ assert.equal(R22_TOKENS.anim.endDwell, 300);
+ assert.equal(R22_TOKENS.anim.cycle, 3080);
+ assert.equal(R22_TOKENS.anim.noteOff, 500);
+ assert.equal(R22_TOKENS.anim.easing, 'steps(1,end)');
+ assert.equal(panCell(0).includes('>L64<'), true);
+ assert.equal(panCell(64).includes('>C<'), true);
+ assert.equal(panCell(127).includes('>R63<'), true);
 });

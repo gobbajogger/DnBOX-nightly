@@ -3,19 +3,21 @@
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { expandOrigin, githubRepo, SITE_ORIGIN } from '../web/product-site/site-origin.mjs';
 const read = (p) => readFileSync(new URL('../' + p, import.meta.url), 'utf8');
-const text = read('build-status.json');
-assert.equal(read('docs/build-status.json'), text, 'source and docs build status mismatch');
+const rawStatus = read('build-status.json');
+assert.equal(read('docs/build-status.json'), rawStatus, 'source and docs build status mismatch');
+const text = expandOrigin(rawStatus);
 const catalog = JSON.parse(text);
-const preview = JSON.parse(read('preview-catalog.json'));
-const published = JSON.parse(read('docs/versions.json'));
+const preview = JSON.parse(expandOrigin(read('preview-catalog.json')));
+const published = JSON.parse(expandOrigin(read('docs/versions.json')));
 // The empty source-only picker is an exact schema, not an extensible download surface.
 // Both source and generated picker files must use the approved provenance values.
 const approvedPickerKeys = ['schema', 'repo', 'pages', 'latest', 'versions', 'history'];
 assert.deepEqual(Object.keys(preview).sort(), approvedPickerKeys.sort(),
   'unapproved NIGHTLY picker field (including hidden download/approval metadata)');
 assert.equal(preview.schema, 1, 'unsupported NIGHTLY picker schema');
-assert.equal(preview.repo, 'https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly',
+assert.equal(preview.repo, githubRepo(SITE_ORIGIN.nightlyRepo),
   'NIGHTLY picker must identify the correct public browser-source repository');
 assert.equal(preview.pages, '', 'NIGHTLY picker must not advertise an unapproved hosting target');
 assert.equal(catalog.schema, 1);
@@ -51,11 +53,11 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
    const names=new Set(allowed.split(' '));
    for(const key of Object.keys(value)) assert.ok(names.has(key),at+': forbidden field '+key);
  };
- const officialRepo='https://github.com/gobbajogger/X0X37-for-Loopy-Pro';
+ const officialRepo=githubRepo(SITE_ORIGIN.firmwareRepo);
  // NIGHTLY browser-source history may truthfully cite this public repo for
  // website/installer Git receipts. Firmware/upstream catalog.source stays on
  // the production repository below.
- const nightlyRepo='https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly';
+ const nightlyRepo=githubRepo(SITE_ORIGIN.nightlyRepo);
  const approvedRepos=new Set([officialRepo, nightlyRepo]);
  const repoBase=(value)=>{
    for(const base of approvedRepos){

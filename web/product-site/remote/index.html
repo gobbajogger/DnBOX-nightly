@@ -6,49 +6,71 @@
 <title>DnBOX Remote</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
-</head>
+<script type="module" src="../site-origin.mjs"></script></head>
 <body>
-<header class="topbar">
+<header class="shell">
+<div class="topbar">
 <a class="brand" href="../">DnBOX <small>REMOTE</small></a>
-<span class="source"><i class="status-dot" aria-hidden="true"></i> Local example · Not connected</span>
-<a class="pill connection" href="device/">Connection</a>
-<button id="undo" class="pill" type="button">Undo</button>
-<button id="redo" class="pill" type="button">Redo</button>
-<button id="review" class="pill" type="button">Review</button>
-<button id="draft-save" class="pill" type="button">Download draft</button>
-<label class="pill draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
-<button class="pill" type="button" disabled title="Not connected">Apply to instrument</button>
-</header>
-<div class="chrome">
-<nav aria-label="Workspace">
-<button type="button" data-view="roll" aria-current="page">Roll</button>
+<span class="project-name">Example project</span>
+<div class="pattern-readout"><strong id="pattern-no">P01</strong><svg class="pattern-mark" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span id="tempo">120 BPM</span></div>
+<div class="header-actions">
+<span id="conn-state" class="conn-state">Not connected</span>
+<a class="hdr-btn connect" href="device/">Connect</a>
+<button id="undo" class="hdr-btn" type="button">Undo</button>
+<button id="redo" class="hdr-btn" type="button">Redo</button>
+<details class="overflow">
+<summary aria-label="More actions">…</summary>
+<div class="overflow-list">
+<button id="review" class="hdr-btn" type="button">Review</button>
+<button id="draft-save" class="hdr-btn" type="button">Download draft</button>
+<label class="hdr-btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
+<button class="hdr-btn" type="button" disabled title="Not connected">Apply to instrument</button>
 <button type="button" data-view="drums">Drums</button>
-<button type="button" data-view="sound">Sound</button>
 <button type="button" data-view="locks">Motion</button>
-<button type="button" data-view="mix">Mix / FX</button>
-<button type="button" data-view="patterns">Launch</button>
 <button type="button" data-view="song">Song</button>
-<button type="button" data-view="files">Files / MIDI</button>
+</div>
+</details>
+</div>
+</div>
+<div class="row-b">
+<nav class="tabs" aria-label="Workspace">
+<button class="tab" type="button" data-tab="1" data-view="roll" aria-current="page">Sequence</button>
+<button class="tab" type="button" data-tab="1" data-view="sound">Sound</button>
+<button class="tab" type="button" data-tab="1" data-view="mix">Mix &amp; FX</button>
+<button class="tab" type="button" data-tab="1" data-view="patterns">Patterns &amp; Song</button>
+<button class="tab" type="button" data-tab="1" data-view="files">Projects</button>
 </nav>
-<div class="toolbar" role="toolbar" aria-label="Roll tools">
-<div class="part-title"><strong id="part-title">CHICAGO A · P1</strong><label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label></div>
+<div class="engine-row">
+<button type="button" class="engine" data-engine="drum909" style="--engine:#ff9529"><i></i><span>909</span></button>
+<button type="button" class="engine" data-engine="drum808" style="--engine:#ff4841"><i></i><span>808</span></button>
+<button type="button" class="engine" data-engine="chicago" style="--engine:#82f05a" aria-pressed="true"><i></i><span>BASS A</span></button>
+<button type="button" class="engine" data-engine="miami" style="--engine:#46cdff"><i></i><span>BASS B</span></button>
+<button type="button" class="engine" data-engine="breaks" style="--engine:#d678ff"><i></i><span>BREAK</span></button>
+<strong id="part-title">CHICAGO / P01</strong>
+<label class="part">Part <select id="part" aria-label="Part"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select></label>
+<div class="transport">
+<button id="play" class="hdr-btn transport-btn" type="button">Play</button>
+<button id="stop" class="hdr-btn transport-btn" type="button">Stop</button>
+<button id="rec" class="hdr-btn transport-btn" type="button" aria-pressed="false">REC</button>
+</div>
+</div>
+</div>
 <span id="context-title" hidden>Roll</span>
-<div id="mode-tools">
+<div id="mode-tools" hidden>
 <button type="button" data-mode="select" aria-pressed="true">Select</button>
-<button type="button" data-mode="move">Move</button>
 <button type="button" data-mode="draw">Draw</button>
+<button type="button" id="multi" aria-pressed="false">Group</button>
+<button type="button" data-mode="move">Move</button>
 <button type="button" data-mode="length">Length</button>
 <button type="button" data-mode="pan">Pan</button>
-<button type="button" id="multi" aria-pressed="false">Group</button>
 <button type="button" id="copy">Copy</button>
 <button type="button" id="paste">Paste</button>
 <button type="button" id="delete">Delete</button>
-</div>
 <button type="button" id="snap" aria-pressed="true">Snap 1/16</button>
 <button type="button" id="zoom-step">Zoom 100%</button>
 <label class="zoom">Zoom <input id="zoom" type="range" min="1" max="4" step=".25" value="1"></label>
 </div>
-</div>
+</header>
 <main>
 <section id="roll-view">
 <div class="workspace">
@@ -64,15 +86,12 @@
 <div id="roll-scroll" tabindex="0" aria-label="Piano roll"><div id="roll-grid"></div></div>
 </div>
 <div class="lane">
-<div class="lane-gutter">
-<button type="button" id="lane-param" aria-controls="velocity">Velocity</button>
-<output id="lane-value"></output>
+<button type="button" id="lane-param" aria-controls="velocity">Velocity ▾</button>
 <select id="lane-kind" class="lane-kind" tabindex="-1" aria-hidden="true">
 <option value="velocity" selected>Velocity</option>
 <option value="chance">Chance</option>
 <option value="pitch">Pitch</option>
 </select>
-</div>
 <div id="velocity" aria-label="Velocity"></div>
 </div>
 </div>
