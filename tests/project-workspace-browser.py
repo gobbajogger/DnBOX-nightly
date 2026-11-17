@@ -25,7 +25,7 @@ async def main():
  srv=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=srv.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{srv.server_port}'
  errors=[];screens=[]
  async with async_playwright() as p:
-  b=await p.chromium.launch()
+  b=await p.chromium.launch(chromium_sandbox=True)
   for width in [320,390,768,1280]:
    page=await b.new_page(viewport={'width':width,'height':900});page.on('pageerror',lambda e:errors.append(str(e)))
    await page.goto(base+'/install/')
