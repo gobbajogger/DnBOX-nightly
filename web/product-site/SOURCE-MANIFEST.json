@@ -459,8 +459,8 @@
     },
     {
       "path": "presets/codec.mjs",
-      "bytes": 11189,
-      "sha256": "0691a638ab557a6b04d6d97a0cda03de5bc6177cf006d8bdfee61675a52e75fa"
+      "bytes": 12658,
+      "sha256": "469a0da07f31aa54be4c9a1b2abb6d735a00df9aa9a4c96cc7a1822672a91fae"
     },
     {
       "path": "presets/index.html",
@@ -479,13 +479,13 @@
     },
     {
       "path": "presets/legacy/codec.mjs",
-      "bytes": 11189,
-      "sha256": "0691a638ab557a6b04d6d97a0cda03de5bc6177cf006d8bdfee61675a52e75fa"
+      "bytes": 12658,
+      "sha256": "469a0da07f31aa54be4c9a1b2abb6d735a00df9aa9a4c96cc7a1822672a91fae"
     },
     {
       "path": "presets/legacy/index.html",
-      "bytes": 9965,
-      "sha256": "9f32e43620d946cccb1f7aef58ae10bea9f13d76c5ade6b0ef46e5b0b4e9eff2"
+      "bytes": 9943,
+      "sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
     },
     {
       "path": "presets/legacy/zip.mjs",
