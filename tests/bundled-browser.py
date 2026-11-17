@@ -124,7 +124,7 @@ async def main():
             await page.evaluate('()=>{qa.select("elite");}')
             # The new load is not held; release only the stale install digest.
             await page.evaluate('releaseHash()')
-            await page.wait_for_function('qa.state().status.includes("X0X") || !qa.state().image')
+            await page.wait_for_function('(qa.state().status.includes("SMK-37 Elite") && !qa.state().writing) || !qa.state().image')
             s=await state(page);check(s['permissions']==0 and s['writes']==0,'model change during embedded hash refuses stale install before MIDI')
             await page.close();await browser.close()
     failures=[name for name,ok in checks if not ok]

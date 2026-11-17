@@ -1,17 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 for (const path of ['codec.mjs', 'legacy/codec.mjs']) {
-  test(`${path}: old slot-2 files remain inspectable without advertising a current engine`, async () => {
+  test(`${path}: historical model hints remain guarded during init adoption`, async () => {
     const c = await import(`../../web/product-site/presets/${path}`);
-    const params = Uint8Array.of(1,2,3,4,5,6,7,8);
-    const bytes = c.encodeDnpr({engineId:4,name:'Archive',params});
-    const record = c.parseDnpr(bytes);
-    assert.equal(record.title,'Retired engine 4');
-    assert.equal(record.engine,'legacy-slot2');
-    assert.deepEqual(record.params,params);
-    assert.deepEqual(c.ensureExportable(record),bytes);
+    const bytes = c.encodeDnpr({engineId:4,name:'Archive',params:Uint8Array.of(1,2,3,4,5,6,7,8)});
+    const before = bytes.slice();
     const oldName = String.fromCharCode(100,114,111,110,101);
-    assert.equal(c.explicitModelHint(`archive.elite.${oldName}.dnpr`),'elite');
-    assert.equal(c.explicitModelHint(c.fileNameFor(record).replace('.legacy-slot2.', '.elite.legacy-slot2.')),'elite');
+    for (const suffix of [oldName, 'synthone']) for (const model of ['elite', 'pro']) {
+      const fileName = `archive.${model}.${suffix}.dnpr`;
+      const record = c.parseDnpr(bytes,{fileName,targetModel:model,expectedEngine:'synthone'});
+      assert.equal(record.adoptedInit,true);
+      assert.equal(record.filenameModelHint,model);
+      assert.ok(record.params.every(v=>v===0));
+      assert.throws(()=>c.parseDnpr(bytes,{fileName,targetModel:model==='elite'?'pro':'elite'}),e=>e.code==='WRONG MODEL');
+    }
+    assert.deepEqual(bytes,before);
+    assert.throws(()=>c.parseDnpr(bytes,{expectedEngine:'chicago'}),e=>e.code==='WRONG ENGINE');
   });
 }

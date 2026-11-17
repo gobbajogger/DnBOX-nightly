@@ -28,12 +28,12 @@ Rules: `RULES.md` v2 + `CHECKLISTS.md`. Where this plan is stricter, this plan w
 The move that contains each one copies it in unchanged. No new evidence, provenance or re-verification work on it.
 | ID | Frozen result | Evidence | Used in |
 |---|---|---|---|
-| V01 | Pan formatter L50/C/R50 on all 5 mixer voices + 22 drum voice pans × 128 values, 10,975 checks PASS | `lane/fwui-r22`, `docs/evidence/fwui/pan-exhaustive/`; `lead/pan-clip-50-20261116` `d80423f3` | M2 |
+| V01 | Pan formatter L50/C/R50 on all 5 mixer voices + 22 drum voice pans × 128 values, 10,975 checks PASS | `lane/fwui` (tag `archive/lane/fwui-r22`), `docs/evidence/fwui/pan-exhaustive/`; `lead/pan-clip-50-20261116` `d80423f3` | M2 |
 | V02 | Battery/header 5,306 host checks; explanatory-text and startup-footer regressions PASS | fw #955 comment at `646ac662` | M2 |
 | V03 | Elite + Pro link today: XIP free 3,156 B (gate floor 1,024), RAM headroom 1,096 B, pool 836 B above the 8,192 B reserve (gate floor 512) | fw #955 comment at `7e398180` | M1, M2, M6 budget baseline |
-| V04 | Live Decay/Noise tail restored, 113,424 host checks PASS | `lane/fwui-r22` `af56c8a4` | M2 |
-| V05 | Synth One renderer rebuilt from `56079bbd`: 12 scenes / 576,000 frames bit-identical to the source oracle, no heap calls; 694 programs render finite | `lane/sound-v2` `3e41e4b3`, `docs/sound/v2-pre-fx-evidence.md` | M1 |
-| V06 | AudioKit corpus identity: 640 presets / 12 banks decoded from the original bundle | `lane/sound-v2` `d0bdfa8b`, `c76b3f0e` | M1 |
+| V04 | Live Decay/Noise tail restored, 113,424 host checks PASS | `lane/fwui` (tag `archive/lane/fwui-r22`) `af56c8a4` | M2 |
+| V05 | Synth One renderer rebuilt from `56079bbd`: 12 scenes / 576,000 frames bit-identical to the source oracle, no heap calls; 694 programs render finite | `lane/sound` (tag `archive/lane/sound-v2`) `3e41e4b3`, `docs/sound/v2-pre-fx-evidence.md` | M1 |
+| V06 | AudioKit corpus identity: 640 presets / 12 banks decoded from the original bundle | `lane/sound` (tag `archive/lane/sound-v2`) `d0bdfa8b`, `c76b3f0e` | M1 |
 | V07 | Remote structural browser fixtures 9/9 PASS (sandbox on) | box log `/workspace/dnbox-review/pr132-browser-test-3f22e000.log` | M3 floor |
 | V08 | Website: 19 routes, 211 assets and 5 WAV previews served; preview-player bug fixed; keyboard edit/Undo works | nightly #135 comments at `b97d1bbb`, `d3154518`, `8ce16ce1` | M4 |
 | V09 | Gate environment repairs (Lua, packages, Chromium sandbox flags, TMPDIR outside repo) | `backup/integ-before-start-split-20261116` `246ea371`; nightly `lane/integ-start-files` history | M0 |
@@ -52,7 +52,7 @@ Nothing else is done. At 10:05 VLAT **0 of the 41 CHECKLISTS items are PASS** in
 ### sound (firmware repo): move M1
 | ID | Finished feature | Counts as done when (all, one SHA) | Req |
 |---|---|---|---|
-| L01 | Synth One is a playable firmware engine in the retired engine's place, with its common FX | host test renders every factory program (694) through the full engine incl. FX and prints `programs=694 nonfinite=0 xruns=0` (deadline = firmware audio block period); Elite+Pro builds with Synth One selectable; a project saved with the retired-engine loads (decision N02) | S1, R016, R018 |
+| L01 | Synth One is a playable firmware engine in the retired engine's place, with its common FX | host test renders every factory program (694) through the full engine incl. FX and prints `programs=694 nonfinite=0 xruns=0` (deadline = firmware audio block period); Elite+Pro builds with Synth One selectable; a project saved with the old the retired engine engine loads (decision N02) | S1, R016, R018 |
 | L02 | Synth One A/B bench vs the original passes | `docs/sound/synthone-ab.md` with thresholds written in its header before the run (PROPOSED N03); every program within them; one rerunnable bench command | S2, R019 |
 | L03 | SuperJ6 is a complete firmware engine | host test: each of the 64 controls changes output (64/64); each FX changes output and bypass is bit-exact dry; every preset field applies; control list equals the original's list (no silent drops); Elite+Pro builds with SuperJ6 selectable | S3, R015 |
 | L04 | SuperJ6 A/B bench vs the original passes | as L02, using the 14/56 comparison set (decision N01) | S4, R019 |
@@ -129,7 +129,7 @@ The only setup move, kept because nothing can merge without it.
 
 ### M1: sound, both new engines complete. Start ~12:15 today, merge target Thu 19 Nov ~18:00
 **Delivers:** L01-L07 in one PR `lane/sound-engines` → consolidated.
-In: Synth One as the retired engine replacement with FX and the legacy-project mapping; SuperJ6 with all 64 controls, FX and presets; 640 AudioKit presets; both A/B benches; per-engine memory report; the retired engine removed.
+In: Synth One as the the retired engine replacement with FX and the legacy-project mapping; SuperJ6 with all 64 controls, FX and presets; 640 AudioKit presets; both A/B benches; per-engine memory report; the retired engine removed.
 How (not reported steps): first hour, write the shared memory budget table in `docs/lanes/sound-memory.md` (bytes of XIP/RAM/pool per engine and for fwui's UI, summing within the gate floors from V03), co-signed by fwui in the same commit; the owner's subagents build Synth One and SuperJ6 in parallel against it; benches run when both engines render.
 **Done when:** L01-L07 checks + G1-G4.
 
@@ -150,7 +150,7 @@ In: the retired engine removed, 19 routes, installer, emulator, import/export, 1
 **Done when:** L29-L33 checks + G1-G4.
 
 ### M5: integ product pieces. Start after M0, merge target Wed 18 Nov ~18:00
-**Delivers:** L19-L21 in one PR `lane/integ-product` (firmware, plus nightly for the Pages audio fix).
+**Delivers:** L19-L21 in one PR from `lane/integ` (firmware, plus nightly for the Pages audio fix).
 In: LeakSanitizer-clean compact-programs; the 5 BREAK samples with listen-before-choose and the `/private-audio/` 404 fix; roadmap files generated from `CONSOLIDATED-STATE.md`; #120 voting working.
 integ also runs the merge queue throughout: a PR marked ready gets its gate and merge decision within 1 h.
 **Done when:** L19-L21 checks + G1-G4.
@@ -206,7 +206,7 @@ Honesty note: in the 10 h after kickoff, 0 of 41 checklist items reached PASS wh
 | ID | Question | Proposed | Blocks |
 |---|---|---|---|
 | N01 | The SuperJ6 "14/56 comparison ZIP" (CHECKLISTS S4) was not found; sound found only a Synth One 56-preset / 14-over-unity archive. Where is it, or what replaces it? | User attaches it from the Library; otherwise bench against the original app's renders of 14 presets | L04 |
-| N02 | "Synth One replaces the retired engine everywhere" (rule 31) vs the consolidated note "legacy engine save IDs must retain old meaning". What do retired-engine projects load as? | the retired-engine ID loads as Synth One's init patch | L01, L07 |
+| N02 | "Synth One replaces the retired engine everywhere" (rule 31) vs the consolidated note "legacy the retired engine save IDs must retain old meaning". What do old the retired engine projects load as? | the old the retired engine ID loads as Synth One's init patch | L01, L07 |
 | N03 | No A/B bench thresholds are defined anywhere | per program: RMS level diff ≤ 1.0 dB, log-spectral distance ≤ 3.0 dB (20 Hz-16 kHz) | L02, L04 |
 | N04 | No visual diff thresholds for Remote-vs-baseline and HTML-vs-firmware | Remote ≤ 2 % pixels after R22 restyle; HTML vs firmware ≤ 1 % at 240x240 | L23, L32 |
 | N05 | The firmware gate's `slot2-scan` step fails for integ until M1 removes the retired engine. Accept it as the one known failure until then? | yes, listed in `docs/lanes/integ.md`; no threshold change | M0 |

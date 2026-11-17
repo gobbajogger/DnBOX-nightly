@@ -13,3 +13,10 @@ __pycache__/
 *~
 .idea/
 build/
+
+# Build and firmware artefacts
+*.elf
+*.map
+*.fwsc
+*.img
+*.log

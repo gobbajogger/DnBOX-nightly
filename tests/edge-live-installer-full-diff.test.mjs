@@ -79,8 +79,12 @@ function parseUnifiedHunks(diff) {
 test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
   const live = gitBlob(LIVE_INSTALL_BLOB);
   const catalog = JSON.parse(gitBlob(LIVE_CATALOG_BLOB));
-  const rendered = renderInstaller(catalog);
-  const a = normalize(live), b = normalize(rendered);
+  const rendered = renderInstaller(catalog).replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
+  // The repos were renamed after this live snapshot (X0X37-for-Loopy-Pro -> DnBOX,
+  // x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Map the old names in the
+  // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
+  const renamed = live.replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
+  const a = normalize(renamed), b = normalize(rendered);
   const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
   writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');

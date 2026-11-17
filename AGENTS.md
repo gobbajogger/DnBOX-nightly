@@ -11,7 +11,7 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; `gobbajogger/Dn
 ## Lanes and agents (6 in parallel)
 | Agent | Owns | Branch prefix |
 |---|---|---|
-| sound | Synth One (replaces the retired engine), SuperJ6, Chicago, Miami, presets, A/B benches, memory fit | `lane/sound-*` |
+| sound | Synth One, SuperJ6, Chicago, Miami, presets, A/B benches, memory fit | `lane/sound-*` |
 | fwui | every firmware screen in R22, battery, pan, pads/LEDs, hold-GLOBE, firmware slider lane, code-space fit | `lane/fwui-*` |
 | integ | consolidated branch (both repos), combined Elite/Pro firmware, zero dropouts, BREAK samples, roadmap, #120 voting, cleanup + rename | `lane/integ-*`, writes `integration/dnbox-consolidated` |
 | remote | (nightly repo) FunkyBeats port, Remote slider lane, browser Remote, TouchOSC, landscape | `lane/remote-*` |
