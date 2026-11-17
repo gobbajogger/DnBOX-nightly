@@ -3,7 +3,6 @@
 """Visual-regression gate for the DnBOX website, Remote, emulator and offline edition.
 
   python3 tests/visual/visual_gate.py            # compare against approved baselines (fails on any diff)
-  python3 tests/visual/visual_gate.py --keep-actual  # retain every actual PNG for manual review, never writes baselines
   python3 tests/visual/visual_gate.py --update   # write baselines; committing them through a merged PR is the approval
 
 Baselines: tests/visual/__snapshots__/<name>.png (approved reference, generated from the polished head).
@@ -23,7 +22,6 @@ SNAP = ROOT / 'tests/visual/__snapshots__'
 FIX = ROOT / 'tests/visual/fixtures/page-01.png'
 OUT = Path(os.environ.get('VISUAL_OUT', ROOT / 'test-results/visual'))
 UPDATE = '--update' in sys.argv
-KEEP_ACTUAL = '--keep-actual' in sys.argv
 ONLY = os.environ.get('VISUAL_ONLY')  # regex filter
 MAX_DIFF_RATIO = 0.001      # ~ toHaveScreenshot maxDiffPixelRatio
 PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as different (AA noise)
@@ -78,10 +76,6 @@ def ssim(a, b):
     return float(m.mean())
 
 def validate_capture_output():
-    if not KEEP_ACTUAL:
-        return
-    if UPDATE:
-        raise ValueError('--keep-actual is output-only and cannot be combined with --update')
     if any(p.is_symlink() for p in (OUT, *OUT.parents)):
         raise ValueError('capture output directory must not contain symlinks')
     target, baseline = OUT.resolve(), SNAP.resolve()
@@ -129,7 +123,7 @@ def compare(name, png_bytes, results):
     if not base.exists():
         # No committed baseline: the page still had to render with no errors, header or overflow
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
-        if not KEEP_ACTUAL: tmp.unlink(missing_ok=True)
+        tmp.unlink(missing_ok=True)
         results.append((name, 'NOBASE', 0.0)); return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
@@ -143,7 +137,7 @@ def compare(name, png_bytes, results):
         write_actual_output(f'{name}-diff.png', diff_png.getvalue())
         results.append((name, 'FAIL', ratio)); print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {OUT / (name + "-diff.png")}')
     else:
-        if not KEEP_ACTUAL: tmp.unlink(missing_ok=True)
+        tmp.unlink(missing_ok=True)
         results.append((name, 'PASS', ratio))
 
 HEADER_JS = """
@@ -219,7 +213,7 @@ def exit_status(results, header_fails, errors):
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
 def main():
-    validate_capture_output()  # reject baseline-writing mode before any browser/server starts
+    validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
     srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     p2 = port()

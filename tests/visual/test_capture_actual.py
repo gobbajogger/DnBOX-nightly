@@ -9,36 +9,41 @@ SOURCE=Path(__file__).with_name('visual_gate.py')
 def png(color):
     out=io.BytesIO();Image.new('RGB',(16,16),color).save(out,format='PNG');return out.getvalue()
 
-def load(root, keep=True, update=False):
+def load(root, update=False):
     nodes=[n for n in ast.parse(SOURCE.read_text()).body if isinstance(n,ast.FunctionDef) and n.name in ('compare','exit_status','validate_capture_output','write_actual_output')]
-    ns=dict(os=os,re=re,stat=stat,uuid=uuid,io=io,Path=Path,SNAP=root/'baselines',OUT=root/'out',UPDATE=update,KEEP_ACTUAL=keep,ONLY=None,np=np,Image=Image,MAX_DIFF_RATIO=.001,PIXEL_THRESHOLD=25.5)
+    ns=dict(os=os,re=re,stat=stat,uuid=uuid,io=io,Path=Path,SNAP=root/'baselines',OUT=root/'out',UPDATE=update,ONLY=None,np=np,Image=Image,MAX_DIFF_RATIO=.001,PIXEL_THRESHOLD=25.5)
     exec(compile(ast.Module(body=nodes,type_ignores=[]),str(SOURCE),'exec'),ns)
     return ns
 
 class Capture(unittest.TestCase):
-    def test_missing_baseline_keeps_actual_without_creating_reference_directory(self):
+    def test_missing_baseline_cleans_actual_without_creating_reference_directory(self):
         with tempfile.TemporaryDirectory() as d:
             ns=load(Path(d));results=[];data=png('red');ns['compare']('screen',data,results)
             self.assertEqual(results,[('screen','NOBASE',0.0)])
-            self.assertEqual((ns['OUT']/'screen-actual.png').read_bytes(),data)
+            self.assertFalse((ns['OUT']/'screen-actual.png').exists())
             self.assertFalse(ns['SNAP'].exists())
             self.assertEqual(ns['exit_status'](results,[],[]),0) # preserve current NOBASE policy
 
-    def test_pass_and_failure_keep_exact_actual_and_never_change_reference(self):
+    def test_failure_keeps_actual_pass_cleans_it_and_neither_changes_reference(self):
         for color,status in [('red','PASS'),('blue','FAIL')]:
             with self.subTest(status=status),tempfile.TemporaryDirectory() as d:
                 ns=load(Path(d));ns['SNAP'].mkdir();reference=png('red');(ns['SNAP']/'screen.png').write_bytes(reference)
                 actual=png(color);results=[];ns['compare']('screen',actual,results)
                 self.assertEqual(results[0][1],status)
-                self.assertEqual((ns['OUT']/'screen-actual.png').read_bytes(),actual)
+                if status == 'FAIL':
+                    self.assertEqual((ns['OUT']/'screen-actual.png').read_bytes(),actual)
+                else:
+                    self.assertFalse((ns['OUT']/'screen-actual.png').exists())
                 self.assertEqual((ns['SNAP']/'screen.png').read_bytes(),reference)
                 self.assertEqual(ns['exit_status'](results,[],[]),int(status=='FAIL'))
 
-    def test_capture_rejects_baseline_update(self):
+    def test_explicit_update_preserves_supported_baseline_workflow(self):
         with tempfile.TemporaryDirectory() as d:
             ns=load(Path(d),update=True)
-            with self.assertRaises(ValueError):ns['compare']('screen',png('red'),[])
-            self.assertFalse(ns['SNAP'].exists())
+            data=png('red');results=[];ns['compare']('screen',data,results)
+            self.assertEqual(results,[('screen','BASELINE',0.0)])
+            self.assertEqual((ns['SNAP']/'screen.png').read_bytes(),data)
+            self.assertEqual(ns['exit_status'](results,[],[]),1)
 
     def test_capture_rejects_output_inside_baselines(self):
         with tempfile.TemporaryDirectory() as d:
@@ -48,7 +53,7 @@ class Capture(unittest.TestCase):
 
     def test_normal_pass_cleanup_and_failure_signals_unchanged(self):
         with tempfile.TemporaryDirectory() as d:
-            ns=load(Path(d),keep=False);ns['SNAP'].mkdir();data=png('red');(ns['SNAP']/'screen.png').write_bytes(data)
+            ns=load(Path(d));ns['SNAP'].mkdir();data=png('red');(ns['SNAP']/'screen.png').write_bytes(data)
             results=[];ns['compare']('screen',data,results)
             self.assertFalse((ns['OUT']/'screen-actual.png').exists())
             self.assertEqual(ns['exit_status'](results,['overflow'],[]),1)
