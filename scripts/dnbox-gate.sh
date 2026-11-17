@@ -8,7 +8,8 @@ LANE="${1:-unknown}"; SHA=$(git rev-parse HEAD); BASE=origin/integration/dnbox-c
 TS=$(TZ=Asia/Vladivostok date +%Y%m%d-%H%M); OUT=build/dnbox-gate; mkdir -p "$OUT"
 LOG="$OUT/${SHA:0:8}-$TS.log"; exec > >(tee "$LOG") 2>&1
 # Temp files and browser profile go OUTSIDE the checkout (some tests require output outside the repo) but in a folder we own.
-export TMPDIR="${HOME}/.cache/dnbox-gate/tmp"; mkdir -p "$TMPDIR"
+export TMPDIR="$(mktemp -d "${TMPDIR:-/tmp}/dnbox.XXXXXX")" || exit 2
+# Keep the private directory for failure inspection; never weaken Chromium sandboxing.
 # One browser for every test: Playwright's bundled Chromium unless CHROMIUM_EXECUTABLE is already set.
 # (Tests hard-code /usr/bin/chromium, /usr/local/bin/google-chrome or a macOS Chrome path otherwise.)
 if [ -z "${CHROMIUM_EXECUTABLE:-}" ]; then
@@ -20,11 +21,10 @@ echo "DNBOX-GATE repo=nightly lane=$LANE sha=$SHA started=$TS (UTC+10)"
 clean()   { git diff --quiet && git diff --cached --quiet; }
 setup()   { command -v node >/dev/null && command -v python3 >/dev/null || return 2; if [ -f package-lock.json ]; then npm ci --no-audit --no-fund >/dev/null || return 2; fi
             python3 -c 'import playwright' 2>/dev/null || { echo "pip install playwright && python3 -m playwright install chromium"; return 2; }; }
-no_loss() { if [ -n "${DNBOX_BASE_SHA:-}" ]; then
+no_loss() { [ -n "${DNBOX_BASE_SHA:-}" ] || { echo "DNBOX_BASE_SHA required from a fresh GitHub connector receipt; network Git is disabled"; return 1; }
                  [[ "$DNBOX_BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid connector base SHA"; return 1; }
                  [ "$(git cat-file -t "$DNBOX_BASE_SHA" 2>/dev/null)" = commit ] || { echo "connector base commit unavailable"; return 1; }
                  BASE=$DNBOX_BASE_SHA; echo "connector-pinned consolidated base=$BASE (caller must retain fresh remote receipt)"
-               else git fetch -q origin integration/dnbox-consolidated || return 1; BASE=$(git rev-parse --verify "$BASE^{commit}") || return 1; echo "fetched consolidated base=$BASE"; fi
             python3 tools/dnbox_contains_base.py "$BASE" || { echo "merge $BASE in (no rebase)"; return 1; }
             local miss=0 del; del=$(git diff --name-only --diff-filter=D "$BASE" HEAD) || return 1; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$del"; return $miss; }
 limits()  { local bad=0
@@ -37,10 +37,10 @@ limits()  { local bad=0
 build()   { npm run build; }
 unit()    { npm test; }
 browser() { npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py; }
-step clean-tree clean; step setup setup; step no-loss no_loss; step hard-limits-regression python3 tests/hard-limits-regression.py; step limits limits
+step clean-tree clean; step setup setup; step no-loss no_loss; step gate-no-network-regression python3 tests/nightly-gate-no-network.py; step hard-limits-regression python3 tests/hard-limits-regression.py; step limits limits
 browser_safe=1
 browser_policy() { python3 tests/normal-sandbox-regression.py || { browser_safe=0; return 1; }; }
 step browser-sandbox-policy browser_policy
 if [ $void = 0 ]; then step build build; if [ $browser_safe = 1 ]; then step unit-tests unit; step browser-tests browser; else echo "[FAIL] unit/browser-tests NOT_RUN: browser policy unsafe or unavailable"; fail=1; fi; fi
-R=PASS; [ $fail = 1 ] && R=FAIL; [ $void = 1 ] && R=VOID
+R=PASS; [ $void = 1 ] && R=VOID; [ $fail = 1 ] && R=FAIL
 echo "DNBOX-GATE RESULT $R sha=$SHA lane=$LANE log=$LOG"; [ $R = PASS ] && exit 0; [ $R = VOID ] && exit 2; exit 1
