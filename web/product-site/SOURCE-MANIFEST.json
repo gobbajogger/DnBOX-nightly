@@ -753,9 +753,19 @@
       "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a"
     },
     {
+      "path": "remote/firmware-link.mjs",
+      "bytes": 6997,
+      "sha256": "590825006c26ab329d3f0a3f64d0c69f0c97cd4285cf992b027fbfb68078c59a"
+    },
+    {
       "path": "remote/frame.mjs",
       "bytes": 1584,
       "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
+    },
+    {
+      "path": "remote/funkybeats-view.mjs",
+      "bytes": 9181,
+      "sha256": "469a7b5929702b8a6dfd91c79e6a6a81051bea6916c537af3d7daea011770efb"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -806,6 +816,16 @@
       "path": "remote/lane.mjs",
       "bytes": 2450,
       "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d"
+    },
+    {
+      "path": "remote/mixer-format.json",
+      "bytes": 59444,
+      "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
+    },
+    {
+      "path": "remote/mixer-format.mjs",
+      "bytes": 712,
+      "sha256": "f63b485884244656a7853c6fb858baf67b00118172974a9007c4505f8158f404"
     },
     {
       "path": "remote/model.mjs",
@@ -888,9 +908,19 @@
       "sha256": "c4836c6aff371cc21ae790b51804b9634d9118c2ef3d05da9d05b54388303d40"
     },
     {
+      "path": "remote/vendor/funkybeats-core.mjs",
+      "bytes": 24430,
+      "sha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c"
+    },
+    {
       "path": "remote/view.mjs",
       "bytes": 2773,
       "sha256": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9"
+    },
+    {
+      "path": "remote/wave-display.mjs",
+      "bytes": 790,
+      "sha256": "62bdd5faf403bba7759085620fb2f30d7a014040627aa6d75fb42268001bcbe4"
     },
     {
       "path": "remote/workspace.mjs",
