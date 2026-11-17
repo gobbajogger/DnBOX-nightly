@@ -1,0 +1,626 @@
+{
+  "offline-x0x_breaks-1024x640": {
+    "status": "APPROVED",
+    "sha256": "936b94925abc7ca9ea92c17767f5f7094950a01ec67f4fc34b6353f8e6edb5c6",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c3ee55b6c608bc58e7d9083dc335c5a6fd9fe9b7 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_breaks-1440x900": {
+    "status": "APPROVED",
+    "sha256": "a2aac299cdc5686ee00dbf6a5f0925680c1e10bf6cd386bdd0bdaced19ce4972",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 561d093f52eef4edcfeb6602e44529bf27b77aeb and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_breaks-390x844": {
+    "status": "APPROVED",
+    "sha256": "8a1b4bdde49abb3c1db363b367c06d6fd2fe0599be761d913a95f48df5606133",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 89414b72f6dcc86f41fba1bc131511933fbe639a and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_breaks-844x390": {
+    "status": "APPROVED",
+    "sha256": "52640ad8eafd4e6d6dbdb8ef24b1cd48642fc0081217e612b5dbde2f0fb60cf6",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 03ca5da82d58a01a9ce53f0ebf7a5d3644987a3d and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_installer-1024x640": {
+    "status": "APPROVED",
+    "sha256": "4e5f66e87441d147fc024b82390b4483941a6fa7a466002a465bf8bc36110491",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 4bd1fd5f542f3c232beb2c4e107a55508d9498d8 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_installer-1440x900": {
+    "status": "APPROVED",
+    "sha256": "e52c84b0827c9283d9e7e406f7de70c1a3417965c4899810d95bc561e4470278",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 38912d55baa786e8c193fa418267404eed5e803f and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_installer-390x844": {
+    "status": "APPROVED",
+    "sha256": "1d983f2635d83ba0e6a42947d0b2fa00f7002e3eddf00d68292fa7c05a492656",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 88d68140bdbf9afce57015ee0b83ff59878396f3 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_installer-844x390": {
+    "status": "APPROVED",
+    "sha256": "f7e4004dedaa324b0611a5bf3723c4c4afabafb2647204ac2aea9182bdb44317",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 9e926c7cd6624ae9b5dda34bcb26bd101a0061de and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_projects-1024x640": {
+    "status": "APPROVED",
+    "sha256": "37c0957e59685cf8426ccdcb76da1ca3f8c5adbfa2e096333d8edb8871c4fa67",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 545edda9abbef31aff1a63a724c85ba9d3470106 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_projects-1440x900": {
+    "status": "APPROVED",
+    "sha256": "31211fb6345ceac9afb14372bfaf7f7b4f613fcdf6d46d54e53e9f09f38cdfcf",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob bb7dfd8dbdc3613458081c302ac1505a20778738 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_projects-390x844": {
+    "status": "APPROVED",
+    "sha256": "989de9e6788507a28566843ad3847f2885994b805debe4b1e4d9547222b6f08b",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 7d3e3d7416c293cf5923093fc313a1d46ff7cd20 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "offline-x0x_projects-844x390": {
+    "status": "APPROVED",
+    "sha256": "a693af57b7f3fd366be71fa4ab6b1314a484e62b860c0f759cc8cd2f98793732",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 03c4b54f3ddd1ee9d443fb42d09e93252669ea20 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-files-1024x640": {
+    "status": "APPROVED",
+    "sha256": "4f27078ee1807dd526778e5121043835f5e585564c88658060dcdd4876917353",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob db6ba7e736dba56461a5f866e9da6c500fa90368 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-files-1440x900": {
+    "status": "APPROVED",
+    "sha256": "1be654c48e9e7a14396a5c303083422c81ff30e6765e70a5b1c92086d3f414fe",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 4dca782c7e669b67fe8ecb455e2a6f5d5df79fa6 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-files-390x844": {
+    "status": "APPROVED",
+    "sha256": "c5b54e8e31ccb23e2a76e3ec9ad945d3982d6c4b360418b170007fa04ae852f1",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 2b46b889a69f327f758243b99adc16ddf2ed41f5 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-files-844x390": {
+    "status": "APPROVED",
+    "sha256": "b0c24bb45bea30a8df02802a12612fa1e8ece88a08e2120cd208a2ff2e06cc97",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f2f212a4ff2c9e7e989ed8868361c0c9a9fc3152 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-chance-1024x640": {
+    "status": "APPROVED",
+    "sha256": "4511f8d7878a830a612a267642e72a3030168a62c03bfb4ed86e66758b3735b3",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 070a8d5f532b90d227c12e906bfa89067a0cd6e0 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-chance-1440x900": {
+    "status": "APPROVED",
+    "sha256": "ea23b8ffb07a98fafb45f7af7f0660d0fb5857e80c684cd4433940e5249d8daa",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 0bbe624810fef3b333c3498e4b55100b49e67b94 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-chance-390x844": {
+    "status": "APPROVED",
+    "sha256": "cedd65c1a476ed4f99561c8311a89f2dd6aedaa001befdbb86a018788a671733",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob bd2d441d0c7b55e65f0ef93ebcfbb13f969b7c6f and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-chance-844x390": {
+    "status": "APPROVED",
+    "sha256": "db58feb9c9caf7fb2f8bb92ae65d6d38c2aab98944787e10b1710c109f52bb98",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 61a457f693987781b4b2469537e204dad56de09b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pan-1024x640": {
+    "status": "APPROVED",
+    "sha256": "24587f63fd590e7fe7b2a5e6120e694b01bfeeac18c4b02791539f05930550c9",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 522655ef861be60408f9d1d76f473529ae2f08d5 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pan-1440x900": {
+    "status": "APPROVED",
+    "sha256": "ca5efc20206ad14b960d8597cc1c658987f58a408c96ccad84875336f87090a9",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f483739bab105339551f77e2108ebe23e0738286 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pan-390x844": {
+    "status": "APPROVED",
+    "sha256": "b4628a25ff0d010160aebf3ee6506038866d341f82d969775d802706a2102f09",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 98b4601028c37eeb7ac726b6211247144a9b9383 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pan-844x390": {
+    "status": "APPROVED",
+    "sha256": "0f591647e10fc62ae2471e365a1f90414ab636694a1c22b1377e70821a56f03a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 6aa25c302705b510ae127e02479c096a5a547e1b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pitch-1024x640": {
+    "status": "APPROVED",
+    "sha256": "fc61d8e0bf97e64faef8ebc010c00eabff18acf1595ab72350d5958974cdd8ba",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 6fc2917cf4f70cf6cc351ac7b6a98ef71af912c9 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pitch-1440x900": {
+    "status": "APPROVED",
+    "sha256": "3e852ca5015b4d9dc374933ab08c652bf01fbf8780a5e1fb38f30a59ccc628f7",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 97a31f77e3c03fc4ec28f87c84102becdb0fbf57 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pitch-390x844": {
+    "status": "APPROVED",
+    "sha256": "ac446d495d62103a48dd9ea51ac11107362581513116de79ec5dcbf28ba31dfb",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 32544c333fdd6178ebe58223fbbdba828859db81 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-lane-pitch-844x390": {
+    "status": "APPROVED",
+    "sha256": "4d8771e90e15c5bcf1c2f7b6285b1991ac48e51a7142fe45601c9aa808ccb890",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 09694e90b08efbd0cc64bf865596502012e48851 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-mix-1024x640": {
+    "status": "APPROVED",
+    "sha256": "6c9b0b6c2e85bef03312d9cd442be6872a7a82de5add4e3d2c25c166da385ea4",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 01fa7d09a88ca653dffca3a89808b64a2ee42be6 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-mix-1440x900": {
+    "status": "APPROVED",
+    "sha256": "4c3b40910e8af2b6a06faa0d54047a16ea0f87ca6ba9c84b84634d74cabc75f6",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 4f972f3886a09c9babea876f1aed1a6e7a7b7b18 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-mix-390x844": {
+    "status": "APPROVED",
+    "sha256": "e13890fc14ecc6e204be37a41719da40d9ab6313f67cf1f492a2a3d6ae60d88c",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob ff82bdd8bd600cd3d850f80ee106f4b08f135ec1 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-mix-844x390": {
+    "status": "APPROVED",
+    "sha256": "58bb4198f994561ce1f87e2a0a3982a447dfeda475540f9e2240f2e8008f511a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f0d03c28dd1f96b1bce1db4223b157cbcb0af3d7 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-patterns-1024x640": {
+    "status": "APPROVED",
+    "sha256": "82d3c87480d232a6437948bf28dfac6c08c6b8146f6ff8dbd6514808688b6ee7",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 6604d4c6e09618bfca23ee165b77ca8b93515762 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-patterns-1440x900": {
+    "status": "APPROVED",
+    "sha256": "24917f875576f9ea80f4f58061e2b271221e2e3df263a23ab4032469272bec57",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 5c1a007f378cc09556988a4bdab768abf476c62f and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-patterns-390x844": {
+    "status": "APPROVED",
+    "sha256": "eab7c63a1143d04d3c03a4aca6d04bf2971f3b37d739b1a8561277da8b989c2d",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f2d53474a82045a3aadc786b082ffe367f164246 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-patterns-844x390": {
+    "status": "APPROVED",
+    "sha256": "c0e8ec687ad4c74251c22d42dedd48b869840d7d04d6b9b93ca1bb3cd087c7dd",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 20db443585c2aab6e8b97a01ea89a91a81043f40 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sequence-1024x640": {
+    "status": "APPROVED",
+    "sha256": "158b7a4203eab4675ab539246e3c52b1bd554a0f7b91ad4699fcecf8e58792c1",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 00edd501ae0eaf098564363715c2083a7b886ccd and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sequence-1440x900": {
+    "status": "APPROVED",
+    "sha256": "63cfb865fe1e1ed8ec363d5703eff867831f90a4571a08b4f56a293ff906b675",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 157f6b72e578807007f1f8c209399017dd034e31 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sequence-390x844": {
+    "status": "APPROVED",
+    "sha256": "94d55285ed72df7935eae5745cae36c5126cc3ed518339bae3abc580237b8f64",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 95258132fa70d9dd923caeaa6dfcac1e2345119b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sequence-844x390": {
+    "status": "APPROVED",
+    "sha256": "b36a7bd1cbf622ff0b872308cded467a719be8e84dabb86af44dcfe25a3e81ef",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f9df56f998e3856d0d1a1b8a0113ee02235bce2e and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sound-1024x640": {
+    "status": "APPROVED",
+    "sha256": "6a161f79b88ada86bf70c629c92318734485fbec8044db33bd8968fd9adc2120",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 7d59182cf18b315630fe26b89fd871969623b12b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sound-1440x900": {
+    "status": "APPROVED",
+    "sha256": "e1d20c277029bd50b49c8fec4c1d7212ede2dd69e38395ecb959c7f5299acafb",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob d5f4e86015f32214c527e2aa0ee60e97e73c5c76 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sound-390x844": {
+    "status": "APPROVED",
+    "sha256": "b7156c17783e21ad468f2bb174dee103c947a21560ee2c1be7ef01c1a8c49598",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 8ce2a7eca1ca0231ab6943b54f509129791f8810 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "remote-sound-844x390": {
+    "status": "APPROVED",
+    "sha256": "fa2fa499b618917a1b5fa98fb0b42d1afe90ae5736f803c82c4cbfe786cb2817",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 179dd4234dfd7a861879b1e06816dfd43d7a5a95 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-breaks-1024x640": {
+    "status": "APPROVED",
+    "sha256": "321a925c9acd29049a9431623c765bc657f8970b4954181ca0a3376b11ed7fa3",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 2e5048fd6d6f70f9dc9d9b80f9e23d712d5e30cc and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-breaks-1440x900": {
+    "status": "APPROVED",
+    "sha256": "c163333aec4f57b8b1da63742405e67bffeea4fd931fc3cd99cf3cdc1c874dfa",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 342db036ad7abd0369ffc231a4e4b301a8940c26 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-breaks-390x844": {
+    "status": "APPROVED",
+    "sha256": "c7c46f120d4629071cd0ec90a30102380bd1fa1c6df1f4e7f0b0c3a0b93a516d",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 046bc7a39ce5e15e78111f8eb357adbc662fe3b7 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-breaks-844x390": {
+    "status": "APPROVED",
+    "sha256": "8a1391c1b6c09aafdfae6380a43ca839d9e1445f25933319f92041d96688faa6",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 570f97022ae23e42ffe37960f2d498b8c78ef892 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-builds-1024x640": {
+    "status": "APPROVED",
+    "sha256": "036cca69d47857447d4791aeb6df14ef47080ef5fe9b7da1686aca8c99ab8fab",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob e06a47a7f54d10696251c5e498ed8e1de294c35b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-builds-1440x900": {
+    "status": "APPROVED",
+    "sha256": "053360a6250394a1d184541c052825e7c5f0ac88937577395e2426f5aefd6bfe",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 833ebdec6e408e6d888a0ea68f60308730cce244 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-builds-390x844": {
+    "status": "APPROVED",
+    "sha256": "82fad7cff5b6d20e21c240f3528f015eb926a595ec274e08e68a3a04a4ae7fb3",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob e3b1f74a9d8f0a8a44c723f44d3ae5fc88deb968 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-builds-844x390": {
+    "status": "APPROVED",
+    "sha256": "29ba76de6ef0c42fc94ea3b582d58e83f6b4374f905aa8d72ef52a38fa24d0d8",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 963698e0d4bb7b535f171b980c15b184415c85d1 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-help-1024x640": {
+    "status": "APPROVED",
+    "sha256": "828ef6e79f0de69fbb2d24c58b9eaed8c20fac2a9f4544dffdac2df5e701aed2",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 690ff209f76cf03831ae11c7fe733aaef3e1cf3d and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-help-1440x900": {
+    "status": "APPROVED",
+    "sha256": "c979cd1c5062444cd49ad1a93a1bcda716d33509338a59196c48f33b76e9c5bd",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob be6bef623f41518b1b70c0cbc9e62e40f6263c72 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-help-390x844": {
+    "status": "APPROVED",
+    "sha256": "611647f7abf23e6dddd7e7e281919ecef3ad530d98dbb267a5cea1257291c744",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob e4d1eef64c69e026db53434206f3c02e3e4790bb and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-help-844x390": {
+    "status": "APPROVED",
+    "sha256": "e99361a076d2596fa074216f329842ba3728d7d657d80cfde5be939965dfc07f",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob e2bd3b79f3e927e777432b8c37e3d9330064dc78 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-index-1024x640": {
+    "status": "APPROVED",
+    "sha256": "1888da01eaceeb2d326c7bbecd92561b1436f2d06a7a71abb021856e27249087",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob d412982990ac286d45ce221312794b66fcc02226 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-index-1440x900": {
+    "status": "APPROVED",
+    "sha256": "5f5cbc23a607640fec5bb91be9c939169d1af671778659024389e6431de0f92b",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 02993b4ebc89f596f2925c1e91845cb807e3102f and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-index-390x844": {
+    "status": "APPROVED",
+    "sha256": "1cdd8a21018461b75dd6a3bc6965cd68806a184604e152bade87021342905d1a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c32b62dbf324574f179b3d8c31249106f8ae3a2d and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-index-844x390": {
+    "status": "APPROVED",
+    "sha256": "a6be2b5da75b5ea27a7f6d1fe39a1962bdb60b8163fb18697d606a4312d5135b",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cd94bd59ad6204b6386b6af1a2ae9c501a779b42 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-install-1024x640": {
+    "status": "APPROVED",
+    "sha256": "ba5ce6a021481da0737e9a3b05c6d16323c51028fa1d69f9f0af8f395c9327f9",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 05e292e1a63acd811fbe3bae243def65eb2e7502 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-install-1440x900": {
+    "status": "APPROVED",
+    "sha256": "34f2c21dafa4b6b91d56b52923055a98b5661e801d8c271d17b3637c8ecdd654",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c50300ec673c8c17274157750b9d041115f09b18 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-install-390x844": {
+    "status": "APPROVED",
+    "sha256": "716acf22867080118a624e03cdfa2561811ed000e33d556181af2a5ba3b13193",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c5931a3a2f741a6f2b173f903365e757b47c5804 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-install-844x390": {
+    "status": "APPROVED",
+    "sha256": "41d633a3a23ea1d2fb7af0c960994a40d8dd1b42c833132fa46f8cbcb9e2b95c",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 870e7c20faabe82609ce59e632b357ebc15daa7a and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-1024x640": {
+    "status": "APPROVED",
+    "sha256": "686f07b239f5a0a3bbf6efa6c9e08e01c7bcaa3403dd6e5320fce7a75f4765b5",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 1531b6da119a5cd8571fca99e817825cc12e8d8d and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-1440x900": {
+    "status": "APPROVED",
+    "sha256": "e079b8bf81e3487cb7d33187409b04f02bc10ce9d39b59dde00080e408aa57e3",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c45fe8a918fd92c7788b5aa1776b1bfbce5803ac and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-390x844": {
+    "status": "APPROVED",
+    "sha256": "961923f87d40d8da70b2bcfd543be100af473fe56bfbbbeba225aec8c0a0c4e0",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cdd4106f03f57a3e67215be6bb0e6f2518aec119 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-844x390": {
+    "status": "APPROVED",
+    "sha256": "c398cbc690cf1132711462a1450dbd4eb306eed94ce45b98f78c492db78e06ec",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 7a2d0b15f9f34bbe00539b076c13ecd263e740d3 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-original-1024x640": {
+    "status": "APPROVED",
+    "sha256": "2e25ff704371e2ecdad0176557273439819d4284b502f21c01d8a0319662eda8",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 811fed06b51edc9d52947acf21ac9a22e75675a7 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-original-1440x900": {
+    "status": "APPROVED",
+    "sha256": "7c4699fba9f3003c9803c9a9dcf4ce3b0027b23a10a03bc2a602b223c8f0e091",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob dffa4e6043cdcff572f5f7a9fcf5b9be166b6134 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-original-390x844": {
+    "status": "APPROVED",
+    "sha256": "c0e46319cce1d545a0dd93896b05ae7e7cd9b5b44e5c9451a0e924b6d11fe272",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob dff4cc8e5f47ffde3ccf1fb12c77fc45b5db7186 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-manual-original-844x390": {
+    "status": "APPROVED",
+    "sha256": "a4d7f372de601cf7fec1e436f18c0c1ba8351818f8d246ce897777d37dc68a49",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f7b82683393bfcfbfaf039e4c80a2a8cee54a3a8 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-new-1024x640": {
+    "status": "APPROVED",
+    "sha256": "c4c7b919580bf51a9e0851d13eac9b5c2f62e37d7c31765e28f191c52e6cf91b",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cdf7659376f95591362ef8b8bfbb34c61e90c285 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-new-1440x900": {
+    "status": "APPROVED",
+    "sha256": "5a2b8d6177d0a1f47fb3bf57b9753ad3b1af8d1322164e0e0f5ee2223eb2fb03",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 3e32f6abaa263444b9aab312d05723142da5aed4 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-new-390x844": {
+    "status": "APPROVED",
+    "sha256": "65437807323ac59b7f067c0fbfb9268addd4835bdcee852a5155d6f9b8457aad",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob ce4bc7934fe042e64f3ab7e20ad1f83a51abbb36 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-new-844x390": {
+    "status": "APPROVED",
+    "sha256": "16df3b7bf4b0fddc9136ca4880c59048c89c8c8522119509198ebecfbb086492",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 87f7e84d17fda0af88997575a56a8add886123aa and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-1024x640": {
+    "status": "APPROVED",
+    "sha256": "b37553b18285656402c2ea5a91d35391c59717c44e18262a3338b5841c3ab62a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob a5c142df6ab64a39b0096a76c27ea4390c384f8b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-1440x900": {
+    "status": "APPROVED",
+    "sha256": "578aee7270d7f9ff981541bb083e0731093bd60cfc8e52a9e1fb1f046da6f914",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f8ccaa3aa5dbc019d900233b56278e1fb542f381 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-390x844": {
+    "status": "APPROVED",
+    "sha256": "db85dfedfcfbd946dd3e8ee432c59d3229413e2cbb7b57b7266a21790bb1a08a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 0082e44e0f5ff874e3f46467d53faa3088edefa2 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-844x390": {
+    "status": "APPROVED",
+    "sha256": "4e9825de4067e6354a420d2585e99b13f6045b7d36950623db4bbfce765667f9",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 54d3511e06120ffc27b96942b4cc4d442bf02daa and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-legacy-1024x640": {
+    "status": "APPROVED",
+    "sha256": "0a9ca5cfc9155d25e00f532970e24df06c18fa23689ce458660f285e86c7898f",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 861b90bdbb1b91e0b76039c75999189e89bd62d4 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-legacy-1440x900": {
+    "status": "APPROVED",
+    "sha256": "0c80777b589680392e61e97f41b6d40e8e990283191645b7377ebdaa500d0a06",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob ef28f37c05dec3d723945977af2f0dfe589f89d0 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-legacy-390x844": {
+    "status": "APPROVED",
+    "sha256": "caeb5356304e1491bb16c41d2aa097098adb763e8ac9111903196ea420507788",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 63a786779b72fd9180645af9f5a0215013e3b434 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-presets-legacy-844x390": {
+    "status": "APPROVED",
+    "sha256": "dc51059931def687948ad89b8021dc713ace522016523a6f131c3bb0c1103dad",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 712e2626627086654b74069a91ab4d5f1825bc01 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-projects-1024x640": {
+    "status": "APPROVED",
+    "sha256": "a72bb39b926eb9f0e89ba524b94a92323fbc0e5f40c24a2014cdde4f8ad78a07",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 765076646d087a45a488b842ee863469c70c2f68 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-projects-1440x900": {
+    "status": "APPROVED",
+    "sha256": "831973614a73b7cebbb7f1f16aa1413aea0dabd2e9afacd1863cc97198a013fe",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cd4d6355ae419cf1eb6f132694604c561196cfd4 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-projects-390x844": {
+    "status": "APPROVED",
+    "sha256": "aad8d04a778e04273aeee680f337fd117204321a94f3089874b4318d2dac9c7a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 899ff14fae6e1aa262cb15d95e3f6d18d03768fb and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-projects-844x390": {
+    "status": "APPROVED",
+    "sha256": "ac043cd030b85bccee0ac746d24499854444cacd69bbce94666e1725691d418c",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 85f00b722b975ac6528e4794ba43269ded33ebf7 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-device-1024x640": {
+    "status": "APPROVED",
+    "sha256": "062792dc13005c154e621c9c85c551b1c35ae52c4b67467a90af44882dd68575",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 8301f61d7baeb610e91064f37d1e44a23ceba52d and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-device-1440x900": {
+    "status": "APPROVED",
+    "sha256": "2a50e9ec52d05e29d43490699ee7c2b64c1895d48e6a1ecc40b0a865218d16f0",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cda37ff324cfb2c5a445d9dcb54f6bbafdd17d78 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-device-390x844": {
+    "status": "APPROVED",
+    "sha256": "63c346e53e484d107a56c91111d1ba4fcf36c497f3fa0d08a15aa03ad8b46612",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 05cc2aee5831c7047827e49c73e839fce91ea6e2 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-device-844x390": {
+    "status": "APPROVED",
+    "sha256": "dbab96a0f13def7f6f8ca554415bc1cc9912390b4a8f391e5adf2a9d3ad5470a",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob c285d5ee33f03e3c8dc57cae54dae071f45a304b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-identity-1024x640": {
+    "status": "APPROVED",
+    "sha256": "c6cfb2a7d421b248d5a5558018f87b4d1ca3a708d53d91c1b572b50517c85c9c",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob f25d0a3508f83d219a5a922b7ac15d17a55a9d0e and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-identity-1440x900": {
+    "status": "APPROVED",
+    "sha256": "dec9f9d43a6cfd86b739556a0332cadb80cd3f7980bdf11d14661f6e948936eb",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cc2db22c80536d574acc4622642f4b9a361a3e22 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-identity-390x844": {
+    "status": "APPROVED",
+    "sha256": "a15b70c9593c7331174fb92acda7e85d79c8b4c58f3fefb0ed8752a83b21fac3",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 84786e158e00409dddf3f80f3a8699e22db42e48 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-remote-identity-844x390": {
+    "status": "APPROVED",
+    "sha256": "af72650bef9fe6edef08017d1b57657b70867f3257d605746a4b3c3fc0f41e08",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 2a39e170b81d62e4c30c2018ad470c2d7c949e9f and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-starting-breaks-1024x640": {
+    "status": "APPROVED",
+    "sha256": "197632ee73bd396eb5ecaa466702b5c00cf6c60cd2adb49e14957f1faf45ea85",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob dab240a395c8b4b2de217bd9e32652f7019ee8f9 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-starting-breaks-1440x900": {
+    "status": "APPROVED",
+    "sha256": "f05b59b6c8ea1c0374ac601b6742cb959d7fddf59727b62c53e3cfdf196a0108",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 2ac0e3fb86570c0f3cf11c7eed6c00f069c66a82 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-starting-breaks-390x844": {
+    "status": "APPROVED",
+    "sha256": "25c23404467fce49299187428c1e61713df76d1c0e46a17fac753a8c0c238692",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob a29771ad78b7bcc52d3f94f2703a28a4e1d8f9c9 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-starting-breaks-844x390": {
+    "status": "APPROVED",
+    "sha256": "1f7d2c281d948ed46ee26b6c5b1b1439e94a7628ed15675ea0c4f020c4bead52",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob cb317f99393f35b75913978429623bfe582d858b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-tools-1024x640": {
+    "status": "APPROVED",
+    "sha256": "aa47c01b23baa6fcedb1d732899f565273809007473e4f718edc0464fcfd3220",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 43e97ccc42ae721c8f90d514e6f24448156bd6a8 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-tools-1440x900": {
+    "status": "APPROVED",
+    "sha256": "688123f089a02cf80fc81a21b10abb16c824fbeb5b514d9682ba726ca4a7d451",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 55d6023debb5301ccbca2d38de7c961be81c899c and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-tools-390x844": {
+    "status": "APPROVED",
+    "sha256": "73323b0d3983c065d256dc67655286a5b2e58d631229a5388b813454da9c5b97",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob 87bcfa3ecbd7747ba5b3b1fc28a9e0f815cb7947 and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  },
+  "site-tools-844x390": {
+    "status": "APPROVED",
+    "sha256": "0077ebd60468fa630025c956e99b59c02ae277119b2037372d92abf0023c6e57",
+    "reviewer": "independent review_m2 (not baseline producer)",
+    "evidence": "Independently reviewed existing f75670b8e94657ff6c845004262c51904ff14d01 PNG as current-state regression baseline only, per owner direction. Exact Git blob fb6ab57a00cbc51873e0f7dac58dd5191c81a19b and PNG integrity verified; contact-sheet inspection, with top/middle/bottom crops for tall build-history and original-manual pages. No regeneration. Remote header, offline JavaScript errors, browser handshake and other web/remote LEFT requirements remain open; this is not G3/design, functionality, stability or full-gate acceptance."
+  }
+}
