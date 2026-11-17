@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Reused from gobbajogger/X0X37-for-Loopy-Pro 08d3164a265123cb4c84e5104642fd93257d63d7, web/x0x_projects.js.
+// Reused from gobbajogger/DnBOX 08d3164a265123cb4c84e5104642fd93257d63d7, web/x0x_projects.js.
 // Selective consumer port from firmware 144f4e042bdfb2cc52ed16a1cf2a26a1148a0101.
 // Adaptive BREAK companion: stream8/9 are reader schemas, not firmware or feature approval.
 // X0X projects: an exact project snapshot and the original sample slot images.

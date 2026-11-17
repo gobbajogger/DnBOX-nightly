@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Reused from gobbajogger/X0X37-for-Loopy-Pro 08d3164a265123cb4c84e5104642fd93257d63d7, web/test_projects_page.mjs.
+// Reused from gobbajogger/DnBOX 08d3164a265123cb4c84e5104642fd93257d63d7, web/test_projects_page.mjs.
 // Run the page's actual event handlers with a small DOM and controlled service mocks.
 // Protocol and exact-byte transfer checks are in test_projects.mjs.
 // Run: node web/test_projects_page.mjs

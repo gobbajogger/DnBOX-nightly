@@ -34,7 +34,7 @@ BUNDLE = json.dumps({
         {'id': 37, 'kind': 3, 'min': 1, 'max': 127, 'readMin': 0, 'readMax': 2, 'label': 'Hold'}]},
     'admission': {'catalogCrc': 0x12345678, 'sourceSha': CORE, 'reviewSha': WIRE, 'testOnly': True}})
 MIDI = r'''
-window.__DNBOX_FIRMWARE_BUNDLE = __FIXTURE_BUNDLE_JSON__;
+window.__DNBOX_FIRMWARE_BUNDLE = BUNDLE;
 navigator.requestMIDIAccess = async () => {
   const input = {state:'connected', type:'input', fn:null, addEventListener(t,f){if(t==='midimessage')this.fn=f;}, removeEventListener(){this.fn=null;}, open:async()=>{}, close:async()=>{}, deliver(data){this.fn&&this.fn({data});}};
   const output = {state:'connected', type:'output', open:async()=>{}, close:async()=>{}, send(bytes){
@@ -44,7 +44,7 @@ navigator.requestMIDIAccess = async () => {
   }};
   return {inputs:new Map([['in',input]]), outputs:new Map([['out',output]])};
 };
-'''.replace('__FIXTURE_BUNDLE_JSON__', BUNDLE)
+'''.replace('BUNDLE', BUNDLE)
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):

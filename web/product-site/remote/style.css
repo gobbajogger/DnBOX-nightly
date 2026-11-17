@@ -278,3 +278,23 @@ dialog::backdrop{background:#000a}
 .funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
 .funkybeats-sequencer{max-width:100%;overflow:auto}
 
+
+/* FunkyBeats typed local surfaces, shared R22 tokens. */
+.funkybeats-launcher .perform-grid{display:grid;grid-template-columns:90px repeat(32,76px);gap:5px;min-width:max-content}
+.funkybeats-launcher .perform-row-label{position:sticky;left:0;background:var(--bg);z-index:1;padding:10px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.funkybeats-launcher .perform-header{text-align:center;color:var(--muted);font-size:11px}
+.funkybeats-launcher .perform-cell{min-height:44px;padding:0 8px;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control)}
+.funkybeats-launcher .perform-cell[aria-pressed=true]{background:var(--focus-col);outline:1px solid var(--accent)}
+/* Upstream synth slider structure keeps exact native domains inside R22 cells. */
+.funkybeats-typed-unit .funkybeats-typed-param{display:contents}
+.funkybeats-typed-unit label{font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
+.funkybeats-typed-unit .synth-range{width:100%;min-width:0;height:14px;margin:0;padding:0;accent-color:var(--accent);touch-action:none}
+.funkybeats-typed-unit .param-val{font-size:var(--fs-value);font-weight:700;color:var(--fg);letter-spacing:0}
+
+/* Typed upstream mixer: five native strips, no invented VU/EQ/bus state. */
+.funkybeats-mixer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:600px;margin:12px auto}
+.funkybeats-mixer .mixer-channel{display:grid;justify-items:center;gap:8px;min-width:0;padding:8px 2px;border:1px solid var(--line);border-radius:var(--radius,8px)}
+.funkybeats-mixer .mixer-channel-name{font-size:var(--fs-xs);font-weight:700}
+.funkybeats-mixer .mixer-fader-container{height:150px}
+.funkybeats-mixer .mixer-fader{writing-mode:vertical-lr;direction:rtl;appearance:auto;width:30px;height:150px;margin:0;padding:0;accent-color:var(--accent);touch-action:none}
+.funkybeats-mixer .mixer-db{font-size:var(--fs-value);font-weight:700}

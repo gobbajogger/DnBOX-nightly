@@ -51,7 +51,7 @@ const ALLOWED = [
       '  return name === "starrykey-37 play" || name === "starrykey-37" ? "smk-37 pro" : name;',
     ],
     liveOnly: [
-      '// Strict model match (X0X37-for-Loopy-Pro #806 62cf11e98): a package is written only',
+      '// Strict model match (DnBOX #806 62cf11e98): a package is written only',
       '// when its model equals the model the keyboard reports (case-insensitive, "ota-"',
       '// ignored). No family or alias match, and an FM-1 is never flashed.',
       '  return name === "fm-1" ? null : name;',

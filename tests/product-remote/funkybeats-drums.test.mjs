@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 test('ported upstream sequencer renders all typed drum cells with safe, stable identities',async()=>{
- const {renderFunkyBeatsDrums,DRUM_VOICES}=await import('../../web/product-site/remote/funkybeats-drums.mjs');
+ const {renderFunkyBeatsDrums,DRUM_VOICES}=await import('../../web/product-site/remote/funkybeats-view.mjs');
  for(const kit of ['909','808']){
   const track=kit==='909'?'drum909':'drum808';
   const notes=[{id:'first',track,note:36,start:0,velocity:88},{id:'fifth',track,note:36,start:22050,velocity:104},{id:'foreign',track:'other',note:36,start:0,velocity:20}];
@@ -17,7 +17,7 @@ import{readFileSync}from'node:fs';
 import{SequenceDraft}from'../../web/product-site/remote/sequence.mjs';
 test('shipped app binds every typed step without a tool mode and edits remain undoable',()=>{
  const app=readFileSync(new URL('../../web/product-site/remote/app.mjs',import.meta.url),'utf8');
- assert.match(app,/import\{renderFunkyBeatsDrums\}from'\.\/funkybeats-drums\.mjs'/);
+ assert.match(app,/import\{[^}]*renderFunkyBeatsDrums[^}]*\}from'\.\/funkybeats-view\.mjs'/);
  assert.match(app,/renderFunkyBeatsDrums\(\{kit,notes:model.notes,endSample:trace.endSample\}\)/);
  assert.match(app,/if\(b.dataset.drumNote!==undefined\)\{model.toggleHit\(b.dataset.drumTrack,Number\(b.dataset.drumNote\),Number\(b.dataset.drumStart\)\)/);
  assert.doesNotMatch(app,/drumEdit&&b.dataset.drumNote/);
@@ -30,7 +30,7 @@ test('shipped app binds every typed step without a tool mode and edits remain un
  }
 });
 test('near-grid hit toggles the displayed event rather than adding a duplicate',async()=>{
- const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-drums.mjs');
+ const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-view.mjs');
  for(const kit of ['909','808']){
   const track=kit==='909'?'drum909':'drum808';
   const model=new SequenceDraft({trace:{sampleRate:44100,endSample:88200,events:[]}});
