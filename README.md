@@ -1,5 +1,19 @@
 # DnBOX nightly
 
+## Current status
+
+This is the **beta / nightly channel** for the DnBOX website, browser Remote, and untested firmware builds. The firmware source of record is [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
+
+- **Install (published 0.0.25.1):** https://gobbajogger.github.io/DnBOX/install/
+- **Install (nightly / hardware-test):** https://gobbajogger.github.io/DnBOX-nightly/install/
+- **Integration branch:** `integration/dnbox-consolidated` (tags `dnbox-start-2026-11-17` and `start-nt-2026-11-17`)
+- **What's done and what's left:** [docs/START-POINT.md](docs/START-POINT.md) and [docs/DELIVERY-PLAN.md](docs/DELIVERY-PLAN.md)
+
+GitHub Actions are off. Checks run locally with `scripts/gate.sh <lane>`, which prints `DNBOX-GATE: PASS <sha>` or `DNBOX-GATE: FAIL <sha> <failed checks>`. Pull requests go into `integration/dnbox-consolidated`, not `main`.
+
+The R16/V10 notes below are local workspace history. They are not a qualification of the live site or of `integration/dnbox-consolidated`.
+
+
 ## Current local candidate: R16 / V10
 
 Producer correction of the three sealed R15 findings. Combined local build and full npm test returned 0: 704 summarized Node tests, 7 static Python tests and standalone source-event regressions. Independent successor recheck remains pending. Imported IDs remain unchanged while Add/Paste allocate unused bounded IDs; page departure cancels draft file generations; Projects availability text survives mounting outside its replacement root. Original provider/device gates remain. No browser, touch, BFCache, download filesystem or delivery acceptance is implied. Earlier stage notes below are historical, not automatic current qualification.

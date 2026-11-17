@@ -1,14 +1,22 @@
 # Every path is owned by @gobbajogger.
 # Comments name the lane that normally works that path (see AGENTS.md).
 # test-and-merge reviews gates and PRs and has no path prefix.
-# sound and fwui work live in gobbajogger/X0X37-for-Loopy-Pro.
+# sound and fwui work live in gobbajogger/DnBOX.
 
 # integ — default: docs, gates, repo hygiene, integration
 * @gobbajogger
+/scripts/dnbox-gate.sh @gobbajogger
+/scripts/gate.sh @gobbajogger
+/docs/lanes/integ.md @gobbajogger
+/.github/ @gobbajogger
 
 # web — website routes, installer, emulator, import/export, 1:1 HTML firmware UI, nightly page
 /web/ @gobbajogger
-/scripts/ @gobbajogger
+/docs/install/ @gobbajogger
+/docs/manual/ @gobbajogger
+/docs/new/ @gobbajogger
+/docs/PRODUCT_SITE.md @gobbajogger
+/docs/lanes/web.md @gobbajogger
 /tests/ @gobbajogger
 
 # remote — FunkyBeats port, Remote slider lane, browser Remote, TouchOSC, landscape
@@ -16,3 +24,4 @@
 /web/product-site/remote/ @gobbajogger
 /web/product-site/remote.html @gobbajogger
 /tests/product-remote/ @gobbajogger
+/docs/lanes/remote.md @gobbajogger
