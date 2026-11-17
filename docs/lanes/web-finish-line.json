@@ -213,7 +213,7 @@
       "required": true,
       "source": "R032; rules27..31",
       "scope": "Exact current1:1HTMLfirmwareUI with actual engine parameters",
-      "evidenceOrNext": "Current native/schema/renderer contract pending; never alias historical Juno/Drone as new engines",
+      "evidenceOrNext": "Current native/schema/renderer contract pending; never alias historical Juno or the former slot-2 engine as new engines",
       "qualifiedFinalSHA": null
     },
     {

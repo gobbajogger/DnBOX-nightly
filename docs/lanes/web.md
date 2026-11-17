@@ -88,7 +88,7 @@ C1/C3/C5/C6 and W1–W5 remain open. C2/C4 bounded scanner evidence is pinned to
 
 - Exact detached bd8b776 diagnostic nonbrowser chain completed exit0 with tracked files unchanged (external dependency symlink only). All npm test commands except final visual stage:493 edge cases, installer/catalog/history/project tests,product63+29,workspace84+apps,Remote63,presets19,origins4. Receipt/log web-bd8-nonbrowser-*; not full npm/Local or later e7 composition qualification.
 - Independent9b3e review verified one project paragraph only, preserving controls/scripts/markup; targeted8 Node+2 Python PASS. Browser/visual design approval still missing.
-- Historical compatibility audit: version-pinned0.0.26 manuals and retired .dnpr filename parser retain old Drone names; no active new engine claim. Sound owner notified for S7 coordination; no blind renaming of saved-format identifiers or historical claims.
+- Historical compatibility: 0.0.26 manuals are version-pinned; engine-4 .dnpr files and historical filename infixes load as Synth One init (N02). Saved-format numeric id 4 is not renamed.
 
 - Independent Remote review found live mixer alias text stale until commit; consumed exact ffe227c202318d9262f3985eec74ac2ad28d44e8 unchanged via normal merge. Actual app preview/cancel now synchronize alias without extra Undo; supplied regression retained. Combined build211/product64+29/workspace84+apps/Remote66 PASS, logs web-alias-*. Integ previous efe7 source superseded for this fix; no browser/full gate PASS.
 

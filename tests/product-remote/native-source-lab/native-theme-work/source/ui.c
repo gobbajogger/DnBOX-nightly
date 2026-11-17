@@ -115,8 +115,8 @@ static int part_neighbor(int part, int direction)
 static const char *bass_display_name(int bank,int other,int voice)
 {
     if (bank == ORIGINAL_SOUND_JUNO) return bank == other ? (voice?"JUNO B":"JUNO A"):"JUNO";
-    if (bank == ORIGINAL_SOUND_DRONE) return bank == other ?
-        (voice ? "DRONE B" : "DRONE A") : "DRONE";
+    if (bank == ORIGINAL_SOUND_SYNTHONE) return bank == other ?
+        (voice ? "S1 B" : "S1 A") : "SYNTH ONE";
     if(bank==other) return bank?(voice?"MIAMI B":"MIAMI A"):(voice?"CHICAGO B":"CHICAGO A");
     return bank?"MIAMI":"CHICAGO";
 }
@@ -157,7 +157,7 @@ static const char *part_s(int i)
         if(engine_bass_sound_bank(&proj.sound,v)<0)return "?";
 #endif
         if (b == ORIGINAL_SOUND_JUNO) return b == engine_bass_bank(1-v)?(v?"JU-B":"JU-A"):"JUN";
-        if (b == ORIGINAL_SOUND_DRONE) return b == engine_bass_bank(1-v) ?
+        if (b == ORIGINAL_SOUND_SYNTHONE) return b == engine_bass_bank(1-v) ?
             (v ? "DR-B" : "DR-A") : "DRN";
         if(b==engine_bass_bank(1-v)) return b?(v?"MI-B":"MI-A"):(v?"CH-B":"CH-A");
         return b?"MIA":"CHI";
@@ -423,13 +423,13 @@ static uint8_t original_page_bank, original_list_bank;
 static int original_display_value(pref_t r);
 static const ui_original_control_view *original_text_view(pref_t r, int value);
 static void build_pages(void);
-static const char *const BENGINE_N[] = {"CHICAGO", "MIAMI", "DRONE", "JUNO"};
+static const char *const BENGINE_N[] = {"CHICAGO", "MIAMI", "SYNTH ONE", "JUNO"};
 static const x0x_param_t BENGINE_P = {"ENGINE",3,0,BENGINE_N};
 static x0x_param_t BPRESET_P = {"PRESET",54,0,0};
 static const x0x_param_t BSTATUS_P = {"STATUS",0,0,0};
 /* per-pattern preset recall (owner 2026-11-12 02:42): 0 OFF, else the preset number in the
  * part's current engine. Codes 1..81=Chicago, 129..158=Miami and
- * 193..196=Drone. Reuse the original pattern byte without migration. */
+ * 193..196=historical slot-2 (all load as Synth One init). Reuse the original pattern byte without migration. */
 static x0x_param_t PATSND_P = {"PAT SOUND",54,0,0};
 
 static const char *const RATE_N[] = {"1/16", "1/16T", "1/32", "1/8T", "1/8", "1/4"};   /* M13: index = pattern.h RATE_* */
@@ -1074,8 +1074,8 @@ static int original_value_text(pref_t r, int value, char *num, char *unit)
     unsigned kind = (unsigned)bank, id = r.c;
     const ui_original_control_view *v = 0;
     /* a corrupt patch has no bank: never index a name table through a null view */
-    if (bank != ORIGINAL_SOUND_CHICAGO && bank != ORIGINAL_SOUND_MIAMI && bank != ORIGINAL_SOUND_DRONE && bank != ORIGINAL_SOUND_JUNO) { put_s(num,"INVALID"); return 1; }
-    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_DRONE) { put_i(num,(value*100+63)/127); put_s(unit,"%"); return 1; }
+    if (bank != ORIGINAL_SOUND_CHICAGO && bank != ORIGINAL_SOUND_MIAMI && bank != ORIGINAL_SOUND_SYNTHONE && bank != ORIGINAL_SOUND_JUNO) { put_s(num,"INVALID"); return 1; }
+    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_SYNTHONE) { put_i(num,(value*100+63)/127); put_s(unit,"%"); return 1; }
     if (ui_original_states(kind,id) || (kind == ORIGINAL_SOUND_CHICAGO && id == 4) ||
         (kind == ORIGINAL_SOUND_MIAMI && id == 7)) {
         v = original_text_view(r,value);
@@ -1270,7 +1270,7 @@ X0X_COLD static void pref_value_of(pref_t r, int v, char *num, char *unit)
         if (!ps) { put_s(num, "OFF"); return; }
         unsigned kind, preset;
         if (!bass_pattern_preset_decode(ps, &kind, &preset)) { put_s(num, "INVALID"); return; }
-        num[0] = kind == ORIGINAL_SOUND_JUNO ? 'J' : kind == ORIGINAL_SOUND_DRONE ? 'D' : kind == ORIGINAL_SOUND_MIAMI ? 'M' : 'C';
+        num[0] = kind == ORIGINAL_SOUND_JUNO ? 'J' : kind == ORIGINAL_SOUND_SYNTHONE ? 'D' : kind == ORIGINAL_SOUND_MIAMI ? 'M' : 'C';
         put_i(num + 1, (int)preset);
         return;
     }
@@ -1514,11 +1514,11 @@ static void describe_pages(pages_t *out, page_query_t *query, int view, int p, i
             int b = p - PART_303A;
             emit->group = GR_SOUND;
             int kind = engine_bass_bank(b), chicago = kind == ORIGINAL_SOUND_CHICAGO;
-            const int8_t (*rows)[4] = kind == ORIGINAL_SOUND_JUNO ? ui_original_juno_rows : kind == ORIGINAL_SOUND_DRONE ? ui_original_drone_rows :
+            const int8_t (*rows)[4] = kind == ORIGINAL_SOUND_JUNO ? ui_original_juno_rows : kind == ORIGINAL_SOUND_SYNTHONE ? ui_original_drone_rows :
                 chicago ? ui_original_chicago_rows : ui_original_miami_rows;
-            const char *const *titles = kind == ORIGINAL_SOUND_JUNO ? ui_original_juno_titles : kind == ORIGINAL_SOUND_DRONE ? ui_original_drone_titles :
+            const char *const *titles = kind == ORIGINAL_SOUND_JUNO ? ui_original_juno_titles : kind == ORIGINAL_SOUND_SYNTHONE ? ui_original_drone_titles :
                 chicago ? ui_original_chicago_titles : ui_original_miami_titles;
-            int count = kind == ORIGINAL_SOUND_JUNO ? UI_ORIGINAL_JUNO_PAGES : kind == ORIGINAL_SOUND_DRONE ? UI_ORIGINAL_DRONE_PAGES :
+            int count = kind == ORIGINAL_SOUND_JUNO ? UI_ORIGINAL_JUNO_PAGES : kind == ORIGINAL_SOUND_SYNTHONE ? UI_ORIGINAL_DRONE_PAGES :
                 chicago ? UI_ORIGINAL_CHICAGO_PAGES : UI_ORIGINAL_MIAMI_PAGES;
             for (int row = 0; row < count; row++) {
                 pref_t refs[4];
@@ -2949,7 +2949,7 @@ static const ui_original_wave_cache *original_wave_view(pref_t r, int value)
 {
     const uint8_t *cell = proj.sound.v[T_303][r.b];
     unsigned kind = (unsigned)engine_bass_sound_bank(&proj.sound,r.b);
-    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_DRONE) return 0; /* drone has no Miami oscillator UI */
+    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_SYNTHONE) return 0; /* Synth One has no Miami oscillator UI */
     uint32_t relevant = kind == ORIGINAL_SOUND_CHICAGO ? UI_ORIGINAL_CHICAGO_WAVE_MASK : UI_ORIGINAL_MIAMI_WAVE_MASK;
     uint8_t preview[22] = {0}; uint32_t mask = 0;
     for (unsigned id = 0; id < original_sound_count(kind); id++) if (relevant & (1u<<id)) {
@@ -5445,8 +5445,8 @@ static UI_DRAW void draw_header(void)
         ;
     if (cacheable) {
         snapshot.name = part_display(ui.part);
-        if (is_303()) snapshot.name = engine_bass_bank(bidx()) == ORIGINAL_SOUND_JUNO ? (bidx()?"JUNO B":"JUNO A") : engine_bass_bank(bidx()) == ORIGINAL_SOUND_DRONE ?
-            (bidx() ? "DRONE B" : "DRONE A") : engine_bass_bank(bidx()) == ORIGINAL_SOUND_MIAMI ?
+        if (is_303()) snapshot.name = engine_bass_bank(bidx()) == ORIGINAL_SOUND_JUNO ? (bidx()?"JUNO B":"JUNO A") : engine_bass_bank(bidx()) == ORIGINAL_SOUND_SYNTHONE ?
+            (bidx() ? "S1 B" : "S1 A") : engine_bass_bank(bidx()) == ORIGINAL_SOUND_MIAMI ?
             (bidx() ? "MIAMI B" : "MIAMI A") : (bidx() ? "CHICAGO B" : "CHICAGO A");
         memcpy(snapshot.colours, pal, sizeof pal);
         snapshot.col = matrix_col(); snapshot.light = ui_theme_light;
@@ -5495,7 +5495,7 @@ static UI_DRAW void draw_header(void)
             ui.view==V_GLO?list_title:VIEW_N[ui.view];
         char drum_title[24],context_title[32];
         if(ui.view==V_PART && is_303()) {
-            name=engine_bass_bank(bidx())==ORIGINAL_SOUND_JUNO?(bidx()?"JUNO B":"JUNO A"):engine_bass_bank(bidx())==ORIGINAL_SOUND_DRONE?(bidx()?"DRONE B":"DRONE A"):
+            name=engine_bass_bank(bidx())==ORIGINAL_SOUND_JUNO?(bidx()?"JUNO B":"JUNO A"):engine_bass_bank(bidx())==ORIGINAL_SOUND_SYNTHONE?(bidx()?"S1 B":"S1 A"):
                 engine_bass_bank(bidx())==ORIGINAL_SOUND_MIAMI?(bidx()?"MIAMI B":"MIAMI A"):
                 (bidx()?"CHICAGO B":"CHICAGO A");
         }
@@ -7010,7 +7010,7 @@ static UI_DRAW int wave_shape(pref_t r, int v, int *mix)
  * oscillator mix or the Miami carrier, 1 the Miami modulator, 2 the wobble. */
 static int original_wave_slot(unsigned kind,int p)
 {
-    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_DRONE) return -1;
+    if (kind == ORIGINAL_SOUND_JUNO || kind == ORIGINAL_SOUND_SYNTHONE) return -1;
     if(p==0)return 0;
     if(kind==ORIGINAL_SOUND_MIAMI)return p==6?1:p==11?2:-1;
     return -1;

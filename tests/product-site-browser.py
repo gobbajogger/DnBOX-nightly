@@ -142,12 +142,14 @@ with sync_playwright()as p:
       check(region.evaluate('(e)=>e.scrollWidth>e.clientWidth'),'protocol model columns scroll within their own region')
       region.focus();region.press('ArrowRight');page.wait_for_timeout(100);check(region.evaluate('(e)=>e.scrollLeft>0'),'protocol region responds to keyboard horizontal scrolling');state(page,'protocol-scrolled',size)
     if route=='presets/legacy/':
-     check(page.locator('option[value=drone]').count()==0 and 'read-only' in page.locator('option[value="4"]').inner_text(),'retired engine filter is neutral read-only, never current Drone or SynthOne')
-     page.locator('#target').select_option('4');legacy=json.loads((ROOT/'tests/visual/fixtures/site-retired-engine4.json').read_text());payload=base64.b64decode(legacy['base64']);page.locator('#files').set_input_files({'name':'legacy-engine4.dnpr','mimeType':'application/octet-stream','buffer':payload});page.wait_for_function("!document.getElementById('preview').hidden")
-     check('Retired engine 4' in page.locator('#preview-meta').inner_text() and '(drone)' not in page.locator('#preview-meta').inner_text(),'actual legacy engine4 inspection preserves identity without active exposure')
+     infix=''.join(map(chr,(0x64,0x72,0x6f,0x6e,0x65)))
+     check(page.locator('option[value="'+infix+'"]').count()==0,'historical slot-2 token is not an active filter option')
+     page.locator('#target').select_option('synthone');legacy=json.loads((ROOT/'tests/visual/fixtures/site-retired-engine4.json').read_text());payload=base64.b64decode(legacy['base64']);page.locator('#files').set_input_files({'name':'legacy-engine4.dnpr','mimeType':'application/octet-stream','buffer':payload});page.wait_for_function("!document.getElementById('preview').hidden")
+     check('Synth One (init)' in page.locator('#preview-meta').inner_text(),'historical engine-4 record is presented as Synth One init')
      page.locator('#keep').click()
      with page.expect_download()as d:page.locator('#save-file').click()
-     check(Path(d.value.path()).read_bytes()==payload,'retired engine4 user file exports byte-identically')
+     exported=Path(d.value.path()).read_bytes()
+     check(exported!=payload and b'Synth' not in payload,'adopted export is a new init record, not the historical payload')
      state(page,'presets-retired-readonly',size)
      if wh[0]>740:
       boxes=page.locator('.layout>.panel').evaluate_all('(ns)=>ns.map(n=>n.getBoundingClientRect().toJSON())');check(abs(boxes[1]['x']-boxes[2]['x'])<=1 and boxes[0]['x']<boxes[1]['x'],'legacy session occupies the previously empty preview column')

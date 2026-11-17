@@ -11,7 +11,7 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; this repo, beco
 ## Lanes and agents (6 in parallel)
 | Agent | Owns | Branch prefix |
 |---|---|---|
-| sound | Synth One (replaces Drone), SuperJ6, Chicago, Miami, presets, A/B benches, memory fit | `lane/sound-*` |
+| sound | Synth One, SuperJ6, Chicago, Miami, presets, A/B benches, memory fit | `lane/sound-*` |
 | fwui | every firmware screen in R22, battery, pan, pads/LEDs, hold-GLOBE, firmware slider lane, code-space fit | `lane/fwui-*` |
 | integ | consolidated branch (both repos), combined Elite/Pro firmware, zero dropouts, BREAK samples, roadmap, #120 voting, cleanup + rename | `lane/integ-*`, writes `integration/dnbox-consolidated` |
 | remote | (nightly repo) FunkyBeats port, Remote slider lane, browser Remote, TouchOSC, landscape | `lane/remote-*` |
@@ -30,7 +30,7 @@ scripts/dnbox-gate.sh <lane>        # this repo (website + Remote), at the commi
 tools/dnbox-gate.sh <lane>          # firmware repo, for firmware lanes
 ```
 Nightly steps: clean-tree, setup (`npm ci`, Playwright Chromium), no-loss, limits (incl. FunkyBeats MIT notice for remote), build (`npm run build`), unit-tests (`npm test`), browser-tests (`npm run test:browser` + `tests/visual/fixtures/web-structural/browser_fixtures.py`, Chromium with its normal sandbox, TMPDIR outside the checkout under `${HOME}/.cache/dnbox-gate/tmp` (set HOME to a workspace-owned location)). Firmware gate details below.
-Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, drone. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL.
+Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, slot2-scan. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL.
 
 ## Where everything lives
 | What | Where |

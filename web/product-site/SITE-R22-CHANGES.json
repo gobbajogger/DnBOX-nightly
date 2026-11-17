@@ -642,8 +642,8 @@
           "after": "<body id=\"top\""
         },
         {
-          "before": "<p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Drone and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p>",
-          "after": "<p>Start with the <a href=\"legacy.html#s3\">four musical tasks</a> for your SMK-37. Check the version installed on your keyboard before following version-specific features.</p><details><summary>Versions, engine names and test status</summary><p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Drone and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p></details>"
+          "before": "<p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Synth One and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p>",
+          "after": "<p>Start with the <a href=\"legacy.html#s3\">four musical tasks</a> for your SMK-37. Check the version installed on your keyboard before following version-specific features.</p><details><summary>Versions, engine names and test status</summary><p>It describes the <strong>0.0.26 hardware-test candidate</strong> at source <code>94197fc8</code>, <strong>not</strong> the <a href=\"https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1\">recommended published 0.0.25.1 release</a>. <strong>Neither is fully hardware-qualified.</strong> Release notes report Elite testing of 0.0.25.1 without a confirmed installed-package hash, and no Pro device test; the exact 0.0.26 candidate's boot/restart remain unverified. Juno, Synth One and held-key chord recording belong to the 0.0.26 candidate only. Chicago is the 303 engine; Miami is not.</p></details>"
         },
         {
           "before": "<a href=\"../builds/\">Build history</a><a href=\"../tools/\">",
@@ -797,7 +797,7 @@
           "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
         },
         {
-          "before": "<option value=\"juno\">Juno</option><option value=\"drone\">Drone (legacy files)</option>",
+          "before": "<option value=\"juno\">Juno</option><option value=\"Synth One\">Synth One (legacy files)</option>",
           "after": "<option value=\"juno\">Juno</option>",
           "scope": "Owner17:16engine retirement. Preserve exact historical data, no engine4\u2192SynthOne relabel."
         },
