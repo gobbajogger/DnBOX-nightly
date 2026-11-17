@@ -8,8 +8,8 @@
 // (GitHub redirects renamed repos, and the R19 digests pin those bytes).
 export const SITE_ORIGIN=Object.freeze({
  owner:'gobbajogger',
- firmwareRepo:'X0X37-for-Loopy-Pro',
- nightlyRepo:'x0x37-for-Loopy-Pro_nightly'
+ firmwareRepo:'DnBOX',
+ nightlyRepo:'DnBOX-nightly'
 });
 export function githubRepo(repo,suffix=''){
  const path=suffix?(suffix.startsWith('/')?suffix:'/'+suffix):'';

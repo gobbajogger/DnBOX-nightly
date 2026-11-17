@@ -15,7 +15,7 @@ import { validateCatalog, verifyDownloads, renderInstaller, installerFingerprint
 const hash = b => createHash('sha256').update(b).digest('hex');
 const raw = makePackage('pro'), product = 'SMK-37 Pro_900';
 const digest = hash(raw), ctl = makeController();
-const evidence = 'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/103';
+const evidence = 'https://github.com/gobbajogger/DnBOX/pull/103';
 const commit = '1'.repeat(40), tree = '2'.repeat(40);
 const pkg = { product, sha256: digest, size: raw.length,
   controller_strategy: 'bundled', controller_size: ctl.length, controller_sha256: hash(ctl), pkg: `https://example.org/${digest}/pro.fwsc` };
@@ -29,7 +29,7 @@ const qualification = { schema: 1, installer_sha256: installerFingerprint(), pac
   controller: { strategy: 'bundled', sha256: hash(ctl), size: ctl.length },
   budgets: { app_code_free: 5620, ram_free: 460, pool_free: 8324 },
   gates: Object.fromEntries([...requiredGates, 'native-build'].map(g => [g, { status: 'PASS', evidence_url: evidence }])),
-  corresponding_source: `https://github.com/gobbajogger/X0X37-for-Loopy-Pro/archive/${commit}.tar.gz`,
+  corresponding_source: `https://github.com/gobbajogger/DnBOX/archive/${commit}.tar.gz`,
   notices: `https://example.org/${digest}/notices.zip`,
 } } };
 let negatives = 0;

@@ -62,7 +62,7 @@ run('legitimate-existing-DEV-lifecycle-progression',edit(j=>j.builds[0].lifecycl
 // Simulated hashes and Git links are not verified device observations.
 const fictionalOwnerReport = () => ({
   report_sha256:'f'.repeat(64),
-  report_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/'+'e'.repeat(40),
+  report_url:'https://github.com/gobbajogger/DnBOX/commit/'+'e'.repeat(40),
   controller_sha256:'d'.repeat(64),
   owner_publication_approved:true
 });
@@ -151,7 +151,7 @@ run('approved-GitHub-source-evidence-remains-allowed-on-append',edit(j=>{
     id:'future-approved-git-source-proof-test',title:'Synthetic future source navigation test',
     date:'2026-10-25',status:'source-only',models:[],source_commit:'f'.repeat(40),
     installable:false,device_verified:false,
-    evidence_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/58b5b45a2dd90581de7a674c331ca5cbe8a67c7e'
+    evidence_url:'https://github.com/gobbajogger/DnBOX/commit/58b5b45a2dd90581de7a674c331ca5cbe8a67c7e'
   });
   j.counts.source_or_historical_checkpoints=j.history.length;
 }),true);
@@ -180,10 +180,10 @@ for(const [label,mutation] of [
  ['unrecognized-build-release-checked',j=>j.builds[0].status='release-checked'],
  ['unrecognized-build-lifecycle',j=>j.builds[0].lifecycle='live'],
  ['duplicate-history-ids',j=>j.history[1].id=j.history[0].id],
- ['unapproved-download-on-github',j=>j.history[0].url='https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/download/v1/firmware.bin'],
- ['unapproved-binary-blob',j=>j.history[0].url='https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/firmware.bin'],
- ['forged-GitHub-host',j=>j.history[0].url='https://github.com.evil.invalid/gobbajogger/X0X37-for-Loopy-Pro/pull/1'],
- ['github-query-forced-download',j=>j.history[0].url='https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/1?download=1'],
+ ['unapproved-download-on-github',j=>j.history[0].url='https://github.com/gobbajogger/DnBOX/releases/download/v1/firmware.bin'],
+ ['unapproved-binary-blob',j=>j.history[0].url='https://github.com/gobbajogger/DnBOX/blob/main/firmware.bin'],
+ ['forged-GitHub-host',j=>j.history[0].url='https://github.com.evil.invalid/gobbajogger/DnBOX/pull/1'],
+ ['github-query-forced-download',j=>j.history[0].url='https://github.com/gobbajogger/DnBOX/pull/1?download=1'],
  ['wrong-source-repository',j=>j.history.find(x=>x.source_repo).source_repo='https://example.net/sources'],
  ['unknown-source-download-field',j=>j.source.download_url='https://example.net/file'],
  ['versioning-picker-url',j=>j.versioning.picker_url='https://example.net/file'],
@@ -201,7 +201,7 @@ run('synthetic-malicious-Release-does-not-become-an-installable-catalog',dir=>{
 
  // Historical hardware observations and PRODUCTION permission are distinct.
  // These synthetic fixtures never add firmware or authorize installation.
-const officialReport='https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/'+'b'.repeat(40);
+const officialReport='https://github.com/gobbajogger/DnBOX/commit/'+'b'.repeat(40);
 function setProof(j,{eliteApproved=false,proVerified=false,proApproved=false}={}){
   const b=j.builds[0];b.hardware_tested=true;
   for(const model of ['elite','pro']){
@@ -235,7 +235,7 @@ run('mutable-history-navigation-is-not-a-proof-claim-on-future-append',edit(j=>{
     id:'future-mutable-navigation-test',title:'Synthetic future read-only history navigation',
     date:'2026-10-25',status:'source-only',models:[],source_commit:'f'.repeat(40),
     installable:false,device_verified:false,
-    url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/main'
+    url:'https://github.com/gobbajogger/DnBOX/tree/main'
   });
   j.counts.source_or_historical_checkpoints=j.history.length;
 }),true);
@@ -246,26 +246,26 @@ run('new-future-DEV-model-may-reference-immutable-validation-record',edit(j=>{
   later.built_at='2026-10-25T00:00:00Z';
   later.source_commit='f'.repeat(40);
   later.models.elite.validation_record=
-    'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/'+
+    'https://github.com/gobbajogger/DnBOX/blob/'+
     'e5cc2c720af5f815cbb6bf0774971a41594b9574'+'/docs/build-proof.json';
   j.builds.unshift(later);
   j.counts.actual_build_generations=j.builds.length;
 }),true);
 for (const [label,mutate] of [
   ['mutable-history-evidence-tree',j=>j.history[0].evidence_url=
-    'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/main'],
+    'https://github.com/gobbajogger/DnBOX/tree/main'],
   ['mutable-model-validation-record',j=>j.builds[0].models.elite.validation_record=
-    'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/main'],
+    'https://github.com/gobbajogger/DnBOX/tree/main'],
   ['mutable-physical-report',j=>{j.builds[0].models.elite.device_verified=true;
     j.builds[0].hardware_tested=true;
     j.builds[0].models.elite.physical_evidence={
       report_sha256:'a'.repeat(64),
-      report_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/main',
+      report_url:'https://github.com/gobbajogger/DnBOX/tree/main',
       controller_sha256:'b'.repeat(64)};
   }],
   ['forged-physical-report-on-untested-model',j=>j.builds[0].models.elite.physical_evidence={
     report_sha256:'bogus',controller_sha256:'bogus',
-    report_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/tree/main',
+    report_url:'https://github.com/gobbajogger/DnBOX/tree/main',
     owner_publication_approved:'approved'}],
   ['nonbuilt-source-forges-QA-live-device-status',j=>{
     const base=j.history.find(x=>x.status==='build-succeeded-unreviewed').build_pipeline;
@@ -412,7 +412,7 @@ for (const [label, mutation] of [
   ['picker-forged-pages-host', p => p.pages='https://untrusted.invalid/installer'],
   ['picker-unsupported-schema', p => p.schema=999],
   ['picker-extra-nonbinary-url', p => p.metadata_url='https://untrusted.invalid/readme.txt'],
-  ['picker-forged-repo-non-url', p => p.repo='gobbajogger/X0X37-for-Loopy-Pro'],
+  ['picker-forged-repo-non-url', p => p.repo='gobbajogger/DnBOX'],
 ]) run(label, editPickerCopies(mutation));
 const r16id='integration-pr103-r10-native-elite-pro-20261024';
 const r16mutate=fn=>edit(j=>{const rec=j.history.find(h=>h.id===r16id);assert.ok(rec);fn(rec);});
@@ -580,10 +580,10 @@ const appendEvidenceCommit=commit=>edit(j=>{
   j.history.push({
     id:'future-synthetic-evidence-commit-append-test',
     title:'Synthetic future source receipt',date:'2026-10-25',status:'source-only',models:['pro'],
-    source_repo:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro',
+    source_repo:'https://github.com/gobbajogger/DnBOX',
     source_commit:futureEvidenceSha,source_tree:'2'.repeat(40),
     device_verified:false,installable:false,evidence_commit:commit,
-    evidence_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/commit/'+futureEvidenceSha,
+    evidence_url:'https://github.com/gobbajogger/DnBOX/commit/'+futureEvidenceSha,
     description:'Synthetic future noninstallable source evidence'
   });
   j.counts.source_or_historical_checkpoints=j.history.length;
@@ -602,11 +602,11 @@ const r28AppendEvidence=(route,gitRef,suffix,reportedCommit)=>edit(j=>{
   const next={
     id:'future-synthetic-r28-evidence-route-test',
     title:'Synthetic future source receipt',date:'2026-10-25',status:'source-only',models:['pro'],
-    source_repo:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro',
+    source_repo:'https://github.com/gobbajogger/DnBOX',
     source_commit:futureEvidenceSha,source_tree:'2'.repeat(40),
     evidence_commit:reportedCommit,description:'Synthetic future noninstallable source evidence'
   };
-  next.evidence_url='https://github.com/gobbajogger/X0X37-for-Loopy-Pro/'+route+'/'+gitRef+suffix;
+  next.evidence_url='https://github.com/gobbajogger/DnBOX/'+route+'/'+gitRef+suffix;
   next.installable=false;
   next.device_verified=false;
   j.history.push(next);

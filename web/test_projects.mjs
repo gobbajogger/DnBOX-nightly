@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Reused from gobbajogger/X0X37-for-Loopy-Pro 08d3164a265123cb4c84e5104642fd93257d63d7, web/test_projects.mjs.
+// Reused from gobbajogger/DnBOX 08d3164a265123cb4c84e5104642fd93257d63d7, web/test_projects.mjs.
 // Host-only project/container/MIDI safety checks. Run: node web/test_projects.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
