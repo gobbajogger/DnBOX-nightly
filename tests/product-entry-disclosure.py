@@ -7,7 +7,11 @@ class EntryDisclosure(unittest.TestCase):
   self.assertIn('Local workspace preview',home);self.assertNotIn('Connect your browser to the instrument.',home)
   self.assertIn('No connected control or playback in this preview.',tools);self.assertIn('Draft download/open',tools)
   self.assertIn('Browser MIDI export is unavailable',project);self.assertIn('source-executed browser provider',project)
-  self.assertIn('Starting-break choices are a separate preparation preview',starting)
+  self.assertIn('Download chosen breaks',starting)
+  self.assertIn('Downloading does not change your keyboard',starting)
+  self.assertIn('Restore replaces slot 1, and slot 2',starting)
+  self.assertIn('It does not add to occupied slots',starting)
   self.assertIn('export const provider=null;',(out/'projects/exchange/provider.mjs').read_text());self.assertIn('null',(out/'remote/device/catalog.mjs').read_text())
 
 if __name__=='__main__':unittest.main()
+
