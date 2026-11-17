@@ -56,7 +56,10 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
  // website/installer Git receipts. Firmware/upstream catalog.source stays on
  // the production repository below.
  const nightlyRepo='https://github.com/gobbajogger/DnBOX-nightly';
- const approvedRepos=new Set([officialRepo, nightlyRepo]);
+ // Pre-rename names of the same two repositories. Historical receipts keep the
+ // URL they were recorded with; GitHub redirects both to the renamed repos.
+ const legacyRepos=['https://github.com/gobbajogger/X0X37-for-Loopy-Pro','https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly'];
+ const approvedRepos=new Set([officialRepo, nightlyRepo, ...legacyRepos]);
  const repoBase=(value)=>{
    for(const base of approvedRepos){
      if(value===base || value.startsWith(base+'/')) return base;
@@ -120,7 +123,7 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
 
  shape(catalog,'schema kind installable source builds history policy counts versioning','manifest');
  shape(catalog.source,'repo ref commit versions_blob_sha','source');
- assert.equal(catalog.source.repo,officialRepo,'source repo');
+ assert.ok([officialRepo, legacyRepos[0]].includes(catalog.source.repo),'source repo');
  assert.equal(catalog.source.ref,'gh-pages','source ref');
 assert.match(catalog.source.commit,/^[a-f0-9]{40}$/,'source commit requires pinned SHA');
  shape(catalog.policy,'nightly public public_device_proven_versions public_latest','policy');

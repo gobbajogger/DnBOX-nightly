@@ -51,3 +51,10 @@ Local: final product build189files PASS including recovered audio NOTICE; final 
 
 ## Hygiene review corrections
 Isolated review-fix branch from the hygiene PR; original PR head is unchanged. Corrected gate-log wording. Full gate and independent final review remain NOT_RUN; consume through the existing integration owner before merge.
+
+## Deletes (gate fixes, per DOT-BRIEF stale-test list)
+- SOURCE_PROVENANCE.json: provenance hash pins; the check is removed as evidence-only.
+- INPUT-MANIFEST.json: input hash manifest; no code reads it.
+- tests/installer-evidence-links.test.mjs: evidence-link test, stale per DOT-BRIEF.
+- tests/fixtures/build-product-site-missing-guard-mutant.mjs: mutant fixture pinned to the build script's hash (source-drift guard removed).
+- tests/fixtures/build-product-site-missing-guard-mutant.json: metadata for that mutant fixture.

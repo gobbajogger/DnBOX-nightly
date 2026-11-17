@@ -32,6 +32,10 @@ SITE = ['index.html', 'install/index.html', 'breaks/index.html', 'starting-break
         'presets/index.html', 'presets/legacy/index.html', 'manual/index.html', 'manual/original/index.html',
         'builds/index.html', 'tools/index.html', 'help/index.html', 'new/index.html', 'remote/identity/index.html']
 OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
+# The web/x0x_*.html files are templates (/*LIB*/, /*CATALOG*/); npm run build compiles
+# them into docs/. The offline edition is the compiled page, so that is what is captured.
+OFFLINE_BUILT = {'x0x_installer.html': 'install/index.html', 'x0x_breaks.html': 'breaks/index.html',
+                 'x0x_projects.html': 'projects/index.html'}
 PAGE01 = {'bg': '#050a0d', 'panel': '#101a1f', 'line': '#293d43', 'ink': '#dde7de', 'muted': '#99aaa9', 'amber': '#ffb337'}
 ENGINES = {'909': '#ff9529', '808': '#ff4841', 'BASS A': '#82f05a', 'BASS B': '#46cdff', 'BREAK': '#d678ff'}
 FREEZE_JS = """
@@ -175,7 +179,10 @@ def exit_status(results, header_fails, errors):
 def main():
     p = port()
     srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    p2 = port()
+    srv2 = subprocess.Popen([sys.executable, '-m', 'http.server', str(p2), '-d', str(ROOT / 'docs')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(0.8)
+    built = f'http://127.0.0.1:{p2}'
     results, header_fails, errors = [], [], []
     base = f'http://127.0.0.1:{p}'
     try:
@@ -225,12 +232,12 @@ def main():
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/' + rel); settle(pg)
+                    pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 c.close()
             b.close()
     finally:
-        srv.terminate()
+        srv.terminate(); srv2.terminate()
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')
     for f in header_fails: print('FAIL header', f)
     for e in errors: print('PAGEERROR', e)
