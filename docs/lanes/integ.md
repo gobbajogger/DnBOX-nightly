@@ -1,3 +1,8 @@
+Move: M0 (clean start and green gate)   PR: #136   Head: this commit
+LEFT items PASS: 0/2; failing: L15 L16
+Gate at head: NOT_RUN (M0 start checks next; full green gate remains follow-up)
+ETA merge: start files after M0 checks; green gates 2026-11-17 22:00 VLAT
+
 # Lane: integ   (copy to docs/lanes/integ.md; update in every push)
 Owner agent: <name>   Branch: lane/integ-<topic>   Draft PR: #<n>   Head: <sha8>   Updated: <YYYY-MM-DD HH:MM VLAT>
 
