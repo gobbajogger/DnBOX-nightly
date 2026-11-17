@@ -4,11 +4,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
+import {mkdirSync,mkdtempSync,rmSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {buildProductSite} from '../scripts/build-product-site.mjs';
-import {pathToFileURL} from 'node:url';
-test('built five previews survive nested HTTP hosting with exact pinned bytes',async()=>{
- const {output}=buildProductSite();
+import {pathToFileURL,fileURLToPath} from 'node:url';
+test('built five previews survive nested HTTP hosting with exact pinned bytes',async t=>{
+ const parent=fileURLToPath(new URL('../.output/',import.meta.url));
+ mkdirSync(parent,{recursive:true});
+ const target=mkdtempSync(parent+'break-http-test-');
+ t.after(()=>rmSync(target,{recursive:true,force:true}));
+ const {output}=buildProductSite({output:target});
  const {createStartingBreakPreview}=await import(pathToFileURL(`${output}/starting-break-preview.mjs`));
  const contract=JSON.parse(await readFile(new URL('../web/product-site/sample-contract.json',import.meta.url)));
  const routes=new Map(contract.assets.map(a=>[`/dnbox/assets/starting-breaks/${a.id}.wav`,`${output}/assets/starting-breaks/${a.id}.wav`]));
