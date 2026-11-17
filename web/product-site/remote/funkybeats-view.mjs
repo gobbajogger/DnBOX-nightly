@@ -54,6 +54,7 @@ export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
  Object.assign(ui,{performMode:false,playing:false,performChannelPatterns:[...targets],performQueuedChanges:{},autoSave(){}});
  ui.buildPerformGrid();
  const grid=container.children.find(n=>n.className==='perform-grid');
+ grid.children=grid.children.filter(n=>n.className!=='perform-header');
  for(let ch=0;ch<parts.length;ch++)for(let p=0;p<patternCount;p++){
   const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent='P'+(p+1);cell.setAttribute('type','button');
   cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');

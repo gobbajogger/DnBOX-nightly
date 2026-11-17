@@ -50,3 +50,21 @@ test('FunkyBeats native preview is cancelled when navigation interrupts editing'
  const x=await boot();x.view('sound');const g=data.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0),c=g.controls.find(c=>c.name.toUpperCase()==='WAVE'),t=nativeInput(idOf(g,c),c.raw<c.max?c.raw+1:c.raw-1);
  input(x,t);x.view('patterns');assert.equal(Number(t.value),c.raw);assert.equal(changes(x),'No changes.');assert.equal((x.get('other-view').innerHTML.match(/data-launch-part=/g)||[]).length,160);
 });
+test('owner visual corrections: sound uses concise heading and captured units; projects show real local work actions',async()=>{
+ const x=await boot();x.view('sound');assert.doesNotMatch(x.get('other-view').innerHTML,/local bank preview/i);assert.match(x.get('other-view').innerHTML,/14 %/);
+ x.view('files');assert.match(x.get('other-view').innerHTML,/data-project-action="save"/);assert.match(x.get('other-view').innerHTML,/data-project-action="open"/);assert.match(x.get('other-view').innerHTML,/notes/);
+});
+test('owner visual corrections: Mix has labeled controls instead of captured CPU telemetry',async()=>{
+ const x=await boot();x.view('mix');assert.doesNotMatch(x.get('other-view').innerHTML,/CPU/);assert.match(x.get('other-view').innerHTML,/Master/);assert.equal((x.get('other-view').innerHTML.match(/class="mixer-fader"/g)||[]).length,5);
+});
+test('Mix retains every source FX send and its editable identity',async()=>{
+ const x=await boot();x.view('mix');const html=x.get('other-view').innerHTML;
+ const screens=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.filter(s=>/fx-(reverb|delay)-direct/.test(s.path));
+ for(const screen of screens)for(const c of screen.controls){assert.ok(html.includes('data-param="'+screen.path+'|'+c.identity+'"'),c.context.name);}
+});
+test('rendered parameter inspector supplies the span dereferenced by edits',async()=>{
+ const x=await boot();let inserted='';x.get('other-view').insertAdjacentHTML=(_,html)=>{inserted=html};x.view('mix');assert.match(inserted,/<label><span><\/span><output id="parameter-readout"/);
+ x.get('parameter-inspector').querySelector=s=>s==='span'&&inserted.includes('<span></span>')?new Node():null;
+ const id='current-state-and-reference/mix-master.svg|1:4:0:2',target=Object.assign(new Node(),{dataset:{param:id}});
+ assert.doesNotThrow(()=>x.get('other-view').emit('keydown',{target,key:'ArrowUp',preventDefault(){}}));
+});
