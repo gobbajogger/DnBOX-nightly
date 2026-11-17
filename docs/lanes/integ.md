@@ -43,3 +43,6 @@ Removal-list exceptions retained: AGENTS.md. AGENTS.md is replaced, not deleted;
 Each path below is an obsolete brief/rule/handoff explicitly listed in the supplied remove manifest; the original bytes remain in the inherited baseline and backup history.
 - `coordination/edge-case-hunt/EC-20261026-011.json` — supplied removal list; historical instructions, retained in Git history.
 - `docs/nightly-first-development-gate.md` — supplied removal list; historical instructions, retained in Git history.
+
+## Hygiene review corrections
+Isolated review-fix branch from the hygiene PR; original PR head is unchanged. Corrected gate-log wording. Full gate and independent final review remain NOT_RUN; consume through the existing integration owner before merge.
