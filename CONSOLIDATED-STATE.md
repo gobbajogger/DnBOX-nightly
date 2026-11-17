@@ -1,6 +1,8 @@
 # Consolidated source ledger
 
-Inherited consolidated baseline: `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`.
-This tree contains the supplied RULES.md v2 start-file/removal payload for PR #136. The eventual normal merge SHA is recorded by GitHub on that PR; no complete lane, full Local gate, product release or Pages publication is asserted here.
+| Start | Repository | Merged PR | Exact merge SHA |
+|---|---|---|---|
+| START-FW | gobbajogger/X0X37-for-Loopy-Pro | #955 | `ea4d1d37edca8dd39469573107a49309d0ea68d7` |
+| START-NT | gobbajogger/x0x37-for-Loopy-Pro_nightly | #136 | `bc3ed20d69159a01e82e079fa7e1cbbf66cab2ce` |
 
-Broad unmerged work is retained at `backup/integ-before-start-split-20261116`, exact tip `b39e99c4197544037896fd4ed463a338a5d423c3`. Gate/environment corrections move to an independent follow-up; other product work remains in the backup and its original lane branches. No unique history is deleted.
+Start-only delivery is verified. M0 L16 green gates remain open; no finished product lane or release is claimed. `docs/DELIVERY-PLAN.md` is the unchanged owner plan. Prior broad product work stays in donor branches and backup history; take selected changes, never merge donors whole.

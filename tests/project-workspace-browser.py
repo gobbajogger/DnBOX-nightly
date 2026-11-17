@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Actual generated UI, synthetic state only; no device or physical MIDI access."""
+import os
 import asyncio, hashlib, json, threading
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -25,7 +26,7 @@ async def main():
  srv=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=srv.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{srv.server_port}'
  errors=[];screens=[]
  async with async_playwright() as p:
-  b=await p.chromium.launch()
+  b=await p.chromium.launch(chromium_sandbox=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
   for width in [320,390,768,1280]:
    page=await b.new_page(viewport={'width':width,'height':900});page.on('pageerror',lambda e:errors.append(str(e)))
    await page.goto(base+'/install/')
