@@ -36,6 +36,16 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
   inputs.push([row.path,data]);
  }
+ // Keep historical preview URLs working without admitting arbitrary private audio.
+ // Aliases reuse only WAV bytes that passed the pinned five-sample admission above.
+ for(const [name,data]of [...inputs]){
+  const match=/^assets\/starting-breaks\/(personal-br[12]-zone[123])\.wav$/.exec(name);
+  if(!match)continue;
+  for(const alias of [`private-audio/${match[1]}`,`private-audio/${match[1]}.wav`]){
+   if(seen.has(alias))throw Error('Starting-break alias collision');
+   seen.add(alias);inputs.push([alias,data]);
+  }
+ }
  // No stale private/unrelated files may ride along in a publisher input.
  function inspectOutput(dir){if(!existsSync(dir))return;for(const name of readdirSync(dir)){const p=join(dir,name);noLinks(p,repoRoot);const stat=lstatSync(p);if(stat.isDirectory())inspectOutput(p);else{if(!stat.isFile())throw Error('Regular output files required');if(stat.nlink!==1)throw Error('Output hardlink refused');if(!seen.has(relative(target,p).split(sep).join('/')))throw Error('unexpected output file: '+relative(target,p));}}}
  inspectOutput(target);
