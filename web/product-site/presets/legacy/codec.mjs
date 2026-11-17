@@ -82,7 +82,7 @@ export function fileNameFor(record, sequence = 1) {
   return stem + suffix;
 }
 export function explicitModelHint(filename) {
-  const m = String(filename).toLowerCase().match(new RegExp("\\.(elite|pro)\\.(chicago|miami|juno|" + LEGACY_SLOT2_INFIX + "|909|808|break)\\.dnpr$"));
+  const m = String(filename).toLowerCase().match(new RegExp("\\.(elite|pro)\\.(chicago|miami|juno|synthone|" + LEGACY_SLOT2_INFIX + "|909|808|break)\\.dnpr$"));
   return m ? m[1] : null;
 }
 export function ensureDeviceModel(requested, reported) {

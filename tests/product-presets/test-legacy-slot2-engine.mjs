@@ -31,6 +31,7 @@ for (const path of ['codec.mjs', 'legacy/codec.mjs']) test(path + ' adopts engin
   assert.ok(again.params.every(b => b === 0));
   assert.match(c.fileNameFor(r), /\.synthone\.dnpr$/);
   assert.equal(c.explicitModelHint('user.elite.' + infix + '.dnpr'), 'elite');
+  for (const model of ['elite', 'pro']) assert.equal(c.explicitModelHint('user.' + model + '.synthone.dnpr'), model);
   const encoded = c.encodeDnpr({ engine: 'synthone', name: 'Init', params: new Uint8Array(8) });
   assert.equal(c.parseDnpr(encoded).engine, 'synthone');
 });
