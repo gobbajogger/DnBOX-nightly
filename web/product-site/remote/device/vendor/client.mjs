@@ -4,32 +4,9 @@ const MAX=0x0fffffff;
 const validHigh=a=>Array.isArray(a)&&a.length===3&&a.every(x=>Number.isInteger(x)&&x>=0&&x<=0xffffffff);
 const sameHigh=(a,b)=>validHigh(a)&&validHigh(b)&&a.every((x,i)=>x===b[i]);
 export class MidiBroker{
- constructor({input,output,timeoutMs=250,attempts=2,now=()=>performance.now(),setTimer=setTimeout,clearTimer=clearTimeout}){
-  if(!input?.addEventListener||!output?.send||!Number.isInteger(attempts)||attempts<1||attempts>2||!Number.isFinite(timeoutMs)||timeoutMs<=0||![now,setTimer,clearTimer].every(f=>typeof f==='function'))throw Error('Invalid remote transport');
-  Object.assign(this,{input,output,timeoutMs,attempts,now,setTimer,clearTimer});this.pending=new Map;this.closed=false;this.listener=e=>this.receive(e.data);input.addEventListener('midimessage',this.listener);
- }
- clock(){try{return this.now()}catch{return NaN}}
- receive(bytes){
-  let r;try{r=decodeReply(bytes)}catch{return}if(r.status>STATUS.EXHAUSTED||r.kind>KIND.HELD)return;
-  const p=this.pending.get(r.request);if(!p)return;const c=p.command;
-  if(r.op!==c.op||r.client!==c.client||r.request!==c.request||!r.unit||(c.op!==OP.HELLO&&(r.unit!==c.unit||!sameHigh(r.unitHigh,c.unitHigh)))||(c.op!==OP.OPEN&&r.epoch!==c.epoch)||(c.op!==OP.HELLO&&r.control!==c.control))return;
-  const now=this.clock();if(!Number.isFinite(now)||now<p.started)return p.finish(Error('Transport clock changed'));
-  if(now>=p.deadline)return p.finish(Error('Firmware reply timed out'));
-  p.finish(null,r);
- }
- exchange(command){
-  if(this.closed)return Promise.reject(Error('Remote transport closed'));
-  let packet,copy,started,deadline;
-  try{packet=encodeCommand(command);copy={...command,unitHigh:[...command.unitHigh]};started=this.clock();deadline=started+this.timeoutMs*this.attempts;if(!Number.isFinite(started)||!Number.isFinite(deadline))throw Error('Invalid transport clock');}catch(e){return Promise.reject(e)}
-  const request=copy.request;if(this.pending.has(request))return Promise.reject(Error('Duplicate outstanding request'));
-  return new Promise((resolve,reject)=>{
-   let timer=null,count=0,done=false;
-   const finish=(error,result)=>{if(done)return;done=true;this.clearTimer(timer);this.pending.delete(request);error?reject(error):resolve(result)};
-   this.pending.set(request,{command:copy,started,deadline,finish});
-   const send=()=>{if(done)return;if(this.closed)return finish(Error('Remote transport closed'));const now=this.clock();if(!Number.isFinite(now)||now<started)return finish(Error('Transport clock changed'));if(now>=deadline||count++>=this.attempts)return finish(Error('Firmware reply timed out'));timer=this.setTimer(send,Math.min(this.timeoutMs,deadline-now));try{this.output.send(packet)}catch{finish(Error('MIDI send failed'))}};
-   send();
-  });
- }
+ constructor({input,output,timeoutMs=250,attempts=2}){if(!input?.addEventListener||!output?.send||!Number.isInteger(attempts)||attempts<1||attempts>2||!Number.isFinite(timeoutMs)||timeoutMs<=0)throw Error('Invalid remote transport');Object.assign(this,{input,output,timeoutMs,attempts});this.pending=new Map;this.closed=false;this.listener=e=>this.receive(e.data);input.addEventListener('midimessage',this.listener);}
+ receive(bytes){let r;try{r=decodeReply(bytes)}catch{return}if(r.status>STATUS.EXHAUSTED||r.kind>KIND.HELD)return;const p=this.pending.get(r.request);if(!p)return;const c=p.command;if(r.op!==c.op||r.client!==c.client||r.request!==c.request||!r.unit||(c.op!==OP.HELLO&&(r.unit!==c.unit||!sameHigh(r.unitHigh,c.unitHigh)))||(c.op!==OP.OPEN&&r.epoch!==c.epoch)||(c.op!==OP.HELLO&&r.control!==c.control))return;p.finish(null,r);}
+ exchange(command){if(this.closed)return Promise.reject(Error('Remote transport closed'));let packet;try{packet=encodeCommand(command)}catch(e){return Promise.reject(e)}if(this.pending.has(command.request))return Promise.reject(Error('Duplicate outstanding request'));return new Promise((resolve,reject)=>{let timer=null,count=0,done=false;const finish=(error,result)=>{if(done)return;done=true;clearTimeout(timer);this.pending.delete(command.request);error?reject(error):resolve(result)};this.pending.set(command.request,{command:{...command,unitHigh:[...command.unitHigh]},finish});const send=()=>{if(done)return;if(this.closed)return finish(Error('Remote transport closed'));if(count++>=this.attempts)return finish(Error('Firmware reply timed out'));timer=setTimeout(send,this.timeoutMs);try{this.output.send(packet)}catch{finish(Error('MIDI send failed'))}};send();});}
  dispose(){if(this.closed)return;this.closed=true;this.input.removeEventListener('midimessage',this.listener);for(const p of [...this.pending.values()])p.finish(Error('Remote transport closed'));}
 }
 export class RemoteClient{

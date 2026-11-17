@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Actual generated UI; no MIDI/device requests or private data."""
-import os
 import asyncio,threading
 from pathlib import Path
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
@@ -12,7 +11,7 @@ class H(SimpleHTTPRequestHandler):
 async def main():
  s=ThreadingHTTPServer(('127.0.0.1',0),H);threading.Thread(target=s.serve_forever,daemon=True).start();n=0
  async with async_playwright() as p:
-  b=await p.chromium.launch(chromium_sandbox=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
+  b=await p.chromium.launch()
   for w in [320,390,768,1280]:
    page=await b.new_page(viewport={'width':w,'height':900})
    for route in ['firmware','samples','projects']:

@@ -17,7 +17,7 @@ async def main():
   assert ok,label
   count+=1;print('PASS '+label,flush=True)
  async with async_playwright() as pw:
-  browser=await pw.chromium.launch(chromium_sandbox=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
+  browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
   page=await browser.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   for width in [320,390,768,1280]:
    await page.set_viewport_size({'width':width,'height':900})

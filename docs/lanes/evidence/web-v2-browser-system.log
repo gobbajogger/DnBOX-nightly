@@ -1,9 +1,0 @@
-Tree174f8c76bb8a2786d92b1d548406e7f165f14cea; browser NOT_RUN (FAIL), sandbox retained.
-[pid=19][err] [19:19:1116/092759.041074:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open <home>/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)
-[pid=19][err] [19:19:1116/092759.041374:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open <home>/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)
-[pid=19][err] [19:19:1116/092759.051949:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
-[pid=19][err] [1116/092759.052666:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)
-  - [pid=19][err] [19:19:1116/092759.041074:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open <home>/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)
-  - [pid=19][err] [19:19:1116/092759.041374:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open <home>/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)
-  - [pid=19][err] [19:19:1116/092759.051949:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
-  - [pid=19][err] [1116/092759.052666:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)

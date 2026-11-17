@@ -1,3 +1,0 @@
-PASS TouchOSC root-callback source -> C host; explicit simulator connect, route1 only, no-pin no-send, pending/timeout failclosed; NOT actual TouchOSC runtime
-PASS simulator-only Lua session -> C host identity/catalog/lease/read/set/close; limits, pending transaction and timeout fail closed
-PASS Lua codec -> pinned C host HELLO/OPEN/READ/SET/CONFLICT/CLOSE; no TouchOSC or device claim
