@@ -20,6 +20,16 @@ DNBOX-GATE: FAIL <sha> <failed checks>
 
 A docs- or meta-only change may say why the full product gate was not required, but still name the SHA.
 
+The local gate is fail-closed and offline by default (`scripts/gate.sh --self-test` proves the parser). It prints `DNBOX-GATE: PASS <sha>` only if every required inner step ran and reported success; otherwise `FAIL` or `INCOMPLETE`. It does not use network Git unless you pass `--online`. A skipped network step prints `SKIP`.
+
+After a local PASS, post the status so the pull request can merge into `integration/dnbox-consolidated`:
+
+```
+scripts/gate.sh <lane> --post
+```
+
+That publishes a `dnbox-gate` commit status on the tested SHA. The consolidated branch requires this status to be success, and it requires a pull request. GitHub Actions are not used.
+
 ## Done checks covered
 
 <!-- LEFT / checklist IDs this PR claims, for example L15, L16, or "docs/meta only". -->

@@ -23,6 +23,14 @@ Please use the issue forms. Do not attach private backups, credentials, or raw c
    `scripts/gate.sh <lane>`
 
    It wraps `scripts/dnbox-gate.sh` and prints `DNBOX-GATE: PASS <sha>` or `DNBOX-GATE: FAIL <sha> <failed checks>`. Name the lane (`remote`, `web`, or `integ`) and list the done checks the PR covers.
+
+   The gate is fail-closed and offline by default. It prints `DNBOX-GATE: PASS <sha>` only if every required inner step ran and reported success; otherwise the line is `FAIL` or `INCOMPLETE`. It does not `git fetch`, `clone` or `ls-remote` unless you pass `--online` (or set `DNBOX_GATE_ONLINE=1`). A skipped network step prints `SKIP`. Prove the parser with `scripts/gate.sh --self-test` (or `scripts/gate-selftest.sh`).
+
+   After a local PASS, post the result as a GitHub commit status so the pull request can merge into `integration/dnbox-consolidated`:
+
+   `scripts/gate.sh <lane> --post`
+
+   That uses `gh api` to set context `dnbox-gate` (success, failure, or error) on the tested SHA, with the `DNBOX-GATE` line as the description. GitHub Actions are not used. The consolidated branch requires a successful `dnbox-gate` status and a pull request; do not push that branch directly. A docs- or meta-only change may still name the SHA and explain why the full product gate was not required, but a merge into consolidated still needs a posted `dnbox-gate` success on the pull-request head.
 5. Do not change GitHub workflow files under `.github/workflows/` unless a maintainer asks you to. GitHub Actions are off on this repository; checks run locally.
 
 ## Releases
