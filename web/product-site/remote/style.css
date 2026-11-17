@@ -261,3 +261,20 @@ dialog::backdrop{background:#000a}
 #roll-grid .black-key{z-index:0}
 #roll-grid::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--vertical-grid);background-repeat:repeat-y;background-size:100% 1px}
 #roll-grid .note{z-index:2}
+
+/* Actual FunkyBeats sequencer structure, restyled to the locked R22 panels. */
+.drum-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px);gap:16px;align-items:start}
+.drum-layout>section,.drum-layout>aside{min-width:0}
+.funkybeats-sequencer .seq-row{display:grid;grid-template-columns:60px repeat(4,minmax(176px,1fr));width:max(100%,764px);min-height:32px;gap:0}
+.funkybeats-sequencer .seq-steps{display:contents}
+.funkybeats-sequencer .seq-step-group{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-left:2px solid var(--r22-selected-edge,var(--line));gap:3px;padding:3px}
+.funkybeats-sequencer .seq-step{position:relative;isolation:isolate;min-height:26px;min-width:0;padding:2px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r22-panel-radius,0);color:var(--fg);font-size:12px;overflow:hidden}
+.funkybeats-sequencer .seq-step.hit{border-color:var(--track);color:var(--fg)}
+.funkybeats-sequencer .seq-step .step-fill{position:absolute;inset:0;opacity:0;z-index:-1}
+.funkybeats-sequencer .seq-step .velocity-bar{position:absolute;bottom:0;left:3px;width:2px;background:var(--track);opacity:.7;z-index:-1}
+.funkybeats-sequencer .seq-channel-info{display:flex;align-items:center;gap:5px;padding:0 5px;font-size:13px;font-weight:700}
+.funkybeats-sequencer .seq-channel-color{width:3px;height:18px}
+.funkybeats-sequencer .seq-numbers{min-height:24px;color:var(--muted);font-size:11px;text-align:center;align-items:center}
+.funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
+.funkybeats-sequencer{max-width:100%;overflow:auto}
+

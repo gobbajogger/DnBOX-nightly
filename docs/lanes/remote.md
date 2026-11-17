@@ -1,26 +1,17 @@
-# Lane: remote   (copy to docs/lanes/remote.md; update in every push)
-Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8>   Updated: <YYYY-MM-DD HH:MM VLAT>
+Move: M3 (remote whole Remote)   PR: not opened   Head: this source checkpoint
+LEFT items PASS: 0/6; failing: L23 L24 L25 L26 L27 L28
+Gate at head: NOT_RUN (browser, full move gate and independent Review pending)
+ETA merge: unconfirmed; plan target 2026-11-19 12:00 VLAT
 
-## Checklist (from CHECKLISTS.md)
-| ID | Check | Status (PASS/FAIL) | Evidence (SHA + log path or PR comment link) |
-|---|---|---|---|
-| C1 | Local gate at head | FAIL | |
-| <S1…> | | FAIL | |
+Owner: Dot remote step-port worker. Branch: lane/remote-step-port. Base: START-NT bc3ed20d69159a01e82e079fa7e1cbbf66cab2ce.
 
-## Now / next
-- Now: <item, riskiest first>
-- Next: <item>
+## Delivered piece
+FunkyBeats step-sequencer source port integrated into the Remote drums view for 909/808: 176 typed cells per kit, click-to-toggle through the existing undoable model, R22 styling and MIT notice. Structural test and product build pass. This is the user-requested source checkpoint, not full M3 completion or native protocol admission.
 
-## Blockers (each with its fix and the route being tried; never "waiting")
-- <blocker> → <fix> (since HH:MM)
+## Next
+Run the browser-capable Orchestrator stage on this exact source, then consume this piece in the sole M3 move branch. Preserve the older dirty M3 tree; this isolated branch does not overwrite it. Remaining roll, mixer, launcher, synth, slider-lane, visual and actual-protocol checks remain open.
 
-## Top 3 risks for the next hour
-1.
-2.
-3.
-
-## Deletes (files this lane removes on purpose, with reason; the gate's no-loss step reads this)
-- <path> — <reason>
-
-## Conflicts noted (RULES 23)
-- <conflict> → reading used: <…>
+## Checks
+- `node --test tests/product-remote/funkybeats-drums.test.mjs`: PASS.
+- `node scripts/build-product-site.mjs`: PASS; manifest includes static application closure.
+- Browser / landscape / full Local gate / Review: NOT_RUN. Prior sandbox EPERM is not retried or bypassed.
