@@ -266,3 +266,79 @@ dialog::backdrop{background:#000a}
 .hdr .conn-state + .hdr-actions{margin-left:0}
 .engines .overflow{margin-left:8px;flex:none}
 @media (orientation:portrait) and (max-width:600px){.hdr .conn-state{order:2;padding-right:8px;font-size:11px}.hdr .conn-state + .hdr-actions{margin-left:0;order:2}}
+
+/* Actual FunkyBeats sequencer structure, restyled to the locked R22 panels. */
+.drum-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px);gap:16px;align-items:start}
+.drum-layout>section,.drum-layout>aside{min-width:0}
+.funkybeats-sequencer .seq-row{display:grid;grid-template-columns:60px repeat(4,minmax(176px,1fr));width:max(100%,764px);min-height:32px;gap:0}
+.funkybeats-sequencer .seq-steps{display:contents}
+.funkybeats-sequencer .seq-step-group{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-left:2px solid var(--r22-selected-edge,var(--line));gap:3px;padding:3px}
+.funkybeats-sequencer .seq-step{position:relative;isolation:isolate;min-height:26px;min-width:0;padding:2px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r22-panel-radius,0);color:var(--fg);font-size:12px;overflow:hidden}
+.funkybeats-sequencer .seq-step.hit{border-color:var(--track);color:var(--fg)}
+.funkybeats-sequencer .seq-step .step-fill{position:absolute;inset:0;opacity:0;z-index:-1}
+.funkybeats-sequencer .seq-step .velocity-bar{position:absolute;bottom:0;left:3px;width:2px;background:var(--track);opacity:.7;z-index:-1}
+.funkybeats-sequencer .seq-channel-info{display:flex;align-items:center;gap:5px;padding:0 5px;font-size:13px;font-weight:700}
+.funkybeats-sequencer .seq-channel-color{width:3px;height:18px}
+.funkybeats-sequencer .seq-numbers{min-height:24px;color:var(--muted);font-size:11px;text-align:center;align-items:center}
+.funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
+.funkybeats-sequencer{max-width:100%;overflow:auto}
+
+
+/* FunkyBeats typed local surfaces, shared R22 tokens. */
+.funkybeats-launcher .perform-grid{display:grid;grid-template-columns:90px repeat(32,76px);gap:5px;min-width:max-content}
+.funkybeats-launcher .perform-row-label{position:sticky;left:0;background:var(--bg);z-index:1;padding:10px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.funkybeats-launcher .perform-header{text-align:center;color:var(--muted);font-size:11px}
+.funkybeats-launcher .perform-cell{min-height:44px;padding:0 8px;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control)}
+.funkybeats-launcher .perform-cell[aria-pressed=true]{background:var(--focus-col);outline:1px solid var(--accent)}
+/* Upstream synth slider structure keeps exact native domains inside R22 cells. */
+.funkybeats-typed-unit .funkybeats-typed-param{display:contents}
+.funkybeats-typed-unit label{font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
+.funkybeats-typed-unit .synth-range{width:100%;min-width:0;height:14px;margin:0;padding:0;accent-color:var(--accent);touch-action:none}
+.funkybeats-typed-unit .param-val{font-size:var(--fs-value);font-weight:700;color:var(--fg);letter-spacing:0}
+
+/* Typed upstream mixer: five native strips, no invented VU/EQ/bus state. */
+.funkybeats-mixer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:600px;margin:12px auto}
+.funkybeats-mixer .mixer-channel{display:grid;justify-items:center;gap:8px;min-width:0;padding:8px 2px;border:1px solid var(--line);border-radius:var(--radius,8px)}
+.funkybeats-mixer .mixer-channel-name{font-size:var(--fs-xs);font-weight:700}
+.funkybeats-mixer .mixer-fader-container{height:150px}
+.funkybeats-mixer .mixer-fader{writing-mode:vertical-lr;direction:rtl;appearance:auto;width:30px;height:150px;margin:0;padding:0;accent-color:var(--accent);touch-action:none}
+.funkybeats-mixer .mixer-db{font-size:var(--fs-value);font-weight:700}
+
+/* Owner visual review: one bounded panel system, no overlapping history tray. */
+#parameter-inspector{position:static;bottom:auto;margin:12px 0 0;max-width:100%;border:1px solid var(--line);border-radius:var(--r-panel)}
+.parameter.encoder{min-width:0}
+#other-view .encoder{overflow:hidden}
+#other-view .encoder>span:last-child{white-space:normal}
+#other-view .encoder output{max-width:100%;overflow-wrap:anywhere}
+.mix-panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mix-panel{min-width:0}
+.mix-panel .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.project-summary,.destinations section{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);padding:16px;min-width:0}
+.project-summary{margin-bottom:12px}
+.project-actions{display:flex;flex-wrap:wrap;gap:8px}
+.destinations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.destinations p,.project-summary p{color:var(--muted);line-height:1.4}
+.funkybeats-launcher .perform-grid{grid-template-columns:repeat(8,minmax(0,1fr));min-width:0;width:100%}
+.funkybeats-launcher .perform-row-label{grid-column:1/-1;position:static;padding:8px 2px}
+.funkybeats-launcher .perform-cell{min-width:0;width:100%;padding:0 4px;text-align:center}
+/* Keep the first bar gridline visible beside the playhead. */
+.roll-playhead{position:absolute;left:1px;top:0;bottom:0;width:1px;background:var(--accent);z-index:3;pointer-events:none}
+#roll-grid .note{overflow:visible}
+.note-name{display:inline-block;min-width:24px;pointer-events:none;background:inherit;border-radius:var(--r-note);padding-right:2px}
+#lane-param{padding:6px 2px;align-items:center;text-align:center}
+.lane-word{font-size:10px;letter-spacing:0}
+#lane-value{font-size:16px;max-width:100%}
+#velocity .fader output{left:0;bottom:0;max-width:28px;font-size:9px;text-align:center;overflow:visible}
+@media (max-width:600px){
+ :root{--key-w:64px}
+ .mix-panels{grid-template-columns:1fr}
+ .destinations{grid-template-columns:1fr}
+ .funkybeats-launcher .perform-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .pitch{left:6px;font-size:11px}
+ .note-name{font-size:10px}
+}
+@media (orientation:landscape) and (max-height:500px){
+ .funkybeats-mixer .mixer-fader-container,.funkybeats-mixer .mixer-fader{height:110px}
+ #other-view .encoder{min-height:80px}
+ #other-view h2{font-size:18px;margin:0 0 8px}
+}
