@@ -12,3 +12,5 @@ Work toward the final build is tagged on `integration/dnbox-consolidated` as pre
 Whoever merges a finished move M0–M6 into `integration/dnbox-consolidated` creates the tag at that merge SHA and publishes a GitHub **prerelease** with the same name. Do not force-move a tag. Do not mark these as the latest public release.
 
 The move list and the done checks are in [DELIVERY-PLAN.md](DELIVERY-PLAN.md) and [START-POINT.md](START-POINT.md).
+
+A short summary of these tags and of the public v* releases is in [CHANGELOG.md](../CHANGELOG.md).

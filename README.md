@@ -1,5 +1,9 @@
 # DnBOX nightly
 
+[![Latest firmware release](https://img.shields.io/github/v/release/gobbajogger/DnBOX?label=firmware)](https://github.com/gobbajogger/DnBOX/releases/latest)
+[![Nightly installer](https://img.shields.io/badge/nightly-Pages-6f42c1)](https://gobbajogger.github.io/DnBOX-nightly/install/)
+[![Tracking](https://img.shields.io/badge/tracking-%23147-informational)](https://github.com/gobbajogger/DnBOX-nightly/issues/147)
+
 ## Current status
 
 This is the **beta / nightly channel** for the DnBOX website, browser Remote, and untested firmware builds. The firmware source of record is [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
@@ -9,7 +13,7 @@ This is the **beta / nightly channel** for the DnBOX website, browser Remote, an
 - **Integration branch:** `integration/dnbox-consolidated` (tags `dnbox-start-2026-11-17` and `start-nt-2026-11-17`)
 - **What's done and what's left:** [docs/START-POINT.md](docs/START-POINT.md) and [docs/DELIVERY-PLAN.md](docs/DELIVERY-PLAN.md)
 
-GitHub Actions are off. Checks run locally with `scripts/gate.sh <lane>`, which prints `DNBOX-GATE: PASS <sha>` or `DNBOX-GATE: FAIL <sha> <failed checks>`. Pull requests go into `integration/dnbox-consolidated`, not `main`.
+GitHub Actions are off. Checks run locally with `scripts/gate.sh <lane>` (offline by default; `--post` publishes a `dnbox-gate` commit status), which prints `DNBOX-GATE: PASS <sha>`, `FAIL`, or `INCOMPLETE`. Pull requests go into `integration/dnbox-consolidated`, not `main`. See the [changelog](CHANGELOG.md) and [tracking issue #147](https://github.com/gobbajogger/DnBOX-nightly/issues/147).
 
 The R16/V10 notes below are local workspace history. They are not a qualification of the live site or of `integration/dnbox-consolidated`.
 
@@ -100,7 +104,7 @@ On desktop Chrome or Edge, connect by a USB data cable, click **Connect**, and g
 - **[Sample importer](https://gobbajogger.github.io/DnBOX/breaks/)** — import your own break loops
 - **[Projects](https://gobbajogger.github.io/DnBOX/projects/)** — save, load and export projects
 
-Repository and Pages URLs still use the previous name, because the GitHub repository has not been renamed.
+Source and issue tracking are in this repository, [gobbajogger/DnBOX-nightly](https://github.com/gobbajogger/DnBOX-nightly). The published installer is at the [production Pages site](https://gobbajogger.github.io/DnBOX/install/) and the nightly installer is at the [nightly Pages site](https://gobbajogger.github.io/DnBOX-nightly/install/). Work in progress is tracked in [issue #147](https://github.com/gobbajogger/DnBOX-nightly/issues/147).
 
 ## Restore
 
