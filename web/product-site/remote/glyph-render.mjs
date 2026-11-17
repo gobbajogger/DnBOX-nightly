@@ -1,4 +1,3 @@
-import{chicagoAffectedPath}from'./chicago-wave-projection.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // Live R22 readouts. One renderer per function. The shape is the current value
 // through that engine's transfer curve. Idle and zero-depth stay on one frame.
@@ -335,7 +334,7 @@ export function render(fnId, value, engineId='chicago', state={}){
  const depth=state.depth;
  if(fn==='LFO' && depth===0) return {fn,d:lfoPath(value,{depth:0}),live:false};
  if(!live && state.age!=null) state={...state, age:0};
- const d=fn==='WAVE'&&String(engineId).toLowerCase()==='chicago'?chicagoAffectedPath(unit(value)):draw(engineId, value, state);
+ const d=draw(engineId, value, state);
  const proof=(fn==='WIDTH'||(fn==='WAVE'&&engineId!=='miami'));
  return {fn, engine:engineId, d, live, cell:proof?'102x26':null};
 }

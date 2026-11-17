@@ -18,31 +18,3 @@ test('bounded queued cleanup remains unconfirmed instead of falsely reporting re
 test('owning snapshots renew lease inline but readers do not',async()=>{const m=model();await ready(m);m.calls.length=0;const original=m.client.transport.exchange;m.client.transport.exchange=async c=>{const r=await original(c);if(c.op===2)m.setTime((m.calls.filter(x=>x.op===2).length)*600);return r;};await m.client.snapshot([1,2,5000]);assert.ok(m.calls.some(x=>x.op===6));await m.client.close();const reader=model();await reader.client.identify();reader.setTime(1000);await reader.client.snapshot([1,2,5000]);assert.equal(reader.calls.filter(x=>x.op===6).length,0);});
 test('reply with matching low unit but different incarnation word is not correlated',async()=>{const m=model(),real=m.client.transport.exchange;await m.client.identify();m.client.transport.exchange=async c=>({...await real(c),unitHigh:[...high.slice(0,2),high[2]^1]});await assert.rejects(m.client.open(),/correlat/);assert.equal((await m.client.close()).released,false);});
 test('aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts',async()=>{const m=model();await ready(m);await m.client.down('a',5000,99);await m.client.down('b',5000,100);m.calls.length=0;m.setQueued(1000);const start=m.client.now(),r=await m.client.close();assert.equal(r.released,false);assert.equal(m.calls[0].op,7);assert.equal(m.calls.filter(x=>x.op===5).length,0);assert.ok(m.client.now()-start<=100);});
-test('MIDI broker rejects elapsed deadline even when timeout task has not run',async()=>{
- const input={addEventListener(){},removeEventListener(){}},broker=new MidiBroker({input,output:{send(){}},timeoutMs:5,attempts:1});
- const command={version:2,op:OP.HELLO,unit:0,unitHigh:[0,0,0],client:9,epoch:0,request:1,revision:0,control:0,token:0,value:0};
- try{const pending=broker.exchange(command);Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,25);broker.receive(encodeReply({op:OP.HELLO,status:0,kind:0,unit:42,unitHigh:high,client:9,epoch:0,request:1,revision:1,control:3,value:123}));await assert.rejects(pending,/timed out/);}finally{broker.dispose();}
-});
-function brokerFixture({attempts=1,timeoutMs=100}={}){
- let time=0,serial=0;const timers=new Map(),sent=[];
- const broker=new MidiBroker({input:{addEventListener(){},removeEventListener(){}},output:{send:b=>sent.push([...b])},timeoutMs,attempts,now:()=>{if(time==='throw')throw Error('clock unavailable');return time;},setTimer:(fn,ms)=>{timers.set(++serial,{fn,ms});return serial;},clearTimer:id=>timers.delete(id)});
- const command=request=>({version:2,op:OP.HELLO,unit:0,unitHigh:[0,0,0],client:9,epoch:0,request,revision:0,control:0,token:0,value:0});
- const reply=request=>encodeReply({op:OP.HELLO,status:0,kind:0,unit:42,unitHigh:high,client:9,epoch:0,request,revision:1,control:3,value:123});
- return{broker,timers,sent,command,reply,setTime:v=>time=v};
-}
-test('MIDI broker receive enforces exact deadline, rollback and invalid clocks without timer delivery',async()=>{
- for(const when of[99,100,101,-1,NaN,'throw']){
-  const f=brokerFixture(),p=f.broker.exchange(f.command(1));f.setTime(when);f.broker.receive(f.reply(1));
-  if(when===99)assert.equal((await p).unit,42);else await assert.rejects(p,/clock|timed out/);
-  assert.equal(f.broker.pending.size,0);assert.equal(f.timers.size,0);f.broker.dispose();
- }
-});
-test('MIDI broker retry keeps identical bytes inside absolute total budget and cannot send after deadline',async()=>{
- const f=brokerFixture({attempts:2,timeoutMs:50}),p=f.broker.exchange(f.command(1));
- const first=[...f.timers.values()][0].fn;f.setTime(50);first();assert.equal(f.sent.length,2);assert.deepEqual(f.sent[0],f.sent[1]);f.setTime(100);[...f.timers.values()].at(-1).fn();await assert.rejects(p,/timed out/);assert.equal(f.sent.length,2);f.broker.dispose();
- const late=brokerFixture({attempts:2,timeoutMs:50}),pending=late.broker.exchange(late.command(1));late.setTime(101);[...late.timers.values()][0].fn();await assert.rejects(pending,/timed out/);assert.equal(late.sent.length,1);late.broker.dispose();
-});
-test('MIDI broker captures request ownership and stale retry cannot disturb a later request',async()=>{
- const f=brokerFixture(),command=f.command(1),p=f.broker.exchange(command),old=[...f.timers.values()][0].fn;command.request=99;command.unitHigh[0]=99;f.broker.receive(f.reply(1));await p;assert.equal(f.broker.pending.size,0);
- const next=f.broker.exchange(f.command(2));old();assert.equal(f.sent.length,2);assert.equal(f.broker.pending.size,1);f.broker.receive(f.reply(2));await next;assert.equal(f.broker.pending.size,0);f.broker.dispose();
-});

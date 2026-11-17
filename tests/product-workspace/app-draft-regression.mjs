@@ -54,15 +54,3 @@ await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(lifec
 assert.equal(x.get('draft-dialog').open,true);x.press('draft-cancel');
 console.log('PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof');
 console.log('PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem');
-for(const zoom of [.125,8,1.333]){
- const probe=await boot();probe.get('roll-scroll').clientWidth=320;probe.view('roll');
- probe.get('zoom').value=String(zoom);probe.get('zoom').oninput();
- probe.press('draft-save');const saved=await probe.download();assert.ok(saved,'viewport zoom must remain exportable');
- assert.equal(JSON.parse(saved).context.zoom,zoom);
- probe.get('zoom').value='1';probe.get('zoom').oninput();
- await probe.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(saved),text:async()=>saved}]}});
- assert.equal(probe.get('draft-dialog').open,true);probe.press('draft-replace');
- assert.equal(Number(probe.get('zoom').value),zoom);
- assert.equal(Number.parseFloat(probe.get('roll-grid').style.width),320*zoom,'restore uses actual narrow viewport basis');
-}
-console.log('PASS shipped app saves/restores .125,8 and continuous viewport zoom at320px without unsupported context');

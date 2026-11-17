@@ -1,33 +1,46 @@
-# Nightly installer preview — repository rules
+# DnBOX — start here (every agent, every run)
+This file replaces every earlier AGENTS.md, skill, brief and handoff. Read these four files, in this order, and nothing older:
+1. `RULES.md` — the only rules (identical copy of the firmware repo RULES.md; `integ` keeps them identical) (v2, 25 rules). If any other text in this repo disagrees, RULES.md wins.
+2. `CHECKLISTS.md` — the pass/fail finish line for each lane. Work until your lane's lines are all PASS.
+3. `docs/lanes/<your-lane>.md` — your lane's current state, blockers, next item. Update it in every push.
+4. `CONSOLIDATED-STATE.md` — what is merged into `integration/dnbox-consolidated`, with SHAs.
 
-- NIGHTLY is the **public GPL-3.0-only browser/installer source and truthful complete development-status history**. Keep author notices and GPL license. The separate production-source repository owns firmware/SMC/clock/data-safety source.
-- NIGHTLY is a **fast development and hardware-testing channel**. Source-only site/status changes can be committed to owned isolated branches and merged through independently checked NIGHTLY PRs with no physical device test. The designated NIGHTLY Main Merger may merge eligible reviewed NIGHTLY PRs, but regular workers must not update main directly.
-- Retain all real development statuses, including source-only, failed, unbuilt, missing, broken, superseded, DEV CHECKED and device-untested, in separate read-only history. Do not make a build flashable merely because it is in status history.
-- **Standing NIGHTLY DEV testing authorization (owner, 2026-10-23):** the sole NIGHTLY Pages publisher may expose a clearly labeled `DEV / HARDWARE TEST — DEVICE NOT TESTED` candidate for owner-operated device testing **without separate per-candidate owner approval** after independently verified exact-source native Elite/Pro build(s) as applicable, matching model/controller and package hashes/CRC, source availability, memory/flash limits, meaningful host and installer negative tests, backup/readback/rollback integrity, independent safety review, and compatible lawful distribution terms ALL PASS. No matching checked candidate => flashable picker stays empty. A failed/unrun gate or an absent artifact means NOT INSTALLABLE, even on NIGHTLY. Do not call mock checks DEVICE VERIFIED.
-- Never commit proprietary JieLi SDK/toolchain, DSP reference sources, credentials, unrelated private user samples/backups, `.fwsc` images or `ctl.img` to this NIGHTLY browser-source repository. Separately hosted, lawfully distributable immutable firmware test artifacts may be linked in the NIGHTLY installer **only after the full automated prehardware gate** with exact server byte/hash verification, explicit owner confirmation in the installer before a device write and correct model/backup guards. Never import unverified release URLs into the installer.
-- For website UI/UX changes, use the installed official `frontend-design` skill and the autonomous visual stages below: mockup, internal independent design review, implementation, then actual desktop/mobile validation and code review. Keep the existing release and safety gates.
-- After UI/source changes run native `npm run build`, `npm test` and applicable responsive/negative browser tests. History-only metadata gets schema/provenance/parity checks; do not require a firmware build merely to report a source-only or failed status.
-- **Production main is hardware proven.** No production firmware/installer behavior merge or selectable production package without exact affected-model owner-operated physical device PASS on the same firmware/controller hashes, complete automatic/backup/recovery checks, independent review and separate explicit production approval. Production `gobbajogger/X0X37-for-Loopy-Pro` `main` and `gh-pages` are separate; nightly approval is not production approval. Documentation-only production maintenance uses its applicable tests and may not introduce unproven behavior.
-- Preserve the single firmware integrator, independent QA, build owner, catalog owner, NIGHTLY PR merger and sole NIGHTLY Pages publisher. Never force-push, flash hardware, declare stable, bypass a security-denied Git operation or publish private vendor assets. Verify each remote SHA and distinguish branch, merged main, Pages git deployment and live HTTP bytes.
+## The project
+DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; this repo, becoming `DnBOX`) plus a website and browser Remote (`gobbajogger/x0x37-for-Loopy-Pro_nightly`, becoming `DnBOX-nightly`). The User (gobbajogger) decides finished lanes, design and rule changes; Dot runs everything else.
 
-For detailed gates and continuation rules read `docs/nightly-first-development-gate.md` at the current target branch and the latest owner instructions. That maintained document governs current work; dated proposals, old PR dependencies and evidence snapshots record history and do not create new approval waits.
+## Lanes and agents (6 in parallel)
+| Agent | Owns | Branch prefix |
+|---|---|---|
+| sound | Synth One (replaces Drone), SuperJ6, Chicago, Miami, presets, A/B benches, memory fit | `lane/sound-*` |
+| fwui | every firmware screen in R22, battery, pan, pads/LEDs, hold-GLOBE, firmware slider lane, code-space fit | `lane/fwui-*` |
+| integ | consolidated branch (both repos), combined Elite/Pro firmware, zero dropouts, BREAK samples, roadmap, #120 voting, cleanup + rename | `lane/integ-*`, writes `integration/dnbox-consolidated` |
+| remote | (nightly repo) FunkyBeats port, Remote slider lane, browser Remote, TouchOSC, landscape | `lane/remote-*` |
+| web | (nightly repo) website 19 routes, installer, emulator, import/export, 1:1 HTML firmware UI, nightly page | `lane/web-*` |
+| test-and-merge | every Local gate, every Review, merge checks | none (comments on PRs) |
 
-For recurring and queued work, resolve the live `coordination/merge-queue` ref of `gobbajogger/X0X37-for-Loopy-Pro` and read the [shared automation contract](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/coordination/merge-queue/coordination/automation/runtime-contract.md), `coordination/automation/roles.json` and relevant request/delivery records at that same commit. New authorized work updates the existing request and acceptance data; keep each role bootstrap stable. Actual permissions, role ownership and action-specific denials still govern.
+## How to work
+- Branch from `integration/dnbox-consolidated`; merge it in, never rebase. Keep one draft PR per lane into it (PR events wake Dot).
+- Push at least every 30 min. Subject: `<type>(<lane>): <what> | next: <next deliverable>`.
+- Blocked item: write blocker + fix in your lane file, try another route within 10 min, keep working the rest. Never wait.
+- Riskiest item first. Every push: re-check memory fit (no PSRAM), merge conflicts with the consolidated branch, tests that can't run.
 
-## Automatic continuation and parallel work
+## Local gate (one command)
+```
+scripts/dnbox-gate.sh <lane>        # this repo (website + Remote), at the commit you want to gate
+tools/dnbox-gate.sh <lane>          # firmware repo, for firmware lanes
+```
+Nightly steps: clean-tree, setup (`npm ci`, Playwright Chromium), no-loss, limits (incl. FunkyBeats MIT notice for remote), build (`npm run build`), unit-tests (`npm test`), browser-tests (`npm run test:browser` + `tests/visual/fixtures/web-structural/browser_fixtures.py`, Chromium with its normal sandbox, profile and TMPDIR inside the checkout under `.cache/`). Firmware gate details below.
+Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, drone. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL.
 
-Reports accompany delivered work. After each verified stage, continue the next authorized action without waiting for an owner reply. Reuse standing action-specific authority and unchanged exact-input evidence. Run ready independent source, review, build and documentation work in parallel within actual executor capacity, using disjoint owned work areas and isolated branches. Keep dependent integration and shared-ref writes serialized under their assigned sole owner.
+## Where everything lives
+| What | Where |
+|---|---|
+| Rules, checklists, lane state | `RULES.md`, `CHECKLISTS.md`, `docs/lanes/*.md` |
+| Design references | `docs/design/UI-SOURCE-OF-TRUTH.md`, `docs/design/OWNER-BASELINE-1836.pdf` + `-NOTES.md`, `docs/design/UI-DEFECT-TESTS-SPEC.md` |
+| Firmware source / host simulator / tests | `firmware/`, `host/`, `tests/` (`tests/ui_defects/` for UI geometry) |
+| Build | `build.sh` → `tools/build.py` |
+| Library-only files (SuperJ6 .ipa and AU installer only) | ChatGPT Library; index with SHA256 and restore steps: `docs/LIBRARY-INDEX.md` |
+| History (old rules, handoffs, evidence) | Git history and `archive/*` tags. Not instructions. |
 
-A failed check, unavailable executor or actual tool denial blocks its affected action. Record the exact blocker, an accountable recovery owner and next action; continue unaffected authorized work. Unknown writer scope blocks new overlapping claims while accepted owners continue safe work or read-only ownership reconciliation. A report, queue entry or producer handoff is not consumer acceptance: verify the current input, named owner, durable handoff and the consumer's first substantive action. A bounded run checkpoints unfinished work and its continuation; it must not mark the task complete or disable itself merely because it produced a report. Source pushed, PR merged, Pages deployed, HTTP verified and device tested are separate outcomes.
-
-## Public development context
-
-Both `gobbajogger/X0X37-for-Loopy-Pro` and `gobbajogger/x0x37-for-Loopy-Pro_nightly` are public project repositories. **Closed DEV means the owner is the sole tester; it does not mean private source.** Project source, documentation, sanitized test/review evidence and nonsecret provenance may be delivered to their authorized public destinations. Internal creation or temporary private Library storage does not itself make those materials confidential or prohibit later authorized delivery. Credentials, unrelated private samples/backups, and proprietary or license-restricted third-party bytes remain excluded. Owner-designated personal samples selected as stock loops may be included in their authorized stock distribution after verifying the exact selection, provenance and intended destination; this does not authorize other personal files. Preserve copyright notices and applicable distribution obligations.
-
-Use the latest action-specific owner authorization. A completed stage's read-only, local-only, or no-publication limit is not a permanent project-wide ban; a later authorized stage may expand that scope. Do not infer a new grant merely from a stage change. Actual tool denials remain binding for the denied operation; do not retry or route around them without the required changed authorization or permitted resolution. Continue independent authorized work. Source delivery, review, build, merge, publication and owner-available results remain separate states.
-
-## Autonomous visual stages
-
-Within the agreed task, visual UI, glyph, menu, website and 3D work follows **mockup → internal independent review → implementation → actual validation**. Reuse unchanged approved presentations. Label mockups as proposals; they are not implemented renders. Resolve blocking design findings before implementation, then validate the actual candidate-pinned render or interaction and report it before rollout. Report each meaningful completed stage with evidence and its next action, then continue the next authorized step without waiting for an owner reply. These stage reports and previews are informative, not another aesthetic approval gate.
-
-This supersedes earlier owner-aesthetic-response waits within the agreed scope, not actual preview evidence or independent correctness checks. A required UI-completion-before-boot dependency means finish and validate the UI stage first, not wait for the owner to answer. Current action-specific authority, real tool denials, licensing, device validation, production and publication boundaries remain. A materially new scope or action still needs its applicable authority; continue independent authorized work meanwhile.
+## Never
+Force-push; push or merge to `main`; Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git.

@@ -1,42 +1,25 @@
-# Lane: remote
-Owner agent: Remote v2. Branch: lane/remote-r22. Draft PR: #134. Base: 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a. Updated: 2026-11-17 06:19 VLAT.
+Move: M3 (remote whole Remote)   PR: not opened   Head: this source checkpoint
+LEFT items PASS: 0/6; failing: L23 L24 L25 L26 L27 L28
+Gate at head: NOT_RUN (browser, full move gate and independent Review pending)
+ETA merge: unconfirmed; plan target 2026-11-19 12:00 VLAT
 
-## Checklist
-| ID | Check | Status | Evidence |
-|---|---|---|---|
-| C1 | Exact-head Local gate | FAIL | Not run; prep gate corrections in progress. |
-| C2 | Contains consolidated; explained deletions | PASS | Initial branch parent 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a; no deletions. |
-| C3 | Independent before/after Review | FAIL | Not run. |
-| C4 | Hard-limit scan | FAIL | Full gate not run. |
-| C5 | Complete evidence and empty remainder | FAIL | R1–R7 remain. |
-| C6 | Ready and integrated after three checks | FAIL | Draft only; no merge. |
-| R1 | Every page matches approved baseline and eight gaps fixed | FAIL | Current implementation requires full equivalent-state visual assessment. |
-| R2 | Five FunkyBeats components ported and licensed | FAIL | Existing local donor contains upstream-derived sequencer; not all five qualified on current tree. |
-| R3 | Modeless roll gestures | FAIL | Exact-target gesture tests pending. |
-| R4 | Thin switched slider lane, no selected-note panel | FAIL | Exact-target interaction/render proof pending. |
-| R5 | Every page phone landscape | FAIL | 844x390 checks pending. |
-| R6 | Browser and TouchOSC real protocol | FAIL | Simulator protocol proof pending. |
-| R7 | Structural Chromium fixtures | FAIL | Exact-head run pending. |
+Owner: Dot remote step-port worker. Branch: lane/remote-step-port. Base: START-NT bc3ed20d69159a01e82e079fa7e1cbbf66cab2ce.
 
-## Now / next
-- Now: published head80a6fa43 host diagnostics reviewed; native source geometry package is unbound, so actual browser runtime remains unchanged from 9d71/9bf. Exact live browser source is Web8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e. No lane completion claim.
-- Next: bind source-native glyphs only after typed context and raster/easing/layout comparison; preserve existing UI until a coherent reviewed candidate exists. Current package ports Tune/Attack and Decay numeric geometry without changing app rendering. Continue native protocol work with integ, never substitute preview IDs or infer native admission.
+## Delivered piece
+FunkyBeats step-sequencer source port integrated into the Remote drums view for 909/808: 176 typed cells per kit, click-to-toggle through the existing undoable model, R22 styling and MIT notice. Structural test and product build pass. This is the user-requested source checkpoint, not full M3 completion or native protocol admission.
 
-## Blockers and routes
-- No shell GitHub authentication: use GitHub connector, each write under 700 KB.
-- Runtime/source snapshots are materialized and API-verified. Web/test-and-merge own shared actual-browser access; do not compete for desktop inputs.
-- Prep gate is being repaired by integ; do not claim the wider gate passed from focused tests.
+## Next
+Run the browser-capable Orchestrator stage on this exact source, then consume this piece in the sole M3 move branch. Preserve the older dirty M3 tree; this isolated branch does not overwrite it. Remaining roll, mixer, launcher, synth, slider-lane, visual and actual-protocol checks remain open.
 
-## Top risks
-1. Local donor is not current consolidated: preserve both and compare exact blobs.
-2. UI event gestures may disagree with tested model behavior.
-3. Protocol bindings may not represent all controls; no hardware claims.
+## Checks
+- `node --test tests/product-remote/funkybeats-drums.test.mjs`: PASS.
+- `node scripts/build-product-site.mjs`: PASS; manifest includes static application closure.
+- Browser / landscape / full Local gate / Review: NOT_RUN. Prior sandbox EPERM is not retried or bypassed.
 
-## Deletes
-None.
+## Near-grid hit correction
+The step adapter previously displayed an existing hit within one sample of the grid but bound the click to the rounded grid start, adding a duplicate instead of toggling the displayed hit. The adapter now binds that cell to the actual displayed event start. The regression verifies both kits and Undo. Exact original source remains preserved.
 
-## Conflicts noted
-README prep sequencing depends on independent reviewer; lane starts independent work while prep gate is unresolved, without merging or changing rules.
+Checks on corrected source: 3/3 targeted tests and 43/43 complete Remote Node tests PASS; product build PASS (179 files). Browser and full Local gate remain NOT_RUN; no green PR or M3 completion claim. The Local gate still contains network Git and cannot run unchanged under the project rule; the prior denied browser route was not retried. Independent source review: PASS; reviewer separately reran all 43 Remote tests and verified every one of 179 manifest entries. No blocking finding in the changed scope. Next: source checkpoint, then qualified browser/full-gate stage.
 
 ## Focused evidence (not full Local gate)
 - Exact base 9165adb92fcdaab756c4e59e3d4a8ee22437ca5a Remote blobs SHA-1 verified before test. `node --test tests/product-remote/*.test.mjs`: 37/37 PASS (Node v24.22.1, GCC 14.2.0, Linux); `firmware-link.test.mjs`: 3/3 PASS against freshly compiled C host fixture. Historical two-failure hypothesis not reproduced; no hardware claim.
@@ -149,3 +132,6 @@ README prep sequencing depends on independent reviewer; lane starts independent 
 - Exact af56 live-tail source port independently matches4,488 cases/185,011 ordered primitive values. Shared24-slot return model independently matches2,288 source events, including zero sentinel/300ms boundary/uint32 wrap. Typed22-control binding preserves source SI and validates before mutating return ownership; three independent tests PASS. These remain explicit fixture activity inputs, not actual audio/clock/raster/app qualification.
 - Native dependency confirmed with integ: current scalar-only actual-host catalog has no admitted envelope/age/activity telemetry and native endpoint resource fit is still open. Never reuse IDs or invent activity; retain this dependency for a later reviewed read-only snapshot contract. Continue local-draft renderer/label binding independently.
 - Package directories are API-tree-authenticated source snapshots, not exact local Git checkouts. Their inherited Git metadata is not the tested source pin; full Local/no-loss stays NOT_RUN/FAIL until qualified on maintained exact composition. FullR1–R7 remain FAIL.
+
+## Browser fixture syntax correction
+The browser test replaced every BUNDLE substring, including the __DNBOX_FIRMWARE_BUNDLE property name, producing invalid JavaScript before MIDI setup. Reused the fixture with a unique payload marker; regression parses and evaluates the injected source without a browser. RED reproduced Unexpected token '{'; corrected Remote Node suite PASS44/44. This explains a concrete injected-script failure, not proof the complete handshake/browser flow passes. Browser/full Local remains FAIL (NOT_RUN); prior EPERM not retried. Existing no-sandbox test launch is not executed and must consume the reviewed normal-sandbox correction from integ before browser qualification. Independent source review PASS on exact fixture/test hashes; reviewer reran41/41 top-level Remote tests (full incl.platform run44/44). Next: combined browser qualification in an authorized capable environment.

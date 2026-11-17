@@ -1,41 +1,21 @@
 {
   "schema": "dnbox-product-site-source/1",
   "publicationQualified": false,
-  "sourceReview": "DNBOX_V2_REMOTE_SOURCE_SNAPSHOT_UNREVIEWED_NOT_PUBLICATION_QUALIFIED",
+  "sourceReview": "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY",
   "sourceRepositoryBase": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
   "nativeBaseline": "3c41ef4bedf9701f549ce2752b73306e2fab1eb8",
   "retainedPages": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
   "workspaceFreeze": "0013f29a990fbc2305a3269f4da1f87182ec3a29b7e3b35ca760281c132e2186",
   "files": [
     {
-      "path": "APPROVED-PRESENTATION.json",
-      "bytes": 89967,
-      "sha256": "e60e12e46f8eaa2de8d598858d3f7ca487a669e88682a598c2ece9222701246d"
-    },
-    {
-      "path": "COMPONENT-PERFORMANCE.json",
-      "bytes": 628,
-      "sha256": "c692413d2222674b4af5b1580ca9f825dbde1d3c39da63747bcf2161abfddc4c"
-    },
-    {
-      "path": "ENTRY-DISCLOSURE.json",
-      "bytes": 264583,
-      "sha256": "b8f8a13af413370109584e126a7441a869a57e14664b360e149292a433af4310"
-    },
-    {
-      "path": "HIHAT-SOURCE-PATCH.json",
-      "bytes": 21562,
-      "sha256": "d0458e00972852aede67f079ee7b7f5f5a4db49a29558c99bfb47a1491083a4f"
-    },
-    {
-      "path": "SOURCE-TRACE.json",
-      "bytes": 7391,
-      "sha256": "cce08a32135e11d6b8a5f1cb80d4c79e494325e814e4e0d65814a425334a6a21"
-    },
-    {
       "path": "app.mjs",
       "bytes": 1849,
       "sha256": "ddec5b7f4261592a0b6c5dbc3687137617f389c8f164227531e1793c745b02b2"
+    },
+    {
+      "path": "APPROVED-PRESENTATION.json",
+      "bytes": 89967,
+      "sha256": "e60e12e46f8eaa2de8d598858d3f7ca487a669e88682a598c2ece9222701246d"
     },
     {
       "path": "assets/Barlow-OFL.txt",
@@ -108,6 +88,11 @@
       "sha256": "b71e86e04c0d158c8bb5d6b89350191706faad87a9360580816253811aeff3fc"
     },
     {
+      "path": "COMPONENT-PERFORMANCE.json",
+      "bytes": 628,
+      "sha256": "c692413d2222674b4af5b1580ca9f825dbde1d3c39da63747bcf2161abfddc4c"
+    },
+    {
       "path": "components/archive/store.mjs",
       "bytes": 2399,
       "sha256": "fbf7333c587f3745939cf8702e9d3a06643492fa8bf0c78af70d9f78a0fa9e72"
@@ -153,9 +138,19 @@
       "sha256": "ad782e5bb3cc16bae209515ce41ae4c20a4508cb1ebed22cf0836e0cef471cfe"
     },
     {
+      "path": "ENTRY-DISCLOSURE.json",
+      "bytes": 264583,
+      "sha256": "b8f8a13af413370109584e126a7441a869a57e14664b360e149292a433af4310"
+    },
+    {
       "path": "help/index.html",
       "bytes": 2811,
       "sha256": "19ef64c973ee9ce579ba13d83cd10e220b21148ee09a9ca8e0e13699d65959a6"
+    },
+    {
+      "path": "HIHAT-SOURCE-PATCH.json",
+      "bytes": 21562,
+      "sha256": "d0458e00972852aede67f079ee7b7f5f5a4db49a29558c99bfb47a1491083a4f"
     },
     {
       "path": "index.html",
@@ -313,11 +308,6 @@
       "sha256": "03335a5401c7f70663386806b96c7db5b237c029f315d9c197cbdaf8abe5434e"
     },
     {
-      "path": "manual/original/PROJECT_FILES.md",
-      "bytes": 12668,
-      "sha256": "1d324072bd5f5b2df370592b952148101d8e9ef213007c1a1c0574edea287cdd"
-    },
-    {
       "path": "manual/original/img/fm1-keys.svg",
       "bytes": 6994,
       "sha256": "52dd6a78d54a8b7ce18b0cb58b82f4345596330e6c375aa30398c7f6a27a01e0"
@@ -436,6 +426,11 @@
       "path": "manual/original/index.html",
       "bytes": 60002,
       "sha256": "623de8295e5e760634555b2e8717072dc959815b26ecd9669e22ba88640b52bf"
+    },
+    {
+      "path": "manual/original/PROJECT_FILES.md",
+      "bytes": 12668,
+      "sha256": "1d324072bd5f5b2df370592b952148101d8e9ef213007c1a1c0574edea287cdd"
     },
     {
       "path": "manual/projects-guide.html",
@@ -573,29 +568,14 @@
       "sha256": "158cbf7a2672cf5d76fe5381bd86319b9d5c833164974fbc362e1e39ce743763"
     },
     {
-      "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 2108,
-      "sha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80"
-    },
-    {
-      "path": "remote/SOURCE-PINS.json",
-      "bytes": 1225,
-      "sha256": "a0084bd01f70e6adb19fc4e78a3e2b9e860524ff19014822c0cd29b264fa536d"
-    },
-    {
-      "path": "remote/WORKSPACE-SOURCE-PINS.json",
-      "bytes": 4316,
-      "sha256": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4"
-    },
-    {
       "path": "remote/aa-ease.mjs",
       "bytes": 8094,
       "sha256": "3206359dd72f6e551676f7cf8a81178b34e96b04ea2e64700c6abcb54a49e11d"
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 46946,
-      "sha256": "212273f18b8ef3229c47043b9ebf8010440edb5b0b865f8dfcc9cc24760b6856"
+      "bytes": 41794,
+      "sha256": "210c9a2e592b7e751cbbf3378639799c18eb51889a77c045f34e67fede614c1d"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -621,11 +601,6 @@
       "path": "remote/catalog.mjs",
       "bytes": 209,
       "sha256": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0"
-    },
-    {
-      "path": "remote/chicago-wave-projection.mjs",
-      "bytes": 4449,
-      "sha256": "0938e1e9549bc8e7e463115e6b79426c4ff4b8fad41a6f13d5366a475b7d4558"
     },
     {
       "path": "remote/components.json",
@@ -674,8 +649,8 @@
     },
     {
       "path": "remote/device/vendor/client.mjs",
-      "bytes": 12012,
-      "sha256": "a68ca59e0b7052a878ce7c5be6cc96ef325e5a19cb7379c0d4c002caa2985908"
+      "bytes": 11188,
+      "sha256": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b"
     },
     {
       "path": "remote/device/vendor/codec.mjs",
@@ -689,8 +664,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 9242,
-      "sha256": "66ae77063d4728988443a894cd7124ba79b4d010c74fd1d007a46488a0038d30"
+      "bytes": 9272,
+      "sha256": "27c711945aaf56acb41fe6ab109cafe5bf03af5c2739ab12adc5e6cdf85f8844"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -703,154 +678,19 @@
       "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a"
     },
     {
-      "path": "remote/drum-display.mjs",
-      "bytes": 2198,
-      "sha256": "428b4005f5e305c6850278275728bf299e39f3a19b059bd9b27d1a026eebd80f"
-    },
-    {
-      "path": "remote/drum-format.mjs",
-      "bytes": 2141,
-      "sha256": "3a5f69adcebd7f6e848102fcd18c0675bc36b3f70d0c9773c76fc8d336a863a3"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-00.json",
-      "bytes": 45063,
-      "sha256": "d2cce09d13bef3aa37d76a461c9c63db0e3ee063ff17b72ac007db4498b2756b"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-01.json",
-      "bytes": 45064,
-      "sha256": "c0d44b6243d8cd3fce112bd7587432acc999a08fb11a18ba4b5168a920b010e7"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-02.json",
-      "bytes": 36096,
-      "sha256": "37f1231b32957213254e724f559a969fcb79040de0bb54687310359049b2955c"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-03.json",
-      "bytes": 36096,
-      "sha256": "6819fe00df9854c52ee601176b4799d95e8c88450272cb39f23eeab365c36a20"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-04.json",
-      "bytes": 36096,
-      "sha256": "cac60a7dbff56e98c66583757123525dd6b3aec52e62649632da358b1533cc5a"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-05.json",
-      "bytes": 35757,
-      "sha256": "65f6ecbc749fde9a2d6c7c179ec184ebe2dfef56653da2129f221e5560f67d8d"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-06.json",
-      "bytes": 40423,
-      "sha256": "9ff077c99eed721f3326b5b1600ae93870e1f37e5edc7d8fd3207f0245351b2c"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-07.json",
-      "bytes": 35541,
-      "sha256": "ecca8a50fc97167a3cc07fd5163fb9270739e67a3c59bb7475bcb800bbf46b16"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-08.json",
-      "bytes": 35541,
-      "sha256": "76f4093eb97de1235ce8fb4c763044f624c12f0b99f66519684bb8e28361a157"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-09.json",
-      "bytes": 35541,
-      "sha256": "ec1e0550d79e80ecbc1901d3f74ec4264d6e1e6017a34b205959a9f902f64380"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-10.json",
-      "bytes": 35550,
-      "sha256": "005575eebba4e28f644ed733e829484b3f4ce1f7a527bd053384542a0149eda1"
-    },
-    {
-      "path": "remote/drum-formatters/808-voice-11.json",
-      "bytes": 10632,
-      "sha256": "7552042b5111a85f0b87df6dd5c702c8c7f97f97c7ea0661d57c1cc5ad2e1f2d"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-00.json",
-      "bytes": 49567,
-      "sha256": "b3a55c271fb89bc90430eb26817c2abf02ec77a691493e31b9bf799b27135fe6"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-01.json",
-      "bytes": 45650,
-      "sha256": "476c52fa9abfd75a748a9db3c555bfe080692e6f1735c02d35074c44cf59861f"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-02.json",
-      "bytes": 40384,
-      "sha256": "3377b0d7576a6c88c234da1b9002a71203bb8f1d96fab0c7cb9410bd953ab8b5"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-03.json",
-      "bytes": 40449,
-      "sha256": "373324c5bf702c4d04e15316caaf1e09fa0cc611781302cbbe28a32c270609bd"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-04.json",
-      "bytes": 40510,
-      "sha256": "b6ba3b9da41198179f15633e43253c35d474d480cc908e6b765a7d852144103b"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-05.json",
-      "bytes": 30764,
-      "sha256": "7179b7d4438f681524a51f8713cdb30e5da2473ac5e736c28594adc3f2228822"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-06.json",
-      "bytes": 35847,
-      "sha256": "31e1676c88f5d7e520a3c8f67186ba556d10e32ff7eea519455b55d59ebc7045"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-07.json",
-      "bytes": 35762,
-      "sha256": "924eadb07b9588e26c2afb8cee24e2921227a5c6271a4c6c8778c95fe04056a6"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-08.json",
-      "bytes": 35787,
-      "sha256": "883f0aa3c9db62e21b2e3451d68bf5262aa614cd7825c1e3a57f1c7be0892ebc"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-09.json",
-      "bytes": 35802,
-      "sha256": "71901a79485560448b636024ebfe148d910ae7386fb4cf904bcaada62d14b2a8"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-10.json",
-      "bytes": 35811,
-      "sha256": "6f4ed1514bbc6513921acced3f9ae22bfae44a20ee0989464c10692958077a05"
-    },
-    {
-      "path": "remote/drum-formatters/909-voice-11.json",
-      "bytes": 10632,
-      "sha256": "5e23e365d6d5b683ae62d925b1120ab84e060dadbcb8f2778d62b92bc9866a97"
-    },
-    {
-      "path": "remote/drum-formatters/index.json",
-      "bytes": 6576,
-      "sha256": "fbe9539791127f77c03c94a971f897827074ab72d7ed9e6b2dc30f9a5827731e"
-    },
-    {
-      "path": "remote/firmware-link.mjs",
-      "bytes": 6997,
-      "sha256": "590825006c26ab329d3f0a3f64d0c69f0c97cd4285cf992b027fbfb68078c59a"
-    },
-    {
       "path": "remote/frame.mjs",
       "bytes": 1584,
       "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
     },
     {
-      "path": "remote/funkybeats-view.mjs",
-      "bytes": 9095,
-      "sha256": "8dfd2fa6060799737cee42e37aa362be75a3c1985c027260c2d9d39e8d4908c3"
+      "path": "remote/funkybeats-drums.mjs",
+      "bytes": 4276,
+      "sha256": "ab309a0c29ea36cbc09485bdc0e5367928e199ea69a5f39ffb745ad7e197d862"
+    },
+    {
+      "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
+      "bytes": 2108,
+      "sha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -864,8 +704,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 16944,
-      "sha256": "05e63c13f1c59069ae8d3869c19978986d84a0b8d1d7af2a642a282b7c3649b7"
+      "bytes": 16791,
+      "sha256": "1bd27aad7485b22e9fbcea8fd5ad8a1100ec74db14c065442b5fd8b6770409cc"
     },
     {
       "path": "remote/glyphs.mjs",
@@ -894,28 +734,13 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7032,
-      "sha256": "2c50c6f9ae50cf8412ef440573dc64138f3c26f65c6f0ca1b809c533e5dae37c"
+      "bytes": 7356,
+      "sha256": "9ee77d05cfedbce22538f4bfbb0591fa98dd977339297e0eee0fcd9abdfa1c23"
     },
     {
       "path": "remote/lane.mjs",
       "bytes": 2450,
       "sha256": "003b9ec880a6a13e52519f5cd9ee5261528d209c5ba34315e0b18e57d1e23c1d"
-    },
-    {
-      "path": "remote/long-press.mjs",
-      "bytes": 1833,
-      "sha256": "955dddad665ecd37b81982179c562daab1f406be8ea39519a4ec4b4f823be420"
-    },
-    {
-      "path": "remote/mixer-format.json",
-      "bytes": 59444,
-      "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
-    },
-    {
-      "path": "remote/mixer-format.mjs",
-      "bytes": 712,
-      "sha256": "f63b485884244656a7853c6fb858baf67b00118172974a9007c4505f8158f404"
     },
     {
       "path": "remote/model.mjs",
@@ -926,31 +751,6 @@
       "path": "remote/motion.mjs",
       "bytes": 1438,
       "sha256": "f65eedc0c106b2259b9a64c2c29d22d52fb963742138d207f46ba086551f3eab"
-    },
-    {
-      "path": "remote/native-geometry/decay.mjs",
-      "bytes": 1297,
-      "sha256": "6ff7f4bc4c4b3941a5e67121494cd26901b0f34adeae4b6450127b98bca41062"
-    },
-    {
-      "path": "remote/native-geometry/fastmath.mjs",
-      "bytes": 895,
-      "sha256": "e4b1cc440f5001aac251db73b6a5e4dd6aa59939dae141b846a40068673f1bed"
-    },
-    {
-      "path": "remote/native-geometry/tune-attack.mjs",
-      "bytes": 1549,
-      "sha256": "64f575a6875b4caf6d104cc99a8cc6da458e4093d05926dc275076554dc41bb9"
-    },
-    {
-      "path": "remote/native-geometry/typed-adapter.mjs",
-      "bytes": 1090,
-      "sha256": "312eabb775ad84f8662e46bd4c95542cd39d2774f0b50a46520dab209949f1a8"
-    },
-    {
-      "path": "remote/native-geometry/typed-controls.json",
-      "bytes": 5733,
-      "sha256": "ca918e3466711fe74f0d95b2d459b5abe742abf1a261ce77368c17fcad6608ae"
     },
     {
       "path": "remote/page.mjs",
@@ -974,8 +774,8 @@
     },
     {
       "path": "remote/roll.mjs",
-      "bytes": 5558,
-      "sha256": "4cce712b49d80ee58639e0a07149ed45fbe5bbdde19ade72d6cd0aa244532a80"
+      "bytes": 5217,
+      "sha256": "075fab3b4a3d2c5f526e06ddc7bcb03aa15813d311f26b9ec018094c2c66014b"
     },
     {
       "path": "remote/sequence.mjs",
@@ -993,39 +793,24 @@
       "sha256": "f3edc4e9660afbaf1a3b4f37b3ac636eebba7b69356223f225164b106d1868b8"
     },
     {
+      "path": "remote/SOURCE-PINS.json",
+      "bytes": 1225,
+      "sha256": "a0084bd01f70e6adb19fc4e78a3e2b9e860524ff19014822c0cd29b264fa536d"
+    },
+    {
       "path": "remote/source-sounds.json",
       "bytes": 64780,
       "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7"
     },
     {
       "path": "remote/style.css",
-      "bytes": 24682,
-      "sha256": "aee80568c59a50ce5bf9f6e3a1546d4986ac4268ba547ce6aad77a4fed225916"
+      "bytes": 22158,
+      "sha256": "bf224d62336b7c362d49f4b8abdb53c9c2de98f395d2cb7e1d6036d76490f8ba"
     },
     {
       "path": "remote/timeline.mjs",
       "bytes": 1055,
       "sha256": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152"
-    },
-    {
-      "path": "remote/touchosc/README.md",
-      "bytes": 3647,
-      "sha256": "ccc8f49797097531bdf60e69fbf1abb46268782b791a1e2cf369d11cf422d049"
-    },
-    {
-      "path": "remote/touchosc/dnr2-codec.lua",
-      "bytes": 2416,
-      "sha256": "85b0a30fd96585c676a6c8d2809627a5114c3104a58ab9f676de6e1f319c2b60"
-    },
-    {
-      "path": "remote/touchosc/dnr2-controller.lua",
-      "bytes": 3117,
-      "sha256": "97d0cbb7c6bbe062ec6402c12e4b49f6f9511f4ec98cab9e1cae7f6a57336fe5"
-    },
-    {
-      "path": "remote/touchosc/dnr2-session.lua",
-      "bytes": 4263,
-      "sha256": "701b2c342bdfb71488c3ba0064e6dbd2e10441a1859ff020fba398c876e08fb7"
     },
     {
       "path": "remote/trace.json",
@@ -1048,24 +833,14 @@
       "sha256": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c"
     },
     {
-      "path": "remote/vendor/funkybeats-provenance.json",
-      "bytes": 1912,
-      "sha256": "a8aa321898781c68489fbbcef24fda5cbf8adf849f768105805c614674e92735"
-    },
-    {
       "path": "remote/view.mjs",
       "bytes": 2773,
       "sha256": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9"
     },
     {
-      "path": "remote/viewport.mjs",
-      "bytes": 3502,
-      "sha256": "ce2129435b6069b2e7332efeb14e632a6bf65d68d79aaa1812cc35b4add808d2"
-    },
-    {
-      "path": "remote/wave-display.mjs",
-      "bytes": 790,
-      "sha256": "62bdd5faf403bba7759085620fb2f30d7a014040627aa6d75fb42268001bcbe4"
+      "path": "remote/WORKSPACE-SOURCE-PINS.json",
+      "bytes": 4316,
+      "sha256": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4"
     },
     {
       "path": "remote/workspace.mjs",
@@ -1096,6 +871,11 @@
       "path": "site.css",
       "bytes": 11870,
       "sha256": "62579cf8f5058cc79137d96005634c8d2a032b5a8dfce1dae2fc79bf7230c605"
+    },
+    {
+      "path": "SOURCE-TRACE.json",
+      "bytes": 7391,
+      "sha256": "cce08a32135e11d6b8a5f1cb80d4c79e494325e814e4e0d65814a425334a6a21"
     },
     {
       "path": "starting-breaks/index.html",
@@ -1158,13 +938,5 @@
   "firstUiGateSlice": {
     "status": "SOURCE_ONLY_NOT_QUALIFIED",
     "purpose": "Continuous vertical grid plus local structural detectors; no native/browser/publication acceptance."
-  },
-  "sourceReviewHistory": [
-    "R15_EXACT_V9_CHANGES_REQUIRED; R16_PRODUCER_THREE_FINDING_CORRECTION_RECHECK_PENDING; NOT_FULL_WORKFLOW_BROWSER_RUNTIME_DELIVERY"
-  ],
-  "remoteSnapshotInput": "c7394f59839a3c18eeebfe02c01f8192ac237150",
-  "remoteSnapshotAdditions": [
-    "remote/touchosc/dnr2-codec.lua",
-    "remote/touchosc/README.md"
-  ]
+  }
 }
