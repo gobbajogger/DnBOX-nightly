@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Nightly installer
-    url: https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/install/
+    url: https://gobbajogger.github.io/DnBOX-nightly/install/
     about: Install or test DnBOX nightly packages (Chrome or Edge, USB). Developer and hardware testing only.
   - name: Published installer
-    url: https://gobbajogger.github.io/X0X37-for-Loopy-Pro/install/
+    url: https://gobbajogger.github.io/DnBOX/install/
     about: Install the current public DnBOX release.

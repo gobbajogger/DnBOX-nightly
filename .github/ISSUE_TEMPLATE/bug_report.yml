@@ -7,7 +7,7 @@ body:
       value: |
         Thanks for a report. Please fill in every required field.
         Do not attach private backups, credentials, or raw captures you do not want public.
-        For a vulnerability, use the [security advisory form](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/security/advisories/new) instead of this form.
+        For a vulnerability, use the [security advisory form](https://github.com/gobbajogger/DnBOX-nightly/security/advisories/new) instead of this form.
   - type: dropdown
     id: area
     attributes:
