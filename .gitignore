@@ -4,3 +4,19 @@ test-results/
 playwright-report/
 __pycache__/
 *.pyc
+.DS_Store
+*.o
+.env
+.env.*
+!.env.example
+*.swp
+*~
+.idea/
+build/
+
+# Build and firmware artefacts
+*.elf
+*.map
+*.fwsc
+*.img
+*.log
