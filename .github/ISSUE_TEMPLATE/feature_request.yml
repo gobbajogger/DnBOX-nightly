@@ -1,0 +1,37 @@
+name: Feature request
+description: Suggest an improvement to the DnBOX nightly website, installer, or Remote.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the idea. Please say what you want and why it would help.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area this relates to
+      options:
+        - Website
+        - Installer
+        - Browser Remote
+        - TouchOSC
+        - Import / export
+        - All / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: What should change
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it would help
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Extra context
+      description: Optional. Examples, comparisons, or constraints.

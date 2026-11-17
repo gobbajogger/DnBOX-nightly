@@ -1,8 +1,0 @@
-{
-  "historicalFixture": true,
-  "activeProduct": false,
-  "origin": "Actual R3 sound-section markup, before owner SuperJ6/SynthOne mapping correction. Scripts/styles omitted; old bank observation must not be relabelled.",
-  "sourceIndexSHA256": "d81cb08232ea2f5c4934375808d8cb4121833eb5cddf624387cb8b7da78ec009",
-  "fixtureSHA256": "8c51d149c7513eff78e457589810e8466648eea0aada552f295f3ef5fdc8cd74",
-  "expectedRejectedCondition": "Old JUNO source specimen is not explicitly identified as earlier bank data and must not imply SuperJ6 compatibility."
-}

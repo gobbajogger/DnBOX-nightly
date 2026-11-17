@@ -23,7 +23,7 @@ for(const [name,html] of variants){
  test(`${name}: text and recovery guidance do not describe SMK as FM-1`,()=>{
   for(const old of ['Firmware for SMK-37 and FM-1.','SMK-37 と FM-1','If the FM-1','万一 FM-1','recovering an FM-1','recovering-an-fm-1'])assert.ok(!html.includes(old),old);
   assert.ok(html.includes('Firmware for SMK-37 Pro and Elite.'));
-  assert.ok(html.includes('https://github.com/gobbajogger/X0X37-for-Loopy-Pro/issues" style="color:inherit" data-t="bricklink"')); 
+  assert.ok(html.includes('https://github.com/gobbajogger/DnBOX/issues" style="color:inherit" data-t="bricklink"')); 
  });
 }
 test('real updater rejects the other board, including same-board FM1 pairing',()=>{

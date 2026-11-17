@@ -20,8 +20,8 @@ function files(path){
 }
 
 test('repo and pages links come from one origin config',()=>{
- assert.equal(githubRepo(SITE_ORIGIN.firmwareRepo), 'https://github.com/gobbajogger/X0X37-for-Loopy-Pro');
- assert.equal(pagesUrl('install/'), 'https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/install/');
+ assert.equal(githubRepo(SITE_ORIGIN.firmwareRepo), 'https://github.com/gobbajogger/DnBOX');
+ assert.equal(pagesUrl('install/'), 'https://gobbajogger.github.io/DnBOX-nightly/install/');
  const bad=[];let seen=0;
  for(const rel of LIVE_ROOTS.flatMap(files)){
   if(SEALED.has(rel)) continue;

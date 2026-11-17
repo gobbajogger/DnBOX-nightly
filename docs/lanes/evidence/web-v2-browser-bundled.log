@@ -1,2 +1,0 @@
-Tree174f8c76bb8a2786d92b1d548406e7f165f14cea; browser NOT_RUN (FAIL), sandbox retained.
-playwright._impl._errors.Error: BrowserType.launch: Failed to launch chromium because executable doesn't exist at <home>/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome

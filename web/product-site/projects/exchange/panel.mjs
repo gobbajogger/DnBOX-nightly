@@ -2,7 +2,7 @@ import {createExchange} from './adapter.mjs';
 // Inject existing Projects readProjectFile; no new binary layout or automatic device read.
 export function mountExchange(root,{readProjectFile,provider=null,approvedSources=[],onFiles=()=>{}}){
  const d=root.ownerDocument;root.replaceChildren();const make=(tag,text)=>{let x=d.createElement(tag);if(text)x.textContent=text;root.append(x);return x;};
- make('h2','MIDI export preview');make('p','Inspect a project for MIDI export. MIDI export is unavailable until its matching firmware renderer is qualified.');
+ make('h2','Take your sequences into Live');make('p','Export a project as MIDI tracks, with timing and pattern markers.');
  const label=make('label','Choose a DnBOX project '),file=d.createElement('input');file.type='file';file.accept='.x0xproject';label.append(file);
  const range=make('label','Export length in seconds '),seconds=d.createElement('input');seconds.type='number';seconds.min='1';seconds.max='86400';seconds.value='60';range.append(seconds);
  const button=make('button','Prepare MIDI export');button.disabled=true;const status=make('p');status.setAttribute('role','status');

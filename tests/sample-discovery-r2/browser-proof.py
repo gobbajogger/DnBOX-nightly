@@ -1,5 +1,4 @@
 # SPDX-License-Identifier: GPL-3.0-only
-import os
 import asyncio, hashlib, json, pathlib, threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from playwright.async_api import async_playwright
@@ -48,7 +47,7 @@ INIT=r'''(() => {
 async def main():
  receipt={'scope':'Chromium / fake endpoints only','off_origin_requests':[],'errors':[],'checks':[]}
  async with async_playwright() as pw:
-  browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium'),headless=True,chromium_sandbox=True)
+  browser=await pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
   receipt['browser_version']=browser.version
   ctx=await browser.new_context(viewport={'width':1440,'height':1000},service_workers='block')
   await ctx.add_init_script(INIT)

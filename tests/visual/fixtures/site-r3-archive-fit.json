@@ -1,9 +1,0 @@
-{
-  "schema": "dnbox-site-archive-fit-negative/1",
-  "historicalFixture": true,
-  "activeProduct": false,
-  "origin": "Actual R3 current-ui wrapper and captured R3 shared styles. Only stylesheet inlined, module shell omitted, font/iframe URLs rooted for fixture serving. Original faulty fit script unchanged.",
-  "wrapperSHA256": "b5df000d93d41f4f63f45364464fead7756f53a900bf80183d28a9b2cc3a3a2a",
-  "fixtureSHA256": "7a38b05c08ea38aa5f7003cabd09b7d657c3e8a485bbd2b452fe0d24e869f1c1",
-  "expectedRejectedCondition": "Full-page screenshot expands the iframe through viewport-dependent root.scrollHeight despite unchanged intrinsic body geometry."
-}

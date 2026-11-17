@@ -28,5 +28,5 @@ class ProductClosure(unittest.TestCase):
   for row in m['files']:
    data=(ROOT/row['path']).read_bytes();self.assertEqual(len(data),row['bytes']);self.assertEqual(hashlib.sha256(data).hexdigest(),row['sha256']);self.assertEqual(hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest(),row['git_blob'])
  def test_r22_study_does_not_remove_historical_reference_or_claim_installed_firmware(self):
-  self.assertEqual(hashlib.sha256((ROOT/'reference/r22-source.html').read_bytes()).hexdigest(),'722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986');self.assertTrue((ROOT/'reference/current-ui.html').is_file());self.assertIn('not installed firmware',(ROOT/'reference/index.html').read_text());self.assertIn('reference/index.html',(ROOT/'index.html').read_text())
+  self.assertEqual(hashlib.sha256((ROOT/'reference/r22.html').read_bytes()).hexdigest(),'722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986');self.assertTrue((ROOT/'reference/current-ui.html').is_file());self.assertIn('not installed firmware',(ROOT/'reference/index.html').read_text());self.assertIn('reference/index.html',(ROOT/'index.html').read_text())
 if __name__=='__main__':unittest.main()

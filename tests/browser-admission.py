@@ -227,7 +227,7 @@ async def local_files(browser):
 
 async def main():
  async with async_playwright() as pw:
-  browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium' if Path('/usr/bin/chromium').exists() else None),chromium_sandbox=True)
+  browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium' if Path('/usr/bin/chromium').exists() else None),args=['--no-sandbox'])
   print('Chromium',browser.version,flush=True)
   if args.approval_only or not (args.race_only or args.local_files_only):
    await catalog_approvals(browser)

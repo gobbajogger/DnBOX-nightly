@@ -18,7 +18,7 @@
 - REDO: the SuperJ6 WAVE, SUB and LFO RATE glyphs (they must clearly show the value). Attack must be an obvious value-driven edge. 808 TONE must not look like a decay.
 
 ## Engines and parts
-- Synth One occupies the third synth slot everywhere (firmware, Remote, website, mocks, fixtures). The former string-machine engine is removed.
+- the retired engine is REMOVED and replaced by Synth One, everywhere (firmware, Remote, website, mocks, fixtures).
 - SuperJ6, not "Juno": use the real SuperJ6 parameter set and names (from the engine/presets), and none of the old generic Juno params.
 - Every engine (909, 808, SuperJ6, Synth One, Chicago, Miami, the bass) uses the same design system. No raw float lists.
 - 909: TUNE and PITCH must not duplicate each other (one control, or two distinct ones with distinct names, units and glyphs).
