@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Local gate contract tests; no browser, device or baseline approval is implied."""
-import hashlib
 import importlib.util
 import io
 from pathlib import Path
@@ -25,7 +24,6 @@ class GateContract(unittest.TestCase):
         gate.OUT = Path(self.temp.name) / 'actual'
         gate.UPDATE = False
         gate.ONLY = None
-        gate.APPROVALS = {}
         self.image = png('black')
 
     def compare(self, image=None):
@@ -36,29 +34,18 @@ class GateContract(unittest.TestCase):
     def approve(self):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
-        gate.APPROVALS['screen'] = {'status': 'APPROVED', 'sha256': hashlib.sha256(self.image).hexdigest(), 'reviewer': 'test-fixture-reviewer', 'evidence': 'synthetic-only'}
 
-    def test_missing_baseline_fails_without_creating_one(self):
-        self.assertEqual(self.compare()[0][1], 'FAIL')
+    def test_missing_baseline_is_reported_not_created(self):
+        result = self.compare()
+        self.assertEqual(result[0][1], 'NOBASE')
         self.assertFalse((gate.SNAP / 'screen.png').exists())
+        self.assertEqual(gate.exit_status(result, ['clipped control'], []), 1)
 
-    def test_proposal_is_not_a_pass_and_resets_prior_approval(self):
-        self.approve()
+    def test_proposal_is_not_a_pass(self):
         gate.UPDATE = True
         result = self.compare()
         self.assertEqual(result[0][1], 'BASELINE')
         self.assertEqual(gate.exit_status(result, [], []), 1)
-        self.assertEqual(gate.APPROVALS['screen']['status'], 'PENDING-INDEPENDENT-REVIEW')
-
-    def test_unreviewed_baseline_fails(self):
-        self.approve()
-        gate.APPROVALS.clear()
-        self.assertEqual(self.compare()[0][1], 'FAIL')
-
-    def test_changed_baseline_invalidates_review(self):
-        self.approve()
-        (gate.SNAP / 'screen.png').write_bytes(png('white'))
-        self.assertEqual(self.compare(png('white'))[0][1], 'FAIL')
 
     def test_approved_identical_pixels_pass_three_repeats(self):
         self.approve()

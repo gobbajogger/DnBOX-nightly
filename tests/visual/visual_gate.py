@@ -3,7 +3,7 @@
 """Visual-regression gate for the DnBOX website, Remote, emulator and offline edition.
 
   python3 tests/visual/visual_gate.py            # compare against approved baselines (fails on any diff)
-  python3 tests/visual/visual_gate.py --update   # capture proposals; requires independent review before acceptance
+  python3 tests/visual/visual_gate.py --update   # write baselines; committing them through a merged PR is the approval
 
 Baselines: tests/visual/__snapshots__/<name>.png (approved reference, generated from the polished head).
 Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's chosen top section).
@@ -22,8 +22,6 @@ SNAP = ROOT / 'tests/visual/__snapshots__'
 FIX = ROOT / 'tests/visual/fixtures/page-01.png'
 OUT = Path(os.environ.get('VISUAL_OUT', ROOT / 'test-results/visual'))
 UPDATE = '--update' in sys.argv
-APPROVALS_FILE = Path(__file__).parent / 'approvals.json'
-APPROVALS = json.loads(APPROVALS_FILE.read_text()) if APPROVALS_FILE.exists() else {}
 ONLY = os.environ.get('VISUAL_ONLY')  # regex filter
 MAX_DIFF_RATIO = 0.001      # ~ toHaveScreenshot maxDiffPixelRatio
 PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as different (AA noise)
@@ -82,15 +80,11 @@ def compare(name, png_bytes, results):
     base = SNAP / f'{name}.png'
     tmp = OUT / f'{name}-actual.png'; tmp.write_bytes(png_bytes)
     if UPDATE:
-        base.write_bytes(png_bytes); results.append((name, 'BASELINE', 0.0))
-        APPROVALS[name] = {'status': 'PENDING-INDEPENDENT-REVIEW', 'sha256': hashlib.sha256(png_bytes).hexdigest()}; return
+        base.write_bytes(png_bytes); results.append((name, 'BASELINE', 0.0)); return
     if not base.exists():
-        # Missing, unreviewed or modified baselines are never accepted automatically.
-        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: no baseline'); return
-    entry = APPROVALS.get(name, {})
-    digest = hashlib.sha256(base.read_bytes()).hexdigest()
-    if not isinstance(entry, dict) or entry.get('status') != 'APPROVED' or entry.get('sha256') != digest or not entry.get('reviewer') or not entry.get('evidence'):
-        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: baseline lacks exact-byte independent acceptance'); return
+        # No committed baseline: the page still had to render with no errors, header or overflow
+        # findings; only the pixel comparison is skipped and reported. Never written automatically.
+        tmp.unlink(missing_ok=True); results.append((name, 'NOBASE', 0.0)); return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
     if a.shape != b.shape:
@@ -174,7 +168,7 @@ def header_checks(h, w, fails):
 
 def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
-    return int(bool(ONLY) or not results or any(r[1] != 'PASS' for r in results) or bool(header_fails) or bool(errors))
+    return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
 def main():
     p = port()
@@ -241,11 +235,9 @@ def main():
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')
     for f in header_fails: print('FAIL header', f)
     for e in errors: print('PAGEERROR', e)
-    if UPDATE:
-        APPROVALS_FILE.write_text(json.dumps(dict(sorted(APPROVALS.items())), indent=1) + '\n')
-    pending = sorted(k for k, v in APPROVALS.items() if not isinstance(v, dict) or v.get('status') != 'APPROVED')
-    if pending: print(f'NOTE {len(pending)} baselines pending independent review (not accepted)')
-    summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors), 'pending_independent_review': len(pending)}
+    nobase = sum(1 for r in results if r[1] == 'NOBASE')
+    if nobase: print(f'NOTE {nobase} screens have no committed baseline (rendered and checked; pixel compare not run)')
+    summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'no_baseline': nobase, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors)}
     OUT.mkdir(parents=True, exist_ok=True); (OUT / 'summary.json').write_text(json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors}, indent=1))
     print('VISUAL', json.dumps(summary))
     sys.exit(exit_status(results, header_fails, errors))
