@@ -29,3 +29,18 @@ test('shipped app binds every typed step without a tool mode and edits remain un
   model.toggleHit(track,36,start);assert.equal(model.notes.length,0);
  }
 });
+test('near-grid hit toggles the displayed event rather than adding a duplicate',async()=>{
+ const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-drums.mjs');
+ for(const kit of ['909','808']){
+  const track=kit==='909'?'drum909':'drum808';
+  const model=new SequenceDraft({trace:{sampleRate:44100,endSample:88200,events:[]}});
+  model.toggleHit(track,36,1);
+  const html=renderFunkyBeatsDrums({kit,notes:model.notes,endSample:88200});
+  const tag=html.match(/<button[^>]*aria-label="BD step 1 velocity 100[^>]*>/)?.[0];
+  assert.ok(tag);
+  const start=Number(tag.match(/data-drum-start="(\d+)"/)[1]);
+  model.toggleHit(track,36,start);
+  assert.equal(model.notes.length,0);
+  model.undo();assert.equal(model.notes[0].start,1);
+ }
+});

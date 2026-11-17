@@ -15,3 +15,8 @@ Run the browser-capable Orchestrator stage on this exact source, then consume th
 - `node --test tests/product-remote/funkybeats-drums.test.mjs`: PASS.
 - `node scripts/build-product-site.mjs`: PASS; manifest includes static application closure.
 - Browser / landscape / full Local gate / Review: NOT_RUN. Prior sandbox EPERM is not retried or bypassed.
+
+## Near-grid hit correction
+The step adapter previously displayed an existing hit within one sample of the grid but bound the click to the rounded grid start, adding a duplicate instead of toggling the displayed hit. The adapter now binds that cell to the actual displayed event start. The regression verifies both kits and Undo. Exact original source remains preserved.
+
+Checks on corrected source: 3/3 targeted tests and 43/43 complete Remote Node tests PASS; product build PASS (179 files). Browser and full Local gate remain NOT_RUN; no green PR or M3 completion claim. The Local gate still contains network Git and cannot run unchanged under the project rule; the prior denied browser route was not retried. Independent source review: PASS; reviewer separately reran all 43 Remote tests and verified every one of 179 manifest entries. No blocking finding in the changed scope. Next: source checkpoint, then qualified browser/full-gate stage.

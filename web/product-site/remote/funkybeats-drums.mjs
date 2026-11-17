@@ -32,7 +32,7 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16}){
   for(let s=0;s<steps;s++){
    const start=Math.round(s*endSample/steps),event=notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];
    const modelStep=state.getStep(ch,s);if(event)Object.assign(modelStep,{on:true,velocity:event.velocity/127,note:event.note});
-   Object.assign(step.dataset,{drumNote:voices[ch][1],drumStart:start,drumTrack:track});
+   Object.assign(step.dataset,{drumNote:voices[ch][1],drumStart:event?.start??start,drumTrack:track});
    step.setAttribute('aria-label',`${voices[ch][0]} step ${s+1} ${event?'velocity '+event.velocity:'empty'}, toggle local hit`);
    step.setAttribute('aria-pressed',String(!!event));
    if(event){step.className+=' hit';step.dataset.hit=event.id;step.children[0].style.opacity=String(.3+modelStep.velocity*.7);step.children[1].style.height=(modelStep.velocity*100)+'%';step.textContent=String(event.velocity);}
