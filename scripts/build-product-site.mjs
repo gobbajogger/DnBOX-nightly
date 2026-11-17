@@ -16,12 +16,25 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
  if(target===repoRoot||inside(repoRoot,target)||inside(target,source))throw Error('Unsafe product output');
  if(!inside(target,join(repoRoot,'.output')))throw Error('Product output must remain in the scoped .output build tree');
  noLinks(target,repoRoot);
+ // Only the five owner-confirmed starting-break assets may cross the audio boundary.
+ // The pin is source-controlled, never supplied by a downloaded manifest.
+ function admittedStartingBreak(name,data){
+  const match=/^assets\/starting-breaks\/(personal-br[12]-zone[123])\.(wav|adpcm)$/.exec(name);
+  if(!match)return false;
+  const contractPath=join(source,'sample-contract.json');noLinks(contractPath,repoRoot);
+  if(!existsSync(contractPath)||!lstatSync(contractPath).isFile())throw Error('Regular pinned sample contract required');
+  const bytes=readFileSync(contractPath);
+  if(createHash('sha256').update(bytes).digest('hex')!=='df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f')throw Error('Starting-break contract pin mismatch');
+  const asset=JSON.parse(bytes).assets.find(a=>a.id===match[1]);if(!asset)return false;
+  const kind=match[2]==='wav'?'preview':'adpcm';
+  return data.length===asset[kind+'_bytes']&&createHash('sha256').update(data).digest('hex')===asset[kind+'_sha256'];
+ }
  const seen=new Set(),inputs=[];
  for(const row of manifest.files){
   if(typeof row.path!=='string'||!row.path||row.path.includes('\\')||row.path.startsWith('/')||row.path.split('/').some(x=>!x||x==='.'||x==='..')||seen.has(row.path)||row.path==='SOURCE-MANIFEST.json')throw Error('Invalid or duplicate source path');
   seen.add(row.path);const input=join(source,row.path);noLinks(input,repoRoot);if(!lstatSync(input).isFile())throw Error('Regular product source files required');const data=readFileSync(input);
   if(data.length!==row.bytes||createHash('sha256').update(data).digest('hex')!==row.sha256)throw Error('Product source drift: '+row.path);
-  if(/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))throw Error('Firmware/private audio is not a product source asset');
+  if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
   inputs.push([row.path,data]);
  }
  // No stale private/unrelated files may ride along in a publisher input.
