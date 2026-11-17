@@ -11,11 +11,8 @@ TS=$(TZ=Asia/Vladivostok date +%Y%m%d-%H%M); OUT=build/dnbox-gate; mkdir -p "$OU
 LOG="$OUT/${SHA:0:8}-$TS.log"; exec > >(tee "$LOG") 2>&1
 # Temp files and browser profile go OUTSIDE the checkout (some tests require output outside the repo) but in a folder we own.
 export TMPDIR="${HOME}/.cache/dnbox-gate/tmp"; mkdir -p "$TMPDIR"
-# One browser for every test: Playwright's bundled Chromium unless CHROMIUM_EXECUTABLE is already set.
-# (Tests hard-code /usr/bin/chromium, /usr/local/bin/google-chrome or a macOS Chrome path otherwise.)
-if [ -z "${CHROMIUM_EXECUTABLE:-}" ]; then
-  CHROMIUM_EXECUTABLE=$(python3 -c 'from playwright.sync_api import sync_playwright as s; p=s().start(); print(p.chromium.executable_path); p.stop()' 2>/dev/null); export CHROMIUM_EXECUTABLE; fi
-echo "browser: ${CHROMIUM_EXECUTABLE:-none}"
+# Launchers use only Playwright's bundled Chromium; external executable overrides are forbidden.
+echo "browser: Playwright bundled Chromium (normal sandbox)"
 fail=0; void=0
 step() {
   local n=$1; shift
@@ -76,7 +73,7 @@ build()   { npm run build; }
 unit()    { npm test; }
 # browser_fixtures.py needs --output; its product mode needs an immutable old Remote root, so the
 # gate runs the detector contract on the real browser (--fixtures-only).
-browser() { rm -rf "$OUT/web-structural"; npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py --fixtures-only --output "$OUT/web-structural"; }
+browser() { python3 tests/browser-sandbox-contract.py || return 1; rm -rf "$OUT/web-structural"; npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py --fixtures-only --output "$OUT/web-structural"; }
 step clean-tree clean; step setup setup; step fetch-base fetch_base; step no-loss no_loss; step limits limits
 if [ $void = 0 ]; then step build build; step unit-tests unit; step browser-tests browser; fi
 R=PASS; [ $fail = 1 ] && R=FAIL; [ $void = 1 ] && R=VOID

@@ -60,7 +60,7 @@ async def main():
         def rec(model,kind='bundled'):return copy.deepcopy(manifest[f'{model}-{kind}.fwsc'])
         def payload(p,model,kind='bundled'):return {p['pkg']:(folder/f'{model}-{kind}.fwsc').read_bytes()}
         async with async_playwright() as pw:
-            browser=await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
+            browser=await pw.chromium.launch(chromium_sandbox=True)
             print('Chromium '+browser.version,flush=True)
             for model in ['elite','pro']:
                 p=rec(model);cat=catalog({model:p})
