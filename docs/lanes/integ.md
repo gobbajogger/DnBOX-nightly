@@ -43,3 +43,6 @@ Removal-list exceptions retained: AGENTS.md. AGENTS.md is replaced, not deleted;
 Each path below is an obsolete brief/rule/handoff explicitly listed in the supplied remove manifest; the original bytes remain in the inherited baseline and backup history.
 - `coordination/edge-case-hunt/EC-20261026-011.json` — supplied removal list; historical instructions, retained in Git history.
 - `docs/nightly-first-development-gate.md` — supplied removal list; historical instructions, retained in Git history.
+
+## CI
+GitHub Actions runs the Local gate on every PR into `integration/dnbox-consolidated` and every push to that branch. See `docs/lanes/CI.md`.

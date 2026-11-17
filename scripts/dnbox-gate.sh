@@ -24,7 +24,11 @@ no_loss() { git fetch -q origin integration/dnbox-consolidated || return 1
             git merge-base --is-ancestor "$BASE" HEAD || { echo "merge $BASE in (no rebase)"; return 1; }
             local miss=0; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$(git diff --name-only --diff-filter=D "$BASE" HEAD)"; return $miss; }
 limits()  { local bad=0
-            git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' && bad=1
+            while read -r f; do
+              [ -z "$f" ] && continue
+              [ "$f" = ".github/workflows/gates.yml" ] && continue
+              echo "workflow file changed: $f"; bad=1
+            done <<< "$(git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' || true)"
             git grep -nIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . ':!*.md' && bad=1
             git ls-files | grep -iE '\.ipa$|\.fwsc$|ctl\.img$' && bad=1
             [ "$LANE" != remote ] || grep -rqi 'funkybeats' LICENSES web 2>/dev/null || { echo "FunkyBeats MIT notice missing"; bad=1; }
@@ -34,5 +38,5 @@ unit()    { npm test; }
 browser() { npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py; }
 step clean-tree clean; step setup setup; step no-loss no_loss; step limits limits
 if [ $void = 0 ]; then step build build; step unit-tests unit; step browser-tests browser; fi
-R=PASS; [ $fail = 1 ] && R=FAIL; [ $void = 1 ] && R=VOID
+R=PASS; [ $void = 1 ] && R=VOID; [ $fail = 1 ] && R=FAIL
 echo "DNBOX-GATE RESULT $R sha=$SHA lane=$LANE log=$LOG"; [ $R = PASS ] && exit 0; [ $R = VOID ] && exit 2; exit 1

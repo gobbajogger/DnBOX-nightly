@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Local gate (website, Remote, visual, origin, browser) on GitHub-hosted runners.
+# No secrets, no deploy, never touches main or gh-pages.
+name: gates
+
+on:
+  pull_request:
+    branches: [integration/dnbox-consolidated]
+  push:
+    branches: [integration/dnbox-consolidated]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gates-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: Local gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-nt
+
+      - name: Prepare dependencies
+        run: bash .github/ci/prepare-deps.sh
+
+      - name: Run Local gate
+        env:
+          TMPDIR: ${{ runner.temp }}/dnbox-tmp
+        run: |
+          set -o pipefail
+          mkdir -p "$TMPDIR"
+          set +e
+          scripts/dnbox-gate.sh integ
+          rc=$?
+          set -e
+          result=$(grep -E '^DNBOX-GATE RESULT ' build/dnbox-gate/*.log | tail -1 || true)
+          echo "$result"
+          {
+            echo "## DnBOX Local gate"
+            echo
+            echo '```'
+            echo "$result"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$rc"
+
+      - name: Upload gate logs and visual diffs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dnbox-gate-logs
+          path: |
+            build/dnbox-gate/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 14

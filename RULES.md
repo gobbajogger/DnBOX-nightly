@@ -3,7 +3,7 @@
 
 ## Who decides
 1. The User (GitHub gobbajogger) decides only: finished lanes, design, rule changes, merges to `main`. Dot decides everything about how the work gets done.
-2. Dot does all DnBOX work with its background agents, their subagents, its cloud computer and Codex cloud tasks. Not used: Cursor cloud agents, Grok worker bots, GitHub Actions (no workflow files, no runs).
+2. Dot does all DnBOX work with its background agents, their subagents, its cloud computer and Codex cloud tasks. Not used: Cursor cloud agents, Grok worker bots. GitHub Actions may run the Local gate only (`.github/workflows/gates.yml` on pull requests into `integration/dnbox-consolidated` and on pushes to that branch); no deploy workflows and no runs against `main` or `gh-pages`.
 3. Six agents run in parallel: one owner per lane (`sound`, `fwui`, `integ`, `remote`, `web`; scopes in CHECKLISTS.md) plus `test-and-merge`, which runs every Local gate and Review. No lane reviews its own work.
 4. A lane is finished only when every item of its CHECKLISTS.md section is PASS with logs at one SHA. Then, and only then, Dot tells the User.
 
@@ -40,3 +40,4 @@
 
 ## Change log
 - 2026-11-16: v2 created from RULES.md v1 (19:50–20:10) and the User's decisions; process rules dropped.
+- 2026-11-17: GitHub Actions allowed for Local gates only (User). Cursor cloud agents remain unused.
