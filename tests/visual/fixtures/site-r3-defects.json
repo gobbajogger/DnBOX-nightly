@@ -1,0 +1,74 @@
+{
+  "schema": "dnbox-site-actual-defect-fixtures/1",
+  "sourceRun": "site-actual-r3",
+  "sourceReportSHA256": "24caeb49c3031b441479a09e53b4d4588f7d1c4fac79e5a203dea141dbf0bdec",
+  "sourceFiles": {
+    "site.css": "7c19cd033b69a60272fe9c416b3235ec1a91a86233b0e92d0c2f37a86cc9c779",
+    "tool-theme.css": "37f4e9f06165ec0488527655e1638d0ded4f9cff9fb63903a05d7350c64adbcf",
+    "index.html": "d81cb08232ea2f5c4934375808d8cb4121833eb5cddf624387cb8b7da78ec009",
+    "install/index.html": "70ba5bf18a6a08898a9b16d628d4d10d846deb90682e882db1e6e10f15f8c34f",
+    "projects/index.html": "f4e0d818891dc149828cb8a9ddf8f90908a178d5fc6fdb3082e1900036af14c7",
+    "manual/protocol.html": "a0e25ce08842ee7fda37c06b63320f247a87a9f439292ef1d006f579372accca",
+    "presets/legacy/index.html": "971b278237dfcff86295bc4d2e92351221a607fefaa09bd4f7f9f2e3bfe5a6c3"
+  },
+  "fixtures": [
+    {
+      "path": "tests/visual/fixtures/site-r3-nav-hidden.html",
+      "sha256": "9e03e287146239826e464b679156d39f26e633c193009700db43de85f7a3eb31",
+      "expectedRejectedCondition": "First secondary destination is hidden at390px by legacy first-child selector.",
+      "adaptations": "Relevant real R3 markup/styles isolated, scripts omitted; font URLs anchored to unchanged bundled assets. Navigation open state matches actual interaction probe. No fabricated values/captures.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-small-controls.html",
+      "sha256": "c6408b56acffdd5cafe97ed045144005f35006c5c28e80743fc42a806bb1c95b",
+      "expectedRejectedCondition": "Installer secondary action fonts below16px and/or targets below44px.",
+      "adaptations": "Relevant real R3 markup/styles isolated, scripts omitted; font URLs anchored to unchanged bundled assets. Navigation open state matches actual interaction probe. No fabricated values/captures.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-project-task-nav.html",
+      "sha256": "ef151f3a14a998c9cf40656790e2d0f9e12c9c9dcb09b46e1477118e3966859f",
+      "expectedRejectedCondition": "Task destinations are small unstyled text links, below16px/44px target.",
+      "adaptations": "Relevant real R3 markup/styles isolated, scripts omitted; font URLs anchored to unchanged bundled assets. Navigation open state matches actual interaction probe. No fabricated values/captures.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-protocol-columns.html",
+      "sha256": "f5079c5b63505d27fd14762945befc6057a6ad09ef251583a4b21650883aa0b4",
+      "expectedRejectedCondition": "Four columns compress technical identifiers into narrow phone cells below160px; no focusable contained table scroll region.",
+      "adaptations": "Relevant real R3 markup/styles isolated, scripts omitted; font URLs anchored to unchanged bundled assets. Navigation open state matches actual interaction probe. No fabricated values/captures.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-legacy-column.html",
+      "sha256": "019d05009affb657e7eaf51aea25b6183bdfaaecdfada12515a3a1aac09d5fd6",
+      "expectedRejectedCondition": "Session panel spans below both columns while empty Review leaves a large unused column beside Open.",
+      "adaptations": "Relevant real R3 markup/styles isolated, scripts omitted; font URLs anchored to unchanged bundled assets. Navigation open state matches actual interaction probe. No fabricated values/captures.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-emoji-play.html",
+      "sha256": "434b837c0bfd911b4075d90c47fcd62132b21c676957327c6dc43567cf2f8328",
+      "expectedRejectedCondition": "Disabled audio actions retain bright orange OS emoji instead of monochrome unavailable affordances.",
+      "adaptations": "Relevant actual R3 markup and captured exact R3 styles. Scripts omitted; font URLs rooted. Header enhancement state is represented explicitly, not fabricated content.",
+      "historicalFixture": true,
+      "activeProduct": false
+    },
+    {
+      "path": "tests/visual/fixtures/site-r3-tool-header.html",
+      "sha256": "b117a3ded494cf5082312887abdc635a79b98662e2a93ee05b0d4dcf214d623a",
+      "expectedRejectedCondition": "Tool Menu inherits700weight and body-dependent line height instead of the shared header treatment.",
+      "adaptations": "Relevant actual R3 markup and captured exact R3 styles. Scripts omitted; font URLs rooted. Header enhancement state is represented explicitly, not fabricated content.",
+      "historicalFixture": true,
+      "activeProduct": false
+    }
+  ],
+  "historicalFixture": true,
+  "activeProduct": false
+}

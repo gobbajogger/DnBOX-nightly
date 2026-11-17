@@ -29,7 +29,7 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; this repo, beco
 scripts/dnbox-gate.sh <lane>        # this repo (website + Remote), at the commit you want to gate
 tools/dnbox-gate.sh <lane>          # firmware repo, for firmware lanes
 ```
-Nightly steps: clean-tree, setup (`npm ci`, Playwright Chromium), no-loss, limits (incl. FunkyBeats MIT notice for remote), build (`npm run build`), unit-tests (`npm test`), browser-tests (`npm run test:browser` + `tests/visual/fixtures/web-structural/browser_fixtures.py`, Chromium with its normal sandbox, profile and TMPDIR inside the checkout under `.cache/`). Firmware gate details below.
+Nightly steps: clean-tree, setup (`npm ci`, Playwright Chromium), no-loss, limits (incl. FunkyBeats MIT notice for remote), build (`npm run build`), unit-tests (`npm test`), browser-tests (`npm run test:browser` + `tests/visual/fixtures/web-structural/browser_fixtures.py`, Chromium with its normal sandbox, TMPDIR outside the checkout under `${HOME}/.cache/dnbox-gate/tmp` (set HOME to a workspace-owned location)). Firmware gate details below.
 Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, slot2-scan. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL.
 
 ## Where everything lives

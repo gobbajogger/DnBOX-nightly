@@ -1,0 +1,45 @@
+{
+  "schema": "dnbox-remote-protocol-provenance/1",
+  "recordedDate": "2026-11-16",
+  "qualification": "NOT_ADMITTED",
+  "retainedGitHome": {
+    "repository": "gobbajogger/x0x37-for-Loopy-Pro_nightly",
+    "commit": "9165adb92fcdaab756c4e59e3d4a8ee22437ca5a",
+    "directory": "tests/product-remote/tests/c-reference"
+  },
+  "files": {
+    "remote_core.c": "4f7fae3087e3477d8bf8a65f77c3189dddddd3e1d34b8c264b3b1017578f97d4",
+    "remote_core.h": "ada39c8d12999c92debf50c787da66c0708122b8cfe486005b1ff1559d6ba7ae",
+    "remote_wire.c": "81b4a8729cab7af75bb8495f528d9979d0fc02abbedfba05aaac3f0dae659390",
+    "remote_wire.h": "ad878321249e107d532c8f69d48af1d702e397c990a43f47c4e0b5d1fe085cd5"
+  },
+  "historicalSource": {
+    "archive": "DnBOX-program-source-recovery-20261115",
+    "resourceManifest": "firmware-remote-native-completion-20261115/resource-handoff-r2/SOURCE-MANIFEST.json",
+    "baseline": "ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+    "resourcePatchSha256": "c436d59ce687560aba3d797c6446990882be9d971dfd0d78cf23aaa6006bd276",
+    "successor": "firmware-remote-resource-successor-20261115",
+    "successorCoreSha256": "2fe12aedb831e5a59b8e052b3f57958b93a6ee293a0b34df89c4af8040adbb93",
+    "verifiedRelation": "Reversing the recorded noinline attribute on dnr2_handle yields byte-identical retained core. Successor wire already matches. This verifies byte relation, not current native admission.",
+    "integratedOriginCommit": null,
+    "limits": [
+      "Resource patch contains resource/glue edits, not the full original protocol addition.",
+      "Direct protocol path at baseline ffd31 returned404. A single integrated firmware origin SHA is not established.",
+      "Historical manifests explicitly label native admission false; prior approvals and rules have no current authority."
+    ]
+  },
+  "nativeAdapter": {
+    "owner": "integ",
+    "reviewedCurrentAdapter": null,
+    "inspectedCompositionReportedByOwner": "badcc0cdcff7744d27c7f2e7f1ffeca84a5c2ab2",
+    "status": "No DNR2-named source/host adapter found by integration owner; generic entrypoint audit in progress.",
+    "interface": "dnr2_host in retained remote_core.h: source-authoritative read; atomic set; original-context down/up; catalog CRC/count; borrowed host lifetime.",
+    "requiredSourceHooks": [
+      "Every physical/MIDI/project mutation calls dnr2_changed, including A-to-B-to-A.",
+      "Lease tick and original-context release preserve physical and other owners.",
+      "Endpoint incarnation is not sender authentication.",
+      "Transport routing/isolation, actual catalog types/units and stock memory/flash/audio budgets require exact-current-source checks."
+    ]
+  },
+  "testScope": "Pinned actual core/wire with synthetic host callbacks; browser and Lua source tests do not establish native catalog, DSP graph, TouchOSC application, device or release acceptance."
+}

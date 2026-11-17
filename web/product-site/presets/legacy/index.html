@@ -55,7 +55,7 @@
     @media(max-width:740px) { .layout { grid-template-columns:1fr; } .panel { padding:17px; } .meta { grid-template-columns:1fr 1fr; } }
     @media(max-width:440px) { .meta { grid-template-columns:1fr; } .actions button { width:100%; } }
     @media(prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; transition:none !important; } }
-  </style><link rel="stylesheet" href="../../tool-theme.css"></head><body class="tool-surface"><a class="skip" href="#content">Skip to content</a><header><a class="brand" href="../../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../../index.html#sounds">Sounds</a><a href="../../remote/">Remote</a><a href="../../breaks/">Samples</a><a href="../../projects/">Projects</a><a href="../../presets/">Presets</a><a href="../../manual/">Manual</a><a href="../../builds/">History</a><a class="install-link" href="../../install/">Install nightly</a></nav></header><main id="content" class="document-page">
+  </style><link rel="stylesheet" href="../../tool-theme.css"></head><body id="top" class="tool-surface legacy-presets"><a class="skip" href="#content">Skip to content</a><header class="site-header"><a class="brand" href="../../index.html">DnBOX <small>INSTRUMENTS</small></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden>Menu</button><nav id="site-navigation" aria-label="Main"><a href="../../remote/">Remote</a><a href="../../breaks/">Samples</a><a href="../../projects/">Projects</a><a href="../../presets/">Presets</a><a href="../../manual/">Manual</a><details class="more-nav"><summary>More</summary><div><a href="../../starting-breaks/">Starting breaks</a><a href="../../builds/">Build history</a><a href="../../new/">What’s new</a><a href="../../tools/">Tools</a><a href="../../help/">Setup &amp; help</a><a href="../../reference/">Design archive</a></div></details></nav><a class="install-link" href="../../install/">Install nightly</a></header><main id="content" class="document-page">
   
   <h1>Earlier DnBOX preset files.</h1>
   <p class="muted">Read, check and back up user-made engine presets without changing the keyboard. This page never writes to the instrument or uploads files to a server.</p>
@@ -66,8 +66,8 @@
         <label for="model"><span>Intended hardware</span>
           <select id="model"><option value="">Not selected</option><option value="elite">SMK-37 Elite</option><option value="pro">SMK-37 Pro</option></select>
         </label>
-        <label for="target"><span>Target engine</span>
-          <select id="target"><option value="">Inspect any engine</option><option value="chicago">Chicago</option><option value="miami">Miami</option><option value="juno">Juno</option><option value="synthone">Synth One</option><option value="909">909</option><option value="808">808</option><option value="break">BREAK</option></select>
+        <label for="target"><span>File engine filter</span>
+          <select id="target"><option value="">Inspect any engine</option><option value="chicago">Chicago</option><option value="miami">Miami</option><option value="juno">Juno</option><option value="909">909</option><option value="808">808</option><option value="break">BREAK</option><optgroup label="Retired file inspection"><option value="4" data-retired-engine="4">Retired engine 4 (read-only)</option></optgroup></select>
         </label>
         <div class="drop" id="drop">
           <label for="files"><span>Choose .dnpr files or .zip of .dnpr files</span></label>
@@ -75,7 +75,7 @@
           <p class="help">Drop files here or use the file picker. Each record is checked for CRC, length, engine, format and schema before being kept in this browser session.</p>
         </div>
       </div>
-      <p class="help">Hardware model is not encoded in DNPR v1. An explicit Elite/Pro filename suffix can be checked for conflict, but real model compatibility requires a future device identity handshake. File-only inspection works without a device.</p>
+      <p class="help" data-retired-engine="4">Engine4 is retired. Existing files stay unchanged as legacy backups, not SynthOne presets.</p><p class="help">Hardware model is not encoded in DNPR v1. An explicit Elite/Pro filename suffix can be checked for conflict, but real model compatibility requires a future device identity handshake. File-only inspection works without a device.</p>
       <p id="status" role="status" aria-live="polite">Choose a file to inspect. Nothing is sent or saved automatically.</p>
     </section>
     <section class="panel" id="preview-panel" aria-labelledby="preview-title">
@@ -105,4 +105,4 @@
       <p class="help">Factory or factory-derived exports stay blocked. 909, 808 and BREAK records reference external samples; without a keyboard sample CRC check, the kit is not verified complete. No plugin preset conversion or J6 fidelity is implied.</p>
     </section>
   </div>
-</main><footer><a class="brand" href="../../index.html">DnBOX</a><nav aria-label="Project"><a href="../../manual/">Manual</a><a href="../../builds/">Build history</a><a href="../../new/">What’s new</a><a href="../../help/">Setup & help</a><a href="https://github.com/gobbajogger/X0X37-for-Loopy-Pro">Source and credits</a></nav></footer><script type="module" src="app.mjs"></script></body></html>
+</main><footer class="site-footer"><a class="brand" href="../../index.html">DnBOX</a><nav aria-label="Project"><a href="../../manual/">Manual</a><a href="../../builds/">Build history</a><a href="../../install/#firmware">Firmware versions</a><a href="../../tools/">Tools</a><a href="../../help/">Setup &amp; help</a><a href="../../reference/">Design archive</a><a href="https://github.com/gobbajogger/X0X37-for-Loopy-Pro">Source and credits</a></nav><a class="back-top" href="#top">↑ Top</a></footer><script type="module" src="app.mjs"></script><script type="module" src="../../site-shell.mjs"></script></body></html>

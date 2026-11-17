@@ -1,0 +1,10 @@
+✔ actual first public WIP fails closure for its two absent shared interfaces (30.278356ms)
+✔ current local shared composition resolves all imported hero/theme inputs (11.285026ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 368.212948

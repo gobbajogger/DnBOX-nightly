@@ -20,12 +20,16 @@ echo "DNBOX-GATE repo=nightly lane=$LANE sha=$SHA started=$TS (UTC+10)"
 clean()   { git diff --quiet && git diff --cached --quiet; }
 setup()   { command -v node >/dev/null && command -v python3 >/dev/null || return 2; if [ -f package-lock.json ]; then npm ci --no-audit --no-fund >/dev/null || return 2; fi
             python3 -c 'import playwright' 2>/dev/null || { echo "pip install playwright && python3 -m playwright install chromium"; return 2; }; }
-no_loss() { git fetch -q origin integration/dnbox-consolidated || return 1
+no_loss() { if [ -n "${DNBOX_BASE_SHA:-}" ]; then
+                 [[ "$DNBOX_BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid connector base SHA"; return 1; }
+                 [ "$(git cat-file -t "$DNBOX_BASE_SHA" 2>/dev/null)" = commit ] || { echo "connector base commit unavailable"; return 1; }
+                 BASE=$DNBOX_BASE_SHA; echo "connector-pinned consolidated base=$BASE (caller must retain fresh remote receipt)"
+               else git fetch -q origin integration/dnbox-consolidated || return 1; fi
             git merge-base --is-ancestor "$BASE" HEAD || { echo "merge $BASE in (no rebase)"; return 1; }
             local miss=0; while read -r f; do [ -z "$f" ] && continue; grep -qF -- "$f" "docs/lanes/$LANE.md" 2>/dev/null || { echo "deleted without reason: $f"; miss=1; }; done <<< "$(git diff --name-only --diff-filter=D "$BASE" HEAD)"; return $miss; }
 limits()  { local bad=0
             git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' && bad=1
-            git grep -nIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . ':!*.md' && bad=1
+            git grep -lIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . && bad=1
             git ls-files | grep -iE '\.ipa$|\.fwsc$|ctl\.img$' && bad=1
             [ "$LANE" != remote ] || grep -rqi 'funkybeats' LICENSES web 2>/dev/null || { echo "FunkyBeats MIT notice missing"; bad=1; }
             return $bad; }

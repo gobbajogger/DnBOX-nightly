@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Isolated b341 fastmath source port for pitch-dependent native glyphs.
+const f=Math.fround,a=(x,y)=>f(f(x)+f(y)),s=(x,y)=>f(f(x)-f(y)),m=(x,y)=>f(f(x)*f(y)),d=(x,y)=>f(f(x)/f(y));
+const buf=new ArrayBuffer(4),floats=new Float32Array(buf),bits=new Uint32Array(buf);
+function finite(x){x=f(x);if(!Number.isFinite(x))throw Error('Finite float32 required');return x;}
+function exp2nf(n,r){if(n<-126)return 0;let p=f(1.534580891e-4);for(const v of[1.339993158e-3,9.618488972e-3,5.550328776e-2,2.402264689e-1,6.931472057e-1,1])p=a(m(p,r),v);floats[0]=p;bits[0]=(bits[0]+((n<<23)>>>0))>>>0;return floats[0];}
+export function sourceExp(x){x=finite(x);if(x<f(-87.3))return 0;if(x>f(88.7))x=f(88.7);const n=Math.floor(a(m(x,1.44269504088896),.5));x=s(s(x,m(n,.693145752)),m(n,1.42860677e-6));return exp2nf(n,m(x,1.44269504088896));}
+export function sourceLog2(x){x=finite(x);if(x<=0)return -127;floats[0]=x;let e=((bits[0]>>>23)&255)-127;bits[0]=(bits[0]&0x007fffff)|0x3f800000;let q=floats[0];if(q>f(1.41421356)){q=m(q,.5);e++;}const t=d(s(q,1),a(q,1)),t2=m(t,t);let p=f(.3428278367);for(const v of[.411533781,.5770866525,.9617966483,2.885390082])p=a(m(p,t2),v);return a(e,m(p,t));}
+export function sourceSin(x){x=finite(x);if(Math.abs(x)>10000)throw Error('Pitch glyph angle out of scope');const k=Math.floor(a(m(x,d(1,6.28318530717959)),.5));x=s(s(s(x,m(k,6.28125)),m(k,1.9353071693331003e-3)),m(k,1.0253131561401567e-11));const x2=m(x,x);let p=f(1.345176048e-10);for(const v of[-2.467706523e-8,2.752946668e-6,-1.984015614e-4,8.333310417e-3,-1.666666459e-1,9.999999946e-1])p=a(m(p,x2),v);return m(p,x);}
+export function sourceCos(x){x=finite(x);if(Math.abs(x)>10000)throw Error('Glyph angle out of scope');const k=Math.floor(a(m(x,d(1,6.28318530717959)),.5));let r=a(s(s(s(x,m(k,6.28125)),m(k,1.9353071693331003e-3)),m(k,1.0253131561401567e-11)),m(.5,3.14159265358979));if(r>=f(3.14159265358979))r=s(r,6.28318530717959);const x2=m(r,r);let p=f(1.345176048e-10);for(const v of[-2.467706523e-8,2.752946668e-6,-1.984015614e-4,8.333310417e-3,-1.666666459e-1,9.999999946e-1])p=a(m(p,x2),v);return m(p,r);}

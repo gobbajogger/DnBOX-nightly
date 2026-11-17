@@ -1,0 +1,21 @@
+✔ pagehide before metadata completes never mounts a stale panel (4.022262ms)
+✔ pagehide during cryptographic mounting destroys late candidate without attaching it (14.548241ms)
+✔ BFCache restores selected IDs and old callbacks cannot mutate current storage (5.422581ms)
+✔ network errors disclose failure without mounting or claiming device writes (3.737308ms)
+✔ pagehide while metadata body waits never calls mount after body arrives (2.425717ms)
+✔ overlapping restore destroys obsolete candidate and retains newest panel (2.16286ms)
+✔ stale or duplicate saved IDs cannot prevent verified panel mounting (12.949308ms)
+✔ all five contract previews resolve beneath module-relative public asset directory (5.188656ms)
+✔ each exact contract size is bounded and returned without changing bytes (12.32102ms)
+✔ oversize and truncated streams cancel and release without returning unverified bytes (4.543597ms)
+✔ unknown URLs never fetch; failed HTTP, forged lengths and missing streaming fail closed (1.643187ms)
+✔ all five admitted previews validate original PCM before choosing any break (83.295403ms)
+✔ stored selection normalization retains only known unique IDs without adding choices (3.350387ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 765.94874

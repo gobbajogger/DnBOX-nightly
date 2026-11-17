@@ -1,0 +1,150 @@
+{
+  "scope": "Own bounded document-width observations only, not independent Review or full layout/interaction qualification",
+  "currentRuntime": "8ce16ce15fb5ecc4b2f40b04ee2c697e6d04e20e",
+  "priorObservations": "c25012642ffa0076de177d836f02b53ef61e390c",
+  "sourceContinuity": "Git diff c250..8ce has no non-Remote product byte changes except SOURCE-MANIFEST.json",
+  "viewport": [
+    844,
+    390
+  ],
+  "routes": [
+    {
+      "path": "",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "install/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "manual/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "manual/legacy.html",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "manual/protocol.html",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "manual/projects-guide.html",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "manual/original/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "presets/legacy/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "help/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "new/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "presets/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "projects/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "breaks/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "starting-breaks/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "builds/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "tools/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "reference/",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "reference/r22.html",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    },
+    {
+      "path": "reference/current-ui.html",
+      "documentWidthObservation": "no horizontal overflow",
+      "qualification": "NOT_QUALIFIED",
+      "clientWidth": 829,
+      "scrollWidth": 829
+    }
+  ],
+  "notes": [
+    "All19 route document widths observed, not full visual or interaction review",
+    "390x844 remainsNOT_RUN: native window minimum500px",
+    "Archive wrapper widths do not qualify embedded galleries"
+  ]
+}

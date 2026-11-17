@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "webParent": "26eb18ba989924006b395ab6aa660823e21b925c",
+  "remoteParent": "8f28b20ba510233a3e701f5efbf2b0946e6f06d7",
+  "outerTests": 90,
+  "nestedTests": [
+    {
+      "folder": "native-body-work",
+      "tests": 3,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-drum-inventory-work",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-bank-presentation-work",
+      "tests": 5,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-presentation-work",
+      "tests": 3,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-font-work",
+      "tests": 2,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-cache-work",
+      "tests": 2,
+      "exitCode": 0
+    },
+    {
+      "folder": "native-drum-binding-work",
+      "tests": 4,
+      "exitCode": 0
+    }
+  ],
+  "nestedCount": 25,
+  "intentionalChildFailureRegression": "PASS",
+  "log": "docs/lanes/evidence/web-runner-correction.log",
+  "sha256": "1aacd321952b0e55dba3507beed00d6a85dd2edbf02f26c95ed50fa57bf0d5a7",
+  "scope": "Source test runner correction; prior outer89 did not establish nested suite execution. No browser/native/full gate qualification."
+}

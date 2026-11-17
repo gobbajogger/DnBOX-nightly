@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><lexml version="5"><node ID="c4d9cd16-b22b-540f-ace0-45e15da48334" type="GROUP"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>0</x><y>0</y><w>480</w><h>240</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[dnr2_source_harness]]></value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[-- Generated SOURCE-ONLY harness; not native admission.
+DNBOX_CODEC=(function()
+-- SPDX-License-Identifier: GPL-3.0-only
+-- Lua 5.1-compatible DNR2 wire codec for TouchOSC. No MIDI I/O or auto-admission.
+-- Source contract: tests/product-remote/tests/c-reference/remote_wire.c.
+local M = {}
+local function integer(value, maximum)
+  assert(type(value) == 'number' and value == value and value >= 0 and value <= maximum and value == math.floor(value), 'Invalid DNR2 integer')
+  return value
+end
+local function put(bytes, offset, count, value)
+  for i = 0, count - 1 do
+    bytes[offset + i] = value % 128
+    value = math.floor(value / 128)
+  end
+end
+local function get(bytes, offset, count)
+  local value = 0
+  for i = 0, count - 1 do value = value + bytes[offset + i] * 2 ^ (7 * i) end
+  return value
+end
+function M.encodeCommand(command)
+  assert(type(command) == 'table' and command.version == 2, 'Invalid DNR2 version')
+  local bytes = {}
+  for i = 1, 51 do bytes[i] = 0 end
+  bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6] = 240, 125, 68, 78, 2, integer(command.op, 7)
+  for i, key in ipairs({'unit', 'client', 'epoch', 'request', 'revision'}) do put(bytes, 7 + (i - 1) * 4, 4, integer(command[key], 268435455)) end
+  put(bytes, 27, 2, integer(command.control, 16383))
+  put(bytes, 29, 2, integer(command.token, 16383))
+  put(bytes, 31, 5, integer(command.value, 4294967295))
+  assert(type(command.unitHigh) == 'table' and #command.unitHigh == 3, 'Three incarnation words required')
+  for i = 1, 3 do put(bytes, 36 + (i - 1) * 5, 5, integer(command.unitHigh[i], 4294967295)) end
+  bytes[51] = 247
+  return bytes
+end
+function M.decodeReply(bytes)
+  assert(type(bytes) == 'table' and #bytes == 51, 'Invalid DNR2 frame length')
+  assert(bytes[1] == 240 and bytes[2] == 125 and bytes[3] == 68 and bytes[4] == 78 and bytes[5] == 2 and bytes[51] == 247, 'Invalid DNR2 header')
+  for i = 2, 50 do integer(bytes[i], 127) end
+  for _, i in ipairs({35, 40, 45, 50}) do assert(bytes[i] <= 15, 'Noncanonical DNR2 uint32') end
+  assert(bytes[6] >= 64 and bytes[6] <= 71, 'Invalid DNR2 reply operation')
+  local result = {op = bytes[6] - 64, status = bytes[7], kind = bytes[8], unitHigh = {}}
+  for i, key in ipairs({'unit', 'client', 'epoch', 'request', 'revision'}) do result[key] = get(bytes, 9 + (i - 1) * 4, 4) end
+  result.control, result.value = get(bytes, 29, 2), get(bytes, 31, 5)
+  for i = 1, 3 do result.unitHigh[i] = get(bytes, 36 + (i - 1) * 5, 5) end
+  return result
+end
+return M
+
+end)()
+DNBOX_SESSION=(function()
+-- SPDX-License-Identifier: GPL-3.0-only
+-- Simulator-only, no-I/O transaction owner over the pinned DNR2 codec.
+-- No native catalog admission, MIDI send, lease timer, HELD or device claims.
+local M = {}
+local function uint(n,max) return type(n)=='number' and n==math.floor(n) and n>=0 and n<=max end
+function M.new(codec, pin)
+  assert(type(codec)=='table' and type(pin)=='table' and pin.testOnly==true, 'Reviewed simulator pin required')
+  assert(uint(pin.client,268435455) and pin.client>0, 'Client required')
+  assert(uint(pin.catalogCrc,4294967295) and uint(pin.catalogCount,16383) and pin.catalogCount>0 and type(pin.controls)=='table' and #pin.controls>0 and #pin.controls<=pin.catalogCount, 'Catalog required')
+  local controls = {}
+  for _, c in ipairs(pin.controls) do
+    assert(c.kind==1 and uint(c.id,16383) and not controls[c.id] and uint(c.min,4294967295) and uint(c.max,4294967295) and c.min<=c.max, 'Reviewed U32 controls only')
+    controls[c.id]={id=c.id,kind=1,min=c.min,max=c.max}
+  end
+  local self={phase='disconnected',request=0,unit=0,unitHigh={0,0,0},epoch=0,revision=0,pending=nil,values={}}
+  local function fail(message) self.phase='failed'; self.pending=nil; error(message) end
+  local function command(op,control,value)
+    assert(not self.pending, 'One transaction at a time')
+    self.request=self.request+1
+    local c={version=2,op=op,unit=self.unit,unitHigh=self.unitHigh,client=pin.client,epoch=self.epoch,request=self.request,revision=op<=1 and 0 or self.revision,control=control or 0,token=0,value=value or 0}
+    local bytes=codec.encodeCommand(c);self.pending=c;return bytes
+  end
+  function self:hello() assert(self.phase=='disconnected','Fresh session required');return command(0) end
+  function self:open() assert(self.phase=='identified','Identify first');return command(1) end
+  function self:read(id) assert(self.phase=='ready' and controls[id],'Reviewed control required');return command(2,id) end
+  function self:set(id,value)
+    local c=controls[id]
+    assert(self.phase=='ready' and c and self.values[id]~=nil,'Read the reviewed control first')
+    assert(type(value)=='number' and value==math.floor(value) and value>=c.min and value<=c.max,'Value outside native domain')
+    return command(3,id,value)
+  end
+  function self:close() assert(self.phase=='ready','Open session required');return command(7) end
+  function self:timeout() return fail('Reply not confirmed; reconnect with a fresh session') end
+  function self:accept(bytes)
+    local c=self.pending;assert(c,'No pending transaction')
+    local ok,r=pcall(codec.decodeReply,bytes);if not ok then return fail('Malformed reply') end
+    if r.op~=c.op or r.client~=pin.client or r.request~=c.request then return fail('Uncorrelated reply') end
+    -- QUEUED confirms only a checked scalar target, never audio application.
+    if r.status~=0 and not (c.op==3 and r.status==1) then return fail('Firmware rejected transaction') end
+    if c.op==0 then
+      if r.unit==0 or r.value~=pin.catalogCrc or r.control~=pin.catalogCount then return fail('Catalog mismatch') end
+      self.unit=r.unit;self.unitHigh={r.unitHigh[1],r.unitHigh[2],r.unitHigh[3]};self.phase='identified'
+    else
+      if r.revision<self.revision then return fail('Stale source revision') end
+      if r.unit~=self.unit then return fail('Instrument changed') end
+      for i=1,3 do if r.unitHigh[i]~=self.unitHigh[i] then return fail('Instrument incarnation changed') end end
+      if c.op==1 then if r.epoch==0 then return fail('Invalid lease') end;self.epoch=r.epoch;self.phase='ready'
+      else
+        if r.epoch~=self.epoch then return fail('Lease changed') end
+        if c.op==2 or c.op==3 then
+          local d=controls[c.control]
+          if r.control~=c.control or r.kind~=d.kind or r.value<d.min or r.value>d.max then return fail('Invalid source value') end
+          if c.op==3 and r.revision~=self.revision+1 then return fail('Source changed during SET; reconnect and refresh') end
+          if c.op==2 and r.revision>self.revision then self.values={} end
+          self.values[c.control]=r.value
+        elseif c.op==7 then self.phase='closed';self.values={} end
+      end
+    end
+    self.revision=r.revision;self.pending=nil;return r
+  end
+  return self
+end
+return M
+
+end)()
+DNBOX_SIMULATOR_PIN=nil
+function DNBOX_ON_STATE(phase,value) local c=root:findByName("state");if c then c.values.text=phase end end
+-- SPDX-License-Identifier: GPL-3.0-only
+-- TouchOSC root callbacks for the simulator-only DNR2 source harness.
+-- The document builder must supply DNBOX_CODEC, DNBOX_SESSION and an explicit
+-- DNBOX_SIMULATOR_PIN. With no pin this script sends nothing. Not native admission.
+-- Official callback/message contract: https://hexler.net/touchosc/manual/script-objects-control
+-- https://hexler.net/touchosc/manual/script-functions-global
+local codec, factory, pin = DNBOX_CODEC, DNBOX_SESSION, DNBOX_SIMULATOR_PIN
+local session, deadline, started = nil, nil, nil
+local route = {true,false,false,false,false,false,false,false,false,false}
+local function state(phase, value)
+  if type(DNBOX_ON_STATE)=='function' then DNBOX_ON_STATE(phase,value) end
+end
+local function abort()
+  session=nil;deadline=nil;started=nil;state('failed')
+end
+local function transmit(bytes)
+  started=getMillis();deadline=started+1000;state('pending')
+  sendMIDI(bytes,route)
+end
+local function invoke(method, ...)
+  if not session then return end
+  local ok,bytes=pcall(method,session,...)
+  if not ok then abort();return end
+  transmit(bytes)
+end
+function init()
+  session=nil;deadline=nil;started=nil;state('disconnected')
+end
+function onReceiveNotify(key, value)
+  if key~='dnr2' or type(value)~='table' then return end
+  if value.action=='connect' then
+    if session or type(pin)~='table' or pin.testOnly~=true or type(factory)~='table' or type(codec)~='table' then return end
+    local ok,created=pcall(factory.new,codec,pin)
+    if not ok then abort();return end
+    session=created;state('connecting');invoke(session.hello)
+  elseif value.action=='cancel' then
+    session=nil;deadline=nil;started=nil;state('disconnected')
+  elseif value.action=='set' then
+    if session and session.phase=='ready' and not session.pending then invoke(session.set,value.id,value.value) end
+  elseif value.action=='read' then
+    if session and session.phase=='ready' and not session.pending then invoke(session.read,value.id) end
+  elseif value.action=='close' then
+    if session and session.phase=='ready' and not session.pending then invoke(session.close) end
+  end
+end
+function onReceiveMIDI(message, connections)
+  if not session or not session.pending or type(connections)~='table' or connections[1]~=true or type(message)~='table' then return end
+  -- Unrelated musical MIDI must never be mistaken for a protocol reply.
+  if message[1]~=240 or message[2]~=125 or message[3]~=68 or message[4]~=78 then return end
+  local now=getMillis()
+  if not deadline or not started or now<started or now>=deadline then abort();return true end
+  local ok,reply=pcall(session.accept,session,message)
+  deadline=nil
+  if not ok then abort();return true end
+  if reply.op==0 then invoke(session.open)
+  elseif reply.op==1 then invoke(session.read,pin.controls[1].id)
+  elseif reply.op==7 then session=nil;state('disconnected')
+  else state('ready',{id=reply.control,value=reply.value,kind=reply.kind,queued=reply.status==1}) end
+  return true
+end
+function update()
+  if deadline then local now=getMillis();if now<started or now>=deadline then abort() end end
+end
+]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values><children><node ID="01883a4d-883b-5f5e-a718-f2fa396f472d" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>12</x><y>8</y><w>456</w><h>35</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[title]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[SOURCE HARNESS / NOT NATIVE]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="376d1be8-9551-55e6-aef8-b70424998aee" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>12</x><y>48</y><w>456</w><h>35</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[state]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[disconnected]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="6e5d419d-2684-58d7-ac09-805b9ca45185" type="BUTTON"><properties><property type="b"><key><![CDATA[background]]></key><value>1</value></property><property type="i"><key><![CDATA[buttonType]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>12</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>1</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[connect]]></value></property><property type="b"><key><![CDATA[press]]></key><value>1</value></property><property type="b"><key><![CDATA[release]]></key><value>1</value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[function onValueChanged(key) if key=="x" and self.values.x>0 then root:notify("dnr2",{action="connect",id=1,value=950}) end end]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[x]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[0]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="076092fc-0fa8-597c-964f-8f94456245ca" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>12</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[connect_label]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[Connect]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="581ba083-78b5-54da-822f-631b9dd04b83" type="BUTTON"><properties><property type="b"><key><![CDATA[background]]></key><value>1</value></property><property type="i"><key><![CDATA[buttonType]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>104</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>1</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[read]]></value></property><property type="b"><key><![CDATA[press]]></key><value>1</value></property><property type="b"><key><![CDATA[release]]></key><value>1</value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[function onValueChanged(key) if key=="x" and self.values.x>0 then root:notify("dnr2",{action="read",id=1,value=950}) end end]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[x]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[0]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="b51d029a-a3f0-5bc6-bde7-683a117cce41" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>104</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[read_label]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[Read]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="904879c1-0112-5e96-a723-39ee6fe09c86" type="BUTTON"><properties><property type="b"><key><![CDATA[background]]></key><value>1</value></property><property type="i"><key><![CDATA[buttonType]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>196</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>1</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[set]]></value></property><property type="b"><key><![CDATA[press]]></key><value>1</value></property><property type="b"><key><![CDATA[release]]></key><value>1</value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[function onValueChanged(key) if key=="x" and self.values.x>0 then root:notify("dnr2",{action="set",id=1,value=950}) end end]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[x]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[0]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="34f63940-9cd1-5eaa-9744-b50ebb8a5220" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>196</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[set_label]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[Set 950]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="93d1e168-caa0-5a07-80c0-061c562f8ebe" type="BUTTON"><properties><property type="b"><key><![CDATA[background]]></key><value>1</value></property><property type="i"><key><![CDATA[buttonType]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>288</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>1</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[close]]></value></property><property type="b"><key><![CDATA[press]]></key><value>1</value></property><property type="b"><key><![CDATA[release]]></key><value>1</value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[function onValueChanged(key) if key=="x" and self.values.x>0 then root:notify("dnr2",{action="close",id=1,value=950}) end end]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[x]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[0]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="aa3ee529-eac9-5a56-8d91-93bd54b6085c" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>288</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[close_label]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[Close]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="e64ca849-3acd-5b15-89f8-e4dc324e5464" type="BUTTON"><properties><property type="b"><key><![CDATA[background]]></key><value>1</value></property><property type="i"><key><![CDATA[buttonType]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>380</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>1</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[cancel]]></value></property><property type="b"><key><![CDATA[press]]></key><value>1</value></property><property type="b"><key><![CDATA[release]]></key><value>1</value></property><property type="s"><key><![CDATA[script]]></key><value><![CDATA[function onValueChanged(key) if key=="x" and self.values.x>0 then root:notify("dnr2",{action="cancel",id=1,value=950}) end end]]></value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[x]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[0]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node><node ID="87c12124-9510-5666-9a53-6dbe8e9c0f55" type="LABEL"><properties><property type="b"><key><![CDATA[background]]></key><value>0</value></property><property type="c"><key><![CDATA[color]]></key><value><r>0.12</r><g>0.18</g><b>0.2</b><a>1</a></value></property><property type="r"><key><![CDATA[frame]]></key><value><x>380</x><y>110</y><w>84</w><h>64</h></value></property><property type="b"><key><![CDATA[interactive]]></key><value>0</value></property><property type="s"><key><![CDATA[name]]></key><value><![CDATA[cancel_label]]></value></property><property type="c"><key><![CDATA[textColor]]></key><value><r>0.95</r><g>0.95</g><b>0.95</b><a>1</a></value></property><property type="i"><key><![CDATA[textSize]]></key><value>15</value></property><property type="b"><key><![CDATA[visible]]></key><value>1</value></property></properties><values><value><key><![CDATA[text]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[Cancel]]></default><defaultPull>0</defaultPull></value><value><key><![CDATA[touch]]></key><locked>0</locked><lockedDefaultCurrent>0</lockedDefaultCurrent><default><![CDATA[false]]></default><defaultPull>0</defaultPull></value></values></node></children></node></lexml>
