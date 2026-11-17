@@ -1,0 +1,11 @@
+✔ current source-linked finish line is complete metadata, not an acceptance claim (1.939638ms)
+✔ controlled false completion cannot hide FAIL/NOT_RUN or a different evidence SHA (0.704123ms)
+✔ controlled missing page and landscape size are not silently narrowed coverage (0.40267ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 259.144174

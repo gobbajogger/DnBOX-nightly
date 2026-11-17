@@ -1,45 +1,59 @@
-Move: M0 (clean start and green gate)   PR: #136   Head: this commit
-LEFT items PASS: 0/2; failing: L15 L16
-Gate at head: NOT_RUN (M0 start checks next; full green gate remains follow-up)
-ETA merge: start files after M0 checks; green gates 2026-11-17 22:00 VLAT
+# Lane: integ
 
-# Lane: integ   (copy to docs/lanes/integ.md; update in every push)
-Owner agent: <name>   Branch: lane/integ-<topic>   Draft PR: #<n>   Head: <sha8>   Updated: <YYYY-MM-DD HH:MM VLAT>
+Owner: repo prep integration agent. Branch: lane/integ-start-files. Updated: 2026-11-17 00:30 VLAT.
+Baseline: `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`.
 
-## Checklist (from CHECKLISTS.md)
-| ID | Check | Status (PASS/FAIL) | Evidence (SHA + log path or PR comment link) |
-|---|---|---|---|
-| C1 | Local gate at head | FAIL | |
-| <S1…> | | FAIL | |
+## Checklist
+- C1 FAIL: exact baseline/head Local gates in progress; not claimed passing.
+- C2 PASS: branch descends from pinned consolidated input; deletions below preserve recoverability in Git history.
+- C3 FAIL: independent test-and-merge review in progress.
+- C4 FAIL: full gate pending.
+- C5 FAIL: broader integration outcome not complete.
+- C6 FAIL: prep PR remains unmerged until required evidence.
 
 ## Now / next
-- Now: <item, riskiest first>
-- Next: <item>
+Apply supplied v2 prep, remove obsolete briefs with reasons, correct proven gate false-PASS defect, then qualify exact before/after inputs.
 
-## Blockers (each with its fix and the route being tried; never "waiting")
-- <blocker> → <fix> (since HH:MM)
+## Blockers and routes
+- Shell gh is not logged in; explicit push dry-run cannot read GitHub username. Use connected GitHub API writes below 700 KB.
+- Baseline has no new gate script; execute the supplied script externally on the exact baseline and record this bootstrap fact.
+- Independent reviewer reproduced Elite-failure/Pro-success false PASS; firmware gate corrected to fail immediately and require Elite copy. Budget attribution remains unresolved, never PASS from stale logs.
 
-## Top 3 risks for the next hour
-1.
-2.
-3.
+## Conflicts noted
+- CHECKLISTS I0 describes no-new-regressions while RULES 9 requires passing before and after. No merge is authorized by a failed/VOID gate alone; independent review required.
+- User kickoff forbids repo settings changes; no rename/settings action performed.
 
-## Deletes (files this lane removes on purpose, with reason; the gate's no-loss step reads this)
-- <path> — <reason>
+## Deletes
+- `coordination/edge-case-hunt/EC-20261026-011.json` — obsolete brief/rule/handoff listed in supplied removal manifest; recoverable from parent Git commit.
+- `docs/nightly-first-development-gate.md` — obsolete brief/rule/handoff listed in supplied removal manifest; recoverable from parent Git commit.
 
-## Conflicts noted (RULES 23)
-- <conflict> → reading used: <…>
+## Gate corrections from independent review
+- Optional DNBOX_BASE_SHA is a fresh connector-resolved 40-hex commit pin; validate object and retain ancestry/deletion checks, avoiding unauthenticated fetch only.
+- Nightly TMPDIR description corrected to match the actual outside-checkout path.
 
-## Owner-directed start-only split
-This PR now contains only the supplied prep manifest, source ledger and removal list. All unrelated product/test/environment changes are removed from its effective diff by a normal successor commit, never by force push. Complete broad work remains recoverable at backup/integ-before-start-split-20261116 (b39e99c4197544037896fd4ed463a338a5d423c3).
+## Verified review and current blockers
+- Independent regression: firmware fail-fast/exact-model budget fixtures PASS 6/6; connector-base validation, ancestry and documented deletion fixtures PASS 12/12 across both gates. These are focused tests, not a full Local PASS.
+- Firmware baseline host sanitizer tests fail because LeakSanitizer cannot operate under ptrace; current cloud and elevated tiny probe reproduce. Mac mini is offline; cloud is the only connected environment. Keep FAIL and rerun in a compatible environment, never disable sanitizer to claim PASS.
+- Firmware build gate now fails immediately for either model and budget reads only exact-SHA, per-model logs/receipts in a fresh run directory. Missing actual metrics remain FAIL.
 
-Latest owner direction permits these two start-only merges after meaningful touched-file Local checks; this is a specific sequencing exception, not a changed RULES.md v2 text or a claim that the full before/after application gate and viewport review passed. Independent QA records exact scoped results and known defects on the PR. All lane finish lines remain open.
+## Follow-up gate corrections
+- Baseline build PASS, browser harness correction requires chromium_sandbox=True and removes explicit no-sandbox in common admission/visual launchers. AST regression PASS for both launchers and syntax checks PASS. Actual normal sandbox fails cloud socket permissions; Mac offline, no browser PASS claimed.
 
-The gate scripts are exact supplied ZIP bytes, not later corrected versions. Known follow-up defects include firmware fail-fast/budget attribution and gate environment/prerequisite handling; the touched-file gate must not execute unsafe browser routes or treat the original scripts' possible false PASS as qualification. Full Local remains unqualified.
+Repeated mistake: browser-sandbox fixes missed launchers in the full gate call graph. Inspect every invoked launcher, require explicit chromium_sandbox=True throughout, and never count a two-file policy check as full runtime coverage.
+- Expanded source audit now inspects all Python Chromium launchers, not only two common files. Remote's own harness remains its owner's correction; full regression correctly fails until that change is composed. Static policy PASS is never runtime PASS.
+- Independent review identified Markdown exclusion in secret scanning. Removed it; scan now emits filename only, never matched values. Dummy Markdown key/token regression3/3 PASS; actual Local must rerun at new head.
 
-Removal-list exceptions retained: AGENTS.md. AGENTS.md is replaced, not deleted; other retained paths are existing test dependencies.
+## Integration checklist
+- I0 FAIL: full baseline/current Local not passing; normal sandbox environment unavailable. Safe subsets do not replace full gate.
+- I1 FAIL: consolidated state now recorded in both repositories; prep and lane PRs not yet merged.
+- I2 FAIL: combined firmware with all lanes not qualified.
+- I3 FAIL: all-engine dropout measurement outstanding.
+- I4 FAIL: actual LeakSanitizer blocked by tracer; no disabled-sanitizer result counts.
+- I5 FAIL: five BREAK samples, preview and published404 correction require runtime/Pages verification.
+- I6 FAIL: consolidated roadmap and voting runtime audit outstanding.
+- I7 FAIL: cleanup waits all lanes/rule9, and renames conflict with explicit no-settings instruction.
 
-## Exact removals
-Each path below is an obsolete brief/rule/handoff explicitly listed in the supplied remove manifest; the original bytes remain in the inherited baseline and backup history.
-- `coordination/edge-case-hunt/EC-20261026-011.json` — supplied removal list; historical instructions, retained in Git history.
-- `docs/nightly-first-development-gate.md` — supplied removal list; historical instructions, retained in Git history.
+## I5 authentic asset admission
+- Recovered all five original backup encoded zones and exact contract-pinned preview WAVs. Verified extraction against original slots-before-install.x0xslots SHA256239bd1d1ec5ae79ab634cbefe4817c058f357531a33774f0a5f6ecc80322df9e; contract SHA256df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f. Verification/mutation tests4/4 PASS. Pre-backup lossless WAV originals remain unknown; no synthetic replacement.
+- Files admitted under web/product-site/assets/starting-breaks/. Web owns narrow contract-hash/size builder allowlist and actual preview provider wiring. Existing builder rejects all WAV/ADPCM until that reviewed correction is composed. No live404 fix, deployment or browser playback PASS yet.
+- Firmware baseline includes zero built-in loops by default; old opt-in stock bank is three unrelated loops, not this five-zone set. Exact five encoded bytes109274 exceed current13,464/13,472 code headroom; embedded-bank fit remains open, no protected flash map changes.

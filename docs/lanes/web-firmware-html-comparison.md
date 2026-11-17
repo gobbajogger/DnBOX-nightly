@@ -1,0 +1,36 @@
+# W3 exact-source comparison
+
+`scripts/compare-firmware-html.py` compares decoded RGBA pixels and the complete screen inventory. It is read-only. It neither creates screenshots nor grants independent visual approval, firmware qualification or publication.
+
+## Inputs
+
+- Separate authoritative inventory: schema `dnbox-firmware-screen-inventory/1`, `productionSourceCommit`, `sourceInventoryGitBlob`, `coverageComplete: true`, `notRun: []`, and complete unique `screenIds`. The exact file SHA256 must be supplied independently from its source/review record. Matching two truncated capture inventories is not sufficient. The CLI resolves the exact harness path at the pinned firmware commit and matches its regular Git blob to sourceInventoryGitBlob, with Git replacement objects disabled and any declared sourceInventoryPath checked. A separate historical sourceInventoryCommit cannot override the production pin. The caller/reviewer must still independently verify derivation and completeness; Git identity is not semantic proof. Direct compare() unit calls exercise only the pixel/inventory algorithm, not the CLI provenance gate.
+- Native manifest: `productionSourceCommit`, `coverageComplete: true`, `notRun: []`, and nonempty `screens` records with unique `id`, relative PNG `path`, `width: 240`, `height: 240`, file `sha256`.
+- HTML manifest: the same fields and exact native screen IDs, plus `websiteSourceCommit` and `browserCapture: true`. These fields must describe an actual browser capture, never a copied native image or an inferred result.
+- Both exact commit pins must be supplied explicitly. Each PNG must match its recorded file digest; decoding uses those same in-memory hashed bytes, not a second path open. Paths may not escape the manifest directory or use symlinks; each image is bounded to 2 MiB and must decode to 240×240.
+
+```
+python3 scripts/compare-firmware-html.py \
+  --native /path/to/native/manifest.json \
+  --html /path/to/browser/manifest.json \
+  --inventory /path/to/source-derived/screen-inventory.json \
+  --inventory-sha256 <independently-pinned-64-character-inventory-SHA256> \
+  --firmware-repo /path/to/pinned/firmware/repository \
+  --source-inventory-path tests/host/ui_screen_inventory.c \
+  --firmware-sha <exact-40-character-firmware-SHA> \
+  --website-sha <exact-40-character-website-SHA>
+```
+
+The threshold is fixed at zero differing pixels. The report includes per-screen differing-pixel counts and decoded-RGBA hashes. Missing inputs, different pins, incomplete coverage, NOT_RUN, different inventories, malformed dimensions or a single changed pixel result in FAIL. No captures are opened when metadata admission fails.
+
+## Current boundary
+
+Firmware baseline `4bacd2e7d1bca1bf4de026befc0572e0b2489b8f` has 135 ordinary-state captures, but its manifest explicitly says coverage is incomplete (alternate engine and transient states missing). No final complete authoritative inventory or matching real HTML capture is available. Running admission against that baseline and missing HTML returns FAIL before any pixel comparison. This is not W3 completion.
+
+Synthetic unit tests exercise the comparator, including a changed pixel, malformed/source-mismatched manifests, file-hash mismatch, dimensions and symlinks. Their PASS says only that the checker behaves as tested, not that any actual firmware/HTML pair matches.
+
+## Later incomplete inventories (not final W3 inputs)
+
+The later 172 ordinary/GLOBAL inventory records runtime source `1bd5f6854486b8cb1dadec08cc1c33c01f9f35a0`, harness blob `c604b9070f21ed576d113feeedf59c087297dcb0`, and `coverageComplete: false`. Alternate engines, overlays/transients, hardware clip/PADCAL and full geometry/visual approval remain missing.
+
+The 500-state deep-list extension at firmware commit `7ea37ab8cef8b911f47b08e251877eee69a39068` also remains incomplete. Its `sourceInventoryGitBlob` identifies `tests/host/ui_overlay_inventory.c`, not the JSON manifest. The firmware owner confirms its runtime pin predates that harness commit: resolving the harness at the earlier runtime SHA must fail rather than silently treating the two commits as identical. Historical receipts can record separate runtime and harness pins, but final same-source captures must run at one commit containing both runtime and harness, with the resulting manifest published afterward. Neither partial inventory qualifies W3.

@@ -1,0 +1,1644 @@
+CHECK PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+PASS: upstream public-blob identity, generated scripts, accessibility, safeguards, empty firmware catalog, site links
+PASS: Nightly versus production gates, history read-only and renderer syntax
+PASS: four source/generated help destinations and no nonexistent local-manual fragments
+PASS stale not-found scan cannot replace new connected result
+PASS stale disconnect error cannot replace new connected result
+PASS older Elite scan cannot overwrite newer Pro selection
+PASS in-flight scan does not disturb active flashing status
+PASS latest error, not-found and OTA result still work
+PASS scan-race regression (5 scenarios; production function, simulated MIDI)
+PASS: controller-image non-erased tail rejected, erased bytes retained, CRC/bounds guarded
+PASS bundled-controller: 62 actual parser, composition, renderer, qualification and denial assertions; synthetic Elite/Pro only
+PASS: 58 admission cases, including all six independent audit negatives
+{"case":"stable-parent-control","exit":0,"wrote_inside":false,"stderr":""}
+{"case":"async-parent-rebind","exit":1,"wrote_inside":false,"stderr":"output must be a new directory outside the repository"}
+PASS: qualified local rendering, 333 rejection cases and download-byte verifier. Synthetic evidence only; NOT candidate QA.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev catalog:check
+> node scripts/verify-build-status.mjs
+
+PASS: 2 nightly builds + 148 history; no unapproved installer entries
+PASS baseline
+PASS historic-elite-firmware-hash-forged-64hex
+PASS historic-pro-firmware-hash-forged-64hex
+PASS historic-elite-size-forged-positive
+PASS historic-source-commit-forged-40hex
+PASS historic-generation-deleted-with-adjusted-count
+PASS historic-generations-reordered
+PASS legitimate-new-DEV-generation-prepended
+PASS legitimate-existing-DEV-lifecycle-progression
+PASS forged-Elite-hardware-proof-is-not-owner-verification
+PASS forged-both-model-hardware-proofs-are-not-owner-verification
+PASS forged-public-latest-and-both-models-are-not-owner-authorization
+PASS aggregate-device-flag
+PASS forged-history-device-pass
+PASS build-forged-device-status
+PASS build-forged-stable-status
+PASS build-forged-hardware-proven
+PASS empty-build-id
+PASS empty-history-id
+PASS cross-build-history-duplicate-id
+PASS empty-build-models
+PASS script-URL
+PASS insecure-URL
+PASS unsupported-model
+PASS history-device-bool
+PASS history-installable
+PASS history-unknown-status
+PASS history-bad-source-SHA
+PASS model-bad-hash
+PASS build-unreviewed-qa-forgery
+PASS build-unreviewed-http-forgery
+PASS build-unreviewed-installable-forgery
+PASS build-unreviewed-silenced-failure
+PASS build-unreviewed-missing-pro
+PASS build-unreviewed-forged-rehash
+PASS firmware-link
+PASS real-failed-build-relabel-source
+PASS real-failed-build-relabel-evidence
+PASS real-failed-build-remove-receipt
+PASS real-failed-build-remove-receipt-and-relabel
+PASS real-failed-build-forge-source-root
+PASS real-failed-build-forge-valid-log-hash
+PASS real-failed-build-forge-pro-compiler-exit
+PASS other-source-only-with-typed-failure
+PASS nonempty-preview
+PASS source-docs-mismatch
+PASS deleted-DEV-generations-and-entire-pinned-history-cannot-be-accepted
+PASS standalone-catalog-check-rejects-tail-history-delete-even-with-updated-count
+PASS standalone-catalog-check-rejects-valid-40hex-pinned-history-source-forgery
+PASS standalone-catalog-check-rejects-two-pinned-history-rows-swapped
+PASS standalone-catalog-check-accepts-truthful-future-noninstallable-history-append
+PASS approved-GitHub-source-evidence-remains-allowed-on-append
+PASS nested-history-download-bin
+PASS nested-history-picker
+PASS nested-history-artifact-text
+PASS reported-check-forged-verified-object-no-link
+PASS history-description-forged-release-object-no-link
+PASS history-title-forged-release-object-no-link
+PASS history-date-object-no-link
+PASS history-source-ref-object-no-link
+PASS history-missing-gate-object-no-link
+PASS reported-check-command-object-no-link
+PASS history-blank-title
+PASS nested-history-assets
+PASS nested-reported-check-download
+PASS nested-build-pipeline-release
+PASS nested-failed-check-link
+PASS nested-reported-package-link
+PASS nested-controller-link
+PASS nested-offline-controller-link
+PASS nested-failed-native-build-link
+PASS nested-build-model-link
+PASS top-level-binary-link
+PASS unrecognized-build-release-checked
+PASS unrecognized-build-lifecycle
+PASS duplicate-history-ids
+PASS unapproved-download-on-github
+PASS unapproved-binary-blob
+PASS forged-GitHub-host
+PASS github-query-forced-download
+PASS wrong-source-repository
+PASS unknown-source-download-field
+PASS versioning-picker-url
+PASS unreviewed-controller-redistribution
+PASS failed-build-forged-artifact
+PASS synthetic-malicious-Release-does-not-become-an-installable-catalog
+PASS synthetic-Elite-device-report-without-owner-attestation-REJECTED
+PASS synthetic-both-model-production-proof-shape-not-attestation-REJECTED
+PASS hidden-description-download-any-extension
+PASS hidden-policy-artifact
+PASS hidden-reported-check-picker
+PASS hidden-build-pipeline-Release
+PASS hidden-generic-link
+PASS hidden-blob-URI
+PASS mislabelled-Elite-build-model
+PASS public-single-model-cannot-imply-Pro
+PASS public-list-needs-each-model-approval
+PASS mutable-history-navigation-is-not-a-proof-claim-on-future-append
+PASS new-future-DEV-model-may-reference-immutable-validation-record
+PASS mutable-history-evidence-tree
+PASS mutable-model-validation-record
+PASS mutable-physical-report
+PASS forged-physical-report-on-untested-model
+PASS nonbuilt-source-forges-QA-live-device-status
+PASS source-only-cannot-borrow-even-truthful-unreviewed-build-pipeline
+PASS unapproved-artifact-link-in-new-repaired-history
+PASS top-source-commit-mutable
+PASS top-source-commit-null
+PASS top-source-commit-number
+PASS history-firmware-subtree-mutable
+PASS historical-model-package-sha-invalid
+PASS failed-model-exit-status-string
+PASS failed-controller-sha-invalid
+PASS failed-controller-crc-invalid
+PASS failed-pool-accounting-corruption
+PASS offline-controller-crc-invalid
+PASS producer-Elite-hash-invalid
+PASS producer-Pro-product-swapped
+PASS producer-private-controller-crc-invalid
+PASS PR103-download-hidden-any-extension
+PASS PR103-firmware-subtree-not-a-SHA
+PASS PR103-cross-history-duplicate
+PASS PR103-independent-build-receipt-stays-noninstallable
+PASS PR96-new-current-source-stays-noninstallable
+PASS PR96-current-history-rejects-private-download
+PASS PR96-current-history-rejects-device-PASS
+PASS PR103-private-rehash-does-not-make-installable
+PASS PR103-real-private-byte-audit-stays-noninstallable
+PASS PR64-no-distribution-approval
+PASS PR64-no-string-approval
+PASS PR64-no-exact-remote-claim
+PASS PR64-no-string-remote-claim
+PASS PR84-no-independent-QA-claim
+PASS PR103-no-independent-QA-claim
+PASS PR103-byte-proof-not-string
+PASS PR103-byte-proof-not-null
+PASS PR84-no-unattributed-byte-proof
+PASS PR103-byte-hash-must-match-audit
+PASS PR103-source-identity-must-match-audit
+PASS new-history-no-unattributed-target-QA
+PASS PR103-audit-exit-cannot-be-forged
+PASS PR103-audit-hash-must-match-receipt
+PASS PR96-new-source-repair-stays-read-only
+PASS PR96-new-repair-no-hardware-PASS
+PASS PR96-new-repair-no-download
+PASS PR104-source-window-not-device
+PASS PR103-latest-combined-not-new-build
+PASS PR104-hidden-download-any-extension
+PASS PR103-hidden-picker-any-extension
+PASS PR104-forged-device-PASS
+PASS PR103-fake-independent-byte-claim
+PASS PR104-invalid-firmware-subtree
+PASS PR103-unapproved-QA-promote
+PASS picker-canonical-empty-positive
+PASS picker-hidden-downloads-array
+PASS picker-hidden-nested-package-link
+PASS picker-hidden-approval
+PASS picker-forged-repository
+PASS picker-forged-pages-host
+PASS picker-unsupported-schema
+PASS picker-extra-nonbinary-url
+PASS picker-forged-repo-non-url
+PASS r16-valid-readonly-rehash-without-qa-or-host
+PASS r16-elite-sha-forgery
+PASS r16-pro-model-forgery
+PASS r16-source-root-forgery
+PASS r16-firmware-subtree-forgery
+PASS r16-qa-forgery
+PASS r16-http-forgery
+PASS r16-controller-redistribution-forgery
+PASS r16-hidden-artifact-url
+PASS r16-invented-test-failure
+PASS r16-archive-receipt-forgery
+PASS r16-controller-member-forgery
+PASS r16-negative-test-count-forgery
+PASS r16-immutable-five-audit-proof-fields-positive
+PASS r16-forged-checker-digest
+PASS r16-forged-log-digest
+PASS r16-forged-results-digest
+PASS r16-forged-Elite-CRC32
+PASS r16-forged-Pro-CRC32
+PASS r14-genuine-build-only-history-positive
+PASS r14-invalid-Elite-SHA
+PASS r14-invalid-Pro-SHA
+PASS r14-invalid-Pro-bytes
+PASS r14-wrong-compiled-tree
+PASS r14-wrong-full-root
+PASS r14-wrong-private-controller
+PASS r14-wrong-immutable-proof
+PASS r14-fake-QA-PASS
+PASS r14-fake-external-HTTP
+PASS r14-unapproved-download
+PASS r16-combined-source-noninstallable-positive
+PASS r16-wrong-merged-root
+PASS: status-history allowlist and malicious-nesting fixtures; no firmware artifacts
+PASS smc79-genuine-native-build-record
+PASS smc79-forged-elite-hash
+PASS smc79-forged-pro-size
+PASS smc79-forged-ctl-hash
+PASS smc79-forged-complete-root
+PASS smc79-forged-compiled-subtree
+PASS smc79-forged-immutable-proof
+PASS smc79-fake-full-QA-PASS
+PASS smc79-fake-HTTP-PASS
+PASS smc79-false-audit-state
+PASS smc79-invented-historical-test-exit
+PASS smc79-hidden-historical-test-failure
+PASS r25-two-new-noninstallable-history-records-positive
+PASS r25-delete-real-PR120-receipt-adjust-count
+PASS r25-delete-both-old-tail-receipts-adjust-count
+PASS r25-swap-new-source-and-private-build-receipts
+PASS r25-forged-Elite-package-SHA-valid-shape
+PASS r25-forged-Pro-package-SHA-valid-shape
+PASS r25-forged-private-controller-SHA
+PASS r25-forged-private-controller-CRC
+PASS r25-forged-package-model
+PASS r25-forged-root-SHA-valid-shape
+PASS r25-forged-firmware-tree-SHA-valid-shape
+PASS r25-forged-QA-PASS
+PASS r25-forged-public-HTTP
+PASS r25-hidden-unapproved-download
+PASS r25-audit-forged-ZIP-SHA
+PASS r25-audit-forged-controller-CRC
+PASS r25-audit-false-distribution
+PASS r25-audit-false-independent-QA
+PASS r26-pinned-119-noninstallable-prefix-positive
+PASS r26-delete-SMC-PR122-receipt-adjust-count
+PASS r26-delete-BF020-PR123-receipt-adjust-count
+PASS r26-delete-both-new-real-receipts-adjust-count
+PASS r26-swap-new-real-receipts
+PASS r26-forge-SMC-source-SHA-valid-shape
+PASS r26-forge-BF020-compiled-subtree-SHA-valid-shape
+PASS r26-forge-SMC-nondevice-QA-PASS
+PASS r26-forge-BF020-device-proof
+PASS r26-add-hidden-download-HREF
+PASS r26-false-exact-native-compile
+PASS future-evidence-commit-valid-pinned-append-PASS
+PASS future-evidence-commit-mutable-main-REJECTED
+PASS future-evidence-commit-40hex-mismatched-url-REJECTED
+PASS future-evidence-commit-object-REJECTED
+PASS r28-legitimate-pinned-blob-append-PASS
+PASS r28-legitimate-pinned-tree-append-PASS
+PASS r28-legitimate-pinned-commit-append-PASS
+PASS r28-blob-path-contains-claimed-SHA-but-Git-ref-differs-REJECTED
+PASS r28-tree-path-contains-claimed-SHA-but-Git-ref-differs-REJECTED
+PASS r28-mutable-blob-ref-with-claimed-SHA-in-path-REJECTED
+PASS r30-real-noninstallable-merged-source-history-positive
+PASS r30-delete-merge-receipt-and-adjust-count-REJECT
+PASS r30-forge-merged-source-SHA-REJECT
+PASS r30-forge-compiled-subtree-REJECT
+PASS r30-claim-downloadable-package-REJECT
+PASS r30-claim-hardware-PASS-REJECT
+PASS r30-claim-distribution-approved-REJECT
+PASS r30-claim-new-native-build-REJECT
+PASS r33-pages-Git-declaration-nonflashable-positive
+PASS r33-delete-pages-evidence-REJECT
+PASS r33-pages-Git-SHA-forgery-REJECT
+PASS r33-unapproved-firmware-link-REJECT
+PASS r33-fake-source-download-admission-REJECT
+PASS r33-fake-device-PASS-REJECT
+PASS r33-fake-distribution-approval-REJECT
+PASS r35-native-independent-qa-failure-safely-recorded
+PASS r35-failed-native-test-concealed-REJECT
+PASS r35-unqualified-download-REJECT
+PASS r35-false-device-approval-REJECT
+PASS r35-false-distribution-approval-REJECT
+PASS r35-artifact-link-smuggling-REJECT
+PASS r35-status-forged-success-REJECT
+PASS r35-history-tail-deleted-REJECT
+PASS r36-pages-unqualified-source-warning-retained
+PASS r36-unsafe-admission-history-deleted-REJECT
+PASS r36-unsafe-admission-relabeled-to-PASS-REJECT
+PASS r36-fake-download-grant-REJECT
+PASS r36-fake-device-PASS-REJECT
+PASS r36-fake-distribution-grant-REJECT
+PASS r36-fake-verified-package-bytes-REJECT
+PASS r36-pages-commit-forged-REJECT
+PASS r37-source-only-proposed-repair
+PASS r37-tail-deletion-REJECT
+PASS r37-forged-source-REJECT
+PASS r37-forged-root-REJECT
+PASS r37-fabricated-site-QA-PASS-REJECT
+PASS r37-forged-download-REJECT
+PASS r37-forged-hardware-PASS-REJECT
+PASS r37-forged-rights-PASS-REJECT
+PASS r37-forged-verified-bytes-REJECT
+PASS r39-independent-scope-and-no-flash
+PASS r39-history-deleted-REJECT
+PASS r39-false-full-QA-REJECT
+PASS r39-forged-source-REJECT
+PASS r39-forged-root-REJECT
+PASS r39-false-download-REJECT
+PASS r39-false-device-PASS-REJECT
+PASS r39-false-rights-PASS-REJECT
+PASS r39-false-served-bytes-REJECT
+PASS r40-BF031-source-only-and-no-flash
+PASS r40-delete-source-history-REJECT
+PASS r40-forged-source-root-REJECT
+PASS r40-forged-source-commit-REJECT
+PASS r40-fabricated-build-REJECT
+PASS r40-fabricated-hardware-REJECT
+PASS r40-fabricated-download-REJECT
+PASS r40-fabricated-rights-REJECT
+PASS r41-two-events-nonflashable-PASS
+PASS r41-swing-delete-REJECT
+PASS r41-swing-source-SHA-forgery-REJECT
+PASS r41-swing-target-build-forgery-REJECT
+PASS r41-swing-download-forgery-REJECT
+PASS r41-safety-HOLD-delete-REJECT
+PASS r41-safety-HOLD-relabel-REJECT
+PASS r41-safety-HOLD-distribution-forgery-REJECT
+PASS r41-safety-HOLD-download-forgery-REJECT
+PASS r42-noninstallable-three-source-receipts-PASS
+PASS r42-deleted-0-REJECT
+PASS r42-forged-source-0-REJECT
+PASS r42-false-install-0-REJECT
+PASS r42-false-rights-0-REJECT
+PASS r42-deleted-1-REJECT
+PASS r42-forged-source-1-REJECT
+PASS r42-false-install-1-REJECT
+PASS r42-false-rights-1-REJECT
+PASS r42-deleted-2-REJECT
+PASS r42-forged-source-2-REJECT
+PASS r42-false-install-2-REJECT
+PASS r42-false-rights-2-REJECT
+PASS r42-forged-compiler-REJECT
+PASS r42-forged-upstream-PASS-REJECT
+PASS r43-safe-noninstallable-history-PASS
+PASS r43-delete-0-REJECT
+PASS r43-forged-source-0-REJECT
+PASS r43-false-download-0-REJECT
+PASS r43-false-rights-0-REJECT
+PASS r43-delete-1-REJECT
+PASS r43-forged-source-1-REJECT
+PASS r43-false-download-1-REJECT
+PASS r43-false-rights-1-REJECT
+PASS r43-delete-2-REJECT
+PASS r43-forged-source-2-REJECT
+PASS r43-false-download-2-REJECT
+PASS r43-false-rights-2-REJECT
+PASS r43-forged-compiler-REJECT
+PASS r43-forged-models-REJECT
+PASS r43-false-QA-REJECT
+PASS r44-source-only-PASS
+PASS r44-deleted-0-REJECT
+PASS r44-forged-source-0-REJECT
+PASS r44-false-install-0-REJECT
+PASS r44-false-rights-0-REJECT
+PASS r44-deleted-1-REJECT
+PASS r44-forged-source-1-REJECT
+PASS r44-false-install-1-REJECT
+PASS r44-false-rights-1-REJECT
+PASS r44-forged-compiler-REJECT
+PASS r46-source-history-PASS
+PASS r46-remove-0-REJECT
+PASS r46-forged-rights-0-REJECT
+PASS r46-forged-package-0-REJECT
+PASS r46-remove-1-REJECT
+PASS r46-forged-rights-1-REJECT
+PASS r46-forged-package-1-REJECT
+PASS r46-remove-2-REJECT
+PASS r46-forged-rights-2-REJECT
+PASS r46-forged-package-2-REJECT
+PASS r46-remove-3-REJECT
+PASS r46-forged-rights-3-REJECT
+PASS r46-forged-package-3-REJECT
+PASS r47-source-history-PASS
+PASS r47-remove-0-REJECT
+PASS r47-false-install-0-REJECT
+PASS r47-false-device-0-REJECT
+PASS r47-false-rights-0-REJECT
+PASS r47-forged-source-0-REJECT
+PASS r47-forged-package-0-REJECT
+PASS r47-remove-1-REJECT
+PASS r47-false-install-1-REJECT
+PASS r47-false-device-1-REJECT
+PASS r47-false-rights-1-REJECT
+PASS r47-forged-source-1-REJECT
+PASS r47-forged-package-1-REJECT
+PASS r48-real-noninstallable-history-positive
+PASS r48-row-deletion-0
+PASS r48-forged-source-0
+PASS r48-false-download-0
+PASS r48-false-device-0
+PASS r48-false-rights-0
+PASS r48-row-deletion-1
+PASS r48-forged-source-1
+PASS r48-false-download-1
+PASS r48-false-device-1
+PASS r48-false-rights-1
+PASS r48-row-deletion-2
+PASS r48-forged-source-2
+PASS r48-false-download-2
+PASS r48-false-device-2
+PASS r48-false-rights-2
+PASS r48-WBL1-forged-Pro-package
+PASS r48-WBL1-forged-controller
+PASS r48-unapproved-firmware-download-HREF
+PASS: 148 SHA256-pinned historical records with R39 continuity negatives; safe append
+PASS: R40 pinned source-only BF031 and negative evidence checks; full native root still required
+PASS R41: 131 SHA-256 seals and permanent source-only / negative policy evidence; native npm still required
+PASS R42: 134 immutable noninstallable development history receipts
+PASS R43: 137 SHA256-pinned nonflashable historical events
+PASS R45: 141 immutable history rows; 14 F03 deletion/false-approval/digest negatives
+PASS R46 143 sealed historical rows; F04 not silently flashable
+PASS R47 145 immutable historical rows; F05 source nonflashable
+PASS R48: 148 immutable records and 14 corruption/false-grant negatives
+PASS install rejects ota-FM-1 before loader write for Elite package
+PASS install refuses an FM-1 package before staging
+PASS install rejects Pro loader for Elite package
+PASS install rejects Elite loader for Pro package
+PASS install preserves matching Elite loader positive
+PASS install preserves matching Pro loader positive
+PASS install refuses a matching FM-1 loader and device
+PASS write cross-family refusal
+PASS write requires a known package identity
+PASS write rejects Pro loader for Elite package
+PASS write allows matching Elite loader
+PASS resume preserves matching Elite loader on the same port pair
+PASS X0X no slot response warns and continues install
+PASS USB send failure warns and continues install
+PASS USB read failure warns and continues install
+PASS malformed SMP_INFO warns and continues install
+PASS zero-slot SMP_INFO warns and continues install
+PASS stock corrupt reply is not unsupported
+PASS stock USB loss is not unsupported
+PASS unclassified no response is not unsupported
+PASS stock Elite016 no SMP_INFO retains supported path
+PASS stock MKE016 no SMP_INFO retains supported path
+PASS stock Starry016 no SMP_INFO retains supported path
+PASS stock FM1_015 is refused as an unsupported board
+PASS required slot backup failure warns and continues install
+PASS known stock Pro016 no SMP_INFO retains existing manual path
+PASS valid empty slot layout retains install
+PASS resume refuses foreign/missing package SMK-37 Elite_900/ota-FM-1
+PASS resume refuses foreign/missing package SMK-37 Elite_900/ota-SMK-37 Pro
+PASS resume refuses foreign/missing package FM-1_900/ota-SMK-37 Pro
+PASS resume refuses foreign/missing package /ota-SMK-37 Elite
+PASS sameKeyboard preserves exact models and only the verified Starrykey-to-Pro alias
+PASS bind single selected observable port positive
+PASS bind ambiguity refuses before app UPGRADE
+PASS selected port name change continues on a single renamed port before app UPGRADE
+PASS real find/wait accepts replacement with a matching-model loader
+PASS real find/wait accepts matching-model loader on the uninterrupted pair
+PASS real bound find refuses changed family
+PASS real bound wait refuses observable ambiguity before handshake
+PASS verified find accepts name-change of the single bound port before readback
+PASS verified find blocks extra-port before readback
+PASS binding ambiguity blocks sample-layout query and backup
+PASS post-install restore binding positive
+PASS post-install restore binding name-change
+PASS post-install restore binding extra-port
+PASS post-install restore binding archive-error
+PASS post-install restore binding readback-mismatch
+{"cases":47,"failed":0,"scope":"actual browser shipping bodies; synthetic discovery/serve/MIDI boundaries, no hardware"}
+PASS 9 actual-source permission/write-lock/reconnect/restore scenarios; simulated only
+PASS 6 actual-source last-qualified picker continuity scenarios; synthetic only
+PASS: 7 actual-source evidence/history navigation cases; HTTPS fragments retained
+{
+  "status": "PASS",
+  "assertions": 51,
+  "scenarios": 14,
+  "scope": "exact Updater method windows / synthetic Web MIDI maps / no physical device",
+  "observed": [
+    {
+      "scenario": "one correctly named device",
+      "pairs": [
+        "A>A"
+      ],
+      "probes": [
+        "A>A"
+      ],
+      "writes": [
+        "SEND:A"
+      ]
+    },
+    {
+      "scenario": "unique device among unrelated ports",
+      "pairs": [
+        "A>A"
+      ],
+      "probes": [
+        "A>A"
+      ],
+      "writes": [
+        "SEND:A"
+      ]
+    },
+    {
+      "scenario": "two uniquely named models",
+      "pairs": [
+        "A>A",
+        "F>F"
+      ],
+      "probes": [
+        "A>A"
+      ],
+      "writes": [
+        "SEND:A"
+      ]
+    },
+    {
+      "scenario": "two identically named outputs",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "two identically named inputs",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "two identical devices with reversed outputs",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "mismatched sole output",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "disconnected matching output",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "disconnected duplicate output ignored",
+      "pairs": [
+        "A>A"
+      ],
+      "probes": [
+        "A>A"
+      ],
+      "writes": [
+        "SEND:A"
+      ]
+    },
+    {
+      "scenario": "disconnected duplicate input ignored",
+      "pairs": [
+        "A>A"
+      ],
+      "probes": [
+        "A>A"
+      ],
+      "writes": [
+        "SEND:A"
+      ]
+    },
+    {
+      "scenario": "non-keyboard input never probed",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "different names of sole in/out",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "two identically named OTA devices",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    },
+    {
+      "scenario": "case-only name mismatch",
+      "pairs": [],
+      "probes": [],
+      "writes": []
+    }
+  ]
+}
+✔ portable and project-only containers preserve raw project, all slots and full header bytes (29.604359ms)
+✔ inner project rejects corrupt, truncated, oversized and incompatible schemas (9.248893ms)
+✔ outer CRC, version, flags, metadata size and raw unmanifested files are rejected (8.284654ms)
+✔ strict metadata rejects duplicated entries, overlapping ranges and unreferenced bytes (17.171229ms)
+✔ sample metadata must match the original header even when both JSON copies and CRCs agree (10.599231ms)
+✔ sample image rejects data CRC, impossible zone boundaries and rate corruption (1.504967ms)
+✔ project-only matching checks every occupied and empty slot and never remaps (3.058667ms)
+✔ portable plans fills, identical skips and backed-up clear/replacement collisions (6.546444ms)
+✔ non-X0X identity is rejected before any project command (3.238927ms)
+✔ unsupported or malformed query replies are explained clearly (2.265401ms)
+✔ export snapshots project plus every original sample and always aborts; no sample writes (16.938199ms)
+✔ export aborts interrupted reads and uncertain BEGIN without blind BEGIN retry (4.753282ms)
+✔ definitively rejected IMPORT does not abort the peer transfer that won after QUERY (40.241909ms)
+✔ stage-time sample change is refused before the first mutation and preserves the peer bytes (18.819139ms)
+✔ READ/WRITE replies correlate operation and offset and validate exact byte lengths (4.325854ms)
+✔ sample reads correlate slot and offset and reject a short reply (3.75317ms)
+✔ project chunk replay recovers a lost WRITE acknowledgement exactly once (2.985905ms)
+✔ complete project-only import preserves every sample byte with zero sample write commands (49.624652ms)
+✔ confirmation or missing verified recovery acknowledgement refuses all sample mutations (24.505617ms)
+✔ firmware semantic validation fails before sample writes and keeps the previous live project (12.612821ms)
+✔ portable import fills and clears exact positions, skips identical images and preserves 512-byte headers (28.446817ms)
+✔ a changed keyboard invalidates the preview before any sample writes (17.017173ms)
+✔ sample readback mismatch rolls back exact original bytes before aborting adoption (35.199287ms)
+✔ lost sample-write acknowledgement is not blindly retried and rollback uses its backup (18.1241ms)
+✔ failed rollback reports recovery failure concretely and does not claim restoration (23.372265ms)
+✔ lost COMMIT reply restores the previous project as well as samples without repeating adoption (53.847756ms)
+✔ QUERY detects retained recovery mode after expiry and rollback restages without releasing its hold (27.791286ms)
+✔ failed recovery retains mode3; reconnect restores a portable backup without reading partial sample images (72.434778ms)
+✔ mode3 refuses project-only recovery and keeps the hold on a failed portable recovery (7.441043ms)
+✔ save/load/reset use confirmation tokens, do not touch samples and never retry SAVE blindly (1.738355ms)
+✔ MIDI adapter ignores normal playing traffic and bounds idle SysEx buffering (2.896863ms)
+✔ only explicit pattern/sound revision pairs are accepted (0.591246ms)
+✔ actual current firmware export retains its 3/10 header and every payload byte (10.225676ms)
+✔ current and endpoint-revision exports pass the real frontend transaction without sample changes (1159.409616ms)
+✔ current stream-3 firmware refuses endpoint stream-6 data before any sample replacement or adoption (534.056418ms)
+✔ adaptive BREAK stream8/9 containers preserve bytes and strict CRC/layout (966.916367ms)
+✔ old firmware rejects new count streams before any sample replacement (399.913232ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3691.275825
+✔ page checks a file before connecting and keeps keyboard actions disabled (43.164718ms)
+✔ wrong identity and damaged file leave mutation controls unavailable (5.742519ms)
+✔ export defaults portable and project-only option is explicit (13.867119ms)
+✔ collision import requires downloaded recovery, saved acknowledgement and explicit import consent (15.025295ms)
+✔ failed import retains recovery download and requires a new preview before retry (2.801841ms)
+✔ load/reset decline sends no action; accepted action invalidates the import preview (4.232299ms)
+✔ mode3 recovery explains the hold, disables normal actions and confirms the portable recovery source (4.298077ms)
+✔ workspace switch detaches MIDI, retains dirty form and file, and invalidates device preview (7.042747ms)
+✔ disconnect disables mutation and invalidates preview while preserving recovery download (3.874397ms)
+✔ queued bound-port reconnect revokes preview and requires an explicit fresh identity handshake (1.62388ms)
+✔ unrelated port lifecycle event preserves the current verified session (1.308785ms)
+✔ initial explicit open events are consumed before the new session is bound (2.118566ms)
+✔ busy export refuses repeat clicks and task switching without discarding draft state (1.595443ms)
+✔ unsupported firmware has an honest unavailable state and no reset fallback (0.898809ms)
+✔ reset wording distinguishes whole project, samples and autosave from arrangement clear (0.373365ms)
+✔ empty chooser cancellation keeps checked file, preview and saved-backup consent (1.738175ms)
+✔ pending connect resolve after input disconnect cannot revive actions or overwrite disconnect status (1.722755ms)
+✔ pending connect reject after input disconnect cannot revive actions or overwrite disconnect status (3.412105ms)
+✔ pending connect resolve after output disconnect cannot revive actions or overwrite disconnect status (1.803793ms)
+✔ pending connect reject after output disconnect cannot revive actions or overwrite disconnect status (6.26377ms)
+✔ final port-state check refuses connect when disconnect event has not arrived (0.694833ms)
+✔ replug does not revive old pending connect; an explicit fresh retry remains usable (1.130261ms)
+✔ live delayed recovery connection preserves busy exclusion and recovery mutation hold (1.267327ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 156.582665
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:edge
+> node --test tests/edge-*.test.mjs
+
+✔ baseline: distinct slot images have distinct restore targets (14.700368ms)
+✔ negative: CRC-valid alias of slot 2 to slot 1 must be rejected before any restore (9.168684ms)
+✔ negative: CRC-valid false empty marker must never turn a populated backup slot into CLEAR (2.173161ms)
+✔ tests/edge-archive-duplicate-slot-id.test.mjs (655.879656ms)
+✔ real archive roundtrip retains interspersed empty slots, multizone data and nonzero buffer offset (13.855287ms)
+✔ genuine all-empty archive remains valid and contains no payload (1.233255ms)
+✔ CRC-valid alias is refused before restore (2.339367ms)
+✔ CRC-valid gap is refused before restore (1.054493ms)
+✔ CRC-valid negative offset is refused before restore (0.96241ms)
+✔ CRC-valid fractional length is refused before restore (0.976104ms)
+✔ CRC-valid string offset is refused before restore (3.004739ms)
+✔ CRC-valid out-of-range length is refused before restore (3.300811ms)
+✔ CRC-valid CRC type is refused before restore (2.300695ms)
+✔ CRC-valid false empty is refused before restore (5.848504ms)
+✔ CRC-valid nonboolean empty is refused before restore (0.355483ms)
+✔ CRC-valid empty with display metadata is refused before restore (0.891411ms)
+✔ CRC-valid unreferenced trailing payload is refused before restore (0.922884ms)
+✔ CRC-valid wrong format is refused before restore (4.601083ms)
+✔ CRC-valid wrong metadata version is refused before restore (0.625534ms)
+✔ CRC-valid fractional count is refused before restore (0.462207ms)
+✔ CRC-valid reserved framing flags is refused before restore (0.617167ms)
+✔ CRC-valid source size too small is refused before restore (0.293959ms)
+✔ preview name must agree with embedded image (0.911535ms)
+✔ preview zones must agree with embedded image (0.528372ms)
+✔ preview samples must agree with embedded image (0.449851ms)
+✔ preview rates must agree with embedded image (0.225832ms)
+✔ preview data_len must agree with embedded image (0.441031ms)
+✔ preview data_crc32 must agree with embedded image (0.947171ms)
+✔ false-empty with image fields stripped cannot leave the original payload hidden (1.353218ms)
+✔ CRC-valid image with an out-of-bounds zone is refused (1.686065ms)
+✔ metadata framing cannot run past payload and final CRC (4.920899ms)
+✔ baseline valid backup presents and restores matching sample names (11.972098ms)
+✔ CRC-valid but false sample-name metadata must be rejected before restore confirmation (1.648407ms)
+✔ tests/edge-archive-slot-identity.test.mjs (415.651659ms)
+✔ all nine real builds and all eighteen packages have assigned numeric labels (30.077657ms)
+✔ assignment and descending choice order survive catalog reordering (24.403427ms)
+✔ changed identity bytes or metadata cannot borrow an assigned number (13.658943ms)
+✔ package numbers do not alter real firmware identities or grant qualification (0.832759ms)
+✔ corrected 0.0.26 candidate has a bound numeric identity without hardware promotion (2.096794ms)
+✔ real historical catalog revisions survive regeneration without losing firmware identity (12.602885ms)
+✔ control: confirmed recovery-backup download precedes simulated OTA (28.264988ms)
+✔ negative: asynchronously canceled download warns and continues OTA unprotected (4.275005ms)
+✔ fail closed: false is not retained-backup acknowledgement (11.791633ms)
+✔ fail closed: undefined is not retained-backup acknowledgement (5.497612ms)
+✔ fail closed: null is not retained-backup acknowledgement (3.359526ms)
+✔ fail closed: truthy string is not retained-backup acknowledgement (1.166888ms)
+✔ fail closed: truthy number is not retained-backup acknowledgement (5.260516ms)
+✔ fail closed: object is not retained-backup acknowledgement (1.702685ms)
+✔ fail closed: async undefined is not retained-backup acknowledgement (1.951984ms)
+✔ fail closed: async rejection is not retained-backup acknowledgement (2.654281ms)
+✔ fail closed: synchronous throw is not retained-backup acknowledgement (11.500885ms)
+✔ missing save hook continues OTA unprotected (4.561104ms)
+✔ async true is acknowledged before MIDI closes and OTA starts (79.259825ms)
+✔ pending backup stays read-only until cancellation (23.055522ms)
+✔ pending backup stays read-only until confirmation (1.648427ms)
+✔ CRC-parseable stock/custom zero-map target requires the exact valid recovery archive (1234.930726ms)
+✔ unchanged target map with bundled controller needs no extra backup (1425.675686ms)
+✔ known-empty device needs no backup even when the target map is empty (3.969097ms)
+✔ download request settles true immediately and revokes the blob after 60s (8.940465ms)
+✔ a second save is an independent download and also returns true (2.108495ms)
+✔ url failure rejects without a completed download request (2.993313ms)
+✔ click failure rejects without a completed download request (2.481488ms)
+✔ control: unchanged sample image and confirmed backup allow OTA (18.375121ms)
+✔ negative: new sample bytes after backup confirmation require fail-closed preflash freshness (4.248368ms)
+✔ legacy application code without a slot map refuses controller insertion (4125.518104ms)
+✔ forged valid slot-map record in unused package padding cannot authorize an overwrite (1196.42028ms)
+✔ current two-slot full package admits bundled controller: elite (3212.360486ms)
+✔ current two-slot full package admits bundled controller: pro (2238.927559ms)
+✔ retained legacy three-slot full package admits bundled controller: elite (971.663536ms)
+✔ retained legacy three-slot full package admits bundled controller: pro (660.054595ms)
+✔ current three-slot at 0xB3000 full package admits bundled controller: elite (598.503069ms)
+✔ current three-slot at 0xB3000 full package admits bundled controller: pro (601.391857ms)
+✔ CRC-valid malformed map is rejected: four-slot record (389.29823ms)
+✔ CRC-valid malformed map is rejected: reordered two-slot map (394.48763ms)
+✔ CRC-valid malformed map is rejected: reordered three-slot map (430.608573ms)
+✔ CRC-valid malformed map is rejected: third slot offset +1 (1736.244551ms)
+✔ CRC-valid malformed map is rejected: third slot size +1 (942.542635ms)
+✔ CRC-valid malformed map is rejected: third slot zero size (447.123362ms)
+✔ CRC-valid malformed map is rejected: current third slot offset +1 (1292.841668ms)
+✔ CRC-valid malformed map is rejected: current third slot size +1 (2409.811324ms)
+✔ CRC-valid malformed map is rejected: current third slot zero size (1605.113025ms)
+✔ CRC-valid malformed map is rejected: third slot overlaps first (1503.698333ms)
+✔ CRC-valid malformed map is rejected: first VM-spare offset (483.213314ms)
+✔ CRC-valid malformed map is rejected: first zero size (626.64371ms)
+✔ CRC-valid malformed map is rejected: first size +1 (1007.171658ms)
+✔ CRC-valid malformed map is rejected: first offset +1 (960.606878ms)
+✔ CRC-valid malformed map is rejected: second overlapping offset (480.485165ms)
+✔ CRC-valid malformed map is rejected: second zero size (346.350142ms)
+✔ CRC-valid malformed map is rejected: second size +1 (500.701576ms)
+✔ CRC-valid malformed map is rejected: second offset +1 (1220.812925ms)
+✔ CRC-valid malformed map is rejected: one-slot record (269.612176ms)
+✔ CRC-valid malformed map is rejected: empty record (375.410548ms)
+✔ relocated correct two-slot decoy cannot satisfy fixed-address admission (273.949189ms)
+✔ two-slot CRC mismatch is rejected despite valid outer package checksums (313.909385ms)
+✔ two-slot truncated final descriptor is rejected despite valid outer package checksums (712.450133ms)
+✔ two-slot missing CRC is rejected despite valid outer package checksums (282.336215ms)
+✔ relocated correct three-slot decoy cannot satisfy fixed-address admission (262.801063ms)
+✔ three-slot CRC mismatch is rejected despite valid outer package checksums (277.275371ms)
+✔ three-slot truncated final descriptor is rejected despite valid outer package checksums (254.613945ms)
+✔ three-slot missing CRC is rejected despite valid outer package checksums (262.413323ms)
+✔ relocated correct current three-slot decoy cannot satisfy fixed-address admission (270.612985ms)
+✔ current three-slot CRC mismatch is rejected despite valid outer package checksums (272.8641ms)
+✔ current three-slot truncated final descriptor is rejected despite valid outer package checksums (275.08003ms)
+✔ current three-slot missing CRC is rejected despite valid outer package checksums (382.595049ms)
+✔ missing map remains ineligible for bundled controller (389.056146ms)
+✔ legacy explicit insertion retains a proven empty controller block without claiming bundled eligibility (588.228369ms)
+✔ legacy application-owned block is never overwritten without current valid map (219.961272ms)
+✔ current selection permits one atomic snapshot COMMIT (18.897381ms)
+✔ selection revoked during final INFO sends no atomic COMMIT (3.889129ms)
+✔ real save + real Updater preserves queued OTA read and sends no second UPGRADE (1445.368188ms)
+✔ final legacy responder gets read-only INFO, never the unnegotiated COMMIT (1273.580223ms)
+✔ final malformed responder gets read-only INFO, never the unnegotiated COMMIT (535.73265ms)
+✔ final unrelated responder gets read-only INFO, never the unnegotiated COMMIT (343.065979ms)
+✔ final missing responder gets read-only INFO, never the unnegotiated COMMIT (342.771018ms)
+✔ external BEGIN/WRITE/END during backup invalidates same-shape archive at commit (322.830433ms)
+✔ mutation on final freshly bound link is rejected after backup (1085.860242ms)
+✔ empty-to-occupied after first SMP_INFO cannot take an unguarded no-backup path (246.569735ms)
+✔ live auto-continue starts OTA after a successful backup (no cancel panel) (321.953226ms)
+✔ old firmware occupied slots continue OTA unprotected (165.1003ms)
+✔ old firmware empty slots continue OTA unprotected (197.584119ms)
+✔ stray token/ticket ACKs do not replace the requested snapshot, and COMMIT is one-shot (4.248759ms)
+✔ COMMIT missing acknowledgement refuses without retry (15.415783ms)
+✔ COMMIT short acknowledgement refuses without retry (0.408931ms)
+✔ COMMIT high-bit acknowledgement refuses without retry (0.281657ms)
+✔ COMMIT zero-ticket acknowledgement refuses without retry (0.189719ms)
+✔ COMMIT wrong-ticket acknowledgement refuses without retry (0.556934ms)
+✔ COMMIT wrong-op acknowledgement refuses without retry (0.292864ms)
+✔ COMMIT bad-rc acknowledgement refuses without retry (0.130653ms)
+✔ observed disconnect rejects before sending COMMIT (0.246925ms)
+✔ missing START ACK abandons the attempt without any ticket or retry (0.177174ms)
+✔ missing or wrong-family preflight cannot discover a later device and bypass its backup (0.327292ms)
+✔ capability requires exact X0X versioned extension; an unknown command is never probed (0.192616ms)
+✔ control: uninterrupted package completes bounded read with simulated digest and identity (58.628597ms)
+✔ negative: changing model cancels the obsolete stalled network read immediately (25.323342ms)
+EC043 source=live repository production body fnv1a32=8d8bacce
+✔ control: a valid four-byte streamed firmware package is accepted (8.828328ms)
+✔ negative: thousands of zero-byte chunks cannot accumulate unbounded retained references (180.176889ms)
+✔ rendered installer and source function bodies match live iOS confirm and SysEx continuity (96.963886ms)
+✔ in-page confirm dialog gates write: Cancel does not write, OK does (3.042551ms)
+✔ reconnect with the same SysEx identity on a new port object continues (47.675337ms)
+✔ a different SysEx identity on a new or same port is rejected (22.9842ms)
+✔ issued identity first, status separate; no array position (2.404225ms)
+✔ optional absent metadata derives from product; legacy unnumbered (0.397291ms)
+✔ mismatched metadata/invalid products never receive valid numeric identity (0.339008ms)
+✔ selected model cannot borrow another version; mixed selector truthful (0.239315ms)
+✔ same-version variants distinguishable, reorder stable, text sinks (3.205687ms)
+✔ null numeric metadata rejected; null legacy metadata accepted (0.494658ms)
+✔ all nine public legacy title distinctions remain, without invented dates/numbers (0.826211ms)
+✔ malformed model entries fail closed without hiding valid siblings by throwing (0.320194ms)
+✔ missing, blank and duplicate titles retain stable variant ID distinction (0.818823ms)
+✔ full rendered installer vs live gh-pages differs only by allowlisted hunks (1129.971437ms)
+✔ publicCatalog keeps display_version so 0.0.25.1 stays 0.0.25.1 (111.764466ms)
+✔ positive: firmware envelopes echo offsets 0 and 224 for distinct chunks (16.908597ms)
+✔ negative: stale retry offset 0 cannot consume pending offset 224 (7.53169ms)
+✔ negative: wrong-slot echo leaves the matching read wait intact (5.607662ms)
+✔ positive: nonzero slot and high offset with odd final pair padding (10.156967ms)
+✔ negative: truncated echoed address cannot consume the read wait (12.990769ms)
+✔ negative: missing SysEx terminator leaves the matching wait intact (14.150092ms)
+✔ negative: address prefix without payload leaves the matching wait intact (3.942744ms)
+✔ skipped middle multizone image cannot donate its saved LOOP indices to C (6.990819ms)
+✔ identical image CRCs do not hide original-slot reorder (0.480509ms)
+✔ safe prefix, trailing omission and append-only occupants retain existing indices (0.553356ms)
+✔ production installer retains verified archive and emits no restoration write for skipped middle slot (787.805058ms)
+✔ fresh backup population recomputes risk before any restore writes (964.793344ms)
+PASS control: unchanged approved selection reaches OTA entry (simulated)
+PASS revoked selection blocks OTA before any install start
+✔ tests/edge-nightly-revoked-during-sample-preflight.test.mjs (1872.53292ms)
+✔ actual producer pro 0.1.0 reaches renderer and browser (878.387729ms)
+✔ actual producer pro 0.1.99 reaches renderer and browser (367.734199ms)
+✔ actual producer pro 0.2.0 reaches renderer and browser (1235.53796ms)
+✔ actual producer pro 1.0.0 reaches renderer and browser (367.127935ms)
+✔ actual producer pro 99.99.99 reaches renderer and browser (358.553593ms)
+✔ actual producer elite 0.1.0 reaches renderer and browser (546.755983ms)
+✔ actual producer elite 0.1.99 reaches renderer and browser (264.244175ms)
+✔ actual producer elite 0.2.0 reaches renderer and browser (252.606625ms)
+✔ actual producer elite 1.0.0 reaches renderer and browser (328.986345ms)
+✔ actual producer elite 99.99.99 reaches renderer and browser (260.744981ms)
+✔ metadata is optional, but every supplied numeric label must agree with embedded product (636.806755ms)
+✔ legacy unversioned identity stays valid only with omitted or null metadata (227.424896ms)
+✔ malformed, foreign and truncated products remain refused with otherwise matching receipts (61.48006ms)
+✔ numeric acceptance cannot weaken controller, integrity, source or independent receipt gates (22.512481ms)
+✔ control: a valid occupied header is retained as a nonempty, verified archive (17.065297ms)
+✔ fail closed: occupied SMP_INFO with invalid read header never proceeds to OTA (17.77587ms)
+✔ empty slot remains null without any device read or write (0.416914ms)
+✔ occupied invalid header rejects a standalone backup (3.516267ms)
+✔ ordinary occupied slot backs up 512-byte header and 128 data bytes (20.592053ms)
+✔ occupied header claiming 2 MiB in an 80 KiB slot fails before data reads (11.343921ms)
+✔ control: genuinely invalid terminal length 7 refuses success (55.216362ms)
+✔ negative: exact deployed app ota_read(0xE0000000,b,8) receives success (18.010317ms)
+✔ control: a single scan can identify the keyboard and receive a later packet (13.363602ms)
+✔ negative: earlier timed-out scan cannot unregister a newer successful scan (1138.187435ms)
+✔ source: hung open port.open is bounded even after statechange (745.892546ms)
+✔ source: hung closed port.open is bounded even after statechange (3.85456ms)
+✔ source: waitFor deadline bounds hung opening and late completion cannot install a handler (7.89333ms)
+✔ source: closed port with resolved open but no statechange times out and removes observer (9.810659ms)
+✔ source: discovery deadline bounds silent handshake and removes its handler (5.902509ms)
+✔ source: normal closed-port transition still succeeds and removes temporary observer (0.62453ms)
+✔ source: output opening cannot exceed remaining discovery deadline after input succeeds (9.503228ms)
+✔ generated: hung open port.open is bounded even after statechange (9.746652ms)
+✔ generated: hung closed port.open is bounded even after statechange (6.217677ms)
+✔ generated: waitFor deadline bounds hung opening and late completion cannot install a handler (8.772228ms)
+✔ generated: closed port with resolved open but no statechange times out and removes observer (7.361104ms)
+✔ generated: discovery deadline bounds silent handshake and removes its handler (94.027536ms)
+✔ generated: normal closed-port transition still succeeds and removes temporary observer (1.9941ms)
+✔ generated: output opening cannot exceed remaining discovery deadline after input succeeds (17.405277ms)
+✔ positive: an acknowledged OTA completion succeeds after serving a data request (23.005408ms)
+✔ negative: a lost OTA finish acknowledgment must not report completion (11.207254ms)
+✔ failed ACK for either finish marker stops both stages even before port state changes (162.184818ms)
+✔ other-stage marker is refused before ACK or consuming the later expected finish (40.099152ms)
+✔ failed ordinary data reply still reports transport loss without progress (13.316045ms)
+✔ a latched receive error is propagated, not converted into successful completion (6.877702ms)
+✔ resume returns false and closes the link when the loader finish ACK fails (2025.262277ms)
+✔ a fresh resume still succeeds after a previous failed finish ACK (7105.020431ms)
+✔ install aborts before loader discovery when first-stage finish ACK fails (2043.884899ms)
+✔ baseline: eight-byte finish after a valid data request completes OTA stage (19.561169ms)
+✔ negative: checksummed finish request with an invalid read length must fail closed (57.992906ms)
+✔ both finish markers require eight bytes, including an unexpected stage marker (334.921371ms)
+✔ valid current/legacy identity FM-1_015 remains accepted (7.152992ms)
+✔ valid current/legacy identity FM-1_016 remains accepted (0.65873ms)
+✔ valid current/legacy identity SMK-37 Pro_016 remains accepted (0.266284ms)
+✔ valid current/legacy identity SMK-37 Elite_016 remains accepted (0.230968ms)
+✔ valid current/legacy identity SMK-37 Elite_900 remains accepted (0.252599ms)
+✔ valid current/legacy identity ota-SMK-37 Elite_900 remains accepted (0.533624ms)
+✔ valid current/legacy identity MKE-P37_900 remains accepted (0.282219ms)
+✔ valid current/legacy identity Felucca_000 remains accepted (0.206914ms)
+✔ contradictory 24-bit payload length 0 is rejected (0.357433ms)
+✔ contradictory 24-bit payload length 26 is rejected (5.005791ms)
+✔ contradictory 24-bit payload length 28 is rejected (22.126621ms)
+✔ contradictory 24-bit payload length 283 is rejected (0.235165ms)
+✔ contradictory 24-bit payload length 65563 is rejected (0.207954ms)
+✔ missing F0 is rejected before identity admission (0.344851ms)
+✔ missing F7 is rejected before identity admission (0.58477ms)
+✔ interior status byte is rejected before identity admission (0.307832ms)
+✔ nonzero packed padding is rejected before identity admission (0.225506ms)
+✔ truncated frame is rejected before identity admission (0.272199ms)
+✔ extra packed octet is rejected before identity admission (1.093867ms)
+✔ a different version with a correct checksum is valid framing, not authenticated identity (0.606838ms)
+✔ malformed identity followed by valid identity does not poison discovery (11.688737ms)
+✔ positive: checksummed identity frame discovers the correct model and version (127.035206ms)
+✔ negative: corrupt identity checksum must not bind a keyboard (2050.493656ms)
+✔ negative: corrupted version byte with unchanged checksum must not bind (2134.016593ms)
+✔ negative: contradictory identity length header must not bind (2055.046333ms)
+✔ initial opening does not revoke a fresh binding (input closed=false, output closed=false) (19.496372ms)
+✔ initial opening does not revoke a fresh binding (input closed=true, output closed=false) (18.73044ms)
+✔ initial opening does not revoke a fresh binding (input closed=false, output closed=true) (51.250231ms)
+✔ initial opening does not revoke a fresh binding (input closed=true, output closed=true) (5.912196ms)
+✔ later observed disconnect/reconnect of the same identity does not revoke (9.752781ms)
+✔ later coalesced disconnect/reconnect of the same identity does not revoke (21.767688ms)
+✔ an unrelated lifecycle event preserves the freshly opened pair (4.638927ms)
+✔ failed initial open removes temporary listeners and sends no handshake (7.286745ms)
+✔ control: two ordinary image reads then real eight-byte finish are accepted (28.967316ms)
+✔ control: a malformed seven-byte terminal request is rejected (1.530021ms)
+✔ negative: a valid early terminal must not acknowledge or complete an untouched image (1.261541ms)
+✔ positive: valid length-8 request reads one chunk then finishes (24.754659ms)
+✔ negative: contradictory 24-bit length 7 must not read firmware bytes (0.84301ms)
+✔ negative: contradictory 24-bit length 65544 must not read firmware bytes (0.20988ms)
+✔ valid request fields retained {} (4.143208ms)
+✔ valid request fields retained {"fl":255,"addr":305419896,"len":1193046} (0.306432ms)
+✔ valid request fields retained {"addr":3758096384,"len":8} (5.469073ms)
+✔ valid request fields retained {"addr":4026531840,"len":8} (0.252437ms)
+✔ declared 0 refuses before any firmware-data reply (6.065744ms)
+✔ declared 7 refuses before any firmware-data reply (2.164318ms)
+✔ declared 9 refuses before any firmware-data reply (0.218758ms)
+✔ declared 264 refuses before any firmware-data reply (0.189504ms)
+✔ declared 65544 refuses before any firmware-data reply (3.39388ms)
+✔ checksum refuses before any firmware-data reply (0.786205ms)
+✔ changed address unchanged checksum refuses before any firmware-data reply (0.26261ms)
+✔ wrong command refuses before any firmware-data reply (1.73447ms)
+✔ missing F0 refuses before any firmware-data reply (0.772043ms)
+✔ missing F7 refuses before any firmware-data reply (0.161693ms)
+✔ truncated refuses before any firmware-data reply (0.162953ms)
+✔ extra refuses before any firmware-data reply (0.114971ms)
+✔ status byte refuses before any firmware-data reply (1.433858ms)
+✔ packed padding refuses before any firmware-data reply (0.132843ms)
+✔ OTA resume refuses completed-install success when application never returns (3009.666197ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but absent (163.429956ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but loader (206.377255ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but wrong-marker (10.73555ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but cross-family (17.893482ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but ambiguity (12.039979ms)
+✔ actual resumed caller refuses Done/100 after successful ACK but late-ambiguity (13.015065ms)
+✔ actual resumed caller accepts the matching app on the uninterrupted Elite port pair (16.467247ms)
+✔ actual resumed caller accepts completion after replacement by a matching renamed pair (11.470302ms)
+✔ foreign policy cannot turn an observed marker mismatch into Done/100 (328.653366ms)
+✔ lost final ACK never attempts application readback or completion (9.921255ms)
+✔ wrong-family or Pro loader and multiple compatible inputs still receive no UPGRADE (13.017564ms)
+✔ actual caller cannot turn transfer boolean or pre-app progress into Done/100 (6.697161ms)
+✔ uninterrupted matching-model pair completes: none (20.950027ms)
+✔ uninterrupted matching-model pair completes: unrelated (9.851179ms)
+✔ foreign Pro loader cannot replace selected Elite even on the same MIDI pair (8.883815ms)
+✔ same-SysEx port replacement continues loader writes: replace (12.044846ms)
+✔ same-SysEx port replacement continues loader writes: rename (8.835189ms)
+✔ same-SysEx port replacement continues loader writes: deferred-reconnect (10.323644ms)
+✔ disconnected bound pair does not enter loader writes (device gone) (85.106741ms)
+✔ post-write same-SysEx reconnect still verifies completion (9.300894ms)
+✔ fresh explicit matching-loader resume is separate from prior continuity (14.184664ms)
+✔ wrong-model fresh resume refuses before any UPGRADE (0.685222ms)
+✔ a rejected atomic start sends no fallback legacy UPGRADE (2.008128ms)
+✔ atomic start callback owns OTA entry with no second UPGRADE (24.413326ms)
+✔ approval revoked during discovery blocks first legacy UPGRADE (0.384238ms)
+✔ approval revoked after loader starts blocks first image response (5.506133ms)
+✔ a returned wrong version is not verified completion (14.118026ms)
+✔ verified Starry alias stays Pro, while Elite and other model names stay distinct (0.194934ms)
+✔ baseline: idle Link handles a finite ordinary incoming SysEx batch (4.72ms)
+✔ negative: unrelated SysEx storm cannot accumulate an unbounded OTA queue (3.501712ms)
+✔ normal reads preserve FIFO and free the byte budget (8.938644ms)
+✔ overflow wakes a waiting reader and blocks future writes even after drain (6.641105ms)
+✔ aggregate bytes are bounded independently of frame count (9.314386ms)
+✔ a new connection remains usable after another link overflowed (5.745193ms)
+✔ source: both current/legacy protocol terminal stages can retry, without marking verified (63.524329ms)
+✔ source: uncompleted stage receives no retry token (2.659732ms)
+✔ source: malformed length and other terminal stage rejected (14.543731ms)
+✔ source: ordinary and malformed request never causes replay (10.799658ms)
+✔ source: other port pair and expired context cannot receive replay (12.880714ms)
+✔ source: real disconnect causes failure not completion (11.439762ms)
+✔ source: close clears completion context (11.518266ms)
+✔ source: stale Link close preserves discovery handler (1.766091ms)
+✔ source: successful terminal retries do not bypass matching application identity (19.558891ms)
+✔ source: queued success lost in transport is answered on discovery retry (21.485442ms)
+✔ source: real five-second retry cadence survives discovery gaps and observes app at 60 seconds (135.491004ms)
+✔ generated: both current/legacy protocol terminal stages can retry, without marking verified (22.105836ms)
+✔ generated: uncompleted stage receives no retry token (0.261456ms)
+✔ generated: malformed length and other terminal stage rejected (10.422767ms)
+✔ generated: ordinary and malformed request never causes replay (10.040112ms)
+✔ generated: other port pair and expired context cannot receive replay (10.928432ms)
+✔ generated: real disconnect causes failure not completion (11.211105ms)
+✔ generated: close clears completion context (10.585129ms)
+✔ generated: stale Link close preserves discovery handler (0.296036ms)
+✔ generated: successful terminal retries do not bypass matching application identity (13.275999ms)
+✔ generated: queued success lost in transport is answered on discovery retry (16.83379ms)
+✔ generated: real five-second retry cadence survives discovery gaps and observes app at 60 seconds (20.479706ms)
+✔ control: positive-length read is answered and advances OTA request count (38.490168ms)
+✔ negative: zero-length ordinary read is not acknowledged as data or progress (2.636879ms)
+✔ baseline: authentic flash slot map requires backup and blocks OTA if SMP_READ fails (449.817375ms)
+✔ negative: CRC-valid earlier slot-map decoy cannot hide risky sample shrinkage (1876.565265ms)
+✔ authentic map follows relocated flash.bin and ignores padding decoy (1915.166613ms)
+✔ FM-1 uses its own flash-relative map address (1565.915108ms)
+✔ unverified package header with valid decoy cannot bypass backup or reach OTA (3584.423984ms)
+✔ legacy map requires a valid package loader, never a padding marker (1454.265363ms)
+✔ known empty device needs no backup or sample write (543.477761ms)
+✔ map inspection leaves Buffer and nonzero-offset input bytes unchanged (1098.296678ms)
+✔ conflicting package file type 0 (other.bin) cannot hide the installed map (2145.015808ms)
+✔ conflicting package file type 0 (flash.bin) cannot hide the installed map (677.804651ms)
+✔ conflicting package file type 100 (other.bin) cannot hide the installed map (809.780856ms)
+✔ conflicting package file type 100 (ota.bin) cannot hide the installed map (1475.295703ms)
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+✔ current source-generated pages retain all nine published versions and pass read-only parity (424.607213ms)
+✔ sample preparation moved above the installer is refused even with current libraries and catalog (81.272986ms)
+✔ stale generated docs cannot hide changed Breaks and Projects source (51.416941ms)
+✔ self-consistent empty preview pages cannot replace a retained catalog (137.230207ms)
+✔ coherently altered package metadata still fails retained-catalog comparison (273.628974ms)
+✔ renumbered assignments and stale history are reported by their exact paths (94.188184ms)
+✔ a missing staged page is a failing path instead of a partial pass (48.853834ms)
+✔ legacy adoption requires two explicit dense identities, never an omitted engine (3.122167ms)
+✔ control: interrupted successfully acquired export releases its own transfer (3.73422ms)
+✔ negative: rejected BUSY export must not ABORT the concurrent client import (0.638399ms)
+✔ control: a live paired link accepts one WRITE acknowledgment (5.683355ms)
+✔ negative: closing the input link during a pending WRITE must stop retransmission (1.03618ms)
+✔ control: confirmed reset is possible on an unchanged connected session (3.432466ms)
+✔ control: promptly observed disconnection revokes device and preview (0.639621ms)
+✔ negative: queued disconnect/reconnect events may arrive after ports show connected (0.384814ms)
+✔ baseline: completed live connection enables project actions (5.551261ms)
+✔ negative: disconnect during pending identity query must not revive a stale session (4.83599ms)
+✔ control: disconnect after a completed connection disables project actions (1.67163ms)
+✔ control: failed first write with no peer preserves original sample and exits hold (5.418326ms)
+✔ negative: failed import must preserve new peer sample written after snapshot, before BEGIN (2.140041ms)
+✔ live timeout retries exactly once and accepts the matching second WRITE ACK (10.858818ms)
+✔ live unanswered requests retain the bounded retry count (17.364653ms)
+✔ explicit close with both ports still connected stops the pending retry (0.618ms)
+✔ input disconnect without a statechange callback prevents the retry (5.749612ms)
+✔ output disconnect without a statechange callback prevents the retry (5.942119ms)
+✔ input already disconnected refuses the first send (1.261759ms)
+✔ output already disconnected refuses the first send (0.761896ms)
+✔ closed link cannot send, wait again, or revive after a port replug (0.451913ms)
+✔ close is idempotent, resolves a pending read and ignores a queued detached callback (0.755713ms)
+✔ close discards buffered replies instead of returning stale evidence (0.564572ms)
+✔ disconnected link cannot deliver a previously buffered reply (0.37455ms)
+✔ fresh link can connect after a separate old link was closed (0.316644ms)
+✔ EC042: overlapping read is refused and preserves the original reply owner (5.592729ms)
+✔ EC042: timeout followed by another read preserves its deadline and close settles its owner (1.017329ms)
+✔ control: small project SysEx replies retain FIFO behavior (3.9152ms)
+✔ negative: idle project MIDI receive queue must be bounded by bytes (8.437288ms)
+✔ aggregate byte boundary is accepted; the next frame closes rather than dropping replies (17.602397ms)
+✔ the 64-frame boundary is accepted; frame 65 closes even under the byte budget (1.168546ms)
+✔ reading and draining release byte budget, including a maximum-sized frame (40.118586ms)
+✔ one oversized frame closes before copy, pending read=false (0.933621ms)
+✔ one oversized frame closes before copy, pending read=true (1.833104ms)
+✔ overflow remains sticky through drain, close, port replug and detached callbacks; fresh link works (0.574449ms)
+✔ overflow stops WRITE retries and follow-on COMMIT, ACK already delivered=false (2.214935ms)
+✔ overflow stops WRITE retries and follow-on COMMIT, ACK already delivered=true (8.500821ms)
+✔ unrelated MIDI input is ignored without consuming the project receive budget (0.371465ms)
+✔ actual144 C producer WBL0 parses and round-trips opaque project/sample bytes (309.73956ms)
+✔ actual144 C producer WBL1 parses and round-trips opaque project/sample bytes (121.931031ms)
+✔ tagged import validates before replacing a synthetic sample and retains its exact backup (107.140482ms)
+✔ legacy3/10 high-level import remains refused before staging (51.612757ms)
+✔ explicit low-level legacy3/10 staging returns identity-needed then aborts without mutation (638.309139ms)
+✔ legacy6/10 high-level import remains refused before staging (99.82221ms)
+✔ explicit low-level legacy6/10 staging returns identity-needed then aborts without mutation (565.206337ms)
+✔ tagged unsupported streams, revisions, structural lengths and damaged payloads remain refused (3.407761ms)
+✔ QUERY v2 binds exact size and all unsupported protocols fail before staging (1.266197ms)
+✔ legacy stage exception is not a generic length or schema bypass (3.208874ms)
+✔ control: matched keyboard ports admit the actual ProjectDevice handshake (17.964229ms)
+✔ negative: sole unrelated output must not receive project SysEx or enable reset (7.667347ms)
+✔ refuse automatic and explicit selection: case-only mismatch (16.466314ms)
+✔ refuse automatic and explicit selection: missing names (4.806961ms)
+✔ refuse automatic and explicit selection: disconnected input (2.177544ms)
+✔ refuse automatic and explicit selection: disconnected output (1.547191ms)
+✔ refuse automatic and explicit selection: duplicate inputs (5.030949ms)
+✔ refuse automatic and explicit selection: duplicate outputs (5.524366ms)
+✔ refuse automatic and explicit selection: two unmatched outputs (1.545886ms)
+✔ manual Connect cannot bypass the unrelated-output refusal (1.576786ms)
+✔ legacy sole matching nonstandard label still requires and passes the actual X0X handshake (4.82568ms)
+✔ one known unique pair is selected among unrelated ports without sending to them (3.856229ms)
+✔ distinct known pairs require explicit selection, which cannot cross their outputs (1.337318ms)
+✔ explicit selection rechecks live ambiguity added after discovery (0.885454ms)
+✔ disconnected duplicate labels do not invalidate the sole live matching pair (4.038674ms)
+✔ rediscovery clears the old device when no safe pair remains (1.017619ms)
+REFUSING PUBLICATION: catalog (<exact-checkout>/docs/versions.json) is empty (no versions). The in-repo docs/versions.json and preview-catalog.json are empty preview files and must never be deployed or used as a qualified-render input. Use the retained live catalog (git blob 24a8b208aa01d539b5ef4e23af73d9c4aa2ac3d8).
+✔ assertPublicationCatalog refuses the empty docs/versions.json preview (2.672439ms)
+✔ render-qualified-nightly CLI refuses an empty catalog before writing any output (156.979223ms)
+✔ publicCatalog keeps 0.0.25.1 display_version from a live-shaped catalog (0.858958ms)
+✔ baseline: one matching MIDI acknowledgement resolves before timeout (2.517048ms)
+✔ negative: a thrown send's old timer must not erase a newer live request (2.246075ms)
+✔ actual prepared bank 1x has fewer bytes and compensating saved rate (448.486125ms)
+✔ actual prepared bank 1.5x has fewer bytes and compensating saved rate (717.29817ms)
+✔ actual prepared bank 2x has fewer bytes and compensating saved rate (199.115686ms)
+✔ actual prepared bank 3x has fewer bytes and compensating saved rate (179.585301ms)
+✔ actual prepared bank 4x has fewer bytes and compensating saved rate (552.722156ms)
+✔ Off is byte-identical to existing clean cut; toggles always rebuild from unchanged original (5232.665196ms)
+✔ half-rate plus grit reports actual payload, odd nibble and fixed slot header overhead (245.987881ms)
+✔ bad factors, malformed source and too-short rate-reduced loops fail before serialization (18.482268ms)
+✔ control: byte-for-byte sample readback is accepted (188.028942ms)
+✔ negative: changed ADPCM with a valid inner CRC and colliding outer CRC must fail readback (4.470891ms)
+✔ control: valid 44.1 kHz mono WAV stays bounded and prepares normally (3.529756ms)
+✔ control: legal low positive rate fitting slot stays available (612.312459ms)
+✔ EC046: 4 Hz WAV just above slot capacity must reject before resampling (3.585332ms)
+✔ EC046: 1 Hz WAV must reject before huge allocation or resampling (1.191909ms)
+✔ control: genuinely empty slot can safely produce an empty archive entry (39.558728ms)
+✔ control: valid occupied header is read and retained byte-exactly (15.105277ms)
+✔ negative: occupied slot with an invalid read header must fail closed (1.273879ms)
+✔ valid occupied 8 KiB sample slot keeps its bytes (17.014587ms)
+✔ oversized occupied-slot header fails before requesting or allocating sample data (8.400195ms)
+✔ control: unchanged slot accepts the confirmed sample replacement (5.13385ms)
+✔ negative: peer updates sample during review; stale preview must not erase it (3.263667ms)
+✔ valid own-slot CLEAR success remains supported (59.775198ms)
+✔ own-slot CLEAR failure is rejected (39.746475ms)
+✔ foreign slot-0 success cannot mask own slot-1 CLEAR failure (13.041573ms)
+✔ exact-fit occupied images and progress work across smaller and larger capacities (169.780055ms)
+✔ one byte over each actual capacity is refused before sample data reads (10.287382ms)
+✔ invalid explicit capacities refuse before even a header request; empty slots stay read-free (5.113527ms)
+✔ full production module rejects length 81409 before requesting a data allocation (7.151771ms)
+✔ full production module rejects length 2097152 before requesting a data allocation (2.167476ms)
+✔ full production module rejects length 4294967295 before requesting a data allocation (2.91272ms)
+✔ backup propagates mixed extension sizes and genuine legacy capacity, preserving occupied and empty slots (92.447777ms)
+✔ backup uses the small actual slot, not legacy default or another slot capacity (1.792791ms)
+✔ restore readback propagates fresh destination capacity, both valid large and invalid small (87.146284ms)
+✔ oversized occupied backup aborts installer before save, progress, sample writes or OTA (23.89449ms)
+✔ baseline: distinct occupied SMP_INFO offsets save both slots BEFORE OTA install (1271.502519ms)
+✔ negative: duplicate occupied flash offsets continue OTA unprotected (2092.495989ms)
+✔ source: supported models only; unknown identities do not become Pro (6.353545ms)
+✔ source: text and recovery guidance do not describe SMK as FM-1 (1.307514ms)
+✔ rendered: supported models only; unknown identities do not become Pro (4.220581ms)
+✔ rendered: text and recovery guidance do not describe SMK as FM-1 (2.209691ms)
+✔ real updater rejects the other board, including same-board FM1 pairing (0.662291ms)
+✔ real missing-device and short-package errors name no other board (2.180141ms)
+✔ zero slots are invalid in both legacy and extended SMP_INFO (23.612444ms)
+✔ well-formed one/two empty legacy slots and empty extended slots remain valid (1.248844ms)
+✔ zero count closes the preflash link with slotbackup and only an INFO request (6.883363ms)
+✔ every unsupported 7-bit marker with an extension payload is refused (16.746365ms)
+✔ every partial recognized extension is refused, including a marker alone (1.275862ms)
+✔ unsupported extension versions and all extra 7-bit trailing bytes are refused (72.194404ms)
+✔ complete legacy descriptors remain accepted without invented extension requirements (0.923805ms)
+✔ malformed metadata closes the preflash link before backup/sample commands or OTA, including stock identity (28.885343ms)
+✔ consistent occupied slot blocks OTA when backup read fails (26.545638ms)
+✔ legitimate empty slot descriptors preserve normal OTA admission (15.328547ms)
+✔ EC031: NZ corruption conflicting with name and used-size must stop OTA (6.653524ms)
+✔ valid touching ranges, reverse order and empty descriptors retain their map (4.269972ms)
+✔ legacy occupied and empty slots retain inferred SMK map (0.655558ms)
+✔ duplicate, partial, enclosing and empty-slot overlap ranges are rejected (6.739237ms)
+✔ zero ranges, overflowing usage and partial extensions cannot become legacy maps (0.747322ms)
+✔ invalid ranges fail before sample reads, backup save or OTA on the actual installer path (7.5541ms)
+✔ control: complete one-slot empty legacy descriptor permits simulated OTA (11.118815ms)
+✔ negative: a missing used-size byte is an invalid legacy slot descriptor (1.346349ms)
+✔ negative: partial final slot cannot authorize OTA without backup (0.797003ms)
+✔ negative: truncation of the last of two descriptors cannot look like an empty device (36.418701ms)
+✔ valid flash-map extension accurately requires backup (11.607962ms)
+✔ genuine legacy reply without any extension remains accepted (2.997361ms)
+✔ one-byte corrupted extension marker must fail closed, not erase backup requirement (1.035482ms)
+✔ producer-compatible unsaturated and saturated usage remains valid without losing full usage (31.949175ms)
+✔ both directions of disagreement are refused, including saturation boundary and empty descriptors (1.13332ms)
+✔ genuine legacy and empty extension replies remain valid (0.272891ms)
+✔ contradictory usage rejects standalone backup before any sample read or progress (0.67954ms)
+✔ actual installer refuses contradiction before backup, sample commands or OTA and closes its link (5.148787ms)
+✔ consistent 100 KiB usage is at risk when firmware reduces the slot to 80 KiB (7.763972ms)
+✔ corrupt extension cannot change a 100 KiB occupied slot into safe-to-overwrite (0.249874ms)
+✔ baseline: valid two-empty-slot legacy SMP_INFO permits a source-only OTA call (12.855211ms)
+✔ negative: zero-slot SMP_INFO count is rejected by the parser (3.090405ms)
+✔ negative: zero-slot SMP_INFO cannot trigger OTA or skip backup enforcement (1.435474ms)
+ℹ tests 493
+ℹ suites 0
+ℹ pass 493
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 32532.166326
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+✔ space-saving selector is visible, defaults Off, and explains actual rate rather than stretch promise (6.6235ms)
+✔ cancel add or replace preview preserves loop list, original input and zero writes (189.952643ms)
+✔ accepted add shows exact data saving and retains original for Off and preview (93.137603ms)
+✔ failed recut is atomic and restores controls instead of leaving partial transformed loops (67.653159ms)
+✔ cancel send/escape performs no slot writes; confirmation sends actual prepared saved-rate image (153.530047ms)
+✔ rapid preview source changes and Stop cannot start stale audio after a suspended context resumes (78.485916ms)
+✔ workspace source switch stops a pending original preview before audio starts (58.193809ms)
+✔ repeated setting event while confirmation is open cannot apply mismatched control labels (75.660443ms)
+✔ A/B reference uses the same trim and bar cut, mono peak target, and leaves encoded preview exact (183.73896ms)
+✔ visible local file audition works before MIDI or Add and refreshes settings without device draft writes (92.146496ms)
+✔ local source decode epochs ignore a stale file after replacement or removal (78.519093ms)
+✔ workspace invalidation uses neutral status while retaining the draft and send guard (30.499484ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1121.99852
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:product
+> node --test tests/product-site-build.test.mjs tests/product-site-content.test.mjs tests/product-mounted-disclosure.test.mjs tests/product-site-r22.test.mjs tests/product-runtime-closure.test.mjs tests/product-retained-catalog.test.mjs tests/product-starting-break-preview.test.mjs tests/product-installer-lifecycle.test.mjs && python3 tests/product-html-closure.py && python3 tests/product-r22-hihat.py && python3 tests/product-entry-disclosure.py && python3 tests/product-site-browser-config.py && python3 tests/product-route-contract.py && python3 tests/product-firmware-html-diff.py && python3 tests/product-built-http.py
+
+✔ pagehide before metadata completes never mounts a stale panel (4.438724ms)
+✔ pagehide during cryptographic mounting destroys late candidate without attaching it (15.889348ms)
+✔ BFCache restores selected IDs and old callbacks cannot mutate current storage (3.671572ms)
+✔ network errors disclose failure without mounting or claiming device writes (2.581025ms)
+✔ pagehide while metadata body waits never calls mount after body arrives (3.608213ms)
+✔ overlapping restore destroys obsolete candidate and retains newest panel (2.215617ms)
+✔ actual mounted exchange leaves provider-unavailable entry copy visible before any file selection (3.633167ms)
+✔ product catalog and build history retain exact recorded gh-pages bytes (8.200404ms)
+✔ empty preview catalog and edited release claims cannot replace retained catalog (3.977391ms)
+✔ read-only publication inventory never claims a gate or performs deletion (1.219607ms)
+✔ actual first public WIP fails closure for its two absent shared interfaces (29.53873ms)
+✔ current local shared composition resolves all imported hero/theme inputs (7.417642ms)
+✔ normal deterministic source build/check never changes Pages/catalog/source (6.518527ms)
+✔ all source identities checked before first output write (2.275239ms)
+✔ unsafe destinations and malformed paths fail closed (8.848114ms)
+✔ private/binary assets, duplicate inputs and symlinks are refused (5.773821ms)
+✔ source ancestor symlink and output symlink never escape the scoped build tree (2.1209ms)
+✔ a stale unrelated output is not silently carried into a later publisher input (1.17546ms)
+✔ recognized output hardlink cannot overwrite a protected synthetic catalog (1.197637ms)
+✔ recognized output special files refuse without opening or blocking (10.979526ms)
+✔ FIFO manifest rejects after import-ready without blocking the operation (235.226863ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":210.92042199999997,"operationElapsedMs":13.103065999999899}
+✔ slow child startup does not consume the500ms FIFO operation watchdog (922.319715ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":879.1132279999999,"operationElapsedMs":8.929656000000023}
+✔ controlled missing-guard fixture is exact current code minus the declared preflight, never claimed historical (1.205039ms)
+✔ controlled missing-guard mutant blocks after readiness and trips only the operation watchdog (668.559351ms)
+ℹ {"code":null,"signal":"SIGKILL","result":null,"timedOut":"operation","stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":110.61977200000001,"operationElapsedMs":548.6394229999999}
+✔ symlink manifest refuses without reading an outside manifest (22.210579ms)
+✔ starting-break admission rejects forged manifest bytes and non-contract IDs (17.587098ms)
+✔ starting-break contract cannot be replaced, linked or special-file opened (36.554191ms)
+✔ all ten exact contract-pinned starting-break assets build byte-identically (97.841994ms)
+✔ complete source manifest builds byte-identical local output without deployment (739.253369ms)
+✔ both manual families and197 true history records survive source integration (160.159642ms)
+✔ source admission remains explicit, no original-format or remote capability fabricated (1.312602ms)
+✔ R16 composed source names exact workspace and contains safe local editing endpoints only (0.857371ms)
+✔ R21 captured presentation and v6 port identity remain explicit without admission (7.005441ms)
+✔ entry availability is disclosed without enabling native providers (19.317568ms)
+✔ all public page families expose the same accessible responsive navigation (89.734712ms)
+✔ installer retains guarded actions and a single shell, not starting-break picker (7.373533ms)
+✔ build pagination never loses records, filters before slicing and clamps pages (2.442301ms)
+✔ public contract previews never request private paths or synthesize substitute audio (0.664461ms)
+✔ home does not present a connection failure before a connection attempt (67.057366ms)
+✔ new website stage is exactly reversible without rewriting earlier provenance (890.541217ms)
+✔ existing executable bytes and source glyphs are preserved except the explicit waveform token substitution (506.684435ms)
+✔ home live controls use the shared R22 renderer and consistent integer percentages (35.726814ms)
+✔ help includes a source-linked SMK control map rather than an unlabelled hardware image (0.931072ms)
+✔ hero resonance moves resonance, not cutoff, and never labels attack as envelope amount (1.12521ms)
+✔ earlier captured interface is labeled honestly and the product/tool entry copy matches actual capability (28.33431ms)
+✔ choosing a manual chapter closes the sticky jump instead of covering the chapter (4.41192ms)
+✔ cutoff and resonance do not reuse an indistinguishable default curve (5.258377ms)
+✔ history exposes synchronized controls below records and safe initial deep-link filters (4.796276ms)
+✔ development highlights link exact saved records and preserve explicit device-test limits (0.445341ms)
+✔ homepage feature artwork maps actual physical controls without invented active/value state (37.033435ms)
+✔ Juno source preview uses the observed WIDTH scalar and only its actual renderer law (1.88652ms)
+✔ installer actual waveform stroke takes the R22 CSS token instead of a legacy hardcoded blue (3.989238ms)
+✔ R3 human defects have exact-source negative fixtures, and their repair hooks exist (5.328814ms)
+✔ actual browser animation probe preserves source-keyed attempts and rejects an exact original static hero (2.393236ms)
+✔ archive fitting uses intrinsic body bounds plus margins and frame borders, never viewport scrollHeight (2.539382ms)
+✔ disabled sample-play affordances are text glyphs and shared Menu typography is explicit (4.504936ms)
+✔ earlier JUNO scalar is versioned, never relabelled as the new SuperJ6 engine (36.030839ms)
+✔ preset guidance uses musician actions while preserving file and edit limits (0.416917ms)
+✔ all five contract previews resolve beneath module-relative public asset directory (3.005569ms)
+✔ each exact contract size is bounded and returned without changing bytes (4.195779ms)
+✔ oversize and truncated streams cancel and release without returning unverified bytes (1.645243ms)
+✔ unknown URLs never fetch; failed HTTP, forged lengths and missing streaming fail closed (1.191354ms)
+✔ all five admitted previews validate original PCM before choosing any break (45.683331ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2466.056803
+...
+----------------------------------------------------------------------
+Ran 3 tests in 2.136s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.367s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.275s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.042s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.029s
+
+OK
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.041s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.169s
+
+OK
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:workspace
+> node --test tests/product-workspace/*.test.mjs && node tests/product-workspace/app-regression.mjs && node tests/product-workspace/app-correction-regression.mjs && node tests/product-workspace/app-sound-regression.mjs && node tests/product-workspace/app-draft-regression.mjs
+
+✔ explicit version1 draft roundtrips every authored domain and context without native format/apply (87.313943ms)
+✔ opening validates without mutation, explicit install is atomic and clears histories without replacing originals (28.277539ms)
+✔ all bad versions/identities/IDs/ranges/unknown fields are rejected before any state mutation (91.980738ms)
+✔ parser bounds and duplicate keys are strict, malformed/oversized/deep input cannot become a draft (28.846561ms)
+✔ draft capture cancels no gestures silently and no data alias can corrupt baselines (8.380556ms)
+✔ dirty content includes launch/bank and all domains, not selection context or baseline-equal preview entries (7.528235ms)
+✔ duration editor cannot create an unsaveable zero-length non-pulse; existing source pulse stays a pulse (2.099595ms)
+✔ maximum accepted draft ID wraps Add and Paste into unused bounded IDs, preserving imported identities (13.093112ms)
+✔ a group paste crossing upper ID boundary reserves the whole unique group before commit (2.465478ms)
+✔ file preview/cancel never replaces current data; explicit replace restores all data with histories reset (20.516402ms)
+✔ invalid or stale asynchronous open clears old pending import and never changes state (2.331777ms)
+✔ beforeunload guard follows authored content even after download request, no navigation policy bypass (5.259263ms)
+✔ pagehide invalidates deferred reads and pending replacement; pageshow permits only a new file choice (3.805012ms)
+✔ frame retains exact source body and places an accessible direct-control hit region (2.686935ms)
+✔ metadata is escaped but source geometry not redrawn (0.387766ms)
+✔ only immutable unadmitted source frames are accepted and malformed bounds fail (0.445544ms)
+✔ all26 actual projected frames keep124 source-control occurrences (14.157571ms)
+✔ all projected source-control ink fits complete native body viewport through bottom240 (13.919848ms)
+✔ source hit area uses the same full viewport and does not clamp real bottom value ink to224 (0.728349ms)
+✔ WAVE and WIDTH readouts equal the golden 102x26 fixture at every sweep step (14.080896ms)
+✔ Chicago WAVE raw samples use C truncating division from ui_original_wave.h (1.673047ms)
+✔ Juno pulse width grows with the value and Chicago ADSR stage widths follow the RC law (3.811172ms)
+✔ 909 tune follows drum909_bd_hz and idle or zero-depth motion does not decorate (3.99617ms)
+✔ no r23 token, class or glyph remains in the Remote or site UI (103.340032ms)
+✔ pan notation clips at L50 / C / R50 (3.473378ms)
+✔ R22 gallery tokens and pan notation (85.380461ms)
+✔ vertical hierarchy is painted once above every pitch-row shade (2.345279ms)
+✔ bar beat and subdivision lines remain pixel aligned at every target width (1.094926ms)
+✔ group pointer move uses relative onset and pitch with one atomic undo (10.851571ms)
+✔ whole group clamps time/pitch without changing spacing or durations (1.677012ms)
+✔ second pointer cancels whole group and cannot restart until original owners release (1.590892ms)
+✔ left edge resizes only start and clamps before end (8.605905ms)
+✔ moving selected anchor preserves group rather than toggling membership (7.929361ms)
+✔ source pulse timing, track and velocity remain exact, not invented gate length (5.31876ms)
+✔ explicit local draft changes do not mutate source or claim confirmed state (1.814695ms)
+✔ undo/redo and edit-after-undo preserve coherent history (1.126769ms)
+✔ pointercancel and a second touch cancel a gesture without accidental edit (0.831736ms)
+✔ original pointer ownership, release and validation are bounded (0.835715ms)
+✔ snapshot invalidation retains draft and never auto-applies on reconnect (0.698751ms)
+✔ catalog grouping preserves fixed/bank identities and no generic master pan/sends (0.921499ms)
+✔ invalid selection does not acquire a phantom pointer owner (0.468002ms)
+✔ six actual local point updates one atomic undo, no implicit native baseline (6.210048ms)
+✔ wrong owner ignored and second pointer cancels until all pointers released (0.386273ms)
+✔ bounds and explicit point clear (0.902588ms)
+✔ right and up each increase one parameter; dominant axis locks to avoid diagonal doubling (2.680475ms)
+✔ left/down decrease and boundaries/quantization remain typed (1.803586ms)
+✔ fine adjustment preserves fractional accumulation, target identity and original context (0.36899ms)
+✔ cancel and foreign release cannot commit or alter original owner (0.268714ms)
+✔ a second pointer cancels and blocks edits until all fingers lift (0.263301ms)
+✔ context/revision invalidation discards draft without requesting stale global restore (0.195181ms)
+✔ tap alone is selection, not accidental change; malformed or disposed input fails closed (0.745442ms)
+✔ non-unit enumerated integer domain uses its declared step (1.833164ms)
+✔ local draw retains source, adds one undoable new note and never applies (12.818762ms)
+✔ second touch cancels draw until all original pointers released (0.738241ms)
+✔ move preserves duration, clamp and original owner; cancel restores exact source (1.075703ms)
+✔ length adjusts only end; source zero-duration pulse cannot become a gate (1.492643ms)
+✔ pan changes viewport only; cancellation never edits source (2.08271ms)
+✔ coordinate mapping spans whole MIDI pitch range and bounds time (0.329341ms)
+✔ draw rejects malformed track/channel/timing and no source alias (3.353404ms)
+✔ atomic clipboard copy/paste retains relative timing pitch pulse and one undo (11.61585ms)
+✔ paste refuses all on overflow and retains copied selection (1.160051ms)
+✔ group move atomic bounds and delete are undoable including original deletion diff (2.79619ms)
+✔ chance native domain excludes0, admits 5percent and proper conditional boundaries (1.057126ms)
+✔ drag past 5 percent enters ratios and encodes back (0.920956ms)
+✔ drum velocity/chance retain scoped lane identity and unbound pattern (3.045226ms)
+✔ arrangement has five typed destinations one to8 repeats and independent history (0.726335ms)
+✔ clearing explicit chance removes the property and remains undoable (1.120974ms)
+✔ both slots expose all104 exact bank-qualified current bass scalars without aliasing banks (22.261423ms)
+✔ BREAK missing/invalid loops and native-only engine/preset roles are explicit, never silently clamped (6.423681ms)
+✔ descriptor matching includes sourceBank, exact bounds and source identity, never first-triple fallback (10.579381ms)
+✔ raw snapshots and returned control copies cannot corrupt baselines or enable native apply (7.078408ms)
+✔ duplicate MIAMI Wave/Level refs retain actual CARRIER and XMOD source sections in both slots (16.148137ms)
+✔ every bass scalar has authentic finite section provenance, without changing raw baselines/ref identity (16.11771ms)
+✔ part options express stable slots and local selected bank context is not a native engine claim (3.359767ms)
+✔ committed domain commands undo and redo in one chronological order (3.959615ms)
+✔ new cross-domain edit discards global redo and no-op is not recorded (0.414732ms)
+✔ bounded history retains only the latest reversible commands (0.253432ms)
+✔ failed replay does not lose the command or fabricate a redo (1.952475ms)
+✔ invalid commands and limits fail without altering history (0.453081ms)
+✔ five independent launch destinations, all32 targets, never loaded or playing (13.791705ms)
+✔ every assembler destination exact including MIDI section (0.63381ms)
+✔ stable viewport captures Select before repaint and always releases original pointer (6.998697ms)
+✔ lost Select capture and canceled draw leave no phantom owner or edit (5.815334ms)
+✔ stable binder forwards left-edge identity to actual resize gesture (2.373176ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 84
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 992.633012
+PASS selected pointer owns keyboard
+CORRECTED_POINTER_SELECTION_FOCUS {"selectedBefore":"<h2>G3 <small>· local draft</small>","focusAfter":"n5","selectedAfter":"<h2>G♯3 <small>· local draft</small>"}
+PASS undo repaints current drums
+CORRECTED_UNDO_DRUM_RENDER {"staleVelocity120":false,"statusAfterUndo":"Undo Notes · Draft · Not connected","refreshedVelocity88":true}
+PASS selected bass has only own controls
+CORRECTED_SELECTED_BASS_VOICE {"selectedPart":"Bass A Chicago","shownCards":20,"expectedBassACards":20,"WaveLabels":1}
+PASS actual-app aligned velocity 93→124, Undo93, cancel93
+PASS actual-app Drive raw41→53, Undo41, cancel41
+PASS actual-app five launch selections→song row→8 repeats
+PASS actual-app six motion points→Undo empty→Redo
+PASS actual-app explicit drum toggle→Undo
+PASS actual-app exact conditional1:2→Undo unset
+PASS actual-app Not set removes a condition
+PASS actual-app Undo clear restores condition
+PASS actual-app Redo clear restores unset
+PASS conditional chips do not map their ordinal to height
+PASS conditional lane is correctly announced
+PASS chance drag sets the percentage under the finger
+PASS chance drag is one undoable action
+PASS chance drag cancellation restores percentage
+PASS actual-app group pointer moves both onsets
+PASS actual-app group pointer is one Undo
+PASS part change clears hidden group membership
+PASS lane keyboard increments explicit percentage by5
+PASS lane keyboard repaint restores replacement-button focus
+PASS lane keyboard opens exact chance chooser
+PASS R21 app uses whole transparent source frame, not recaptioned cards
+PASS all11 captured909voice contexts available
+PASS choosing909RD changes whole captured source context
+PASS same-target alias preserves actual touched occurrence name
+PASS no connection caption text in views (state shown only by Connect)
+PASS modeless Delete removes the focused note and Undo restores it
+PASS actual page Connect fails closed without admitted simulator catalog
+PASS actual app binds vertical pitch pinch independently of time zoom
+PASS actual drum page reuses live lane controls and returns them intact on leaving
+PASS shipped pointer binding preserves note geometry through small touch jitter
+PASS parameter Review and header Undo/Redo include actual raw change
+PASS Motion Review and shared Undo/Redo
+PASS Song Review and shared Undo/Redo
+PASS blur cancels and immediately repaints without losing committed history
+PASS no-op clear and row update do not hide real undo
+PASS all four domains undo/redo chronologically and new branch discards redo
+PASS Review distinguishes same-name parameters by exact kit and voice
+CORRECTION_REGRESSION_CASES 7; FAILURES 0; source-event stub, NOT DOM/touch
+PASS all104 original bass scalars reachable under both local slot/bank previews
+PASS same target/voice/parameter in different banks remain reversible independent drafts
+PASS bank change cancels active raw drag, does not commit or leak into next bank
+PASS BREAK empty loop state visible but cannot be selected as scalar; numeric roles editable
+SOURCE_SOUND_APP_CASES 4; FAILURES 0; source-event stub, NOT DOM/touch
+PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof
+PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem
+PASS shipped app saves/restores .125,8 and continuous viewport zoom at320px without unsupported context
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:remote
+> node --test tests/product-remote/*.test.mjs tests/product-remote/platform/*.test.mjs
+
+✔ vendored Wu/px_blend coverage buffers are identical to the reference (41.753671ms)
+✔ live glyphs use the reference painter for its four kinds (3.899121ms)
+✔ ease is the reference critically damped law; idle schedules no frame (1.14965ms)
+✔ reduced motion jumps instantly (0.287456ms)
+✔ exact C v2 wire/core with synthetic callbacks verifies float/scalar CAS and two original held owners (66.049548ms)
+✔ actual C inactive-control UNSUPPORTED stays one unavailable row without failing snapshot (10.556522ms)
+✔ lost C OPEN remains unconfirmed; explicit source tick separately proves expiry (11.717396ms)
+✔ actualC nativeprimitiveand affectedonly samples match Float32 exactly at65declaredphases and5rawstates (12.846053ms)
+✔ mapping retains128nativegainpairs, no rawfraction-as-gainratio or fullprogramclaim (0.783607ms)
+✔ Chicago WAVE renderer uses native affected-layer path at every raw value (87.8615ms)
+✔ port open is bounded and cancellation settles without stale readiness (2531.085315ms)
+✔ cancel while opening prevents late session; closes original ports (2525.26464ms)
+✔ session close precedes broker/port disposal and unconfirmed cleanup remains explicit (13.529087ms)
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (8.763937ms)
+✔ the C fixture handshake reads confirmed values and Apply is the only write (207.519257ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (24.039028ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (52.835462ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (0.924603ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (76.380097ms)
+✔ actual upstream launcher renders all five local rows without fake playback (7.92347ms)
+✔ port provenance pins the shipped MIT source bytes (7.668026ms)
+✔ registry: all 82 ids map to a renderer family (2.565395ms)
+✔ registry: every glyph changes shape with its value (no static icons) (196.921685ms)
+✔ drum voice glyphs react to level, hit pulse and decay (1.141399ms)
+✔ step lane label cycles all four parameters and no selected-note inspector is mounted (3.250989ms)
+✔ final per-step style uses thin value bars rather than mixer caps (0.453364ms)
+✔ late-open stale close must stay owned until it settles before same-port reconnect (4.669215ms)
+✔ modeless note body moves preserving duration rather than defaulting to end resize (8.102576ms)
+✔ explicit modeless handles still resize only the indicated endpoint (1.156071ms)
+✔ modeless draw uses upstream bounded duration with integer sample edges on fractional grids (1.636665ms)
+✔ touch body jitter selects without moving or creating an undo item (0.631553ms)
+✔ touch move crosses slop once and remains one cancellable transaction (0.7981ms)
+✔ no native admission means no permission request or fabricated controls (6.144105ms)
+✔ actual page uses typed descriptors and returned state; blur uses paired DNR2 aggregate owner CLOSE before port disposal (30.569444ms)
+✔ late permission result after final departure cannot attach listeners (5.839622ms)
+✔ cached return requires fresh manual connection and obtains new firmware epoch (9.316468ms)
+✔ same-name ports remain visibly distinct through stable source IDs (2.990546ms)
+✔ pending port open immediately locks the displayed pair and allows explicit cancel (20.239054ms)
+✔ DNR2 full incarnation and inactive-bank UNSUPPORTED survive one coherent snapshot (15.111108ms)
+✔ heartbeat and conflict do not acknowledge unseen revision for subsequent CAS (3.65838ms)
+✔ queued UP/CLOSE retain exact command/request until OK and never release ownership early (4.497789ms)
+✔ bounded queued cleanup remains unconfirmed instead of falsely reporting released (1.229433ms)
+✔ owning snapshots renew lease inline but readers do not (8.031787ms)
+✔ reply with matching low unit but different incarnation word is not correlated (0.835141ms)
+✔ aggregate owner CLOSE bounds cleanup once instead of multiplying per-held-token timeouts (0.778782ms)
+✔ exhaustive raw 0..127 -> display (2.445555ms)
+✔ display -> raw round trip for every d, extremes 0/127 (0.604059ms)
+✔ drag edits in display units, extremes send 0/127; marker from the same d (0.217193ms)
+✔ import keeps raw untouched (raw 3 stays 3, shows L48) (3.319332ms)
+✔ API availability is not firmware admission or proof of a Bluetooth port (4.278658ms)
+✔ no API on mobile gives an honest platform route, no made-up PWA fallback (1.327376ms)
+✔ secure context, explicit transport admission and user action are all separate (0.347657ms)
+✔ descriptor controls only, acknowledged values replace pending edits and held original owners survive capture loss (6.850883ms)
+✔ unsupported descriptor roles never fabricate a 37-key or pad layout (3.420308ms)
+✔ inactive-bank rows are unavailable rather than editable stale values (1.336379ms)
+✔ zoom keeps the sample under the pointer and clamps finite extent (2.474445ms)
+✔ pinch settles only on 1/2/4/8 units without a zoom tool (0.661976ms)
+✔ plain and shifted wheel pan, control wheel zooms around pointer (1.142202ms)
+✔ second pointer cancels note preview and remaining finger cannot edit (1.472904ms)
+✔ vertical pinch enlarges pitch rows without changing time width, anchoring vertical location (0.741282ms)
+✔ third pointer freezes navigation without throwing or reviving note edits (0.708532ms)
+✔ Chicago continuous source uses names without changing scalar endpoints (1.388888ms)
+✔ unsupported engines and invalid raw values do not invent wave mappings (0.329598ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5732.339669
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:sample-discovery
+> node --test tests/product-samples-discovery.test.mjs
+
+✔ empty and malformed INFO fail closed, release newly opened ports and restore prior input listener (7.596317ms)
+✔ valid legacy X0X and exact XSG extension remain discoverable (2.775938ms)
+✔ probe timeout releases only newly opened ports and restores previous handler (1.931654ms)
+✔ preexisting shared ports and a newer foreign listener are preserved after failed probe (2.937355ms)
+✔ disconnected first matching output is skipped (1.676194ms)
+✔ input and output open failures do not abort later candidates (2.267742ms)
+✔ cleanup close rejection does not replace the discovery error or abort the loop (1.319591ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 222.948555
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:presets
+> node --test tests/product-presets/test*.mjs
+
+✔ duplicate J6 parameter identifiers retain all ordered records and raw tokens, without applying (6.478999ms)
+✔ duplicate-bearing previews retain immutable copies and cancelled preview never changes kept bytes (1.883243ms)
+✔ empty identifiers and malformed duplicate records remain rejected (2.2816ms)
+✔ file change previews, keep required, name edit original bytes and filename retained (4.415464ms)
+✔ late file read cancelled and wrong profile fail closed (0.327102ms)
+✔ destroy is terminal and stale controls cannot read or download (0.682862ms)
+✔ oversized file is refused before allocating its arrayBuffer (0.629418ms)
+✔ duplicate-bearing J6 bank previews expose preservation warning and never enable apply (0.800259ms)
+✔ real Document root has no ownerDocument and still populates original-file presets (1.370231ms)
+✔ preview fields clear and disable until a valid file is inspected, without losing kept bytes (1.143455ms)
+✔ codec.mjs preserves engine4 bytes without exposing creation or falsely relabeling SynthOne (14.253633ms)
+✔ legacy/codec.mjs preserves engine4 bytes without exposing creation or falsely relabeling SynthOne (4.656569ms)
+✔ original bytes and unknown number lexemes survive a known edit (5.087967ms)
+✔ cross format, duplicates, invalid sequence, unsafe edits rejected (1.003351ms)
+✔ preview then keep, cancellation and original immutability (0.543982ms)
+✔ J6 wrapper and parameter arrays preserved (0.568555ms)
+✔ unsupported engine never guessed from JSON (0.55605ms)
+✔ bounded strict JSON rejects malformed values and mutable inputs cannot alter originals (1.637067ms)
+✔ unknown keys matching Object prototype are preserved rather than treated as source fields (6.431628ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 356.020141
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:origin
+> node --test tests/site-origin.test.mjs
+
+✔ repo and pages links come from one origin config (4077.43848ms)
+✔ no runtime link templating survives (links must work without JS) (248.012824ms)
+✔ a rename is one constant: links disagreeing with SITE_ORIGIN are caught (0.884725ms)
+✔ corner radii live in the R22 token module (1.449791ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4564.085104
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

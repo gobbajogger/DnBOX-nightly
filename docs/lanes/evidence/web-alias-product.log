@@ -1,0 +1,120 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:product
+> node --test tests/product-site-build.test.mjs tests/product-site-content.test.mjs tests/product-mounted-disclosure.test.mjs tests/product-site-r22.test.mjs tests/product-runtime-closure.test.mjs tests/product-retained-catalog.test.mjs tests/product-starting-break-preview.test.mjs tests/product-installer-lifecycle.test.mjs && python3 tests/product-html-closure.py && python3 tests/product-r22-hihat.py && python3 tests/product-entry-disclosure.py && python3 tests/product-site-browser-config.py && python3 tests/product-route-contract.py && python3 tests/product-firmware-html-diff.py && python3 tests/product-built-http.py
+
+✔ pagehide before metadata completes never mounts a stale panel (4.008671ms)
+✔ pagehide during cryptographic mounting destroys late candidate without attaching it (19.272822ms)
+✔ BFCache restores selected IDs and old callbacks cannot mutate current storage (3.959174ms)
+✔ network errors disclose failure without mounting or claiming device writes (1.825336ms)
+✔ pagehide while metadata body waits never calls mount after body arrives (3.503604ms)
+✔ overlapping restore destroys obsolete candidate and retains newest panel (1.91831ms)
+✔ actual mounted exchange leaves provider-unavailable entry copy visible before any file selection (6.985498ms)
+✔ product catalog and build history retain exact recorded gh-pages bytes (21.979092ms)
+✔ empty preview catalog and edited release claims cannot replace retained catalog (8.066625ms)
+✔ read-only publication inventory never claims a gate or performs deletion (1.750777ms)
+✔ actual first public WIP fails closure for its two absent shared interfaces (40.045882ms)
+✔ current local shared composition resolves all imported hero/theme inputs (8.288882ms)
+✔ normal deterministic source build/check never changes Pages/catalog/source (8.463072ms)
+✔ all source identities checked before first output write (2.159859ms)
+✔ unsafe destinations and malformed paths fail closed (9.566934ms)
+✔ private/binary assets, duplicate inputs and symlinks are refused (11.422383ms)
+✔ source ancestor symlink and output symlink never escape the scoped build tree (3.496265ms)
+✔ a stale unrelated output is not silently carried into a later publisher input (0.801064ms)
+✔ recognized output hardlink cannot overwrite a protected synthetic catalog (2.306256ms)
+✔ recognized output special files refuse without opening or blocking (14.315831ms)
+✔ FIFO manifest rejects after import-ready without blocking the operation (296.094469ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":270.39007300000003,"operationElapsedMs":11.839771999999925}
+✔ slow child startup does not consume the500ms FIFO operation watchdog (862.322454ms)
+ℹ {"code":0,"signal":null,"result":{"phase":"result","outcome":"threw","message":"Regular source manifest required"},"timedOut":null,"stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":821.3516299999999,"operationElapsedMs":25.466791000000057}
+✔ controlled missing-guard fixture is exact current code minus the declared preflight, never claimed historical (2.527604ms)
+✔ controlled missing-guard mutant blocks after readiness and trips only the operation watchdog (626.446545ms)
+ℹ {"code":null,"signal":"SIGKILL","result":null,"timedOut":"operation","stderr":"","ready":true,"operationStarted":true,"startupElapsedMs":97.16392300000007,"operationElapsedMs":517.8797240000001}
+✔ symlink manifest refuses without reading an outside manifest (2.202344ms)
+✔ starting-break admission rejects forged manifest bytes and non-contract IDs (4.00238ms)
+✔ starting-break contract cannot be replaced, linked or special-file opened (11.678776ms)
+✔ all ten exact contract-pinned starting-break assets build byte-identically (17.161676ms)
+✔ complete source manifest builds byte-identical local output without deployment (519.871316ms)
+✔ both manual families and197 true history records survive source integration (152.776409ms)
+✔ source admission remains explicit, no original-format or remote capability fabricated (1.672208ms)
+✔ R16 composed source names exact workspace and contains safe local editing endpoints only (0.856118ms)
+✔ R21 captured presentation and v6 port identity remain explicit without admission (7.365301ms)
+✔ entry availability is disclosed without enabling native providers (23.035379ms)
+✔ project entry explains unavailable MIDI export without implementation jargon (1.095608ms)
+✔ all public page families expose the same accessible responsive navigation (54.155956ms)
+✔ installer retains guarded actions and a single shell, not starting-break picker (8.409554ms)
+✔ build pagination never loses records, filters before slicing and clamps pages (1.754386ms)
+✔ public contract previews never request private paths or synthesize substitute audio (0.526582ms)
+✔ home does not present a connection failure before a connection attempt (92.548881ms)
+✔ new website stage is exactly reversible without rewriting earlier provenance (669.205072ms)
+✔ existing executable bytes and source glyphs are preserved except the explicit waveform token substitution (523.860985ms)
+✔ home live controls use the shared R22 renderer and consistent integer percentages (29.117285ms)
+✔ help includes a source-linked SMK control map rather than an unlabelled hardware image (0.86964ms)
+✔ hero resonance moves resonance, not cutoff, and never labels attack as envelope amount (3.176652ms)
+✔ earlier captured interface is labeled honestly and the product/tool entry copy matches actual capability (17.105145ms)
+✔ choosing a manual chapter closes the sticky jump instead of covering the chapter (3.499003ms)
+✔ cutoff and resonance do not reuse an indistinguishable default curve (1.325781ms)
+✔ history exposes synchronized controls below records and safe initial deep-link filters (2.533615ms)
+✔ development highlights link exact saved records and preserve explicit device-test limits (0.283696ms)
+✔ homepage feature artwork maps actual physical controls without invented active/value state (27.645887ms)
+✔ Juno source preview uses the observed WIDTH scalar and only its actual renderer law (1.523091ms)
+✔ installer actual waveform stroke takes the R22 CSS token instead of a legacy hardcoded blue (4.666571ms)
+✔ R3 human defects have exact-source negative fixtures, and their repair hooks exist (4.834696ms)
+✔ actual browser animation probe preserves source-keyed attempts and rejects an exact original static hero (1.66414ms)
+✔ archive fitting uses intrinsic body bounds plus margins and frame borders, never viewport scrollHeight (1.797851ms)
+✔ disabled sample-play affordances are text glyphs and shared Menu typography is explicit (2.476109ms)
+✔ earlier JUNO scalar is versioned, never relabelled as the new SuperJ6 engine (23.953592ms)
+✔ preset guidance uses musician actions while preserving file and edit limits (0.258242ms)
+✔ all five contract previews resolve beneath module-relative public asset directory (4.134563ms)
+✔ each exact contract size is bounded and returned without changing bytes (8.081202ms)
+✔ oversize and truncated streams cancel and release without returning unverified bytes (1.969638ms)
+✔ unknown URLs never fetch; failed HTTP, forged lengths and missing streaming fail closed (2.325512ms)
+✔ all five admitted previews validate original PCM before choosing any break (31.481268ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 64
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2230.245416
+...
+----------------------------------------------------------------------
+Ran 3 tests in 1.720s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.352s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.255s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.066s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.032s
+
+OK
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.053s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.152s
+
+OK
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

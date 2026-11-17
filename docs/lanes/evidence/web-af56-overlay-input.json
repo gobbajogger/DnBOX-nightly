@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "provenance": {
+    "status": "PASS",
+    "scope": "git-harness-identity-not-coverage-or-derivation-approval",
+    "firmwareSourceCommit": "af56c8a4ba7b140402db71ba50a4dea6e14fddfe",
+    "harnessPath": "tests/host/ui_overlay_inventory.c",
+    "resolvedBlob": "9cc88021b9d49fec63d0cea134ac7725f845df2c",
+    "errors": []
+  },
+  "manifestSha256": "cb422248337512db553079905dc3780f6155f32d7136c88fb38fc1ed42ce4f31",
+  "capturedStates": 500,
+  "uniquePhysicalScreensClaimed": false,
+  "pngHashDecodePass": 500,
+  "coverageComplete": false,
+  "publishedMetadataCommit": "4403e7239bb5c503fab0b1afc112ac7efd54c147",
+  "imagePublication": false,
+  "scope": "partial input identity only; no final W3/full checkout/ancestry proof"
+}

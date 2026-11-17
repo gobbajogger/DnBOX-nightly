@@ -1,0 +1,15 @@
+{
+  "lifecycleSnapshot": "native-panels-lifecycle-review-v2",
+  "lifecycleFiles": 22,
+  "lifecycleTests": 6,
+  "colorSnapshot": "native-frame-color-review-v2",
+  "colorFiles": 39,
+  "colorAndHtmlTests": 3,
+  "nativeColorWords": 65536,
+  "sourceGeneratedRgbaFrames": 45,
+  "rgbaPixels": 2592000,
+  "rgbaDifferences": 0,
+  "spawnErrorNegative": 1,
+  "postInputHashes": "PASS",
+  "scope": "Source/unit and source-generated frame equivalence only; not browser capture, live firmware, production app or full gate"
+}

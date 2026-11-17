@@ -1,0 +1,15 @@
+{
+  "schema": "dnbox-web-nonbrowser-receipt/1",
+  "sourceCommit": "bd8b77646542eac5875af5442a819d9f0a233f17",
+  "sourceTree": "d6d2ef7a1939160808a525778cc8b64d26ef6338",
+  "command": "node scripts/build-preview.mjs --check && node tests/nightly-preview.test.mjs && node tests/manual-help-links.test.mjs && node tests/installer-scan-order.test.mjs && node tests/controller-padding.test.mjs && node tests/bundled-controller.test.mjs && node tests/installer-download-admission.test.mjs && node tests/qualified-catalog.test.mjs && npm run catalog:check && node tests/build-status-negatives.test.mjs && node tests/build-history-continuity.test.mjs && node tests/installer-write-boundaries.test.mjs && node tests/installer-write-lock.test.mjs && node tests/installer-qualified-selection.test.mjs && node tests/installer-evidence-links.test.mjs && node web/test_midi_port_pairing.mjs && node web/test_projects.mjs && node web/test_projects_page.mjs && npm run test:edge && node web/test_breaks_page.mjs && npm run test:product && npm run test:workspace && npm run test:remote && npm run test:sample-discovery && npm run test:presets && npm run test:origin",
+  "exitCode": 0,
+  "trackedChangesAfterRun": [],
+  "untrackedEnvironment": [
+    "node_modules symlink to existing installed dependencies"
+  ],
+  "rawLogSHA256": "e726a387c1106fcc889333d29cd7b77a011c39dbff2825954a48621b9f44031f",
+  "sanitizedLogSHA256": "5884d52e79fd043f526706eb58d4dfe3cba423ee472c1ff95089450ec2c99cf9",
+  "scope": "All npm test commands except final npm run test:visual, executed from exact detached Git worktree. Not full npm test, browser, full Local, visual review, firmware/device or publication qualification. Does not qualify later composed Remote source.",
+  "failedAttempt": "Initial exact Git archive lacked .git for repository-dependent tests; retried actual exact detached worktree without weakening assertions."
+}

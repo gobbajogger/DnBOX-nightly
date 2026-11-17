@@ -1,0 +1,46 @@
+// Actual project panel/adapter with file and parser boundaries mocked; provider stays null.
+import test from'node:test';import assert from'node:assert/strict';import{mountExchange}from'../web/product-site/projects/exchange/panel.mjs';
+const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{promise,resolve};};
+class E{constructor(tag='div'){this.tag=tag;this.children=[];this.textContent='';this.disabled=false;this.files=[];}append(n){this.children.push(n);}replaceChildren(){this.children=[];}setAttribute(){}}
+function fixture(parser=async project=>({project})){const root=new E();root.ownerDocument={createElement:t=>new E(t)};let exports=0,parsed=0;const api=mountExchange(root,{readProjectFile:async b=>{parsed++;return parser(b);},onFiles:()=>exports++});return{api,root,file:root.children.find(x=>x.tag==='label').children[0],button:root.children.find(x=>x.tag==='button'),status:root.children.at(-1),parsed:()=>parsed,exports:()=>exports};}
+test('verified file inspection never enables unavailable renderer or returns export files',async()=>{
+ const f=fixture();f.file.files=[{size:3,arrayBuffer:async()=>new Uint8Array([1,2,3]).buffer}];await f.file.onchange();assert.equal(f.parsed(),1);assert.equal(f.button.disabled,true);assert.match(f.status.textContent,/matching firmware renderer/);await f.button.onclick();assert.equal(f.exports(),0);assert.equal(f.button.disabled,true);f.api.dispose();
+});
+test('oversized project rejects before allocating or calling parser',async()=>{
+ const f=fixture();let reads=0;f.file.files=[{size:4*1024*1024+1,arrayBuffer:async()=>{reads++;return new ArrayBuffer(0);}}];await f.file.onchange();assert.equal(reads,0);assert.equal(f.parsed(),0);assert.equal(f.button.disabled,true);assert.match(f.status.textContent,/4 MiB/);f.api.dispose();
+});
+test('new selection prevents a late old file read from replacing current inspection',async()=>{
+ const old=deferred(),seen=[],f=fixture(async project=>{seen.push([...project]);return{project};});f.file.files=[{size:1,arrayBuffer:()=>old.promise}];const pending=f.file.onchange();f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([2]).buffer}];await f.file.onchange();const current=f.status.textContent;old.resolve(new Uint8Array([1]).buffer);await pending;assert.deepEqual(seen,[[2]]);assert.equal(f.status.textContent,current);assert.equal(f.button.disabled,true);f.api.dispose();
+});
+test('dispose while file read is pending prevents parsing and removes event handlers',async()=>{
+ const pending=deferred(),f=fixture();f.file.files=[{size:1,arrayBuffer:()=>pending.promise}];const read=f.file.onchange();f.api.dispose();pending.resolve(new ArrayBuffer(1));await read;assert.equal(f.parsed(),0);assert.equal(f.exports(),0);assert.equal(f.file.onchange,null);assert.equal(f.button.onclick,null);assert.equal(f.button.disabled,true);
+});
+test('invalid parsed project remains unavailable and discloses verification failure',async()=>{
+ const f=fixture(async()=>({project:'not bytes'}));f.file.files=[{size:1,arrayBuffer:async()=>new ArrayBuffer(1)}];await f.file.onchange();assert.equal(f.button.disabled,true);assert.match(f.status.textContent,/could not be verified/);assert.equal(f.exports(),0);f.api.dispose();
+});
+test('obsolete parser failure cannot overwrite a newer verified selection message',async()=>{
+ let rejectOld;const old=new Promise((_,reject)=>{rejectOld=reject;});let calls=0;const f=fixture(async project=>{calls++;if(calls===1)return old;return{project};});
+ f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([1]).buffer}];const pending=f.file.onchange();await Promise.resolve();await Promise.resolve();
+ f.file.files=[{size:1,arrayBuffer:async()=>new Uint8Array([2]).buffer}];await f.file.onchange();const current=f.status.textContent;rejectOld(Error('old parse failed'));await pending;assert.equal(f.status.textContent,current);assert.equal(f.button.disabled,true);f.api.dispose();
+});
+
+// Shipped parser + actual adapter/panel, synthetic source fixture, no renderer/device.
+import{readFileSync}from'node:fs';
+import{inflateSync}from'node:zlib';
+import{createHash}from'node:crypto';
+import{makeProjectFile,readProjectFile}from'../web/product-site/projects/exchange/vendor/x0x_projects.js';
+async function realBundle(){
+ const spec=JSON.parse(readFileSync(new URL('./fixtures/project-v6-sound11-wbl0.json',import.meta.url)));
+ assert.equal(spec.synthetic,true);assert.equal(spec.contains_user_data,false);
+ const project=new Uint8Array(inflateSync(Buffer.from(spec.zlib_base64,'base64')));
+ assert.equal(createHash('sha256').update(project).digest('hex'),spec.sha256);
+ return makeProjectFile(project,{layout:{count:1,size:4096,ext:true,slots:[{size:4096,off:65536,nz:0,name:'',used:0,kb:0}]},images:[null]}, {portable:false,name:'Synthetic inspection',created:'2026-11-16T00:00:00.000Z'});
+}
+test('shipped parser accepts real synthetic bundle through panel but never enables absent renderer',async()=>{
+ const bytes=await realBundle(),f=fixture(readProjectFile);f.file.files=[{size:bytes.length,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}];
+ await f.file.onchange();assert.equal(f.parsed(),1);assert.match(f.status.textContent,/Project checked/);assert.equal(f.button.disabled,true);assert.equal(f.exports(),0);f.api.dispose();
+});
+test('shipped parser rejects CRC-corrupted bundle through panel without enabling export',async()=>{
+ const bytes=await realBundle();bytes[bytes.length-1]^=1;const f=fixture(readProjectFile);f.file.files=[{size:bytes.length,arrayBuffer:async()=>bytes.buffer}];
+ await f.file.onchange();assert.equal(f.parsed(),1);assert.match(f.status.textContent,/could not be verified/);assert.equal(f.button.disabled,true);assert.equal(f.exports(),0);f.api.dispose();
+});

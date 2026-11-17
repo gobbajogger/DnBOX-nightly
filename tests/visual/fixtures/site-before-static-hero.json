@@ -1,0 +1,8 @@
+{
+  "source": "9809abc0ef1e620c8d04c46735e2c92e6f7100c9",
+  "originalIndexSHA256": "392afcc5e401b52ef61967901279d5f1b0dbe7cf5c11381fd38e1dbf4fa5bec3",
+  "originalHeroFragmentSHA256": "371663cd59b8f2b88a519c958f142cec42abddc4a12d5cb42da09f320d9ae3f2",
+  "fixtureSHA256": "787e1bf6d02aaac466c280476cad0e951105ea0cda6858679f78b63098682142",
+  "adaptations": "Original hero fragment and stylesheet isolated; font paths rooted to unchanged bundled assets; no source curve alteration.",
+  "expectedRejectedCondition": "No actual adaptive glyph animator/range binding, so static approved-looking curves cannot qualify as a current animated preview."
+}

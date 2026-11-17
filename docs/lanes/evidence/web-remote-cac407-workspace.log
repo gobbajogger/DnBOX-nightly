@@ -1,0 +1,154 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> x0x37-nightly-installer-preview@0.0.0-dev test:workspace
+> node --test tests/product-workspace/*.test.mjs && node tests/product-workspace/app-regression.mjs && node tests/product-workspace/app-correction-regression.mjs && node tests/product-workspace/app-sound-regression.mjs && node tests/product-workspace/app-draft-regression.mjs
+
+✔ explicit version1 draft roundtrips every authored domain and context without native format/apply (30.599194ms)
+✔ opening validates without mutation, explicit install is atomic and clears histories without replacing originals (24.05686ms)
+✔ all bad versions/identities/IDs/ranges/unknown fields are rejected before any state mutation (132.373429ms)
+✔ parser bounds and duplicate keys are strict, malformed/oversized/deep input cannot become a draft (63.71858ms)
+✔ draft capture cancels no gestures silently and no data alias can corrupt baselines (37.729071ms)
+✔ dirty content includes launch/bank and all domains, not selection context or baseline-equal preview entries (20.295357ms)
+✔ duration editor cannot create an unsaveable zero-length non-pulse; existing source pulse stays a pulse (2.972703ms)
+✔ maximum accepted draft ID wraps Add and Paste into unused bounded IDs, preserving imported identities (23.189534ms)
+✔ a group paste crossing upper ID boundary reserves the whole unique group before commit (13.403803ms)
+✔ file preview/cancel never replaces current data; explicit replace restores all data with histories reset (10.969238ms)
+✔ invalid or stale asynchronous open clears old pending import and never changes state (5.71353ms)
+✔ beforeunload guard follows authored content even after download request, no navigation policy bypass (0.99308ms)
+✔ pagehide invalidates deferred reads and pending replacement; pageshow permits only a new file choice (2.606348ms)
+✔ frame retains exact source body and places an accessible direct-control hit region (5.925155ms)
+✔ metadata is escaped but source geometry not redrawn (0.941187ms)
+✔ only immutable unadmitted source frames are accepted and malformed bounds fail (1.224389ms)
+✔ all26 actual projected frames keep124 source-control occurrences (31.321904ms)
+✔ all projected source-control ink fits complete native body viewport through bottom240 (24.826943ms)
+✔ source hit area uses the same full viewport and does not clamp real bottom value ink to224 (1.272779ms)
+✔ WAVE and WIDTH readouts equal the golden 102x26 fixture at every sweep step (32.088302ms)
+✔ Chicago WAVE raw samples use C truncating division from ui_original_wave.h (1.20292ms)
+✔ Juno pulse width grows with the value and Chicago ADSR stage widths follow the RC law (1.525201ms)
+✔ 909 tune follows drum909_bd_hz and idle or zero-depth motion does not decorate (9.424377ms)
+✔ no r23 token, class or glyph remains in the Remote or site UI (681.549979ms)
+✔ pan notation clips at L50 / C / R50 (7.003571ms)
+✔ R22 gallery tokens and pan notation (392.073879ms)
+✔ vertical hierarchy is painted once above every pitch-row shade (2.651112ms)
+✔ bar beat and subdivision lines remain pixel aligned at every target width (1.534662ms)
+✔ group pointer move uses relative onset and pitch with one atomic undo (518.679891ms)
+✔ whole group clamps time/pitch without changing spacing or durations (2.927684ms)
+✔ second pointer cancels whole group and cannot restart until original owners release (1.370464ms)
+✔ left edge resizes only start and clamps before end (1.101446ms)
+✔ moving selected anchor preserves group rather than toggling membership (3.85692ms)
+✔ source pulse timing, track and velocity remain exact, not invented gate length (14.069484ms)
+✔ explicit local draft changes do not mutate source or claim confirmed state (1.71158ms)
+✔ undo/redo and edit-after-undo preserve coherent history (1.066327ms)
+✔ pointercancel and a second touch cancel a gesture without accidental edit (1.106941ms)
+✔ original pointer ownership, release and validation are bounded (2.558424ms)
+✔ snapshot invalidation retains draft and never auto-applies on reconnect (1.58493ms)
+✔ catalog grouping preserves fixed/bank identities and no generic master pan/sends (0.970994ms)
+✔ invalid selection does not acquire a phantom pointer owner (0.532684ms)
+✔ six actual local point updates one atomic undo, no implicit native baseline (15.649136ms)
+✔ wrong owner ignored and second pointer cancels until all pointers released (0.296004ms)
+✔ bounds and explicit point clear (7.527862ms)
+✔ right and up each increase one parameter; dominant axis locks to avoid diagonal doubling (2.207481ms)
+✔ left/down decrease and boundaries/quantization remain typed (0.429552ms)
+✔ fine adjustment preserves fractional accumulation, target identity and original context (0.463608ms)
+✔ cancel and foreign release cannot commit or alter original owner (0.353273ms)
+✔ a second pointer cancels and blocks edits until all fingers lift (0.351752ms)
+✔ context/revision invalidation discards draft without requesting stale global restore (0.303646ms)
+✔ tap alone is selection, not accidental change; malformed or disposed input fails closed (0.964482ms)
+✔ non-unit enumerated integer domain uses its declared step (0.896477ms)
+✔ local draw retains source, adds one undoable new note and never applies (14.800166ms)
+✔ second touch cancels draw until all original pointers released (0.778811ms)
+✔ move preserves duration, clamp and original owner; cancel restores exact source (5.282336ms)
+✔ length adjusts only end; source zero-duration pulse cannot become a gate (0.894651ms)
+✔ pan changes viewport only; cancellation never edits source (0.554963ms)
+✔ coordinate mapping spans whole MIDI pitch range and bounds time (0.399225ms)
+✔ draw rejects malformed track/channel/timing and no source alias (0.944191ms)
+✔ atomic clipboard copy/paste retains relative timing pitch pulse and one undo (7.322516ms)
+✔ paste refuses all on overflow and retains copied selection (2.489275ms)
+✔ group move atomic bounds and delete are undoable including original deletion diff (1.13255ms)
+✔ chance native domain excludes0, admits 5percent and proper conditional boundaries (0.59491ms)
+✔ drag past 5 percent enters ratios and encodes back (2.252502ms)
+✔ drum velocity/chance retain scoped lane identity and unbound pattern (2.95993ms)
+✔ arrangement has five typed destinations one to8 repeats and independent history (0.885418ms)
+✔ clearing explicit chance removes the property and remains undoable (1.438107ms)
+✔ both slots expose all104 exact bank-qualified current bass scalars without aliasing banks (30.895524ms)
+✔ BREAK missing/invalid loops and native-only engine/preset roles are explicit, never silently clamped (13.862147ms)
+✔ descriptor matching includes sourceBank, exact bounds and source identity, never first-triple fallback (18.957916ms)
+✔ raw snapshots and returned control copies cannot corrupt baselines or enable native apply (6.035785ms)
+✔ duplicate MIAMI Wave/Level refs retain actual CARRIER and XMOD source sections in both slots (15.555686ms)
+✔ every bass scalar has authentic finite section provenance, without changing raw baselines/ref identity (5.580696ms)
+✔ part options express stable slots and local selected bank context is not a native engine claim (2.770863ms)
+✔ committed domain commands undo and redo in one chronological order (3.0241ms)
+✔ new cross-domain edit discards global redo and no-op is not recorded (0.270191ms)
+✔ bounded history retains only the latest reversible commands (0.23186ms)
+✔ failed replay does not lose the command or fabricate a redo (0.460305ms)
+✔ invalid commands and limits fail without altering history (0.287523ms)
+✔ five independent launch destinations, all32 targets, never loaded or playing (4.473366ms)
+✔ every assembler destination exact including MIDI section (0.302859ms)
+✔ stable viewport captures Select before repaint and always releases original pointer (4.310419ms)
+✔ lost Select capture and canceled draw leave no phantom owner or edit (1.786315ms)
+✔ stable binder forwards left-edge identity to actual resize gesture (2.197136ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 84
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2336.505223
+PASS selected pointer owns keyboard
+CORRECTED_POINTER_SELECTION_FOCUS {"selectedBefore":"<h2>G3 <small>· local draft</small>","focusAfter":"n5","selectedAfter":"<h2>G♯3 <small>· local draft</small>"}
+PASS undo repaints current drums
+CORRECTED_UNDO_DRUM_RENDER {"staleVelocity120":false,"statusAfterUndo":"Undo Notes · Draft · Not connected","refreshedVelocity88":true}
+PASS selected bass has only own controls
+CORRECTED_SELECTED_BASS_VOICE {"selectedPart":"Bass A Chicago","shownCards":20,"expectedBassACards":20,"WaveLabels":1}
+PASS actual-app aligned velocity 93→124, Undo93, cancel93
+PASS actual-app Drive raw41→53, Undo41, cancel41
+PASS actual-app five launch selections→song row→8 repeats
+PASS actual-app six motion points→Undo empty→Redo
+PASS actual-app explicit drum toggle→Undo
+PASS actual-app exact conditional1:2→Undo unset
+PASS actual-app Not set removes a condition
+PASS actual-app Undo clear restores condition
+PASS actual-app Redo clear restores unset
+PASS conditional chips do not map their ordinal to height
+PASS conditional lane is correctly announced
+PASS chance drag sets the percentage under the finger
+PASS chance drag is one undoable action
+PASS chance drag cancellation restores percentage
+PASS actual-app group pointer moves both onsets
+PASS actual-app group pointer is one Undo
+PASS part change clears hidden group membership
+PASS lane keyboard increments explicit percentage by5
+PASS lane keyboard repaint restores replacement-button focus
+PASS lane keyboard opens exact chance chooser
+PASS R21 app uses whole transparent source frame, not recaptioned cards
+PASS all11 captured909voice contexts available
+PASS choosing909RD changes whole captured source context
+PASS same-target alias preserves actual touched occurrence name
+PASS no connection caption text in views (state shown only by Connect)
+PASS modeless Delete removes the focused note and Undo restores it
+PASS actual page Connect fails closed without admitted simulator catalog
+PASS actual app binds vertical pitch pinch independently of time zoom
+PASS actual drum page reuses live lane controls and returns them intact on leaving
+PASS shipped pointer binding preserves note geometry through small touch jitter
+PASS parameter Review and header Undo/Redo include actual raw change
+PASS Motion Review and shared Undo/Redo
+PASS Song Review and shared Undo/Redo
+PASS blur cancels and immediately repaints without losing committed history
+PASS no-op clear and row update do not hide real undo
+PASS all four domains undo/redo chronologically and new branch discards redo
+PASS Review distinguishes same-name parameters by exact kit and voice
+CORRECTION_REGRESSION_CASES 7; FAILURES 0; source-event stub, NOT DOM/touch
+PASS all104 original bass scalars reachable under both local slot/bank previews
+PASS same target/voice/parameter in different banks remain reversible independent drafts
+PASS bank change cancels active raw drag, does not commit or leak into next bank
+PASS BREAK empty loop state visible but cannot be selected as scalar; numeric roles editable
+SOURCE_SOUND_APP_CASES 4; FAILURES 0; source-event stub, NOT DOM/touch
+PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof
+PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem
+PASS shipped app saves/restores .125,8 and continuous viewport zoom at320px without unsupported context
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

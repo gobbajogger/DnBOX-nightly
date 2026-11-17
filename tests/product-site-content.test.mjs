@@ -9,3 +9,10 @@ test('R16 composed source names exact workspace and contains safe local editing 
 test('R21 captured presentation and v6 port identity remain explicit without admission',()=>{const t=JSON.parse(read('SOURCE-TRACE.json'));assert.equal(t.candidatePins.remoteEndpointManifest,'36e54ac2ca5f6c0524f7f8e4615839a7333b10e6bf9738bece022b8d315f8847');assert.ok(read('remote/frame.mjs').includes('runtime_admitted'));const c=JSON.parse(read('remote/components.json'));assert.equal(c.screens.length,26);assert.equal(c.screens.reduce((n,s)=>n+s.controls.length,0),124);assert.match(read('remote/device/page.mjs'),/p.id/);assert.ok(JSON.parse(read('remote/WORKSPACE-SOURCE-PINS.json')));});
 
 test('entry availability is disclosed without enabling native providers',()=>{assert.match(read('index.html'),/Local workspace preview/);assert.match(read('tools/index.html'),/No connected control or playback in this preview/);assert.match(read('projects/index.html'),/Browser MIDI export is unavailable/);assert.match(read('starting-breaks/index.html'),/separate preparation preview/);assert.match(read('remote/index.html'),/Download draft/);assert.equal(JSON.parse(read('SOURCE-MANIFEST.json')).publicationQualified,false);});
+
+test('project entry explains unavailable MIDI export without implementation jargon',()=>{
+ const page=read('projects/index.html');
+ assert.ok(page.includes('Browser MIDI export is unavailable in this preview. You can inspect files here; use the original full-project backup/restore tools separately. Local workspace drafts are not native projects or MIDI exports.'));
+ assert.ok(!page.includes('no qualified source-executed browser provider is installed'));
+ for(const limit of ['3/4, 3/10, 6/10, 6/11, 8/10, 8/11 and 9/11','36,452-byte layout','File inspection does not prove device compatibility.'])assert.ok(page.includes(limit));
+});

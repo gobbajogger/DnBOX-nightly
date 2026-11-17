@@ -1,0 +1,366 @@
+In file included from tests/host/../../host/x0x_host.c:339,
+                 from tests/host/smc_ui_test.c:8,
+                 from tests/host/remote_panels_test.c:3:
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘pref_set_impl’:
+tests/host/../../host/../firmware/src/app/ui.c:820:57: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
+  820 |     case R_MIDICH: seq.ch[r.a % NPARTS] = (uint8_t)(v ? v - 1 : SEQ_CH_OFF); break;
+      |                                                         ^~~~~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘original_value_text’:
+tests/host/../../host/../firmware/src/app/ui.c:1060:40: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+ 1060 |         put_s(num, value >= 0 && value <= ORIGINAL_SOUND_JUNO ? BENGINE_N[value] : "INVALID");
+      |                                        ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘prob_turn’:
+tests/host/../../host/../firmware/src/app/ui.c:3100:43: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
+ 3100 |         l->val[s] = (uint8_t)(nv != 100 ? nv : MOT_NONE);
+      |                                           ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘draw_home’:
+tests/host/../../host/../firmware/src/app/ui.c:6097:17: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 6097 |                 if(tx<4)tx=4;if(tx+w>236)tx=236-w;
+      |                 ^~
+tests/host/../../host/../firmware/src/app/ui.c:6097:30: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 6097 |                 if(tx<4)tx=4;if(tx+w>236)tx=236-w;
+      |                              ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘draw_adsr_inline’:
+tests/host/../../host/../firmware/src/app/ui.c:7524:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7524 |             if(level<0)level=0; if(level>1)level=1;
+      |             ^~
+tests/host/../../host/../firmware/src/app/ui.c:7524:33: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7524 |             if(level<0)level=0; if(level>1)level=1;
+      |                                 ^~
+tests/host/../../host/../firmware/src/app/ui.c:7545:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7545 |             if(lv<0)lv=0; if(lv>1)lv=1;
+      |             ^~
+tests/host/../../host/../firmware/src/app/ui.c:7545:27: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7545 |             if(lv<0)lv=0; if(lv>1)lv=1;
+      |                           ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘og_wave’:
+tests/host/../../host/../firmware/src/app/ui.c:7893:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7893 |         if(v>1)v=1; if(v<-1)v=-1;
+      |         ^~
+tests/host/../../host/../firmware/src/app/ui.c:7893:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7893 |         if(v>1)v=1; if(v<-1)v=-1;
+      |                     ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘og_gnaw’:
+tests/host/../../host/../firmware/src/app/ui.c:7904:5: warning: this ‘while’ clause does not guard... [-Wmisleading-indentation]
+ 7904 |     while(v>1||v<-1) v=v>1?2-v:-2-v; return v;}             /* wavefolder */
+      |     ^~~~~
+tests/host/../../host/../firmware/src/app/ui.c:7904:38: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘while’
+ 7904 |     while(v>1||v<-1) v=v>1?2-v:-2-v; return v;}             /* wavefolder */
+      |                                      ^~~~~~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘orig_strip_glyph’:
+tests/host/../../host/../firmware/src/app/ui.c:7927:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7927 |     if(q<0)q=0; if(q>1)q=1;
+      |     ^~
+tests/host/../../host/../firmware/src/app/ui.c:7927:17: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7927 |     if(q<0)q=0; if(q>1)q=1;
+      |                 ^~
+tests/host/../../host/../firmware/src/app/ui.c:7930:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7930 |     if(amp<0)amp=0; if(amp>1)amp=1;
+      |     ^~
+tests/host/../../host/../firmware/src/app/ui.c:7930:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7930 |     if(amp<0)amp=0; if(amp>1)amp=1;
+      |                     ^~
+tests/host/../../host/../firmware/src/app/ui.c:7949:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7949 |         if(eg<0)eg=0; if(eg>1)eg=1; if(pq<0)pq=0; if(pq>1)pq=1;
+      |         ^~
+tests/host/../../host/../firmware/src/app/ui.c:7949:23: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7949 |         if(eg<0)eg=0; if(eg>1)eg=1; if(pq<0)pq=0; if(pq>1)pq=1;
+      |                       ^~
+tests/host/../../host/../firmware/src/app/ui.c:7970:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 7970 |         if(f<0)f=0; if(f>1)f=1;
+      |         ^~
+tests/host/../../host/../firmware/src/app/ui.c:7970:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 7970 |         if(f<0)f=0; if(f>1)f=1;
+      |                     ^~
+tests/host/../../host/../firmware/src/app/ui.c:8029:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 8029 |             if(mod<0)mod=0; if(mod>1)mod=1;
+      |             ^~
+tests/host/../../host/../firmware/src/app/ui.c:8029:29: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 8029 |             if(mod<0)mod=0; if(mod>1)mod=1;
+      |                             ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘dg_tail’:
+tests/host/../../host/../firmware/src/app/ui.c:8090:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 8090 |     if(xe<2)xe=2; if(xe>OG_W-1)xe=OG_W-1;
+      |     ^~
+tests/host/../../host/../firmware/src/app/ui.c:8090:19: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 8090 |     if(xe<2)xe=2; if(xe>OG_W-1)xe=OG_W-1;
+      |                   ^~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘drum_strip_glyph’:
+tests/host/../../host/../firmware/src/app/ui.c:8134:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 8134 |     if(q<0)q=0; if(q>1)q=1;
+      |     ^~
+tests/host/../../host/../firmware/src/app/ui.c:8134:17: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 8134 |     if(q<0)q=0; if(q>1)q=1;
+      |                 ^~
+tests/host/../../host/../firmware/src/app/ui.c:8189:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 8189 |             if(i<1)i=1; if(i>OG_W-2)i=OG_W-2; /* 3px marker stays in the cell */
+      |             ^~
+tests/host/../../host/../firmware/src/app/ui.c:8189:25: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 8189 |             if(i<1)i=1; if(i>OG_W-2)i=OG_W-2; /* 3px marker stays in the cell */
+      |                         ^~
+In file included from tests/host/../../host/../firmware/src/app/ui.c:8274:
+tests/host/../../host/../firmware/src/app/ui_drum_voice.inc: In function ‘draw_drum_voice’:
+tests/host/../../host/../firmware/src/app/ui_drum_voice.inc:562:44: warning: unused variable ‘dimc’ [-Wunused-variable]
+  562 |     uint16_t ink = col, gray = SOUND_GRAY, dimc = SOUND_DIM;
+      |                                            ^~~~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘ui_frame’:
+tests/host/../../host/../firmware/src/app/ui.c:8943:26: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 8943 |     else { int visible=0;for(unsigned row=ui.list_top;row<ui.list_n && row<ui.list_top+6u;row++)
+      |                          ^~~
+tests/host/../../host/../firmware/src/app/ui.c:8945:9: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 8945 |         if(!visible)peer_scroll.active=0; }
+      |         ^~
+tests/host/../../host/x0x_host.c: In function ‘simulator_main’:
+tests/host/../../host/x0x_host.c:1105:44: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
+ 1105 |             seq.ch[part] = (uint8_t)(chn ? chn - 1 : SEQ_CH_OFF);
+      |                                            ^~~~~~~
+tests/host/smc_ui_test.c: At top level:
+tests/host/smc_ui_test.c:11:9: warning: "CK_FN" redefined
+   11 | #define CK_FN __attribute__((unused))
+      |         ^~~~~
+In file included from tests/host/../../host/../firmware/src/app/smk_clip_arp_share.c:5,
+                 from tests/host/../../host/x0x_host.c:336:
+tests/host/../../host/../firmware/src/app/smk_clip_keys.h:16:9: note: this is the location of the previous definition
+   16 | #define CK_FN __attribute__((X0X_MINSIZE noinline, unused))   /* small code: the app area is almost full */
+      |         ^~~~~
+In file included from tests/host/smc_ui_test.c:57:
+<source>/firmware/src/app/smc_mixer.c: In function ‘smc_fx_bus’:
+<source>/firmware/src/app/smc_mixer.c:1826:44: warning: operand of ‘?:’ changes signedness from ‘int’ to ‘unsigned int’ due to unsignedness of other operand [-Wsign-compare]
+ 1826 |     int strip = note < 32u ? (note & 7u) : -1;
+      |                                            ^~
+<source>/firmware/src/app/smc_mixer.c: At top level:
+<source>/firmware/src/app/smc_mixer.c:2290:5: warning: missing initializer for field ‘pending’ of ‘smc_panic_peer_t’ [-Wmissing-field-initializers]
+ 2290 |     {{0, 0}, 0, -1}
+      |     ^
+<source>/firmware/src/app/smc_mixer.c:2287:13: note: ‘pending’ declared here
+ 2287 |     uint8_t pending;              /* single BANK action waits for its physical release */
+      |             ^~~~~~~
+tests/host/../../host/../firmware/src/app/ui.c: In function ‘unit_value’:
+tests/host/../../host/../firmware/src/app/ui.c:1143:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 1143 |     case X0X_U_RATIO: x = 12.0f * fm_log2f(x); /* fall through: semitones */
+      |                       ~~^~~~~~~~~~~~~~~~~~~~~
+tests/host/../../host/../firmware/src/app/ui.c:1144:5: note: here
+ 1144 |     case X0X_U_ST: put_d1(num, x, 1); put_s(unit, "st"); return;
+      |     ^~~~
+tests/host/../../host/../firmware/src/app/ui.c: At top level:
+tests/host/../../host/../firmware/src/app/ui.c:3544:38: warning: ‘smk_mute_known’ defined but not used [-Wunused-variable]
+ 3544 | static uint8_t smk_mute_intended[4], smk_mute_known, smk_mute_active, smk_mute_edit, smk_mute_bank;
+      |                                      ^~~~~~~~~~~~~~
+FRAME kit0-voice00-page00 pages=3
+CONTROL 0 0 0 0 0 0 34 4294967295 0
+CONTROL 0 0 0 0 0 1 13 4294967295 0
+CONTROL 0 0 0 0 0 2 80 4294967295 0
+CONTROL 0 0 0 0 0 4 0 4294967295 0
+CONTROL 0 0 0 0 0 5 45 4294967295 0
+CONTROL 0 0 0 0 11 1 127 4294967295 0
+FRAME kit0-voice00-page01 pages=3
+CONTROL 0 0 1 0 0 0 34 4294967295 0
+CONTROL 0 0 1 0 0 1 13 4294967295 0
+CONTROL 0 0 1 0 0 2 80 4294967295 0
+CONTROL 0 0 1 0 0 4 0 4294967295 0
+CONTROL 0 0 1 0 0 5 45 4294967295 0
+CONTROL 0 0 1 0 11 1 127 4294967295 0
+FRAME kit0-voice00-page02 pages=3
+CONTROL 0 0 2 0 0 0 34 4294967295 0
+CONTROL 0 0 2 0 0 1 13 4294967295 0
+CONTROL 0 0 2 0 0 2 80 4294967295 0
+CONTROL 0 0 2 0 0 4 0 4294967295 0
+CONTROL 0 0 2 0 0 5 45 4294967295 0
+CONTROL 0 0 2 0 11 1 127 4294967295 0
+FRAME kit0-voice01-page00 pages=2
+CONTROL 0 1 0 0 1 0 64 4294967295 0
+CONTROL 0 1 0 0 1 1 68 4294967295 0
+CONTROL 0 1 0 0 1 3 41 4294967295 0
+CONTROL 0 1 0 0 1 2 64 4294967295 0
+CONTROL 0 1 0 0 11 1 127 4294967295 0
+FRAME kit0-voice01-page01 pages=2
+CONTROL 0 1 1 0 1 0 64 4294967295 0
+CONTROL 0 1 1 0 1 1 68 4294967295 0
+CONTROL 0 1 1 0 1 3 41 4294967295 0
+CONTROL 0 1 1 0 1 2 64 4294967295 0
+CONTROL 0 1 1 0 11 1 127 4294967295 0
+FRAME kit0-voice02-page00 pages=2
+CONTROL 0 2 0 0 2 0 66 4294967295 0
+CONTROL 0 2 0 0 2 3 23 4294967295 0
+CONTROL 0 2 0 0 2 1 92 4294967295 0
+CONTROL 0 2 0 0 11 1 127 4294967295 0
+FRAME kit0-voice02-page01 pages=2
+CONTROL 0 2 1 0 2 0 66 4294967295 0
+CONTROL 0 2 1 0 2 3 23 4294967295 0
+CONTROL 0 2 1 0 2 1 92 4294967295 0
+CONTROL 0 2 1 0 11 1 127 4294967295 0
+FRAME kit0-voice03-page00 pages=2
+CONTROL 0 3 0 0 3 0 69 4294967295 0
+CONTROL 0 3 0 0 3 3 23 4294967295 0
+CONTROL 0 3 0 0 3 1 88 4294967295 0
+CONTROL 0 3 0 0 11 1 127 4294967295 0
+FRAME kit0-voice03-page01 pages=2
+CONTROL 0 3 1 0 3 0 69 4294967295 0
+CONTROL 0 3 1 0 3 3 23 4294967295 0
+CONTROL 0 3 1 0 3 1 88 4294967295 0
+CONTROL 0 3 1 0 11 1 127 4294967295 0
+FRAME kit0-voice04-page00 pages=2
+CONTROL 0 4 0 0 4 0 53 4294967295 0
+CONTROL 0 4 0 0 4 3 23 4294967295 0
+CONTROL 0 4 0 0 4 1 90 4294967295 0
+CONTROL 0 4 0 0 11 1 127 4294967295 0
+FRAME kit0-voice04-page01 pages=2
+CONTROL 0 4 1 0 4 0 53 4294967295 0
+CONTROL 0 4 1 0 4 3 23 4294967295 0
+CONTROL 0 4 1 0 4 1 90 4294967295 0
+CONTROL 0 4 1 0 11 1 127 4294967295 0
+FRAME kit0-voice05-page00 pages=2
+CONTROL 0 5 0 0 5 1 62 4294967295 0
+CONTROL 0 5 0 0 11 1 127 4294967295 0
+FRAME kit0-voice05-page01 pages=2
+CONTROL 0 5 1 0 5 1 62 4294967295 0
+CONTROL 0 5 1 0 11 1 127 4294967295 0
+FRAME kit0-voice06-page00 pages=2
+CONTROL 0 6 0 0 6 1 63 4294967295 0
+CONTROL 0 6 0 0 6 2 63 4294967295 0
+CONTROL 0 6 0 0 11 1 127 4294967295 0
+FRAME kit0-voice06-page01 pages=2
+CONTROL 0 6 1 0 6 1 63 4294967295 0
+CONTROL 0 6 1 0 6 2 63 4294967295 0
+CONTROL 0 6 1 0 11 1 127 4294967295 0
+FRAME kit0-voice07-page00 pages=2
+CONTROL 0 7 0 0 7 2 64 4294967295 0
+CONTROL 0 7 0 0 7 0 84 4294967295 0
+CONTROL 0 7 0 0 11 1 127 4294967295 0
+FRAME kit0-voice07-page01 pages=2
+CONTROL 0 7 1 0 7 2 64 4294967295 0
+CONTROL 0 7 1 0 7 0 84 4294967295 0
+CONTROL 0 7 1 0 11 1 127 4294967295 0
+FRAME kit0-voice08-page00 pages=2
+CONTROL 0 8 0 0 8 2 64 4294967295 0
+CONTROL 0 8 0 0 8 0 97 4294967295 0
+CONTROL 0 8 0 0 11 1 127 4294967295 0
+FRAME kit0-voice08-page01 pages=2
+CONTROL 0 8 1 0 8 2 64 4294967295 0
+CONTROL 0 8 1 0 8 0 97 4294967295 0
+CONTROL 0 8 1 0 11 1 127 4294967295 0
+FRAME kit0-voice09-page00 pages=2
+CONTROL 0 9 0 0 9 0 64 4294967295 0
+CONTROL 0 9 0 0 9 2 108 4294967295 0
+CONTROL 0 9 0 0 11 1 127 4294967295 0
+FRAME kit0-voice09-page01 pages=2
+CONTROL 0 9 1 0 9 0 64 4294967295 0
+CONTROL 0 9 1 0 9 2 108 4294967295 0
+CONTROL 0 9 1 0 11 1 127 4294967295 0
+FRAME kit0-voice10-page00 pages=2
+CONTROL 0 10 0 0 10 0 64 4294967295 0
+CONTROL 0 10 0 0 10 2 108 4294967295 0
+CONTROL 0 10 0 0 11 1 127 4294967295 0
+FRAME kit0-voice10-page01 pages=2
+CONTROL 0 10 1 0 10 0 64 4294967295 0
+CONTROL 0 10 1 0 10 2 108 4294967295 0
+CONTROL 0 10 1 0 11 1 127 4294967295 0
+FRAME kit1-voice00-page00 pages=2
+CONTROL 1 0 0 1 0 3 64 4294967295 0
+CONTROL 1 0 0 1 0 1 42 4294967295 0
+CONTROL 1 0 0 1 0 4 24 4294967295 0
+CONTROL 1 0 0 1 0 2 87 4294967295 0
+CONTROL 1 0 0 1 11 1 127 4294967295 0
+FRAME kit1-voice00-page01 pages=2
+CONTROL 1 0 1 1 0 3 64 4294967295 0
+CONTROL 1 0 1 1 0 1 42 4294967295 0
+CONTROL 1 0 1 1 0 4 24 4294967295 0
+CONTROL 1 0 1 1 0 2 87 4294967295 0
+CONTROL 1 0 1 1 11 1 127 4294967295 0
+FRAME kit1-voice01-page00 pages=2
+CONTROL 1 1 0 1 1 3 64 4294967295 0
+CONTROL 1 1 0 1 1 1 64 4294967295 0
+CONTROL 1 1 0 1 1 4 108 4294967295 0
+CONTROL 1 1 0 1 1 2 89 4294967295 0
+CONTROL 1 1 0 1 11 1 127 4294967295 0
+FRAME kit1-voice01-page01 pages=2
+CONTROL 1 1 1 1 1 3 64 4294967295 0
+CONTROL 1 1 1 1 1 1 64 4294967295 0
+CONTROL 1 1 1 1 1 4 108 4294967295 0
+CONTROL 1 1 1 1 1 2 89 4294967295 0
+CONTROL 1 1 1 1 11 1 127 4294967295 0
+FRAME kit1-voice02-page00 pages=2
+CONTROL 1 2 0 1 2 1 64 4294967295 0
+CONTROL 1 2 0 1 2 3 0 4294967295 0
+CONTROL 1 2 0 1 2 2 68 4294967295 0
+CONTROL 1 2 0 1 11 1 127 4294967295 0
+FRAME kit1-voice02-page01 pages=2
+CONTROL 1 2 1 1 2 1 64 4294967295 0
+CONTROL 1 2 1 1 2 3 0 4294967295 0
+CONTROL 1 2 1 1 2 2 68 4294967295 0
+CONTROL 1 2 1 1 11 1 127 4294967295 0
+FRAME kit1-voice03-page00 pages=2
+CONTROL 1 3 0 1 3 1 64 4294967295 0
+CONTROL 1 3 0 1 3 3 0 4294967295 0
+CONTROL 1 3 0 1 3 2 56 4294967295 0
+CONTROL 1 3 0 1 11 1 127 4294967295 0
+FRAME kit1-voice03-page01 pages=2
+CONTROL 1 3 1 1 3 1 64 4294967295 0
+CONTROL 1 3 1 1 3 3 0 4294967295 0
+CONTROL 1 3 1 1 3 2 56 4294967295 0
+CONTROL 1 3 1 1 11 1 127 4294967295 0
+FRAME kit1-voice04-page00 pages=2
+CONTROL 1 4 0 1 4 1 64 4294967295 0
+CONTROL 1 4 0 1 4 3 0 4294967295 0
+CONTROL 1 4 0 1 4 2 53 4294967295 0
+CONTROL 1 4 0 1 11 1 127 4294967295 0
+FRAME kit1-voice04-page01 pages=2
+CONTROL 1 4 1 1 4 1 64 4294967295 0
+CONTROL 1 4 1 1 4 3 0 4294967295 0
+CONTROL 1 4 1 1 4 2 53 4294967295 0
+CONTROL 1 4 1 1 11 1 127 4294967295 0
+FRAME kit1-voice05-page00 pages=2
+CONTROL 1 5 0 1 5 1 64 4294967295 0
+CONTROL 1 5 0 1 5 3 0 4294967295 0
+CONTROL 1 5 0 1 5 2 40 4294967295 0
+CONTROL 1 5 0 1 11 1 127 4294967295 0
+FRAME kit1-voice05-page01 pages=2
+CONTROL 1 5 1 1 5 1 64 4294967295 0
+CONTROL 1 5 1 1 5 3 0 4294967295 0
+CONTROL 1 5 1 1 5 2 40 4294967295 0
+CONTROL 1 5 1 1 11 1 127 4294967295 0
+FRAME kit1-voice06-page00 pages=2
+CONTROL 1 6 0 1 6 1 64 4294967295 0
+CONTROL 1 6 0 1 6 3 32 4294967295 0
+CONTROL 1 6 0 1 6 4 0 4294967295 0
+CONTROL 1 6 0 1 6 2 64 4294967295 0
+CONTROL 1 6 0 1 11 1 127 4294967295 0
+FRAME kit1-voice06-page01 pages=2
+CONTROL 1 6 1 1 6 1 64 4294967295 0
+CONTROL 1 6 1 1 6 3 32 4294967295 0
+CONTROL 1 6 1 1 6 4 0 4294967295 0
+CONTROL 1 6 1 1 6 2 64 4294967295 0
+CONTROL 1 6 1 1 11 1 127 4294967295 0
+FRAME kit1-voice07-page00 pages=2
+CONTROL 1 7 0 1 7 1 64 4294967295 0
+CONTROL 1 7 0 1 7 2 62 4294967295 0
+CONTROL 1 7 0 1 11 1 127 4294967295 0
+FRAME kit1-voice07-page01 pages=2
+CONTROL 1 7 1 1 7 1 64 4294967295 0
+CONTROL 1 7 1 1 7 2 62 4294967295 0
+CONTROL 1 7 1 1 11 1 127 4294967295 0
+FRAME kit1-voice08-page00 pages=2
+CONTROL 1 8 0 1 8 2 64 4294967295 0
+CONTROL 1 8 0 1 8 1 70 4294967295 0
+CONTROL 1 8 0 1 11 1 127 4294967295 0
+FRAME kit1-voice08-page01 pages=2
+CONTROL 1 8 1 1 8 2 64 4294967295 0
+CONTROL 1 8 1 1 8 1 70 4294967295 0
+CONTROL 1 8 1 1 11 1 127 4294967295 0
+FRAME kit1-voice09-page00 pages=2
+CONTROL 1 9 0 1 9 2 64 4294967295 0
+CONTROL 1 9 0 1 9 1 74 4294967295 0
+CONTROL 1 9 0 1 11 1 127 4294967295 0
+FRAME kit1-voice09-page01 pages=2
+CONTROL 1 9 1 1 9 2 64 4294967295 0
+CONTROL 1 9 1 1 9 1 74 4294967295 0
+CONTROL 1 9 1 1 11 1 127 4294967295 0
+FRAME kit1-voice10-page00 pages=2
+CONTROL 1 10 0 1 10 1 64 4294967295 0
+CONTROL 1 10 0 1 10 2 47 4294967295 0
+CONTROL 1 10 0 1 11 1 127 4294967295 0
+FRAME kit1-voice10-page01 pages=2
+CONTROL 1 10 1 1 10 1 64 4294967295 0
+CONTROL 1 10 1 1 10 2 47 4294967295 0
+CONTROL 1 10 1 1 11 1 127 4294967295 0
+PASS native panels 45 frames 390 checks

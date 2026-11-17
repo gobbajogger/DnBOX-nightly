@@ -1,0 +1,354 @@
+{
+  "schema": "dnbox-web-finish-line/1",
+  "lane": "web",
+  "recordedUTC": "2026-11-16T10:25:00Z",
+  "latestPushedSHA": "93b6f0991147be97c89b82e5039267c546608469",
+  "branch": "feature/website-r22",
+  "draftPR": 133,
+  "targetBranch": "integration/dnbox-consolidated",
+  "observedTargetSHA": "9165adb92fcdaab756c4e59e3d4a8ee22437ca5a",
+  "decision": "NOT_FINISHED",
+  "nextDeliverable": "Exact shared-source composition and complete build/test receipt",
+  "nextPushByUTC": "2026-11-16T10:41:00Z",
+  "sources": [
+    {
+      "name": "RULES(1).md",
+      "sha256": "de3e94f256704103c5db8cc8ad911ffe6c031dac811ca9f6c07a59ea9147fc04",
+      "state": "READ"
+    },
+    {
+      "name": "OWNER-BASELINE-1836.pdf",
+      "sha256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+      "state": "READ"
+    },
+    {
+      "name": "OWNER-BASELINE-1836-NOTES.md",
+      "sha256": "1f6b0743bc8ba955a718d2a41421ec410a19cbb5c75ec3b9978b7a533304ed72",
+      "state": "READ"
+    },
+    {
+      "name": "UI-DEFECT-TESTS-SPEC.md",
+      "sha256": "caff27dada8382ce0b298276f66cc34075e8215ac0e179aaf143c72d184062b3",
+      "state": "READ"
+    },
+    {
+      "name": "OPEN-ITEMS.md",
+      "sha256": null,
+      "state": "NOT_READ",
+      "next": "Known current ID/path requested; local intake and Library exact-title/content search did not locate it"
+    }
+  ],
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "phone",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "landscape",
+      "width": 844,
+      "height": 390
+    }
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/install/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/manual/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/manual/legacy.html",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/manual/protocol.html",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/manual/projects-guide.html",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/manual/original/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/presets/legacy/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/help/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/new/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/presets/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/projects/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/breaks/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/starting-breaks/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/builds/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/tools/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/reference/",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/reference/r22.html",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    },
+    {
+      "route": "/reference/current-ui.html",
+      "currentCaptureStatus": "NOT_RUN",
+      "currentIndependentScore": null
+    }
+  ],
+  "gates": [
+    {
+      "id": "source-preservation",
+      "status": "PASS",
+      "required": true,
+      "source": "rules5,10,14",
+      "scope": "Exact public owned blobs and paired Library source state",
+      "evidenceOrNext": "Git readback d8be91/91 and93b625/25; full-state bundles953/977tracked paths; independent recovery fsck0",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "content-control-map",
+      "status": "PASS",
+      "required": true,
+      "source": "rules4,27,34; W-G1..G6",
+      "scope": "Source map only, not runtime acceptance",
+      "evidenceOrNext": "17reversible HTML families,41original SVG occurrences,19route table",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "runtime-composition",
+      "status": "FAIL",
+      "required": true,
+      "source": "rules5,9a,11,12",
+      "scope": "Published complete module/theme dependency closure",
+      "evidenceOrNext": "93b6runtime test1PASS/1FAIL for two missing shared paths; exact negative fixture retained. Consume Remote frozen shared pin.",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "reproducible-build",
+      "status": "FAIL",
+      "required": true,
+      "source": "rules12; Local gate",
+      "scope": "Final exact PRhead full shipped website build",
+      "evidenceOrNext": "Exact clean93b6 npm build exit1: Product source drift: breaks/index.html; Integration-owned complete manifest refresh required",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "full-suite",
+      "status": "FAIL",
+      "required": true,
+      "source": "rules12; Local gate",
+      "scope": "Whole repository tests on same final commit",
+      "evidenceOrNext": "Exact clean93b6:493edgePASS,19/20productPASS; breaks/index.htmlmanifestdriftFAIL; downstreamNOT_RUN. Mixed59/60diagnostic retained separately.",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "installer-io",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "R031; rules18,34",
+      "scope": "All installer guarded positive/negative tasks and public file workflows at3sizes",
+      "evidenceOrNext": "Existing guards/codecs retained; current browser end-to-end evidence absent",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "html-firmware-ui",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "R032; rules27..31",
+      "scope": "Exact current1:1HTMLfirmwareUI with actual engine parameters",
+      "evidenceOrNext": "Current native/schema/renderer contract pending; never alias historical Juno or the former slot-2 engine as new engines",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "emulator",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "R029,R037; rules12,13",
+      "scope": "Actual current emulator behaviors and all-screen independent review",
+      "evidenceOrNext": "Historical native/test-only frames do not qualify current emulator",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "musician-content",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "R033; rule34; W-G4",
+      "scope": "Current musician-readable content, actual functions and all preserved destinations",
+      "evidenceOrNext": "Original history/manuals retained; changed-version complete review absent",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "nightly-history",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "R036; rules18,34",
+      "scope": "Actual nightly/history/install discovery and truthful candidate state",
+      "evidenceOrNext": "197records retained; current composed filter/pagination/deeplink/offline runtime proof required",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "unique-controls",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI1,2,4,9; rules27,28,31",
+      "scope": "Current glyph controls have unique source IDs, labels, real semantics and no raw lists",
+      "evidenceOrNext": "Static hero source-only contracts do not establish all current1:1native/emulator screen bindings",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "source-curves",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI5,6,7; rule28",
+      "scope": "Actual source-derived glyph response, semantic stages and value units",
+      "evidenceOrNext": "No universal15%monotonic pixel criterion is invented for cyclic/morphing signals; exact law/fixtures required",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "pan-battery",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI8; rules29,30",
+      "scope": "L50..C..R50 pan and actual four-level battery state, calibratedpercent only",
+      "evidenceOrNext": "Historical native22c589PANdefect not qualified; no invented public live battery reading",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "layout-hygiene",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI19,20,21; rule34",
+      "scope": "Current3size measured clipping/overlap/contrast/font roles/baseline/gaps",
+      "evidenceOrNext": "Actual contrast≥4.5; baseline≤1px/gap≤2px. No undocumented font floor or generic dead-space waiver invented",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "approved-region-diffs",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI22,23; rules27,32",
+      "scope": "Equivalent-state actual comparisons to every relevant approved region",
+      "evidenceOrNext": "Locked PDF is a proposal/reference, not an actual current browser render or approved golden by itself",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "animation-aa",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "UI24; rule28",
+      "scope": "Actual eased30–60fps no-drop captured transitions with exact palette AA",
+      "evidenceOrNext": "OriginalR4one66.7msgapandinvalidAAclassifierremainfailed; corrected probe needs new exact-input run",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "all-route-captures",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "rules13,34",
+      "scope": "19routes×3sizes plus meaningful controls/states with full-size review",
+      "evidenceOrNext": "57default current captures absent; oldR4has57+29onlyandoldpalette",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "independent-review",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "rule13",
+      "scope": "One final-version candid emulator/render review by nonbuilder",
+      "evidenceOrNext": "Fresh brief must omit prior scores/target; R4HOLDdoes not transfer",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "anti-revert",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "rules5,12; Local gate",
+      "scope": "Diff against exact Consolidated source with justified approved region changes",
+      "evidenceOrNext": "Need intended combined composition; no rebase/hidden dropped controls, catalog, packages, original archives",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "local-gate-receipt",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "rule12; Local gate",
+      "scope": "First full gate attempt at exact final PRhead, log on PR",
+      "evidenceOrNext": "No build/fulltest/UIdefect/anti-revert same-SHA PASS exists",
+      "qualifiedFinalSHA": null
+    },
+    {
+      "id": "integration-delivery",
+      "status": "NOT_RUN",
+      "required": true,
+      "source": "rules12,15,18",
+      "scope": "Authorized gated PR integration and exact served-byte parity",
+      "evidenceOrNext": "No merge, main, gh-pages, device write, release or accepted delivery claimed",
+      "qualifiedFinalSHA": null
+    }
+  ],
+  "limits": [
+    "PASS source-preservation/content-control-map rows are strictly bounded source receipts, not feature/emulator/visual qualification.",
+    "Current runtime/browser/glyph source composition is different from earlierR4; old acceptance never transferred.",
+    "Chromium denial is not bypassed by flags/profile/Terminal or alternate execution.",
+    "Provider/device/native audio/memory qualification is not invented. No PSRAM.",
+    "Outward progress suppressed during the requested autonomous two-hour work period; real rule violations/finished lane still reported."
+  ],
+  "exactHeadAttempt": "evidence/website/2026-11-16/exact-93b6-attempt.json"
+}

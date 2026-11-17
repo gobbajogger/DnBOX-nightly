@@ -28,7 +28,9 @@ test('pan notation clips at L50 / C / R50',()=>{
 });
 
 test('R22 gallery tokens and pan notation',()=>{
- const html=readFileSync(new URL('../../web/product-site/reference/r22.html',import.meta.url),'utf8');
+ const wrapper=readFileSync(new URL('../../web/product-site/reference/r22.html',import.meta.url),'utf8');
+ assert.match(wrapper,/<iframe[^>]*src="r22-source\.html"/,'responsive wrapper retains original R22 archive');
+ const html=readFileSync(new URL('../../web/product-site/reference/r22-source.html',import.meta.url),'utf8');
  const style=html.match(/<style>([\s\S]*?)<\/style>/)[1];
  const pick=(re)=>style.match(re)[1];
  assert.equal(R22_TOKENS.page, pick(/background:(#[0-9a-f]{6})/));

@@ -1,0 +1,9 @@
+# Complete source-native drum laboratory
+
+These are reviewed source-only prototypes and exact native source inputs. They do not register a browser renderer, control a device, grant native admission or change the app's visible UI. The source snapshot is captured and staged by the parent test before any interpreter/compiler executes. Internal C builds separately stage captured input bytes, verify them and use normal local compilers with bounded timeouts. Generated executables remain temporary and are not committed.
+
+Geometry/SI inputs are pinned to b341436ff8087c20b8ef51765f986736473611b0; current value placement and body source to 2bfae5ef1fce4cb71c7002722c141613e04521de; explicit DARK/LIGHT materials and idle frames to 34ad78a76f963276de31de50c85f08a20af01f8a. These are component provenance pins, not a combined native admission. Native inputs retain their GPL source license. Numeric SI source metadata is split into three small text parts; its original full SHA256 is verified after concatenation. No raw framebuffer archive, screenshot or SDK/toolchain binary is included.
+
+Run `node --test tests/product-remote/native-source-complete.test.mjs`. It reproduces bounded native raster, easing arithmetic, dependent/remaining-family geometry and settled typed-binding tests. An independent local-only golden comparison previously matched all63 controls/7,434 retained native frames, but those buffers are not distributed here. Its separate runner requires an explicitly authorized local fixture URL and checks all expected hashes. No fallback download or alternate publication route is used.
+
+Open qualification: actual app binding, source-readable captions/value placement, whole layouts, native live state/colors, true presentation/cache/clock/RAF ownership and browser/device transport. Native easing arithmetic alone is not end-to-end animation proof. The integer draft binder is settled-state only. Full Local and R1–R7 remain open.

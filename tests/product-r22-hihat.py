@@ -1,9 +1,16 @@
 from pathlib import Path
 import unittest,json,hashlib
 P=Path(__file__).resolve().parents[1]/'web/product-site'
+def historical(text):
+ proof=json.loads((P/'SITE-R22-CHANGES.json').read_text())
+ row=next(r for r in proof['files'] if r['path']=='index.html')
+ for change in reversed(row['changes']):
+  assert change['after'] in text
+  text=text.replace(change['after'],change['before'],1)
+ return text
 class HiHatProduct(unittest.TestCase):
  def test_every_source_fragment_and_exact_inverse_predecessor(self):
-  after=(P/'index.html').read_text();receipt=json.loads((P/'HIHAT-SOURCE-PATCH.json').read_text());self.assertEqual(receipt['sharedSHA256'],'2d234b1ee918ae9b882800256ed3867757a64304ade44d0a352f3f50f6ccc4cd');self.assertEqual(len(receipt['replacements']),14);before=after
+  after=historical((P/'index.html').read_text());receipt=json.loads((P/'HIHAT-SOURCE-PATCH.json').read_text());self.assertEqual(receipt['sharedSHA256'],'2d234b1ee918ae9b882800256ed3867757a64304ade44d0a352f3f50f6ccc4cd');self.assertEqual(len(receipt['replacements']),14);before=after
   entry=json.loads((P/'ENTRY-DISCLOSURE.json').read_text());row=next(r for r in entry['files'] if r['path']=='index.html')
   for c in reversed(row['changes']):before=before.replace(c['after'],c['before'],1)
   hihat_stage=before
