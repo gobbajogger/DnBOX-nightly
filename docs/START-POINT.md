@@ -32,12 +32,12 @@ The lists below are copied from [DELIVERY-PLAN.md](DELIVERY-PLAN.md) (locked DON
 The move that contains each one copies it in unchanged. No new evidence, provenance or re-verification work on it.
 | ID | Frozen result | Evidence | Used in |
 |---|---|---|---|
-| V01 | Pan formatter L50/C/R50 on all 5 mixer voices + 22 drum voice pans × 128 values, 10,975 checks PASS | `lane/fwui-r22`, `docs/evidence/fwui/pan-exhaustive/`; `lead/pan-clip-50-20261116` `d80423f3` | M2 |
+| V01 | Pan formatter L50/C/R50 on all 5 mixer voices + 22 drum voice pans × 128 values, 10,975 checks PASS | `lane/fwui` (tag `archive/lane/fwui-r22`), `docs/evidence/fwui/pan-exhaustive/`; `lead/pan-clip-50-20261116` `d80423f3` | M2 |
 | V02 | Battery/header 5,306 host checks; explanatory-text and startup-footer regressions PASS | fw #955 comment at `646ac662` | M2 |
 | V03 | Elite + Pro link today: XIP free 3,156 B (gate floor 1,024), RAM headroom 1,096 B, pool 836 B above the 8,192 B reserve (gate floor 512) | fw #955 comment at `7e398180` | M1, M2, M6 budget baseline |
-| V04 | Live Decay/Noise tail restored, 113,424 host checks PASS | `lane/fwui-r22` `af56c8a4` | M2 |
-| V05 | Synth One renderer rebuilt from `56079bbd`: 12 scenes / 576,000 frames bit-identical to the source oracle, no heap calls; 694 programs render finite | `lane/sound-v2` `3e41e4b3`, `docs/sound/v2-pre-fx-evidence.md` | M1 |
-| V06 | AudioKit corpus identity: 640 presets / 12 banks decoded from the original bundle | `lane/sound-v2` `d0bdfa8b`, `c76b3f0e` | M1 |
+| V04 | Live Decay/Noise tail restored, 113,424 host checks PASS | `lane/fwui` (tag `archive/lane/fwui-r22`) `af56c8a4` | M2 |
+| V05 | Synth One renderer rebuilt from `56079bbd`: 12 scenes / 576,000 frames bit-identical to the source oracle, no heap calls; 694 programs render finite | `lane/sound` (tag `archive/lane/sound-v2`) `3e41e4b3`, `docs/sound/v2-pre-fx-evidence.md` | M1 |
+| V06 | AudioKit corpus identity: 640 presets / 12 banks decoded from the original bundle | `lane/sound` (tag `archive/lane/sound-v2`) `d0bdfa8b`, `c76b3f0e` | M1 |
 | V07 | Remote structural browser fixtures 9/9 PASS (sandbox on) | box log `/workspace/dnbox-review/pr132-browser-test-3f22e000.log` | M3 floor |
 | V08 | Website: 19 routes, 211 assets and 5 WAV previews served; preview-player bug fixed; keyboard edit/Undo works | nightly #135 comments at `b97d1bbb`, `d3154518`, `8ce16ce1` | M4 |
 | V09 | Gate environment repairs (Lua, packages, Chromium sandbox flags, TMPDIR outside repo) | `backup/integ-before-start-split-20261116` `246ea371`; nightly `lane/integ-start-files` history | M0 |
