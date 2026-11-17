@@ -72,10 +72,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 /* Work area */
 main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px var(--margin) 8px;overflow:hidden}
 #roll-view{flex:1;min-height:0;display:flex}
-.roll-panel{flex:1;min-width:0;min-height:0;display:grid;grid-template-rows:44px 20px minmax(0,1fr) var(--lane-h);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
-.roll-tools{display:flex;align-items:center;gap:8px;padding:0 12px}
-.roll-pos{margin-left:auto;color:var(--muted);font-size:12px;order:2}
-.sel-actions{display:flex;gap:8px}
+.roll-panel{flex:1;min-width:0;min-height:0;display:grid;grid-template-rows:20px minmax(0,1fr) var(--lane-h);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
 .roll-head{display:grid;grid-template-columns:var(--key-w) minmax(0,1fr);overflow:hidden}
 .beat-ruler{position:relative;overflow:hidden;color:var(--muted);font-size:11px}
 .beat-ruler span{position:absolute;top:4px;padding-left:4px;white-space:nowrap}
@@ -215,8 +212,7 @@ dialog::backdrop{background:#000a}
  .history{margin-left:8px}
  .btn.icon{width:32px}
  main{padding:4px var(--margin) 0}
- .roll-panel{grid-template-rows:0 16px minmax(0,1fr) var(--lane-h);border-radius:var(--r-panel) var(--r-panel) 0 0;border-bottom:0}
- .roll-tools{visibility:hidden;overflow:hidden;height:0}
+ .roll-panel{grid-template-rows:16px minmax(0,1fr) var(--lane-h);border-radius:var(--r-panel) var(--r-panel) 0 0;border-bottom:0}
  #lane-value{font-size:16px}
 }
 /* Phone portrait: header, tabs on top, engines, then title + transport + history; lane 120 */
@@ -240,8 +236,7 @@ dialog::backdrop{background:#000a}
  .history{gap:4px;margin-left:8px}
  .btn.icon{width:32px}
  main{padding:4px var(--margin) 4px}
- .roll-panel{grid-template-rows:0 16px minmax(0,1fr) var(--lane-h)}
- .roll-tools{visibility:hidden;overflow:hidden;height:0}
+ .roll-panel{grid-template-rows:16px minmax(0,1fr) var(--lane-h)}
 }
 /* Narrow desktop / tablet */
 @media (min-width:601px) and (max-width:999px) and (min-height:501px){
