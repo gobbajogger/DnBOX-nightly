@@ -24,3 +24,5 @@ Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8
 
 ## Conflicts noted (RULES 23)
 - <conflict> → reading used: <…>
+
+- 2026-11-17: Item 1 FunkyBeats R22 port merged via #153 (squash 5840d8aa2dbe60d5d2aaa5dc2be6742d9d49eb21); DNBOX-GATE: PASS 01fc2421780b0336e9d942bcc45c5688ca3ebd3f.

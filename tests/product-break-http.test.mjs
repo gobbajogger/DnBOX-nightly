@@ -6,6 +6,7 @@ import {spawn} from 'node:child_process';
 import {readFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {buildProductSite} from '../scripts/build-product-site.mjs';
+import {readArchive,parseHeader} from '../web/x0x_breaks.js';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {join,dirname,basename} from 'node:path';
 // Use Python's unmodified file routing and MIME inference, not a test route table.
@@ -33,12 +34,19 @@ test('built five previews survive real static hosting at root and nested paths',
  const output=await mkdtemp(join(outRoot,'http-'));t.after(()=>rm(output,{recursive:true,force:true}));
  buildProductSite({output});
  const {createStartingBreakPreview}=await import(pathToFileURL(`${output}/starting-break-preview.mjs`));
+ const {exportStartingBreaks}=await import(pathToFileURL(`${output}/starting-break-export.mjs`));
  const contract=JSON.parse(await readFile(new URL('../web/product-site/sample-contract.json',import.meta.url)));
  for(const [directory,prefix]of [[output,''],[dirname(output),'/'+basename(output)]]){
   const server=await serve(directory);
   try{
    const base=`${server.origin}${prefix}/starting-break-preview.mjs`;
    const preview=createStartingBreakPreview({baseURL:base});
+   // Exercise the shipped download graph, not source-tree files or a route mock.
+   const exported=await exportStartingBreaks(contract.assets.map(a=>a.id),{baseURL:`${server.origin}${prefix}/starting-break-export.mjs`});
+   const {images}=readArchive(exported.bytes);let zone=0;
+   for(const image of images){const h=parseHeader(image);for(const z of h.zones){const a=contract.assets[zone++];assert.equal(z.n,a.frames);assert.equal(z.rate,22050);assert.equal(createHash('sha256').update(image.subarray(512+z.off,512+z.off+a.adpcm_bytes)).digest('hex'),a.adpcm_sha256);}}
+   assert.equal(zone,5);
+
    for(const a of contract.assets){const bytes=await preview.fetchBytes(preview.resolvePrivateUrl(a.id));assert.equal(bytes.length,a.preview_bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),a.preview_sha256);}
    for(const a of contract.assets)for(const suffix of ['', '.wav']){
     const response=await fetch(`${server.origin}${prefix}/private-audio/${a.id}${suffix}`);

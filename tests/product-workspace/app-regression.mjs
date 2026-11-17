@@ -80,7 +80,7 @@ $('velocity').handlers.keydown?.({key:'Enter',target:keyTarget,preventDefault(){
 check('lane keyboard opens exact chance chooser',()=>assert.equal(document.activeElement?.id,'chance-value'));
 assert.equal(failures,0);
 
-views.find(e=>e.dataset.view==='mix').onclick();check('R21 app uses whole transparent source frame, not recaptioned cards',()=>{assert.match($('other-view').innerHTML,/data-source-frame/);assert.doesNotMatch($('other-view').innerHTML,/<span>Drive<\/span>/)});
+views.find(e=>e.dataset.view==='mix').onclick();check('owner correction: Mix labels native controls without captured telemetry',()=>{assert.match($('other-view').innerHTML,/class="mix-panels"/);assert.match($('other-view').innerHTML,/data-param=/);assert.match($('other-view').innerHTML,/Master/);assert.doesNotMatch($('other-view').innerHTML,/CPU/)});
 $('part').value='drum909';$('part').selectedOptions=[{textContent:'909'}];$('part').onchange();views.find(e=>e.dataset.view==='sound').onclick();check('all11 captured909voice contexts available',()=>assert.match($('other-view').innerHTML,/<option value="10">RD<\/option>/));
 $('other-view').handlers.change({target:{id:'sound-voice',value:'10',dataset:{}}});check('choosing909RD changes whole captured source context',()=>assert.match($('other-view').innerHTML,/909-voice-10.svg/));
 assert.equal(failures,0);

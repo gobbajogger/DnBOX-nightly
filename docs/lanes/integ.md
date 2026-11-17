@@ -1,7 +1,7 @@
 # Current integ item1 — 2026-11-17 19:00 VLAT
 Owner agent: dot/integ   Branch: lane/integ   PR: #155   Head: this commit
 Gate at final head: NOT_RUN; no merge or deployment completion claimed.
-Now: Five original BREAK previews and selection/export; /private-audio/ aliases tested locally. New consolidated7a2ed184 merged; final exact-head gate pending. Deployed five WAV URLs currently404, publication not complete.
+Now: Five original BREAK previews and selection/export; /private-audio/ aliases tested locally. New corrected consolidated234f3895 merged; prior c3dc PASS predates this composition. Shipped sample export metadata included; final exact-head gate pending. Deployed five WAV URLs currently404, publication not complete.
 Next: qualify final inputs, post the actual PASS line, merge only when allowed, then verify deployed aliases.
 
 ## Preserved lane history
