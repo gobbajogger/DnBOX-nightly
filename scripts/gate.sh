@@ -385,9 +385,9 @@ fi
 # Offline is the default. Inner scripts honour DNBOX_GATE_ONLINE and
 # skip network Git when it is unset or not 1.
 
-if [ -x "$ROOT/tools/dnbox-gate.sh" ]; then
+if [ -f "$ROOT/tools/dnbox-gate.sh" ]; then
   INNER="$ROOT/tools/dnbox-gate.sh"
-elif [ -x "$ROOT/scripts/dnbox-gate.sh" ]; then
+elif [ -f "$ROOT/scripts/dnbox-gate.sh" ]; then
   INNER="$ROOT/scripts/dnbox-gate.sh"
 else
   echo "DNBOX-GATE: INCOMPLETE ${SHA} missing-inner-gate"
@@ -399,7 +399,7 @@ CAP=$(mktemp)
 trap 'rm -f "$CAP"' EXIT
 
 set +e
-"$INNER" "$LANE" | tee "$CAP"
+bash "$INNER" "$LANE" | tee "$CAP"
 RC=${PIPESTATUS[0]}
 set -e
 
