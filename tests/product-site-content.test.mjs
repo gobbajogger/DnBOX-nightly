@@ -12,3 +12,17 @@ test('R21 captured presentation and v6 port identity remain explicit without adm
 
 test('entry availability is disclosed without enabling native providers',()=>{assert.match(read('index.html'),/Local workspace preview/);assert.match(read('tools/index.html'),/No connected control or playback in this preview/);assert.match(read('projects/index.html'),/Browser MIDI export is unavailable/);assert.match(read('starting-breaks/index.html'),/Download chosen breaks/);assert.match(read('starting-breaks/index.html'),/Downloading does not change your keyboard/);assert.match(read('starting-breaks/index.html'),/Restore replaces slot 1, and slot 2/);assert.match(read('remote/index.html'),/Download draft/);assert.equal(JSON.parse(read('SOURCE-MANIFEST.json')).publicationQualified,false);});
 
+
+test('starting-breaks publication navigation uses existing live destinations without unrelated route rollout',()=>{
+ const html=read('starting-breaks/index.html');
+ const allowed=new Set(['#content','../index.html','../breaks/','../projects/','../manual/','../builds/','../install/','../install/#samples','../new/']);
+ for(const [,href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)){
+  if(/^https:\/\//.test(href))continue;
+  assert.ok(allowed.has(href),'unpublished starting-break destination: '+href);
+ }
+ assert.match(html,/>Home<\/a>/);
+ assert.match(html,/class="starting-breaks-page"/);
+ assert.match(html,/\.starting-breaks-page header\{[^}]*flex-wrap:wrap/);
+ assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
+ assert.match(html,/src="\.\.\/install\.mjs"/);
+});
