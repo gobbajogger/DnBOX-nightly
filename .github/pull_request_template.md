@@ -46,6 +46,6 @@ That publishes a `dnbox-gate` commit status on the tested SHA. The consolidated 
 
 ## Checklist
 
-- [ ] I did not commit secrets, firmware images (`.fwsc`, `.bin`, `.elf`, `.img`), logs, dumps, or installer zip archives.
+- [ ] I did not commit secrets, firmware images (`.fwsc`, `.bin`, `.elf`, `.img`), SuperJ6 `.ipa` or AU installers, logs, dumps, or installer zip archives.
 - [ ] I did not change files under `.github/workflows/` unless a maintainer asked for that.
 - [ ] Licence and credits in `LICENSE` (and `LICENSING.md` / `CREDITS.md` when present) still apply to any third-party code I touched.
