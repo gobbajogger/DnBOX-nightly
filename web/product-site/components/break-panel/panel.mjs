@@ -19,28 +19,9 @@ export async function mountBreakPanel(root,options={}){
   capacity.textContent=check.status==='insufficient-capacity'?`Insufficient capacity for this selection (${check.encodedPayloadBytes.toLocaleString()} sample bytes before package overhead).`:'';
   if(notify)options.onSelection?.(picker.summary());
  }
- let toneStop=()=>{},fallbackId=null;
- async function playTone(id){
-  toneStop();fallbackId=id;
-  const audio=root.ownerDocument.createElement('audio');
-  audio.setAttribute('data-preview',id);
-  const rate=22050,frames=Math.floor(rate/3),freq=180+(id.length*37%220);
-  const pcm=new Int16Array(frames);
-  for(let i=0;i<frames;i++) pcm[i]=Math.round(Math.sin(2*Math.PI*freq*i/rate)*6000*(1-i/frames));
-  const header=new ArrayBuffer(44),view=new DataView(header);
-  const write=(o,s)=>{for(let i=0;i<s.length;i++) view.setUint8(o+i,s.charCodeAt(i));};
-  write(0,'RIFF');view.setUint32(4,36+pcm.byteLength,true);write(8,'WAVEfmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,rate,true);view.setUint32(28,rate*2,true);view.setUint16(32,2,true);view.setUint16(34,16,true);write(36,'data');view.setUint32(40,pcm.byteLength,true);
-  const blob=new Blob([header,pcm],{type:'audio/wav'});
-  const url=URL.createObjectURL(blob);
-  audio.src=url;audio.preload='auto';
-  root.querySelector('[data-audio]').replaceChildren(audio);
-  toneStop=()=>{audio.pause();URL.revokeObjectURL(url);fallbackId=null;toneStop=()=>{};};
-  await audio.play();
-  options.onAudioState?.({status:'playing',id,sampleRate:rate,error:null,fallback:true});
- }
  const paintPlay=()=>{
   const playing=audition.state();
-  const active=playing.status==='playing'?playing.id:fallbackId;
+  const active=playing.status==='playing'?playing.id:null;
   for(const button of root.querySelectorAll('[data-action="play"]')){
    const on=active===button.dataset.id;
    button.setAttribute('aria-pressed',String(on));
@@ -50,19 +31,19 @@ export async function mountBreakPanel(root,options={}){
  };
  const listen=async id=>{
   const playing=audition.state();
-  if((playing.status==='playing'&&playing.id===id)||fallbackId===id){audition.stop();toneStop();paintPlay();return false;}
-  audition.stop();toneStop();
+  if(playing.status==='playing'&&playing.id===id){audition.stop();paintPlay();return false;}
+  audition.stop();
   try{const ok=await audition.play(id);paintPlay();return ok;}
-  catch{await playTone(id);paintPlay();return true;}
+  catch(error){paintPlay();throw error;}
  };
  const onClick=event=>{
   const button=event.target.closest?.('[data-action]');if(!button||(root.contains&&!root.contains(button)))return;
   const action=button.dataset.action;
   if(action==='all'){picker.all();sync();}
-  else if(action==='none'){picker.none();audition.stop();toneStop();paintPlay();sync();}
+  else if(action==='none'){picker.none();audition.stop();paintPlay();sync();}
   else if(action==='play')listen(button.dataset.id).catch(()=>{});
  };
  const onChange=event=>{if(!inputs.includes(event.target))return;picker.select(inputs.filter(i=>i.checked).map(i=>i.dataset.asset));sync();};
  root.addEventListener('click',onClick);root.addEventListener('change',onChange);sync();
- return Object.freeze({listen,selectedIds:()=>picker.selectedIds(),summary:()=>picker.summary(),capacity:()=>picker.assessCapacity(options.availableBytes),destroy(){if(disposed)return;disposed=true;toneStop();root.removeEventListener('click',onClick);root.removeEventListener('change',onChange);audition.destroy();}});
+ return Object.freeze({listen,selectedIds:()=>picker.selectedIds(),summary:()=>picker.summary(),capacity:()=>picker.assessCapacity(options.availableBytes),destroy(){if(disposed)return;disposed=true;root.removeEventListener('click',onClick);root.removeEventListener('change',onChange);audition.destroy();}});
 }

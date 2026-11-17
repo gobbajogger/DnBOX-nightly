@@ -11,6 +11,7 @@ import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs'
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
 import{STEP_LANES,envelopeCurve,formatPan,formatParameterValue,glyphFor,isPanLabel,panCell}from'./glyphs.mjs';
 import{mountLiveGlyphs,setGlyphValue}from'./glyph-live.mjs';
+import{mountFirmwareLink}from'./firmware-link.mjs';
 import{LANE_KINDS,LANE_WORDS,nextLane,chanceFromLane,panFromLane,velocityFromLane,pitchOffsetFromLane,laneFraction,laneText,laneP,RAIL_OFFSET,CHANCE_SPLIT}from'./lane.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sourceFiles=['trace','catalog','components','source-sounds'],sourceIdentity={};
@@ -136,6 +137,10 @@ const draftState={model,motion,arrangement,launch,parameterDraft,parameterIdenti
 const draftCodec=new WorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean)});
 const draftContext=()=>({part:$('part').value,view,mode,lane:$('lane-kind').value,zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
 bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{gesture.cancel();cancelParameters();},restoreContext:c=>{$('part').value=c.part;selected=c.selected;mode=c.mode;multi=c.multi;drumVoice=c.drumVoice;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=1400*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
+// Explicit simulator admission only. Native endpoint/catalog admission is not yet qualified.
+const simulatorBundle=globalThis.__DNBOX_FIRMWARE_BUNDLE?.admission?.testOnly===true?globalThis.__DNBOX_FIRMWARE_BUNDLE:null;
+if(simulatorBundle){for(const id of['firmware-safety','firmware-controls'])if($(id))$(id).hidden=false;}
+mountFirmwareLink({bundle:simulatorBundle});
 // Fit the pattern once layout has settled, and again when the screen turns.
 if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>{fitted=false;if(view==='roll')paintNotes();});
 if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{fitted=false;if(view==='roll')paintNotes();});

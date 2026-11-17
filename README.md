@@ -58,12 +58,9 @@ DnBOX runs a **909**, an **808**, two bass slots, and a **breakbeat player** at 
 
 Each bass slot can run Chicago or Miami.
 
-In **0.0.26**, each bass slot can also run **Juno** or **Drone**.
-Juno is a six-voice subtractive engine with chorus.
-Drone is a four-voice string-machine engine.
-Juno and Drone are not 303 engines.
-Juno and Drone can record a held-key chord.
-These engines and held-key chords are not in **0.0.25.1**.
+In **0.0.26**, Juno is a six-voice subtractive engine with chorus and held-key chord recording. These features are not in **0.0.25.1**. Juno is not a 303 engine.
+
+In development, Synth One reserves synth slot 2 (id `OS11`). Legacy engine-4 preset records load as Synth One init; this compatibility migration does not establish playable audio. The playable Synth One renderer remains an M1 task. This removal checkpoint does not claim Synth One playback or chord recording is delivered.
 
 Each part can use its own step length (up to 64 steps) and rate.
 Parts can drift against each other.

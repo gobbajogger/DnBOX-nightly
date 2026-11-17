@@ -16,7 +16,7 @@ Common to every lane (C1–C6)
 - S4 SuperJ6 A/B bench vs the originals (uses the 14/56 comparison ZIP); report committed, within its pre-declared thresholds.
 - S5 AudioKit-faithful presets: all 640 presets / 12 banks mapped with verified parameter mapping (test checks every preset loads and maps every parameter).
 - S6 Memory: Elite and Pro link with every engine in, stock memory, no PSRAM; pool margin ≥ 512 B above the 8192 B floor; measured per-engine RAM/flash report committed (`docs/lanes/sound-memory.md`).
-- S7 Drone: `git grep -niw drone -- firmware tests web` returns 0 lines outside history/changelog.
+- S7 third-slot engine removed: the L07/L29 whole-word scan over firmware/web/tests returns 0 lines outside history/changelog.
 
 ## fwui — every firmware screen in R22
 - F1 Every firmware screen uses R22 components (909/808 pattern) and the shared glyph library; screen inventory in `docs/lanes/fwui.md` with a 240x240 render per screen committed.

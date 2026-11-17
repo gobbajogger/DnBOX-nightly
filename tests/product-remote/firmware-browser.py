@@ -34,7 +34,7 @@ BUNDLE = json.dumps({
         {'id': 37, 'kind': 3, 'min': 1, 'max': 127, 'readMin': 0, 'readMax': 2, 'label': 'Hold'}]},
     'admission': {'catalogCrc': 0x12345678, 'sourceSha': CORE, 'reviewSha': WIRE, 'testOnly': True}})
 MIDI = r'''
-window.__DNBOX_FIRMWARE_BUNDLE = BUNDLE;
+window.__DNBOX_FIRMWARE_BUNDLE = __FIXTURE_BUNDLE_JSON__;
 navigator.requestMIDIAccess = async () => {
   const input = {state:'connected', type:'input', fn:null, addEventListener(t,f){if(t==='midimessage')this.fn=f;}, removeEventListener(){this.fn=null;}, open:async()=>{}, close:async()=>{}, deliver(data){this.fn&&this.fn({data});}};
   const output = {state:'connected', type:'output', open:async()=>{}, close:async()=>{}, send(bytes){
@@ -44,7 +44,7 @@ navigator.requestMIDIAccess = async () => {
   }};
   return {inputs:new Map([['in',input]]), outputs:new Map([['out',output]])};
 };
-'''.replace('BUNDLE', BUNDLE)
+'''.replace('__FIXTURE_BUNDLE_JSON__', BUNDLE)
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -94,12 +94,12 @@ async def main():
         await page.locator('#fw-1').evaluate('el=>{el.value="800";el.dispatchEvent(new Event("input"));}')
         check(not await page.locator('#apply').is_disabled(), 'an edit arms Apply and still sends nothing')
         check(3 not in OPS, 'editing does not SET')
-        await page.locator('#apply').click(force=True)
+        await page.locator('details.overflow').evaluate('d=>{d.open=true}');await page.locator('#apply').click()
         await page.wait_for_function('document.getElementById("conn-state").textContent === "Firmware confirmed 800."')
         check(OPS.count(3) == 1, 'Apply writes the edited control once')
         fixture('change')
         await page.locator('#fw-1').evaluate('el=>{el.value="700";el.dispatchEvent(new Event("input"));}')
-        await page.locator('#apply').click(force=True)
+        await page.locator('details.overflow').evaluate('d=>{d.open=true}');await page.locator('#apply').click()
         await page.wait_for_function('document.getElementById("conn-state").textContent.includes("instrument changed")')
         check(True, 'a C revision conflict is shown and not treated as applied')
         await page.locator('#connect').click()
