@@ -888,6 +888,11 @@
       "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7"
     },
     {
+      "path": "remote/step-lane.mjs",
+      "bytes": 5553,
+      "sha256": "5b3c95bad10b017461d3ca6e6dedf9c93e9955707a0ef9f3476deb7ca6637ed4"
+    },
+    {
       "path": "remote/style.css",
       "bytes": 20541,
       "sha256": "064c4d2c94f6807196902b6825bfa5f91d7bb332aaa0022421be203a150d562f"

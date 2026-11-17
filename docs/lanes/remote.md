@@ -28,3 +28,4 @@ Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8
 - 2026-11-17: Item 1 FunkyBeats R22 port merged via #153 (squash 5840d8aa2dbe60d5d2aaa5dc2be6742d9d49eb21); DNBOX-GATE: PASS 01fc2421780b0336e9d942bcc45c5688ca3ebd3f.
 
 - 2026-11-17: Shipped Remote module closure corrected in #157 (squash 234f38958fdfa1c6ace0c6c8ebf5ad42ff8b2a7d); DNBOX-GATE: PASS 6a4918230389638dad5f08e8b73e15797627465d.
+- 2026-11-17: #158 modeless gestures squash-merged as 45d98696646fb50e08de12858edd2e13eaae1a32; external PASS status on f2986b316aed8ffe8636fa466496e4f72e9f0c22, local full PASS only on earlier fc08e3bd; exact consolidated post-merge gate failed visual networkidle timeout (browser chain passed), diagnosis ongoing.

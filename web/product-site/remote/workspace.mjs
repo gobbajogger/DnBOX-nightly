@@ -6,7 +6,7 @@ export class LaunchSelection{
  state(part){return{part:PARTS[part],selected:this.targets[part],loaded:false,playing:false,pending:false};}
 }
 // Capture on the stable viewport before any callback can replace a note node.
-export function bindRollPointers(viewport,{gesture,mode,point,paint,getScale,setScale,remove}){
+export function bindRollPointers(viewport,{gesture,mode,point,paint,getScale,setScale,remove,admit=()=>true}){
  const pointers=new Map();let navigation=null,blocked=false,tap=null,lastTap=null;
  const boundedScale=v=>Math.max(1,Math.min(4,Math.round(v*4)/4));
  const xy=e=>({x:e.clientX,y:e.clientY});
@@ -14,7 +14,7 @@ export function bindRollPointers(viewport,{gesture,mode,point,paint,getScale,set
  const release=e=>{pointers.delete(e.pointerId);if(viewport.hasPointerCapture(e.pointerId))viewport.releasePointerCapture(e.pointerId);if(!pointers.size){blocked=false;navigation=null;}};
  const handlers={
   pointerdown(e){
-   if(e.button!==0)return;viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,xy(e));
+   if(e.button!==0||!admit(e))return;viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,xy(e));
    if(getScale&&pointers.size>1){gesture.cancel();tap=lastTap=null;blocked=true;if(pointers.size===2){const p=pair(),r=viewport.getBoundingClientRect();navigation={...p,left:r.left,top:r.top,scrollX:viewport.scrollLeft,scrollY:viewport.scrollTop,scale:getScale()};}else navigation=null;e.preventDefault();return;}
    if(blocked)return;
    const id=e.target.closest('[data-note]')?.dataset.note,edge=e.target.closest('[data-edge]')?.dataset.edge;
@@ -44,5 +44,5 @@ export function bindRollPointers(viewport,{gesture,mode,point,paint,getScale,set
  };
  for(const[k,fn]of Object.entries(handlers))viewport.addEventListener(k,fn,k==='wheel'?{passive:false}:undefined);
  const cancel=()=>{gesture.cancel();tap=lastTap=null;navigation=null;blocked=false;const ids=[...pointers.keys()];pointers.clear();for(const id of ids)if(viewport.hasPointerCapture(id))viewport.releasePointerCapture(id);};
- const cleanup=()=>{cancel();for(const[k,fn]of Object.entries(handlers))viewport.removeEventListener(k,fn);};cleanup.cancel=cancel;return cleanup;
+ const cleanup=()=>{cancel();for(const[k,fn]of Object.entries(handlers))viewport.removeEventListener(k,fn);};cleanup.cancel=cancel;cleanup.active=()=>pointers.size>0;return cleanup;
 }

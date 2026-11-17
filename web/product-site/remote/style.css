@@ -13,7 +13,7 @@
  --hit:40px; --btn-h:32px;
  --r-control:7px; --r-panel:7px; --r-note:4px; --r-bar:2px; --r-field:4px; --radius:var(--r-control);
  --anim-frame-min:20ms; --anim-idle-dwell:160ms; --anim-end-dwell:300ms; --anim-cycle:3080ms; --anim-note-off:500ms; --anim-easing:steps(1,end);
- --margin:20px; --key-w:56px; --lane-h:128px; --row:20px; --step:20px;
+ --margin:20px; --key-w:56px; --lane-h:48px; --row:20px; --step:20px;
  --tab-w:112px; --tab-gap:48px; --eng-w:96px; --eng-gap:16px;
 }
 *{box-sizing:border-box}
@@ -198,7 +198,7 @@ dialog::backdrop{background:#000a}
 
 /* Phone landscape: same three rows, compressed; lane 88 */
 @media (orientation:landscape) and (max-height:500px){
- :root{--margin:12px;--key-w:56px;--lane-h:80px;--tab-gap:20px;--tab-w:auto;--eng-w:auto;--eng-gap:12px;--btn-h:28px}
+ :root{--margin:12px;--key-w:56px;--lane-h:48px;--tab-gap:20px;--tab-w:auto;--eng-w:auto;--eng-gap:12px;--btn-h:28px}
  .hdr{height:36px}
  .brand{width:auto;font-size:18px;gap:8px;margin-right:24px}
  .project-name{width:auto;font-size:14px;margin-right:24px}
@@ -217,7 +217,7 @@ dialog::backdrop{background:#000a}
 }
 /* Phone portrait: header, tabs on top, engines, then title + transport + history; lane 120 */
 @media (orientation:portrait) and (max-width:600px){
- :root{--margin:12px;--key-w:48px;--lane-h:120px;--tab-gap:12px;--tab-w:auto;--eng-gap:0px;--btn-h:32px}
+ :root{--margin:12px;--key-w:48px;--lane-h:48px;--tab-gap:12px;--tab-w:auto;--eng-gap:0px;--btn-h:32px}
  .hdr{height:auto;flex-wrap:wrap;padding:4px 0}
  .brand{width:auto;font-size:20px;gap:8px;height:36px;align-items:center;order:1}
  .hdr-actions{margin-left:auto;gap:8px;order:2}
@@ -337,3 +337,19 @@ dialog::backdrop{background:#000a}
  #other-view .encoder{min-height:80px}
  #other-view h2{font-size:18px;margin:0 0 8px}
 }
+
+/* FunkyBeats-style paintable step bars, using the shared R22 palette and type. */
+.drum-step-lane{height:48px;width:max(100%,764px);grid-template-columns:60px minmax(0,1fr)}
+.drum-step-lane>button,#other-view .drum-step-lane>button{min-width:0;padding:2px;font-size:10px}
+#drum-lane{position:relative;min-width:0;overflow:hidden;touch-action:none}
+.step-slider,#other-view .step-slider{position:absolute;top:0;bottom:0;min-width:0;padding:0;border:0;border-right:1px solid var(--line);border-radius:0;background:none;touch-action:none;color:var(--fg);isolation:isolate}
+.step-slider-fill{position:absolute;left:3px;right:3px;bottom:12px;height:calc(var(--v) * (100% - 16px));background:var(--muted);opacity:.8;z-index:-1}
+.step-slider output{position:absolute;left:0;bottom:0;width:100%;overflow:hidden;font-size:9px;line-height:12px;text-align:center;white-space:nowrap}
+.step-slider:disabled{opacity:.2;pointer-events:none}
+.step-slider[aria-pressed=true] .step-slider-fill{background:var(--accent);opacity:1}
+.step-slider:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
+#lane-param{padding:2px;margin:2px;gap:1px}#lane-value{font-size:12px}.lane-dots{margin-top:0}
+
+#other-view .funkybeats-sequencer:has(.drum-step-lane){display:flex;flex-direction:column;max-height:calc(100dvh - 190px)}
+#other-view .funkybeats-sequencer:has(.drum-step-lane)>.seq-numbers,#other-view .drum-step-lane{flex-shrink:0}
+#other-view .funkybeats-sequencer:has(.drum-step-lane)>.sequencer-grid{min-height:64px;overflow-y:auto;scrollbar-width:none}

@@ -7,6 +7,7 @@ an unsandboxed browser. Each case receives a fresh page and tests an edit plus
 its persistence/undo, rather than accepting only that a heading is visible.
 """
 import asyncio
+import json
 import mimetypes
 import re
 import subprocess
@@ -184,13 +185,142 @@ async def no_tool_row(page):
     await expect(page.locator('[data-mode]:visible')).to_have_count(0)
     await page.screenshot(path=str(screenshots / '1440x900.png'))
 
+async def draft_state(page):
+    menu = page.locator('.overflow')
+    if not await menu.evaluate('e=>e.open'):
+        await page.locator('.overflow summary').click()
+    async with page.expect_download() as requested:
+        await page.locator('#draft-save').click()
+    result = json.loads(Path(await (await requested.value).path()).read_text())
+    await page.locator('.overflow summary').click()
+    return result
+
+async def load_draft(page, state):
+    await page.locator('#draft-file').set_input_files({'name':'step-roundtrip.json','mimeType':'application/json','buffer':json.dumps(state).encode()})
+    await page.locator('#draft-replace').click()
+
+async def step_roll(page):
+    state = await draft_state(page)
+    first = next(n for n in state['notes'] if n['track']=='chicago')
+    chord = dict(first, id='draft999', sourceOrder=None, note=first['note']+4, velocity=80)
+    state['notes'].append(chord)
+    await load_draft(page, state)
+    before = (await draft_state(page))['notes']
+    cell = page.locator('#velocity [data-lane-step="0"]')
+    await expect(page.locator('#velocity [data-lane-step]')).to_have_count(16)
+    await expect(cell).to_have_attribute('aria-label', re.compile('2 notes.*Mixed'))
+    for kind, key in [('velocity','velocity'),('chance','chance'),('pan','pan'),('pitch','note')]:
+        await page.locator('#lane-kind').evaluate('(e,k)=>{e.value=k;e.dispatchEvent(new Event("change"))}',kind)
+        original = (await draft_state(page))['notes']
+        await cell.press('ArrowDown' if kind=='chance' else 'ArrowUp')
+        edited = (await draft_state(page))['notes']
+        ids = {first['id'],chord['id']}
+        for old,new in zip(original,edited):
+            if old['id'] in ids:
+                assert old.get(key) != new.get(key), (kind,old,new)
+                assert (old['start'],old['end'],old['id']) == (new['start'],new['end'],new['id'])
+            else:
+                assert old == new
+        await page.locator('#undo').click()
+        assert (await draft_state(page))['notes'] == original
+        await page.locator('#redo').click()
+        assert (await draft_state(page))['notes'] == edited
+        await page.locator('#undo').click()
+    assert (await draft_state(page))['notes'] == before
+    await page.locator('#lane-kind').evaluate('(e)=>{e.value="velocity";e.dispatchEvent(new Event("change"))}')
+    await cell.scroll_into_view_if_needed()
+    track = await page.locator('#velocity .lane-track').bounding_box()
+    lane_box = await page.locator('#velocity').bounding_box()
+    x0 = track['x']+track['width']/32
+    x4 = track['x']+track['width']*4.5/16
+    await page.mouse.move(x0,lane_box['y']+lane_box['height']-10)
+    await page.mouse.down()
+    await page.mouse.move(x4,lane_box['y']+10,steps=1)
+    await page.mouse.up()
+    ramp = (await draft_state(page))['notes']
+    changed = [(a,b) for a,b in zip(before,ramp) if a!=b]
+    assert len(changed)>=3, changed
+    assert {b['velocity'] for a,b in changed if a['id'] in {first['id'],chord['id']}}=={1}
+    await page.locator('#undo').click()
+    assert (await draft_state(page))['notes']==before
+    await page.locator('#lane-kind').evaluate('(e)=>{e.value="pan";e.dispatchEvent(new Event("change"))}')
+    await cell.scroll_into_view_if_needed()
+    box = await cell.bounding_box()
+    client = await page.context.new_cdp_session(page)
+    x,y = box['x']+box['width']/2,box['y']+10
+    await client.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'id':1,'x':x,'y':y}]})
+    await client.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[{'id':1,'x':x,'y':y},{'id':2,'x':x+30,'y':y+10}]})
+    await client.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]})
+    assert (await draft_state(page))['notes'] == before
+    note = page.locator('#roll-grid [data-note="'+first['id']+'"]')
+    await note.scroll_into_view_if_needed()
+    nb = await note.bounding_box()
+    lb = await cell.bounding_box()
+    roll_point = {'id':11,'x':nb['x']+nb['width']/2,'y':nb['y']+nb['height']/2}
+    lane_point = {'id':12,'x':lb['x']+lb['width']/2,'y':lb['y']+10}
+    for start,second in [(roll_point,lane_point),(lane_point,roll_point)]:
+        await client.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[start]})
+        await client.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[start,second]})
+        await client.send('Input.dispatchTouchEvent',{'type':'touchEnd','touchPoints':[]})
+        assert (await draft_state(page))['notes'] == before
+    await client.detach()
+    await cell.press('ArrowRight')
+    exported = await draft_state(page)
+    await load_draft(page,exported)
+    assert (await draft_state(page))['notes'] == exported['notes']
+
+async def step_drums(page):
+    for kit in ['909','808']:
+        await page.locator('[data-engine="drum'+kit+'"]').click()
+        await page.locator('.overflow summary').click()
+        await page.locator('[data-view="drums"]').click()
+        await page.locator('.overflow summary').click()
+        cells = page.locator('#drum-lane [data-lane-step]')
+        await expect(cells).to_have_count(16)
+        if kit=='808':
+            await expect(page.locator('#drum-lane [data-lane-step]:disabled')).to_have_count(16)
+            await page.locator('#sound-voice').select_option('1')
+        cell = page.locator('#drum-lane [data-lane-step]:not(:disabled)').first
+        before = (await draft_state(page))['notes']
+        for _ in range(4):
+            kind = await page.locator('#lane-kind').input_value()
+            print('STEP_DRUM_CONTROL',kit,kind,flush=True)
+            await cell.press('ArrowDown' if kind=='chance' else 'ArrowUp')
+            after = (await draft_state(page))['notes']
+            changes = [(a,b) for a,b in zip(before,after) if a!=b]
+            assert changes, (kit,kind)
+            for a,b in changes:
+                assert a['track']==b['track']=='drum'+kit
+                assert (a['note'],a['start'],a['end'])==(b['note'],b['start'],b['end'])
+                if kind=='pitch': assert b['pitchOffset']==1
+            if kind=='pitch':
+                await page.locator('[data-view="roll"]').click()
+                await expect(page.locator('#lane-value')).to_have_text('+1st')
+                await page.locator('[data-view="drums"]').evaluate('e=>e.click()')
+            await page.locator('#undo').click()
+            assert (await draft_state(page))['notes']==before
+            await page.locator('[data-lane-cycle]').click()
+        assert await page.locator('.drum-step-lane').evaluate('e=>e.getBoundingClientRect().height') <= 49
+        assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+        await expect(page.locator('#inspector')).to_have_count(0)
+
+async def thin_step_lanes(page):
+    await expect(page.locator('#inspector')).to_have_count(0)
+    for width,height in [(844,390),(1440,900)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        assert await page.locator('.lane').evaluate('e=>e.getBoundingClientRect().height') <= 49
+        assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+        target = ROOT/'build/remote-step-lanes'
+        target.mkdir(parents=True,exist_ok=True)
+        await page.screenshot(path=str(target/f'{width}x{height}.png'))
+
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -205,7 +335,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=9 failures=0')
+    print('FUNKYBEATS-BROWSER pages=12 failures=0')
 
 async def main():
     global SOURCE
