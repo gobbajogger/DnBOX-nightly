@@ -1,158 +1,40 @@
-# Lane: integ
+# Lane: integ   (copy to docs/lanes/integ.md; update in every push)
+Owner agent: <name>   Branch: lane/integ-<topic>   Draft PR: #<n>   Head: <sha8>   Updated: <YYYY-MM-DD HH:MM VLAT>
 
-Owner: accountable integration lane. Branch: lane/integ-start-files. RULES.md v2 only.
-Consolidated nightly remains `9165adb92fcdaab756c4e59e3d4a8ee22437ca5a`; no source merge or Pages publication is claimed.
+## Checklist (from CHECKLISTS.md)
+| ID | Check | Status (PASS/FAIL) | Evidence (SHA + log path or PR comment link) |
+|---|---|---|---|
+| C1 | Local gate at head | FAIL | |
+| <S1…> | | FAIL | |
 
-## Current checklist and exact scope
-- C1 FAIL: complete before/after Local gate is not qualified; source-diagnostic tests are not browser or release qualification.
-- C2: prior exact 7ca561b50833d2d6a38e10ada05b80047391f41a no-loss independently PASS against fresh 9165adb9; this normal two-parent candidate preserves that first parent and deletes no files. Exact new-head check remains required.
-- C3 FAIL: required full independent viewport Review 10/10 remains incomplete.
-- C4 FAIL: prior 7ca bounded limits passed 1,354 tracked blobs; exact new-head scan and residual content review remain required.
-- C5/C6 FAIL: all lane finish lines remain open; draft PR136 is unmerged and unpublished.
+## Now / next
+- Now: <item, riskiest first>
+- Next: <item>
 
-## Current composition and next action
-Normal composition of prior integ 7ca561b50833d2d6a38e10ada05b80047391f41a and Web 7b32261a9e709e7bf0a267de84c10e730b70e2f3. Includes the complete reviewed source-only color, lifecycle, explicit-envelope and LIGHT-theme diagnostic dependencies, not merely their aggregate runner. The 246 product files, source manifest and common gate policies remain unchanged. Actual native state in these labs is supplied fixture input, not admitted firmware telemetry, current full-screen W3 parity or browser qualification.
+## Blockers (each with its fix and the route being tried; never "waiting")
+- <blocker> → <fix> (since HH:MM)
 
-The prior 30-minute push interval was exceeded during environment recovery and priority combined-firmware native/map qualification. Recovery verified the live 7ca ref and absence of an uncertain write, then resumed this coherent source-lab batch instead of creating an empty checkpoint. Next: independent exact-head no-loss/limits and affected-source review, while QA continues the corrected firmware host batch.
+## Top 3 risks for the next hour
+1.
+2.
+3.
 
-## Cross-repository dependencies
-Latest measured firmware runtime is 2d86f59491d3ec33c1ab586a62ae0f4e9ff0a490; docs-only f2f337b7e3243d57ffd66c35c2c81f6c43c4777f preserves it. Independent default-PADCAL1 Elite/Pro native builds leave 2,548/2,556 B XIP, 1,096 B ordinary RAM and 836 B pool margin above the 8,192 B reserve. Exact map-only ELFs match independent native outputs. Corrected affected-host execution remains QA-owned; no full Local or all-final-engine claim. The native DNR2 endpoint remains unadmitted. Scalar host diagnostics do not qualify native transport, HELD ownership or activity telemetry.
+## Deletes (files this lane removes on purpose, with reason; the gate's no-loss step reads this)
+- <path> — <reason>
 
-Earlier dated composition entries below are retained history, not current status. Consolidated targets remain e742be7b (firmware) and 9165adb9 (nightly); no main, gh-pages or settings changes.
+## Conflicts noted (RULES 23)
+- <conflict> → reading used: <…>
 
-## Conflicts noted
-- CHECKLISTS I0 describes no-new-regressions while RULES 9 requires passing before and after. No merge is authorized by a failed/VOID gate alone; independent review required.
-- User kickoff forbids repo settings changes; no rename/settings action performed.
+## Owner-directed start-only split
+This PR now contains only the supplied prep manifest, source ledger and removal list. All unrelated product/test/environment changes are removed from its effective diff by a normal successor commit, never by force push. Complete broad work remains recoverable at backup/integ-before-start-split-20261116 (b39e99c4197544037896fd4ed463a338a5d423c3).
 
-## Deletes
-- `coordination/edge-case-hunt/EC-20261026-011.json` — obsolete brief/rule/handoff listed in supplied removal manifest; recoverable from parent Git commit.
-- `docs/nightly-first-development-gate.md` — obsolete brief/rule/handoff listed in supplied removal manifest; recoverable from parent Git commit.
+Latest owner direction permits these two start-only merges after meaningful touched-file Local checks; this is a specific sequencing exception, not a changed RULES.md v2 text or a claim that the full before/after application gate and viewport review passed. Independent QA records exact scoped results and known defects on the PR. All lane finish lines remain open.
 
-## Gate corrections from independent review
-- Optional DNBOX_BASE_SHA is a fresh connector-resolved 40-hex commit pin; validate object and retain ancestry/deletion checks, avoiding unauthenticated fetch only.
-- Nightly TMPDIR description corrected to match the actual outside-checkout path.
+The gate scripts are exact supplied ZIP bytes, not later corrected versions. Known follow-up defects include firmware fail-fast/budget attribution and gate environment/prerequisite handling; the touched-file gate must not execute unsafe browser routes or treat the original scripts' possible false PASS as qualification. Full Local remains unqualified.
 
-## Verified review and current blockers
-- Independent regression: firmware fail-fast/exact-model budget fixtures PASS 6/6; connector-base validation, ancestry and documented deletion fixtures PASS 12/12 across both gates. These are focused tests, not a full Local PASS.
-- Firmware baseline host sanitizer tests fail because LeakSanitizer cannot operate under ptrace; current cloud and elevated tiny probe reproduce. Mac mini is offline; cloud is the only connected environment. Keep FAIL and rerun in a compatible environment, never disable sanitizer to claim PASS.
-- Firmware build gate now fails immediately for either model and budget reads only exact-SHA, per-model logs/receipts in a fresh run directory. Missing actual metrics remain FAIL.
+Removal-list exceptions retained: AGENTS.md. AGENTS.md is replaced, not deleted; other retained paths are existing test dependencies.
 
-## Follow-up gate corrections
-- Baseline build PASS, browser harness correction requires chromium_sandbox=True and removes explicit no-sandbox in common admission/visual launchers. AST regression PASS for both launchers and syntax checks PASS. Actual normal sandbox fails cloud socket permissions; Mac offline, no browser PASS claimed.
-
-Repeated mistake: browser-sandbox fixes missed launchers in the full gate call graph. Inspect every invoked launcher, require explicit chromium_sandbox=True throughout, and never count a two-file policy check as full runtime coverage.
-- Expanded source audit now inspects all Python Chromium launchers, not only two common files. Remote's own harness remains its owner's correction; full regression correctly fails until that change is composed. Static policy PASS is never runtime PASS.
-- Independent review identified Markdown exclusion in secret scanning. Removed it; scan now emits filename only, never matched values. Dummy Markdown key/token regression3/3 PASS; actual Local must rerun at new head.
-
-## Integration checklist
-- I0 FAIL: full baseline/current Local not passing; normal sandbox environment unavailable. Safe subsets do not replace full gate.
-- I1 FAIL: consolidated state now recorded in both repositories; prep and lane PRs not yet merged.
-- I2 FAIL: combined firmware with all lanes not qualified.
-- I3 FAIL: all-engine dropout measurement outstanding.
-- I4 FAIL: actual LeakSanitizer blocked by tracer; no disabled-sanitizer result counts.
-- I5 FAIL: five BREAK samples, preview and published404 correction require runtime/Pages verification.
-- I6 FAIL: consolidated roadmap and voting runtime audit outstanding.
-- I7 FAIL: cleanup waits all lanes/rule9, and renames conflict with explicit no-settings instruction.
-
-## I5 authentic asset admission
-- Recovered all five original backup encoded zones and exact contract-pinned preview WAVs. Verified extraction against original slots-before-install.x0xslots SHA256239bd1d1ec5ae79ab634cbefe4817c058f357531a33774f0a5f6ecc80322df9e; contract SHA256df61cfe067e56579ace27fc58341f722f4a7a0d9a476ad7d8e798a38413b504f. Verification/mutation tests4/4 PASS. Pre-backup lossless WAV originals remain unknown; no synthetic replacement.
-- Files admitted under web/product-site/assets/starting-breaks/. Web owns narrow contract-hash/size builder allowlist and actual preview provider wiring. Existing builder rejects all WAV/ADPCM until that reviewed correction is composed. No live404 fix, deployment or browser playback PASS yet.
-- Firmware baseline includes zero built-in loops by default; old opt-in stock bank is three unrelated loops, not this five-zone set. Exact five encoded bytes109274 exceed current13,464/13,472 code headroom; embedded-bank fit remains open, no protected flash map changes.
-
-Repeated mistake: browser launch policy checks missed a launcher invoked indirectly by the firmware host suite. Audit cross-repository and transitive test call graphs before running any suite, not just named browser scripts; never launch with default-off sandbox.
-- Browser source policy now scans repository Python and JavaScript launchers and runs before npm unit/browser suites. Unsafe or missing policy skips those suites with FAIL/NOT_RUN, never launches them with disabled sandbox. Static policy is not runtime coverage.
-
-## Combined nightly candidate
-- Normal two-parent composition of web68f4b7b718a45291c86d4548b996c5095e8353a4 (including authentic five assets and real preview/provider allowlist) with integ b0a66ec5bd1f38234e0540d3267ea68a854a58fc (fail-closed browser policy). No consolidated/gh-pages/main merge or publication.
-- Web source evidence build203files, product57Node+15Python and asset/provider21 checks PASS applies to web68f input; combined exact-head gate and independent review remain required. Runtime browser unavailable here, no live404 resolution claimed.
-
-Repeated mistake: commands mixed workspace-root-relative paths with a repository workdir. Resolve input/output paths against the explicit working directory before running; fail closed on missing inputs.
-
-## Remote plus web composition
-- Updated normal two-parent composition consumes exact3edfb16374c99c9ccb99e27d45e3d1af25360185 (web plus Remote cac407) while retaining integ fail-closed policy. Source manifest209 files belongs to web and is retained unchanged. Producer product57Node+25Python/workspace84/Remote63/protocol evidence belongs to3ed input, not an automatic full combined PASS.
-- Native/TouchOSC device acceptance, live Pages byte validation and full normal-browser gate remain unqualified; no consolidated or gh-pages merge.
-
-## Stable Web/Remote mixer composition
-- Normal composition retains exact e7da6cf6e7f475388c31e0b64c5768355e1dc9fb Web+Remote source and its211-file manifest with latest integ cd2 fail-closed browser policy. Web producer reports build211/product64+29/workspace84+apps/Remote66/Lua-C-host PASS; these scoped results do not substitute for this head's independent gate or browser runtime.
-- No consolidated merge or Pages publication. Normal sandbox remains required, tests that cannot run remain NOT_RUN/FAIL.
-
-Repeated mistake: the integration owner ended after an intermediate handoff while independent I items remained. Keep one accountable owner active through those items and all applicable gates; verify actual progress before transferring ownership.
-
-- Follow-up composition retains b97d1bbb163928834aca65be41af5db43f281814 with Remote ffe227c live LEVEL alias preview/cancel correction, independently reviewed. Earlier efe7 lacked this correction and is not final review input. Product manifest remains owner-maintained211 files.
-
-- Latest coherent Web9aeb98a3d682fa3ce5cd2e01b4ad3289667e41f9 + Remote35fb retained: source212-file manifest, reviewed sample preview natural-end/error/loading state and guarded saved-selection recovery; root-level gate policy retained. Earlier aliases remain historical inputs, not latest delivery.
-
-## Verified containment transport correction
-- Complete-graph git merge-base remains first. If unrelated historical donor objects are absent, fallback hashes every raw commit on a first-parent path and succeeds only upon reaching the exact freshly pinned consolidated base. Missing/invalid/corrupt first-parent objects fail. No invented ancestry/shallow boundary or no-loss waiver.
-- Both fetched symbolic refs and connector exact refs resolve to commit pins; deletion diff failures now fail closed rather than appearing as empty deletion lists. Independent10fixture cases PASS; no full Local qualification implied.
-- Coherent Web485f2a666a427e56807ec4f2b03252eb968dce4d retained with214-file product manifest, all sample preview lifecycle corrections and Remote callback deadline/default-no-send fixtures. Owner-maintained source unchanged by gate composition. Actual4842 changed-scope build212/product70+29/workspace84/Remote66/Lua-C passed; newer composition requires affected checks.
-
-Repeated mistake: coordinator reported a requested stop or lane-file update as completed before checking the result. State pending until an actual receipt or readback verifies it; correct unsupported claims immediately.
-
-## Producer composition checks
-
-Actual composed source (c250 product plus retained integ gate files): normal-browser source policy14, containment regression10, build214 and npm run test:product PASS. Product log is retained as integ-c250-product.log. This is a source-composition run before the commit metadata was assigned, not a complete exact-head Local or rendered landscape Review.
-
-## Nightly tracked-object gate correction
-
-Independent review identified missing retained-workflow, blob-size/LFS and PSRAM checks in the supplied nightly limits function. Actual extracted-function fixtures reproduced four false PASS cases: retained workflow,50MiB non-LFS blob, direct PSRAM activation and named SuperJ6 AU installer. Added fail-closed tracked-object metadata inspection, retained workflow inventory, direct source/config activation detection (including nested inline JSON), and AU filename/component archive inventory. LFS pointers remain small stored Git blobs; this does not verify remote LFS recovery.
-
-Final13 producer and independent fixtures PASS after inline-JSON and three source-grammar red/green corrections (parenthesized defines, Kconfig y, typed bool). The common gate runs these regressions before limits. The prior05850 source inventory of1126 tracked blobs passes the bounded helper; this is not a comprehensive secret or opaque binary/content audit and is not C4/full Local acceptance. Missing/unmerged/uninspectable objects fail closed. Independent final source review and exact-head gate remain required.
-
-The next source composition also retains all20 exact Web8eb31e86c204279f86f73805d690728f24944fe8 changes since c250, including the independently source-reviewed Remote inspector crash correction and stronger firmware-render provenance tests. No product code/manifest has been rewritten by integration; real browser after-state and full gates remain unqualified.
-
-## Current native-unit readout and browser evidence composition
-
-Normal composition retains the full50-path Web340d5b44f65525691b54127df6e2d38bcecf3279 delta since8eb, including Remote9d71 source-native drum formatters and all241manifest paths. Latest common fail-closed gate and tracked-object scanner remain unchanged. Product runtime equals reviewed Web8ce; later files are bounded browser/evidence records, not a full visual or Local gate.
-
-Producer Web checks report product88Node+32Python, workspace84plus apps and Remote checks. Independent actual browser evidence covers native readout changes. Web producer browser evidence covers all five sample previews without media errors/selection changes, at the recorded viewport only. Preset file import and complete required viewport/Local qualification remain unmet. This composition still needs its exact source checks. No Pages publication or consolidated merge is claimed.
-
-Producer selected composition checks pass: build241, product/workspace/Remote chain exit0, normal-sandbox source policy14, tracked-object audit1183blobs. No browser/full Local run. An initial policy filename typo produced no policy result; correct gate-selected policy ran successfully. One existing donor evidence log absolute workspace prefix was sanitized to <source>; no product byte changed.
-
-## Real-host consumer diagnostics composition
-
-Normal composition of Web58ec562e7cb698384cc4a9666b100a44e381b13e retains independently reviewed Remote9bf actual-host stdin diagnostics and typed Lua queued-SET/revision guards. Three TouchOSC rows change; browser app/geometry remains8ce and all241product manifest entries remain verified. These callbacks confirm stored-target acceptance only, never audio application. Exported/native catalog admission remainsfalse and production reviewed bundle remainsnull.
-
-The fixture pins exact firmware1ab15cf2 source; test-only stdin binding negotiates a genuine lease and ordinary production unadmitted-open rejection remains tested. Lua diagnostics use host Lua5.4, not actual TouchOSC Lua5.1/customVM qualification. The new real DOM browser assertions encode independently observed readout regressions, but automated browser execution remains NOT_RUN here. No full Local/Review or native endpoint admission.
-
-Producer exact staged consumer replay against independently built1ab host passes unchanged browser/Lua/timeout diagnostics plus product241build. Normal-sandbox source policy14PASS; no actual browser launcher executed. Log: evidence/integ-host-consumer-composition.log. Existing exact17ea no-loss/limits independentlyPASS and all241product closure matched8ce; those results remain input-scoped, not full current Local.
-
-## Bounded Web keyboard evidence composition
-
-Normal composition of reviewed Web 1a1d3a975562e1459037ee6938d1f4e551878a36 adds only two documentation files over previously composed 58ec. Actual 8ce keyboard Menu/Escape/navigation observation remains bounded evidence, not complete viewport/Local qualification. All production product rows and current gate policies remain unchanged from 1d068. Firmware current draft is 6fc998c95a9ab436c8bc46b6cd74c16fe868d242, identical production 646; targets remain e742/9165, unmerged.
-
-## Shared roadmap reconciliation
-
-Working/Pending/Complete queues are synchronized with firmware7f6d8a44396e8d7da28f66e6fcc712c537494b1b: actual consolidated e742/9165 remain unmerged; latest default combined firmware fef9 resources and bounded read-only collector observation are recorded without finished-lane or native endpoint claims. Five encoded samples109274B cannot fit the recorded stock app headroom unchanged. Production website and current gate policies are unchanged from4c9.
-
-## Reviewed native-source laboratory composition
-
-Composed Web 26eb18ba989924006b395ab6aa660823e21b925c, retaining current integration gate/policy and roadmap files unchanged. The donor contains independently reviewed Remote source fixtures and five unbound native-geometry product modules; the whole product manifest is 246 files. Browser bindings remain unchanged from the prior 8ce source. Source fixtures and host parity are not native endpoint admission or complete visual qualification. Exact composed checks are pending; no full Local or publication claim.
-
-Actual composed non-browser build/product/workspace/Remote chain exit 0; Remote 89 cases pass. Exact command and original/public log hashes are retained in docs/lanes/evidence/integ-web-native-panels. Common policies unchanged; full Local and browser qualification remain open.
-
-## Exact 97c20 aggregate qualification correction
-
-The producer command exited 0 and reported 89 outer Remote tests, but tests/product-remote/native-source-complete.test.mjs inherited NODE_TEST_CONTEXT=child-v8 in nested node --test invocations. Their stdout is empty in the preserved checks.log. Exit 0 did not prove those nested test bodies ran. Retract nested-suite qualification; retain the unchanged original log as failure-diagnosis evidence. The separate C/parity scripts and independently run component checks retain only their own scope. Build/product/workspace results are not affected by this particular defect.
-
-Owner: Remote for child environment isolation, explicit TAP-result verification and an intentional-failure regression; integ for normal composition and corrected exact replay; test-and-merge for independent source/check review. No full Local or release was claimed. Next lane push must carry this correction and may not count the historical aggregate as full native-source lab qualification.
-
-Independent exact 97c20 no-loss and bounded hard-limit stages passed against freshly API-verified consolidated 9165adb9: merge-base containment and 1323 tracked blobs. These checks do not validate the nested aggregate or establish comprehensive secret/opaque-content review, C4 completion, or full Local. No native/browser input changed in the forthcoming runner correction.
-
-Adapted the reviewed runner correction from Remote8f28b20ba510233a3e701f5efbf2b0946e6f06d7 and retained its two donor evidence files with their original scope. This is a targeted correction, not integration of every intervening Remote commit. It removes inherited internal Node test context from children, requires positive TAP test counts, and proves an intentionally failing child fails. Product manifest and all 246 product files remain unchanged. Corrected exact-composition replay follows.
-
-The first literal runner-copy attempt failed before lab execution: its cc8-derived step list required native-body-work absent from this earlier composition. The corrected adaptation retains the existing exact 23-step list and imports only child-context isolation, TAP/count checks and the failing-child sentinel; missing spawn output is safely logged. The failed attempt remains preserved, not counted as qualification. Donor25-test results are not the count for this earlier lab closure.
-
-Actual adapted replay exit0:23 subprocess steps, six nested TAP suites with22 executed tests, and outer2 tests including the failing-child sentinel. Independent source review accepted the narrow correction. Logs/receipt in docs/lanes/evidence/integ-nested-runner preserve the prior closure failure separately; no full Local claim.
-
-## Complete reviewed source-lab dependency closure
-
-Normal composition of Web ab2685b8ad6e9731515877b86dedfba7af8f1481 adds the missing native-body diagnostic dependencies and corrected 27-step runner together. Preserved the independently accepted null-safe spawn-output diagnostic; all product bytes, policies and publication state remain unchanged. The earlier 23-step/22-test correction remains historical evidence, not evidence for these additional inputs. Current exact replay is required; no W3, browser or full Local claim.
-
-Actual full-closure replay exit0:27 steps, seven actual nested TAP suites totaling25 tests, outer2PASS including intentional failing-child detection. Independent source acceptance applies to the complete donor closure plus unchanged null-safe diagnostic. Logs/receipt: docs/lanes/evidence/integ-full-lab. This does not promote historical source frames to current UI/W3 qualification.
-
-## Current theme-source diagnostic replay
-- Actual composed aggregate exit 0: 36 child steps, 12 nested TAP suites / 42 tests, and three outer tests including executed failing-child and missing-cwd regressions. Receipt/log: docs/lanes/evidence/integ-theme-composition/. No skipped-child coverage inferred from an outer exit alone.
-
-## Roadmap status reconciliation
-- Replaced stale Working table with verified 50823d5/c9f09 draft scopes, unchanged consolidated targets, actual ca0bbb reference outcomes and terminal 2d86 affected-host 45 PASS / 2 FAIL. Pending BREAK headroom now uses 2d86, not historical 7e398. No lane marked complete; two-selector corrected managed replay remains QA-owned after FWUI review.
+## Exact removals
+Each path below is an obsolete brief/rule/handoff explicitly listed in the supplied remove manifest; the original bytes remain in the inherited baseline and backup history.
+- `coordination/edge-case-hunt/EC-20261026-011.json` — supplied removal list; historical instructions, retained in Git history.
+- `docs/nightly-first-development-gate.md` — supplied removal list; historical instructions, retained in Git history.

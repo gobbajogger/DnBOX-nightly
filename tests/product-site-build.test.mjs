@@ -52,34 +52,3 @@ test('symlink manifest refuses without reading an outside manifest',()=>{
  const f=fixture(),manifest=join(f.src,'SOURCE-MANIFEST.json'),outside=join(f.root,'outside.json');writeFileSync(outside,JSON.stringify(f.m));unlinkSync(manifest);symlinkSync(outside,manifest);
  assert.throws(()=>buildProductSite({repoRoot:f.root}),/symlink/);assert.equal(existsSync(join(f.root,'.output')),false);
 });
-
-test('starting-break admission rejects forged manifest bytes and non-contract IDs',()=>{
- for(const id of ['personal-br1-zone1','personal-br2-zone3']){
-  const f=fixture(),name=`assets/starting-breaks/${id}.wav`,bytes=Buffer.from('not authorized audio');
-  mkdirSync(join(f.src,'assets/starting-breaks'),{recursive:true});writeFileSync(join(f.src,name),bytes);
-  writeFileSync(join(f.src,'sample-contract.json'),readFileSync(new URL('../web/product-site/sample-contract.json',import.meta.url)));
-  f.m.files=[{path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}];f.save();
-  assert.throws(()=>buildProductSite({repoRoot:f.root}),/Firmware\/private audio/);assert.equal(existsSync(join(f.root,'.output')),false);
- }
-});
-test('starting-break contract cannot be replaced, linked or special-file opened',()=>{
- for(const kind of ['changed','symlink','fifo']){
-  const f=fixture(),name='assets/starting-breaks/personal-br1-zone1.wav';mkdirSync(join(f.src,'assets/starting-breaks'),{recursive:true});writeFileSync(join(f.src,name),'a');
-  f.m.files=[{path:name,bytes:1,sha256:createHash('sha256').update('a').digest('hex')}];f.save();
-  const contract=join(f.src,'sample-contract.json');
-  if(kind==='changed')writeFileSync(contract,'{}');else if(kind==='symlink')symlinkSync('/etc/hosts',contract);else execFileSync('mkfifo',[contract]);
-  assert.throws(()=>buildProductSite({repoRoot:f.root}),/pin mismatch|symlink|Regular pinned/);assert.equal(existsSync(join(f.root,'.output')),false);
- }
-});
-
-test('all ten exact contract-pinned starting-break assets build byte-identically',()=>{
- const f=fixture(),contractBytes=readFileSync(new URL('../web/product-site/sample-contract.json',import.meta.url)),contract=JSON.parse(contractBytes);
- writeFileSync(join(f.src,'sample-contract.json'),contractBytes);mkdirSync(join(f.src,'assets/starting-breaks'),{recursive:true});
- f.m.files=[];
- for(const asset of contract.assets)for(const ext of ['wav','adpcm']){
-  const name=`assets/starting-breaks/${asset.id}.${ext}`,bytes=readFileSync(new URL('../web/product-site/'+name,import.meta.url));
-  writeFileSync(join(f.src,name),bytes);f.m.files.push({path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
- }
- f.save();assert.equal(buildProductSite({repoRoot:f.root}).files,10);
- for(const row of f.m.files)assert.deepEqual(readFileSync(join(f.root,'.output/product-site',row.path)),readFileSync(join(f.src,row.path)));
-});

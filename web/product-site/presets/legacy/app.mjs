@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX W3: local-only file preview. No MIDI, USB, device storage, or network calls.
-import { PresetError, PresetSession, parseDnpr, ensureExportable, fileNameFor, sampleWarnings, recordEngineLabel } from "./codec.mjs";
+import { PresetError, PresetSession, parseDnpr, ensureExportable, fileNameFor, sampleWarnings } from "./codec.mjs";
 import { readDnprZip, makeDnprZip, ZIP_MAX_INPUT } from "./zip.mjs";
 
 const $ = id => document.getElementById(id);
@@ -25,7 +25,7 @@ function originName(v) {
 function appendMeta(element, record) {
   const fields = [
     ["Name", record.name || "Unnamed"],
-    ["Engine", recordEngineLabel(record)],
+    ["Engine", record.title + " (" + record.engine + ")"],
     ["Format", "DNPR v" + record.version + ", engine schema v" + record.schema],
     ["Integrity", "CRC-32 verified · " + record.bytes.length + " bytes"],
     ["Origin", originName(record.origin) + (record.factoryIndex ? " · derived #" + record.factoryIndex : "")],

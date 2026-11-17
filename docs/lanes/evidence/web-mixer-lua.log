@@ -1,1 +1,0 @@
-PASS Lua codec -> pinned C host HELLO/OPEN/READ/SET/CONFLICT/CLOSE; no TouchOSC or device claim

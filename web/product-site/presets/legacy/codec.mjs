@@ -6,7 +6,7 @@ export const DNPR_ENGINES = Object.freeze({
   1: Object.freeze({ token: "chicago", title: "Chicago", params: 22, samples: 0, factory: 81 }),
   2: Object.freeze({ token: "miami", title: "Miami", params: 18, samples: 0, factory: 30 }),
   3: Object.freeze({ token: "juno", title: "Juno", params: 18, samples: 0, factory: 4 }),
-  4: Object.freeze({ token: "drone", title: "Retired engine 4", params: 8, samples: 0, factory: 4, retired: true }),
+  4: Object.freeze({ token: "drone", title: "Drone", params: 8, samples: 0, factory: 4 }),
   5: Object.freeze({ token: "909", title: "909", params: 132, samples: 4, factory: 0 }),
   6: Object.freeze({ token: "808", title: "808", params: 144, samples: -1, factory: 0 }),
   7: Object.freeze({ token: "break", title: "BREAK", params: 16, samples: 2, factory: 0 })
@@ -33,12 +33,8 @@ const toBytes = (value) => {
 };
 const engineNumber = (id) => {
   if (typeof id === "number") return DNPR_ENGINES[id] ? id : null;
-  if (/^[1-7]$/.test(String(id))) return Number(id);
   return Number(Object.keys(DNPR_ENGINES).find(k => DNPR_ENGINES[k].token === String(id).toLowerCase())) || null;
 };
-export function recordEngineLabel(record) {
-  return record.engineId === 4 ? "Retired engine 4 · read-only" : record.title + " (" + record.engine + ")";
-}
 // Names are opaque C byte strings. Escape controls for display, never edit original bytes.
 const readPad = (b, start, length) => {
   let end = start;
@@ -131,7 +127,7 @@ export function parseDnpr(input, options = {}) {
   }
   const isFactoryDerived = origin === 1 || factoryIndex !== 0;
   return Object.freeze({
-    bytes: b, checksum, version, schema, engineId, engine: spec.token, title: spec.title, retiredEngine: Boolean(spec.retired),
+    bytes: b, checksum, version, schema, engineId, engine: spec.token, title: spec.title,
     name, sourceName, origin, originalEngine, factoryIndex, isFactoryDerived,
     date: le32(b, 24), pluginFormat: le16(b, 28), pluginVersion: le16(b, 30),
     params: b.slice(100, 100 + nparams), sampleRefs: Object.freeze(sampleRefs),
@@ -141,7 +137,6 @@ export function parseDnpr(input, options = {}) {
 export function encodeDnpr(fields) {
   const engineId = engineNumber(fields.engineId ?? fields.engine), spec = DNPR_ENGINES[engineId];
   if (!spec) fail("WRONG ENGINE");
-  if (spec.retired) fail("RETIRED ENGINE", "Engine4 files can only be inspected and exported unchanged; they are not SynthOne presets.");
   if (!(fields.params instanceof Uint8Array) || fields.params.length !== spec.params)
     fail("BAD FILE", "Explicit " + spec.params + "-byte engine parameter payload required");
   const refs = fields.sampleRefs || [];
@@ -175,15 +170,14 @@ export function ensureExportable(record) {
   return new Uint8Array(record.bytes);
 }
 export function sampleWarnings(record, inventory = null) {
-  const retired = record.engineId === 4 ? ["Retired engine4: unchanged legacy backup only, not a SynthOne preset. New creation and native application are unavailable."] : [];
-  return retired.concat(record.sampleRefs.flatMap((r, i) => {
+  return record.sampleRefs.flatMap((r, i) => {
     if (r.source === 0) return ["Sample " + (i + 1) + " is unassigned; the kit may be incomplete."];
     const key = r.source + ":" + r.index;
     const actual = inventory && Object.hasOwn(inventory, key) ? inventory[key] : null;
     if (actual == null) return ["Sample " + (i + 1) + " (" + key + ") not checked against keyboard; it may be missing or changed."];
     if (actual !== r.crc) return ["Sample " + (i + 1) + " (" + key + ") missing / changed (CRC mismatch)."];
     return [];
-  }));
+  });
 }
 export class PresetSession {
   constructor(capacity = 32) {

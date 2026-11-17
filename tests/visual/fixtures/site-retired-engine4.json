@@ -1,8 +1,0 @@
-{
-  "synthetic": true,
-  "contains_user_data": false,
-  "sourceFormat": "DNPRv1 engine4,8params,0samples; actual pre-retirement codec bytes",
-  "sha256": "b316403a7814ba5b95f78791d3611c844dd7ff09474f610697a8e66b104a116c",
-  "base64": "RE5QUgEABAABAAAAbAAAAKFOS6ACBAAAAAAAAAAAAABMZWdhY3kgZW5naW5lIDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAABAgMEBQYH",
-  "scope": "Legacy read/unchanged-export compatibility only. Never a SynthOne preset or a current engine-creation fixture."
-}
