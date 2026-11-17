@@ -3,6 +3,7 @@
 """Visual-regression gate for the DnBOX website, Remote, emulator and offline edition.
 
   python3 tests/visual/visual_gate.py            # compare against approved baselines (fails on any diff)
+  python3 tests/visual/visual_gate.py --keep-actual  # retain every actual PNG for manual review, never writes baselines
   python3 tests/visual/visual_gate.py --update   # write baselines; committing them through a merged PR is the approval
 
 Baselines: tests/visual/__snapshots__/<name>.png (approved reference, generated from the polished head).
@@ -10,7 +11,7 @@ Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's 
 Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions off, fixed clock and random seed,
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
-import os, sys, json, socket, subprocess, time, re, hashlib, shutil
+import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
 from pathlib import Path
 import numpy as np
 from PIL import Image
@@ -22,6 +23,7 @@ SNAP = ROOT / 'tests/visual/__snapshots__'
 FIX = ROOT / 'tests/visual/fixtures/page-01.png'
 OUT = Path(os.environ.get('VISUAL_OUT', ROOT / 'test-results/visual'))
 UPDATE = '--update' in sys.argv
+KEEP_ACTUAL = '--keep-actual' in sys.argv
 ONLY = os.environ.get('VISUAL_ONLY')  # regex filter
 MAX_DIFF_RATIO = 0.001      # ~ toHaveScreenshot maxDiffPixelRatio
 PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as different (AA noise)
@@ -75,16 +77,60 @@ def ssim(a, b):
     m = ((2 * mu1 * mu2 + C1) * (2 * s12 + C2)) / ((mu1 ** 2 + mu2 ** 2 + C1) * (s11 + s22 + C2))
     return float(m.mean())
 
-def compare(name, png_bytes, results):
-    SNAP.mkdir(parents=True, exist_ok=True); OUT.mkdir(parents=True, exist_ok=True)
-    base = SNAP / f'{name}.png'
-    tmp = OUT / f'{name}-actual.png'; tmp.write_bytes(png_bytes)
+def validate_capture_output():
+    if not KEEP_ACTUAL:
+        return
     if UPDATE:
+        raise ValueError('--keep-actual is output-only and cannot be combined with --update')
+    if any(p.is_symlink() for p in (OUT, *OUT.parents)):
+        raise ValueError('capture output directory must not contain symlinks')
+    target, baseline = OUT.resolve(), SNAP.resolve()
+    if target == baseline or baseline in target.parents:
+        raise ValueError('capture output must be outside the baseline directory')
+
+def write_actual_output(filename, data):
+    # Output artifacts must never follow a link into an approved reference.
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', filename):
+        raise ValueError('capture filename must be a simple basename')
+    if any(p.is_symlink() for p in (OUT, *OUT.parents)):
+        raise ValueError('capture output directory must not contain symlinks')
+    OUT.mkdir(parents=True, exist_ok=True)
+    directory = os.open(OUT, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    temporary = '.capture-' + uuid.uuid4().hex
+    created = False
+    try:
+        try:
+            existing = os.stat(filename, dir_fd=directory, follow_symlinks=False)
+        except FileNotFoundError:
+            existing = None
+        if existing is not None and (not stat.S_ISREG(existing.st_mode) or existing.st_nlink != 1):
+            raise ValueError('capture output must not be a link or special file')
+        fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=directory)
+        created = True
+        with os.fdopen(fd, 'wb') as output:
+            output.write(data)
+        # Atomic replacement replaces a raced-in link itself, never its target.
+        os.replace(temporary, filename, src_dir_fd=directory, dst_dir_fd=directory)
+        created = False
+    finally:
+        if created:
+            os.unlink(temporary, dir_fd=directory)
+        os.close(directory)
+    return OUT / filename
+
+def compare(name, png_bytes, results):
+    validate_capture_output()
+    OUT.mkdir(parents=True, exist_ok=True)
+    base = SNAP / f'{name}.png'
+    tmp = write_actual_output(f'{name}-actual.png', png_bytes)
+    if UPDATE:
+        SNAP.mkdir(parents=True, exist_ok=True)
         base.write_bytes(png_bytes); results.append((name, 'BASELINE', 0.0)); return
     if not base.exists():
         # No committed baseline: the page still had to render with no errors, header or overflow
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
-        tmp.unlink(missing_ok=True); results.append((name, 'NOBASE', 0.0)); return
+        if not KEEP_ACTUAL: tmp.unlink(missing_ok=True)
+        results.append((name, 'NOBASE', 0.0)); return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
     if a.shape != b.shape:
@@ -93,10 +139,12 @@ def compare(name, png_bytes, results):
     ratio = float(diff.mean())
     if ratio > MAX_DIFF_RATIO:
         vis = (np.asarray(Image.open(base).convert('RGB')) * 0.3).astype(np.uint8); vis[diff] = [255, 0, 255]
-        Image.fromarray(vis).save(OUT / f'{name}-diff.png')
+        diff_png = io.BytesIO(); Image.fromarray(vis).save(diff_png, format='PNG')
+        write_actual_output(f'{name}-diff.png', diff_png.getvalue())
         results.append((name, 'FAIL', ratio)); print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {OUT / (name + "-diff.png")}')
     else:
-        tmp.unlink(missing_ok=True); results.append((name, 'PASS', ratio))
+        if not KEEP_ACTUAL: tmp.unlink(missing_ok=True)
+        results.append((name, 'PASS', ratio))
 
 HEADER_JS = """
 () => {
@@ -171,6 +219,7 @@ def exit_status(results, header_fails, errors):
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
 def main():
+    validate_capture_output()  # reject baseline-writing mode before any browser/server starts
     p = port()
     srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     p2 = port()
@@ -238,7 +287,7 @@ def main():
     nobase = sum(1 for r in results if r[1] == 'NOBASE')
     if nobase: print(f'NOTE {nobase} screens have no committed baseline (rendered and checked; pixel compare not run)')
     summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'no_baseline': nobase, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors)}
-    OUT.mkdir(parents=True, exist_ok=True); (OUT / 'summary.json').write_text(json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors}, indent=1))
+    write_actual_output('summary.json', json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors}, indent=1).encode())
     print('VISUAL', json.dumps(summary))
     sys.exit(exit_status(results, header_fails, errors))
 
