@@ -15,7 +15,7 @@ const approvedPickerKeys = ['schema', 'repo', 'pages', 'latest', 'versions', 'hi
 assert.deepEqual(Object.keys(preview).sort(), approvedPickerKeys.sort(),
   'unapproved NIGHTLY picker field (including hidden download/approval metadata)');
 assert.equal(preview.schema, 1, 'unsupported NIGHTLY picker schema');
-assert.equal(preview.repo, 'https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly',
+assert.equal(preview.repo, 'https://github.com/gobbajogger/DnBOX-nightly',
   'NIGHTLY picker must identify the correct public browser-source repository');
 assert.equal(preview.pages, '', 'NIGHTLY picker must not advertise an unapproved hosting target');
 assert.equal(catalog.schema, 1);
@@ -51,11 +51,11 @@ assert.equal(catalog.counts.source_or_historical_checkpoints, catalog.history.le
    const names=new Set(allowed.split(' '));
    for(const key of Object.keys(value)) assert.ok(names.has(key),at+': forbidden field '+key);
  };
- const officialRepo='https://github.com/gobbajogger/X0X37-for-Loopy-Pro';
+ const officialRepo='https://github.com/gobbajogger/DnBOX';
  // NIGHTLY browser-source history may truthfully cite this public repo for
  // website/installer Git receipts. Firmware/upstream catalog.source stays on
  // the production repository below.
- const nightlyRepo='https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly';
+ const nightlyRepo='https://github.com/gobbajogger/DnBOX-nightly';
  const approvedRepos=new Set([officialRepo, nightlyRepo]);
  const repoBase=(value)=>{
    for(const base of approvedRepos){

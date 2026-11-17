@@ -6,7 +6,7 @@ This file replaces every earlier AGENTS.md, skill, brief and handoff. Read these
 4. `CONSOLIDATED-STATE.md` — what is merged into `integration/dnbox-consolidated`, with SHAs.
 
 ## The project
-DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; this repo, becoming `DnBOX`) plus a website and browser Remote (`gobbajogger/x0x37-for-Loopy-Pro_nightly`, becoming `DnBOX-nightly`). The User (gobbajogger) decides finished lanes, design and rule changes; Dot runs everything else.
+DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; `gobbajogger/DnBOX`) plus a website and browser Remote (this repo, `gobbajogger/DnBOX-nightly`). The User (gobbajogger) decides finished lanes, design and rule changes; Dot runs everything else.
 
 ## Lanes and agents (6 in parallel)
 | Agent | Owns | Branch prefix |
