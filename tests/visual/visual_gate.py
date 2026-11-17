@@ -181,7 +181,7 @@ def main():
     base = f'http://127.0.0.1:{p}'
     try:
         with sync_playwright() as pw:
-            b = pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), args=['--no-sandbox', '--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
+            b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
             def ctx(w, h):
                 c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
                 c.add_init_script(FREEZE_JS); return c

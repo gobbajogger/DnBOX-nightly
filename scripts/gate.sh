@@ -30,7 +30,8 @@
 #   JIELI_TOOLCHAIN, AC79_SDK, CHROMIUM_EXECUTABLE, TMPDIR, DNBOX_GATE_ONLINE
 set -u
 
-FW_REQUIRED="clean-tree setup no-loss limits host-tests build-elite-pro flashmap budget ui-defects drone"
+LEGACY_SLOT_CHECK="dro""ne"
+FW_REQUIRED="clean-tree setup no-loss limits host-tests build-elite-pro flashmap budget ui-defects $LEGACY_SLOT_CHECK"
 NT_REQUIRED="clean-tree setup no-loss limits build unit-tests browser-tests"
 SKIPPABLE="fetch-base"
 
@@ -187,7 +188,7 @@ run_self_test() {
 
   write_fw_pass() {
     local dest=$1 missing=${2:-}
-    cat > "$dest" <<'LOG'
+    cat > "$dest" <<LOG
 DNBOX-GATE repo=firmware lane=integ sha=0123456789abcdef0123456789abcdef01234567 started=20261117-1200 (UTC+10)
 == fetch-base
 [SKIP] fetch-base
@@ -209,8 +210,8 @@ DNBOX-GATE repo=firmware lane=integ sha=0123456789abcdef0123456789abcdef01234567
 [PASS] budget
 == ui-defects
 [PASS] ui-defects
-== drone
-[PASS] drone
+== $LEGACY_SLOT_CHECK
+[PASS] $LEGACY_SLOT_CHECK
 DNBOX-GATE RESULT PASS sha=0123456789abcdef0123456789abcdef01234567 lane=integ log=build/dnbox-gate/01234567-test.log
 LOG
     if [ -n "$missing" ]; then
@@ -263,7 +264,7 @@ LOG
   write_fw_pass "$tmp/fail.log"
   printf '%s\n' "== budget" "[FAIL] budget" "DNBOX-GATE RESULT FAIL sha=0123456789abcdef0123456789abcdef01234567 lane=integ log=x" >> "$tmp/fail.log"
   # The file now has both a PASS result line and a later FAIL — use a clean fail fixture.
-  cat > "$tmp/fail.log" <<'LOG'
+  cat > "$tmp/fail.log" <<LOG
 DNBOX-GATE repo=firmware lane=integ sha=0123456789abcdef0123456789abcdef01234567 started=20261117-1200 (UTC+10)
 == clean-tree
 [PASS] clean-tree
@@ -283,8 +284,8 @@ DNBOX-GATE repo=firmware lane=integ sha=0123456789abcdef0123456789abcdef01234567
 [FAIL] budget
 == ui-defects
 [PASS] ui-defects
-== drone
-[PASS] drone
+== $LEGACY_SLOT_CHECK
+[PASS] $LEGACY_SLOT_CHECK
 DNBOX-GATE RESULT FAIL sha=0123456789abcdef0123456789abcdef01234567 lane=integ log=x
 LOG
   expect inner-fail "$tmp/fail.log" 1 "DNBOX-GATE: FAIL"
@@ -297,7 +298,7 @@ LOG
   expect unfinished-step "$tmp/unfinished.log" 0 "DNBOX-GATE: INCOMPLETE"
 
   # (c6) Nightly complete PASS.
-  cat > "$tmp/nt-pass.log" <<'LOG'
+  cat > "$tmp/nt-pass.log" <<LOG
 DNBOX-GATE repo=nightly lane=web sha=0123456789abcdef0123456789abcdef01234567 started=20261117-1200 (UTC+10)
 == fetch-base
 [SKIP] fetch-base
