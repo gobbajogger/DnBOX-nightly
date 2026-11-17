@@ -64,3 +64,11 @@ action('review');const savedChanges=projects.get('changes').textContent;assert.m
 projects.press('undo');action('open');assert.equal(pickerOpened,1);
 await projects.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(saved),text:async()=>saved}]}});assert.equal(projects.get('draft-dialog').open,true);projects.press('draft-replace');action('review');assert.equal(projects.get('changes').textContent,savedChanges);
 console.log('PASS Projects card clicks dispatch Save/Open/Review and round-trip edited draft; event doubles, not browser file-picker proof');
+const viewportDraft=await boot();viewportDraft.get('roll-scroll').clientWidth=700;viewportDraft.get('zoom').value='2';viewportDraft.get('zoom').oninput();
+const viewportWidth=viewportDraft.get('roll-grid').style.width;assert.equal(viewportWidth,'1400px');viewportDraft.press('draft-save');const viewportText=await viewportDraft.download();
+viewportDraft.get('zoom').value='1';viewportDraft.get('zoom').oninput();await viewportDraft.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(viewportText),text:async()=>viewportText}]}});viewportDraft.press('draft-replace');
+assert.equal(viewportDraft.get('roll-grid').style.width,viewportWidth,'Restored zoom uses actual viewport basis');
+console.log('PASS draft zoom roundtrip retains narrow viewport geometry');
+const legacyTool=JSON.parse(viewportText);legacyTool.context.mode='pan';const legacyText=JSON.stringify(legacyTool);
+await viewportDraft.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(legacyText),text:async()=>legacyText}]}});viewportDraft.press('draft-replace');viewportDraft.press('draft-save');
+assert.equal(JSON.parse(await viewportDraft.download()).context.mode,'auto','Legacy draft tool modes normalize to modeless interaction');
