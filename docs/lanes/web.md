@@ -34,3 +34,5 @@ Next: source review, exact combined browser/full-gate qualification, then normal
 Independent review caught inherited donor omission: canonical synthone filenames lost their explicit Elite/Pro hint. Added the token to both identical codec regexes and regression for both models. Reproduced RED2/2 before fix; preset suite PASS17/17 after fix. Final independent source recheck PASS: reviewer reran17/17 tests and verified3 changed manifest entries; Local gate remains FAIL, required combined checks NOT_RUN.
 
 Review also corrected README: Synth One is a development slot/init migration with playable renderer pending M1, not a released playable/chord-recording engine. Historical Juno0.0.26 qualification retained.
+
+- 2026-11-17: item 1 merged in #152 as `7a2ed1842e7773e249f0e46ac3da156945964626` after the exact-head `dnbox-gate` success; current-source retired-name scan is clear.
