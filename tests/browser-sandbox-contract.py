@@ -39,8 +39,6 @@ def inspect(source, path):
             errors.append(f'{path}:{node.lineno}: explicit chromium_sandbox=True required')
         if any(kw.arg is None for kw in node.keywords):
             errors.append(f'{path}:{node.lineno}: dynamic launch options require audit')
-        if 'executable_path' in options or 'channel' in options:
-            errors.append(f'{path}:{node.lineno}: bundled Playwright Chromium required')
         args = options.get('args')
         if args is not None:
             try:
@@ -51,6 +49,8 @@ def inspect(source, path):
                     errors.append(f'{path}:{node.lineno}: sandbox-disabling argument')
             except (ValueError, TypeError):
                 errors.append(f'{path}:{node.lineno}: dynamic arguments require audit')
+        if 'executable_path' in options or 'channel' in options:
+            errors.append(f'{path}:{node.lineno}: only bundled Playwright Chromium is allowed')
         if 'ignore_default_args' in options:
             errors.append(f'{path}:{node.lineno}: default argument override requires audit')
     return errors, count
@@ -72,6 +72,8 @@ def controls():
     assert inspect(good, 'positive')[0] == []
     bad = [
         'p.chromium.launch()',
+        'p.chromium.launch(chromium_sandbox=True, executable_path="/usr/bin/chromium")',
+        'p.chromium.launch(chromium_sandbox=True, channel="chrome")',
         'p.chromium.launch(chromium_sandbox=False)',
         'p.chromium.launch(chromium_sandbox=True, args=["--no-sandbox"])',
         'p.chromium.launch(chromium_sandbox=True, args=["--disable-setuid-sandbox"])',
@@ -79,10 +81,6 @@ def controls():
         'p.chromium.launch(chromium_sandbox=True, **options)',
         'p.chromium.launch(chromium_sandbox=True, args=options)',
         'p.chromium.launch(chromium_sandbox=True, ignore_default_args=True)',
-    ]
-    bad += [
-        'p.chromium.launch(chromium_sandbox=True, executable_path="/usr/bin/chromium")',
-        'p.chromium.launch(chromium_sandbox=True, channel="chrome")',
     ]
     for source in bad:
         assert inspect(source, 'negative')[0], source
