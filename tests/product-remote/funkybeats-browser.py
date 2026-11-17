@@ -8,6 +8,7 @@ its persistence/undo, rather than accepting only that a heading is visible.
 """
 import asyncio
 import mimetypes
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -96,14 +97,101 @@ async def synth(page):
     await page.locator('#undo').click()
     await expect(slider).to_have_value(before)
 
+async def gesture_edits(page):
+    identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
+    note = page.locator(f'#roll-grid [data-note="{identity}"]')
+    await note.scroll_into_view_if_needed()
+    before = await note.get_attribute('aria-label')
+    start,end = map(int,re.search(r'(\d+) to (\d+) samples',before).groups())
+    box = await note.bounding_box()
+    x,y = box['x']+box['width']/2, box['y']+box['height']/2
+    await page.mouse.move(x,y); await page.mouse.down(); await page.mouse.move(x+20,y,steps=4); await page.mouse.up()
+    after = await note.get_attribute('aria-label')
+    moved_start,moved_end = map(int,re.search(r'(\d+) to (\d+) samples',after).groups())
+    assert moved_start > start and moved_end-moved_start == end-start
+    await page.locator('#undo').click()
+    await expect(note).to_have_attribute('aria-label',before)
+    edge = await note.locator('[data-edge="end"]').bounding_box()
+    x,y = edge['x']+edge['width']/2, edge['y']+edge['height']/2
+    await page.mouse.move(x,y); await page.mouse.down(); await page.mouse.move(x+20,y,steps=4); await page.mouse.up()
+    resized_start,resized_end = map(int,re.search(r'(\d+) to (\d+) samples',await note.get_attribute('aria-label')).groups())
+    assert resized_start == start and resized_end > end
+    await page.locator('#undo').click()
+    await expect(note).to_have_attribute('aria-label',before)
+    empty = await page.locator('#roll-scroll').evaluate("e=>{const r=e.getBoundingClientRect();for(let y=r.y+10;y<r.bottom-12;y+=15)for(let x=r.x+20;x<r.right-30;x+=25){const t=document.elementFromPoint(x,y);if(t?.closest('#roll-grid')&&!t.closest('[data-note]'))return{x,y};}throw Error('No empty visible roll cell');}")
+    count = await page.locator('#roll-grid .note').count()
+    await page.mouse.move(empty['x'],empty['y']); await page.mouse.down(); await page.mouse.move(empty['x']+15,empty['y'],steps=3); await page.mouse.up()
+    await expect(page.locator('#roll-grid .note')).to_have_count(count+1)
+    await page.locator('#undo').click()
+    await expect(page.locator('#roll-grid .note')).to_have_count(count)
+
+async def gesture_delete(page):
+    identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
+    note = page.locator(f'#roll-grid [data-note="{identity}"]')
+    await note.scroll_into_view_if_needed()
+    before = await note.get_attribute('aria-label')
+    box = await note.bounding_box()
+    client = await page.context.new_cdp_session(page)
+    for _ in range(2):
+        await client.send('Input.dispatchTouchEvent', {'type':'touchStart','touchPoints':[{'x':box['x']+box['width']/2,'y':box['y']+box['height']/2,'id':1}]})
+        await client.send('Input.dispatchTouchEvent', {'type':'touchEnd','touchPoints':[]})
+    await client.detach()
+    await expect(note).to_have_count(0)
+    await page.locator('#undo').click()
+    await expect(note).to_have_attribute('aria-label', before)
+
+async def gesture_navigation(page):
+    viewport = page.locator('#roll-scroll')
+    box = await viewport.bounding_box()
+    snapshot = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.map(n=>n.getAttribute("aria-label"))')
+    await page.locator('#zoom').evaluate('(el)=>{el.value="1.5";el.dispatchEvent(new Event("input"))}')
+    x,y = box['x']+box['width']/2, box['y']+box['height']/2
+    client = await page.context.new_cdp_session(page)
+    async def touch(kind, points):
+        await client.send('Input.dispatchTouchEvent', {'type':kind,'touchPoints':[{'x':a,'y':b,'id':i,'radiusX':1,'radiusY':1} for i,a,b in points]})
+    before = await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')
+    await touch('touchStart', [(1,x-40,y),(2,x+40,y)])
+    await touch('touchMove', [(1,x-80,y),(2,x+80,y)])
+    await touch('touchEnd', [])
+    await expect(page.locator('#zoom')).to_have_value('3')
+    assert abs(await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')-before*2) <= 1
+    top = await viewport.evaluate('(e)=>e.scrollTop')
+    await touch('touchStart', [(1,x-40,y),(2,x+40,y)])
+    await touch('touchMove', [(1,x-40,y-20),(2,x+40,y-20)])
+    await touch('touchEnd', [])
+    assert abs(await viewport.evaluate('(e)=>e.scrollTop')-top-20) < 2
+    assert await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.map(n=>n.getAttribute("aria-label"))') == snapshot
+    await client.detach()
+    zoomed_width = await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')
+    await page.locator('.overflow summary').click()
+    async with page.expect_download() as requested:
+        await page.locator('#draft-save').click()
+    download = await requested.value
+    draft = Path(await download.path()).read_bytes()
+    await page.locator('#zoom').evaluate('(el)=>{el.value="1";el.dispatchEvent(new Event("input"))}')
+    await page.locator('#draft-file').set_input_files({'name':'roundtrip.json','mimeType':'application/json','buffer':draft})
+    await page.locator('#draft-replace').click()
+    assert await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth') == zoomed_width
+
+async def no_tool_row(page):
+    screenshots = ROOT / 'build/remote-gestures'
+    screenshots.mkdir(parents=True, exist_ok=True)
+    await expect(page.locator('.roll-tools')).to_have_count(0)
+    await expect(page.locator('[data-mode]:visible')).to_have_count(0)
+    await page.screenshot(path=str(screenshots / '844x390.png'))
+    await page.set_viewport_size({'width':1440,'height':900})
+    await expect(page.locator('.roll-tools')).to_have_count(0)
+    await expect(page.locator('[data-mode]:visible')).to_have_count(0)
+    await page.screenshot(path=str(screenshots / '1440x900.png'))
+
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth):
-                context = await browser.new_context(viewport={'width': 844, 'height': 390})
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row):
+                context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
                 errors = []
@@ -117,7 +205,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=5 failures=0')
+    print('FUNKYBEATS-BROWSER pages=9 failures=0')
 
 async def main():
     global SOURCE
