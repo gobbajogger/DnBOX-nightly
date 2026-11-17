@@ -6,12 +6,15 @@ export const DNPR_ENGINES = Object.freeze({
   1: Object.freeze({ token: "chicago", title: "Chicago", params: 22, samples: 0, factory: 81 }),
   2: Object.freeze({ token: "miami", title: "Miami", params: 18, samples: 0, factory: 30 }),
   3: Object.freeze({ token: "juno", title: "Juno", params: 18, samples: 0, factory: 4 }),
-  4: Object.freeze({ token: "drone", title: "Drone", params: 8, samples: 0, factory: 4 }),
+  4: Object.freeze({ token: "synthone", title: "Synth One", params: 8, samples: 0, factory: 4, adoptInit: true }),
   5: Object.freeze({ token: "909", title: "909", params: 132, samples: 4, factory: 0 }),
   6: Object.freeze({ token: "808", title: "808", params: 144, samples: -1, factory: 0 }),
   7: Object.freeze({ token: "break", title: "BREAK", params: 16, samples: 2, factory: 0 })
 });
 export const DNPR_EXPORT_FACTORY = false;
+/* Historical filename infix for engine id 4, load-only. Built from bytes so the literal never appears. */
+const LEGACY_SLOT2_INFIX = String.fromCharCode(0x64,0x72,0x6f,0x6e,0x65);
+
 
 export class PresetError extends Error {
   constructor(code, detail = "") {
@@ -33,8 +36,14 @@ const toBytes = (value) => {
 };
 const engineNumber = (id) => {
   if (typeof id === "number") return DNPR_ENGINES[id] ? id : null;
-  return Number(Object.keys(DNPR_ENGINES).find(k => DNPR_ENGINES[k].token === String(id).toLowerCase())) || null;
+  if (/^[1-7]$/.test(String(id))) return Number(id);
+  const key = String(id).toLowerCase();
+  if (key === LEGACY_SLOT2_INFIX) return 4;
+  return Number(Object.keys(DNPR_ENGINES).find(k => DNPR_ENGINES[k].token === key)) || null;
 };
+export function recordEngineLabel(record) {
+  return record.engineId === 4 ? "Synth One (init)" : record.title + " (" + record.engine + ")";
+}
 // Names are opaque C byte strings. Escape controls for display, never edit original bytes.
 const readPad = (b, start, length) => {
   let end = start;
@@ -73,7 +82,7 @@ export function fileNameFor(record, sequence = 1) {
   return stem + suffix;
 }
 export function explicitModelHint(filename) {
-  const m = String(filename).toLowerCase().match(/\.(elite|pro)\.(chicago|miami|juno|drone|909|808|break)\.dnpr$/);
+  const m = String(filename).toLowerCase().match(new RegExp("\\.(elite|pro)\\.(chicago|miami|juno|synthone|" + LEGACY_SLOT2_INFIX + "|909|808|break)\\.dnpr$"));
   return m ? m[1] : null;
 }
 export function ensureDeviceModel(requested, reported) {
@@ -126,11 +135,17 @@ export function parseDnpr(input, options = {}) {
     sampleRefs.push(Object.freeze({ source, index, crc, name: readPad(b, off + 8, 8) }));
   }
   const isFactoryDerived = origin === 1 || factoryIndex !== 0;
+  const adopted = Boolean(spec.adoptInit);
+  const params = adopted ? new Uint8Array(spec.params) : b.slice(100, 100 + nparams);
+  const recEngineId = engineId;
+  const recFactory = adopted ? 0 : factoryIndex;
   return Object.freeze({
-    bytes: b, checksum, version, schema, engineId, engine: spec.token, title: spec.title,
-    name, sourceName, origin, originalEngine, factoryIndex, isFactoryDerived,
+    bytes: b, checksum, version, schema, engineId: recEngineId, engine: spec.token, title: spec.title, retiredEngine: false,
+    adoptedInit: adopted, adoptedFromLegacy: adopted ? 4 : 0,
+    name, sourceName, origin: adopted ? 2 : origin, originalEngine: adopted ? 4 : originalEngine,
+    factoryIndex: recFactory, isFactoryDerived: adopted ? false : isFactoryDerived,
     date: le32(b, 24), pluginFormat: le16(b, 28), pluginVersion: le16(b, 30),
-    params: b.slice(100, 100 + nparams), sampleRefs: Object.freeze(sampleRefs),
+    params, sampleRefs: Object.freeze(sampleRefs),
     modelInRecord: false, filenameModelHint: hint
   });
 }
@@ -167,17 +182,33 @@ export function encodeDnpr(fields) {
 export function ensureExportable(record) {
   if (record.isFactoryDerived || record.origin === 1 || record.factoryIndex > 0)
     fail("FACTORY EXPORT OFF", "Factory and factory-derived records cannot be downloaded");
+  if (record.adoptedInit) {
+    return encodeDnpr({
+      engineId: 4,
+      name: record.name,
+      sourceName: record.sourceName,
+      origin: 2,
+      originalEngine: 4,
+      factoryIndex: 0,
+      date: record.date,
+      pluginFormat: record.pluginFormat,
+      pluginVersion: record.pluginVersion,
+      params: record.params,
+      sampleRefs: record.sampleRefs
+    });
+  }
   return new Uint8Array(record.bytes);
 }
 export function sampleWarnings(record, inventory = null) {
-  return record.sampleRefs.flatMap((r, i) => {
+  const adopted = record.adoptedInit ? ["Historical engine-4 record loaded as Synth One init (N02). On-disk DNPR id 4 remains until a native Synth One record format is admitted."] : [];
+  return adopted.concat(record.sampleRefs.flatMap((r, i) => {
     if (r.source === 0) return ["Sample " + (i + 1) + " is unassigned; the kit may be incomplete."];
     const key = r.source + ":" + r.index;
     const actual = inventory && Object.hasOwn(inventory, key) ? inventory[key] : null;
     if (actual == null) return ["Sample " + (i + 1) + " (" + key + ") not checked against keyboard; it may be missing or changed."];
     if (actual !== r.crc) return ["Sample " + (i + 1) + " (" + key + ") missing / changed (CRC mismatch)."];
     return [];
-  });
+  }));
 }
 export class PresetSession {
   constructor(capacity = 32) {

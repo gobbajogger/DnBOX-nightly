@@ -74,7 +74,9 @@ limits()  { resolve_base || return 1
             return $bad; }
 build()   { npm run build; }
 unit()    { npm test; }
-browser() { npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py; }
+# browser_fixtures.py needs --output; its product mode needs an immutable old Remote root, so the
+# gate runs the detector contract on the real browser (--fixtures-only).
+browser() { rm -rf "$OUT/web-structural"; npm run test:browser && python3 tests/visual/fixtures/web-structural/browser_fixtures.py --fixtures-only --output "$OUT/web-structural"; }
 step clean-tree clean; step setup setup; step fetch-base fetch_base; step no-loss no_loss; step limits limits
 if [ $void = 0 ]; then step build build; step unit-tests unit; step browser-tests browser; fi
 R=PASS; [ $fail = 1 ] && R=FAIL; [ $void = 1 ] && R=VOID

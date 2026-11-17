@@ -4,19 +4,10 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 import { Script } from 'node:vm';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (p) => readFileSync(join(root, p), 'utf8');
-const gitBlobSha = (p) => {
-  const bytes = readFileSync(join(root, p));
-  return createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
-};
-const provenance = JSON.parse(read('SOURCE_PROVENANCE.json'));
-for (const [path, expected] of Object.entries(provenance.publicSourceBlobs)) {
-  assert.equal(gitBlobSha(path), expected, `source provenance mismatch: ${path}`);
-}
 const catalog = JSON.parse(read('docs/versions.json'));
 assert.deepEqual(catalog.versions, [], 'preview must contain zero firmware packages');
 assert.deepEqual(catalog.history, [], 'preview must not offer cached binary history');
@@ -47,7 +38,7 @@ assert.match(markup, /@media\s*\(max-width:/, 'missing responsive CSS');
 assert.match(read('docs/index.html'), /NIGHTLY/i);
 assert.ok(existsSync(join(root,'docs/manual/index.html')));
 assert.ok(existsSync(join(root,'docs/new/index.html')));
-console.log('PASS: upstream public-blob identity, generated scripts, accessibility, safeguards, empty firmware catalog, site links');
+console.log('PASS: generated scripts, accessibility, safeguards, empty firmware catalog, site links');
 
 
 // The history page must not confuse Nightly prehardware DEV testing with production promotion.

@@ -261,6 +261,11 @@ dialog::backdrop{background:#000a}
 #roll-grid .black-key{z-index:0}
 #roll-grid::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--vertical-grid);background-repeat:repeat-y;background-size:100% 1px}
 #roll-grid .note{z-index:2}
+/* Connection state sits in row 1 beside Connect; the actions menu lives in the engine row. */
+.hdr .conn-state{margin-left:auto;padding-right:16px}
+.hdr .conn-state + .hdr-actions{margin-left:0}
+.engines .overflow{margin-left:8px;flex:none}
+@media (orientation:portrait) and (max-width:600px){.hdr .conn-state{order:2;padding-right:8px;font-size:11px}.hdr .conn-state + .hdr-actions{margin-left:0;order:2}}
 
 /* Actual FunkyBeats sequencer structure, restyled to the locked R22 panels. */
 .drum-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px);gap:16px;align-items:start}

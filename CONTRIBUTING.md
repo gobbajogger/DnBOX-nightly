@@ -33,6 +33,12 @@ Please use the issue forms. Do not attach private backups, credentials, or raw c
    That uses `gh api` to set context `dnbox-gate` (success, failure, or error) on the tested SHA, with the `DNBOX-GATE` line as the description. GitHub Actions are not used. The consolidated branch requires a successful `dnbox-gate` status and a pull request; do not push that branch directly. A docs- or meta-only change may still name the SHA and explain why the full product gate was not required, but a merge into consolidated still needs a posted `dnbox-gate` success on the pull-request head.
 5. Do not change GitHub workflow files under `.github/workflows/` unless a maintainer asks you to. GitHub Actions are off on this repository; checks run locally.
 
+## Branches
+
+Max 15 branches per repo; every branch needs an open PR; delete the branch right after merge/close, after the archive/<branch> tag.
+
+Protected branches (`main`, `gh-pages`, `nightly` where it exists, and `integration/dnbox-consolidated`) count toward the cap. Keep at most two `backup/*` branches. Work that is closed or merged is preserved by the `archive/<branch>` tag, then the branch is deleted.
+
 ## Releases
 
 Integration-branch tags for finished delivery-plan moves are described in [docs/RELEASES.md](docs/RELEASES.md).
