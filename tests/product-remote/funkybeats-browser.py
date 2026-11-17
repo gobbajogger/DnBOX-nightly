@@ -1,19 +1,21 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Five real-browser FunkyBeats surfaces, local draft only; no device access.
 
-Serve repository bytes through Playwright routing, without a test HTTP server.
+Serve the actual product build through Playwright routing, without a test HTTP server.
 Use Playwright's bundled Chromium with its normal sandbox. Never fall back to
 an unsandboxed browser. Each case receives a fresh page and tests an edit plus
 its persistence/undo, rather than accepting only that a heading is visible.
 """
 import asyncio
 import mimetypes
+import subprocess
+import tempfile
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 from playwright.async_api import async_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / 'web/product-site'
+SOURCE = None
 ORIGIN = 'https://dnbox.test'
 
 async def serve(route):
@@ -94,7 +96,7 @@ async def synth(page):
     await page.locator('#undo').click()
     await expect(slider).to_have_value(before)
 
-async def main():
+async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
@@ -116,6 +118,15 @@ async def main():
         finally:
             await browser.close()
     print('FUNKYBEATS-BROWSER pages=5 failures=0')
+
+async def main():
+    global SOURCE
+    output_root = ROOT / '.output'
+    output_root.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='funkybeats-browser-', dir=output_root) as output:
+        SOURCE = Path(output)
+        subprocess.run(['node', 'scripts/build-product-site.mjs', '--output', output], cwd=ROOT, check=True)
+        await browser_cases()
 
 if __name__ == '__main__':
     asyncio.run(main())
