@@ -27,7 +27,7 @@ The original v1 protocol tables below describe the historical baseline; the
 bounded tagged additions above do not alter container version1 or bypass its
 length, CRC, backup and semantic-validation checks.
 
-Provenance: Projects HTML/JS and host tests, and the protocol documentation below, reused from GPL-3.0-only gobbajogger/X0X37-for-Loopy-Pro commit 08d3164a265123cb4c84e5104642fd93257d63d7. Keep LICENSE and inherited Felucca attribution (Leo Kuroshita / Hügelton Instruments, 2026); upstream LICENSING.md identifies web code as GPL-3.0-only. Only source, synthetic fixtures/tests and docs were copied. Existing website sample transport and its later fail-closed backup guards remain unchanged.
+Provenance: Projects HTML/JS and host tests, and the protocol documentation below, reused from GPL-3.0-only gobbajogger/DnBOX commit 08d3164a265123cb4c84e5104642fd93257d63d7. Keep LICENSE and inherited Felucca attribution (Leo Kuroshita / Hügelton Instruments, 2026); upstream LICENSING.md identifies web code as GPL-3.0-only. Only source, synthetic fixtures/tests and docs were copied. Existing website sample transport and its later fail-closed backup guards remain unchanged.
 
 The source preview generator emits projects/ with inlined existing modules. Qualified publication must rebuild the preview, bind qualification to the new installer fingerprint (including project assets/generator), independently review output and obtain the parent-owned rollout approval. An empty preview catalog must never replace a qualified catalog.
 

@@ -1,6 +1,6 @@
 # LoopyX0X37 — fast NIGHTLY, hardware-proven production
 
-**Owner policy, 2026-10-23:** NIGHTLY supports rapid development, truthful build history, checked beta installers and owner-operated hardware-test candidates. Standing NIGHTLY DEV authority covers each qualifying candidate without another per-candidate owner reply. Model, integrity, backup and recovery gates remain required. Production firmware and installer behavior on `gobbajogger/X0X37-for-Loopy-Pro` `main` requires matching real-device proof and separate production approval.
+**Owner policy, 2026-10-23:** NIGHTLY supports rapid development, truthful build history, checked beta installers and owner-operated hardware-test candidates. Standing NIGHTLY DEV authority covers each qualifying candidate without another per-candidate owner reply. Model, integrity, backup and recovery gates remain required. Production firmware and installer behavior on `gobbajogger/DnBOX` `main` requires matching real-device proof and separate production approval.
 
 This maintained document and current `AGENTS.md` define the active workflow. Historical proposals and dated PR/evidence snapshots preserve provenance; they are not additional prerequisites. Firmware source remains in the firmware repository's owned lanes and `nightly` integration branch. The separate NIGHTLY repository contains browser/installer/status source and reviewed `main`.
 
