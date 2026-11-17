@@ -63,7 +63,7 @@ async def case(browser, name, payload, width=375, negative=True, transport='json
     await page.close()
 async def main():
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium' if Path('/usr/bin/chromium').exists() else None), chromium_sandbox=True)
+        browser = await pw.chromium.launch(chromium_sandbox=True)
         print('Chromium '+browser.version, flush=True)
         base = copy.deepcopy(DATA)
         base['builds'] = base['builds'][:1]  # Same positive cardinality as independent evidence.

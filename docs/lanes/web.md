@@ -26,7 +26,7 @@ Owner agent: <name>   Branch: lane/web-<topic>   Draft PR: #<n>   Head: <sha8>  
 - <conflict> → reading used: <…>
 
 ## Existing slot-2 removal extraction checkpoint
-Owner: remote/integ integration worker. Base: consolidated 548e56799e1a1f0fc3c273cd6f9702cdf8efad4d. Donor: lane/web-drone-removal 9024d1ec0fb4a4589f405387a57b39eb3184afd3.
+Owner: remote/integ integration worker. Base: consolidated 548e56799e1a1f0fc3c273cd6f9702cdf8efad4d. Donor commit: 9024d1ec0fb4a4589f405387a57b39eb3184afd3.
 Reuses donor codecs and compatibility fixture/test, active preset selector and policy labels. No renderer implementation, R22 redesign, visual baseline regeneration, or native lab copies. Preserves current repository URLs and all untouched tree entries. Original donor retained; #135 overlaps and must be reconciled before later integration.
 Checks: 17/17 preset tests PASS. Independent source review pending. Local gate status: FAIL (required steps NOT_RUN). Full Local gate/browser/combined manifest qualification NOT_RUN; draft only, not delivered or merge-qualified. Historical manual substitutions excluded because they incorrectly describe Synth One as present in source94197fc8 and assign former-engine STRING/BRIGHTNESS controls. Review and resolve documentation separately without falsifying history.
 Next: source review, exact combined browser/full-gate qualification, then normal integration.

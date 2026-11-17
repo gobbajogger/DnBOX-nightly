@@ -66,7 +66,7 @@ async def main():
         OPS.append(raw[5])
         return fixture(hexline)
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/local/bin/google-chrome'), chromium_sandbox=True)
+        browser = await pw.chromium.launch(chromium_sandbox=True)
         plain = await browser.new_page(viewport={'width': 1280, 'height': 900})
         plain_errors = []
         plain.on('pageerror', lambda error: plain_errors.append(str(error)))

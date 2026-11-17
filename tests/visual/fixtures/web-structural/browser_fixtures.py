@@ -46,7 +46,7 @@ def main():
         with sync_playwright() as pw:
             # Explicitly ENABLE the browser sandbox. No --no-sandbox, namespace
             # workaround, security setting change, or alternate security context.
-            browser = pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium'), chromium_sandbox=True)
+            browser = pw.chromium.launch(chromium_sandbox=True)
             report['browser'] = {'status': 'RUN', 'version': browser.version, 'sandbox': True}
             for case in manifest['cases']:
                 page = browser.new_page(viewport={'width': 400, 'height': 300}, reduced_motion='reduce')
