@@ -3,10 +3,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
-import {readFile} from 'node:fs/promises';
+import {readFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {buildProductSite} from '../scripts/build-product-site.mjs';
-import {pathToFileURL} from 'node:url';
+import {pathToFileURL,fileURLToPath} from 'node:url';
 import {join,dirname,basename} from 'node:path';
 // Use Python's unmodified file routing and MIME inference, not a test route table.
 async function serve(directory){
@@ -28,8 +28,10 @@ server.serve_forever()
   return{origin:`http://127.0.0.1:${port}`,async close(){child.kill();await closed;}};
  }catch(error){child.kill();await closed;throw error;}
 }
-test('built five previews survive real static hosting at root and nested paths',async()=>{
- const {output}=buildProductSite();
+test('built five previews survive real static hosting at root and nested paths',async t=>{
+ const outRoot=fileURLToPath(new URL('../.output/',import.meta.url));await mkdir(outRoot,{recursive:true});
+ const output=await mkdtemp(join(outRoot,'http-'));t.after(()=>rm(output,{recursive:true,force:true}));
+ buildProductSite({output});
  const {createStartingBreakPreview}=await import(pathToFileURL(`${output}/starting-break-preview.mjs`));
  const contract=JSON.parse(await readFile(new URL('../web/product-site/sample-contract.json',import.meta.url)));
  for(const [directory,prefix]of [[output,''],[dirname(output),'/'+basename(output)]]){
@@ -49,7 +51,7 @@ test('built five previews survive real static hosting at root and nested paths',
    for(const unknown of ['personal-br2-zone3','personal-br1-zone9','unrelated.wav'])assert.equal((await fetch(`${server.origin}${prefix}/private-audio/${unknown}`)).status,404);
   }finally{await server.close();}
  }
- assert.equal(buildProductSite({check:true}).files,JSON.parse(await readFile(new URL('../web/product-site/SOURCE-MANIFEST.json',import.meta.url))).files.length+10);
+ assert.equal(buildProductSite({output,check:true}).files,JSON.parse(await readFile(new URL('../web/product-site/SOURCE-MANIFEST.json',import.meta.url))).files.length+10);
 });
 
 test('historical aliases cannot bypass pinned audio admission or overwrite hardlinks',async()=>{
