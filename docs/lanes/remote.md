@@ -1,29 +1,39 @@
 # Lane: remote   (copy to docs/lanes/remote.md; update in every push)
-Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8>   Updated: <YYYY-MM-DD HH:MM VLAT>
+Owner: Classic Remote (sole lane writer; Dot Remote frozen). Branch: `lane/remote`. PR: #167. Intake head: `fd6bcf8fee2841466de3291ea46a78952c440ee7`; consolidated base: `cd2926dc7892a73a9d1ea4719ab36f88f221d384`.
 
-## Checklist (from CHECKLISTS.md)
-| ID | Check | Status (PASS/FAIL) | Evidence (SHA + log path or PR comment link) |
-|---|---|---|---|
-| C1 | Local gate at head | FAIL | |
-| <S1…> | | FAIL | |
+## Current work
+- Fix #167 feedback layout regression: reserve a stable compact status row so Undo does not shrink the piano roll or hide a resize edge; keep real errors visible and keyboard reachable.
+- Independent baseline browser negatives reproduce the geometry loss and end-edge hit failure. Candidate all14 FunkyBeats cases and seven recovery cases pass, with Undo/resize at 1440x900, 390x844 and 844x390. Evidence: `evidence/remote-feedback-20261118/`.
+- Exact-head full gate, authenticated status and consolidation are separate delivery steps. No device or gh-pages publication is part of this slice.
+- Next: bind the prepared real Chicago 4758 consumer in both 20-control native voices, preserving native formatter/revision, opaque Undo, no-write busy retry and separate Draft bytes/history. Current production runtime stays 257 until that whole scope is qualified.
 
-## Now / next
-- Now: <item, riskiest first>
-- Next: <item>
+## Whole-lane acceptance remains open
+| ID | Status | Evidence or remaining work |
+|---|---|---|
+| C1 | FAIL | Current successor full gate has not run yet; source/test scope above is qualified separately. |
+| C2 | PASS | Intake fd6 contains exact consolidated cd2926; no files deleted. Recheck live before delivery. |
+| C3 | FAIL | Independent footer review is scoped; all-page owner-baseline 10/10 acceptance remains open. |
+| C4 | FAIL | Current successor limits step must run in the full gate. |
+| C5 | FAIL | R1/R5/R6 and universal live/native coverage remain open. |
+| C6 | FAIL | #167 remains draft until exact-head gate and independent acceptance. |
+| R1 | FAIL | Historical gate renders 109 screens but compares only 5 baselines; 104 have no baseline. Owner-PDF/page acceptance is not established by gate success alone. |
+| R2 | PASS | Scoped browser/source port coverage for roll, step sequencer, mixer, launcher and synth editor; MIT notice retained. Native binding completeness is tracked in R6. |
+| R3 | PASS | Candidate 14 actual gesture cases pass, including create/move/Undo/resize/delete/zoom/pan and no tool row. Explicit physical-touch timing and slow controls preserved. |
+| R4 | PASS | Existing thin per-step velocity/chance/pitch/pan lanes and no selected-note panel retained; actual step lane cases pass. |
+| R5 | FAIL | Current touched footer passes all three sizes; whole-page polish/keyboard inventory is still open. |
+| R6 | FAIL | Mix 29 and available real envelope observer subset qualified; Chicago app binding, all native controls and actual TouchOSC/host integration remain incomplete. |
+| R7 | FAIL | Structural browser fixture must run in the exact successor full gate. |
 
-## Blockers (each with its fix and the route being tried; never "waiting")
-- <blocker> → <fix> (since HH:MM)
+## Preserved requirements and scope
+R22 and owner page geometry; flat shared styling; live glyphs represent real parameter action; full-row available envelope stages; circular TAPE reels; pan L50..C..R50; no tool row or selected-note panel; controls/values only on Remote screens. No invented FILTER/live transport/native state. Follow handoff consumer lifecycle and Draft separation. No main writes, force-push, device access, Codex or Actions. Source transfer/push uses GitHub API; no network Git.
 
-## Top 3 risks for the next hour
-1.
-2.
-3.
+## Deletes
+None.
 
-## Deletes (files this lane removes on purpose, with reason; the gate's no-loss step reads this)
-- <path> — <reason>
+## Conflicts noted
+Current owner handoff supersedes older Dot/Codex execution guidance and preserves the existing lane/PR. Current user prohibitions remain binding. Runtime and browser credentials are reused in place; none are copied into source or evidence.
 
-## Conflicts noted (RULES 23)
-- <conflict> → reading used: <…>
+## Prior delivered slices
 
 - 2026-11-17: Item 1 FunkyBeats R22 port merged via #153 (squash 5840d8aa2dbe60d5d2aaa5dc2be6742d9d49eb21); DNBOX-GATE: PASS 01fc2421780b0336e9d942bcc45c5688ca3ebd3f.
 
@@ -43,4 +53,4 @@ Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8
 - 2026-11-18: #164 native Mix/Master/FX squash ff164b72cb10; exact 9976c75b full remote gate PASS, 29 controls with adopted readback/Undo and three-size gesture/lifecycle tests; deployment remains separate.
 - 2026-11-18: #165 accessibility squash d1812209e61d; exact bceeebf0 full remote gate PASS, current encoder values and stable slider names; first visual timeout retained as unresolved external-load diagnosis.
 
-- 2026-11-18: #166 glyph-domain correction squash cd2926dc7892; exact f8892ae7 full remote gate PASS with raw0/1/2/127 browser checks at all3 sizes; initial ENOSPC failure retained.
+- 2026-11-18: #166 glyph-domain correction squash cd2926dc7892; exact f8892ae7 full remote gate PASS with raw0/1/2/127 browser checks at all three sizes; initial ENOSPC failure retained.

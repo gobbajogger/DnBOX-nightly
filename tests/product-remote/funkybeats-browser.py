@@ -119,10 +119,30 @@ async def synth(page):
     await page.locator('#undo').click()
     await expect(slider).to_have_value(before)
 
+async def edit_geometry(page, note):
+    # Do not scroll here: that would conceal the Undo clipping regression.
+    return await note.evaluate("""n=>{
+        const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
+        const edge=n.querySelector('[data-edge="end"]'),r=edge.getBoundingClientRect();
+        const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+        return {main:rect(document.querySelector('main')),roll:rect(document.querySelector('#roll-scroll')),
+            note:rect(n),edge:rect(edge),endHit:hit===edge||edge.contains(hit)};
+    }""")
+
 async def gesture_edits(page):
+    for width,height in [(844,390),(390,844),(1440,900)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        await page.reload()
+        await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+        await gesture_edits_at_size(page)
+        print(f'PASS Undo + resize stable geometry {width}x{height}',flush=True)
+
+async def gesture_edits_at_size(page):
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
+    geometry = await edit_geometry(page,note)
+    assert geometry['endHit'],('Resize edge must receive pointer input before feedback',geometry)
     before = await note.get_attribute('aria-label')
     start,end = map(int,re.search(r'(\d+) to (\d+) samples',before).groups())
     box = await note.bounding_box()
@@ -133,6 +153,8 @@ async def gesture_edits(page):
     assert moved_start > start and moved_end-moved_start == end-start
     await page.locator('#undo').click()
     await expect(note).to_have_attribute('aria-label',before)
+    restored = await edit_geometry(page,note)
+    assert restored==geometry,('Undo feedback must preserve main, roll and selected-note hit geometry',geometry,restored)
     edge = await note.locator('[data-edge="end"]').bounding_box()
     x,y = edge['x']+edge['width']/2, edge['y']+edge['height']/2
     await page.mouse.move(x,y); await page.mouse.down(); await page.mouse.move(x+20,y,steps=4); await page.mouse.up()
