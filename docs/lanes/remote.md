@@ -1,31 +1,40 @@
 # Lane: remote   (copy to docs/lanes/remote.md; update in every push)
-Owner: Classic Remote (sole lane writer; Dot Remote frozen). Branch: `lane/remote`. PR: #167. Intake head: `fd6bcf8fee2841466de3291ea46a78952c440ee7`; consolidated base: `cd2926dc7892a73a9d1ea4719ab36f88f221d384`.
+Owner: Classic Remote (sole lane writer; Dot Remote frozen). Branch: `lane/remote`. Previous PR: #167, merged as `dd3e2cfb7a0cde404415029e6d1bca3aefb7960a`; next Chicago/R22 slice uses the same lane. Intake head: `fd6bcf8fee2841466de3291ea46a78952c440ee7`; current consolidated base: `dd3e2cfb7a0cde404415029e6d1bca3aefb7960a`.
 
-## Current work
+## Delivered footer correction and current native scope
 - Fix #167 feedback layout regression: reserve a stable compact status row so Undo does not shrink the piano roll or hide a resize edge; keep real errors visible and keyboard reachable.
 - Independent baseline browser negatives reproduce the geometry loss and end-edge hit failure. Candidate all14 FunkyBeats cases and seven recovery cases pass, with Undo/resize at 1440x900, 390x844 and 844x390. Evidence: `evidence/remote-feedback-20261118/`.
 - Exact-head full gate, authenticated status and consolidation are separate delivery steps. No device or gh-pages publication is part of this slice.
 - Full gate at `7844570e4d9922b08f67e154fbdd7759589447d1` failed honestly (status `59263165171`): runtime tests rejected an ancestor symlink in the temporary path, loopback HTTP used the proxy, and the Mix fixture attempted Draft export while the conflict dialog was modal. Complete log SHA256 `fc29d6fac2ca1764bc9b713e4d0acbd82e8762da58770dc5f0a9413d76fb45e1` is preserved in the recovery evidence.
 - The temporary directory is now a real owned directory with unchanged HOME; NO_PROXY/no_proxy append loopback hosts. All eight affected focused runtime/HTTP tests pass without gate or product changes. The Mix fixture now asserts visible conflict feedback and disabled replacement, dismisses with the real Cancel button, and retains the unchanged-Draft assertion before continuing. No threshold or rejection assertion was removed.
 - Independent fixture review found no actionable defects; actual Mix family passes all three sizes (ten sends, five levels, cancel, Undo and five Sound routes), exit0. Log SHA256 `798eb77a3072b4b4b1c7c0bf89ec7606f6d55abbcd83f8ae0cc1e42e2936fedd`. Expanded shared-footer visual review remains separate from owner-PDF acceptance.
-- Next: bind the prepared real Chicago 4758 consumer in both 20-control native voices, preserving native formatter/revision, opaque Undo, no-write busy retry and separate Draft bytes/history. Current production runtime stays 257 until that whole scope is qualified.
+- #167 exact successor `9fab9d092887ebab9faf75d9eadf2fec1fd1a5ee` passed the authentic full gate, exit0, status `59265100114`; complete log SHA256 `8539b5efbb474fbc9b3ebc4a66bcf1d2bf090fe42c4d800e0f124efdcf40749b`. Independent shared-footer review inspected 25 states at each of three sizes and scored the bounded layout criteria 10/10. PR comment: https://github.com/gobbajogger/DnBOX-nightly/pull/167#issuecomment-6982824904. Tip is retained by `archive/lane/remote-pr167-9fab9d092887-20261118`; the automatically deleted branch name was restored from consolidated. Exact post-merge gate is running separately.
+- Current candidate binds producer4758's native Chicago Sound provider through the existing owning MessagePort for both20-control voices. Exact engine/bank/voice/choice/revision/domain validation, native formatter readback, opaque Undo16, explicit verified busy/noWrite retry and generation retirement preserve independent Draft banks/values/history. Runtime4758 is pinned only in this candidate; its exact-source full gate remains required before consolidation.
+- Actual WASM/AudioWorklet acceptance attempt5 passed all three sizes:40controls, both p17 endpoints and outward-key clamp, formatter/revision/expected SET,17edits/16opaque Undo, active-note busy/token retention/manual retry, away/back stale-choice refusal, pending READ/SET/Undo retirement, distinct-voice pending READ supersession, authored nondefault Draft banks/values and both Sound Undo/Redo histories, exact exported bytes and MIDI0. Preserved negative attempts exposed fixture selector and retired-session clock mistakes, not established product defects. Final test adds session/request/voice qualification to audit lookups; compilation and independent source review pass, and the mandatory published-head gate will execute these final bytes.
+- The independent owner-PDF audit found three semantic panels using8px despite the R22 panel token7px. Mix, Connect feedback and startup error now use `--r-panel`. Actual baseline was red; all18 UI/size cases pass after the correction, including an11px active-token change with unchanged bounds. Independent actual panel captures support scoped10/10. Both new browser tests are registered in `test:browser`; the sandbox contract sees17 launch sites with0findings.
+- Independent native layout probes use the existing R22 hit token40px and mounted live canvas glyphs. Initial probe assumptions of44px and retained SVG were corrected against source; product dimensions and thresholds were not changed to satisfy the probe.
+- Evidence and recovery: `docs/LIBRARY-INDEX.md` and https://chatgpt.com/space/page_d663ea30f1b48191acd9762ff4732a33. Source/tests remain on this lane; complete logs, receipts and recovery instructions are in the named evidence archive.
 
 ## Whole-lane acceptance remains open
 | ID | Status | Evidence or remaining work |
 |---|---|---|
-| C1 | FAIL | Exact784 full gate failed unit/browser checks above; corrected successor requires a fresh complete gate and authentic status. |
-| C2 | PASS | Intake fd6 contains exact consolidated cd2926; no files deleted. Recheck live before delivery. |
-| C3 | FAIL | Independent footer review is scoped; all-page owner-baseline 10/10 acceptance remains open. |
-| C4 | PASS | Exact784 full gate limits step passed; rerun at the corrected successor. |
+| C1 | FAIL | Footer9fab full gate passed; post-merge dd3 and this new4758 candidate still require their exact terminal receipts. No result is inherited across SHAs. |
+| C2 | PASS | Candidate fast-forwards through merged consolidated dd3; no files deleted. Recheck live before delivery. |
+| C3 | FAIL | Footer75-state and R22 panel reviews passed their bounded criteria. Final native Sound visual review and whole-page owner-baseline acceptance remain separate. |
+| C4 | FAIL | Footer9fab limits passed; new native candidate limits must run in its full gate. |
 | C5 | FAIL | R1/R5/R6 and universal live/native coverage remain open. |
-| C6 | FAIL | #167 remains draft until exact-head gate and independent acceptance. |
+| C6 | FAIL | #167 merged after exact-head gate/review; current native/R22 slice remains draft until its own qualification. Whole-lane completion remains open. |
 | R1 | FAIL | Historical gate renders 109 screens but compares only 5 baselines; 104 have no baseline. Owner-PDF/page acceptance is not established by gate success alone. |
 | R2 | PASS | Scoped browser/source port coverage for roll, step sequencer, mixer, launcher and synth editor; MIT notice retained. Native binding completeness is tracked in R6. |
 | R3 | PASS | Candidate 14 actual gesture cases pass, including create/move/Undo/resize/delete/zoom/pan and no tool row. Explicit physical-touch timing and slow controls preserved. |
 | R4 | PASS | Existing thin per-step velocity/chance/pitch/pan lanes and no selected-note panel retained; actual step lane cases pass. |
-| R5 | FAIL | Current touched footer passes all three sizes; whole-page polish/keyboard inventory is still open. |
-| R6 | FAIL | Mix 29 and available real envelope observer subset qualified; Chicago app binding, all native controls and actual TouchOSC/host integration remain incomplete. |
-| R7 | FAIL | Structural browser fixture must run in the exact successor full gate. |
+| R5 | FAIL | Shared-footer75-state and R22 panel18-case checks pass all three sizes; full owner-baseline/page/keyboard acceptance remains open. |
+| R6 | FAIL | Mix29 and real observer subset qualified; actual Chicago40 candidate acceptance passed, but final published-head gate is pending. Full native controls and TouchOSC/host integration remain incomplete. |
+| R7 | FAIL | Footer9fab structural detector ran9 fixtures in normal sandbox, exit0. This new candidate still requires its own exact full-gate fixture run. |
+
+## Remaining owner requirements and dependencies
+
+The actual24-page owner PDF and eight correction notes were audited independently. Chicago's duplicate raw list is removed; modeless roll and thin per-step lanes have scoped tests; Chicago WAVE has real names/blends. The remaining real SuperJ6/Synth One maps, native transport/playhead and broader envelope/control observers require their upstream catalog/formatter/runtime contracts. The current JUNO map cannot be renamed to imply those contracts. Historical visual rendering still has104 missing pixel baselines; do not auto-promote them. Complete page-to-owner comparison, full keyboard/reachability coverage, TouchOSC emitted/received protocol fixtures against the actual host and cross-lane firmware/website R22 proof remain open. No fabricated live FILTER stage, transport position or engine state is acceptable.
 
 ## Preserved requirements and scope
 R22 and owner page geometry; flat shared styling; live glyphs represent real parameter action; full-row available envelope stages; circular TAPE reels; pan L50..C..R50; no tool row or selected-note panel; controls/values only on Remote screens. No invented FILTER/live transport/native state. Follow handoff consumer lifecycle and Draft separation. No main writes, force-push, device access, Codex or Actions. Source transfer/push uses GitHub API; no network Git.
@@ -37,6 +46,8 @@ None.
 Current owner handoff supersedes older Dot/Codex execution guidance and preserves the existing lane/PR. Current user prohibitions remain binding. Runtime and browser credentials are reused in place; none are copied into source or evidence.
 
 ## Prior delivered slices
+
+- 2026-11-18: #167 feedback recovery merged as `dd3e2cfb7a0cde404415029e6d1bca3aefb7960a` after authentic full PASS at `9fab9d092887ebab9faf75d9eadf2fec1fd1a5ee`, independent three-size footer review and archived tip. Exact post-merge qualification is tracked separately.
 
 - 2026-11-17: Item 1 FunkyBeats R22 port merged via #153 (squash 5840d8aa2dbe60d5d2aaa5dc2be6742d9d49eb21); DNBOX-GATE: PASS 01fc2421780b0336e9d942bcc45c5688ca3ebd3f.
 
