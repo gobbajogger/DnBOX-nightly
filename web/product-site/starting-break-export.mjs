@@ -35,6 +35,9 @@ export async function exportStartingBreaks(selectedIds,{baseURL=import.meta.url,
  images.forEach((image,i)=>{
   // This is a source-file envelope, not a claim about any connected device's layout.
   if(image.length>81920)throw Error('Starting group exceeds stock source slot size');
+  // SMP_END commits the first 480 bytes on a freshly erased slot. Preserve
+  // the erased gap before the payload so byte-for-byte Restore can verify it.
+  image.fill(0xff,480,512);
   const group=groups[i],payload=image.subarray(512);
   entries.push({slot:i+1,size:81920,empty:false,name:group[0].group,zones:group.length,samples:group.map(r=>r.frames),rates:group.map(()=>22050),data_len:payload.length,data_crc32:crc32(payload),offset,length:image.length,crc32:crc32(image)});offset+=image.length;
  });
