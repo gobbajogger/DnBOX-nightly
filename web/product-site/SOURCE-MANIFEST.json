@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 60229,
-      "sha256": "dd4accd2a8f4af8bf622b3195acf70202da30e6d56c8a99b4178ad857e23c9ff"
+      "bytes": 60374,
+      "sha256": "22b8cc9c1532fc396a4004cc8375fba25c34fac49edab7553a84239ac6913563"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -784,13 +784,13 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 9701,
-      "sha256": "f7b2b2b700b36cc8f18eb47acac3130c02415d27be3c051bc18f2d535f2375d1"
+      "bytes": 9811,
+      "sha256": "16b31727418011124697795a87c178c659aa93e3587fb3ea07cab48e11569e2c"
     },
     {
       "path": "remote/glyph-live.mjs",
-      "bytes": 4887,
-      "sha256": "1c5fef125b0c7f4fc8d3b8ae9121ff3d080657fbf45e80246f2f9796674123f5"
+      "bytes": 5050,
+      "sha256": "cfdb0e2f6bb65ade671cf1027b593a84da34fc3b3bea247dbdb8830692c5d404"
     },
     {
       "path": "remote/glyph-registry.mjs",
@@ -799,8 +799,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 18627,
-      "sha256": "a401fe45de7deee1022a6d1c3dab3565de3d47613ba6e28872eb133fe038c07e"
+      "bytes": 19028,
+      "sha256": "254d10fb6a669f8fe861dc3b7df7be777841ed98106ccd20637d557213cb5bdb"
     },
     {
       "path": "remote/glyphs.mjs",

@@ -41,3 +41,4 @@ Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8
 - 2026-11-18: #163 Mix family squash d372ce1b3d12; exact d602ce5a full remote gate PASS, alias-safe edits/Undo and three-size browser checks; host binding and deployment remain separate.
 
 - 2026-11-18: #164 native Mix/Master/FX squash ff164b72cb10; exact 9976c75b full remote gate PASS, 29 controls with adopted readback/Undo and three-size gesture/lifecycle tests; deployment remains separate.
+- 2026-11-18: #165 accessibility squash d1812209e61d; exact bceeebf0 full remote gate PASS, current encoder values and stable slider names; first visual timeout retained as unresolved external-load diagnosis.
