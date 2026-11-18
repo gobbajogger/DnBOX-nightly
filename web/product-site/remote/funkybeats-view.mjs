@@ -72,7 +72,8 @@ export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,di
  const input=group.children[1];input.dataset.nativeParam=id;if(occurrence!==undefined)input.dataset.paramOccurrence=occurrence;input.setAttribute('aria-label',label);input.setAttribute('aria-valuetext',display);
  if(!enabled)input.setAttribute('disabled','disabled');
  group.children[2].dataset.paramValue=id;
- const glyph='<span class="glyph" data-glyph-fn="'+esc(label)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-value="'+value+'">'+renderSvg(label,value,engine,{live:false})+'</span>';
+ const glyphValue=(value-min)/(max-min||1);
+ const glyph='<span class="glyph" data-glyph-fn="'+esc(label)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-domain="normalized" data-glyph-value="'+glyphValue+'">'+renderSvg(label,glyphValue,engine,{live:false,valueDomain:'normalized'})+'</span>';
  return '<div class="funkybeats-typed-unit encoder">'+glyph+serialize(group)+'</div>';
 }
 

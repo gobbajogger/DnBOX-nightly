@@ -54,11 +54,13 @@ const NAMES={
  BD:'VOICE',SD:'VOICE',LT:'VOICE',MT:'VOICE',HT:'VOICE',RS:'VOICE',CP:'VOICE',CH:'VOICE',OH:'VOICE',CC:'VOICE',RC:'VOICE',CR:'VOICE',RD:'VOICE',CB:'VOICE',CY:'VOICE',COWBELL:'VOICE',DRUMBD:'VOICE'
 };
 
-export function unit(value){
+// Explicit input contract: renderer internals use normalized0..1. Raw MIDI
+// callers must request raw127; numeric1 is never guessed to mean either end.
+export function unit(value,domain='normalized'){
+ if(!['normalized','raw127'].includes(domain))throw Error('Unknown glyph value domain');
  const n=Number(value);
- if(!Number.isFinite(n)) return 0;
- if(n>1) return Math.min(1,n/127);
- return Math.min(1,Math.max(0,n));
+ if(!Number.isFinite(n))return 0;
+ return Math.min(1,Math.max(0,domain==='raw127'?n/127:n));
 }
 function fnOf(id){
  const key=String(id??'').toUpperCase().replace(/[^A-Z0-9]/g,'');
@@ -351,6 +353,8 @@ const DRAW={
 };
 
 export function render(fnId, value, engineId='chicago', state={}){
+ // State scalars (attack/cutoff/feedback etc.) are already normalized.
+ value=unit(value,state.valueDomain??'normalized');
  const fn=fnOf(fnId);
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
@@ -371,7 +375,7 @@ export function renderSvg(fnId, value, engineId, state={}){
 export function morphFrames(fnId, from, to, engineId, state={}){
  const fn=fnOf(fnId);
  if(!state.live || state.depth===0) return [render(fnId, from, engineId, {...state, live:false})];
- if(fn==='WAVE'||fn==='WIDTH') return SWEEP_MIDI.map((midi,i)=>Object.assign(render(fn, midi, engineId, state),{midi, holdMs:SWEEP_HOLD_MS[i]}));
+ if(fn==='WAVE'||fn==='WIDTH') return SWEEP_MIDI.map((midi,i)=>Object.assign(render(fn, midi, engineId, {...state,valueDomain:'raw127'}),{midi, holdMs:SWEEP_HOLD_MS[i]}));
  const samples=[0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600];
  const span=samples[samples.length-1];
  return samples.map(ms=>render(fnId, from+(to-from)*(ms/span), engineId, state));

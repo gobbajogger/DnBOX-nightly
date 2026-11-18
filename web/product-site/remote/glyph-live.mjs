@@ -36,7 +36,7 @@ export function paintPixels(data,w,h,fn,value01,engine,state={}){
  const pad=Math.max(1,Math.round(h*0.08)),gx=pad,gy=pad,gw=w-2*pad,gh=h-2*pad;
  const kind=referenceKind(fn,engine);
  if(kind){paintGlyph({data,width:w,height:h},kind,unit(value01)*127,gx,gy,gw,gh,INK);return kind;}
- const r=render(fn,value01,engine,state),vw=r.cell?102:40,vh=r.cell?26:24,scale=Math.min(gw/vw,gh/vh);
+ const r=render(fn,value01,engine,{...state,valueDomain:'normalized'}),vw=r.cell?102:40,vh=r.cell?26:24,scale=Math.min(gw/vw,gh/vh);
  // The reel diameter is physical geometry. Preserve it in wide or tall cards.
  const sx=r.fn==='TAPE'?scale:gw/vw,sy=r.fn==='TAPE'?scale:gh/vh;
  const left=gx+(gw-sx*vw)/2,top=gy+(gh-sy*vh)/2;
@@ -68,8 +68,8 @@ export function mountLiveGlyphs(root){
  for(const el of root.querySelectorAll('[data-glyph-fn]')){
   if(live.has(el))continue;const fn=el.dataset.glyphFn,engine=el.dataset.glyphEngine||'chicago';
   const c=document.createElement('canvas');c.className='glyph-canvas';c.setAttribute('aria-hidden','true');el.replaceChildren(c);
-  const a=new GlyphAnimator({value:unit(el.dataset.glyphValue),draw:v=>drawGlyph(c,fn,v,engine)});live.set(el,a);el.glyphAnimator=a;n++;
+  const a=new GlyphAnimator({value:unit(el.dataset.glyphValue,el.dataset.glyphDomain??'normalized'),draw:v=>drawGlyph(c,fn,v,engine)});live.set(el,a);el.glyphAnimator=a;n++;
  }
  return n;
 }
-export function setGlyphValue(el,value){el.dataset.glyphValue=String(value);live.get(el)?.set(unit(value));}
+export function setGlyphValue(el,value,domain='normalized'){const normalized=unit(value,domain);el.dataset.glyphValue=String(normalized);el.dataset.glyphDomain='normalized';live.get(el)?.set(normalized);}
