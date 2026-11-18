@@ -61,3 +61,19 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
  assert.match(html,/src="\.\.\/install\.mjs"/);
 });
+
+test('published release records, backup workflows and history bookmarks survive site composition',()=>{
+ const notes=read('new/index.html'), manual=read('manual/index.html'), history=read('builds/index.html');
+ for(const target of [
+  'https://github.com/gobbajogger/DnBOX/pull/869#issuecomment-6849042743',
+  'https://github.com/gobbajogger/DnBOX-nightly/pull/120',
+  'https://github.com/gobbajogger/DnBOX-nightly/pull/117',
+  'https://github.com/gobbajogger/DnBOX-nightly/pull/118',
+  '../install/#buildarchive',
+ ])assert.ok(notes.includes('href="'+target+'"'),target);
+ for(const text of ['94197fc8','600b3b45','withdrawn','0.0.25.1'])assert.ok(notes.includes(text),text);
+ for(const target of ['../install/#samples','../install/#projects','https://github.com/gobbajogger/DnBOX/issues','https://github.com/gobbajogger/DnBOX/tree/79280e763341d03ba43266d3e25dad66f12de860/docs'])assert.ok(manual.includes('href="'+target+'"'),target);
+ for(const id of ['status','buildtitle','builds','historytitle','history'])assert.ok(history.includes('id="'+id+'"'),id);
+ assert.ok(history.includes('href="../build-status.json"'));
+ const ids=[...notes.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
+});
