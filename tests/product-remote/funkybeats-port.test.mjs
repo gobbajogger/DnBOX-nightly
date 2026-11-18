@@ -58,7 +58,7 @@ test('actual synth slider builder retains explicit native domains and escaped va
  const {renderTypedFunkyBeatsParameter}=await import('../../web/product-site/remote/funkybeats-view.mjs');
  const html=renderTypedFunkyBeatsParameter({id:'native/"<control>',label:'Attack',value:25,min:3,max:9000,step:.25,display:'25 ms'});
  assert.match(html,/min="3" max="9000" value="25" step="0.25"/);
- assert.match(html,/aria-valuetext="25 ms"/);assert.doesNotMatch(html,/<control>/);assert.match(html,/data-param="native\/&quot;&lt;control&gt;"/);
+ assert.match(html,/aria-label="Attack"/);assert.match(html,/aria-valuetext="25 ms"/);assert.doesNotMatch(html,/<control>/);assert.match(html,/data-param="native\/&quot;&lt;control&gt;"/);
  assert.match(html,/data-native-param="native\/&quot;&lt;control&gt;"/);
  assert.match(renderTypedFunkyBeatsParameter({id:'x',label:'Wave',value:0,min:0,max:0,display:'SAW',enabled:false}),/disabled="disabled"/);
  assert.throws(()=>renderTypedFunkyBeatsParameter({id:'x',label:'Wrong',value:128,min:0,max:127,display:'wrong'}));
@@ -67,7 +67,7 @@ test('upstream mixer projection retains typed faders, not fabricated meters or c
  const {renderTypedFunkyBeatsMixer}=await import('../../web/product-site/remote/funkybeats-view.mjs');
  const channels=['909','808','BREAK','CHICAGO','MIAMI'].map((label,i)=>({id:'parts|1:5:'+i+':0',label,value:75+i,min:0,max:127,step:1,display:'-5dB',occurrence:i}));
  const html=renderTypedFunkyBeatsMixer({channels});
- assert.equal((html.match(/class="mixer-fader"/g)||[]).length,5);assert.equal((html.match(/max="127"/g)||[]).length,5);
+ assert.match(html,/aria-label="909"/);assert.match(html,/aria-valuetext="-5dB"/);assert.equal((html.match(/class="mixer-fader"/g)||[]).length,5);assert.equal((html.match(/max="127"/g)||[]).length,5);
  for(let i=0;i<5;i++){assert.ok(html.includes('data-param="'+channels[i].id+'"'));assert.ok(html.includes('value="'+channels[i].value+'"'));}
  assert.doesNotMatch(html,/mixer-vu|mixer-eq|mixer-send|mixer-mute|mixer-solo|bus-channel|master-fader|0\.0dB/);
  assert.throws(()=>renderTypedFunkyBeatsMixer({channels:channels.slice(1)}));

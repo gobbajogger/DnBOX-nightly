@@ -27,6 +27,8 @@ async def cases(origin):
        await page.wait_for_function('n=>controlPackets.length>n',arg=before_count)
        packet=await page.evaluate('controlPackets.at(-1)');actual=next(c for c in packet['controls'] if ':'.join(str(c[k]) for k in ['target','voice','parameter'])==key);assert actual['value']==value+delta,(key,value,actual)
        new_text=await target.evaluate("e=>e.tagName==='INPUT'?e.value:e.querySelector('output')?.textContent");assert new_text!=old_text,(key,old_text,new_text)
+       if await target.evaluate("e=>e.tagName==='BUTTON' && e.classList.contains('encoder')"):assert new_text in (await target.get_attribute('aria-label') or ''),(key,'stale accessible value',new_text,await target.get_attribute('aria-label'))
+       if await target.evaluate("e=>e.tagName==='INPUT'"):assert await target.get_attribute('aria-valuetext')==await target.evaluate("e=>e.closest('.funkybeats-typed-unit').querySelector('[data-param-value]').textContent")
        await page.locator('#undo').click();await page.wait_for_function('n=>controlPackets.length>n',arg=before_count+1);assert await page.evaluate('controlPackets.at(-1).controls')==baseline
        assert await target.evaluate("e=>e.tagName==='INPUT'?e.value:e.querySelector('output')?.textContent")==old_text
      assert len(seen)==29,seen

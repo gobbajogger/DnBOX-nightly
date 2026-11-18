@@ -389,7 +389,7 @@ async def break_and_tape(page):
     await page.locator('[data-view="mix"]').click()
     await page.locator('[data-mix-mode="fx"]').click()
     await expect(page.locator('[data-mix-mode="fx"]')).to_have_attribute('aria-pressed', 'true')
-    wear = page.locator('button[aria-label="Tape Wear"]')
+    wear = page.locator('button[data-mix-param-label="Tape Wear"]')
     await expect(wear.locator('output')).to_have_text('50%')
     painted = await wear.locator('canvas').evaluate('el => el.toDataURL()')
     await wear.press('Enter')
@@ -397,7 +397,7 @@ async def break_and_tape(page):
     await field.fill('127')
     await field.press('Enter')
     await expect(wear.locator('output')).to_have_text('100%')
-    await page.wait_for_function("before => document.querySelector('[aria-label=\"Tape Wear\"] canvas').toDataURL() !== before",arg=painted)
+    await page.wait_for_function("before => document.querySelector('[data-mix-param-label=\"Tape Wear\"] canvas').toDataURL() !== before",arg=painted)
     state = await draft_state(page)
     assert state['breakSequence'] == {'loops':['personal-br1-zone2','personal-br2-zone1'], 'rate':'1/8', 'slices':[0]*15+[32]}
     assert {'id':'catalog/1551', 'value':127} in state['parameters']
