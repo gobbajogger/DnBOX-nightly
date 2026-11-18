@@ -57,7 +57,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
   }
  }
  async function shutdown(announce){
-  busy=true;apply.disabled=true;pending=null;confirmed=new Map();admitted=null;
+  busy=true;state.dataset.session='disconnected';apply.disabled=true;pending=null;confirmed=new Map();admitted=null;
   if(list?.replaceChildren)list.replaceChildren();
   const current=client,link=broker;client=null;broker=null;
   let released=true;
@@ -84,7 +84,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    const timeoutMs=Number.isFinite(globalThis.__DNBOX_MIDI_TIMEOUT)?globalThis.__DNBOX_MIDI_TIMEOUT:400;
    broker=new MidiBroker({input,output,timeoutMs});
    const pin={crc:parsed.catalog.crc,count:parsed.catalog.count,admitted:true,controls:parsed.catalog.controls.map(descriptor=>({id:descriptor.id,kind:descriptor.kind,min:descriptor.min,max:descriptor.max,...(descriptor.readMin!==undefined?{readMin:descriptor.readMin}:{}),...(descriptor.readMax!==undefined?{readMax:descriptor.readMax}:{})}))};
-   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(note.phase==='connection-lost'){say('Connection lost. Apply stays off.');apply.disabled=true;}}});
+   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(note.phase==='connection-lost'){state.dataset.session='disconnected';say('Connection lost. Apply stays off.');apply.disabled=true;}}});
    await client.identify();
    await client.open();
    const snapshot=await client.snapshot(parsed.catalog.controls.map(descriptor=>descriptor.id));
@@ -92,7 +92,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    admitted=parsed;confirmed=new Map(snapshot.values.map(reading=>[reading.id,reading]));pending=null;
    renderControls();apply.disabled=true;
    const count=snapshot.values.filter(reading=>reading.available!==false).length;
-   say(`Connected. ${count} controls confirmed.`);if(result)result.hidden=true;
+   state.dataset.session='ready';say(`Connected. ${count} controls confirmed.`);if(result)result.hidden=true;
    if(safety)safety.textContent=`${parsed.admission.testOnly?'Simulator catalog. Not a device. ':''}${SAFETY_ON}`;
    connect.textContent='Disconnect';
   }catch(error){

@@ -338,8 +338,8 @@ async def break_and_tape(page):
     preview = page.locator('#break-sequence [data-action="play"]').first
     await preview.click()
     await expect(preview).to_have_attribute('aria-pressed','true')
-    await preview.click()
-    await expect(preview).to_have_attribute('aria-pressed','false')
+    await expect(preview).to_have_attribute('aria-pressed','false',timeout=7000)
+    await expect(preview).to_have_text('Play')
     assert await page.locator('[data-break-loop="0"]').input_value() == ''
     await page.locator('[data-break-loop="0"]').select_option('personal-br1-zone2')
     await page.locator('[data-break-loop="1"]').select_option('personal-br2-zone1')
@@ -372,11 +372,20 @@ async def break_and_tape(page):
     await expect(page.locator('[data-break-loop="0"]')).to_have_value('personal-br1-zone2')
     old = dict(state)
     del old['breakSequence']
+    old['notes'].append(dict(id='draft998', track='breaks', note=60, velocity=100, channel=0, start=0, end=500, sourceOrder=None, pulse=False))
     await load_draft(page, old)
     await page.locator('[data-view="roll"]').click()
     await expect(page.locator('[data-break-step="15"]')).to_have_value('0')
     await expect(page.locator('[data-break-loop="0"]')).to_have_value('')
     assert not await page.locator('#roll-view').is_visible()
+    await page.locator('[data-break-view="notes"]').click()
+    legacy = page.locator('[data-note="draft998"]')
+    await expect(legacy).to_be_visible()
+    await legacy.press('ArrowUp')
+    legacy_file = await draft_state(page)
+    assert next(n for n in legacy_file['notes'] if n['id']=='draft998')['note'] == 61
+    assert 'breakSequence' not in legacy_file
+    await page.locator('[data-break-view="slices"]').click()
     await page.locator('[data-engine="chicago"]').click()
     await expect(page.locator('#roll-view')).to_be_visible()
     await page.locator('#connect').click()

@@ -363,3 +363,7 @@ dialog::backdrop{background:#000a}
 #connection-result {position:fixed;z-index:10;top:64px;right:var(--margin);padding:16px;max-width:min(400px,90vw);background:var(--panel);border:1px solid var(--line);border-radius:8px;}
 #connection-result h2 {margin:0;}
 @media(max-width:600px) {.break-steps {grid-template-columns:repeat(4,minmax(0,1fr));}}
+
+#break-views:not([hidden]) {display:flex;gap:4px;margin-bottom:8px;}
+#break-views button {border:1px solid var(--line);border-radius:var(--r-control);background:var(--panel);color:var(--fg);min-height:var(--hit);padding:0 14px;}
+#break-views [aria-pressed=true] {color:var(--accent);border-color:var(--accent);}

@@ -30,8 +30,17 @@ const breakEditor = $('break-sequence') && mountBreakSequence($('break-sequence'
  const apply = value => { Object.assign(breakSequence, value); breakEditor.paint(); };
  apply(next); timeline.record({label:'BREAK sequence',undo:()=>apply(before),redo:()=>apply(next)}); status();
 });
+let breakView = 'slices';
+for(const button of document.querySelectorAll('[data-break-view]'))button.onclick = () => {
+ breakView = button.dataset.breakView;
+ syncBreakView();
+ if (breakView === 'notes') {paintNotes(); fitPattern(); paintNotes();}
+};
 function syncBreakView() {
- const active = view === 'roll' && $('part').value === 'breaks';
+ const editingBreak = view === 'roll' && $('part').value === 'breaks';
+ const active = editingBreak && breakView === 'slices';
+ if ($('break-views')) $('break-views').hidden = !editingBreak;
+ for (const button of document.querySelectorAll('[data-break-view]')) button.setAttribute('aria-pressed',String(button.dataset.breakView === breakView));
  $('roll-view').hidden = view !== 'roll' || active;
  if (breakEditor) {
   $('break-sequence').hidden = !active;
@@ -39,7 +48,7 @@ function syncBreakView() {
  }
 }
 const name=n=>names[n%12]+(Math.floor(n/12)-1),notes=()=>model.notes.filter(n=>n.track===$('part').value),current=()=>notes().find(n=>n.id===selected),point=e=>{const r=grid.getBoundingClientRect();return pointAt(e.clientX-r.left,e.clientY-r.top,{width,row,endSample:model.endSample});};
-function status(message){$('status').textContent=message??`${changeLines().length} changes · Draft · Not connected`;for(const id of['undo','parameter-undo','motion-undo','song-undo'])if($(id))$(id).disabled=!timeline.canUndo;for(const id of['redo','motion-redo','song-redo'])if($(id))$(id).disabled=!timeline.canRedo;}
+function status(message){const connection=$('conn-state')?.dataset?.session==='ready'?'Simulator connected':'Not connected';$('status').textContent=message??`${changeLines().length} changes · Draft · ${connection}`;for(const id of['undo','parameter-undo','motion-undo','song-undo'])if($(id))$(id).disabled=!timeline.canUndo;for(const id of['redo','motion-redo','song-redo'])if($(id))$(id).disabled=!timeline.canRedo;}
 function select(id,{preserve=false,replace=false}={}){selected=id;focusSelection=true;if(preserve)return;if(multi&&!replace){const ids=new Set(model.selection);if(ids.has(id))ids.delete(id);else ids.add(id);model.selectIds([...ids]);}else model.selectIds([id]);}
 function laneKind(){return LANE_KINDS.includes($('lane-kind').value)?$('lane-kind').value:'velocity';}
 function laneSpan(){const h=$('velocity')?.clientHeight;return h>=24?h:72;}
