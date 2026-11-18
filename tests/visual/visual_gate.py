@@ -28,6 +28,7 @@ PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as di
 SIZES = [(1440, 900), (1024, 640), (844, 390), (390, 844)]
 SITE = ['index.html', 'install/index.html', 'breaks/index.html', 'starting-breaks/index.html', 'projects/index.html',
         'presets/index.html', 'presets/legacy/index.html', 'manual/index.html', 'manual/original/index.html',
+        'manual/legacy.html', 'manual/projects-guide.html', 'manual/protocol.html',
         'builds/index.html', 'tools/index.html', 'help/index.html', 'new/index.html', 'remote/identity/index.html']
 OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 # The web/x0x_*.html files are templates (/*LIB*/, /*CATALOG*/); npm run build compiles
@@ -264,6 +265,9 @@ def main():
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(base + '/product-site/' + rel); settle(pg)
+                    scroll_width = pg.evaluate('document.documentElement.scrollWidth')
+                    if scroll_width > w:
+                        errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag

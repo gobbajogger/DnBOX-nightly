@@ -954,8 +954,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 11870,
-      "sha256": "62579cf8f5058cc79137d96005634c8d2a032b5a8dfce1dae2fc79bf7230c605"
+      "bytes": 12093,
+      "sha256": "99d33a7a03628c1a4ea32817a5f069a439a360b4d3ffd7315b9815f478fb8aab"
     },
     {
       "path": "starting-break-export.mjs",

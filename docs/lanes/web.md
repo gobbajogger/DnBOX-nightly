@@ -38,3 +38,7 @@ Review also corrected README: Synth One is a development slot/init migration wit
 - 2026-11-17: item 1 merged in #152 as `7a2ed1842e7773e249f0e46ac3da156945964626` after the exact-head `dnbox-gate` success; current-source retired-name scan is clear.
 
 - 2026-11-18: Merge consolidated #160 and retain its starting-breaks navigation assertion alongside Web item 2 route, redirect and historical label assertions.
+
+### 2026-11-18 phone layout and route coverage
+
+Chromium reproduced horizontal page overflow on 13 of 19 routes at 390×844 and on Remote connection at 844×390 at 7681fabe. Wrap the narrow site navigation and build identifiers and stack the narrow installer header. The scoped rerun loaded all 19 routes at 390×844, 844×390 and 1440×900 with HTTP 200 and zero page overflow. The visual gate now checks page width and includes all three previously omitted manual pages. Product checks passed locally. Independent full gate, comparative review, firmware screen parity and Pages qualification remain open.
