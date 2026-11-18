@@ -105,6 +105,12 @@ async def main():
         await page.locator('button[aria-label="Tape Wear"]').press('ArrowRight')
         check(before_local_edits == OPS, 'BREAK assignments, slices and Wear edits send zero protocol frames')
         check('Simulator connected' in await page.locator('#status').text_content(), 'draft status retains confirmed simulator identity')
+        await page.locator('#undo').click()
+        check('Simulator connected' in await page.locator('#status').text_content(), 'Undo preserves simulator status')
+        for button in ['play','stop','rec']:
+            await page.locator('#'+button).click()
+            check('Local transport · Simulator connected' == await page.locator('#status').text_content(), button+' reports the local transport and actual connection')
+        check(before_local_edits == OPS, 'draft history and transport buttons send zero protocol frames')
         check(await page.locator('#apply').is_disabled(), 'offline edits do not arm native Apply')
         await page.locator('#apply').is_disabled()
         check(await page.locator('#apply').is_disabled(), 'Apply stays disabled before an edit')
