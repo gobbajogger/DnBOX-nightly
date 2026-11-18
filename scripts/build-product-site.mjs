@@ -3,6 +3,37 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,lstatSync,readdirSync}from'node:fs';
 import {resolve,dirname,join,relative,sep}from'node:path';
 import {fileURLToPath}from'node:url';import{createHash}from'node:crypto';
+import {SITE_ORIGIN,githubRepo,pagesUrl} from '../web/product-site/site-origin.mjs';
+
+const oldNightly = 'gobbajogger/x0x37-for-Loopy-Pro_nightly';
+const oldFirmware = 'gobbajogger/X0X37-for-Loopy-Pro';
+const renamedRoots = new Map([
+ ['https://github.com/'+oldNightly, githubRepo(SITE_ORIGIN.nightlyRepo)],
+ ['https://github.com/'+oldFirmware, githubRepo(SITE_ORIGIN.firmwareRepo)],
+ ['https://raw.githubusercontent.com/'+oldFirmware, 'https://raw.githubusercontent.com/'+SITE_ORIGIN.owner+'/'+SITE_ORIGIN.firmwareRepo],
+ ['https://api.github.com/repos/'+oldNightly, 'https://api.github.com/repos/'+SITE_ORIGIN.owner+'/'+SITE_ORIGIN.nightlyRepo],
+ ['https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly', pagesUrl().replace(/\/$/,'')],
+]);
+function renamedUrl(url) {
+ if (typeof url !== 'string') return url;
+ for (const [oldRoot, newRoot] of renamedRoots) {
+  if (url === oldRoot || url.startsWith(oldRoot + '/')) return newRoot + url.slice(oldRoot.length);
+ }
+ return url;
+}
+// Keep the sealed source record intact. Only public transport addresses follow a repository rename.
+function buildCatalog(source) {
+ const catalog = JSON.parse(source);
+ if ('repo' in catalog) catalog.repo = renamedUrl(catalog.repo);
+ if ('pages' in catalog) catalog.pages = renamedUrl(catalog.pages);
+ for (const row of catalog.versions) {
+  if ('evidence_url' in row) row.evidence_url = renamedUrl(row.evidence_url);
+  for (const model of Object.values(row.models ?? {})) {
+   if (model && 'pkg' in model) model.pkg = renamedUrl(model.pkg);
+  }
+ }
+ return Buffer.from(JSON.stringify(catalog,null,2)+'\n');
+}
 const root=fileURLToPath(new URL('../',import.meta.url));
 export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
@@ -37,7 +68,7 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if (row.bytes !== data.length || row.sha256 !== createHash('sha256').update(data).digest('hex')) {
    throw Error('Source differs from manifest: ' + row.path);
   }
-  inputs.push([row.path,data]);
+  inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
  // Keep historical preview URLs working without admitting arbitrary private audio.
  // Aliases reuse only WAV bytes that passed the pinned five-sample admission above.
