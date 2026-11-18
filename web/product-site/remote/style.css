@@ -180,6 +180,12 @@ dialog::backdrop{background:#000a}
 .source-scene .source-hit{position:absolute;min-width:0;min-height:0;padding:0;margin:0;display:grid;place-items:center;opacity:0;border:0;background:transparent;border-radius:7px;touch-action:none;font:700 var(--fs-sm)/1 var(--font);color:var(--fg)}
 .source-scene .source-hit[data-live=pan]{opacity:1;background:rgba(14,20,22,.72)}
 .source-scene .source-hit:focus-visible{opacity:1;outline:2px solid var(--accent)}
+/* Consumer names occupy the redundant SOUND heading strip, outside source ink/hits. */
+.source-labels{position:absolute;left:2.5%;top:2.72727272727%;width:95%;height:5.45454545455%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;background:var(--focus-col);color:var(--fg);pointer-events:none;border-radius:4px 4px 0 0}
+.source-labels span{display:grid;place-items:center;min-width:0;height:100%;text-align:center;font-size:13px;line-height:18px;font-weight:700;white-space:nowrap}
+/* Beat the generic view-button fill without changing source hit geometry. */
+#other-view .source-scene .source-hit{background:transparent}
+#other-view .source-scene .source-hit[data-live=pan]{background:rgba(14,20,22,.72)}
 .source-caption{font-size:var(--fs-xs);color:var(--muted)}
 .source-sound-list{display:block}
 .source-sound-row{display:grid;grid-template-columns:minmax(5rem,1fr) minmax(4rem,1fr) auto;align-items:center;gap:var(--u);min-height:var(--hit);width:100%;padding:.65rem .8rem;border:1px solid var(--line);border-radius:10px;text-align:left;background:#121a1c;color:var(--fg)}

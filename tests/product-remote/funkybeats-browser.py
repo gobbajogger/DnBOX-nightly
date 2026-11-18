@@ -593,13 +593,67 @@ async def motion_keyboard(page):
         await expect(steps.nth(9)).to_have_attribute('aria-label','Step 10, 77')
         print(f'PASS Motion Tab/Enter/Space selects the edited step, preserves focus/history and pointer drawing {width}x{height}',flush=True)
 
+async def project_sound_edit_count(page):
+    for width,height in [(1440,900),(390,844),(844,390)]:
+        await project_sound_edit_count_at_size(page,width,height)
+
+async def project_sound_edit_count_at_size(page,width,height):
+    await page.set_viewport_size({'width':width,'height':height})
+    await page.goto(ORIGIN+'/remote/')
+    await page.locator('[data-engine="drum909"]').click()
+    await page.locator('[data-view="sound"]').click()
+    await page.locator('#sound-voice').select_option('0')
+    prefix='current-state-and-reference/909-voice-00.svg|'
+    attack_id,tune_id=prefix+'1:0:0:1',prefix+'1:0:0:0'
+    async def snapshot(label):
+        await page.locator('[data-view="sound"]').click()
+        await page.locator('[data-param="'+tune_id+'"]').press('Enter')
+        effective=await page.locator('#parameter-value').input_value()
+        document=await draft_state(page)
+        raw={entry['id']:entry['value'] for entry in document['parameters']}
+        await page.locator('[data-view="files"]').click()
+        summary=await page.locator('.project-summary p').inner_text()
+        await page.locator('[data-project-action="review"]').click()
+        review=await page.locator('#changes').inner_text()
+        await page.locator('#review-dialog button').click()
+        result={'raw':raw,'effectiveTune':effective,'summary':summary,'review':review}
+        print('PROJECT_SOUND_COUNT',width,height,label,json.dumps(result),flush=True)
+        return result
+    await page.locator('[data-param="'+attack_id+'"]').press('Enter')
+    await expect(page.locator('#parameter-value')).to_have_value('13')
+    await page.locator('[data-param="'+attack_id+'"]').press('ArrowUp')
+    before=await snapshot('authored-Attack')
+    assert before['raw']=={attack_id:14} and '1 sound edits' in before['summary']
+    await page.locator('[data-view="sound"]').click()
+    await page.locator('[data-param="'+tune_id+'"]').press('ArrowDown')
+    edited=await snapshot('edited-Tune')
+    assert edited['raw']=={attack_id:14,tune_id:33} and edited['effectiveTune']=='33'
+    assert '2 sound edits' in edited['summary']
+    await page.locator('#undo').press('Enter')
+    undone=await snapshot('Undo-Tune')
+    # Default-valued entries may remain explicit; preserve this existing representation.
+    assert undone['raw']=={attack_id:14,tune_id:34} and undone['effectiveTune']=='34'
+    assert '1 sound edits' in undone['summary'],('Projects must count changed values, not retained default entries',undone)
+    assert 'Attack: 13 → 14' in undone['review'] and 'Tune:' not in undone['review']
+    await page.locator('#redo').press('Enter')
+    redone=await snapshot('Redo-Tune')
+    assert redone['raw']=={attack_id:14,tune_id:33} and redone['effectiveTune']=='33'
+    assert '2 sound edits' in redone['summary'] and 'Tune: 34 → 33' in redone['review']
+    await page.locator('#undo').press('Enter')
+    await page.locator('#undo').press('Enter')
+    zero=await snapshot('Undo-Attack')
+    assert zero['raw']=={attack_id:13,tune_id:34} and zero['effectiveTune']=='34'
+    assert '0 sound edits' in zero['summary'] and zero['review']=='No changes.'
+    await expect(page.locator('#undo')).to_be_disabled()
+    print(f'PASS Projects sound-edit count follows actual Draft changes and preserves effective Undo/Redo {width}x{height}',flush=True)
+
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -614,7 +668,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=16 failures=0')
+    print('FUNKYBEATS-BROWSER pages=17 failures=0')
 
 async def main():
     global SOURCE

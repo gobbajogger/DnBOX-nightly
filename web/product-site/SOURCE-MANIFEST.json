@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 66899,
-      "sha256": "29ab7af1332279536a3556d4b4ea9693dff64594e39b99f9e5de03d52202eb49"
+      "bytes": 67028,
+      "sha256": "e0de00b1ac85f03b0d7bf87a05b69e630b01edf337495b44ca0039c22b04b0c5"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -779,8 +779,8 @@
     },
     {
       "path": "remote/frame.mjs",
-      "bytes": 1584,
-      "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
+      "bytes": 2015,
+      "sha256": "36c4f1dc69d4666c5ee1097dceb912dfa38be08932d6dca0c3e5ce9add56cd86"
     },
     {
       "path": "remote/funkybeats-view.mjs",
@@ -934,8 +934,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 34324,
-      "sha256": "76838984214fbcc73eaccd1a9c1767ba803c98662c35024bb82b6d290fcc5d34"
+      "bytes": 35061,
+      "sha256": "5325dfde4acc7148cdec1e5bab3440322da47909cff82c32e7dbfff3c65d3a3e"
     },
     {
       "path": "remote/timeline.mjs",
