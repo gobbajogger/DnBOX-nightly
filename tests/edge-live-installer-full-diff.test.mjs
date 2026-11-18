@@ -35,6 +35,12 @@ function normalize(html) {
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
   {
+    id: 'programmed-sample-header-padding',
+    reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',
+    liveOnly: ['  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);'],
+    renderOnly: ['  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN))], 5000);'],
+  },
+  {
     id: 'slot-map-port-comment',
     reason: 'Source documents the 9fde4dbe slot-map port so a later render cannot drop it; live has the same pkHasSlotMap logic without this comment.',
     renderOnly: ['  // Port of live gh-pages 9fde4dbe so a later site render cannot drop 0.0.25 packages.'],
@@ -76,10 +82,9 @@ function parseUnifiedHunks(diff) {
   return hunks;
 }
 
-test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
+function assertAllowedRendered(rendered) {
   const live = gitBlob(LIVE_INSTALL_BLOB);
   const catalog = JSON.parse(gitBlob(LIVE_CATALOG_BLOB));
-  const rendered = renderInstaller(catalog).replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
   // The repos were renamed after this live snapshot (X0X37-for-Loopy-Pro -> DnBOX,
   // x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Map the old names in the
   // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
@@ -110,6 +115,21 @@ test('full rendered installer vs live gh-pages differs only by allowlisted hunks
   assert.equal(unexpected.length, 0, 'unexpected hunks: ' + JSON.stringify(unexpected, null, 2));
   assert.equal(unused.size, 0, 'allowlisted hunk missing from the live diff: ' + [...unused]);
   assert.equal(hunks.length, ALLOWED.length);
+}
+function currentRendered() {
+  return renderInstaller(JSON.parse(gitBlob(LIVE_CATALOG_BLOB))).replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
+}
+test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
+  assertAllowedRendered(currentRendered());
+});
+test('exact Restore allowance rejects lost padding, forced full headers and unrelated changes', () => {
+  const rendered=currentRendered();
+  const selector='img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN';
+  assert.equal(rendered.split(selector).length,2);
+  for(const changed of [rendered.replace(selector,'SLOT_HDR_LEN'),rendered.replace(selector,'SLOT_HDR_AREA'),rendered.replace(selector,selector.replace('!==','===')),rendered.replace('if (name === "fm-1") return null;','if (name === "smk-37") return null;')]) {
+    assert.notEqual(changed,rendered);
+    assert.throws(()=>assertAllowedRendered(changed),/unexpected hunks|allowlisted hunk missing/);
+  }
 });
 
 test('publicCatalog keeps display_version so 0.0.25.1 stays 0.0.25.1', () => {

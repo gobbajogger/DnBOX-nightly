@@ -593,7 +593,7 @@ async function writeImage(k, img, onPart) {
     if (r[4]) throw new Error("Writing to the SMK-37 failed.");
     if (onPart) onPart(Math.min(256, data.length - off));
   }
-  const e = await link.req(13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);
+  const e = await link.req(13, [k, ...pack78(img.subarray(0, img.subarray(SLOT_HDR_LEN, SLOT_DATA_OFF).some(byte => byte !== 0xff) ? SLOT_DATA_OFF : SLOT_HDR_LEN))], 5000);
   if (e[1]) throw new Error("The SMK-37 didn't accept the loops.");
 }
 

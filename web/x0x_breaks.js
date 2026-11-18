@@ -783,7 +783,7 @@ export async function writeSlotImage(link, k, img, onPart) {
     if (r[4]) throw new Error(`slot ${k + 1}: write at 0x${adr.toString(16)} failed (${r[4]})`);
     if (onPart) onPart(Math.min(off + 256, data.length), data.length);
   }
-  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);
+  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN))], 5000);
   if (e[1]) throw new Error(`slot ${k + 1}: the keyboard refused the header (${e[1]})`);
 }
 
