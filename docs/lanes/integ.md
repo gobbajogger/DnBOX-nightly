@@ -75,3 +75,5 @@ The native sample protocol leaves bytes 480–511 erased when committing a 480-b
 ### Browser Restore header preservation
 
 Merged #161 as bd449d7; the five live sample URLs and corrected exporter returned their exact bytes. Restore now selects the complete 512-byte header only when padding contains programmed bytes, retaining 480-byte compatibility for erased padding. The canonical writers, generated pages and project exchange copy share this behavior. The regression executes the actual writers against simulated erased flash and compares the entire image. It is not physical-device verification. Full exact-head gate and live corrected Restore deployment remain pending.
+
+The exact eca8f00b full gate passed its browser chain but failed the archived installer-diff test on the intended header-padding selector. Its exact hunk is now recognized; four actual-render negatives still reject short-only, full-only, inverted-padding and unrelated model-guard changes. Production bytes are unchanged by this test correction. Fresh full gate remains required.
