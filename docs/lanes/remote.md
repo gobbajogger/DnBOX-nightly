@@ -29,3 +29,5 @@ Owner agent: <name>   Branch: lane/remote-<topic>   Draft PR: #<n>   Head: <sha8
 
 - 2026-11-17: Shipped Remote module closure corrected in #157 (squash 234f38958fdfa1c6ace0c6c8ebf5ad42ff8b2a7d); DNBOX-GATE: PASS 6a4918230389638dad5f08e8b73e15797627465d.
 - 2026-11-17: #158 modeless gestures squash-merged as 45d98696646fb50e08de12858edd2e13eaae1a32; external PASS status on f2986b316aed8ffe8636fa466496e4f72e9f0c22, local full PASS only on earlier fc08e3bd; exact consolidated post-merge gate failed visual networkidle timeout (browser chain passed), diagnosis ongoing.
+
+- 2026-11-18: Merged consolidated 495d212282434fad6be5256dca7aa4d0962d404b into the per-step parameter candidate for PR #159. This keeps the starting-breaks preview changes in the same checkout as the Remote. Next gate covers both on this merge.
