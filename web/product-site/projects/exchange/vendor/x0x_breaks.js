@@ -687,7 +687,11 @@ export async function backupSlots(link, onPart) {
 }
 
 // erase slot k and write the image (null: erase only); throws on a device error (x0x_slots.write_slot)
-export async function writeSlotImage(link, k, img, onPart, headerLength = SLOT_HDR_LEN) {
+export async function writeSlotImage(link, k, img, onPart, headerLength) {
+  if (headerLength === undefined) {
+    const programmed = img?.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff);
+    headerLength = programmed ? SLOT_HDR_AREA : SLOT_HDR_LEN;
+  }
   if (headerLength !== SLOT_HDR_LEN && headerLength !== SLOT_HDR_AREA)
     throw new Error("Unsupported sample header length.");
   if (!img) {

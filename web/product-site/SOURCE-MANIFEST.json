@@ -144,8 +144,8 @@
     },
     {
       "path": "breaks/index.html",
-      "bytes": 96024,
-      "sha256": "32891addb83de6c9d93431dddfb1cc8d9468d8e2c905893df499891ebb8fee62"
+      "bytes": 96200,
+      "sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265"
     },
     {
       "path": "build-status.json",
@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 627933,
-      "sha256": "05e21c89a770d3eb8fc73129d249a374c977314a755eb11c95357ce4a8af496a"
+      "bytes": 628021,
+      "sha256": "fa5e64a718bdf415dffbf38401e0745263480182dc25ee274410b8225f2e9970"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -599,8 +599,8 @@
     },
     {
       "path": "projects/exchange/vendor/x0x_breaks.js",
-      "bytes": 45178,
-      "sha256": "19c23cf39c9325f4e349fcd0bc0652b83a857ab4b05fee9aa0a79f7dc241a701"
+      "bytes": 45360,
+      "sha256": "4d4dca0dae6d116f53a681829fe9bf88059effb91f4f794d5aaf648e160f34c1"
     },
     {
       "path": "projects/exchange/vendor/x0x_projects.js",
