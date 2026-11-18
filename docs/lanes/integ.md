@@ -1,3 +1,5 @@
+Merged #155 as fbb9c46b0f435b1ac09f912f49104a79de3b501b; five-sample source/export and aliases landed, live publication remains separately qualified.
+
 # Current integ item1 — 2026-11-17 19:00 VLAT
 Owner agent: dot/integ   Branch: lane/integ   PR: #155   Head: this commit
 Gate at final head: NOT_RUN; no merge or deployment completion claimed.
