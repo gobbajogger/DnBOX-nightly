@@ -21,6 +21,12 @@ test('selected samples produce importer-compatible archives with exact original 
   assert.equal(meta.count,images.length);assert.ok(images.every(Boolean));
   const expected=contract.assets.filter(a=>selectedIds.includes(a.id));let index=0;
   for(const image of images){const h=importer.parseHeader(image);assert.ok(image.length<=81920);
+   // SMP_BEGIN erases the slot, SMP_WRITE sends data from address 512, and
+   // legacy SMP_END commits just the 480-byte header. Restore verifies all bytes.
+   const readback = new Uint8Array(image.length).fill(0xff);
+   readback.set(image.subarray(512),512);
+   readback.set(image.subarray(0,480));
+   assert.ok(readback.every((byte,i)=>byte===image[i]),'exact legacy protocol readback for selection '+mask);
    for(let i=0;i<h.nz;i++){
     const a=expected[index++],z=h.zones[i];assert.equal(z.rate,22050);assert.equal(z.n,a.frames);
     assert.equal(digest(image.subarray(512+z.off,512+z.off+a.adpcm_bytes)),a.adpcm_sha256);
