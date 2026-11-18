@@ -359,13 +359,13 @@
     },
     {
       "path": "manual/index.html",
-      "bytes": 13150,
-      "sha256": "452e38674863f53c789a65c5fb942d2889ab41b1caa7ae1efbbf7f12ad48ac82"
+      "bytes": 13169,
+      "sha256": "df57fb7318f0e454e8331e48752ad27501b8f39688dfeaa68364401a6d656509"
     },
     {
       "path": "manual/legacy.html",
-      "bytes": 64367,
-      "sha256": "4c4ac4e7e7b88210d2839bd9c73e61498030a1eb09eb759860fca228bf811382"
+      "bytes": 64745,
+      "sha256": "47b591294351818901598ef4a7ea3ea0e962681770b02123f40e52c5ff999a7c"
     },
     {
       "path": "manual/manual.js",
@@ -504,8 +504,8 @@
     },
     {
       "path": "manual/protocol.html",
-      "bytes": 5188,
-      "sha256": "4036d90c8598b34779680a7f14db176921cbbadf120fbad67d671631be41dba0"
+      "bytes": 5207,
+      "sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
     },
     {
       "path": "new/index.html",
@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 67028,
-      "sha256": "e0de00b1ac85f03b0d7bf87a05b69e630b01edf337495b44ca0039c22b04b0c5"
+      "bytes": 69426,
+      "sha256": "9e38e5e077ccec5c08f96c0b0150265bdd74661813c54fdfaed71d9b5ce025f1"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -829,8 +829,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7964,
-      "sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
+      "bytes": 8114,
+      "sha256": "a82dc9ee285dd8fb0c6ac885531bac9e21eb3ad11ddb0aff699137efec2665db"
     },
     {
       "path": "remote/lane.mjs",
@@ -839,8 +839,8 @@
     },
     {
       "path": "remote/local-instrument.mjs",
-      "bytes": 1559,
-      "sha256": "8a3d97787eb3f6bad508cd19845aa1b49dc9f62657e9a6074966c99f2b45e45d"
+      "bytes": 1997,
+      "sha256": "8c0608ce12eeb848067ea82138dbbb4bb911a4e581bec3290114ad5cd4dacdb2"
     },
     {
       "path": "remote/mix-aliases.mjs",
@@ -908,14 +908,34 @@
       "sha256": "d241ce343a2622c0d0cc12aff53a7921fe1ba6855f2006a74083f782ecf897aa"
     },
     {
+      "path": "remote/runtime-playing-state.mjs",
+      "bytes": 1393,
+      "sha256": "c41a6629933f007c176ada0811a4eb77d754318ddf75c1f3a554ddaa9046c4ab"
+    },
+    {
+      "path": "remote/runtime-sound-map.mjs",
+      "bytes": 1248,
+      "sha256": "44b1e6ec4dea9730bb7db3484bcbd1784d9d0f731cbfecbd2c294219d559df6d"
+    },
+    {
+      "path": "remote/runtime-sound-state.mjs",
+      "bytes": 5443,
+      "sha256": "ecedfd285422c7c5eaa3872cbf07c76e38a65e431fde2b5f26249ac5b73dbff5"
+    },
+    {
       "path": "remote/sequence.mjs",
-      "bytes": 8002,
-      "sha256": "800882642057d40506a08fcf9c80ca2524b858ec2972c48a43244cdab947142a"
+      "bytes": 8731,
+      "sha256": "50549117efe340c3a5400b69094314f89a53aa3d22b8f31237b0c2b3bd16672b"
     },
     {
       "path": "remote/session.mjs",
       "bytes": 6205,
       "sha256": "7ccfbb84d1700a81dfd2c6a1ebbc433aefea6780177f33abefd5817a646ce521"
+    },
+    {
+      "path": "remote/song-view.mjs",
+      "bytes": 1741,
+      "sha256": "03f3d431e74ef0aca9c8ebc6dcd6f748cd4e77249f952941cded808b331b4058"
     },
     {
       "path": "remote/sound.mjs",
@@ -928,14 +948,19 @@
       "sha256": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7"
     },
     {
+      "path": "remote/startup.mjs",
+      "bytes": 876,
+      "sha256": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6"
+    },
+    {
       "path": "remote/step-lane.mjs",
       "bytes": 5553,
       "sha256": "5b3c95bad10b017461d3ca6e6dedf9c93e9955707a0ef9f3476deb7ca6637ed4"
     },
     {
       "path": "remote/style.css",
-      "bytes": 35061,
-      "sha256": "5325dfde4acc7148cdec1e5bab3440322da47909cff82c32e7dbfff3c65d3a3e"
+      "bytes": 36116,
+      "sha256": "f7c70efdc9cf6f64bc9489e03137e70fd8e9dcb7808ee9fa426e4838e6cdda24"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1036,21 +1061,6 @@
       "path": "versions.json",
       "bytes": 89223,
       "sha256": "84d79d2f5240eb02d0dadd810e84f2aec7577d9bf0218bfdbc6d187334285893"
-    },
-    {
-      "path": "remote/startup.mjs",
-      "bytes": 876,
-      "sha256": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6"
-    },
-    {
-      "path": "remote/runtime-sound-map.mjs",
-      "bytes": 1248,
-      "sha256": "44b1e6ec4dea9730bb7db3484bcbd1784d9d0f731cbfecbd2c294219d559df6d"
-    },
-    {
-      "path": "remote/runtime-sound-state.mjs",
-      "bytes": 5443,
-      "sha256": "ecedfd285422c7c5eaa3872cbf07c76e38a65e431fde2b5f26249ac5b73dbff5"
     }
   ],
   "notClaimed": [

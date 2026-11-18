@@ -593,6 +593,47 @@ async def motion_keyboard(page):
         await expect(steps.nth(9)).to_have_attribute('aria-label','Step 10, 77')
         print(f'PASS Motion Tab/Enter/Space selects the edited step, preserves focus/history and pointer drawing {width}x{height}',flush=True)
 
+async def motion_context(page):
+    for width,height in [(1440,900),(390,844),(844,390)]:
+        await motion_context_at_size(page,width,height)
+
+async def motion_context_at_size(page,width,height):
+    await page.set_viewport_size({'width':width,'height':height})
+    await page.goto(ORIGIN+'/remote/')
+    await page.locator('.overflow summary').click()
+    await page.locator('[data-view="locks"]').click()
+    if await page.locator('.overflow').evaluate('(el)=>el.open'):
+        await page.locator('.overflow summary').click()
+    await page.locator('#motion-step').fill('10')
+    await page.locator('#motion-step').press('Tab')
+    await page.locator('#motion-value').fill('77')
+    await page.locator('#motion-value').press('Tab')
+    await page.locator('#motion-grid').focus()
+    # Native Tab traversal scrolls the working controls into view on landscape.
+    for _ in range(18):
+        await page.keyboard.press('Tab')
+    value=page.locator('#motion-value')
+    await expect(value).to_be_focused()
+    await expect(value).to_have_value('77')
+    await expect(page.locator('#part-title')).to_have_text('MIAMI Wave')
+    label=value.locator('..')
+    assert (await label.inner_text()).strip()=='Value'
+    for target in [page.locator('#part-title'),label,value]:
+        box=await target.bounding_box()
+        assert box and box['x']>=0 and box['y']>=0 and box['x']+box['width']<=width+1 and box['y']+box['height']<=height+1,(width,height,box)
+        assert await target.evaluate('(e)=>{const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return e===hit||e.contains(hit)}')
+    await expect(page.get_by_text('Local draft',exact=True)).to_have_count(0)
+    expected=[None]*16;expected[9]=77
+    assert (await draft_state(page))['motion']['values']==expected
+    await page.locator('#undo').click()
+    assert (await draft_state(page))['motion']['values']==[None]*16
+    await page.locator('#redo').click()
+    assert (await draft_state(page))['motion']['values']==expected
+    await page.locator('[data-view="roll"]').click()
+    await expect(page.locator('#part-title')).to_have_text('CHICAGO / P01')
+    assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+    print(f'PASS Motion visible target/value identity after keyboard scroll and intact history {width}x{height}',flush=True)
+
 async def project_sound_edit_count(page):
     for width,height in [(1440,900),(390,844),(844,390)]:
         await project_sound_edit_count_at_size(page,width,height)
@@ -653,7 +694,7 @@ async def browser_cases():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()

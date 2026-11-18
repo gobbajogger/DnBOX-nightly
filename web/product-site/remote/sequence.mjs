@@ -23,6 +23,10 @@ export class Arrangement{
  check(row){if(!Array.isArray(row.patterns)||row.patterns.length!==5||row.patterns.some(n=>!Number.isInteger(n)||n<0||n>31)||!Number.isInteger(row.repeats)||row.repeats<1||row.repeats>8)throw Error('Invalid song row');return row;}
  add(patterns,repeats=1){this.save([...this.rows,this.check({patterns:[...patterns],repeats})]);}
  update(i,patch){if(!this.rows[i]||Object.keys(patch).some(k=>!['patterns','repeats'].includes(k)))throw Error('Invalid song row');const row=this.check({...structuredClone(this.rows[i]),...structuredClone(patch)});this.save(this.rows.map((r,j)=>i===j?row:r));}
+ row(i){if(!Number.isInteger(i)||i<0||i>=this.rows.length)throw Error('Invalid song row');return this.rows[i];}
+ setPattern(i,part,pattern){const row=this.row(i);if(!Number.isInteger(part)||part<0||part>=5||!Number.isInteger(pattern)||pattern<0||pattern>31)throw Error('Invalid song pattern');const patterns=[...row.patterns];patterns[part]=pattern;this.update(i,{patterns});}
+ move(i,direction){this.row(i);if(direction!==-1&&direction!==1)throw Error('Invalid song move');const next=i+direction;if(next<0||next>=this.rows.length)return false;const rows=structuredClone(this.rows);[rows[i],rows[next]]=[rows[next],rows[i]];this.save(rows);return true;}
+ remove(i){this.row(i);this.save(this.rows.filter((_,index)=>index!==i));}
  undo(){if(!this.history.length)return;this.future.push(this.rows);this.rows=this.history.pop();}
  redo(){if(!this.future.length)return;this.history.push(this.rows);this.rows=this.future.pop();}
 }
