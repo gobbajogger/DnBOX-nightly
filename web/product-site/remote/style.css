@@ -353,3 +353,13 @@ dialog::backdrop{background:#000a}
 #other-view .funkybeats-sequencer:has(.drum-step-lane){display:flex;flex-direction:column;max-height:calc(100dvh - 190px)}
 #other-view .funkybeats-sequencer:has(.drum-step-lane)>.seq-numbers,#other-view .drum-step-lane{flex-shrink:0}
 #other-view .funkybeats-sequencer:has(.drum-step-lane)>.sequencer-grid{min-height:64px;overflow-y:auto;scrollbar-width:none}
+
+#break-sequence { min-height:0; overflow:auto; padding:8px 0; }
+#break-sequence .break-assignment, #break-sequence .break-steps {display:grid;gap:8px;margin-bottom:16px;}
+.break-assignment {grid-template-columns:repeat(3,minmax(0,1fr));}
+.break-steps {grid-template-columns:repeat(8,minmax(0,1fr));}
+#break-sequence label {display:grid;gap:4px;}
+#break-sequence select, #close-connection {color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:6px;min-height:var(--hit);min-width:0;}
+#connection-result {position:fixed;z-index:10;top:64px;right:var(--margin);padding:16px;max-width:min(400px,90vw);background:var(--panel);border:1px solid var(--line);border-radius:8px;}
+#connection-result h2 {margin:0;}
+@media(max-width:600px) {.break-steps {grid-template-columns:repeat(4,minmax(0,1fr));}}

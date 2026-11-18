@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>DnBOX Remote</title>
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="../components/break-panel/panel.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -72,6 +73,7 @@
 <input id="zoom" type="range" min="1" max="4" step=".25" value="1" hidden aria-label="Zoom">
 </div>
 </header>
+<aside id="connection-result" aria-labelledby="connection-heading" hidden><h2 id="connection-heading">Connection</h2><p id="connection-message" role="status"></p><button type="button" id="close-connection">Return to draft</button></aside>
 <main>
 <section id="roll-view">
 <div class="roll-panel">
@@ -93,6 +95,7 @@
 </div>
 <aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
 </section>
+<section id="break-sequence" aria-label="BREAK sequence" hidden></section>
 <section id="other-view" hidden></section>
 </main>
 <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>

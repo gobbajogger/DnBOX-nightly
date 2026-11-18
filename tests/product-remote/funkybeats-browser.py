@@ -331,13 +331,71 @@ async def thin_step_lanes(page):
         target.mkdir(parents=True,exist_ok=True)
         await page.screenshot(path=str(target/f'{width}x{height}.png'))
 
+async def break_and_tape(page):
+    await page.locator('[data-engine="breaks"]').click()
+    await expect(page.locator('[data-break-step]')).to_have_count(16)
+    await expect(page.locator('#break-sequence [data-action="play"]')).to_have_count(5)
+    preview = page.locator('#break-sequence [data-action="play"]').first
+    await preview.click()
+    await expect(preview).to_have_attribute('aria-pressed','true')
+    await preview.click()
+    await expect(preview).to_have_attribute('aria-pressed','false')
+    assert await page.locator('[data-break-loop="0"]').input_value() == ''
+    await page.locator('[data-break-loop="0"]').select_option('personal-br1-zone2')
+    await page.locator('[data-break-loop="1"]').select_option('personal-br2-zone1')
+    await page.locator('[data-break-rate]').select_option('1/8')
+    await page.locator('[data-break-step="15"]').select_option('32')
+    await page.locator('#undo').click()
+    await expect(page.locator('[data-break-step="15"]')).to_have_value('0')
+    await page.locator('#redo').click()
+    await expect(page.locator('[data-break-step="15"]')).to_have_value('32')
+    await page.locator('[data-view="mix"]').click()
+    wear = page.locator('button[aria-label="Tape Wear"]')
+    await expect(wear.locator('output')).to_have_text('50%')
+    painted = await wear.locator('canvas').evaluate('el => el.toDataURL()')
+    await wear.press('Enter')
+    field = page.locator('#parameter-value')
+    await field.fill('127')
+    await field.press('Enter')
+    await expect(wear.locator('output')).to_have_text('100%')
+    await page.wait_for_function("before => document.querySelector('[aria-label=\"Tape Wear\"] canvas').toDataURL() !== before",arg=painted)
+    state = await draft_state(page)
+    assert state['breakSequence'] == {'loops':['personal-br1-zone2','personal-br2-zone1'], 'rate':'1/8', 'slices':[0]*15+[32]}
+    assert {'id':'catalog/1551', 'value':127} in state['parameters']
+    await load_draft(page, state)
+    await expect(wear.locator('output')).to_have_text('100%')
+    await page.locator('[data-view="roll"]').click()
+    await expect(page.locator('[data-break-step="15"]')).to_have_value('32')
+    broken = dict(state, breakSequence=dict(state['breakSequence'],loops=['unknown-loop',None]))
+    await page.locator('#draft-file').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':json.dumps(broken).encode()})
+    await expect(page.locator('#status')).to_have_text('Local draft: invalid BREAK sequence')
+    await expect(page.locator('[data-break-loop="0"]')).to_have_value('personal-br1-zone2')
+    old = dict(state)
+    del old['breakSequence']
+    await load_draft(page, old)
+    await page.locator('[data-view="roll"]').click()
+    await expect(page.locator('[data-break-step="15"]')).to_have_value('0')
+    await expect(page.locator('[data-break-loop="0"]')).to_have_value('')
+    assert not await page.locator('#roll-view').is_visible()
+    await page.locator('[data-engine="chicago"]').click()
+    await expect(page.locator('#roll-view')).to_be_visible()
+    await page.locator('#connect').click()
+    await expect(page.locator('#connection-message')).to_have_text('No reviewed firmware catalog. Apply stays off.')
+    await page.locator('#close-connection').click()
+    await expect(page.locator('#connection-result')).to_be_hidden()
+    await page.route('**/sample-contract.json', lambda route:route.fulfill(status=200,body='{}'))
+    await page.locator('[data-engine="breaks"]').click()
+    await expect(page.locator('#break-sequence')).to_contain_text('Starting breaks unavailable')
+    await expect(page.locator('#break-sequence [data-action="play"]')).to_have_count(0)
+    assert await page.locator('#apply').is_disabled()
+
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -352,7 +410,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=12 failures=0')
+    print('FUNKYBEATS-BROWSER pages=13 failures=0')
 
 async def main():
     global SOURCE

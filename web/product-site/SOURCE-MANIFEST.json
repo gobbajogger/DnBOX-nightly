@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 47095,
-      "sha256": "141ff46c250b8a1490d2cb4475a4ff4cc5232e470a01dbfe36f32067bead546d"
+      "bytes": 49479,
+      "sha256": "2093215d3a4baabc3cea0bedde17056fc2b64c49c1276af6ae78fa49d0985488"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -671,6 +671,11 @@
       "path": "remote/assets/BarlowSemiCondensed-Medium.ttf",
       "bytes": 105560,
       "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48"
+    },
+    {
+      "path": "remote/break-sequence.mjs",
+      "bytes": 4169,
+      "sha256": "40857ae32dba34c4d559d4f6099144dfc07dda4a363b58fb38f1054b44e2f958"
     },
     {
       "path": "remote/catalog.json",
@@ -744,8 +749,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 9272,
-      "sha256": "27c711945aaf56acb41fe6ab109cafe5bf03af5c2739ab12adc5e6cdf85f8844"
+      "bytes": 9975,
+      "sha256": "f92049564888025e0777da574342b88b0da4294698878aca3ffa2c9152888252"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -759,8 +764,8 @@
     },
     {
       "path": "remote/firmware-link.mjs",
-      "bytes": 6997,
-      "sha256": "590825006c26ab329d3f0a3f64d0c69f0c97cd4285cf992b027fbfb68078c59a"
+      "bytes": 7319,
+      "sha256": "6c6e2644ecd83803c342284997fed1dbcd120487a881c2174d44cbffed3f7a65"
     },
     {
       "path": "remote/frame.mjs",
@@ -814,8 +819,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7356,
-      "sha256": "9ee77d05cfedbce22538f4bfbb0591fa98dd977339297e0eee0fcd9abdfa1c23"
+      "bytes": 7368,
+      "sha256": "0d3d9eabf0368cb38c3b48ee7a99fc5ac378ae409d8fe0e9c9f676c925f58d94"
     },
     {
       "path": "remote/lane.mjs",
@@ -894,8 +899,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 20541,
-      "sha256": "064c4d2c94f6807196902b6825bfa5f91d7bb332aaa0022421be203a150d562f"
+      "bytes": 28997,
+      "sha256": "2f3b7a28f0df8f767f834d829ea348f6653aef25e1ca419271e89b6d27a7fd25"
     },
     {
       "path": "remote/timeline.mjs",
