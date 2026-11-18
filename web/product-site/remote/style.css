@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;overscroll-behavior-x:none}
 body{height:100dvh;background:var(--bg);color:var(--fg);font:500 var(--fs)/1.2 var(--font);font-variant-numeric:tabular-nums;
- display:grid;grid-template-rows:auto minmax(0,1fr);
+ display:grid;grid-template-rows:auto minmax(0,1fr) calc(32px + env(safe-area-inset-bottom));
  padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -397,3 +397,8 @@ dialog::backdrop{background:#000a}
 #other-view .mix-master-panel .encoder,#other-view .mix-effects .encoder{border:0;background:none}
 #other-view .mix-parts-panel .mixer-channel-name{border:0;background:none;padding:2px}
 #other-view .mix-part-route{color:var(--part-color)}
+#workspace-error:not([hidden]){position:fixed;z-index:100;inset:12px 12px auto;margin-inline:auto;max-width:32rem;padding:16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--panel);color:var(--fg);box-sizing:border-box}#workspace-error h1{font-size:1.2rem;margin:0 0 8px}#workspace-error p{margin:0 0 12px}
+
+/* Reserve feedback space even while status is sr-only, so messages never move
+   the roll, its resize edges or the step lane. Long feedback scrolls in its row. */
+#status.status-message{grid-row:3;position:static;min-width:0;width:auto;height:100%;clip:auto;padding:6px 12px calc(6px + env(safe-area-inset-bottom));min-height:0;border-top:1px solid var(--line);font-size:13px;line-height:1.3;white-space:normal;overflow:auto;overflow-wrap:anywhere;color:var(--fg)}

@@ -1,0 +1,21 @@
+{"files":227,"output":"/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/.output/recovery-p_zdgx04","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+Traceback (most recent call last):
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/tests/product-workspace/recovery-browser.py", line 56, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/tests/product-workspace/recovery-browser.py", line 55, in main
+    with core.server(tmp) as origin:asyncio.run(cases(origin))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/tests/product-workspace/recovery-browser.py", line 39, in cases
+    assert await geometry(page)==main_geometry,('Feedback must not shrink editing geometry',main_geometry,await geometry(page))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Feedback must not shrink editing geometry', {'x': 0, 'y': 147, 'width': 1440, 'height': 753}, {'x': 0, 'y': 147, 'width': 1440, 'height': 723.109375})

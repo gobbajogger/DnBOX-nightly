@@ -1,0 +1,35 @@
+[Reading last 30 lines (total: 30 lines)]
+
+{"files":227,"output":"/tmp/dnbox-classic-remote-7dfde7909d3b/candidate/.output/layout-test","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS FunkyBeats roll
+PASS FunkyBeats sequencer
+PASS FunkyBeats mixer
+PASS FunkyBeats launcher
+PASS FunkyBeats synth
+PASS Undo + resize stable geometry 844x390
+PASS Undo + resize stable geometry 390x844
+PASS Undo + resize stable geometry 1440x900
+PASS FunkyBeats gesture_edits
+TOUCH_DELETE implicit-delayed [{"type": "pointerdown", "time": 336.5, "note": "n1", "target": ""}, {"type": "pointerup", "time": 352.1000000089407, "note": null, "target": "roll-scroll"}, {"type": "pointerdown", "time": 970.7999999970198, "note": "n1", "target": ""}, {"type": "pointerup", "time": 980.7000000029802, "note": null, "target": "roll-scroll"}]
+TOUCH_DELETE fast-stamped [{"type": "pointerdown", "time": 972.2999999970198, "note": "n1", "target": ""}, {"type": "pointerup", "time": 992.2000000029802, "note": null, "target": "roll-scroll"}, {"type": "pointerdown", "time": 1072.2000000029802, "note": "n1", "target": ""}, {"type": "pointerup", "time": 1092.2000000029802, "note": null, "target": "roll-scroll"}]
+TOUCH_DELETE slow-stamped [{"type": "pointerdown", "time": 1774.9000000059605, "note": "n1", "target": ""}, {"type": "pointerup", "time": 1794.7999999970198, "note": null, "target": "roll-scroll"}, {"type": "pointerdown", "time": 2274.7999999970198, "note": "n1", "target": ""}, {"type": "pointerup", "time": 2294.7999999970198, "note": null, "target": "roll-scroll"}]
+PASS FunkyBeats gesture_delete
+PASS FunkyBeats gesture_navigation
+PASS FunkyBeats no_tool_row
+PASS FunkyBeats step_roll
+STEP_DRUM_CONTROL 909 velocity
+STEP_DRUM_CONTROL 909 chance
+STEP_DRUM_CONTROL 909 pitch
+STEP_DRUM_CONTROL 909 pan
+STEP_DRUM_CONTROL 808 velocity
+STEP_DRUM_CONTROL 808 chance
+STEP_DRUM_CONTROL 808 pitch
+STEP_DRUM_CONTROL 808 pan
+PASS FunkyBeats step_drums
+PASS FunkyBeats thin_step_lanes
+PASS FunkyBeats break_and_tape
+PASS FunkyBeats full_envelopes
+FUNKYBEATS-BROWSER pages=14 failures=0
+✅ Process completed with exit code 0 (runtime: 37.39s)
+
+[executed on device: ab35235f2a25 (89d4d70e-162b-4d2b-8d8b-d4e0641aac10)]

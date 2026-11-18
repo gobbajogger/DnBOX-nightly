@@ -1,0 +1,21 @@
+{"files":227,"output":"/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/.output/regression-gesture-q8usnqvx","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+Traceback (most recent call last):
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/regression-evidence/run-gesture.py", line 25, in <module>
+    asyncio.run(run())
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/regression-evidence/run-gesture.py", line 17, in run
+    await fixture.gesture_edits(page)
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/tests/product-remote/funkybeats-browser.py", line 137, in gesture_edits
+    await gesture_edits_at_size(page)
+  File "/tmp/dnbox-classic-remote-7dfde7909d3b/baseline/tests/product-remote/funkybeats-browser.py", line 157, in gesture_edits_at_size
+    assert restored==geometry,('Undo feedback must preserve main, roll and selected-note hit geometry',geometry,restored)
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ('Undo feedback must preserve main, roll and selected-note hit geometry', {'main': {'x': 0, 'y': 102, 'width': 844, 'height': 288}, 'roll': {'x': 69, 'y': 123, 'width': 762, 'height': 219}, 'note': {'x': 69, 'y': 310, 'width': 69.421875, 'height': 18}, 'edge': {'x': 130.421875, 'y': 310, 'width': 8, 'height': 18}, 'endHit': True}, {'main': {'x': 0, 'y': 102, 'width': 844, 'height': 258.109375}, 'roll': {'x': 69, 'y': 123, 'width': 762, 'height': 189.109375}, 'note': {'x': 69, 'y': 310, 'width': 69.421875, 'height': 18}, 'edge': {'x': 130.421875, 'y': 310, 'width': 8, 'height': 18}, 'endHit': False})

@@ -12,6 +12,7 @@ import mimetypes
 import re
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 from playwright.async_api import async_playwright, expect
@@ -118,10 +119,30 @@ async def synth(page):
     await page.locator('#undo').click()
     await expect(slider).to_have_value(before)
 
+async def edit_geometry(page, note):
+    # Do not scroll here: that would conceal the Undo clipping regression.
+    return await note.evaluate("""n=>{
+        const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
+        const edge=n.querySelector('[data-edge="end"]'),r=edge.getBoundingClientRect();
+        const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+        return {main:rect(document.querySelector('main')),roll:rect(document.querySelector('#roll-scroll')),
+            note:rect(n),edge:rect(edge),endHit:hit===edge||edge.contains(hit)};
+    }""")
+
 async def gesture_edits(page):
+    for width,height in [(844,390),(390,844),(1440,900)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        await page.reload()
+        await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+        await gesture_edits_at_size(page)
+        print(f'PASS Undo + resize stable geometry {width}x{height}',flush=True)
+
+async def gesture_edits_at_size(page):
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
+    geometry = await edit_geometry(page,note)
+    assert geometry['endHit'],('Resize edge must receive pointer input before feedback',geometry)
     before = await note.get_attribute('aria-label')
     start,end = map(int,re.search(r'(\d+) to (\d+) samples',before).groups())
     box = await note.bounding_box()
@@ -132,6 +153,8 @@ async def gesture_edits(page):
     assert moved_start > start and moved_end-moved_start == end-start
     await page.locator('#undo').click()
     await expect(note).to_have_attribute('aria-label',before)
+    restored = await edit_geometry(page,note)
+    assert restored==geometry,('Undo feedback must preserve main, roll and selected-note hit geometry',geometry,restored)
     edge = await note.locator('[data-edge="end"]').bounding_box()
     x,y = edge['x']+edge['width']/2, edge['y']+edge['height']/2
     await page.mouse.move(x,y); await page.mouse.down(); await page.mouse.move(x+20,y,steps=4); await page.mouse.up()
@@ -151,15 +174,44 @@ async def gesture_delete(page):
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
     before = await note.get_attribute('aria-label')
-    box = await note.bounding_box()
     client = await page.context.new_cdp_session(page)
-    for _ in range(2):
-        await client.send('Input.dispatchTouchEvent', {'type':'touchStart','touchPoints':[{'x':box['x']+box['width']/2,'y':box['y']+box['height']/2,'id':1}]})
-        await client.send('Input.dispatchTouchEvent', {'type':'touchEnd','touchPoints':[]})
-    await client.detach()
-    await expect(note).to_have_count(0)
-    await page.locator('#undo').click()
-    await expect(note).to_have_attribute('aria-label', before)
+    await page.evaluate("""() => {
+      window.deleteTouchTrace=[];
+      window.recordDeleteTouch=e=>{if(e.pointerType==='touch')deleteTouchTrace.push({type:e.type,time:e.timeStamp,note:e.target.closest?.('[data-note]')?.dataset.note,target:e.target.id});};
+      for(const type of ['pointerdown','pointerup','pointercancel'])document.addEventListener(type,recordDeleteTouch,true);
+    }""")
+    try:
+        # Input timing is part of the gesture contract. Controller scheduling
+        # must not silently turn the positive double tap into two slow taps.
+        for name, offsets, expected in [('implicit-delayed',None,1),('fast-stamped',[0,.02,.10,.12],0),('slow-stamped',[0,.02,.50,.52],1)]:
+            await page.locator('#roll-scroll').press('Escape')
+            await note.scroll_into_view_if_needed()
+            box=await note.bounding_box()
+            await page.evaluate('deleteTouchTrace=[]')
+            base=time.time()-.1
+            for i in range(4):
+                if i==2: await asyncio.sleep(.6)  # deliberate host delivery delay
+                event={'type':'touchStart' if i%2==0 else 'touchEnd','touchPoints':[{'x':box['x']+box['width']/2,'y':box['y']+box['height']/2,'id':1}] if i%2==0 else []}
+                if offsets is not None: event['timestamp']=base+offsets[i]
+                await client.send('Input.dispatchTouchEvent',event)
+            trace=await page.evaluate('deleteTouchTrace')
+            downs=[e for e in trace if e['type']=='pointerdown'];ups=[e for e in trace if e['type']=='pointerup']
+            assert len(downs)==2 and len(ups)==2 and all(e.get('note')==identity for e in downs),trace
+            assert all(e['target']=='roll-scroll' for e in ups) and not any(e['type']=='pointercancel' for e in trace),trace
+            delta=ups[1]['time']-ups[0]['time']
+            if offsets is None: assert delta>=350,trace
+            else:
+                assert abs(delta-(offsets[3]-offsets[1])*1000)<2,trace
+                assert all(abs(ups[i]['time']-downs[i]['time']-20)<2 for i in range(2)),trace
+            await expect(note).to_have_count(expected)
+            print('TOUCH_DELETE',name,json.dumps(trace),flush=True)
+            if expected==0:
+                await page.locator('#undo').click()
+                await expect(note).to_have_attribute('aria-label',before)
+            else: await expect(note).to_have_attribute('aria-label',before)
+    finally:
+        await client.detach()
+        await page.evaluate("""() => {for(const type of ['pointerdown','pointerup','pointercancel'])document.removeEventListener(type,recordDeleteTouch,true);delete window.recordDeleteTouch;delete window.deleteTouchTrace;}""")
 
 async def gesture_navigation(page):
     viewport = page.locator('#roll-scroll')
