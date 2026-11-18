@@ -164,8 +164,8 @@
     },
     {
       "path": "builds/index.html",
-      "bytes": 579616,
-      "sha256": "804efb7bccb2a13a878d2a5cbb1e4e3206288da4d276378a3f1014f7d5eeb59d"
+      "bytes": 579670,
+      "sha256": "341a51ce7c46e0ba3d9cb6d4581ab6e989a77334bf2a6ca14e71a9b554266145"
     },
     {
       "path": "components/archive/store.mjs",

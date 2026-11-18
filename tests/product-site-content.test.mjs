@@ -18,6 +18,19 @@ test('historical manual never presents a descriptive retirement name as a hardwa
  assert.match(html,/retains its original on-screen label/);
 });
 
+test('retired build branches link to the archived source and evidence commits',()=>{
+ const history = read('builds/index.html');
+ const destinations = [
+  ['night-versions-12','d8086cc09203945919c70d3c805f8ca3e6acbe5a'],
+  ['night-versions-11','c20943a75d9e680a64e0384458245db4d7999e05/docs/evidence/build-0.0.24.1'],
+ ];
+ for(const [record, destination] of destinations){
+  const article = history.split('data-record-id="'+record+'"')[1]?.split('</article>')[0];
+  assert.ok(article,record);
+  assert.ok(article.includes('href="https://github.com/gobbajogger/DnBOX/tree/'+destination+'"'),record+' must point to archived evidence');
+ }
+});
+
 test('all nineteen musician routes and both legacy entry redirects survive the build',t=>{
  const routes=['index.html','breaks/index.html','builds/index.html','help/index.html','install/index.html','manual/index.html','manual/legacy.html','manual/original/index.html','manual/projects-guide.html','manual/protocol.html','new/index.html','presets/index.html','presets/legacy/index.html','projects/index.html','remote/index.html','remote/device/index.html','remote/identity/index.html','starting-breaks/index.html','tools/index.html'];
  assert.equal(routes.length,19);
