@@ -143,3 +143,35 @@ export function envelopeCurve(rows, engine='chicago', valueOf=row=>row.raw) {
  const curve = render('ADSR', stages.attack, engine, stages);
  return `<svg class="envelope-graph" viewBox="-1 0 42 24" preserveAspectRatio="none" aria-label="ADSR envelope" role="img"><path d="${curve.d}" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
+
+// Mirrors drum_curve_t and dv_curve_level in firmware a6815dd. This is a
+// renderer adapter, not a transport: callers must supply an actual native
+// snapshot. Preview control values never stand in for the observed level.
+export function nativeDrumEnvelope(snapshot) {
+ const keys=['delay','rise_tau','rise_end','hold','fall','peak','window','elapsed','level'];
+ if(!snapshot || keys.some(k=>!Number.isFinite(snapshot[k])) ||
+    ['delay','rise_tau','rise_end','hold','peak'].some(k=>snapshot[k]<0) ||
+    snapshot.fall<=0 || snapshot.window<=0 ||
+    (snapshot.rise_end>0 && snapshot.rise_tau<=0) ||
+    ![0,1].includes(snapshot.linear) || snapshot.elapsed< -1)
+  throw Error('Invalid native drum envelope');
+ const v=snapshot, stages=[];
+ if(v.delay>0)stages.push('delay');
+ if(v.rise_end>0)stages.push('attack');
+ if(v.hold>0)stages.push('hold');
+ stages.push('decay');
+ const at=ms=>{
+  let t=ms-v.delay;
+  if(t<0)return 0;
+  if(t<v.rise_end)return v.peak*(1-Math.exp(-t/v.rise_tau));
+  const peak=v.rise_end>0?v.peak*(1-Math.exp(-v.rise_end/v.rise_tau)):v.peak;
+  t=Math.max(0,t-v.rise_end-v.hold);
+  return v.linear?Math.max(0,peak-v.peak*t/v.fall):peak*Math.exp(-t/v.fall);
+ };
+ const times=new Set(Array.from({length:33},(_,i)=>v.window*i/32));
+ for(const t of [v.delay,v.delay+v.rise_end,v.delay+v.rise_end+v.hold])if(t<=v.window)times.add(t);
+ const samples=[...times].sort((a,b)=>a-b).map(ms=>({ms,level:at(ms)}));
+ const marker=v.elapsed>=0 && v.elapsed<=v.window
+  ? {elapsed:v.elapsed,rawLevel:v.level,level:Math.max(0,Math.min(1,v.level))}:null;
+ return {stages,samples,marker,window:v.window};
+}
