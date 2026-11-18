@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 56241,
-      "sha256": "239a68a91400409f80afce89b7efd23f0b3d7fecda92d4746cdad5aa7c1ad9fd"
+      "bytes": 60022,
+      "sha256": "494d853ea9ac0d2856a9bb4ba8f932b545cdc6450b3e5ce7d2849183127f9d14"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -839,8 +839,8 @@
     },
     {
       "path": "remote/local-instrument.mjs",
-      "bytes": 1456,
-      "sha256": "853f6553805d6c5b36846d77531d2a648fb01b54e2fb3d7f8b48f58ed4bbc59f"
+      "bytes": 1559,
+      "sha256": "8a3d97787eb3f6bad508cd19845aa1b49dc9f62657e9a6074966c99f2b45e45d"
     },
     {
       "path": "remote/mix-aliases.mjs",
@@ -896,6 +896,16 @@
       "path": "remote/roll.mjs",
       "bytes": 5341,
       "sha256": "7167c3c9c3c892244026dc2660176336b3b43d1dc4af2279b71c5a70c046bc3d"
+    },
+    {
+      "path": "remote/runtime-mix-map.mjs",
+      "bytes": 2439,
+      "sha256": "b3a7f44bb361f970340a4349ae8c3838262cf8306690c0e78be35c6e2b4a3ec2"
+    },
+    {
+      "path": "remote/runtime-mix-state.mjs",
+      "bytes": 4116,
+      "sha256": "d241ce343a2622c0d0cc12aff53a7921fe1ba6855f2006a74083f782ecf897aa"
     },
     {
       "path": "remote/sequence.mjs",

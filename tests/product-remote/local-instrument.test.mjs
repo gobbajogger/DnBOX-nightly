@@ -23,3 +23,11 @@ test('runtime lifecycle publishes persistent phase independently of transient st
  const phases=[];const x=api.createLocalInstrument({load:async()=>({node:{port:{}},observerPin:{},activate(){},close:async()=>{}}),attach:()=>({close(){}}),onState:p=>phases.push(p)});
  await x.start();await x.stop();assert.deepEqual(phases,['starting','running','stopped']);
 });
+test('control endpoint exposes only the active ready session and clears synchronously on Stop',async()=>{
+ const port={},pin={firmware:'f',kernel:'k',session:'s'};let ready;
+ const x=api.createLocalInstrument({load:()=>new Promise(r=>ready=r),attach:()=>({close(){}})});
+ assert.equal(typeof x.controlEndpoint,'function');assert.equal(x.controlEndpoint(),null);
+ const starting=x.start();assert.equal(x.controlEndpoint(),null);
+ ready({node:{port},observerPin:pin,activate(){},close:async()=>{}});await starting;
+ assert.deepEqual(x.controlEndpoint(),{port,pin});const stopping=x.stop();assert.equal(x.controlEndpoint(),null);await stopping;
+});

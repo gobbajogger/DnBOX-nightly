@@ -22,5 +22,6 @@ export function createLocalInstrument({load,attach,status=()=>{},onState=()=>{}}
    await candidate?.close();
   }
  }
- return {start,stop};
+ const controlEndpoint=()=>active?{port:active.node.port,pin:active.observerPin}:null;
+ return {start,stop,controlEndpoint};
 }

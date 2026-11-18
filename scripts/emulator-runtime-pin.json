@@ -1,18 +1,18 @@
 {
   "firmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
-  "kernel": "8606573e7ca24c5e1ecf7ab8bb8cdc55756c48ce",
+  "kernel": "25753eb4e7546d023b458ee58b2e9e5de36cd28a",
   "files": {
     "runtime.json": {
       "bytes": 285,
-      "sha256": "7728a0818dcc7ad7f56d6573c908384f8cd8bc80aa5b66c53b857486ad3c1189"
+      "sha256": "8e03df8237455fbcc7f7a8089f3ed6083493877a490ba9fa7e2f6a73261b2475"
     },
     "kernel.wasm": {
-      "bytes": 931673,
-      "sha256": "644aa0dd4aed0d176ac76fb8d87a251e590fd299733b4bd63dd2581ca81af9f3"
+      "bytes": 938799,
+      "sha256": "f289da826f6c2cf270a257c19e506cc0701cb00c27b7215e7f428475de27eb11"
     },
     "native-session.mjs": {
-      "bytes": 6040,
-      "sha256": "da47e271a39ad115f5dfb9a60f8976baafd2b7528077322030b81a65a5fe9edc"
+      "bytes": 9552,
+      "sha256": "ad8145a0d44bd96cba8800553d0f523bcbf436035785b659e736e480ff37660c"
     },
     "observer.mjs": {
       "bytes": 2631,
@@ -23,8 +23,8 @@
       "sha256": "5924c689e512fc1c4e14718e0d267dce7ef287ec51183d1902e3d7902134845d"
     },
     "worklet.mjs": {
-      "bytes": 3973,
-      "sha256": "c3f8af4e9a9f517c5fc3da063a558b33820eb87555504163290517e5c64473e0"
+      "bytes": 7038,
+      "sha256": "588ad4465d0c0e7954103c22d9039f9645c5785b495176b16638eb53d93d8d06"
     },
     "wasi.mjs": {
       "bytes": 1507,
