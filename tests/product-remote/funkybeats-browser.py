@@ -331,6 +331,40 @@ async def thin_step_lanes(page):
         target.mkdir(parents=True,exist_ok=True)
         await page.screenshot(path=str(target/f'{width}x{height}.png'))
 
+async def full_envelopes(page):
+    await page.locator('[data-view="sound"]').click()
+    graph = page.locator('#other-view .envelope-graph')
+    root = page.locator('#other-view .envelope-controls')
+    buttons = root.locator('.envelope-stage')
+    for part in ['chicago','miami']:
+        await page.locator('[data-engine="'+part+'"]').click()
+        for bank in ['CHICAGO','JUNO']:
+            await page.locator('#sound-bank').select_option(bank)
+            await expect(buttons).to_have_count(4)
+            for width,height in [(390,844),(844,390),(1440,900)]:
+                await page.set_viewport_size({'width':width,'height':height})
+                assert (await graph.bounding_box())['width'] >= (await root.bounding_box())['width'] - 18
+            for button in await buttons.all():
+                before = await graph.screenshot()
+                original_shape = await graph.locator('path').get_attribute('d')
+                initial = await button.locator('output').inner_text()
+                await button.press('Enter')
+                field = page.locator('#parameter-value')
+                await field.fill('115')
+                await field.press('Enter')
+                await expect(button.locator('output')).to_have_text('91%')
+                assert await graph.screenshot() != before
+                await page.locator('#undo').click()
+                await expect(button.locator('output')).to_have_text(initial)
+                assert await graph.locator('path').get_attribute('d') == original_shape
+            await buttons.first.press('ArrowRight')
+            saved = await draft_state(page)
+            shape = await graph.locator('path').get_attribute('d')
+            await load_draft(page,saved)
+            assert shape == await graph.locator('path').get_attribute('d')
+    await page.locator('#sound-bank').select_option('MIAMI')
+    await expect(graph).to_have_count(0)
+
 async def break_and_tape(page):
     await page.locator('[data-engine="breaks"]').click()
     await expect(page.locator('[data-break-step]')).to_have_count(16)
@@ -404,7 +438,7 @@ async def browser_cases():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -419,7 +453,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=13 failures=0')
+    print('FUNKYBEATS-BROWSER pages=14 failures=0')
 
 async def main():
     global SOURCE

@@ -367,3 +367,9 @@ dialog::backdrop{background:#000a}
 #break-views:not([hidden]) {display:flex;gap:4px;margin-bottom:8px;}
 #break-views button {border:1px solid var(--line);border-radius:var(--r-control);background:var(--panel);color:var(--fg);min-height:var(--hit);padding:0 14px;}
 #break-views [aria-pressed=true] {color:var(--accent);border-color:var(--accent);}
+.envelope-row {grid-column:1/-1;min-width:0;padding:4px 8px;background:var(--panel);border-radius:var(--r-panel);}
+.envelope-row .envelope-graph {display:block;width:100%;height:clamp(60px,12vh,100px);color:var(--fg);}
+#other-view .envelope-stage {display:grid;justify-items:center;align-content:center;gap:4px;min-width:0;padding:4px;}
+.envelope-stage output {font-size:var(--fs-value);color:var(--fg);}
+
+.encoder-grid.envelope-controls {grid-template-columns:repeat(4,minmax(0,1fr));}

@@ -123,7 +123,7 @@ export const R22_TOKENS=Object.freeze({
  })
 });
 
-import {renderSvg} from './glyph-render.mjs';
+import {render,renderSvg} from './glyph-render.mjs';
 import {fractionFromPan} from './pan.mjs';
 export {render,renderSvg,morphFrames,chicagoWaveSamples,chicagoLevel,chicagoTimes,adsrWidths,bd909Hz} from './glyph-render.mjs';
 // Live readout. Re-rendered from the value. No decorative motion.
@@ -133,7 +133,13 @@ export function glyphFor(id, engine='chicago', value=0.5, state={}){
 export function panCell(raw){
  return `<div class="readout-cell"><span class="glyph">${renderSvg('PAN', fractionFromPan(raw), 'chicago', {live:false})}</span><output>${formatPan(raw)}</output><span>PAN</span></div>`;
 }
-export function envelopeCurve(rows){
- const raw=name=>{const row=(rows||[]).find(c=>String(c.label).toUpperCase()===name);return Number(row?.raw??0)/127;};
- return renderSvg('ADSR', raw('ATTACK'), 'chicago', {live:false, attack:raw('ATTACK'), decay:raw('DECAY'), sustain:raw('SUSTAIN'), release:raw('RELEASE')});
+export function envelopeCurve(rows, engine='chicago', valueOf=row=>row.raw) {
+ const stages = {};
+ for (const label of ['ATTACK','DECAY','SUSTAIN','RELEASE']) {
+  const row = rows.find(c=>c.label===label);
+  if (!row || row.max<=row.min) return '';
+  stages[label.toLowerCase()] = (valueOf(row)-row.min)/(row.max-row.min);
+ }
+ const curve = render('ADSR', stages.attack, engine, stages);
+ return `<svg class="envelope-graph" viewBox="-1 0 42 24" preserveAspectRatio="none" aria-label="ADSR envelope" role="img"><path d="${curve.d}" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
