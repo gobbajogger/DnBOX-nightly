@@ -56,10 +56,13 @@ async def unit_state(page,t,p):
  return await unit.evaluate("""e=>({display:e.querySelector('output')?.textContent,glyphs:Array.from(e.querySelectorAll('[data-glyph-fn]')).map(g=>({value:g.dataset.glyphValue,target:g.glyphAnimator?.target})),raw:document.querySelector('#parameter-value')?.value,undo:!document.querySelector('#undo').disabled,redo:!document.querySelector('#redo').disabled})""")
 
 async def gesture(page,ctx,t,p,width,cancel=True,interrupt=False):
+ if await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
  control=page.locator(selector(t,p)) if (t,p) in MORE else page.locator(f'.mix-master-panel [data-param$="|1:{t}:0:{p}"]').first
  await control.scroll_into_view_if_needed();await control.press('Enter')
  # Opening the detail field may scroll the unit out; restore it before the real drag.
  await control.scroll_into_view_if_needed();box=await control.bounding_box();x=box['x']+box['width']/2;y=box['y']+box['height']/2
+ hit=await control.evaluate("e=>{const r=e.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2,h=document.elementFromPoint(x,y);return{x,y,owned:!!h&&(e===h||e.contains(h)),tag:h?.tagName,id:h?.id}}");assert hit['owned'],hit
+ PROOFS.append({'kind':'gesture-center-hit','target':[t,p],'hit':hit})
  before=await unit_state(page,t,p)
  # Positive delta uses y travel on narrow units, keeping the pointer in the viewport.
  dx=24 if x+24<width-2 else -24
@@ -110,7 +113,7 @@ async def cases(origin,evidence,capture_only=False):
      await expect(page.locator('.master-more [data-master-control]')).to_have_count(12)
      before=await draft(page);before_params=before['parameters'];seen=[]
      # Real forward and reverse Tab, without corrective programmatic scrolling after Tab.
-     await page.locator('.mix-master-panel [data-param]').nth(3).click()
+     anchor=page.locator('.mix-master-panel [data-param]').nth(3);await anchor.focus();await expect(anchor).to_be_focused()
      for t,p in MORE:
       await page.keyboard.press('Tab');unit=page.locator(selector(t,p));await expect(unit).to_be_focused()
       await visible_proof(page,unit,f'tab-{t}-{p}',focused=True)
@@ -162,7 +165,9 @@ async def cases(origin,evidence,capture_only=False):
       folder=ROOT/'tests/product-remote/fixtures/legacy-ce667-master';provenance=json.loads((folder/(kind+'-provenance.json')).read_text());raw_bytes=(folder/(kind+'-after-undo.json')).read_bytes();assert hashlib.sha256(raw_bytes).hexdigest()==provenance['sha256']
       await load_document(json.loads(raw_bytes),kind+'.json');accepted=await draft(page)
       for c in SOURCE['controls']:assert raw(accepted,c['target'],c['parameter'])==c['default']
-      await sound.menu_action(page,'#review');await expect(page.locator('#changes')).to_have_text('No changes.');await page.locator('#review-dialog button').click()
+      if not await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
+      await page.locator('#review').click();await expect(page.locator('#changes')).to_have_text('No changes.');await page.locator('#review-dialog button').click()
+      if await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
       assert await page.locator('#undo').is_disabled() and await page.locator('#redo').is_disabled()
      assert await page.evaluate('nativeRequests.length')==0
      saved_native_boundary=await draft(page);await sound.menu_action(page,'#emulator-start');await expect(page.locator('#status')).to_contain_text('Emulator running',timeout=20000)

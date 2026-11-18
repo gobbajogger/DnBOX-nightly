@@ -97,8 +97,9 @@ async def mixer(page):
     await page.locator('#undo').click()
 
 async def launcher(page):
+    await page.locator('[data-engine="drum909"]').click()
     await page.locator('[data-view="patterns"]').click()
-    await expect(page.locator('[data-launch-part]')).to_have_count(160)
+    await expect(page.locator('[data-launch-part]')).to_have_count(32)
     cell = page.locator('[data-launch-part="0"][data-pattern="1"]')
     await cell.click()
     await expect(cell).to_have_attribute('aria-pressed', 'true')

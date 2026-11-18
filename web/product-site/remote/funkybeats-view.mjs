@@ -44,8 +44,9 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16}){
 }
 
 // Actual upstream performance grid; local selection only, never queued playback.
-export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
+export function renderFunkyBeatsLauncher({parts,targets,patternCount=32,selectedPart=null}){
  if(!Array.isArray(parts)||parts.length!==5||!Array.isArray(targets)||targets.length!==5||patternCount!==32||targets.some(v=>v!==null&&(!Number.isInteger(v)||v<0||v>=patternCount)))throw Error('Invalid local launch selection');
+ if(selectedPart!==null&&(!Number.isInteger(selectedPart)||selectedPart<0||selectedPart>=parts.length))throw Error('Invalid selected part');
  const colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];
  const channels=parts.map((name,i)=>({name:String(name),type:i<2?'drum':'synth',color:colors[i]}));
  const container=new Element('div');
@@ -59,6 +60,7 @@ export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
   const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent='P'+(p+1);cell.setAttribute('type','button');
   cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');
  }
+ if(selectedPart!==null){const label=grid.children.filter(n=>n.className==='perform-row-label')[selectedPart];grid.children=[label,...ui.performCells[selectedPart]];}
  return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';
 }
 // Native source domains are supplied explicitly; no upstream percent defaults.

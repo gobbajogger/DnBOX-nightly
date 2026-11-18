@@ -7,7 +7,7 @@ These are the exact inputs consumed for the 2026-11-18 Remote continuation and t
 | classic-remote-transfer.tar.gz | 12450151 | `d673a99b3707ce7bdcba518b9c07a4ba90dc21a831da208833d339d1329a2e71` | [Transfer](https://chatgpt.com/library?file_id=libfile_fde3_f-595f93dfe7008191bc2a8f71bc081c23_2021479872048191acbfdca1f870a539&account_id=personal) |
 | mix-257-qualified.tar.gz | 548452 | `480f9881faf68042d0476ba932f248c094a146da3549058a8b95a3e7e09551e2` | [Runtime257](https://chatgpt.com/library?file_id=libfile_fde3_f-7a9d38c739e4819192bdc994bc25cac8_2021479872048191acbfdca1f870a539&account_id=personal) |
 | sound-4758-qualified.tar.gz | 553226 | `d8cd114c2dfcb31614ff75a01db8d27b8899c6ba213055af034fe187b2b7b9dd` | [Runtime4758](https://chatgpt.com/library?file_id=libfile_fde3_f-0f0a4e6ba8a081918a58910f1e1a9420_2021479872048191acbfdca1f870a539&account_id=personal) |
-| dnbox-remote-recovery-20261118.tar.gz, version12 | 1249756 | `67c3413e0c35487bc0a4959afddaefa72c6f961a20970a4001d01ed8fef89f5d` | [Evidence and recovery](https://chatgpt.com/library?file_id=libfile_fde3_f-d20a3c0ebb648191b347810a3e331499_2021479872048191acbfdca1f870a539&account_id=personal) |
+| dnbox-remote-recovery-20261118.tar.gz, version13 | 1293370 | `9ba99ab1a6321d4efaf1980392fc20837a3badb325e21b53fbc87bd7f5f0ce3a` | [Evidence and recovery](https://chatgpt.com/library?file_id=libfile_fde3_f-d20a3c0ebb648191b347810a3e331499_2021479872048191acbfdca1f870a539&account_id=personal) |
 
 ## Recovery
 

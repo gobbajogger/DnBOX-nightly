@@ -425,6 +425,81 @@ dialog::backdrop{background:#000a}
 #native-playing{flex:none;inline-size:22ch;font-size:11px;font-weight:400;color:var(--muted);white-space:nowrap}
 @media (orientation:portrait) and (max-width:600px){#native-playing{font-size:10px}}
 
+/* Motion is a fixed-target Draft study beside the actual selected-part sequence. */
+#workspace-main[data-view="locks"]{display:grid;grid-template-columns:minmax(0,3fr) minmax(280px,2fr);gap:12px}
+#workspace-main[data-view="locks"] #roll-view{display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;min-width:0}
+#motion-sequence-context{margin:0;font-size:14px;font-weight:700;line-height:24px}
+#workspace-main[data-view="locks"] #other-view{padding:0}
+.motion-editor{display:grid;grid-template-rows:auto minmax(120px,1fr) auto auto;gap:8px;min-height:100%;box-sizing:border-box}
+#other-view .motion-editor h2{margin:0;font-size:18px;line-height:24px}
+.motion-editor #motion-grid{height:auto;min-height:120px}
+.motion-fields,.motion-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#other-view .motion-fields label{margin:0;gap:6px}
+.motion-actions button{flex:1;min-width:72px}
+@media (orientation:landscape) and (max-height:500px){
+ #workspace-main[data-view="locks"]{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:8px}
+ .motion-editor{grid-template-rows:auto minmax(64px,1fr) auto auto;gap:4px}
+ .motion-editor #motion-grid{min-height:64px}
+ #motion-step,#motion-value{width:54px}
+ #other-view .motion-editor h2,#motion-sequence-context{font-size:14px;line-height:20px}
+}
+@media (orientation:portrait) and (max-width:600px){
+ #workspace-main[data-view="locks"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(180px,1fr) minmax(250px,1fr);gap:8px;overflow:auto}
+ .motion-editor{grid-template-rows:auto minmax(96px,1fr) auto auto}
+ .motion-editor #motion-grid{min-height:96px}
+}
+
+
+/* Owner composition: existing grid/lane and immutable voice Sound share the workspace. */
+#other-view:has(>.drum-layout){display:flex;flex-direction:column;overflow:hidden}
+#other-view:has(>.drum-layout)>h2{flex:none}
+.drum-layout{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) minmax(280px,340px);grid-template-rows:minmax(0,1fr);align-items:stretch;gap:12px}
+.drum-grid-panel{display:flex;flex-direction:column;min-height:0}
+.drum-sound-panel{min-height:0;overflow:auto}
+#other-view .drum-sound-panel>h3{margin:0 0 8px}
+.drum-sound-panel>label{display:flex;align-items:center;gap:8px;min-height:44px;margin-bottom:8px}
+#other-view .drum-layout .funkybeats-sequencer:has(.drum-step-lane){flex:1;min-height:0;max-height:none}
+.drum-layout .seq-row{grid-template-columns:60px repeat(4,minmax(177px,1fr));width:max(100%,768px)}
+#other-view .drum-layout .seq-step{min-width:40px;min-height:40px}
+#other-view .drum-layout .sequencer-grid{flex:1;min-width:768px;overflow-x:hidden}
+.drum-layout .drum-step-lane{width:max(100%,768px)}
+
+.patterns-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:12px;align-items:start}
+.patterns-grid-panel,.patterns-actions{min-width:0}
+.patterns-actions{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
+#other-view .patterns-actions h3,.patterns-actions p{margin:0}
+.patterns-actions output{font-size:var(--fs-value);color:var(--accent)}
+#other-view .patterns-actions button{min-height:44px}
+#other-view .patterns-layout .perform-cell{min-height:44px}
+
+/* Compact only the Remote consumer; shared website picker presentation is untouched. */
+#break-sequence .break-picker{max-width:none}
+#break-sequence .break-picker h2{display:inline-block;font-size:18px;line-height:1.2;margin:0 12px 8px 0;vertical-align:middle}
+#break-sequence .break-actions{display:inline-flex;margin:0 0 8px;gap:8px;vertical-align:middle}
+#break-sequence .break-rows{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+#break-sequence .break-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;min-height:112px;padding:8px;border:1px solid var(--line);border-radius:var(--r-panel)}
+#break-sequence .break-rows label{grid-column:1/-1;min-width:0;min-height:44px;gap:8px}
+#break-sequence .break-picker button{min-height:44px;min-width:44px;padding:8px 12px;background:var(--control);border-color:var(--line-strong);border-radius:var(--r-control)}
+#break-sequence .break-picker p{margin:4px 0}
+@media(max-width:600px) and (orientation:portrait){
+ #other-view:has(>.drum-layout){display:block;overflow:auto}
+ .drum-layout{display:flex;flex-direction:column;gap:12px}
+ .drum-grid-panel{height:clamp(240px,42vh,360px);flex:none;width:100%}
+ .drum-sound-panel{width:100%;overflow:visible}
+ .patterns-layout{display:flex;flex-direction:column}
+ .patterns-grid-panel,.patterns-actions{width:100%}
+ #break-sequence .break-rows{grid-template-columns:1fr}
+ #break-sequence .break-rows li{grid-template-columns:minmax(0,1fr) auto auto;min-height:56px;padding:4px 8px}
+ #break-sequence .break-rows label{grid-column:auto}
+}
+/* A real observer strip needs its own height; keep the drum viewport usable below it. */
+@media(min-width:601px){
+ #other-view:has(>.drum-layout):has(>#native-envelopes:not([hidden])){overflow-y:auto}
+ #other-view:has(>.drum-layout)>#native-envelopes{flex:none}
+ #other-view:has(>#native-envelopes:not([hidden]))>.drum-layout{flex:1 0 180px;min-height:180px}
+}
+
+
 /* Source-qualified Draft More units retain the shared label/glyph/value grid. */
 .master-more .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .master-more .encoder>span:last-child{white-space:normal;overflow-wrap:anywhere}

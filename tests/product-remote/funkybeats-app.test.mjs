@@ -47,8 +47,8 @@ test('FunkyBeats mixer fader commits its source-domain value without firmware ac
  input(x,t);input(x,t,'change');assert.notEqual(changes(x),'No changes.');x.press('undo');assert.equal(changes(x),'No changes.');
 });
 test('FunkyBeats native preview is cancelled when navigation interrupts editing',async()=>{
- const x=await boot();x.view('sound');const g=data.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0),c=g.controls.find(c=>c.name.toUpperCase()==='WAVE'),t=nativeInput(idOf(g,c),c.raw<c.max?c.raw+1:c.raw-1);
- input(x,t);x.view('patterns');assert.equal(Number(t.value),c.raw);assert.equal(changes(x),'No changes.');assert.equal((x.get('other-view').innerHTML.match(/data-launch-part=/g)||[]).length,160);
+ const x=await boot();x.changePart('chicago');x.view('sound');const g=data.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0),c=g.controls.find(c=>c.name.toUpperCase()==='WAVE'),t=nativeInput(idOf(g,c),c.raw<c.max?c.raw+1:c.raw-1);
+ input(x,t);x.view('patterns');assert.equal(Number(t.value),c.raw);assert.equal(changes(x),'No changes.');assert.equal((x.get('other-view').innerHTML.match(/data-launch-part=/g)||[]).length,32);assert.match(x.get('other-view').innerHTML,/data-launch-part="2"/);
 });
 test('owner visual corrections: sound uses concise heading and captured units; projects show real local work actions',async()=>{
  const x=await boot();x.view('sound');assert.doesNotMatch(x.get('other-view').innerHTML,/local bank preview/i);assert.match(x.get('other-view').innerHTML,/14 %/);

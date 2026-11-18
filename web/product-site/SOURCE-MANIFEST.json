@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 72348,
-      "sha256": "a4e8f677234119f02a45dc95b150832665b4b9ef93fbb4d067768fb7523e2358"
+      "bytes": 75125,
+      "sha256": "075e53d0d07730aa90d280ec193470f3bb0d87567a45a30d8d136a8e453ab090"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -784,8 +784,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 9811,
-      "sha256": "16b31727418011124697795a87c178c659aa93e3587fb3ea07cab48e11569e2c"
+      "bytes": 10137,
+      "sha256": "99c1f6519d691b849599805dcc793d69392af21f5220863a9563cd5e98340d70"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -829,8 +829,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 8114,
-      "sha256": "a82dc9ee285dd8fb0c6ac885531bac9e21eb3ad11ddb0aff699137efec2665db"
+      "bytes": 8180,
+      "sha256": "e25ffb0e9c56d7da435377ba6b2942455bd0069c73c0d768b356913b150c7e72"
     },
     {
       "path": "remote/lane.mjs",
@@ -841,16 +841,6 @@
       "path": "remote/local-instrument.mjs",
       "bytes": 1997,
       "sha256": "8c0608ce12eeb848067ea82138dbbb4bb911a4e581bec3290114ad5cd4dacdb2"
-    },
-    {
-      "path": "remote/master-draft.mjs",
-      "bytes": 5317,
-      "sha256": "3394d9d987a66ec8051e8fddc462c19ecae6c6bb19c72fe1195370b568c4bdda"
-    },
-    {
-      "path": "remote/master-source.mjs",
-      "bytes": 17526,
-      "sha256": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783"
     },
     {
       "path": "remote/mix-aliases.mjs",
@@ -969,8 +959,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 36354,
-      "sha256": "c231df2f1a70a6f1e9e85235044fe18d5d4906f4acf7f078ea9ff768976d7544"
+      "bytes": 41496,
+      "sha256": "fb818f19061c7f4fe1ab96aae9fcb2a90ae427db05cd1e4596c4ec2f48a5b7bf"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1071,6 +1061,16 @@
       "path": "versions.json",
       "bytes": 89223,
       "sha256": "84d79d2f5240eb02d0dadd810e84f2aec7577d9bf0218bfdbc6d187334285893"
+    },
+    {
+      "path": "remote/master-draft.mjs",
+      "bytes": 5317,
+      "sha256": "3394d9d987a66ec8051e8fddc462c19ecae6c6bb19c72fe1195370b568c4bdda"
+    },
+    {
+      "path": "remote/master-source.mjs",
+      "bytes": 17526,
+      "sha256": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783"
     }
   ],
   "notClaimed": [
