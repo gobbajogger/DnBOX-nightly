@@ -34,3 +34,17 @@ test('all nineteen musician routes and both legacy entry redirects survive the b
   assert.ok(built.includes(target),route+' must point to its maintained route');
  }
 });
+
+test('starting-breaks publication navigation uses existing live destinations without unrelated route rollout',()=>{
+ const html=read('starting-breaks/index.html');
+ const allowed=new Set(['#content','../index.html','../breaks/','../projects/','../manual/','../builds/','../install/','../install/#samples','../new/']);
+ for(const [,href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)){
+  if(/^https:\/\//.test(href))continue;
+  assert.ok(allowed.has(href),'unpublished starting-break destination: '+href);
+ }
+ assert.match(html,/>Home<\/a>/);
+ assert.match(html,/class="starting-breaks-page"/);
+ assert.match(html,/\.starting-breaks-page header\{[^}]*flex-wrap:wrap/);
+ assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
+ assert.match(html,/src="\.\.\/install\.mjs"/);
+});

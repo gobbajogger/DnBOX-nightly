@@ -36,3 +36,5 @@ Independent review caught inherited donor omission: canonical synthone filenames
 Review also corrected README: Synth One is a development slot/init migration with playable renderer pending M1, not a released playable/chord-recording engine. Historical Juno0.0.26 qualification retained.
 
 - 2026-11-17: item 1 merged in #152 as `7a2ed1842e7773e249f0e46ac3da156945964626` after the exact-head `dnbox-gate` success; current-source retired-name scan is clear.
+
+- 2026-11-18: Merge consolidated #160 and retain its starting-breaks navigation assertion alongside Web item 2 route, redirect and historical label assertions.
