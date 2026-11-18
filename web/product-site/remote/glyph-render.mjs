@@ -44,7 +44,7 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
+ DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
  BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
@@ -282,10 +282,23 @@ function lfoPath(value, state){
  for(let i=0;i<24;i++) pts.push([i*40/23, 12-depth*8*Math.sin(6.2831853*i*rate/23)]);
  return path(pts);
 }
-function tapePath(value){
- const u=unit(value);
- const sag=4+u*8;
- return path([[4,10],[8,10],[8,6],[12,6],[12,10],[16,10],[18,10+sag],[28,10+sag],[30,10],[34,10],[34,6],[38,6],[38,10]]);
+// Match the firmware R_TAPE readout. Values 0–15 select digital delay.
+function tapePath(value, state){
+ const raw=Math.round(unit(value)*127);
+ if(raw<16) return path([[2,15],[10,15],[10,5],[20,5],[20,15],[30,15],[30,5],[38,5]]);
+ const phase=(state.phase??0)*Math.PI/8;
+ const parts=[];
+ for(const cx of [10,30]){
+  const reel=[];
+  for(let i=0;i<=32;i++){
+   const angle=i*Math.PI/16;
+   reel.push([cx+7*Math.cos(angle),10+7*Math.sin(angle)]);
+  }
+  parts.push(path(reel),path([[cx,10],[cx+4*Math.sin(phase),10-4*Math.cos(phase)]]));
+ }
+ const wear=1+Math.floor((raw-16)*32/111);
+ parts.push(path([[4,21],[36,21]]),path([[4,20],[4+wear,20]]));
+ return parts.join(' ');
 }
 function tonePath(value){
  const u=unit(value);
@@ -323,7 +336,7 @@ const DRAW={
  // These take (value,state); the engine argument is dropped. Before this fix they
  // received the engine name as the value, so they never moved with the control.
  FILTER:(e,v,s)=>filterPath(v,s), TUNE:tunePath, DECAY:(e,v)=>decayPath(v), ATTACK:(e,v)=>attackPath(v),
- LFO:(e,v,s)=>lfoPath(v,s), TAPE:(e,v)=>tapePath(v), TONE:(e,v)=>tonePath(v), LEVEL:(e,v)=>levelPath(v),
+ LFO:(e,v,s)=>lfoPath(v,s), TAPE:(e,v,s)=>tapePath(v,s), TONE:(e,v)=>tonePath(v), LEVEL:(e,v)=>levelPath(v),
  GLIDE:(e,v)=>glidePath(v), PAN:(e,v)=>panPath(v)
 };
 

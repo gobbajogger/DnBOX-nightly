@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 42589,
-      "sha256": "36e274db4eb14ed4d479e259c7b80053be28988aa2df9a0c51cecd3f0da773b7"
+      "bytes": 47095,
+      "sha256": "141ff46c250b8a1490d2cb4475a4ff4cc5232e470a01dbfe36f32067bead546d"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -774,8 +774,8 @@
     },
     {
       "path": "remote/glyph-live.mjs",
-      "bytes": 4680,
-      "sha256": "15be6702765d4d968b2540fd48defc57c20767f1494d16ac6fe021601eb422d8"
+      "bytes": 4887,
+      "sha256": "1c5fef125b0c7f4fc8d3b8ae9121ff3d080657fbf45e80246f2f9796674123f5"
     },
     {
       "path": "remote/glyph-registry.mjs",
@@ -784,8 +784,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 16791,
-      "sha256": "1bd27aad7485b22e9fbcea8fd5ad8a1100ec74db14c065442b5fd8b6770409cc"
+      "bytes": 17294,
+      "sha256": "077b09ebe6bf2db2cc9cf47315bdc7e764118068d92faa2e883d1948404aaaee"
     },
     {
       "path": "remote/glyphs.mjs",

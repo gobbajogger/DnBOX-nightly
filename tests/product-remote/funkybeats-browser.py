@@ -75,6 +75,23 @@ async def mixer(page):
     await page.locator('#undo').click()
     await expect(faders.first).to_have_value(before)
 
+    # Actual painted readout changes for an edited delay control.
+    feedback = page.locator('.mix-panel button[aria-label^="Delay FEEDBACK"]')
+    canvas = feedback.locator('canvas')
+    await expect(canvas).to_be_visible()
+    original = await canvas.evaluate('(c) => c.toDataURL()')
+    await feedback.press('Enter')
+    field = page.locator('#parameter-value')
+    raw = await field.input_value()
+    minimum, maximum = await field.get_attribute('min'), await field.get_attribute('max')
+    await field.fill(minimum if float(raw) != float(minimum) else maximum)
+    await field.press('Enter')
+    await field.blur()
+    await page.wait_for_function(
+        "before => document.querySelector('.mix-panel button[aria-label^=\"Delay FEEDBACK\"] canvas').toDataURL() !== before",
+        arg=original)
+    await page.locator('#undo').click()
+
 async def launcher(page):
     await page.locator('[data-view="patterns"]').click()
     await expect(page.locator('[data-launch-part]')).to_have_count(160)

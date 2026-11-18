@@ -26,3 +26,19 @@ test('drum voice glyphs react to level, hit pulse and decay',()=>{
  assert.notEqual(p({level:0.5,decay:1,hit:0}),base,'decay');
  assert.notEqual(p({level:0.5,decay:0.5,hit:1}),base,'hit pulse');
 });
+test('tape wear matches the firmware digital threshold, two circular reels and wear range',async()=>{
+ const {render}=await import('../../web/product-site/remote/glyph-render.mjs');
+ const {polylines}=await import('../../web/product-site/remote/glyph-live.mjs');
+ const draw=(raw,phase=0)=>polylines(render('Wear',raw/127,'mixer',{phase}).d);
+ assert.equal(draw(15).length,1);
+ const low=draw(16),high=draw(127),turned=draw(16,4);
+ for(const [index,cx] of [[0,10],[2,30]]){
+  const reel=low[index];
+  assert.deepEqual(reel[0],reel.at(-1));
+  for(const [x,y] of reel)assert.ok(Math.abs(Math.hypot(x-cx,y-10)-7)<0.08);
+  assert.deepEqual(high[index],reel);
+  assert.notDeepEqual(turned[index+1],low[index+1]);
+ }
+ assert.equal(low.at(-1)[1][0],5);
+ assert.equal(high.at(-1)[1][0],37);
+});
