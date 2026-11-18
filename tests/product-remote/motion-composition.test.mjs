@@ -29,7 +29,7 @@ return{get,view,changePart,press,windowListeners,documentListeners};}
 
 import test from 'node:test';
 test('Motion composes existing live selected-part sequence and thin lane without changing fixed target',async()=>{
- const x=await boot();x.view('locks');assert.equal(x.get('roll-view').hidden,false,'Motion must retain the real roll');assert.equal(x.get('other-view').hidden,false);assert.equal(x.get('workspace-main').dataset.view,'locks');assert.match(x.get('motion-sequence-context').textContent,/Sequence.*Bass A.*CHICAGO/);assert.match(x.get('other-view').innerHTML,/Motion · MIAMI Wave/);assert.match(x.get('other-view').innerHTML,/Value <input/);
+ const x=await boot();x.view('locks');assert.equal(x.get('roll-view').hidden,false,'Motion must retain the real roll');assert.equal(x.get('other-view').hidden,false);assert.equal(x.get('workspace-main').dataset.layoutView,'locks');assert.match(x.get('motion-sequence-context').textContent,/Sequence.*Bass A.*CHICAGO/);assert.match(x.get('other-view').innerHTML,/Motion · MIAMI Wave/);assert.match(x.get('other-view').innerHTML,/Value <input/);
  x.changePart('miami','Bass B');assert.equal(x.get('roll-view').hidden,false);assert.match(x.get('motion-sequence-context').textContent,/Sequence.*Bass B.*MIAMI/);assert.match(x.get('other-view').innerHTML,/Motion · MIAMI Wave/);assert.ok(x.get('roll-grid').innerHTML.includes('data-note='));assert.ok(x.get('velocity').innerHTML.includes('data-lane-step='));
  x.view('sound');assert.equal(x.get('roll-view').hidden,true);assert.equal(x.get('motion-sequence-context').hidden,true);
 });

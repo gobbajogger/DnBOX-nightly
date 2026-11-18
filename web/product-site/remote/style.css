@@ -427,10 +427,10 @@ dialog::backdrop{background:#000a}
 @media (orientation:portrait) and (max-width:600px){#native-playing{font-size:10px}}
 
 /* Motion is a fixed-target Draft study beside the actual selected-part sequence. */
-#workspace-main[data-view="locks"]{display:grid;grid-template-columns:minmax(0,3fr) minmax(280px,2fr);gap:12px}
-#workspace-main[data-view="locks"] #roll-view{display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;min-width:0}
+#workspace-main[data-layout-view="locks"]{display:grid;grid-template-columns:minmax(0,3fr) minmax(280px,2fr);gap:12px}
+#workspace-main[data-layout-view="locks"] #roll-view{display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;min-width:0}
 #motion-sequence-context{margin:0;font-size:14px;font-weight:700;line-height:24px}
-#workspace-main[data-view="locks"] #other-view{padding:0}
+#workspace-main[data-layout-view="locks"] #other-view{padding:0}
 .motion-editor{display:grid;grid-template-rows:auto minmax(120px,1fr) auto auto;gap:8px;min-height:100%;box-sizing:border-box}
 #other-view .motion-editor h2{margin:0;font-size:18px;line-height:24px}
 .motion-editor #motion-grid{height:auto;min-height:120px}
@@ -438,14 +438,14 @@ dialog::backdrop{background:#000a}
 #other-view .motion-fields label{margin:0;gap:6px}
 .motion-actions button{flex:1;min-width:72px}
 @media (orientation:landscape) and (max-height:500px){
- #workspace-main[data-view="locks"]{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:8px}
+ #workspace-main[data-layout-view="locks"]{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:8px}
  .motion-editor{grid-template-rows:auto minmax(64px,1fr) auto auto;gap:4px}
  .motion-editor #motion-grid{min-height:64px}
  #motion-step,#motion-value{width:54px}
  #other-view .motion-editor h2,#motion-sequence-context{font-size:14px;line-height:20px}
 }
 @media (orientation:portrait) and (max-width:600px){
- #workspace-main[data-view="locks"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(180px,1fr) minmax(250px,1fr);gap:8px;overflow:auto}
+ #workspace-main[data-layout-view="locks"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(180px,1fr) minmax(250px,1fr);gap:8px;overflow:auto}
  .motion-editor{grid-template-rows:auto minmax(96px,1fr) auto auto}
  .motion-editor #motion-grid{min-height:96px}
 }
