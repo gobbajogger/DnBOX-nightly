@@ -3,8 +3,9 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,lstatSync,readdirSync}from'node:fs';
 import {resolve,dirname,join,relative,sep}from'node:path';
 import {fileURLToPath}from'node:url';import{createHash}from'node:crypto';
+import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -46,14 +47,21 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
    seen.add(alias);inputs.push([alias,data]);
   }
  }
+ // Explicit qualified runtime staging. Absence remains unavailable, never a fake emulator.
+ if(emulatorRuntime){
+  const pin=readEmulatorPin(join(repoRoot,'scripts/emulator-runtime-pin.json'));
+  for(const [name,data] of readEmulatorRuntime({directory:emulatorRuntime,pin})){
+   if(seen.has(name))throw Error('Native runtime output collision');seen.add(name);inputs.push([name,data]);
+  }
+ }
  // No stale private/unrelated files may ride along in a publisher input.
  function inspectOutput(dir){if(!existsSync(dir))return;for(const name of readdirSync(dir)){const p=join(dir,name);noLinks(p,repoRoot);const stat=lstatSync(p);if(stat.isDirectory())inspectOutput(p);else{if(!stat.isFile())throw Error('Regular output files required');if(stat.nlink!==1)throw Error('Output hardlink refused');if(!seen.has(relative(target,p).split(sep).join('/')))throw Error('unexpected output file: '+relative(target,p));}}}
  inspectOutput(target);
  // Validate the COMPLETE input set before any output changes.
  for(const [name,data]of inputs){const path=join(target,name);noLinks(path,repoRoot);if(check){if(!existsSync(path)||!readFileSync(path).equals(data))throw Error('Product output differs: '+name);}else{mkdirSync(dirname(path),{recursive:true});writeFileSync(path,data);}}
- return{files:inputs.length,output:target,published:false,firmwareWrites:false,catalogMutations:[]};
+ return{files:inputs.length,output:target,emulator:Boolean(emulatorRuntime),published:false,firmwareWrites:false,catalogMutations:[]};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
- console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check')})));
+ console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }

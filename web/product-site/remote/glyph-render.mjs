@@ -44,7 +44,7 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
+ DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
  BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
@@ -201,27 +201,37 @@ export function adsrWidths(e){
  const sum=dur[0]+dur[1]+dur[2]||1;
  return dur.map(d=>d/sum);
 }
+// Chicago macro slots 7..10 feed native VCA controls 32..35 via the firmware's 1001-step mapping.
+const chicagoVcaRanges=[[0,0.5585317611694336],[0.1190476194024086,0.5515872836112976],[0,1],[0.11866399645805359,0.5506910085678101]];
+export function chicagoVcaStage(stage, macro){
+ const [low,high]=chicagoVcaRanges[stage];
+ return Math.round(1000*(low+(high-low)*macro))/1000;
+}
 function adsrPath(engine, value, state){
  const u=unit(value);
- const a=state.attack??u, d=state.decay??0.5, s=state.sustain??0.6, r=state.release??0.4;
- const curved=engine!=='juno';
- const e=chicagoTimes(a,d,r); e.S=s;
- const w=adsrWidths(e);
- const pts=[];
- const push=(x0,x1,fn)=>{
-  const n=8;
-  for(let i=0;i<=n;i++){
-   const t=i/n;
-   const level=curved?fn(t):fn(0)+(fn(1)-fn(0))*t;
-   pts.push([x0+(x1-x0)*t, 22-Math.max(0,Math.min(1,level))*18]);
-  }
- };
- const hold=6, timed=34;
- const x1=timed*w[0], x2=x1+timed*w[1], x3=x2+hold, x4=x3+timed*w[2];
- push(0,x1,t=>chicagoLevel(0,t*e.A*Math.log(1.3/0.3),e));
- push(x1,x2,t=>chicagoLevel(1,t*e.D*Math.log(100),e));
- pts.push([x3, 22-s*18]);
- push(x3,x4,t=>chicagoLevel(2,t*(e.S>0.04?e.R*Math.log(e.S/0.04):0),e));
+ const macros=[state.attack??u,state.decay??0.5,state.sustain??0.6,state.release??0.4];
+ const [a,d,s,r]=engine.toLowerCase()==='chicago'?macros.map((v,i)=>chicagoVcaStage(i,v)):macros;
+ const juno=engine.toLowerCase()==='juno';
+ const times=juno?{A:.002+3*a*a,D:.01+3*d*d,R:.01+4*r*r}:chicagoTimes(a,d,r);
+ const sampleRate=44100, releaseStep=1-1/Math.max(1,times.R*sampleRate);
+ // Compact juno6.c's linear A/D and per-sample exponential release, including silence threshold.
+ const releaseDuration=juno
+  ? (s>.00001?Math.log(.00001/s)/Math.log(releaseStep)/sampleRate:0)
+  : (s>.04?times.R*Math.log(s/.04):0);
+ const durations=juno?[times.A,times.D,releaseDuration]:[times.A*Math.log(1.3/.3),times.D*Math.log(100),releaseDuration];
+ // DnBOX ui.c adsr_layout: reserve 42 of 214 pixels for hold and at least three for each timed stage.
+ const span=172,total=durations.reduce((sum,n)=>sum+n,0);
+ const widths=durations.map(n=>3+Math.round((span-9)*n/total));
+ widths[1]+=span-widths.reduce((sum,n)=>sum+n,0);
+ if(widths[1]<3){widths[2]-=3-widths[1];widths[1]=3;}
+ const xs=[0,widths[0],widths[0]+widths[1],widths[0]+widths[1]+42,214];
+ const envelope={...times,S:s},pts=[];
+ function point(x,level){pts.push([40*x/214,22-18*Math.max(0,Math.min(1,level))]);}
+ function segment(start,end,level){for(let i=0;i<=24;i++)point(start+(end-start)*i/24,level(i/24));}
+ segment(xs[0],xs[1],u=>juno?u:chicagoLevel(0,u*durations[0],envelope));
+ segment(xs[1],xs[2],u=>juno?1-(1-s)*u:chicagoLevel(1,u*durations[1],envelope));
+ point(xs[3],s);
+ segment(xs[3],xs[4],u=>u===1?0:juno?s*Math.pow(releaseStep,u*durations[2]*sampleRate):chicagoLevel(2,u*durations[2],envelope));
  return path(pts);
 }
 
@@ -282,10 +292,23 @@ function lfoPath(value, state){
  for(let i=0;i<24;i++) pts.push([i*40/23, 12-depth*8*Math.sin(6.2831853*i*rate/23)]);
  return path(pts);
 }
-function tapePath(value){
- const u=unit(value);
- const sag=4+u*8;
- return path([[4,10],[8,10],[8,6],[12,6],[12,10],[16,10],[18,10+sag],[28,10+sag],[30,10],[34,10],[34,6],[38,6],[38,10]]);
+// Match the firmware R_TAPE readout. Values 0–15 select digital delay.
+function tapePath(value, state){
+ const raw=Math.round(unit(value)*127);
+ if(raw<16) return path([[2,15],[10,15],[10,5],[20,5],[20,15],[30,15],[30,5],[38,5]]);
+ const phase=(state.phase??0)*Math.PI/8;
+ const parts=[];
+ for(const cx of [10,30]){
+  const reel=[];
+  for(let i=0;i<=32;i++){
+   const angle=i*Math.PI/16;
+   reel.push([cx+7*Math.cos(angle),10+7*Math.sin(angle)]);
+  }
+  parts.push(path(reel),path([[cx,10],[cx+4*Math.sin(phase),10-4*Math.cos(phase)]]));
+ }
+ const wear=1+Math.floor((raw-16)*32/111);
+ parts.push(path([[4,21],[36,21]]),path([[4,20],[4+wear,20]]));
+ return parts.join(' ');
 }
 function tonePath(value){
  const u=unit(value);
@@ -323,7 +346,7 @@ const DRAW={
  // These take (value,state); the engine argument is dropped. Before this fix they
  // received the engine name as the value, so they never moved with the control.
  FILTER:(e,v,s)=>filterPath(v,s), TUNE:tunePath, DECAY:(e,v)=>decayPath(v), ATTACK:(e,v)=>attackPath(v),
- LFO:(e,v,s)=>lfoPath(v,s), TAPE:(e,v)=>tapePath(v), TONE:(e,v)=>tonePath(v), LEVEL:(e,v)=>levelPath(v),
+ LFO:(e,v,s)=>lfoPath(v,s), TAPE:(e,v,s)=>tapePath(v,s), TONE:(e,v)=>tonePath(v), LEVEL:(e,v)=>levelPath(v),
  GLIDE:(e,v)=>glidePath(v), PAN:(e,v)=>panPath(v)
 };
 

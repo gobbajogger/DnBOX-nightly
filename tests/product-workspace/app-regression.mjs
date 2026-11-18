@@ -2,7 +2,7 @@ let failures=0;function check(name,fn){try{fn();console.log('PASS',name);}catch(
 import fs from 'node:fs';import assert from 'node:assert/strict';
 const base=new URL('../../web/product-site/remote/',import.meta.url);
 // Deterministic source-event shim only. No DOM engine, browser, server or rendering.
-class E{constructor(id=''){this.id=id;this.handlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}addEventListener(k,f){this.handlers[k]=f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
+class E{constructor(id=''){this.id=id;this.handlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}addEventListener(k,f){const prior=this.handlers[k];this.handlers[k]=prior?e=>{prior(e);f(e)}:f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-lane-step]'&&this.dataset.laneStep!==undefined)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
 const nodes=new Map(),views=['roll','drums','locks','sound','mix','patterns','song','files'].map(view=>{const e=new E();e.dataset.view=view;return e;}),modes=['select','move','draw','length','pan'].map(mode=>{const e=new E();e.dataset.mode=mode;return e;});
 globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new E(),addEventListener(){}};globalThis.window={addEventListener(){}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
 const $=document.getElementById;$('zoom').value='1';$('lane-kind').value='velocity';$('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];await import(new URL('app.mjs',base));
@@ -23,7 +23,7 @@ assert.equal(failures,0);
 $('part').value='chicago';$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();
 // Lane is absolute (value follows the finger), shared lane.mjs mapping.
 const L=await import(new URL('lane.mjs',base));const vAt=y=>L.velocityFromLane(L.laneP(y,0,100)),cAt=y=>L.chanceFromLane(L.laneP(y,0,100));
-const bar=new E();bar.dataset.select='n1';const laneDown={button:0,pointerId:7,clientX:0,clientY:20,target:bar,preventDefault(){}};
+const bar=new E();bar.dataset.select='n1';bar.dataset.laneStep='0';const laneDown={button:0,pointerId:7,clientX:0,clientY:20,target:bar,preventDefault(){}};
 $('velocity').handlers.pointerdown(laneDown);$('velocity').handlers.pointermove({...laneDown,clientY:12});$('velocity').handlers.pointerup(laneDown);
 assert.match($('inspector').innerHTML,new RegExp('data-field="velocity"[^>]*value="'+vAt(12)+'"'));$('undo').onclick();assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);
 $('velocity').handlers.pointerdown(laneDown);$('velocity').handlers.pointermove({...laneDown,clientY:2});$('velocity').handlers.pointercancel(laneDown);assert.match($('inspector').innerHTML,/data-field="velocity"[^>]*value="93"/);console.log('PASS actual-app aligned velocity 93→'+vAt(12)+', Undo93, cancel93');
@@ -48,7 +48,7 @@ $('inspector').handlers.change({target:{id:'chance-value',value:'1:2',dataset:{}
 const laneHeight=()=>Number($('velocity').innerHTML.match(/data-select="n1"[^>]*height:([0-9.]+)px/)?.[1]);
 const half=laneHeight();$('inspector').handlers.change({target:{id:'chance-value',value:'8:8',dataset:{}}});
 check('conditional chips do not map their ordinal to height',()=>assert.equal(laneHeight(),half));
-check('conditional lane is correctly announced',()=>assert.match($('velocity').innerHTML,/aria-label="C3, condition 8:8, local draft"/));
+check('conditional lane is correctly announced',()=>assert.match($('velocity').innerHTML,/aria-label="Step 1, 1 notes, chance 8:8"/));
 // Explicit percentage supports direct aligned drag, with one Undo and safe cancel.
 $('inspector').handlers.change({target:{id:'chance-value',value:'50%',dataset:{}}});
 $('velocity').handlers.pointerdown({...laneDown,pointerId:70});$('velocity').handlers.pointermove({...laneDown,pointerId:70,clientY:30});$('velocity').handlers.pointerup({...laneDown,pointerId:70});
@@ -72,12 +72,12 @@ assert.equal(failures,0);
 
 // Keyboard lane alternative operates the same source-domain value, not a new scale.
 $('lane-kind').value='chance';$('lane-kind').onchange();$('inspector').handlers.change({target:{id:'chance-value',value:'50%',dataset:{}}});
-const keyTarget=new E();keyTarget.dataset.select='n1';document.activeElement=keyTarget;
+const keyTarget=new E();keyTarget.dataset.select='n1';keyTarget.dataset.laneStep='0';document.activeElement=keyTarget;
 $('velocity').handlers.keydown?.({key:'ArrowUp',target:keyTarget,preventDefault(){}});
 check('lane keyboard increments explicit percentage by5',()=>assert.match($('inspector').innerHTML,/option selected>55%/));
 check('lane keyboard repaint restores replacement-button focus',()=>{assert.equal(document.activeElement?.dataset.select,'n1');assert.notEqual(document.activeElement,keyTarget)});
 $('velocity').handlers.keydown?.({key:'Enter',target:keyTarget,preventDefault(){}});
-check('lane keyboard opens exact chance chooser',()=>assert.equal(document.activeElement?.id,'chance-value'));
+check('lane keyboard remains on the step instead of opening a selected-note panel',()=>assert.equal(document.activeElement?.dataset.select,'n1'));
 assert.equal(failures,0);
 
 views.find(e=>e.dataset.view==='mix').onclick();check('owner correction: Mix labels native controls without captured telemetry',()=>{assert.match($('other-view').innerHTML,/class="mix-panels"/);assert.match($('other-view').innerHTML,/data-param=/);assert.match($('other-view').innerHTML,/Master/);assert.doesNotMatch($('other-view').innerHTML,/CPU/)});

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Shared step lane under the roll. Absolute fader mapping, p = 0 (bottom) .. 1 (top).
+// Shared step lane under the roll and drums. Absolute slider mapping, p = 0 (bottom) .. 1 (top).
 // Chance: the top 60% of travel is 100%..5%, the bottom 40% continues 1:2..8:8 in
 // one drag. Values encode with sequence.mjs encodeChance (5%->5, 1:2->101, 8:8->135).
 import{chanceDomain}from'./sequence.mjs';
@@ -24,16 +24,17 @@ export const panFromLane=panFromFraction;
 export const velocityFromLane=p=>1+Math.round(clamp(p,0,1)*126);
 export const PITCH_RANGE=24;
 export function pitchOffsetFromLane(p){return Math.round((clamp(p,0,1)-0.5)*2*PITCH_RANGE);}
+const pitchDelta=(n,base)=>['drum909','drum808'].includes(n.track)?n.pitchOffset??0:n.note-base;
 // Lane fraction for a note. base = the note's pitch when the stroke started.
 export function laneFraction(kind,n,base=n.note){
  if(kind==='chance') return n.chance?laneFromChance(n.chance):1;
- if(kind==='pitch') return clamp(0.5+(n.note-base)/(2*PITCH_RANGE),0,1);
+ if(kind==='pitch') return clamp(0.5+pitchDelta(n,base)/(2*PITCH_RANGE),0,1);
  if(kind==='pan') return fractionFromPan(n.pan??PAN_CENTRE);
  return (n.velocity-1)/126;
 }
 export function laneText(kind,n,base=n.note){
  if(kind==='chance') return n.chance??'100%';
- if(kind==='pitch'){const d=n.note-base;return (d>0?'+':'')+d+'st';}
+ if(kind==='pitch'){const d=pitchDelta(n,base);return (d>0?'+':'')+d+'st';}
  if(kind==='pan') return formatPan(n.pan??PAN_CENTRE);
  return String(n.velocity);
 }

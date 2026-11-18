@@ -20,11 +20,11 @@ globalThis.document={activeElement:null,getElementById:get,querySelectorAll:s=>s
 const windowListeners={};globalThis.window={addEventListener(t,f){(windowListeners[t]??=[]).push(f)}};
 globalThis.fetch=async p=>({ok:true,text:async()=>fs.readFileSync(new URL(p,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(p,base),'utf8'))});
 get('zoom').value='1';get('lane-kind').value='velocity';get('part').value='chicago';get('part').selectedOptions=[{textContent:'Bass A Chicago'}];
-await import(new URL('app.mjs?correctionProbe='+(bootId++),base));
+const app=await import(new URL('app.mjs?correctionProbe='+(bootId++),base));
 const view=v=>views.find(x=>x.dataset.view===v).onclick();
 const changePart=(v,label=v)=>{get('part').value=v;get('part').selectedOptions=[{textContent:label}];get('part').onchange()};
 const press=id=>get(id).onclick();
-return{get,view,changePart,press,windowListeners,documentListeners};}
+return{get,view,changePart,press,windowListeners,documentListeners,app};}
 
 const event=(target,pointerId=1,extra={})=>({target,pointerId,button:0,clientX:0,clientY:40,preventDefault(){},...extra});
 function review(x){x.press('review');return x.get('changes').textContent}
@@ -37,8 +37,23 @@ const soundData=JSON.parse(fs.readFileSync(new URL('source-sounds.json',base),'u
 const idOf=(group,c)=>'source-sound/'+group.bank+'/'+group.bassSlot+'|'+[c.kind,c.target,c.voice,c.parameter,c.sourceBank].join(':');
 const chooseBank=(x,bank)=>x.get('other-view').emit('change',{target:Object.assign(new Node('sound-bank'),{value:bank})});
 const row=(x,id,p=71)=>{const t=Object.assign(new Node(),{dataset:{param:id}});x.get('other-view').emit('pointerdown',event(t,p));x.get('other-view').emit('pointerup',event(t,p));return t};
-await check('all104 original bass scalars reachable under both local slot/bank previews',async x=>{let total=0;for(const slot of[0,1]){x.changePart(slot?'miami':'chicago',slot?'Bass B':'Bass A');x.view('sound');assert.match(x.get('other-view').innerHTML,/Engine/);assert.doesNotMatch(x.get('other-view').innerHTML,/Local bank preview/);for(const bank of['CHICAGO','MIAMI','JUNO']){chooseBank(x,bank);const group=soundData.contexts.find(g=>g.bank===bank&&g.bassSlot===slot);for(const c of group.controls.filter(c=>c.kind===1)){const id=idOf(group,c);assert.ok(x.get('other-view').innerHTML.includes('data-param="'+id+'"'),id);row(x,id);assert.equal(x.get('parameter-value').disabled,false);assert.equal(Number(x.get('parameter-value').value),c.raw);assert.equal(Number(x.get('parameter-value').max),c.max);total++;}}}assert.equal(total,104)});
+await check('all104 original bass scalars reachable under both local slot/bank previews',async x=>{let total=0;for(const slot of[0,1]){x.changePart(slot?'miami':'chicago',slot?'Bass B':'Bass A');x.view('sound');assert.match(x.get('other-view').innerHTML,/Engine/);assert.doesNotMatch(x.get('other-view').innerHTML,/Local bank preview/);for(const bank of['CHICAGO','MIAMI','JUNO']){chooseBank(x,bank);assert.equal(x.get('part-title').textContent,bank+' / P01','selected bank title');const group=soundData.contexts.find(g=>g.bank===bank&&g.bassSlot===slot);for(const c of group.controls.filter(c=>c.kind===1)){const id=idOf(group,c);assert.ok(x.get('other-view').innerHTML.includes('data-param="'+id+'"'),id);row(x,id);assert.equal(x.get('parameter-value').disabled,false);assert.equal(Number(x.get('parameter-value').value),c.raw);assert.equal(Number(x.get('parameter-value').max),c.max);total++;}}}assert.equal(total,104)});
 await check('same target/voice/parameter in different banks remain reversible independent drafts',async x=>{x.changePart('chicago','Bass A');x.view('sound');const edited=[];for(const bank of['CHICAGO','MIAMI','JUNO']){chooseBank(x,bank);const group=soundData.contexts.find(g=>g.bank===bank&&g.bassSlot===0),c=group.controls.find(c=>c.kind===1&&c.parameter===0),id=idOf(group,c),next=c.raw===c.max?c.raw-1:c.raw+1;row(x,id);x.get('parameter-value').value=String(next);x.get('parameter-value').onchange();edited.push({bank,id,next});}let text=review(x);assert.equal(text.split('\n').length,3);for(const bank of['CHICAGO','MIAMI','JUNO'])assert.ok(text.includes('BASS A / '+bank));for(const e of edited){chooseBank(x,e.bank);row(x,e.id);assert.equal(Number(x.get('parameter-value').value),e.next)}for(let i=0;i<3;i++)x.press('undo');assert.equal(review(x),'No changes.');for(let i=0;i<3;i++)x.press('redo');assert.equal(review(x).split('\n').length,3)});
 await check('bank change cancels active raw drag, does not commit or leak into next bank',async x=>{x.changePart('chicago','Bass A');x.view('sound');const g=soundData.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===0),c=g.controls.find(c=>c.kind===1&&c.raw<c.max-2),id=idOf(g,c),t=Object.assign(new Node(),{dataset:{param:id}});x.get('other-view').emit('pointerdown',event(t,83));x.get('other-view').emit('pointermove',event(t,83,{clientX:14}));assert.notEqual(Number(x.get('parameter-value').value),c.raw);chooseBank(x,'JUNO');x.get('other-view').emit('pointerup',event(t,83));assert.equal(review(x),'No changes.');chooseBank(x,'CHICAGO');row(x,id);assert.equal(Number(x.get('parameter-value').value),c.raw)});
 await check('BREAK empty loop state visible but cannot be selected as scalar; numeric roles editable',async x=>{x.changePart('breaks','BREAK');x.view('sound');const g=soundData.contexts.find(g=>g.bank==='BREAK');assert.match(x.get('other-view').innerHTML,/INVALID/);assert.match(x.get('other-view').innerHTML,/No loaded loop domain|no loaded loop domain/);for(const c of g.controls.filter(c=>c.kind===12))assert.ok(!x.get('other-view').innerHTML.includes('data-param="'+idOf(g,c)+'"'));const c=g.controls.find(c=>c.kind===10),id=idOf(g,c);row(x,id);assert.equal(Number(x.get('parameter-value').max),100);x.get('parameter-value').value='5';x.get('parameter-value').onchange();assert.match(review(x),/BREAK.*B CHANCE.*0.*5/);x.press('undo');assert.equal(review(x),'No changes.');x.press('redo');assert.match(review(x),/B CHANCE.*5/)});
-if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 4; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
+await check('native observer renders only selected engine and clears on page teardown',async x=>{
+ assert.equal(typeof x.app.attachEnvelopeObserver,'function');x.view('sound');
+ const listeners=new Set(),port={addEventListener:(t,f)=>listeners.add(f),removeEventListener:(t,f)=>listeners.delete(f),start(){}};
+ const pin={firmware:'a'.repeat(40),kernel:'b'.repeat(64),session:'app-1'};
+ const binding=x.app.attachEnvelopeObserver(port,pin);
+ try{
+ const snapshot={adsr:[0,.4,.6,.4],level:.25,state:1};
+ for(const fn of listeners)fn({data:{type:'envelopes',...pin,sequence:1,timeMs:1,voices:[{engine:'CHICAGO',slot:0,role:'amp',available:true,snapshot}]}});
+ assert.match(x.get('native-envelopes').innerHTML,/Decay \/ sustain/);
+ assert.throws(()=>x.app.attachEnvelopeObserver(port,{...pin,kernel:'invalid'}));assert.equal(listeners.size,1,'failed observer replacement retains old native session');
+ chooseBank(x,'JUNO');assert.equal(x.get('native-envelopes').innerHTML,'');
+ chooseBank(x,'CHICAGO');assert.match(x.get('native-envelopes').innerHTML,/25%/);
+ for(const fn of x.windowListeners.pagehide??[])fn({});assert.equal(listeners.size,0);assert.equal(x.get('native-envelopes').innerHTML,'');
+ }finally{binding.close();}
+});
+if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 5; FAILURES '+failed+'; source-event stub, NOT DOM/touch');

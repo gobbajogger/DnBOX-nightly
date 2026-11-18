@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>DnBOX Remote</title>
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="../components/break-panel/panel.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -47,6 +48,8 @@
 <button id="review" class="btn" type="button">Review</button>
 <button id="draft-save" class="btn" type="button">Download draft</button>
 <label class="btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
+<button id="emulator-start" class="btn" type="button">Start emulator</button>
+<button id="emulator-stop" class="btn" type="button">Stop emulator</button>
 <button id="apply" class="btn" type="button" disabled>Apply to instrument</button>
 <p id="firmware-safety" hidden></p>
 <div id="firmware-controls" hidden></div>
@@ -72,7 +75,9 @@
 <input id="zoom" type="range" min="1" max="4" step=".25" value="1" hidden aria-label="Zoom">
 </div>
 </header>
+<aside id="connection-result" aria-labelledby="connection-heading" hidden><h2 id="connection-heading">Connection</h2><p id="connection-message" role="status"></p><button type="button" id="close-connection">Return to draft</button></aside>
 <main>
+<nav id="break-views" aria-label="BREAK editor" hidden><button type="button" data-break-view="slices" aria-pressed="true">Slices</button><button type="button" data-break-view="notes" aria-pressed="false">Notes</button></nav>
 <section id="roll-view">
 <div class="roll-panel">
 <div class="roll-head"><span class="key-head"></span><div class="beat-ruler" id="beat-ruler" aria-hidden="true"></div></div>
@@ -93,10 +98,11 @@
 </div>
 <aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
 </section>
+<section id="break-sequence" aria-label="BREAK sequence" hidden></section>
 <section id="other-view" hidden></section>
 </main>
 <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>
-<dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><p>Not connected.</p><button type="submit">Return</button></form></dialog>
+<dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><button type="submit">Return</button></form></dialog>
 <dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
 <script type="module" src="app.mjs"></script>
 </body>

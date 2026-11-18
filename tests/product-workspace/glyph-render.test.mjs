@@ -68,3 +68,26 @@ test('no r23 token, class or glyph remains in the Remote or site UI',()=>{
  walk('');
  assert.deepEqual(hits, []);
 });
+
+test('full ADSR rows use compact Juno timing, distinct Chicago curvature, a visible attack and a zero release endpoint',()=>{
+ const state={attack:0,decay:.4,sustain:.65,release:1};
+ const points=engine=>[...render('ADSR',0,engine,state).d.matchAll(/[ML]\s*([\d.]+)[ ,]+([\d.]+)/g)].map(m=>[Number(m[1]),Number(m[2])]);
+ const juno=points('juno'),chicago=points('chicago');
+ assert.notDeepEqual(juno,chicago);
+ for(const row of [juno,chicago]){
+  assert.ok(row[24][0]>=.5,'even the shortest attack retains visible width');
+  assert.deepEqual(row.at(-1),[40,22]);
+ }
+ assert.equal(juno[12][1],13,'the Juno attack is linear at its midpoint');
+ assert.ok(chicago[12][1]<13,'the Chicago attack uses its RC law');
+ assert.ok(juno.at(-13)[1]>21,'the Juno exponential release reaches its tail before the midpoint');
+});
+
+test('Chicago uses the compiled VCA values for every stage at every 7-bit setting',async()=>{
+ const {chicagoVcaStage}=await import('../../web/product-site/remote/glyph-render.mjs');
+ const {createHash}=await import('node:crypto');
+ let observed='';
+ for(let stage=0;stage<4;stage++)for(let raw=0;raw<128;raw++)observed+=Math.round(1000*chicagoVcaStage(stage,raw/127))+'\n';
+ // C oracle: original_chicago_program_set(7+stage), original_chicago_program_native(32+stage).
+ assert.equal(createHash('sha256').update(observed).digest('hex'),'01fc57868aa41da40708f9909ee4e91221ed39d347e8eb602bcb0ec3a8a1367a');
+});
