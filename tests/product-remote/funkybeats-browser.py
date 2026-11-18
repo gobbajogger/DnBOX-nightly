@@ -691,10 +691,11 @@ async def project_sound_edit_count_at_size(page,width,height):
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
+    cases = (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context):
+            for case in cases:
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -709,7 +710,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=17 failures=0')
+    print(f'FUNKYBEATS-BROWSER pages={len(cases)} failures=0')
 
 async def main():
     global SOURCE
