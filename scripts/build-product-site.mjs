@@ -34,6 +34,9 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if(typeof row.path!=='string'||!row.path||row.path.includes('\\')||row.path.startsWith('/')||row.path.split('/').some(x=>!x||x==='.'||x==='..')||seen.has(row.path)||row.path==='SOURCE-MANIFEST.json')throw Error('Invalid or duplicate source path');
   seen.add(row.path);const input=join(source,row.path);noLinks(input,repoRoot);if(!lstatSync(input).isFile())throw Error('Regular product source files required');const data=readFileSync(input);
   if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
+  if (row.bytes !== data.length || row.sha256 !== createHash('sha256').update(data).digest('hex')) {
+   throw Error('Source differs from manifest: ' + row.path);
+  }
   inputs.push([row.path,data]);
  }
  // Keep historical preview URLs working without admitting arbitrary private audio.

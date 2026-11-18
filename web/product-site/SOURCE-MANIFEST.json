@@ -359,13 +359,13 @@
     },
     {
       "path": "manual/index.html",
-      "bytes": 13150,
-      "sha256": "452e38674863f53c789a65c5fb942d2889ab41b1caa7ae1efbbf7f12ad48ac82"
+      "bytes": 13169,
+      "sha256": "df57fb7318f0e454e8331e48752ad27501b8f39688dfeaa68364401a6d656509"
     },
     {
       "path": "manual/legacy.html",
-      "bytes": 64367,
-      "sha256": "4c4ac4e7e7b88210d2839bd9c73e61498030a1eb09eb759860fca228bf811382"
+      "bytes": 64789,
+      "sha256": "3e48f161394b20e615284b2be232c42ba82f9967ac5d7304526c9116cc77ca8d"
     },
     {
       "path": "manual/manual.js",
@@ -504,8 +504,8 @@
     },
     {
       "path": "manual/protocol.html",
-      "bytes": 5188,
-      "sha256": "4036d90c8598b34779680a7f14db176921cbbadf120fbad67d671631be41dba0"
+      "bytes": 5207,
+      "sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
     },
     {
       "path": "new/index.html",
@@ -634,8 +634,8 @@
     },
     {
       "path": "remote/FUNKYBEATS-MIT-NOTICE.md",
-      "bytes": 1092,
-      "sha256": "a75974a3a21cd30a01b57a035a9035cee4199e8d563a3c1c116bd107cfd062be"
+      "bytes": 2108,
+      "sha256": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80"
     },
     {
       "path": "remote/SOURCE-PINS.json",
@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 42589,
-      "sha256": "36e274db4eb14ed4d479e259c7b80053be28988aa2df9a0c51cecd3f0da773b7"
+      "bytes": 47619,
+      "sha256": "58efdbec46b056dc6e785d59e58f3218271343b6d83b73a8bb7d4051d422fb2c"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -814,8 +814,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7356,
-      "sha256": "9ee77d05cfedbce22538f4bfbb0591fa98dd977339297e0eee0fcd9abdfa1c23"
+      "bytes": 6987,
+      "sha256": "1c8003194bf07f079a3149cb54d3581afe2a303a770e1a54929e4ac938c65eff"
     },
     {
       "path": "remote/lane.mjs",
@@ -864,8 +864,8 @@
     },
     {
       "path": "remote/roll.mjs",
-      "bytes": 5217,
-      "sha256": "075fab3b4a3d2c5f526e06ddc7bcb03aa15813d311f26b9ec018094c2c66014b"
+      "bytes": 5341,
+      "sha256": "7167c3c9c3c892244026dc2660176336b3b43d1dc4af2279b71c5a70c046bc3d"
     },
     {
       "path": "remote/sequence.mjs",
@@ -889,8 +889,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 20541,
-      "sha256": "064c4d2c94f6807196902b6825bfa5f91d7bb332aaa0022421be203a150d562f"
+      "bytes": 26628,
+      "sha256": "66505f4108649df848f811073560c0934b30db3c7a05dbce3af10d8f0ecf146c"
     },
     {
       "path": "remote/timeline.mjs",
@@ -929,8 +929,8 @@
     },
     {
       "path": "remote/workspace.mjs",
-      "bytes": 1801,
-      "sha256": "52ec3e4258ba976e5dd021e91e59cfda3b74b890d1f418335f2b04525de7fb2e"
+      "bytes": 4207,
+      "sha256": "0931a2ddcfff64e10fef9ca0f5af2c1bac0069e2c4c5cf05d72d08dfeef3b461"
     },
     {
       "path": "replay.mjs",

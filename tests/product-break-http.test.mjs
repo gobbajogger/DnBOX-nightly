@@ -72,7 +72,7 @@ test('historical aliases cannot bypass pinned audio admission or overwrite hardl
   const contract=await readFile(new URL('../web/product-site/sample-contract.json',import.meta.url));
   const wav=await readFile(new URL(`../web/product-site/${name}`,import.meta.url));
   await writeFile(join(source,'sample-contract.json'),contract);await writeFile(join(source,name),wav);
-  const manifest={schema:'dnbox-product-site-source/1',publicationQualified:false,files:[{path:name}]};
+  const manifest={schema:'dnbox-product-site-source/1',publicationQualified:false,files:[{path:name,bytes:wav.length,sha256:createHash('sha256').update(wav).digest('hex')}]};
   await writeFile(join(source,'SOURCE-MANIFEST.json'),JSON.stringify(manifest));
   const {output}=buildProductSite({repoRoot:root});
   assert.deepEqual(await readFile(join(output,`private-audio/${id}`)),wav);
@@ -83,7 +83,7 @@ test('historical aliases cannot bypass pinned audio admission or overwrite hardl
   await rm(join(output,`private-audio/${id}`));
   const corrupt=Buffer.from(wav);corrupt[corrupt.length-1]^=1;await writeFile(join(source,name),corrupt);
   assert.throws(()=>buildProductSite({repoRoot:root}),/private audio/);
-  await writeFile(join(source,name),wav);manifest.files.push({path:`private-audio/${id}`});
+  await writeFile(join(source,name),wav);manifest.files.push({path:`private-audio/${id}`,bytes:9,sha256:createHash('sha256').update('unrelated').digest('hex')});
   await mkdir(join(source,'private-audio'));await writeFile(join(source,`private-audio/${id}`),'unrelated');
   await writeFile(join(source,'SOURCE-MANIFEST.json'),JSON.stringify(manifest));
   assert.throws(()=>buildProductSite({repoRoot:root}),/alias collision/);

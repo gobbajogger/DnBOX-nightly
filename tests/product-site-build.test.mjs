@@ -43,3 +43,11 @@ test('symlink manifest refuses without reading an outside manifest',()=>{
  const f=fixture(),manifest=join(f.src,'SOURCE-MANIFEST.json'),outside=join(f.root,'outside.json');writeFileSync(outside,JSON.stringify(f.m));unlinkSync(manifest);symlinkSync(outside,manifest);
  assert.throws(()=>buildProductSite({repoRoot:f.root}),/symlink/);assert.equal(existsSync(join(f.root,'.output')),false);
 });
+
+
+test('a same-size source change must match its recorded digest before output is created', () => {
+ const f = fixture();
+ writeFileSync(join(f.src, 'index.html'), '<h1>Other</h1>');
+ assert.throws(() => buildProductSite({repoRoot: f.root}), /Source differs from manifest: index.html/);
+ assert.equal(existsSync(join(f.root, '.output')), false);
+});
