@@ -489,13 +489,117 @@ async def break_and_tape(page):
     await expect(page.locator('#break-sequence [data-action="play"]')).to_have_count(0)
     assert await page.locator('#apply').is_disabled()
 
+async def project_files(page):
+    for width,height in [(1440,900),(390,844),(844,390)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        await page.goto(ORIGIN+'/remote/')
+        await page.locator('[data-view="files"]').click()
+        summary = page.locator('.project-summary')
+        await expect(summary.get_by_role('heading',name='Current session',exact=True)).to_be_visible()
+        await expect(summary.locator('p')).to_have_text(re.compile(r'\d+ notes · \d+ sound edits · \d+ song rows'))
+        destinations = [('Projects','/projects/'),('Samples','/breaks/'),('Presets','/presets/'),('MIDI exchange','/projects/#project-exchange-root')]
+        cards = page.locator('.destinations>section')
+        await expect(cards).to_have_count(4)
+        for index,(name,path) in enumerate(destinations):
+            card = cards.nth(index)
+            await expect(card.get_by_role('heading',name=name,exact=True)).to_be_visible()
+            await expect(card.get_by_role('link',name='Open '+name,exact=True)).to_have_attribute('href','..'+path)
+            # A Remote destination card contains its label and action only.
+            # Keep counters/statuses elsewhere; do not replace their semantics with a text ban.
+            await expect(card.locator('p')).to_have_count(0)
+            assert (await card.inner_text()).splitlines()==[name,'Open '+name]
+        async def save():
+            async with page.expect_download() as requested:
+                await summary.get_by_role('button',name='Save draft',exact=True).click()
+            return json.loads(Path(await (await requested.value).path()).read_text())
+        before = await save()
+        assert before['notes']
+        await summary.get_by_role('button',name='Review changes',exact=True).click()
+        await expect(page.locator('#review-dialog')).to_be_visible()
+        await page.locator('#review-dialog').get_by_role('button',name='Return',exact=True).click()
+        async with page.expect_file_chooser() as requested:
+            await summary.get_by_role('button',name='Open draft',exact=True).click()
+        await (await requested.value).set_files({'name':'invalid.json','mimeType':'application/json','buffer':b'invalid'})
+        await expect(page.locator('#draft-dialog')).to_be_visible()
+        await expect(page.locator('#draft-replace')).to_be_disabled()
+        assert await page.locator('#draft-preview').inner_text()
+        await page.locator('#draft-cancel').click()
+        await expect(page.locator('#status')).to_be_visible()
+        assert await page.locator('#status').inner_text()
+        after = await save()
+        assert after==before, 'Rejected draft changed Current session'
+        for name,path in destinations:
+            response = None
+            async with page.expect_navigation() as navigation:
+                await page.get_by_role('link',name='Open '+name,exact=True).click()
+            response = await navigation.value
+            assert response and response.status==200, (name,'Destination is unreachable')
+            assert page.url==ORIGIN+path, (name,page.url)
+            await page.goto(ORIGIN+'/remote/')
+            await page.locator('[data-view="files"]').click()
+        print(f'PASS Projects controls/statuses/actions and four reachable destinations {width}x{height}',flush=True)
+
+async def motion_keyboard(page):
+    for width,height in [(1440,900),(390,844),(844,390)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        await page.goto(ORIGIN+'/remote/')
+        await page.locator('.overflow summary').click()
+        await page.locator('[data-view="locks"]').click()
+        if await page.locator('.overflow').evaluate('(el)=>el.open'):
+            await page.locator('.overflow summary').click()
+        grid = page.locator('#motion-grid')
+        steps = grid.locator('[data-motion-step]')
+        await expect(steps).to_have_count(16)
+        await grid.focus()
+        for _ in range(9):
+            await page.keyboard.press('Tab')
+        await expect(steps.nth(8)).to_be_focused()
+        await page.keyboard.press('Enter')
+        await expect(page.locator('#motion-step')).to_have_value('9')
+        await expect(steps.nth(8)).to_have_attribute('aria-pressed','true')
+        await expect(steps.nth(8)).to_be_focused()
+        await page.keyboard.press('Tab')
+        await expect(steps.nth(9)).to_be_focused()
+        await page.keyboard.press('Space')
+        await expect(page.locator('#motion-step')).to_have_value('10')
+        await expect(steps.nth(9)).to_have_attribute('aria-pressed','true')
+        await expect(steps.nth(9)).to_be_focused()
+        assert await steps.evaluate_all('(buttons)=>buttons.every(b=>b.getAttribute("aria-label").endsWith(", unset"))')
+        await expect(page.locator('#undo')).to_be_disabled()
+        # Traverse the remaining six step buttons and Step field to Value.
+        for _ in range(8):
+            await page.keyboard.press('Tab')
+        await expect(page.locator('#motion-value')).to_be_focused()
+        await page.keyboard.type('77')
+        await page.keyboard.press('Tab')
+        await expect(steps.nth(9)).to_have_attribute('aria-label','Step 10, 77')
+        assert await steps.evaluate_all('(buttons)=>buttons.every((b,i)=>i===9||b.getAttribute("aria-label").endsWith(", unset"))')
+        await page.locator('#undo').focus()
+        await page.keyboard.press('Enter')
+        assert await steps.evaluate_all('(buttons)=>buttons.every(b=>b.getAttribute("aria-label").endsWith(", unset"))')
+        await page.locator('#redo').focus()
+        await page.keyboard.press('Enter')
+        await expect(steps.nth(9)).to_have_attribute('aria-label','Step 10, 77')
+        # Pointer drawing remains one independent history entry after keyboard selection.
+        await grid.scroll_into_view_if_needed()
+        box = await grid.bounding_box()
+        await page.mouse.move(box['x']+box['width']*2.5/16,box['y']+box['height']/2)
+        await page.mouse.down()
+        await page.mouse.up()
+        await expect(steps.nth(2)).to_have_attribute('aria-label','Step 3, 64')
+        await page.locator('#undo').focus()
+        await page.keyboard.press('Enter')
+        await expect(steps.nth(2)).to_have_attribute('aria-label','Step 3, unset')
+        await expect(steps.nth(9)).to_have_attribute('aria-label','Step 10, 77')
+        print(f'PASS Motion Tab/Enter/Space selects the edited step, preserves focus/history and pointer drawing {width}x{height}',flush=True)
+
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -510,7 +614,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=14 failures=0')
+    print('FUNKYBEATS-BROWSER pages=16 failures=0')
 
 async def main():
     global SOURCE
