@@ -46,7 +46,7 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16}){
 // Actual upstream performance grid; local selection only, never queued playback.
 export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
  if(!Array.isArray(parts)||parts.length!==5||!Array.isArray(targets)||targets.length!==5||patternCount!==32||targets.some(v=>v!==null&&(!Number.isInteger(v)||v<0||v>=patternCount)))throw Error('Invalid local launch selection');
- const colors=['#ff9529','#ff4841','var(--fg)','var(--fg)','var(--fg)'];
+ const colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];
  const channels=parts.map((name,i)=>({name:String(name),type:i<2?'drum':'synth',color:colors[i]}));
  const container=new Element('div');
  const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),getElementById:id=>id==='perform-content'?container:null};
@@ -80,12 +80,13 @@ export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,di
 // volume strips survive projection: fake meters, EQ, sends and buses do not.
 export function renderTypedFunkyBeatsMixer({channels}){
  if(!Array.isArray(channels)||channels.length!==5||channels.some(c=>!c||typeof c.id!=='string'||typeof c.label!=='string'||typeof c.display!=='string'||![c.value,c.min,c.max,c.step].every(Number.isFinite)||c.min>c.max||c.step<=0||c.value<c.min||c.value>c.max))throw Error('Five typed source mixer channels required');
+ if(channels.some((c,i)=>c.id.split('|').length!==2||c.id.split('|')[1]!=='1:5:'+i+':0'||c.id.split('|')[0]!==channels[0].id.split('|')[0]||c.min!==0||c.max!==127||c.step!==1||!Number.isInteger(c.value)))throw Error('Mixer source identity or domain mismatch');
  const container=new Element('div');const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),getElementById:id=>id==='mixer-channels'?container:null};
- const colors=['#ff9529','#ff4841','var(--fg)','var(--fg)','var(--fg)'];
+ const colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];
  const ui=createFunkyBeatsUI({document,channels:channels.map((c,i)=>({name:c.label,color:colors[i],type:i<2?'drum':'synth'})),state:null});ui.buildMixer();
  const projected=container.children.slice(0,5).map((strip,i)=>{
   const c=channels[i],name=strip.children.find(n=>n.className==='mixer-channel-name'),box=strip.children.find(n=>n.className==='mixer-fader-container'),readout=strip.children.find(n=>n.className==='mixer-db'),input=box.children[0];
-  strip.children=[name,box,readout];strip.className+=' funkybeats-typed-unit';
+  name.style.color=colors[i];name.tag='button';name.setAttribute('type','button');name.dataset.mixPart=['drum909','drum808','chicago','miami','breaks'][i];name.setAttribute('aria-label','Open '+c.label+' sound controls');const hint=new Element('small');hint.textContent='Sound';name.appendChild(hint);strip.children=[name,box,readout];strip.className+=' funkybeats-typed-unit';
   for(const[k,v]of Object.entries({min:c.min,max:c.max,step:c.step,value:c.value}))input.setAttribute(k,v);
   input.dataset.param=c.id;input.dataset.nativeParam=c.id;input.dataset.paramOccurrence=c.occurrence??i;input.setAttribute('aria-label',c.label+', '+c.display);input.setAttribute('aria-valuetext',c.display);
   readout.textContent=c.display;readout.dataset.paramValue=c.id;
