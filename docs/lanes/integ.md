@@ -67,3 +67,7 @@ Isolated review-fix branch from the hygiene PR; original PR head is unchanged. C
 - tests/installer-evidence-links.test.mjs: evidence-link test, stale per DOT-BRIEF.
 - tests/fixtures/build-product-site-missing-guard-mutant.mjs: mutant fixture pinned to the build script's hash (source-drift guard removed).
 - tests/fixtures/build-product-site-missing-guard-mutant.json: metadata for that mutant fixture.
+
+### Starting-break archive restore
+
+The native sample protocol leaves bytes 480–511 erased when committing a 480-byte header. Earlier starting-break exports filled those bytes with zero, which failed exact readback after simulated restore. New exports use the erased value before computing archive checksums. The 31 nonempty sample selections pass the legacy-protocol readback regression, preserving every selected zone and its encoded audio. Native simulator verification, full gate and live deployment are tracked separately.

@@ -959,8 +959,8 @@
     },
     {
       "path": "starting-break-export.mjs",
-      "bytes": 5494,
-      "sha256": "4ed4e190160e41d56bfc18e84446277dc2c79ae413ea421732d4ff949544386f"
+      "bytes": 5677,
+      "sha256": "c9b9f4860202a4c69cdd3a427460770f9ebefafadd416b7d038cc8714a340846"
     },
     {
       "path": "starting-break-preview.mjs",
