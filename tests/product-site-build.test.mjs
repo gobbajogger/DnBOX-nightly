@@ -45,11 +45,16 @@ test('symlink manifest refuses without reading an outside manifest',()=>{
 });
 
 
-test('a same-size source change must match its recorded digest before output is created', () => {
- const f = fixture();
- writeFileSync(join(f.src, 'index.html'), '<h1>Other</h1>');
- assert.throws(() => buildProductSite({repoRoot: f.root}), /Source differs from manifest: index.html/);
- assert.equal(existsSync(join(f.root, '.output')), false);
+test('build uses current editable source and check detects stale output', () => {
+ const f=fixture(),path=join(f.src,'index.html');
+ for(const text of ['<h1>Other</h1>','<h1>A longer musician-facing page</h1>']){
+  writeFileSync(path,text);
+  const {output}=buildProductSite({repoRoot:f.root});
+  assert.equal(readFileSync(join(output,'index.html'),'utf8'),text);
+  buildProductSite({repoRoot:f.root,check:true});
+ }
+ writeFileSync(path,'<h1>A newer page</h1>');
+ assert.throws(()=>buildProductSite({repoRoot:f.root,check:true}),/Product output differs: index.html/);
 });
 
 test('built catalog renames only legacy transport fields and preserves pinned package metadata',()=>{

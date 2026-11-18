@@ -28,6 +28,7 @@ export class SourceSounds{
  }
  get runtimeAdmitted(){return false;}
  controls(bank,slot){const rows=this.#groups.get(bank+':'+slot);if(!rows)throw Error('Unknown current source bank/slot');return copy(rows);}
+ controlForId(id){const row=this.#controls.get(id);return row?copy(row):null;}
  entries(){return copy([...this.#controls.values()]);}
  spec(id){const c=this.#controls.get(id);return c?.enabled?{id:c.id,label:c.label,context:c.context,value:c.raw,min:c.min,max:c.max,step:c.step}:null;}
 }

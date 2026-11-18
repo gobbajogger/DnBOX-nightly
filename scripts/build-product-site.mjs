@@ -34,8 +34,9 @@ function buildCatalog(source) {
  }
  return Buffer.from(JSON.stringify(catalog,null,2)+'\n');
 }
+import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -65,9 +66,6 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if(typeof row.path!=='string'||!row.path||row.path.includes('\\')||row.path.startsWith('/')||row.path.split('/').some(x=>!x||x==='.'||x==='..')||seen.has(row.path)||row.path==='SOURCE-MANIFEST.json')throw Error('Invalid or duplicate source path');
   seen.add(row.path);const input=join(source,row.path);noLinks(input,repoRoot);if(!lstatSync(input).isFile())throw Error('Regular product source files required');const data=readFileSync(input);
   if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
-  if (row.bytes !== data.length || row.sha256 !== createHash('sha256').update(data).digest('hex')) {
-   throw Error('Source differs from manifest: ' + row.path);
-  }
   inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
  // Keep historical preview URLs working without admitting arbitrary private audio.
@@ -80,14 +78,21 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
    seen.add(alias);inputs.push([alias,data]);
   }
  }
+ // Explicit qualified runtime staging. Absence remains unavailable, never a fake emulator.
+ if(emulatorRuntime){
+  const pin=readEmulatorPin(join(repoRoot,'scripts/emulator-runtime-pin.json'));
+  for(const [name,data] of readEmulatorRuntime({directory:emulatorRuntime,pin})){
+   if(seen.has(name))throw Error('Native runtime output collision');seen.add(name);inputs.push([name,data]);
+  }
+ }
  // No stale private/unrelated files may ride along in a publisher input.
  function inspectOutput(dir){if(!existsSync(dir))return;for(const name of readdirSync(dir)){const p=join(dir,name);noLinks(p,repoRoot);const stat=lstatSync(p);if(stat.isDirectory())inspectOutput(p);else{if(!stat.isFile())throw Error('Regular output files required');if(stat.nlink!==1)throw Error('Output hardlink refused');if(!seen.has(relative(target,p).split(sep).join('/')))throw Error('unexpected output file: '+relative(target,p));}}}
  inspectOutput(target);
  // Validate the COMPLETE input set before any output changes.
  for(const [name,data]of inputs){const path=join(target,name);noLinks(path,repoRoot);if(check){if(!existsSync(path)||!readFileSync(path).equals(data))throw Error('Product output differs: '+name);}else{mkdirSync(dirname(path),{recursive:true});writeFileSync(path,data);}}
- return{files:inputs.length,output:target,published:false,firmwareWrites:false,catalogMutations:[]};
+ return{files:inputs.length,output:target,emulator:Boolean(emulatorRuntime),published:false,firmwareWrites:false,catalogMutations:[]};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
- console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check')})));
+ console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }

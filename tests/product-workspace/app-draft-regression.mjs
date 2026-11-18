@@ -72,3 +72,27 @@ console.log('PASS draft zoom roundtrip retains narrow viewport geometry');
 const legacyTool=JSON.parse(viewportText);legacyTool.context.mode='pan';const legacyText=JSON.stringify(legacyTool);
 await viewportDraft.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(legacyText),text:async()=>legacyText}]}});viewportDraft.press('draft-replace');viewportDraft.press('draft-save');
 assert.equal(JSON.parse(await viewportDraft.download()).context.mode,'auto','Legacy draft tool modes normalize to modeless interaction');
+// Grouped per-step controls exercise the actual app listeners and serialized drafts.
+const laneApp=await boot();
+const snapshot=async()=>{laneApp.press('draft-save');return JSON.parse(await laneApp.download())};
+const laneBefore=await snapshot(),laneTrace=JSON.parse(fs.readFileSync(new URL('trace.json',base))),first=laneBefore.notes.find(n=>n.track==='chicago');
+const {stepGroups}=await import(new URL('step-lane.mjs',base));
+const stepGroup=stepGroups(laneBefore.notes.filter(n=>n.track==='chicago'),laneTrace.endSample).find(g=>g.notes.some(n=>n.id===first.id));
+const stepTarget={dataset:{laneStep:String(stepGroup.step)},closest(s){return s==='[data-lane-step]'?this:null}};
+const velocity=laneApp.get('velocity');velocity.emit('pointerdown',event(stepTarget,201,{clientY:10}));velocity.emit('pointerup',event(stepTarget,201));
+const laneAfter=await snapshot(),changedIds=new Set(stepGroup.notes.map(n=>n.id));
+for(const n of laneAfter.notes){const old=laneBefore.notes.find(o=>o.id===n.id);if(changedIds.has(n.id))assert.equal(n.velocity,127);else assert.deepEqual(n,old)}
+laneApp.press('undo');assert.deepEqual((await snapshot()).notes,laneBefore.notes);
+velocity.emit('pointerdown',event(stepTarget,202,{clientY:10}));velocity.emit('pointerdown',event(stepTarget,203,{clientY:90}));velocity.emit('pointerup',event(stepTarget,202));velocity.emit('pointerup',event(stepTarget,203));assert.deepEqual((await snapshot()).notes,laneBefore.notes);assert.equal(velocity.captured.size,0);
+for(const kit of['drum909','drum808']){laneApp.changePart(kit);laneApp.view('drums');assert.match(laneApp.get('other-view').innerHTML,/id="drum-lane"/);assert.equal((laneApp.get('other-view').innerHTML.match(/data-lane-step=/g)||[]).length,16)}
+console.log('PASS actual app grouped step edits, one Undo, multi-touch rollback, capture cleanup and both drum lanes; event doubles, not browser proof');
+laneApp.changePart('chicago');laneApp.view('roll');
+const crossBefore=(await snapshot()).notes,rollTarget=Object.assign(new Node(),{dataset:{note:first.id}}),rollSurface=laneApp.get('roll-scroll');
+for(const rollFirst of[true,false]){
+ const rollEvent=event(rollTarget,301,{clientX:20,clientY:30,timeStamp:1000}),laneEvent=event(stepTarget,302,{clientY:10,timeStamp:1001});
+ if(rollFirst){rollSurface.emit('pointerdown',rollEvent);velocity.emit('pointerdown',laneEvent)}else{velocity.emit('pointerdown',laneEvent);rollSurface.emit('pointerdown',rollEvent)}
+ rollSurface.emit('pointerup',rollEvent);velocity.emit('pointerup',laneEvent);
+ assert.deepEqual((await snapshot()).notes,crossBefore);assert.equal(velocity.captured.size,0);assert.equal(rollSurface.captured.size,0);
+ velocity.emit('pointerdown',event(stepTarget,303,{clientY:10}));velocity.emit('pointerup',event(stepTarget,303));assert.notDeepEqual((await snapshot()).notes,crossBefore);laneApp.press('undo');assert.deepEqual((await snapshot()).notes,crossBefore);
+}
+console.log('PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available');

@@ -1,3 +1,4 @@
+import {emptyBreakSequence,validateBreakSequence} from './break-sequence.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
 // Explicit LOCAL example-draft file, not an instrument project, preset, engine or MIDI format.
 import{notesFromTrace}from'./model.mjs';
@@ -25,12 +26,14 @@ export class WorkspaceDraftFile{
   array(parameters,10000);for(const s of parameters){if(typeof s?.id!=='string'||!s.id||s.id.length>1024||this.parameters.has(s.id)||![s.value,s.min,s.max,s.step].every(Number.isFinite)||s.max<=s.min||s.step<=0||s.value<s.min||s.value>s.max)fail('finite unique parameter spec');this.parameters.set(s.id,clone(s));}
  }
  validate(document){
-  keys(document,['schema','kind','identity','notes','parameters','motion','launch','song','soundBanks','context']);if(document.schema!==SCHEMA||document.kind!==KIND)fail('unsupported version or non-local format');
+  keys(document,['schema','kind','identity','notes','parameters','motion','launch','song','soundBanks','context'],['breakSequence']);if(document.schema!==SCHEMA||document.kind!==KIND)fail('unsupported version or non-local format');
   keys(document.identity,Object.keys(this.identity));if(Object.keys(this.identity).some(k=>document.identity[k]!==this.identity[k]))fail('source identity mismatch; no automatic migration');
   const ids=new Set();array(document.notes,20000);for(const n of document.notes){
-   keys(n,['id','track','note','velocity','channel','start','end','sourceOrder','pulse'],['chance']);
+   keys(n,['id','track','note','velocity','channel','start','end','sourceOrder','pulse'],['chance','pan','pitchOffset']);
    if(typeof n.id!=='string'||n.id.length>64||ids.has(n.id)||!TRACKS.includes(n.track)||!int(n.note,0,127)||!int(n.velocity,1,127)||!int(n.channel,0,15)||!int(n.start,0,this.endSample)||!int(n.end,n.start,this.endSample)||typeof n.pulse!=='boolean'||n.pulse!==(n.start===n.end))fail('invalid note');ids.add(n.id);
    const source=this.sources.get(n.id);if(source){if(n.sourceOrder!==source.sourceOrder||n.track!==source.track||n.channel!==source.channel||n.pulse!==source.pulse)fail('source note identity changed');}else if(!/^draft(?:0|[1-9]\d*)$/.test(n.id)||!int(Number(n.id.slice(5)),0,MAX_DRAFT_ID)||n.sourceOrder!==null)fail('unknown note identity');
+   if(Object.hasOwn(n,'pan')&&!int(n.pan,0,127))fail('invalid per-step pan');
+   if(Object.hasOwn(n,'pitchOffset')&&(!['drum909','drum808'].includes(n.track)||!int(n.pitchOffset,-24,24)))fail('invalid drum pitch offset');
    if(Object.hasOwn(n,'chance')&&(!['chicago','miami','drum909','drum808'].includes(n.track)||!chanceDomain.includes(n.chance)))fail('unsupported chance');
   }
   const refs=new Set();array(document.parameters,this.parameters.size);for(const p of document.parameters){keys(p,['id','value']);const spec=this.parameters.get(p.id);if(!spec||refs.has(p.id)||!Number.isFinite(p.value)||p.value<spec.min||p.value>spec.max||p.value!==spec.value&&Math.abs((p.value-spec.min)/spec.step-Math.round((p.value-spec.min)/spec.step))>1e-6)fail('unqualified parameter ref/raw value');refs.add(p.id);}
@@ -40,15 +43,16 @@ export class WorkspaceDraftFile{
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>!BANKS.includes(b)))fail('unsupported local bank');
   const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||!['velocity','chance','pitch','pan'].includes(c.lane)||!Number.isFinite(c.zoom)||c.zoom<1||c.zoom>4||c.zoom*4!==Math.round(c.zoom*4)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
-  return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
+  return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
  }
- capture(state,context){if(state.model.gesture||state.motion.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
+ capture(state,context){if(state.model.gesture||state.motion.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,...(state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())?{breakSequence:state.breakSequence}:{}),notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
  encode(document){const text=JSON.stringify(this.validate(document),null,2)+'\n';if(new TextEncoder().encode(text).length>MAX_BYTES)fail('file exceeds 4 MiB');return text;}
  decode(text){return this.validate(parse(text));}
 }
 export function installWorkspaceDraft(state,codec,document){
  // Complete validation/allocation precedes every write. Never infer a native transaction.
  const d=codec.validate(document),notes=clone(d.notes),next=(1+Math.max(-1,...notes.filter(n=>n.id.startsWith('draft')).map(n=>Number(n.id.slice(5)))))%(MAX_DRAFT_ID+1),selection=new Set(d.context.selection),parameters=new Map(d.parameters.map(p=>[p.id,p.value])),identities=new Map(d.parameters.map(p=>{const s=codec.parameters.get(p.id);return[p.id,{label:s.label,context:s.context}];}));
+ if(state.breakSequence)Object.assign(state.breakSequence,d.breakSequence??emptyBreakSequence());
  state.model.cancelAll();state.motion.cancel();state.model._notes=notes;state.model.next=next;state.model.selection=selection;state.model.clipboard=null;
  for(const m of[state.model,state.motion,state.arrangement]){m.history=[];m.future=[];}
  state.motion.values=d.motion.values;state.arrangement.rows=d.song;state.launch.targets=d.launch;state.soundBanks.splice(0,2,...d.soundBanks);
@@ -57,5 +61,5 @@ export function installWorkspaceDraft(state,codec,document){
 }
 export function hasDraftChanges(state,codec){
  if(state.model.gesture||state.motion.gesture)return true;
- return !same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
+ return !!state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())||!same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
 }

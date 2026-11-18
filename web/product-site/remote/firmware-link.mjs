@@ -27,7 +27,9 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
  let admitted=null,client=null,broker=null,confirmed=new Map(),pending=null,busy=false;
  apply.disabled=true;
  if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
- const say=text=>{state.textContent=text;};
+ const result=$('connection-result'),message=$('connection-message');
+ const say=text=>{state.textContent=text;if(message)message.textContent=text;};
+ $('close-connection')?.addEventListener('click',()=>{if(result)result.hidden=true;connect.focus?.();});
  function stage(descriptor,input){
   const value=Number(input.value);
   const known=confirmed.get(descriptor.id);
@@ -55,7 +57,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
   }
  }
  async function shutdown(announce){
-  busy=true;apply.disabled=true;pending=null;confirmed=new Map();admitted=null;
+  busy=true;state.dataset.session='disconnected';apply.disabled=true;pending=null;confirmed=new Map();admitted=null;
   if(list?.replaceChildren)list.replaceChildren();
   const current=client,link=broker;client=null;broker=null;
   let released=true;
@@ -77,12 +79,12 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    const access=await request.call(nav,{sysex:true});
    const input=[...access.inputs.values()].find(port=>port.state==='connected');
    const output=[...access.outputs.values()].find(port=>port.state==='connected');
-   if(!input||!output)throw Error('No MIDI port pair is connected.');
+   if(!input||!output){say('No MIDI input and output pair is connected. Connect your instrument and try again.');return;}
    await input.open?.();await output.open?.();
    const timeoutMs=Number.isFinite(globalThis.__DNBOX_MIDI_TIMEOUT)?globalThis.__DNBOX_MIDI_TIMEOUT:400;
    broker=new MidiBroker({input,output,timeoutMs});
    const pin={crc:parsed.catalog.crc,count:parsed.catalog.count,admitted:true,controls:parsed.catalog.controls.map(descriptor=>({id:descriptor.id,kind:descriptor.kind,min:descriptor.min,max:descriptor.max,...(descriptor.readMin!==undefined?{readMin:descriptor.readMin}:{}),...(descriptor.readMax!==undefined?{readMax:descriptor.readMax}:{})}))};
-   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(note.phase==='connection-lost'){say('Connection lost. Apply stays off.');apply.disabled=true;}}});
+   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(note.phase==='connection-lost'){state.dataset.session='disconnected';say('Connection lost. Apply stays off.');apply.disabled=true;}}});
    await client.identify();
    await client.open();
    const snapshot=await client.snapshot(parsed.catalog.controls.map(descriptor=>descriptor.id));
@@ -90,7 +92,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    admitted=parsed;confirmed=new Map(snapshot.values.map(reading=>[reading.id,reading]));pending=null;
    renderControls();apply.disabled=true;
    const count=snapshot.values.filter(reading=>reading.available!==false).length;
-   say(`Connected. ${count} controls confirmed.`);
+   state.dataset.session='ready';say(`Connected. ${count} controls confirmed.`);if(result)result.hidden=true;
    if(safety)safety.textContent=`${parsed.admission.testOnly?'Simulator catalog. Not a device. ':''}${SAFETY_ON}`;
    connect.textContent='Disconnect';
   }catch(error){
@@ -109,7 +111,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
   }catch(error){say(friendly(error));apply.disabled=true;}
   finally{busy=false;}
  }
- connect.addEventListener('click',event=>{event.preventDefault?.();if(busy)return;void (client?shutdown(true):onConnect());});
+ connect.addEventListener('click',event=>{event.preventDefault?.();if(result)result.hidden=false;if(busy)return;void (client?shutdown(true):onConnect());});
  apply.addEventListener('click',()=>{void onApply();});
  return {destroy(){return shutdown(false);},op:OP};
 }
