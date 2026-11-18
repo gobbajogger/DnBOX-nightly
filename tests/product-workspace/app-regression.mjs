@@ -80,7 +80,7 @@ $('velocity').handlers.keydown?.({key:'Enter',target:keyTarget,preventDefault(){
 check('lane keyboard remains on the step instead of opening a selected-note panel',()=>assert.equal(document.activeElement?.dataset.select,'n1'));
 assert.equal(failures,0);
 
-views.find(e=>e.dataset.view==='mix').onclick();check('owner correction: Mix labels native controls without captured telemetry',()=>{assert.match($('other-view').innerHTML,/class="mix-panels"/);assert.match($('other-view').innerHTML,/data-param=/);assert.match($('other-view').innerHTML,/Master/);assert.doesNotMatch($('other-view').innerHTML,/CPU/)});
+views.find(e=>e.dataset.view==='mix').onclick();check('owner correction: Mix labels native controls without captured telemetry',()=>{assert.match($('other-view').innerHTML,/class="mix-parts-panel"/);assert.match($('other-view').innerHTML,/data-param=/);assert.match($('other-view').innerHTML,/Master/);assert.doesNotMatch($('other-view').innerHTML,/CPU/)});
 $('part').value='drum909';$('part').selectedOptions=[{textContent:'909'}];$('part').onchange();views.find(e=>e.dataset.view==='sound').onclick();check('all11 captured909voice contexts available',()=>assert.match($('other-view').innerHTML,/<option value="10">RD<\/option>/));
 $('other-view').handlers.change({target:{id:'sound-voice',value:'10',dataset:{}}});check('choosing909RD changes whole captured source context',()=>assert.match($('other-view').innerHTML,/909-voice-10.svg/));
 assert.equal(failures,0);

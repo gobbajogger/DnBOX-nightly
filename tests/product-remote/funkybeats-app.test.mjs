@@ -57,14 +57,27 @@ test('owner visual corrections: sound uses concise heading and captured units; p
 test('owner visual corrections: Mix has labeled controls instead of captured CPU telemetry',async()=>{
  const x=await boot();x.view('mix');assert.doesNotMatch(x.get('other-view').innerHTML,/CPU/);assert.match(x.get('other-view').innerHTML,/Master/);assert.equal((x.get('other-view').innerHTML.match(/class="mixer-fader"/g)||[]).length,5);
 });
-test('Mix retains every source FX send and its editable identity',async()=>{
- const x=await boot();x.view('mix');const html=x.get('other-view').innerHTML;
- const screens=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.filter(s=>/fx-(reverb|delay)-direct/.test(s.path));
- for(const screen of screens)for(const c of screen.controls){assert.ok(html.includes('data-param="'+screen.path+'|'+c.identity+'"'),c.context.name);}
+test('Mix family retains all28 captured native controls across reachable modes',async()=>{
+ const x=await boot();x.view('mix');let html='';for(const mode of['levels','pan','sends','fx']){const target=Object.assign(new Node(),{dataset:{mixMode:mode}});x.get('other-view').emit('click',{target});html+=x.get('other-view').innerHTML;}
+ const screens=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.filter(s=>/\/(mix-parts-live|mix-master|fx-reverb-direct|fx-delay-direct)\.svg$/.test(s.path));
+ const expected=new Set(screens.flatMap(s=>s.controls.map(c=>c.identity))),actual=new Set([...html.matchAll(/data-(?:native-param|param)="[^"|]+\|([^"]+)"/g)].map(m=>m[1]));assert.equal(expected.size,28);assert.deepEqual(actual,expected);
+ for(let voice=0;voice<5;voice++)for(const param of[1,2])assert.ok(html.includes('fx-reverb-direct.svg|1:5:'+voice+':'+param));
 });
 test('rendered parameter inspector supplies the span dereferenced by edits',async()=>{
  const x=await boot();let inserted='';x.get('other-view').insertAdjacentHTML=(_,html)=>{inserted=html};x.view('mix');assert.match(inserted,/<label><span><\/span><output id="parameter-readout"/);
  x.get('parameter-inspector').querySelector=s=>s==='span'&&inserted.includes('<span></span>')?new Node():null;
  const id='current-state-and-reference/mix-master.svg|1:4:0:2',target=Object.assign(new Node(),{dataset:{param:id}});
  assert.doesNotThrow(()=>x.get('other-view').emit('keydown',{target,key:'ArrowUp',preventDefault(){}}));
+});
+test('touch pointerup commits before lost capture; later change is one Undo',async()=>{
+ const x=await boot();x.view('mix');const id='current-state-and-reference/mix-parts-live.svg|1:5:0:0',t=nativeInput(id,90,0);
+ input(x,t);x.get('other-view').emit('pointerup',{target:t,pointerId:7});x.get('other-view').emit('lostpointercapture',{target:t,pointerId:7});input(x,t,'change');assert.match(changes(x),/90/);x.press('undo');assert.equal(changes(x),'No changes.');
+});
+test('cancelled native touch keeps baseline and creates no Undo',async()=>{
+ const x=await boot();x.view('mix');const id='current-state-and-reference/mix-parts-live.svg|1:5:0:0',t=nativeInput(id,90,0);input(x,t);x.get('other-view').emit('pointercancel',{target:t,pointerId:8});assert.equal(Number(t.value),75);assert.equal(changes(x),'No changes.');assert.equal(x.get('undo').disabled,true);
+});
+test('generic alias drag after normalized edit stays coherent and Undo restores previous value',async()=>{
+ const x=await boot();x.view('mix');const id='current-state-and-reference/mix-parts-live.svg|1:5:0:1',native=nativeInput(id,20,7);input(x,native);input(x,native,'change');const original=changes(x);const target=Object.assign(new Node(),{dataset:{param:id,paramOccurrence:'7'}}),e={target,button:0,pointerId:28,clientX:0,clientY:50,preventDefault(){}};
+ x.get('other-view').emit('pointerdown',e);x.get('other-view').emit('pointermove',{...e,clientX:25});x.get('other-view').emit('pointerup',e);assert.notEqual(changes(x),original);x.press('undo');assert.equal(changes(x),original);
+ x.get('other-view').emit('pointerdown',{...e,pointerId:29});x.get('other-view').emit('pointermove',{...e,pointerId:29,clientX:25});x.get('other-view').emit('pointercancel',{...e,pointerId:29});assert.equal(changes(x),original);
 });

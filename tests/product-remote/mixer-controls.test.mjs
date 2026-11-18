@@ -1,0 +1,4 @@
+import test from'node:test';import assert from'node:assert/strict';import{renderTypedFunkyBeatsMixer}from'../../web/product-site/remote/funkybeats-view.mjs';
+const channels=()=>['909','808','BASS A','BASS B','BREAK'].map((label,i)=>({id:'parts|1:5:'+i+':0',label,value:75,min:0,max:127,step:1,display:'-5dB'}));
+test('mixer preserves native identities, domain and five part routes',()=>{const html=renderTypedFunkyBeatsMixer({channels:channels()});assert.equal((html.match(/data-mix-part=/g)||[]).length,5);assert.doesNotMatch(html,/VU|solo|mixer-meter/);});
+test('wrong source, duplicate voice, wrong parameter and fractional domains reject',()=>{for(const patch of[{id:'other|1:5:1:0'},{id:'parts|1:5:0:0'},{id:'parts|1:5:1:1'},{max:100},{value:75.5},{step:.5}]){const c=channels();Object.assign(c[1],patch);assert.throws(()=>renderTypedFunkyBeatsMixer({channels:c}));}});
