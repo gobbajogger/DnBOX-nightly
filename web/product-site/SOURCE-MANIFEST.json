@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 60022,
-      "sha256": "494d853ea9ac0d2856a9bb4ba8f932b545cdc6450b3e5ce7d2849183127f9d14"
+      "bytes": 60229,
+      "sha256": "dd4accd2a8f4af8bf622b3195acf70202da30e6d56c8a99b4178ad857e23c9ff"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -784,8 +784,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 9729,
-      "sha256": "b4cbace9bb51097f2865b982c4d988e9ca9efd299881f2c219954742c4924123"
+      "bytes": 9701,
+      "sha256": "f7b2b2b700b36cc8f18eb47acac3130c02415d27be3c051bc18f2d535f2375d1"
     },
     {
       "path": "remote/glyph-live.mjs",

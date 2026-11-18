@@ -69,7 +69,7 @@ export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,di
  const group=ui.createParamSlider(label,id,value,min,max,step,()=>display);
  group.className+=' funkybeats-typed-param';
  const labelSpan=new Element('span');labelSpan.textContent=group.children[0].textContent;group.children[0].textContent='';group.children[0].appendChild(labelSpan);
- const input=group.children[1];input.dataset.nativeParam=id;if(occurrence!==undefined)input.dataset.paramOccurrence=occurrence;input.setAttribute('aria-label',label+', '+display);input.setAttribute('aria-valuetext',display);
+ const input=group.children[1];input.dataset.nativeParam=id;if(occurrence!==undefined)input.dataset.paramOccurrence=occurrence;input.setAttribute('aria-label',label);input.setAttribute('aria-valuetext',display);
  if(!enabled)input.setAttribute('disabled','disabled');
  group.children[2].dataset.paramValue=id;
  const glyph='<span class="glyph" data-glyph-fn="'+esc(label)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-value="'+value+'">'+renderSvg(label,value,engine,{live:false})+'</span>';
@@ -88,7 +88,7 @@ export function renderTypedFunkyBeatsMixer({channels}){
   const c=channels[i],name=strip.children.find(n=>n.className==='mixer-channel-name'),box=strip.children.find(n=>n.className==='mixer-fader-container'),readout=strip.children.find(n=>n.className==='mixer-db'),input=box.children[0];
   name.style.color=colors[i];name.tag='button';name.setAttribute('type','button');name.dataset.mixPart=['drum909','drum808','chicago','miami','breaks'][i];name.setAttribute('aria-label','Open '+c.label+' sound controls');const hint=new Element('small');hint.textContent='Sound';name.appendChild(hint);strip.children=[name,box,readout];strip.className+=' funkybeats-typed-unit';
   for(const[k,v]of Object.entries({min:c.min,max:c.max,step:c.step,value:c.value}))input.setAttribute(k,v);
-  input.dataset.param=c.id;input.dataset.nativeParam=c.id;input.dataset.paramOccurrence=c.occurrence??i;input.setAttribute('aria-label',c.label+', '+c.display);input.setAttribute('aria-valuetext',c.display);
+  input.dataset.param=c.id;input.dataset.nativeParam=c.id;input.dataset.paramOccurrence=c.occurrence??i;input.setAttribute('aria-label',c.label);input.setAttribute('aria-valuetext',c.display);
   readout.textContent=c.display;readout.dataset.paramValue=c.id;
   return serialize(strip);
  });
