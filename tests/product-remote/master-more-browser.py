@@ -48,6 +48,17 @@ async def visible_proof(page,element,name,focused=False,field=False):
    assert m['text'] and m['fontSize']>=(11 if part=='value' else 8),result
    b=m['effective'];assert all(t['left']>=b['left']-1 and t['right']<=b['right']+1 and t['top']>=b['top']-1 and t['bottom']<=b['bottom']+1 for t in m['texts']),result
  if focused:assert result['focused'] and result['focusVisible'] and result['outline']['width']>=2 and result['outline']['style']!='none',result
+ if focused and field:
+  # Native focus scrolling must expose the painted ring, including its offset.
+  extent=result['outline']['width']+result['outline']['offset'];full=result['unit']['full']
+  ring={side:full[side]+sign*extent for side,sign in [('left',-1),('right',1),('top',-1),('bottom',1)]}
+  result['paintedRing']=ring
+  (RUN/'measurements.json').write_text(json.dumps(PROOFS,indent=2)+'\n')
+  assert ring['left']>=0 and ring['right']<=result['viewport']['width'] and ring['top']>=0 and ring['bottom']<=result['viewport']['height'],result
+  for ancestor in result['unit']['clips']:
+   clip=ancestor['clip']
+   if ancestor['x']:assert ring['left']>=clip['left'] and ring['right']<=clip['right'],result
+   if ancestor['y']:assert ring['top']>=clip['top'] and ring['bottom']<=clip['bottom'],result
  result['image']=await image_proof(page,name)
  return result
 

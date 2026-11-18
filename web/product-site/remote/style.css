@@ -160,6 +160,7 @@ dialog{max-width:min(600px,calc(100vw - 24px));background:var(--panel);color:inh
 dialog::backdrop{background:#000a}
 #parameter-inspector{position:sticky;bottom:0;background:var(--panel);padding:8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line)}
 #parameter-inspector label{display:inline-flex;align-items:center;gap:8px}
+#parameter-inspector input,#parameter-inspector button{scroll-margin-block:5px}
 #parameter-value{width:90px;min-height:var(--hit);background:var(--control);border:1px solid var(--line-strong);border-radius:8px}
 #parameter-readout{min-width:3.5ch}
 .context-param{display:flex;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--grid)}

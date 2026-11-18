@@ -19,7 +19,7 @@ async def run(origin):
      await page.locator('#draft-file').set_input_files({'name':name,'mimeType':'application/json','buffer':json.dumps(document).encode()});await page.locator('#draft-replace').click()
     async def check(name,count,labels=()):
      if not await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
-     await page.locator('#review').click();text=await page.locator('#changes').inner_text();lines=[] if text=='No changes.' else text.splitlines();assert len(lines)==count,(name,count,text)
+     await page.locator('#review').click();text=await page.locator('#changes').text_content();lines=[] if text=='No changes.' else text.splitlines();assert len(lines)==count,(name,count,text)
      for label in labels:assert sum((' '+label+':') in x for x in lines)==1,(name,label,text)
      await page.screenshot(path=str(folder/(name+'-review.png')));await page.locator('#review-dialog button').click()
      if await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
