@@ -5,15 +5,18 @@ Owner: Classic Remote (sole lane writer; Dot Remote frozen). Branch: `lane/remot
 - Fix #167 feedback layout regression: reserve a stable compact status row so Undo does not shrink the piano roll or hide a resize edge; keep real errors visible and keyboard reachable.
 - Independent baseline browser negatives reproduce the geometry loss and end-edge hit failure. Candidate all14 FunkyBeats cases and seven recovery cases pass, with Undo/resize at 1440x900, 390x844 and 844x390. Evidence: `evidence/remote-feedback-20261118/`.
 - Exact-head full gate, authenticated status and consolidation are separate delivery steps. No device or gh-pages publication is part of this slice.
+- Full gate at `7844570e4d9922b08f67e154fbdd7759589447d1` failed honestly (status `59263165171`): runtime tests rejected an ancestor symlink in the temporary path, loopback HTTP used the proxy, and the Mix fixture attempted Draft export while the conflict dialog was modal. Complete log SHA256 `fc29d6fac2ca1764bc9b713e4d0acbd82e8762da58770dc5f0a9413d76fb45e1` is preserved in the recovery evidence.
+- The temporary directory is now a real owned directory with unchanged HOME; NO_PROXY/no_proxy append loopback hosts. All eight affected focused runtime/HTTP tests pass without gate or product changes. The Mix fixture now asserts visible conflict feedback and disabled replacement, dismisses with the real Cancel button, and retains the unchanged-Draft assertion before continuing. No threshold or rejection assertion was removed.
+- Independent fixture review found no actionable defects; actual Mix family passes all three sizes (ten sends, five levels, cancel, Undo and five Sound routes), exit0. Log SHA256 `798eb77a3072b4b4b1c7c0bf89ec7606f6d55abbcd83f8ae0cc1e42e2936fedd`. Expanded shared-footer visual review remains separate from owner-PDF acceptance.
 - Next: bind the prepared real Chicago 4758 consumer in both 20-control native voices, preserving native formatter/revision, opaque Undo, no-write busy retry and separate Draft bytes/history. Current production runtime stays 257 until that whole scope is qualified.
 
 ## Whole-lane acceptance remains open
 | ID | Status | Evidence or remaining work |
 |---|---|---|
-| C1 | FAIL | Current successor full gate has not run yet; source/test scope above is qualified separately. |
+| C1 | FAIL | Exact784 full gate failed unit/browser checks above; corrected successor requires a fresh complete gate and authentic status. |
 | C2 | PASS | Intake fd6 contains exact consolidated cd2926; no files deleted. Recheck live before delivery. |
 | C3 | FAIL | Independent footer review is scoped; all-page owner-baseline 10/10 acceptance remains open. |
-| C4 | FAIL | Current successor limits step must run in the full gate. |
+| C4 | PASS | Exact784 full gate limits step passed; rerun at the corrected successor. |
 | C5 | FAIL | R1/R5/R6 and universal live/native coverage remain open. |
 | C6 | FAIL | #167 remains draft until exact-head gate and independent acceptance. |
 | R1 | FAIL | Historical gate renders 109 screens but compares only 5 baselines; 104 have no baseline. Owner-PDF/page acceptance is not established by gate success alone. |
