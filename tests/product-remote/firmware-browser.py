@@ -102,6 +102,8 @@ async def main():
         await page.locator('[data-break-loop="0"]').select_option('personal-br1-zone1')
         await page.locator('[data-break-step="4"]').select_option('12')
         await page.locator('[data-view="mix"]').click()
+        await page.locator('[data-mix-mode="fx"]').click()
+        check(await page.locator('[data-mix-mode="fx"]').get_attribute('aria-pressed') == 'true', 'FX workspace selected before local Wear edit')
         await page.locator('button[aria-label="Tape Wear"]').press('ArrowRight')
         check(before_local_edits == OPS, 'BREAK assignments, slices and Wear edits send zero protocol frames')
         check('Simulator connected' in await page.locator('#status').text_content(), 'draft status retains confirmed simulator identity')

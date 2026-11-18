@@ -75,6 +75,9 @@ async def mixer(page):
     await page.locator('#undo').click()
     await expect(faders.first).to_have_value(before)
 
+    # FX controls live in the explicit FX workspace; exercise its actual navigation.
+    await page.locator('[data-mix-mode="fx"]').click()
+    await expect(page.locator('[data-mix-mode="fx"]')).to_have_attribute("aria-pressed", "true")
     # Actual painted readout changes for an edited delay control.
     feedback = page.locator('.mix-panel button[aria-label^="Delay FEEDBACK"]')
     canvas = feedback.locator('canvas')
@@ -384,6 +387,8 @@ async def break_and_tape(page):
     await page.locator('#redo').click()
     await expect(page.locator('[data-break-step="15"]')).to_have_value('32')
     await page.locator('[data-view="mix"]').click()
+    await page.locator('[data-mix-mode="fx"]').click()
+    await expect(page.locator('[data-mix-mode="fx"]')).to_have_attribute('aria-pressed', 'true')
     wear = page.locator('button[aria-label="Tape Wear"]')
     await expect(wear.locator('output')).to_have_text('50%')
     painted = await wear.locator('canvas').evaluate('el => el.toDataURL()')
