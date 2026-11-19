@@ -244,12 +244,17 @@ def resources():
 
 
 def consumers(d, accept_pid2):
-    """Path/cwd/exe/cmdline/fd/maps AND output dev/inode matches. No peer file reads."""
+    """Check visible consumers; never construct or inspect a PID 2 proc path."""
     groups = d["groups"]
     wanted = {(int(i[3]["dev"]), int(i[3]["inode"])) for i in d["items"]}
     matches, opaque, vanished = [], [], []
     seen = 0
     for pid in sorted(int(x) for x in os.listdir("/proc") if x.isdigit()):
+        if pid == 2:
+            opaque.append({"pid": 2, "inspectionSkipped": True,
+                           "reason": "Known opaque cloud control service; deliberately uninspected",
+                           "acceptedKnownControlServiceLimit": bool(accept_pid2)})
+            continue
         if pid == os.getpid():
             continue
         seen += 1
@@ -310,9 +315,8 @@ def consumers(d, accept_pid2):
                     matches.append({"pid": pid, "kind": kind, "matchedGroup": group})
         if errors:
             comm = next((v.strip() for k, v in texts if k == "comm"), "")
-            allowed = pid == 2 and accept_pid2 and comm.startswith("cloud-agent")
             opaque.append({"pid": pid, "comm": comm, "errors": errors,
-                           "acceptedKnownControlServiceLimit": allowed})
+                           "acceptedKnownControlServiceLimit": False})
     result = {"utc": utc(), "examined": seen, "selfExcluded": os.getpid(),
               "matches": matches, "opaque": opaque, "vanishedDuringRead": sorted(set(vanished)),
               "globalIdleClaim": False}

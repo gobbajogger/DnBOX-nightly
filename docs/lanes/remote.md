@@ -1,10 +1,18 @@
 # Lane: remote
 
-Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `lane/remote`; target: `integration/dnbox-consolidated`. Intake head `fd6bcf8fee2841466de3291ea46a78952c440ee7`. Current successor descends normally from published PR169 head `f38f1fcdcfc2d2d6d1e47a512e90aba62ec2f83c` and merged base `914d68e8ed50698ea77c9d18c221c404629b9332`. The same branch and PR are preserved; all five earlier PR169 full-gate failures remain recorded below and in the recovery evidence.
+Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `lane/remote`; target: `integration/dnbox-consolidated`. Intake head `fd6bcf8fee2841466de3291ea46a78952c440ee7`. Current successor descends normally from published PR169 head `b42102df456f387314ad48cc1e1bd7fdde1a229c` and merged base `914d68e8ed50698ea77c9d18c221c404629b9332`. The same branch and PR are preserved; all five earlier PR169 full-gate failures remain recorded below and in the recovery evidence.
 
 This file records the implementation checkpoint before its own exact-head gate. Post-commit and post-merge results are recorded with exact SHAs in the lane PR and [recovery checkpoint](https://chatgpt.com/space/page_d663ea30f1b48191acd9762ff4732a33). Never infer a new SHA's result from an older run. Whole-lane completion is not claimed.
 
-## Current checkpoint: reproduce the header and preserve recoverability
+## Recovery result and PID 2 correction
+
+The one-shot recovery at b421 finished on 19 November at 00:55:44 UTC. Its journal contains all 6,167 intended removals and completions. All 3,794 distinct keepers rehashed unchanged and 1,652 neighboring entries were preserved. Available space on the Remote scratch mount increased by 802,582,528 bytes; the separate gate temp mount still reported zero user-available bytes. [Actual result](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-6996301642). Do **not** repeat this operation. Before reusing any affected generated build, restore the required missing outputs from their exact mappings and verified keepers.
+
+The executed b421 operator tried to inspect PID 2 before accepting its opacity. That did not satisfy [Integ’s no-probe requirement](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-6996078643). Its original result and journal stand as recorded. The successor operator skips PID 2 before building any process path, records the deliberate omission, refuses any other opaque process and makes no global-idle claim. This correction is for future use only. No operator mode or host process inspection is required to test its guard.
+
+Both header diagnostic inputs were checked after transfer. The paired 1024 comparison has not run. The [Web checkpoint](https://chatgpt.com/space/page_44f3d1c9a7b48191a0b3dcc86de704af) records actual browser execution in Web’s allocation, with Integ next. Remote’s last complete gate remains the cb29 header failure.
+
+## Historical b421 checkpoint: reproduce the header and preserve recoverability
 
 Parent `f38f1fcdcfc2d2d6d1e47a512e90aba62ec2f83c` published the reviewed evidence-retention fix. It did not change product pixels and has no full-gate result. The latest complete gate remains the authentic cb29 unit visual failure with the complete browser chain passing, detailed below. This ordinary checkpoint versions two independently reviewed, manual diagnostic/recovery utilities. Neither is invoked by the product or the mandatory gate.
 
