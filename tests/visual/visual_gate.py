@@ -251,11 +251,14 @@ def main():
                             # x 0..720; connection status and Connect are asserted structurally on the right.
                             # Undo/Redo live in the engine row, not an overflow menu.
                             from PIL import ImageFilter
-                            shot = Image.open(__import__('io').BytesIO(pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148}))).convert('L')
+                            shot_png = pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148})
+                            shot = Image.open(__import__('io').BytesIO(shot_png)).convert('L')
                             ref = Image.open(FIX).convert('L'); s = ref.width / 1024
                             ref = ref.crop((0, 0, ref.width, round(148 * s))).resize((1024, 148), Image.LANCZOS)
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
+                            if results[-1][1] == 'FAIL':
+                                write_actual_output('header-ssim-1024x640-actual.png', shot_png)
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     if act: act(pg); pg.wait_for_timeout(150)
                     compare(full, pg.screenshot(), results); pg.close()
