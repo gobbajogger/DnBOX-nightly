@@ -1,10 +1,20 @@
 # Lane: remote
 
-Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `lane/remote`; target: `integration/dnbox-consolidated`. Intake head `fd6bcf8fee2841466de3291ea46a78952c440ee7`. Current successor descends normally from published PR169 head `cb29d66c15c7dda3cdabddcfb0dffebd62332b31` and merged base `914d68e8ed50698ea77c9d18c221c404629b9332`. The same branch and PR are preserved; all five earlier PR169 full-gate failures remain recorded below and in the recovery evidence.
+Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `lane/remote`; target: `integration/dnbox-consolidated`. Intake head `fd6bcf8fee2841466de3291ea46a78952c440ee7`. Current successor descends normally from published PR169 head `f38f1fcdcfc2d2d6d1e47a512e90aba62ec2f83c` and merged base `914d68e8ed50698ea77c9d18c221c404629b9332`. The same branch and PR are preserved; all five earlier PR169 full-gate failures remain recorded below and in the recovery evidence.
 
 This file records the implementation checkpoint before its own exact-head gate. Post-commit and post-merge results are recorded with exact SHAs in the lane PR and [recovery checkpoint](https://chatgpt.com/space/page_d663ea30f1b48191acd9762ff4732a33). Never infer a new SHA's result from an older run. Whole-lane completion is not claimed.
 
-## Current checkpoint: retain failed header evidence
+## Current checkpoint: reproduce the header and preserve recoverability
+
+Parent `f38f1fcdcfc2d2d6d1e47a512e90aba62ec2f83c` published the reviewed evidence-retention fix. It did not change product pixels and has no full-gate result. The latest complete gate remains the authentic cb29 unit visual failure with the complete browser chain passing, detailed below. This ordinary checkpoint versions two independently reviewed, manual diagnostic/recovery utilities. Neither is invoked by the product or the mandatory gate.
+
+`tests/product-remote/header-ssim-diagnostic.py` (SHA256 `6add735449bc65f7e32a7eb41f49aa6bf2fc2f9ac534ad57a2ae6a2b6076a26a`) compares exact existing cb29/ce0d checkouts without modifying them. Both full tracked maps, HEAD/tree and clean tracked state must pass before verified code is loaded. It uses the original visual gate's rendering settings and oracle, requires both historical scores before interpreting a runtime-only ink variant, and retains clips, geometry, spatial differences, source/error and closure records. Four preparation defects were corrected before independent approval. It has **not run**. A separate offline comparison of retained 1440 screenshots found exactly 319 changed RGB pixels in the common first header row, all in the added readout. Its localized contribution was −0.00872905 versus the observed gate delta −0.00855929. The two images came from different screens; their differing tab and engine rows were excluded. This is evidence for the readout hypothesis, not a new 1024 capture, product fix or PASS.
+
+`tools/remote-recovery/generated-output-recovery.py` (SHA256 `99adce1bdf650ae005b6c3180d36d2b8443882b2e0a5d8e9a9b18eea975da4fa`) preserves a reversible, exact-file route for the already identified Remote-generated duplicate outputs. It is bound to a particular host, canonical allowlist and reviewed evidence, and refuses an unbound input. Run every mode using isolated Python **`-I -B`**. The first attempt with the old staging filename `operator.py` exited 1 while importing a standard module, before any journal or unlink. Its log is preserved. The isolated prepare then completed exit 0, rehashing all 6,167 outputs and 3,794 separate keepers, recording metadata and checking 1,652 protected neighboring entries. No readable process matched; PID 2 is explicitly opaque, not evidence of global inactivity. The actual off-host preflight SHA256 is `9d8fb57a8da3d5da4ebf17dc67643d7592088c126186ad5bcc1f92ba73eb8c02`. This checkpoint records preparation, **zero unlinks**, and no capacity admission. Recovery version 21 contains the exact canonical mapping, protected identities, journal, both attempts and independent reviews. Only a later verified execution receipt can establish measured recovery; all unmapped paths, source, dependencies and unique evidence stay protected.
+
+Header diagnosis needs the existing shared allocation after Web and Integ release it, and fresh usable temp space. The bundled local browser is absent. A four-size actual header/playing regression and a real unchanged full gate on the eventual product fix remain necessary. No tracked files are deleted, product/runtime/firmware bytes are unchanged, and no firmware memory or PSRAM effects are introduced.
+
+## Historical f38 implementation checkpoint: retain failed header evidence
 
 The unchanged full gate at exact `cb29d66c15c7dda3cdabddcfb0dffebd62332b31`, tree `771d026bf49ef003467470a6ba7a96d21a3ddfaf`, completed with exit 1 in 1037.00 seconds. Authentic failure status 59303834966 is independently verified at both endpoints. Clean-tree, setup, no-loss, limits, build and the entire mandatory 23-program browser chain plus structural fixtures passed; only unit-tests failed. The sole failure is `header-ssim-1024x640`: **0.8973681065066039 against the unchanged 0.90 minimum**. Visual totals are 109 results: 4 PASS, 1 FAIL and 104 NOBASE, with no baseline writes, structural header findings or page errors. [Exact terminal receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-6995609013).
 
@@ -121,19 +131,19 @@ Masterv2 was integrated with the composed app/style and Motion fixture preserved
 
 | ID | Status at this implementation checkpoint | Evidence or remaining work |
 |---|---|---|
-| C1 | FAIL | Original7c failed no-loss/limits; ce0d failed installer bootstrap; ce667 failed an obsolete Song unit assertion; b378 failed the historical-source scan and obsolete Mix Undo assertion. All four results remain FAIL. This successor requires its own exact full gate/comment. PR167/168 before/after gates passed. |
+| C1 | FAIL | Original7c failed no-loss/limits; ce0d failed installer bootstrap; ce667 failed an obsolete Song unit assertion; b378 failed the historical-source scan and Mix Undo assertion; cb29 failed header SSIM 0.8973681065066039 < 0.90. All five results remain FAIL. This successor requires its own exact full gate/comment. PR167/168 before/after gates passed. |
 | C2 | PASS | Successor contains merged consolidated914, no files deleted; recheck live before delivery. |
-| C3 | FAIL | Final b378 source/actual synthesis approved ten defined touched-screen criteria with zero findings; c9ca passed 23 cases. Both new mandatory test corrections have independent source review and actual focused passes. Final successor SHA/document closure is pending at this edit. Whole owner-baseline acceptance remains R1. |
-| C4 | FAIL | Correctly configured b378 limits passed; this successor still requires its own full-gate limits step. |
+| C3 | FAIL | Final b378 source/actual synthesis approved ten defined touched-screen criteria with zero findings; c9ca passed 23 cases. The scanner/Mix repairs passed their actual cb29 checks. Header retention has independent review and 18 passing local contracts; the controlled pair diagnostic is reviewed but unexecuted. Actual product-header correction and exact-head acceptance remain pending. Whole owner-baseline acceptance remains R1. |
+| C4 | FAIL | Correctly configured cb29 limits passed; this successor still requires its own full-gate limits step. |
 | C5 | FAIL | R1/R5/R6 and universal native/live coverage remain open. |
 | C6 | FAIL | Delivered slices are merged; this successor needs its own archive, gates, independent review and authorized delivery. Whole-lane completion remains open. |
 | R1 | FAIL | Current visual gate renders109 states with5 pixel comparisons and104 missing baselines.24-page mapping/eight departures is not page-by-page approval. |
 | R2 | PASS | Scoped FunkyBeats port/source/browser coverage; MIT notice retained. Native completeness is R6. |
-| R3 | PASS | All18 FunkyBeats cases actually passed in the b378 browser phase, including real touch timing/slow negatives, Projects/Motion/count/context. The current selected-part composition preserves these semantics and still requires its own exact full gate. |
+| R3 | PASS | All 18 FunkyBeats cases actually passed in the complete cb29 browser phase, including real touch timing/slow negatives, Projects/Motion/count/context. The current selected-part composition preserves these semantics and still requires its own exact full gate. |
 | R4 | PASS | Shared thin per-step velocity/chance/pitch/pan lanes and no selected-note panel retained, with established actual browser coverage. |
 | R5 | FAIL | Earlier footer75/native120/R22/Projects/Motion/modal18/drum66/count/Pan scopes passed. New Song owner/independent tests, actual Motion-context/native-playing product tests and independent30image bounded review pass3sizes; full page acceptance remains open. |
 | R6 | FAIL | Mix29, Chicago40, available real envelope subset and bounded native playing0/1 readback are qualified in their stated scopes. Full native controls/position and TouchOSC host integration remain incomplete. |
-| R7 | FAIL | Earlier structural fixtures passed9 cases in normal sandbox. This successor requires its own exact full-gate run. |
+| R7 | FAIL | The complete cb29 browser phase including structural fixtures passed in the normal sandbox. This successor requires its own exact full-gate run. |
 
 ## Remaining owner requirements and dependencies
 
