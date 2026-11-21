@@ -420,6 +420,11 @@ dialog::backdrop{background:#000a}
 .step-slider{container:lane-step / inline-size}
 .step-slider output{position:absolute;left:0;bottom:0;width:100%;overflow:hidden;font-size:9px;line-height:12px;text-align:center;white-space:nowrap}
 .step-compact{display:none}
+/* COMPRESSOR, the widest stock lock name, paints 51px in the lane font. */
+@container lane-step (max-width:52px){
+ .step-enum .step-full{display:none}
+ .step-enum .step-compact{display:inline}
+}
 @container lane-step (max-width:32px){
  .step-full{display:none}
  .step-compact{display:inline}
