@@ -2,6 +2,12 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Native Sound and LCD browser qualification
+
+At `59d83425` the real emulator and AudioWorklet passed the native Sound case on all three owner sizes across separate invocations. The unfiltered invocation passed desktop, then timed out on the portrait Undo button. Unchanged serial reruns passed both portrait and landscape. Each successful case exercised 40 controls, a 16-operation native Undo history, both Draft slots and exact restoration of the exported Draft bytes, with zero MIDI calls. [Successful measurements, original failure and diagnostic attempts](../../evidence/remote-qualification-944e99d8/follow-up-tests/native-sound-59d83425/README.md)
+
+The original `944e99d8` Global LCD case reported 4,442 differing pixels out of 57,600. A controlled replay on that build reproduced the same count during the firmware's deferred autosave. The original image was discarded. The [LCD test repair](https://github.com/gobbajogger/DnBOX-nightly/commit/a2824b530dd48e151b4c9a6f7f3377c9f2be1562) separates browser-runner delays from the native scenario's input intervals. The final replay matched all 26 current, previous and historical reference images. The running AudioContext resumed normally after both success and failure, and deliberately flipping one RGB565 bit still failed at precisely one pixel. [Screen hashes, timings, recovery checks and pixel images](../../evidence/remote-qualification-944e99d8/follow-up-tests/lcd/README.md)
+
 ## Requested revision 944e99d8 and later repairs
 
 Both full Local gate runs on `944e99d87125e60aff9e3020ead7212fb47687d6` exited 1. The second passed all 557 edge tests, then reported the retired-name scan and a keyboard action timeout. To cover every browser command hidden behind npm's first failure, the cloud runner executed the 30 remaining scripts individually. Sixteen passed and fourteen exited 1. The final FunkyBeats command passed 22 case groups before requiring an absent Tune override after Undo. All 30 terminal logs matched their recorded SHA-256. The original sandbox-contract and landscape checks are reported separately. [Every browser command and failure](../../evidence/remote-qualification-944e99d8/browser-suite-continuation/README.md) · [Two full gate logs and landscape results](#cloud-checks-on-the-requested-revision)
