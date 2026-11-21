@@ -1,0 +1,8 @@
+{"files":227,"output":"/tmp/dnbox-classic-remote-7dfde7909d3b/candidate/.output/recovery-lswwve_c","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS recovery trace 1440x900: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery catalog 1440x900: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery components 1440x900: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery source-sounds 1440x900: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery malformed 1440x900: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery malformed 390x844: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained
+PASS recovery malformed 844x390: retry, visible invalid draft + full source mismatch, stable main geometry, authored value retained

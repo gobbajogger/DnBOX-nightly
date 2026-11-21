@@ -1,6 +1,6 @@
 # Lane: web
 
-Owner: Classic Pro `/root`; Dot Web has relinquished writing. Branch: `lane/web`; existing PR: #156. Continuation parent: `9172ce84caefd9350357895f4d69c99c51e00ade`. Updated: 2026-11-18 10:12 EST. This section records the prepared continuation; its exact commit and terminal gate receipt belong in the durable delivery checkpoint.
+Owner: Classic Pro `/root`; Dot Web has relinquished writing. Branch: `lane/web`; existing PR: #156. Continuation parent: `9172ce84caefd9350357895f4d69c99c51e00ade`. Updated: 2026-11-18 10:30 EST. This section records the prepared continuation; its exact commit and terminal gate receipt belong in the durable delivery checkpoint.
 
 ## Consumed checkpoint and delivery authority
 
@@ -20,19 +20,23 @@ No main writes, force-push, devices, Codex jobs, Actions, gh-pages writes, PR co
 - Two old tests asserted the now-false blanket “no playback” copy. Their expectations now verify the separate instrument, no connected-device control, unchanged draft and unavailable fallback. The disclosure test was reproduced failing before repair; the product suite passed afterward.
 - Independent eight-lens code review and a separate findings validator retained two P2 follow-ups. The manual now reopens a closed chapter when its already-current topic link is activated, preserving native navigation and modified clicks; its source regression failed before the fix and passed afterward, and the keyboard browser scenario is retained. The deadline fixture now covers pending bundled-controller completion/rejection through expiry and replacement selections, with the actual install-admission and cancellation helpers. Current production controller fencing was already correct; the additional cases protect that branch against regression.
 
-## Qualification state before the exact continuation gate
+## Qualification state before the post-merge exact gate
+
+The first continuation commit `261b4913a0bbc4c0722a40d4a92ce3f7161ff6fc` completed its actual full gate at 2026-11-18 10:18:00 EST with FAIL: `unit-tests,browser-tests`. Clean-tree, setup, no-loss, limits and build passed; the npm chain reached `test:visual`, then Chromium launch failed because the required bundle is absent. Independent installer, presets and manual browser commands failed at the same launch boundary before journeys or screenshots. Log SHA256: `30d463892a555f873592f47dfb43f40abc52b7a3df797fe69625b823871d5f8a`. This is terminal evidence for 261b, not for its successor.
+
+Live recheck found #167 merged at 2026-11-18 10:19:19 EST, advancing nightly consolidated to `dd3e2cfb7a0cde404415029e6d1bca3aefb7960a` (tree `442f025c0929e494db7b951bc42d6ccb11fa5d09`). All five incoming commits and their reachable objects were authenticated and restored, preserving the Web worktree. This local merge retains Remote startup/recovery handling, its footer geometry repair, the mix-cancel fixture and the complete physical-touch timing regression. The browser chain and source manifest retain both branches’ additions. #156 remains untouched at 9172; the user retains status and merge authority. The resulting exact clean head must run its own full gate, with terminal evidence recorded in the external checkpoint.
 
 NOT_RUN remains FAIL for checklist completion. Historical or source-only evidence cannot satisfy current browser or firmware acceptance.
 
 | ID | Status | Evidence and remaining condition |
 |---|---|---|
-| C1 | FAIL | Historical 9172 PASS retained; new exact clean-head gate required. Never use `--post`. |
-| C2 | PASS | Authentic cd2926 commit/tree restored; `git merge-base --is-ancestor cd2926 HEAD` passes. No files deleted. |
-| C3 | FAIL | Independent source review and historical Tools screenshots reviewed. Actual new browser commands built 227 files but failed at missing supported Chromium before their journeys; fresh current visual acceptance remains open. |
-| C4 | FAIL | New exact gate hard-limit result is still required. No intended restricted-path or binary additions. |
+| C1 | FAIL | Historical 9172 PASS and terminal 261b FAIL retained; exact post-merge gate required. Never use `--post`. |
+| C2 | PASS | Authentic dd3 consolidated graph restored and merged locally with 261b; no Web or Remote source/test deletion. |
+| C3 | FAIL | Independent source review and historical Tools screenshots reviewed. Independent 261b browser commands built 227 files but failed at missing supported Chromium before their journeys; fresh post-merge visual acceptance remains open. |
+| C4 | FAIL | 261b hard-limit gate PASS; exact post-merge hard-limit gate is still required. No intended restricted-path or binary additions. |
 | C5 | FAIL | Remaining work is recorded below. |
 | C6 | FAIL | #156 status/merge reserved to the user; no delivery mutation performed. |
-| W1 | FAIL | Build and product suite PASS for the composition; complete `npm test` and all current route/redirect browser checks still required. |
+| W1 | FAIL | 261b build and all npm commands before `test:visual` passed. Full npm/browser steps failed at Chromium launch; repeat on the merged head. |
 | W2 | FAIL | Deadline 36/36 and manual 6/6 focused source tests PASS after integration; four isolated guard mutations produced the expected failures. Fresh installer/emulator/preset browser qualification still required. |
 | W3 | FAIL | Current firmware UI parity lacks matching current-source renders/state proof; older native runtime and reference screenshots are insufficient. |
 | W4 | FAIL | Content and manual preservation checks PASS; current complete phone-landscape/browser acceptance still required. |
@@ -42,9 +46,10 @@ NOT_RUN remains FAIL for checklist completion. Historical or source-only evidenc
 
 1. Supported Playwright Chromium 151.0.7922.34 revision 1234 is absent. The normal installer received an HTML “Site unavailable” response with `x-openai-site-blocked: true`. A shared local-preview server escalation was rejected by the environment's granular permission policy. Do not substitute system Chromium, disable sandboxing, alter launch checks or route around the denial. Obtain the supported bundle through an allowed environment configuration, then run the unchanged exact gate and independent browser journeys.
 2. The active native 257 runtime remains pinned to firmware `06bd40c57cefcdf6c751b318b1cbaea0914fa8bb`, kernel `25753eb4e7546d023b458ee58b2e9e5de36cd28a`, WASM SHA256 `f289da826f6c2cf270a257c19e506cc0701cb00c27b7215e7f428475de27eb11`. Current firmware consolidated was `76040daa5b52d686a8b7b544296ba5d79610a95d` at recovery. Keep the ten-file runtime pin intact; obtain FWUI's corresponding inventory, source identity, states and 240x240 renders before W3 acceptance.
-3. Keep Remote #167's terminal roll/footer geometry failure and Chicago 4758 consumer binding with the Remote successor. Preserve standalone ec887 Save/Open/End/cancel work in its native producer repository; `web/emu` is absent here, so that source patch is not applicable to this checkout. Neither dependency is silently considered complete.
+3. Remote #167's earlier roll/footer geometry failure is historical: its repaired head `9fab9d092887ebab9faf75d9eadf2fec1fd1a5ee` was merged into dd3 after the Remote owner's exact gate and independent three-size footer review. This local Web composition still needs its own gate. Chicago 4758 consumer binding and broader owner-baseline acceptance remain Remote-owned follow-ups, with production pinned to 257. Preserve standalone ec887 Save/Open/End/cancel work in its native producer repository; `web/emu` is absent here, so that source patch is not applicable to this checkout.
 4. Preserve firmware parity requirements: shared live glyphs and real parameter values/engine graphs; R22 glyphs and Synth One/SuperJ6 piano rolls; later-approved R23 layout; pan L50..C..R50; small circular TAPE reels in normal FX layout; real BREAK samples/features. Reference edition 2's 518 target rows/368 parameters are targets, not current engine-backed acceptance. Do not replace animation with static icons or substitute fake values.
-5. After the user's disposition of #156, recheck live heads, merge the latest consolidated, run `DNBOX_EMULATOR_RUNTIME=<qualified-257-runtime> bash scripts/gate.sh web` without `--post` or `--online`, review real current browser evidence, and deliver only the qualified scope. Save source/tests on this lane and final receipts/checkpoint in the existing Space/Library.
+5. Preserve the complete UI-source Page snapshot updated 2026-11-18 10:07:36 EST (307 blocks), including the latest continuation archive `libfile_fde3_f-05cb5044e3488191b2e4e33e0038b17d_2021479872048191acbfdca1f870a539`. Its R17 drum vectors, R16 reconstructions, R8 SONG, HOME/FX differences, PHASER proposal, 808 motion and SuperJ6 sources remain evidence with their stated classes; they are not native/browser/all-page acceptance. Keep the three explicit historical exclusions and the missing original-file gaps.
+6. Run the exact merged clean-head gate now with `DNBOX_GATE_ONLINE=0 DNBOX_EMULATOR_RUNTIME=<qualified-257-runtime> bash scripts/gate.sh web`, without `--post` or `--online`; preserve any terminal failure. Recheck live refs before delivery. After the user's disposition of #156 and after browser/parity prerequisites are met, qualify and deliver only the proven scope. Save source/tests on this lane and final receipts/checkpoint in the existing Space/Library.
 
 ## Deletes
 

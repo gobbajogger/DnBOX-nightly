@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 60374,
-      "sha256": "22b8cc9c1532fc396a4004cc8375fba25c34fac49edab7553a84239ac6913563"
+      "bytes": 60431,
+      "sha256": "a6964cbbc647ceb59b392a5824fd340478c802a74606dbe919058ce1c0bab612"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -759,8 +759,8 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2692,
-      "sha256": "d0732118075988f594c9c96f29844d1be027f35a442e6722182578fbd326024a"
+      "bytes": 2749,
+      "sha256": "dcaa288664e960e8828078033c9f47f872933de646cd71eca83477c715ac6b21"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -829,8 +829,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7726,
-      "sha256": "769612d7a65d6985a0175ea1a50eca632f6b6d3de872207ea076c6c5361317b4"
+      "bytes": 7964,
+      "sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
     },
     {
       "path": "remote/lane.mjs",
@@ -934,8 +934,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 33452,
-      "sha256": "83f36a1f46a832e04face30e40cda6ba48bf3b57333c44a85313f89542155e3c"
+      "bytes": 34291,
+      "sha256": "de5d3e4a3c5704e051e2824980f73a403070083d20de5ed203a3ce4ad14ac491"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1041,6 +1041,11 @@
       "path": "manual/manual.css",
       "bytes": 3226,
       "sha256": "6a408d1d0c04b97fb4d2573d78f855ebc397433d1bb108aeef715f6420d3927a"
+    },
+    {
+      "path": "remote/startup.mjs",
+      "bytes": 876,
+      "sha256": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6"
     }
   ],
   "notClaimed": [

@@ -42,7 +42,11 @@ async def main():
       await mode(page,'levels')
      fresh=await state(page);legacy=json.loads(json.dumps(fresh));legacy['parameters']=[{'id':'current-state-and-reference/mix-parts-live.svg|1:5:0:1','value':32}];await core.load_draft(page,legacy);imported=await state(page);assert len([p for p in imported['parameters'] if p['id'].endswith('|1:5:0:1') and p['value']==32])==3
      conflict=json.loads(json.dumps(imported));conflict['parameters'][0]['value']=0
-     await page.locator('#draft-file').set_input_files({'name':'conflict.json','mimeType':'application/json','buffer':json.dumps(conflict).encode()});await expect(page.locator('#draft-replace')).to_be_disabled();assert (await state(page))['parameters']==imported['parameters'];await core.load_draft(page,before)
+     await page.locator('#draft-file').set_input_files({'name':'conflict.json','mimeType':'application/json','buffer':json.dumps(conflict).encode()})
+     await expect(page.locator('#draft-dialog')).to_be_visible();await expect(page.locator('#draft-replace')).to_be_disabled();await expect(page.locator('#draft-preview')).to_have_text('Conflicting mixer aliases');await expect(page.locator('#status')).to_have_text('Conflicting mixer aliases')
+     # Invalid imports stay modal; dismiss through the real UI before exporting to prove no mutation.
+     await page.locator('#draft-cancel').click();await expect(page.locator('#draft-dialog')).to_be_hidden()
+     assert (await state(page))['parameters']==imported['parameters'];await core.load_draft(page,before)
      await mode(page,'sends')
      for part in ['drum909','drum808','chicago','miami','breaks']:
       await page.locator('[data-mix-part="'+part+'"]').click();await expect(page.locator('[data-view="sound"]').first).to_have_attribute('aria-current','page');await page.locator('[data-view="mix"]').click()
