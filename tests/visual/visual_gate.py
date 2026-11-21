@@ -341,7 +341,7 @@ def wait_for_offline_installer(page, *, timeout=None):
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
-    srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    srv = subprocess.Popen([sys.executable, str(ROOT / 'tests/visual/serve_source.py'), str(p)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     p2 = port()
     srv2 = subprocess.Popen([sys.executable, '-m', 'http.server', str(p2), '-d', str(ROOT / 'docs')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(0.8)
@@ -351,9 +351,9 @@ def main():
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def settle(pg, url, name, *, homepage=False, offline_installer=False, mounted_samples=False):
+            def settle(pg, url, name, *, homepage=False, offline_installer=False, mounted_samples=False, build_history=False):
                 try:
-                    if mounted_samples:
+                    if mounted_samples or build_history:
                         def check_response(response):
                             if response.status >= 400:
                                 errors.append(f'{name} HTTP {response.status}: {response.url}')
@@ -412,7 +412,7 @@ def main():
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     package_name = attach_installer_responses(pg, require_package=True) if rel == 'install/index.html' else None
                     settle(pg, base + '/product-site/' + rel, full, homepage=(rel == 'index.html'),
-                           mounted_samples=(rel == 'breaks/index.html'))
+                           mounted_samples=(rel == 'breaks/index.html'), build_history=(rel == 'builds/index.html'))
                     if package_name:
                         wait_for_admission(pg, package_name)
                     if rel == 'breaks/index.html':

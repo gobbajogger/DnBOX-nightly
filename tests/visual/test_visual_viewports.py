@@ -11,6 +11,7 @@ import visual_gate as gate
 class VisualViewportContract(unittest.TestCase):
     def run_sweep(self, reject_lane=False):
         events, captures, clicks = [], [], []
+        history_pages = []
         image = io.BytesIO()
         Image.new('RGB', (2, 2)).save(image, format='PNG')
         playwright = MagicMock()
@@ -35,6 +36,10 @@ class VisualViewportContract(unittest.TestCase):
 
                 def page():
                     pg = Mock()
+                    def visit(url):
+                        if url.endswith('/product-site/builds/index.html'):
+                            history_pages.append(pg)
+                    pg.goto.side_effect = visit
                     pg.evaluate.return_value = 0
                     pg.screenshot.return_value = image.getvalue()
 
@@ -82,6 +87,10 @@ class VisualViewportContract(unittest.TestCase):
                     [call.args[1] for call in sample_navigation.call_args_list],
                     [f'{w}x{h}' for w, h in gate.SIZES],
                 )
+                self.assertEqual(len(history_pages), len(gate.SIZES))
+                for page in history_pages:
+                    registered = {call.args[0] for call in page.on.call_args_list}
+                    self.assertTrue({'response', 'requestfailed'} <= registered)
                 admitted = [call.args[1] for call in package_admission.call_args_list]
                 self.assertEqual(len(admitted), len(gate.SIZES))
                 self.assertTrue(all(name.endswith('.fwsc') for name in admitted))
