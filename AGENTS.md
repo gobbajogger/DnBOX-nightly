@@ -33,4 +33,4 @@ The gate script [scripts/dnbox-gate.sh](https://github.com/gobbajogger/DnBOX-nig
 Historical note: the older x0x37 nightly instructions (the previous AGENTS.md, `coordination/` and its merge-queue contract) are history and have no force.
 
 ## Never
-Force-push; push or merge to `main` without the User; Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git.
+Force-push; push or merge to `main` without the User; Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git; `.img`, `.component` or `.vst3` files in Git. `.fwsc` firmware and sanitized test evidence may be in Git ([RULES 13](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)).
