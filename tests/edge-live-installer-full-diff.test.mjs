@@ -124,7 +124,11 @@ function assertAllowedRendered(rendered) {
   // x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Map the old names in the
   // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
   const renamed = live.replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
-  const a = normalize(renamed), b = normalize(rendered);
+  // This pinned clip-mode instruction predates the DnBOX name.
+  const oldInstruction = 'return to normal X0X operation with KNOB BANK';
+  assert.equal(renamed.split(oldInstruction).length, 2);
+  const a = normalize(renamed.replace(oldInstruction, 'return to normal DnBOX operation with KNOB BANK'));
+  const b = normalize(rendered);
   const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
   writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');

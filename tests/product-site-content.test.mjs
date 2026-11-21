@@ -77,3 +77,25 @@ test('published release records, backup workflows and history bookmarks survive 
  assert.ok(history.includes('href="../build-status.json"'));
  const ids=[...notes.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
 });
+
+test('Loopy clip mode names DnBOX when returning from the host grid', () => {
+  const instruction = 'return to normal DnBOX operation with KNOB BANK';
+  for (const path of ['docs/install/index.html', 'web/product-site/install/index.html']) {
+    const html = readFileSync(new URL(path, root), 'utf8');
+    const clipMode = html.match(/<li><b>Loopy clip mode:<\/b>([^<]*)<\/li>/)?.[1];
+    assert.ok(clipMode?.includes(instruction), path + ' must name DnBOX in the return instruction');
+  }
+});
+
+test('the project guide opens the musician workflow and keeps protocol details optional', () => {
+  const guide = read('manual/projects-guide.html');
+  const introduction = guide.slice(guide.indexOf('<h1>'), guide.indexOf('<h2'));
+  assert.match(introduction, /<a href="\.\.\/projects\/">Projects<\/a>/);
+  for (const label of ['Find USB MIDI keyboard', 'Connect selected ports']) {
+    assert.ok(introduction.includes(label) && read('projects/index.html').includes('>' + label + '</button>'), label);
+  }
+  assert.doesNotMatch(introduction, /make_pages\.py|localhost|web\/x0x_projects\.html/);
+  const reference = guide.match(/<details>\s*<summary>File format and MIDI protocol<\/summary>([\s\S]*?)<\/details>/);
+  assert.ok(reference && reference[1].includes('id="usb-midi-project-protocol"'));
+  assert.ok(guide.indexOf('id="recover-an-interrupted-sample-transfer"') < reference.index);
+});

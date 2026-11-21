@@ -1,0 +1,24 @@
+wait 523
+expect playing 0
+shot boot.png
+wait 35
+press FX
+wait 78
+release FX
+wait 440
+expect playing 0
+shot fx.png
+wait 35
+press SAVE
+wait 78
+release SAVE
+wait 197
+expect playing 0
+shot save.png
+wait 69
+press HOME
+wait 78
+release HOME
+wait 2949
+expect playing 0
+shot home.png

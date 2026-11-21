@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 628330,
-      "sha256": "388506d0bbd250f891f27480292e27a22c8eb0fa809f5d0f238b650b298a43e5"
+      "bytes": 628332,
+      "sha256": "16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -499,8 +499,8 @@
     },
     {
       "path": "manual/projects-guide.html",
-      "bytes": 16325,
-      "sha256": "6b3c7a1edc54c02edcb91924a31b70fcab81fa2d370caf5194d2b0a48ee18f52"
+      "bytes": 16321,
+      "sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
     },
     {
       "path": "manual/protocol.html",
@@ -609,8 +609,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 117997,
-      "sha256": "f543d86caba53f2a7faae7e3ade8dd742886a8fcf8aea0f6587e81cfbb296cb7"
+      "bytes": 118085,
+      "sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
     },
     {
       "path": "reference/current-ui.html",

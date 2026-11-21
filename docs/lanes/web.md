@@ -1,6 +1,37 @@
-# Lane: web
+# Web lane · PR #156
 
-## Current integration reconciliation on 18 November 2026
+## Qualification at the current PR head
+
+Branch `lane/web` targets `integration/dnbox-consolidated`. The [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) identifies the exact GitHub commit, Local gate log and latest public hash check. The starting head was `9172ce84caefd9350357895f4d69c99c51e00ade`. Reading the branch ref found consolidated at `914d68e8ed50698ea77c9d18c221c404629b9332`, seven commits beyond the base SHA in the PR metadata.
+
+The recovered Web candidate has 1,022 paths and tree `15849e511a449b92e3504af8c3730cf21cdaea6e`. Its four local commits were restored in order through GitHub. The resulting merge `504167ed669be68428d4e177b5e4bc5d268c726c` has the identical tree and contains both public branches. GitHub assigned new commit metadata. Each commit records its original SHA.
+
+| Item | Evidence and status |
+|---|---|
+| W1 · routes and redirects | The product content suite builds all 19 routes and checks both legacy redirects. The [head gate](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) records the full unit result, including both firmware-link checks. |
+| W2 · installer, emulator and file exchange | The browser suite exercises the installer deadline and model changes, presets and recovery. The real emulator uses the consolidated ten-file runtime pin. The Projects page now runs the deployed sample-header writer. Source and built-page tests cover both erased and programmed bytes 480–511. The [head receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) records emulator export and restore. |
+| W3 · firmware UI | **FAIL, partial coverage.** Four stopped emulator states match independent native host frames at every RGB565 pixel. The standard browser suite runs [the LCD comparison](../../tests/emulator-lcd-browser.py) against [the native fixtures and input sequence](../../tests/fixtures/emulator-lcd-06bd40/README.md). The emulator targets firmware `06bd40c57cefcdf6c751b318b1cbaea0914fa8bb` and kernel `4758a9573e0a2a95e73cb054a74e0aad39d5741e`. The HTML presentation inventory also references an older firmware tree. Full parity needs the FWUI owner's per-screen source, input sequence and 240×240 frame for a common version. The earlier inventory identified 107 current keys missing a matched receipt. |
+| W4 · musician content and landscape | The Loopy feature now says “return to normal DnBOX operation with KNOB BANK” in preview and product. The Projects guide links directly to the tool and names its port controls. The guide retains the file-format and protocol appendices under a disclosure. The [independent browser review](../../evidence/web-routes/web-route-review.md) passed all 57 route/viewport checks with zero horizontal overflow or page errors. All 391 internal links resolve, including the two Projects links handled by the installer. |
+| W5 · nightly publication | The [publication record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) names the gated source, Pages commit and live HTTP byte checks. The output must overlay the existing Pages tree to keep the deployed packages, catalog and backup compatibility probe. |
+| C1 · exact-head gate | [Raw log and result for the pushed head](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794). An earlier green run at local `6326d8a` covered the recovered source before the changes here. |
+| C2 · ancestry and deletions | Both public heads are ancestors of the recovered merge. This lane deletes zero paths relative to consolidated. Exact-head no-loss is in the gate receipt. |
+| C3 · independent review | **FAIL for full coverage.** Desktop, portrait and landscape browser evidence is scoped to the site. The 240×240 all-screen firmware/HTML comparison and independent 10/10 disposition remain open. |
+| C4 · hard limits | Web changes affect browser assets, tests and documentation. The consolidated runtime pin and stock firmware memory use are unchanged. Preflight found no workflow, app installer, firmware package or 50 MB blob added. The exact-head gate supplies the tracked-secret scan. |
+| C5 · complete lane ledger | **FAIL** while W3 and C3 remain open. |
+| C6 · readiness and integration | **FAIL** while the remaining acceptance evidence is open. PR #156 is draft. Integ owns the final merge after RULES 9. |
+
+## What's left
+
+- FWUI supplies matched 240×240 native states at the common firmware revision. Web compares each matching HTML state. Test-and-merge records independent before/after acceptance. Historical design assets and unrelated firmware captures cannot establish this comparison.
+- The [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) tracks the gate, any outstanding website findings and served-byte verification without changing the commit being tested.
+
+The owner's 20 November kickoff authorizes pushes and comments on this existing PR and a gated nightly publication. Earlier reservations below describe the preceding run.
+
+<details>
+<summary>Previous implementation and verification records</summary>
+
+
+## Integration reconciliation on 18 November 2026
 
 The sole Web writer continues locally on `lane/web`, merging exact consolidated `914d68e8ed50698ea77c9d18c221c404629b9332` into preserved `097586f12e958296c0858b34c923999d33f09fdf`. Authenticated live reads immediately before this merge still show remote Web and #156 at `9172ce84caefd9350357895f4d69c99c51e00ade`, open and unmerged. **Every #156 mutation remains USER-RESERVED.** There is no push, status, comment, review, merge, alternate PR or publication.
 
@@ -85,7 +116,7 @@ NOT_RUN remains FAIL for checklist completion. Historical or source-only evidenc
 
 None in this continuation.
 
-## Current instruction precedence
+## Instruction precedence in the previous run
 
 The user's ownership and delivery constraints override older repository defaults that mention Codex, automatic status/comments, timed pushes or lane-owned publication. The historical text below is retained as history. In particular, the current builder intentionally consumes editable source (with stale-output checking); its older manifest-hash narrative is not a current instruction to reject ordinary source edits. Frozen runtime and starting-break assets retain their existing strict identity checks.
 
@@ -114,3 +145,5 @@ The build history page now links 0.0.24 and 0.0.24.1 to the immutable commits pr
 A publication rehearsal found stale repository addresses in the generated catalog. The product builder now rewrites only exact historical URL roots in the published catalog’s repo, pages, evidence_url and model pkg fields. The sealed input stays byte-identical. The regenerated 37-version catalog matches the current public Pages file exactly (SHA256 527bf68e895ef8f6adaa66e35b368a4492ef5422cde4a43d9b9b461672833e88), including all 74 model entries and package hashes. The transport-field regression failed before the fix and passes with a lookalike URL and historical free text preserved.
 
 Recovered the four published SMK release-status sections from Pages 42d4027, including the 600b3b45 withdrawal and 94197fc8 evidence. The manual retains the direct backup, project, support and historical documentation destinations. Build history retains its raw inventory link and five published fragment targets. The seven repeated release-note IDs now have distinct anchors; the original first bookmark remains usable. The scoped publication-continuity regression failed before these changes and passed afterward.
+
+</details>
