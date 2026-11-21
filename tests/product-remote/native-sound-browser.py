@@ -39,6 +39,9 @@ async def draft_bytes(page):
     assert await download.failure() is None
     return Path(await download.path()).read_bytes()
 
+def parameter_overrides(draft):
+    return {entry['id']: entry['value'] for entry in draft['parameters']}
+
 async def native_elapsed(page, milliseconds):
     at = await page.evaluate('nativeFrames.at(-1)?.time??0')
     await page.wait_for_function('([at,ms])=>nativeFrames.at(-1)?.time>=at+ms', arg=[at, milliseconds])
@@ -177,6 +180,7 @@ async def cases(origin, meta):
                     await page.locator('#draft-file').set_input_files(archived)
                     await page.locator('#draft-replace').click()
                     authored = []
+                    overrides = parameter_overrides(json.loads(await draft_bytes(page)))
                     for part, bank in [('chicago', 'JUNO'), ('miami', 'CHICAGO')]:
                         await page.locator('[data-engine="'+part+'"]').click()
                         await page.locator('[data-view="sound"]').click()
@@ -199,7 +203,11 @@ async def cases(origin, meta):
                         await field.fill(str(changed))
                         await field.press('Tab')
                         assert float(await field.input_value()) == changed
-                        authored.append({'id': identity, 'value': changed, 'before': value, 'part': part, 'bank': bank})
+                        prior_overrides = overrides
+                        overrides = {**prior_overrides, identity: changed}
+                        authored.append({'id': identity, 'value': changed, 'before': value,
+                                         'part': part, 'bank': bank, 'overridesBefore': prior_overrides,
+                                         'overridesAfter': overrides})
                     await page.locator('[data-engine="chicago"]').click()
                     await page.locator('[data-view="roll"]').click()
                     note = page.locator('#roll-grid [data-note]').first
@@ -211,8 +219,7 @@ async def cases(origin, meta):
                     draft = await draft_bytes(page)
                     saved_draft = json.loads(draft)
                     assert saved_draft['soundBanks'] == ['JUNO', 'CHICAGO']
-                    for change in authored:
-                        assert {'id': change['id'], 'value': change['value']} in saved_draft['parameters'], (change, saved_draft['parameters'])
+                    assert parameter_overrides(saved_draft) == overrides
                     endpoint_proof = []
                     for voice in (1, 0):
                         await start(page)
@@ -467,17 +474,18 @@ async def cases(origin, meta):
                             await page.locator('#'+direction).click()
                             expected = change['before'] if direction == 'undo' else change['value']
                             draft_values[change['id']] = expected
-                            await page.locator('[data-engine="'+change['part']+'"]').click()
-                            await page.locator('[data-view="sound"]').click()
-                            await expect(page.locator('[data-sound-source="draft"]')).to_have_attribute('aria-pressed', 'true')
-                            await expect(page.locator('#sound-bank')).to_have_value(change['bank'])
-                            await page.locator('[data-param="'+change['id']+'"]').press('Enter')
-                            assert float(await page.locator('#parameter-value').input_value()) == expected
+                            for slot in authored:
+                                await page.locator('[data-engine="'+slot['part']+'"]').click()
+                                await page.locator('[data-view="sound"]').click()
+                                await expect(page.locator('[data-sound-source="draft"]')).to_have_attribute('aria-pressed', 'true')
+                                await expect(page.locator('#sound-bank')).to_have_value(slot['bank'])
+                                await page.locator('[data-param="'+slot['id']+'"]').press('Enter')
+                                assert float(await page.locator('#parameter-value').input_value()) == draft_values[slot['id']]
                             saved = json.loads(await draft_bytes(page))
                             assert saved['soundBanks'] == saved_draft['soundBanks']
-                            parameters = {c['id']: c['value'] for c in saved['parameters']}
-                            for identity, value in draft_values.items():
-                                assert parameters[identity] == value
+                            # Undo restores both the value and the previous presence of an override.
+                            expected_overrides = change['overridesBefore'] if direction == 'undo' else change['overridesAfter']
+                            assert parameter_overrides(saved) == expected_overrides
                     await page.locator('#redo').click()
                     await page.locator('[data-engine="chicago"]').click()
                     await page.locator('[data-view="roll"]').click()
