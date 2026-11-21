@@ -34,12 +34,12 @@ test('original waveform stops, independent PWM, continuous SUB and all three clo
   assert.equal(text(78,0),'50% duty');assert.equal(text(79,1),'3% duty');
   assert.equal(text(202,.25),'25%');assert.equal(text(202,0),'0%');
   for(const [rate,mode] of [[88,195],[96,196],[100,197]]){
-    edits.set(sid(0,mode).id,0);assert.equal(text(rate,.5),'50% tempo position');
+    edits.set(sid(0,mode).id,0);assert.equal(text(rate,.5),'4/3 beats');
     edits.set(sid(0,mode).id,1);assert.equal(text(rate,.5),'1.591 Hz');assert.equal(text(rate,1),'16 Hz');
   }
   const left=renderSuperJ6(0,edits),right=renderSuperJ6(1,edits);
   assert.equal((left.match(/data-sj6-field=/g)||[]).length,13);
-  assert.match(left,/PWM String Pad/);assert.match(right,/20.78% tempo position/);
+  assert.match(left,/PWM String Pad/);assert.match(right,/data-sj6-display="96">8 beats</);
   assert.doesNotMatch(left,/data-native-param|data-param=|quarter note|1\/16/);
   const baselineGlyph=html=>html.match(/data-sj6-glyph="82">(.*?)<\/span>/)[1];
   const previous=baselineGlyph(left);edits.set(sid(0,210).id,0);
@@ -51,6 +51,31 @@ test('unsupported field values and legacy identity aliases are rejected',()=>{
   for(const f of [82,83,210,211,195,196,197])assert.equal(acceptsSuperJ6(sid(0,f),.5),false);
   assert.equal(superJ6Spec('source-sound/JUNO/0|1:2:0:0:3'),undefined);
   assert.equal(superJ6Spec(sid(0,78).id.replace(SUPERJ6_PROGRAM.programId,'other')),undefined);
+});
+
+
+test('all three synced LFOs on both basses select the original binary32 tempo ranges',()=>{
+  // First representable normalized value selecting each successively faster
+  // rate from the build-9 Conductor's compiled lfo_rate at 120 BPM.
+  const starts=[0,0x3cf0f111,0x3db4b4bc,0x3e16969b,0x3e52d2d6,0x3e87878a,
+    0x3ea5a5a7,0x3ec3c3c6,0x3ee1e1e3,0x3f000001,0x3f0f0f10,0x3f1e1e1f,
+    0x3f2d2d2e,0x3f3c3c3d,0x3f4b4b4c,0x3f5a5a5b,0x3f69696a,0x3f787879];
+  const periods=['32 beats','≈24 beats','16 beats','≈12 beats','8 beats','4 beats',
+    '8/3 beats','2 beats','4/3 beats','1 beat','2/3 beat','1/2 beat','1/3 beat',
+    '1/4 beat','1/6 beat','1/8 beat','1/12 beat','1/16 beat'];
+  const word=new DataView(new ArrayBuffer(4));
+  const raw=bits=>{word.setUint32(0,bits);return word.getFloat32(0);};
+  for(const slot of [0,1])for(const [rate,mode] of [[88,195],[96,196],[100,197]]){
+    const spec=sid(slot,rate),edits=new Map([[sid(slot,mode).id,0]]);
+    for(let i=0;i<starts.length;i++){
+      const hi=i+1<starts.length?starts[i+1]-1:0x3f800000;
+      for(const value of [raw(starts[i]),raw(hi)])assert.equal(superJ6Text(spec,value,edits),periods[i]);
+    }
+    edits.set(spec.id,0.5);
+    assert.ok(renderSuperJ6(slot,edits).includes('aria-valuetext="4/3 beats"'));
+    edits.set(sid(slot,mode).id,1);
+    assert.equal(superJ6Text(spec,0.5,edits),'1.591 Hz');
+  }
 });
 
 if (process.env.DNBOX_SUPERJ6_ARCHIVE) {

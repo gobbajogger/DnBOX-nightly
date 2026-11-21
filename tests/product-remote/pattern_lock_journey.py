@@ -56,11 +56,18 @@ async def exercise(page, draft_state, load_draft):
     await page.locator('#undo').click();assert (4098,31) not in await rows()
     await page.locator('#redo').click();assert (await rows())[4098,31]==points
     await page.locator('[data-engine="miami"]').click()
-    assert await lane.input_value() != 'patternLock'
+    await target(3, 0)
+    await cells.nth(0).press('ArrowUp')
+    assert (await rows())[4201, 0][0] == 77
+    await page.locator('#undo').click()
+    assert (4201, 0) not in await rows()
+    await page.locator('#redo').click()
+    assert (await rows())[4201, 0][0] == 77
     await page.locator('[data-view="sound"]').click();await page.locator('#sound-bank').select_option('CHICAGO')
     await target(3,0)
     await cells.nth(0).press('ArrowDown')
     assert (await rows())[4130,0][0] == 31
+    assert (await rows())[4201,0][0] == 77
     await page.locator('[data-engine="breaks"]').click()
     await target(4,2)
     await cells.nth(7).press('ArrowDown')
@@ -68,11 +75,13 @@ async def exercise(page, draft_state, load_draft):
     if not await page.locator('.overflow').evaluate('e=>e.open'):
         await page.locator('.overflow summary').click()
     await page.locator('#review').click()
-    await expect(page.locator('#changes')).to_contain_text('BREAK · P03 · Step 8 · Level lock: 126 raw')
+    await expect(page.locator('#changes')).to_contain_text('Bass B / MIAMI · P01 · Step 1 · Cutoff lock: 61 %')
+    await expect(page.locator('#changes')).to_contain_text('Bass B / CHICAGO · P01 · Step 1 · Cutoff lock: 24 %')
+    await expect(page.locator('#changes')).to_contain_text('BREAK · P03 · Step 8 · Level lock: -0.1dB')
     await page.locator('#review-dialog').get_by_role('button',name='Return').click()
     saved = await draft_state(page)
     await load_draft(page,saved);await page.locator('[data-break-view="notes"]').click();await choose_lane()
-    await expect(cells.nth(7)).to_have_attribute('aria-valuetext','126 raw')
+    await expect(cells.nth(7)).to_have_attribute('aria-valuetext','-0.1dB')
     assert await rows() == {(r['catalogId'],r['pattern']):r['values'] for r in saved['patternLocks']}
     await load_draft(page,old);assert await rows() == {}
     print('PATTERN_LOCK_BROWSER PASS owners 2/3/4, separate P01/P32, explicit target, empty steps, multi-point 127-to-0 gesture, Undo/Redo, delete, review and round trip',flush=True)

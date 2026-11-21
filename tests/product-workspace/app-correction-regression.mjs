@@ -39,6 +39,29 @@ await check('blur cancels and immediately repaints without losing committed hist
 await check('no-op clear and row update do not hide real undo',async x=>{x.view('locks');x.get('motion-clear').onclick();assert.equal(x.get('undo').disabled,true);song(x);const t=Object.assign(new Node(),{dataset:{songRow:'0'},value:'1'});x.get('other-view').emit('change',{target:t});x.press('undo');assert.equal(review(x),'No changes.');assert.equal(x.get('undo').disabled,true)});
 await check('all four domains undo/redo chronologically and new branch discards redo',async x=>{const current=Number(x.get('inspector').innerHTML.match(/data-field="velocity"[^>]*value="(\d+)"/)[1]);const target=Object.assign(new Node(),{dataset:{field:'velocity'},value:String(current===127?126:current+1)});x.get('inspector').emit('change',{target});drive(x);motion(x);song(x);for(const word of['velocity','Drive','Motion','Song'])assert.ok(review(x).includes(word));for(let i=0;i<4;i++)x.press('undo');assert.equal(review(x),'No changes.');assert.equal(x.get('undo').disabled,true);for(let i=0;i<4;i++)x.press('redo');for(const word of['velocity','Drive','Motion','Song'])assert.ok(review(x).includes(word));x.press('undo');x.press('undo');drive(x,18,14);assert.equal(x.get('redo').disabled,true);for(let i=0;i<3;i++)x.press('undo');assert.equal(review(x),'No changes.')});
 
-await check('Review distinguishes same-name parameters by exact kit and voice',async x=>{const select=(path,identity)=>{const controls=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.find(s=>s.path===path).controls;const t=Object.assign(new Node(),{dataset:{param:path+'|'+identity,paramOccurrence:String(controls.findIndex(c=>c.identity===identity))}});x.get('other-view').emit('pointerdown',event(t,81));x.get('other-view').emit('pointerup',event(t,81));};x.changePart('drum909','909');x.view('sound');select('current-state-and-reference/909-voice-00.svg','1:0:0:0');x.get('parameter-value').value=35;x.get('parameter-value').onchange();x.changePart('drum808','808');x.view('sound');select('current-state-and-reference/808-voice-00.svg','1:1:0:3');x.get('parameter-value').value=65;x.get('parameter-value').onchange();const text=review(x),lines=text.split('\n');assert.equal(lines.length,2);assert.match(lines[0],/909.*BD.*Tune.*34.*35/);assert.match(lines[1],/808.*BD.*Tune.*64.*65/);x.press('undo');assert.doesNotMatch(review(x),/808.*Tune/);x.press('redo');assert.match(review(x),/808.*BD.*Tune.*64.*65/)});
+await check('Drum Review and inspector preserve source units, names and rounded setting changes',async x=>{
+ const select=(kit,identity)=>{
+  x.changePart('drum'+kit,kit);
+  x.view('sound');
+  const screen=JSON.parse(fs.readFileSync(new URL('components.json',base),'utf8')).screens.find(s=>s.path.endsWith('/'+kit+'-voice-00.svg'));
+  const index=screen.controls.findIndex(c=>c.identity===identity);
+  const target=Object.assign(new Node(),{dataset:{param:screen.path+'|'+identity,paramOccurrence:String(index)}});
+  x.get('other-view').emit('pointerdown',event(target,81));
+  x.get('other-view').emit('pointerup',event(target,81));
+ };
+ const edit=value=>{x.get('parameter-value').value=value;x.get('parameter-value').onchange()};
+ select('909','1:0:0:0');edit(35);
+ select('909','1:0:0:4');edit(1);
+ assert.match(x.get('parameter-inspector').querySelector('span').textContent,/909.*BD.*Pitch depth/);
+ select('808','1:1:0:3');edit(65);
+ x.view('files');
+ const lines=review(x).split('\n');
+ assert.equal(lines.length,3);
+ assert.match(lines[0],/909.*BD.*Tune: 13ms \(\+1 step\)/);
+ assert.match(lines[1],/909.*BD.*Pitch depth: 0% → 1%/);
+ assert.match(lines[2],/808.*BD.*Tune: \+0\.1st → \+0\.3st/);
+ x.press('undo');assert.doesNotMatch(review(x),/808.*Tune/);
+ x.press('redo');assert.match(review(x),/808.*BD.*Tune: \+0\.1st → \+0\.3st/);
+});
 
 if(failed)process.exitCode=1;console.log('CORRECTION_REGRESSION_CASES 7; FAILURES '+failed+'; source-event stub, NOT DOM/touch');

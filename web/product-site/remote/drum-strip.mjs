@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // A responsive Draft projection of the captured 909/808 voice, in source bank order.
 import {drumDisplay} from './drum-format.mjs';
+import {GlyphAnimator} from './glyph-live.mjs';
+import {sourceControlLabel} from './frame.mjs';
 
 const escape = value => String(value).replace(/[&<>"']/g,
   c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
@@ -26,6 +28,45 @@ function glyphsFor(screen) {
   }
   cache.set(screen, glyphs);
   return glyphs;
+}
+
+// DnBOX firmware #975 at 9dd6f2df, ui_drum_voice.inc, dv_glyph.
+// These are the idle control curves in its 32 x 18 slot coordinates.
+const coordinate = n => Number(n.toFixed(4));
+const attackEdge = q => 'M1 12L'+coordinate(1+30*q)+' 0L31 0';
+function kickTone(q) {
+  const cutoff = 300 * 20 ** q;
+  const pole = Math.exp(-2 * Math.PI * cutoff / 44100);
+  const points = [];
+  for (let i=0; i<=24; i++) {
+    const t = i / 24;
+    const frequency = 100 * 2 ** (t * 7.78463485);
+    const denominator = 1 + pole*pole - 2*pole*Math.cos(2*Math.PI*frequency/44100);
+    const gain = Math.min(1,(1-pole)/Math.sqrt(denominator));
+    points.push((i?'L':'M')+coordinate(31*t)+' '+coordinate(1+11*(1-gain)));
+  }
+  return points.join('');
+}
+
+const animators = new WeakMap();
+export function paintDrumGlyph(root,control,raw,max) {
+  const shape = control.context.name === 'Attack' ? attackEdge :
+    control.identity === '1:1:0:1' ? kickTone : null;
+  if (!shape || !root?.querySelectorAll || !Number.isFinite(raw) || !(max>0)) return;
+  const q = Math.max(0,Math.min(1,raw/max));
+  const selector = '[data-source-control="'+control.identity+'"] [data-glyph-semantic]';
+  for (const glyph of root.querySelectorAll('[data-drum-editor] '+selector+', [data-drum-sound-strip] '+selector)) {
+    let animator = animators.get(glyph);
+    if (!animator) {
+      const path = glyph.querySelector('path');
+      if (!path) continue;
+      glyph.setAttribute('data-glyph-origin','firmware dv_glyph');
+      animator = new GlyphAnimator({value:q,draw:v=>path.setAttribute('d',shape(v))});
+      animators.set(glyph,animator);
+    } else {
+      animator.set(q);
+    }
+  }
 }
 
 export function drumValueText(control, value) {
@@ -59,7 +100,17 @@ export function mountDrumReadouts(scene, screen, getSpec) {
     output.style.top = (digitMatrix.f - view.y) / view.height * 100 + '%';
     output.textContent = drumValueText(control, getSpec(button.dataset.param,index).value);
     outputs.append(output);
-    const label = control.context.name === 'P.Dpth' ? 'Pitch depth' : control.context.name;
+    const label = sourceControlLabel(control);
+    if (control.identity === '1:0:11:1') {
+      const firstLetter = entry.querySelector('[role="text"] > g');
+      const baseline = firstLetter.cloneNode(false).transform.baseVal.consolidate().matrix;
+      const caption = document.createElement('span');
+      caption.className = 'drum-velocity-label';
+      caption.style.left = (baseline.e - view.x) / view.width * 100 + '%';
+      caption.style.top = (baseline.f - view.y) / view.height * 100 + '%';
+      caption.textContent = label;
+      outputs.append(caption);
+    }
     button.dataset.drumLabel = label;
     button.setAttribute('aria-label', label + ', ' + output.textContent + ', local draft');
   }
@@ -72,13 +123,13 @@ export function renderDrumStrip(screen, getSpec, glyphs = glyphsFor(screen)) {
     const spec = getSpec(id, String(index));
     const glyph = glyphs.get(control.identity);
     if (!glyph) throw Error('Unknown source drum control '+control.identity);
-    const label = control.context.name === 'P.Dpth' ? 'Pitch depth' : control.context.name;
+    const label = sourceControlLabel(control);
     const display = drumValueText(control, spec?.value ?? Number(control.context.raw));
     const role = control.markers['visual-role'] === 'active glyph/value control' ? 'active' : 'summary';
     const disabled = spec ? '' : ' disabled';
     const target = escape(id);
     return '<section data-drum-sound-unit data-drum-role="'+role+'">'+
-      '<button type="button" class="drum-strip-control" data-param="'+target+'" data-param-occurrence="'+index+'"'+disabled+'>'+
+      '<button type="button" class="drum-strip-control" data-source-control="'+escape(control.identity)+'" data-param="'+target+'" data-param-occurrence="'+index+'"'+disabled+'>'+
       '<span data-drum-label>'+escape(label)+'</span><span class="drum-strip-readout">'+glyph+
       '<output data-drum-value data-param-value="'+target+'">'+escape(display)+'</output></span></button>'+
       '<div class="drum-step-buttons"><button type="button" data-drum-decrement="'+target+'" aria-label="Decrease '+escape(label)+'"'+disabled+'>−</button>'+

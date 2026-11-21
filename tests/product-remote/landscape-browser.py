@@ -64,9 +64,9 @@ def author_break_chance(page):
 
 def inspect_pattern_locks(page,snap):
     for engine,part,pattern,name,step,expected in [
-        ('chicago',2,0,'pattern-lock-bass-a-cutoff',3,'33 raw'),
-        ('miami',3,15,'pattern-lock-bass-b-cutoff',6,'33 raw'),
-        ('breaks',4,31,'pattern-lock-break-level',9,'126 raw'),
+        ('chicago',2,0,'pattern-lock-bass-a-cutoff',3,'26 %'),
+        ('miami',3,15,'pattern-lock-bass-b-cutoff',6,'26 %'),
+        ('breaks',4,31,'pattern-lock-break-level',9,'-0.1dB'),
     ]:
         page.locator(f'[data-engine="{engine}"]').click()
         if engine == 'miami':
@@ -90,7 +90,7 @@ def inspect_pattern_locks(page,snap):
         target.press('ArrowDown' if engine=='breaks' else 'ArrowUp')
         expect(target).to_be_focused()
         expect(target).to_have_attribute('aria-valuetext',expected)
-        expect(page.locator('#lane-value')).to_have_text(f'P{pattern+1:02d} · {expected.split()[0]}')
+        expect(page.locator('#lane-value')).to_have_text(f'P{pattern+1:02d} · {expected}')
         geometry=target.evaluate("e=>{const b=e.getBoundingClientRect(),l=document.querySelector('#velocity').getBoundingClientRect();const h=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);return {hit:h===e||e.contains(h),visible:b.left>=l.left-1&&b.right<=l.right+1&&b.top>=0&&b.bottom<=innerHeight+1}}")
         assert geometry['hit'] and geometry['visible'],(name,geometry)
         snap(name,[11,15] if engine=='breaks' else [3,17,22])

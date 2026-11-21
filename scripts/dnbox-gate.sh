@@ -33,6 +33,8 @@ step() {
 echo "DNBOX-GATE repo=nightly lane=$LANE sha=$SHA started=$TS (UTC+10)"
 clean()   { git diff --quiet && git diff --cached --quiet; }
 setup()   { mkdir -p -- "$TMPDIR" && [ -w "$TMPDIR" ] || { echo "Set DNBOX_GATE_TMPDIR to a writable directory outside the checkout"; return 2; }
+            # Chromium can cancel a completed Blob download when TMPDIR contains a parent segment.
+            TMPDIR=$(CDPATH= cd -P -- "$TMPDIR" && pwd -P) || return 2
             command -v node >/dev/null && command -v python3 >/dev/null || return 2
             if [ -f package-lock.json ]; then
               if [ "${DNBOX_GATE_ONLINE:-0}" = "1" ]; then

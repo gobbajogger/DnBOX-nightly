@@ -149,20 +149,28 @@ test('pattern-owned step locks preserve catalog identity, owner, pattern, zero a
  const a=setup(),legacy=a.codec.encode(capture(a)),empty=()=>Array(16).fill(null);
  for(const f of patternLockSpecs){
   const c=catalog.controls.find(d=>d.id===f.id);
-  assert.deepEqual([c.kind,c.target,c.voice,c.parameter,c.min,c.max,c.sourceBank],['U32',f.part===4?3:2,f.part===4?0:f.part-2,f.parameter,0,127,f.part===4?-1:0]);
+  assert.deepEqual([c.kind,c.target,c.voice,c.parameter,c.min,c.max,c.sourceBank],['U32',f.part===4?3:2,f.part===4?0:f.part-2,f.parameter,0,127,f.part===4?-1:f.bank==='MIAMI'?1:0]);
  }
- assert.equal(lockField('miami',['MIAMI','CHICAGO'],'roll').id,4130);assert.equal(lockField('chicago',['MIAMI','CHICAGO'],'roll'),undefined);
+ assert.equal(lockField('miami',['MIAMI','CHICAGO'],'roll').id,4130);assert.equal(lockField('chicago',['MIAMI','CHICAGO'],'roll').id,4169);
+ assert.equal(lockField('miami',['CHICAGO','MIAMI'],'locks').id,4201);
+ assert.equal(lockField('miami',['MIAMI','SuperJ6'],'roll'),undefined);
+ const breakLevel=lockField('breaks',[],'roll').text;
+ // All 128 outputs of the stock engine_param_si(T_BRK,0,0) and unit_value.
+ const gains=Array.from({length:128},(_,i)=>breakLevel(i)).join('\n')+'\n';
+ assert.equal(createHash('sha256').update(gains).digest('hex'),'359ed007a5c74ecf111e406b90f8e18a1a73c1286ca92e349ab65f610ad9bb55');
+ assert.equal(lockField('miami',['CHICAGO','MIAMI'],'locks').text(77),'61 %');
+ assert.equal(lockField('chicago',['CHICAGO','MIAMI'],'roll').text(31),'24 %');
  assert.equal(lockField('breaks',[],'sound'),undefined);assert.equal(lockField('drum909',[],'roll'),undefined);
  let locks=[];
  for(const spec of patternLockSpecs)for(let pattern=0;pattern<32;pattern++){
   const values=empty();values[0]=0;values[15]=127;
   locks=putPatternLock(locks,spec.id,pattern,values);
  }
- a.state.patternLocks=locks;const doc=capture(a);assert.equal(doc.patternLocks.length,96);
+ a.state.patternLocks=locks;const doc=capture(a);assert.equal(doc.patternLocks.length,160);
  const b=setup();const ctx=installWorkspaceDraft(b.state,b.codec,doc);
  assert.equal(b.codec.encode(capture({...b,context:ctx})),a.codec.encode(doc));
  const wrong=structuredClone(doc),before=structuredClone(b.state.patternLocks);
- for(const patch of [{pattern:32},{pattern:-1},{pattern:0.5},{catalogId:1154},{catalogId:4169},{extra:0},{values:[]},{values:[...empty(),1]},...[-1,128,255,.5,'32',true,undefined].map(bad=>({values:[bad,...empty().slice(1)]}))]){
+ for(const patch of [{pattern:32},{pattern:-1},{pattern:0.5},{catalogId:1154},{catalogId:4170},{extra:0},{values:[]},{values:[...empty(),1]},...[-1,128,255,.5,'32',true,undefined].map(bad=>({values:[bad,...empty().slice(1)]}))]){
   wrong.patternLocks=[{...doc.patternLocks[0],...patch}];assert.throws(()=>installWorkspaceDraft(b.state,b.codec,wrong),/pattern lock/);assert.deepEqual(b.state.patternLocks,before);
  }
  assert.throws(()=>checkedPatternLocks([...locks,locks[0]]));
