@@ -73,8 +73,11 @@ def capture_full_page(page, route, name):
         needs_bands = geometry[-1] == 1 and height > BAND_ROWS and (long_archive or width * height > SINGLE_CAPTURE_PIXELS)
         if short_manual or needs_bands:
             # Chromium can finish fractional layout on its first compositor capture.
-            # Paint one pixel first, then size and check every stored band on the settled page.
-            page.screenshot(full_page=True, clip=dict(x=0, y=0, width=1, height=1), timeout=remaining_ms(deadline))
+            # Build History can retain this first band when the viewport and document
+            # stay fixed. Manuals have separate first-paint extent rules.
+            clip = (dict(x=0, y=0, width=width, height=BAND_ROWS) if route == 'builds/index.html'
+                    else dict(x=0, y=0, width=1, height=1))
+            first_paint = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
             painted = page.evaluate(GEOMETRY)
             if painted[0] != width or painted[2:] != geometry[2:]:
                 raise ValueError('Document viewport changed before the full-page capture')
@@ -108,7 +111,7 @@ def capture_full_page(page, route, name):
                 if tile_rows >= MANUAL_BAND_ROWS * 2:
                     rows = min(MANUAL_BAND_ROWS * 4, tile_rows - 1, BAND_ROWS - 1)
                 return capture_bands(page, painted, deadline, band_rows=rows)
-            return capture_bands(page, painted, deadline)
+            return capture_bands(page, painted, deadline, first_band=first_paint if painted == geometry else None)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
         verify_png(data)
         with Image.open(BytesIO(data), formats=['PNG']) as image:
@@ -119,7 +122,7 @@ def capture_full_page(page, route, name):
         raise RuntimeError(f'{name} full-page capture failed: {error}') from error
 
 
-def capture_bands(page, geometry, deadline, *, native_height=None, band_rows=None):
+def capture_bands(page, geometry, deadline, *, native_height=None, band_rows=None, first_band=None):
     width, painted_height = geometry[:2]
     height = painted_height if native_height is None else native_height
     output = BytesIO()
@@ -163,7 +166,10 @@ def capture_bands(page, geometry, deadline, *, native_height=None, band_rows=Non
             rows = min(band_rows, height - y)
             overlap = int(y > 0)
             clip = dict(x=0, y=y - overlap, width=width, height=rows + overlap)
-            png = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
+            if y == 0 and first_band is not None:
+                png = first_band
+            else:
+                png = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
             if pending is not None:
                 pending.result()
             pending = worker.submit(append_band, png, rows, overlap)

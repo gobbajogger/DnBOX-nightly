@@ -120,15 +120,21 @@ class GateContract(unittest.TestCase):
         def screenshot(*, full_page, clip, timeout):
             clips.append((clip['y'], clip['width'], clip['height']))
             output = io.BytesIO()
-            Image.new('RGB', (clip['width'], clip['height']), 'red').save(output, format='PNG')
+            band = Image.new('RGB', (clip['width'], clip['height']))
+            for row in range(band.height):
+                band.paste((0, clip['y'] + row, 10), (0, row, band.width, row + 1))
+            if len(clips) == 1:
+                # Stale first-paint content away from the seam must disappear after reflow.
+                band.putpixel((1, 0), (255, 0, 0))
+            band.save(output, format='PNG')
             return output.getvalue()
         page.screenshot.side_effect = screenshot
         with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
             png = capture.capture_full_page(page, 'builds/index.html', 'builds-case')
         with Image.open(io.BytesIO(png)) as actual:
             self.assertEqual(actual.size, (3, 7))
-            self.assertEqual(actual.getpixel((2, 6)), (255, 0, 0))
-        self.assertEqual(clips, [(0, 1, 1), (0, 3, 3), (2, 3, 4), (5, 3, 2)])
+            self.assertEqual([actual.getpixel((1, y)) for y in range(7)], [(0, y, 10) for y in range(7)])
+        self.assertEqual(clips, [(0, 3, 3), (0, 3, 3), (2, 3, 4), (5, 3, 2)])
 
     def test_legacy_manual_keeps_the_entire_settled_footer_on_narrow_viewports(self):
         initial = [3, 5, 0, 0, 3, 2, 1]
@@ -255,6 +261,11 @@ class GateContract(unittest.TestCase):
                     with Image.open(io.BytesIO(data)) as actual:
                         self.assertEqual((actual.size, actual.mode), (expected.size, expected.mode))
                         self.assertEqual(actual.tobytes(), expected.tobytes())
+                    self.assertEqual([c.kwargs['clip'] for c in page.screenshot.call_args_list], [
+                        dict(x=0, y=0, width=3, height=3),
+                        dict(x=0, y=2, width=3, height=4),
+                        dict(x=0, y=5, width=3, height=2),
+                    ])
 
     def test_capture_rejects_a_complete_image_after_the_total_deadline(self):
         page = Mock()
@@ -262,12 +273,8 @@ class GateContract(unittest.TestCase):
         elapsed = [0]
         def capture_band(*, full_page, clip, timeout):
             self.assertTrue(full_page)
-            if clip['width'] == 1:
-                self.assertEqual(timeout, 30_000)
-                elapsed[0] += 1
-            else:
-                self.assertEqual(timeout, 29_000 if clip['y'] == 0 else 2_000)
-                elapsed[0] += 27 if clip['y'] == 0 else 3
+            self.assertEqual(timeout, 30_000 if clip['y'] == 0 else 2_000)
+            elapsed[0] += 28 if clip['y'] == 0 else 3
             image = Image.new('RGB', (clip['width'], clip['height']))
             data = io.BytesIO()
             image.save(data, format='PNG')
@@ -277,7 +284,7 @@ class GateContract(unittest.TestCase):
             with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
                 with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
                     capture.capture_full_page(page, 'builds/index.html', 'build-history')
-        self.assertEqual(page.screenshot.call_count, 3)
+        self.assertEqual(page.screenshot.call_count, 2)
 
     def test_bands_reject_invalid_png_and_changed_document(self):
         size = [3, 6, 0, 0, 3, 2, 1]
@@ -310,7 +317,7 @@ class GateContract(unittest.TestCase):
 
     def test_bands_share_one_deadline_and_reject_late_completion(self):
         page = Mock()
-        page.evaluate.return_value = [30, 30, 0, 0, 30, 20, 1]
+        page.evaluate.return_value = [30, 45, 0, 0, 30, 20, 1]
         timeouts = []
         def screenshot(full_page, clip, timeout):
             timeouts.append(timeout)
