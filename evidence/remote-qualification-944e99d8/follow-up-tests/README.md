@@ -1,0 +1,23 @@
+# Remote browser test regressions
+
+## Project Workspace receipt
+
+At `944e99d87125e60aff9e3020ead7212fb47687d6` the ordinary workspace browser suite printed 63 successful UI checks. The final write to `/tmp/song-ux-review.json` raised FileNotFoundError. This cloud worker supplies an existing writable temporary directory through `TMPDIR`. The [fix](https://github.com/gobbajogger/DnBOX-nightly/commit/b10b161491c4d7f9f0fcea88f0482e129ace7652) uses Python's configured temporary directory. A focused regression exercised the actual receipt writer from a fresh interpreter in a directory whose name contained spaces. Its JSON matched the input. A separate follow-up browser run passed 30 UI assertions and timed out reloading the 390-pixel Projects view. The original failing write and the later UI timeout have distinct outcomes.
+
+## Keepalive during a held control
+
+With the real 650 ms keepalive active, deferring the observation of a pointer DOWN by 950 ms made the old test compare opcode 6 (KEEPALIVE) with opcode 4 (DOWN). Its failure skipped session teardown and left a referenced timer. The isolated reproduction exhausted both a 25-second watchdog and a separate 15-second watchdog. All five other tests completed in the diagnostic file. [The correction](https://github.com/gobbajogger/DnBOX-nightly/commit/4421b615811a50cb844ec0733bdd1bd605e398ba) registers teardown before assertions and checks the complete sequence of action commands, allowing protocol keepalives between them. It still rejects extra UP or SET commands. The delayed replay passed 6/6 and exited normally. A direct run without the delay also passed 6/6.
+
+[Project Workspace and keepalive logs](follow-up-logs.zip) include the original failures, focused replays and the separate 71806ae2 Edge, Remote and ordinary browser results. The 71806ae2 Edge suite passed 563 tests. Its Remote suite lost its worker before a terminal result; a separate default-only browser run timed out at startup. A clean Remote run at `4421b615` later passed 233 tests and skipped zero.
+
+## Waiting for actual Workspace responses
+
+On `944e99d8`, the first 503 recovery case checked a hidden alert five seconds after document navigation. The original isolated replay observed navigation at 3.871 s, the injected 503 at 11.679 s, the visible alert and focused Retry at 11.797 s, and successful retry at 14.122 s. [The first repair](https://github.com/gobbajogger/DnBOX-nightly/commit/16afbf2d100bd255190f9fa6f5d9dd2749b7e618) registers a response observer before navigation and checks the returned HTTP status. The old assertion failed under a controlled 6.2-second source delay. The repaired check passed with the same delay.
+
+A complete run of that first repair passed the trace, catalog and components cases at 1440 × 900, then checked the busy state before the successful reload had finished. [The Retry repair](https://github.com/gobbajogger/DnBOX-nightly/commit/e03839f05568655763ff19f8a6ee210b6122ad4d) waits for the new document and the four Workspace resources before checking usability with the original five-second UI deadline. Holding one successful source for 6.2 s reproduced the failure and verified the fix. The unfiltered corrected test exited 0 for all seven cases across desktop, portrait and landscape, including malformed input, focus, preserved edits, invalid file recovery and geometry. The 303-file application was built from `16afbf2d`. The tested revised file is Git blob `46924909cb7a6af697e533c05c937fc43e4c8df2`, published in `e03839f0`. [Timed exchanges, controlled failure replays and complete output](workspace-recovery.zip)
+
+## Native Sound Undo and exported parameters
+
+On `944e99d8` the native Sound browser ran the 1440 × 900 edit lifecycle and checked that the native operations had preserved the authored Draft bytes. After the first Draft Sound Undo, the UI displayed the correct original value. The check then raised `KeyError` for `source-sound/CHICAGO/1|1:2:1:1:0`. The fixture started with an empty `parameters` array. Undo correctly removed that override when restoring the original effective value.
+
+[The repair](https://github.com/gobbajogger/DnBOX-nightly/commit/e19b8f9d7cb9a58aee34d5c33c53336a1e7c6b49) snapshots the complete override map before and after each edit. Each Undo and Redo checks both displayed values and the precise exported map. A focused browser run on the `16afbf2d` application covered previously absent overrides, an explicitly stored default, a nondefault override and an unrelated scalar. All eight exported intermediate maps and sixteen displayed values matched, and both final files matched the original authored bytes. [Browser observations and original failing output](native-sound-sparse-history.zip)
