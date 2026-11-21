@@ -1173,9 +1173,14 @@
       "sha256": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783"
     },
     {
+      "path": "remote/drum-decay-times.mjs",
+      "bytes": 14517,
+      "sha256": "ed85dee39a40a1a3c32fa6b6811191d3066c9cf1d6bd5243fe164e6fa8d512d7"
+    },
+    {
       "path": "remote/drum-strip.mjs",
-      "bytes": 8795,
-      "sha256": "99bc09f15e21875726eca4312961ea1a689144659189b3a039e54379c4f56a81"
+      "bytes": 9781,
+      "sha256": "5eaf3027ca5a84b9227941c1dd6a745428def3eaab844b42b4cc3a19f8f5262a"
     },
     {
       "path": "remote/drum-format.mjs",

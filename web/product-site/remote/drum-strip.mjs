@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // A responsive Draft projection of the captured 909/808 voice, in source bank order.
 import {drumDisplay} from './drum-format.mjs';
+import {decayCurves,decayMilliseconds} from './drum-decay-times.mjs';
 import {GlyphAnimator} from './glyph-live.mjs';
 import {sourceControlLabel} from './frame.mjs';
 
@@ -62,6 +63,22 @@ function tuneFork(q) {
   return path+'L'+point(right,0)+'M'+point(16,drop)+'L'+point(16,tip);
 }
 
+// The 909 uses a fixed two-second axis. The 808 uses the native duration
+// when calibrated, or the eased pot position for the seven raw fallback controls.
+function decayTail(q, curve, kit909) {
+  const ms=curve===null ? 4000*q : Math.fround(decayMilliseconds[curve][Math.round(127*q)]);
+  const reach=8+23*Math.sqrt(ms/4000);
+  const points=[];
+  for(let i=0;i<=16;i++){
+    const t=i/16;
+    const x=1+t*(kit909?30:reach);
+    const y=kit909 ? 12*(1-2**(-16.60964047*2000*t/(ms||1)))
+      : i===16 ? 12 : 12*(1-2**(-t*(2.2+3*(1-q))));
+    points.push((i?'L':'M')+coordinate(x)+' '+coordinate(y));
+  }
+  return points.join('');
+}
+
 function kickTone(q) {
   const cutoff = 300 * 20 ** q;
   const pole = Math.exp(-2 * Math.PI * cutoff / 44100);
@@ -78,6 +95,10 @@ function kickTone(q) {
 
 const animators = new WeakMap();
 function drumShape(control) {
+  const curve=decayCurves[control.identity];
+  if (curve!==undefined && control.markers?.['visual-role']==='active glyph/value control' &&
+      (control.context.name==='Decay' || control.context.name==='Tail'))
+    return q=>decayTail(q,curve,control.identity.startsWith('1:0:'));
   if (control.context.name==='Attack') return attackEdge;
   if (control.identity==='1:1:0:1') return kickTone;
   if ((control.identity==='1:0:11:1' || control.identity==='1:1:11:1') &&

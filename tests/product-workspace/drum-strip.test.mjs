@@ -67,7 +67,7 @@ test('a missing local descriptor leaves the captured cell and its actions disabl
 
 test('editable kit glyphs update their mounted source paths at every raw value', () => {
   const envelopeControls=[];
-  let tuneForks=0, kitSummaries=0;
+  let tuneForks=0, kitSummaries=0, fallingTails=0;
   for(const screen of screens)for(const control of screen.controls){
     const attributes=new Map();
     const path={setAttribute:(k,v)=>attributes.set(k,v)};
@@ -85,13 +85,19 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     const firstCurve=attributes.get('d');
     const fork=control.context.name==='Tune' && control.identity!=='1:0:0:0';
     const summary=control.context.name==='ACCENT' && control.markers['visual-role']==='inactive bank parameter summary';
-    if(fork)tuneForks++;
+    const decay=['Decay','Tail'].includes(control.context.name) && control.identity!=='1:1:6:2';
+    if(decay)fallingTails++;
+    else if(fork)tuneForks++;
     else if(summary)kitSummaries++;
     else envelopeControls.push(control.identity);
     for(let raw=0;raw<=127;raw++){
       paintDrumGlyph(root,control,raw,127);
       const curve=attributes.get('d');
-      if(fork){
+      if(decay){
+        const points=[...curve.matchAll(/[ML]([\d.]+) ([\d.]+)/g)];
+        assert.equal(points.length,17);
+        assert.ok(points.every((p,i)=>+p[2]>=0 && +p[2]<=12 && (!i || +p[1]>+points[i-1][1])));
+      }else if(fork){
         // Two eight-segment tines, their upright ends and the independent stem.
         assert.equal(curve.match(/[ML]/g).join(''),'M'+'L'.repeat(18)+'ML');
       }else if(summary){
@@ -110,6 +116,6 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     assert.notEqual(attributes.get('d'),firstCurve,control.identity);
     assert.equal(pathLookups,1,'updates reuse the mounted glyph path');
   }
-  assert.equal(tuneForks,21);assert.equal(kitSummaries,22);
+  assert.equal(tuneForks,21);assert.equal(kitSummaries,22);assert.equal(fallingTails,20);
   assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:6:3']);
 });

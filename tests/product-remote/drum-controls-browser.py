@@ -293,13 +293,17 @@ async def cases(evidence=None):
        const copy=svg.cloneNode(true);
        if(svg.closest('[data-drum-editor]'))for(const cell of copy.querySelectorAll('[data-source-control]')){
         const id=cell.getAttribute('data-source-control'), glyph=cell.querySelector('[data-glyph-semantic]');
-        const semantic=glyph?.getAttribute('data-glyph-semantic');
+        const sourceCell=original.querySelector('[data-source-control="'+id+'"]');
+        const donor=sourceCell?.querySelector('[data-glyph-semantic]');
+        if(!glyph || !donor)return false;
+        const semantic=donor.getAttribute('data-glyph-semantic'), role=sourceCell.getAttribute('data-visual-role');
         const tuningFork=semantic==='TUNE' && id!=='1:0:0:0';
         const kitSummary=semantic==='ACCENT' && ['1:0:11:1','1:1:11:1'].includes(id) &&
-          cell.getAttribute('data-visual-role')==='inactive bank parameter summary';
-        if(semantic!=='ATTACK' && id!=='1:1:0:1' && !tuningFork && !kitSummary)continue;
-        const donor=original.querySelector('[data-source-control="'+id+'"] [data-glyph-semantic]');
-        if(glyph.getAttribute('data-glyph-origin')!=='firmware dv_glyph')return false;
+          role==='inactive bank parameter summary';
+        const decay=['DECAY','TAIL'].includes(semantic) && id!=='1:1:6:2' && role==='active glyph/value control';
+        const eligible=semantic==='ATTACK' || id==='1:1:0:1' || tuningFork || kitSummary || decay;
+        if((glyph.getAttribute('data-glyph-origin')==='firmware dv_glyph')!==eligible)return false;
+        if(!eligible)continue;
         glyph.setAttribute('data-glyph-origin',donor.getAttribute('data-glyph-origin'));
         glyph.querySelector('path').setAttribute('d',donor.querySelector('path').getAttribute('d'));
        }
