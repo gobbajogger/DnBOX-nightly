@@ -15,6 +15,7 @@ import subprocess
 import tempfile
 import time
 import traceback
+from functools import cache, lru_cache
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 from playwright.async_api import async_playwright, expect
@@ -23,22 +24,54 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCE = None
 ORIGIN = 'https://dnbox.test'
 
+@lru_cache(maxsize=1)
+def product_reader(source):
+    # Each suite routes one immutable build, shared by all its browser contexts.
+    root = source.resolve()
+
+    @cache
+    def read_file(path):
+        return path.read_bytes()
+
+    @cache
+    def response(relative):
+        path = (root / relative).resolve()
+        if not path.is_relative_to(root):
+            return {'status': 403, 'body': 'Forbidden'}
+        mime_path = path
+        if path.is_dir():
+            mime_path = path / 'index.html'
+            path = mime_path.resolve()
+            if not path.is_relative_to(root):
+                return {'status': 403, 'body': 'Forbidden'}
+        if not path.is_file():
+            return {'status': 404, 'body': 'Not found'}
+        mime = 'text/javascript' if mime_path.suffix == '.mjs' else mimetypes.guess_type(mime_path)[0] or 'application/octet-stream'
+        return {'status': 200, 'content_type': mime, 'body': read_file(path)}
+
+    return response
+
+
+def preload_product(source):
+    response = product_reader(source)
+    response('')
+    for path in source.rglob('*'):
+        response(path.relative_to(source).as_posix())
+
+
+def product_response(source, relative):
+    return product_reader(source)(relative)
+
+
 async def serve(route):
     url = urlparse(route.request.url)
     if url.netloc != 'dnbox.test':
         await route.abort()
         return
-    path = (SOURCE / unquote(url.path).lstrip('/')).resolve()
-    if not path.is_relative_to(SOURCE.resolve()):
-        await route.fulfill(status=403, body='Forbidden')
-        return
-    if path.is_dir():
-        path /= 'index.html'
-    if not path.is_file():
-        await route.fulfill(status=404, body='Not found')
-        return
-    mime = 'text/javascript' if path.suffix == '.mjs' else mimetypes.guess_type(path)[0] or 'application/octet-stream'
-    await route.fulfill(status=200, content_type=mime, body=path.read_bytes())
+    relative = unquote(url.path).strip('/')
+    response = await asyncio.to_thread(product_response, SOURCE, relative)
+    await route.fulfill(**response)
+
 
 async def roll(page):
     green = 'rgb(130, 240, 90)'  # Owner PDF pages 1, 14 and 21, Bass A note fill.
@@ -1049,6 +1082,7 @@ async def main():
     with tempfile.TemporaryDirectory(prefix='funkybeats-browser-', dir=output_root) as output:
         SOURCE = Path(output)
         subprocess.run(['node', 'scripts/build-product-site.mjs', '--output', output], cwd=ROOT, check=True)
+        await asyncio.to_thread(preload_product, SOURCE)
         await browser_cases()
 
 if __name__ == '__main__':

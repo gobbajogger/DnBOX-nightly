@@ -2,6 +2,12 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Local gate test repairs
+
+Two unfiltered runs exposed failures in both test phases. On `b90b3bbc` the catalog's stable-parent control returned a null exit status and Chromium timed out on a Draft Save click after clearing a Chicago lock. On `242f0189` the first valid catalog output returned a null exit status and Chromium timed out while inspecting the visible overflow menu during the first Draft export. Both runs passed setup, ancestry/no-loss, limits and the 303-file build. [First full log](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063956594) · [Second full log](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063990278).
+
+The catalog fixture now reads its 644,156-byte synthetic package as bytes. Previously every test process compiled a 2,302,220-byte JavaScript array literal for the same package. The verifier and catalog suites distinguish Node startup, normal validator rejections, signals and timeouts. The command deadline remains 15 seconds. The browser harness reads each immutable built asset outside Playwright's event loop and reuses it across contexts. An independent comparison of all 303 files checked 39,810,036 response bytes, HTTP statuses and MIME types against the earlier handler. [Qualification by commit](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508).
+
 ## Cloud checks on the requested revision
 
 The [page-by-page control crosswalk](../../evidence/remote-qualification-944e99d8/control-crosswalk.md) covers all 23 product drawings on `944e99d8`, the eight written owner corrections and the shared controls. Its 357 page-specific entries and seven shared groups name the corresponding rendered control, the observed action, or the missing evidence. An independent check resolved 333 bindings against the captured DOM entries and verified the 23 screenshot hashes. [Machine-readable crosswalk](../../evidence/remote-qualification-944e99d8/control-crosswalk.json)
