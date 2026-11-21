@@ -1,5 +1,5 @@
 # DnBOX finish-line checklists
-Rules: `RULES.md` (v2). A lane is finished when every line of its section is PASS at one SHA, with the log path or PR comment link written next to it in `docs/lanes/<lane>.md`. A check that did not run is not PASS; write NOT_RUN and the reason. For the full gate before a `gh-pages` fast-forward or `main`, NOT_RUN = FAIL. Never weaken a threshold to make a check pass; if a check is wrong, the fix and its reason go in the lane file and `test-and-merge` reviews it.
+Rules: `RULES.md` (v2). A lane is finished when every line of its section is PASS at one SHA, with the log path or PR comment link written next to it in `docs/lanes/<lane>.md`. A check that did not run is not PASS; write NOT_RUN and the reason. For the full gate before a `gh-pages` fast-forward or `main`, and for the site-only gate (RULES 16), NOT_RUN = FAIL. Never weaken a threshold to make a check pass; if a check is wrong, the fix and its reason go in the lane file and `test-and-merge` reviews it.
 
 Common to every lane (C1–C6)
 - C1 The lane's focused tests PASS at the lane PR head SHA (plus Elite and Pro builds when firmware changed); result posted as a PR comment naming the SHA. The full Local gate runs on the combined branch after the final lane merge (RULES 9), not per lane PR.
@@ -51,4 +51,4 @@ Common to every lane (C1–C6)
 - W2 Installer, emulator, import/export work (existing tests + browser tests PASS).
 - W3 1:1 HTML firmware UI matches fwui's 240x240 renders at the same SHA (pixel/structure diff test).
 - W4 Pages explain what musicians can do, no technical explainers (content test); every page usable in phone landscape.
-- W5 Nightly page published: `gh-pages` fast-forwarded only after the Local gate, live URL returns the built bytes (hash check).
+- W5 Nightly page published: `gh-pages` fast-forwarded only after its gate (RULES 16; the site-only gate for site-only changes, else the full Local gate), live URL returns the built bytes (hash check).
