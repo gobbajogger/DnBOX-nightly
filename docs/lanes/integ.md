@@ -30,6 +30,10 @@ An uncached read of the deployed installers and their embedded catalogs on 21 No
 
 At `f3974721` all 529 Node edge checks passed. The subsequent Chromium inbox check exceeded the 30-second navigation limit opening Help. The unchanged test completed all four sizes in a separate run. Keep the full gate open until it passes at the final head.
 
+The [complete `f3974721` gate log](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7056593599) also records a browser crash while Native Sound tried to save its failure screenshot. The browser test retained every 240×240 pixel buffer it observed. A deterministic replay of 2,048 real-size frames retained 235,929,600 bytes in both original observer modes. The narrowly scoped observer from [Remote #169](https://github.com/gobbajogger/DnBOX-nightly/pull/169) retained zero pixel-buffer bytes and kept the required frame readings and latest five complete envelopes. The page still receives every original frame. A separate diagnostic test confirmed that a failed screenshot now preserves the initial exception as well as the capture error. All 151 Remote Node cases and the browser sandbox contract passed. The failed gate could not identify the initial cause of its browser crash.
+
+A local reconciliation of Web `56c99fb8`, Remote `37982b3f` and integration `cfef0c05` preserved all 28 accepted reference blobs, all 197 existing history records and the new public release record. Its product build produced 247 files and passed 113 focused tests. The independent visual and full gate requirements continue to apply to a future actual merge. [Exact inputs, replayable patches and verification log](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7056578290).
+
 The deployed Starting BREAK page also passed real Chromium playback for all five samples with zero checkboxes selected, followed by selection and download. The resulting archive was 110,844 bytes and matched the independently verified digest. [Playback and export receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055766883).
 
 ### Independent visual and browser review
