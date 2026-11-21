@@ -1039,8 +1039,8 @@
     },
     {
       "path": "manual/manual.css",
-      "bytes": 3226,
-      "sha256": "6a408d1d0c04b97fb4d2573d78f855ebc397433d1bb108aeef715f6420d3927a"
+      "bytes": 3325,
+      "sha256": "f16c2c0811dc467059148a34de63c1ffa98dc30c4232d0ed9c1e7b3666cafe6e"
     },
     {
       "path": "remote/startup.mjs",
