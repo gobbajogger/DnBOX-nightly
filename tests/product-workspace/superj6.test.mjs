@@ -53,6 +53,23 @@ test('unsupported field values and legacy identity aliases are rejected',()=>{
   assert.equal(superJ6Spec(sid(0,78).id.replace(SUPERJ6_PROGRAM.programId,'other')),undefined);
 });
 
+test('Hz readouts use the frequency returned by the build-9 Conductor',()=>{
+  // The original returns binary32 before Remote formats to three decimal places.
+  const probe=new DataView(new ArrayBuffer(4));
+  const cases=[[0x3d7cc788,'0.002 Hz'],[0x3e13f963,'0.025 Hz']];
+  for(const slot of [0,1])for(const [rate,mode] of [[88,195],[96,196],[100,197]]){
+    const spec=sid(slot,rate),edits=new Map([[sid(slot,mode).id,1]]);
+    for(const [word,expected] of cases){
+      probe.setUint32(0,word);
+      const value=probe.getFloat32(0);
+      assert.equal(superJ6Text(spec,value,edits),expected);
+      edits.set(spec.id,value);
+      const html=renderSuperJ6(slot,edits);
+      assert.ok(html.includes('data-sj6-display="'+rate+'">'+expected+'</output>'));
+      assert.match(html,new RegExp('data-sj6-field="'+rate+'"[^>]*aria-valuetext="'+expected.replace('.', '\\.')+'"'));
+    }
+  }
+});
 
 test('all three synced LFOs on both basses select the original binary32 tempo ranges',()=>{
   // First representable normalized value selecting each successively faster

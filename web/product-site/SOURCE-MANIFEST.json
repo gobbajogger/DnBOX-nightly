@@ -1184,8 +1184,8 @@
     },
     {
       "path": "remote/superj6.mjs",
-      "bytes": 9424,
-      "sha256": "ecb63d261f32f59fc564927f4fb22d01d8230f7f14635d366883e2c80bc63193"
+      "bytes": 9543,
+      "sha256": "e31989d53364a624273a4e1acdfd4f104fba1a7ac58cb66edbd28be211af1b11"
     },
     {
       "path": "remote/synth-one-init.mjs",

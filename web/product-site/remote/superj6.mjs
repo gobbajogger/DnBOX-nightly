@@ -29,6 +29,8 @@ function tempoIndex(value) {
   // a positive half upward. For example exactly .5 still selects 4/3 beats.
   return Math.round(Math.fround(Math.fround(1-value)*17));
 }
+// The Conductor returns a binary32 frequency after evaluating the Hz curve.
+const lfoHz = value => Math.fround(16 * Math.pow(value, 3.33));
 const sections=[
   ['Layer 1',[[82,'Wave','wave',1],[210,'PWM','enable',1],[78,'Width','width',0.1263203]]],
   ['Layer 2',[[83,'Wave','wave',1],[211,'PWM','enable',1],[79,'Width','width',0.50431365]]],
@@ -81,7 +83,7 @@ export function superJ6Text(spec,value,edits,fields=slots[spec.slot]) {
     case 'rate':{
       const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
       if(mode===undefined)return decimal(100*value,2)+'% position';
-      return mode ? decimal(16*Math.pow(value,3.33),3)+' Hz' : tempoPeriods[tempoIndex(value)];
+      return mode ? decimal(lfoHz(value),3)+' Hz' : tempoPeriods[tempoIndex(value)];
     }
   }
 }
@@ -94,7 +96,7 @@ function glyph(spec,value,edits,fields) {
     const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
     if(mode===0)return position(1-tempoIndex(value)/17);
     if(mode===undefined)return position();
-    const hz=16*Math.pow(value,3.33);
+    const hz=lfoHz(value);
     return line(Array.from({length:61},(_,x)=>(2+x)+','+decimal(12-8*Math.sin(2*Math.PI*x/60*hz*.25),2)).join(' '));
   }
   const layer=spec.section==='Layer 2';
