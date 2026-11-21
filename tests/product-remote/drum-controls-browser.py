@@ -66,6 +66,7 @@ async def compact_voice(page, screen):
   assert {r['ink'] for r in rows[:4]}.isdisjoint(r['ink'] for r in rows[4:])
   # Owner p18 uses a 222px panel, with the step buttons at y303 and footer bottom at y382.
   # Keep room for the shared header and larger touch targets in the working 390px viewport.
+  await expect(page.locator('#parameter-inspector')).to_be_hidden()
   panel=await strip.bounding_box()
   footer=await page.get_by_role('button',name='Open original',exact=True).bounding_box()
   height=page.viewport_size['height']
@@ -306,10 +307,19 @@ async def cases(evidence=None):
       voice_screen=next(s for s in screens.values() if s['path'].endswith(f'/{kit[4:]}-voice-{int(voice):02d}.svg'))
       opener=page.get_by_role('button',name='Open original',exact=True)
       original_return=page.get_by_role('button',name='Return to Sound',exact=True)
-      compact=None
-      if kit=='drum909' and voice=='0':await kick_depth_dependencies(page)
+      # Compare the owner drawing before selecting a parameter opens the numeric editor.
+      compact=await compact_voice(page,voice_screen) if width==844 else None
+      if kit=='drum909' and voice=='0':
+       await kick_depth_dependencies(page)
+       if compact is not None:
+        inspector=page.locator('#parameter-inspector')
+        await expect(inspector.locator('label span')).to_have_text('909 / BD · Pitch')
+        await expect(inspector.locator('output')).to_have_text('+0.1st')
+        field=inspector.get_by_role('spinbutton')
+        await expect(field).to_have_value('45')
+        await field.click()
+        await expect(field).to_be_focused()
       if width==844:
-       compact=await compact_voice(page,voice_screen)
        await expect(opener).to_be_visible()
        await opener.press('Enter')
        await expect(original_return).to_be_focused()

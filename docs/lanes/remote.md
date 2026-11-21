@@ -2,6 +2,18 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Cloud gate and browser qualification at 7c59dad5
+
+The [unfiltered remote gate](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7066670532) ran for 87 minutes and exited 1. The 304-file build, no-loss, 564 edge tests, 126 workspace tests, 241 Remote/platform tests and all 26 FunkyBeats browser groups passed. The stock-dispatcher and original AU prerequisites remain open. [Full gate and local manual request traces](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/7c59-gate-and-manual.json.gz)
+
+The visual run completed 74 captures before the local original manual timed out at 844 × 390. The unchanged local navigation then completed in 1.538 seconds. Separate bounded viewport runs brought the union to all 116 capture names, comprising 104 product and 12 offline images. The page-01 header scored 0.9059 against the 0.90 threshold. The tree contained no full-image snapshot baselines. All nine structural fixtures returned their expected outcomes, including eight negative controls. [Per-capture provenance, viewport summaries and structural logs](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/7c59-visual-and-structural.json.gz)
+
+The ordinary browser phase stopped on the 844 × 390 909 bass drum. The test compared the layout with an open numeric editor against the page-18 drawing of the closed editor. In the matching closed state the control panel measured 208 px, the step buttons started at y=292 and the footer ended at y=390. With the editor open the panel measured 127.28 px and every step control remained reachable. The fixture now checks both states.
+
+All 30 browser commands following FunkyBeats were also run individually at `d7da0445`. Initially 23 passed, four failed and three were interrupted by the supplemental runner. R22 passed an unchanged retry. Follow-up checks verified quantized FX readouts and Undo, native Sound import readiness, and the BREAK preview's actual playing and ended events. The three interrupted suites later passed in the ordinary `7c59dad5` gate. Its supplemental predecessor's landscape run covered 131 states and 5,850 reachable control presentations with zero page errors. [Per-suite results](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/d7da-supplemental-browsers.json) · [Raw logs and focused replays](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/d7da-supplemental-browsers.zip)
+
+At `8bebd2b8` a supplemental checkout had hardlinked generated output. The build guard refused the 87 linked files. The run was interrupted, the generated copies were separated, and a clean rebuild passed. The subsequent `7c59dad5` gate used independent generated output.
+
 ## Full gate at bf9304fe
 
 This additional unfiltered gate completed with exit 1. It passed all 564 edge tests and all 26 FunkyBeats browser groups. The Workspace test applied an Attack-curve expectation to a kit summary glyph. The native Mix browser also required adjacent stored feedback values to display different percentages. Both test assumptions have since been corrected. The rebuilt `045d96dc` product passed the full Workspace and Remote suites; the real audio provider separately verified raw Delay Feedback values 52, 53 and 54, their 35%, 35% and 36% displays, and Undo readback at all three viewport sizes. [Complete output and revision-specific follow-ups](../../evidence/remote-qualification-944e99d8/follow-up-tests/README.md#full-gate-at-bf9304fe)
