@@ -214,8 +214,8 @@
     },
     {
       "path": "help/index.html",
-      "bytes": 2783,
-      "sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+      "bytes": 2818,
+      "sha256": "abc1a5f5e8cceee622a0d08a726b72d46117be2474d3fdd7637db34a10d029e8"
     },
     {
       "path": "index.html",
@@ -1051,6 +1051,21 @@
       "path": "remote/runtime-sound-state.mjs",
       "bytes": 5443,
       "sha256": "ecedfd285422c7c5eaa3872cbf07c76e38a65e431fde2b5f26249ac5b73dbff5"
+    },
+    {
+      "path": "help/ideas/inbox.mjs",
+      "bytes": 2169,
+      "sha256": "ed7b6d3c2d2b45eccf675baa7421497f5f3ab29702dc377c2598bdf071123902"
+    },
+    {
+      "path": "help/ideas/index.html",
+      "bytes": 1137,
+      "sha256": "f4cc01dde6b227bf71c72004ded013833dd226010f89f76e298534d0b0cc967f"
+    },
+    {
+      "path": "help/ideas/page.mjs",
+      "bytes": 1309,
+      "sha256": "b753b91ca07ccbd5273e30f4264a741713a5a9442db08f88fe6cc432bdeceeea"
     }
   ],
   "notClaimed": [
