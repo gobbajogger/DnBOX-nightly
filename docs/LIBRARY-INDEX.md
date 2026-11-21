@@ -2,6 +2,8 @@
 
 These are the exact inputs consumed for the 2026-11-18 Remote continuation and the persistent evidence checkpoint. Source and tests are versioned on `lane/remote`; this index does not substitute for exact-head gates. Check the Space checkpoint for the latest evidence version and delivery status: https://chatgpt.com/space/page_d663ea30f1b48191acd9762ff4732a33.
 
+The [PR #169 cloud qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063279830) indexes the November 21 build, gate logs, stock host and emulator results, four-size owner-page comparison and independent landscape and structural checks. Each result identifies the revision tested.
+
 | File / recorded version | Bytes | SHA256 | Library |
 |---|---:|---|---|
 | classic-remote-transfer.tar.gz | 12450151 | `d673a99b3707ce7bdcba518b9c07a4ba90dc21a831da208833d339d1329a2e71` | [Transfer](https://chatgpt.com/library?file_id=libfile_fde3_f-595f93dfe7008191bc2a8f71bc081c23_2021479872048191acbfdca1f870a539&account_id=personal) |

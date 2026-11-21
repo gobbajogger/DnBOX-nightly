@@ -177,11 +177,11 @@ function selectedLaneText(kind,n){
 function laneBar(n){const span=laneSpan(),kind=laneKind();if(kind==='chance')return n.chance?.endsWith('%')?Math.max(8,Number(n.chance.slice(0,-1))/100*span):Math.min(24,span);if(kind==='pitch')return Math.max(8,n.note/127*span);return Math.max(8,n.velocity/127*span);}
 function laneSpoken(n){const kind=laneKind();if(kind==='pan')return `${name(n.note)}, pan ${laneText('pan',n)}, local draft`;if(kind==='chance')return `${name(n.note)}, ${n.chance?(n.chance.endsWith('%')?'chance ':'condition ')+n.chance:'chance not set'}, local draft`;if(kind==='pitch')return `${name(n.note)}, pitch ${n.note}, local draft`;return `${name(n.note)}, velocity ${n.velocity}, local draft`;}
 function laneFigure(n){if(n.id!==selected)return '';const kind=laneKind();if(kind==='chance')return breakChanceMode()?selectedLaneText(kind,n):n.chance??'—';if(kind==='pitch')return name(n.note);return n.velocity;}
-function syncLaneLabel(){const kind=laneKind(),btn=$('lane-param');if(!btn)return;const lock=kind==='patternLock',word=btn.querySelector?.('.lane-word');
+function syncLaneLabel(focusedValue){const kind=laneKind(),btn=$('lane-param');if(!btn)return;const lock=kind==='patternLock',word=btn.querySelector?.('.lane-word');
  btn.dataset.patternLock=String(lock);
  const label=lock?currentLock().label.replace(' lock','').toUpperCase():laneWord(kind);
  if(word)word.textContent=label;else btn.textContent=label;
- const value=selectedLaneText(kind,current()),out=btn.querySelector?.('output');
+ const value=focusedValue??selectedLaneText(kind,current()),out=btn.querySelector?.('output');
  if(out)out.textContent=lock?(Number.isInteger(lockPattern())?value:'Pick pattern'):value;
  const dots=btn.querySelector?.('.lane-dots');if(dots)dots.innerHTML=availableLanes().map(k=>`<b class="${k===kind?'on':''}"></b>`).join('');btn.setAttribute('aria-label',laneWord(kind)+(value?' '+value:''));if($('velocity')?.setAttribute)$('velocity').setAttribute('aria-label',laneWord(kind));}
 const laneBases=new Map();function laneBase(n){return laneBases.get(n.id)??n.note;}
@@ -773,8 +773,13 @@ function bindStepLane(root,container,getNotes){
   scroll.scrollLeft=root.scrollLeft;
  }
  root.addEventListener('focusin',e=>{
-  const step=e.target.closest?.('[data-lane-step]')?.dataset.laneStep;
-  if(editor()===laneGesture || step===undefined)return;
+  const button=e.target.closest?.('[data-lane-step]');
+  if(!button)return;
+  if(editor()===laneGesture){
+   if(root===$('velocity'))syncLaneLabel(button.getAttribute('aria-valuetext'));
+   return;
+  }
+  const step=button.dataset.laneStep;
   activeLaneStep=Number(step);syncLaneLabel();
   for(const button of root.querySelectorAll('[data-lane-step]'))button.setAttribute('aria-pressed',String(button.dataset.laneStep===step));
  });

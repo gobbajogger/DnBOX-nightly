@@ -406,7 +406,17 @@ dialog::backdrop{background:#000a}
 #drum-lane{position:relative;min-width:0;overflow:hidden;touch-action:none}
 .step-slider,#other-view .step-slider{position:absolute;top:0;bottom:0;min-width:0;padding:0;border:0;border-right:1px solid var(--line);border-radius:0;background:none;touch-action:none;color:var(--fg);isolation:isolate}
 .step-slider-fill{position:absolute;left:3px;right:3px;bottom:12px;height:calc(var(--v) * (100% - 16px));background:var(--muted);opacity:.8;z-index:-1}
+.step-slider{container:lane-step / inline-size}
 .step-slider output{position:absolute;left:0;bottom:0;width:100%;overflow:hidden;font-size:9px;line-height:12px;text-align:center;white-space:nowrap}
+.step-compact{display:none}
+@container lane-step (max-width:32px){
+ .step-full{display:none}
+ .step-compact{display:inline}
+}
+/* At minimum zoom the fill remains visible; the lane header gives the value. */
+@container lane-step (max-width:16px){
+ .step-slider output{display:none}
+}
 .step-slider:disabled{opacity:.2;pointer-events:none}
 .step-slider[aria-pressed=true] .step-slider-fill{background:var(--accent);opacity:1}
 .step-slider:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}

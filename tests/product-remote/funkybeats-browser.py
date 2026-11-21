@@ -1018,7 +1018,10 @@ async def browser_cases():
     from bass_step_journey import exercise as bass_steps
     async def bass_step_fields(page):
         await bass_steps(page, draft_state, load_draft)
-    cases = (discard_draft, bass_step_fields, pattern_lock_points, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, kit_accent_across_voices, motion_context)
+    from step_label_journey import exercise as step_labels
+    async def step_label_widths(page):
+        await step_labels(page, draft_state, load_draft)
+    cases = (discard_draft, bass_step_fields, pattern_lock_points, step_label_widths, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, kit_accent_across_voices, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
