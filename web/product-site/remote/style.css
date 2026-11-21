@@ -183,6 +183,12 @@ dialog::backdrop{background:#000a}
 .launch-row button small{display:block;font-size:var(--fs)}
 .source-scene{position:relative;width:min(100%,480px);aspect-ratio:240/220}
 .source-scene>svg{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.source-scene[data-drum-editor]{container-type:inline-size}
+[data-drum-editor] svg [data-drum-control]>[role=text]:last-child{visibility:hidden}
+.drum-frame-values{position:absolute;inset:0;pointer-events:none}
+.drum-frame-values span{position:absolute;color:var(--fg);font:700 5.5cqw/1 var(--font);white-space:nowrap}
+.drum-frame-values .stacked-value{transform:translate(-50%,-84%)}
+.drum-frame-values .inline-value{transform:translate(-100%,-84%)}
 .source-scene .source-hit{position:absolute;min-width:0;min-height:0;padding:0;margin:0;display:grid;place-items:center;opacity:0;border:0;background:transparent;border-radius:7px;touch-action:none;font:700 var(--fs-sm)/1 var(--font);color:var(--fg)}
 .source-scene .source-hit[data-live=pan]{opacity:1;background:rgba(14,20,22,.72)}
 .source-scene .source-hit:focus-visible{opacity:1;outline:2px solid var(--accent)}

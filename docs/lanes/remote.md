@@ -8,6 +8,20 @@ The branch incorporates integration `583f622961fc9975fac746592ce6c483073c4170` a
 
 The full Local gate failed on the previous published head `90cf5429`. Its original log identifies missing integration ancestry and a Playwright launch failure. Fresh gate, landscape, structural, whole-page review and stock protocol results must identify the revision they exercised. R1, R5, R6 and R7 remain open. [Original gate](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7061106028) · [Candidate source and focused test results](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7061291872)
 
+### Current Remote qualification
+
+The independent review of [all 23 owner screens and the evidence appendix](../../evidence/remote-owner-pages-20261121/1f6d7602-review/owner-page-review.md) recorded 248 browser states, 11,951 mounted controls, zero body overflows and zero page errors on `1f6d7602`. All 108 built Remote files matched the published product manifest. The six comparison sheets and the control-level inventory accompany the review. The original page 15 drum grid has six visible voices and 16 steps. The current editable grid and adjacent Sound pane retain larger hit targets with inner scrolling.
+
+That review found archival values still painted over editable controls in the regular 909/808 Sound page and the Sound pane beside the step grid. The editable frames now present the firmware readouts and accessible button values at the corresponding source positions. The explicit Open original route retains its immutable artwork. A 909 kick Pitch edit changes +0.1 st to +0.4 st, and Undo restores +0.1 st. [Desktop pane](../../evidence/remote-owner-pages-20261121/drum-panel-units-1440.png) · [Landscape pane](../../evidence/remote-owner-pages-20261121/drum-panel-units-844.png)
+
+| Item | Qualification |
+|---|---|
+| C1, C2, C4, R5, R7 | The [head-specific test and review receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508) records the focused results, gate, ancestry, limits, landscape and structural checks as they complete. No unexplained deletions or firmware changes. |
+| R2, R3, R4 | The five FunkyBeats ports, gesture roll and thin per-step lanes retain their source and browser regressions. |
+| R1, C3 | OPEN. Page-by-page and control review is complete for the named inputs. Unresolved layout differences, static drum artwork/17:00 identities, original SuperJ6 tempo labels and cross-surface design acceptance are recorded in the review. |
+| R6 | OPEN on stock firmware. Stock TouchOSC passed the [32 outbound and two feedback note pairs](../../evidence/remote-owner-pages-20261121/1f6d7602-review/touchosc-current.json). The DNR2 C reference has edit, readback and guarded Undo. Stock firmware still lacks the handshake and catalogue. |
+| C5, C6 | OPEN. Integ owns any eventual merge of this draft PR. |
+
 ### Corrections under qualification
 
 At merge `e0a859cc` the pinned Chromium 151.0.7922.34 ran all 127 phone-landscape states. All 5,716 enabled control presentations were reachable, with zero page errors. The structural detector observed all nine expected fixture outcomes. The 1024×640 header SSIM was 0.905927401190831 and all 512 grid samples passed. The original SuperJ6 ZIP was unavailable for this run. Its partial and complete bank layouts used the repository fixture. [Landscape receipt](../../evidence/remote-owner-pages-20261121/e0a859cc-landscape.json)
@@ -19,7 +33,7 @@ At merge `e0a859cc` the pinned Chromium 151.0.7922.34 ran all 127 phone-landscap
 
 Owner-page review remains open. Page 15 shows six voices and sixteen steps beside the Sound panel in the owner PDF. Sixteen 40 px hit targets, 60 px of voice labels and a 280 px Sound panel need at least 980 px before spacing. At 844 px the editing grid scrolls. The 17:00 glyph crosswalk, the original SuperJ6 tempo division displays and stock protocol admission also remain open.
 
-## Remote acceptance, 21 November 2026
+## Earlier Remote qualification, 21 November 2026
 
 The active Remote branch is `lane/remote`. Consolidated advanced from `914d68e8ed50698ea77c9d18c221c404629b9332` to `b3868da0df1237d86d442cb9259262ee90a13dcb` during the 90cf5429 gate. Consolidated subsequently merged the owner-approved rule update at `56918d9e601c2eb6c6e9dd53b02ad06897bf2e3c`. [Gate at 90cf5429 and original log](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7061106028) · [Draft PR #169](https://github.com/gobbajogger/DnBOX-nightly/pull/169). Earlier results in this file identify the specific revision they describe.
 

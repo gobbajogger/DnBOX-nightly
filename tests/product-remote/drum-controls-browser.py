@@ -109,6 +109,128 @@ async def compact_bd_edits(page, screen):
  assert (await core.draft_state(page))['parameters']==edited['parameters']
 
 
+async def frame_values(scene, screen):
+ # All source labels and hit regions survive; only the archival numeric ink is hidden.
+ rows = await scene.evaluate("""e => [...e.querySelectorAll('.source-hit')].map(button => {
+  const id=button.dataset.param, identity=id.split('|')[1];
+  const source=e.querySelector('svg [data-source-control="'+identity+'"]');
+  const value=e.querySelector('.drum-frame-values [data-param-value="'+id+'"]');
+  const box=value.getBoundingClientRect(), group=source.querySelector('[data-glyph-semantic]').getBoundingClientRect();
+  const panel=e.getBoundingClientRect(), old=source.lastElementChild;
+  return {text:value.textContent, name:button.getAttribute('aria-label'), hidden:getComputedStyle(old).visibility==='hidden',
+    fits:box.width>0 && box.left>=panel.left && box.right<=panel.right && box.top>=panel.top && box.bottom<=panel.bottom,
+    clear:value.classList.contains('stacked-value')?box.top>=group.bottom-1:box.left>=group.right-1,
+    left:box.left,right:box.right,top:box.top};
+ })""")
+ assert len(rows)==len(screen['controls']),rows
+ for i,(row,control) in enumerate(zip(rows,screen['controls'])):
+  label=control['context']['name']
+  if label=='P.Dpth':label='Pitch depth'
+  expected=FIRMWARE_DEFAULTS[screen['path']][i]
+  assert row['text']==expected and row['name']==f'{label}, {expected}, local draft',(screen['path'],row)
+  assert row['hidden'] and row['fits'] and row['clear'],(screen['path'],row)
+  if i and abs(rows[i-1]['top']-row['top'])<1:
+   assert rows[i-1]['right']<=row['left'],(screen['path'],rows[i-1],row)
+
+
+async def widest_frame_values(scene):
+ # Exercise the CSS grid's 280px Sound-column minimum with the actual loaded font.
+ # Install the widest legal label in every field simultaneously before testing separation.
+ result=await scene.evaluate("""async panel => {
+  await document.fonts.ready;
+  const {drumDisplay}=await import('/remote/drum-format.mjs');
+  const saved=panel.style.maxWidth;
+  const fields=[...panel.querySelectorAll('.drum-frame-values [data-param-value]')];
+  const original=fields.map(field=>field.textContent);
+  let checked=0;
+  try{
+   panel.style.maxWidth='280px';
+   for(const field of fields){
+    const identity=field.dataset.paramValue.split('|')[1];
+    const labels=new Set();
+    for(let raw=0;raw<=127;raw++){
+     const value=drumDisplay(identity,raw);
+     if(value!==null){labels.add(value);checked++;}
+    }
+    let widest='',width=-1;
+    for(const label of labels){
+     field.textContent=label;
+     const next=field.getBoundingClientRect().width;
+     if(next>width){widest=label;width=next;}
+    }
+    field.textContent=widest;
+   }
+   const bounds=panel.getBoundingClientRect();
+   const boxes=fields.map(field=>field.getBoundingClientRect());
+   const failures=fields.flatMap((field,i)=>{
+    const box=boxes[i],id=field.dataset.paramValue.split('|')[1];
+    const glyph=panel.querySelector('svg [data-source-control="'+id+'"] [data-glyph-semantic]').getBoundingClientRect();
+    const separate=field.classList.contains('stacked-value')?box.top>=glyph.bottom-1:box.left>=glyph.right-1;
+    const fits=box.width>0 && box.left>=bounds.left && box.right<=bounds.right;
+    const overlap=boxes.slice(0,i).some(b=>b.left<box.right && box.left<b.right && b.top<box.bottom && box.top<b.bottom);
+    return separate && fits && !overlap?[]:[{id,label:field.textContent,separate,fits,overlap}];
+   });
+   return {width:bounds.width,checked,failures};
+  }finally{fields.forEach((f,i)=>f.textContent=original[i]);panel.style.maxWidth=saved;}
+ }""")
+ assert 0<result['width']<=280 and result['checked'] and not result['failures'],result
+ return result['checked']
+
+
+async def adjacent_kit_frames(page,screens,kit):
+ count=0
+ for voice in range(11):
+  await page.locator('#sound-voice').select_option(str(voice))
+  scene=page.locator('.drum-sound-panel [data-drum-editor]')
+  screen=screens[await scene.get_attribute('data-source-frame')]
+  assert screen['path'].endswith(f'/{kit[4:]}-voice-{voice:02d}.svg')
+  await frame_values(scene,screen)
+  count+=await widest_frame_values(scene)
+ return count
+
+
+async def frame_edits(page,kit,adjacent):
+ # Use a summary value on the 909 and an active control on the 808.
+ index,name,before,after=(4,'Pitch','+0.1st','+0.4st') if kit=='drum909' else (1,'Tone','33%','34%')
+ await page.locator(f'[data-engine="{kit}"]').click()
+ if adjacent:
+  await page.locator('.overflow summary').click()
+  await page.locator('[data-view="drums"]').click()
+  if await page.locator('.overflow').get_attribute('open') is not None:
+   await page.locator('.overflow summary').click()
+ else:
+  await page.locator('[data-view="sound"]').click()
+ await page.locator('#sound-voice').select_option('0')
+ scene=page.locator('.drum-sound-panel [data-drum-editor]' if adjacent else '[data-drum-editor]')
+ hit=scene.locator('.source-hit').nth(index)
+ output=scene.locator('[data-param-value]').nth(index)
+ async def check(text):
+  await expect(output).to_have_text(text)
+  await expect(hit).to_have_attribute('aria-label',f'{name}, {text}, local draft')
+  await expect(page.locator('#parameter-readout')).to_have_text(text)
+ await hit.press('ArrowRight')
+ await expect(hit).to_be_focused()
+ await check(after)
+ await page.locator('#undo').press('Enter')
+ await check(before)
+ await page.locator('#redo').press('Enter')
+ await check(after)
+ # A pointer gesture updates the readout during movement and restores it on Escape.
+ await hit.scroll_into_view_if_needed()
+ box=await hit.bounding_box()
+ x,y=box['x']+box['width']/2,box['y']+box['height']/2
+ await page.mouse.move(x,y)
+ await page.mouse.down()
+ await page.mouse.move(x,y-30,steps=3)
+ await expect(output).not_to_have_text(after)
+ await check(await output.text_content())
+ await page.keyboard.press('Escape')
+ await page.mouse.up()
+ await check(after)
+ await page.locator('#undo').press('Enter')
+ await check(before)
+
+
 async def cases(evidence=None):
  data=json.loads((ROOT/'web/product-site/remote/components.json').read_text())
  screens={s['path']:s for s in data['screens']};proof=[];samples=0;active_count=0
@@ -143,6 +265,10 @@ async def cases(evidence=None):
       assert path==voice_screen['path'],(path,voice_screen['path'])
       assert await scene.get_attribute('data-runtime-admitted')=='false'
       assert await scene.locator('svg').evaluate('(svg,body)=>svg.isEqualNode(new DOMParser().parseFromString(body,"image/svg+xml").documentElement)',screen['body_svg']),path
+      if width==844:
+       await expect(scene.locator('.drum-frame-values')).to_have_count(0)
+      else:
+       await frame_values(scene,screen)
       active=[c for c in screen['controls'] if c.get('markers',{}).get('visual-role')=='active glyph/value control']
       # Exercise real Tab even on the negative: an opaque blank hit is a separate defect.
       first=scene.locator('.source-hit').first
@@ -182,7 +308,10 @@ async def cases(evidence=None):
        assert all(before[k]==after[k] for k in before),(path,index,'Focus changed hit geometry')
        assert after['background']=='rgba(0, 0, 0, 0)' and after['focus'] and after['hit'],(path,index,after)
        expected='Pitch depth' if c['context']['name']=='P.Dpth' else c['context']['name']
-       assert (await hit.get_attribute('aria-label')).startswith(expected+', source example ')
+       if width==844:
+        assert (await hit.get_attribute('aria-label')).startswith(expected+', source example ')
+       else:
+        await expect(hit).to_have_attribute('aria-label',expected+', '+FIRMWARE_DEFAULTS[path][index]+', local draft')
        assert c['identity'] in (await hit.get_attribute('data-param'))
        samples+=1
       # Keep the original transparent-pan interaction sample on the final displayed voice.
@@ -196,7 +325,16 @@ async def cases(evidence=None):
        await expect(page.locator('[data-drum-sound-strip]')).to_be_visible()
       proof.append({'size':[width,height],'path':path,'controls':len(screen['controls']),'visibleNames':len(active),'labels':row,'compact':compact})
       print('DRUM_CONTROLS',width,height,path,'PASS',flush=True)
+    width_samples=0
+    for kit in ['drum909','drum808']:
+     await frame_edits(page,kit,adjacent=True)
+     if width==844:
+      width_samples+=await adjacent_kit_frames(page,screens,kit)
+     if width!=844:
+      await frame_edits(page,kit,adjacent=False)
     if width==844:
+     assert width_samples==9994,width_samples
+     print('DRUM_FRAME_WIDTH PASS',width_samples,'source occurrences at 280px',flush=True)
      await compact_bd_edits(page, screens['current-state-and-reference/909-voice-00.svg'])
     assert not errors,errors;assert await page.evaluate('midiCalls')==0
     assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
