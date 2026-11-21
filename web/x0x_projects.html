@@ -72,11 +72,62 @@
   .embedded #status{font-size:.88rem;color:var(--muted)}
   p{max-width:72ch}.embedded section[aria-labelledby="export-title"]{grid-column:1/-1}.embedded section[aria-labelledby="keyboard-title"]{grid-column:1/-1}.check{min-height:44px}button,a,input,select{touch-action:manipulation}
 details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--muted);cursor:pointer}details p{margin:8px 0 12px}
+
+  /* STANDALONE_BARLOW_FACES */
+  html:not(.embedded) {
+    color-scheme: dark;
+    --bg: #071014;
+    --card: #101a1f;
+    --ink: #dde7de;
+    --muted: #a9b9b8;
+    --line: #415052;
+    --accent: #ffb337;
+    --error: #ffaaa2;
+  }
+  html:not(.embedded) body { font-family: "DnBOX Barlow", sans-serif; font-weight: 500; }
+  html:not(.embedded) nav {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 18px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  html:not(.embedded) nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  html:not(.embedded) .home {
+    margin-inline-end: auto;
+    color: var(--ink);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  html:not(.embedded) h1, html:not(.embedded) h2, html:not(.embedded) h3 { font-weight: 700; }
+  html:not(.embedded) section { border-radius: 5px; }
+  html:not(.embedded) #find, html:not(.embedded) #connect {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1c1404;
+    font-weight: 700;
+  }
+  html:not(.embedded) button:disabled {
+    color: var(--muted);
+    background: #172227;
+    border-color: var(--line);
+    opacity: 1;
+  }
+  html:not(.embedded) input::file-selector-button { font: inherit; }
+  html:not(.embedded) summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 360px) {
+    html:not(.embedded) nav .home { flex-basis: 100%; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <nav aria-label="DnBOX"><a href="../install/#firmware">Install firmware</a><a href="../install/#samples">Import samples</a></nav>
+  <nav aria-label="DnBOX">
+    <a class="home" href="../install/index.html">DnBOX</a>
+    <a href="../install/index.html#firmware">Install firmware</a>
+    <a href="../install/index.html#samples">Import samples</a>
+  </nav>
   <h1>Songs &amp; projects</h1>
   <p class="small">Move your whole live project—song arrangement, patterns and sounds—to or from a file. Include samples for a portable copy.</p>
   <section aria-labelledby="connection-title">

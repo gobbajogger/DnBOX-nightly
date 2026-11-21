@@ -4,13 +4,13 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 48 of 104 references, including the four homepage views. The other 56 remain open. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 56 of 104 references, including the homepage and both downloadable tools. The other 48 remain open. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
 | I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
-| C1–C6 | C2 passed. The parent `fe293c51` full gate failed when the 1440×900 Builds capture exceeded 30 seconds. The browser stage passed. The successor awaits its full gate and final review. [Parent gate receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649). |
+| C1–C6 | C2 passed. The parent `fe293c51` full gate failed when the 1440×900 Builds capture exceeded 30 seconds. The browser stage passed. The homepage and capture repair landed at `b5806b98`. The downloadable-tool changes require a complete gate at the new head and final review. [Parent gate receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649). |
 
 This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
 
@@ -105,6 +105,14 @@ The Samples workspace uses the shared product navigation and the R22 palette. It
 Independent review scored the four disconnected views 10/10 at 1440×900, 1024×640, 844×390 and 390×844. All four full-page PNGs matched independent captures. Native viewport captures at 844 and 1024 px varied by up to eight pixels with a maximum channel difference of 1/255. The original comparator counted zero changed pixels. Browser checks at those widths and 240×240 verified keyboard navigation and skip-to-content. The installer’s Samples iframe and the standalone page retained their controls. This brings the accepted set to 44 of 104. [Reviewed reference images and raw browser results](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058207004).
 
 The [receipt form and installer reader](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058014195) agreed on all eight form IDs for both released packages. Across 90 manual fixtures, only successful matching reports counted. All 270 mismatched-model, checksum and cached-port controls returned zero successful installs.
+
+### Downloadable Samples and Projects
+
+Samples and Projects now bundle the two Barlow faces and their license in each downloadable page. File-mode navigation opens the actual HTML documents, so the two tools can run locally with networking disabled. The hosted installer continues to load and coordinate the embedded workspaces. The qualifying catalog fingerprint includes the font assets and the shared rendering code.
+
+Independent review scored all eight default views 10/10. Each full-page screenshot matched an independent file-mode render at 1440×900, 1024×640, 844×390 and 390×844. The 240 px checks also covered keyboard use and horizontal fit. Samples played the reference and encoded versions of a local WAV. Projects inspected a portable bundle and rejected its truncated counterpart. The device-write controls stayed disabled. The real hosted installer passed 680 admission checks. The embedded Samples and Projects controls and screenshots matched their earlier versions. [Independent reviews, exact file-mode replay and hosted installer checks](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058642226).
+
+The [complete gate at `fe293c51`](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649) finished with one failure. Capturing Build History at 1440×900 exceeded its 30-second deadline. The browser suite passed, including Native Sound and R22. Four homepage views were also approved in the intervening checkpoint. The remaining 48 proposals cover eight Remote states, the product installer, history and Remote Device pages, and the standalone installer. Remote and Web remain under review in [#169](https://github.com/gobbajogger/DnBOX-nightly/pull/169) and [#156](https://github.com/gobbajogger/DnBOX-nightly/pull/156).
 
 ## Earlier evidence
 

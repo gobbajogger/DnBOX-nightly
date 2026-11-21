@@ -8,6 +8,8 @@ import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import { renderInstaller } from './render-qualified-nightly.mjs';
 
+import { inlineStandaloneFonts } from './standalone-fonts.mjs';
+
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = path => readFileSync(join(root, path), 'utf8');
 const digest = text => createHash('sha256').update(text).digest('hex');
@@ -20,11 +22,11 @@ function expandLibrary(html, library) {
 }
 
 function renderBreaks() {
-  return expandLibrary(source('web/x0x_breaks.html'), stripModule(source('web/x0x_breaks.js')));
+  return expandLibrary(inlineStandaloneFonts(source('web/x0x_breaks.html')), stripModule(source('web/x0x_breaks.js')));
 }
 
 function renderProjects() {
-  const html = source('web/x0x_projects.html');
+  const html = inlineStandaloneFonts(source('web/x0x_projects.html'));
   const marker = /^import .* from "\.\/x0x_projects.js";$/gm;
   if ((html.match(marker) || []).length !== 1) throw new Error('expected exactly one project import');
   return expandLibrary(html.replace(marker, '/*LIB*/'),

@@ -229,6 +229,7 @@ def sample_navigation_checks(page, tag, failures):
             visible(link) && ['../', '../index.html'].includes(link.getAttribute('href')));
         return {
             destinations: links.filter(visible).map(link => link.textContent.trim()),
+            targets: links.filter(visible).map(link => link.getAttribute('href')),
             homeLinks: home.length,
             current: links.find(link => link.getAttribute('aria-current') === 'page')?.textContent,
             background: getComputedStyle(document.body).backgroundColor,
@@ -238,6 +239,8 @@ def sample_navigation_checks(page, tag, failures):
     }""")
     wanted = {
         'destinations': ['Sounds', 'Remote', 'Samples', 'Projects', 'Presets', 'Manual', 'History', 'Install nightly'],
+        'targets': ['../index.html#sounds', '../remote/', '../breaks/', '../projects/', '../presets/',
+                    '../manual/', '../builds/', '../install/'],
         'homeLinks': 1, 'current': 'Samples', 'background': 'rgb(7, 16, 20)',
         'primary': 'rgb(255, 179, 55)', 'fits': True
     }

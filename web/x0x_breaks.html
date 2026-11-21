@@ -88,11 +88,30 @@
   .embedded main{padding:0 0 16px;background:#0b0e10}.embedded{--bg:#0b0e10}p{max-width:76ch}h1{font-size:24px;margin-bottom:8px}.bar{padding:10px 0}.sample-warning{font-size:14px;color:var(--dim);margin:12px 0 0}.sample-help>summary{min-height:44px;align-content:center;color:var(--dim)}label{min-height:44px}button,a,input,summary{touch-action:manipulation}
   .embedded p{font-weight:400}.embedded main>p:last-child{display:none}
 .empty{padding:14px 0}.embedded .empty{padding:14px 0}
+
+  /* STANDALONE_BARLOW_FACES */
+  html:not(.embedded) {
+    --bg: #071014;
+    --fg: #dde7de;
+    --dim: #a9b9b8;
+    --rule: #415052;
+    --wave: #a9b9b8;
+    --accent: #ffb337;
+  }
+  html:not(.embedded) body { font-family: "DnBOX Barlow", sans-serif; }
+  html:not(.embedded) h1 { font-weight: 700; }
+  html:not(.embedded) #list,
+  html:not(.embedded) button.quiet,
+  html:not(.embedded) select { background: #101a1f; }
+  html:not(.embedded) button:not(.quiet):not(.link) { color: #1c1404; }
+  html:not(.embedded) label[for="grit"] { flex-wrap: wrap; }
+  html:not(.embedded) input::file-selector-button { font: inherit; }
+  html:not(.embedded) summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 </style>
 </head>
 <body>
 <main>
-  <a class="home" href="../">DnBOX</a>
+  <a class="home" href="../install/index.html">DnBOX</a>
   <h1>Import samples</h1>
   <p>Connect your keyboard by USB with DnBOX running. Use Chrome or Edge to add or replace loops.</p>
 
