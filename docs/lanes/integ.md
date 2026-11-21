@@ -1,3 +1,21 @@
+# Integration baseline
+
+Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b9332`. Work continues on `lane/integ`. GitHub rejected creation of `lane/integ-baseline` (HTTP 422). The active branch-name ruleset reserves `lane/integ` for this lane. No other open integration PR existed when the work started.
+
+| Item | Evidence at this checkpoint |
+|---|---|
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The coverage of the stored visual references is being checked separately. |
+| I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
+| I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
+| I4–I5 | See the compact-program sanitizer and five-BREAK restore records below. Final composition qualification is open. |
+| I6 | Reconcile the owner-request rows, generated status views and the feature-list voting implementation. |
+| I7 | Both canonical installer URLs return 200. The two old Pages paths return 404. Cleanup is deferred until the lanes merge. |
+| C1–C6 | Candidate gate and independent review remain outstanding. The draft is ineligible for merge. |
+
+This checkpoint changes documentation only. Stock firmware source, build configuration and memory layout have no delta from the base. Exact-candidate gate and memory measurements are outstanding.
+
+## Earlier evidence
+
 Merged #155 as fbb9c46b0f435b1ac09f912f49104a79de3b501b; five-sample source/export and aliases landed, live publication remains separately qualified.
 
 # Current integ item1 — 2026-11-17 19:00 VLAT
