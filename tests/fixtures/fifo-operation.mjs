@@ -25,6 +25,7 @@ export function runFifoOperation(prepare, operation, {operationMs, startupMs=150
   const start = performance.now();
   const child = spawn(process.execPath, ['--input-type=module','-e',code], {stdio:['ignore','ignore','pipe','ipc']});
   let readyAt=null, operationAt=null, endedAt=null, result=null, timedOut=null, stderr='', timer;
+  let childError=null;
   function watch(phase, ms) {
    clearTimeout(timer);
    timer=setTimeout(() => { timedOut=phase; child.kill('SIGKILL'); }, ms);
@@ -46,9 +47,14 @@ export function runFifoOperation(prepare, operation, {operationMs, startupMs=150
     watch('shutdown', startupMs);
    }
   });
-  child.once('error', error => { clearTimeout(timer); reject(error); });
+  child.on('error', error => {
+   if (childError) return;
+   childError=error;
+   if (child.pid) child.kill('SIGKILL');
+  });
   child.once('close', (code,signal) => {
    clearTimeout(timer);
+   if (childError) { reject(childError); return; }
    resolve({code,signal,result,timedOut,stderr,ready:readyAt!==null,operationStarted:operationAt!==null,
     startupElapsedMs:readyAt===null?null:readyAt-start,
     operationElapsedMs:operationAt===null?null:(endedAt??performance.now())-operationAt});
