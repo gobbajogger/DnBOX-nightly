@@ -5,6 +5,7 @@ import io
 import re
 from unittest.mock import Mock, patch
 import full_page_capture as capture
+from manual_capture import BAND_ROWS
 from pathlib import Path
 import tempfile
 import unittest
@@ -41,7 +42,7 @@ class GateContract(unittest.TestCase):
         (gate.SNAP / 'screen.png').write_bytes(self.image)
 
     def manual_page(self, *, rest=None, image=None):
-        state = dict(width=4, height=1031, viewport=[3, 3, 1, 0, 0], fonts='loaded', images=[])
+        state = dict(width=4, height=BAND_ROWS + 7, viewport=[3, 3, 1, 0, 0], fonts='loaded', images=[])
         page = Mock()
         page.wait_for_function.side_effect = [
             Mock(json_value=Mock(return_value=json.dumps(value)))
@@ -65,26 +66,35 @@ class GateContract(unittest.TestCase):
         return page
 
     def test_manual_joins_all_native_pixels_including_overhang_seam_and_last_row(self):
-        page = self.manual_page(rest={'height': 1035})
+        page = self.manual_page(rest={'height': BAND_ROWS + 11})
         result = gate.capture_full_page(page, 'manual/original/index.html', 'manual')
         with Image.open(io.BytesIO(result)) as output:
-            self.assertEqual((output.format, output.mode, output.size), ('PNG', 'RGB', (4, 1031)))
-            self.assertEqual(output.tobytes(), bytes(c for y in range(1031) for x in range(4)
+            self.assertEqual((output.format, output.mode, output.size), ('PNG', 'RGB', (4, BAND_ROWS + 7)))
+            self.assertEqual(output.tobytes(), bytes(c for y in range(BAND_ROWS + 7) for x in range(4)
                 for c in (x, y % 251, y // 251)))
         self.assertEqual([call.kwargs['clip'] for call in page.screenshot.call_args_list],
-                         [{'x': 0, 'y': 0, 'width': 4, 'height': 1024},
-                          {'x': 0, 'y': 1024, 'width': 4, 'height': 7}])
+                         [{'x': 0, 'y': 0, 'width': 4, 'height': BAND_ROWS},
+                          {'x': 0, 'y': BAND_ROWS, 'width': 4, 'height': 7}])
         for call in page.wait_for_function.call_args_list:
             self.assertGreater(call.kwargs['timeout'], 0)
             self.assertLessEqual(call.kwargs['timeout'], 30_000)
 
+    def test_manual_caps_native_texture_area_using_the_overhanging_document_width(self):
+        page = self.manual_page()
+        with patch('manual_capture.MAX_BAND_PIXELS', 4 * 700):
+            gate.capture_full_page(page, 'manual/original/index.html', 'manual')
+        bands = [call.kwargs['clip'] for call in page.screenshot.call_args_list]
+        self.assertEqual(bands[0], {'x': 0, 'y': 0, 'width': 4, 'height': 700})
+        self.assertTrue(all(band['width'] * band['height'] <= 4 * 700 for band in bands))
+        self.assertEqual(bands[-1]['y'] + bands[-1]['height'], BAND_ROWS + 7)
+
     def test_manual_native_band_size_crc_truncation_and_format_fail_closed(self):
         data = io.BytesIO()
-        Image.new('RGB', (4, 1024)).save(data, format='PNG')
+        Image.new('RGB', (4, BAND_ROWS)).save(data, format='PNG')
         damaged = bytearray(data.getvalue())
         damaged[damaged.index(b'IDAT') + 4] ^= 1
         wrong = io.BytesIO()
-        Image.new('RGB', (4, 1024)).save(wrong, format='JPEG')
+        Image.new('RGB', (4, BAND_ROWS)).save(wrong, format='JPEG')
         for bad in [wrong.getvalue(), self.image, bytes(damaged), data.getvalue()[:-12]]:
             with self.subTest(length=len(bad)):
                 page = self.manual_page(image=bad)

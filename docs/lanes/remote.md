@@ -2,6 +2,12 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Original-manual capture and f868dea6 gate
+
+Two [unfiltered runs at `f868dea6`](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7067302541) exited 1. The first exhausted the shared disk during catalog and browser setup. After a clean build of 304 files, the second passed all 564 edge tests, 126 workspace tests, 241 Remote/platform tests, 26 FunkyBeats journeys, native firmware Apply/Undo and native Mix. The full visual run timed out taking a band of the original desktop manual. Later the browser phase exhausted disk while creating Chromium’s temporary artifacts directory. [First run](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/f868-first-run.json.gz) · [Second run](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/f868-second-run.json.gz)
+
+The manual capture now asks Chromium for fewer lossless bands, bounded by pixel area, and compresses the unmodified scanlines in batches. The full-document deadline remains 30 seconds. Independent Chromium processes compared all 92,792,052 current RGB pixels with native captures at four sizes, including every band join and last row. The historical comparison covered all 95,885,312 pixels, including the portrait overhang. Current captures took 2.86–6.42 seconds. Their peak process-tree memory was 21.4–33.7% below the corresponding one-shot native capture. At desktop the larger bands used 11.6% more peak process-tree memory than the prior bounded implementation. [Timing, memory and pixel comparisons](../../evidence/remote-owner-pages-20261121/manual-bounded-capture-comparison.json) · [Raw proof and test output](../../evidence/remote-owner-pages-20261121/manual-bounded-capture-proof.tar.gz)
+
 ## Current Remote qualification
 
 The sample import, drum Sound and Delay type changes are on the same branch as the consolidated `583f6229` base. The requested `90cf5429` failed its base ancestry check and could not launch the required Chromium. The new tree contains both histories and uses Playwright’s pinned Chromium 151 in its normal sandbox. The [PR qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508) identifies the published head and its actual Local gate outcome.

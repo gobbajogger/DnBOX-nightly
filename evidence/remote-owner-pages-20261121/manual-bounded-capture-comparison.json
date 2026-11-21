@@ -1,0 +1,413 @@
+{
+  "source": "f868dea604256d29fef6024326b0c208cd86f3fe",
+  "deadlineSeconds": 30,
+  "sampling": "Python, Playwright driver and all Chromium descendants. Peak is the maximum summed PSS among samples. Nominal 200 ms wait between reads; process-tree sampling is not an allocator high-water mark.",
+  "successes": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "extent": [
+        1440,
+        23921
+      ],
+      "captures": {
+        "native": {
+          "wallSeconds": 4.6107,
+          "peakTreePssKiB": 789454,
+          "peakChromiumPssKiB": 664061,
+          "peakSingleRendererRssKiB": 245324,
+          "peakSingleGpuRssKiB": 508612,
+          "nativeCalls": 1,
+          "nativeCaptureSeconds": 4.6105,
+          "samples": 12,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 4458357
+        },
+        "candidate": {
+          "wallSeconds": 5.6215,
+          "peakTreePssKiB": 523723,
+          "peakChromiumPssKiB": 340050,
+          "peakSingleRendererRssKiB": 198508,
+          "peakSingleGpuRssKiB": 143012,
+          "nativeCalls": 6,
+          "nativeCaptureSeconds": 4.608,
+          "samples": 24,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3877864
+        },
+        "baseline": {
+          "wallSeconds": 14.8982,
+          "peakTreePssKiB": 469303,
+          "peakChromiumPssKiB": 291888,
+          "peakSingleRendererRssKiB": 189304,
+          "peakSingleGpuRssKiB": 104932,
+          "nativeCalls": 24,
+          "nativeCaptureSeconds": 10.7796,
+          "samples": 61,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3705915
+        },
+        "repeat-baseline": {
+          "wallSeconds": 10.8031,
+          "peakTreePssKiB": 462680,
+          "peakChromiumPssKiB": 286640,
+          "peakSingleRendererRssKiB": 187556,
+          "peakSingleGpuRssKiB": 98448,
+          "nativeCalls": 24,
+          "nativeCaptureSeconds": 9.0774,
+          "samples": 46,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3705915
+        },
+        "repeat-candidate": {
+          "wallSeconds": 8.5383,
+          "peakTreePssKiB": 516303,
+          "peakChromiumPssKiB": 325632,
+          "peakSingleRendererRssKiB": 172892,
+          "peakSingleGpuRssKiB": 167892,
+          "nativeCalls": 6,
+          "nativeCaptureSeconds": 6.6993,
+          "samples": 37,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3877864
+        }
+      },
+      "nativePixels": 34446240,
+      "changedPixels": 0,
+      "boundaryDifferences": {
+        "4096": 0,
+        "8192": 0,
+        "12288": 0,
+        "16384": 0,
+        "20480": 0
+      },
+      "finalRowDifferences": 0,
+      "overhangPixels": 0,
+      "overhangDifferences": 0,
+      "rgbSha256": "dbd344c7e836c9113619ecf853f1d586a021da44f1c299191e967305d4866693",
+      "historicalRgbSha256": "dbd344c7e836c9113619ecf853f1d586a021da44f1c299191e967305d4866693",
+      "historicalBoundedPssKiB": 471265,
+      "historicalBoundedSeconds": 5.8,
+      "originalNativePssKiB": 749706,
+      "treePssPercentChangeVsNative": -33.66,
+      "treePssPercentChangeVsPriorBounded": 11.6,
+      "wallPercentChangeVsPriorBounded": -62.27,
+      "minimumMeasuredDeadlineMargin": 21.4617
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "extent": [
+        1024,
+        23618
+      ],
+      "captures": {
+        "native": {
+          "wallSeconds": 3.5094,
+          "peakTreePssKiB": 672077,
+          "peakChromiumPssKiB": 545781,
+          "peakSingleRendererRssKiB": 224144,
+          "peakSingleGpuRssKiB": 398160,
+          "nativeCalls": 1,
+          "nativeCaptureSeconds": 3.5094,
+          "samples": 15,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 4275763
+        },
+        "candidate": {
+          "wallSeconds": 6.4243,
+          "peakTreePssKiB": 490212,
+          "peakChromiumPssKiB": 300809,
+          "peakSingleRendererRssKiB": 177708,
+          "peakSingleGpuRssKiB": 120088,
+          "nativeCalls": 6,
+          "nativeCaptureSeconds": 5.6325,
+          "samples": 27,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3550557
+        },
+        "baseline": {
+          "wallSeconds": 7.1748,
+          "peakTreePssKiB": 437952,
+          "peakChromiumPssKiB": 270766,
+          "peakSingleRendererRssKiB": 184740,
+          "peakSingleGpuRssKiB": 87756,
+          "nativeCalls": 24,
+          "nativeCaptureSeconds": 6.4784,
+          "samples": 30,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3396359
+        }
+      },
+      "nativePixels": 24184832,
+      "changedPixels": 0,
+      "boundaryDifferences": {
+        "4096": 0,
+        "8192": 0,
+        "12288": 0,
+        "16384": 0,
+        "20480": 0
+      },
+      "finalRowDifferences": 0,
+      "overhangPixels": 0,
+      "overhangDifferences": 0,
+      "rgbSha256": "35b3903b1779125feb2a6dd0ba1d35a014584a3e367b051c9eab6d9439ea3e74",
+      "historicalRgbSha256": "35b3903b1779125feb2a6dd0ba1d35a014584a3e367b051c9eab6d9439ea3e74",
+      "historicalBoundedPssKiB": 424944,
+      "historicalBoundedSeconds": 4.232,
+      "originalNativePssKiB": null,
+      "treePssPercentChangeVsNative": -27.06,
+      "treePssPercentChangeVsPriorBounded": 11.93,
+      "wallPercentChangeVsPriorBounded": -10.46,
+      "minimumMeasuredDeadlineMargin": 23.5757
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "extent": [
+        844,
+        23755
+      ],
+      "captures": {
+        "native": {
+          "wallSeconds": 4.8575,
+          "peakTreePssKiB": 654941,
+          "peakChromiumPssKiB": 528370,
+          "peakSingleRendererRssKiB": 216612,
+          "peakSingleGpuRssKiB": 379516,
+          "nativeCalls": 1,
+          "nativeCaptureSeconds": 4.8574,
+          "samples": 19,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 4199057
+        },
+        "candidate": {
+          "wallSeconds": 4.0048,
+          "peakTreePssKiB": 473847,
+          "peakChromiumPssKiB": 299252,
+          "peakSingleRendererRssKiB": 189532,
+          "peakSingleGpuRssKiB": 111780,
+          "nativeCalls": 6,
+          "nativeCaptureSeconds": 3.3772,
+          "samples": 18,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3432904
+        },
+        "baseline": {
+          "wallSeconds": 12.235,
+          "peakTreePssKiB": 432382,
+          "peakChromiumPssKiB": 270687,
+          "peakSingleRendererRssKiB": 183740,
+          "peakSingleGpuRssKiB": 78560,
+          "nativeCalls": 24,
+          "nativeCaptureSeconds": 11.6263,
+          "samples": 55,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3283527
+        }
+      },
+      "nativePixels": 20049220,
+      "changedPixels": 0,
+      "boundaryDifferences": {
+        "4096": 0,
+        "8192": 0,
+        "12288": 0,
+        "16384": 0,
+        "20480": 0
+      },
+      "finalRowDifferences": 0,
+      "overhangPixels": 0,
+      "overhangDifferences": 0,
+      "rgbSha256": "341c0c5ff1762dd4d3a1526b4fce8d8e9add71862171ea612885c6ce04c4d6f2",
+      "historicalRgbSha256": "341c0c5ff1762dd4d3a1526b4fce8d8e9add71862171ea612885c6ce04c4d6f2",
+      "historicalBoundedPssKiB": 456251,
+      "historicalBoundedSeconds": 4.165,
+      "originalNativePssKiB": null,
+      "treePssPercentChangeVsNative": -27.65,
+      "treePssPercentChangeVsPriorBounded": 9.59,
+      "wallPercentChangeVsPriorBounded": -67.27,
+      "minimumMeasuredDeadlineMargin": 25.9952
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "extent": [
+        390,
+        36184
+      ],
+      "captures": {
+        "native": {
+          "wallSeconds": 2.2255,
+          "peakTreePssKiB": 544202,
+          "peakChromiumPssKiB": 416304,
+          "peakSingleRendererRssKiB": 200764,
+          "peakSingleGpuRssKiB": 267032,
+          "nativeCalls": 1,
+          "nativeCaptureSeconds": 2.2255,
+          "samples": 10,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 4055613
+        },
+        "candidate": {
+          "wallSeconds": 2.8641,
+          "peakTreePssKiB": 427961,
+          "peakChromiumPssKiB": 261992,
+          "peakSingleRendererRssKiB": 169332,
+          "peakSingleGpuRssKiB": 88684,
+          "nativeCalls": 9,
+          "nativeCaptureSeconds": 2.3688,
+          "samples": 13,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3242946
+        },
+        "baseline": {
+          "wallSeconds": 3.913,
+          "peakTreePssKiB": 410984,
+          "peakChromiumPssKiB": 248266,
+          "peakSingleRendererRssKiB": 163952,
+          "peakSingleGpuRssKiB": 68736,
+          "nativeCalls": 36,
+          "nativeCaptureSeconds": 3.3515,
+          "samples": 18,
+          "pssReadDenied": 0,
+          "kernelOomKillDelta": 0,
+          "pngBytes": 3027826
+        }
+      },
+      "nativePixels": 14111760,
+      "changedPixels": 0,
+      "boundaryDifferences": {
+        "4096": 0,
+        "8192": 0,
+        "12288": 0,
+        "16384": 0,
+        "20480": 0,
+        "24576": 0,
+        "28672": 0,
+        "32768": 0
+      },
+      "finalRowDifferences": 0,
+      "overhangPixels": 0,
+      "overhangDifferences": 0,
+      "rgbSha256": "451a05a53d99dc02293ff0eab86b631944580bd1fd848bdf60c36ef0e5f6a43f",
+      "historicalRgbSha256": "8469ebf2b37499f97e7af5f0ffa9751eeccec21e0dea3a1bafe8bb98a4dc7fd0",
+      "historicalBoundedPssKiB": 444574,
+      "historicalBoundedSeconds": 3.147,
+      "originalNativePssKiB": null,
+      "treePssPercentChangeVsNative": -21.36,
+      "treePssPercentChangeVsPriorBounded": 4.13,
+      "wallPercentChangeVsPriorBounded": -26.81,
+      "minimumMeasuredDeadlineMargin": 27.1359
+    }
+  ],
+  "preCaptureOrRuntimeFailures": {
+    "main-candidate-1024x640.json": {
+      "captureStarted": false,
+      "error": "playwright._impl._errors.Error: BrowserType.launch: ENOSPC: no space left on device, mkdtemp '/workspace/scratch/79e1b4b1ca33/ownerpdf/manual-f868/tmp/playwright-artifacts-9P0jZS'"
+    },
+    "main-native-1440x900.json": {
+      "captureStarted": false,
+      "error": "playwright._impl._errors.Error: BrowserType.launch: ENOSPC: no space left on device, mkdtemp '/workspace/scratch/79e1b4b1ca33/ownerpdf/manual-f868/tmp/playwright-artifacts-5uanip'"
+    }
+  },
+  "totalCandidatePixels": 92792052,
+  "totalDifferentPixels": 0,
+  "verifiedViewportCount": 4,
+  "historicalExtentCoverage": {
+    "historicalPixels": 95885312,
+    "changed": 0,
+    "currentRgbEqualOnThreeViewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        1024,
+        640
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "portrait": {
+      "viewport": [
+        390,
+        844
+      ],
+      "dimensions": [
+        476,
+        36145
+      ],
+      "pixels": 17205020,
+      "changed": 0,
+      "overhangColumns": 86,
+      "overhangPixels": 3108470,
+      "overhangDifferent": 0,
+      "seams": {
+        "4096": 0,
+        "8192": 0,
+        "12288": 0,
+        "16384": 0,
+        "20480": 0,
+        "24576": 0,
+        "28672": 0,
+        "32768": 0
+      },
+      "lastRowDifferent": 0,
+      "expectedRGB": "8469ebf2b37499f97e7af5f0ffa9751eeccec21e0dea3a1bafe8bb98a4dc7fd0",
+      "actualRGB": "8469ebf2b37499f97e7af5f0ffa9751eeccec21e0dea3a1bafe8bb98a4dc7fd0"
+    },
+    "originalCss": "3a7f051ee13f5a5619b6e1f07cf97e68b99ea083",
+    "currentCss": "74b90cf9b79eb85b6b4fe52d60c7c0d4c00970dd",
+    "historicalPortraitRuns": {
+      "reference": {
+        "wallSeconds": 6.6613,
+        "peakTreePssKiB": 607290,
+        "peakChromiumPssKiB": 479790,
+        "peakSingleRendererRssKiB": 197460,
+        "peakSingleGpuRssKiB": 333084,
+        "nativeCalls": 1,
+        "nativeCaptureSeconds": 6.6613,
+        "samples": 26,
+        "pssReadDenied": 0,
+        "kernelOomKillDelta": 0,
+        "pngBytes": 4556053
+      },
+      "candidate": {
+        "wallSeconds": 7.2401,
+        "peakTreePssKiB": 415863,
+        "peakChromiumPssKiB": 259811,
+        "peakSingleRendererRssKiB": 165972,
+        "peakSingleGpuRssKiB": 93536,
+        "nativeCalls": 9,
+        "nativeCaptureSeconds": 6.611,
+        "samples": 28,
+        "pssReadDenied": 0,
+        "kernelOomKillDelta": 0,
+        "pngBytes": 3527794
+      }
+    }
+  }
+}

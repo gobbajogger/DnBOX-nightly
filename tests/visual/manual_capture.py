@@ -6,7 +6,13 @@ import struct
 import time
 import zlib
 
+import numpy as np
 from PIL import Image
+
+
+BAND_ROWS = 4096
+MAX_BAND_PIXELS = 6 * 1024 * 1024
+PACK_ROWS = 128
 
 
 def manual_state(page, timeout):
@@ -52,23 +58,29 @@ def capture_original_manual(page):
         output.write(struct.pack('>I', zlib.crc32(payload, zlib.crc32(kind))))
 
     write_chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0))
-    pixels = zlib.compressobj(level=3)
-    for top in range(0, height, 1024):
-        rows = min(1024, height - top)
-        png = page.screenshot(full_page=True, clip={'x': 0, 'y': top, 'width': width, 'height': rows},
-                              timeout=remaining_ms())
+    pixels = zlib.compressobj(level=1)
+    # Bound the native surface area even when the document overhangs its viewport.
+    band_rows = max(1, min(BAND_ROWS, MAX_BAND_PIXELS // width))
+    scanlines = np.empty((min(PACK_ROWS, height), 1 + 3 * width), dtype=np.uint8)
+    scanlines[:, 0] = 0  # PNG filter byte preceding every unmodified RGB row.
+    def append_band(png, top, rows):
         with Image.open(io.BytesIO(png)) as image:
             if image.format != 'PNG' or image.mode != 'RGB' or image.size != (width, rows):
                 raise ValueError(f"Unexpected native original manual band at y={top}")
             image.verify()
         with Image.open(io.BytesIO(png)) as image:
-            # PNG filter zero for each complete scanline keeps memory bounded to one band.
-            rgb = memoryview(image.tobytes())
-            stride = width * 3
-            for start in range(0, len(rgb), stride):
-                data = pixels.compress(b'\x00' + rgb[start:start + stride].tobytes())
+            for first in range(0, rows, PACK_ROWS):
+                last = min(first + PACK_ROWS, rows)
+                batch = scanlines[:last - first]
+                batch[:, 1:] = np.asarray(image.crop((0, first, width, last))).reshape(len(batch), -1)
+                data = pixels.compress(batch)
                 if data:
                     write_chunk(b'IDAT', data)
+    for top in range(0, height, band_rows):
+        rows = min(band_rows, height - top)
+        png = page.screenshot(full_page=True, clip={'x': 0, 'y': top, 'width': width, 'height': rows},
+                              timeout=remaining_ms())
+        append_band(png, top, rows)
     write_chunk(b'IDAT', pixels.flush())
     write_chunk(b'IEND', b'')
     rest = manual_state(page, remaining_ms())
