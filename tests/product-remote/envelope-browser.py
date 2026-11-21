@@ -15,6 +15,30 @@ def server(site):
  thread=threading.Thread(target=srv.serve_forever,daemon=True);thread.start()
  try:yield f'http://127.0.0.1:{srv.server_port}'
  finally:srv.shutdown();srv.server_close();thread.join()
+# The observer may replace or clear its section on any worklet packet or freshness tick.
+# Sample the DOM and the actual worklet packet within one browser task.
+OBSERVED_GRAPH = """([engine, slot, role, after, held]) => {
+ const host = document.querySelector('#native-envelopes');
+ const section = host?.querySelector(`[data-observed-engine="${engine}"][data-observed-slot="${slot}"][data-observed-role="${role}"]`);
+ const graph = section?.querySelector('svg.envelope-graph');
+ const path = graph?.querySelector('path');
+ if (!host || host.hidden || !graph || getComputedStyle(graph).visibility !== 'visible') return false;
+ const bounds = graph.getBoundingClientRect();
+ if (!bounds.width || !bounds.height || !(path?.getTotalLength() > 0)) return false;
+ const level = section.querySelector('[data-observed-level]')?.dataset.observedLevel;
+ const packet = nativePackets.at(-1);
+ if (!packet || packet.sequence <= after) return false;
+ const voice = packet.voices.find(v => v.available && v.engine === engine && v.slot === slot && v.role === role);
+ const raw = voice?.snapshot.level ?? voice?.snapshot.raw_level;
+ if (!Number.isFinite(raw) || String(raw) !== level || (held && raw <= 0)) return false;
+ return {sequence: packet.sequence, engine, slot, role, level: raw};
+}"""
+
+async def observed_graph(page, engine, slot, role, after=0, held=False):
+ await expect(page.locator('#native-envelopes')).to_be_visible()
+ observation = await page.wait_for_function(OBSERVED_GRAPH, arg=[engine, slot, role, after, held])
+ return await observation.json_value()
+
 async def cases(origin,meta):
  async with async_playwright() as pw:
   browser=await pw.chromium.launch(chromium_sandbox=True)
@@ -46,9 +70,7 @@ async def cases(origin,meta):
       await page.locator('[data-engine="'+('chicago' if voice['slot']==0 else 'miami')+'"]').click();await page.locator('[data-view="sound"]').click()
       if voice['engine']=='JUNO':await page.locator('[data-sound-source="emulator"]').click()
       else:await page.locator('#sound-bank').select_option(voice['engine'])
-     await expect(page.locator('#native-envelopes')).to_be_visible()
-     await page.wait_for_function("([engine,slot,role])=>{const n=document.querySelector('[data-observed-role=\"'+role+'\"] [data-observed-level]');return n&&nativePackets.slice(-10).some(p=>p.voices.some(v=>v.engine===engine&&v.slot===slot&&v.role===role&&v.available&&String(v.snapshot.level??v.snapshot.raw_level)===n.dataset.observedLevel))}",arg=[voice['engine'],voice['slot'],voice['role']])
-     assert await page.locator('#native-envelopes .envelope-graph').count()>0
+     await observed_graph(page, voice['engine'], voice['slot'], voice['role'])
      assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
      out=ROOT/'test-results/native-envelopes';out.mkdir(parents=True,exist_ok=True);await page.screenshot(path=str(out/f'{w}x{h}.png'))
      # Drive the real native panel, not invented observer packets. Boot is 909/V_SEQ.
@@ -80,9 +102,16 @@ async def cases(origin,meta):
       else:
        await picker.select_option(engine)
        await expect(page.locator('#part-title')).to_have_text(engine+' / P01')
-      await expect(page.locator('#native-envelopes')).to_be_visible()
-      await page.wait_for_function("([engine,role])=>{const n=document.querySelector('[data-observed-role=\"'+role+'\"] [data-observed-level]');return n&&nativePackets.slice(-10).some(p=>p.voices.some(v=>v.engine===engine&&v.slot===1&&v.role===role&&v.available&&String(v.snapshot.level)===n.dataset.observedLevel))}",arg=[engine,role])
-      assert await page.locator('#native-envelopes .envelope-graph').count()>0
+      observed = await observed_graph(page, engine, 1, role, after=start, held=True)
+      if w == 1440 and engine == 'CHICAGO':
+       await page.evaluate('contexts.at(-1).suspend()')
+       await expect(page.locator('#native-envelopes')).to_be_hidden()
+       assert await page.locator('#native-envelopes .envelope-graph').count() == 0
+       assert not await page.evaluate(OBSERVED_GRAPH, [engine, 1, role, start, True])
+       last = await page.evaluate('nativePackets.at(-1).sequence')
+       await page.evaluate('contexts.at(-1).resume()')
+       resumed = await observed_graph(page, engine, 1, role, after=last, held=True)
+       print('PASS native observer expiry and resume', json.dumps({'observed':observed, 'last':last, 'resumed':resumed}), flush=True)
       assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
       await page.screenshot(path=str(out/f'{engine.lower()}-{w}x{h}.png'))
       await page.evaluate('nativeNodes.at(-1).port.postMessage({type:"keys",bits:0})')

@@ -769,8 +769,8 @@
     },
     {
       "path": "remote/envelope-view.mjs",
-      "bytes": 4734,
-      "sha256": "75dc2e79346fc70bf4ec927929e9368814eb1d40587fcc6116c423b9431b3b48"
+      "bytes": 4802,
+      "sha256": "bb0ea4fdb883caa0f22938ba78edd4f740a78b192a59e09f7411eee081ddcffd"
     },
     {
       "path": "remote/firmware-link.mjs",
