@@ -2,7 +2,7 @@
 This file replaces every earlier AGENTS.md, skill, brief and handoff. Read these four files, in this order, and nothing older:
 1. `RULES.md` — the only rules (identical copy of the firmware repo RULES.md; `integ` keeps them identical) (v2, rules 0–25). If any other text in this repo disagrees, RULES.md wins.
 2. `CHECKLISTS.md` — the pass/fail finish line for each lane. Work until your lane's lines are all PASS.
-3. `docs/lanes/<your-lane>.md` — your lane's current state, blockers, next item. Update it in every push.
+3. `docs/lanes/<your-lane>.md` — your lane's current state, blockers, next item. Keep it current.
 4. `CONSOLIDATED-STATE.md` — what is merged into `integration/dnbox-consolidated`, with SHAs.
 
 ## The project
@@ -16,12 +16,12 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; `gobbajogger/Dn
 | integ | consolidated branch (both repos), combined Elite/Pro firmware, zero dropouts, BREAK samples, roadmap, #120 voting, cleanup + rename | `lane/integ-*`, writes `integration/dnbox-consolidated` |
 | remote | (nightly repo) FunkyBeats port, Remote slider lane, browser Remote, TouchOSC, landscape | `lane/remote-*` |
 | web | (nightly repo) website 19 routes, installer, emulator, import/export, 1:1 HTML firmware UI, nightly page | `lane/web-*` |
-| test-and-merge | every Local gate, every Review, merge checks | none (comments on PRs) |
+| test-and-merge | Local gates, Reviews, merge checks (any agent that did not build the work may also run them) | none (comments on PRs) |
 
 ## How to work
 - Branch from `integration/dnbox-consolidated`; merge it in, never rebase. Keep one draft PR per lane into it (PR events wake Dot).
-- Push at least every 30 min. Subject: `<type>(<lane>): <what> | next: <next deliverable>`.
-- Blocked item: write blocker + fix in your lane file, try another route within 10 min, keep working the rest. Never wait.
+- Push often so work isn't lost.
+- Blocked item: write blocker + fix in your lane file, try another route, keep working the rest. Never wait.
 - Riskiest item first. Every push: re-check memory fit (no PSRAM), merge conflicts with the consolidated branch, tests that can't run.
 
 ## Local gate (one command)
@@ -30,8 +30,8 @@ scripts/dnbox-gate.sh <lane>        # this repo (website + Remote), at the commi
 tools/dnbox-gate.sh <lane>          # firmware repo, for firmware lanes
 ```
 Nightly steps: clean-tree, setup (`npm ci`, Playwright Chromium), no-loss, limits (incl. FunkyBeats MIT notice for remote), build (`npm run build`), unit-tests (`npm test`), browser-tests (`npm run test:browser` + `tests/visual/fixtures/web-structural/browser_fixtures.py`, Chromium with its normal sandbox, profile and TMPDIR inside the checkout under `.cache/`). Firmware gate details below.
-Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, slot2-scan. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL.
-When the full gate is required (RULES 9): once on the combined branch after the final lane merge, before any `gh-pages` fast-forward, and before anything goes to `main`. A lane PR into `integration/dnbox-consolidated` needs only its focused tests (plus Elite/Pro builds for firmware), no-loss and the independent Review; a missing `dnbox-gate` status flag does not block it.
+Needs: JieLi toolchain (`~/.jieli/toolchain`) and AC79 SDK (`~/fw-AC79_AIoT_SDK`) and the original synth inputs (`python3 tools/check_original_inputs.py`); if missing, get them from Git or the Library using `docs/LIBRARY-INDEX.md`. Steps: clean-tree, setup, no-loss, limits, host-tests (`host/build_host.sh` + `tests/run_tests.sh`), build-elite-pro (`MODEL=elite|pro ./build.sh`), flashmap, budget (XIP free ≥ 1024 B, pool margin ≥ 512 B), ui-defects, slot2-scan. Last line: `DNBOX-GATE RESULT PASS|FAIL|VOID sha=<sha>`; log in `build/dnbox-gate/`. Post the log as a PR comment naming the SHA. NOT_RUN = FAIL for the full gate before a `gh-pages` fast-forward or `main`.
+When the full gate is required (RULES 9): once on the combined branch after the final lane merge, before any `gh-pages` fast-forward, and before anything goes to `main`. A lane PR into `integration/dnbox-consolidated` needs only its focused tests (plus Elite/Pro builds for firmware), no-loss and, when it changes screens, the independent Review; a missing `dnbox-gate` status flag does not block it.
 
 ## Where everything lives
 | What | Where |
