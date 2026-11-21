@@ -81,6 +81,11 @@ def main():
                     with browser.new_page(viewport={"width": width, "height": height}) as page:
                         origin = f"http://127.0.0.1:{server.server_port}"
                         actual = check_inbox(page, origin)
+                        page.goto(origin + "/builds/")
+                        page.evaluate("document.fonts.ready")
+                        history_width = page.evaluate("document.documentElement.scrollWidth")
+                        if history_width > width:
+                            failures.append(f"Build history extends to {history_width}px at {width}px")
                         for path, selector in [("/new/", "body > header a:visible"),
                                                ("/projects/", "#dnbox-global-header header a:visible"),
                                                ("/breaks/", "body > header a:visible"),

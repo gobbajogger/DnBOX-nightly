@@ -164,8 +164,8 @@
     },
     {
       "path": "builds/index.html",
-      "bytes": 579924,
-      "sha256": "5640f946e0fb55d10cd5051a54261dc456ba303468a5a2e9720ccd2b8d233953"
+      "bytes": 580169,
+      "sha256": "7f3acfc99ee0aaef9ad934c173ae962ab4c60804443fe678816192af833cb0b0"
     },
     {
       "path": "components/archive/store.mjs",
@@ -999,8 +999,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12783,
-      "sha256": "fe562032da1b6938a0625fd8634efd9f4947bbbe7464505f84b43eaf3efbcfdb"
+      "bytes": 12828,
+      "sha256": "441793fa6ee276b9f44388fba6dc3c599d66fd2bd53652e830ab237a3b00dc62"
     },
     {
       "path": "starting-break-export.mjs",

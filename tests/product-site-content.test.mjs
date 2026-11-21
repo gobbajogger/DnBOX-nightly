@@ -53,3 +53,36 @@ test('homepage separates the current Chicago waveform and SuperJ6 name from arch
  assert.equal(frames.juno.length, 7);
  assert.ok(frames.juno.every(frame => frame.text.startsWith('JUNO ')));
 });
+
+test('archived build links name different destinations in the static record', () => {
+  const records = read('builds/index.html').matchAll(/<article\b[^>]*data-record-id="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g);
+  const recordIds = [];
+  let reviewed = 0;
+  for (const [, id, record] of records) {
+    recordIds.push(id);
+    const group = record.match(/<div class="record-links">([\s\S]*?)<\/div>/);
+    if (!group) continue;
+    const links = [...group[1].matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<>]+)<\/a>/g)];
+    if (new Set(links.map(([, href]) => href)).size >= 2) reviewed++;
+    const destinations = new Map();
+    for (const [, href, text] of links) {
+      const name = text.trim();
+      assert.ok(name && name !== 'Source and evidence', id + ' needs a descriptive source link');
+      assert.ok(!destinations.has(name) || destinations.get(name) === href,
+        id + ' reuses "' + name + '" for different source links');
+      destinations.set(name, href);
+      const target = new URL(href, 'https://example.invalid/');
+      const github = target.hostname === 'github.com';
+      const commit = target.pathname.match(/\/commit\/([0-9a-f]{40})$/);
+      const pull = target.pathname.match(/\/pull\/(\d+)$/);
+      const review = target.pathname.match(/\/pulls\/(\d+)\/reviews\/\d+$/);
+      if (review) assert.ok(/review/i.test(name) && name.includes('#' + review[1]), id + ' needs its review target');
+      if (target.pathname.endsWith('.log')) assert.match(name, /log/i);
+      if (target.pathname.includes('/tree/')) assert.match(name, /tree|folder|directory/i);
+      if (github && commit) assert.ok(name.includes(commit[1].slice(0, 8)), id + ' needs its commit ID');
+      if (github && pull) assert.ok(name.includes('#' + pull[1]), id + ' needs its pull request number');
+    }
+  }
+  assert.deepEqual(recordIds, JSON.parse(read('data/history.json')).map(record => record.id));
+  assert.ok(reviewed >= 60, 'archived multi-source build records are missing');
+});

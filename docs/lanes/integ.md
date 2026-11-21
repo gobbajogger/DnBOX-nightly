@@ -4,7 +4,7 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 60 of 104 references, including the homepage and the downloadable Samples, Projects and installer pages. The other 44 remain open. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 64 of 104 references, including Build History, the homepage and the downloadable Samples, Projects and installer pages. The other 40 remain open. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
@@ -16,7 +16,7 @@ This branch changes the product site, documentation and host tests. Firmware sou
 
 ## Homepage and Builds follow-up
 
-The Chicago hero shows SAW at raw WAVE 0. The sound list names SuperJ6, and the archived Juno demo keeps its original frames. Independent full-page captures matched all four homepage references. At 240 px the eight physical knobs and nine header links fit. The Builds capture divided the 197-record page into checked bands and finished within the original 30-second budget at all four gate sizes. The Builds screenshots remain under design review.
+The Chicago hero shows SAW at raw WAVE 0. The sound list names SuperJ6, and the archived Juno demo keeps its original frames. Independent full-page captures matched all four homepage references. At 240 px the eight physical knobs and nine header links fit. The Builds capture divided the 197-record page into checked bands and finished within the original 30-second budget at all four gate sizes. All four Build History screenshots now match a separate Chromium render pixel for pixel. Across 197 records, 247 generic links now name their 198 distinct destinations. Every URL, original record and link order was preserved. All nine header destinations work, filters and expanded records fit at the four gate sizes and 240 px, and the full page fits the 390 px viewport. [Independent label review and owner handoff](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058820949).
 
 ## Reproduced results at nightly 914d68e8
 

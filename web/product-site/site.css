@@ -16,6 +16,7 @@
 #proposals a{overflow-wrap:anywhere}
 
 @media (max-width: 900px) {
+  .build-record { overflow-wrap: anywhere; }
   body > header, body > header nav,
   .projects-page #dnbox-global-header header,
   .projects-page #dnbox-global-header nav { flex-wrap: wrap; }
