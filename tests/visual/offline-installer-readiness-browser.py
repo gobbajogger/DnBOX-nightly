@@ -42,15 +42,14 @@ class OfflineInstallerReadiness(unittest.TestCase):
             self.assertTrue(page.locator('#go').is_disabled())
             held[0].fulfill(status=204)
 
-            page.set_default_timeout(700)
             page.eval_on_selector('#noversion', 'notice => {notice.hidden = true}')
             with self.assertRaises(BrowserTimeout):
-                wait_for_offline_installer(page)
+                wait_for_offline_installer(page, timeout=700)
             page.eval_on_selector('#noversion', 'notice => {notice.hidden = false}')
             page.frame_locator('#project-frame').locator('body').evaluate(
                 '() => { window.projectWorkspace = undefined }')
             with self.assertRaises(BrowserTimeout):
-                wait_for_offline_installer(page)
+                wait_for_offline_installer(page, timeout=700)
 
 
 if __name__ == '__main__':

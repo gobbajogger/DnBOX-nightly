@@ -1,0 +1,44 @@
+node-tests.log
+✔ count opening-post votes once per person and distinguish the owner (77.991674ms)
+✔ incomplete reads never become zero votes or another repository’s owner decision (21.818233ms)
+✔ read all reaction pages and omit pull requests and unrelated open issues (19.128467ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1783.044461
+
+native-five.log
+PASS 1440px mounted installer navigation and firmware heading
+PASS 1440x900: proposal title wraps and owner vote refreshes
+PASS 1024px mounted installer navigation and firmware heading
+PASS 1024x640: proposal title wraps and owner vote refreshes
+PASS 844px mounted installer navigation and firmware heading
+PASS 844x390: proposal title wraps and owner vote refreshes
+PASS 390px mounted installer navigation and firmware heading
+PASS 390x844: proposal title wraps and owner vote refreshes
+PASS 240px mounted installer navigation and firmware heading
+PASS 240x240: proposal title wraps and owner vote refreshes
+
+live-dom.log
+Proposal link https://github.com/gobbajogger/DnBOX/issues/new?template=feature_request.yml
+Exact nightly HTML and page.mjs with a Node DOM and live GitHub fetches 2026-11-21T12:20:35.642Z
+HTTP 200 https://api.github.com/repos/gobbajogger/DnBOX
+HTTP 200 https://api.github.com/repos/gobbajogger/DnBOX/issues?state=open&per_page=100&page=1
+pageshow #984 [Feature]: Temporary integration check for feature votes · 0 votes https://github.com/gobbajogger/DnBOX/issues/984
+HTTP 200 https://api.github.com/repos/gobbajogger/DnBOX
+HTTP 200 https://api.github.com/repos/gobbajogger/DnBOX/issues?state=open&per_page=100&page=1
+Refresh votes #984 [Feature]: Temporary integration check for feature votes · 0 votes https://github.com/gobbajogger/DnBOX/issues/984
+
+native-live-closed.log
+Using TLS-verified host relay for the browser sandbox's GitHub API requests
+GitHub issue closed 2026-11-21T12:21:21Z opening-post +1 0
+GitHub 200 https://api.github.com/repos/gobbajogger/DnBOX
+GitHub 200 https://api.github.com/repos/gobbajogger/DnBOX/issues?state=open&per_page=100&page=1
+Initial There are no open feature proposals.
+GitHub 200 https://api.github.com/repos/gobbajogger/DnBOX
+GitHub 200 https://api.github.com/repos/gobbajogger/DnBOX/issues?state=open&per_page=100&page=1
+Refresh There are no open feature proposals.

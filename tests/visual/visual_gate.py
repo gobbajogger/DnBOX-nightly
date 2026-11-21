@@ -291,7 +291,7 @@ def wait_for_homepage(page):
     }""")
 
 
-def wait_for_offline_installer(page):
+def wait_for_offline_installer(page, *, timeout=None):
     # The empty preview eagerly opens two hidden workspaces. Their frame
     # lifecycle may keep Playwright from reporting idle after all assets load.
     page.wait_for_function("""() => {
@@ -312,7 +312,7 @@ def wait_for_offline_installer(page):
             element('noversion').textContent.trim().length > 0 && element('version')?.options.length === 0 &&
             element('go')?.disabled === true && element('download')?.hidden === true &&
             readyFrame('sample-frame', 'sampleWorkspace') && readyFrame('project-frame', 'projectWorkspace');
-    }""")
+    }""", timeout=timeout)
 
 
 def main():
