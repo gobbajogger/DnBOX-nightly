@@ -2,6 +2,16 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Cloud qualification at 290b1d81
+
+At `290b1d819ed844eb25a5aaa3e1465bf4defca70a`, the unfiltered remote gate passed clean tree, setup, no-loss, limits and the 304-file build. It exited 1 when the shared disk filled during catalog staging and again while FunkyBeats tried to build its browser fixture. [Full original gate, disk samples and visual output](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/290b-full-gate.json.gz)
+
+Independently, the same source passed all 564 edge tests, 126 workspace tests and the application regression scripts, 242 Remote/platform tests and all 333 catalog rejection cases with the download-byte verifier. All 304 generated files had independent inodes. [Build, edge and workspace outputs](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/290b-components.json.gz) · [Remote and catalog retries](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/290b-final-retries.json.gz)
+
+The original manual passed the unchanged visual capture at all four sizes. All 21 local requests finished, with zero page or header errors. No full-image baselines were available. An independent full visual traversal timed out waiting for the desktop installer's network-idle event. The isolated installer completed all 32 requests with no failures, and a later full visual attempt exhausted disk before Chromium started. [Four-viewport manual readiness trace](../../evidence/remote-owner-pages-20261121/manual-readiness-trace.json.gz)
+
+The original build-9 AU and its tempo display formatter are still required for the literal SuperJ6 names. Stock firmware `f1786ebe` returned zero bytes to DNR2 HELLO, so physical keyboard read, edit and Undo remain open. The page-15 grid density, approved 17:00 glyph identities and joint cross-surface acceptance remain open. [Original SuperJ6 input audit](../../evidence/remote-synth-files/firmware-f1786ebe/README.md) · [Stock handshake](../../evidence/remote-protocol/stock-f1786ebe/README.md) · [Owner control comparison](../../evidence/remote-owner-pages-20261121/owner-control-crosswalk/README.md)
+
 ## Original-manual capture and f868dea6 gate
 
 Two [unfiltered runs at `f868dea6`](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7067302541) exited 1. The first exhausted the shared disk during catalog and browser setup. After a clean build of 304 files, the second passed all 564 edge tests, 126 workspace tests, 241 Remote/platform tests, 26 FunkyBeats journeys, native firmware Apply/Undo and native Mix. The full visual run timed out taking a band of the original desktop manual. Later the browser phase exhausted disk while creating Chromium’s temporary artifacts directory. [First run](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/f868-first-run.json.gz) · [Second run](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/f868-second-run.json.gz)
