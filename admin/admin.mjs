@@ -16,8 +16,7 @@ function initialize() {
   function selection() {
     const r=selected();
     if(!r) throw Error('Select a nightly build.');
-    return {id:r.version,source:r.source_commit,model:byId('model').value,
-      digests:{elite:r.models?.elite?.sha256,pro:r.models?.pro?.sha256}};
+    return {build:structuredClone(r),model:byId('model').value};
   }
   function controls() {
     byId('connect').disabled=authenticated||saving;
@@ -29,7 +28,10 @@ function initialize() {
   }
   function identity() {
     const r=selected(),m=byId('model').value;
-    message('identity',r ? [r.version,r.source_commit,r.models?.[m]?.sha256].join(' · ') : '');
+    const pkg=r?.models?.[m];
+    message('identity',pkg ? [r.display_version+' · '+r.version,pkg.product,'Source '+r.source_commit,
+      'Tree '+r.source_tree,'Package '+pkg.sha256,'Controller '+pkg.controller_sha256,
+      pkg.controller_strategy].filter(Boolean).join(' · ') : '');
     byId('verified').checked=false; controls();
   }
   async function action(id,work) {
@@ -58,7 +60,7 @@ function initialize() {
   });
   byId('promote').onclick=()=>action('promotion-result',async()=>{
     const s=selection();
-    if(!window.confirm('Promote '+s.id+' to DnBOX gh-pages?\n\nElite '+s.digests.elite+'\nPro '+s.digests.pro)) return 'Promotion cancelled.';
+    if(!window.confirm('Promote '+s.build.version+' to DnBOX gh-pages?\n\nElite '+s.build.models.elite.sha256+'\nPro '+s.build.models.pro.sha256)) return 'Promotion cancelled.';
     const result=await github.promote(s);await refresh();return result;
   });
   function clearNotes(){loadedNotes=null;byId('notes').value='';byId('notes').disabled=true;controls();}
