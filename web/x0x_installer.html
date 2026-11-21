@@ -505,6 +505,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
           </label>
         </div>
     <p class="meta" id="pkgmeta"></p>
+    <p class="small" id="public-installs" aria-live="polite"></p>
 
     <div class="build-detail" id="builddetail" hidden>
       <details id="package-details" class="package-details"><summary>Details</summary>
@@ -529,6 +530,14 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
           <p class="install-hint" id="installhint" aria-live="polite"></p>
           <progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress>
           <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <section id="install-check" aria-label="Install checks" hidden>
+            <h3>Install checks</h3>
+            <p id="receipt-result" role="status"></p>
+            <p id="receipt-next"></p>
+            <details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details>
+            <button type="button" id="report-install" disabled>Report this install</button>
+            <p class="small">Review your receipt on GitHub before submitting a public report.</p>
+          </section>
           <p id="backup-warning" class="backup-confirmation" role="alert" aria-live="assertive" hidden></p>
           <details class="diagnostics">
             <summary data-t="diagnostics">Technical details / activity log</summary>
@@ -643,6 +652,7 @@ const TEXT = {
     hintready: "書き込む準備ができました。開始前に機種と内容をもう一度確認します。",
     hintbusy: "インストールの処理中です。USB を抜かず、ページを閉じないでください。",
     latestdev: "最新の利用可能な DEV", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
+    modeltested: "この機種で起動と再起動を確認済み",
     ownertested: "オーナーが Elite と Pro の実機で起動と再起動を確認済み",
     releaseagree: "機種を確認し、データをバックアップしてからこのリリースをインストールします。",
     devagree: "実機未テストの開発版であることを理解し、機種と大切なサンプルのバックアップを確認しました。",
@@ -751,6 +761,7 @@ const TEXT = {
     hintready: "Ready to install.",
     hintbusy: "An installation operation is in progress. Keep USB connected and this page open.",
     latestdev: "LATEST AVAILABLE DEV", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
+    modeltested: "Owner confirmed startup and restart",
     ownertested: "Owner tested startup and restart on Elite and Pro",
     releaseagree: "I have checked my keyboard model and backed up my data before installing this release.",
     devagree: "I accept hardware-untested development firmware for my selected keyboard model.",
@@ -949,6 +960,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
   try {
     const access = await midiAccess();
     if (!isCurrent()) return;
+    const restartTicket = midiAccess.restartCheck?.ticket();
     const up = new Updater(access, () => {});
     // Prefer a running app; if only the update loader is present, resume from there.
     let dev = await up.find((id) => !/^ota-/i.test(id.model));
@@ -965,6 +977,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
       return;
     }
     lastId = dev.id;
+    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);
     const bare = inOta ? dev.id.model.replace(/^ota-/i, "") : dev.id.model;
     const detail = inOta
       ? `${dev.id.text}${dev.name ? " · " + dev.name : ""} — ${t("otahelp")}`
@@ -973,6 +986,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
     if (inOta) led("busy");
     // Post-write reconnect must not reload model/package and hide restoration results.
     if (!allowPostWrite) suggestModel(bare);
+    midiAccess.reports?.refresh();
     dev.link.close();
   } catch (e) {
     if (!isCurrent()) return;
@@ -1026,9 +1040,19 @@ function modelKeyForProduct(product) {
 // Revocation is monotonic: any explicit denial wins over a checked status.
 // Optional approval hints must be true when present. They are not qualification
 // receipts; the publisher's preparation path still checks those independently.
+let currentHardwareLedger = /*HARDWARE_TEST_DATA*/{"schema":1,"reports":[]};
+function hardwareTestsFor(ledger, row, model) {
+  const pkg = row?.models?.[model];
+  if (!pkg || !['elite','pro'].includes(model)) return null;
+  return ledger.reports.find(report => report.model === model && report.version === row.display_version &&
+    report.source_commit === row.source_commit && report.package_sha256 === pkg.sha256 &&
+    report.controller_sha256 === pkg.controller_sha256) || null;
+}
 function ownerTestedRelease(v) {
-  return v?.version === "nightly-94197fc8-dev" && v.status === "release-checked" &&
-    v.hardware_tested === true && assignedPackageVersion(v)?.version === "0.0.26";
+  const assignment = assignedPackageVersion(v);
+  return v?.status === "release-checked" && v.hardware_tested === true && assignment?.valid === true &&
+    Object.keys(v.models).length > 0 &&
+    Object.keys(v.models).every(model => hardwareTestsFor(currentHardwareLedger, v, model));
 }
 function catalogDenied(record) {
   return !record || ["revoked", "blocked", "withdrawn"].some(k =>
@@ -1244,7 +1268,9 @@ function renderBuildInfo(v,p) {
   if(v.version===catalogLive.latest && v.status==="dev-checked") b.append(buildBadge(t("latestdev"),"important"));
   if(v.status==="dev-checked") b.append(buildBadge(t("devchecked")));
   if(ownerTestedRelease(v)) b.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
-  if(v.hardware_tested!==true) b.append(buildBadge(t("hardwareuntested"),"important"));
+  const modelReport = hardwareTestsFor(currentHardwareLedger, v, chosenModel);
+  if (modelReport && !ownerTestedRelease(v)) b.append(buildBadge(t("modeltested") + " · " + MODELS[chosenModel], "important"));
+  if (!modelReport) b.append(buildBadge(t("hardwareuntested"), "important"));
   if(v.lifecycle==="superseded") b.append(buildBadge(t("superseded"),"blocked"));
   $("buildsummary").textContent=buildDisplayLabel(v,p)+" · "+(nightlyProductIdentity(p.product)?.model || "")+
     (v.description ? " — "+v.description : "");
@@ -1268,7 +1294,13 @@ function renderBuildHistory() {
     if(v.version===catalogLive.latest && v.status==="dev-checked")badges.append(buildBadge(t("latestdev"),"important"));
     if(v.status==="dev-checked")badges.append(buildBadge(t("devchecked")));
     if(ownerTestedRelease(v)) badges.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
-    if(v.hardware_tested!==true)badges.append(buildBadge(t("hardwareuntested"),"important"));
+    const reported = Object.keys(v.models || {}).filter(model => hardwareTestsFor(currentHardwareLedger, v, model));
+    if (!reported.length) badges.append(buildBadge(t("hardwareuntested"),"important"));
+    else if (!ownerTestedRelease(v)) {
+      for (const model of Object.keys(v.models || {})) {
+        badges.append(buildBadge(t(reported.includes(model) ? "modeltested" : "hardwareuntested") + " · " + (MODELS[model] || model), "important"));
+      }
+    }
     if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
     el.append(badges);
     const p=document.createElement("p");p.textContent=v.description||"";el.append(p);
@@ -1616,6 +1648,8 @@ async function run(img, product, opts = {}) {
   $("bar").value = 0;
   $("backup-warning").hidden = true;
   $("backup-warning").textContent = "";
+  midiAccess.reports?.reset();
+  midiAccess.restartCheck = null;
   const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
   let access, up, unprotected = false;
   try { access = await midiAccess(); }
@@ -1672,6 +1706,9 @@ async function run(img, product, opts = {}) {
       }
     }
     await scan(true);
+    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
+    if (!foreign && opts.receiptBuild && up.verified && up.application)
+      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);
     if (unprotected) {
       sayK("slotunprotecteddone");
       log("Firmware installed without a recoverable sample-slot backup.");
@@ -1734,7 +1771,7 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
 });
@@ -1784,12 +1821,38 @@ function navigateWorkspace() {
 window.addEventListener("hashchange", navigateWorkspace);
 $("sample-frame").addEventListener("load", navigateWorkspace);
 $("project-frame").addEventListener("load", navigateWorkspace);
+function selectedInstallBuild(version, pkg, model) {
+  if (!version || !pkg || version.display_version) return installBuild(version, pkg, model);
+  const assigned = assignedPackageVersion(version, pkg);
+  return installBuild({...version, display_version: assigned?.valid ? assigned.version : ""}, pkg, model);
+}
+midiAccess.reports = mountInstallReports(document, () => {
+  const {version, pkg} = currentSelection();
+  return selectedInstallBuild(version, pkg, chosenModel);
+}, navigator.userAgent);
+$("models").addEventListener("change", midiAccess.reports.refresh);
+$("version").addEventListener("change", midiAccess.reports.refresh);
 navigateWorkspace();
 
 (async () => {
   if (typeof location !== "undefined" && location.hash === "#buildarchive") $("buildarchive").open = true;
   applyLang();
   fillVersions();
+  if (catalog.versions?.length && location.origin === "https://gobbajogger.github.io") {
+    try {
+      const {fetchHardwareTests, catalogWithHardwareTests} = await import("../hardware-tests.mjs");
+      const reports = await fetchHardwareTests("../hardware-tests.json", {signal: AbortSignal.timeout(5000)});
+      if (!writing && JSON.stringify(reports) !== JSON.stringify(currentHardwareLedger)) {
+        const response = await fetch("../package-version-assignments.json", {cache:"no-store", redirect:"error", signal:AbortSignal.timeout(5000)});
+        const assignments = response.ok && !response.redirected ? await response.json() : [];
+        if (writing) return;
+        currentHardwareLedger = reports;
+        catalogLive = catalogWithHardwareTests(reports, catalog, assignments);
+        fillVersions();
+      }
+    } catch { /* The embedded report snapshot accompanies this published catalog. */ }
+  }
+  midiAccess.reports.refresh();
   if (navigator.requestMIDIAccess) {
     // Soft probe without prompting until Connect, unless the browser already granted MIDI.
   }

@@ -12,6 +12,7 @@ DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-result
 """
 import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
 from pathlib import Path
+from urllib.parse import urlencode
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -213,6 +214,58 @@ def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
+def installer_responses():
+    # Match only the two public requests made by the installer's initial state.
+    report_url = 'https://api.github.com/search/issues?' + urlencode({
+        'q': 'repo:gobbajogger/DnBOX is:issue in:title "Install report"', 'per_page': 100, 'page': 1,
+    })
+    source = (ROOT / 'web/product-site/install/index.html').read_text()
+    catalog = json.loads(re.search(r'^const catalog = (.+);$', source, re.M)[1])
+    version = next((row for row in catalog['versions'] if row['version'] == catalog['latest']), None)
+    models = version['models'] if version else {}
+    default_model = 'pro' if 'pro' in models else 'elite'
+    package = models.get(default_model)
+    if package:
+        digest = package['sha256']
+        if not re.fullmatch(r'[a-f0-9]{64}', digest) or not package['pkg'].startswith(
+            'https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/' + digest + '/'
+        ):
+            raise ValueError('Default installer package must have an immutable nightly URL')
+    saved = os.environ.get('DNBOX_RELEASE_PACKAGES')
+    data = None
+
+    def respond(route):
+        nonlocal data
+        if route.request.method != 'GET':
+            return route.fallback()
+        if data is None:
+            if saved:
+                v = version['display_version']
+                if not re.fullmatch(r'\d+(?:\.\d+){2,3}', v):
+                    raise ValueError('Unexpected release package version')
+                body = (Path(saved) / ('v' + v) / f'dnbox-x0x37-{v}-{default_model}.fwsc').read_bytes()
+            else:
+                response = route.fetch(max_redirects=0)
+                if not response.ok:
+                    raise ValueError(f'Default package returned HTTP {response.status}. Set DNBOX_RELEASE_PACKAGES for offline captures.')
+                body = response.body()
+            if len(body) != package['size'] or hashlib.sha256(body).hexdigest() != digest:
+                raise ValueError('Default installer package does not match its committed size and SHA-256')
+            data = body
+        route.fulfill(body=data, content_type='application/octet-stream', headers={'Access-Control-Allow-Origin': '*'})
+
+    def attach(context):
+        def report(route):
+            if route.request.method != 'GET':
+                return route.fallback()
+            route.fulfill(json={'total_count': 0, 'incomplete_results': False, 'items': []},
+                          headers={'Access-Control-Allow-Origin': '*'})
+        context.route(lambda u: u == report_url, report)
+        if package:
+            context.route(lambda u: u == package['pkg'], respond)
+
+    return attach
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -226,12 +279,19 @@ def main():
     try:
         with sync_playwright() as pw:
             b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
+            attach_installer_responses = installer_responses()
             def ctx(w, h):
                 c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
-                c.add_init_script(FREEZE_JS); return c
-            def settle(pg):
-                pg.add_style_tag(content=FREEZE_CSS)
-                pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                c.add_init_script(FREEZE_JS)
+                attach_installer_responses(c)
+                return c
+            def settle(pg, url, name):
+                try:
+                    pg.goto(url)
+                    pg.add_style_tag(content=FREEZE_CSS)
+                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                except Exception as error:
+                    raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
             for w, h in SIZES:
                 tag = f'{w}x{h}'
                 c = ctx(w, h)
@@ -240,7 +300,7 @@ def main():
                     full = f'remote-{name}-{tag}'
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/remote/index.html'); settle(pg)
+                    settle(pg, base + '/product-site/remote/index.html', full)
                     if name == 'sequence':
                         header_checks(pg.evaluate(HEADER_JS), tag, header_fails)
                         try:
@@ -264,7 +324,7 @@ def main():
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/' + rel); settle(pg)
+                    settle(pg, base + '/product-site/' + rel, full)
                     scroll_width = pg.evaluate('document.documentElement.scrollWidth')
                     if scroll_width > w:
                         errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
@@ -273,7 +333,7 @@ def main():
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 c.close()
             b.close()

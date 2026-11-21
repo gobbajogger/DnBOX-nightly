@@ -74,7 +74,19 @@ class Server(BaseHTTPRequestHandler):
         self.wfile.write((ROOT/page).read_bytes() if page else HTML)
     def log_message(self,*a):pass
 srv=ThreadingHTTPServer(('127.0.0.1',0),Server);threading.Thread(target=srv.serve_forever,daemon=True).start()
-INIT='''window.pending=[];window.fetch=(url,opts)=>new Promise((resolve,reject)=>pending.push({url,opts,resolve,reject}));'''
+INIT = '''
+window.pending = [];
+const reports = new URL("https://api.github.com/search/issues");
+reports.search = new URLSearchParams({
+  q: 'repo:gobbajogger/DnBOX is:issue in:title "Install report"', per_page: 100, page: 1
+});
+window.fetch = (url, opts) => {
+  if (String(url) === reports.href && (opts?.method || "GET") === "GET") {
+    return Promise.resolve(Response.json({total_count: 0, incomplete_results: false, items: []}));
+  }
+  return new Promise((resolve, reject) => pending.push({url, opts, resolve, reject}));
+};
+'''
 checks=0; failures=[]
 async def accept_confirm(p):
     # Install now asks with the in-page write confirmation. window.confirm is not the gate.

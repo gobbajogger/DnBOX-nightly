@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-a2uhfZuHlTWv5a0qp+qGPAjAJyoYV7ixOCjjKdzC49Q='; connect-src https://api.github.com; style-src 'self'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'">
+<meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Release administration · DnBOX</title><link rel="stylesheet" href="admin.css"></head>
+<body><header><a href="../">DnBOX</a><span>Owner tools</span></header>
+<main><h1>Release administration</h1>
+<div id="workspace" hidden>
+<section><h2>GitHub connection</h2>
+<p>Public data is available below. To make changes, use a short-lived, fine-grained owner token restricted to DnBOX and DnBOX-nightly with Contents write access and read access to pull requests, issues, checks and commit statuses. The token stays in this tab’s memory.</p>
+<label for="token">Owner token</label><div class="controls"><input id="token" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"><button id="connect" type="button">Connect</button><button id="lock" type="button" disabled>Disconnect</button></div>
+<p id="connection" role="status">Viewing public data.</p></section>
+<section><div class="controls"><h2>Lane pull requests</h2><button id="refresh" type="button">Refresh data</button></div>
+<div id="lanes"></div><p id="status" role="status" aria-live="polite"></p></section>
+<section><h2>Installer catalogs</h2><p id="reports" role="status"></p><div id="catalogs"></div></section>
+<section><h2>Owner hardware tests</h2>
+<label for="build">Nightly build</label><select id="build"></select><label for="model">Tested model</label><select id="model"><option value="elite">SMK-37 Elite</option><option value="pro">SMK-37 Pro</option></select>
+<p id="identity"></p><label for="evidence">Link to the owner’s release, issue or pull request</label><input id="evidence" type="url" placeholder="https://github.com/gobbajogger/…">
+<label class="check"><input id="verified" type="checkbox"> I verified startup and restart on this model with the selected package.</label>
+<button id="mark" type="button" disabled>Mark tested</button><p id="test-result" role="status"></p></section>
+<section><h2>Promote nightly to main installer</h2>
+<p>The selected build’s two verified packages and catalog entry will be copied to the main installer in one Pages commit. Earlier entries remain available.</p>
+<button id="promote" type="button" disabled>Review promotion</button><p id="promotion-result" role="status"></p></section>
+<section><h2>GitHub release notes</h2>
+<div class="fields"><div><label for="repo">Repository</label><select id="repo"><option>DnBOX</option><option>DnBOX-nightly</option></select></div><div><label for="tag">Tag</label><input id="tag" value="v0.0.26" spellcheck="false"></div></div>
+<button id="read-notes" type="button">Load notes</button><label for="notes">Release notes in Markdown</label><textarea id="notes" rows="10" disabled></textarea>
+<button id="save-notes" type="button" disabled>Save release notes</button><p id="notes-result" role="status"></p></section>
+</div><noscript>Enable JavaScript to view the release tools.</noscript>
+</main><script defer src="admin.bundle.js" integrity="sha256-a2uhfZuHlTWv5a0qp+qGPAjAJyoYV7ixOCjjKdzC49Q=" crossorigin="anonymous"></script></body></html>

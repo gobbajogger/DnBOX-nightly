@@ -505,6 +505,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
           </label>
         </div>
     <p class="meta" id="pkgmeta"></p>
+    <p class="small" id="public-installs" aria-live="polite"></p>
 
     <div class="build-detail" id="builddetail" hidden>
       <details id="package-details" class="package-details"><summary>Details</summary>
@@ -529,6 +530,14 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
           <p class="install-hint" id="installhint" aria-live="polite"></p>
           <progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress>
           <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <section id="install-check" aria-label="Install checks" hidden>
+            <h3>Install checks</h3>
+            <p id="receipt-result" role="status"></p>
+            <p id="receipt-next"></p>
+            <details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details>
+            <button type="button" id="report-install" disabled>Report this install</button>
+            <p class="small">Review your receipt on GitHub before submitting a public report.</p>
+          </section>
           <p id="backup-warning" class="backup-confirmation" role="alert" aria-live="assertive" hidden></p>
           <details class="diagnostics">
             <summary data-t="diagnostics">Technical details / activity log</summary>
@@ -1258,6 +1267,7 @@ class Updater {
   // The protocol has no unit serial or flash hash: this is not exact-byte proof.
   async finishApplication(product, step) {
     this.verified = false;
+    this.application = null;
     step("reboot");
     await sleep(3000);
     // Loader terminal retries can take 4 × 3 × 5 seconds before reset.
@@ -1271,6 +1281,7 @@ class Updater {
         throw fail("model", `The selected keyboard changed model during the update: ${back.id.text}`);
       if (back.id.text !== product) throw fail("mismatch", `installed, but the device reports ${back.id.text}`, back.id.text);
       this.targetName = back.name;
+      this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};
     } finally { back.link.close(); }
     this.verified = true;
     step("done", back.id.text);
@@ -2300,6 +2311,255 @@ async function installKeepingSlots(up, image, product, board, hooks) {
   return { product: ran, move, unprotected };
 }
 
+// SPDX-License-Identifier: GPL-3.0-only
+// Public, user-submitted install observations. Owner hardware approvals live in a separate ledger.
+const reportRepository = 'gobbajogger/DnBOX';
+const reportTitle = '[Install report]';
+const modelNames = {elite: 'SMK-37 Elite', pro: 'SMK-37 Pro'};
+
+function installBuild(version, pkg, model) {
+  if (!version || !pkg || !Object.hasOwn(modelNames, model) ||
+      !/^[a-z0-9._-]{1,100}$/i.test(version.version) || !/^[a-f0-9]{64}$/.test(pkg.sha256)) return null;
+  return {build_id: version.version, version: version.display_version || '', sha256: pkg.sha256, source_commit: version.source_commit, model, product: pkg.product};
+}
+
+function portVersionMatches(name, build) {
+  // OS-specific suffixes are allowed, but the DnBOX version token and full model must agree.
+  const match = /^DnBOX\s+v?(\d+\.\d+\.\d+(?:\.\d+)?)\s+(SMK-37 (?:Elite|Pro))(?=$|\s|[([])/i.exec(name);
+  return !!match && match[1] === build.version && match[2].toLowerCase() === modelNames[build.model]?.toLowerCase();
+}
+
+function sameReceiptPort(port, original) {
+  return !!port && !!original && (!port.type || !original.type || port.type === original.type) &&
+    (port === original || (original.id && port.id === original.id));
+}
+
+function connectedReceiptPort(ports, original) {
+  const matches = [...ports.values()].filter(p => p.state === 'connected' && sameReceiptPort(p, original));
+  return matches.length === 1 ? matches[0] : null;
+}
+
+// Created only from finishApplication's exact application reply and its actual pair.
+// A timer, picker selection or a scan that started before the physical unplug cannot complete this check.
+class InstallRestartCheck {
+  constructor(access, application, build, browser, changed) {
+    if (!build || application?.product !== build.product || !application.input || !application.output)
+      throw Error('A confirmed application and its MIDI pair are required');
+    this.access = access;
+    this.input = application.input;
+    this.output = application.output;
+    this.changed = changed;
+    this.generation = 0;
+    this.unplugged = false;
+    this.receipt = {...build, port_name: application.port_name, browser, time: new Date().toISOString(),
+      startup_ok: true, restart_ok: false, version_matched: portVersionMatches(application.port_name, build)};
+    this.onState = e => this.stateChange(e.port);
+    access.addEventListener('statechange', this.onState);
+    this.changed(this.receipt, 'unplug');
+  }
+
+  stateChange(port) {
+    if (port?.state !== 'disconnected' ||
+        !(sameReceiptPort(port, this.input) || sameReceiptPort(port, this.output))) return;
+    this.generation++;
+    const input = connectedReceiptPort(this.access.inputs, this.input);
+    const output = connectedReceiptPort(this.access.outputs, this.output);
+    if (!input && !output) {
+      this.unplugged = true;
+      this.changed(this.receipt, 'replug');
+    }
+  }
+
+  ticket() {
+    if (!this.unplugged || this.receipt.restart_ok) return null;
+    const input = connectedReceiptPort(this.access.inputs, this.input);
+    const output = connectedReceiptPort(this.access.outputs, this.output);
+    return input && output ? {input, output, generation: this.generation} : null;
+  }
+
+  reidentify(ticket, dev, soleKeyboard) {
+    const current = this.ticket();
+    if (!ticket && this.unplugged && soleKeyboard && dev?.id?.text === this.receipt.product &&
+        (!sameReceiptPort(dev.link?.input, this.input) || !sameReceiptPort(dev.link?.output, this.output))) {
+      this.changed(this.receipt, 'different-ports');
+    }
+    if (!ticket || !current || !soleKeyboard || current.generation !== ticket.generation ||
+        ticket.input !== current.input || ticket.output !== current.output ||
+        dev?.link?.input !== current.input || dev?.link?.output !== current.output ||
+        dev.id?.text !== this.receipt.product || dev.id.model !== modelNames[this.receipt.model] ||
+        !current.input.name || current.input.name !== current.output.name) return false;
+    this.receipt = {...this.receipt, port_name: current.input.name, restart_ok: true,
+      version_matched: portVersionMatches(current.input.name, this.receipt), time: new Date().toISOString()};
+    this.changed(this.receipt, 'done');
+    this.close();
+    return true;
+  }
+
+  close() {
+    this.unplugged = false;
+    this.generation++;
+    this.access.removeEventListener('statechange', this.onState);
+  }
+}
+
+function installReportUrl(receipt) {
+  const url = new URL('https://github.com/' + reportRepository + '/issues/new');
+  url.search = new URLSearchParams({
+    template: 'install-report.yml', title: reportTitle + ' ' + receipt.build_id + ' · ' + modelNames[receipt.model],
+    build_id: receipt.build_id, model: modelNames[receipt.model], sha256: receipt.sha256,
+    port_name: receipt.port_name, startup_ok: receipt.startup_ok ? 'Yes' : 'Not tested',
+    restart_ok: receipt.restart_ok ? 'Yes' : 'Not tested', browser: receipt.browser,
+    notes: 'Installer receipt\n\n```json\n' + JSON.stringify(receipt, null, 2) + '\n```',
+  });
+  return url.href;
+}
+
+const formHeadings = ['Build ID', 'Keyboard model', 'Firmware package SHA-256', 'Port name',
+  'Did startup succeed?', 'Did restart succeed?', 'Browser and version', 'Notes'];
+
+function submittedReceipt(issue) {
+  if (!Number.isSafeInteger(issue?.number) || issue.number <= 0 || issue.pull_request ||
+      !/^\[Install report\](?:\s|$)/.test(issue.title) || typeof issue.body !== 'string' || issue.body.length > 65536) return null;
+  // GitHub publishes issue forms as Markdown with a heading for each field.
+  const parts = issue.body.replace(/\r\n/g, '\n').split(/^### ([^\n]+)\s*$/m);
+  const fields = new Map();
+  for (let i = 1; i < parts.length; i += 2) {
+    const heading = parts[i].trim();
+    if (fields.has(heading)) return null;
+    fields.set(heading, parts[i + 1].trim());
+  }
+  if (!formHeadings.slice(0, -1).every(key => fields.has(key))) return null;
+  const [build_id, modelName, sha256, port_name, startup, restart, browser, notes] = formHeadings.map(h => fields.get(h));
+  const model = Object.keys(modelNames).find(key => modelNames[key] === modelName);
+  if (!model || !build_id || build_id.length > 120 || !/^[a-f0-9]{64}$/i.test(sha256) ||
+      !port_name || !browser || browser === '_No response_' || ![startup, restart].every(x => ['Yes', 'No', 'Not tested'].includes(x))) return null;
+  const common = {build_id, model, sha256: sha256.toLowerCase(), port_name, browser,
+    startup_ok: startup === 'Yes', restart_ok: restart === 'Yes'};
+  if (/^Installer receipt\b/.test(notes || '')) {
+    const fenced = /^Installer receipt\s+```json\s*\n([\s\S]+?)\n```\s*$/.exec(notes);
+    if (!fenced) return null;
+    try {
+      const r = JSON.parse(fenced[1]);
+      if (!r || !Object.entries(common).every(([key, value]) => r[key] === value) ||
+          typeof r.product !== 'string' || !/^SMK-37 (?:Elite|Pro)_\d+$/.test(r.product) ||
+          r.product.split('_')[0] !== modelName || typeof r.time !== 'string' || !Number.isFinite(Date.parse(r.time)) ||
+          typeof r.version_matched !== 'boolean' || !/^\d+\.\d+\.\d+(?:\.\d+)?$/.test(r.version)) return null;
+      return r;
+    } catch { return null; }
+  }
+  // Ordinary users can fill the published form manually and leave Notes empty.
+  const namedVersion = /^v?(\d+\.\d+\.\d+(?:\.\d+)?)(?:\s*\([a-f0-9]{7,40}\))?$/i.exec(build_id);
+  return {...common, version: namedVersion?.[1] || '', time: issue.created_at, manual: true};
+}
+
+async function loadInstallReports({fetchImpl = fetch, signal = globalThis.AbortSignal?.timeout?.(20000)} = {}) {
+  const reports = new Map();
+  async function request(url) {
+    const response = await fetchImpl(url.href, {credentials: 'omit', referrerPolicy: 'no-referrer', signal,
+      headers: {Accept: 'application/vnd.github+json'}});
+    if (!response.ok) throw Error('Public installs API returned HTTP ' + response.status);
+    return {body: await response.json(), hasNext: /;\s*rel="next"/.test(response.headers.get('Link') || '')};
+  }
+  function add(issues) {
+    if (!Array.isArray(issues)) throw Error('Invalid public installs response');
+    for (const issue of issues) {
+      const receipt = submittedReceipt(issue);
+      if (receipt) reports.set(issue.number, {number: issue.number,
+        url: 'https://github.com/' + reportRepository + '/issues/' + issue.number, receipt});
+    }
+  }
+  // A title search normally takes a single public request. Avoid GitHub's search
+  // limit and partial-result flag by enumerating the complete issue list when needed.
+  for (let page = 1; ; page++) {
+    const search = new URL('https://api.github.com/search/issues');
+    search.search = new URLSearchParams({q: 'repo:' + reportRepository + ' is:issue in:title "Install report"', per_page: 100, page});
+    const {body, hasNext} = await request(search);
+    if (!Number.isSafeInteger(body?.total_count) || body.total_count < 0 ||
+        typeof body.incomplete_results !== 'boolean' || !Array.isArray(body.items)) throw Error('Invalid public installs search');
+    if (body.incomplete_results || body.total_count > 1000) break;
+    add(body.items);
+    if (!hasNext) return [...reports.values()];
+  }
+  reports.clear();
+  for (let page = 1; ; page++) {
+    const url = new URL('https://api.github.com/repos/' + reportRepository + '/issues');
+    url.search = new URLSearchParams({state: 'all', per_page: 100, page});
+    const {body, hasNext} = await request(url);
+    add(body);
+    if (!hasNext) return [...reports.values()];
+  }
+}
+
+function reportBuildMatches(receipt, selection) {
+  if (!selection.build_id || receipt.build_id === selection.build_id) return true;
+  if (!receipt.manual) return false;
+  const alias = /^v?(\d+\.\d+\.\d+(?:\.\d+)?)(?:\s*\(([a-f0-9]{7,40})\))?$/i.exec(receipt.build_id);
+  if (alias) return alias[1] === selection.version && (!alias[2] || selection.source_commit?.startsWith(alias[2].toLowerCase()));
+  return /^[a-f0-9]{7,40}$/i.test(receipt.build_id) && selection.source_commit?.startsWith(receipt.build_id.toLowerCase());
+}
+
+function countInstallReports(reports, selection = {}) {
+  return reports.filter(({receipt: r}) => {
+    if (!r.startup_ok || !r.restart_ok || !reportBuildMatches(r, selection) ||
+        (selection.sha256 && selection.sha256 !== r.sha256) || (selection.model && selection.model !== r.model)) return false;
+    if (r.manual) {
+      const version = selection.version || r.version;
+      return !!version && portVersionMatches(r.port_name, {version, model: r.model});
+    }
+    return r.version_matched && (!selection.version || selection.version === r.version) && portVersionMatches(r.port_name, r);
+  }).length;
+}
+
+function mountInstallReports(doc, getSelection, browser) {
+  const element = id => doc.getElementById(id);
+  let read, check = null, displayed = null;
+  element('report-install').addEventListener('click', () => {
+    if (displayed) doc.defaultView.open(installReportUrl(displayed), '_blank', 'noopener,noreferrer');
+  });
+  function render(receipt, phase) {
+    element('install-check').hidden = false;
+    element('receipt-result').textContent = 'Startup OK · ' + (receipt.restart_ok ? 'Restart OK' : 'Restart pending') +
+      ' · ' + (receipt.version_matched ? 'version matched' : 'version unconfirmed');
+    element('receipt-next').textContent = phase === 'done' ? '' : phase === 'different-ports'
+      ? 'Restart unconfirmed. The browser assigned different MIDI ports, so this keyboard could not be linked to the install.'
+      : phase === 'replug'
+      ? 'Reconnect the same keyboard to the same USB port. Use Connect to check again if needed.'
+      : 'Unplug the keyboard, then reconnect it to the same USB port. Keep this page open for the restart check.';
+    if (!receipt.version_matched) element('receipt-next').textContent += ' The OS may have cached an older MIDI port name.';
+    element('receipt-json').textContent = JSON.stringify(receipt, null, 2);
+    displayed = receipt;
+    element('report-install').disabled = false;
+  }
+  async function refresh() {
+    const selection = getSelection();
+    if (!selection) { element('public-installs').textContent = ''; return; }
+    const output = element('public-installs');
+    output.textContent = 'Checking public install reports…';
+    try {
+      read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
+      const reports = await read;
+      const current = getSelection();
+      if (current?.sha256 !== selection.sha256 || current?.build_id !== selection.build_id) return;
+      const n = countInstallReports(reports, selection);
+      output.textContent = n + (n === 1 ? ' install' : ' installs') + ' reported OK for this build and model.';
+    } catch {
+      if (getSelection()) output.textContent = 'Public install reports unavailable.';
+    }
+  }
+  // Selection changes can be user-initiated or come from a connected device.
+  return {refresh, reset() {
+    check?.close();
+    check = null;
+    element('install-check').hidden = true;
+    displayed = null;
+    element('report-install').disabled = true;
+  }, observed(access, application, build) {
+    if (!application?.input || !application.output || !access.addEventListener) return null;
+    check = new InstallRestartCheck(access, application, build, browser, render);
+    return check;
+  }};
+}
+
 const $ = (id) => document.getElementById(id);
 const MODELS = { pro: "SMK-37 Pro", elite: "SMK-37 Elite", mke: "MKE-P37", fm1: "FM-1" };
 const MODEL_KEYS = ["pro", "elite", "mke"];
@@ -2324,6 +2584,7 @@ const TEXT = {
     hintready: "書き込む準備ができました。開始前に機種と内容をもう一度確認します。",
     hintbusy: "インストールの処理中です。USB を抜かず、ページを閉じないでください。",
     latestdev: "最新の利用可能な DEV", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
+    modeltested: "この機種で起動と再起動を確認済み",
     ownertested: "オーナーが Elite と Pro の実機で起動と再起動を確認済み",
     releaseagree: "機種を確認し、データをバックアップしてからこのリリースをインストールします。",
     devagree: "実機未テストの開発版であることを理解し、機種と大切なサンプルのバックアップを確認しました。",
@@ -2432,6 +2693,7 @@ const TEXT = {
     hintready: "Ready to install.",
     hintbusy: "An installation operation is in progress. Keep USB connected and this page open.",
     latestdev: "LATEST AVAILABLE DEV", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
+    modeltested: "Owner confirmed startup and restart",
     ownertested: "Owner tested startup and restart on Elite and Pro",
     releaseagree: "I have checked my keyboard model and backed up my data before installing this release.",
     devagree: "I accept hardware-untested development firmware for my selected keyboard model.",
@@ -2630,6 +2892,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
   try {
     const access = await midiAccess();
     if (!isCurrent()) return;
+    const restartTicket = midiAccess.restartCheck?.ticket();
     const up = new Updater(access, () => {});
     // Prefer a running app; if only the update loader is present, resume from there.
     let dev = await up.find((id) => !/^ota-/i.test(id.model));
@@ -2646,6 +2909,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
       return;
     }
     lastId = dev.id;
+    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);
     const bare = inOta ? dev.id.model.replace(/^ota-/i, "") : dev.id.model;
     const detail = inOta
       ? `${dev.id.text}${dev.name ? " · " + dev.name : ""} — ${t("otahelp")}`
@@ -2654,6 +2918,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
     if (inOta) led("busy");
     // Post-write reconnect must not reload model/package and hide restoration results.
     if (!allowPostWrite) suggestModel(bare);
+    midiAccess.reports?.refresh();
     dev.link.close();
   } catch (e) {
     if (!isCurrent()) return;
@@ -2707,9 +2972,19 @@ function modelKeyForProduct(product) {
 // Revocation is monotonic: any explicit denial wins over a checked status.
 // Optional approval hints must be true when present. They are not qualification
 // receipts; the publisher's preparation path still checks those independently.
+let currentHardwareLedger = {"schema":1,"reports":[{"version":"0.0.26","source_commit":"94197fc839b00aff47b98ca02f3c6396e4a6eabf","model":"elite","package_sha256":"95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6","controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","startup":true,"restart":true,"evidence_url":"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26","reported_by":"owner"},{"version":"0.0.26","source_commit":"94197fc839b00aff47b98ca02f3c6396e4a6eabf","model":"pro","package_sha256":"ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8","controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","startup":true,"restart":true,"evidence_url":"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26","reported_by":"owner"}]};
+function hardwareTestsFor(ledger, row, model) {
+  const pkg = row?.models?.[model];
+  if (!pkg || !['elite','pro'].includes(model)) return null;
+  return ledger.reports.find(report => report.model === model && report.version === row.display_version &&
+    report.source_commit === row.source_commit && report.package_sha256 === pkg.sha256 &&
+    report.controller_sha256 === pkg.controller_sha256) || null;
+}
 function ownerTestedRelease(v) {
-  return v?.version === "nightly-94197fc8-dev" && v.status === "release-checked" &&
-    v.hardware_tested === true && assignedPackageVersion(v)?.version === "0.0.26";
+  const assignment = assignedPackageVersion(v);
+  return v?.status === "release-checked" && v.hardware_tested === true && assignment?.valid === true &&
+    Object.keys(v.models).length > 0 &&
+    Object.keys(v.models).every(model => hardwareTestsFor(currentHardwareLedger, v, model));
 }
 function catalogDenied(record) {
   return !record || ["revoked", "blocked", "withdrawn"].some(k =>
@@ -2925,7 +3200,9 @@ function renderBuildInfo(v,p) {
   if(v.version===catalogLive.latest && v.status==="dev-checked") b.append(buildBadge(t("latestdev"),"important"));
   if(v.status==="dev-checked") b.append(buildBadge(t("devchecked")));
   if(ownerTestedRelease(v)) b.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
-  if(v.hardware_tested!==true) b.append(buildBadge(t("hardwareuntested"),"important"));
+  const modelReport = hardwareTestsFor(currentHardwareLedger, v, chosenModel);
+  if (modelReport && !ownerTestedRelease(v)) b.append(buildBadge(t("modeltested") + " · " + MODELS[chosenModel], "important"));
+  if (!modelReport) b.append(buildBadge(t("hardwareuntested"), "important"));
   if(v.lifecycle==="superseded") b.append(buildBadge(t("superseded"),"blocked"));
   $("buildsummary").textContent=buildDisplayLabel(v,p)+" · "+(nightlyProductIdentity(p.product)?.model || "")+
     (v.description ? " — "+v.description : "");
@@ -2949,7 +3226,13 @@ function renderBuildHistory() {
     if(v.version===catalogLive.latest && v.status==="dev-checked")badges.append(buildBadge(t("latestdev"),"important"));
     if(v.status==="dev-checked")badges.append(buildBadge(t("devchecked")));
     if(ownerTestedRelease(v)) badges.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
-    if(v.hardware_tested!==true)badges.append(buildBadge(t("hardwareuntested"),"important"));
+    const reported = Object.keys(v.models || {}).filter(model => hardwareTestsFor(currentHardwareLedger, v, model));
+    if (!reported.length) badges.append(buildBadge(t("hardwareuntested"),"important"));
+    else if (!ownerTestedRelease(v)) {
+      for (const model of Object.keys(v.models || {})) {
+        badges.append(buildBadge(t(reported.includes(model) ? "modeltested" : "hardwareuntested") + " · " + (MODELS[model] || model), "important"));
+      }
+    }
     if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
     el.append(badges);
     const p=document.createElement("p");p.textContent=v.description||"";el.append(p);
@@ -3297,6 +3580,8 @@ async function run(img, product, opts = {}) {
   $("bar").value = 0;
   $("backup-warning").hidden = true;
   $("backup-warning").textContent = "";
+  midiAccess.reports?.reset();
+  midiAccess.restartCheck = null;
   const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
   let access, up, unprotected = false;
   try { access = await midiAccess(); }
@@ -3353,6 +3638,9 @@ async function run(img, product, opts = {}) {
       }
     }
     await scan(true);
+    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
+    if (!foreign && opts.receiptBuild && up.verified && up.application)
+      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);
     if (unprotected) {
       sayK("slotunprotecteddone");
       log("Firmware installed without a recoverable sample-slot backup.");
@@ -3415,7 +3703,7 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
 });
@@ -3465,12 +3753,38 @@ function navigateWorkspace() {
 window.addEventListener("hashchange", navigateWorkspace);
 $("sample-frame").addEventListener("load", navigateWorkspace);
 $("project-frame").addEventListener("load", navigateWorkspace);
+function selectedInstallBuild(version, pkg, model) {
+  if (!version || !pkg || version.display_version) return installBuild(version, pkg, model);
+  const assigned = assignedPackageVersion(version, pkg);
+  return installBuild({...version, display_version: assigned?.valid ? assigned.version : ""}, pkg, model);
+}
+midiAccess.reports = mountInstallReports(document, () => {
+  const {version, pkg} = currentSelection();
+  return selectedInstallBuild(version, pkg, chosenModel);
+}, navigator.userAgent);
+$("models").addEventListener("change", midiAccess.reports.refresh);
+$("version").addEventListener("change", midiAccess.reports.refresh);
 navigateWorkspace();
 
 (async () => {
   if (typeof location !== "undefined" && location.hash === "#buildarchive") $("buildarchive").open = true;
   applyLang();
   fillVersions();
+  if (catalog.versions?.length && location.origin === "https://gobbajogger.github.io") {
+    try {
+      const {fetchHardwareTests, catalogWithHardwareTests} = await import("../hardware-tests.mjs");
+      const reports = await fetchHardwareTests("../hardware-tests.json", {signal: AbortSignal.timeout(5000)});
+      if (!writing && JSON.stringify(reports) !== JSON.stringify(currentHardwareLedger)) {
+        const response = await fetch("../package-version-assignments.json", {cache:"no-store", redirect:"error", signal:AbortSignal.timeout(5000)});
+        const assignments = response.ok && !response.redirected ? await response.json() : [];
+        if (writing) return;
+        currentHardwareLedger = reports;
+        catalogLive = catalogWithHardwareTests(reports, catalog, assignments);
+        fillVersions();
+      }
+    } catch { /* The embedded report snapshot accompanies this published catalog. */ }
+  }
+  midiAccess.reports.refresh();
   if (navigator.requestMIDIAccess) {
     // Soft probe without prompting until Connect, unless the browser already granted MIDI.
   }

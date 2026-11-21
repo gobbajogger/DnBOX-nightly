@@ -3,6 +3,7 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,lstatSync,readdirSync}from'node:fs';
 import {resolve,dirname,join,relative,sep}from'node:path';
 import {fileURLToPath}from'node:url';import{createHash}from'node:crypto';
+import {applyHardwarePublication} from './hardware-publication.mjs';
 import {SITE_ORIGIN,githubRepo,pagesUrl} from '../web/product-site/site-origin.mjs';
 
 const oldNightly = 'gobbajogger/x0x37-for-Loopy-Pro_nightly';
@@ -34,9 +35,10 @@ function buildCatalog(source) {
  }
  return Buffer.from(JSON.stringify(catalog,null,2)+'\n');
 }
+import {adminAssets} from './build-admin.mjs';
 import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,pagesBase}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -68,6 +70,32 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
   inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
+ const derived = new Map(inputs);
+ if (derived.has('hardware-tests.json')) {
+  const name = 'package-version-assignments.json', path = join(repoRoot,name);
+  noLinks(path,repoRoot);
+  if (seen.has(name) || !lstatSync(path).isFile()) throw Error('Expected the canonical package assignments');
+  derived.set(name,readFileSync(path)); seen.add(name);
+ }
+ if(derived.has('admin/index.html')){
+  const {bundle,html}=adminAssets(path=>derived.get(path));
+  if(!derived.has('admin/admin.bundle.js'))throw Error('Admin bundle missing from product manifest');
+  derived.set('admin/admin.bundle.js',Buffer.from(bundle));
+  derived.set('admin/index.html',Buffer.from(html));
+ }
+ if (pagesBase) {
+  const prior = resolve(pagesBase);
+  if (!lstatSync(prior).isDirectory()) throw Error('Regular Pages base directory required');
+  const ledger = join(prior,'hardware-tests.json');
+  const stat = lstatSync(ledger,{throwIfNoEntry:false});
+  if (stat) {
+   if (!stat.isFile()) throw Error('Regular published hardware ledger required');
+   if (!derived.has('hardware-tests.json')) throw Error('Published hardware ledger missing from product');
+   derived.set('hardware-tests.json',readFileSync(ledger));
+  }
+ }
+ applyHardwarePublication(derived);
+ inputs.splice(0, inputs.length, ...derived);
  // Keep historical preview URLs working without admitting arbitrary private audio.
  // Aliases reuse only WAV bytes that passed the pinned five-sample admission above.
  for(const [name,data]of [...inputs]){
@@ -94,5 +122,6 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
- console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
+ const p=args.indexOf('--pages-base');if(p!==-1&&!args[p+1])throw Error('--pages-base requires a local Pages tree');
+ console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }

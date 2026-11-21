@@ -3,6 +3,7 @@
 // gh-pages install/index.html (blob 15d43a0a, tip 6a9953de). Only allowlisted
 // hunks may remain; each has a declared reason.
 import test from 'node:test';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
@@ -147,7 +148,9 @@ function assertAllowedRendered(rendered) {
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
-    const match = ALLOWED.find(allow =>
+    // Use exact byte digests for reviewed multi-function hunks to avoid duplicating the renderer.
+    const digest = createHash('sha256').update(JSON.stringify([h.liveOnly,h.renderOnly])).digest('hex');
+    const match = ALLOWED.find(allow => allow.hunk_sha256 ? digest === allow.hunk_sha256 :
       JSON.stringify(allow.liveOnly) === JSON.stringify(h.liveOnly) &&
       JSON.stringify(allow.renderOnly) === JSON.stringify(h.renderOnly));
     if (!match) unexpected.push({ header: h.header, liveOnly: h.liveOnly, renderOnly: h.renderOnly });
@@ -170,6 +173,14 @@ test('exact Restore allowance rejects lost padding, forced full headers and unre
   for(const changed of [rendered.replace(selector,'SLOT_HDR_LEN'),rendered.replace(selector,'SLOT_HDR_AREA'),rendered.replace(selector,selector.replace('!==','===')),rendered.replace('if (name === "fm-1") return null;','if (name === "smk-37") return null;')]) {
     assert.notEqual(changed,rendered);
     assert.throws(()=>assertAllowedRendered(changed),/unexpected hunks|allowlisted hunk missing/);
+  }
+});
+
+test('approved release diff rejects drift in the restart handshake and report bindings', () => {
+  const current = currentRendered();
+  for (const old of ['restartTicket, dev, up.ports().length === 1','receiptBuild: selectedInstallBuild(ver, pkg, chosenModel)']) {
+    assert.equal(current.split(old).length,2);
+    assert.throws(()=>assertAllowedRendered(current.replace(old,'undefined')),/unexpected hunks|allowlisted hunk missing/);
   }
 });
 

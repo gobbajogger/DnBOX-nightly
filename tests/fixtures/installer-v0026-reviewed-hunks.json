@@ -9,45 +9,6 @@
     ]
   },
   {
-    "id": "v0026-consent-label",
-    "liveOnly": [
-      "          <label id=\"devagreewrap\" hidden><input type=\"checkbox\" id=\"devagree\"> <span data-t=\"devagree\">I accept hardware-untested development firmware for my selected keyboard model.</span></label>"
-    ],
-    "renderOnly": [
-      "          <label id=\"devagreewrap\" hidden><input type=\"checkbox\" id=\"devagree\"> <span id=\"consent-copy\" data-t=\"devagree\">I accept hardware-untested development firmware for my selected keyboard model.</span></label>"
-    ]
-  },
-  {
-    "id": "v0026-ja-owner-test",
-    "liveOnly": [],
-    "renderOnly": [
-      "    ownertested: \"オーナーが Elite と Pro の実機で起動と再起動を確認済み\",",
-      "    releaseagree: \"機種を確認し、データをバックアップしてからこのリリースをインストールします。\","
-    ]
-  },
-  {
-    "id": "v0026-en-owner-test",
-    "liveOnly": [],
-    "renderOnly": [
-      "    ownertested: \"Owner tested startup and restart on Elite and Pro\",",
-      "    releaseagree: \"I have checked my keyboard model and backed up my data before installing this release.\","
-    ]
-  },
-  {
-    "id": "v0026-pinned-release-identity",
-    "liveOnly": [
-      "    [\"device_verified\", \"hardware_tested\"].some(k => Object.hasOwn(record, k) && record[k] !== false) ||"
-    ],
-    "renderOnly": [
-      "function ownerTestedRelease(v) {",
-      "  return v?.version === \"nightly-94197fc8-dev\" && v.status === \"release-checked\" &&",
-      "    v.hardware_tested === true && assignedPackageVersion(v)?.version === \"0.0.26\";",
-      "}",
-      "    (Object.hasOwn(record, \"device_verified\") && record.device_verified !== false) ||",
-      "    (Object.hasOwn(record, \"hardware_tested\") && record.hardware_tested !== false && !ownerTestedRelease(record)) ||"
-    ]
-  },
-  {
     "id": "v0026-release-model-picker",
     "liveOnly": [
       "      (ver.status !== undefined && ver.status !== \"dev-checked\")) return [];"
@@ -67,13 +28,6 @@
     ]
   },
   {
-    "id": "v0026-selected-release-badges",
-    "liveOnly": [],
-    "renderOnly": [
-      "  if(ownerTestedRelease(v)) b.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));"
-    ]
-  },
-  {
     "id": "v0026-release-consent",
     "liveOnly": [
       "  $(\"devagreewrap\").hidden=v.status!==\"dev-checked\";"
@@ -86,9 +40,18 @@
   },
   {
     "id": "v0026-history-release-badges",
-    "liveOnly": [],
+    "liveOnly": [
+      "    if(v.hardware_tested!==true)badges.append(buildBadge(t(\"hardwareuntested\"),\"important\"));"
+    ],
     "renderOnly": [
-      "    if(ownerTestedRelease(v)) badges.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));"
+      "    if(ownerTestedRelease(v)) badges.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));",
+      "    const reported = Object.keys(v.models || {}).filter(model => hardwareTestsFor(currentHardwareLedger, v, model));",
+      "    if (!reported.length) badges.append(buildBadge(t(\"hardwareuntested\"),\"important\"));",
+      "    else if (!ownerTestedRelease(v)) {",
+      "      for (const model of Object.keys(v.models || {})) {",
+      "        badges.append(buildBadge(t(reported.includes(model) ? \"modeltested\" : \"hardwareuntested\") + \" · \" + (MODELS[model] || model), \"important\"));",
+      "      }",
+      "    }"
     ]
   },
   {
@@ -110,5 +73,119 @@
       "  installBlocked(!$(\"devagree\").checked ? \"Install is locked: tick the firmware consent box above, then press Install.\"",
       "  if (!$(\"devagree\").checked) { installBlocked(\"Tick the firmware consent box above, then press Install.\"); return; }"
     ]
+  },
+  {
+    "id": "public-install-count",
+    "liveOnly": [],
+    "renderOnly": [
+      "    <p class=\"small\" id=\"public-installs\" aria-live=\"polite\"></p>"
+    ]
+  },
+  {
+    "id": "receipt-panel-and-consent",
+    "hunk_sha256": "c3249515138557f8220e7a37d7d621787d825767d1213acdb9d495a3a984100e"
+  },
+  {
+    "id": "reset-application-identity",
+    "liveOnly": [],
+    "renderOnly": [
+      "    this.application = null;"
+    ]
+  },
+  {
+    "id": "capture-confirmed-application-pair",
+    "liveOnly": [],
+    "renderOnly": [
+      "      this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};"
+    ]
+  },
+  {
+    "id": "shared-report-workflow",
+    "hunk_sha256": "ebee5eb52afe95c74e6611e715724db103e038b78031788f0429bf783510c3e0"
+  },
+  {
+    "id": "ja-owner-status",
+    "liveOnly": [],
+    "renderOnly": [
+      "    modeltested: \"この機種で起動と再起動を確認済み\",",
+      "    ownertested: \"オーナーが Elite と Pro の実機で起動と再起動を確認済み\",",
+      "    releaseagree: \"機種を確認し、データをバックアップしてからこのリリースをインストールします。\","
+    ]
+  },
+  {
+    "id": "en-owner-status",
+    "liveOnly": [],
+    "renderOnly": [
+      "    modeltested: \"Owner confirmed startup and restart\",",
+      "    ownertested: \"Owner tested startup and restart on Elite and Pro\",",
+      "    releaseagree: \"I have checked my keyboard model and backed up my data before installing this release.\","
+    ]
+  },
+  {
+    "id": "stamp-fresh-scan",
+    "liveOnly": [],
+    "renderOnly": [
+      "    const restartTicket = midiAccess.restartCheck?.ticket();"
+    ]
+  },
+  {
+    "id": "post-replug-identity",
+    "liveOnly": [],
+    "renderOnly": [
+      "    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);"
+    ]
+  },
+  {
+    "id": "refresh-report-count",
+    "liveOnly": [],
+    "renderOnly": [
+      "    midiAccess.reports?.refresh();"
+    ]
+  },
+  {
+    "id": "match-owner-ledger",
+    "hunk_sha256": "429704b5e7eb450489bb9266c6f2f1e07c37c6ffc8f44cf365671f92cb60585e"
+  },
+  {
+    "id": "per-model-owner-test",
+    "liveOnly": [
+      "  if(v.hardware_tested!==true) b.append(buildBadge(t(\"hardwareuntested\"),\"important\"));"
+    ],
+    "renderOnly": [
+      "  if(ownerTestedRelease(v)) b.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));",
+      "  const modelReport = hardwareTestsFor(currentHardwareLedger, v, chosenModel);",
+      "  if (modelReport && !ownerTestedRelease(v)) b.append(buildBadge(t(\"modeltested\") + \" · \" + MODELS[chosenModel], \"important\"));",
+      "  if (!modelReport) b.append(buildBadge(t(\"hardwareuntested\"), \"important\"));"
+    ]
+  },
+  {
+    "id": "clear-old-receipt",
+    "liveOnly": [],
+    "renderOnly": [
+      "  midiAccess.reports?.reset();",
+      "  midiAccess.restartCheck = null;"
+    ]
+  },
+  {
+    "id": "arm-after-slot-restoration",
+    "liveOnly": [],
+    "renderOnly": [
+      "    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.",
+      "    if (!foreign && opts.receiptBuild && up.verified && up.application)",
+      "      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);"
+    ]
+  },
+  {
+    "id": "bind-receipt-to-selected-package",
+    "liveOnly": [
+      "  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&"
+    ],
+    "renderOnly": [
+      "  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&"
+    ]
+  },
+  {
+    "id": "load-current-records",
+    "hunk_sha256": "81d6405451b017d7581df3bb176070b7d29d7d2f822603fd07e2c24c13a3a46b"
   }
 ]

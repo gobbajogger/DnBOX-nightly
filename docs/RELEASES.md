@@ -1,6 +1,6 @@
 # Release tags on the integration branch
 
-Public, user-facing firmware packages stay on the `v*` tags (currently v0.0.25.1) and are published from `main` / `gh-pages` only after the owner's sign-off.
+Public, user-facing firmware packages stay on the `v*` tags (currently [v0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26), with v0.0.25.1 available as the installer fallback) and are published from `main` / `gh-pages` only after the owner's sign-off.
 
 Work toward the final build is tagged on `integration/dnbox-consolidated` as prereleases:
 
