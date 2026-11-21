@@ -4,6 +4,61 @@ from pathlib import Path
 from playwright.async_api import expect
 from superj6_bank_journey import fixture
 
+async def review_note_fields(page, save):
+    """Use the same step controls, effective values and note identities the musician edits."""
+    initial = (await save(page))['notes']
+    await page.locator('[data-engine="drum909"]').click()
+    await page.locator('.overflow summary').click()
+    await page.locator('[data-view="drums"]').click()
+    await page.locator('.overflow summary').click()
+    cell = page.locator('#drum-lane [data-lane-step]:enabled').first
+
+    async def choose(kind):
+        for _ in range(await page.locator('#lane-kind option').count()):
+            if await page.locator('#lane-kind').input_value() == kind:
+                return
+            await page.locator('[data-lane-cycle]').click()
+        raise AssertionError(f'{kind} was unreachable through the visible lane selector')
+
+    await choose('pan')
+    await cell.press('ArrowUp')
+    await choose('pitch')
+    await cell.press('ArrowDown')
+    edited = (await save(page))['notes']
+    changed = [(a, b) for a, b in zip(initial, edited, strict=True) if a != b]
+    assert changed
+    for before, after in changed:
+        assert before['track'] == 'drum909'
+        assert after == {**before, 'pan': 65, 'pitchOffset': -1}
+
+    await page.locator('[data-view="files"]').click()
+    dialog = page.locator('#review-dialog')
+
+    async def review():
+        await page.locator('[data-project-action="review"]').click()
+        await expect(dialog).to_be_visible()
+        return await dialog.locator('#changes').inner_text()
+
+    async def close():
+        await dialog.get_by_role('button', name='Return').click()
+
+    combined = await review()
+    assert 'Notes · 909' in combined and 'Pan C → R1' in combined and 'Pitch offset 0st → -1st' in combined, combined
+    await close()
+    await page.locator('#undo').click()
+    pan_only = await review()
+    assert 'Pan C → R1' in pan_only and 'Pitch offset' not in pan_only, pan_only
+    await close()
+    await page.locator('#undo').click()
+    assert await review() == 'No changes.'
+    await close()
+    await page.locator('#redo').click()
+    await page.locator('#redo').click()
+    assert (await save(page))['notes'] == edited
+    assert await review() == combined
+    return combined
+
+
 async def exercise(page, save, load):
     dialog = page.locator('#review-dialog')
     def content(doc):
@@ -23,6 +78,9 @@ async def exercise(page, save, load):
         await page.locator('.overflow summary').tap()
 
     initial = await save(page)
+    await review_note_fields(page, save)
+    await dialog.get_by_role('button',name='Return').click()
+    await load(page, initial)
     await review()
     await expect(page.locator('#review-discard')).to_be_disabled()
     await dialog.get_by_role('button',name='Return').click()

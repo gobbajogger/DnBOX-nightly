@@ -285,7 +285,23 @@ function wearPanel() {
  return '<section class="mix-panel"><h3>Tape</h3><div class="encoder-grid"><button type="button" class="parameter encoder" data-param="'+wearId+'" data-mix-param-label="Tape Wear" aria-label="Tape Wear '+wearDisplay(value)+'"><span class="glyph" data-glyph-fn="TAPE" data-glyph-engine="mixer" data-glyph-value="'+wearGlyph(value)+'"></span><output data-param-value="'+wearId+'">'+wearDisplay(value)+'</output><span>Wear</span></button></div></section>';
 }
 function changeLines(){
- const lines=model.changes().map(c=>{const describe=n=>n?`${name(n.note)}, velocity ${n.velocity}, start ${n.start}, end ${n.end}, chance ${n.chance??'not set'}${n.pulse?', pulse':''}`:'deleted';return `Notes · ${c.track}: ${c.before?describe(c.before):'new'} → ${describe(c.after)}`;});
+ const lines=model.changes().map(({track,before,after})=>{
+  const describe=n=>n?`${name(n.note)}, velocity ${n.velocity}, start ${n.start}, end ${n.end}, chance ${n.chance??'not set'}${n.pulse?', pulse':''}`:'deleted';
+  const previous=before?describe(before):'new', next=describe(after);
+  const changes=[];
+  if(previous!==next)changes.push(`${previous} → ${next}`);
+  for(const [key,kind,label] of [['pan','pan','Pan'],['pitchOffset','pitch','Pitch offset']]){
+   if(before?.[key]!==after?.[key]){
+    const from=before?laneText(kind,before):'—',to=after?laneText(kind,after):'—';
+    // Imported Drafts may explicitly store the effective center or zero.
+    const stored=n=>n?.[key]===undefined?'default':String(n[key]);
+    changes.push(from===to?`${label} ${to} (${stored(before)} → ${stored(after)})`:`${label} ${from} → ${to}`);
+   }
+  }
+  const location=previous===next?` · ${name(after.note)} at sample ${after.start}`:'';
+  const part=PARTS[launchParts.indexOf(track)]??track;
+  return `Notes · ${part}${location}: ${changes.join(' · ')||previous+' → '+next}`;
+ });
  const masterSeen=new Set();for(const[id,value]of parameterDraft){if(masterDraft.has(id)){const key=masterDraft.spec(id).id;if(masterSeen.has(key))continue;masterSeen.add(key);}const base=parameterBaseline.get(id)??superJ6Banks.spec(id);if(base&&value!==base.value){const identity=parameterIdentity.get(id)??base;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);const shown=v=>sj6?superJ6Text(sj6,v,v===base.value?new Map():parameterDraft,superJ6Banks.fieldsOf(id)):masterDraft.has(id)?masterDraft.display(id,v):isPanLabel(identity.label)?formatPan(v):v;lines.push(`Parameter · ${identity.context?identity.context+' · ':''}${identity.label}: ${shown(base.value)} → ${shown(value)}`);}}
  for(const slot of [0,1]){const program=superJ6Banks.view(slot);if(program)lines.push('SuperJ6 · Bass '+(slot?'B':'A')+' · '+program.bank+' / '+program.name);}
  for(const row of patternLocks){
