@@ -261,18 +261,21 @@ def main():
                                 write_actual_output('header-ssim-1024x640-actual.png', shot_png)
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     if act: act(pg); pg.wait_for_timeout(150)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(), results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(base + '/product-site/' + rel); settle(pg)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 c.close()
             b.close()

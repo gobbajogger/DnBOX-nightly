@@ -215,37 +215,56 @@ async def gesture_delete(page):
         await page.evaluate("""() => {for(const type of ['pointerdown','pointerup','pointercancel'])document.removeEventListener(type,recordDeleteTouch,true);delete window.recordDeleteTouch;delete window.deleteTouchTrace;}""")
 
 async def gesture_navigation(page):
-    viewport = page.locator('#roll-scroll')
-    box = await viewport.bounding_box()
-    snapshot = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.map(n=>n.getAttribute("aria-label"))')
-    await page.locator('#zoom').evaluate('(el)=>{el.value="1.5";el.dispatchEvent(new Event("input"))}')
-    x,y = box['x']+box['width']/2, box['y']+box['height']/2
-    client = await page.context.new_cdp_session(page)
-    async def touch(kind, points):
-        await client.send('Input.dispatchTouchEvent', {'type':kind,'touchPoints':[{'x':a,'y':b,'id':i,'radiusX':1,'radiusY':1} for i,a,b in points]})
-    before = await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')
-    await touch('touchStart', [(1,x-40,y),(2,x+40,y)])
-    await touch('touchMove', [(1,x-80,y),(2,x+80,y)])
-    await touch('touchEnd', [])
-    await expect(page.locator('#zoom')).to_have_value('3')
-    assert abs(await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')-before*2) <= 1
-    top = await viewport.evaluate('(e)=>e.scrollTop')
-    await touch('touchStart', [(1,x-40,y),(2,x+40,y)])
-    await touch('touchMove', [(1,x-40,y-20),(2,x+40,y-20)])
-    await touch('touchEnd', [])
-    assert abs(await viewport.evaluate('(e)=>e.scrollTop')-top-20) < 2
-    assert await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.map(n=>n.getAttribute("aria-label"))') == snapshot
-    await client.detach()
-    zoomed_width = await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth')
+    viewport, grid, zoom = (page.locator(s) for s in ['#roll-scroll','#roll-grid','#zoom'])
+    async def notes():
+        return await grid.locator('[data-note]').evaluate_all(
+            'ns=>ns.map(n=>[n.dataset.note,n.getAttribute("aria-label")])')
+    original=await notes()
+    box=await viewport.bounding_box()
+    x=box['x']+box['width']/2
+    y=box['y']+box['height']/2
+    client=await page.context.new_cdp_session(page)
+    async def touch(kind,points):
+        await client.send('Input.dispatchTouchEvent',{'type':kind,'touchPoints':[
+            {'id':i+1,'x':a,'y':b} for i,(a,b) in enumerate(points)]})
+    try:
+        await zoom.evaluate('el=>{el.value="1";el.dispatchEvent(new Event("input"))}')
+        basis=await grid.evaluate('g=>g.offsetWidth')
+        for start,end,bars in [(80,40,2),(80,40,4),(80,40,8),(40,80,4),(40,80,2),(40,80,1),(80,40,2)]:
+            await touch('touchStart',[(x-start,y),(x+start,y)])
+            await touch('touchMove',[(x-end,y),(x+end,y)])
+            await touch('touchEnd',[])
+            assert float(await zoom.input_value())==1/bars
+            assert abs(await grid.evaluate('g=>g.offsetWidth')-basis/bars)<=1
+            if bars>1:
+                await expect(page.locator('#beat-ruler span')).to_have_count(bars)
+                await expect(viewport).to_have_attribute('aria-label',f'Piano roll, {bars} four-beat bars. Only bar 1 is captured.')
+        # Tap and drag in unrecorded time, then pan over that same region.
+        outside=box['x']+.8*box['width']
+        await touch('touchStart',[(outside,y)])
+        await touch('touchMove',[(outside+12,y)])
+        await touch('touchEnd',[])
+        top=await viewport.evaluate('e=>e.scrollTop')
+        await touch('touchStart',[(outside-25,y),(outside+25,y)])
+        await touch('touchMove',[(outside-25,y-20),(outside+25,y-20)])
+        await touch('touchEnd',[])
+        assert abs(await viewport.evaluate('e=>e.scrollTop')-top-20)<2
+        assert float(await zoom.input_value())==.5
+        assert await notes()==original
+    finally:
+        await client.detach()
+    zoomed_width=await grid.evaluate('g=>g.offsetWidth')
     await page.locator('.overflow summary').click()
     async with page.expect_download() as requested:
         await page.locator('#draft-save').click()
-    download = await requested.value
-    draft = Path(await download.path()).read_bytes()
-    await page.locator('#zoom').evaluate('(el)=>{el.value="1";el.dispatchEvent(new Event("input"))}')
+    download=await requested.value
+    draft=Path(await download.path()).read_bytes()
+    assert json.loads(draft)['context']['zoom']==.5
+    await zoom.evaluate('el=>{el.value="1";el.dispatchEvent(new Event("input"))}')
     await page.locator('#draft-file').set_input_files({'name':'roundtrip.json','mimeType':'application/json','buffer':draft})
     await page.locator('#draft-replace').click()
-    assert await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth') == zoomed_width
+    assert await grid.evaluate('g=>g.offsetWidth')==zoomed_width
+    assert await notes()==original
 
 async def no_tool_row(page):
     screenshots = ROOT / 'build/remote-gestures'

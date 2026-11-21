@@ -260,6 +260,16 @@ dialog::backdrop{background:#000a}
 
 /* One pixel-aligned time layer above pitch shading, including fractional subdivisions. */
 #roll-grid{background:repeating-linear-gradient(to bottom,var(--grid-16) 0 1px,transparent 1px var(--row)),var(--bg)}
+/* At multi-bar zoom, the grid and lane occupy only the captured sample interval. */
+#roll-scroll[data-visible-bars]:not([data-visible-bars="1"]){
+ position:relative;
+ background:repeating-linear-gradient(135deg,transparent 0 7px,#203034 7px 8px),var(--bg);
+}
+#roll-scroll[data-visible-bars]:not([data-visible-bars="1"]) #roll-grid{overflow:clip}
+#roll-scroll[data-visible-bars]:not([data-visible-bars="1"])::after{
+ content:"Unrecorded";position:sticky;float:right;bottom:8px;right:8px;
+ padding:2px 6px;background:var(--bg);color:var(--muted);pointer-events:none;font-size:11px;
+}
 #roll-grid .black-key{z-index:0}
 #roll-grid::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--vertical-grid);background-repeat:repeat-y;background-size:100% 1px}
 #roll-grid .note{z-index:2}
@@ -462,8 +472,25 @@ dialog::backdrop{background:#000a}
 
 .patterns-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:12px;align-items:start}
 .patterns-grid-panel,.patterns-actions{min-width:0}
-.pattern-scope{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.pattern-scope{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.pattern-scope [data-pattern-action="review"]{margin-left:auto}
+.patterns-grid-panel .funkybeats-launcher{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);padding:4px}
+.patterns-grid-panel[data-scope="selected"] .perform-row-label{display:none}
+.patterns-grid-panel[data-scope="all"] .funkybeats-launcher{max-height:min(55dvh,38rem)}
+@media (orientation:landscape) and (max-height:500px){
+ #other-view:has(>.patterns-layout)>h2{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .patterns-grid-panel .funkybeats-launcher{padding:1px 4px}
+ .patterns-grid-panel[data-scope="all"] .funkybeats-launcher{max-height:calc(100dvh - 198px)}
+ .patterns-grid-panel .perform-grid{row-gap:4px}
+}
 #other-view .pattern-scope button{min-height:44px}
+/* The desktop page-9 proposal gives the 8×4 pad bank about two thirds of the width. */
+@media (min-width:1100px) and (min-height:650px){
+ .patterns-layout{grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:20px}
+ .patterns-grid-panel[data-scope="selected"] .funkybeats-launcher{padding:20px}
+ .patterns-grid-panel[data-scope="selected"] .perform-grid{gap:clamp(12px,2.6vh,24px) clamp(8px,1.1vw,16px)}
+ #other-view .patterns-layout .patterns-grid-panel[data-scope="selected"] .perform-cell{min-height:clamp(64px,9vh,88px);font-size:var(--fs-value)}
+}
 .patterns-actions{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
 #other-view .patterns-actions h3,.patterns-actions p{margin:0}
 .patterns-actions output{font-size:var(--fs-value);color:var(--accent)}
@@ -501,3 +528,32 @@ dialog::backdrop{background:#000a}
 /* Source-qualified Draft More units retain the shared label/glyph/value grid. */
 .master-more .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .master-more .encoder>span:last-child{white-space:normal;overflow-wrap:anywhere}
+
+/* Use the unused end of the tab bar for feedback on short, wide displays.
+   The three header bands and both sequence and motion editing surfaces stay visible. */
+@media (orientation:landscape) and (min-width:740px) and (max-height:500px){
+ :root{--compact-header:36px;--compact-tabs:24px;--compact-feedback:clamp(160px,calc(100vw - 405px),430px);--lane-h:30px}
+ body{grid-template-rows:auto minmax(0,1fr)}
+ .hdr{height:var(--compact-header)}
+ .tabs{height:var(--compact-tabs);margin:0 var(--compact-feedback) 0 0}
+ .tab{height:var(--compact-tabs)}
+ .engines,.engine{height:28px;margin-block:0}
+ #status.status-message{
+  position:fixed;inset:auto;top:calc(env(safe-area-inset-top) + var(--compact-header));
+  right:calc(env(safe-area-inset-right) + var(--margin));width:var(--compact-feedback);
+  height:var(--compact-tabs);padding:3px 4px;border:0;overflow:auto
+ }
+ main{padding-block:0}
+ .roll-panel{grid-template-rows:14px minmax(0,1fr) var(--lane-h)}
+ .beat-ruler span{top:0}
+ #roll-grid .note{max-height:var(--row);transform:translateY(-2px)}
+ #lane-param{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:0;align-content:center}
+ .lane-word{grid-column:1/-1}
+ .lane-dots{grid-column:2;grid-row:2}
+ #workspace-main[data-layout-view="locks"]{position:relative}
+ #workspace-main[data-layout-view="locks"] #roll-view{display:flex}
+ #motion-sequence-context{position:absolute;top:0;right:var(--margin);max-width:45%;margin:0}
+ #workspace-main[data-layout-view="locks"] #other-view{margin-top:24px}
+ #workspace-main:has(#break-views:not([hidden])){display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px}
+ #break-views:not([hidden]){flex-direction:column;align-self:start;margin:0}
+}

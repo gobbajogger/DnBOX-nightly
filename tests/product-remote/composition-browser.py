@@ -12,7 +12,45 @@ async def full_bounds(target,child=None):
  assert result['box']['width']>0 and result['box']['height']>0,('Detached/empty target',result)
  assert result['width']>=result['box']['width']-.2 and result['height']>=result['box']['height']-.2,('Control clipped by viewport/ancestor',result)
  return result
+async def check_selected_grid(page):
+    if page.viewport_size == {'width': 1440, 'height': 900}:
+        # PDF page 9 devotes roughly 64% of its content width to the pad panel.
+        geometry = await page.locator('.patterns-layout').evaluate('''layout => {
+            const bounds = layout.getBoundingClientRect();
+            const panel = layout.querySelector('.patterns-grid-panel').getBoundingClientRect();
+            const cells = [...layout.querySelectorAll('[data-launch-part]')].map(cell => cell.getBoundingClientRect());
+            return {ratio: panel.width / bounds.width, cells: cells.length,
+                    height: Math.min(...cells.map(r => r.height)),
+                    x: new Set(cells.map(r => r.left)).size, y: new Set(cells.map(r => r.top)).size};
+        }''')
+        assert 0.60 <= geometry['ratio'] <= 0.68 and geometry['height'] >= 76, geometry
+        assert (geometry['cells'], geometry['x'], geometry['y']) == (32, 8, 4), geometry
+        return
+    if page.viewport_size != {'width': 844, 'height': 390}:
+        return
+    cells = page.locator('[data-launch-part]')
+    outline = await cells.evaluate_all("""cells => {
+        const clip = document.querySelector('#other-view').getBoundingClientRect();
+        const boxes = cells.map(cell => {
+            const r = cell.getBoundingClientRect();
+            return [r.left, r.top, r.right, r.bottom, r.height];
+        });
+        return {boxes, clip: [clip.left, clip.top, clip.right, clip.bottom],
+                labels: cells.map(c => c.textContent.trim())};
+    }""")
+    boxes, clip = outline['boxes'], outline['clip']
+    assert len(boxes) == 32
+    assert all(clip[0] <= x and clip[1] <= y and right <= clip[2] and bottom <= clip[3]
+               and height >= 44 for x, y, right, bottom, height in boxes), outline
+    assert len({b[0] for b in boxes}) == 8 and len({b[1] for b in boxes}) == 4
+    assert outline['labels'] == [str(n).zfill(2) for n in range(1, 33)]
+    for selector in ['[data-pattern-scope="selected"]', '[data-pattern-scope="all"]', '#pattern-review']:
+        button = await full_bounds(page.locator(selector))
+        assert button['box']['top'] >= max(r[3] for r in boxes), (selector, button, boxes[-1])
+
+
 async def check_pattern_scopes(page):
+    await check_selected_grid(page)
     selected = page.get_by_role('button', name='Selected part', exact=True)
     all_parts = page.get_by_role('button', name='All parts', exact=True)
     await expect(selected).to_have_attribute('aria-pressed', 'true', timeout=2500)

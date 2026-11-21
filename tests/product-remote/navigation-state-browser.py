@@ -37,6 +37,36 @@ async def check_device_navigation(page, origin):
     return bounds
 
 
+async def check_roll_part_return(page):
+    # Choose a different part while its roll is unmounted, then open Sequence.
+    for away, part in [('sound', 'miami'), ('drums', 'chicago'), ('patterns', 'miami')]:
+        await choose(page, away)
+        await page.locator('[data-engine="' + part + '"]').click()
+        await choose(page, 'roll')
+        visible = await page.locator('#roll-scroll').evaluate("""pane => {
+            const viewport = pane.getBoundingClientRect();
+            return [...pane.querySelectorAll('[data-note]')].some(note => {
+                const box = note.getBoundingClientRect();
+                return box.left < viewport.right && box.right > viewport.left &&
+                       box.top >= viewport.top && box.bottom <= viewport.bottom;
+            });
+        }""")
+        assert visible, (away, part, 'selected part opened outside its notes')
+
+    # Returning to the same part must preserve the position chosen by the player.
+    pane = page.locator('#roll-scroll')
+    initial = await pane.evaluate('el => el.scrollTop')
+    await pane.hover()
+    await page.mouse.wheel(0, 90)
+    await page.wait_for_function("y => document.getElementById('roll-scroll').scrollTop !== y", arg=initial)
+    await page.wait_for_timeout(150)
+    position = await pane.evaluate('el => [el.scrollLeft,el.scrollTop]')
+    await choose(page, 'sound')
+    await choose(page, 'roll')
+    restored = await pane.evaluate('el => [el.scrollLeft,el.scrollTop]')
+    assert restored == position, (position, restored)
+
+
 async def run(origin,out,negative):
     f.ORIGIN=origin
     async with async_playwright() as pw:
@@ -62,6 +92,8 @@ async def run(origin,out,negative):
                         if view=='locks':await expect(page.locator('#roll-view')).to_be_visible();await expect(page.locator('#motion-grid')).to_be_visible();await expect(page.locator('#motion-sequence-context')).to_contain_text('Sequence ·')
                     await page.goto(origin+'/remote/',wait_until='networkidle')
                     await f.step_drums(page)  # exact existing implementation, no selector narrowing
+                    if not negative:
+                        await check_roll_part_return(page)
                     assert not errors,errors;assert await page.evaluate('navigationMidiCalls')==0
                     assets={name:hashlib.sha256(await (await page.request.get(origin+'/remote/'+name)).body()).hexdigest() for name in ['app.mjs','style.css','index.html']}
                     (out/f'{width}x{height}.json').write_text(json.dumps({'viewport':[width,height],'navigation':history,'deviceNavigation':device_navigation,'existingCase':'funkybeats-browser.py:step_drums unchanged','assetSha256':assets,'pageErrors':errors,'midiCalls':0},indent=2)+'\n');await page.screenshot(path=str(out/f'{width}x{height}.png'));print(f'PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums {width}x{height}',flush=True)

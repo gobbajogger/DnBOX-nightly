@@ -19,6 +19,12 @@ function parse(text){
   else{const match=/^(?:true|false|null|-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)/.exec(text.slice(p));if(!match)fail('JSON value');p+=match[0].length;}
  };value(0);ws();if(p!==text.length)fail('trailing JSON');try{return JSON.parse(text);}catch{fail('invalid JSON');}
 }
+// Local viewport only. Existing files store quarter-step zooms from 1 to 4.
+function validRollZoom(scale){
+ return [1/8,1/4,1/2].includes(scale) ||
+        (Number.isFinite(scale) && scale>=1 && scale<=4 && Number.isInteger(scale*4));
+}
+
 export class WorkspaceDraftFile{
  constructor({trace,identity,parameters}){
   keys(identity,['trace','catalog','components','source-sounds']);if(Object.values(identity).some(v=>typeof v!=='string'||! /^[0-9a-f]{64}$/.test(v)))fail('exact source SHA256 identity required');
@@ -41,7 +47,7 @@ export class WorkspaceDraftFile{
   array(document.launch,5,5);if(document.launch.some(v=>v!==null&&!int(v,0,31)))fail('Launch target');
   array(document.song,1024);for(const row of document.song){keys(row,['patterns','repeats']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8))fail('Song row');}
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>!BANKS.includes(b)))fail('unsupported local bank');
-  const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||!['velocity','chance','pitch','pan'].includes(c.lane)||!Number.isFinite(c.zoom)||c.zoom<1||c.zoom>4||c.zoom*4!==Math.round(c.zoom*4)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
+  const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||!['velocity','chance','pitch','pan'].includes(c.lane)||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
   return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
  }

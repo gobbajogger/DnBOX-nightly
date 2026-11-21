@@ -17,3 +17,14 @@ test('maximum accepted draft ID wraps Add and Paste into unused bounded IDs, pre
 test('a group paste crossing upper ID boundary reserves the whole unique group before commit',()=>{const a=setup(),m=a.state.model;const one=m.add({track:'chicago',note:60,start:1,end:9}),two=m.add({track:'chicago',note:64,start:3,end:11});m.selectIds([one,two]);m.copy();m.next=1000000000;const added=m.paste({track:'chicago',note:65,start:20});assert.deepEqual(added,['draft1000000000','draft2']);assert.equal(new Set(m.notes.map(n=>n.id)).size,m.notes.length);assert.doesNotThrow(()=>a.codec.encode(capture(a)));});
 test('per-step pan and drum pitch offset roundtrip without changing source voice',()=>{const a=setup(),n=a.state.model.notes.find(n=>n.track==='drum909');a.state.model.editNote(n.id,{pan:10,pitchOffset:7});const d=a.codec.decode(a.codec.encode(capture(a))),saved=d.notes.find(x=>x.id===n.id);assert.equal(saved.pan,10);assert.equal(saved.pitchOffset,7);assert.equal(saved.note,n.note);const b=setup();installWorkspaceDraft(b.state,b.codec,d);assert.deepEqual(b.state.model.notes,a.state.model.notes);});
 test('draft rejects invalid pan and pitch offsets, or drum articulation on a bass note',()=>{const a=setup(),d=capture(a),drum=d.notes.find(n=>n.track==='drum909'),bass=d.notes.find(n=>n.track==='chicago');for(const patch of[{pan:-1},{pan:128},{pan:1.5},{pitchOffset:-25},{pitchOffset:25},{pitchOffset:0.5}]){const changed=structuredClone(d);Object.assign(changed.notes.find(n=>n.id===drum.id),patch);assert.throws(()=>a.codec.validate(changed));}bass.pitchOffset=1;assert.throws(()=>a.codec.validate(d));});
+
+test('zoom round trips all historical quarter-steps and the three wider viewports, preserving note identity',()=>{
+ const a=edited(),draft=capture(a);
+ for(const zoom of [.125,.25,.5,...Array.from({length:13},(_,i)=>1+i/4)]){
+  const input=structuredClone(draft);input.context.zoom=zoom;
+  const decoded=a.codec.decode(a.codec.encode(input));assert.deepEqual(decoded,input);
+ }
+ for(const zoom of [0,.2,.375,.75,1.125,4.25]){
+  const input=structuredClone(draft);input.context.zoom=zoom;assert.throws(()=>a.codec.validate(input));
+ }
+});

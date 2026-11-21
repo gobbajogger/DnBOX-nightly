@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import re
+import runpy
 import shutil
 import subprocess
 import sys
@@ -98,6 +99,8 @@ def main():
     parser.add_argument("repository", type=Path)
     parser.add_argument("--lua", default=shutil.which("lua") or shutil.which("texlua"))
     parser.add_argument("--json", type=Path)
+    parser.add_argument("--browser-identity", action="store_true",
+                        help="also run the shipped identity page in Chromium against the stock USB dispatcher")
     args = parser.parse_args()
     if not args.lua:
         parser.error("provide a Lua interpreter with --lua")
@@ -123,6 +126,15 @@ def main():
             "expect noteons 0", "tap PLAY", "wait 2200", "tap PLAY", "expect noteons >0",
         ])
         subprocess.run([*lua, "receive", "10", midi], check=True)
+        browser = None
+        if args.browser_identity:
+            here = Path(__file__).resolve().parent
+            probe = work / "stock-editor"
+            subprocess.run(["cc", "-std=c11", "-O2", "-I", firmware, "-I", firmware / "build/gen",
+                            here / "stock-editor-probe.c", "-o", probe], check=True)
+            check_identity = runpy.run_path(str(here / "stock-identity-browser.py"))["check_identity"]
+            browser = check_identity(here.parents[1] / "web/product-site", probe)
+            print(browser["status"], " / DNR2 HELLO has no reply")
         if args.json:
             report = {
                 "firmware_commit": FIRMWARE,
@@ -134,6 +146,11 @@ def main():
                 "host_midi_output": midi.read_text(encoding="ascii").splitlines(),
                 "scope": "Packed Lua scripts at TouchOSC's callback boundary and stock firmware host; no physical MIDI or native TouchOSC application.",
             }
+            if browser:
+                report["browser_identity"] = browser
+                report["scope"] = ("TouchOSC Lua callbacks to the stock audio engine and Chromium Web MIDI "
+                                   "callbacks to the stock editor/OTA dispatchers. No physical MIDI or native "
+                                   "TouchOSC application.")
             args.json.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 

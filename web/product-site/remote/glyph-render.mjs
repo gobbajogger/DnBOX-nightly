@@ -17,6 +17,8 @@
 //   firmware/src/app/ui.c:8084-8108 snappy noise and level meter
 // Animation is re-render after interpolating the parameter. No decorative motion.
 
+import {miamiWave} from './wave-display.mjs';
+
 const MERGED={
  G023:'WAVE',G024:'WAVE',G025:'WAVE',G026:'WIDTH',G029:'WIDTH',
  G037:'ADSR',G038:'ADSR',G049:'ADSR',
@@ -165,8 +167,9 @@ export function proofSamples(kind,midi){
 // Chicago WAVE samples for a MIDI value, in firmware plot units / 16384.
 export function chicagoWaveSamples(midi){return chicagoWaveZ(56,Math.max(0,Math.min(127,Number(midi)||0))/127).map(z=>z/16384);}
 // Readout rows for a function at a MIDI value. Exactly the golden fixture for WAVE and WIDTH.
-export function readoutYs(fn,engine,midi){
+export function readoutYs(fn,engine,midi,miamiParameter){
  const m=Math.max(0,Math.min(127,Math.round(Number(midi)||0)));
+ if(engine==='miami' && (fn==='WAVE'||fn==='SHAPE'))return miamiWave(miamiParameter??(fn==='SHAPE'?11:0),m)?.rows.slice()??[];
  if(fn==='WIDTH') return readoutRows(proofSamples('juno_width',m)).ys;
  return readoutRows(proofSamples(engine==='juno'?'juno_wave':'chicago_wave',m)).ys;
 }
@@ -176,11 +179,6 @@ function waveSamples(engine,value){
  return chicagoWaveZ(56,x).map(z=>z/16384);
 }
 function wavePath(engine,value){
- if(engine==='miami'){
-  const u=unit(value), duty=0.10+0.8*Math.min(.99,Math.max(.01,u)), pts=[];
-  for(let i=0;i<29;i++) pts.push([i*40/28, i/28<duty?4:20]);
-  return path(pts);
- }
  return stroke(readoutRows(waveSamples(engine,value)));
 }
 function widthPath(_engine,value){
@@ -356,6 +354,12 @@ export function render(fnId, value, engineId='chicago', state={}){
  // State scalars (attack/cutoff/feedback etc.) are already normalized.
  value=unit(value,state.valueDomain??'normalized');
  const fn=fnOf(fnId);
+ if(engineId==='miami' && (fn==='WAVE'||fnId==='SHAPE')){
+  const parameter=state.miamiParameter ?? (fnId==='SHAPE'?11:0);
+  const wave=miamiWave(parameter,Math.round(value*127));
+  if(wave)return {fn:'WAVE',engine:engineId,live:false,cell:null,zero:wave.zero+0.5,
+   d:path(wave.rows.map((y,x)=>[x+0.5,y+0.5]))};
+ }
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
  const depth=state.depth;
@@ -367,6 +371,7 @@ export function render(fnId, value, engineId='chicago', state={}){
 }
 export function renderSvg(fnId, value, engineId, state={}){
  const drawn=render(fnId,value,engineId,state);
+ if(drawn.zero!==undefined)return `<svg class="glyph readout" data-fn="WAVE" viewBox="0 0 29 19" width="40" height="24" aria-hidden="true"><path d="M0.5 ${drawn.zero} H28.5" fill="none" stroke="currentColor" opacity=".1875"/><path d="${drawn.d}" fill="none" stroke="currentColor"/></svg>`;
  if(drawn.cell) return `<svg class="glyph readout readout-wave" data-fn="${drawn.fn}" viewBox="0 0 102 26" width="102" height="26" aria-hidden="true"><rect width="102" height="26" fill="#101a1f"/><path d="${drawn.d}" fill="none" stroke="#dde7de" stroke-width="1"/></svg>`;
  return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true"><path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
