@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 105772,
-      "sha256": "60f133a52eb35f66ae218f3d122afd8802d9dba791ccde9b32a15cd1b6085075"
+      "bytes": 111793,
+      "sha256": "3c8d80074342993d6a68b65fcb79326f10474d7d6bbfe6c5a4b21cb8482d40b5"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -758,9 +758,14 @@
       "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48"
     },
     {
+      "path": "remote/break-generator.mjs",
+      "bytes": 5629,
+      "sha256": "6995ece2dc203c9c7f77e2b1be02a8187f1a7c167493f4afb796975dfd692972"
+    },
+    {
       "path": "remote/break-sequence.mjs",
-      "bytes": 4709,
-      "sha256": "7b543ff3e4ec0579219771a3907b7cbc85fad821335679d1d0fb6b62779d99c1"
+      "bytes": 5018,
+      "sha256": "93934ec00c03c1581d4c98e6ca40a9f403cbce604599d79a18dbfbd1b140080a"
     },
     {
       "path": "remote/catalog.json",
@@ -834,8 +839,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 12622,
-      "sha256": "2f7baad242c2c2b41c1b1b245392cc5f0ae06a11d8fe56149259417829341154"
+      "bytes": 13122,
+      "sha256": "1abdf045895db7496e301a9bdadbf5bca89b2db032901ae080ab68183f9c1b07"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -884,8 +889,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 19641,
-      "sha256": "f8a2d9d3fc3eb7fad9227ed49637b4376eca38980df2769279e90b277c705aa8"
+      "bytes": 21298,
+      "sha256": "084625abb6623ea3d86a3d4d87505f9760b730b9880778891415233432532a39"
     },
     {
       "path": "remote/glyphs.mjs",
@@ -914,8 +919,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 9765,
-      "sha256": "e35b871e096dd4bb1f3088839ef50b2b3186840f025c00935ed853914cebcaa7"
+      "bytes": 10128,
+      "sha256": "802cf13a848e965f6139e3db391533a6edf6e5d63f8e12cb8a5273bf0ee314db"
     },
     {
       "path": "remote/lane.mjs",
@@ -1019,8 +1024,8 @@
     },
     {
       "path": "remote/sound.mjs",
-      "bytes": 4566,
-      "sha256": "419a19958cd342bae9948ecf56d39679b1f8bb58b9b0db5ac7f0398b13ce8788"
+      "bytes": 4630,
+      "sha256": "31114103ed887fdea443fccd04d70dfe6cb9f4d78caecf4dc5d5fa29b6296ca7"
     },
     {
       "path": "remote/source-sounds.json",
@@ -1039,8 +1044,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 63025,
-      "sha256": "6227483e17f457a115d04738a58a4580af83c7d1e33d3f3f27d01faa77dc97e3"
+      "bytes": 66319,
+      "sha256": "241bd1b257e4614e25ff432ee82b1e7b5a2fa04ddba7d399c7900beb010b418c"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1309,8 +1314,8 @@
     },
     {
       "path": "remote/pattern-locks.mjs",
-      "bytes": 1965,
-      "sha256": "8934a7a512d106ff26fa9ca40d6f17f3f0bf622708bcbf93b19407aeb5fdd241"
+      "bytes": 4118,
+      "sha256": "8941191d4cac5e95637d9a0f908d11bb4831e610643764cf3c377fc2f6703502"
     },
     {
       "path": "presets/working-file.mjs",

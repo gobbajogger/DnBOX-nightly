@@ -2,6 +2,7 @@
 import asyncio,importlib.util,json,subprocess,tempfile
 from pathlib import Path
 from playwright.async_api import async_playwright,expect
+from break_generator_journey import exercise as exercise_break_generator
 ROOT=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('funky',Path(__file__).with_name('funkybeats-browser.py'));core=importlib.util.module_from_spec(spec);spec.loader.exec_module(core)
 CLIPPED="""e=>{const r=e.getBoundingClientRect();let l=Math.max(0,r.left),t=Math.max(0,r.top),right=Math.min(innerWidth,r.right),bottom=Math.min(innerHeight,r.bottom);for(let p=e.parentElement;p;p=p.parentElement){const s=getComputedStyle(p),b=p.getBoundingClientRect(),bl=parseFloat(s.borderLeftWidth)||0,br=parseFloat(s.borderRightWidth)||0,bt=parseFloat(s.borderTopWidth)||0,bb=parseFloat(s.borderBottomWidth)||0,v=Math.max(0,p.offsetWidth-p.clientWidth-bl-br),h=Math.max(0,p.offsetHeight-p.clientHeight-bt-bb);if(/auto|scroll|hidden|clip/.test(s.overflowX)){l=Math.max(l,b.left+bl);right=Math.min(right,b.right-br-v)}if(/auto|scroll|hidden|clip/.test(s.overflowY)){t=Math.max(t,b.top+bt);bottom=Math.min(bottom,b.bottom-bb-h)}}return{box:r.toJSON(),width:Math.max(0,right-l),height:Math.max(0,bottom-t)}}"""
@@ -212,6 +213,7 @@ async def cases(evidence=None):
      await p.locator('[data-view="roll"]').click();await expect(plays).to_have_count(5)
      async def refuse_preview(route):await route.fulfill(status=503,body='Unavailable')
      await p.route('**/assets/starting-breaks/*.wav',refuse_preview);await plays.first.click();error=p.locator('#break-sequence [data-audio-status]');await expect(error).to_contain_text('Could not load this preview');await expect(plays.first).to_have_attribute('aria-pressed','false');await error.scroll_into_view_if_needed();await full_bounds(error);await screenshot('break-error');await p.unroute('**/assets/starting-breaks/*.wav',refuse_preview)
+     await exercise_break_generator(p,core.draft_state,core.load_draft)
      assert await p.evaluate('document.documentElement.scrollWidth<=innerWidth');assert await p.evaluate('midiCalls')==0;assert not errors,errors
      proof.append({'size':[w,h],'drumCellsPerKit':176,'drumMinimumHit':40,'patternsPerPart':32,'targets':targets,'previews':5,'previewBoxes':boxes,'midiCalls':0,'headerSamples':header_samples,'physicalScroll':scroll_samples,'realTabTargetsPerKit':176,'previewEnd':True,'previewStopOnLeave':True,'previewFetchError':True});print('COMPOSITION PASS',w,h,flush=True)
     finally:await c.close()

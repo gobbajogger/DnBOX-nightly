@@ -8,12 +8,16 @@ const percentParameters = [
  new Set([1, 2, 4, 5, 8, 9, 10, 12, 14, 15]),  // Miami
 ];
 
+export function knobPercent(raw) {
+ return Math.floor((raw * 100 + 63) / 127);
+}
+
 export function sourcePercent(row, raw) {
  if (row?.kind !== 1 || row.target !== 2 || (row.voice !== 0 && row.voice !== 1) ||
      (row.sourceBank !== 0 && row.sourceBank !== 1) ||
      !percentParameters[row.sourceBank]?.has(row.parameter) || row.unit !== '%' ||
      !Number.isInteger(raw) || raw < 0 || raw > 127) return null;
- return Math.floor((raw * 100 + 63) / 127) + ' %';
+ return knobPercent(raw) + ' %';
 }
 
 export class SourceSounds{

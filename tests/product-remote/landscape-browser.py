@@ -23,6 +23,7 @@ def expected_states():
         'drums-accent-drum909', 'drums-accent-drum808',
         'drums-voices-7-11-drum909', 'drums-voices-7-11-drum808',
         'pattern-lock-bass-a-cutoff', 'pattern-lock-bass-b-cutoff', 'pattern-lock-break-level',
+        'pattern-lock-bass-a-fx-type', 'pattern-lock-bass-b-arp', 'break-generator', 'break-sound-pattern-chance',
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
           for kit in ('drum909', 'drum808') for voice in range(11)),
@@ -64,8 +65,8 @@ def author_break_chance(page):
 
 def inspect_pattern_locks(page,snap):
     for engine,part,pattern,name,step,expected in [
-        ('chicago',2,0,'pattern-lock-bass-a-cutoff',3,'33 raw'),
-        ('miami',3,15,'pattern-lock-bass-b-cutoff',6,'33 raw'),
+        ('chicago',2,0,'pattern-lock-bass-a-cutoff',3,'26%'),
+        ('miami',3,15,'pattern-lock-bass-b-cutoff',6,'26%'),
         ('breaks',4,31,'pattern-lock-break-level',9,'126 raw'),
     ]:
         page.locator(f'[data-engine="{engine}"]').click()
@@ -94,6 +95,29 @@ def inspect_pattern_locks(page,snap):
         geometry=target.evaluate("e=>{const b=e.getBoundingClientRect(),l=document.querySelector('#velocity').getBoundingClientRect();const h=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);return {hit:h===e||e.contains(h),visible:b.left>=l.left-1&&b.right<=l.right+1&&b.top>=0&&b.bottom<=innerHeight+1}}")
         assert geometry['hit'] and geometry['visible'],(name,geometry)
         snap(name,[11,15] if engine=='breaks' else [3,17,22])
+        if engine == 'breaks':
+            page.get_by_role('button', name='Generator', exact=True).click()
+            panel = page.locator('#break-generator')
+            expect(panel.locator('[data-break-setting]')).to_have_count(11)
+            complexity = panel.locator('[data-break-setting="0"]')
+            complexity.fill('81')
+            complexity.press('Tab')
+            expect(complexity).to_have_value('81')
+            snap('break-generator', [11])
+            page.locator('[data-view="sound"]').click()
+            chance = page.locator('.break-sound-chance [data-break-setting="9"]')
+            expect(chance).to_have_attribute('data-break-pattern', str(pattern))
+            snap('break-sound-pattern-chance', [11])
+        else:
+            picker = page.get_by_role('combobox', name='Choose lock target')
+            expect(picker.locator('option:not([disabled])')).to_have_count(20)
+            is_bass_a = engine == 'chicago'
+            picker.select_option('4113' if is_bass_a else '4141')
+            cell = cells.nth(2)
+            expect(cell).to_have_attribute('aria-valuetext', 'Unset')
+            cell.press('ArrowUp')
+            expect(cell).not_to_have_attribute('aria-valuetext', 'Unset')
+            snap('pattern-lock-bass-a-fx-type' if is_bass_a else 'pattern-lock-bass-b-arp', [3, 17])
 
 
 def inspect_bass_steps(page, part, snap):

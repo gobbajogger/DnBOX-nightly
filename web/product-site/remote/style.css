@@ -69,6 +69,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 .sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .transport #rec[aria-pressed=true]{color:#ff4841;border-color:#ff4841}
 
+/* Keep the native picker in the header, outside every beat, pitch and step target. */
+#lock-choice:not([hidden]){
+ display:grid;place-items:center;position:relative;flex:none;min-width:56px;height:var(--hit);
+ margin-left:12px;padding:0 8px;border:1px solid var(--line-strong);border-radius:var(--r-control);
+ background:var(--control);color:var(--fg);font-weight:700;cursor:pointer
+}
+#lock-choice select{position:absolute;inset:0;width:100%;height:100%;min-height:var(--hit);opacity:0;cursor:pointer}
+#lock-choice:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+@media (orientation:portrait) and (max-width:600px){
+ #lock-choice:not([hidden]){order:1;margin:calc(36px - var(--hit)) 0 0 8px}
+}
 /* Work area */
 main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px var(--margin) 8px;overflow:hidden}
 #roll-view{flex:1;min-height:0;display:flex}
@@ -409,6 +420,8 @@ dialog::backdrop{background:#000a}
 .step-slider[aria-pressed=true] .step-slider-fill{background:var(--accent);opacity:1}
 .step-slider:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
 #lane-param{padding:2px;margin:2px;gap:1px}#lane-value{font-size:12px}.lane-dots{margin-top:0}
+#lane-value :is(.lock-pattern,.lock-display){display:block}
+#lane-value .lock-display[data-long=true]{font-size:9px;letter-spacing:-.2px}
 
 #other-view .funkybeats-sequencer:has(.drum-step-lane){display:flex;flex-direction:column;max-height:calc(100dvh - 190px)}
 #other-view .funkybeats-sequencer:has(.drum-step-lane)>.seq-numbers,#other-view .drum-step-lane{flex-shrink:0}
@@ -598,6 +611,11 @@ dialog::backdrop{background:#000a}
  :root{--compact-header:36px;--compact-tabs:24px;--compact-feedback:clamp(160px,calc(100vw - 405px),430px);--lane-h:30px}
  body{grid-template-rows:auto minmax(0,1fr)}
  .hdr{height:var(--compact-header)}
+ /* The picker uses the free header area above the start of the feedback strip.
+    Reserve that column so its full touch surface is clear of tabs and live status. */
+ .hdr:has(#lock-choice:not([hidden])){position:relative}
+ #lock-choice:not([hidden]){position:absolute;top:0;right:calc(var(--compact-feedback) - 72px);width:68px;margin:0}
+ body:has(#lock-choice:not([hidden])) #status.status-message{width:calc(var(--compact-feedback) - 76px)}
  .tabs{height:var(--compact-tabs);margin:0 var(--compact-feedback) 0 0}
  .tab{height:var(--compact-tabs)}
  .engines,.engine{height:28px;margin-block:0}
@@ -615,7 +633,8 @@ dialog::backdrop{background:#000a}
  .lane-dots{grid-column:2;grid-row:2}
  #lane-param[data-pattern-lock=true]{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0}
  #lane-param[data-pattern-lock=true] :is(.lane-word,output){font-size:10px;line-height:11px;white-space:nowrap}
- #lane-param[data-pattern-lock=true] .lane-dots{display:none}
+ #lane-param[data-pattern-lock=true] :is(.lane-dots,.lock-pattern){display:none}
+ #lane-param[data-pattern-lock=true] .lock-display[data-long=true]{font-size:8px;letter-spacing:-.2px}
  #workspace-main[data-layout-view="locks"]{position:relative}
  #workspace-main[data-layout-view="locks"] #roll-view{display:flex}
  #motion-sequence-context{position:absolute;top:0;right:var(--margin);max-width:45%;margin:0}
@@ -805,3 +824,22 @@ dialog::backdrop{background:#000a}
  .mix-modes[aria-label="Mix controls"] {display:grid;grid-template-columns:repeat(4,minmax(44px,1fr)) minmax(74px,1.3fr)}
  .mix-modes[aria-label="Mix controls"] button {min-width:0;padding-inline:2px}
 }
+
+#break-generator { overflow:auto; min-height:0; }
+#break-generator h2 { margin:0 0 8px; font-size:18px; }
+#break-generator fieldset { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:0 0 8px; padding:8px; min-width:0; border:1px solid var(--line); border-radius:var(--r-panel); }
+#break-generator legend { font-weight:600; color:var(--muted); padding:0 4px; }
+.break-setting { display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; align-content:center; gap:4px; min-width:0; padding:6px; background:var(--panel); border-radius:var(--r-panel); }
+.break-setting-name { font-weight:600; }
+.break-setting-glyph { width:96px; max-width:100%; height:38px; color:#d678ff; --idle:var(--line-strong); }
+.break-setting-glyph[data-r22-glyph] { color:#ffba41; --idle:var(--panel); }
+.break-setting-glyph rect { fill:color-mix(in srgb,currentColor var(--ink),var(--idle)); transition:fill 100ms linear; }
+.break-setting input,.break-setting select { width:100%; min-height:44px; box-sizing:border-box; text-align:center; color:var(--fg); background:var(--control); border:1px solid var(--line-strong); border-radius:var(--r-control); font:inherit; }
+.break-setting select,.break-percent { width:100%; max-width:10rem; }
+.break-percent { position:relative; }
+.break-percent input { padding-inline:1.4em; }
+.break-percent span { position:absolute; right:.4em; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--muted); }
+.break-sound-chance { display:grid; gap:4px; align-content:start; }
+@media(max-width:560px) { #break-generator fieldset { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-height:500px) and (min-width:740px) { .break-setting { gap:2px; padding:3px; } .break-setting-glyph { width:74px; height:29px; } }
+@media(prefers-reduced-motion:reduce) { .break-setting-glyph rect { transition:none; } }

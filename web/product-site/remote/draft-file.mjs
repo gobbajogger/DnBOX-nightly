@@ -1,6 +1,7 @@
 import {checkedPatternLocks,lockField} from './pattern-locks.mjs';
 import {checkedStepRows,replaceStepRows,viewStepFields} from './local-step-rows.mjs';
 import {SuperJ6Banks} from './superj6-banks.mjs';
+import {legacyBreakChanceId} from './break-generator.mjs';
 import {emptyBreakSequence,validateBreakSequence,installBreakSequence} from './break-sequence.mjs';
 import {SOUND_BANKS,superJ6Spec,acceptsSuperJ6} from './superj6.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
@@ -68,7 +69,10 @@ export class WorkspaceDraftFile{
   array(document.launch,5,5);if(document.launch.some(v=>v!==null&&!int(v,0,31)))fail('Launch target');
   array(document.song,MAX_SONG_ROWS);for(const row of document.song){keys(row,['patterns','repeats'],['muteMask']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8)||(Object.hasOwn(row,'muteMask')&&!int(row.muteMask,0,31)))fail('Song row');}
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>b!=='JUNO'&&!SOUND_BANKS.includes(b)))fail('unsupported local bank');
-  const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||(!['velocity','chance','pitch','pan'].includes(c.lane)&&!viewStepFields(c.part,c.view).includes(c.lane)&&!(c.lane==='patternLock'&&lockField(c.part,document.soundBanks,c.view)))||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
+  const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit'],['lockTarget','breakView']);
+  if(Object.hasOwn(c,'breakView') && (c.breakView!=='generator'||c.view!=='roll'||c.part!=='breaks'||!int(document.launch[4],0,31)))fail('invalid BREAK generator context');
+  if(Object.hasOwn(c,'lockTarget')&&(c.lane!=='patternLock'||!Number.isInteger(c.lockTarget)||!lockField(c.part,document.soundBanks,c.view,c.lockTarget)))fail('invalid lock target context');
+  array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||(!['velocity','chance','pitch','pan'].includes(c.lane)&&!viewStepFields(c.part,c.view).includes(c.lane)&&!(c.lane==='patternLock'&&lockField(c.part,document.soundBanks,c.view)))||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
   return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.keys(stepLanes).length?{stepLanes}:{}),...(patternLocks.length?{patternLocks}:{}),...(imported.banks.size?{superJ6Banks:imported.snapshot()}:{}),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats,...(r.muteMask?{muteMask:r.muteMask}:{})})),soundBanks:[...document.soundBanks],context:clone(c)};
  }
@@ -99,5 +103,5 @@ export function installWorkspaceDraft(state,codec,document,{keepSession=false}={
 }
 export function hasDraftChanges(state,codec){
  if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture||state.stepValueLane?.gesture||state.patternLocks?.length||Object.keys(state.stepLanes??{}).length||state.superJ6Banks?.banks.size)return true;
- return !!state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())||!same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
+ return state.parameterDraft.has(legacyBreakChanceId)||!!state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())||!same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
 }

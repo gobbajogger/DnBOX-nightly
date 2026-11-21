@@ -3,6 +3,7 @@ import {mountBreakPanel} from '../components/break-panel/panel.mjs';
 import {SAMPLE_CONTRACT_SHA256} from '../sample-pin.mjs';
 import {createStartingBreakPreview, normalizeStartingBreakSelection} from '../starting-break-preview.mjs';
 
+import {checkedBreakGenerators} from './break-generator.mjs';
 import {validBreakChance} from './break-chance.mjs';
 
 const rates = ['1/16', '1/8', '1/4'];
@@ -12,7 +13,7 @@ export function emptyBreakSequence() {
 
 export function validateBreakSequence(value) {
   const validLoop = id => id === null || typeof id === 'string' && normalizeStartingBreakSelection([id])?.length === 1;
-  if (!value || !['loops,rate,slices','chance,loops,rate,slices'].includes(Object.keys(value).sort().join(',')) ||
+  if (!value || Object.keys(value).some(key => !['loops','rate','slices','chance','generators'].includes(key)) ||
       (Object.hasOwn(value,'chance') && !validBreakChance(value.chance)) ||
       !Array.isArray(value.loops) || value.loops.length !== 2 || !value.loops.every(validLoop) ||
       !rates.includes(value.rate) || !Array.isArray(value.slices) || value.slices.length !== 16 ||
@@ -20,12 +21,17 @@ export function validateBreakSequence(value) {
     throw Error('Local draft: invalid BREAK sequence');
   }
   const checked = structuredClone(value);
+  if (Object.hasOwn(checked,'generators')) {
+    checked.generators = checkedBreakGenerators(checked.generators);
+    if (!checked.generators.length) delete checked.generators;
+  }
   if (checked.chance && !checked.chance.some(v => v !== null)) delete checked.chance;
   return checked;
 }
 
 // Replace optional step locks as well as loops/rate/slices when loading or undoing an older Draft.
 export function installBreakSequence(state, next) {
+  if (!Object.hasOwn(next, 'generators')) delete state.generators;
   if (!Object.hasOwn(next, 'chance')) delete state.chance;
   Object.assign(state, structuredClone(next));
 }
