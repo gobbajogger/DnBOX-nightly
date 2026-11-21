@@ -2,6 +2,16 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Owner page 11 and the complete control comparison
+
+BREAK now opens its pattern's 16 level locks and Draft Review directly. Opening Step locks focuses the first enabled step. A Draft file preserves the selected BREAK editor and its lock lane. Opening an empty pattern now measures the visible roll at the selected zoom. On the 844 × 390 screen at 1× the time axis fell from 1,400 to 660 pixels, which exposed all 16 steps in place of seven.
+
+The [control comparison](../../evidence/remote-owner-pages-20261121/owner-control-crosswalk/README.md) indexes 996 drawing controls, readouts and appendix entries. At `242f0189`, sandboxed Chromium captured 26 states for all 23 product pages at their owner viewport sizes. The [browser measurements](../../evidence/remote-owner-pages-20261121/owner-control-crosswalk/browser-controls.json.gz) cover 1,561 mounted controls, 1,416 enabled controls and 1,091 enabled center hits. The retained screenshots for `944e99d8` also matched their 79 recorded dimensions and hashes. Outstanding visual differences include the drum grid on page 15 and the approved 17:00 glyph identities.
+
+An independent [SuperJ6 control check](../../evidence/remote-owner-pages-20261121/superj6-tempo-provider.json) covered all 17 boundaries, 216 Remote readouts and 108 measured Linux periods at 48 kHz. The available source-derived Conductor supplies musical durations. Verbatim tempo names still require the original build-9 AU or its display formatter.
+
+The corrected BREAK editor passed keyboard edit, readback, Review, Undo and Redo in Chromium at desktop, phone landscape and phone portrait sizes. At all three sizes, 1× showed sixteen complete cells and 2× showed eight. Two full pointer replays on the final sizing change timed out. The comparison report identifies the successful paths and the interrupted steps.
+
 ## Native parameter confirmation and cloud gate runs
 
 Apply verifies the requested wire value against both the firmware acknowledgement and a fresh read of the catalog. Floating-point controls use the encoded value. Remote names any other controls that changed and offers scalar Undo only for an isolated edit.

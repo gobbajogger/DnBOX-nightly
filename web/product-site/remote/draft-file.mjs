@@ -70,7 +70,8 @@ export class WorkspaceDraftFile{
   array(document.song,MAX_SONG_ROWS);for(const row of document.song){keys(row,['patterns','repeats'],['muteMask']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8)||(Object.hasOwn(row,'muteMask')&&!int(row.muteMask,0,31)))fail('Song row');}
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>b!=='JUNO'&&!SOUND_BANKS.includes(b)))fail('unsupported local bank');
   const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit'],['lockTarget','breakView']);
-  if(Object.hasOwn(c,'breakView') && (c.breakView!=='generator'||c.view!=='roll'||c.part!=='breaks'||!int(document.launch[4],0,31)))fail('invalid BREAK generator context');
+  if(Object.hasOwn(c,'breakView') && (c.view!=='roll' || c.part!=='breaks' ||
+     (c.breakView!=='notes' && !(c.breakView==='generator' && int(document.launch[4],0,31)))))fail('invalid BREAK editor context');
   if(Object.hasOwn(c,'lockTarget')&&(c.lane!=='patternLock'||!Number.isInteger(c.lockTarget)||!lockField(c.part,document.soundBanks,c.view,c.lockTarget)))fail('invalid lock target context');
   array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||(!['velocity','chance','pitch','pan'].includes(c.lane)&&!viewStepFields(c.part,c.view).includes(c.lane)&&!(c.lane==='patternLock'&&lockField(c.part,document.soundBanks,c.view)))||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.

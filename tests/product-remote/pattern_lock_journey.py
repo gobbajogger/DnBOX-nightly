@@ -51,8 +51,17 @@ async def exercise(page, draft_state, load_draft):
         await page.locator(f'[data-launch-part="{part}"][data-pattern="{pattern}"]').click()
         await page.locator('[data-view="roll"]').click()
         if part == 4:
-            await page.locator('[data-break-view="notes"]').click()
-        await choose_lane()
+            await page.get_by_role('button', name='Step locks',exact=True).click()
+            await expect(cells.first).to_be_focused()
+            await expect(lane).to_have_value('patternLock')
+            axis = await page.locator('#velocity .lane-track').evaluate('''track => ({
+                width:track.getBoundingClientRect().width,
+                viewport:document.querySelector('#roll-scroll').clientWidth,
+                zoom:Number(document.querySelector('#zoom').value)
+            })''')
+            assert abs(axis['width'] - axis['viewport'] * axis['zoom']) <= 1,axis
+        else:
+            await choose_lane()
         await expect(cycle).to_contain_text('P' + str(pattern + 1).zfill(2))
 
     async def rows():
@@ -156,15 +165,19 @@ async def exercise(page, draft_state, load_draft):
     await target(4,2)
     await cells.nth(7).press('ArrowDown')
     assert (await rows())[1153,2][7] == 126
-    if not await page.locator('.overflow').evaluate('e=>e.open'):
-        await page.locator('.overflow summary').click()
-    await page.locator('#review').click()
+    review = page.get_by_role('button',name='Review draft',exact=True)
+    await review.click()
     await expect(page.locator('#changes')).to_contain_text('Bass B / MIAMI · P01 · Step 1 · Cutoff lock: 61 %')
     await expect(page.locator('#changes')).to_contain_text('Bass B / CHICAGO · P01 · Step 1 · Cutoff lock: 24%')
     await expect(page.locator('#changes')).to_contain_text('BREAK · P03 · Step 8 · Level lock: -0.1dB')
     await page.locator('#review-dialog').get_by_role('button',name='Return').click()
+    await expect(review).to_be_focused()
     saved = await draft_state(page)
-    await load_draft(page,saved);await page.locator('[data-break-view="notes"]').click();await choose_lane()
+    assert saved['context']['breakView'] == 'notes'
+    await page.locator('[data-break-view="slices"]').click()
+    await load_draft(page,saved)
+    await expect(page.locator('[data-break-view="notes"]')).to_have_attribute('aria-pressed','true')
+    await expect(lane).to_have_value('patternLock')
     await expect(cells.nth(7)).to_have_attribute('aria-valuetext','-0.1dB')
     assert await rows() == {(r['catalogId'],r['pattern']):r['values'] for r in saved['patternLocks']}
     await load_draft(page,old);assert await rows() == {}

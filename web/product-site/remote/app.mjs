@@ -222,11 +222,24 @@ for(const button of document.querySelectorAll('[data-break-view]'))button.onclic
  syncBreakView();
  if (breakView === 'notes') {paintNotes(); fitPattern(); paintNotes();}
 };
+if($('break-locks'))$('break-locks').onclick=()=>{
+ if(view!=='roll' || $('part').value!=='breaks' || !knownBreakPattern(launch.targets[4]))return;
+ cancelParameters();activeLaneStep=null;
+ breakView='notes';
+ $('lane-kind').value='patternLock';
+ syncBreakView();fitPattern();paintNotes();
+ $('velocity').querySelector('[data-lane-step]:enabled')?.focus();
+};
+if($('break-review'))$('break-review').onclick=openReview;
 function syncBreakView() {
  const editingBreak = view === 'roll' && $('part').value === 'breaks';
  const generatorButton=document.querySelector('[data-break-view="generator"]');
  const ownsPattern=knownBreakPattern(launch.targets[4]);
- if(generatorButton){generatorButton.disabled=!ownsPattern;generatorButton.title=ownsPattern?'':'Select a BREAK pattern in Patterns & Song';}
+ for(const button of [generatorButton,$('break-locks')]){
+  if(!button)continue;
+  button.disabled=!ownsPattern;
+  button.title=ownsPattern?'':'Select a BREAK pattern in Patterns & Song';
+ }
  if(breakView==='generator' && !ownsPattern)breakView='slices';
  const generator=editingBreak && breakView==='generator';
  if($('break-generator')){$('break-generator').hidden=!generator;if(generator)paintBreakGenerator();}
@@ -302,7 +315,12 @@ function framePitchOffset(top){
  const fullLandscapeRoll = minRow() === 16 && scroll.clientHeight >= 16 * row;
  scroll.scrollTop = Math.max(0, fullLandscapeRoll ? Math.round(top / row) * row : top);
 }
-function fitPattern(){const ns=notes();if((scroll?.clientHeight||0)<80)return;if(!ns.length){if(Number($('zoom').value)<1)width=Math.round(rollBasis()*Number($('zoom').value));framePitchOffset(scroll.scrollTop);return;}applyRow();const lo=Math.min(...ns.map(n=>n.note)),hi=Math.max(...ns.map(n=>n.note));grid.style.height=(128*row)+'px';const top=(127-hi)*row,bottom=(127-lo+1)*row,view=scroll.clientHeight,band=bottom-top;framePitchOffset(band<=view?top-(view-band)/2:top-row);if(Number($('zoom').value)<1){width=Math.round(rollBasis()*Number($('zoom').value));return;}const start=Math.min(...ns.map(n=>n.start)),end=Math.max(...ns.map(n=>n.end)),basis=rollBasis(),frac=Math.max(.2,(end-start)/trace.endSample);const zoom=Math.min(4,Math.max(1,Math.round((0.92/frac)*4)/4));if($('zoom')){$('zoom').value=String(zoom);width=Math.round(basis*zoom);if($('zoom-step'))$('zoom-step').textContent='Zoom '+Math.round(zoom*100)+'%';}}
+function fitPattern(){const ns=notes();if((scroll?.clientHeight||0)<80)return;if(!ns.length){
+ // The Slices and Generator panels hide the roll. Recompute its time axis
+ // against the visible pane when opening an empty pattern at any zoom.
+ width=Math.round(rollBasis()*Number($('zoom').value||1));
+ framePitchOffset(scroll.scrollTop);return;
+}applyRow();const lo=Math.min(...ns.map(n=>n.note)),hi=Math.max(...ns.map(n=>n.note));grid.style.height=(128*row)+'px';const top=(127-hi)*row,bottom=(127-lo+1)*row,view=scroll.clientHeight,band=bottom-top;framePitchOffset(band<=view?top-(view-band)/2:top-row);if(Number($('zoom').value)<1){width=Math.round(rollBasis()*Number($('zoom').value));return;}const start=Math.min(...ns.map(n=>n.start)),end=Math.max(...ns.map(n=>n.end)),basis=rollBasis(),frac=Math.max(.2,(end-start)/trace.endSample);const zoom=Math.min(4,Math.max(1,Math.round((0.92/frac)*4)/4));if($('zoom')){$('zoom').value=String(zoom);width=Math.round(basis*zoom);if($('zoom-step'))$('zoom-step').textContent='Zoom '+Math.round(zoom*100)+'%';}}
 function onsetX(n){return n.start/trace.endSample*width;}
 function laneHtml(ns,span=width){return `<div class="lane-track" style="width:${typeof span==='number'?span+'px':span}">${renderStepSliders(stepGroups(ns,trace.endSample),{kind:laneKind(),base:laneBase,selected,breakChance:breakChanceMode()?breakChanceLane.values:null,activeStep:activeLaneStep,stepValue:laneSpec()?{spec:laneSpec(),values:stepValueLane.values,enabled:stepValueLane.enabled}:null})}</div>`;}
 function drumLaneNotes(){const kit=$('part').value==='drum808'?'808':'909';return model.notes.filter(n=>n.track==='drum'+kit&&n.note===DRUM_VOICES[kit][drumVoice][1]);}
@@ -936,7 +954,7 @@ window.addEventListener('blur',()=>{rollBinding.cancel();cancelParameters();});d
 const draftState={patternLocks,stepLanes,stepValueLane,superJ6Banks,breakSequence,breakChanceLane,model,motion,arrangement,launch,parameterDraft,parameterIdentity,timeline,soundBanks};
 class MixWorkspaceDraftFile extends WorkspaceDraftFile{validate(document){const checked=super.validate(document);return super.validate({...checked,parameters:masterDraft.normalize(normalizeMixEdits(checked.parameters,mixAliasIndex))});}}
 const draftCodec=new MixWorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean)});
-const draftContext=()=>({part:$('part').value,view,...(view==='roll'&&$('part').value==='breaks'&&breakView==='generator'?{breakView}:{}),mode,lane:laneKind(),...(laneKind()==='patternLock'&&currentLock()?.id!==lockField($('part').value,soundBanks,view)?.id?{lockTarget:currentLock().id}:{}),zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
+const draftContext=()=>({part:$('part').value,view,...(view==='roll'&&$('part').value==='breaks'&&breakView!=='slices'?{breakView}:{}),mode,lane:laneKind(),...(laneKind()==='patternLock'&&currentLock()?.id!==lockField($('part').value,soundBanks,view)?.id?{lockTarget:currentLock().id}:{}),zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
 const startingDraft=draftCodec.capture(draftState,draftContext());
 
 function showReviewConfirmation(confirm) {
@@ -973,7 +991,7 @@ $('review-reset').onclick=()=>{
  function apply(snapshot, song, legacy) {
   const context=installWorkspaceDraft(draftState,draftCodec,snapshot,{keepSession:true});
   restoreLockChoice(context);selected=context.selected;songSelected=song;activeLaneStep=null;laneBases.clear();
-  if(context.breakView==='generator' && view==='roll' && $('part').value==='breaks')breakView='generator';
+  if(context.breakView && view==='roll' && $('part').value==='breaks')breakView=context.breakView;
   importedJunoOwners.clear();for(const owner of legacy)importedJunoOwners.add(owner);
   activeParameter=null;activePresentation=null;
   breakEditor?.paint();syncBreakView();
@@ -984,7 +1002,7 @@ $('review-reset').onclick=()=>{
  $('review-dialog').close();
  paintNotes();if(view!=='roll')other();status('Local draft discarded. Undo in Draft to restore it.');
 };
-bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{rollBinding.cancel();cancelParameters();},restoreContext:c=>{retireNativeSound();recoverLegacySoundOwners();restoreLockChoice(c);activeLaneStep=null;laneBases.clear();$('part').value=c.part;if(c.breakView==='generator')breakView='generator';else if(breakView==='generator')breakView='slices';selected=c.selected;mode='auto';multi=c.multi;drumVoice=c.drumVoice;drumOriginal=false;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=rollBasis()*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
+bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{rollBinding.cancel();cancelParameters();},restoreContext:c=>{retireNativeSound();recoverLegacySoundOwners();restoreLockChoice(c);activeLaneStep=null;laneBases.clear();$('part').value=c.part;breakView=c.breakView??'slices';selected=c.selected;mode='auto';multi=c.multi;drumVoice=c.drumVoice;drumOriginal=false;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=rollBasis()*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
 // Explicit simulator admission only. Native endpoint/catalog admission is not yet qualified.
 const simulatorBundle=globalThis.__DNBOX_FIRMWARE_BUNDLE?.admission?.testOnly===true?globalThis.__DNBOX_FIRMWARE_BUNDLE:null;
 if(simulatorBundle){for(const id of['firmware-safety','firmware-controls'])if($(id))$(id).hidden=false;}

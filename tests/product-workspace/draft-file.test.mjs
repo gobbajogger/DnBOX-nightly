@@ -281,4 +281,9 @@ test('old BREAK B chance values round-trip independently from pattern-owned Gene
  const generatorContext={...copy,context:{...copy.context,view:'roll',part:'breaks',breakView:'generator'}};
  assert.deepEqual(a.codec.decode(a.codec.encode(generatorContext)),generatorContext);
  const unknown=structuredClone(generatorContext);unknown.launch[4]=null;assert.throws(()=>a.codec.validate(unknown));
+ const notes=structuredClone(unknown);notes.context.breakView='notes';
+ assert.deepEqual(a.codec.decode(a.codec.encode(notes)),notes);
+ for(const context of [{part:'chicago'},{view:'sound'},{breakView:'unrecognized'}]){
+  assert.throws(()=>a.codec.validate({...notes,context:{...notes.context,...context}}));
+ }
 });

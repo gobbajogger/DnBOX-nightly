@@ -64,4 +64,25 @@ await check('Drum Review and inspector preserve source units, names and rounded 
  x.press('redo');assert.match(review(x),/808.*BD.*Tune: \+0\.1st → \+0\.3st/);
 });
 
-if(failed)process.exitCode=1;console.log('CORRECTION_REGRESSION_CASES 7; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
+await check('BREAK Sequence opens its own pattern locks and local Review',async x=>{
+ x.changePart('breaks','BREAK');x.view('roll');
+ assert.equal(x.get('break-locks').disabled,true);
+ x.view('patterns');
+ const target=Object.assign(new Node(),{dataset:{launchPart:'4',pattern:'2'}});
+ x.get('other-view').emit('click',{target});
+ // The Slices panel starts with an unmeasurable roll. Keeping a musician's
+ // 2× zoom requires measuring the visible pane when it opens.
+ x.get('roll-scroll').clientWidth=0;x.get('zoom').value='2';x.view('roll');
+ assert.equal(x.get('break-locks').disabled,false);
+ x.get('roll-scroll').clientWidth=660;x.press('break-locks');
+ assert.equal(x.get('zoom').value,'2');
+ assert.match(x.get('velocity').innerHTML,/class="lane-track" style="width:1320px"/);
+ assert.equal(x.get('break-sequence').hidden,true);
+ assert.equal(x.get('roll-view').hidden,false);
+ assert.equal(x.get('lane-kind').value,'patternLock');
+ assert.equal((x.get('velocity').innerHTML.match(/Level lock Unset/g)??[]).length,16);
+ x.press('break-review');assert.equal(x.get('review-dialog').open,true);
+ assert.match(x.get('review-selections').textContent,/BREAK pattern P03/);
+});
+
+if(failed)process.exitCode=1;console.log('CORRECTION_REGRESSION_CASES 8; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
