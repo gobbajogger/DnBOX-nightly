@@ -18,7 +18,7 @@ scope. It also closes the identical malformed-type gap in `qualified` and
   `2506ad142b6910dd389df7453b9ed9f7b6500357`; complete binary diff from base SHA256
   `840d07c2eef3edeb74145606f446a76df52bef8a1a9a3345db1c94e51815b97d`.
   The delivery tree adds only this textual evidence directory to that candidate.
-- [Coordination receipt on PR #9](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/9#issuecomment-6391315877).
+- [Coordination receipt on PR #9](https://github.com/gobbajogger/DnBOX-nightly/pull/9#issuecomment-6391315877).
   PR #9 remains at stale head `47cc6eaaa43655192c9ee88d9e1217473fe4f2f4`;
   its branch is untouched. This is only the explicit approval-denial repair,
   not wholesale adoption or acceptance of PR #9's other proposals/findings.

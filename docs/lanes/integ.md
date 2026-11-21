@@ -9,10 +9,10 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
-| I7 | Both canonical installer URLs return 200. The two old Pages paths return 404. Cleanup is deferred until the lanes merge. |
+| I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
 | C1–C6 | Candidate gate and independent review remain outstanding. The draft is ineligible for merge. |
 
-This branch changes the product site, host tests and the staged account-site redirects. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
+This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
 
 ## Reproduced results at nightly 914d68e8
 
@@ -20,8 +20,7 @@ This branch changes the product site, host tests and the staged account-site red
 - I0 review. A separate Chromium measurement found horizontal overflow on 12 of 72 sampled site/standalone page–viewport combinations on this base. At 390 px the builds page measured 593 px wide and the device page 699 px. At 844 px the device page extended to 1,003 px. The existing Web [#156](https://github.com/gobbajogger/DnBOX-nightly/pull/156) resolves those issues: 0 overflowing pages in 84 checks on `9172ce84caefd9350357895f4d69c99c51e00ade`. Reconcile approved references after the relevant fixes land. A screenshot of an overflowing page cannot serve as its accepted target.
 - I5. Both published `/private-audio/<id>` forms (bare and `.wav`) returned the expected bytes for all five samples. An unknown ID returned 404. The live exporter and assets reproduced the 110,844-byte archive, SHA-256 `3a7f19858d23309dac7375b88d0537cae7854ad65680edd1f95d4dbc0beed4c6`. The full bank occupies three zones in slot 1 and two in slot 2. The physical keyboard and firmware-default delivery are outside that result.
 - I6. The Help page now links to the proposal inbox. Requests and opening-post votes are stored on GitHub. The page reads open feature issues and counts unique voters, identifies the project owner by numeric ID, and refreshes on return. Errors leave the vote count unknown. Three tests cover pagination, identity, counts and failed reads. Chromium verified the navigation, refresh and error views at four sizes with a simulated GitHub read response. The signed-in submit-and-return test on GitHub remains open.
-- I7 decision. Each project Pages site controls only its own prefix. GitHub does not redirect project Pages on rename; reusing an old repository name breaks the existing repository redirect ([GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)). Both canonical installers returned 200, both historical paths returned 404, and the old GitHub repository names still resolved to repository IDs 1426904592 and 1430294677. The 344 inspected README/documentation files contained no live old Pages link. Preserved archival citations still resolve through GitHub.
-- I7 implementation. Publish the contents of `deployment/account-pages/` at the `gobbajogger.github.io` account-site root. Each old installer path sends visitors to the matching installer, preserving the query and fragment with JavaScript and providing a fixed fallback otherwise. The project build deliberately excludes these files. The account-site repository returned 404 to the connector; its creation, settings and publication are outside these two PRs. Verify both real legacy URLs after account-site deployment. Clean up old branches only after the lane merges.
+- I7 owner decision. Public links use the [DnBOX repository](https://github.com/gobbajogger/DnBOX), [stable installer](https://gobbajogger.github.io/DnBOX/install/) and [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/). GitHub’s automatic old-name repository redirects remain in service. The owner retired the two legacy Pages paths. The three integration-only redirect files from the earlier proposal were removed. No changes to the account site or repository names are needed. Branch cleanup follows the remaining lane merges.
 
 ### Independent visual and browser review
 
@@ -31,9 +30,14 @@ The shared header overflowed 390 px and 240 px viewports. At 844 px only 0.39 px
 
 Independent reference review held all 32 Remote proposals. The owner's PDF and corrections require green Bass A notes and thin step lanes, per-part Mix controls, selected-pattern operations, and grouped Chicago controls. These requirements are tracked by the Remote lane. The current home hero still shows WAVE as a percentage. The installation view contains a compressed duplicate navigation header. The old manual’s release instructions need reconciliation before freezing its screenshots. [Review findings](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055501295).
 
-The two static installer redirects passed navigation, Back, query/fragment and no-JavaScript tests locally. The public account-site root is required to serve the legacy URLs. I7 remains open until both old paths work publicly and cleanup qualifies.
+GitHub lists [v0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) as Latest at `94197fc8`. The owner tested startup and restart on the SMK-37 Elite and Pro. Both published installer links already use the renamed paths. The preceding full integration gate passed at `edba17d03e6d2583b9bada91bcceb198ab49678a`. [Complete log](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055802549).
 
 C1 and C3–C6 remain open pending the final exact-candidate gate, outstanding design defects and independent acceptance. C2 was verified against the pinned base. No tracked project file was removed. The candidate hard-limit scan must pass again.
+
+### Removed from this draft under the owner’s I7 update
+
+- `deployment/account-pages/X0X37-for-Loopy-Pro/install/index.html` and `deployment/account-pages/x0x37-for-Loopy-Pro_nightly/install/index.html` were draft-only redirect pages.
+- `tests/edge-legacy-installer-pages.test.mjs` tested only those pages. All three paths were absent from the consolidated base.
 
 ## Earlier evidence
 

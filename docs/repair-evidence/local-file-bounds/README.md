@@ -1,6 +1,6 @@
 # Local controller/stock File bounds — focused producer receipt
 
-Base website main `5d1cf4db62f8700da7671b6b44a6c7dea989228c`, root `2aae49f1c4835733a21c7d98727dfbcc7f371df5`. Fixes publisher [finding6387122569](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/10#issuecomment-6387122569).
+Base website main `5d1cf4db62f8700da7671b6b44a6c7dea989228c`, root `2aae49f1c4835733a21c7d98727dfbcc7f371df5`. Fixes publisher [finding6387122569](https://github.com/gobbajogger/DnBOX-nightly/pull/10#issuecomment-6387122569).
 
 Reused the existing PR102 safe-integer/preallocation pattern from firmware commit `e77cd4dfdf970bd1e47490ed304c4c22e8e58564` (read-only reference). Controller bounds68–65536 match existing ctlProblem, including erased padding; stock bounds960–16MiB preserve productOf's identity header minimum and PR102's local resource cap. Both reject before arrayBuffer, after existing serial increment/old-selection clearing. Input reset, writing guards, current-only errors, confirmation/meta cleanup and downstream model/hash/CRC/consent checks are preserved. No firmware, denied legacy R29 write or unrelated architecture is changed.
 
