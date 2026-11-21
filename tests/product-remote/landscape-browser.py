@@ -19,7 +19,8 @@ PARTS = ('chicago', 'miami', 'drum909', 'drum808', 'breaks')
 def expected_states():
     return {
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
-        *(f'sound-{kit}-{voice}' for kit in ('drum909', 'drum808') for voice in range(11)),
+        *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
+          for kit in ('drum909', 'drum808') for voice in range(11)),
         *(f'sound-{part}-{bank}' for part in ('miami', 'chicago') for bank in ('MIAMI', 'CHICAGO', 'JUNO')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
@@ -97,6 +98,9 @@ def inspect(origin, site, output):
                 for v in vals:
                     page.locator('#sound-voice').select_option(v)
                     snap('sound-' + q + '-' + v, [18])
+                    page.get_by_role('button', name='Open original', exact=True).click()
+                    snap('original-' + q + '-' + v, [18])
+                    page.get_by_role('button', name='Return to Sound', exact=True).click()
             elif q in ['chicago', 'miami']:
                 vals = page.locator('#sound-bank option').evaluate_all('es=>es.filter(e=>!e.disabled).map(e=>e.value)')
                 for v in vals:

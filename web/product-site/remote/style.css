@@ -584,3 +584,33 @@ dialog::backdrop{background:#000a}
  #break-sequence .break-steps select {min-height:clamp(64px,11vh,112px)}
  #break-sequence .break-rows li {min-height:clamp(128px,18vh,180px)}
 }
+
+/* Landscape Sound Draft, using each kit voice's captured R22 control cells. */
+.drum-sound-toolbar,.drum-sound-actions,.drum-step-buttons,.drum-strip-readout{display:flex;align-items:center}
+.drum-sound-toolbar{gap:12px;flex-wrap:wrap;margin-bottom:5px}
+#other-view .drum-sound-toolbar h2,.drum-sound-toolbar .mix-modes,#other-view .drum-sound-toolbar label{margin:0}
+.drum-sound-toolbar label{margin-inline-start:auto!important}
+[data-drum-sound-strip]{display:grid;grid-template-columns:repeat(var(--drum-columns),minmax(0,1fr));gap:8px;padding:clamp(8px,3vh,16px) 10px;background:var(--panel);border-radius:var(--r-panel)}
+[data-drum-sound-unit]{display:grid;min-width:0;gap:6px}
+#other-view .drum-strip-control{display:grid;justify-items:center;align-content:center;gap:6px;min-width:0;padding:4px 0;border:0;background:transparent}
+[data-drum-label]{font-size:var(--fs);font-weight:700}
+[data-drum-role="summary"] [data-drum-label]{color:var(--muted)}
+.drum-strip-readout{width:100%;justify-content:center;gap:5px}
+.drum-strip-readout output{font-size:clamp(15px,2.8vw,24px);white-space:nowrap;font-variant-numeric:tabular-nums}
+.drum-source-glyph{width:min(48%,64px);height:32px;display:block}
+.drum-step-buttons{justify-content:space-evenly;gap:3px}
+#other-view .drum-step-buttons button{min-width:0;width:min(46%,48px);height:44px;padding:0}
+.drum-sound-actions{gap:6px;margin-top:6px}
+.drum-sound-actions button:last-child{margin-inline-start:auto}
+
+/* Give the voice strip the space between the toolbar and the visible actions. */
+#other-view:has(>[data-drum-sound-strip]){
+ display:flex;flex-direction:column;padding-block:0
+}
+#other-view:has(>[data-drum-sound-strip])>.drum-sound-toolbar{
+ flex:none;margin-bottom:0
+}
+[data-drum-sound-strip]{flex:1 0 auto;padding-bottom:4px}
+[data-drum-sound-unit]{grid-template-rows:minmax(min-content,1fr) auto}
+.drum-sound-actions{flex:none}
+#other-view .drum-sound-actions button{min-height:44px}

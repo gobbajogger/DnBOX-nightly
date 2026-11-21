@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 79642,
-      "sha256": "898f00955f6c408f01ce6198d11da67cff23fd45b768cc63c9c6b16849ee8d35"
+      "bytes": 82313,
+      "sha256": "1a8b7cdfc600e7516f75247bc87d63e35534453d609ebc8a4f43cfae26ab4e6f"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -959,8 +959,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 47127,
-      "sha256": "571cd4be3d6d6b9b7004c51c6719b1d560a269e1a59220bceeb32109ab892e4b"
+      "bytes": 49076,
+      "sha256": "7af2b38c91a25862e4df82421934b51df5873bb532c55bb7ee229a1e4265859b"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1071,6 +1071,16 @@
       "path": "remote/master-source.mjs",
       "bytes": 17526,
       "sha256": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783"
+    },
+    {
+      "path": "remote/drum-strip.mjs",
+      "bytes": 3301,
+      "sha256": "9f16dd7264376dec115518e04269d88863c4e58023a676268ca75a28b6104dc5"
+    },
+    {
+      "path": "remote/drum-format.mjs",
+      "bytes": 23047,
+      "sha256": "743f8049e986d6b84f028f50ab3098f82d8daeeb78f53b77068c16e76a945a85"
     }
   ],
   "notClaimed": [

@@ -1,0 +1,23 @@
+{
+  "repo": "gobbajogger/DnBOX",
+  "ref": "ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+  "inputs": {
+    "firmware/src/app/ui.c": "8cb35150b9294aad0d8e1d3d78069e1802fdbf89",
+    "firmware/src/app/engine.c": "f89648044587c0f3326588ffcaa3a3b721d0d120",
+    "firmware/src/dsp/drum808.c": "de0f1ce8df77dd158248d04ee690960a82f5ef52",
+    "firmware/src/dsp/drum909.c": "2033c80d2ff3989bf3ea7374ab79cd3b0f8fab42",
+    "firmware/src/dsp/drum808.h": "b8b8554413ada998eebcdc2d1acd4e1ffb8ce15c",
+    "firmware/src/dsp/drum909.h": "ddaa4fc3e28e7b44108b2f99796f8e8d65a1ab60",
+    "firmware/src/dsp/drum909_dsp.h": "bd0dee18855786d39c002f2c327314e637e0c558",
+    "firmware/src/dsp/fastmath.h": "666d8e1325d32a76f7b4b964f2808420d3987104",
+    "firmware/src/dsp/x0x_param.c": "b84beeda87fa4d3eb8fda1c572b96d38cd8bb17f",
+    "firmware/src/dsp/x0x_param.h": "79d0f38d30190eceeda1226f58e631921e29d06f",
+    "firmware/src/dsp/ima_adpcm.h": "a461bc1accca4a23a3899915a8d4003f2300c1e0",
+    "firmware/src/x0x_cold.h": "089256ed4b45ceb220aa713a9dfa023efe9b85ad",
+    "tools/gen_drum_samples.py": "a347501f0787291b99714d01fef577bb9a09d706",
+    "tools/sampleio.py": "cff1acbc23921b7300dddc32cf8c9dd545976fe7",
+    "assets/909/hh.wav": "3cbd3b911490d38850387931c00f835c386a1034",
+    "assets/909/ride.wav": "985f418679f58eed7a340928e1ad18483331d179",
+    "assets/909/crash.wav": "7451f3330e6ff3a18f65f3b3c6e9be23d93503df"
+  }
+}
