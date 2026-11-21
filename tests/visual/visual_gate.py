@@ -11,6 +11,7 @@ Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions o
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
 import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
+from contextlib import closing
 from pathlib import Path
 from urllib.parse import urlencode
 import numpy as np
@@ -267,6 +268,17 @@ def installer_responses():
 
     return attach
 
+def viewport_contexts(pw):
+    # Reclaim Chromium's compositor and caches along with the context after each viewport.
+    for w, h in SIZES:
+        with pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb']) as browser:
+            with browser.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1,
+                                     has_touch=w < 900, reduced_motion='reduce', locale='en-US',
+                                     timezone_id='UTC') as context:
+                context.add_init_script(FREEZE_JS)
+                yield w, h, context
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -278,13 +290,8 @@ def main():
     results, header_fails, errors = [], [], []
     base = f'http://127.0.0.1:{p}'
     try:
-        with sync_playwright() as pw:
-            b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
+        with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def ctx(w, h):
-                c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
-                c.add_init_script(FREEZE_JS)
-                return c
             def settle(pg, url, name):
                 try:
                     pg.goto(url)
@@ -292,9 +299,8 @@ def main():
                     pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
                 except Exception as error:
                     raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
-            for w, h in SIZES:
+            for w, h, c in viewports:
                 tag = f'{w}x{h}'
-                c = ctx(w, h)
                 # Remote: header conformance + every tab/lane/overflow state
                 for name, act in remote_states():
                     full = f'remote-{name}-{tag}'
@@ -318,8 +324,12 @@ def main():
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
-                    if act: act(pg); pg.wait_for_timeout(150)
-                    compare(full, pg.screenshot(), results); pg.close()
+                    try:
+                        if act: act(pg); pg.wait_for_timeout(150)
+                        screenshot = pg.screenshot()
+                    except Exception as error:
+                        raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
+                    compare(full, screenshot, results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
@@ -339,8 +349,6 @@ def main():
                         attach_installer_responses(pg)
                     settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
                     compare(full, capture_full_page(pg, rel, full), results); pg.close()
-                c.close()
-            b.close()
     finally:
         srv.terminate(); srv2.terminate()
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')
