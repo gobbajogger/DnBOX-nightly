@@ -13,7 +13,7 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; `gobbajogger/Dn
 ## How work reaches main and the sites
 - Lanes work on `lane/<lane>-<topic>` branches cut from `integration/dnbox-consolidated` and merge there (RULES 5 and 9). Never branch from `main` for lane work.
 - Code reaches `main` only as a PR the User merges (RULES 1 and 11), after the full Local gate passes at the exact SHA (RULES 9).
-- `gh-pages` (the nightly site and installer) is fast-forwarded only after the full Local gate passes (RULES 9 and 16). The installer flashes keyboards: device writes stay the User's only (RULES 15).
+- `gh-pages` (the nightly site and installer) is fast-forwarded or merged only after its gate passes. A site-only change (site, installer, catalog or test files only; no firmware or code built into firmware) uses the [RULES 16](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md) site-only gate: the site's own tests at the exact SHA, a byte-for-byte match of every listed firmware package with its GitHub release asset (size, CRC32, SHA-256), and an independent review. Every other `gh-pages` change needs the full Local gate (RULES 9). The installer flashes keyboards: device writes stay the User's only (RULES 15).
 - Documentation-only PRs (only .md docs; no firmware, code, .github, Pages, installer or gh-pages files) may be merged into `main` or `nightly` by an agent once content, link and policy checks and an independent QA review pass. They need no full Local gate and no device tests ([RULES 9 and 11](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)).
 
 ## Local gate (one command)
