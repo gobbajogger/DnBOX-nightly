@@ -134,9 +134,9 @@ async def draft_controls(page):
 
 async def cases(origin, meta):
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(chromium_sandbox=True)
-        try:
-            for width, height in SIZES:
+        for width, height in SIZES:
+            browser = await pw.chromium.launch(chromium_sandbox=True)
+            try:
                 context = await browser.new_context(viewport={'width': width, 'height': height}, accept_downloads=True, has_touch=True)
                 page = await context.new_page()
                 errors = []
@@ -468,8 +468,8 @@ async def cases(origin, meta):
                     raise
                 finally:
                     await context.close()
-        finally:
-            await browser.close()
+            finally:
+                await browser.close()
 
 def main():
     value = os.environ.get('DNBOX_EMULATOR_RUNTIME')
