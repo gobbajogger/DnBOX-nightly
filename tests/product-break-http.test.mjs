@@ -3,12 +3,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
-import {readFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
+import {readFile,readdir,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {buildProductSite} from '../scripts/build-product-site.mjs';
 import {readArchive,parseHeader} from '../web/x0x_breaks.js';
 import {pathToFileURL,fileURLToPath} from 'node:url';
-import {join,dirname,basename} from 'node:path';
+import {join,dirname,basename,relative,sep} from 'node:path';
 // Use Python's unmodified file routing and MIME inference, not a test route table.
 async function serve(directory){
  const script=`import functools,http.server,sys
@@ -59,7 +59,16 @@ test('built five previews survive real static hosting at root and nested paths',
    for(const unknown of ['personal-br2-zone3','personal-br1-zone9','unrelated.wav'])assert.equal((await fetch(`${server.origin}${prefix}/private-audio/${unknown}`)).status,404);
   }finally{await server.close();}
  }
- assert.equal(buildProductSite({output,check:true}).files,JSON.parse(await readFile(new URL('../web/product-site/SOURCE-MANIFEST.json',import.meta.url))).files.length+10);
+ const manifest=JSON.parse(await readFile(new URL('../web/product-site/SOURCE-MANIFEST.json',import.meta.url)));
+ const aliases=contract.assets.flatMap(({id})=>[`private-audio/${id}`,`private-audio/${id}.wav`]);
+ const assignments='package-version-assignments.json';
+ const expected=[...manifest.files.map(row=>row.path),...aliases,assignments].sort();
+ const entries=await readdir(output,{recursive:true,withFileTypes:true});
+ const actual=entries.filter(entry=>entry.isFile()).map(entry=>
+  relative(output,join(entry.parentPath,entry.name)).split(sep).join('/')).sort();
+ assert.deepEqual(actual,expected);
+ assert.deepEqual(await readFile(join(output,assignments)),await readFile(new URL('../'+assignments,import.meta.url)));
+ assert.equal(buildProductSite({output,check:true}).files,expected.length);
 });
 
 test('historical aliases cannot bypass pinned audio admission or overwrite hardlinks',async()=>{
