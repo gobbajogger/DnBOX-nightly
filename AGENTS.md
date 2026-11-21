@@ -44,4 +44,4 @@ When the full gate is required (RULES 9): once on the combined branch after the 
 | History (old rules, handoffs, evidence) | Git history and `archive/*` tags. Not instructions. |
 
 ## Never
-Force-push; push or merge to `main`; Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git; `.img`, `.component` or `.vst3` files in Git (RULES 13).
+Force-push; push or merge firmware or code to `main` (documentation-only PRs: RULES 9); Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git; `.img`, `.component` or `.vst3` files in Git (RULES 13).
