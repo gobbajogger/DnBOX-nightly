@@ -534,18 +534,18 @@
     },
     {
       "path": "presets/legacy/app.mjs",
-      "bytes": 11378,
-      "sha256": "68af340ed31b031977bce9e99e9d548f889f5f47534304aba933c9a227b50e0b"
+      "bytes": 11385,
+      "sha256": "f6288708985c5c780fe47997a7b9fd44628275c66817fb75637412c73de8905b"
     },
     {
       "path": "presets/legacy/codec.mjs",
-      "bytes": 12667,
-      "sha256": "66563fb679f2ca15e5aadb7ecb86bcc3bc5a8b4b570ad41c7e9e069f5cbeaae9"
+      "bytes": 12795,
+      "sha256": "7a5fb4609e5ca709962cae6f9c357934d06944a404d0c6b57617a2fd4c7647d0"
     },
     {
       "path": "presets/legacy/index.html",
-      "bytes": 9943,
-      "sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+      "bytes": 9946,
+      "sha256": "5b4456c26f1c74fc6da46ceca45bcfab516f71f4c68eb9992e2be15c114e887c"
     },
     {
       "path": "presets/legacy/zip.mjs",
@@ -609,8 +609,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 117997,
-      "sha256": "f543d86caba53f2a7faae7e3ade8dd742886a8fcf8aea0f6587e81cfbb296cb7"
+      "bytes": 118006,
+      "sha256": "b06cd9014f9d558b871fa39c07e9aefafb455948e79faf96c8ba80dc6831c7a4"
     },
     {
       "path": "reference/current-ui.html",

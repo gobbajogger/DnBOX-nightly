@@ -325,3 +325,15 @@ test("live delayed recovery connection preserves busy exclusion and recovery mut
   for (const id of ["save", "load", "reset", "export"]) assert.equal(e.ids[id].disabled, true);
   assert.equal(e.calls.includes("close"), false);
 });
+
+test('Songs and projects uses DnBOX labels on the source, offline and product pages', () => {
+  for (const path of ['web/x0x_projects.html', 'docs/projects/index.html', 'web/product-site/projects/index.html']) {
+    const html = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
+    assert.match(html, /<title>DnBOX songs &amp; projects<\/title>/, path);
+    assert.match(html, /<nav aria-label="DnBOX">/, path);
+    assert.match(html, /Connect by USB with DnBOX running\./, path);
+    assert.match(html, /id="name"[^>]+value="My DnBOX project"/, path);
+    assert.match(html, /too large to be a DnBOX project bundle/, path);
+    assert.match(html, /id="file"[^>]+accept="\.x0xproject"/, path);
+  }
+});

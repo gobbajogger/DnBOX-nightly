@@ -4,13 +4,13 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The unmodified updater generated all 104 absent images. Accepted references and open defects are recorded below. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 40 of those images. The other 64 remain open. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
 | I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
-| C1–C6 | Candidate gate and independent review remain outstanding. The draft is ineligible for merge. |
+| C1–C6 | The full gate at `cbe03f76` failed its full-page capture and Native Sound checks. C2 passed. The current head needs a full gate and final independent review. |
 
 This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
 
@@ -77,6 +77,18 @@ The archived manual now opens with its existing document title. Each of the 19 n
 The browser-admission fixture previously returned the installer for workspace and image requests. A 320 px empty-catalog test loaded 39 frames, including more copies of the installer. The fixture now serves the actual committed workspace files, keeps its synthetic install route and checks both workspace APIs. The same three viewport controls passed all 13 assertions. This removes the recursive frames. Two longer attempts each passed 257 checks before navigation timed out on the next synthetic installer. Its 11 field assertions passed in isolation. The complete candidate gate is still open.
 
 The later Web, Remote and integration inputs also built together locally at tree `c5fe8947f7f66aceddc85ab617ac206b35d96773`. The build produced 252 files, and independent review verified every digest in the 231-entry source manifest. The simulated-MIDI receipt test used the published Elite package. A real signed-in proposal vote and the four source-lane merges are still outstanding. [Three-lane checks](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7057593863) · [BREAK, voting and cleanup evidence](https://github.com/gobbajogger/DnBOX/pull/976#issuecomment-7057640442).
+
+### Projects, earlier presets and the full Local gate
+
+The [full Local gate on `cbe03f76`](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7057958399) passed all 680 installer-admission checks, including both embedded workspaces. The build, no-loss and limits stages passed. Two failures kept C1 open. Chromium crashed during a full-page site screenshot after the fonts loaded. The log did not name the route. At 1440×900, Native Sound waited 30 seconds for a Chicago voice 0 edit to return a successful packet. The exact parameter and the cause remain unknown.
+
+The visual test now logs the screen and size before capturing it. For identical PNGs it verifies the PNG structure and decodes the pixels once. Differently encoded images follow the existing pixel comparison. A 1024×2048 crop of the archived manual used a median 41,944 KiB peak memory, down from 82,960 KiB. All 12 visual-test contracts passed, including damaged PNG and alternate encoding cases. Native Sound now writes the attempted voice, parameter, previous value and packet counts before trying to photograph a failure. The original time limits and assertions still apply.
+
+Songs & projects now uses DnBOX in its title, navigation, connection instructions, initial project name and file-size error. The offline page matches its template and both shipped libraries. Existing project files keep their `.x0xproject` extension. Across five widths including 240 px, all ten before/after comparisons of the mounted and offline pages preserved control geometry and disabled states. The standalone page still has the previous outstanding design finding for its white, system-font presentation.
+
+The earlier preset reader displays SuperJ6 in its target menu, preview and session. An existing engine 3 file imported and exported byte for byte as `Lead.juno.dnpr` at five widths. The historical `juno` token and the other engine labels are preserved. The 23 preset tests passed. All eight new full-page reference images for the mounted Projects page and legacy preset reader matched independent captures pixel for pixel. Independent review has accepted 40 of the original 104 proposals.
+
+A later integration rehearsal at tree `9c7ce1b435d14fa43fa7d2afd7f979f2d5f89dfe` combined Web `8e2e9fb6`, Remote `0753ff3f` and integration `cbe03f76`. It built and byte-checked 253 product files with the qualified emulator. Its 232 manifest entries, 69 Node tests and 13 visual-test contracts passed. These checks cover that local tree. Final component merges, the complete candidate gates, a signed-in proposal vote and final independent acceptance are still open.
 
 ## Earlier evidence
 

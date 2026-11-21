@@ -125,6 +125,18 @@ def compare(name, png_bytes, results):
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
         tmp.unlink(missing_ok=True)
         results.append((name, 'NOBASE', 0.0)); return
+    if base.stat().st_size == len(png_bytes) and base.read_bytes() == png_bytes:
+        # Matching bytes establish pixel equality once the PNG is known to decode.
+        # Pillow stops verify() at IEND, which has zero payload and a fixed CRC.
+        if not png_bytes.endswith(b'\x00\x00\x00\x00IEND\xaeB\x60\x82'):
+            raise ValueError('Incomplete or invalid PNG end chunk')
+        with Image.open(io.BytesIO(png_bytes), formats=['PNG']) as image:
+            image.verify()
+        with Image.open(io.BytesIO(png_bytes), formats=['PNG']) as image:
+            image.load()
+        tmp.unlink(missing_ok=True)
+        results.append((name, 'PASS', 0.0))
+        return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
     if a.shape != b.shape:
@@ -258,18 +270,21 @@ def main():
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     if act: act(pg); pg.wait_for_timeout(150)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(), results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(base + '/product-site/' + rel); settle(pg)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
+                    print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 c.close()
             b.close()

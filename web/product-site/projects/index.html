@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>X0X songs &amp; projects</title>
+<title>DnBOX songs &amp; projects</title>
 <style>
   :root { color-scheme: light dark; --bg: #f5f5f3; --card: #fff; --ink: #212321; --muted: #62685f; --line: #d7dbd2; --accent: #8a4b04; --error: #a32720; }
   @media (prefers-color-scheme: dark) {
@@ -76,12 +76,12 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
 <link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
 <body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
 <main id="dnbox-tool-main">
-  <nav aria-label="X0X"><a href="../install/#firmware">Install firmware</a><a href="../install/#samples">Import samples</a></nav>
+  <nav aria-label="DnBOX"><a href="../install/#firmware">Install firmware</a><a href="../install/#samples">Import samples</a></nav>
   <h1>Songs &amp; projects</h1>
   <p class="small">Move your whole live project—song arrangement, patterns and sounds—to or from a file. Include samples for a portable copy.</p>
   <section aria-labelledby="connection-title">
     <h2 id="connection-title">Connect your keyboard</h2>
-    <p class="small">Connect by USB with X0X running. Stop playback, recording and performance mode; close other editors.</p>
+    <p class="small">Connect by USB with DnBOX running. Stop playback, recording and performance mode; close other editors.</p>
     <button id="find">Find USB MIDI keyboard</button>
     <div id="ports" hidden>
       <div class="ports">
@@ -122,7 +122,7 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
   <section aria-labelledby="export-title">
     <h2 id="export-title">Export a project</h2>
     <label for="name" class="small">Project name</label>
-    <input id="name" type="text" maxlength="80" value="My X0X project" autocomplete="off">
+    <input id="name" type="text" maxlength="80" value="My DnBOX project" autocomplete="off">
     <label class="check"><input id="portable" type="checkbox" checked><span>Include original samples <span class="small">— recommended for moving a project or keeping a complete backup.</span></span></label>
     <details><summary>Details: project files</summary><p class="small">Portable files retain original sample bytes, playback rates and slot order. Without samples, a file imports only when every sample slot already matches.</p></details>
     <button id="export" disabled>Export project + samples</button>
@@ -1927,7 +1927,7 @@ $("file").onchange = () => {
   return run("Checking the project file…", async () => {
   clearPreview(); selected = null; const file = $("file").files[0];
   $("file-info").textContent = "Choose an .x0xproject file.";
-  if (file.size > PROJECT_MAX_FILE) throw new Error("This file is too large to be an X0X project bundle.");
+  if (file.size > PROJECT_MAX_FILE) throw new Error("This file is too large to be a DnBOX project bundle.");
   selected = await readProjectFile(new Uint8Array(await file.arrayBuffer()));
   const n = selected.meta.slots.filter((s) => !s.empty).length;
   $("file-info").textContent = `${selected.meta.name} · ${selected.portable ? "Project + original samples" : "Project only"} · ${n} populated sample slots · ${human(file.size)}`;

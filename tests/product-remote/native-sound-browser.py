@@ -99,9 +99,18 @@ async def assert_readings(page, packet):
 async def edit(page, voice, parameter):
     old = await page.evaluate('soundPackets.at(-1)')
     c = next(c for c in old['controls'] if c['parameter'] == parameter)
-    count = await page.evaluate('soundPackets.length')
-    await page.locator(control(voice, parameter)).press('ArrowLeft' if c['value'] == c['max'] else 'ArrowRight')
-    after = await packet_after(page, count)
+    counts = await page.evaluate('() => ({packets:soundPackets.length, requests:soundRequests.length, errors:soundErrors.length})')
+    key = 'ArrowLeft' if c['value'] == c['max'] else 'ArrowRight'
+    await page.locator(control(voice, parameter)).press(key)
+    try:
+        after = await packet_after(page, counts['packets'])
+    except Exception as error:
+        error.native_edit = {
+            'voice': voice, 'parameter': parameter, 'key': key, 'countsBefore': counts,
+            'previousValue': c['value'], 'maximum': c['max'],
+            'previousPacket': {k: old.get(k) for k in ('session', 'request', 'voice', 'revision')},
+        }
+        raise
     expected = c['value'] + (-1 if c['value'] == c['max'] else 1)
     assert next(x for x in after['controls'] if x['parameter'] == parameter)['value'] == expected
     request = await page.evaluate('soundRequests.at(-1)')
@@ -131,6 +140,34 @@ async def draft_controls(page):
       source:[...document.querySelectorAll('[data-sound-source]')].map(e=>[e.dataset.soundSource,e.getAttribute('aria-pressed')]),
       undo:document.querySelector('#undo').disabled,redo:document.querySelector('#redo').disabled
     })""")
+
+async def record_failure(page, out, page_errors, error):
+    receipt = out / 'failure.json'
+    observation = {'exception': str(error), 'pageErrors': page_errors}
+    if hasattr(error, 'native_edit'):
+        observation['edit'] = error.native_edit
+    receipt.write_text(json.dumps(observation, indent=2) + '\n')
+    try:
+        state = await asyncio.wait_for(page.evaluate("""() => {
+          const packets = window.soundPackets ?? [];
+          return {
+            status: document.querySelector('#status')?.textContent,
+            requests: window.soundRequests ?? [], errors: window.soundErrors ?? [],
+            packetCount: packets.length,
+            recentPackets: packets.slice(-3).map(({session, request, voice, revision}) =>
+                ({session, request, voice, revision})),
+            audioState: window.nativeContext?.state, frameTime: window.nativeFrames?.at(-1)?.time
+          };
+        }"""), timeout=5)
+        observation.update(state)
+    except Exception as observation_error:
+        observation['observationError'] = repr(observation_error)
+    receipt.write_text(json.dumps(observation, indent=2) + '\n')
+    try:
+        await page.screenshot(path=str(out/'failure.png'), full_page=True)
+    except Exception as capture_error:
+        observation['captureError'] = str(capture_error)
+        receipt.write_text(json.dumps(observation, indent=2) + '\n')
 
 async def cases(origin, meta):
     async with async_playwright() as pw:
@@ -456,15 +493,7 @@ async def cases(origin, meta):
                     (out/'proof.json').write_text(json.dumps(proof, indent=2)+'\n')
                     print(f'PASS actual native Chicago40/p17max11/formatter/Undo16/busy retry/choice stale/read-set-undo lifecycle/authored Draft/MIDI0 {width}x{height}', flush=True)
                 except BaseException as error:
-                    diagnostics = {'exception': str(error), 'pageErrors': errors}
-                    try:
-                        await page.screenshot(path=str(out/'failure.png'), full_page=True)
-                        diagnostics.update(status=await page.locator('#status').text_content(),
-                                           requests=await page.evaluate('soundRequests'),
-                                           errors=await page.evaluate('soundErrors'))
-                    except Exception as capture_error:
-                        diagnostics['captureError'] = str(capture_error)
-                    (out/'failure.json').write_text(json.dumps(diagnostics, indent=2)+'\n')
+                    await record_failure(page, out, errors, error)
                     raise
                 finally:
                     await context.close()
