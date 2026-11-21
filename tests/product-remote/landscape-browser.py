@@ -21,6 +21,7 @@ PARTS = ('chicago', 'miami', 'drum909', 'drum808', 'breaks')
 def expected_states():
     return {
         'drums-accent-drum909', 'drums-accent-drum808',
+        'drums-voices-7-11-drum909', 'drums-voices-7-11-drum808',
         'pattern-lock-bass-a-cutoff', 'pattern-lock-bass-b-cutoff', 'pattern-lock-break-level',
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
@@ -29,7 +30,7 @@ def expected_states():
         *(f'sound-{part}-{state}' for part in ('chicago', 'miami')
           for state in ('synth-one-file', 'superj6-import-partial', 'superj6-import-complete')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
-        *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
+        *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx', 'master')),
         *(f'bass-{part}-{field}' for part in ('chicago','miami') for field in ('gate','slide','accent','release')),
         'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'projects-original-empty', 'projects-original-invalid', 'projects-original-editor', 'projects-original-kept', 'song-empty', 'song-row', 'all-part-patterns',
         'review-dialog', 'review-discard-confirm', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
@@ -270,8 +271,15 @@ def inspect(origin, site, output):
                 view(v)
                 snap(v + '-' + q, ref)
                 if v == 'drums' and q in ('drum909', 'drum808'):
+                    navigation = page.get_by_role('navigation', name=q.removeprefix('drum') + ' step navigation')
+                    navigation.get_by_role('button', name='Voices 7–11').tap()
+                    seventh = page.locator('.sequencer-grid [data-drum-note]').nth(6 * 16)
+                    assert seventh.evaluate('node => node === document.activeElement')
+                    snap('drums-voices-7-11-' + q, ref)
+                    navigation.get_by_role('button', name='Accent lane').tap()
                     accents = page.locator('.drum-accent-row [data-drum-accent-step]')
                     assert accents.count() == 16
+                    assert accents.first.evaluate('node => node === document.activeElement')
                     accents.last.tap()
                     accents.first.tap()
                     accents.first.tap()
@@ -304,7 +312,7 @@ def inspect(origin, site, output):
             if native:
                 page.locator('[data-mix-source="emulator"]').click()
                 page.locator('[data-runtime-key]:enabled').first.wait_for()
-            for v in ['levels', 'pan', 'sends', 'fx']:
+            for v in ['levels', 'pan', 'sends', 'fx', 'master']:
                 page.locator('[data-mix-mode="' + v + '"]').click()
                 snap(('native-' if native else 'draft-') + 'mix-' + v, [6, 7, 8, 16, 23])
 

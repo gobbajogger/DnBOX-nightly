@@ -25,6 +25,7 @@ export const DRUM_VOICES=Object.freeze({
 function appendAccentRow(grid, kit, steps, accents) {
  const row = grid.appendChild(new Element('div'));
  row.className = 'seq-row drum-accent-row';
+ row.setAttribute('id','drum'+kit+'-accent');
  row.setAttribute('role', 'group');
  row.setAttribute('aria-label', kit + ' kit accent');
  const label = row.appendChild(new Element('span'));
@@ -57,6 +58,7 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accent
  const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),querySelector:s=>s==='.sequencer-grid'?grid:null};
  const ui=createFunkyBeatsUI({document,channels,state});ui.buildSequencerGrid();
  for(let ch=0;ch<voices.length;ch++){
+  grid.children[ch].setAttribute('id','drum'+kit+'-voice-'+(ch+1));
   const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);
   for(let s=0;s<steps;s++){
    const start=Math.round(s*endSample/steps),event=notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];

@@ -41,6 +41,24 @@ async def serve(route):
     await route.fulfill(status=200, content_type=mime, body=path.read_bytes())
 
 async def roll(page):
+    green = 'rgb(130, 240, 90)'  # Owner PDF pages 1, 14 and 21, Bass A note fill.
+    notes = page.locator('#roll-grid [data-note]')
+    selected = page.locator('#roll-grid [aria-selected="true"][data-note]').first
+    other = page.locator('#roll-grid [aria-selected="false"][data-note]').first
+    for width, height in ((1440, 900), (390, 844), (844, 390)):
+        await page.set_viewport_size({'width': width, 'height': height})
+        await expect(selected).to_have_css('background-color', green)
+        await expect(other).to_have_css('background-color', green)
+        assert await notes.evaluate_all('(rows, color) => rows.every(n => getComputedStyle(n).backgroundColor === color)', green)
+        ring = await selected.evaluate("""n => {
+            const s = getComputedStyle(n, '::after');
+            return [s.borderTopWidth, s.borderTopColor, s.pointerEvents];
+        }""")
+        assert ring == ['2px', 'rgb(5, 10, 13)', 'none'], ring
+    await page.locator('[data-engine="miami"]').click()
+    await expect(selected).not_to_have_css('background-color', green)
+    await page.locator('[data-engine="chicago"]').click()
+    await expect(selected).to_have_css('background-color', green)
     note = page.locator('#roll-grid [data-note]').first
     identity = await note.get_attribute('data-note')
     before = await note.get_attribute('aria-label')
@@ -64,6 +82,7 @@ async def sequencer(page):
     await expect(cells.first).to_have_attribute('aria-pressed', before)
 
 async def drum_accent(page):
+    from drum_navigation_journey import exercise as drum_navigation
     # Old v1 Drafts captured MIDI events, which cannot recover the kit accent bits.
     archive = Path(__file__).resolve().parent / 'fixtures/legacy-sound-banks/both-owners.json'
     old = json.loads(archive.read_text())
@@ -83,6 +102,10 @@ async def drum_accent(page):
             await expect(buttons).to_have_count(16)
             await expect(row.locator('[aria-pressed="mixed"]')).to_have_count(16)
             await expect(buttons.first).to_have_attribute('data-accent-track', owner)
+            if width == 844:
+                await drum_navigation(page, kit, draft_state)
+            else:
+                await expect(page.locator('.drum-grid-navigation')).to_be_hidden()
             # Edit the right edge of both grids by real touch, including silent steps.
             cell = buttons.last
             await cell.tap()

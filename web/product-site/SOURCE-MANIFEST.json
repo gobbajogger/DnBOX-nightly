@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 103139,
-      "sha256": "77725c74ad18d7334841df54a6e5e24db7cfbec8bfd080f72733a6b7fd132180"
+      "bytes": 105214,
+      "sha256": "d89dbac4823798268d7c301e9d2dda7cc4f8223d403848600ff50ef73f390c87"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -789,8 +789,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 11469,
-      "sha256": "a2b95ab5897903a0dff96039eac8ce8ee79e79097e3bc97620588c3f4c485cae"
+      "bytes": 11583,
+      "sha256": "246d96ed404e977c1d540c15ac8e9077df93e331d7c6180096a6e7114914b030"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -834,8 +834,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 9759,
-      "sha256": "dac48b338f0110b49f527fc170ee5d16a8f0c05c207f2a1c65f4fc6728c41cdf"
+      "bytes": 9765,
+      "sha256": "e35b871e096dd4bb1f3088839ef50b2b3186840f025c00935ed853914cebcaa7"
     },
     {
       "path": "remote/lane.mjs",
@@ -854,8 +854,8 @@
     },
     {
       "path": "remote/mix-workspace.mjs",
-      "bytes": 888,
-      "sha256": "c82e5e7f698498696d4e2a3bf130b1b8217691ced2af2659ab0603cdea4f5b4e"
+      "bytes": 1142,
+      "sha256": "1ba2e99afbba3b3ba98e6eeef49b5431e89f987e8923468e4c2bbeb3f2c5cdf1"
     },
     {
       "path": "remote/mixer-format.json",
@@ -964,8 +964,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 59201,
-      "sha256": "c88ac50743c9d3356144a12a92a4bf9729dafee0faa0d28a2f4744394060701a"
+      "bytes": 62543,
+      "sha256": "90074d9b409aebba77c64a7d4b48cfcf94cac3e9049ff800879385b3f4c85543"
     },
     {
       "path": "remote/timeline.mjs",

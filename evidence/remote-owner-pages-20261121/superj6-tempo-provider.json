@@ -1,0 +1,103 @@
+{
+  "soundHead": "03f92a7d94ad29bdb4a6bb238311ba12776401ea",
+  "firmwareBase": "76040daa5b52d686a8b7b544296ba5d79610a95d",
+  "remoteHead": "868cd7c8e4784f9f1f866e0fbcf0fcdcbcb1e398",
+  "producerOpen": true,
+  "publicEvidence": [
+    {
+      "path": "docs/lanes/sound.md",
+      "gitBlob": "6d44e0d3ea4e70771d190954043a0bbe4432aa67",
+      "url": "https://github.com/gobbajogger/DnBOX/blob/03f92a7d94ad29bdb4a6bb238311ba12776401ea/docs/lanes/sound.md#L232"
+    },
+    {
+      "path": "experiments/sound-hardware-v1/mapping/results/implementer_brief/BEHAVIOR-BRIEF.md",
+      "gitBlob": "05e89528a828db536ce621f6cad0cd0e741e6f5c",
+      "url": "https://github.com/gobbajogger/DnBOX/blob/03f92a7d94ad29bdb4a6bb238311ba12776401ea/experiments/sound-hardware-v1/mapping/results/implementer_brief/BEHAVIOR-BRIEF.md#L41"
+    },
+    {
+      "path": "experiments/sound-hardware-v1/mapping/results/implementer_brief/public_control_catalog.json",
+      "gitBlob": "394b90fb833a9dba90563b71fbf0c63e24172107",
+      "url": "https://github.com/gobbajogger/DnBOX/blob/03f92a7d94ad29bdb4a6bb238311ba12776401ea/experiments/sound-hardware-v1/mapping/results/implementer_brief/public_control_catalog.json#L954"
+    },
+    {
+      "path": "experiments/sound-hardware-v1/mapping/results/implementer_brief/numeric_behavior_targets.json",
+      "gitBlob": "99f3844733183cd4502d347206a31f26a5ae6363",
+      "url": "https://github.com/gobbajogger/DnBOX/blob/03f92a7d94ad29bdb4a6bb238311ba12776401ea/experiments/sound-hardware-v1/mapping/results/implementer_brief/numeric_behavior_targets.json#L1"
+    }
+  ],
+  "bindings": [
+    {
+      "id": 88,
+      "identifier": "neonlfo1Rate",
+      "occurrences": 640,
+      "publicUnits": "Hz or tempo division according to HzEnable 195"
+    },
+    {
+      "id": 96,
+      "identifier": "neonlfo2Rate",
+      "occurrences": 640,
+      "publicUnits": "Hz or tempo division according to HzEnable 196"
+    },
+    {
+      "id": 100,
+      "identifier": "neonlfo3Rate",
+      "occurrences": 640,
+      "publicUnits": "Hz or tempo division according to HzEnable 197"
+    },
+    {
+      "id": 195,
+      "identifier": "neonlfo1HzEnable",
+      "occurrences": 640,
+      "publicUnits": "off/on; exact callback threshold must match original"
+    },
+    {
+      "id": 196,
+      "identifier": "neonlfo2HzEnable",
+      "occurrences": 640,
+      "publicUnits": "off/on; exact callback threshold must match original"
+    },
+    {
+      "id": 197,
+      "identifier": "neonlfo3HzEnable",
+      "occurrences": 640,
+      "publicUnits": "off/on; exact callback threshold must match original"
+    }
+  ],
+  "originalBankArchive": {
+    "sha256": "ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8",
+    "banks": 12,
+    "programs": 640,
+    "rateModeRecords": 3840,
+    "recordKeys": [
+      "identifier",
+      "value"
+    ],
+    "distinctRawRates": [
+      288,
+      382,
+      333
+    ],
+    "distinctRawModes": [
+      2,
+      2,
+      2
+    ]
+  },
+  "reference": {
+    "version": "0.999.8",
+    "build": 9,
+    "auExecutableSha256": "a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1",
+    "englishLocalizationKeys": 1181,
+    "qualifyingFieldSpecificTempoLabelTableInLocalization": false,
+    "knownCountFromPriorPageAudit": 18,
+    "isolatedComparisonEndpointsAt120BpmHz": [
+      0.0625,
+      32
+    ],
+    "priorMillionCaseLfoIndexScope": "256-sample oscillator phase index, distinct from tempo selection",
+    "referenceImplementationIsOriginalFormatter": false
+  },
+  "missing": "Source-authenticated formatter or original GUI/AU displays for all three tempo-mode controls, all 18 names and ordering, input range and the adjacent representable raw values for all 17 transitions. Preserve each original field independent of other controls.",
+  "immediatelyActionableNamedRemoteMapping": false,
+  "existingRemoteProjection": "Hz mode 16*u^3.33. Tempo mode normalized position only."
+}

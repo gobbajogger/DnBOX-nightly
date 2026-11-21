@@ -14,6 +14,42 @@ def master_source_specs():
 async def effective(page,target):
  await target.press('Enter');field=page.locator('#parameter-value');await expect(field).to_be_enabled()
  return {'raw':int(await field.input_value()),'readout':await page.locator('#parameter-readout').text_content(),'output':await target.locator('output').text_content()}
+async def check_master_destination(page, before, width, height):
+ opener = page.get_by_role('button', name='Master / More', exact=True)
+ await opener.focus()
+ await opener.press('Enter')
+ await expect(opener).to_be_focused()
+ await expect(opener).to_have_attribute('aria-pressed', 'true')
+ panel = page.get_by_role('region', name='Master controls')
+ await expect(panel.locator('[data-mix-param-label]')).to_have_count(4)
+ await expect(panel.locator('[data-master-control]')).to_have_count(12)
+ await expect(page.locator('.mixer-fader, .master-output, [data-runtime-key]')).to_have_count(0)
+ assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+ geometry = await panel.locator('[data-param]').evaluate_all("els=>els.map(e=>{const b=e.getBoundingClientRect();return [b.width,b.height,b.bottom]})")
+ assert all(w >= 44 and h >= 44 for w,h,_ in geometry), geometry
+ if width == 1440:
+  assert max(bottom for _,_,bottom in geometry) <= height, geometry
+  macro = panel.locator('[data-mix-param-label]').first
+  label, glyph, value = [await macro.locator(selector).bounding_box() for selector in (':scope > span:last-child', ':scope > .glyph', ':scope > output')]
+  assert label['y']+label['height'] <= glyph['y'] and glyph['y']+glyph['height'] <= value['y'], (label,glyph,value)
+ destination = ROOT/'test-results/mix-family'
+ destination.mkdir(parents=True, exist_ok=True)
+ await page.screenshot(path=str(destination/f'master-{width}x{height}.png'))
+ detail = panel.locator('[data-master-control="6:2"]')
+ label = await detail.locator('output').inner_text()
+ await detail.press('ArrowUp')
+ await expect(detail.locator('output')).not_to_have_text(label)
+ changed = await state(page)
+ assert changed['parameters'] != before['parameters']
+ await mode(page,'levels')
+ await expect(page.locator('[data-master-control="6:2"] output')).not_to_have_text(label)
+ await page.locator('#undo').click()
+ assert (await state(page))['parameters'] == before['parameters']
+ await mode(page,'master')
+ await expect(detail.locator('output')).to_have_text(label)
+ await mode(page,'levels')
+ await expect(page.locator('.mixer-fader')).to_have_count(5)
+
 async def main():
  source_specs=master_source_specs()
  (ROOT/'.output').mkdir(exist_ok=True)
@@ -27,6 +63,7 @@ async def main():
      await page.add_init_script('window.midiCalls=0;navigator.requestMIDIAccess=()=>{window.midiCalls++;throw Error("No device")}')
      await page.goto(core.ORIGIN+'/remote/');await page.locator('[data-view="mix"]').click();await page.locator('.mixer-fader').first.wait_for()
      before=await state(page)
+     await check_master_destination(page,before,w,h)
      for view in ['levels','pan','sends','fx']:
       await mode(page,view);assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(w,view)
       for target in await page.locator('[data-mix-mode]').all():assert (await target.bounding_box())['height']>=44

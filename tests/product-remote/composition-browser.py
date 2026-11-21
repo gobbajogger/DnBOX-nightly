@@ -25,6 +25,40 @@ async def check_selected_grid(page):
         }''')
         assert 0.60 <= geometry['ratio'] <= 0.68 and geometry['height'] >= 76, geometry
         assert (geometry['cells'], geometry['x'], geometry['y']) == (32, 8, 4), geometry
+        panel = page.locator('.patterns-grid-panel[data-scope="selected"]')
+        count = panel.get_by_role('heading', name='32 patterns')
+        await expect(count).to_be_visible()
+        await expect(count).to_have_css('font-size', '28px')
+        await expect(count).to_have_css('font-weight', '700')
+        await expect(count).to_have_css('color', 'rgb(221, 231, 222)')
+        await expect(count).to_have_css('text-transform', 'uppercase')
+        pads = panel.locator('[data-launch-part]')
+        assert await pads.all_text_contents() == [f'{number:02d}' for number in range(1, 33)]
+        first = (await full_bounds(pads.first))['box']
+        last = (await full_bounds(pads.last))['box']
+        # PDF p9 first pad (53,296), last lower-right (892,691) at 1440×900.
+        for observed, reference in [(first['left'], 53), (first['top'], 296),
+                                    (last['right'], 892), (last['bottom'], 691)]:
+            assert abs(observed-reference) <= 10, (first, last)
+        selected = panel.get_by_role('button', name='Selected part')
+        all_parts = panel.get_by_role('button', name='All parts')
+        review = panel.get_by_role('button', name='Review draft')
+        await selected.focus()
+        for target in [all_parts, review, pads.first]:
+            await page.keyboard.press('Tab')
+            await expect(target).to_be_focused()
+        await page.keyboard.press('Shift+Tab')
+        await expect(review).to_be_focused()
+        await review.press('Enter')
+        await page.locator('#review-dialog').get_by_role('button', name='Return').click()
+        await expect(review).to_be_focused()
+        # Moving the same controls at a desktop breakpoint preserves their focus.
+        await page.set_viewport_size({'width': 1024, 'height': 640})
+        await expect(panel.locator(':scope > .pattern-scope:last-child')).to_have_count(1)
+        await expect(review).to_be_focused()
+        await page.set_viewport_size({'width': 1440, 'height': 900})
+        await expect(panel.locator(':scope > .pattern-scope:first-child')).to_have_count(1)
+        await expect(review).to_be_focused()
         return
     if page.viewport_size != {'width': 844, 'height': 390}:
         return
