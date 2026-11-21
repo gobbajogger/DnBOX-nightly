@@ -554,8 +554,8 @@
     },
     {
       "path": "presets/page.mjs",
-      "bytes": 3774,
-      "sha256": "2c0394c4b1d5243590c592026612e96ebd8cdf4374b00d9d4008093cf3ba39de"
+      "bytes": 2906,
+      "sha256": "8fdae087bfd27a539c41cbaabfea948d7cadd5c60068cfce791b57638239b68d"
     },
     {
       "path": "presets/schema.mjs",
@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 102548,
-      "sha256": "7793fded146e0b1a6341c099401b2da288101b94c1a7c1c234775ecbe0c11bd8"
+      "bytes": 103139,
+      "sha256": "77725c74ad18d7334841df54a6e5e24db7cfbec8bfd080f72733a6b7fd132180"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -834,8 +834,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 8948,
-      "sha256": "79c9a396260f03db9b0355f4cf899051a18a6fbd366c0e630212214383be4f9d"
+      "bytes": 9759,
+      "sha256": "dac48b338f0110b49f527fc170ee5d16a8f0c05c207f2a1c65f4fc6728c41cdf"
     },
     {
       "path": "remote/lane.mjs",
@@ -964,8 +964,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 57549,
-      "sha256": "95a34cf2c6cb386044efa70a2e9d535c60aa5fe1baff96ddfdd6d551903f5a8d"
+      "bytes": 59201,
+      "sha256": "c88ac50743c9d3356144a12a92a4bf9729dafee0faa0d28a2f4744394060701a"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1221,6 +1221,16 @@
       "path": "remote/pattern-locks.mjs",
       "bytes": 1965,
       "sha256": "8934a7a512d106ff26fa9ca40d6f17f3f0bf622708bcbf93b19407aeb5fdd241"
+    },
+    {
+      "path": "presets/working-file.mjs",
+      "bytes": 2423,
+      "sha256": "86a426c59fe28e64f934e5f8acf22fa0ef73bdfb8c437b21527000b532367f19"
+    },
+    {
+      "path": "remote/project-preset.mjs",
+      "bytes": 3688,
+      "sha256": "5b990f5c7cc783aa51517bcaab51c17fc0c8967c4ff3862a44a506d5b0376957"
     }
   ],
   "notClaimed": [

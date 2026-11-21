@@ -121,6 +121,17 @@
 <div id="review-confirm" hidden><p>Restore the starting notes, sounds, patterns and song? You can Undo this change in Draft.</p>
 <input type="button" id="review-keep" value="Keep editing"> <input type="button" id="review-reset" value="Discard draft"></div>
 </form></dialog>
+<dialog id="project-preset-dialog" aria-labelledby="project-preset-title">
+<h2 id="project-preset-title">Original presets</h2>
+<div class="project-preset-fields">
+<label data-preset-source>Format<select aria-label="Format" data-preset-format><option value="synthone">Synth One</option><option value="superj6">SuperJ6</option></select></label>
+<label data-preset-source>Original file<input data-preset-file type="file"></label>
+<label>Preset<select aria-label="Preset" data-preset-program disabled></select></label>
+<label>Name<input data-preset-name maxlength="8192" disabled></label>
+</div>
+<output data-preset-status aria-live="polite"></output>
+<div class="project-actions"><button type="button" data-preset-keep disabled>Keep</button><button type="button" data-preset-return>Return</button></div>
+</dialog>
 <dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
 <script type="module" src="startup.mjs"></script>
 </body>

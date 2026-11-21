@@ -338,7 +338,22 @@ dialog::backdrop{background:#000a}
 .destinations section{display:flex;flex-direction:column;gap:8px}
 .destinations h3,.destinations p{margin:0}
 .destinations section>div,.project-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.destinations a,.project-tools a,.project-guide summary{box-sizing:border-box;min-height:44px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--accent);align-content:center}
+.destinations a,.destinations button,.project-tools a,.project-guide summary{box-sizing:border-box;min-height:44px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--accent);align-content:center}
+#project-preset-dialog{width:min(520px,calc(100vw - 24px));box-sizing:border-box;max-height:calc(100dvh - 16px);overflow:auto}
+#other-view .destinations button,#project-preset-dialog button{min-height:44px}
+#other-view .destinations button:disabled,#project-preset-dialog button:disabled{background:transparent;border-color:var(--line);color:var(--muted);cursor:default}
+#project-preset-dialog h2{margin:0 0 12px}
+.project-preset-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#project-preset-dialog.inspect-preset [data-preset-source]{display:none}
+@media(orientation:landscape) and (max-height:500px){.destinations [data-project-preset-inspect]{display:none}}
+.project-preset-fields label{display:grid;gap:4px;min-width:0}
+.project-preset-fields input,.project-preset-fields select{width:100%;min-width:0;min-height:44px;box-sizing:border-box;color:var(--fg);background:var(--control);border:1px solid var(--line-strong);border-radius:var(--r-control);padding:6px 8px;font:inherit;color-scheme:dark}
+.project-preset-fields select option{background:var(--control);color:var(--fg)}
+.project-preset-fields input::file-selector-button{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line-strong);border-radius:var(--r-control);padding:4px 8px}
+.project-preset-fields :is(input,select):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#project-preset-dialog output:not(:empty){display:block;margin:8px 0;overflow-wrap:anywhere}
+#project-preset-dialog .project-actions{margin-top:10px}
+@media(max-width:600px){.project-preset-fields{grid-template-columns:1fr}}
 .project-guide{margin:10px 0}
 .project-guide summary{width:fit-content;cursor:pointer}
 .project-guide p{white-space:pre-line;overflow-wrap:anywhere;max-width:78ch}

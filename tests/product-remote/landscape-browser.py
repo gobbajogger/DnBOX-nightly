@@ -31,7 +31,7 @@ def expected_states():
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
         *(f'bass-{part}-{field}' for part in ('chicago','miami') for field in ('gate','slide','accent','release')),
-        'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
+        'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'projects-original-empty', 'projects-original-invalid', 'projects-original-editor', 'projects-original-kept', 'song-empty', 'song-row', 'all-part-patterns',
         'review-dialog', 'review-discard-confirm', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
     }
 
@@ -312,6 +312,21 @@ def inspect(origin, site, output):
             part('chicago')
             view('files')
             snap('projects', [12, 20])
+            opener = page.locator('[data-project-preset-open]')
+            save_copy = page.locator('[data-project-preset-save]')
+            assert save_copy.is_disabled()
+            opener.click()
+            editor = page.locator('#project-preset-dialog')
+            snap('projects-original-empty', [12, 20])
+            editor.locator('[data-preset-file]').set_input_files({'name':'invalid.json','mimeType':'application/json','buffer':b'{}'})
+            expect(editor.locator('[data-preset-status]')).to_have_text('Invalid Synth One file')
+            snap('projects-original-invalid', [12, 20])
+            editor.locator('[data-preset-file]').set_input_files(ROOT / 'web/product-site/remote/synth-one-banks/Starter Bank.json')
+            expect(editor.locator('[data-preset-keep]')).to_be_enabled()
+            snap('projects-original-editor', [12, 20])
+            editor.locator('[data-preset-keep]').click()
+            assert save_copy.is_enabled()
+            snap('projects-original-kept', [12, 20])
             view('song')
             snap('song-empty', [10])
             view('patterns')

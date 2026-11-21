@@ -741,7 +741,6 @@ async def project_files(page):
         destinations = [
             ('Export backup', '/projects/#export-title', '#export'),
             ('Inspect restore', '/projects/#import-title', '#file'),
-            ('Open original', '/presets/#file', '#file'),
             ('Choose range', '/projects/#project-exchange-root', '#project-exchange-root input[type="number"]'),
             ('Export availability', '/projects/#project-exchange-availability', '#project-exchange-availability'),
             ('Samples', '/breaks/', 'h1'),
@@ -775,6 +774,8 @@ async def project_files(page):
         assert await page.locator('#status').inner_text()
         after = await save()
         assert after==before, 'Rejected draft changed Current session'
+        from project_preset_journey import exercise as project_presets
+        await project_presets(page)
         for name,path,target in destinations:
             action = page.get_by_role('link',name=name,exact=True)
             await expect(action).to_have_attribute('href','..'+path)
@@ -787,8 +788,6 @@ async def project_files(page):
                 if name == 'Choose range':
                     await tab.locator(target).fill('12')
                     await expect(tab.get_by_role('button',name='Prepare MIDI export')).to_be_disabled()
-                elif name == 'Open original':
-                    await expect(tab.get_by_role('button',name='Download original bytes unchanged')).to_be_disabled()
                 elif name == 'Export availability':
                     await expect(tab.locator(target)).to_contain_text('no qualified source-executed browser provider')
             finally:
