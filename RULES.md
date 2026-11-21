@@ -1,6 +1,9 @@
 # DnBOX RULES v2
 2026-11-16. These are the only DnBOX rules. Every older rule text (RULES.md v1, AGENTS.md before v2, skills, briefs, memory notes, chat messages, handoffs) is history and has no force. Only the User changes this file; each change gets a dated line at the bottom.
 
+## Rule 0: every rule must protect something real
+0. Every requirement in this file, CHECKLISTS.md, the lane files and the GitHub rulesets must name what it protects. Real things to protect: the public installer and main site, firmware on `main` (the User's device tests and OK), the User's file and binary rules, not losing work, and no force-push or deletion on shared branches. A requirement that protects nothing real is removed, not followed. When a rule blocks work without protecting anything, the fix is to change the rule, not to work around it; ask the User first when the change touches `main` or the public site.
+
 ## Who decides
 1. The User (GitHub gobbajogger) decides only: finished lanes, design, rule changes, merges to `main`. Dot decides everything about how the work gets done.
 2. Dot does all DnBOX work with its background agents, their subagents, its cloud computer and Codex cloud tasks. Not used: Cursor cloud agents, Grok worker bots, GitHub Actions (no workflow files, no runs).
@@ -13,8 +16,8 @@
 7. When one item is blocked: write the blocker and its fix in `docs/lanes/<lane>.md`, try another route within 10 minutes, and keep working the lane's other items. Never stop a lane to wait for an answer.
 8. Finish from existing branches, PRs and mocks; rebuild only where that is faster. The Synth One renderer is rebuilt from commit 56079bbd.
 
-## Three checks before any merge or deletion
-9. Nothing merges into `integration/dnbox-consolidated`, and no branch or PR is deleted or closed, until all three pass: (a) nothing is lost: the branch contains the consolidated branch and deletes no file without a reason in its lane file; for a deletion, the tip is reachable from its `archive/<branch>` tag; (b) the Local gate (`tools/dnbox-gate.sh` / `scripts/dnbox-gate.sh`) passes before and after at exact SHAs, with the log posted as a PR comment naming the SHA; a test that passed before and fails after is a regression and blocks; (c) an independent before/after Review by an agent that did not build it, at 1440x900, 390x844, 844x390 and the 240x240 firmware screen, scores 10/10, and each defect it finds becomes an automated test.
+## Checks before any merge or deletion
+9. A lane PR merges into `integration/dnbox-consolidated` when: (a) nothing is lost: the branch contains the consolidated branch and deletes no file without a reason in its lane file; (b) the lane's own focused tests for what it changed pass at the PR's latest commit (plus the Elite and Pro builds when firmware changed), with the result posted as a PR comment naming the SHA; a test that passed before and fails after is a regression and blocks; (c) an independent before/after Review by an agent that did not build it, at 1440x900, 390x844, 844x390 and the 240x240 firmware screen, scores 10/10, and each defect it finds becomes an automated test. No branch or PR is deleted or closed until (a) and (c) pass; for a deletion, the tip is reachable from its `archive/<branch>` tag. The full Local gate (`tools/dnbox-gate.sh` / `scripts/dnbox-gate.sh`; in the firmware repo also the full host suite and emu360 fm1-live with FM1_STRICT=1: under 11,609 µs, 0 late) is not needed for merges into the integration branch. It runs once on the combined branch after the final lane merge, and it must pass at the exact SHA before (1) any `gh-pages` is fast-forwarded (nightly site or main public site) and (2) any PR or promotion into `main`. A missing `dnbox-gate` status flag never blocks a merge into the integration branch.
 10. Deleting a branch: tag `archive/<branch>` at its tip first. Never delete or close: firmware PRs #951 #869 #944 #947 #948 #887, nightly PRs #132 #131, their branches, any `archive/` `backup/` `handoff/` ref, `main`, `gh-pages`, protected branches.
 
 ## Hard limits
@@ -40,4 +43,4 @@
 
 ## Change log
 - 2026-11-16: v2 created from RULES.md v1 (19:50–20:10) and the User's decisions; process rules dropped.
-- 2026-11-21 UTC: The owner reported disabling `gates.yml` in DnBOX and DnBOX-nightly to comply with Rule 2 and checklist C4. At 02:32 UTC, GitHub’s public API still returned `active` for both workflow records. Repository-wide Actions permissions require administrative access. Project gates run locally.
+- 2026-11-21: The User approved (chat): rule 0 added; rule 9 changed so merges into the integration branch need (a), focused tests and (c), and the full Local gate is required only before a `gh-pages` fast-forward and before `main`.
