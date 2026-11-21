@@ -37,3 +37,15 @@ test('build history distinguishes the current release from its archived entries'
   assert.ok(page.slice(0, page.indexOf('data-record-id=')).includes(release));
   assert.equal((page.match(/data-record-id=/g) || []).length, 197);
 });
+
+test('the archived FM-1 manual has a title and readable section numbers', () => {
+  const page = read('web/product-site/manual/original/index.html');
+  assert.match(page, /<h1>[^<]*FM-1[^<]*<\/h1>/);
+  const headings = [...page.matchAll(/<h2 id="s(\d+)">([\s\S]*?)<\/h2>/g)];
+  assert.equal(headings.length, 19);
+  for (const [, number, heading] of headings) {
+    const contents = page.match(new RegExp('<a href="#s' + number + '">([^<]+)</a>'));
+    assert.ok(contents, 'Missing contents entry for section ' + number);
+    assert.equal(heading.replace(/<[^>]+>/g, ''), number + ' ' + contents[1]);
+  }
+});

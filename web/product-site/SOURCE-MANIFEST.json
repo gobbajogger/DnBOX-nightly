@@ -494,8 +494,8 @@
     },
     {
       "path": "manual/original/index.html",
-      "bytes": 59988,
-      "sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101"
+      "bytes": 60196,
+      "sha256": "43bf4bd4e36c2fbb7efe7b24c38318f2574dac979b9f24f3544489579b97b925"
     },
     {
       "path": "manual/projects-guide.html",
@@ -999,8 +999,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12221,
-      "sha256": "96ecdf18fe8a3704dfc702fdc9771cee7a6ce5e6d19532c7d2ae08c08f3ab908"
+      "bytes": 12485,
+      "sha256": "0206e6a0779edd9a612ade53494c2902f26258a56f58ef0ac052d8dcf8169279"
     },
     {
       "path": "starting-break-export.mjs",

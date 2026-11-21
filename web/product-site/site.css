@@ -23,3 +23,7 @@
 }
 
 .starting-breaks-page .install-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+
+.fm1-reference figure img { max-width: 100%; height: auto; }
+@media (max-width: 480px) { .fm1-reference figure { margin-inline: 0; } }
+@media (max-width: 260px) { .fm1-reference { padding-top: 12px; } .fm1-reference h1 { font-size: 32px; margin-bottom: 12px; } }

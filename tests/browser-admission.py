@@ -6,7 +6,7 @@ Run --source /path/to/before-installer.html for the identical RED assertions.
 import os
 import argparse, asyncio, hashlib, json, re, subprocess, threading
 from pathlib import Path
-from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.async_api import async_playwright
 ROOT=Path(__file__).resolve().parents[1]
 # Pin browser assertions to the independently verified source history lock, not the DOM.
@@ -64,14 +64,22 @@ def render():
     s=s.replace('/*LIB*/',libs).replace('/*CATALOG*/',json.dumps(CAT))
     return s.replace('(async () => {',probe+'\n(async () => {',1)
 HTML=render().encode()
-class Server(BaseHTTPRequestHandler):
+class Server(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=ROOT / 'docs', **kwargs)
+
     def do_GET(self):
-        path = self.path.split('?')[0]
-        page = {'/empty/':'docs/install/index.html', '/builds/':'docs/builds/index.html', '/build-status.json':'docs/build-status.json'}.get(path)
-        self.send_response(200)
-        self.send_header('Content-Type','application/json' if path.endswith('.json') else 'text/html')
-        self.end_headers()
-        self.wfile.write((ROOT/page).read_bytes() if page else HTML)
+        path = self.path.partition('?')[0]
+        if path == '/install/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html')
+            self.send_header('Content-Length', str(len(HTML)))
+            self.end_headers()
+            self.wfile.write(HTML)
+        else:
+            if path == '/empty/':
+                self.path = '/install/index.html'
+            super().do_GET()
     def log_message(self,*a):pass
 srv=ThreadingHTTPServer(('127.0.0.1',0),Server);threading.Thread(target=srv.serve_forever,daemon=True).start()
 INIT='''window.pending=[];window.fetch=(url,opts)=>new Promise((resolve,reject)=>pending.push({url,opts,resolve,reject}));'''
@@ -253,6 +261,13 @@ async def main():
    for width in [320,390,1280]:
     p=await browser.new_page(viewport={'width':width,'height':900});errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
     await p.goto(f'http://127.0.0.1:{srv.server_port}/empty/',wait_until='domcontentloaded')
+    if width == 320:
+     await p.wait_for_load_state('load')
+     workspaces = await p.evaluate("""() => [
+       typeof document.getElementById('sample-frame').contentWindow.sampleWorkspace?.activate,
+       typeof document.getElementById('project-frame').contentWindow.projectWorkspace?.activate
+     ]""")
+     check(workspaces == ['function', 'function'], 'empty installer embeds the real sample and project workspaces')
     check(await p.locator('#go').is_disabled(),'unmodified empty page install disabled '+str(width))
     check(await p.locator('#stockgo').is_disabled(),'unmodified local file install disabled '+str(width))
     check(await p.locator('#download').get_attribute('href') is None,'unmodified empty page no download '+str(width))
