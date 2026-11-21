@@ -7,12 +7,35 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 import full_page_capture as capture
+from installer_package import read_package
+from hashlib import sha256
 import zlib
 from PIL import Image
 
 spec = importlib.util.spec_from_file_location('visual_gate', Path(__file__).with_name('visual_gate.py'))
 gate = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gate)
+
+class MountedPackageTests(unittest.TestCase):
+    def test_verified_bytes_are_served_without_network(self):
+        data = b"visual package integrity fixture"
+        digest = sha256(data).hexdigest()
+        url = f"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/{digest}/fixture.fwsc"
+        with tempfile.TemporaryDirectory() as directory, patch("installer_package.urlopen") as fetch:
+            (Path(directory) / "fixture.fwsc").write_bytes(data)
+            self.assertEqual(read_package(url, len(data), digest, directory), data)
+            fetch.assert_not_called()
+
+    def test_truncated_and_same_size_unverified_files_cannot_be_served(self):
+        data = b"visual package integrity fixture"
+        digest = sha256(data).hexdigest()
+        url = f"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/{digest}/fixture.fwsc"
+        for damaged in [data[:-1], b"x" + data[1:]]:
+            with tempfile.TemporaryDirectory() as directory:
+                (Path(directory) / "fixture.fwsc").write_bytes(damaged)
+                with self.assertRaisesRegex(ValueError, "Size or SHA-256 mismatch"):
+                    read_package(url, len(data), digest, directory)
+
 
 def png(color):
     out = io.BytesIO()

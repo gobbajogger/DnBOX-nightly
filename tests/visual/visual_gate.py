@@ -15,6 +15,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
+from installer_package import route_default_package, wait_for_admission
 from full_page_capture import capture_full_page
 from grid_continuity import assert_grid_continuity
 
@@ -304,7 +305,11 @@ def main():
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
+                    if rel == 'install/index.html':
+                        package_name = route_default_package(pg, ROOT)
                     pg.goto(base + '/product-site/' + rel); settle(pg)
+                    if rel == 'install/index.html':
+                        wait_for_admission(pg, package_name)
                     if rel == 'breaks/index.html':
                         sample_navigation_checks(pg, tag, header_fails)
                     print(f'Capturing {full}', flush=True)

@@ -4,15 +4,21 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 64 of 104 references, including Build History, the homepage and the downloadable Samples, Projects and installer pages. The other 40 remain open. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 68 of 104 references, including Build History, the homepage, the mounted Installer and the downloadable Samples, Projects and installer pages. The remaining 36 cover eight Remote views and the Remote Device page. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
-| I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
-| C1–C6 | C2 passed. The parent `fe293c51` full gate failed when the 1440×900 Builds capture exceeded 30 seconds. The browser stage passed. The complete gate passed on `b5806b98`. The complete rendered-file comparison caught two changes at `0c5d42a1`. The corrected installer requires a full run on this head and final review. [Parent gate receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649). |
+| I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. The [reachability audit](https://github.com/gobbajogger/DnBOX/pull/976#issuecomment-7058900972) accounted for all 488 historical tips in both repositories, including the eight protected PR heads. Cleanup follows the lane merges. |
+| C1–C6 | C2 passed. The parent `fe293c51` full gate failed when the 1440×900 Builds capture exceeded 30 seconds. The browser stage passed. The complete gate passed on `b5806b98`. The complete rendered-file comparison caught two changes at `0c5d42a1`. The full gate at `c8e93872` passed its 60 approved visual references and five structural checks. Chromium then crashed during the FunkyBeats step-roll interaction and the browser stage stopped. A [single full run](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7059057155) began on the Build History revision `4d2ff12d`. Its result and the mounted Installer successor's complete gate need separate SHA-bound records. [C8 terminal log](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058990835). [Parent gate receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649). |
 
 This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
+
+## Mounted Installer
+
+The product header links to all eight destinations. The Firmware, Samples and Projects tabs remain accessible by touch and keyboard. The mounted page keeps one product header and one firmware heading. At five widths from 240 to 1,440 px, the page fits horizontally, changing models resets consent, and denying device permission leaves the install guarded.
+
+The four full-page references show the released Pro bundle after the browser verifies it, before a keyboard is connected or consent is given. Independent and producer captures matched byte-for-byte at every size. The unavailable-package path has a separate browser check. Both public model bundles passed their published byte counts and SHA-256 checks. [Independent browser evidence, raw measurements and four 10/10 reviews](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7059076605).
 
 ## Homepage and Builds follow-up
 

@@ -70,6 +70,45 @@ def check_links(page, url, selector, width):
     return None
 
 
+
+def check_mounted_installer(page, origin, width):
+    packages = "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/**"
+    page.route(packages, lambda route: route.abort("internetdisconnected"))
+    page.goto(origin + "/install/")
+    expect(page.locator("#status")).to_contain_text("Could not load")
+    expect(page.locator("#go")).to_be_disabled()
+    expect(page.locator("#download")).to_be_hidden()
+    page.unroute(packages)
+    page.locator("#sample-picker input[type=checkbox]").first.wait_for()
+    navigation = page.evaluate("""() => {
+        const links = selector => [...document.querySelectorAll(selector)];
+        const global = links('#dnbox-global-header nav a');
+        const tasks = links('.workspace-nav a');
+        const all = [...global, ...tasks];
+        return {
+            global: global.map(a => a.getAttribute('href')),
+            tasks: tasks.map(a => a.getAttribute('href')),
+            homes: links('#dnbox-global-header .brand, .header-top .home').length,
+            current: global.filter(a => a.getAttribute('aria-current') === 'page').map(a => a.getAttribute('href')),
+            tabLabel: document.querySelector('#firmware-tab').textContent.trim(),
+            title: document.querySelector('.hero h1').textContent.trim(),
+            fits: all.every(a => {
+                const box = a.getBoundingClientRect();
+                return box.width > 0 && box.height >= 44 && box.left >= 0 && box.right <= innerWidth;
+            }) && document.documentElement.scrollWidth === innerWidth,
+            firmwareFirst: document.querySelector('.hero h1').getBoundingClientRect().bottom
+                <= document.querySelector('#sample-picker').getBoundingClientRect().top
+        };
+    }""")
+    expected = ["../index.html#sounds", "../remote/", "../breaks/", "../projects/",
+                "../presets/", "../manual/", "../builds/", "../install/"]
+    assert navigation["global"] == expected and navigation["tasks"] == ["#firmware", "#samples", "#projects"], navigation
+    assert navigation["homes"] == 1 and navigation["current"] == ["../install/"], navigation
+    assert (navigation["tabLabel"], navigation["title"]) == ("Firmware", "Install firmware"), navigation
+    assert navigation["fits"] and navigation["firmwareFirst"], (width, navigation)
+    print(f"PASS {width}px mounted installer navigation and firmware heading")
+
+
 def main():
     failures = []
     handler = partial(SiteHandler, directory=str(SITE))
@@ -81,6 +120,7 @@ def main():
                     with browser.new_page(viewport={"width": width, "height": height}) as page:
                         origin = f"http://127.0.0.1:{server.server_port}"
                         actual = check_inbox(page, origin)
+                        check_mounted_installer(page, origin, width)
                         page.goto(origin + "/builds/")
                         page.evaluate("document.fonts.ready")
                         history_width = page.evaluate("document.documentElement.scrollWidth")

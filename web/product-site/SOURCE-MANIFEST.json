@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 628012,
-      "sha256": "b7b2346def0550f6af7e2bddd019c2829634d9a31c628c07a4cccc7e4382a347"
+      "bytes": 630705,
+      "sha256": "d0b14d732945a3102b0a68617a9cc7a703ea2b30881eae744affcd17c2fc425b"
     },
     {
       "path": "install/legacy-hashes.js",
