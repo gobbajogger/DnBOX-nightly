@@ -26,6 +26,10 @@ This branch changes the product site, documentation and host tests. Firmware sou
 
 The README, CHANGELOG, release guide, What’s New, installer and manual link to the [v0.0.26 release](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) at `94197fc8`. The owner verified startup and restart on a real Elite and Pro. Older catalog and history records retain their own package hashes. All 18 focused release and installer-hunk tests passed, including negative controls for a different tag and an unsupported hardware claim. The catalog rejected all 333 invalid cases. The four reviewed What’s New captures now show the published version.
 
+An uncached read of the deployed installers and their embedded catalogs on 21 November 2026 UTC confirmed that the stable channel listed 0.0.25.1 (`79280e76`). Nightly listed `nightly-94197fc8-dev`. Both nightly model checksums matched the v0.0.26 release. Its older hardware-test label predates the owner’s startup and restart results. [Stable catalog](https://gobbajogger.github.io/DnBOX/versions.json) · [Nightly catalog](https://gobbajogger.github.io/DnBOX-nightly/versions.json) · [Release and checksums](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26).
+
+At `f3974721` all 529 Node edge checks passed. The subsequent Chromium inbox check exceeded the 30-second navigation limit opening Help. The unchanged test completed all four sizes in a separate run. Keep the full gate open until it passes at the final head.
+
 The deployed Starting BREAK page also passed real Chromium playback for all five samples with zero checkboxes selected, followed by selection and download. The resulting archive was 110,844 bytes and matched the independently verified digest. [Playback and export receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055766883).
 
 ### Independent visual and browser review

@@ -509,8 +509,8 @@
     },
     {
       "path": "new/index.html",
-      "bytes": 17347,
-      "sha256": "4fa2b6e8ca7e5c90e76c082565822feb55ad1e694965d4c0e23ea924f80add1c"
+      "bytes": 17355,
+      "sha256": "1ee29b576595829c8457ecd01247eedc3e0558e2df0663107440510371ac5f86"
     },
     {
       "path": "presets/app.mjs",

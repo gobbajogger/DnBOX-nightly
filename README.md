@@ -8,8 +8,8 @@
 
 This is the **beta / nightly channel** for the DnBOX website, browser Remote, and untested firmware builds. The firmware source of record is [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
 
-- **Install the published 0.0.26 release:** https://gobbajogger.github.io/DnBOX/install/
-- **Nightly installer and development builds:** https://gobbajogger.github.io/DnBOX-nightly/install/
+- **Stable installer** — https://gobbajogger.github.io/DnBOX/install/
+- **Install v0.0.26 (build `94197fc8`)** — https://gobbajogger.github.io/DnBOX-nightly/install/
 - **Integration branch:** `integration/dnbox-consolidated` (tags `dnbox-start-2026-11-17` and `start-nt-2026-11-17`)
 - **What's done and what's left:** [docs/START-POINT.md](docs/START-POINT.md) and [docs/DELIVERY-PLAN.md](docs/DELIVERY-PLAN.md)
 
@@ -89,8 +89,8 @@ The release came from source [`94197fc8`](https://github.com/gobbajogger/DnBOX/c
 
 On desktop Chrome or Edge, connect by a USB data cable, click **Connect**, and grant **MIDI and SysEx** access. If denied, review browser MIDI/SysEx permission and retry; close other MIDI programs. Verify the model **printed on the hardware** (SMK-37 Elite or Pro), not just the USB name. Starrykey 37 Play uses the Pro package.
 
-- **[Published installer](https://gobbajogger.github.io/DnBOX/install/).** Select the listed 0.0.26 package that matches the model printed on the keyboard. Its local file chooser is hidden and disabled.
-- **[Nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/).** The release notes also list this route for 0.0.26. Development builds have their own qualification records. Choose a listed, admitted package for your model.
+- **[Stable installer](https://gobbajogger.github.io/DnBOX/install/).** Its live catalog listed 0.0.25.1 on 21 November 2026 UTC. Its local file chooser is hidden and disabled.
+- **[Nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/).** For 0.0.26, select `nightly-94197fc8-dev` and the model printed on your keyboard. The catalog still shows its earlier hardware-test label. Both package checksums match the published release above.
 
 **First switch from M-VAVE factory firmware:** There is no DnBOX app or project yet, so a DnBOX `.x0xslots` sample backup and `.x0xproject` export are **not available**. Use any manufacturer-supported method to preserve factory data, if available. Choose only the admitted model-specific firmware shown in the installer; if the current app cannot complete the main installer's sample-layout preflight and installation is refused, **stop rather than bypass the check**. Do not assume the nightly installer's best-effort backup can save factory data.
 
@@ -107,7 +107,7 @@ Source and issue tracking are in this repository, [gobbajogger/DnBOX-nightly](ht
 
 Choose recovery by the **actual detected state**, not a transient disconnect or USB display name:
 
-1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. Select the matching **published 0.0.26 package in the [main installer](https://gobbajogger.github.io/DnBOX/install/)**.
+1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. For 0.0.26, select build `94197fc8` for your model in the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/).
 2. **Only the update loader responds after an interrupted write.** The normal app's sample reader is absent, so **no new sample/project export is possible from the loader**. The published installer can resume an interrupted update from its loader using a **listed admitted package for the printed physical model**, but no app-side backup is made first; existing samples may be lost. Loader acceptance alone does not qualify a development package. If there is no safely admitted matching package, **stop**, rather than force a foreign image or guess a button gesture.
 3. **Uncertain reboot or no device appears.** Wait for an active write to finish, then reconnect and use **Connect / Rescan** to check whether the normal app or `ota-` update loader actually answers. Check browser MIDI/SysEx permission; avoid blind retries. A loader identity is not a completed application boot.
 4. **Return to factory M-VAVE firmware.** Download the **exact model's** official stock package and follow [M-VAVE M-UPGRADE](https://www.m-vave.com/download). The main site's file chooser is hidden and no factory image is bundled. The nightly page has an advanced local chooser in its source, but it is not independently hardware-qualified as a stock-recovery route; the manufacturer path is the documented recommendation.
