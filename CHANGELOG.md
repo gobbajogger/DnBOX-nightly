@@ -6,10 +6,16 @@ Notable published and integration-branch releases of the DnBOX nightly / website
 
 Work toward the next published nightly site. See [docs/START-POINT.md](docs/START-POINT.md), [docs/DELIVERY-PLAN.md](docs/DELIVERY-PLAN.md), and [tracking issue #147](https://github.com/gobbajogger/DnBOX-nightly/issues/147).
 
+## [DnBOX 0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) — 2026-11-21 UTC
+
+- The firmware adds the Drone (String Machine) engine, Juno with shared chorus, and held-key chords on the polyphonic synth slots.
+- The published packages fix startup and restart problems in the withdrawn `600b3b45` build, harden sample import, and identify Elite and Pro separately over USB and Bluetooth.
+- The owner tested startup and restart on both physical models. The release notes identify firmware source `94197fc839b00aff47b98ca02f3c6396e4a6eabf` and provide both package digests. The [production installer](https://gobbajogger.github.io/DnBOX/install/) and [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/) are listed in the release.
+
 ## [dnbox-start-2026-11-17] — 2026-11-17 (prerelease)
 
 Clean starting point on `integration/dnbox-consolidated` (Asia/Vladivostok, UTC+10).
 
 - Snapshot SHA at the tag: `548e56799e1a1f0fc3c273cd6f9702cdf8efad4d` (merge of #139, repo hygiene and rename links). Hygiene #146 later landed on the same branch.
 - M0 start tag: `start-nt-2026-11-17` (`bc3ed20d69159a01e82e079fa7e1cbbf66cab2ce`).
-- This is a prerelease marker, not a firmware download. Use the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/) for test packages. The current public firmware remains [v0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1).
+- This is a prerelease marker, not a firmware download. Use the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/) for test packages. The public firmware at that checkpoint was [v0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1).

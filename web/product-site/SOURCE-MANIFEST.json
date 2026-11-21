@@ -164,8 +164,8 @@
     },
     {
       "path": "builds/index.html",
-      "bytes": 579616,
-      "sha256": "804efb7bccb2a13a878d2a5cbb1e4e3206288da4d276378a3f1014f7d5eeb59d"
+      "bytes": 579924,
+      "sha256": "5640f946e0fb55d10cd5051a54261dc456ba303468a5a2e9720ccd2b8d233953"
     },
     {
       "path": "components/archive/store.mjs",
@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 628021,
-      "sha256": "fa5e64a718bdf415dffbf38401e0745263480182dc25ee274410b8225f2e9970"
+      "bytes": 628012,
+      "sha256": "b7b2346def0550f6af7e2bddd019c2829634d9a31c628c07a4cccc7e4382a347"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -359,13 +359,13 @@
     },
     {
       "path": "manual/index.html",
-      "bytes": 13150,
-      "sha256": "452e38674863f53c789a65c5fb942d2889ab41b1caa7ae1efbbf7f12ad48ac82"
+      "bytes": 12914,
+      "sha256": "331ab2eff21ebed4c78e16b72291211228e5336f0f913d51d728cc335132013f"
     },
     {
       "path": "manual/legacy.html",
-      "bytes": 64367,
-      "sha256": "4c4ac4e7e7b88210d2839bd9c73e61498030a1eb09eb759860fca228bf811382"
+      "bytes": 64227,
+      "sha256": "ae714636654309933f932333edb2e2c9a4072ae64aa4a3198377cc2e40ce738b"
     },
     {
       "path": "manual/manual.js",
@@ -504,13 +504,13 @@
     },
     {
       "path": "manual/protocol.html",
-      "bytes": 5188,
-      "sha256": "4036d90c8598b34779680a7f14db176921cbbadf120fbad67d671631be41dba0"
+      "bytes": 5306,
+      "sha256": "74636d3a25ef271bb80813cd1e296090e3e9c0cbf190575ed5822b9a5b8e9b24"
     },
     {
       "path": "new/index.html",
-      "bytes": 16622,
-      "sha256": "418a0afcd1c855beea631bfe905cd1fb9f9ccceb2005d46cf363f419b02d2c32"
+      "bytes": 17347,
+      "sha256": "4fa2b6e8ca7e5c90e76c082565822feb55ad1e694965d4c0e23ea924f80add1c"
     },
     {
       "path": "presets/app.mjs",

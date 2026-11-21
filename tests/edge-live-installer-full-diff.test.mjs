@@ -35,6 +35,12 @@ function normalize(html) {
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
   {
+    id: 'published-0.0.26-release-notice',
+    reason: 'The public release records startup and restart on Elite and Pro. Only the notice changes from the pinned earlier installer.',
+    liveOnly: ["  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>"],
+    renderOnly: ["  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a></p></aside>"],
+  },
+  {
     id: 'programmed-sample-header-padding',
     reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',
     liveOnly: ['  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);'],
@@ -122,6 +128,17 @@ function currentRendered() {
 test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
   assertAllowedRendered(currentRendered());
 });
+test('release notice comparison rejects a different tag or hardware claim', () => {
+  const rendered = currentRendered();
+  for (const modified of [
+    rendered.replace('releases/tag/v0.0.26\">0.0.26 release notes', 'releases/tag/v0.0.25.1\">0.0.26 release notes'),
+    rendered.replace('The owner verified startup and restart', 'The owner verified every function'),
+  ]) {
+    assert.notEqual(modified, rendered);
+    assert.throws(() => assertAllowedRendered(modified), /unexpected hunks|allowlisted hunk missing/);
+  }
+});
+
 test('exact Restore allowance rejects lost padding, forced full headers and unrelated changes', () => {
   const rendered=currentRendered();
   const selector='img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN';
