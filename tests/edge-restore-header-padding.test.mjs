@@ -18,12 +18,14 @@ const sources=[
   ['web/x0x_breaks.html',['writeImage']],
   ['web/product-site/breaks/index.html',['writeSlotImage','writeImage']],
   ['web/product-site/install/index.html',['writeSlotImage']],
+  ['web/product-site/projects/index.html',['writeSlotImage']],
   ['web/product-site/projects/exchange/vendor/x0x_breaks.js',['writeSlotImage']],
   ['docs/breaks/index.html',['writeSlotImage','writeImage']],
   ['docs/install/index.html',['writeSlotImage']],
   ['docs/projects/index.html',['writeSlotImage']],
   ['.output/product-site/breaks/index.html',['writeSlotImage','writeImage']],
   ['.output/product-site/install/index.html',['writeSlotImage']],
+  ['.output/product-site/projects/index.html',['writeSlotImage']],
   ['.output/product-site/projects/exchange/vendor/x0x_breaks.js',['writeSlotImage']],
 ];
 for(const [path,names] of sources) for(const name of names) for(const programmed of [false,true]) {

@@ -1,0 +1,26 @@
+wait 12
+key w0 down
+wait 18
+key w0 up
+wait 18
+key w4 down
+wait 18
+key w4 up
+wait 18
+key w8 down
+wait 18
+key w8 up
+wait 18
+key w12 down
+wait 18
+key w12 up
+wait 34
+expect view 8
+expect part 0
+expect page 0
+expect overlay 0
+expect rec 0
+expect playing 0
+expect sel 0
+expect tempo 125
+shot actual-06-pattern.png

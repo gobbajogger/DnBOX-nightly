@@ -66,6 +66,8 @@ export class OriginalPresetWorkingFile {
     this.#kept = null;
   }
 
+  get keptName() { return this.#kept?.name; }
+
   get hasKept() { return this.#kept !== null; }
 }
 

@@ -1,0 +1,119 @@
+{
+  "disposition": {
+    "C3": {
+      "status": "PASS",
+      "score": "10/10"
+    },
+    "W3": {
+      "status": "PASS",
+      "score": "10/10"
+    },
+    "W4": {
+      "status": "PASS"
+    },
+    "remaining_review_defects": []
+  },
+  "source": "000e29102525a6ce5672a1cdfd7773492b3158b6",
+  "source_tree": "ad736ac714f297e7fef45ad40b709362e9e7b753",
+  "base": "914d68e8ed50698ea77c9d18c221c404629b9332",
+  "reviewer": "Independent test-and-merge reviewer, distinct from the Web writer, controls and firmware-reference implementers",
+  "local_gate": {
+    "result": "PASS",
+    "exit": 0,
+    "stages_passed": [
+      "clean-tree",
+      "setup",
+      "no-loss",
+      "limits",
+      "build",
+      "unit-tests",
+      "browser-tests"
+    ],
+    "offline_stage": "fetch-base SKIP",
+    "log_bytes": 273312,
+    "log_sha256": "c28b654f3827f1b6e4780d2c5dd06cb504c82a79fb34671802477070b3bf77de",
+    "visual_cases": 121,
+    "visual_compares": 5,
+    "visual_no_baseline": 116,
+    "visual_failures": 0,
+    "browser_canvas_states": 1838,
+    "browser_canvas_observations": 1912,
+    "independent_pixel_comparisons": 105868800
+  },
+  "focused_evidence_sha256": "8c6f8c5d4760737c410e4881d6f0ad21a241331f2a3f20af385b1cdc763b734f",
+  "review_inputs": {
+    "source": "000e29102525a6ce5672a1cdfd7773492b3158b6",
+    "source_tree": "ad736ac714f297e7fef45ad40b709362e9e7b753",
+    "base": "914d68e8ed50698ea77c9d18c221c404629b9332",
+    "previous_qualified_source": "c827d46c4bfd3083d050859fc618987c3758be32",
+    "reviewer": "Independent test-and-merge reviewer, distinct from the Web writer, controls and firmware-reference implementers",
+    "browser": "Playwright 1.62.0, Chromium 151.0.7922.34 with its normal sandbox, three viewports at device scale 1",
+    "product": {
+      "files": 265,
+      "independent_manifest_sha256": "a5fbb815875912bafafaba933073a27ddf900247b4f8e277d4e1b115f5b990e3",
+      "fully_byte_compared_with_qualification_output": true
+    },
+    "route_comparison": {
+      "before_count": 57,
+      "after_count": 57,
+      "viewport_overflow_before": 14,
+      "viewport_overflow_after": 0,
+      "http_errors_after": 0,
+      "browser_errors_after": 0,
+      "before_receipt_sha256": "7efcb2e093526504a284deded343f7727a2def29384bb900b82ed700660bc523",
+      "after_receipt_sha256": "410d5132e0d811d94cb49a0ef998cf7e8f30627f77743ecdd064f1f5b656e59d"
+    },
+    "navigation": {
+      "before_observations": 9,
+      "after_observations": 18,
+      "entry_journeys": [
+        "Tools → Play the browser instrument → previous sessions emulator",
+        "Interface studies → firmware screen reference",
+        "R22 design-study disclosure and historical firmware reference remain visible"
+      ],
+      "before_sha256": "4ad601a1283b0dd7d1231701432d03d5b99a6f5d797b77b7266da1279ee60f32",
+      "after_sha256": "24a37eda4f94e0d4f336f28308627638bd66f41a86dec5093012cf9f4bf83748"
+    },
+    "user_visible_pixel_comparison": {
+      "observations": [
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "native_sha256": "096885affbc774c45b7bc618dc15f96e2c277458e83eec7740cf8e81fd314681",
+          "one_pixel_change_sha256": "a8deef89d912444a4f8ec66cd40dd4a8016ff2070a791b34f170e0b054a9913a",
+          "stale_result_hidden_after": "home-live",
+          "temporary_unavailable_retry": "pass",
+          "page_errors": []
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "native_sha256": "096885affbc774c45b7bc618dc15f96e2c277458e83eec7740cf8e81fd314681",
+          "one_pixel_change_sha256": "a8deef89d912444a4f8ec66cd40dd4a8016ff2070a791b34f170e0b054a9913a",
+          "stale_result_hidden_after": "home-live",
+          "temporary_unavailable_retry": "pass",
+          "page_errors": []
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "native_sha256": "096885affbc774c45b7bc618dc15f96e2c277458e83eec7740cf8e81fd314681",
+          "one_pixel_change_sha256": "a8deef89d912444a4f8ec66cd40dd4a8016ff2070a791b34f170e0b054a9913a",
+          "stale_result_hidden_after": "home-live",
+          "temporary_unavailable_retry": "pass",
+          "page_errors": []
+        }
+      ],
+      "sha256": "8e113639caceec653bb98141745f532a9d43372dc2e83454a9dd72dca2283757"
+    },
+    "focused_independent_evidence_sha256": "6b63e4825d29ffff16bfc0a73a8d4df79368b17bf9b057b20e0c63eaf119fe20",
+    "hardware_writes": 0
+  },
+  "physical_device_actions": 0
+}

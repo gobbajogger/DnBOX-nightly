@@ -1,0 +1,753 @@
+diff --git a/index.html b/index.html
+index 3cadb30ce6c816d499a0e980ff7910351b8cb134..d9df0506ad2cd6e5ca8d835a5feeffc7a9ae65bd 100644
+--- a/index.html
++++ b/index.html
+@@ -40,11 +40,11 @@
+ <p class="lede">Groovebox firmware for the M-VAVE SMK-37 (Pro, Elite, MKE-P37) and the FM-1.
+ A 909, an 808, two 303s with TB-3PO, and a breakbeat player — with an APC40-style clip launcher
+ for Loopy Pro on the SMK-37.</p>
+-<div class="status">Production installation requires exact-model hardware-proven builds. None are currently available; existing development builds are retained in read-only history. Chrome or Edge, USB. The sample importer
++<div class="status">The installer selects the latest DnBOX release for SMK-37 Elite and Pro and shows the owner’s startup and restart reports for each model. Version 0.0.25.1 remains available as a fallback. Chrome or Edge, USB. The sample importer
+ puts your own loops into the BREAK slots. Installing is at your own risk; packages keep the
+ keyboard's model name so M-UPGRADE still works.</div>
+ <nav class="ways" aria-label="Get X0X">
+-  <div class="card"><strong><a href="install/">Install firmware</a> <a class="new" href="new/">What's new?</a></strong><span>Only hardware-proven builds can be offered here. No production build is currently selectable; development records and artifacts remain preserved.</span></div>
++  <div class="card"><strong><a href="install/">Install firmware</a> <a class="new" href="new/">What's new?</a></strong><span>Choose the latest release or the 0.0.25.1 fallback. Back up your sample slots first.</span></div>
+   <a href="breaks/"><strong>Sample importer</strong><span>Drop in loops and send them to the BREAK part from Chrome or Edge.</span></a>
+   <a href="projects/"><strong>Projects</strong><span>Save, load and reset on the keyboard, or export a project with its original samples.</span></a>
+   <a href="manual/"><strong>Manual</strong><span>Getting started, then everything else — including the SMK-37 map.</span></a>
+diff --git a/install/index.html b/install/index.html
+index 4ac894a8401c33632886c954194470aec5b757e7..b2dd768db520fec05b9cbc00f0f905c6c1126588 100644
+--- a/install/index.html
++++ b/install/index.html
+@@ -486,6 +486,7 @@
+           </label>
+         </div>
+     <p class="meta" id="pkgmeta"></p>
++    <p class="small" id="public-installs" aria-live="polite"></p>
+
+     <div class="build-detail" id="builddetail" hidden>
+       <details id="package-details" class="package-details"><summary>Details</summary>
+@@ -504,11 +505,19 @@
+     <div class="flash-action">
+           <div class="step-kicker" data-t="stage3">Step 03 / Install</div>
+           <p class="action-safety">First install replaces previous working data. <a href="#samples">Back up important samples</a> before switching. Keep USB connected until installation finishes.</p>
+-          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span data-t="devagree">I accept hardware-untested development firmware for my selected keyboard model.</span></label>
++          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span data-t="devagree">I have checked the version and keyboard model and accept installing this beta firmware.</span></label>
+           <button id="go" disabled data-t="install">Install</button>
+           <p class="install-hint" id="installhint" aria-live="polite"></p>
+           <progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress>
+           <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
++          <section id="install-check" aria-label="Install checks" hidden>
++            <h3>Install checks</h3>
++            <p id="receipt-result" role="status"></p>
++            <p id="receipt-next"></p>
++            <details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details>
++            <button type="button" id="report-install" disabled>Report this install</button>
++            <p class="small">Review your receipt on GitHub before submitting a public report.</p>
++          </section>
+           <details class="diagnostics">
+             <summary data-t="diagnostics">Technical details / activity log</summary>
+             <pre id="log"></pre>
+@@ -1237,6 +1246,7 @@
+   // The protocol has no unit serial or flash hash: this is not exact-byte proof.
+   async finishApplication(product, step) {
+     this.verified = false;
++    this.application = null;
+     step("reboot");
+     await sleep(3000);
+     // Loader terminal retries can take 4 × 3 × 5 seconds before reset.
+@@ -1250,6 +1260,7 @@
+         throw fail("model", `The selected keyboard changed model during the update: ${back.id.text}`);
+       if (back.id.text !== product) throw fail("mismatch", `installed, but the device reports ${back.id.text}`, back.id.text);
+       this.targetName = back.name;
++      this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};
+     } finally { back.link.close(); }
+     this.verified = true;
+     step("done", back.id.text);
+@@ -2214,11 +2225,11 @@
+     helptext: "見つからない場合は他の MIDI アプリを閉じてください。中断した更新は、多くの場合、USB ケーブルを挿し直して「ファームウェアを書き込む」を再度押せば再開できます。",
+     helpmanual: "マニュアルを開く", hintblocked: "検証済みの機種別パッケージが必要です。",
+     hintverifying: "パッケージの読み込み・整合性確認を待ってください。",
+-    hintack: "開発版の注意事項を確認し、チェックを入れてください。",
++    hintack: "機種を確認し、インストールに同意してください。",
+     hintready: "書き込む準備ができました。開始前に機種と内容をもう一度確認します。",
+     hintbusy: "インストールの処理中です。USB を抜かず、ページを閉じないでください。",
+-    latestdev: "最新の利用可能な DEV", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
+-    devagree: "選択したキーボード機種向けの、実機未テストの開発版ファームウェアであることを受け入れます。",
++    modeltested: "この機種で起動と再起動を確認済み", primaryrelease: "最新リリース", fallbackrelease: "以前のバージョン", currentversion: "最新版", fallbackversion: "以前のバージョン", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
++    devagree: "バージョンとキーボードの機種を確認し、このベータ版ファームウェアのインストールに同意します。",
+     ctrlwarning: "この旧パッケージのインストールには、一致するローカル ctl.img が必要です。",
+     ctlbundlepending: "パッケージに一致する Bluetooth コントローラーを確認しています…",
+     ctlbundled: "この一体型 NIGHTLY には Bluetooth が含まれます。別のコントローラーファイルは不要です。",
+@@ -2323,8 +2334,8 @@
+     hintack: "Confirm the model and consent above to continue.",
+     hintready: "Ready to install.",
+     hintbusy: "An installation operation is in progress. Keep USB connected and this page open.",
+-    latestdev: "LATEST AVAILABLE DEV", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
+-    devagree: "I accept hardware-untested development firmware for my selected keyboard model.",
++    modeltested: "Owner confirmed startup and restart", primaryrelease: "LATEST RELEASE", fallbackrelease: "FALLBACK", currentversion: "Latest", fallbackversion: "Fallback", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
++    devagree: "I have checked the version and keyboard model and accept installing this beta firmware.",
+     ctrlwarning: "This legacy package requires the matching local ctl.img before installation.",
+     ctlbundlepending: "Checking this package for its matching included Bluetooth controller…",
+     ctlbundled: "Bluetooth is included in this complete NIGHTLY package. No separate controller file is needed.",
+@@ -2430,7 +2441,260 @@
+ const say = (txt) => { lastKey = null; $("status").textContent = txt; };
+ const log = (txt) => { $("log").textContent += txt + "\n"; };
+
+-const catalog = {"schema":2,"repo":"https://github.com/gobbajogger/DnBOX","pages":"https://gobbajogger.github.io/DnBOX","latest":"nightly-79280e76-dev","versions":[{"version":"nightly-79280e76-dev","label":"DEVICE NOT TESTED","status":"dev-checked","config":"X0X_DEV_PADCAL=0","hardware_tested":false,"source_commit":"79280e763341d03ba43266d3e25dad66f12de860","source_tree":"ab2e16a61c81abbcb6c4a71bd83bf0b5d943c120","models":{"elite":{"product":"SMK-37 Elite_900","sha256":"5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"},"pro":{"product":"SMK-37 Pro_900","sha256":"6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"}},"display_version":"0.0.25.1","title":"DnBOX 0.0.25.1 \u00b7 SMK-37 Elite and Pro","description":"Owner-approved 0.0.25.1 packages. The owner reports successful use and recovery to 25.1; independent exact-package hardware validation for both models is not recorded here. Firmware reports 0.0.25, GIT 79280e76. Bundled Bluetooth controller included. The 600b 0.0.26 build was withdrawn. 0.0.26 at 94197fc8 is a hardware-test build on the nightly; it is not offered here.","evidence_url":"https://github.com/gobbajogger/DnBOX/commit/79280e763341d03ba43266d3e25dad66f12de860","lifecycle":"current"},{"version":"dev-20261022-1638-e894804","title":"SMC-07 mixer popup + main help-card merge","built_at":"2026-10-22T16:38:00Z","source_commit":"e894804dfdb0bb66c7247eb1846313a215422c9f","status":"dev-checked","lifecycle":"current","hardware_tested":false,"description":"SMC mixer peek/hold/restore integrated with main 909/808 drum mixer, record feedback and help card. Newest recovered DEV CHECKED packages; physical installation remains pending.","notes":"DEV CHECKED is a development validation result, not a device test. A separate locally built ctl.img is needed for direct SMC Bluetooth. Use the appropriate model and the guarded local installation procedure.","evidence_url":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/RESULT.txt","models":{"elite":{"product":"SMK-37 Elite_900","pkg":"firmware/x0x37-dev-20261022-1638-e894804-elite.fwsc","size":651396,"sha256":"19cf000582b67f6e66295c4f0c70512c493432e87f3c88c817f938f67e138c64","validation_record":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/elite/record.json"},"pro":{"product":"SMK-37 Pro_900","pkg":"firmware/x0x37-dev-20261022-1638-e894804-pro.fwsc","size":651392,"sha256":"ca458e0e4fe216ec349566d4a122ad65498d78aabc21c9e01dfe8d7e8494d56f","validation_record":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/pro/record.json"}}},{"version":"dev-20261022-1629-116d903","title":"SMC-07 mixer popup: pre-help-card checkpoint","built_at":"2026-10-22T16:29:31Z","source_commit":"116d9030f18ec251c37c3bd09ffcad2eb0a613be","status":"dev-checked","lifecycle":"superseded","hardware_tested":false,"description":"Previously validated merge candidate; replaced by the 16:38 UTC build after integrating the main help-card. Keep only for regression comparison.","notes":"DEV CHECKED is a development validation result, not a device test. A separate locally built ctl.img is needed for direct SMC Bluetooth. Use the appropriate model and the guarded local installation procedure.","evidence_url":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/RESULT.txt","models":{"elite":{"product":"SMK-37 Elite_900","pkg":"firmware/x0x37-dev-20261022-1629-116d903-elite.fwsc","size":651396,"sha256":"b14ae4145359743d62b1cb789b7c9f8b2b83664b79bcc462ba4e1be29ff4402c","validation_record":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/elite/record.json"},"pro":{"product":"SMK-37 Pro_900","pkg":"firmware/x0x37-dev-20261022-1629-116d903-pro.fwsc","size":651392,"sha256":"8008b633b96e5c33a4bb7dbb7adb98b5e7315720c1d64446664209aadeccee57","validation_record":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/pro/record.json"}}}],"history":[{"id":"smc-peek-later","title":"SMC peek-overlay guard","source_commit":"877f512b384fa4e903dd5b868af1fee1f7007362","status":"source-only","date":"2026-10-22","models":["elite","pro"],"description":"Newer source/PR #19; no matching validated firmware package. Existing archived binaries in this branch predate the new source.","url":"https://github.com/gobbajogger/DnBOX/pull/19"},{"id":"current-main","title":"Current main source","source_commit":"c9718ae833eb64a5191c350922593df8a36017c9","status":"source-only","date":"2026-10-23","models":[],"description":"Repository source head only. Do not confuse branch recency with the latest verified firmware artifact.","url":"https://github.com/gobbajogger/DnBOX/tree/main"},{"id":"older-integrated-smc","title":"Integrated SMC and project management","source_commit":"ab121324455e06e5fad0a8a2f16d897177965acf","status":"not-hosted","date":"2026-10-22","models":["elite","pro"],"description":"Earlier Elite/Pro DEV CHECKED installer archives are mentioned in development handoffs; original package bytes are not hosted in the GitHub installer. No flash link.","url":null},{"id":"direct-smc-elite","title":"Direct-SMC Elite development reference","source_commit":"81459573792a68edd02fa1ee5658796b55597ba0","status":"not-hosted","date":"2026-10-21","models":["elite"],"description":"Previous Elite-only installer ZIP verified in a separate environment; original package is not hosted here and physical link behavior was not established.","url":null},{"id":"project-save-stage","title":"Project reset/save/load/export stage","source_commit":"68e1117262aba958f96b6eb65cb3bfb1b3cc94ce","status":"evidence-only","date":"2026-10-21","models":["elite","pro"],"description":"DEV CHECKED results recorded; original binaries are not recovered as accessible GitHub firmware packages.","url":"https://github.com/gobbajogger/DnBOX/blob/main/docs/audit/project-management-dev-validation.md"},{"id":"xip-failed","title":"SMC mixer popup XIP overflow","source_commit":"df1b204745e78784cccfe41b03e75ac4f105eb2b","status":"failed","date":"2026-10-22","models":["elite","pro"],"description":"DEV build failed the XIP budget. Not installable; retained to explain why the subsequent repair was needed.","url":"https://github.com/gobbajogger/DnBOX/pull/12"},{"id":"smc-physical-ref","title":"Earlier SMC connected reference","source_commit":"53d5654c9bbaec10b64c55fb60d0e7d857ba8156","status":"reference","date":"2026-10-21","models":["elite"],"description":"SMC connection and RX controls were observed in a prior device report, but the exact installed firmware attribution is unproven. Not a verified flash artifact.","url":null}]};
++// SPDX-License-Identifier: GPL-3.0-only
++// Public, user-submitted install observations. Owner hardware approvals live in a separate ledger.
++const reportRepository = 'gobbajogger/DnBOX';
++const reportTitle = '[Install report]';
++const modelNames = {elite: 'SMK-37 Elite', pro: 'SMK-37 Pro'};
++
++function installBuild(version, pkg, model) {
++  if (!version || !pkg || !Object.hasOwn(modelNames, model) ||
++      !/^[a-z0-9._-]{1,100}$/i.test(version.version) || !/^[a-f0-9]{64}$/.test(pkg.sha256)) return null;
++  return {build_id: version.version, version: version.display_version || '', sha256: pkg.sha256, source_commit: version.source_commit, model, product: pkg.product};
++}
++
++function portVersionMatches(name, build) {
++  // OS-specific suffixes are allowed, but the DnBOX version token and full model must agree.
++  const match = /^DnBOX\s+v?(\d+\.\d+\.\d+(?:\.\d+)?)\s+(SMK-37 (?:Elite|Pro))(?=$|\s|[([])/i.exec(name);
++  return !!match && match[1] === build.version && match[2].toLowerCase() === modelNames[build.model]?.toLowerCase();
++}
++
++function sameReceiptPort(port, original) {
++  return !!port && !!original && (!port.type || !original.type || port.type === original.type) &&
++    (port === original || (original.id && port.id === original.id));
++}
++
++function connectedReceiptPort(ports, original) {
++  const matches = [...ports.values()].filter(p => p.state === 'connected' && sameReceiptPort(p, original));
++  return matches.length === 1 ? matches[0] : null;
++}
++
++// Created only from finishApplication's exact application reply and its actual pair.
++// A timer, picker selection or a scan that started before the physical unplug cannot complete this check.
++class InstallRestartCheck {
++  constructor(access, application, build, browser, changed) {
++    if (!build || application?.product !== build.product || !application.input || !application.output)
++      throw Error('A confirmed application and its MIDI pair are required');
++    this.access = access;
++    this.input = application.input;
++    this.output = application.output;
++    this.changed = changed;
++    this.generation = 0;
++    this.unplugged = false;
++    this.receipt = {...build, port_name: application.port_name, browser, time: new Date().toISOString(),
++      startup_ok: true, restart_ok: false, version_matched: portVersionMatches(application.port_name, build)};
++    this.onState = e => this.stateChange(e.port);
++    access.addEventListener('statechange', this.onState);
++    this.changed(this.receipt, 'unplug');
++  }
++
++  stateChange(port) {
++    if (port?.state !== 'disconnected' ||
++        !(sameReceiptPort(port, this.input) || sameReceiptPort(port, this.output))) return;
++    this.generation++;
++    const input = connectedReceiptPort(this.access.inputs, this.input);
++    const output = connectedReceiptPort(this.access.outputs, this.output);
++    if (!input && !output) {
++      this.unplugged = true;
++      this.changed(this.receipt, 'replug');
++    }
++  }
++
++  ticket() {
++    if (!this.unplugged || this.receipt.restart_ok) return null;
++    const input = connectedReceiptPort(this.access.inputs, this.input);
++    const output = connectedReceiptPort(this.access.outputs, this.output);
++    return input && output ? {input, output, generation: this.generation} : null;
++  }
++
++  reidentify(ticket, dev, soleKeyboard) {
++    const current = this.ticket();
++    if (!ticket && this.unplugged && soleKeyboard && dev?.id?.text === this.receipt.product &&
++        (!sameReceiptPort(dev.link?.input, this.input) || !sameReceiptPort(dev.link?.output, this.output))) {
++      this.changed(this.receipt, 'different-ports');
++    }
++    if (!ticket || !current || !soleKeyboard || current.generation !== ticket.generation ||
++        ticket.input !== current.input || ticket.output !== current.output ||
++        dev?.link?.input !== current.input || dev?.link?.output !== current.output ||
++        dev.id?.text !== this.receipt.product || dev.id.model !== modelNames[this.receipt.model] ||
++        !current.input.name || current.input.name !== current.output.name) return false;
++    this.receipt = {...this.receipt, port_name: current.input.name, restart_ok: true,
++      version_matched: portVersionMatches(current.input.name, this.receipt), time: new Date().toISOString()};
++    this.changed(this.receipt, 'done');
++    this.close();
++    return true;
++  }
++
++  close() {
++    this.unplugged = false;
++    this.generation++;
++    this.access.removeEventListener('statechange', this.onState);
++  }
++}
++
++function installReportUrl(receipt) {
++  const url = new URL('https://github.com/' + reportRepository + '/issues/new');
++  url.search = new URLSearchParams({
++    template: 'install-report.yml', title: reportTitle + ' ' + receipt.build_id + ' · ' + modelNames[receipt.model],
++    build_id: receipt.build_id, model: modelNames[receipt.model], sha256: receipt.sha256,
++    port_name: receipt.port_name, startup_ok: receipt.startup_ok ? 'Yes' : 'Not tested',
++    restart_ok: receipt.restart_ok ? 'Yes' : 'Not tested', browser: receipt.browser,
++    notes: 'Installer receipt\n\n```json\n' + JSON.stringify(receipt, null, 2) + '\n```',
++  });
++  return url.href;
++}
++
++const formHeadings = ['Build ID', 'Keyboard model', 'Firmware package SHA-256', 'Port name',
++  'Did startup succeed?', 'Did restart succeed?', 'Browser and version', 'Notes'];
++
++function submittedReceipt(issue) {
++  if (!Number.isSafeInteger(issue?.number) || issue.number <= 0 || issue.pull_request ||
++      !/^\[Install report\](?:\s|$)/.test(issue.title) || typeof issue.body !== 'string' || issue.body.length > 65536) return null;
++  // GitHub publishes issue forms as Markdown with a heading for each field.
++  const parts = issue.body.replace(/\r\n/g, '\n').split(/^### ([^\n]+)\s*$/m);
++  const fields = new Map();
++  for (let i = 1; i < parts.length; i += 2) {
++    const heading = parts[i].trim();
++    if (fields.has(heading)) return null;
++    fields.set(heading, parts[i + 1].trim());
++  }
++  if (!formHeadings.slice(0, -1).every(key => fields.has(key))) return null;
++  const [build_id, modelName, sha256, port_name, startup, restart, browser, notes] = formHeadings.map(h => fields.get(h));
++  const model = Object.keys(modelNames).find(key => modelNames[key] === modelName);
++  if (!model || !build_id || build_id.length > 120 || !/^[a-f0-9]{64}$/i.test(sha256) ||
++      !port_name || !browser || browser === '_No response_' || ![startup, restart].every(x => ['Yes', 'No', 'Not tested'].includes(x))) return null;
++  const common = {build_id, model, sha256: sha256.toLowerCase(), port_name, browser,
++    startup_ok: startup === 'Yes', restart_ok: restart === 'Yes'};
++  if (/^Installer receipt\b/.test(notes || '')) {
++    const fenced = /^Installer receipt\s+```json\s*\n([\s\S]+?)\n```\s*$/.exec(notes);
++    if (!fenced) return null;
++    try {
++      const r = JSON.parse(fenced[1]);
++      if (!r || !Object.entries(common).every(([key, value]) => r[key] === value) ||
++          typeof r.product !== 'string' || !/^SMK-37 (?:Elite|Pro)_\d+$/.test(r.product) ||
++          r.product.split('_')[0] !== modelName || typeof r.time !== 'string' || !Number.isFinite(Date.parse(r.time)) ||
++          typeof r.version_matched !== 'boolean' || !/^\d+\.\d+\.\d+(?:\.\d+)?$/.test(r.version)) return null;
++      return r;
++    } catch { return null; }
++  }
++  // Ordinary users can fill the published form manually and leave Notes empty.
++  const namedVersion = /^v?(\d+\.\d+\.\d+(?:\.\d+)?)(?:\s*\([a-f0-9]{7,40}\))?$/i.exec(build_id);
++  return {...common, version: namedVersion?.[1] || '', time: issue.created_at, manual: true};
++}
++
++async function loadInstallReports({fetchImpl = fetch, signal = globalThis.AbortSignal?.timeout?.(20000)} = {}) {
++  const reports = new Map();
++  async function request(url) {
++    const response = await fetchImpl(url.href, {credentials: 'omit', referrerPolicy: 'no-referrer', signal,
++      headers: {Accept: 'application/vnd.github+json'}});
++    if (!response.ok) throw Error('Public installs API returned HTTP ' + response.status);
++    return {body: await response.json(), hasNext: /;\s*rel="next"/.test(response.headers.get('Link') || '')};
++  }
++  function add(issues) {
++    if (!Array.isArray(issues)) throw Error('Invalid public installs response');
++    for (const issue of issues) {
++      const receipt = submittedReceipt(issue);
++      if (receipt) reports.set(issue.number, {number: issue.number,
++        url: 'https://github.com/' + reportRepository + '/issues/' + issue.number, receipt});
++    }
++  }
++  // A title search normally takes a single public request. Avoid GitHub's search
++  // limit and partial-result flag by enumerating the complete issue list when needed.
++  for (let page = 1; ; page++) {
++    const search = new URL('https://api.github.com/search/issues');
++    search.search = new URLSearchParams({q: 'repo:' + reportRepository + ' is:issue in:title "Install report"', per_page: 100, page});
++    const {body, hasNext} = await request(search);
++    if (!Number.isSafeInteger(body?.total_count) || body.total_count < 0 ||
++        typeof body.incomplete_results !== 'boolean' || !Array.isArray(body.items)) throw Error('Invalid public installs search');
++    if (body.incomplete_results || body.total_count > 1000) break;
++    add(body.items);
++    if (!hasNext) return [...reports.values()];
++  }
++  reports.clear();
++  for (let page = 1; ; page++) {
++    const url = new URL('https://api.github.com/repos/' + reportRepository + '/issues');
++    url.search = new URLSearchParams({state: 'all', per_page: 100, page});
++    const {body, hasNext} = await request(url);
++    add(body);
++    if (!hasNext) return [...reports.values()];
++  }
++}
++
++function reportBuildMatches(receipt, selection) {
++  if (!selection.build_id || receipt.build_id === selection.build_id) return true;
++  if (!receipt.manual) return false;
++  const alias = /^v?(\d+\.\d+\.\d+(?:\.\d+)?)(?:\s*\(([a-f0-9]{7,40})\))?$/i.exec(receipt.build_id);
++  if (alias) return alias[1] === selection.version && (!alias[2] || selection.source_commit?.startsWith(alias[2].toLowerCase()));
++  return /^[a-f0-9]{7,40}$/i.test(receipt.build_id) && selection.source_commit?.startsWith(receipt.build_id.toLowerCase());
++}
++
++function countInstallReports(reports, selection = {}) {
++  return reports.filter(({receipt: r}) => {
++    if (!r.startup_ok || !r.restart_ok || !reportBuildMatches(r, selection) ||
++        (selection.sha256 && selection.sha256 !== r.sha256) || (selection.model && selection.model !== r.model)) return false;
++    if (r.manual) {
++      const version = selection.version || r.version;
++      return !!version && portVersionMatches(r.port_name, {version, model: r.model});
++    }
++    return r.version_matched && (!selection.version || selection.version === r.version) && portVersionMatches(r.port_name, r);
++  }).length;
++}
++
++function mountInstallReports(doc, getSelection, browser) {
++  const element = id => doc.getElementById(id);
++  let read, check = null, displayed = null;
++  element('report-install').addEventListener('click', () => {
++    if (displayed) doc.defaultView.open(installReportUrl(displayed), '_blank', 'noopener,noreferrer');
++  });
++  function render(receipt, phase) {
++    element('install-check').hidden = false;
++    element('receipt-result').textContent = 'Startup OK · ' + (receipt.restart_ok ? 'Restart OK' : 'Restart pending') +
++      ' · ' + (receipt.version_matched ? 'version matched' : 'version unconfirmed');
++    element('receipt-next').textContent = phase === 'done' ? '' : phase === 'different-ports'
++      ? 'Restart unconfirmed. The browser assigned different MIDI ports, so this keyboard could not be linked to the install.'
++      : phase === 'replug'
++      ? 'Reconnect the same keyboard to the same USB port. Use Connect to check again if needed.'
++      : 'Unplug the keyboard, then reconnect it to the same USB port. Keep this page open for the restart check.';
++    if (!receipt.version_matched) element('receipt-next').textContent += ' The OS may have cached an older MIDI port name.';
++    element('receipt-json').textContent = JSON.stringify(receipt, null, 2);
++    displayed = receipt;
++    element('report-install').disabled = false;
++  }
++  async function refresh() {
++    const selection = getSelection();
++    if (!selection) { element('public-installs').textContent = ''; return; }
++    const output = element('public-installs');
++    output.textContent = 'Checking public install reports…';
++    const pending = read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
++    try {
++      const reports = await pending;
++      const current = getSelection();
++      if (current?.sha256 !== selection.sha256 || current?.build_id !== selection.build_id) return;
++      const n = countInstallReports(reports, selection);
++      output.textContent = n + (n === 1 ? ' install' : ' installs') + ' reported OK for this build and model.';
++    } catch {
++      if (read === pending) read = null;
++      const current = getSelection();
++      if (!read && current?.sha256 === selection.sha256 && current.build_id === selection.build_id) {
++        output.textContent = 'Public install reports unavailable.';
++      }
++    }
++  }
++  // Selection changes can be user-initiated or come from a connected device.
++  return {refresh, reset() {
++    check?.close();
++    check = null;
++    element('install-check').hidden = true;
++    displayed = null;
++    element('report-install').disabled = true;
++  }, observed(access, application, build) {
++    if (!application?.input || !application.output || !access.addEventListener) return null;
++    check = new InstallRestartCheck(access, application, build, browser, render);
++    return check;
++  }};
++}
++
++const catalog = {"schema":2,"repo":"https://github.com/gobbajogger/DnBOX","pages":"https://gobbajogger.github.io/DnBOX","latest":"nightly-94197fc8-dev","versions":[{"version":"nightly-94197fc8-dev","display_version":"0.0.26","label":"Owner-tested release","status":"release-checked","config":"X0X_DEV_PADCAL=0","hardware_tested":true,"source_commit":"94197fc839b00aff47b98ca02f3c6396e4a6eabf","source_tree":"72d28fbc741244d18fa3d18495da16ab0fcb1d24","title":"DnBOX 0.0.26 \u00b7 SMK-37 Elite and Pro","description":"The owner tested startup and restart on SMK-37 Elite and Pro with the corrected 94197fc8 release. This replaces the withdrawn 600b build. Back up your sample slots before installing.","evidence_url":"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26","models":{"elite":{"product":"SMK-37 Elite_900","sha256":"95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6","size":651732,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc"},"pro":{"product":"SMK-37 Pro_900","sha256":"ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8","size":651730,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc"}},"lifecycle":"current"},{"version":"nightly-79280e76-dev","label":"DEVICE NOT TESTED","status":"dev-checked","config":"X0X_DEV_PADCAL=0","hardware_tested":false,"source_commit":"79280e763341d03ba43266d3e25dad66f12de860","source_tree":"ab2e16a61c81abbcb6c4a71bd83bf0b5d943c120","models":{"elite":{"product":"SMK-37 Elite_900","sha256":"5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"},"pro":{"product":"SMK-37 Pro_900","sha256":"6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"}},"display_version":"0.0.25.1","title":"DnBOX 0.0.25.1 \u00b7 SMK-37 Elite and Pro","description":"Fallback for SMK-37 Elite and Pro. Firmware reports 0.0.25, GIT 79280e76. The owner reported testing on Elite without confirming the installed package hash. Pro has no recorded device test. Both packages include the Bluetooth controller.","evidence_url":"https://github.com/gobbajogger/DnBOX/commit/79280e763341d03ba43266d3e25dad66f12de860","lifecycle":"current"},{"version":"dev-20261022-1638-e894804","title":"SMC-07 mixer popup + main help-card merge","built_at":"2026-10-22T16:38:00Z","source_commit":"e894804dfdb0bb66c7247eb1846313a215422c9f","status":"dev-checked","lifecycle":"current","hardware_tested":false,"description":"SMC mixer peek/hold/restore integrated with main 909/808 drum mixer, record feedback and help card. Newest recovered DEV CHECKED packages; physical installation remains pending.","notes":"DEV CHECKED is a development validation result, not a device test. A separate locally built ctl.img is needed for direct SMC Bluetooth. Use the appropriate model and the guarded local installation procedure.","evidence_url":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/RESULT.txt","models":{"elite":{"product":"SMK-37 Elite_900","pkg":"firmware/x0x37-dev-20261022-1638-e894804-elite.fwsc","size":651396,"sha256":"19cf000582b67f6e66295c4f0c70512c493432e87f3c88c817f938f67e138c64","validation_record":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/elite/record.json"},"pro":{"product":"SMK-37 Pro_900","pkg":"firmware/x0x37-dev-20261022-1638-e894804-pro.fwsc","size":651392,"sha256":"ca458e0e4fe216ec349566d4a122ad65498d78aabc21c9e01dfe8d7e8494d56f","validation_record":"https://github.com/gobbajogger/DnBOX/blob/d3f4269c19d5d3597a6185e414ed6c8dc9b30c05/evidence/smc-mixer-ui-popup-stage5-resolve/pro/record.json"}}},{"version":"dev-20261022-1629-116d903","title":"SMC-07 mixer popup: pre-help-card checkpoint","built_at":"2026-10-22T16:29:31Z","source_commit":"116d9030f18ec251c37c3bd09ffcad2eb0a613be","status":"dev-checked","lifecycle":"superseded","hardware_tested":false,"description":"Previously validated merge candidate; replaced by the 16:38 UTC build after integrating the main help-card. Keep only for regression comparison.","notes":"DEV CHECKED is a development validation result, not a device test. A separate locally built ctl.img is needed for direct SMC Bluetooth. Use the appropriate model and the guarded local installation procedure.","evidence_url":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/RESULT.txt","models":{"elite":{"product":"SMK-37 Elite_900","pkg":"firmware/x0x37-dev-20261022-1629-116d903-elite.fwsc","size":651396,"sha256":"b14ae4145359743d62b1cb789b7c9f8b2b83664b79bcc462ba4e1be29ff4402c","validation_record":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/elite/record.json"},"pro":{"product":"SMK-37 Pro_900","pkg":"firmware/x0x37-dev-20261022-1629-116d903-pro.fwsc","size":651392,"sha256":"8008b633b96e5c33a4bb7dbb7adb98b5e7315720c1d64446664209aadeccee57","validation_record":"https://github.com/gobbajogger/DnBOX/blob/e894804dfdb0bb66c7247eb1846313a215422c9f/evidence/smc-mixer-ui-popup-stage5-resolve/pro/record.json"}}}],"history":[{"id":"smc-peek-later","title":"SMC peek-overlay guard","source_commit":"877f512b384fa4e903dd5b868af1fee1f7007362","status":"source-only","date":"2026-10-22","models":["elite","pro"],"description":"Newer source/PR #19; no matching validated firmware package. Existing archived binaries in this branch predate the new source.","url":"https://github.com/gobbajogger/DnBOX/pull/19"},{"id":"current-main","title":"Current main source","source_commit":"c9718ae833eb64a5191c350922593df8a36017c9","status":"source-only","date":"2026-10-23","models":[],"description":"Repository source head only. Do not confuse branch recency with the latest verified firmware artifact.","url":"https://github.com/gobbajogger/DnBOX/tree/main"},{"id":"older-integrated-smc","title":"Integrated SMC and project management","source_commit":"ab121324455e06e5fad0a8a2f16d897177965acf","status":"not-hosted","date":"2026-10-22","models":["elite","pro"],"description":"Earlier Elite/Pro DEV CHECKED installer archives are mentioned in development handoffs; original package bytes are not hosted in the GitHub installer. No flash link.","url":null},{"id":"direct-smc-elite","title":"Direct-SMC Elite development reference","source_commit":"81459573792a68edd02fa1ee5658796b55597ba0","status":"not-hosted","date":"2026-10-21","models":["elite"],"description":"Previous Elite-only installer ZIP verified in a separate environment; original package is not hosted here and physical link behavior was not established.","url":null},{"id":"project-save-stage","title":"Project reset/save/load/export stage","source_commit":"68e1117262aba958f96b6eb65cb3bfb1b3cc94ce","status":"evidence-only","date":"2026-10-21","models":["elite","pro"],"description":"DEV CHECKED results recorded; original binaries are not recovered as accessible GitHub firmware packages.","url":"https://github.com/gobbajogger/DnBOX/blob/main/docs/audit/project-management-dev-validation.md"},{"id":"xip-failed","title":"SMC mixer popup XIP overflow","source_commit":"df1b204745e78784cccfe41b03e75ac4f105eb2b","status":"failed","date":"2026-10-22","models":["elite","pro"],"description":"DEV build failed the XIP budget. Not installable; retained to explain why the subsequent repair was needed.","url":"https://github.com/gobbajogger/DnBOX/pull/12"},{"id":"smc-physical-ref","title":"Earlier SMC connected reference","source_commit":"53d5654c9bbaec10b64c55fb60d0e7d857ba8156","status":"reference","date":"2026-10-21","models":["elite"],"description":"SMC connection and RX controls were observed in a prior device report, but the exact installed firmware attribution is unproven. Not a verified flash artifact.","url":null}],"installer_promotion_schema":1};
+ let catalogLive = catalog;
+ const repo = catalog.repo || "https://github.com/gobbajogger/DnBOX";
+ $("repolink").href = repo;
+@@ -2517,6 +2781,7 @@
+   try {
+     const access = await midiAccess();
+     if (requestId !== scanSerial || writing) return;
++    const restartTicket = midiAccess.restartCheck?.ticket();
+     const up = new Updater(access, () => {});
+     // Prefer a running app; if only the update loader is present, resume from there.
+     let dev = await up.find((id) => !/^ota-/i.test(id.model));
+@@ -2533,6 +2798,7 @@
+       return;
+     }
+     lastId = dev.id;
++    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);
+     const bare = inOta ? dev.id.model.replace(/^ota-/i, "") : dev.id.model;
+     const detail = inOta
+       ? `${dev.id.text}${dev.name ? " · " + dev.name : ""} — ${t("otahelp")}`
+@@ -2540,6 +2806,7 @@
+     setConnected(true, detail);
+     if (inOta) led("busy");
+     suggestModel(bare);
++    midiAccess.reports?.refresh();
+     dev.link.close();
+   } catch (e) {
+     if (requestId !== scanSerial || writing) return;
+@@ -2553,12 +2820,157 @@
+ function isRecord(value) {
+   return value !== null && typeof value === "object" && !Array.isArray(value);
+ }
+-// Owner approved these exact 0.0.25.1 artifacts, not arbitrary catalog entries.
+-const MAIN_251_SOURCE = "79280e763341d03ba43266d3e25dad66f12de860";
+-const MAIN_251_MODELS = {"elite":{"product":"SMK-37 Elite_900","sha256":"5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"},"pro":{"product":"SMK-37 Pro_900","sha256":"6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf","size":651721,"controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","controller_strategy":"bundled","controller_size":61552,"pkg":"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"}};
++// The fallback has explicit package approval independent of hardware-test evidence.
++const MAIN_FALLBACK = {
++  "version": "nightly-79280e76-dev",
++  "display_version": "0.0.25.1",
++  "source_commit": "79280e763341d03ba43266d3e25dad66f12de860",
++  "source_tree": "ab2e16a61c81abbcb6c4a71bd83bf0b5d943c120",
++  "status": "dev-checked",
++  "hardware_tested": false,
++  "models": {
++    "elite": {
++      "product": "SMK-37 Elite_900",
++      "sha256": "5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a",
++      "size": 651721,
++      "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
++      "controller_strategy": "bundled",
++      "controller_size": 61552,
++      "pkg": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/5e24e0d4afccc30906b334fbe73bcad3621df8df3c325790b7af2f94accffb1a/x0x37-elite-dev.fwsc"
++    },
++    "pro": {
++      "product": "SMK-37 Pro_900",
++      "sha256": "6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf",
++      "size": 651721,
++      "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
++      "controller_strategy": "bundled",
++      "controller_size": 61552,
++      "pkg": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/6f135a3d03bb1a2a4d09d63040c719313612b85590a6af69b293a928e22285bf/x0x37-pro-dev.fwsc"
++    }
++  }
++};
++const NIGHTLY_HARDWARE_TESTS = "https://gobbajogger.github.io/DnBOX-nightly/hardware-tests.json";
++let currentHardwareLedger = {"schema":1,"reports":[{"version":"0.0.26","source_commit":"94197fc839b00aff47b98ca02f3c6396e4a6eabf","model":"elite","package_sha256":"95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6","controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","startup":true,"restart":true,"evidence_url":"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26","reported_by":"owner"},{"version":"0.0.26","source_commit":"94197fc839b00aff47b98ca02f3c6396e4a6eabf","model":"pro","package_sha256":"ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8","controller_sha256":"a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984","startup":true,"restart":true,"evidence_url":"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26","reported_by":"owner"}]};
++// SPDX-License-Identifier: GPL-3.0-only
++// Reports bind the owner's startup and restart observations to one installed package.
++function validateHardwareTests(ledger) {
++  if (!ledger || ledger.schema !== 1 || !Array.isArray(ledger.reports) ||
++      ledger.reports.length > 20000 || Object.keys(ledger).some(key => !['schema', 'reports'].includes(key))) {
++    throw new Error('Invalid hardware test ledger');
++  }
++  const keys = ['version', 'source_commit', 'model', 'package_sha256', 'controller_sha256',
++    'startup', 'restart', 'evidence_url', 'reported_by', 'reported_at'];
++  const seen = new Set();
++  for (const report of ledger.reports) {
++    if (!report || typeof report !== 'object' || Object.keys(report).some(key => !keys.includes(key)) ||
++        typeof report.version !== 'string' || !/^\d+(?:\.\d+){2,3}$/.test(report.version) || typeof report.source_commit !== 'string' || !/^[0-9a-f]{40}$/.test(report.source_commit) ||
++        !['elite', 'pro'].includes(report.model) || typeof report.package_sha256 !== 'string' ||
++        typeof report.controller_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(report.package_sha256) ||
++        !/^[0-9a-f]{64}$/.test(report.controller_sha256) || report.startup !== true || report.restart !== true ||
++        report.reported_by !== 'owner' || typeof report.evidence_url !== 'string' ||
++        !/^https:\/\/github\.com\/gobbajogger\/DnBOX(?:-nightly)?\/(?:releases\/tag\/v\d+(?:\.\d+){2,3}|(?:issues|pull)\/[1-9]\d*(?:#issuecomment-[1-9]\d*)?)$/.test(report.evidence_url) ||
++        (report.reported_at !== undefined && (typeof report.reported_at !== 'string' ||
++          !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(report.reported_at) ||
++          !Number.isFinite(Date.parse(report.reported_at))))) {
++      throw new Error('Invalid model hardware report');
++    }
++    const key = [report.version, report.source_commit, report.model, report.package_sha256, report.controller_sha256].join('/');
++    if (seen.has(key)) throw new Error('Duplicate model hardware report');
++    seen.add(key);
++  }
++  return ledger;
++}
++
++// Historical packages used the same SMK product string for several releases.
++function effectivePackageVersion(row, assignments = []) {
++  const versionPattern = /^(?:0|[1-9]\d*)(?:\.(?:0|[1-9]\d*)){2,3}$/;
++  if (!row || typeof row !== 'object') return null;
++  if (Object.hasOwn(row, 'display_version')) {
++    return typeof row.display_version === 'string' && versionPattern.test(row.display_version) ? row.display_version : null;
++  }
++  const entries = Array.isArray(assignments) ? assignments : assignments?.schema === 1 ? assignments.assignments : null;
++  if (!Array.isArray(entries)) return null;
++  const matches = entries.filter(entry => entry?.catalog_id === row.version);
++  if (matches.length !== 1) return null;
++  const assignment = matches[0];
++  if (typeof assignment.package_version !== 'string' || !versionPattern.test(assignment.package_version) ||
++      !/^[a-f0-9]{40}$/.test(assignment.source_commit) || !/^[a-f0-9]{40}$/.test(assignment.source_tree) ||
++      row.source_commit !== assignment.source_commit || row.source_tree !== assignment.source_tree) return null;
++  const models = Object.keys(assignment.models || {}).sort();
++  if (!models.length || models.join(',') !== Object.keys(row.models || {}).sort().join(',')) return null;
++  const fields = ['product','sha256','size','controller_sha256','controller_strategy','controller_size'];
++  for (const key of models) {
++    const pkg = row.models[key], pin = assignment.models[key];
++    if (!pkg || !pin || !/^SMK-37 (?:Elite|Pro)_/.test(pin.product) ||
++        !/^[a-f0-9]{64}$/.test(pin.sha256) || !/^[a-f0-9]{64}$/.test(pin.controller_sha256) ||
++        !Number.isSafeInteger(pin.size) || pin.size <= 0 ||
++        !fields.every(field => Object.hasOwn(pkg, field) === Object.hasOwn(pin, field) &&
++          pkg[field] === pin[field])) return null;
++  }
++  return assignment.package_version;
++}
++
++function hardwareTestsFor(ledger, row, model, assignments) {
++  const pkg = row?.models?.[model];
++  if (!pkg || !['elite','pro'].includes(model)) return null;
++  const version = effectivePackageVersion(row, assignments);
++  if (!version) return null;
++  return ledger.reports.find(report => report.model === model && report.version === version &&
++    report.source_commit === row.source_commit && report.package_sha256 === pkg.sha256 &&
++    report.controller_sha256 === pkg.controller_sha256) || null;
++}
++
++async function fetchHardwareTests(url, options = {}) {
++  const response = await fetch(url, {cache:'no-store', redirect:'error', credentials:'omit', ...options});
++  if (!response.ok || response.redirected) throw new Error('Hardware report ledger unavailable');
++  return validateHardwareTests(await response.json());
++}
++function mainReleasePin(v) {
++  if (!v || typeof v !== "object") return null;
++  if (["version","display_version","source_commit","source_tree","status","hardware_tested"]
++      .every(key => v[key] === MAIN_FALLBACK[key])) return MAIN_FALLBACK;
++  if (v.status !== "release-checked" || v.hardware_tested !== true || !/^[a-f0-9]{40}$/.test(v.source_tree) ||
++      Object.keys(v.models || {}).sort().join(",") !== "elite,pro") return null;
++  const known = catalog.versions.find(row => row.version === v.version);
++  if (known && (v.source_tree !== known.source_tree || v.source_commit !== known.source_commit ||
++      v.display_version !== known.display_version || ["elite", "pro"].some(model =>
++        ["product","sha256","size","controller_sha256","controller_size","controller_strategy"].some(key =>
++          v.models[model]?.[key] !== known.models?.[model]?.[key])))) return null;
++  for (const model of ["elite", "pro"]) {
++    const pkg = v.models[model];
++    if (!hardwareTestsFor(currentHardwareLedger, v, model) ||
++        (pkg.controller_strategy !== undefined && !["bundled", "owner-supplied"].includes(pkg.controller_strategy)) ||
++        modelKeyForProduct(pkg.product) !== model) return null;
++    let url;
++    try { url = new URL(pkg.pkg); } catch { return null; }
++    const paths = ["/DnBOX/artifacts/releases/", "/DnBOX-nightly/artifacts/nightly-dev/"];
++    const name = url.pathname.split("/").pop();
++    if (!/^[A-Za-z0-9._-]+\.fwsc$/.test(name) || !paths.some(path =>
++      pkg.pkg === "https://gobbajogger.github.io" + path + pkg.sha256 + "/" + name)) return null;
++  }
++  return v;
++}
++async function refreshMainReleaseData() {
++  if (location.origin !== "https://gobbajogger.github.io") return;
++  const signal = AbortSignal.timeout(5000);
++  let latestLedger;
++  try {
++    latestLedger = await fetchHardwareTests(NIGHTLY_HARDWARE_TESTS, {signal});
++  } catch { return; }
++  if (writing) return;
++  currentHardwareLedger = latestLedger;
++  try {
++    const response = await fetch("../versions.json", {cache:"no-store", redirect:"error", signal});
++    if (response.ok && !response.redirected) {
++      const live = await response.json();
++      if (live.installer_promotion_schema === 1 && Array.isArray(live.versions) && !writing) catalogLive = live;
++    }
++  } finally {
++    if (!writing) fillVersions();
++  }
++}
+ function versions() {
+-  return archivedCatalogVersions().filter(v => v.version === "nightly-79280e76-dev" &&
+-    v.source_commit === MAIN_251_SOURCE && !catalogDenied(v));
++  return archivedCatalogVersions().filter(v => mainReleasePin(v) && !catalogDenied(v));
+ }
+ function archivedCatalogVersions() {
+   try {
+@@ -2581,7 +2993,8 @@
+ }
+
+ function modelKeyForProduct(product) {
+-  return {"SMK-37 Pro_900":"pro", "SMK-37 Elite_900":"elite"}[product] || null;
++  const match = typeof product === "string" && /^SMK-37 (Pro|Elite)_(?:900|9[0-9]{6})$/.exec(product);
++  return match ? match[1].toLowerCase() : null;
+ }
+ // Revocation is monotonic: any explicit denial wins over a checked status.
+ // Optional approval hints must be true when present. They are not qualification
+@@ -2592,7 +3005,9 @@
+     ["qualified", "installable", "qa_pass", "source_licenses_approved", "immutable_http_pass",
+       "backup_integrity_pass", "model_and_controller_pass"].some(k => Object.hasOwn(record, k) && record[k] !== true) ||
+     (record.fromRelease !== undefined && record.fromRelease !== false) ||
+-    ["device_verified", "hardware_tested"].some(k => Object.hasOwn(record, k) && record[k] !== false) ||
++    (Object.hasOwn(record, "device_verified") && record.device_verified !== false) ||
++    (Object.hasOwn(record, "hardware_tested") && record.hardware_tested !== false &&
++      mainReleasePin(record)?.hardware_tested !== true) ||
+     (record.lifecycle !== undefined && record.lifecycle !== "current");
+ }
+ function selectionIdentity(v, p) {
+@@ -2668,15 +3083,15 @@
+ }
+ function isCatalogChecked(v,p) {
+   try {
+-    const pin = MAIN_251_MODELS[chosenModel];
++    const pin = mainReleasePin(v)?.models[chosenModel];
+     return versions().includes(v) && !!pin && archivedNightlyAdmission(v,p) &&
+       Object.keys(pin).every(k => p[k] === pin[k]);
+   } catch { return false; }
+ }
+ function archivedNightlyAdmission(v,p) {
+   try {
+-    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || v.status !== "dev-checked" ||
+-        (p.status !== undefined && p.status !== "dev-checked") ||
++    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || !mainReleasePin(v) ||
++        (p.status !== undefined && p.status !== v.status) ||
+         p.fromRelease === true || v.models?.[chosenModel] !== p ||
+         modelKeyForProduct(p.product) !== chosenModel ||
+         !/^[0-9a-f]{64}$/.test(p.sha256 || "") ||
+@@ -2722,16 +3137,17 @@
+   $("ble").hidden = bundledController(p);
+   $("controllerstatus").textContent = t(bundledController(p) ? (bundledFailure ? "ctlbundlebad" : hasVerifiedNightlySelection(v,p) ? "ctlbundled" : "ctlbundlepending") : "ctrlwarning");
+   const b=$("buildbadges");b.replaceChildren();
+-  if(v.version===catalogLive.latest && v.status==="dev-checked") b.append(buildBadge(t("latestdev"),"important"));
++  if(mainReleasePin(v)) b.append(buildBadge(t(v.version === catalogLive.latest ? "primaryrelease" : "fallbackrelease"), "important"));
+   if(v.status==="dev-checked") b.append(buildBadge(t("devchecked")));
+-  if(v.hardware_tested!==true) b.append(buildBadge(t("hardwareuntested"),"important"));
++  const modelProof = hardwareTestsFor(currentHardwareLedger, v, chosenModel);
++  b.append(buildBadge(t(modelProof ? "modeltested" : "hardwareuntested") + " · " + MODELS[chosenModel], "important"));
+   if(v.lifecycle==="superseded") b.append(buildBadge(t("superseded"),"blocked"));
+   $("buildsummary").textContent=v.description||v.title||"";
+   $("buildprovenance").textContent="Build: "+v.version+" · Source: "+(v.source_commit||"unknown")+
+     " · "+(v.built_at||"undated")+" · SHA-256: "+(p.sha256||"not recorded");
+   const link=$("buildevidence");link.hidden=!v.evidence_url;
+   if(v.evidence_url)link.href=v.evidence_url;else link.removeAttribute("href");
+-  $("devagreewrap").hidden=v.status!=="dev-checked";
++  $("devagreewrap").hidden=!mainReleasePin(v);
+   updateInstallGate();
+ }
+ function renderBuildHistory() {
+@@ -2740,9 +3156,12 @@
+     const el=document.createElement("article");el.className="build-item";
+     const h=document.createElement("h3");h.textContent=(v.title||v.version)+" · "+v.version;el.append(h);
+     const badges=document.createElement("div");badges.className="build-badges";
+-    badges.append(buildBadge(versions().includes(v) ? "Owner-approved 0.0.25.1" : "Archived · not installable", versions().includes(v) ? "important" : "blocked"));
++    badges.append(buildBadge(versions().includes(v) ? t(v.version === catalogLive.latest ? "primaryrelease" : "fallbackrelease") : "Archived · not installable", versions().includes(v) ? "important" : "blocked"));
+     if(v.status==="dev-checked")badges.append(buildBadge(t("devchecked")));
+-    if(v.hardware_tested!==true)badges.append(buildBadge(t("hardwareuntested"),"important"));
++    for (const model of Object.keys(v.models || {})) {
++      const proof = hardwareTestsFor(currentHardwareLedger, v, model);
++      badges.append(buildBadge(t(proof ? "modeltested" : "hardwareuntested") + " · " + (MODELS[model] || model), "important"));
++    }
+     if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
+     el.append(badges);
+     const p=document.createElement("p");p.textContent=v.description||"";el.append(p);
+@@ -2865,7 +3284,7 @@
+   const kind = v.status === "dev-checked"
+     ? (v.lifecycle === "superseded" ? "verolder" : (v.version === catalogLive.latest ? "verlatest" : "verdev"))
+     : (v.status === "release-checked" ? "verrelease" : "verunverified");
+-  return v.display_version ? "DnBOX " + v.display_version : t(kind) + (kind === "verlatest" ? "" : " " + (versions().indexOf(v) + 1));
++  return v.display_version ? "DnBOX " + v.display_version + " · " + t(v.version === catalogLive.latest ? "currentversion" : "fallbackversion") : t(kind) + (kind === "verlatest" ? "" : " " + (versions().indexOf(v) + 1));
+ }
+ function refreshVersionLabels() {
+   const byVersion = new Map(versions().map((v) => [v.version, v]));
+@@ -2901,8 +3320,8 @@
+     o.textContent = versionOptionCaption(v); // Full safety badges remain visible below the picker.
+     sel.append(o);
+   }
+-  const prefer = cur && list.some((v) => v.version === cur) ? cur
+-    : (catalogLive.latest || (list[0] && list[0].version));
++  const prefer = list.some(v => v.version === cur) ? cur
++    : list.some(v => v.version === catalogLive.latest) ? catalogLive.latest : list[0].version;
+   if (prefer) sel.value = prefer;
+   refreshModelUi();
+   loadSelectedPackage();
+@@ -3065,6 +3484,8 @@
+   $("bar").value = 0;
+   $("backup-warning").hidden = true;
+   $("backup-warning").textContent = "";
++  midiAccess.reports?.reset();
++  midiAccess.restartCheck = null;
+   const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
+   let access, up, unprotected = false;
+   try { access = await midiAccess(); }
+@@ -3121,6 +3542,9 @@
+       }
+     }
+     await scan(true);
++    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
++    if (!foreign && opts.receiptBuild && up.verified && up.application)
++      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);
+     if (unprotected) {
+       sayK("slotunprotecteddone");
+       log("Firmware installed without a recoverable sample-slot backup.");
+@@ -3172,7 +3596,7 @@
+   }
+   if (!$("devagree").checked) { updateInstallGate(); return; }
+   $("go").disabled = true;   // sync before the first await in run()
+-  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&
++  run(img, selectedProduct, { foreign: false, receiptBuild: installBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
+     hasCurrentVerifiedSelection() });
+ });
+@@ -3221,12 +3645,20 @@
+ window.addEventListener("hashchange", navigateWorkspace);
+ $("sample-frame").addEventListener("load", navigateWorkspace);
+ $("project-frame").addEventListener("load", navigateWorkspace);
++midiAccess.reports = mountInstallReports(document, () => {
++  const {version, pkg} = currentSelection();
++  return installBuild(version, pkg, chosenModel);
++}, navigator.userAgent);
++$("models").addEventListener("change", midiAccess.reports.refresh);
++$("version").addEventListener("change", midiAccess.reports.refresh);
+ navigateWorkspace();
+
+ (async () => {
+   if (typeof location !== "undefined" && location.hash === "#buildarchive") $("buildarchive").open = true;
+   applyLang();
+-  fillVersions();
++  try { await refreshMainReleaseData(); } catch { /* Embedded matching package snapshot remains available. */ }
++  if (!$("version").options.length) fillVersions();
++  midiAccess.reports.refresh();
+   if (navigator.requestMIDIAccess) {
+     // Soft probe without prompting until Connect, unless the browser already granted MIDI.
+   }
+diff --git a/versions.json b/versions.json
+index 039e37bd40df25c5fa4ec9ee4b1fc408426ad44a..54e6e6ba2c2b8c7f3253ce6058984578a12fd5a3 100644
+--- a/versions.json
++++ b/versions.json
+@@ -2,8 +2,42 @@
+   "schema": 2,
+   "repo": "https://github.com/gobbajogger/DnBOX",
+   "pages": "https://gobbajogger.github.io/DnBOX",
+-  "latest": "nightly-79280e76-dev",
++  "latest": "nightly-94197fc8-dev",
+   "versions": [
++    {
++      "version": "nightly-94197fc8-dev",
++      "display_version": "0.0.26",
++      "label": "Owner-tested release",
++      "status": "release-checked",
++      "config": "X0X_DEV_PADCAL=0",
++      "hardware_tested": true,
++      "source_commit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
++      "source_tree": "72d28fbc741244d18fa3d18495da16ab0fcb1d24",
++      "title": "DnBOX 0.0.26 \u00b7 SMK-37 Elite and Pro",
++      "description": "The owner tested startup and restart on SMK-37 Elite and Pro with the corrected 94197fc8 release. This replaces the withdrawn 600b build. Back up your sample slots before installing.",
++      "evidence_url": "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26",
++      "models": {
++        "elite": {
++          "product": "SMK-37 Elite_900",
++          "sha256": "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6",
++          "size": 651732,
++          "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
++          "controller_strategy": "bundled",
++          "controller_size": 61552,
++          "pkg": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc"
++        },
++        "pro": {
++          "product": "SMK-37 Pro_900",
++          "sha256": "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8",
++          "size": 651730,
++          "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
++          "controller_strategy": "bundled",
++          "controller_size": 61552,
++          "pkg": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc"
++        }
++      },
++      "lifecycle": "current"
++    },
+     {
+       "version": "nightly-79280e76-dev",
+       "label": "DEVICE NOT TESTED",
+@@ -34,7 +68,7 @@
+       },
+       "display_version": "0.0.25.1",
+       "title": "DnBOX 0.0.25.1 \u00b7 SMK-37 Elite and Pro",
+-      "description": "Owner-approved 0.0.25.1 packages. The owner reports successful use and recovery to 25.1; independent exact-package hardware validation for both models is not recorded here. Firmware reports 0.0.25, GIT 79280e76. Bundled Bluetooth controller included. The 600b 0.0.26 build was withdrawn. 0.0.26 at 94197fc8 is a hardware-test build on the nightly; it is not offered here.",
++      "description": "Fallback for SMK-37 Elite and Pro. Firmware reports 0.0.25, GIT 79280e76. The owner reported testing on Elite without confirming the installed package hash. Pro has no recorded device test. Both packages include the Bluetooth controller.",
+       "evidence_url": "https://github.com/gobbajogger/DnBOX/commit/79280e763341d03ba43266d3e25dad66f12de860",
+       "lifecycle": "current"
+     },
+@@ -182,5 +216,6 @@
+       "description": "SMC connection and RX controls were observed in a prior device report, but the exact installed firmware attribution is unproven. Not a verified flash artifact.",
+       "url": null
+     }
+-  ]
++  ],
++  "installer_promotion_schema": 1
+ }

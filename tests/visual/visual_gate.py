@@ -11,12 +11,15 @@ Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions o
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
 import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
+from contextlib import closing
 from pathlib import Path
+from urllib.parse import urlencode
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
 from manual_capture import capture_original_manual
+from full_page_capture import capture_full_page as capture_web_page
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -29,6 +32,7 @@ PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as di
 SIZES = [(1440, 900), (1024, 640), (844, 390), (390, 844)]
 SITE = ['index.html', 'install/index.html', 'breaks/index.html', 'starting-breaks/index.html', 'projects/index.html',
         'presets/index.html', 'presets/legacy/index.html', 'manual/index.html', 'manual/original/index.html',
+        'manual/legacy.html', 'manual/projects-guide.html', 'manual/protocol.html',
         'builds/index.html', 'tools/index.html', 'help/index.html', 'new/index.html', 'remote/identity/index.html']
 OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 # The web/x0x_*.html files are templates (/*LIB*/, /*CATALOG*/); npm run build compiles
@@ -88,32 +92,11 @@ def wait_for_home_capture(page):
 
 
 
-def history_capture_timeout_ms(width, height):
-    megapixels = width * height / 1_000_000
-    return min(120_000, max(30_000, round(1_500 * megapixels)))
-
-def capture_site_page(page, route):
+def capture_full_page(page, route, name):
     if route == 'manual/original/index.html':
         return capture_original_manual(page)
-    if route != 'builds/index.html':
-        return page.screenshot(full_page=True)
+    return capture_web_page(page, route, name)
 
-    # The settled history can exceed 100 megapixels at DPR 1. Bound the
-    # native PNG capture separately from navigation, fonts and UI actions.
-    width, height = page.evaluate("""() => {
-        const root = document.documentElement, body = document.body;
-        const width = Math.max(innerWidth, root.scrollWidth, body.scrollWidth);
-        const height = Math.max(innerHeight, root.scrollHeight, body.scrollHeight);
-        return [width, height];
-    }""")
-    timeout_ms = history_capture_timeout_ms(width, height)
-    print(f'Builds native full-page PNG: {width}x{height}, timeout {timeout_ms} ms', flush=True)
-    png = page.screenshot(full_page=True, timeout=timeout_ms)
-    with Image.open(io.BytesIO(png)) as captured:
-        if captured.format != 'PNG' or captured.size != (width, height):
-            raise ValueError(f'Expected full Builds PNG {width}x{height}, got {captured.format} {captured.size}')
-        captured.verify()
-    return png
 
 def remote_states():
     def lane(n):
@@ -282,6 +265,69 @@ def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
+def installer_responses():
+    # Match only the two public requests made by the installer's initial state.
+    report_url = 'https://api.github.com/search/issues?' + urlencode({
+        'q': 'repo:gobbajogger/DnBOX is:issue in:title "Install report"', 'per_page': 100, 'page': 1,
+    })
+    source = (ROOT / 'web/product-site/install/index.html').read_text()
+    catalog = json.loads(re.search(r'^const catalog = (.+);$', source, re.M)[1])
+    version = next((row for row in catalog['versions'] if row['version'] == catalog['latest']), None)
+    models = version['models'] if version else {}
+    default_model = 'pro' if 'pro' in models else 'elite'
+    package = models.get(default_model)
+    if package:
+        digest = package['sha256']
+        if not re.fullmatch(r'[a-f0-9]{64}', digest) or not package['pkg'].startswith(
+            'https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/' + digest + '/'
+        ):
+            raise ValueError('Default installer package must have an immutable nightly URL')
+    saved = os.environ.get('DNBOX_RELEASE_PACKAGES')
+    data = None
+
+    def respond(route):
+        nonlocal data
+        if route.request.method != 'GET':
+            return route.fallback()
+        if data is None:
+            if saved:
+                v = version['display_version']
+                if not re.fullmatch(r'\d+(?:\.\d+){2,3}', v):
+                    raise ValueError('Unexpected release package version')
+                body = (Path(saved) / ('v' + v) / f'dnbox-x0x37-{v}-{default_model}.fwsc').read_bytes()
+            else:
+                response = route.fetch(max_redirects=0)
+                if not response.ok:
+                    raise ValueError(f'Default package returned HTTP {response.status}. Set DNBOX_RELEASE_PACKAGES for offline captures.')
+                body = response.body()
+            if len(body) != package['size'] or hashlib.sha256(body).hexdigest() != digest:
+                raise ValueError('Default installer package does not match its committed size and SHA-256')
+            data = body
+        route.fulfill(body=data, content_type='application/octet-stream', headers={'Access-Control-Allow-Origin': '*'})
+
+    def attach(page):
+        def report(route):
+            if route.request.method != 'GET':
+                return route.fallback()
+            route.fulfill(json={'total_count': 0, 'incomplete_results': False, 'items': []},
+                          headers={'Access-Control-Allow-Origin': '*'})
+        page.route(re.compile('^' + re.escape(report_url) + '$'), report)
+        if package:
+            page.route(re.compile('^' + re.escape(package['pkg']) + '$'), respond)
+
+    return attach
+
+def viewport_contexts(pw):
+    # Reclaim Chromium's compositor and caches along with the context after each viewport.
+    for w, h in SIZES:
+        with pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb']) as browser:
+            with browser.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1,
+                                     has_touch=w < 900, reduced_motion='reduce', locale='en-US',
+                                     timezone_id='UTC') as context:
+                context.add_init_script(FREEZE_JS)
+                yield w, h, context
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -293,27 +339,29 @@ def main():
     results, header_fails, errors = [], [], []
     base = f'http://127.0.0.1:{p}'
     try:
-        with sync_playwright() as pw:
-            b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
-            def ctx(w, h):
-                c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
-                c.add_init_script(FREEZE_JS); return c
-            def settle(pg, site_route=None):
-                pg.add_style_tag(content=FREEZE_CSS)
-                if site_route == 'index.html':
-                    wait_for_home_capture(pg)
-                else:
-                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle')
-                pg.wait_for_timeout(250)
-            for w, h in SIZES:
+        with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
+            attach_installer_responses = installer_responses()
+            def settle(pg, url, name, site_route=None):
+                try:
+                    print(f'Loading {name}: {url}', flush=True)
+                    pg.goto(url)
+                    pg.add_style_tag(content=FREEZE_CSS)
+                    if site_route == 'index.html':
+                        wait_for_home_capture(pg)
+                    else:
+                        pg.evaluate('document.fonts.ready')
+                        pg.wait_for_load_state('networkidle')
+                    pg.wait_for_timeout(250)
+                except Exception as error:
+                    raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
+            for w, h, c in viewports:
                 tag = f'{w}x{h}'
-                c = ctx(w, h)
                 # Remote: header conformance + every tab/lane/overflow state
                 for name, act in remote_states():
                     full = f'remote-{name}-{tag}'
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/remote/index.html'); settle(pg)
+                    settle(pg, base + '/product-site/remote/index.html', full)
                     if name == 'sequence':
                         header_checks(pg.evaluate(HEADER_JS), tag, header_fails)
                         try:
@@ -334,26 +382,34 @@ def main():
                             if results[-1][1] == 'FAIL':
                                 write_actual_output('header-ssim-1024x640-actual.png', shot_png)
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
-                    if act: act(pg); pg.wait_for_timeout(150)
-                    print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(), results); pg.close()
+                    try:
+                        if act: act(pg); pg.wait_for_timeout(150)
+                        print(f'Capturing {full}', flush=True)
+                        screenshot = pg.screenshot()
+                    except Exception as error:
+                        raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
+                    compare(full, screenshot, results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    print(f'Loading {full}: /product-site/{rel}', flush=True)
-                    pg.goto(base + '/product-site/' + rel); settle(pg, site_route=rel)
+                    if rel == 'install/index.html':
+                        attach_installer_responses(pg)
+                    settle(pg, base + '/product-site/' + rel, full, site_route=rel)
+                    scroll_width = pg.evaluate('document.documentElement.scrollWidth')
+                    if scroll_width > w:
+                        errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
                     print(f'Capturing {full}', flush=True)
-                    compare(full, capture_site_page(pg, rel), results); pg.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
+                    if OFFLINE_BUILT[rel] == 'install/index.html':
+                        attach_installer_responses(pg)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
                     print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
-                c.close()
-            b.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
     finally:
         srv.terminate(); srv2.terminate()
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')

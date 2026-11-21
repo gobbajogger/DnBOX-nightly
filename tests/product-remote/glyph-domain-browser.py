@@ -44,9 +44,9 @@ async def miami_controls(page):
 
 async def cases(origin):
  async with async_playwright() as pw:
-  browser=await pw.chromium.launch(chromium_sandbox=True)
-  try:
-   for w,h in [(1440,900),(390,844),(844,390)]:
+  for w,h in [(1440,900),(390,844),(844,390)]:
+   browser=await pw.chromium.launch(chromium_sandbox=True)
+   try:
     context=await browser.new_context(viewport={'width':w,'height':h},reduced_motion='reduce');page=await context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     try:
      await page.goto(origin+'/remote/');await page.locator('[data-view="sound"]').click();await page.locator('#part').select_option('chicago')
@@ -63,7 +63,7 @@ async def cases(origin):
      assert not errors,errors;assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
      print(f'PASS glyph actual raw0/1/2/127 Sound+Mix {w}x{h}',flush=True)
     finally:await context.close()
-  finally:await browser.close()
+   finally:await browser.close()
 def main():
  out=ROOT/'.output';out.mkdir(exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='glyph-domain-',dir=out) as tmp:

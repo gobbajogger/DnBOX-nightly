@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Firmware screen reference · DnBOX</title>
+  <link rel="stylesheet" href="../../site.css">
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header><a class="brand" href="../../index.html">DnBOX <small>INSTRUMENTS</small></a>
+    <nav aria-label="Reference"><a href="../">Interface studies</a><a href="../../tools/">Tools</a></nav>
+  </header>
+  <main id="content" class="document-page">
+    <h1>Firmware screen reference</h1>
+    <p>Inspect the 240 × 240 keyboard display at firmware <a href="https://github.com/gobbajogger/DnBOX/commit/61827a714ca7b240c01a55ed347b5fd7b847c7c2">61827a71</a>. Each selection runs the corresponding firmware test inputs. To play the instrument, <a href="../../tools/">open Tools</a>.</p>
+    <div class="screen-grid">
+      <div>
+        <label for="group">Screen group</label>
+        <select id="group" disabled></select>
+        <label for="state">Firmware state</label>
+        <select id="state" disabled></select>
+        <p id="scope"></p>
+        <button id="compare" class="button" type="button" disabled>Compare with native frame</button>
+        <p id="comparison" role="status"></p>
+      </div>
+      <figure>
+        <canvas id="lcd" width="240" height="240" role="img" aria-label="Firmware LCD"></canvas>
+        <figcaption id="status" role="status">Loading screen reference…</figcaption>
+      </figure>
+    </div>
+    <noscript>Enable JavaScript to run the firmware screen renderer.</noscript>
+    <p><a href="https://github.com/gobbajogger/DnBOX/tree/3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d/docs/lanes/fwui">Firmware capture records at 3e67b59c</a> · <a href="../current-ui.html">Historical screens at 3c41ef4b</a></p>
+  </main>
+  <script type="module" src="page.mjs"></script>
+</body>
+</html>

@@ -2,6 +2,9 @@
 """Local gate contract tests; no browser, device or baseline approval is implied."""
 import importlib.util
 import io
+import re
+from unittest.mock import Mock, patch
+import full_page_capture as capture
 from pathlib import Path
 import tempfile
 import unittest
@@ -37,19 +40,6 @@ class GateContract(unittest.TestCase):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
 
-    def test_full_page_capture_returns_the_single_native_png(self):
-        page = Mock()
-        page.screenshot.return_value = self.image
-        self.assertIs(gate.capture_site_page(page, 'presets/index.html'), self.image)
-        page.evaluate.assert_not_called()
-        page.screenshot.assert_called_once_with(full_page=True)
-
-        page.reset_mock()
-        page.evaluate.return_value = (30, 30)
-        self.assertIs(gate.capture_site_page(page, 'builds/index.html'), self.image)
-        page.evaluate.assert_called_once()
-        page.screenshot.assert_called_once_with(full_page=True, timeout=30_000)
-
     def manual_page(self, *, rest=None, image=None):
         state = dict(width=4, height=1031, viewport=[3, 3, 1, 0, 0], fonts='loaded', images=[])
         page = Mock()
@@ -76,7 +66,7 @@ class GateContract(unittest.TestCase):
 
     def test_manual_joins_all_native_pixels_including_overhang_seam_and_last_row(self):
         page = self.manual_page(rest={'height': 1035})
-        result = gate.capture_site_page(page, 'manual/original/index.html')
+        result = gate.capture_full_page(page, 'manual/original/index.html', 'manual')
         with Image.open(io.BytesIO(result)) as output:
             self.assertEqual((output.format, output.mode, output.size), ('PNG', 'RGB', (4, 1031)))
             self.assertEqual(output.tobytes(), bytes(c for y in range(1031) for x in range(4)
@@ -99,66 +89,133 @@ class GateContract(unittest.TestCase):
             with self.subTest(length=len(bad)):
                 page = self.manual_page(image=bad)
                 with self.assertRaises((OSError, ValueError, SyntaxError)):
-                    gate.capture_site_page(page, 'manual/original/index.html')
+                    gate.capture_full_page(page, 'manual/original/index.html', 'manual')
                 self.assertEqual(page.screenshot.call_count, 1)
 
     def test_manual_rejects_changed_width_viewport_scroll_fonts_or_lazy_images(self):
         for rest in [{'width': 3}, {'viewport': [3, 3, 1, 0, 1]}, {'fonts': 'loading'},
                      {'images': [['/a.png', True, 1, 1]]}]:
             with self.subTest(rest=rest), self.assertRaisesRegex(ValueError, 'changed during capture'):
-                gate.capture_site_page(self.manual_page(rest=rest), 'manual/original/index.html')
+                gate.capture_full_page(self.manual_page(rest=rest), 'manual/original/index.html', 'manual')
 
     def test_manual_shares_one_deadline_and_propagates_a_native_failure_once(self):
         page = self.manual_page()
         with patch('manual_capture.time.monotonic', side_effect=[0, 0, 1, 31]):
             with self.assertRaisesRegex(TimeoutError, 'exceeded 30 seconds'):
-                gate.capture_site_page(page, 'manual/original/index.html')
+                gate.capture_full_page(page, 'manual/original/index.html', 'manual')
         self.assertEqual(page.screenshot.call_count, 1)
         self.assertEqual(page.screenshot.call_args.kwargs['timeout'], 29_000)
         page = self.manual_page()
         page.screenshot.side_effect = RuntimeError('renderer lost')
         with self.assertRaisesRegex(RuntimeError, 'renderer lost'):
-            gate.capture_site_page(page, 'manual/original/index.html')
+            gate.capture_full_page(page, 'manual/original/index.html', 'manual')
         self.assertEqual(page.screenshot.call_count, 1)
 
-    def test_history_budget_has_a_floor_and_a_hard_cap(self):
-        for width, height, budget in [(1000, 800, 30_000), (1000, 70_000, 105_000),
-                                      (3000, 50_000, 120_000)]:
-            with self.subTest(width=width, height=height):
-                self.assertEqual(gate.history_capture_timeout_ms(width, height), budget)
+
+    def test_full_page_routes_keep_native_capture_for_regular_sizes(self):
+        for route in ('projects/index.html', 'builds/index.html'):
+            page = Mock()
+            page.screenshot.return_value = self.image
+            page.evaluate.return_value = [30, 30, 0, 0, 30, 30, 1]
+            self.assertEqual(capture.capture_full_page(page, route, 'fixture'), self.image)
+            page.screenshot.assert_called_once_with(full_page=True)
+
+    def test_bands_retain_every_row_and_reject_a_changed_seam(self):
+        expected = Image.new('RGBA', (3, 7))
+        expected.putdata([(x, y, 50, y + 17) for y in range(7) for x in range(3)])
+        for mutate in (False, True):
+            page = Mock()
+            page.evaluate.return_value = [3, 7, 0, 0, 3, 2, 1]
+            def clipped_png(full_page, clip, timeout):
+                self.assertTrue(full_page)
+                self.assertTrue(0 < timeout <= 30_000)
+                y = clip['y']
+                band = expected.crop((0, y, 3, y + clip['height']))
+                if mutate and y > 0:
+                    band.putpixel((0, 0), (1, 2, 3, 4))
+                data = io.BytesIO()
+                band.save(data, format='PNG')
+                return data.getvalue()
+            page.screenshot.side_effect = clipped_png
+            with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+                if mutate:
+                    with self.assertRaisesRegex(RuntimeError, 'build-history.*seam'):
+                        capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                else:
+                    data = capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                    with Image.open(io.BytesIO(data)) as actual:
+                        self.assertEqual((actual.size, actual.mode), (expected.size, expected.mode))
+                        self.assertEqual(actual.tobytes(), expected.tobytes())
+
+    def test_capture_rejects_a_complete_image_after_the_total_deadline(self):
+        page = Mock()
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 10, 1]
+        elapsed = [0]
+        def capture_band(*, full_page, clip, timeout):
+            self.assertTrue(full_page)
+            self.assertEqual(timeout, 30_000 if clip['y'] == 0 else 2_000)
+            elapsed[0] += 28 if clip['y'] == 0 else 3
+            image = Image.new('RGB', (clip['width'], clip['height']))
+            data = io.BytesIO()
+            image.save(data, format='PNG')
+            return data.getvalue()
+        page.screenshot.side_effect = capture_band
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15):
+            with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
+                with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
+                    capture.capture_full_page(page, 'builds/index.html', 'build-history')
+        self.assertEqual(page.screenshot.call_count, 2)
+
+    def test_installer_routes_only_pause_the_two_public_requests(self):
+        page = Mock()
+        gate.installer_responses()(page)
+        patterns = [call.args[0] for call in page.route.call_args_list]
+        self.assertEqual(len(patterns), 2)
+        # Playwright sends callable URL matchers to Chromium as a catch-all.
+        for pattern in patterns:
+            self.assertIsInstance(pattern, re.Pattern)
+            self.assertIsNone(pattern.search('http://127.0.0.1:8000/product-site/index.html'))
+        self.assertIsNotNone(patterns[0].fullmatch(
+            'https://api.github.com/search/issues?q=repo%3Agobbajogger%2FDnBOX+is%3Aissue+in%3Atitle+%22Install+report%22&per_page=100&page=1'
+        ))
+
 
     def test_history_capture_rejects_missing_rows_and_truncated_pngs(self):
         page = Mock()
-        page.evaluate.return_value = (30, 31)
+        page.evaluate.return_value = [30, 31, 0, 0, 30, 31, 1]
         page.screenshot.return_value = self.image
-        with self.assertRaisesRegex(ValueError, 'Expected full Builds PNG'):
-            gate.capture_site_page(page, 'builds/index.html')
-        page.evaluate.return_value = (30, 30)
+        with self.assertRaisesRegex(RuntimeError, 'Expected full Builds PNG'):
+            capture.capture_full_page(page, 'builds/index.html', 'history')
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 30, 1]
         page.screenshot.return_value = self.image[:-12]
-        with self.assertRaises(OSError):
-            gate.capture_site_page(page, 'builds/index.html')
+        with self.assertRaisesRegex(RuntimeError, 'history full-page capture failed'):
+            capture.capture_full_page(page, 'builds/index.html', 'history')
 
     def test_history_capture_rejects_wrong_format_and_corrupt_png_data(self):
         page = Mock()
-        page.evaluate.return_value = (30, 30)
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 30, 1]
         jpeg = io.BytesIO()
         Image.new('RGB', (30, 30)).save(jpeg, format='JPEG')
         page.screenshot.return_value = jpeg.getvalue()
-        with self.assertRaisesRegex(ValueError, 'Expected full Builds PNG'):
-            gate.capture_site_page(page, 'builds/index.html')
+        with self.assertRaisesRegex(RuntimeError, 'Expected full Builds PNG'):
+            capture.capture_full_page(page, 'builds/index.html', 'history')
         damaged = bytearray(self.image)
         damaged[damaged.index(b'IDAT') + 4] ^= 1
         page.screenshot.return_value = bytes(damaged)
-        with self.assertRaisesRegex(SyntaxError, 'checksum'):
-            gate.capture_site_page(page, 'builds/index.html')
+        with self.assertRaisesRegex(RuntimeError, 'checksum'):
+            capture.capture_full_page(page, 'builds/index.html', 'history')
 
     def test_failed_history_capture_propagates_without_retry(self):
         page = Mock()
-        page.evaluate.return_value = (1000, 70_000)
+        page.evaluate.return_value = [1000, 70_000, 0, 0, 1000, 800, 1]
         page.screenshot.side_effect = TimeoutError('native capture exceeded its budget')
-        with self.assertRaisesRegex(TimeoutError, 'exceeded its budget'):
-            gate.capture_site_page(page, 'builds/index.html')
-        page.screenshot.assert_called_once_with(full_page=True, timeout=105_000)
+        with self.assertRaisesRegex(RuntimeError, 'exceeded its budget'):
+            capture.capture_full_page(page, 'builds/index.html', 'history')
+        page.screenshot.assert_called_once()
+        first_band = page.screenshot.call_args.kwargs
+        self.assertEqual(first_band['clip'], dict(x=0, y=0, width=1000, height=capture.BAND_ROWS))
+        self.assertTrue(0 < first_band['timeout'] <= 30_000)
+
 
     def test_missing_baseline_is_reported_not_created(self):
         result = self.compare()

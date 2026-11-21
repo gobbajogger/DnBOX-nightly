@@ -472,7 +472,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
   <section id="samples-panel" aria-label="Sample workspace" hidden><iframe id="sample-frame" title="Import break loops, back up or restore sample slots" src="../breaks/?embedded=1" allow="midi"></iframe><p class="small"><a href="../breaks/">Open sample tools separately</a> if this panel does not load.</p></section>
   <section id="projects-panel" aria-label="Songs and projects workspace" hidden><iframe id="project-frame" title="Import or export a whole song project; reset project while keeping samples" src="../projects/?embedded=1" allow="midi"></iframe><p class="small"><a href="../projects/">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>
   <div id="firmware-panel">
-  <aside class="release-notice" aria-label="Release status"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href="../new/">Release status</a></p></aside>
+  <aside class="release-notice" aria-label="Release status"><strong>DnBOX 0.0.26 is the latest release</strong><p>The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with build 94197fc8. Choose 0.0.25.1 for the fallback. The earlier 600b build remains withdrawn. <a href="../new/">Release status</a></p></aside>
 
   <div class="install-layout">
     <div class="install-primary" id="firmware">
@@ -505,6 +505,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
           </label>
         </div>
     <p class="meta" id="pkgmeta"></p>
+    <p class="small" id="public-installs" aria-live="polite"></p>
 
     <div class="build-detail" id="builddetail" hidden>
       <details id="package-details" class="package-details"><summary>Details</summary>
@@ -523,12 +524,20 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
     <div class="flash-action">
           <div class="step-kicker" data-t="stage3">Step 03 / Install</div>
           <p class="action-safety">First install replaces previous working data. <a href="#samples">Back up important samples</a> before switching. Keep USB connected until installation finishes.</p>
-          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span data-t="devagree">I accept hardware-untested development firmware for my selected keyboard model.</span></label>
+          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span id="consent-copy" data-t="devagree">I accept hardware-untested development firmware for my selected keyboard model.</span></label>
           <button id="go" disabled data-t="install">Install</button>
           <div id="inconfirm" role="alertdialog" aria-live="assertive" hidden style="border:2px solid #c80;padding:8px;margin:6px 0;white-space:pre-wrap"><div id="inconfirmtext"></div><button id="inconfirmok" type="button">OK — write firmware</button> <button id="inconfirmno" type="button">Cancel</button></div>
           <p class="install-hint" id="installhint" aria-live="polite"></p>
           <progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress>
           <p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <section id="install-check" aria-label="Install checks" hidden>
+            <h3>Install checks</h3>
+            <p id="receipt-result" role="status"></p>
+            <p id="receipt-next"></p>
+            <details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details>
+            <button type="button" id="report-install" disabled>Report this install</button>
+            <p class="small">Review your receipt on GitHub before submitting a public report.</p>
+          </section>
           <p id="backup-warning" class="backup-confirmation" role="alert" aria-live="assertive" hidden></p>
           <details class="diagnostics">
             <summary data-t="diagnostics">Technical details / activity log</summary>
@@ -602,7 +611,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
     <div class="capability-list">
       <details><summary>Create and play sounds <span>Drums, acid bass and breaks.</span></summary><ul><li><b>909 / 808:</b> choose from 11 drum voices in each kit, edit their sounds and sequence each voice.</li><li><b>Two 303 parts:</b> make separate bass lines with accents, slides and sound shaping; play live with Free Play. Pitch and mod wheels add temporary tune and cutoff movement on the selected 303.</li><li><b>TB-3PO:</b> generate and mutate acid lines using density, accents, slides, root and scale—useful when you want a starting point to reshape.</li><li><b>Break player:</b> slice a loop into eight pieces, change their sequence and use rolls, fills and retriggers for variation.</li></ul></details>
       <details><summary>Sequence and record <span>Patterns, motion and song.</span></summary><ul><li><b>32 patterns, up to 64 steps per part:</b> give parts different lengths and rates; each can use its own pattern.</li><li><b>Live or step recording:</b> tap drum hits, enter 303 notes or record while playing.</li><li><b>Motion and per-step locks:</b> record knob movement or hold a parameter value on one step for changing timbre and rhythm.</li><li><b>Probability and swing:</b> let selected steps vary between passes and shift the groove away from straight timing.</li><li><b>Chains and Song:</b> chain patterns for a jam or arrange bars with pattern choices and mutes.</li></ul></details>
-      <details><summary>Perform and mix <span>Shape a groove as it plays.</span></summary><ul><li><b>Hands-on levels:</b> keyboard fader banks cover the five parts, reverb, delay and the master filter, with pickup for smooth handovers.</li><li><b>Sound movement:</b> use the performance controls, part mutes, pan and sends; a shared reverb, tape delay and master compressor bring the parts together.</li><li><b>SMC control:</b> expand the surface with eight strips and drum banks. The available firmware and newer UI preview are identified separately.</li><li><b>Loopy clip mode:</b> switch pads from local sequencing to the host's clip grid; return to normal X0X operation with KNOB BANK.</li><li><b>SCALE / CHORD / ARP for Loopy:</b> keep played notes in a scale, build chords with inversions and strum, or create arpeggios with rate, gate, swing, humanize and latch.</li></ul></details>
+      <details><summary>Perform and mix <span>Shape a groove as it plays.</span></summary><ul><li><b>Hands-on levels:</b> keyboard fader banks cover the five parts, reverb, delay and the master filter, with pickup for smooth handovers.</li><li><b>Sound movement:</b> use the performance controls, part mutes, pan and sends; a shared reverb, tape delay and master compressor bring the parts together.</li><li><b>SMC control:</b> expand the surface with eight strips and drum banks. The available firmware and newer UI preview are identified separately.</li><li><b>Loopy clip mode:</b> switch pads from local sequencing to the host's clip grid; return to normal DnBOX operation with KNOB BANK.</li><li><b>SCALE / CHORD / ARP for Loopy:</b> keep played notes in a scale, build chords with inversions and strum, or create arpeggios with rate, gate, swing, humanize and latch.</li></ul></details>
       <details><summary>Use your own loops and keep your work <span>Samples, backups and projects.</span></summary><ul><li><b>Sample management:</b> prepare your own loops, inspect available slots, then explicitly send them to the keyboard. Sample memory is limited; the tool shows what fits.</li><li><b>Backup and restore:</b> save sample slots to a file and restore them through Manage samples.</li><li><b>Project save / load:</b> keep the current sounds, patterns and song; autosave and undo / redo support editing. Sample backup is a separate step.</li><li><b>USB MIDI:</b> use note and clock connections with other apps; choose one clock source for a steady tempo.</li></ul></details>
       <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href="../manual/">Open the playing and setup manual</a></p></details>
     </div></details>
@@ -643,6 +652,9 @@ const TEXT = {
     hintready: "書き込む準備ができました。開始前に機種と内容をもう一度確認します。",
     hintbusy: "インストールの処理中です。USB を抜かず、ページを閉じないでください。",
     latestdev: "最新の利用可能な DEV", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
+    modeltested: "この機種で起動と再起動を確認済み",
+    ownertested: "オーナーが Elite と Pro の実機で起動と再起動を確認済み",
+    releaseagree: "機種を確認し、データをバックアップしてからこのリリースをインストールします。",
     devagree: "実機未テストの開発版であることを理解し、機種と大切なサンプルのバックアップを確認しました。",
     ctrlwarning: "この旧パッケージのインストールには、一致するローカル ctl.img が必要です。",
     ctlbundlepending: "パッケージに一致する Bluetooth コントローラーを確認しています…",
@@ -749,6 +761,9 @@ const TEXT = {
     hintready: "Ready to install.",
     hintbusy: "An installation operation is in progress. Keep USB connected and this page open.",
     latestdev: "LATEST AVAILABLE DEV", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
+    modeltested: "Owner confirmed startup and restart",
+    ownertested: "Owner tested startup and restart on Elite and Pro",
+    releaseagree: "I have checked my keyboard model and backed up my data before installing this release.",
     devagree: "I accept hardware-untested development firmware for my selected keyboard model.",
     ctrlwarning: "This legacy package requires the matching local ctl.img before installation.",
     ctlbundlepending: "Checking this package for its matching included Bluetooth controller…",
@@ -945,6 +960,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
   try {
     const access = await midiAccess();
     if (!isCurrent()) return;
+    const restartTicket = midiAccess.restartCheck?.ticket();
     const up = new Updater(access, () => {});
     // Prefer a running app; if only the update loader is present, resume from there.
     let dev = await up.find((id) => !/^ota-/i.test(id.model));
@@ -961,6 +977,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
       return;
     }
     lastId = dev.id;
+    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);
     const bare = inOta ? dev.id.model.replace(/^ota-/i, "") : dev.id.model;
     const detail = inOta
       ? `${dev.id.text}${dev.name ? " · " + dev.name : ""} — ${t("otahelp")}`
@@ -969,6 +986,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
     if (inOta) led("busy");
     // Post-write reconnect must not reload model/package and hide restoration results.
     if (!allowPostWrite) suggestModel(bare);
+    midiAccess.reports?.refresh();
     dev.link.close();
   } catch (e) {
     if (!isCurrent()) return;
@@ -1022,13 +1040,28 @@ function modelKeyForProduct(product) {
 // Revocation is monotonic: any explicit denial wins over a checked status.
 // Optional approval hints must be true when present. They are not qualification
 // receipts; the publisher's preparation path still checks those independently.
+let currentHardwareLedger = /*HARDWARE_TEST_DATA*/{"schema":1,"reports":[]};
+function hardwareTestsFor(ledger, row, model) {
+  const pkg = row?.models?.[model];
+  if (!pkg || !['elite','pro'].includes(model)) return null;
+  return ledger.reports.find(report => report.model === model && report.version === row.display_version &&
+    report.source_commit === row.source_commit && report.package_sha256 === pkg.sha256 &&
+    report.controller_sha256 === pkg.controller_sha256) || null;
+}
+function ownerTestedRelease(v) {
+  const assignment = assignedPackageVersion(v);
+  return v?.status === "release-checked" && v.hardware_tested === true && assignment?.valid === true &&
+    Object.keys(v.models).length > 0 &&
+    Object.keys(v.models).every(model => hardwareTestsFor(currentHardwareLedger, v, model));
+}
 function catalogDenied(record) {
   return !record || ["revoked", "blocked", "withdrawn"].some(k =>
     record[k] !== undefined && record[k] !== false) ||
     ["qualified", "installable", "qa_pass", "source_licenses_approved", "immutable_http_pass",
       "backup_integrity_pass", "model_and_controller_pass"].some(k => Object.hasOwn(record, k) && record[k] !== true) ||
     (record.fromRelease !== undefined && record.fromRelease !== false) ||
-    ["device_verified", "hardware_tested"].some(k => Object.hasOwn(record, k) && record[k] !== false) ||
+    (Object.hasOwn(record, "device_verified") && record.device_verified !== false) ||
+    (Object.hasOwn(record, "hardware_tested") && record.hardware_tested !== false && !ownerTestedRelease(record)) ||
     (record.lifecycle !== undefined && record.lifecycle !== "current");
 }
 function selectionIdentity(v, p) {
@@ -1038,7 +1071,7 @@ function selectionIdentity(v, p) {
 function availableModels(ver) {
   // Picker and model radios only offer non-denied, currently checked packages.
   if (!ver || !ver.models || catalogDenied(ver) ||
-      (ver.status !== undefined && ver.status !== "dev-checked")) return [];
+      (ver.status !== undefined && ver.status !== "dev-checked" && !ownerTestedRelease(ver))) return [];
   return MODEL_KEYS.filter((k) => {
     const p = ver.models[k];
     return p && !catalogDenied(p) &&
@@ -1110,7 +1143,8 @@ async function verifyBundledController(logical, p) {
 }
 function isCatalogChecked(v,p) {
   try {
-    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || v.status !== "dev-checked" ||
+    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) ||
+        (v.status !== "dev-checked" && !ownerTestedRelease(v)) ||
         (p.status !== undefined && p.status !== "dev-checked") ||
         p.fromRelease === true || v.models?.[chosenModel] !== p ||
         modelKeyForProduct(p.product) !== chosenModel ||
@@ -1233,7 +1267,10 @@ function renderBuildInfo(v,p) {
   const b=$("buildbadges");b.replaceChildren();
   if(v.version===catalogLive.latest && v.status==="dev-checked") b.append(buildBadge(t("latestdev"),"important"));
   if(v.status==="dev-checked") b.append(buildBadge(t("devchecked")));
-  if(v.hardware_tested!==true) b.append(buildBadge(t("hardwareuntested"),"important"));
+  if(ownerTestedRelease(v)) b.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
+  const modelReport = hardwareTestsFor(currentHardwareLedger, v, chosenModel);
+  if (modelReport && !ownerTestedRelease(v)) b.append(buildBadge(t("modeltested") + " · " + MODELS[chosenModel], "important"));
+  if (!modelReport) b.append(buildBadge(t("hardwareuntested"), "important"));
   if(v.lifecycle==="superseded") b.append(buildBadge(t("superseded"),"blocked"));
   $("buildsummary").textContent=buildDisplayLabel(v,p)+" · "+(nightlyProductIdentity(p.product)?.model || "")+
     (v.description ? " — "+v.description : "");
@@ -1243,7 +1280,9 @@ function renderBuildInfo(v,p) {
     " · "+(v.built_at||"undated")+" · Product: "+(p.product||"unknown")+" · SHA-256: "+(p.sha256||"not recorded");
   const link=$("buildevidence"), evidence=evidenceUrl(v.evidence_url);link.hidden=!evidence;
   if(evidence)link.href=evidence;else link.removeAttribute("href");
-  $("devagreewrap").hidden=v.status!=="dev-checked";
+  const tested = ownerTestedRelease(v);
+  $("devagreewrap").hidden = v.status !== "dev-checked" && !tested;
+  $("consent-copy").textContent = t(tested ? "releaseagree" : "devagree");
   updateInstallGate();
 }
 function renderBuildHistory() {
@@ -1254,7 +1293,14 @@ function renderBuildHistory() {
     const badges=document.createElement("div");badges.className="build-badges";
     if(v.version===catalogLive.latest && v.status==="dev-checked")badges.append(buildBadge(t("latestdev"),"important"));
     if(v.status==="dev-checked")badges.append(buildBadge(t("devchecked")));
-    if(v.hardware_tested!==true)badges.append(buildBadge(t("hardwareuntested"),"important"));
+    if(ownerTestedRelease(v)) badges.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
+    const reported = Object.keys(v.models || {}).filter(model => hardwareTestsFor(currentHardwareLedger, v, model));
+    if (!reported.length) badges.append(buildBadge(t("hardwareuntested"),"important"));
+    else if (!ownerTestedRelease(v)) {
+      for (const model of Object.keys(v.models || {})) {
+        badges.append(buildBadge(t(reported.includes(model) ? "modeltested" : "hardwareuntested") + " · " + (MODELS[model] || model), "important"));
+      }
+    }
     if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
     el.append(badges);
     const p=document.createElement("p");p.textContent=v.description||"";el.append(p);
@@ -1367,24 +1413,30 @@ async function loadSelectedPackage() {
   };
   const controller = new AbortController();
   activeDownloadController = controller;
+  const isUsable = () => isLatest() && !controller.signal.aborted;
+  // Bound headers, body and late asynchronous verification as one download.
+  const deadline = setTimeout(() => {
+    controller.abort();
+    if (isLatest()) sayK("loadfail", "Download took too long. Reload this page to retry.");
+  }, 20000);
   try {
     const r = await fetch(pkg.pkg, {redirect: "error", signal: controller.signal});
-    if (!isLatest()) { try { await r.body?.cancel(); } catch {} return; }
+    if (!isUsable()) { try { await r.body?.cancel(); } catch {} return; }
     if (!r.ok || r.redirected) throw new Error(`${pkg.pkg}: HTTP ${r.status}`);
     const raw = await readApprovedPackage(r, pkg.size, isLatest, controller.signal);
-    if (!isLatest()) return;
+    if (!isUsable()) return;
     if (!raw) { sayK("badpkg"); return; }
     // Approved downloads require a SHA and the exact product/model identity.
     const hex = await sha256Hex(raw.buffer);
-    if (!isLatest()) return;
+    if (!isUsable()) return;
     if (hex !== pkg.sha256) { sayK("badpkg"); return; }
     const product = productOf(raw);
     if (product !== pkg.product) { sayK("badpkg"); return; }
     const logical = logicalImage(raw);
     if (bundledController(pkg)) {
       try { await verifyBundledController(logical, pkg); }
-      catch (e) { if (isLatest()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK("ctlbundlebad", " " + e.message); } return; }
-      if (!isLatest()) return;
+      catch (e) { if (isUsable()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK("ctlbundlebad", " " + e.message); } return; }
+      if (!isUsable()) return;
     }
     image = logical;
     selectedProduct = product;
@@ -1394,8 +1446,9 @@ async function loadSelectedPackage() {
       href: URL.createObjectURL(new Blob([raw], {type: "application/octet-stream"})) };
     say(`${buildDisplayLabel(ver,pkg)} · ${MODELS[model] || model}`);
     refreshMeta();
-  } catch (e) { if (isLatest() && !controller.signal.aborted) sayK("loadfail", e.message); }
+  } catch (e) { if (isUsable()) sayK("loadfail", e.message); }
   finally {
+    clearTimeout(deadline);
     if (activeDownloadController === controller) activeDownloadController = null;
   }
 }
@@ -1403,7 +1456,7 @@ async function loadSelectedPackage() {
 function versionOptionCaption(v) {
   const kind = v.status === "dev-checked"
     ? (v.lifecycle === "superseded" ? "verolder" : (v.version === catalogLive.latest ? "verlatest" : "verdev"))
-    : (v.status === "release-checked" ? "verrelease" : "verunverified");
+    : (ownerTestedRelease(v) ? "verrelease" : "verunverified");
   return buildDisplayLabel(v) + " · " + t(kind);
 }
 function refreshVersionLabels() {
@@ -1595,6 +1648,8 @@ async function run(img, product, opts = {}) {
   $("bar").value = 0;
   $("backup-warning").hidden = true;
   $("backup-warning").textContent = "";
+  midiAccess.reports?.reset();
+  midiAccess.restartCheck = null;
   const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
   let access, up, unprotected = false;
   try { access = await midiAccess(); }
@@ -1651,6 +1706,9 @@ async function run(img, product, opts = {}) {
       }
     }
     await scan(true);
+    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
+    if (!foreign && opts.receiptBuild && up.verified && up.application)
+      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);
     if (unprotected) {
       sayK("slotunprotecteddone");
       log("Firmware installed without a recoverable sample-slot backup.");
@@ -1673,12 +1731,12 @@ const installBlocked = (why) => { $("status").textContent = why; $("installhint"
 $("go").parentElement.addEventListener("click", (e) => {
   if (e.target !== $("go") && !(e.target.contains && e.target.contains($("go")))) return;
   if (!$("go").disabled || writing) return;
-  installBlocked(!$("devagree").checked ? "Install is locked: tick the development-firmware consent box above, then press Install."
+  installBlocked(!$("devagree").checked ? "Install is locked: tick the firmware consent box above, then press Install."
     : "Install is locked: the selected package is not downloaded and verified yet. Choose the model/version again and wait for 'Ready to install'.");
 });
 $("go").addEventListener("click", async () => {
   if (writing) { installBlocked("An install is already running."); return; }
-  if (!$("devagree").checked) { installBlocked("Tick the development-firmware consent box above, then press Install."); return; }
+  if (!$("devagree").checked) { installBlocked("Tick the firmware consent box above, then press Install."); return; }
   if ($("go").disabled || !hasCurrentVerifiedSelection()) { installBlocked("The selected package is not verified yet. Choose the model/version again and wait for 'Ready to install'."); return; }
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
@@ -1713,7 +1771,7 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
 });
@@ -1763,12 +1821,38 @@ function navigateWorkspace() {
 window.addEventListener("hashchange", navigateWorkspace);
 $("sample-frame").addEventListener("load", navigateWorkspace);
 $("project-frame").addEventListener("load", navigateWorkspace);
+function selectedInstallBuild(version, pkg, model) {
+  if (!version || !pkg || version.display_version) return installBuild(version, pkg, model);
+  const assigned = assignedPackageVersion(version, pkg);
+  return installBuild({...version, display_version: assigned?.valid ? assigned.version : ""}, pkg, model);
+}
+midiAccess.reports = mountInstallReports(document, () => {
+  const {version, pkg} = currentSelection();
+  return selectedInstallBuild(version, pkg, chosenModel);
+}, navigator.userAgent);
+$("models").addEventListener("change", midiAccess.reports.refresh);
+$("version").addEventListener("change", midiAccess.reports.refresh);
 navigateWorkspace();
 
 (async () => {
   if (typeof location !== "undefined" && location.hash === "#buildarchive") $("buildarchive").open = true;
   applyLang();
   fillVersions();
+  if (catalog.versions?.length && location.origin === "https://gobbajogger.github.io") {
+    try {
+      const {fetchHardwareTests, catalogWithHardwareTests} = await import("../hardware-tests.mjs");
+      const reports = await fetchHardwareTests("../hardware-tests.json", {signal: AbortSignal.timeout(5000)});
+      if (!writing && JSON.stringify(reports) !== JSON.stringify(currentHardwareLedger)) {
+        const response = await fetch("../package-version-assignments.json", {cache:"no-store", redirect:"error", signal:AbortSignal.timeout(5000)});
+        const assignments = response.ok && !response.redirected ? await response.json() : [];
+        if (writing) return;
+        currentHardwareLedger = reports;
+        catalogLive = catalogWithHardwareTests(reports, catalog, assignments);
+        fillVersions();
+      }
+    } catch { /* The embedded report snapshot accompanies this published catalog. */ }
+  }
+  midiAccess.reports.refresh();
   if (navigator.requestMIDIAccess) {
     // Soft probe without prompting until Connect, unless the browser already granted MIDI.
   }

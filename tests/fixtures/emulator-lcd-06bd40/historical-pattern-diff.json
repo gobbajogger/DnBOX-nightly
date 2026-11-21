@@ -1,0 +1,40 @@
+{
+  "scope": "Chromium built CSS Pattern reference versus 06bd40 matching stopped 909 BD 1/5/9/13, 188 ms",
+  "reference_commit": "3c41ef4bedf9701f549ce2752b73306e2fab1eb8",
+  "reference_verified_digest": "a881889c7affb0db7242eba4cff416b98524afa9e3af8ad797095801749f4830",
+  "compiled_commit": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
+  "compiled_digest": "2bb8b3296e274471cb700bac308797a118ed8314f588b0158895f09b5ab39d8d",
+  "rgb565_different": 8826,
+  "pixels": 57600,
+  "bands": {
+    "0-19": 2338,
+    "20-151": 35,
+    "152-223": 3306,
+    "224-239": 3147
+  },
+  "web_page": "reference/current-ui.html",
+  "web_entry": "Pattern",
+  "historical_oracle": "APPROVED-PRESENTATION.json frames[pattern-0].proof.native_sha256",
+  "native_input": "four-floor.scenario",
+  "native_runner": "X0X_HOST_LOAD=0 build/host/x0x_host four-floor.scenario OUTPUT",
+  "encoding": "SHA-256 over 240 × 240 RGB565 panel words, most significant byte first, row major",
+  "screen_state": {
+    "time_ms": 188,
+    "view": 8,
+    "part": 0,
+    "page": 0,
+    "overlay": 0,
+    "rec": 0,
+    "playing": 0,
+    "selected_track": 0,
+    "bpm": 125,
+    "active_bd_steps_one_based": [
+      1,
+      5,
+      9,
+      13
+    ]
+  },
+  "band_rows": "inclusive; top is y=0",
+  "comparison": "Historical DOM and native 06bd40 differ in the top bar, lower controls and footer. Each retains its source identity."
+}

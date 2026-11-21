@@ -3,9 +3,43 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,lstatSync,readdirSync}from'node:fs';
 import {resolve,dirname,join,relative,sep}from'node:path';
 import {fileURLToPath}from'node:url';import{createHash}from'node:crypto';
+import {applyHardwarePublication} from './hardware-publication.mjs';
+import {SITE_ORIGIN,githubRepo,pagesUrl} from '../web/product-site/site-origin.mjs';
+
+const oldNightly = 'gobbajogger/x0x37-for-Loopy-Pro_nightly';
+const oldFirmware = 'gobbajogger/X0X37-for-Loopy-Pro';
+const renamedRoots = new Map([
+ ['https://github.com/'+oldNightly, githubRepo(SITE_ORIGIN.nightlyRepo)],
+ ['https://github.com/'+oldFirmware, githubRepo(SITE_ORIGIN.firmwareRepo)],
+ ['https://raw.githubusercontent.com/'+oldFirmware, 'https://raw.githubusercontent.com/'+SITE_ORIGIN.owner+'/'+SITE_ORIGIN.firmwareRepo],
+ ['https://api.github.com/repos/'+oldNightly, 'https://api.github.com/repos/'+SITE_ORIGIN.owner+'/'+SITE_ORIGIN.nightlyRepo],
+ ['https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly', pagesUrl().replace(/\/$/,'')],
+]);
+function renamedUrl(url) {
+ if (typeof url !== 'string') return url;
+ for (const [oldRoot, newRoot] of renamedRoots) {
+  if (url === oldRoot || url.startsWith(oldRoot + '/')) return newRoot + url.slice(oldRoot.length);
+ }
+ return url;
+}
+// Keep the sealed source record intact. Only public transport addresses follow a repository rename.
+function buildCatalog(source) {
+ const catalog = JSON.parse(source);
+ if ('repo' in catalog) catalog.repo = renamedUrl(catalog.repo);
+ if ('pages' in catalog) catalog.pages = renamedUrl(catalog.pages);
+ for (const row of catalog.versions) {
+  if ('evidence_url' in row) row.evidence_url = renamedUrl(row.evidence_url);
+  for (const model of Object.values(row.models ?? {})) {
+   if (model && 'pkg' in model) model.pkg = renamedUrl(model.pkg);
+  }
+ }
+ return Buffer.from(JSON.stringify(catalog,null,2)+'\n');
+}
+import {readFirmwareReference} from './firmware-reference-runtime.mjs';
+import {adminAssets} from './build-admin.mjs';
 import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,firmwareReferenceRuntime,pagesBase}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -35,8 +69,56 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   if(typeof row.path!=='string'||!row.path||row.path.includes('\\')||row.path.startsWith('/')||row.path.split('/').some(x=>!x||x==='.'||x==='..')||seen.has(row.path)||row.path==='SOURCE-MANIFEST.json')throw Error('Invalid or duplicate source path');
   seen.add(row.path);const input=join(source,row.path);noLinks(input,repoRoot);if(!lstatSync(input).isFile())throw Error('Regular product source files required');const data=readFileSync(input);
   if((/\.(?:fwsc|uf2|elf|fsmp|wav|adpcm|bin)$/i.test(row.path)||row.path.split('/').includes('firmware'))&&!admittedStartingBreak(row.path,data))throw Error('Firmware/private audio is not a product source asset');
-  inputs.push([row.path,data]);
+  inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
+ const derived = new Map(inputs);
+ if (emulatorRuntime && derived.has('tools/index.html')) {
+  const toolsPage = derived.get('tools/index.html').toString('utf8');
+  const panelLink = '<a class="button" href="../emu/">Play the browser instrument</a>';
+  derived.set('tools/index.html', Buffer.from(toolsPage.replace('<!-- playable-panel-link -->', panelLink)));
+ }
+ if (derived.has('reference/screens/index.html') && (emulatorRuntime || firmwareReferenceRuntime)) {
+  const oraclePath = join(repoRoot, 'tests/firmware-reference/native-rgb.tsv');
+  const oracleName = 'reference/screens/native-rgb.tsv';
+  noLinks(oraclePath, repoRoot);
+  if (seen.has(oracleName) || !lstatSync(oraclePath).isFile()) throw Error('Expected canonical native frame hashes');
+  derived.set(oracleName, readFileSync(oraclePath));
+  seen.add(oracleName);
+  if (derived.has('reference/index.html')) {
+   const referencePage = derived.get('reference/index.html').toString('utf8');
+   const screenLink = '<p><a class="button" href="screens/">Explore the firmware screen reference</a></p>';
+   derived.set('reference/index.html', Buffer.from(referencePage.replace('<!-- firmware-screen-link -->', screenLink)));
+  }
+  for (const [name, data] of readFirmwareReference(repoRoot, firmwareReferenceRuntime)) {
+   if (seen.has(name)) throw Error('Firmware reference output collision');
+   derived.set(name, data); seen.add(name);
+  }
+ }
+ if (derived.has('hardware-tests.json')) {
+  const name = 'package-version-assignments.json', path = join(repoRoot,name);
+  noLinks(path,repoRoot);
+  if (seen.has(name) || !lstatSync(path).isFile()) throw Error('Expected the canonical package assignments');
+  derived.set(name,readFileSync(path)); seen.add(name);
+ }
+ if(derived.has('admin/index.html')){
+  const {bundle,html}=adminAssets(path=>derived.get(path));
+  if(!derived.has('admin/admin.bundle.js'))throw Error('Admin bundle missing from product manifest');
+  derived.set('admin/admin.bundle.js',Buffer.from(bundle));
+  derived.set('admin/index.html',Buffer.from(html));
+ }
+ if (pagesBase) {
+  const prior = resolve(pagesBase);
+  if (!lstatSync(prior).isDirectory()) throw Error('Regular Pages base directory required');
+  const ledger = join(prior,'hardware-tests.json');
+  const stat = lstatSync(ledger,{throwIfNoEntry:false});
+  if (stat) {
+   if (!stat.isFile()) throw Error('Regular published hardware ledger required');
+   if (!derived.has('hardware-tests.json')) throw Error('Published hardware ledger missing from product');
+   derived.set('hardware-tests.json',readFileSync(ledger));
+  }
+ }
+ applyHardwarePublication(derived);
+ inputs.splice(0, inputs.length, ...derived);
  // Keep historical preview URLs working without admitting arbitrary private audio.
  // Aliases reuse only WAV bytes that passed the pinned five-sample admission above.
  for(const [name,data]of [...inputs]){
@@ -50,7 +132,15 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
  // Explicit qualified runtime staging. Absence remains unavailable, never a fake emulator.
  if(emulatorRuntime){
   const pin=readEmulatorPin(join(repoRoot,'scripts/emulator-runtime-pin.json'));
-  for(const [name,data] of readEmulatorRuntime({directory:emulatorRuntime,pin})){
+  const editions = readEmulatorRuntime({directory:emulatorRuntime,pin});
+  if (pin.previousFirmware) {
+   const previous = readEmulatorPin(join(repoRoot,'scripts/firmware-emulator/previous-runtime.json'));
+   if (pin.previousFirmware !== previous.firmware) throw Error('Previous firmware pin mismatch');
+   for (const [path, bytes] of readEmulatorRuntime({directory:join(emulatorRuntime,'previous'),pin:previous})) {
+    editions.push(['emu/previous/' + path.slice('emu/'.length), bytes]);
+   }
+  }
+  for(const [name,data] of editions){
    if(seen.has(name))throw Error('Native runtime output collision');seen.add(name);inputs.push([name,data]);
   }
  }
@@ -63,5 +153,6 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
- console.log(JSON.stringify(buildProductSite({output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
+ const p=args.indexOf('--pages-base');if(p!==-1&&!args[p+1])throw Error('--pages-base requires a local Pages tree');
+ console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),firmwareReferenceRuntime:process.env.DNBOX_FWUI_RUNTIME,emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }

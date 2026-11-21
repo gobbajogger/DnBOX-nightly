@@ -16,6 +16,7 @@ const relativeInputs = [
   'scripts/verify-pages-source-parity.mjs', 'scripts/legacy-controller-packages.json',
   'web/x0x_installer.html', 'web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.html',
   'web/x0x_breaks.js', 'web/x0x_projects.html', 'web/x0x_projects.js',
+  'web/product-site/install-reports.mjs', 'web/product-site/hardware-tests.json', 'web/product-site/hardware-tests.mjs',
 ];
 
 async function fixture(t) {
