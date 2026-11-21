@@ -65,12 +65,16 @@ test('a missing local descriptor leaves the captured cell and its actions disabl
   assert.equal((html.match(/ disabled/g)||[]).length,screen.controls.length*3);
 });
 
-test('the editable kit mounts six firmware Attack edges and the 808 kick one-pole response', () => {
-  const qualified=[];
+test('editable kit glyphs update their mounted source paths at every raw value', () => {
+  const envelopeControls=[];
+  let tuneForks=0, kitSummaries=0;
   for(const screen of screens)for(const control of screen.controls){
     const attributes=new Map();
     const path={setAttribute:(k,v)=>attributes.set(k,v)};
-    const glyph={setAttribute:()=>{},querySelector:()=>path};
+    let pathLookups=0;
+    const glyph={setAttribute:()=>{},querySelector:selector=>{
+      assert.equal(selector,'path');pathLookups++;return path;
+    }};
     const root={querySelectorAll:selector=>{
       assert.ok(selector.includes('[data-drum-editor]') && selector.includes('[data-drum-sound-strip]'));
       assert.ok(selector.includes('[data-source-control="'+control.identity+'"]'));
@@ -78,11 +82,21 @@ test('the editable kit mounts six firmware Attack edges and the 808 kick one-pol
     }};
     paintDrumGlyph(root,control,0,127);
     if(!attributes.has('d'))continue;
-    qualified.push(control.identity);
+    const firstCurve=attributes.get('d');
+    const fork=control.context.name==='Tune' && control.identity!=='1:0:0:0';
+    const summary=control.context.name==='ACCENT' && control.markers['visual-role']==='inactive bank parameter summary';
+    if(fork)tuneForks++;
+    else if(summary)kitSummaries++;
+    else envelopeControls.push(control.identity);
     for(let raw=0;raw<=127;raw++){
       paintDrumGlyph(root,control,raw,127);
       const curve=attributes.get('d');
-      if(control.identity==='1:1:0:1'){
+      if(fork){
+        // Two eight-segment tines, their upright ends and the independent stem.
+        assert.equal(curve.match(/[ML]/g).join(''),'M'+'L'.repeat(18)+'ML');
+      }else if(summary){
+        assert.match(curve,/^(?:M\d+ 12V[\d.]+){4}$/);
+      }else if(control.identity==='1:1:0:1'){
         const ys=[...curve.matchAll(/[ML]([\d.]+) ([\d.]+)/g)].map(match=>Number(match[2]));
         assert.equal(ys.length,25);
         assert.ok(ys.every((y,i)=>y>=1 && y<=12 && (!i || y>=ys[i-1])));
@@ -93,6 +107,9 @@ test('the editable kit mounts six firmware Attack edges and the 808 kick one-pol
         assert.ok(Math.abs(Number(curve.slice(6).split(' ')[0])-(1+30*raw/127))<.0001);
       }
     }
+    assert.notEqual(attributes.get('d'),firstCurve,control.identity);
+    assert.equal(pathLookups,1,'updates reuse the mounted glyph path');
   }
-  assert.deepEqual(qualified.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:6:3']);
+  assert.equal(tuneForks,21);assert.equal(kitSummaries,22);
+  assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:6:3']);
 });
