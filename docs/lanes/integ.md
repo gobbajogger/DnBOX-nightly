@@ -28,6 +28,10 @@ At 390 px the historical Build History comparison covered all 40,202,760 pixels 
 
 The cloud browser showed a signed-out GitHub session on test proposal [#984](https://github.com/gobbajogger/DnBOX/issues/984). The closed opening post had zero reactions. The live signed-in increment remains open. The nightly lane at `aba00927` contained all 1,117 tracked paths from consolidated `583f6229`. All 28 source-ledger PRs matched GitHub's merged records and their merge commits are reachable from that consolidated tip.
 
+## Mounted Samples capture
+
+The unfiltered visual suite at `503cc5aa` timed out waiting for network idle on the mounted Samples page. An independent Chromium trace at 1,024 px recorded five completed HTTP 200 requests. Both request trackers were empty at timeout and the full-page screenshot matched its approved bytes. The route now waits for the actual file chooser, initialized workspace, disabled device writes, loaded stylesheets and fonts. HTTP failures and failed requests are recorded. A native test passed with an unrelated request still pending and rejected an unbound chooser, a missing stylesheet and a missing font. All four registered Samples images passed without a baseline update. [Browser output and four-width image hashes](../../evidence/integ-current-base/mounted-samples.json)
+
 ## Build History and archived Manual qualification
 
 The registered desktop Build History capture at 1,440 px includes the new v0.0.26 record and all 197 previous records in their original order. A separate reviewer checked both model names, release and fallback links, changed status labels, two corrected destinations and all six footer links. The reviewed image is 1,440 × 72,622. The remaining Build History captures at 390, 844 and 1,024 px exceeded the original 30-second budget. A separate phone capture finished in 26.82 seconds and omitted the final settled row, so the prior phone reference remains. [Four-width result](../../evidence/integ-current-base/build-history-review.json) · [Desktop comparison](../../evidence/integ-current-base/build-history-desktop.json)

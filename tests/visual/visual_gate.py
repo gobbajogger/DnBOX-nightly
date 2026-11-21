@@ -291,6 +291,29 @@ def wait_for_homepage(page):
     }""")
 
 
+def wait_for_mounted_samples(page, *, timeout=None):
+    # The unconnected workspace binds a local audition chooser before enabling any device writes.
+    page.wait_for_function("""() => {
+        const element = id => document.getElementById(id);
+        const chooser = element('auditionFile');
+        const styles = [...document.styleSheets];
+        const loaded = href => styles.some(sheet => !sheet.disabled &&
+            sheet.ownerNode?.getAttribute('href') === href && sheet.cssRules.length > 0);
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            loaded('../site.css') && loaded('../tool-theme.css') &&
+            (weights.has('normal') || weights.has('400')) && weights.has('700') &&
+            window.sampleWorkspace?.busy?.() === false && chooser?.type === 'file' &&
+            chooser.checkVisibility({visibilityProperty: true}) && !chooser.disabled &&
+            chooser.files.length === 0 && typeof chooser.onchange === 'function' &&
+            element('connect')?.disabled === false && element('add')?.disabled === true &&
+            element('send')?.disabled === true && element('auditionReference')?.disabled === true &&
+            element('auditionEncoded')?.disabled === true;
+    }""", timeout=timeout)
+
+
 def wait_for_offline_installer(page, *, timeout=None):
     # The empty preview eagerly opens two hidden workspaces. Their frame
     # lifecycle may keep Playwright from reporting idle after all assets load.
@@ -328,12 +351,21 @@ def main():
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def settle(pg, url, name, *, homepage=False, offline_installer=False):
+            def settle(pg, url, name, *, homepage=False, offline_installer=False, mounted_samples=False):
                 try:
+                    if mounted_samples:
+                        def check_response(response):
+                            if response.status >= 400:
+                                errors.append(f'{name} HTTP {response.status}: {response.url}')
+                        pg.on('response', check_response)
+                        pg.on('requestfailed', lambda request: errors.append(
+                            f'{name} request failed: {request.url} ({request.failure})'))
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
                     if homepage:
                         wait_for_homepage(pg)
+                    elif mounted_samples:
+                        wait_for_mounted_samples(pg)
                     elif offline_installer:
                         wait_for_offline_installer(pg)
                     else:
@@ -379,7 +411,8 @@ def main():
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     package_name = attach_installer_responses(pg, require_package=True) if rel == 'install/index.html' else None
-                    settle(pg, base + '/product-site/' + rel, full, homepage=(rel == 'index.html'))
+                    settle(pg, base + '/product-site/' + rel, full, homepage=(rel == 'index.html'),
+                           mounted_samples=(rel == 'breaks/index.html'))
                     if package_name:
                         wait_for_admission(pg, package_name)
                     if rel == 'breaks/index.html':

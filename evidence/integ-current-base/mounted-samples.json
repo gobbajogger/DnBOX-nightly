@@ -1,0 +1,60 @@
+{
+  "source": "503cc5aa6a135bdf04ed243568d0f068e5e2f7cc",
+  "unfiltered_visual_exit": 1,
+  "unfiltered_step": "Mounted Samples at 1440x900 waiting for networkidle",
+  "isolated_request_trace": "Five requests returned HTTP 200; both request trackers were empty when networkidle timed out at 1024px. The original 1024px PNG matched the approved file byte-for-byte.",
+  "viewports": {
+    "1440": {
+      "width": 1440,
+      "height": 900,
+      "size": [
+        1440,
+        1142
+      ],
+      "png_sha256": "acff53dc7fa6c6b987b21020371adeaf46f159b49dca6343550d0cdad3b289e7",
+      "approved_sha256": "acff53dc7fa6c6b987b21020371adeaf46f159b49dca6343550d0cdad3b289e7",
+      "diff_bbox": null
+    },
+    "1024": {
+      "width": 1024,
+      "height": 640,
+      "size": [
+        1024,
+        1187
+      ],
+      "png_sha256": "85e4ef52bcfb1373c54420ee1827f02ceda83e45ea4cc012ca767e55adef6587",
+      "approved_sha256": "85e4ef52bcfb1373c54420ee1827f02ceda83e45ea4cc012ca767e55adef6587",
+      "diff_bbox": null
+    },
+    "844": {
+      "width": 844,
+      "height": 390,
+      "size": [
+        844,
+        1179
+      ],
+      "png_sha256": "765137b68e9623d73c1f513e7b9f37b644cbeecf5cb1526771ca7db8f504b8d8",
+      "approved_sha256": "765137b68e9623d73c1f513e7b9f37b644cbeecf5cb1526771ca7db8f504b8d8",
+      "diff_bbox": null
+    },
+    "390": {
+      "width": 390,
+      "height": 844,
+      "size": [
+        390,
+        1541
+      ],
+      "png_sha256": "dd973b209a93c0e50f1d867a5d7215a9320c8e991eb6445c08b5324b1d392039",
+      "approved_sha256": "dd973b209a93c0e50f1d867a5d7215a9320c8e991eb6445c08b5324b1d392039",
+      "diff_bbox": null
+    }
+  },
+  "normal_browser_regression": "test_initialized_chooser_and_assets (__main__.MountedSamplesReadiness.test_initialized_chooser_and_assets) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 14.811s\n\nOK",
+  "new_registered_run": "Capturing site-breaks-1440x900\nCapturing site-breaks-1024x640\nCapturing site-breaks-844x390\nCapturing site-breaks-390x844\nVISUAL {\"screens\": 4, \"pass\": 4, \"fail\": 0, \"no_baseline\": 0, \"baseline_written\": 0, \"header_fail\": 0, \"page_errors\": 0}",
+  "three_controls": [
+    "unbound local file chooser",
+    "stylesheet HTTP 404",
+    "bold font HTTP 404"
+  ],
+  "capture_deadline_changed": false
+}
