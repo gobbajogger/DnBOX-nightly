@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 105214,
-      "sha256": "d89dbac4823798268d7c301e9d2dda7cc4f8223d403848600ff50ef73f390c87"
+      "bytes": 105434,
+      "sha256": "c4f935d8a766186cf51d3176c54f2c55b908d65a5ac0f051fa712c54d2a6b63d"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -754,8 +754,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 12599,
-      "sha256": "4b5ec578e6a76cabc78c6cef9945490ee09d142f1598f71ac41b9ed6434290eb"
+      "bytes": 12622,
+      "sha256": "2f7baad242c2c2b41c1b1b245392cc5f0ae06a11d8fe56149259417829341154"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -929,8 +929,8 @@
     },
     {
       "path": "remote/sequence.mjs",
-      "bytes": 9303,
-      "sha256": "ef988db85eea3e00b343e8eef0cec141683abd32a05282b6f020934d7b813341"
+      "bytes": 9413,
+      "sha256": "318ee8c81788af37ed1f836a18e302728dde36fb9ee2edfe2433c2ee6e1938f9"
     },
     {
       "path": "remote/session.mjs",
@@ -939,13 +939,13 @@
     },
     {
       "path": "remote/song-view.mjs",
-      "bytes": 2093,
-      "sha256": "cece58447a4b4c53521f835a11b6407699fa7a4f2585afba82265bcade72478e"
+      "bytes": 2166,
+      "sha256": "f635f81419be7ade91854197ef6a7d4bfb8e144fcecbe5b4c83aed26c3d22ca2"
     },
     {
       "path": "remote/sound.mjs",
-      "bytes": 3861,
-      "sha256": "22ada8759f185df6a5f88b991dac023ccb9954c5a8d980f201b679bacf5a36f6"
+      "bytes": 4566,
+      "sha256": "419a19958cd342bae9948ecf56d39679b1f8bb58b9b0db5ac7f0398b13ce8788"
     },
     {
       "path": "remote/source-sounds.json",

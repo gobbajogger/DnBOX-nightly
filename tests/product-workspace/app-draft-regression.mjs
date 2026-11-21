@@ -97,3 +97,36 @@ for(const rollFirst of[true,false]){
  velocity.emit('pointerdown',event(stepTarget,303,{clientY:10}));velocity.emit('pointerup',event(stepTarget,303));assert.notDeepEqual((await snapshot()).notes,crossBefore);laneApp.press('undo');assert.deepEqual((await snapshot()).notes,crossBefore);
 }
 console.log('PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available');
+
+const capacityApp = await boot();
+capacityApp.press('draft-save');
+const capacityDraft = JSON.parse(await capacityApp.download());
+const patterns = [0, 1, 15, 30, 31];
+capacityDraft.song = Array.from({length: 1023}, () => ({patterns, repeats: 8, muteMask: 10}));
+capacityDraft.launch = patterns;
+capacityDraft.context.view = 'song';
+const capacityText = JSON.stringify(capacityDraft);
+await capacityApp.get('draft-file').onchange({target: {files: [{
+ size: Buffer.byteLength(capacityText), text: async () => capacityText,
+}]}});
+capacityApp.press('draft-replace');
+const songPanel = capacityApp.get('other-view');
+const addDisabled = () => songPanel.innerHTML.includes('id="song-add" disabled');
+const addRow = () => songPanel.emit('click', {target: new Node('song-add')});
+async function savedRows() {
+ capacityApp.press('draft-save');
+ return JSON.parse(await capacityApp.download()).song.length;
+}
+assert.equal(addDisabled(), false);
+addRow();
+assert.equal(addDisabled(), true);
+assert.equal(await savedRows(), 1024);
+addRow(); // Exercise the delegated handler even with a synthetic click on a full Song.
+capacityApp.press('undo');
+assert.equal(await savedRows(), 1023);
+assert.equal(addDisabled(), false);
+assert.equal(capacityApp.get('undo').disabled, true);
+capacityApp.press('redo');
+assert.equal(await savedRows(), 1024);
+assert.equal(addDisabled(), true);
+console.log('PASS Song row limit, global Undo/Redo and Draft save at capacity');

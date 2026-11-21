@@ -6,7 +6,7 @@ import {SOUND_BANKS,superJ6Spec,acceptsSuperJ6} from './superj6.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
 // Explicit LOCAL example-draft file, not an instrument project, preset, engine or MIDI format.
 import{notesFromTrace}from'./model.mjs';
-import{chanceDomain}from'./sequence.mjs';
+import{chanceDomain,MAX_SONG_ROWS}from'./sequence.mjs';
 const clone=x=>structuredClone(x),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
 const TRACKS=['chicago','miami','drum909','drum808','breaks'],VIEWS=['roll','drums','locks','sound','mix','patterns','song','files'];
 const SCHEMA='dnbox-local-workspace-draft/1',KIND='local-preview-only',MOTION='Bass B / MIAMI / CARRIER / WAVE';
@@ -66,7 +66,7 @@ export class WorkspaceDraftFile{
   }
   keys(document.motion,['target','values']);if(document.motion.target!==MOTION)fail('unsupported Motion target');array(document.motion.values,16,16);if(document.motion.values.some(v=>v!==null&&!int(v,0,127)))fail('Motion point');
   array(document.launch,5,5);if(document.launch.some(v=>v!==null&&!int(v,0,31)))fail('Launch target');
-  array(document.song,1024);for(const row of document.song){keys(row,['patterns','repeats'],['muteMask']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8)||(Object.hasOwn(row,'muteMask')&&!int(row.muteMask,0,31)))fail('Song row');}
+  array(document.song,MAX_SONG_ROWS);for(const row of document.song){keys(row,['patterns','repeats'],['muteMask']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8)||(Object.hasOwn(row,'muteMask')&&!int(row.muteMask,0,31)))fail('Song row');}
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>b!=='JUNO'&&!SOUND_BANKS.includes(b)))fail('unsupported local bank');
   const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||(!['velocity','chance','pitch','pan'].includes(c.lane)&&!viewStepFields(c.part,c.view).includes(c.lane)&&!(c.lane==='patternLock'&&lockField(c.part,document.soundBanks,c.view)))||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.

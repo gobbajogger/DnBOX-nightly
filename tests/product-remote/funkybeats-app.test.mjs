@@ -81,3 +81,56 @@ test('generic alias drag after normalized edit stays coherent and Undo restores 
  x.get('other-view').emit('pointerdown',e);x.get('other-view').emit('pointermove',{...e,clientX:25});x.get('other-view').emit('pointerup',e);assert.notEqual(changes(x),original);x.press('undo');assert.equal(changes(x),original);
  x.get('other-view').emit('pointerdown',{...e,pointerId:29});x.get('other-view').emit('pointermove',{...e,pointerId:29,clientX:25});x.get('other-view').emit('pointercancel',{...e,pointerId:29});assert.equal(changes(x),original);
 });
+
+test('edited Chicago and Miami percentage controls keep units and accessible values on both basses', async () => {
+ const cases = [
+  ['CHICAGO', 1, 18, '14 %', '15 %'],
+  ['CHICAGO', 2, 32, '25 %', '26 %'],
+  ['MIAMI', 1, 115, '91 %', '91 %'],
+  ['MIAMI', 8, 70, '55 %', '56 %'],
+ ];
+ for (const [slot, part] of ['chicago', 'miami'].entries()) {
+  for (const [bank, parameter, raw, initial, edited] of cases) {
+   const app = await boot();
+   app.changePart(part);
+   app.view('sound');
+   const picker = app.get('sound-bank');
+   picker.value = bank;
+   input(app, picker, 'change');
+   const group = data.contexts.find(g => g.bank === bank && g.bassSlot === slot);
+   const control = group.controls.find(c => c.kind === 1 && c.parameter === parameter);
+   assert.equal(control.raw, raw);
+   const id = idOf(group, control);
+   const prefix = 'BASS '+(slot ? 'B' : 'A')+' / '+bank+' / '+control.sourceSection+' · '+control.name+', ';
+   const target = Object.assign(new Node(), {dataset: {param: id}});
+   const out = Object.assign(new Node(), {dataset: {paramValue: id}});
+   const query = document.querySelectorAll;
+   document.querySelectorAll = selector => {
+    if (selector === '[data-param]') return [target];
+    if (selector === '[data-param-value]') return [out];
+    return query(selector);
+   };
+   const key = key => app.get('other-view').emit('keydown', {target, key, preventDefault() {}});
+   const card = value => {
+    const markup = app.get('other-view').innerHTML;
+    assert.ok(markup.includes('data-param="'+id+'" aria-label="'+prefix+value+', local draft"'), id);
+    assert.ok(markup.includes('<output data-param-value="'+id+'">'+value+'</output>'), id);
+   };
+   const live = (value, pot) => {
+    assert.equal(target.attributes['aria-label'], prefix+value+', local draft');
+    assert.equal(out.textContent, value);
+    assert.equal(app.get('parameter-readout').textContent, value);
+    assert.equal(Number(app.get('parameter-value').value), pot);
+   };
+   card(initial);
+   key('ArrowUp');
+   live(edited, raw+1);
+   app.press('undo');
+   card(initial);
+   live(initial, raw);
+   app.press('redo');
+   card(edited);
+   live(edited, raw+1);
+  }
+ }
+});

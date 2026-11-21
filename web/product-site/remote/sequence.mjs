@@ -17,9 +17,13 @@ export class SequenceDraft extends RollDraft{
  toggleHit(track,note,start){if(!['drum909','drum808'].includes(track)||!Number.isInteger(start)||start<0||start>=this.endSample)throw Error('Invalid drum step');const found=this._notes.find(n=>n.track===track&&n.note===note&&n.start===start);if(found){this.selectIds([found.id]);this.deleteSelected();return null;}const id=this.add({track,note,start,end:start+1,velocity:100,channel:9});const n=this._notes.find(n=>n.id===id);n.end=start;n.pulse=true;return id;}
  changes(){const ids=new Set([...this.original.map(n=>n.id),...this._notes.map(n=>n.id)]);return [...ids].flatMap(id=>{const before=this.original.find(n=>n.id===id)??null,after=this._notes.find(n=>n.id===id)??null;return JSON.stringify(before)===JSON.stringify(after)?[]:[{id,track:(after??before).track,before:structuredClone(before),after:structuredClone(after),status:'local-draft'}];});}
 }
+export const MAX_SONG_ROWS = 1024;
 export class Arrangement{
  constructor(){this.rows=[];this.history=[];this.future=[];}
- save(next){this.history.push(structuredClone(this.rows));this.future=[];this.rows=next;}
+ save(next){
+  if(next.length>MAX_SONG_ROWS)throw Error('Song row limit reached');
+  this.history.push(structuredClone(this.rows));this.future=[];this.rows=next;
+ }
  check(row){if(!Array.isArray(row.patterns)||row.patterns.length!==5||row.patterns.some(n=>!Number.isInteger(n)||n<0||n>31)||!Number.isInteger(row.repeats)||row.repeats<1||row.repeats>8)throw Error('Invalid song row');
   if(Object.hasOwn(row,'muteMask')&&(!Number.isInteger(row.muteMask)||row.muteMask<0||row.muteMask>31))throw Error('Invalid song mute mask');
   return {patterns:[...row.patterns],repeats:row.repeats,...(row.muteMask?{muteMask:row.muteMask}:{})};

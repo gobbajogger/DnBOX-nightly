@@ -1,4 +1,5 @@
 import test from'node:test';import assert from'node:assert/strict';import fs from'node:fs';import{createHash}from'node:crypto';
+import {renderSong} from '../../web/product-site/remote/song-view.mjs';
 import{WorkspaceDraftFile,installWorkspaceDraft,hasDraftChanges}from'../../web/product-site/remote/draft-file.mjs';
 import{SequenceDraft,Arrangement}from'../../web/product-site/remote/sequence.mjs';import{MotionDraft}from'../../web/product-site/remote/motion.mjs';import{LaunchSelection}from'../../web/product-site/remote/workspace.mjs';import{WorkspaceTimeline}from'../../web/product-site/remote/timeline.mjs';import{SourceSounds}from'../../web/product-site/remote/sound.mjs';
 const read=n=>JSON.parse(fs.readFileSync(new URL(n,new URL('../../web/product-site/remote/',import.meta.url)))),trace=read('trace.json'),catalog=read('catalog.json'),components=read('components.json'),sound=new SourceSounds(read('source-sounds.json'),catalog),identity=Object.fromEntries(['trace','catalog','components','source-sounds'].map(n=>[n,createHash('sha256').update(fs.readFileSync(new URL(n+'.json',new URL('../../web/product-site/remote/',import.meta.url)))).digest('hex')]));
@@ -27,6 +28,42 @@ test('zoom round trips all historical quarter-steps and the three wider viewport
  for(const zoom of [0,.2,.375,.75,1.125,4.25]){
   const input=structuredClone(draft);input.context.zoom=zoom;assert.throws(()=>a.codec.validate(input));
  }
+});
+
+test('a full imported Song stays editable and exportable across Add, Undo and Redo', () => {
+ const a = setup();
+ const {arrangement} = a.state;
+ const row = {patterns: [0, 1, 15, 30, 31], repeats: 8, muteMask: 10};
+ const incoming = capture(a);
+ incoming.song = Array.from({length: 1024}, () => structuredClone(row));
+ installWorkspaceDraft(a.state, a.codec, a.codec.decode(JSON.stringify(incoming)));
+ const addDisabled = () => renderSong(arrangement.rows, 0).includes('id="song-add" disabled');
+ const roundTrip = () => a.codec.decode(a.codec.encode(capture(a))).song;
+ assert.deepEqual(roundTrip(), incoming.song);
+ assert.equal(addDisabled(), true);
+ arrangement.remove(1023);
+ assert.equal(addDisabled(), false);
+ arrangement.undo();
+ const {rows, history, future} = arrangement;
+ assert.throws(() => arrangement.add(row.patterns), /Song row limit/);
+ assert.throws(() => arrangement.save([...rows, row]), /Song row limit/);
+ assert.strictEqual(arrangement.rows, rows);
+ assert.strictEqual(arrangement.history, history);
+ assert.equal(arrangement.history.length, 0);
+ assert.strictEqual(arrangement.future, future);
+ assert.equal(arrangement.future.length, 1);
+ arrangement.redo();
+ assert.equal(arrangement.rows.length, 1023);
+ arrangement.add(row.patterns);
+ assert.equal(addDisabled(), true);
+ assert.equal(roundTrip().length, 1024);
+ arrangement.undo();
+ assert.equal(arrangement.rows.length, 1023);
+ assert.equal(addDisabled(), false);
+ arrangement.redo();
+ assert.equal(addDisabled(), true);
+ assert.equal(roundTrip().length, 1024);
+ assert.throws(() => a.codec.decode(JSON.stringify({...incoming, song: [...incoming.song, row]})));
 });
 
 test('SuperJ6 source records and legacy JUNO survive one file, and rejected input leaves active Draft intact',async()=>{
