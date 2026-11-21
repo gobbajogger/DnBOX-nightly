@@ -360,7 +360,7 @@ dialog::backdrop{background:#000a}
 .break-steps {grid-template-columns:repeat(8,minmax(0,1fr));}
 #break-sequence label {display:grid;gap:4px;}
 #break-sequence select, #close-connection {color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:6px;min-height:var(--hit);min-width:0;}
-#connection-result {position:fixed;z-index:10;top:64px;right:var(--margin);padding:16px;max-width:min(400px,90vw);background:var(--panel);border:1px solid var(--line);border-radius:8px;}
+#connection-result {position:fixed;z-index:10;top:64px;right:var(--margin);padding:16px;max-width:min(400px,90vw);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);}
 #connection-result h2 {margin:0;}
 @media(max-width:600px) {.break-steps {grid-template-columns:repeat(4,minmax(0,1fr));}}
 
@@ -384,7 +384,7 @@ dialog::backdrop{background:#000a}
 .envelope-level output{min-width:5ch;text-align:right;font-variant-numeric:tabular-nums}
 /* One coherent five-part workspace; only source-backed controls are admitted. */
 .mix-modes{display:flex;gap:4px;margin-bottom:4px}.mix-modes button{min-width:64px;min-height:44px}.mix-modes [aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
-.mix-workspace{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(220px,1fr);gap:8px}.mix-parts-panel,.mix-master-panel,.mix-effects>.mix-panel{min-width:0;background:var(--panel,#101b20);border:1px solid var(--line);border-radius:8px;padding:8px}.mix-workspace h3{margin:0 0 6px;font-size:14px}.mix-master-panel>.mix-panel{border:0;padding:0;background:none}.mix-master-panel .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mix-effects{display:grid;gap:8px;min-width:0}.mix-effects .encoder-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mix-workspace{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(220px,1fr);gap:8px}.mix-parts-panel,.mix-master-panel,.mix-effects>.mix-panel{min-width:0;background:var(--panel,#101b20);border:1px solid var(--line);border-radius:var(--r-panel);padding:8px}.mix-workspace h3{margin:0 0 6px;font-size:14px}.mix-master-panel>.mix-panel{border:0;padding:0;background:none}.mix-master-panel .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mix-effects{display:grid;gap:8px;min-width:0}.mix-effects .encoder-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .mix-parts-panel .funkybeats-mixer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;border:0;background:none;padding:0}.mix-parts-panel .mixer-channel{min-width:0;border:0;background:none;padding:4px}.mix-parts-panel .mixer-channel-name,#other-view .mix-part-route{min-width:0;width:100%;min-height:44px;border:0;background:none;font-size:12px;padding:2px;color:var(--part-color,inherit)}.mixer-channel-name small,.mix-part-route small{display:block;font-size:9px;font-weight:400;color:var(--muted)}.mix-parts-panel .mixer-fader-container{height:150px}.mix-strip-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.mix-send-strip{min-width:0}.mix-send-strip .funkybeats-typed-unit{min-width:0;border:0;background:none;padding:0}.mix-send-strip .glyph{display:none}.mix-send-strip input{width:100%;min-width:0;min-height:44px}.mix-send-strip .funkybeats-typed-param{min-width:0;gap:0}.mix-send-strip label{font-size:10px}.mix-unread{text-align:center;min-height:64px;padding:20px 0;color:var(--muted)}
 #parameter-inspector:has(input:disabled){display:none}
 @media(max-width:600px) and (orientation:portrait){.mix-workspace{grid-template-columns:minmax(0,1fr)}.mix-parts-panel .mixer-fader-container{height:180px}.mix-effects .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mix-send-strip .funkybeats-typed-unit{min-height:84px}}
@@ -397,7 +397,7 @@ dialog::backdrop{background:#000a}
 #other-view .mix-master-panel .encoder,#other-view .mix-effects .encoder{border:0;background:none}
 #other-view .mix-parts-panel .mixer-channel-name{border:0;background:none;padding:2px}
 #other-view .mix-part-route{color:var(--part-color)}
-#workspace-error:not([hidden]){position:fixed;z-index:100;inset:12px 12px auto;margin-inline:auto;max-width:32rem;padding:16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--panel);color:var(--fg);box-sizing:border-box}#workspace-error h1{font-size:1.2rem;margin:0 0 8px}#workspace-error p{margin:0 0 12px}
+#workspace-error:not([hidden]){position:fixed;z-index:100;inset:12px 12px auto;margin-inline:auto;max-width:32rem;padding:16px;border:1px solid var(--line-strong);border-radius:var(--r-panel);background:var(--panel);color:var(--fg);box-sizing:border-box}#workspace-error h1{font-size:1.2rem;margin:0 0 8px}#workspace-error p{margin:0 0 12px}
 
 /* Reserve feedback space even while status is sr-only, so messages never move
    the roll, its resize edges or the step lane. Long feedback scrolls in its row. */

@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 60431,
-      "sha256": "a6964cbbc647ceb59b392a5824fd340478c802a74606dbe919058ce1c0bab612"
+      "bytes": 66872,
+      "sha256": "f676483212df69a7f531b2e505f237ae5ddf1eac95925f423bf1aa51a16a672b"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -934,8 +934,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 34291,
-      "sha256": "de5d3e4a3c5704e051e2824980f73a403070083d20de5ed203a3ce4ad14ac491"
+      "bytes": 34324,
+      "sha256": "76838984214fbcc73eaccd1a9c1767ba803c98662c35024bb82b6d290fcc5d34"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1046,6 +1046,16 @@
       "path": "remote/startup.mjs",
       "bytes": 876,
       "sha256": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6"
+    },
+    {
+      "path": "remote/runtime-sound-map.mjs",
+      "bytes": 1248,
+      "sha256": "44b1e6ec4dea9730bb7db3484bcbd1784d9d0f731cbfecbd2c294219d559df6d"
+    },
+    {
+      "path": "remote/runtime-sound-state.mjs",
+      "bytes": 5443,
+      "sha256": "ecedfd285422c7c5eaa3872cbf07c76e38a65e431fde2b5f26249ac5b73dbff5"
     }
   ],
   "notClaimed": [
