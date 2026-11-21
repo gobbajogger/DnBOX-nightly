@@ -13,6 +13,22 @@ export const SOUND_BANKS=Object.freeze(['CHICAGO','MIAMI','Synth One','SuperJ6']
 export const sourceOnlyBank=bank=>bank==='SuperJ6'||bank==='Synth One';
 export const WAVE_STOPS=Object.freeze([0,Math.fround(1/3),Math.fround(2/3),1]);
 const waveNames=['Sine','Triangle','Saw','Square'];
+
+// Durations in quarter-note beats per LFO cycle. Original Conductor build 9
+// scales BPM/60 by factor/4. Its two truncated factors .3333 and .1667
+// produce approximately 12 and 24 beats. Labels describe those durations.
+// DnBOX 74b50bdfe2e1d9ac7f22445cdf5ab3726bb85272,
+// experiments/superj6-conductor-source-20261115/lfo_laws.cpp, lfo_rate.
+const tempoPeriods = [
+  '1/16 beat','1/12 beat','1/8 beat','1/6 beat','1/4 beat','1/3 beat',
+  '1/2 beat','2/3 beat','1 beat','4/3 beats','2 beats','8/3 beats',
+  '4 beats','8 beats','≈12 beats','16 beats','≈24 beats','32 beats',
+];
+function tempoIndex(value) {
+  // The source subtracts and multiplies separately in binary32, then rounds
+  // a positive half upward. For example exactly .5 still selects 4/3 beats.
+  return Math.round(Math.fround(Math.fround(1-value)*17));
+}
 const sections=[
   ['Layer 1',[[82,'Wave','wave',1],[210,'PWM','enable',1],[78,'Width','width',0.1263203]]],
   ['Layer 2',[[83,'Wave','wave',1],[211,'PWM','enable',1],[79,'Width','width',0.50431365]]],
@@ -65,17 +81,19 @@ export function superJ6Text(spec,value,edits,fields=slots[spec.slot]) {
     case 'rate':{
       const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
       if(mode===undefined)return decimal(100*value,2)+'% position';
-      return mode ? decimal(16*Math.pow(value,3.33),3)+' Hz' : decimal(100*value,2)+'% tempo position';
+      return mode ? decimal(16*Math.pow(value,3.33),3)+' Hz' : tempoPeriods[tempoIndex(value)];
     }
   }
 }
 function glyph(spec,value,edits,fields) {
   const line=(points)=>'<svg aria-hidden="true" viewBox="0 0 64 24"><polyline points="'+points+'"/></svg>';
-  const position=()=>line('2,19 '+decimal(2+60*value,2)+',19');
+  const position=(u=value)=>line('2,19 '+decimal(2+60*u,2)+',19');
   if(spec.kind==='enable'||spec.kind==='mode')return line(value?'5,19 29,19 32,5 59,5':'5,19 59,19');
   if(spec.kind==='level')return position();
   if(spec.kind==='rate') {
-    if(read(fields,{88:195,96:196,100:197}[spec.field],edits)!==1)return position();
+    const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
+    if(mode===0)return position(1-tempoIndex(value)/17);
+    if(mode===undefined)return position();
     const hz=16*Math.pow(value,3.33);
     return line(Array.from({length:61},(_,x)=>(2+x)+','+decimal(12-8*Math.sin(2*Math.PI*x/60*hz*.25),2)).join(' '));
   }

@@ -130,3 +130,68 @@ capacityApp.press('redo');
 assert.equal(await savedRows(), 1024);
 assert.equal(addDisabled(), true);
 console.log('PASS Song row limit, global Undo/Redo and Draft save at capacity');
+
+async function kitAccentDrafts(){
+ const app=await boot(),screens=JSON.parse(fs.readFileSync(new URL('components.json',base))).screens;
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download());};
+ const load=async doc=>{
+  const text=JSON.stringify(doc);
+  await app.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});
+  app.press('draft-replace');
+ };
+ const fresh=await save();
+ const catalog=JSON.parse(fs.readFileSync(new URL('catalog.json',base))).controls;
+ const field=app.get('parameter-value');
+ for(const [target,kit] of ['909','808'].entries()){
+  const entries=screens.filter(s=>s.successor?.sourceVoice?.kit===target);
+  const address='1:'+target+':11:1';
+  const keys=entries.map(s=>s.path+'|'+address);
+  assert.equal(keys.length,11);
+  const descriptor=catalog.find(c=>c.target===target&&c.voice===11&&c.parameter===1&&c.kind==='U32');
+  assert.deepEqual([descriptor.id,descriptor.voiceLabel,descriptor.label,descriptor.min,descriptor.max],
+   [target===0?354:738,'KIT',target===0?'Veloc':'Accent',0,127]);
+  assert.ok(entries.every(screen=>screen.successor.sourceVoice.pages.some(page=>page.title==='KIT'&&page.controls.some(c=>c.kind===1&&c.a===target&&c.b===11&&c.id===1))));
+  const open=voice=>{
+   app.changePart('drum'+kit,kit);app.view('sound');
+   app.get('other-view').emit('change',{target:Object.assign(new Node('sound-voice'),{value:String(voice)})});
+   const index=entries[voice].controls.findIndex(c=>c.identity===address);
+   const hit=Object.assign(new Node(),{dataset:{param:keys[voice],paramOccurrence:String(index)}});
+   app.get('other-view').emit('pointerdown',event(hit));app.get('other-view').emit('pointerup',event(hit));
+   return Number(field.value);
+  };
+  const edit=value=>{field.value=String(value);field.onchange();};
+  await load(fresh);
+  assert.equal(open(0),127);edit(100);
+  assert.deepEqual(keys.map((_,i)=>open(i)),Array(11).fill(100));
+  app.view('files');assert.match(app.get('other-view').innerHTML,/1 sound edits/);
+  assert.equal(review(app),'Parameter · '+kit+' / KIT · '+(target===0?'Velocity':'Accent')+': 100% → 79%');
+  app.press('undo');assert.equal(review(app),'No changes.');app.press('redo');
+  const edited=await save();
+  assert.deepEqual(edited.parameters.filter(p=>keys.includes(p.id)).map(p=>p.value),Array(11).fill(100));
+  assert.deepEqual(edited.stepLanes,fresh.stepLanes);
+  const imported=structuredClone(fresh);
+  imported.parameters.push({id:keys[1],value:100});
+  await load(imported);assert.equal(open(7),100);
+  assert.deepEqual((await save()).parameters,imported.parameters);
+  imported.parameters.unshift({id:keys[0],value:127});
+  await load(imported);
+  assert.equal(open(0),127);assert.equal(open(1),100);assert.equal(open(7),127);
+  assert.match(review(app),/conflicting saved values · BD 100% \(127\/127\), SD 79% \(100\/127\)/);
+  // Editing a third voice resolves the historical ambiguity. Undo restores the
+  // original explicit values, their order, and the absence of other entries.
+  open(7);
+  const index=entries[7].controls.findIndex(c=>c.identity===address);
+  const hit=Object.assign(new Node(),{dataset:{param:keys[7],paramOccurrence:String(index)}});
+  app.get('other-view').emit('pointerdown',event(hit,92));
+  app.get('other-view').emit('pointermove',event(hit,92,{clientX:-32}));
+  assert.notEqual(Number(field.value),127);
+  app.get('other-view').emit('pointercancel',event(hit,92));
+  assert.deepEqual((await save()).parameters,imported.parameters);
+  edit(90);assert.equal(open(0),90);assert.equal(open(1),90);
+  app.press('undo');assert.deepEqual((await save()).parameters,imported.parameters);
+  app.press('redo');assert.deepEqual((await save()).parameters.filter(p=>keys.includes(p.id)).map(p=>p.value),Array(11).fill(90));
+  await load(edited);assert.deepEqual(keys.map((_,i)=>open(i)),Array(11).fill(100));
+ }
+}
+await kitAccentDrafts();
+console.log('PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips');

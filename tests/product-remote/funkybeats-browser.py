@@ -960,11 +960,11 @@ async def project_sound_edit_count_at_size(page,width,height):
     # Default-valued entries may remain explicit; preserve this existing representation.
     assert undone['raw']=={attack_id:14,tune_id:34} and undone['effectiveTune']=='34'
     assert '1 sound edits' in undone['summary'],('Projects must count changed values, not retained default entries',undone)
-    assert 'Attack: 13 → 14' in undone['review'] and 'Tune:' not in undone['review']
+    assert 'Attack: 10% → 11%' in undone['review'] and 'Tune:' not in undone['review']
     await page.locator('#redo').press('Enter')
     redone=await snapshot('Redo-Tune')
     assert redone['raw']=={attack_id:14,tune_id:33} and redone['effectiveTune']=='33'
-    assert '2 sound edits' in redone['summary'] and 'Tune: 34 → 33' in redone['review']
+    assert '2 sound edits' in redone['summary'] and 'Tune: 13ms (−1 step)' in redone['review']
     await page.locator('#undo').press('Enter')
     await page.locator('#undo').press('Enter')
     zero=await snapshot('Undo-Attack')
@@ -972,6 +972,39 @@ async def project_sound_edit_count_at_size(page,width,height):
     assert '0 sound edits' in zero['summary'] and zero['review']=='No changes.'
     await expect(page.locator('#undo')).to_be_disabled()
     print(f'PASS Projects sound-edit count follows actual Draft changes and preserves effective Undo/Redo {width}x{height}',flush=True)
+
+async def kit_accent_across_voices(page):
+    for width, height in [(1440, 900), (390, 844), (844, 390)]:
+        await page.set_viewport_size({'width':width,'height':height})
+        for target,kit in enumerate(('909','808')):
+            await page.locator('[data-engine="drum'+kit+'"]').click()
+            await page.locator('[data-view="sound"]').click()
+            voice = page.locator('#sound-voice')
+            suffix = '|1:'+str(target)+':11:1'
+            value = page.locator('[data-param-value$="'+suffix+'"]')
+            hit = page.locator('button[data-param$="'+suffix+'"]')
+            await voice.select_option('0')
+            await expect(value).to_have_text('100%')
+            if target == 0:
+                label=page.locator('.drum-velocity-label, [data-drum-sound-unit] [data-drum-label]').filter(has_text='Velocity')
+                await expect(label).to_be_visible()
+                await expect(hit).to_have_accessible_name(re.compile('Velocity'))
+            await hit.press('ArrowDown')
+            await expect(value).to_have_text('99%')
+            await voice.select_option('1')
+            await expect(value).to_have_text('99%')
+            await page.locator('[data-view="files"]').click()
+            await expect(page.locator('.project-summary p')).to_contain_text('1 sound edits')
+            await page.locator('[data-project-action="review"]').click()
+            await expect(page.locator('#changes')).to_have_text('Parameter · '+kit+' / KIT · '+('Velocity' if target==0 else 'Accent')+': 100% → 99%')
+            await page.locator('#review-dialog').get_by_role('button',name='Return').click()
+            await page.locator('[data-view="sound"]').click()
+            await page.locator('#undo').click()
+            await expect(value).to_have_text('100%')
+            await page.locator('#redo').click()
+            await expect(value).to_have_text('99%')
+            await page.locator('#undo').click()
+        print('KIT_ACCENT_SHARED PASS',width,height,'both kits, BD → SD, Review, Undo and Redo',flush=True)
 
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
@@ -985,7 +1018,7 @@ async def browser_cases():
     from bass_step_journey import exercise as bass_steps
     async def bass_step_fields(page):
         await bass_steps(page, draft_state, load_draft)
-    cases = (discard_draft, bass_step_fields, pattern_lock_points, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
+    cases = (discard_draft, bass_step_fields, pattern_lock_points, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, kit_accent_across_voices, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:

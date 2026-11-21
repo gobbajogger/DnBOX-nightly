@@ -40,6 +40,10 @@ COMPACT_BOXES = """units => units.map(unit => {
 
 FIRMWARE_DEFAULTS = json.loads((ROOT / 'tests/product-remote/fixtures/drum-firmware-defaults.json').read_text())
 
+def editable_label(control):
+ if control['identity']=='1:0:11:1':return 'Velocity'
+ return 'Pitch depth' if control['context']['name']=='P.Dpth' else control['context']['name']
+
 async def compact_voice(page, screen):
  strip=page.locator('[data-drum-sound-strip]')
  await expect(strip).to_be_visible()
@@ -48,8 +52,7 @@ async def compact_voice(page, screen):
  rows=await units.evaluate_all(COMPACT_BOXES)
  assert len({round(r['box']['y']) for r in rows})==1,('Controls wrapped',screen['path'],rows)
  for i,(row,control) in enumerate(zip(rows,screen['controls'])):
-  context=control['context']
-  expected_name='Pitch depth' if context['name']=='P.Dpth' else context['name']
+  expected_name=editable_label(control)
   expected_role='active' if control['markers']['visual-role']=='active glyph/value control' else 'summary'
   assert (row['label'],row['value'],row['role'])==(expected_name,FIRMWARE_DEFAULTS[screen['path']][i],expected_role),(control,row)
   assert row['contentsFit'] and row['visible'] and (i==0 or rows[i-1]['box']['right']<=row['box']['x']+1),(screen['path'],row)
@@ -58,7 +61,7 @@ async def compact_voice(page, screen):
    assert action['id']==screen['path']+'|'+control['identity'],(screen['path'],row)
    assert action['box']['width']>=40 and action['box']['height']>=32 and action['hit'],(screen['path'],row)
  if screen['path'].endswith('/909-voice-00.svg'):
-  assert [r['label'] for r in rows]==['Tune','Attack','Decay','Pitch depth','Pitch','ACCENT']
+  assert [r['label'] for r in rows]==['Tune','Attack','Decay','Pitch depth','Pitch','Velocity']
   assert [r['role'] for r in rows]==['active']*4+['summary']*2
   assert {r['ink'] for r in rows[:4]}.isdisjoint(r['ink'] for r in rows[4:])
   # Owner p18 uses a 222px panel, with the step buttons at y303 and footer bottom at y382.
@@ -83,7 +86,12 @@ async def compact_bd_edits(page, screen):
   delta=-1 if raw==127 else 1
   action=unit.locator('[data-drum-decrement]' if delta<0 else '[data-drum-increment]')
   await expect(action).to_be_enabled()
+  if control['context']['name']=='Attack':
+   edge=unit.locator('[data-glyph-semantic] path')
+   original=await edge.get_attribute('d')
   await action.press('Enter')
+  if control['context']['name']=='Attack':
+   await expect(edge).not_to_have_attribute('d',original)
   changes[screen['path']+'|'+control['identity']]=raw+delta
  values=units.locator('[data-drum-value]')
  await expect(values.nth(4)).to_have_text('+0.4st')
@@ -122,10 +130,19 @@ async def frame_values(scene, screen):
     clear:value.classList.contains('stacked-value')?box.top>=group.bottom-1:box.left>=group.right-1,
     left:box.left,right:box.right,top:box.top};
  })""")
+ if any(control['identity']=='1:0:11:1' for control in screen['controls']):
+  caption=scene.locator('.drum-velocity-label')
+  await expect(caption).to_have_text('Velocity')
+  assert await caption.evaluate('''e=>{
+   const source=e.closest('.source-scene').querySelector('[data-source-control="1:0:11:1"]');
+   const original=source.firstElementChild,glyph=source.querySelector('[data-glyph-semantic]').getBoundingClientRect();
+   const r=e.getBoundingClientRect(),p=e.closest('.source-scene').getBoundingClientRect();
+   return getComputedStyle(original).visibility==='hidden' && getComputedStyle(e).visibility==='visible' &&
+     r.width>0 && r.left>=p.left && r.right<=glyph.left && r.top>=p.top && r.bottom<=p.bottom;
+  }'''),screen['path']
  assert len(rows)==len(screen['controls']),rows
  for i,(row,control) in enumerate(zip(rows,screen['controls'])):
-  label=control['context']['name']
-  if label=='P.Dpth':label='Pitch depth'
+  label=editable_label(control)
   expected=FIRMWARE_DEFAULTS[screen['path']][i]
   assert row['text']==expected and row['name']==f'{label}, {expected}, local draft',(screen['path'],row)
   assert row['hidden'] and row['fits'] and row['clear'],(screen['path'],row)
@@ -208,11 +225,18 @@ async def frame_edits(page,kit,adjacent):
   await expect(output).to_have_text(text)
   await expect(hit).to_have_attribute('aria-label',f'{name}, {text}, local draft')
   await expect(page.locator('#parameter-readout')).to_have_text(text)
+ if kit=='drum808':
+  tone=scene.locator('[data-source-control="1:1:0:1"] [data-glyph-semantic] path')
+  tone_before=await tone.get_attribute('d')
  await hit.press('ArrowRight')
+ if kit=='drum808':
+  await expect(tone).not_to_have_attribute('d',tone_before)
  await expect(hit).to_be_focused()
  await check(after)
  await page.locator('#undo').press('Enter')
  await check(before)
+ if kit=='drum808':
+  await expect(tone).to_have_attribute('d',tone_before)
  await page.locator('#redo').press('Enter')
  await check(after)
  # A pointer gesture updates the readout during movement and restores it on Escape.
@@ -264,7 +288,19 @@ async def cases(evidence=None):
       scene=page.locator('.source-scene');path=await scene.get_attribute('data-source-frame');screen=screens[path]
       assert path==voice_screen['path'],(path,voice_screen['path'])
       assert await scene.get_attribute('data-runtime-admitted')=='false'
-      assert await scene.locator('svg').evaluate('(svg,body)=>svg.isEqualNode(new DOMParser().parseFromString(body,"image/svg+xml").documentElement)',screen['body_svg']),path
+      assert await scene.locator('svg').evaluate("""(svg,body)=>{
+       const original=new DOMParser().parseFromString(body,'image/svg+xml').documentElement;
+       const copy=svg.cloneNode(true);
+       if(svg.closest('[data-drum-editor]'))for(const cell of copy.querySelectorAll('[data-source-control]')){
+        const id=cell.getAttribute('data-source-control'), glyph=cell.querySelector('[data-glyph-semantic]');
+        if(glyph?.getAttribute('data-glyph-semantic')!=='ATTACK' && id!=='1:1:0:1')continue;
+        const donor=original.querySelector('[data-source-control="'+id+'"] [data-glyph-semantic]');
+        if(glyph.getAttribute('data-glyph-origin')!=='firmware dv_glyph')return false;
+        glyph.setAttribute('data-glyph-origin',donor.getAttribute('data-glyph-origin'));
+        glyph.querySelector('path').setAttribute('d',donor.querySelector('path').getAttribute('d'));
+       }
+       return copy.isEqualNode(original);
+      }""",screen['body_svg']),path
       if width==844:
        await expect(scene.locator('.drum-frame-values')).to_have_count(0)
       else:
@@ -311,7 +347,7 @@ async def cases(evidence=None):
        if width==844:
         assert (await hit.get_attribute('aria-label')).startswith(expected+', source example ')
        else:
-        await expect(hit).to_have_attribute('aria-label',expected+', '+FIRMWARE_DEFAULTS[path][index]+', local draft')
+        await expect(hit).to_have_attribute('aria-label',editable_label(c)+', '+FIRMWARE_DEFAULTS[path][index]+', local draft')
        assert c['identity'] in (await hit.get_attribute('data-param'))
        samples+=1
       # Keep the original transparent-pan interaction sample on the final displayed voice.

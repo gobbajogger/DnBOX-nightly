@@ -41,6 +41,21 @@ test('locally opened bank preserves zero, absent fields, escaped names and sourc
   select.undo();action.undo();assert.equal(library.snapshot(),undefined);
   action.redo();select.redo();assert.deepEqual(library.snapshot(),snapshot);
 });
+test('an imported tempo-synced rate uses its own mode and keeps the original float on copy',async()=>{
+  const source=example();
+  source.presets[0].parameterValues.push({identifier:'neonlfo1HzEnable',value:0});
+  const text=JSON.stringify(source),file=new File([text],'Original.superj6.bank.json');
+  const original=await readSuperJ6Original(file),library=new SuperJ6Banks();
+  library.choose(1,[original.bank.digest,first],original.bank);
+  library.retainOriginal(1,original);
+  const edits=new Map(),fields=library.view(1).fields;
+  assert.match(renderSuperJ6(1,edits,library),/data-sj6-display="88">4\/3 beats</);
+  edits.set(fields.get(195).id,1);
+  assert.match(renderSuperJ6(1,edits,library),/data-sj6-display="88">1\.591 Hz</);
+  edits.clear();
+  assert.equal(Buffer.from(library.copy(1,edits).bytes).toString(),text);
+});
+
 test('malformed and ambiguous banks fail before the active bank or owner changes',async()=>{
   const file=asFile(example()),bank=await readSuperJ6Bank(file),library=new SuperJ6Banks();
   library.choose(0,[bank.digest,first],bank);

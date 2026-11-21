@@ -2,7 +2,24 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
-## Current integration and verification
+## Remote qualification on the successor to ad98484d
+
+This draft includes consolidated `583f622961fc9975fac746592ce6c483073c4170`. Integ owns the merge. The [PR discussion](https://github.com/gobbajogger/DnBOX-nightly/pull/169) records the revision, command and outcome of the current gate, landscape inventory, structural checks and independent review.
+
+- **Pages 2, 13, 15 and 18.** Draft Review shows the same firmware units as both editable drum views. A one-step edit that rounds to the same readout retains its signed step count. The 909 kit's p1 is Velocity sensitivity and the 808 kit's p1 is Accent. Each is shared across its eleven voices. Legacy Drafts with conflicting values remain reviewable and Undo restores their exact entries. The six Attack glyphs and 808 kick Tone now follow the firmware's control curves during edits. The distinct 909 Accent gain is p0 and has no control in the captured six-column panel.
+- **Pages 3, 17 and 22.** Both bass slots now retain independent Chicago and Miami cutoff locks in each of the 32 patterns. BREAK level locks show the firmware gain readout. Cutoff displays percent. Review names the bass slot and engine. The [stock motion check](../../evidence/remote-pattern-locks/motion-check.c) exercised all 160 addresses, 327,680 applied values and 327,680 clears against firmware `3e307cfa`. The 128 BREAK readouts matched the stock C formatter.
+- **Page 5.** All three SuperJ6 LFO controls display the original Conductor's 18 tempo-synced cycle lengths in quarter-note beats. The original C++ law and its 17 binary32 transitions were exercised at build 9. The two approximated reciprocals are marked in the readout. The original application's literal label strings still require an original UI capture or formatter. [Conductor source](https://github.com/gobbajogger/DnBOX/blob/74b50bdfe2e1d9ac7f22445cdf5ab3726bb85272/experiments/superj6-conductor-source-20261115/lfo_laws.cpp)
+- **R6.** The emulator accepts a Mix edit or a Mix/Chicago Undo only when the returned value matches the requested or restored setting. An independent provider read back all 29 Mix and 40 Chicago controls after edit and after Undo, 138 fresh reads in total. On the stock firmware host at `3e307cfa`, TouchOSC passed 32 outbound note pairs and two feedback pairs. The stock editor answered ED_INFO and returned zero bytes for DNR2 HELLO. A versioned stock dispatcher and catalogue are still required for keyboard parameter transactions. [Stock and emulator results](../../evidence/remote-protocol/native-stock-and-worklet-20261121.json)
+
+| Checklist | Current evidence and outstanding work |
+|---|---|
+| C1, C2, C4, R5, R7 | Exact-revision build, focused suites, ancestry/no-loss, limits, landscape and structural results are reported on PR #169. |
+| R2, R3, R4 | The licensed FunkyBeats ports, gesture roll and thin per-step lanes retain their regressions. The cutoff lock and BREAK gain changes also exercise stored data, Undo, review and readback. |
+| R1, C3 | Open. The original 17:00 glyph identities, remaining owner-page layout differences, verbatim SuperJ6 tempo labels and joint Remote/firmware/site acceptance are outstanding. The page 15 landscape grid uses inner scrolling. |
+| R6 | Open on stock firmware. The browser can identify the instrument. Keyboard read, edit and Undo still depend on the stock provider. |
+| C5, C6 | Open. The PR remains draft while the visual and stock firmware requirements are outstanding. |
+
+## Previous integration and verification at ad98484d
 
 The branch incorporates integration `583f622961fc9975fac746592ce6c483073c4170` and the tested Remote candidate `d78311dadcfb3fd7674e8d4e3fe3a622f61462df`. The latter includes the 1,024-row Song guard, the 18 source-backed synth percentage displays and the Web reconciliation. Integration changed AGENTS.md, CHECKLISTS.md and RULES.md after the candidate's previous merge. All three files match integration. No tracked file from either parent was removed. This update changes no firmware or memory allocation.
 

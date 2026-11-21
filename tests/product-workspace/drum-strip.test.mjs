@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {renderDrumStrip, drumValueText} from '../../web/product-site/remote/drum-strip.mjs';
+import {renderDrumStrip, drumValueText, paintDrumGlyph} from '../../web/product-site/remote/drum-strip.mjs';
 
 const site = new URL('../../web/product-site/remote/', import.meta.url);
 const screens = JSON.parse(readFileSync(new URL('components.json',site))).screens.filter(s=>s.successor?.recomposedDrum);
@@ -55,6 +55,7 @@ test('909 BD retains all six ordered source controls including both bank summari
   const html=renderDrumStrip(screen,(id,i)=>({value:Number(screen.controls[Number(i)].context.raw)}),projection(screen));
   assert.ok(html.includes('--drum-columns:6'));
   assert.ok(html.includes('data-drum-label>Pitch depth</span>'));
+  assert.ok(html.includes('data-drum-label>Velocity</span>'));
   assert.deepEqual(screen.controls.map(c=>drumValueText(c,Number(c.context.raw))),['13ms','10%','1.0s','0%','+0.1st','100%']);
 });
 
@@ -62,4 +63,36 @@ test('a missing local descriptor leaves the captured cell and its actions disabl
   const screen=screens[0];
   const html=renderDrumStrip(screen,()=>null,projection(screen));
   assert.equal((html.match(/ disabled/g)||[]).length,screen.controls.length*3);
+});
+
+test('the editable kit mounts six firmware Attack edges and the 808 kick one-pole response', () => {
+  const qualified=[];
+  for(const screen of screens)for(const control of screen.controls){
+    const attributes=new Map();
+    const path={setAttribute:(k,v)=>attributes.set(k,v)};
+    const glyph={setAttribute:()=>{},querySelector:()=>path};
+    const root={querySelectorAll:selector=>{
+      assert.ok(selector.includes('[data-drum-editor]') && selector.includes('[data-drum-sound-strip]'));
+      assert.ok(selector.includes('[data-source-control="'+control.identity+'"]'));
+      return [glyph];
+    }};
+    paintDrumGlyph(root,control,0,127);
+    if(!attributes.has('d'))continue;
+    qualified.push(control.identity);
+    for(let raw=0;raw<=127;raw++){
+      paintDrumGlyph(root,control,raw,127);
+      const curve=attributes.get('d');
+      if(control.identity==='1:1:0:1'){
+        const ys=[...curve.matchAll(/[ML]([\d.]+) ([\d.]+)/g)].map(match=>Number(match[2]));
+        assert.equal(ys.length,25);
+        assert.ok(ys.every((y,i)=>y>=1 && y<=12 && (!i || y>=ys[i-1])));
+        if(raw===0)assert.ok(ys[12]>9.5);
+        if(raw===127)assert.ok(ys[12]<2);
+      }else{
+        assert.match(curve,/^M1 12L([\d.]+) 0L31 0$/);
+        assert.ok(Math.abs(Number(curve.slice(6).split(' ')[0])-(1+30*raw/127))<.0001);
+      }
+    }
+  }
+  assert.deepEqual(qualified.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:6:3']);
 });

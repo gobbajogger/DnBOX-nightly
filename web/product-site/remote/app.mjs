@@ -26,8 +26,9 @@ import {renderSynthOneInit} from './synth-one-init.mjs';
 import {openSynthOneFiles} from './synth-one-files.mjs';
 import{SourceSounds,sourcePercent}from'./sound.mjs';
 import{WorkspaceTimeline}from'./timeline.mjs';
-import{sourceFrame}from'./frame.mjs';
-import{renderDrumStrip,drumValueText,mountDrumReadouts}from'./drum-strip.mjs';
+import{sourceFrame,sourceControlLabel}from'./frame.mjs';
+import {kitAccentAliases,sharedKitAccent} from './drum-accent.mjs';
+import{renderDrumStrip,drumValueText,mountDrumReadouts,paintDrumGlyph}from'./drum-strip.mjs';
 import {mountProjectPreset} from './project-preset.mjs';
 import{renderSong}from'./song-view.mjs';
 import{MotionDraft}from'./motion.mjs';
@@ -165,7 +166,7 @@ function selectedLaneText(kind,n){
  if(kind==='patternLock'){
   const pattern=lockPattern();if(!Number.isInteger(pattern))return 'Pick in Patterns';
   const raw=stepValueLane.values[activeLaneStep];
-  return 'P'+String(pattern+1).padStart(2,'0')+(activeLaneStep===null?'':' · '+(raw==null?'Unset':raw+' raw'));
+  return 'P'+String(pattern+1).padStart(2,'0')+(activeLaneStep===null?'':' · '+(raw==null?'Unset':currentLock().text(raw)));
  }
  if(breakChanceMode()||stepField(kind)){
   const step=activeLaneStep??(n?stepGroups([n],trace.endSample).find(group=>group.notes.length).step:null);
@@ -181,7 +182,7 @@ function syncLaneLabel(){const kind=laneKind(),btn=$('lane-param');if(!btn)retur
  const label=lock?currentLock().label.replace(' lock','').toUpperCase():laneWord(kind);
  if(word)word.textContent=label;else btn.textContent=label;
  const value=selectedLaneText(kind,current()),out=btn.querySelector?.('output');
- if(out)out.textContent=lock?(Number.isInteger(lockPattern())?value.replace(' raw',''):'Pick pattern'):value;
+ if(out)out.textContent=lock?(Number.isInteger(lockPattern())?value:'Pick pattern'):value;
  const dots=btn.querySelector?.('.lane-dots');if(dots)dots.innerHTML=availableLanes().map(k=>`<b class="${k===kind?'on':''}"></b>`).join('');btn.setAttribute('aria-label',laneWord(kind)+(value?' '+value:''));if($('velocity')?.setAttribute)$('velocity').setAttribute('aria-label',laneWord(kind));}
 const laneBases=new Map();function laneBase(n){return laneBases.get(n.id)??n.note;}
 function minRow(){const w=globalThis.innerWidth??1024,h=globalThis.innerHeight??640;if(h<=500&&w>h)return 16;if(w<=600&&h>w)return 28;return 20;}
@@ -293,7 +294,11 @@ function markRuntimeMixControls(){
   localInstrument.showMasterOutput(host || null);
  }
  if(view!=='mix'||!nativeMixMode)return;const state=nativeMix.snapshot();for(const input of $('other-view').querySelectorAll('[data-native-param],[data-param]')){const id=input.dataset.nativeParam??input.dataset.param,key=runtimeMixKey(id);if(key){input.dataset.runtimeKey=key;input.disabled=state.phase!=='ready';}}}
-const parameterBaseline=new Map(components.screens.flatMap(screen=>screen.controls.map(c=>[screen.path+'|'+c.identity,{value:Number(c.context.raw),label:c.context.name}])));
+const kitAccentById=kitAccentAliases(components);
+const parameterBaseline=new Map(components.screens.flatMap(screen=>screen.controls.map(control=>[
+ screen.path+'|'+control.identity,
+ {value:Number(control.context.raw),label:sourceControlLabel(control),drumControl:control.markers?.['drum-control']?control:null}
+])));
 for(const spec of superJ6Specs)parameterBaseline.set(spec.id,spec);
 for(const c of sourceSounds.entries())if(c.enabled)parameterBaseline.set(c.id,{value:c.raw,label:c.label,context:c.context});
 for(const spec of masterDraft.specs)for(const id of spec.ids)parameterBaseline.set(id,{value:spec.value,label:spec.label,context:spec.context});
@@ -326,11 +331,45 @@ function changeLines(){
   const part=PARTS[launchParts.indexOf(track)]??track;
   return `Notes · ${part}${location}: ${changes.join(' · ')||previous+' → '+next}`;
  });
- const masterSeen=new Set();for(const[id,value]of parameterDraft){if(masterDraft.has(id)){const key=masterDraft.spec(id).id;if(masterSeen.has(key))continue;masterSeen.add(key);}const base=parameterBaseline.get(id)??superJ6Banks.spec(id);if(base&&value!==base.value){const identity=parameterIdentity.get(id)??base;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);const shown=v=>sj6?superJ6Text(sj6,v,v===base.value?new Map():parameterDraft,superJ6Banks.fieldsOf(id)):masterDraft.has(id)?masterDraft.display(id,v):isPanLabel(identity.label)?formatPan(v):v;lines.push(`Parameter · ${identity.context?identity.context+' · ':''}${identity.label}: ${shown(base.value)} → ${shown(value)}`);}}
+ const masterSeen=new Set(), kitsSeen=new Set();
+ for(const [id,value] of parameterDraft){
+  const kit=kitAccentById.get(id);
+  if(kit){
+   if(kitsSeen.has(kit))continue;
+   kitsSeen.add(kit);
+   if(sharedKitAccent(kit,parameterDraft)===undefined){
+    const saved=[];
+    for(const [key,voice] of kit.voices){
+     if(!parameterDraft.has(key))continue;
+     const raw=parameterDraft.get(key);
+     saved.push(voice+' '+drumValueText(parameterBaseline.get(key).drumControl,raw)+' ('+raw+'/127)');
+    }
+    lines.push('Parameter · '+kit.label+' · '+kit.name+': conflicting saved values · '+saved.join(', '));
+    continue;
+   }
+  }
+  if(masterDraft.has(id)){
+   const key=masterDraft.spec(id).id;
+   if(masterSeen.has(key))continue;
+   masterSeen.add(key);
+  }
+  const base=parameterBaseline.get(id)??superJ6Banks.spec(id);
+  if(!base||value===base.value)continue;
+  const identity=kit?{context:kit.label,label:kit.name}:parameterIdentity.get(id)??base;
+  const sj6=superJ6Spec(id)??superJ6Banks.spec(id);
+  const shown=v=>base.drumControl?drumValueText(base.drumControl,v):sj6?superJ6Text(sj6,v,v===base.value?new Map():parameterDraft,superJ6Banks.fieldsOf(id)):masterDraft.has(id)?masterDraft.display(id,v):isPanLabel(identity.label)?formatPan(v):v;
+  const before=shown(base.value),after=shown(value);
+  let change=before+' → '+after;
+  if(base.drumControl&&before===after){
+   const steps=Math.abs(value-base.value);
+   change=after+' ('+(value>base.value?'+':'−')+steps+(steps===1?' step)':' steps)');
+  }
+  lines.push(`Parameter · ${identity.context?identity.context+' · ':''}${identity.label}: ${change}`);
+ }
  for(const slot of [0,1]){const program=superJ6Banks.view(slot);if(program)lines.push('SuperJ6 · Bass '+(slot?'B':'A')+' · '+program.bank+' / '+program.name);}
  for(const row of patternLocks){
   const field=patternLockSpecs.find(s=>s.id===row.catalogId),pattern='P'+String(row.pattern+1).padStart(2,'0');
-  row.values.forEach((value,step)=>{if(value!==null)lines.push(`${field.owner} · ${pattern} · Step ${step+1} · ${field.label}: ${value} raw`);});
+  row.values.forEach((value,step)=>{if(value!==null)lines.push(`${field.owner}${field.part===4?'':' / '+field.bank} · ${pattern} · Step ${step+1} · ${field.label}: ${field.text(value)}`);});
  }
  for(const [part,rows] of Object.entries(stepLanes))for(const [kind,points] of Object.entries(rows)){
   const name={chicago:'Bass A',miami:'Bass B',drum909:'909',drum808:'808'}[part];
@@ -349,10 +388,12 @@ const endMotion=motion.end.bind(motion),clearMotion=motion.clear.bind(motion),re
 motion.end=owner=>{const count=motion.history.length;endMotion(owner);if(motion.history.length>count)recordMotion();};
 motion.clear=step=>{if(!Number.isInteger(step)||step<0||step>=16)throw Error('Invalid step');motion.cancel();if(motion.values[step]===null)return;clearMotion(step);recordMotion();};
 function scalarDraftChange(id, after) {
- const exists=parameterDraft.has(id), before=parameterDraft.get(id);
+ const kit=kitAccentById.get(id);
+ const ids=kit?Array.from(kit.voices.keys()):[id];
+ const before=ids.map(key=>parameterDraft.get(key));
  return {
-  redo:()=>parameterDraft.set(id,after),
-  undo:()=>exists?parameterDraft.set(id,before):parameterDraft.delete(id),
+  redo(){for(const key of ids)parameterDraft.set(key,after);},
+  undo(){ids.forEach((key,i)=>before[i]===undefined?parameterDraft.delete(key):parameterDraft.set(key,before[i]));}
  };
 }
 function recordParameter(c){if(view==='sound'&&nativeSoundMode){const key=soundKey(c.id),state=nativeSound()?.snapshot();if(key&&state?.phase==='ready'&&c.after!==state.values.get(key))runSoundAction({kind:'change',key,value:c.after});return;}if(view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){if(nativeMix.snapshot().phase==='ready'&&c.after!==nativeMix.snapshot().values.get(runtimeMixKey(c.id)))nativeMixAction(nativeMix.change(runtimeMixKey(c.id),c.after),'Emulator edit not confirmed');return;}if(view==='mix'&&nativeMixMode)return;restoreMixPreview(c.id);if(c.before===c.after)return;if(masterDraft.has(c.id)){const edit=masterDraft.change(c.id,parameterDraft,c.after);edit.redo();timeline.record({label:'Master '+masterDraft.spec(c.id).label,undo:edit.undo,redo:edit.redo});return;}const group=mixAliasIndex.byId.get(c.id);if(group){const edit=mixChange(group,parameterDraft,c.after);edit.redo();timeline.record({label:c.label||'Mix',undo:edit.undo,redo:edit.redo});return;}const source=findSpec(c.id),identity={label:c.label||source.label,context:c.context||source.context};parameterIdentity.set(c.id,identity);const edit=scalarDraftChange(c.id,c.after);edit.redo();timeline.record({label:[identity.context,identity.label].filter(Boolean).join(' · '),undo:edit.undo,redo:edit.redo});}
@@ -546,7 +587,7 @@ function projectCards() {
  const soundEdits = new Set();
  for (const [id,value] of parameterDraft) {
   const baseline = parameterBaseline.get(id) ?? superJ6Banks.spec(id);
-  if (baseline && value !== baseline.value) soundEdits.add(masterDraft.has(id) ? masterDraft.spec(id).id : id);
+  if (baseline && value !== baseline.value) soundEdits.add(kitAccentById.get(id) ?? (masterDraft.has(id) ? masterDraft.spec(id).id : id));
  }
  const tools = Object.fromEntries(DESTINATIONS);
  const link = (label, href) => '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(label)+'</a>';
@@ -614,7 +655,14 @@ function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const lan
  if(['sound','drums'].includes(view))html='<div id="native-envelopes" hidden></div>'+html;
  $('other-view').innerHTML=html;
  const drumScene=$('other-view').querySelector('[data-drum-editor]');
- if(drumScene)mountDrumReadouts(drumScene,drumSoundScreen(part),findSpec);
+ if(drumScene || $('other-view').querySelector('[data-drum-sound-strip]')) {
+  const screen=drumSoundScreen(part);
+  if(drumScene)mountDrumReadouts(drumScene,screen,findSpec);
+  for(const control of screen.controls){
+   const spec=findSpec(screen.path+'|'+control.identity);
+   if(spec)paintDrumGlyph($('other-view'),control,spec.value,spec.max);
+  }
+ }
  if(sj6Focus)$('other-view').querySelector('[data-sj6-id="'+sj6Focus+'"]')?.focus({preventScroll:true});if(laneFocus!==undefined)$('other-view').querySelector(`[data-lane-step="${laneFocus}"]`)?.focus({preventScroll:true});if(['sound','mix','drums'].includes(view)){(view==='drums'?$('other-view').querySelector('.drum-sound-panel')??$('other-view'):$('other-view')).insertAdjacentHTML?.('beforeend','<div id="parameter-inspector"><label><span></span><output id="parameter-readout"></output><input id="parameter-value" type="number" disabled></label><button id="parameter-undo" disabled>Undo</button></div>');paintLivePan();}mountLiveGlyphs($('other-view'));bindParameterFields();if(view==='locks')bindMotion();paintSoundPanel();nativeEnvelopeBinding?.render();markRuntimeMixControls();status();}
 function partTitle(){if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return 'BREAK / P01';return 'P01';}
 function syncPartTitle(){const el=$('part-title');if(el)el.textContent=partTitle();}
@@ -764,8 +812,8 @@ bindStepLane($('velocity'),()=>$('velocity'),notes);
 bindStepLane($('other-view'),()=>$('drum-lane'),drumLaneNotes);
 $('other-view').addEventListener('click',e=>{if(e.target.closest?.('[data-lane-cycle]')){$('lane-kind').value=cycleLane();cancelParameters();other();}});
 scroll.addEventListener('scroll',()=>{$('velocity').scrollLeft=scroll.scrollLeft;const rt=document.querySelector('.ruler-track');if(rt)rt.style.transform=`translateX(${-scroll.scrollLeft}px)`;const rail=$('pitch-rail');if(rail)rail.scrollTop=scroll.scrollTop;});$('velocity').addEventListener('scroll',()=>{if(Math.abs(scroll.scrollLeft-$('velocity').scrollLeft)>1)scroll.scrollLeft=$('velocity').scrollLeft;});
-const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);if(sj6)return{...sj6,value:parameterDraft.get(id)??sj6.value};if(masterDraft.has(id)&&!(view==='mix'&&nativeMixMode)){const c=masterDraft.spec(id);return{...c,id,value:masterDraft.read(id,parameterDraft)};}if(id.startsWith('source-master/'))return null;if(id===wearId&&wearControl)return {id,label:'Wear',context:'Tape',value:runtimeMixValue(id,parameterDraft.get(id)??64),min:wearControl.min,max:wearControl.max,step:1};if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);if(soundNativeId(id)){const value=nativeSound()?.snapshot().values.get(soundKey(id));return c&&Number.isFinite(value)?{...c,value}:null;}return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const group=mixAliasIndex.byId.get(id),value=runtimeMixValue(id,group?mixRead(group,parameterDraft):parameterDraft.has(id)?parameterDraft.get(id):Number(c.context.raw));if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;return{id,label:c.context.name,context:[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};};
-function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(!descriptor)return;if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;const wave=miamiWave(miamiWaveParameter(row),value);const drum=editableDrumControl(id),sourceDisplay=wave?.name??(soundNativeId(id)?null:sourcePercent(row,value));const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):envelopeRows(row)?envelopeValue(row,value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);refreshEnvelope(row);if(wave)paintSoundPanel();for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');if(sourceDisplay!==null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));}const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);paintLivePan();paintMasterValues();}
+const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);if(sj6)return{...sj6,value:parameterDraft.get(id)??sj6.value};if(masterDraft.has(id)&&!(view==='mix'&&nativeMixMode)){const c=masterDraft.spec(id);return{...c,id,value:masterDraft.read(id,parameterDraft)};}if(id.startsWith('source-master/'))return null;if(id===wearId&&wearControl)return {id,label:'Wear',context:'Tape',value:runtimeMixValue(id,parameterDraft.get(id)??64),min:wearControl.min,max:wearControl.max,step:1};if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);if(soundNativeId(id)){const value=nativeSound()?.snapshot().values.get(soundKey(id));return c&&Number.isFinite(value)?{...c,value}:null;}return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const group=mixAliasIndex.byId.get(id),kit=kitAccentById.get(id),value=runtimeMixValue(id,group?mixRead(group,parameterDraft):parameterDraft.get(id)??(kit?sharedKitAccent(kit,parameterDraft):undefined)??Number(c.context.raw));if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;return{id,label:sourceControlLabel(c),context:[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};};
+function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(!descriptor)return;if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;const wave=miamiWave(miamiWaveParameter(row),value);const drum=editableDrumControl(id),sourceDisplay=wave?.name??(soundNativeId(id)?null:sourcePercent(row,value));const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):envelopeRows(row)?envelopeValue(row,value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);if(drum)paintDrumGlyph($('other-view'),drum,value,descriptor.max);refreshEnvelope(row);if(wave)paintSoundPanel();for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');if(sourceDisplay!==null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));}const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);paintLivePan();paintMasterValues();}
 function paintLivePan(){for(const btn of document.querySelectorAll('[data-param]')){const s=findSpec(btn.dataset.param,btn.dataset.paramOccurrence);if(!s||!isPanLabel(s.label))continue;btn.dataset.live='pan';btn.textContent=formatPan(s.value);}}
 const parameterGesture=new ParameterGesture({onPreview:s=>{if(soundNativeId(s.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(s.id)){showParameter(s.id,s.value);return;}if(view==='mix'&&nativeMixMode)return;if(masterDraft.has(s.id)){const change=masterDraft.change(s.id,parameterDraft,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);status();return;}const group=mixAliasIndex.byId.get(s.id);const change=group?mixChange(group,parameterDraft,s.value):scalarDraftChange(s.id,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);const row=sourceSounds.controlForId(s.id),drum=editableDrumControl(s.id);status(`${s.label} · ${drum?drumValueText(drum,s.value):miamiWave(miamiWaveParameter(row),s.value)?.name??sourcePercent(row,s.value)??fxDisplay(s.id,s.value)??formatParameterValue(s.label,s.value)} · Draft`);},onCommit:c=>{recordParameter(c);showParameter(c.id,c.after);status();},onCancel:c=>{if(soundNativeId(c.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){showParameter(c.id,c.restore);return;}restoreMixPreview(c.id);if(c.restore!==null)showParameter(c.id,c.restore);}});
 function cancelNativeInputs(){for(const input of document.querySelectorAll('[data-native-param]'))soundInputIntent.delete(input);const entries=[...nativePreview];nativePreview.clear();for(const [input,value]of entries){input.value=String(value);previewNativeInput(input,false);}nativePreview.clear();}

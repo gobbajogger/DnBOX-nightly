@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Run the packed TouchOSC companion against the stock DnBOX host simulator.
 
-Requires a local DnBOX Git repository containing the firmware commit below, a C
+Requires a local DnBOX Git repository containing the selected firmware commit, a C
 compiler, the normal host build dependencies, and Lua or texlua. All builds and
 tests run in a temporary directory. No MIDI devices are opened.
 
-python3 tests/product-remote/touchosc-host.py /path/to/DnBOX [--json result.json]
+python3 tests/product-remote/touchosc-host.py /path/to/DnBOX [--firmware-ref SHA] [--json result.json]
 """
 import argparse
 import hashlib
@@ -25,13 +25,15 @@ FIRMWARE = "76040daa5b52d686a8b7b544296ba5d79610a95d"
 DRUM_NOTES = (36, 38, 42, 46)
 
 
-def build_host(repo, work):
+def build_host(repo, work, revision):
     # The archive binds the host, packer, scripts, samples and synth inputs to
     # the same commit, independent of the caller's branch or working changes.
     fw = work / "firmware"
     fw.mkdir()
     archive = work / "firmware.tar"
-    subprocess.run(["git", "-C", repo, "archive", "-o", archive, FIRMWARE], check=True)
+    paths = ("assets/909", "assets/fonts", "experiments/original_synth", "experiments/wobble",
+             "firmware", "host", "tests/host", "tools", "web/offline-sequencer/touchosc")
+    subprocess.run(["git", "-C", repo, "archive", "-o", archive, revision, *paths], check=True)
     subprocess.run(["tar", "-xf", archive, "-C", fw], check=True)
     subprocess.run([sys.executable, "tools/check_original_inputs.py"], cwd=fw, check=True)
     # Keep all build products in this archive and use the stock synth/sample settings.
@@ -97,6 +99,7 @@ def outbound_notes(lua, host, work):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("repository", type=Path)
+    parser.add_argument("--firmware-ref", default=FIRMWARE, help="firmware commit to qualify")
     parser.add_argument("--lua", default=shutil.which("lua") or shutil.which("texlua"))
     parser.add_argument("--json", type=Path)
     parser.add_argument("--browser-identity", action="store_true",
@@ -104,9 +107,14 @@ def main():
     args = parser.parse_args()
     if not args.lua:
         parser.error("provide a Lua interpreter with --lua")
+    repo = args.repository.resolve()
+    revision = subprocess.check_output(
+        ["git", "-C", repo, "rev-parse", "--verify", "--end-of-options", args.firmware_ref + "^{commit}"],
+        text=True,
+    ).strip()
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp)
-        firmware = build_host(args.repository.resolve(), work)
+        firmware = build_host(repo, work, revision)
         host = firmware / "build/host/x0x_host"
         packed_sha = extract_layout(firmware, work)
         lua = [args.lua, Path(__file__).with_suffix(".lua").resolve(), work]
@@ -137,7 +145,7 @@ def main():
             print(browser["status"], " / DNR2 HELLO has no reply")
         if args.json:
             report = {
-                "firmware_commit": FIRMWARE,
+                "firmware_commit": revision,
                 "packed_layout_sha256": packed_sha,
                 "result": "PASS",
                 "outbound_columns": ["channel", "note", "note_on", "note_off", "idle_dbfs", "sounding_dbfs"],

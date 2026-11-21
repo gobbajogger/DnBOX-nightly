@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 105772,
-      "sha256": "60f133a52eb35f66ae218f3d122afd8802d9dba791ccde9b32a15cd1b6085075"
+      "bytes": 107562,
+      "sha256": "5efd6a6387126401ee303e135fb0f3c17a4f812824f3e1c66b3c921fa65d2b3f"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -864,8 +864,8 @@
     },
     {
       "path": "remote/frame.mjs",
-      "bytes": 2072,
-      "sha256": "f0399d8b52fa5998d5a1192ebd1387788514b0cc7a9ea5eb8afcc928a707cc54"
+      "bytes": 2249,
+      "sha256": "78b6d3d55944cd33c593485748a74c441aef46ba5c66c4024e83d7b895cc9f09"
     },
     {
       "path": "remote/funkybeats-view.mjs",
@@ -994,8 +994,8 @@
     },
     {
       "path": "remote/runtime-mix-state.mjs",
-      "bytes": 4116,
-      "sha256": "d241ce343a2622c0d0cc12aff53a7921fe1ba6855f2006a74083f782ecf897aa"
+      "bytes": 4304,
+      "sha256": "684ff1192e27d2afacbdec08187d1884b1c1a1aaf9cd142f05c797c2446f3469"
     },
     {
       "path": "remote/runtime-sound-map.mjs",
@@ -1004,8 +1004,8 @@
     },
     {
       "path": "remote/runtime-sound-state.mjs",
-      "bytes": 5443,
-      "sha256": "ecedfd285422c7c5eaa3872cbf07c76e38a65e431fde2b5f26249ac5b73dbff5"
+      "bytes": 5567,
+      "sha256": "54055bc5278e6fbb65756eb9fe6af356b10d75f07a12e4d5293911c2094e9ebd"
     },
     {
       "path": "remote/sequence.mjs",
@@ -1019,8 +1019,8 @@
     },
     {
       "path": "remote/sound.mjs",
-      "bytes": 4566,
-      "sha256": "419a19958cd342bae9948ecf56d39679b1f8bb58b9b0db5ac7f0398b13ce8788"
+      "bytes": 4627,
+      "sha256": "76a3aff4663130dcf9af060c70fe94a85eaab295eda67ebc226df3e0fb4a7c10"
     },
     {
       "path": "remote/source-sounds.json",
@@ -1039,8 +1039,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 63025,
-      "sha256": "6227483e17f457a115d04738a58a4580af83c7d1e33d3f3f27d01faa77dc97e3"
+      "bytes": 63230,
+      "sha256": "69f81cb00ad3ae93162d5667071ff0f622f3854f3fed93dbd51ff577b5410b46"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1169,8 +1169,8 @@
     },
     {
       "path": "remote/drum-strip.mjs",
-      "bytes": 5208,
-      "sha256": "47c05948a55712b0e89c2aadf8fa5c98f1bd384304307ee410ab75cabf9de27e"
+      "bytes": 7449,
+      "sha256": "038a933aae89587fc8b83eb48883159369f319bbaa040d93a5cfcd0060b179f3"
     },
     {
       "path": "remote/drum-format.mjs",
@@ -1179,8 +1179,8 @@
     },
     {
       "path": "remote/superj6.mjs",
-      "bytes": 8512,
-      "sha256": "429fd2c9e2de54745865ff159ebb4d6c29fe6564e9c59f2ff21c19c098049b6a"
+      "bytes": 9424,
+      "sha256": "ecb63d261f32f59fc564927f4fb22d01d8230f7f14635d366883e2c80bc63193"
     },
     {
       "path": "remote/synth-one-init.mjs",
@@ -1294,8 +1294,8 @@
     },
     {
       "path": "remote/drum-accent.mjs",
-      "bytes": 336,
-      "sha256": "b6ae42bfb3dd3a0851aa39da21112c41839e373e19501f1ac25f6d67526a8979"
+      "bytes": 1634,
+      "sha256": "6d814dee3b196a307ced2cbb1b18115a82834ecde22bb61bfabec8178f19d2ea"
     },
     {
       "path": "remote/local-step-rows.mjs",
@@ -1309,8 +1309,8 @@
     },
     {
       "path": "remote/pattern-locks.mjs",
-      "bytes": 1965,
-      "sha256": "8934a7a512d106ff26fa9ca40d6f17f3f0bf622708bcbf93b19407aeb5fdd241"
+      "bytes": 2562,
+      "sha256": "82d1fb2c3a3489b450d469c9fa20e9220a6b5a4e360e075f4862c5cb791decdb"
     },
     {
       "path": "presets/working-file.mjs",
