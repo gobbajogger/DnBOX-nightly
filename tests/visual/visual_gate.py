@@ -76,10 +76,49 @@ def wait_for_home_capture(page):
         require([stage,play,stop].every(el => el?.checkVisibility() && el.getBoundingClientRect().width > 0),
                 'replay display or controls are hidden');
     }""")
-    frames = page.evaluate_handle("() => ({previous: null, stable: 0})")
+    wait_for_stable_layout(page, ['body','header','#replay-display','#demo-play','#demo-stop','footer'])
+
+
+def wait_for_breaks_capture(page):
+    # This local tool has two stylesheets, two fonts and an inline module. Its
+    # idle state can be checked directly without opening MIDI or reading a file.
+    page.wait_for_function("document.fonts.status === 'loaded'")
+    page.evaluate("""() => {
+        const require = (ok, message) => { if (!ok) throw Error('Breaks capture: ' + message); };
+        require(document.readyState === 'complete', 'document has not loaded');
+        for (const path of ['../site.css', '../tool-theme.css']) {
+            const url = new URL(path, location.href).href;
+            const sheet = [...document.styleSheets].find(s => s.href === url);
+            let count;
+            try {
+                count = sheet?.cssRules.length;
+            } catch (error) {
+                if (error.name !== 'SecurityError') throw error;
+            }
+            require(count > 0, path + ' did not load');
+        }
+        for (const weight of ['normal', '700']) {
+            require([...document.fonts].some(f => f.family === 'Barlow' && f.weight === weight && f.status === 'loaded'),
+                    'Barlow ' + weight + ' did not load');
+        }
+        require(window.sampleWorkspace?.busy() === false, 'sample workspace did not initialize');
+        const connect = document.querySelector('#connect'), slots = document.querySelector('#list .empty');
+        require(connect?.checkVisibility() && connect.getBoundingClientRect().width > 0 && !connect.disabled && typeof connect.onclick === 'function',
+                'Connect is not ready');
+        require(slots?.checkVisibility() && slots.getBoundingClientRect().width > 0 &&
+                slots.textContent.trim() === 'Connect to read your keyboard’s sample slots.',
+                'disconnected slot list is missing');
+        require(['add', 'send', 'backup', 'restore'].every(id => document.getElementById(id)?.disabled === true),
+                'initial device actions are not disabled');
+    }""")
+    wait_for_stable_layout(page, ['body', 'header', 'main', '#connect', '#list', '#send'])
+
+
+def wait_for_stable_layout(page, selectors):
+    frames = page.evaluate_handle("sels => ({selectors: sels, previous: null, stable: 0})", selectors)
     try:
         page.wait_for_function("""state => {
-            const boxes = ['body','header','#replay-display','#demo-play','#demo-stop','footer'].flatMap(s => {
+            const boxes = state.selectors.flatMap(s => {
                 const r=document.querySelector(s).getBoundingClientRect(); return [r.x,r.y,r.width,r.height];
             });
             const now = JSON.stringify(boxes);
@@ -89,7 +128,6 @@ def wait_for_home_capture(page):
         }""", arg=frames, polling='raf')
     finally:
         frames.dispose()
-
 
 
 def capture_full_page(page, route, name):
@@ -348,6 +386,8 @@ def main():
                     pg.add_style_tag(content=FREEZE_CSS)
                     if site_route == 'index.html':
                         wait_for_home_capture(pg)
+                    elif site_route == 'breaks/index.html':
+                        wait_for_breaks_capture(pg)
                     else:
                         pg.evaluate('document.fonts.ready')
                         pg.wait_for_load_state('networkidle')

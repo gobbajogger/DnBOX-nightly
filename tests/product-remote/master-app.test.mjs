@@ -53,3 +53,48 @@ test('legacy exact-identity Draft imports derive macro mirrors; unknown/alias-co
 test('keyboard edit during a Master drag cancels the preview before committing a separate scalar',async()=>{const x=await boot();x.view('mix');const e={target:target(master.id(6,12)),button:0,pointerId:91,clientX:0,clientY:80,preventDefault(){}};x.get('other-view').emit('pointerdown',e);x.get('other-view').emit('pointermove',{...e,clientX:30});key(x,master.id(4,3));x.get('other-view').emit('pointercancel',e);const saved=JSON.parse(await save(x)),values=new Map(saved.parameters.map(p=>[p.id,p.value]));assert.equal(master.read(master.id(4,3),values),1);assert.equal(master.read(master.id(6,12),values),95);x.press('undo');assert.equal(review(x),'No changes.');});
 import{createHash}from'node:crypto';
 test('actual original ce667 edit Undo exports import without fabricated Master changes or history',async()=>{for(const kind of['comp95','filter64']){const fixtures=new URL('./fixtures/legacy-ce667-master/',import.meta.url),bytes=fs.readFileSync(new URL(kind+'-after-undo.json',fixtures)),provenance=JSON.parse(fs.readFileSync(new URL(kind+'-provenance.json',fixtures)));assert.equal(createHash('sha256').update(bytes).digest('hex'),provenance.sha256);assert.equal(provenance.sourceRef,'ce6675f7da84ce9042ebd678d892b329490f0585');assert.equal(provenance.review,'No changes.');assert.equal(provenance.projectsSoundEdits,0);const x=await boot();await open(x,bytes.toString());assert.equal(x.get('draft-replace').disabled,false);x.press('draft-replace');assert.equal(review(x),'No changes.');assert.equal(x.get('undo').disabled,true);assert.equal(x.get('redo').disabled,true);const decoded=JSON.parse(await save(x)),legacy=JSON.parse(bytes);for(const spec of master.specs)assert.equal(master.read(spec.id,new Map(decoded.parameters.map(p=>[p.id,p.value]))),spec.value);assert.deepEqual({...decoded,parameters:[]},{...legacy,parameters:[]});x.view('files');assert.match(x.get('other-view').innerHTML,/0 sound edits/);}});
+
+test('Mix FX Delay type preserves absent and explicit values across history and files', async () => {
+ const id = 'catalog/1550';
+ const app = await boot();
+ const enterFx = () => {
+  app.view('mix');
+  const button = Object.assign(new Node(), {dataset:{mixMode:'fx'}});
+  app.get('other-view').emit('click', {target:button});
+ };
+ const choose = value => app.get('other-view').emit('change', {target:{dataset:{delayType:''}, value}});
+ enterFx();
+ const base = JSON.parse(await save(app));
+ assert.ok(!base.parameters.some(p => p.id === id));
+ const panel = app.get('other-view');
+ assert.match(panel.innerHTML, /<label>Delay type <select data-delay-type><option value="0">DIGI<\/option><option value="1" selected>TAPE<\/option>/);
+ for (const value of ['', '2', '1']) choose(value);
+ assert.deepEqual(JSON.parse(await save(app)), base);
+ assert.equal(app.get('undo').disabled, true);
+ choose('0');
+ assert.match(panel.innerHTML, /data-glyph-fn="TAPE" data-glyph-engine="mixer" data-glyph-value="0"/);
+ const digi = JSON.parse(await save(app));
+ assert.deepEqual(digi.parameters, [...base.parameters, {id, value:0}]);
+ assert.match(review(app), /Delay · Delay type: TAPE → DIGI/);
+ app.press('undo');
+ assert.deepEqual(JSON.parse(await save(app)), base);
+ assert.equal(review(app), 'No changes.');
+ app.press('redo');
+ assert.deepEqual(JSON.parse(await save(app)), digi);
+ assert.match(panel.innerHTML, /<option value="0" selected>DIGI/);
+ for (const initial of [0, 1]) {
+  const explicit = {...base, parameters:[...base.parameters, {id, value:initial}]};
+  await open(app, JSON.stringify(explicit));
+  assert.equal(app.get('draft-replace').disabled, false);
+  app.press('draft-replace');
+  enterFx();
+  choose(String(1 - initial));
+  app.press('undo');
+  assert.deepEqual(JSON.parse(await save(app)), explicit);
+ }
+ for (const value of [-1, 2, 0.5]) {
+  await open(app, JSON.stringify({...base, parameters:[{id, value}]}));
+  assert.equal(app.get('draft-replace').disabled, true);
+  app.press('draft-cancel');
+ }
+});

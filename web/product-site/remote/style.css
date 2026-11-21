@@ -186,6 +186,7 @@ dialog::backdrop{background:#000a}
 #parameter-readout{min-width:3.5ch}
 .context-param{display:flex;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--grid)}
 #other-view input,#other-view select{background:var(--control);border:1px solid var(--line-strong);border-radius:8px;min-height:var(--hit);color:inherit}
+#other-view select[data-delay-type]{min-height:44px;min-width:max-content}
 #other-view h2{color:var(--fg);font-size:22px}
 #motion-grid{position:relative;height:180px;border:1px solid var(--line);touch-action:none;background:repeating-linear-gradient(to right,#121a1c 0 calc(6.25% - 1px),#2a3a3e calc(6.25% - 1px) 6.25%)}
 #motion-grid button{position:absolute;bottom:0;width:5.5%;padding:0;min-height:6px;background:var(--accent);color:var(--accent-ink);border-radius:3px 3px 0 0;pointer-events:none}
@@ -718,8 +719,8 @@ dialog::backdrop{background:#000a}
 .drum-source-glyph{width:min(48%,64px);height:32px;display:block}
 .drum-step-buttons{justify-content:space-evenly;gap:3px}
 #other-view .drum-step-buttons button{min-width:0;width:min(46%,48px);height:44px;padding:0}
-.drum-sound-actions{gap:6px;margin-top:6px}
-.drum-sound-actions button:last-child{margin-inline-start:auto}
+.drum-sound-actions{gap:12px;margin-top:6px}
+.drum-sound-actions button:last-child{flex-basis:148px;margin-inline-start:auto}
 
 /* Give the voice strip the space between the toolbar and the visible actions. */
 #other-view:has(>[data-drum-sound-strip]){
@@ -731,7 +732,8 @@ dialog::backdrop{background:#000a}
 [data-drum-sound-strip]{flex:1 0 auto;padding-bottom:4px}
 [data-drum-sound-unit]{grid-template-rows:minmax(min-content,1fr) auto}
 .drum-sound-actions{flex:none}
-#other-view .drum-sound-actions button{min-height:44px}
+.drum-sound-actions>:is(button,select){flex:0 1 145px}
+#other-view .drum-sound-actions :is(button,select){min-height:44px;text-align:center}
 .master-output{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-block:4px 8px}
 .master-output>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;min-width:0}
 .master-output h4,.master-output output{margin:0;font:inherit;font-size:var(--fs-sm);color:var(--muted)}

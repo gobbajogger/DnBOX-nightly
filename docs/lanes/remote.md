@@ -2,6 +2,22 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Current Remote qualification
+
+The sample import, drum Sound and Delay type changes are on the same branch as the consolidated `583f6229` base. The requested `90cf5429` failed its base ancestry check and could not launch the required Chromium. The new tree contains both histories and uses Playwright’s pinned Chromium 151 in its normal sandbox. The [PR qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508) identifies the published head and its actual Local gate outcome.
+
+| Ledger items | Verified scope and remaining dependency |
+|---|---|
+| C1, C2, C4, R7 | The preceding `4f7e02fa` run passed ancestry, no-loss, hard limits, the 304-file build and 564 edge tests. Its visual unit phase failed at the local sample-import page. Six FunkyBeats groups then passed before the superseded run was interrupted. Nine structural fixtures passed in the earlier `7c59dad5` qualification. The PR records the final exact-head run separately. [Complete preceding log, part 1](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7067101883) · [Part 2](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7067102134) |
+| R2, R3, R4 | FunkyBeats port, modeless gestures and thin per-step controls are covered. All 26 FunkyBeats groups passed in the `495159ad` gate. |
+| R1, R5, C3 | The owner crosswalk covers 23 product drawings and 996 individual items. The new drum footer reaches both kits and all 22 voices. Whole-screen acceptance still needs the 17:00 glyph identities, the owner’s decision on phone drum density, and matching Remote, website and 240 × 240 firmware approval. The original SuperJ6 build-9 binary and 12-bank ZIP are also required for the remaining source comparison. |
+| R6 | The archived firmware and emulator qualify discrete stored controls and Undo. The stock dispatcher returned the 25-byte identity response and zero bytes to DNR2 HELLO. Physical USB or BLE, the TouchOSC app, audio-applied state and per-part transport, pattern and meter data still require the producer and device. |
+| C5, C6 | The full-lane acceptance and integration-owned merge remain open. PR #169 remains draft. |
+
+On the combined product, all 242 Remote tests, 126 Workspace tests and 18 visual unit tests passed. All 265 declared product files, including 110 Remote assets, matched the source manifest. The drum footer passed six viewport checks. In the owner’s 844 × 390 viewport its four controls are 145, 145, 145 and 148 px wide and 44 px tall. The Delay type edit/Undo/Redo, saved-file round trip and the source-derived reel/waveform drawing were checked at three sizes. A phone-landscape crop exposed the last letter of TAPE clipping in the first build. The corrected selector uses the browser’s intrinsic width. Both labels matched a wider native selector pixel for pixel at all three sizes. [Owner journeys and measurements](../../evidence/remote-qualification-944e99d8/follow-up-tests/drum-navigation-and-delay-type.zip) · [Readability comparison](../../evidence/remote-qualification-944e99d8/follow-up-tests/delay-type-readability.zip) · [Build and test logs](../../evidence/remote-qualification-944e99d8/follow-up-tests/owner-control-units.zip)
+
+The revised sample-import capture produced the same 1440 × 1175 PNG as the unchanged successful run on `59d83425` (SHA-256 `79c721befad9e0cf55d524f611899f2ec2b60390327d4e8472b995a34bd17dc0`). Seven negative tests rejected a missing stylesheet, theme, regular font, bold font, initialized workspace, disconnected slot message or disabled Send state. [Reproduction, previous capture, requests and negative checks](../../evidence/remote-qualification-944e99d8/follow-up-tests/sample-import-render.zip)
+
 ## Cloud gate and browser qualification at 7c59dad5
 
 The [unfiltered remote gate](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7066670532) ran for 87 minutes and exited 1. The 304-file build, no-loss, 564 edge tests, 126 workspace tests, 241 Remote/platform tests and all 26 FunkyBeats browser groups passed. The stock-dispatcher and original AU prerequisites remain open. [Full gate and local manual request traces](../../evidence/remote-qualification-944e99d8/cloud-browser-runs/7c59-gate-and-manual.json.gz)
@@ -36,7 +52,15 @@ In a fresh Chromium exchange using the archived firmware's real UI and engine, R
 
 The isolated Linux Conductor renders establish the musical lengths of all 18 SuperJ6 tempo divisions. The merged stock source retains the previously published original reference bench, whose seven component cases cover chorus, CoreSynth and CoreSampler. A fresh inventory covered 6,865 tracked paths and 5,532 archive members, with no authenticated original executable or original LFO tempo-label sweep found. The 28 stock SuperJ6 images matched their PNG and RGB hashes. The original plugin's literal labels remain open. [54 WAVs and musical durations](../../evidence/remote-synth-files/tempo-periods/README.md) · [Stock inventory and original inputs](../../evidence/remote-synth-files/firmware-f1786ebe/README.md)
 
+## Delay type and sample-page capture
+
+The Delay panel’s local Draft selector uses the stock DIGI and TAPE modes. The factory sound starts in TAPE. Changing mode switches the existing drawing and leaves Wear independent. Undo restores the prior explicit value or the absence of a stored edit, including after opening an older Draft. The emulator Mix interface has no admitted read or write for this parameter. [Original source, compiled check and reproduction](../../evidence/remote-owner-pages-20261121/delay-type/README.md)
+
+Two unfiltered visual runs timed out waiting for network idle on the local sample-import page after navigation and font loading. The page uses two stylesheets, regular and bold Barlow, and an inline module. Its capture now checks that these resources loaded, the disconnected slot controls initialized, and their geometry stayed stable across frames. The normal 30-second Playwright deadline remains in place. [Earlier unchanged request trace and screenshot](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7065197868)
+
 ## Drum Decay and Tail
+
+The compact drum Sound footer now includes the owner’s **Engine / page** action. It selects 909 or 808 and moves to that kit’s existing eleven-voice selector. Choosing the current kit preserves the current voice.
 
 An independent check of owner page 18 covered four browser sizes and the original 240 × 240 firmware frame. On the 844 × 390 phone, the six-control strip measured 820 × 208 px on entry and 127.28 px tall while editing. All twelve adjustment buttons and three footer actions could receive input. Scrolling nine pixels exposed the entire numeric field. [Measurements, screenshots and firmware pixel identity](../../evidence/remote-owner-pages-20261121/page-18-drum-state/independent-layout.zip)
 

@@ -1,0 +1,4 @@
+parameter=13 label=DlType reset=0 max=1
+raw=1 name=TAPE stored=1 mode=1 wear=37
+raw=0 name=DIGI stored=0 mode=0 wear=37
+raw=1 name=TAPE stored=1 mode=1 wear=37

@@ -63,6 +63,7 @@ async def cases(origin):
        await page.locator('#undo').click();await page.wait_for_function('n=>controlPackets.length>n',arg=before_count+1);assert await page.evaluate('controlPackets.at(-1).controls')==baseline
        assert await target.evaluate("e=>e.tagName==='INPUT'?e.value:e.querySelector('output')?.textContent")==old_text
      assert len(seen)==29,seen
+     await expect(page.get_by_role('combobox', name='Delay type', exact=True)).to_have_count(0)
      await check_feedback_boundary(page,baseline)
      fx_send_keys=await page.locator('.mix-fx-sends [data-runtime-key]').evaluate_all('els=>els.map(e=>e.dataset.runtimeKey)')
      assert fx_send_keys==[f'5:{part}:{effect}' for part in range(5) for effect in (1,2)],fx_send_keys

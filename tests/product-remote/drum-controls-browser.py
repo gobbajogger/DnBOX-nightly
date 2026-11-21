@@ -287,6 +287,57 @@ async def frame_edits(page,kit,adjacent):
  await check(before)
 
 
+async def engine_page_footer(page,screens):
+ chooser=page.get_by_role('combobox',name='Engine / page',exact=True)
+ voice=page.get_by_role('combobox',name='Sound voice',exact=True)
+ await expect(voice).to_have_count(1)
+ await expect(chooser.locator('option:not(:disabled)')).to_have_text(['909','808'])
+ footer=page.locator('.drum-sound-actions')
+ actions=await footer.locator('button,select').evaluate_all("""es=>es.map(e=>{
+  const r=e.getBoundingClientRect(),style=getComputedStyle(e);
+  const radii=['borderTopLeftRadius','borderTopRightRadius','borderBottomLeftRadius','borderBottomRightRadius'];
+  const inset=Math.min(r.width/4,r.height/4,1+Math.max(...radii.map(k=>parseFloat(style[k])||0)));
+  const points=[[inset,inset],[r.width-inset,inset],[r.width/2,r.height/2],
+                [inset,r.height-inset],[r.width-inset,r.height-inset]];
+  return {name:e.getAttribute('aria-label')??e.textContent, x:r.x,right:r.right,y:r.y,bottom:r.bottom,
+          width:r.width,height:r.height,hit:points.every(([x,y])=>document.elementFromPoint(r.x+x,r.y+y)===e)};
+ })""")
+ assert [a['name'] for a in actions]==['Open original','Save a copy','Engine / page','Review draft'],actions
+ for i,a in enumerate(actions):
+  # Original 844px page 18 column positions; heights retain the larger mobile target.
+  assert abs(a['x']-[12,169,326,684][i])<=1 and abs(a['width']-[145,145,145,148][i])<=1,actions
+  assert a['width']>=40 and a['height']>=40 and a['hit'] and 0<=a['x']<a['right']<=844 and 0<=a['y']<a['bottom']<=390,actions
+  if i:assert actions[i-1]['right']<=a['x'],actions
+ await voice.select_option('3')
+ before=await core.draft_state(page)
+ await chooser.select_option('drum909')
+ await page.keyboard.press('Escape')
+ await expect(voice).to_be_focused();await expect(voice).to_have_value('3')
+ # Use native keyboard selection for the cross-kit route, then exercise all
+ # eleven genuine source voices by their existing numeric option identities.
+ await chooser.focus()
+ await page.keyboard.press('End')
+ for kit in ['808','909']:
+  if kit=='909':await chooser.select_option('drum909')
+  await page.keyboard.press('Escape')
+  await expect(page.locator('[data-engine="drum'+kit+'"]')).to_have_attribute('aria-pressed','true')
+  await expect(voice).to_be_focused();await expect(voice).to_have_value('0')
+  originals=[screens[f'current-state-and-reference/{kit}-voice-{i:02d}.svg'] for i in range(11)]
+  await expect(voice.locator('option')).to_have_text([s['successor']['sourceVoice']['nativeName'] for s in originals])
+  for i,screen in enumerate(originals):
+   await voice.select_option(str(i))
+   first=page.locator('[data-drum-sound-strip] [data-param]').first
+   await expect(first).to_have_attribute('data-param',screen['path']+'|'+screen['controls'][0]['identity'])
+   await expect(voice).to_be_focused()
+ after=await core.draft_state(page)
+ assert after['notes']==before['notes'] and after['parameters']==before['parameters']
+ await page.get_by_role('button',name='Open original',exact=True).click()
+ await expect(chooser).to_have_count(0)
+ await page.get_by_role('button',name='Return to Sound',exact=True).press('Enter')
+ await expect(page.get_by_role('button',name='Open original',exact=True)).to_be_focused()
+ print('DRUM_ENGINE_PAGE PASS 2 kits, 22 source voices, four reachable footer actions, Draft retained',flush=True)
+
+
 async def cases(evidence=None):
  data=json.loads((ROOT/'web/product-site/remote/components.json').read_text())
  screens={s['path']:s for s in data['screens']};proof=[];samples=0;active_count=0
@@ -423,6 +474,7 @@ async def cases(evidence=None):
      assert width_samples==9994,width_samples
      print('DRUM_FRAME_WIDTH PASS',width_samples,'source occurrences at 280px',flush=True)
      await compact_bd_edits(page, screens['current-state-and-reference/909-voice-00.svg'])
+     await engine_page_footer(page,screens)
     assert not errors,errors;assert await page.evaluate('midiCalls')==0
     assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
     await context.close()

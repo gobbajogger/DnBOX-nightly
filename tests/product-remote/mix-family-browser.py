@@ -50,6 +50,72 @@ async def check_master_destination(page, before, width, height):
  await mode(page,'levels')
  await expect(page.locator('.mixer-fader')).to_have_count(5)
 
+async def check_delay_type(page):
+    await mode(page, 'fx')
+    control = page.get_by_role('combobox', name='Delay type', exact=True)
+    await expect(control).to_have_value('1')
+    assert await control.locator('option').all_text_contents() == ['DIGI', 'TAPE']
+    await control.scroll_into_view_if_needed()
+    box = await control.bounding_box()
+    assert box['width'] >= 44 and box['height'] >= 44, box
+    # Intrinsic sizing of this same native select includes its widest option,
+    # both paddings, borders and the browser's own dropdown arrow.
+    fits = await control.evaluate('''e => {
+        const clone = e.cloneNode(true);
+        Object.assign(clone.style, {position:'fixed',left:'-2000px',top:'0',width:'max-content',
+            minWidth:'0',maxWidth:'none',visibility:'hidden',flex:'none'});
+        e.parentElement.append(clone);
+        const needed = clone.getBoundingClientRect().width;
+        clone.remove();
+        const r = e.getBoundingClientRect(), panel = e.closest('.mix-panel').getBoundingClientRect();
+        return {actual:r.width, needed, inside:r.left>=panel.left && r.right<=panel.right,
+            hit:document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===e};
+    }''')
+    assert fits['actual'] >= fits['needed'] and fits['inside'] and fits['hit'], fits
+    assert await page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    initial = await state(page)
+    assert 'catalog/1550' not in values(initial)
+    wear = page.locator('[data-mix-param-label="Tape Wear"] output')
+    initial_wear = await wear.inner_text()
+    glyph = wear.locator('..').locator('[data-glyph-fn="TAPE"]')
+    initial_glyph = await glyph.get_attribute('data-glyph-value')
+    assert float(initial_glyph) * 127 >= 16
+    tape_art = await glyph.locator('canvas').evaluate('el => el.toDataURL()')
+    await control.focus()
+    await control.press('Home')
+    await expect(control).to_have_value('0')
+    await expect(wear).to_have_text(initial_wear)
+    await expect(glyph).to_have_attribute('data-glyph-value', '0')
+    await expect(control).to_be_focused()
+    assert await glyph.locator('canvas').evaluate('el => el.toDataURL()') != tape_art
+    edited = await state(page)
+    assert values(edited) == {**values(initial), 'catalog/1550': 0}
+    review = page.locator('#review')
+    if not await review.is_visible():
+        await page.locator('.overflow summary').click()
+    await review.click()
+    await expect(page.locator('#changes')).to_contain_text('Delay · Delay type: TAPE → DIGI')
+    await page.locator('#review-dialog').get_by_role('button', name='Return').click()
+    menu = page.locator('.overflow')
+    if await menu.evaluate('node => node.open'):
+        await menu.locator('summary').click()
+    await page.locator('#undo').click()
+    await expect(control).to_have_value('1')
+    await expect(glyph).to_have_attribute('data-glyph-value', initial_glyph)
+    assert await glyph.locator('canvas').evaluate('el => el.toDataURL()') == tape_art
+    assert (await state(page))['parameters'] == initial['parameters']
+    await page.locator('#redo').click()
+    await expect(control).to_have_value('0')
+    await core.load_draft(page, edited)
+    await mode(page, 'fx')
+    await expect(control).to_have_value('0')
+    assert (await state(page))['parameters'] == edited['parameters']
+    await core.load_draft(page, initial)
+    await mode(page, 'fx')
+    await expect(control).to_have_value('1')
+    assert (await state(page))['parameters'] == initial['parameters']
+
+
 async def main():
  source_specs=master_source_specs()
  (ROOT/'.output').mkdir(exist_ok=True)
@@ -68,6 +134,7 @@ async def main():
       await mode(page,view);assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(w,view)
       for target in await page.locator('[data-mix-mode]').all():assert (await target.bounding_box())['height']>=44
       out=ROOT/'test-results/mix-family';out.mkdir(parents=True,exist_ok=True);await page.screenshot(path=str(out/f'{view}-{w}x{h}.png'),full_page=True)
+     await check_delay_type(page)
      # FX edits keep the firmware display and raw Draft storage in sync.
      for label, initial, changed in [('Reverb DECAY','62%','63%'), ('Delay TIME','1/8.','1/4')]:
       target=page.get_by_role('button',name=label+' '+initial,exact=True)

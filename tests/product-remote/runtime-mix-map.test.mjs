@@ -11,6 +11,8 @@ test('actual Mix family maps 29 native identities and preserves all presentation
  const result=module.mixControlBindings(catalog,components);
  assert.equal(result.groups.size,29);
  assert.equal(result.byId.get('catalog/1551').key,'4:0:14');
+ assert.equal(result.byId.has('catalog/1550'),false);
+ assert.equal(result.groups.has('4:0:13'),false);
  assert.equal(result.groups.get('4:0:8').max,12);
  assert.ok(result.groups.get('5:0:1').ids.length>=3);
  for(const group of result.groups.values())for(const id of group.ids)assert.equal(result.byId.get(id),group);
