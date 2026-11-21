@@ -2,9 +2,9 @@
 // Test a private copy so malformed manifests never touch tracked files.
 import assert from 'node:assert/strict';
 import * as fs from 'node:fs';
-import { tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withStatusFixture } from './fixtures/status-fixture.mjs';
 import { runNodeCli } from './fixtures/node-cli.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const required = [
@@ -17,26 +17,21 @@ const required = [
 // Register the existing cases in source order and execute one CLI at a time.
 const cases = [];
 function run(label, mutate, shouldPass = false) {
-  cases.push({label, mutate, shouldPass});
-}
-async function runCases() {
-  for (const {label, mutate, shouldPass} of cases.splice(0)) await checkCase(label, mutate, shouldPass);
-}
-async function checkCase(label, mutate, shouldPass) {
-  const dir = fs.mkdtempSync(join(tmpdir(), 'x0x37-status-'));
-  try {
-    for (const name of required) {
-      const target = join(dir, name);
-      fs.mkdirSync(dirname(target), {recursive:true});
-      fs.copyFileSync(join(root, name), target);
-    }
-    fs.writeFileSync(join(dir, 'package.json'), '{"type":"module"}\n');
+  cases.push(async (dir, reset) => {
+    reset();
     mutate(dir);
     const r = await runNodeCli(join(dir, required[0]), [], {cwd: dir, label});
     assert.equal(r.status, shouldPass ? 0 : 1, label + ': ' + r.stderr);
     if (!shouldPass) assert.match(r.stderr, /AssertionError/, label + ': expected verifier rejection\n' + r.stderr);
     console.log('PASS ' + label);
-  } finally {fs.rmSync(dir, {recursive:true, force:true});}
+  });
+}
+async function runCases() {
+  const files = new Map(required.map(name => [name,fs.readFileSync(join(root,name))]));
+  files.set('package.json', Buffer.from('{"type":"module"}\n'));
+  await withStatusFixture(files, async (dir, reset) => {
+    for (const check of cases) await check(dir,reset);
+  });
 }
 const edit = fn => dir => {
   const j = JSON.parse(fs.readFileSync(join(dir,'build-status.json'),'utf8'));
@@ -494,8 +489,7 @@ run('r16-combined-source-noninstallable-positive',edit(j=>{
 }),true);
 run('r16-wrong-merged-root',edit(j=>j.history.find(r=>r.id==='integration-pr103-r16-pr110-integrated-current-20261024').source_tree='f'.repeat(40)));
 
-await runCases();
-console.log('PASS: status-history allowlist and malicious-nesting fixtures; no firmware artifacts');
+cases.push(() => console.log('PASS: status-history allowlist and malicious-nesting fixtures; no firmware artifacts'));
 
 // Exact SMC79 real native private-byte receipt must remain QA_PENDING and non-installable.
 const checkedNativeId='integration-pr103-smc79-native-build-20261024-r13';
