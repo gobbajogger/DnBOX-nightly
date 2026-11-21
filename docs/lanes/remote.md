@@ -2,6 +2,14 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Native parameter confirmation and cloud gate runs
+
+Apply verifies the requested wire value against both the firmware acknowledgement and a fresh read of the catalog. Floating-point controls use the encoded value. Remote names any other controls that changed and offers scalar Undo only for an isolated edit.
+
+The [archived firmware host run](../../evidence/remote-protocol/pilot-246ea371/firmware-link-roundtrip.json) made 1,958 native reads and five writes through the Remote connection handler. Chicago cutoff IDs 257 and 277 each went from 32 to 33 and back to 32. Every other stored value matched after Undo. Changing Master COMP from 95 to 96 also moved THRESH from 64 to 60. Remote identified THRESH and withheld scalar Undo. All 23 focused connection tests passed on the integrated source. Physical USB/BLE still requires a compatible attached keyboard and a stock dispatcher that answers DNR2 HELLO.
+
+The [11 original cloud test logs](../../evidence/remote-qualification-944e99d8/cloud-remote-gate-runs.json.gz) preserve the results by revision. The unfiltered gate on `944e99d8` passed clean tree, setup, no-loss, limits and build. The catalog child timed out, and Chromium timed out waiting for Draft startup. The 303-file build at `242f0189` passed. Its full run failed the nested catalog output case and timed out pressing Arrow Up on the first enabled drum step. All 557 edge cases passed in a separate run on that revision.
+
 ## Native synth Apply and Undo
 
 At [`71806ae2`](https://github.com/gobbajogger/DnBOX-nightly/commit/71806ae202fc820df5ce2635a9e380d2b0a03e63), a queued scalar SET stays connected while the page reads back the full catalog. The browser compares the stored value and revision with the acknowledgement before offering Undo. The scrollable control list keeps both actions reachable with 326 descriptors.

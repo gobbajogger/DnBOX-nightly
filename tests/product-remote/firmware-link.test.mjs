@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {dom} from './tests/firmware-link-dom.mjs';
 import assert from 'node:assert/strict';
 import {spawn,execFileSync} from 'node:child_process';
 import {createInterface} from 'node:readline';
@@ -28,22 +29,6 @@ function bundle(controls){
 }
 const controls=[{id:1,kind:1,min:0,max:1000,label:'Scalar'},{id:2,kind:2,min:-1000,max:1000,label:'Level'},{id:37,kind:3,min:1,max:127,readMin:0,readMax:2,label:'Hold'}];
 
-class El{
- constructor(tag){this.tag=tag;this.dataset={};this.children=[];this.listeners={};this.textContent='';this.value='';this.disabled=false;this._id='';}
- get id(){return this._id;}
- set id(value){this._id=value;this.owner.nodes.set(value,this);}
- addEventListener(type,fn){(this.listeners[type]??=[]).push(fn);}
- append(child){child.owner=this.owner;if(child._id)this.owner.nodes.set(child._id,child);this.children.push(child);}
- replaceChildren(){this.children.length=0;}
- click(){return Promise.all((this.listeners.click??[]).map(fn=>fn({preventDefault(){}})));}
- fire(type){for(const fn of this.listeners[type]??[])fn();}
-}
-function dom(){
- const nodes=new Map();
- const document={defaultView:new EventTarget(),createElement(tag){const el=new El(tag);el.owner={nodes};return el;},getElementById(id){return nodes.get(id)??null;}};
- for(const id of ['connect','apply','conn-state','firmware-safety','firmware-controls']){const el=new El('node');el.owner={nodes};el.id=id;el.textContent=id==='connect'?'Connect':'';}
- return {document,nodes};
-}
 function midi(fixture,ops,replies,afterReply=async(_command,reply)=>reply){
  const input={state:'connected',type:'input',listeners:[],addEventListener(type,fn){if(type==='midimessage')this.listeners.push(fn);},removeEventListener(type,fn){this.listeners=this.listeners.filter(item=>item!==fn);},open:async()=>{},close:async()=>{},deliver(data){for(const fn of this.listeners)fn({data});}};
  const output={state:'connected',type:'output',open:async()=>{},close:async()=>{},send(bytes){const command=decodeCommand(bytes);ops.push(command.op);fixture.send(Buffer.from(bytes).toString('hex')).then(async reply=>{if(!reply.hex)return;const decoded=decodeReply(Buffer.from(reply.hex,'hex'));const actual=await afterReply(command,decoded);replies.push(actual);input.deliver(encodeReply(actual));}).catch(()=>{});}};
@@ -193,7 +178,7 @@ test('a queued edit that changes another control refreshes both values and offer
   return reply;
  });
  await edit(800);
- await until(()=>nodes.get('conn-state').textContent.includes('Other control values changed.'),'coupled controls');
+ await until(()=>nodes.get('conn-state').textContent.includes('Other control values changed (Level).'),'coupled controls');
  assert.equal(nodes.get('fw-1').value,'800');
  assert.equal(nodes.get('fw-2').value,'128');
  assert.equal(nodes.get('firmware-undo'),undefined);
@@ -215,7 +200,7 @@ test('an inverse of a queued edit reports changes outside the addressed stored v
    await until(()=>nodes.get('firmware-undo'),'stored forward value');
    await nodes.get('firmware-undo').click();
    const queued=inverseStatus===STATUS.QUEUED?' Update queued.':'';
-   await until(()=>nodes.get('conn-state').textContent===`Restored stored value 500.${queued} Other control values changed.`,'inverse scope');
+   await until(()=>nodes.get('conn-state').textContent===`Restored stored value 500.${queued} Other control values changed (Level).`,'inverse scope');
    assert.equal(nodes.get('fw-1').value,'500');
    assert.equal(nodes.get('fw-2').value,'128');
   });
@@ -238,18 +223,19 @@ test('a queued inverse whose prior value is not read back fails closed',async t=
 });
 
 test('unverifiable writes do not create an Undo action',async t=>{
- for(const scenario of ['queued not stored','queued with different revision','different revision','different stored value']){
+ for(const scenario of ['queued not stored','queued with different revision','different revision','different stored value','ack and stored both differ from request']){
   await t.test(scenario,async t=>{
    let wrote=false;
    const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
     if(command.op===OP.SET){
      wrote=true;
+     if(scenario==='ack and stored both differ from request')return {...reply,value:799};
      if(scenario.startsWith('queued'))return {...reply,status:STATUS.QUEUED};
     }
     if(wrote&&command.op===OP.READ){
      if(scenario.includes('different revision'))return {...reply,revision:reply.revision+1};
      if(scenario==='queued not stored'&&command.control===1)return {...reply,value:500};
-     if(scenario==='different stored value'&&command.control===1)return {...reply,value:799};
+     if(['different stored value','ack and stored both differ from request'].includes(scenario)&&command.control===1)return {...reply,value:799};
     }
     return reply;
    });
@@ -302,4 +288,14 @@ test('returning to a cached page requires a new handshake and drops the prior Un
  assert.equal(nodes.get('fw-1').value,'800');
  await oldUndo.click();
  assert.equal(ops.filter(op=>op===OP.SET).length,1);
+});
+
+test('a fractional setting is compared to its transmitted float32 value',async t=>{
+ const {nodes}=await connectFixture(t);
+ const field=nodes.get('fw-2');
+ field.value='0.1';field.fire('input');
+ await nodes.get('apply').click();
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed '+Math.fround(0.1)+'.','float edit');
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').textContent==='Firmware restored 128.5.','float Undo');
 });

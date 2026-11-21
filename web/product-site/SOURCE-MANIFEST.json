@@ -864,8 +864,8 @@
     },
     {
       "path": "remote/firmware-link.mjs",
-      "bytes": 11170,
-      "sha256": "7012164bb95957ae82d0c538b5c9f6638af9407697cbdb1188937022889fca96"
+      "bytes": 11406,
+      "sha256": "99907240de38b84cadc3151b2d49f2839254443651c07dda46063ce8b20eaa95"
     },
     {
       "path": "remote/frame.mjs",

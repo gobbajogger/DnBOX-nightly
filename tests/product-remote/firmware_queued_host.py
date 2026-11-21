@@ -46,7 +46,7 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         frames.append((command[5], reply[6], unpack(28, 2), unpack(24, 4), unpack(30, 5)))
         return response
 
-    page = await browser.new_page(viewport={'width': 1280, 'height': 900})
+    page = await browser.new_page(viewport={'width': 1280, 'height': 900}, has_touch=True)
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     try:
@@ -65,6 +65,8 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         menu = page.locator('details.overflow')
         if not await menu.evaluate('node => node.open'):
             await menu.locator('summary').click()
+        await field.click(timeout=8000)
+        await field.tap(timeout=8000)
         await field.fill(str(changed), timeout=8000)
         await page.locator('#apply').click()
         await page.wait_for_function("!document.querySelector('#conn-state').textContent.startsWith('Connected.')")
@@ -93,10 +95,10 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         await expect(comp).to_have_value('95')
         await expect(makeup).to_have_value('85')
         await expect(threshold).to_have_value('64')
-        for value, threshold_value, makeup_value in [('96', '60', '85'), ('95', '61', '84')]:
+        for value, threshold_value, makeup_value, affected in [('96', '60', '85', 'THRESH'), ('95', '61', '84', 'THRESH, MAKEUP')]:
             await comp.fill(value)
             await page.locator('#apply').click()
-            await expect(state).to_have_text(f'Stored {value}. Update queued. Other control values changed.', timeout=60000)
+            await expect(state).to_have_text(f'Stored {value}. Update queued. Other control values changed ({affected}).', timeout=60000)
             await expect(comp).to_have_value(value)
             await expect(threshold).to_have_value(threshold_value)
             await expect(makeup).to_have_value(makeup_value)
