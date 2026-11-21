@@ -245,7 +245,16 @@ async function checkOutputRebind(response) {
   try {
     const replica=join(raceDir,'repo');mkdirSync(replica);
     const root=fileURLToPath(new URL('../',import.meta.url));
-    for(const name of ['web','scripts','docs','package-version-assignments.json'])cpSync(join(root,name),join(replica,name),{recursive:true});
+    // The renderer uses product-site modules and data, but these standalone site
+    // assets are outside its inputs. Keep all other source files and the full docs tree.
+    const productSite = join(root, 'web', 'product-site');
+    const unusedAssets = new Set(['reference', 'remote', 'index.html'].map(name => join(productSite, name)));
+    for (const name of ['web', 'scripts', 'docs', 'package-version-assignments.json']) {
+      cpSync(join(root, name), join(replica, name), {
+        recursive: true,
+        filter: source => !unusedAssets.has(source),
+      });
+    }
     writeFileSync(join(replica,'package.json'),'{"type":"module"}');
     const inside=join(replica,'review-preview');mkdirSync(inside);
     writeFileSync(join(inside,'keep.txt'),'source sentinel');
