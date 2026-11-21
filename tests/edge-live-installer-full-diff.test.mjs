@@ -5,8 +5,8 @@
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
-import { execSync } from 'node:child_process';
-import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
+import { execSync, spawnSync } from 'node:child_process';
+import { writeFileSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -173,7 +173,7 @@ function parseUnifiedHunks(diff) {
   return hunks;
 }
 
-function assertAllowedRendered(rendered) {
+function assertAllowedRendered(rendered, tempRoot = tmpdir()) {
   const live = gitBlob(LIVE_INSTALL_BLOB);
   const catalog = JSON.parse(gitBlob(LIVE_CATALOG_BLOB));
   // The repos were renamed after this live snapshot (X0X37-for-Loopy-Pro -> DnBOX,
@@ -181,19 +181,21 @@ function assertAllowedRendered(rendered) {
   // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
   const renamed = live.replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
   const a = normalize(renamed), b = normalize(rendered);
-  const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
+  const dir = mkdtempSync(join(tempRoot, 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
-  writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
-  writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
-  let diff = '';
+  let comparison;
   try {
-    execSync(`diff -u ${livePath} ${rendPath}`, { encoding: 'utf8', maxBuffer: 10e6 });
-  } catch (e) {
-    // diff exits 1 on differences
-    if (e.status !== 1) throw e;
-    diff = e.stdout;
+    writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
+    writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
+    comparison = spawnSync('diff', ['-u', livePath, rendPath], { encoding: 'utf8', maxBuffer: 10e6 });
+    if (comparison.error) throw comparison.error;
+    if (comparison.status !== 0 && comparison.status !== 1) {
+      throw new Error(`Installer comparison failed (${comparison.signal || comparison.status}): ${comparison.stderr}`);
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
-  const hunks = parseUnifiedHunks(diff);
+  const hunks = parseUnifiedHunks(comparison.stdout);
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
@@ -215,6 +217,16 @@ function assertAllowedRendered(rendered) {
 function currentRendered() {
   return renderInstaller(JSON.parse(gitBlob(LIVE_CATALOG_BLOB))).replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
 }
+test('full-file comparisons release scratch files, including after a rejected change', t => {
+  const scratch = mkdtempSync(join(tmpdir(), 'installer comparison '));
+  t.after(() => rmSync(scratch, { recursive: true, force: true }));
+  const rendered = currentRendered();
+  assertAllowedRendered(rendered, scratch);
+  assert.deepEqual(readdirSync(scratch), []);
+  assert.throws(() => assertAllowedRendered(rendered + '\n<!-- unreviewed -->', scratch), /unexpected hunks/);
+  assert.deepEqual(readdirSync(scratch), []);
+});
+
 test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
   assertAllowedRendered(currentRendered());
 });
