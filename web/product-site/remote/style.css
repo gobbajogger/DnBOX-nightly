@@ -643,6 +643,8 @@ dialog::backdrop{background:#000a}
  #lane-param{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:0;align-content:center}
  .lane-word{grid-column:1/-1}
  .lane-dots{grid-column:2;grid-row:2}
+ /* Keep ordinary readout descenders inside the compact landscape selector. */
+ #lane-param[data-pattern-lock=false] output{position:relative;top:-1px}
  #lane-param[data-pattern-lock=true]{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0}
  #lane-param[data-pattern-lock=true] :is(.lane-word,output){font-size:10px;line-height:11px;white-space:nowrap}
  #lane-param[data-pattern-lock=true] :is(.lane-dots,.lock-pattern){display:none}

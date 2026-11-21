@@ -4,6 +4,8 @@ Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. 
 
 ## Current Remote qualification
 
+The current head also incorporates the SuperJ6 frequency and offline installer fixes from `08fd0653` and the landscape Release readout correction. Its [combined cloud build, tests and independent review](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063279830) identify each tested revision.
+
 The merge combines the reviewed Chicago/BREAK editor at `0ecd27e3` with the concurrent Remote changes at `307dfe58` and the compact step values at `736864d3`. Both descend from the tested FIFO repair in `944e99d8` and contain consolidated `583f622961fc9975fac746592ce6c483073c4170`. The [head-specific qualification](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508) records the full gate, focused suites, 131-state landscape inventory and structural checks. Integ owns the eventual merge.
 
 - **Chicago step locks.** Both bass slots expose all twenty Chicago targets. The existing MIAMI cutoff and BREAK gain lanes retain their original identities and displays. Changing bass engines preserves the saved rows. The picker, thin lane, accessible value and Review use the corresponding bank. The bank-qualified Draft catalogue keeps Chicago p9 Sustain distinct from Miami p9 Cutoff even though the native motion address does not encode the engine. Stock playback of arbitrary bank-specific locks remains unqualified.
@@ -21,6 +23,8 @@ The [three-size comparison](../../evidence/remote-owner-pages-20261121/drum-and-
 The Local gate now resolves its writable temporary directory to a physical path before starting Chromium. A parent-directory segment in that path caused Chromium to cancel Draft downloads. The new regression covers nested paths and spaces. An actual browser export saved all 3,169 bytes with the corrected setup.
 
 At `307dfe58` the focused cloud run passed 121 workspace, 221 Remote/platform, 19 FIFO/runtime/build and four gate tests. Independent testing reached all 5,716 enabled control presentations in 127 landscape states and passed all nine structural fixtures. Four-size capture covered all 23 design pages in 248 states with 11,982 mounted controls, zero page errors and zero document overflows. A second reviewer found that Gate, Slide, Accent, Release, Pattern Lock and Chance could run their inline values together at 390 px. The successor uses compact inline values where space is limited. The selected-step readout and accessible value keep their full meaning. An independent reviewer measured 1,088 presentations at four widths, including every legal BREAK gain readout, and found zero text overruns. [Page 22 before and after](../../evidence/remote-owner-pages-20261121/portrait-step-labels/portrait-page-22-before-after.png) · [Measurements](../../evidence/remote-owner-pages-20261121/portrait-step-labels/page-22-summary.json)
+
+At 844×390 the selected Release value “Legacy” also lost the bottom of its descenders. A one-pixel landscape adjustment restored the missing ink. An independent comparison found an exact match to the unclipped control, including all 143 in-bounds ink pixels. The regression exercises the ordinary selected-step readout with the original landscape limits.
 
 | Checklist | Current evidence and outstanding work |
 |---|---|
