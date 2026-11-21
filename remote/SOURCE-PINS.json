@@ -1,0 +1,26 @@
+{
+  "scope": "NEW r6 local draft UI; no persistence or native transactions",
+  "inputs": [
+    {
+      "source": "project-source-trace-20261115/SOURCE-EXECUTED-TRACE.json",
+      "path": "trace.json",
+      "bytes": 4133,
+      "sha256": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55"
+    },
+    {
+      "source": "firmware-remote-native-completion-20261115/CATALOG-v3.json",
+      "path": "catalog.json",
+      "bytes": 100463,
+      "sha256": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0"
+    }
+  ],
+  "pattern_semantics": "firmware/src/seq/pattern.h/sequencer.h/motion.h and app/project.c at ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+  "drum_midi_map": "exact sequencer.c lines30-31",
+  "state_authority": "notes are a finite source-executed example. UI edits are an independent local draft, not executed firmware state or native pattern application.",
+  "catalog_admitted": false,
+  "semantic_components": {
+    "source": "semantic-components/COMPONENTS-v2.json",
+    "sha256": "9dafe1fd9aae35ef4f358340bc24265f71db83b296926a16c5f43c7a7e7e97f2",
+    "selection": "five complete source control groups, no glyph redraw; prior proposal fixtures not current instrument values"
+  }
+}

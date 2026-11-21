@@ -1,0 +1,139 @@
+{
+  "main_pages": "cd345c949da096ee093dfd70bfadc6b185f6e2ed",
+  "nightly_pages": "241196130538b5e6da7738f0c2ebbbdc57fce02e",
+  "source_main": "035026fe70059af35e25c7c121b40f318b732fe3",
+  "nightly_source_main": "8af48f83c21e76bc7ebac2ddbdb7c5e3ff0a81ea",
+  "history_records": 197,
+  "manual": "Complete accepted SMK21chapters+appendices, original19chapter FM1reference retained separately",
+  "catalog_package_mutations": [],
+  "deployed": false,
+  "device_actions": false,
+  "browser": "Existing publicMAIN manual/history/tool navigation inspected; NEWassembly browserQA NOTRUN",
+  "remote": "R16 source-bound LOCAL example workspace: complete captured body window, actual bass section/slot/bank context and strict exact-source local draft JSON download/open. All104 bass scalar refs preserved. R13 source observation and R14 artwork have separate bounded acceptance; R15 exact review requires three corrections; R16 producer fixes await affected recheck. DNR2v6 production catalog remains null. No native formatter, pattern binding, connected control, engine, playback or browser/touch acceptance.",
+  "appearance": "R16 layout and unchanged R17b non-hat artwork with exact R22 paired hi-hats. Default landing captions and complete latest-site design are still open; not implemented firmware.",
+  "private_audio": "No WAV/ADPCM/FSMP in static output; approved private host needed; no audible browser claim",
+  "install": "No new device write admission; existing installer separate; safe writer/readback gates pending",
+  "presets": "DirectlosslessSynthOneoriginaldictionary/bank andobservedSuperJ6bank files; legacyDNPR secondary; Chicago/Miamioriginalserializersandnativeapplyunqualified",
+  "midi_exchange": "Accepted source C/Node host provider is joined to exchange-v3 in the local CLI. Static browser provider remains null; real project backup/restore scripts unchanged.",
+  "browserProvider": null,
+  "candidatePins": {
+    "workspaceManifest": "0013f29a990fbc2305a3269f4da1f87182ec3a29b7e3b35ca760281c132e2186",
+    "remoteEndpointManifest": "36e54ac2ca5f6c0524f7f8e4615839a7333b10e6bf9738bece022b8d315f8847",
+    "projectExchangeManifest": "8b45b7d45645a5c89186b2c9920141eacfb4497c0c78fd34b646645212f89d0d"
+  },
+  "preparedOnly": {
+    "R20": {
+      "sourceFreeze": "a559d0a0c89bd17f94f3d7e1fd20499f324af75ab0a1ba7c19088df54f90986b",
+      "consumerFreeze": "6fdf28eddf5c38633f02eb0ef4d21b85f5832e75a441307e501119f808c7d1a1",
+      "incorporated": false
+    },
+    "currentNativeFeedback": {
+      "source": "ffd31a735acc5721d1f90a30fc1ceb283aad6fc5",
+      "manifest": "5e6609c52a43cad37f78a80d87c72a56a828288211948b8ec1342f3c810974e5",
+      "incorporated": false
+    },
+    "hostMidiExport": {
+      "manifest": "be49c8092284ce0d7792196105c8c1e10c13652cf3e1e24bbf64f1ff0a6ecde5",
+      "browserIncorporated": false
+    }
+  },
+  "R22remotePresentation": {
+    "sourceFreeze": "dc0f8a080843b427cda17e6c55e80043aef40788e5d711e7c6f13382c5c966ff",
+    "consumerFreeze": "67b21142b1539c9b519597bff5624fbce225fbca0be6f1f19ad781f614a576d5",
+    "capturedFrames": 26,
+    "sourceControls": 124,
+    "drumViews": 22,
+    "sourceNonemptyDrumSlots": 83,
+    "scope": "captured body examples with separate local raw draft values; not full R22 landing/site/runtime acceptance",
+    "workspacePins": "remote/WORKSPACE-SOURCE-PINS.json"
+  },
+  "sourceSafetyCorrection": {
+    "SamplesConnectMethod": "08f9dd7260ffbd932f971b637dcf72be85631a672056e31a1b0f28513164dc58",
+    "scope": "only verified discovery validation/cleanup method restored; no broader withheld payload",
+    "sixOriginalInstallerAssets": "exact shared source8af48f83/Pages24119613 Gitblobs; original bytes restored"
+  },
+  "sourceSoundLists": {
+    "freeze": "e90ecc69cd301664175086c6d498659bab76d1ea7c64d2423186e97b2ae8a058",
+    "contexts": 7,
+    "bassScalarDescriptors": 104,
+    "authority": "R15 source sections/viewport independently supported within CHANGES_REQUIRED overall review; exact unchanged refs/context reused in R16, no native pointer/glyph/engine admission"
+  },
+  "originalPresetFiles": {
+    "freeze": "c25c398a16b3d628eb73c7d110cf0433a66440266ab7353cbf063cc46ca0f62f",
+    "scope": "file-only duplicate/order/raw-field preservation with visible warning; native apply false, no preset replay/order/default law implemented; independent review pending",
+    "authority": "R13 bounded file-only repeated-ID/order/raw preservation independently accepted, no native replay/application admission"
+  },
+  "R22Reference": {
+    "gallerySHA256": "722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986",
+    "route": "reference/r22.html",
+    "scope": "full363-view source presentation study including corrected30MIX states; not native/runtime/browser acceptance; earlier reference preserved"
+  },
+  "retainedHistoricalSources": {
+    "count": 10,
+    "paths": [
+      "remote/session.mjs",
+      "remote/view.mjs",
+      "tools/tools.js",
+      "remote/vendor/client.mjs",
+      "remote/page.mjs",
+      "install/legacy-hashes.js",
+      "remote/catalog.mjs",
+      "remote/connection.mjs",
+      "remote/SOURCE-PINS.json",
+      "remote/vendor/codec.mjs"
+    ],
+    "manifestSha256": "8a2d90cf30c1f4a2a88876db4c2340109d5bb979c6281a23ea020df936ea9795",
+    "qualification": "Original source bytes retained, not activated/admitted or relabeled current"
+  },
+  "entryAvailabilityDisclosure": {
+    "paths": [
+      "index.html",
+      "tools/index.html",
+      "projects/index.html",
+      "starting-breaks/index.html"
+    ],
+    "scope": "Only truthful entry copy. Not provider/engine/playback or installer handoff implementation; all original scripts preserved."
+  },
+  "R15LocalDraft": {
+    "schema": "dnbox-local-workspace-draft/1",
+    "exactSourceIdentity": true,
+    "downloadProof": "request only, actual browser/filesystem NOT_RUN",
+    "restores": "all current local model domains/context; explicit preview and replacement resets history/clipboard",
+    "nativeFormat": false,
+    "connectedOrApply": false
+  },
+  "R15BodyViewport": {
+    "viewBox": [
+      0,
+      20,
+      240,
+      220
+    ],
+    "sourceGeometryValuesUnchanged": true,
+    "inverseBodyByteExact": 26,
+    "actualStaticVectorPairsViewed": 2,
+    "browserDOMTouch": "NOT_RUN"
+  },
+  "independentBoundedPredecessors": {
+    "R13": "6958d56d1b7312328a436b248c903d19ff006e074dcdb216f6b5d8b979487503",
+    "R14": "d873f539cdff3f9140d075323a150b9fffc8db6e0d44f96a00afbb0da81a68cd",
+    "scope": "exact affected predecessor source only, not full workflow/browser/native/delivery"
+  },
+  "R16Corrections": {
+    "baseR15Review": "fb3e333d8721524e4d022b4e99c9ebb2eead32ff891464368097ed47df115195",
+    "baseDisposition": "CHANGES_REQUIRED",
+    "producerCorrections": [
+      "bounded unused note ID allocator shared by Add/Paste and codec",
+      "departure invalidates deferred read/pending preview; new choice required after pageshow",
+      "Projects provider-unavailable notice outside replaceable mounted root"
+    ],
+    "independentRecheck": "PENDING",
+    "browserDOMTouchBFCacheDownload": "NOT_RUN"
+  },
+  "R22HiHat": {
+    "sha256": "2d234b1ee918ae9b882800256ed3867757a64304ade44d0a352f3f50f6ccc4cd",
+    "sourceFreeze": "dc0f8a080843b427cda17e6c55e80043aef40788e5d711e7c6f13382c5c966ff",
+    "occurrences": 14,
+    "scope": "Exact paired open/closed source fragments; all other14-group-exterior bytes unchanged"
+  }
+}
