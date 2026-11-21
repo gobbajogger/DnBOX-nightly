@@ -19,7 +19,7 @@
     "test:sample-discovery": "node --test tests/product-samples-discovery.test.mjs && node --test tests/sample-branding.test.mjs",
     "test:presets": "node --test tests/product-presets/test*.mjs",
     "test:origin": "node --test tests/site-origin.test.mjs",
-    "test:visual": "python3 tests/visual/visual_gate.py",
+    "test:visual": "python3 tests/visual/homepage-readiness-browser.py && python3 tests/visual/visual_gate.py",
     "test:visual:update": "python3 tests/visual/visual_gate.py --update"
   }
 }

@@ -274,6 +274,23 @@ def viewport_contexts(pw):
                 yield w, h, context
 
 
+def wait_for_homepage(page):
+    # The replay replaces the static preview after its module loads. Check what
+    # will actually be captured, including both weights used by the site.
+    page.wait_for_function("""() => {
+        const frame = document.querySelector('#frame-voice-0')?.content.firstElementChild;
+        const displayed = document.querySelector('#replay-display')?.firstElementChild;
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            (weights.has('normal') || weights.has('400')) && weights.has('700') &&
+            document.querySelector('#demo-status')?.textContent === 'Ready.' &&
+            document.querySelector('#demo-play')?.textContent === 'Next control' &&
+            !!frame && !!displayed && displayed.isEqualNode(frame);
+    }""")
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -287,11 +304,16 @@ def main():
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def settle(pg, url, name):
+            def settle(pg, url, name, *, homepage=False):
                 try:
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
-                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                    if homepage:
+                        wait_for_homepage(pg)
+                    else:
+                        pg.evaluate('document.fonts.ready')
+                        pg.wait_for_load_state('networkidle')
+                    pg.wait_for_timeout(250)
                 except Exception as error:
                     raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
             for w, h, c in viewports:
@@ -331,7 +353,7 @@ def main():
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     package_name = attach_installer_responses(pg, require_package=True) if rel == 'install/index.html' else None
-                    settle(pg, base + '/product-site/' + rel, full)
+                    settle(pg, base + '/product-site/' + rel, full, homepage=(rel == 'index.html'))
                     if package_name:
                         wait_for_admission(pg, package_name)
                     if rel == 'breaks/index.html':
