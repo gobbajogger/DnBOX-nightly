@@ -56,4 +56,25 @@ await check('native observer renders only selected engine and clears on page tea
  for(const fn of x.windowListeners.pagehide??[])fn({});assert.equal(listeners.size,0);assert.equal(x.get('native-envelopes').innerHTML,'');
  }finally{binding.close();}
 });
-if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 5; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
+await check('two-layer original Draft edits use distinct part/field IDs and ordinary review, Undo and Redo',async x=>{
+ const {superJ6Specs}=await import(new URL('superj6.mjs',base));
+ const pane=x.get('other-view');
+ x.changePart('chicago','Bass A');x.view('sound');chooseBank(x,'SuperJ6');
+ assert.match(pane.innerHTML,/data-superj6/);assert.match(pane.innerHTML,/PWM String Pad/);
+ assert.match(pane.innerHTML,/data-sound-source="emulator"[^>]*disabled/);
+ const field=(slot,f)=>superJ6Specs.find(s=>s.slot===slot&&s.field===f);
+ const change=(slot,f,value,type='change')=>pane.emit(type,{target:Object.assign(new Node(),{dataset:{sj6Field:String(f),sj6Id:field(slot,f).id},value:String(value)})});
+ change(0,78,.75,'input');assert.ok(!review(x).includes('Width'));
+ change(0,78,.75);change(0,83,0);change(0,196,1);change(0,96,.5);
+ let details=review(x);
+ assert.match(details,/Bass A \/ SuperJ6 \/ PWM String Pad \/ Layer 1 · Width: 44.06% duty → 14.75% duty/);
+ assert.match(details,/Layer 2 · Wave: Square → Sine/);assert.match(details,/LFO 2 · Rate: 20.78% tempo position → 1.591 Hz/);
+ x.press('undo');assert.ok(!review(x).includes('LFO 2 · Rate'));x.press('redo');assert.match(review(x),/1\.591 Hz/);
+ x.changePart('miami','Bass B');chooseBank(x,'SuperJ6');change(0,202,.5);
+ assert.ok(!review(x).includes('Sub · Level'));
+ change(1,202,.25);assert.match(review(x),/Bass B \/ SuperJ6 \/ PWM String Pad \/ Sub · Level: 10.8% → 25%/);
+ // A stale input cannot edit once a different bank has been selected.
+ chooseBank(x,'JUNO');change(1,202,0);assert.match(review(x),/10.8% → 25%/);assert.match(pane.innerHTML,/source-sound-list/);
+ chooseBank(x,'Synth One');assert.ok(!pane.innerHTML.includes('data-sj6-field='));
+});
+if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 6; FAILURES '+failed+'; source-event stub, NOT DOM/touch');

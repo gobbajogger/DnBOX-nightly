@@ -1,10 +1,11 @@
 import {emptyBreakSequence,validateBreakSequence} from './break-sequence.mjs';
+import {SOUND_BANKS,superJ6Spec,acceptsSuperJ6} from './superj6.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
 // Explicit LOCAL example-draft file, not an instrument project, preset, engine or MIDI format.
 import{notesFromTrace}from'./model.mjs';
 import{chanceDomain}from'./sequence.mjs';
 const clone=x=>structuredClone(x),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
-const TRACKS=['chicago','miami','drum909','drum808','breaks'],VIEWS=['roll','drums','locks','sound','mix','patterns','song','files'],BANKS=['CHICAGO','MIAMI','JUNO'];
+const TRACKS=['chicago','miami','drum909','drum808','breaks'],VIEWS=['roll','drums','locks','sound','mix','patterns','song','files'];
 const SCHEMA='dnbox-local-workspace-draft/1',KIND='local-preview-only',MOTION='Bass B / MIAMI / CARRIER / WAVE',MAX_BYTES=4*1024*1024;
 function fail(message){throw Error('Local draft: '+message);}
 function keys(value,required,optional=[]){if(!value||typeof value!=='object'||Array.isArray(value)||required.some(k=>!Object.hasOwn(value,k))||Object.keys(value).some(k=>!required.includes(k)&&!optional.includes(k)))fail('unknown or missing fields');}
@@ -42,11 +43,21 @@ export class WorkspaceDraftFile{
    if(Object.hasOwn(n,'pitchOffset')&&(!['drum909','drum808'].includes(n.track)||!int(n.pitchOffset,-24,24)))fail('invalid drum pitch offset');
    if(Object.hasOwn(n,'chance')&&(!['chicago','miami','drum909','drum808'].includes(n.track)||!chanceDomain.includes(n.chance)))fail('unsupported chance');
   }
-  const refs=new Set();array(document.parameters,this.parameters.size);for(const p of document.parameters){keys(p,['id','value']);const spec=this.parameters.get(p.id);if(!spec||refs.has(p.id)||!Number.isFinite(p.value)||p.value<spec.min||p.value>spec.max||p.value!==spec.value&&Math.abs((p.value-spec.min)/spec.step-Math.round((p.value-spec.min)/spec.step))>1e-6)fail('unqualified parameter ref/raw value');refs.add(p.id);}
+  const refs=new Set();array(document.parameters,this.parameters.size);
+  for(const entry of document.parameters){
+   keys(entry,['id','value']);
+   const {id,value}=entry,spec=this.parameters.get(id);
+   if(!spec||refs.has(id)||!Number.isFinite(value)||value<spec.min||value>spec.max)fail('unqualified parameter ref/raw value');
+   const sj6=superJ6Spec(id);
+   const valid=sj6?acceptsSuperJ6(sj6,value):
+    value===spec.value||Math.abs((value-spec.min)/spec.step-Math.round((value-spec.min)/spec.step))<=1e-6;
+   if(!valid)fail('unqualified parameter ref/raw value');
+   refs.add(id);
+  }
   keys(document.motion,['target','values']);if(document.motion.target!==MOTION)fail('unsupported Motion target');array(document.motion.values,16,16);if(document.motion.values.some(v=>v!==null&&!int(v,0,127)))fail('Motion point');
   array(document.launch,5,5);if(document.launch.some(v=>v!==null&&!int(v,0,31)))fail('Launch target');
   array(document.song,1024);for(const row of document.song){keys(row,['patterns','repeats']);array(row.patterns,5,5);if(row.patterns.some(v=>!int(v,0,31))||!int(row.repeats,1,8))fail('Song row');}
-  array(document.soundBanks,2,2);if(document.soundBanks.some(b=>!BANKS.includes(b)))fail('unsupported local bank');
+  array(document.soundBanks,2,2);if(document.soundBanks.some(b=>!SOUND_BANKS.includes(b)))fail('unsupported local bank');
   const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||!['velocity','chance','pitch','pan'].includes(c.lane)||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
   return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};

@@ -614,3 +614,47 @@ dialog::backdrop{background:#000a}
 [data-drum-sound-unit]{grid-template-rows:minmax(min-content,1fr) auto}
 .drum-sound-actions{flex:none}
 #other-view .drum-sound-actions button{min-height:44px}
+.synth-one-init .init-readout{cursor:default;touch-action:auto}
+.synth-one-init .init-envelopes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:8px;margin-top:8px}
+.synth-one-init .init-envelope{min-width:0;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel)}
+.synth-one-init .init-envelope h3,.synth-one-init .init-envelope dl,.synth-one-init .init-envelope dd{margin:0}
+.synth-one-init .init-envelope svg{width:100%;height:44px;color:var(--accent)}
+.synth-one-init .init-envelope dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.synth-one-init .init-envelope dt{color:var(--muted);font-size:var(--fs-sm)}
+.synth-one-init .init-envelope dd{font-size:var(--fs-value);font-variant-numeric:tabular-nums}
+
+[data-superj6]{min-width:0}
+[data-superj6]>header{display:flex;align-items:baseline;gap:10px;margin:4px 0 10px}
+#other-view [data-superj6]>header h3{margin:0;font-size:17px;color:var(--fg)}
+[data-superj6]>header span{color:var(--muted)}
+.sj6-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sj6-groups fieldset{display:flex;min-width:0;margin:0;padding:8px;gap:6px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
+.sj6-groups legend{color:var(--accent);font-weight:700;padding:0 4px}
+#other-view .sj6-unit{display:grid;flex:1;min-width:0;grid-template-rows:auto 22px minmax(16px,auto) 44px;align-content:start;align-items:center;justify-items:center;gap:3px;margin:0;text-align:center}
+.sj6-unit [data-sj6-glyph]{display:block;width:min(100%,64px);height:21px;color:var(--accent)}
+.sj6-unit svg{display:block;width:100%;height:100%;overflow:visible}
+.sj6-unit polyline{fill:none;stroke:currentColor;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round}
+.sj6-unit output{font-size:13px;white-space:normal;font-variant-numeric:tabular-nums}
+#other-view .sj6-unit input,#other-view .sj6-unit select{box-sizing:border-box;width:100%;min-width:0;height:44px;min-height:44px;padding-inline:3px;margin:0;accent-color:var(--accent)}
+@media(max-width:720px){.sj6-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.sj6-groups{grid-template-columns:minmax(0,1fr)}}
+
+@media (min-width:1024px){
+ .synth-one-init>.encoder-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+@media (orientation:landscape) and (min-width:740px) and (max-height:500px){
+ #other-view:has(>:is([data-superj6],.synth-one-init)){
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-auto-rows:max-content;
+  align-content:start;align-items:center;gap:4px 10px;padding-block:0
+ }
+ #other-view:has(>:is([data-superj6],.synth-one-init))>:is(.mix-modes,h2,label){margin:0}
+ #other-view:has(>:is([data-superj6],.synth-one-init))>h2{font-size:16px}
+ #other-view>:is([data-superj6],.synth-one-init){grid-column:1/-1}
+ #other-view [data-superj6]>header,#other-view>.synth-one-init>h3{margin:0 0 4px;line-height:20px}
+ #other-view [data-superj6]>header{margin-bottom:2px}
+ .sj6-groups{gap:2px 8px}
+ .sj6-groups fieldset{padding:0 6px 2px}
+ .sj6-groups legend{font-size:12px;line-height:14px}
+ #other-view .sj6-unit{grid-template-rows:16px 16px minmax(16px,auto) 44px;gap:1px}
+ .sj6-unit [data-sj6-glyph]{height:16px}
+}

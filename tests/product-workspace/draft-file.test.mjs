@@ -28,3 +28,31 @@ test('zoom round trips all historical quarter-steps and the three wider viewport
   const input=structuredClone(draft);input.context.zoom=zoom;assert.throws(()=>a.codec.validate(input));
  }
 });
+
+test('SuperJ6 source records and legacy JUNO survive one file, and rejected input leaves active Draft intact',async()=>{
+ const {superJ6Specs,SUPERJ6_PROGRAM}=await import('../../web/product-site/remote/superj6.mjs');
+ const codec=new WorkspaceDraftFile({trace,identity,parameters:[...parameters,...superJ6Specs]});
+ const old=edited(),legacy=parameters.find(s=>s.id.startsWith('source-sound/JUNO/0|'));
+ old.state.parameterDraft.set(legacy.id,legacy.value===legacy.min?legacy.max:legacy.min);
+ const previous=old.codec.encode(capture(old));
+ assert.equal(codec.encode(codec.decode(previous)),previous);
+ const target=setup();target.codec=codec;installWorkspaceDraft(target.state,codec,codec.decode(previous));
+ target.state.soundBanks.splice(0,2,'SuperJ6','Synth One');
+ const spec=(slot,field)=>superJ6Specs.find(s=>s.slot===slot&&s.field===field);
+ target.state.parameterDraft.set(spec(0,78).id,Math.fround(.67891));
+ target.state.parameterDraft.set(spec(1,78).id,Math.fround(.18842));
+ target.state.parameterDraft.set(spec(0,83).id,Math.fround(2/3));
+ const saved=codec.encode(capture(target)),doc=codec.decode(saved);
+ assert.ok(saved.includes(legacy.id));assert.ok(saved.includes(SUPERJ6_PROGRAM.programId));
+ const fresh=setup();fresh.codec=codec;installWorkspaceDraft(fresh.state,codec,doc);
+ assert.deepEqual(fresh.state.soundBanks,['SuperJ6','Synth One']);
+ assert.equal(fresh.state.parameterDraft.get(spec(0,78).id),Math.fround(.67891));
+ assert.equal(fresh.state.parameterDraft.get(spec(1,78).id),Math.fround(.18842));
+ assert.equal(fresh.state.parameterDraft.get(legacy.id),target.state.parameterDraft.get(legacy.id));
+ for(const change of [[spec(0,83).id,.5],[spec(0,210).id,.25],[spec(0,78).id,.1234567890123456],[spec(0,78).id.replace(SUPERJ6_PROGRAM.programId,'bad'),0]]){
+  const invalid=structuredClone(doc);invalid.parameters=invalid.parameters.filter(x=>x.id!==change[0]);invalid.parameters.push({id:change[0],value:change[1]});
+  const before=codec.encode(capture(fresh));
+  assert.throws(()=>installWorkspaceDraft(fresh.state,codec,invalid),/unqualified parameter/);
+  assert.equal(codec.encode(capture(fresh)),before);
+ }
+});

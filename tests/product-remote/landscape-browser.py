@@ -21,7 +21,7 @@ def expected_states():
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
           for kit in ('drum909', 'drum808') for voice in range(11)),
-        *(f'sound-{part}-{bank}' for part in ('miami', 'chicago') for bank in ('MIAMI', 'CHICAGO', 'JUNO')),
+        *(f'sound-{part}-{bank}' for part in ('miami', 'chicago') for bank in ('MIAMI', 'CHICAGO', 'Synth One', 'SuperJ6', 'JUNO')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
         'break-notes', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
