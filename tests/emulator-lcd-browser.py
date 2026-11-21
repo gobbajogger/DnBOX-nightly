@@ -18,7 +18,21 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests/fixtures/emulator-lcd-06bd40"
-STATES = (("boot", None), ("fx", "FX"), ("save", "SAVE"), ("home", "HOME"))
+# Each state names its native frame, accessible control and minimum simulated delay.
+# Capture SAVE while its banner is up. Wait for it to expire on HOME.
+STATES = (
+    ("boot", None, 500),
+    ("fx", "FX", 500),
+    ("save", "SAVE", 250),
+    ("home", "HOME", 3000),
+    ("mix", "LFO", 1700),
+    ("mix-level", "K1 up", 1700),
+    ("kick-909", "EDIT", 1700),
+    ("kick-808", "Algorithm up", 1700),
+    ("seq-808", "SEQ", 1700),
+    ("global", "GLOBE", 1700),
+    ("midi-clock", "SEL", 1700),
+)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -47,13 +61,11 @@ def check_page(page, url, manifest):
     page.goto(url)
     page.locator("#start").click()
     lcd = page.locator("#lcd")
-    for name, button in STATES:
+    for name, button, delay_ms in STATES:
         before = 0
         if button:
             before = lcd.evaluate("c => Number(c.dataset.time)")
             page.get_by_role("button", name=button, exact=True).click(delay=80)
-        # SAVE overlays the FX page briefly. Let its banner expire on HOME.
-        delay_ms = {"boot": 500, "fx": 500, "save": 250, "home": 3000}[name]
         page.wait_for_function("t => Number(document.querySelector('#lcd').dataset.time) > t",
                                arg=before + delay_ms)
         source = page.locator("#source").text_content()

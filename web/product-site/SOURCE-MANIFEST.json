@@ -34,8 +34,8 @@
     },
     {
       "path": "admin/admin.bundle.js",
-      "bytes": 43599,
-      "sha256": "6b6ba17d9b879535afe5ad2aa7ea863c08c0272a1857b8b13828e329dcc2e3d4"
+      "bytes": 44863,
+      "sha256": "e0ec1ca678607d43cbf9a8980e83f123701ed4726e7826b65045b7ee45744c97"
     },
     {
       "path": "admin/admin.css",
@@ -49,13 +49,13 @@
     },
     {
       "path": "admin/github.mjs",
-      "bytes": 14781,
-      "sha256": "b8d7a8dbd98d1f100adf29cc42cadce9de5978d76a3cd198d4a6882ee5e61286"
+      "bytes": 14996,
+      "sha256": "ae8ec22a3ec78149885547e26cde94bfaeda4dc453f12b0a2a4eed5acaa5c603"
     },
     {
       "path": "admin/index.html",
       "bytes": 3491,
-      "sha256": "bc201448b3d2fc939fc2e03f8960d75ac26ee5ad05ecf540ad3f29437ac15bec"
+      "sha256": "0e938b8750bde572aa6d31c3d1f17475f6b840e67e25652b44b9141d72939918"
     },
     {
       "path": "app.mjs",
@@ -249,8 +249,8 @@
     },
     {
       "path": "hardware-tests.mjs",
-      "bytes": 7107,
-      "sha256": "ca8a880bcffc1151553b7780df7998b3d9d44d2a5926277d0a6c00823204f772"
+      "bytes": 7991,
+      "sha256": "f69e303d2aaf503c4ccd36b7385bf3bca6d3ffab773f4affcdaade93b71a7f6e"
     },
     {
       "path": "help/index.html",
@@ -264,8 +264,8 @@
     },
     {
       "path": "install-reports.mjs",
-      "bytes": 13380,
-      "sha256": "d618282576742f57adec185eba3854633083e2ceca12a4febe12baa0204919a9"
+      "bytes": 13568,
+      "sha256": "aa75b071a3f5c1428603c6f03587ad52e1bf37b9e536398af8ab2bf43b781883"
     },
     {
       "path": "install.html",
@@ -279,8 +279,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 647650,
-      "sha256": "7a8892c76919cbaba9366105b1acaaa90c0f21c82b9d9db621227d1efd04d7aa"
+      "bytes": 647838,
+      "sha256": "816ece917d0883dfbe333c3522db69f02e43402f3469a9ba110cb31145c47a4b"
     },
     {
       "path": "install/legacy-hashes.js",

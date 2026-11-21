@@ -17,7 +17,7 @@ index 3cadb30ce6c816d499a0e980ff7910351b8cb134..d9df0506ad2cd6e5ca8d835a5feeffc7
    <a href="projects/"><strong>Projects</strong><span>Save, load and reset on the keyboard, or export a project with its original samples.</span></a>
    <a href="manual/"><strong>Manual</strong><span>Getting started, then everything else — including the SMK-37 map.</span></a>
 diff --git a/install/index.html b/install/index.html
-index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf143895bab5f07 100644
+index 4ac894a8401c33632886c954194470aec5b757e7..b2dd768db520fec05b9cbc00f0f905c6c1126588 100644
 --- a/install/index.html
 +++ b/install/index.html
 @@ -486,6 +486,7 @@
@@ -91,7 +91,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      ctrlwarning: "This legacy package requires the matching local ctl.img before installation.",
      ctlbundlepending: "Checking this package for its matching included Bluetooth controller…",
      ctlbundled: "Bluetooth is included in this complete NIGHTLY package. No separate controller file is needed.",
-@@ -2430,7 +2441,256 @@
+@@ -2430,7 +2441,260 @@
  const say = (txt) => { lastKey = null; $("status").textContent = txt; };
  const log = (txt) => { $("log").textContent += txt + "\n"; };
 
@@ -320,15 +320,19 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
 +    if (!selection) { element('public-installs').textContent = ''; return; }
 +    const output = element('public-installs');
 +    output.textContent = 'Checking public install reports…';
++    const pending = read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
 +    try {
-+      read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
-+      const reports = await read;
++      const reports = await pending;
 +      const current = getSelection();
 +      if (current?.sha256 !== selection.sha256 || current?.build_id !== selection.build_id) return;
 +      const n = countInstallReports(reports, selection);
 +      output.textContent = n + (n === 1 ? ' install' : ' installs') + ' reported OK for this build and model.';
 +    } catch {
-+      if (getSelection()) output.textContent = 'Public install reports unavailable.';
++      if (read === pending) read = null;
++      const current = getSelection();
++      if (!read && current?.sha256 === selection.sha256 && current.build_id === selection.build_id) {
++        output.textContent = 'Public install reports unavailable.';
++      }
 +    }
 +  }
 +  // Selection changes can be user-initiated or come from a connected device.
@@ -349,7 +353,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
  let catalogLive = catalog;
  const repo = catalog.repo || "https://github.com/gobbajogger/DnBOX";
  $("repolink").href = repo;
-@@ -2517,6 +2777,7 @@
+@@ -2517,6 +2781,7 @@
    try {
      const access = await midiAccess();
      if (requestId !== scanSerial || writing) return;
@@ -357,7 +361,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      const up = new Updater(access, () => {});
      // Prefer a running app; if only the update loader is present, resume from there.
      let dev = await up.find((id) => !/^ota-/i.test(id.model));
-@@ -2533,6 +2794,7 @@
+@@ -2533,6 +2798,7 @@
        return;
      }
      lastId = dev.id;
@@ -365,7 +369,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      const bare = inOta ? dev.id.model.replace(/^ota-/i, "") : dev.id.model;
      const detail = inOta
        ? `${dev.id.text}${dev.name ? " · " + dev.name : ""} — ${t("otahelp")}`
-@@ -2540,6 +2802,7 @@
+@@ -2540,6 +2806,7 @@
      setConnected(true, detail);
      if (inOta) led("busy");
      suggestModel(bare);
@@ -373,7 +377,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      dev.link.close();
    } catch (e) {
      if (requestId !== scanSerial || writing) return;
-@@ -2553,12 +2816,157 @@
+@@ -2553,12 +2820,157 @@
  function isRecord(value) {
    return value !== null && typeof value === "object" && !Array.isArray(value);
  }
@@ -536,7 +540,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
  }
  function archivedCatalogVersions() {
    try {
-@@ -2581,7 +2989,8 @@
+@@ -2581,7 +2993,8 @@
  }
 
  function modelKeyForProduct(product) {
@@ -546,7 +550,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
  }
  // Revocation is monotonic: any explicit denial wins over a checked status.
  // Optional approval hints must be true when present. They are not qualification
-@@ -2592,7 +3001,9 @@
+@@ -2592,7 +3005,9 @@
      ["qualified", "installable", "qa_pass", "source_licenses_approved", "immutable_http_pass",
        "backup_integrity_pass", "model_and_controller_pass"].some(k => Object.hasOwn(record, k) && record[k] !== true) ||
      (record.fromRelease !== undefined && record.fromRelease !== false) ||
@@ -557,7 +561,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      (record.lifecycle !== undefined && record.lifecycle !== "current");
  }
  function selectionIdentity(v, p) {
-@@ -2668,15 +3079,15 @@
+@@ -2668,15 +3083,15 @@
  }
  function isCatalogChecked(v,p) {
    try {
@@ -576,7 +580,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
          p.fromRelease === true || v.models?.[chosenModel] !== p ||
          modelKeyForProduct(p.product) !== chosenModel ||
          !/^[0-9a-f]{64}$/.test(p.sha256 || "") ||
-@@ -2722,16 +3133,17 @@
+@@ -2722,16 +3137,17 @@
    $("ble").hidden = bundledController(p);
    $("controllerstatus").textContent = t(bundledController(p) ? (bundledFailure ? "ctlbundlebad" : hasVerifiedNightlySelection(v,p) ? "ctlbundled" : "ctlbundlepending") : "ctrlwarning");
    const b=$("buildbadges");b.replaceChildren();
@@ -597,7 +601,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
    updateInstallGate();
  }
  function renderBuildHistory() {
-@@ -2740,9 +3152,12 @@
+@@ -2740,9 +3156,12 @@
      const el=document.createElement("article");el.className="build-item";
      const h=document.createElement("h3");h.textContent=(v.title||v.version)+" · "+v.version;el.append(h);
      const badges=document.createElement("div");badges.className="build-badges";
@@ -612,7 +616,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
      el.append(badges);
      const p=document.createElement("p");p.textContent=v.description||"";el.append(p);
-@@ -2865,7 +3280,7 @@
+@@ -2865,7 +3284,7 @@
    const kind = v.status === "dev-checked"
      ? (v.lifecycle === "superseded" ? "verolder" : (v.version === catalogLive.latest ? "verlatest" : "verdev"))
      : (v.status === "release-checked" ? "verrelease" : "verunverified");
@@ -621,7 +625,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
  }
  function refreshVersionLabels() {
    const byVersion = new Map(versions().map((v) => [v.version, v]));
-@@ -2901,8 +3316,8 @@
+@@ -2901,8 +3320,8 @@
      o.textContent = versionOptionCaption(v); // Full safety badges remain visible below the picker.
      sel.append(o);
    }
@@ -632,7 +636,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
    if (prefer) sel.value = prefer;
    refreshModelUi();
    loadSelectedPackage();
-@@ -3065,6 +3480,8 @@
+@@ -3065,6 +3484,8 @@
    $("bar").value = 0;
    $("backup-warning").hidden = true;
    $("backup-warning").textContent = "";
@@ -641,7 +645,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
    const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
    let access, up, unprotected = false;
    try { access = await midiAccess(); }
-@@ -3121,6 +3538,9 @@
+@@ -3121,6 +3542,9 @@
        }
      }
      await scan(true);
@@ -651,7 +655,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      if (unprotected) {
        sayK("slotunprotecteddone");
        log("Firmware installed without a recoverable sample-slot backup.");
-@@ -3172,7 +3592,7 @@
+@@ -3172,7 +3596,7 @@
    }
    if (!$("devagree").checked) { updateInstallGate(); return; }
    $("go").disabled = true;   // sync before the first await in run()
@@ -660,7 +664,7 @@ index 4ac894a8401c33632886c954194470aec5b757e7..076b83190a3ec445482677028cf14389
      image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
      hasCurrentVerifiedSelection() });
  });
-@@ -3221,12 +3641,20 @@
+@@ -3221,12 +3645,20 @@
  window.addEventListener("hashchange", navigateWorkspace);
  $("sample-frame").addEventListener("load", navigateWorkspace);
  $("project-frame").addEventListener("load", navigateWorkspace);

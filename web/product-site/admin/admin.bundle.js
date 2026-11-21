@@ -76,6 +76,24 @@ async function fetchHardwareTests(url, options = {}) {
   return validateHardwareTests(await response.json());
 }
 
+function permitsRelease(record) {
+  if (!record || typeof record !== 'object') return false;
+  const denials=['revoked','blocked','withdrawn','fromRelease','device_verified'];
+  const approvals=['qualified','installable','qa_pass','source_licenses_approved','immutable_http_pass',
+    'backup_integrity_pass','model_and_controller_pass'];
+  return (!Object.hasOwn(record,'lifecycle') || record.lifecycle==='current') &&
+    denials.every(key=>!Object.hasOwn(record,key)||record[key]===false) &&
+    approvals.every(key=>!Object.hasOwn(record,key)||record[key]===true);
+}
+
+function eligibleNightlyBuild(row) {
+  return permitsRelease(row) && (row.hardware_tested === undefined || typeof row.hardware_tested === 'boolean') &&
+    ['dev-checked', 'release-checked'].includes(row.status) &&
+    Object.values(row.models || {}).every(pkg => permitsRelease(pkg) &&
+      (pkg.status === undefined || pkg.status === 'dev-checked') &&
+      (pkg.hardware_tested === undefined || pkg.hardware_tested === false));
+}
+
 // Materialize the two public JSON views on build or in the owner's single Git commit.
 function catalogWithHardwareTests(ledger, sourceCatalog, assignments) {
   validateHardwareTests(ledger);
@@ -85,10 +103,8 @@ function catalogWithHardwareTests(ledger, sourceCatalog, assignments) {
     const tested = models.filter(model => hardwareTestsFor(ledger, row, model, assignments));
     if (tested.length && !row.display_version) row.display_version = effectivePackageVersion(row, assignments);
     const complete = models.length > 0 && tested.length === models.length;
-    const withheld = row.revoked || row.blocked || row.withdrawn ||
-      (row.lifecycle !== undefined && row.lifecycle !== 'current');
     const priorRelease = row.status === 'release-checked';
-    if (complete && !withheld && ['dev-checked','release-checked'].includes(row.status)) {
+    if (complete && eligibleNightlyBuild(row)) {
       row.status = 'release-checked';
       row.hardware_tested = true;
       row.label = 'OWNER HARDWARE TESTED — STARTUP AND RESTART OK ON ' + tested.join(' AND ').toUpperCase();
@@ -107,11 +123,11 @@ function statusWithHardwareTests(ledger, catalog, sourceStatus, assignments) {
   validateHardwareTests(ledger);
   const status = structuredClone(sourceStatus);
   const proven = catalog.versions.filter(row => row.hardware_tested === true &&
-    row.status === 'release-checked' && Object.keys(row.models).length &&
-    Object.keys(row.models).every(model => hardwareTestsFor(ledger, row, model, assignments))).map(row => effectivePackageVersion(row, assignments));
-  status.policy.public_device_proven_versions = proven;
-  const selected = catalog.versions.find(row => row.version === catalog.latest);
-  status.policy.public_latest = proven.includes(selected?.display_version) ? selected.display_version : null;
+    row.status === 'release-checked' && eligibleNightlyBuild(row) && Object.keys(row.models || {}).length &&
+    Object.keys(row.models).every(model => hardwareTestsFor(ledger, row, model, assignments)));
+  status.policy.public_device_proven_versions = [...new Set(proven.map(row => effectivePackageVersion(row, assignments)))];
+  const latest = catalog.versions.find(row => row.version === catalog.latest);
+  status.policy.public_latest = proven.includes(latest) ? effectivePackageVersion(latest, assignments) : null;
   status.hardware_tests = {source: 'hardware-tests.json', reports: ledger.reports};
   return status;
 }
@@ -341,15 +357,19 @@ function mountInstallReports(doc, getSelection, browser) {
     if (!selection) { element('public-installs').textContent = ''; return; }
     const output = element('public-installs');
     output.textContent = 'Checking public install reports…';
+    const pending = read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
     try {
-      read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
-      const reports = await read;
+      const reports = await pending;
       const current = getSelection();
       if (current?.sha256 !== selection.sha256 || current?.build_id !== selection.build_id) return;
       const n = countInstallReports(reports, selection);
       output.textContent = n + (n === 1 ? ' install' : ' installs') + ' reported OK for this build and model.';
     } catch {
-      if (getSelection()) output.textContent = 'Public install reports unavailable.';
+      if (read === pending) read = null;
+      const current = getSelection();
+      if (!read && current?.sha256 === selection.sha256 && current.build_id === selection.build_id) {
+        output.textContent = 'Public install reports unavailable.';
+      }
     }
   }
   // Selection changes can be user-initiated or come from a connected device.
@@ -540,16 +560,25 @@ function createGitHub(fetcher = fetch) {
       const path=url.pathname.slice('/DnBOX-nightly/'.length);
       pathParts(path);
       const parts=path.split('/');
-      if(parts.at(-2)!==entry.sha256||!parts.at(-1).endsWith('.fwsc')) throw Error('Expected an immutable firmware package path.');
+      if(parts.at(-2)!==entry.sha256||!/^[A-Za-z0-9._-]+\.fwsc$/.test(parts.at(-1))) throw Error('Expected an immutable firmware package path.');
       const pkg=await file(NIGHTLY,path,src.ref);
       if(pkg.bytes.length!==entry.size||await sha256(pkg.bytes)!==entry.sha256) throw Error('Firmware verification failed for '+model+'.');
       const to='artifacts/releases/'+entry.sha256+'/'+parts.at(-1);
       files.push({path:to,bytes:pkg.bytes,original:pkg.sha});
       target.models[model].pkg='https://gobbajogger.github.io/DnBOX/'+to;
+      // MAIN checks an explicit model status against the promoted catalog row.
+      if (entry.status!==undefined) target.models[model].status='release-checked';
     }
     Object.assign(target,{hardware_tested:true,status:'release-checked',lifecycle:'current'});
     const prior=dest.catalog.value.versions.find(v=>v.version===target.version);
-    if(prior && (prior.source_commit!==target.source_commit || MODELS.some(m=>prior.models?.[m]?.sha256!==target.models[m].sha256))) throw Error('The existing build ID has different firmware.');
+    if (prior) {
+      const buildFields = ['source_commit', 'source_tree', 'display_version'];
+      const modelFields = ['product', 'sha256', 'size', 'controller_sha256', 'controller_size', 'controller_strategy'];
+      if (buildFields.some(key => prior[key] !== target[key]) ||
+          MODELS.some(model => modelFields.some(key => prior.models?.[model]?.[key] !== target.models[model][key]))) {
+        throw Error('The existing build ID has different firmware.');
+      }
+    }
     const next={...dest.catalog.value,latest:target.version,versions:[target,...dest.catalog.value.versions.filter(v=>v.version!==target.version)]};
     const root=repoPath(MAIN)+'/git/';
     const parent=await request(root+'commits/'+dest.ref);
@@ -582,19 +611,10 @@ function createGitHub(fetcher = fetch) {
   }
   return {connect,lock,head,snapshot,readJson,lanePRs,checks,markTested,promote,release,saveNotes};
 }
-function eligible(record) {
-  if (!record || typeof record !== 'object') return false;
-  const denials=['revoked','blocked','withdrawn','fromRelease','device_verified'];
-  const approvals=['qualified','installable','qa_pass','source_licenses_approved','immutable_http_pass',
-    'backup_integrity_pass','model_and_controller_pass'];
-  return (!Object.hasOwn(record,'lifecycle') || record.lifecycle==='current') &&
-    denials.every(key=>!Object.hasOwn(record,key)||record[key]===false) &&
-    approvals.every(key=>!Object.hasOwn(record,key)||record[key]===true);
-}
 function selected(catalog,selection) {
   const matches=catalog.versions.filter(v=>v.version===selection.id);
   const row=matches[0];
-  if(matches.length!==1 || !eligible(row) || row.source_commit!==selection.source ||
+  if(matches.length!==1 || !permitsRelease(row) || row.source_commit!==selection.source ||
      !HEX40.test(row.source_commit) || !HEX40.test(row.source_tree) ||
      !/^\d+\.\d+\.\d+(?:\.\d+)?$/.test(row.display_version) ||
      !['dev-checked','release-checked'].includes(row.status) ||
@@ -607,9 +627,12 @@ function selected(catalog,selection) {
 function candidate(row,model) {
   const entry=row.models?.[model];
   const product=model==='elite'?'Elite':'Pro';
-  if(!MODELS.includes(model)||!eligible(entry)||!HEX64.test(entry.sha256)||!HEX64.test(entry.controller_sha256)||
+  if(!MODELS.includes(model)||!permitsRelease(entry)||!HEX64.test(entry.sha256)||!HEX64.test(entry.controller_sha256)||
      (entry.status!==undefined && entry.status!=='dev-checked') ||
      (entry.hardware_tested!==undefined && entry.hardware_tested!==false) ||
+     (Object.hasOwn(entry,'controller_strategy') && !['bundled','owner-supplied'].includes(entry.controller_strategy)) ||
+     (entry.controller_strategy==='bundled' &&
+       (!Number.isSafeInteger(entry.controller_size) || entry.controller_size<68 || entry.controller_size>65536)) ||
      !Number.isSafeInteger(entry.size)||entry.size<=960||entry.size>2097152||
      !new RegExp('^SMK-37 '+product+'_(?:900|9[0-9]{6})$').test(entry.product))
     throw Error('This model package is unavailable.');

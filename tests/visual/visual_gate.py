@@ -254,15 +254,15 @@ def installer_responses():
             data = body
         route.fulfill(body=data, content_type='application/octet-stream', headers={'Access-Control-Allow-Origin': '*'})
 
-    def attach(context):
+    def attach(page):
         def report(route):
             if route.request.method != 'GET':
                 return route.fallback()
             route.fulfill(json={'total_count': 0, 'incomplete_results': False, 'items': []},
                           headers={'Access-Control-Allow-Origin': '*'})
-        context.route(lambda u: u == report_url, report)
+        page.route(re.compile('^' + re.escape(report_url) + '$'), report)
         if package:
-            context.route(lambda u: u == package['pkg'], respond)
+            page.route(re.compile('^' + re.escape(package['pkg']) + '$'), respond)
 
     return attach
 
@@ -283,7 +283,6 @@ def main():
             def ctx(w, h):
                 c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
                 c.add_init_script(FREEZE_JS)
-                attach_installer_responses(c)
                 return c
             def settle(pg, url, name):
                 try:
@@ -324,6 +323,8 @@ def main():
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
+                    if rel == 'install/index.html':
+                        attach_installer_responses(pg)
                     settle(pg, base + '/product-site/' + rel, full)
                     scroll_width = pg.evaluate('document.documentElement.scrollWidth')
                     if scroll_width > w:
@@ -333,6 +334,8 @@ def main():
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
+                    if OFFLINE_BUILT[rel] == 'install/index.html':
+                        attach_installer_responses(pg)
                     settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 c.close()

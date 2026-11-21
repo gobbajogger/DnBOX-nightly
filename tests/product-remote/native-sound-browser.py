@@ -19,25 +19,7 @@ spec = importlib.util.spec_from_file_location('envelope_core', Path(__file__).wi
 core = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(core)
 SIZES = [(1440, 900), (390, 844), (844, 390)]
-INSTRUMENT = """
-window.soundPackets=[];window.soundErrors=[];window.soundRequests=[];
-window.nativePackets=[];window.nativeFrames=[];window.nativeNodes=[];window.midiCalls=0;
-navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};
-const AW=AudioWorkletNode;
-window.AudioWorkletNode=class extends AW{
- constructor(...a){super(...a);nativeNodes.push(this);window.nativeContext=a[0];
-  window.nativeFrames=[];window.nativePackets=[];
-  const post=this.port.postMessage.bind(this.port);
-  this.port.postMessage=(m,...rest)=>{if(m?.type==='sound-controls')soundRequests.push(structuredClone(m));return post(m,...rest)};
-  this.port.addEventListener('message',({data:m})=>{
-   if(m?.type==='sound-result')soundPackets.push(m);
-   if(m?.type==='sound-error')soundErrors.push(m);
-   if(m?.type==='envelopes'&&this===nativeNodes.at(-1))nativePackets.push(m);
-   if(m?.type==='frame'&&this===nativeNodes.at(-1))nativeFrames.push(m);
-  });this.port.start();
- }
-};
-"""
+INSTRUMENT = Path(__file__).with_name('native-sound-instrument.js').read_text()
 
 def control(voice, parameter):
     return f'[data-native-param="source-sound/CHICAGO/{voice}|1:2:{voice}:{parameter}:0"]'
@@ -104,15 +86,40 @@ async def assert_readings(page, packet):
         assert 0 <= c['value'] <= c['max']
         assert isinstance(c['display'], str) and len(c['display']) <= 63
         assert isinstance(c['unit'], str) and len(c['unit']) <= 31
-        field = page.locator(control(packet['voice'], c['parameter']))
-        await expect(field).to_have_value(str(c['value']))
-        await expect(field).to_have_attribute('min', '0')
-        await expect(field).to_have_attribute('max', str(c['max']))
-        # The consumer may add whitespace between native display and unit only.
-        rendered = await field.get_attribute('aria-valuetext')
-        assert ''.join(rendered.split()) == ''.join((c['display']+c['unit']).split()), (c, rendered)
-        out = await field.evaluate('e=>e.closest(".funkybeats-typed-unit").querySelector("[data-param-value]").textContent')
-        assert out == rendered, (c, out, rendered)
+    selectors = [control(packet['voice'], c['parameter']) for c in packet['controls']]
+    # Every row comes from the same DOM turn, including its visible readout.
+    snapshot = """selectors => selectors.map(selector => {
+      const fields = document.querySelectorAll(selector);
+      if (fields.length !== 1) return {count: fields.length};
+      const field = fields[0];
+      const output = field.closest('.funkybeats-typed-unit')?.querySelector('[data-param-value]');
+      return {count: 1, value: field.value, min: field.getAttribute('min'),
+              max: field.getAttribute('max'), label: field.getAttribute('aria-valuetext'),
+              output: output?.textContent ?? null};
+    })"""
+    mismatch = None
+
+    async def wait_for_readings():
+        nonlocal mismatch
+        while True:
+            rows = await page.evaluate(snapshot, selectors)
+            for c, row in zip(packet['controls'], rows):
+                label = row.get('label')
+                if (row['count'] == 1 and row['value'] == str(c['value'])
+                        and row['min'] == '0' and row['max'] == str(c['max'])
+                        and label is not None and label == row['output']
+                        and ''.join(label.split()) == ''.join((c['display'] + c['unit']).split())):
+                    continue
+                mismatch = (c, row)
+                break
+            else:
+                return
+            await asyncio.sleep(0.05)
+
+    try:
+        await asyncio.wait_for(wait_for_readings(), timeout=5)
+    except asyncio.TimeoutError as timeout:
+        raise AssertionError(f'Native Sound readings did not settle within 5 seconds: {mismatch}') from timeout
 
 async def edit(page, voice, parameter):
     old = await page.evaluate('soundPackets.at(-1)')
@@ -152,9 +159,9 @@ async def draft_controls(page):
 
 async def cases(origin, meta):
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(chromium_sandbox=True)
-        try:
-            for width, height in SIZES:
+        for width, height in SIZES:
+            browser = await pw.chromium.launch(chromium_sandbox=True)
+            try:
                 context = await browser.new_context(viewport={'width': width, 'height': height}, accept_downloads=True, has_touch=True)
                 page = await context.new_page()
                 errors = []
@@ -473,14 +480,21 @@ async def cases(origin, meta):
                     proof = {'viewport': [width, height], 'firmware': meta['firmware_source'], 'kernel': meta['wasm_sha256'], 'controls': 40, 'p17Endpoints': endpoint_proof, 'nativeHistory': depth_proof, 'pendingReadRetirements': ['source', 'view', 'stop'], 'readSupersession': supersession_proof, 'draftSoundUndoRedoSlots': [0, 1], 'authoredDraft': authored, 'draftBanks': saved_draft['soundBanks'], 'midiCalls': 0, 'draftSha256': hashlib.sha256(draft).hexdigest(), 'requests': await page.evaluate('soundRequests'), 'errors': await page.evaluate('soundErrors')}
                     (out/'proof.json').write_text(json.dumps(proof, indent=2)+'\n')
                     print(f'PASS actual native Chicago40/p17max11/formatter/Undo16/busy retry/choice stale/read-set-undo lifecycle/authored Draft/MIDI0 {width}x{height}', flush=True)
-                except BaseException:
-                    await page.screenshot(path=str(out/'failure.png'), full_page=True)
-                    (out/'failure.json').write_text(json.dumps({'status': await page.locator('#status').text_content(), 'requests': await page.evaluate('soundRequests'), 'errors': await page.evaluate('soundErrors'), 'pageErrors': errors}, indent=2)+'\n')
+                except BaseException as error:
+                    diagnostics = {'exception': str(error), 'pageErrors': errors}
+                    try:
+                        await page.screenshot(path=str(out/'failure.png'), full_page=True)
+                        diagnostics.update(status=await page.locator('#status').text_content(),
+                                           requests=await page.evaluate('soundRequests'),
+                                           errors=await page.evaluate('soundErrors'))
+                    except Exception as capture_error:
+                        diagnostics['captureError'] = str(capture_error)
+                    (out/'failure.json').write_text(json.dumps(diagnostics, indent=2)+'\n')
                     raise
                 finally:
                     await context.close()
-        finally:
-            await browser.close()
+            finally:
+                await browser.close()
 
 def main():
     value = os.environ.get('DNBOX_EMULATOR_RUNTIME')

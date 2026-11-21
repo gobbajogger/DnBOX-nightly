@@ -2535,15 +2535,19 @@ function mountInstallReports(doc, getSelection, browser) {
     if (!selection) { element('public-installs').textContent = ''; return; }
     const output = element('public-installs');
     output.textContent = 'Checking public install reports…';
+    const pending = read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
     try {
-      read ||= loadInstallReports({signal: globalThis.AbortSignal?.timeout?.(15000)});
-      const reports = await read;
+      const reports = await pending;
       const current = getSelection();
       if (current?.sha256 !== selection.sha256 || current?.build_id !== selection.build_id) return;
       const n = countInstallReports(reports, selection);
       output.textContent = n + (n === 1 ? ' install' : ' installs') + ' reported OK for this build and model.';
     } catch {
-      if (getSelection()) output.textContent = 'Public install reports unavailable.';
+      if (read === pending) read = null;
+      const current = getSelection();
+      if (!read && current?.sha256 === selection.sha256 && current.build_id === selection.build_id) {
+        output.textContent = 'Public install reports unavailable.';
+      }
     }
   }
   // Selection changes can be user-initiated or come from a connected device.

@@ -64,6 +64,41 @@ test('new reviewed model reports advance only matching release packages, with ex
   assert.equal(catalogWithHardwareTests(extended,catalog).versions[0].hardware_tested,false);
 });
 
+test('public latest requires evidence for the selected build when display versions repeat', () => {
+  const rebuilt = structuredClone(current);
+  rebuilt.version = 'nightly-rebuilt-dev';
+  rebuilt.models.elite.sha256 = 'a'.repeat(64);
+  const catalog = {latest: rebuilt.version, versions: [rebuilt, current]};
+  function policy(ledger) {
+    return statusWithHardwareTests(ledger, catalogWithHardwareTests(ledger, catalog), rawStatus).policy;
+  }
+  assert.equal(policy(seed).public_latest, null);
+  assert.deepEqual(policy(seed).public_device_proven_versions, [current.display_version]);
+
+  const elite = seed.reports.find(r => r.model === 'elite');
+  const tested = {...seed, reports: [...seed.reports, {...elite, package_sha256: rebuilt.models.elite.sha256}]};
+  assert.equal(policy(tested).public_latest, current.display_version);
+  assert.deepEqual(policy(tested).public_device_proven_versions, [current.display_version]);
+});
+
+test('an owner report survives withdrawal without qualifying a denied package for public release', () => {
+  for (const change of [
+    row => { row.installable = false; },
+    row => { row.qualified = false; },
+    row => { row.models.pro.withdrawn = true; },
+    row => { row.models.elite.status = 'failed'; }
+  ]) {
+    const row = structuredClone(current);
+    change(row);
+    const catalog = catalogWithHardwareTests(seed, {latest: row.version, versions: [row]});
+    assert.ok(hardwareTestsFor(seed, row, 'elite'));
+    assert.equal(catalog.versions[0].hardware_tested, false);
+    const {policy} = statusWithHardwareTests(seed, catalog, rawStatus);
+    assert.deepEqual(policy.public_device_proven_versions, []);
+    assert.equal(policy.public_latest, null);
+  }
+});
+
 test('all unlabeled packages resolve from exact source and both original model assignments', () => {
   const assignments = JSON.parse(readFileSync(new URL('../package-version-assignments.json', import.meta.url)));
   const unlabeled = source.versions.filter(row => !Object.hasOwn(row,'display_version'));

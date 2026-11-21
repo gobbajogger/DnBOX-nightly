@@ -5,7 +5,7 @@ import test from 'node:test';
 import {runInNewContext} from 'node:vm';
 import {pack7, Updater} from '../web/fm1ota.js';
 import {countInstallReports, installBuild, installReportUrl, InstallRestartCheck,
-  loadInstallReports, portVersionMatches} from '../web/product-site/install-reports.mjs';
+  loadInstallReports, mountInstallReports, portVersionMatches} from '../web/product-site/install-reports.mjs';
 
 const product = 'SMK-37 Elite_900';
 const name = 'DnBOX 0.0.26 SMK-37 Elite';
@@ -194,4 +194,20 @@ test('legacy nightly receipts recover the exact selected package version from it
   const changed = structuredClone(legacy);
   changed.models.elite.sha256 = '0'.repeat(64);
   assert.equal(get(changed, changed.models.elite, 'elite').version, '');
+});
+
+test('the installer retries a failed public count on refresh and reuses successful reads', async t => {
+  const counter = {};
+  const doc = {getElementById: id => id === 'public-installs' ? counter : {addEventListener() {}}};
+  const api = t.mock.method(globalThis, 'fetch', async () => new Response('', {status: 503}));
+  const reports = mountInstallReports(doc, () => build, 'test browser');
+  await Promise.all([reports.refresh(), reports.refresh()]);
+  assert.equal(counter.textContent, 'Public install reports unavailable.');
+  assert.equal(api.mock.callCount(), 1);
+
+  api.mock.mockImplementation(async () => Response.json({total_count: 0, incomplete_results: false, items: []}));
+  await Promise.all([reports.refresh(), reports.refresh()]);
+  assert.equal(counter.textContent, '0 installs reported OK for this build and model.');
+  await reports.refresh();
+  assert.equal(api.mock.callCount(), 2);
 });

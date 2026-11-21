@@ -2,6 +2,8 @@
 """Local gate contract tests; no browser, device or baseline approval is implied."""
 import importlib.util
 import io
+import re
+from unittest.mock import Mock
 from pathlib import Path
 import tempfile
 import unittest
@@ -34,6 +36,19 @@ class GateContract(unittest.TestCase):
     def approve(self):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
+
+    def test_installer_routes_only_pause_the_two_public_requests(self):
+        page = Mock()
+        gate.installer_responses()(page)
+        patterns = [call.args[0] for call in page.route.call_args_list]
+        self.assertEqual(len(patterns), 2)
+        # Playwright sends callable URL matchers to Chromium as a catch-all.
+        for pattern in patterns:
+            self.assertIsInstance(pattern, re.Pattern)
+            self.assertIsNone(pattern.search('http://127.0.0.1:8000/product-site/index.html'))
+        self.assertIsNotNone(patterns[0].fullmatch(
+            'https://api.github.com/search/issues?q=repo%3Agobbajogger%2FDnBOX+is%3Aissue+in%3Atitle+%22Install+report%22&per_page=100&page=1'
+        ))
 
     def test_missing_baseline_is_reported_not_created(self):
         result = self.compare()

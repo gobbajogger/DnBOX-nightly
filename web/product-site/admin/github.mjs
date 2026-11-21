@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import {hardwareTestsFor, validateHardwareTests, effectivePackageVersion} from '../hardware-tests.mjs';
+import {permitsRelease, hardwareTestsFor, validateHardwareTests, effectivePackageVersion} from '../hardware-tests.mjs';
 
 export const OWNER = 'gobbajogger';
 export const NIGHTLY = 'DnBOX-nightly';
@@ -172,16 +172,25 @@ export function createGitHub(fetcher = fetch) {
       const path=url.pathname.slice('/DnBOX-nightly/'.length);
       pathParts(path);
       const parts=path.split('/');
-      if(parts.at(-2)!==entry.sha256||!parts.at(-1).endsWith('.fwsc')) throw Error('Expected an immutable firmware package path.');
+      if(parts.at(-2)!==entry.sha256||!/^[A-Za-z0-9._-]+\.fwsc$/.test(parts.at(-1))) throw Error('Expected an immutable firmware package path.');
       const pkg=await file(NIGHTLY,path,src.ref);
       if(pkg.bytes.length!==entry.size||await sha256(pkg.bytes)!==entry.sha256) throw Error('Firmware verification failed for '+model+'.');
       const to='artifacts/releases/'+entry.sha256+'/'+parts.at(-1);
       files.push({path:to,bytes:pkg.bytes,original:pkg.sha});
       target.models[model].pkg='https://gobbajogger.github.io/DnBOX/'+to;
+      // MAIN checks an explicit model status against the promoted catalog row.
+      if (entry.status!==undefined) target.models[model].status='release-checked';
     }
     Object.assign(target,{hardware_tested:true,status:'release-checked',lifecycle:'current'});
     const prior=dest.catalog.value.versions.find(v=>v.version===target.version);
-    if(prior && (prior.source_commit!==target.source_commit || MODELS.some(m=>prior.models?.[m]?.sha256!==target.models[m].sha256))) throw Error('The existing build ID has different firmware.');
+    if (prior) {
+      const buildFields = ['source_commit', 'source_tree', 'display_version'];
+      const modelFields = ['product', 'sha256', 'size', 'controller_sha256', 'controller_size', 'controller_strategy'];
+      if (buildFields.some(key => prior[key] !== target[key]) ||
+          MODELS.some(model => modelFields.some(key => prior.models?.[model]?.[key] !== target.models[model][key]))) {
+        throw Error('The existing build ID has different firmware.');
+      }
+    }
     const next={...dest.catalog.value,latest:target.version,versions:[target,...dest.catalog.value.versions.filter(v=>v.version!==target.version)]};
     const root=repoPath(MAIN)+'/git/';
     const parent=await request(root+'commits/'+dest.ref);
@@ -214,19 +223,10 @@ export function createGitHub(fetcher = fetch) {
   }
   return {connect,lock,head,snapshot,readJson,lanePRs,checks,markTested,promote,release,saveNotes};
 }
-function eligible(record) {
-  if (!record || typeof record !== 'object') return false;
-  const denials=['revoked','blocked','withdrawn','fromRelease','device_verified'];
-  const approvals=['qualified','installable','qa_pass','source_licenses_approved','immutable_http_pass',
-    'backup_integrity_pass','model_and_controller_pass'];
-  return (!Object.hasOwn(record,'lifecycle') || record.lifecycle==='current') &&
-    denials.every(key=>!Object.hasOwn(record,key)||record[key]===false) &&
-    approvals.every(key=>!Object.hasOwn(record,key)||record[key]===true);
-}
 function selected(catalog,selection) {
   const matches=catalog.versions.filter(v=>v.version===selection.id);
   const row=matches[0];
-  if(matches.length!==1 || !eligible(row) || row.source_commit!==selection.source ||
+  if(matches.length!==1 || !permitsRelease(row) || row.source_commit!==selection.source ||
      !HEX40.test(row.source_commit) || !HEX40.test(row.source_tree) ||
      !/^\d+\.\d+\.\d+(?:\.\d+)?$/.test(row.display_version) ||
      !['dev-checked','release-checked'].includes(row.status) ||
@@ -239,9 +239,12 @@ function selected(catalog,selection) {
 function candidate(row,model) {
   const entry=row.models?.[model];
   const product=model==='elite'?'Elite':'Pro';
-  if(!MODELS.includes(model)||!eligible(entry)||!HEX64.test(entry.sha256)||!HEX64.test(entry.controller_sha256)||
+  if(!MODELS.includes(model)||!permitsRelease(entry)||!HEX64.test(entry.sha256)||!HEX64.test(entry.controller_sha256)||
      (entry.status!==undefined && entry.status!=='dev-checked') ||
      (entry.hardware_tested!==undefined && entry.hardware_tested!==false) ||
+     (Object.hasOwn(entry,'controller_strategy') && !['bundled','owner-supplied'].includes(entry.controller_strategy)) ||
+     (entry.controller_strategy==='bundled' &&
+       (!Number.isSafeInteger(entry.controller_size) || entry.controller_size<68 || entry.controller_size>65536)) ||
      !Number.isSafeInteger(entry.size)||entry.size<=960||entry.size>2097152||
      !new RegExp('^SMK-37 '+product+'_(?:900|9[0-9]{6})$').test(entry.product))
     throw Error('This model package is unavailable.');

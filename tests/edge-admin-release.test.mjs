@@ -90,9 +90,17 @@ test('mark tested writes only the nightly ledger with expected blob, preserves p
   assert.equal(f.calls.filter(c=>c.method!=='GET').length,2);
 });
 test('promotion atomically stages both verified files and retains fallback with a fast-forward ref update',async()=>{
-  const f=fixture();await f.github.connect(token);await f.github.promote(f.selection);
+  const f=fixture();
+  Object.assign(f.row.models.elite,{status:'dev-checked',hardware_tested:false});
+  f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));
+  await f.github.connect(token);await f.github.promote(f.selection);
   assert.equal(f.tree.base_tree,root);assert.equal(f.tree.tree.length,3);
   const catalog=JSON.parse(f.blobs.get(f.tree.tree.find(e=>e.path==='versions.json').sha));
+  const promoted=catalog.versions[0];
+  assert.equal(promoted.models.elite.status,promoted.status,'MAIN requires any explicit model status to match the promoted release');
+  assert.equal(promoted.models.elite.hardware_tested,false);
+  assert.ok(!Object.hasOwn(promoted.models.pro,'status'));
+  assert.ok(!Object.hasOwn(promoted.models.pro,'hardware_tested'));
   assert.deepEqual(catalog.versions[1],f.main.versions[0]);assert.equal(catalog.latest,f.row.version);
   for(const m of models){
     const p=catalog.versions[0].models[m],path='artifacts/releases/'+p.sha256+'/'+m+'.fwsc';
@@ -123,6 +131,60 @@ test('promotion uses the installer’s exact legacy or seven-digit numeric model
     if(accepted) await f.github.promote(f.selection);
     else await assert.rejects(f.github.promote(f.selection),/unavailable/);
   }
+});
+test('promotion validates both model controller contracts before changing MAIN', async () => {
+  for (const model of models) {
+    for (const [metadata, accepted] of [
+      [{}, true],
+      [{controller_strategy:'owner-supplied'}, true],
+      [{controller_strategy:'bundled', controller_size:68}, true],
+      [{controller_strategy:'bundled', controller_size:65536}, true],
+      [{controller_strategy:'bundled'}, false],
+      [{controller_strategy:'bundled', controller_size:67}, false],
+      [{controller_strategy:'bundled', controller_size:65537}, false],
+      [{controller_strategy:'bundled', controller_size:'68'}, false],
+      [{controller_strategy:'unrecognized'}, false]
+    ]) {
+      const f=fixture();
+      Object.assign(f.row.models[model],metadata);
+      f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));
+      await f.github.connect(token);
+      if (accepted) {
+        await f.github.promote(f.selection);
+        const catalog=JSON.parse(f.blobs.get(f.tree.tree.find(e=>e.path==='versions.json').sha));
+        const entry=catalog.versions[0].models[model];
+        assert.equal(entry.controller_strategy, metadata.controller_strategy);
+        assert.equal(entry.controller_size, metadata.controller_size);
+      } else {
+        await assert.rejects(f.github.promote(f.selection),/unavailable/);
+        assert.ok(f.calls.every(c=>c.method==='GET'));
+      }
+    }
+  }
+});
+test('promotion preserves the source and controller identity of an existing MAIN build ID', async () => {
+  for (const change of [r=>r.source_tree=root, r=>r.display_version='0.0.28',
+      r=>r.models.elite.controller_sha256='a'.repeat(64),
+      r=>r.models.pro.controller_size=68, r=>r.models.elite.controller_strategy='owner-supplied',
+      r=>r.models.pro.product='SMK-37 Pro_9000001', r=>r.models.elite.size++]) {
+    const f=fixture();
+    const prior=structuredClone(f.row);
+    change(prior);
+    f.main.versions.unshift(prior);
+    f.files[MAIN].set('versions.json',json(f.main));
+    await f.github.connect(token);
+    await assert.rejects(f.github.promote(f.selection),/existing build ID/);
+    assert.ok(f.calls.every(c=>c.method==='GET'));
+  }
+});
+test('promotion rejects a release filename without a basename', async () => {
+  const f=fixture();
+  const entry=f.row.models.pro;
+  entry.pkg=entry.pkg.replace(/[^/]+$/, '.fwsc');
+  f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));
+  await f.github.connect(token);
+  await assert.rejects(f.github.promote(f.selection),/immutable firmware package path/);
+  assert.ok(f.calls.every(c=>c.method==='GET'));
 });
 test('withheld model entries cannot be marked or promoted',async()=>{
   for (const flags of [{lifecycle:'withdrawn'},{status:'failed'},{fromRelease:true},{device_verified:true},{qualified:false}]) {

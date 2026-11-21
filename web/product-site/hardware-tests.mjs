@@ -73,6 +73,24 @@ export async function fetchHardwareTests(url, options = {}) {
   return validateHardwareTests(await response.json());
 }
 
+export function permitsRelease(record) {
+  if (!record || typeof record !== 'object') return false;
+  const denials=['revoked','blocked','withdrawn','fromRelease','device_verified'];
+  const approvals=['qualified','installable','qa_pass','source_licenses_approved','immutable_http_pass',
+    'backup_integrity_pass','model_and_controller_pass'];
+  return (!Object.hasOwn(record,'lifecycle') || record.lifecycle==='current') &&
+    denials.every(key=>!Object.hasOwn(record,key)||record[key]===false) &&
+    approvals.every(key=>!Object.hasOwn(record,key)||record[key]===true);
+}
+
+function eligibleNightlyBuild(row) {
+  return permitsRelease(row) && (row.hardware_tested === undefined || typeof row.hardware_tested === 'boolean') &&
+    ['dev-checked', 'release-checked'].includes(row.status) &&
+    Object.values(row.models || {}).every(pkg => permitsRelease(pkg) &&
+      (pkg.status === undefined || pkg.status === 'dev-checked') &&
+      (pkg.hardware_tested === undefined || pkg.hardware_tested === false));
+}
+
 // Materialize the two public JSON views on build or in the owner's single Git commit.
 export function catalogWithHardwareTests(ledger, sourceCatalog, assignments) {
   validateHardwareTests(ledger);
@@ -82,10 +100,8 @@ export function catalogWithHardwareTests(ledger, sourceCatalog, assignments) {
     const tested = models.filter(model => hardwareTestsFor(ledger, row, model, assignments));
     if (tested.length && !row.display_version) row.display_version = effectivePackageVersion(row, assignments);
     const complete = models.length > 0 && tested.length === models.length;
-    const withheld = row.revoked || row.blocked || row.withdrawn ||
-      (row.lifecycle !== undefined && row.lifecycle !== 'current');
     const priorRelease = row.status === 'release-checked';
-    if (complete && !withheld && ['dev-checked','release-checked'].includes(row.status)) {
+    if (complete && eligibleNightlyBuild(row)) {
       row.status = 'release-checked';
       row.hardware_tested = true;
       row.label = 'OWNER HARDWARE TESTED — STARTUP AND RESTART OK ON ' + tested.join(' AND ').toUpperCase();
@@ -104,11 +120,11 @@ export function statusWithHardwareTests(ledger, catalog, sourceStatus, assignmen
   validateHardwareTests(ledger);
   const status = structuredClone(sourceStatus);
   const proven = catalog.versions.filter(row => row.hardware_tested === true &&
-    row.status === 'release-checked' && Object.keys(row.models).length &&
-    Object.keys(row.models).every(model => hardwareTestsFor(ledger, row, model, assignments))).map(row => effectivePackageVersion(row, assignments));
-  status.policy.public_device_proven_versions = proven;
-  const selected = catalog.versions.find(row => row.version === catalog.latest);
-  status.policy.public_latest = proven.includes(selected?.display_version) ? selected.display_version : null;
+    row.status === 'release-checked' && eligibleNightlyBuild(row) && Object.keys(row.models || {}).length &&
+    Object.keys(row.models).every(model => hardwareTestsFor(ledger, row, model, assignments)));
+  status.policy.public_device_proven_versions = [...new Set(proven.map(row => effectivePackageVersion(row, assignments)))];
+  const latest = catalog.versions.find(row => row.version === catalog.latest);
+  status.policy.public_latest = proven.includes(latest) ? effectivePackageVersion(latest, assignments) : null;
   status.hardware_tests = {source: 'hardware-tests.json', reports: ledger.reports};
   return status;
 }
