@@ -1174,8 +1174,8 @@
     },
     {
       "path": "remote/drum-strip.mjs",
-      "bytes": 8328,
-      "sha256": "4fe8e0810f537a5abf7e85be683e9d21851bd958e9da1b9d520e4d4e87224242"
+      "bytes": 8795,
+      "sha256": "99bc09f15e21875726eca4312961ea1a689144659189b3a039e54379c4f56a81"
     },
     {
       "path": "remote/drum-format.mjs",

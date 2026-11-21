@@ -34,6 +34,16 @@ function glyphsFor(screen) {
 // These are the idle control curves in its 32 x 18 slot coordinates.
 const coordinate = n => Number(n.toFixed(4));
 const attackEdge = q => 'M1 12L'+coordinate(1+30*q)+' 0L31 0';
+// dv_glyph draws these four ticks for kit summaries. A selected 808 KIT
+// slot can use a separate two-peak drawing.
+function kitSummaryTicks(q) {
+  const height = 4+8*q;
+  let path='';
+  for (let i=0; i<4; i++)
+    path += 'M'+(2+8*i)+' 12V'+coordinate(12-height*(i+1)/4);
+  return path;
+}
+
 // dv_tune_fork samples eight segments per quadratic at the current value.
 function tuneFork(q) {
   const half = 7 * (0.62 + 0.76*q);
@@ -70,6 +80,8 @@ const animators = new WeakMap();
 function drumShape(control) {
   if (control.context.name==='Attack') return attackEdge;
   if (control.identity==='1:1:0:1') return kickTone;
+  if ((control.identity==='1:0:11:1' || control.identity==='1:1:11:1') &&
+      control.markers?.['visual-role']==='inactive bank parameter summary') return kitSummaryTicks;
   // The 909 kick uses DG_BDSWEEP, whose curve also depends on Pitch and Depth.
   if (control.context.name==='Tune' && control.identity!=='1:0:0:0') return tuneFork;
   return null;

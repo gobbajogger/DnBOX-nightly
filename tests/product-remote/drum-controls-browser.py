@@ -295,7 +295,9 @@ async def cases(evidence=None):
         const id=cell.getAttribute('data-source-control'), glyph=cell.querySelector('[data-glyph-semantic]');
         const semantic=glyph?.getAttribute('data-glyph-semantic');
         const tuningFork=semantic==='TUNE' && id!=='1:0:0:0';
-        if(semantic!=='ATTACK' && id!=='1:1:0:1' && !tuningFork)continue;
+        const kitSummary=semantic==='ACCENT' && ['1:0:11:1','1:1:11:1'].includes(id) &&
+          cell.getAttribute('data-visual-role')==='inactive bank parameter summary';
+        if(semantic!=='ATTACK' && id!=='1:1:0:1' && !tuningFork && !kitSummary)continue;
         const donor=original.querySelector('[data-source-control="'+id+'"] [data-glyph-semantic]');
         if(glyph.getAttribute('data-glyph-origin')!=='firmware dv_glyph')return false;
         glyph.setAttribute('data-glyph-origin',donor.getAttribute('data-glyph-origin'));
