@@ -23,7 +23,7 @@
 ## Hard limits
 11. Never force-push. Never push or merge to `main` (that is the User's final sign-off). Repo settings, protection and access stay as they are, except the renames to `DnBOX` and `DnBOX-nightly` and changes the User approves.
 12. No Secrets in Git: passwords, API keys, tokens, private keys, session cookies, or files containing them.
-13. Everything the work uses or produces goes into Git: code, ported engine source, SuperJ6 coefficients and fitted tables, the User's audio captures, mocks, logs, MIT-licensed SDK libraries and FunkyBeats code with their MIT notices; Git LFS for files of 50 MB or more. Library only, never Git: the SuperJ6 app installers (`.ipa`, AU zip). Every Library file gets name, size, SHA256 and recovery steps in `docs/LIBRARY-INDEX.md`.
+13. Everything the work uses or produces goes into Git: code, ported engine source, SuperJ6 coefficients and fitted tables, the User's audio captures, mocks, logs, MIT-licensed SDK libraries and FunkyBeats code with their MIT notices; Git LFS for files of 50 MB or more. Library only, never Git: the SuperJ6 app installers (`.ipa`, AU zip). Every Library file gets name, size, SHA256 and recovery steps in `docs/LIBRARY-INDEX.md`. Never in Git: `.img`, `.component` and `.vst3` files. Allowed in Git: `.fwsc` firmware files (release firmware also goes on GitHub Releases with SHA-256 checksums) and sanitized test evidence.
 14. No PSRAM: every engine fits stock SMK-37 memory.
 15. No device writes: flashing, firmware releases, BTIF, USRTRIM, efuse, key_mac and bootloader are the User's only.
 16. `web` and `remote` fast-forward the nightly repo's `gh-pages` only after the Local gate passes.
@@ -45,3 +45,4 @@
 - 2026-11-16: v2 created from RULES.md v1 (19:50–20:10) and the User's decisions; process rules dropped.
 - 2026-11-21: The User approved (chat): rule 0 added; rule 9 changed so merges into the integration branch need (a), focused tests and (c), and the full Local gate is required only before a `gh-pages` fast-forward and before `main`.
 - 2026-11-21: The User approved (chat) the ceremony cleanup: rule 3 any non-builder agent may run the gate or Review; rule 6 only "push often"; rule 7 no timer; rule 9 Review only for PRs that change screens, deletion needs only (a) and the archive tag; rule 11 allows changes the User approves; rule 19 same wording in both repos; rule 25 removed. RULES.md is identical in both repos.
+- 2026-11-21: The User's binary rule added to rule 13: only `.img`, `.component` and `.vst3` are banned from Git; `.fwsc` firmware and sanitized test evidence are allowed.
