@@ -30,7 +30,13 @@ async def cases(origin):
       source='catalog' if bad=='malformed' else bad
       async def refuse(route):await route.fulfill(status=200 if bad=='malformed' else 503,content_type='application/json',body='invalid')
       await page.route('**/remote/'+source+'.json',refuse)
-      await page.goto(origin+'/remote/');await expect(page.locator('#workspace-error')).to_be_visible();await expect(page.locator('#workspace-retry')).to_be_focused();await expect(page.locator('[data-view="sound"]')).to_be_disabled();assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+      # Start the UI assertion deadline when the browser receives the injected failure.
+      # Module loading can continue after the document load event.
+      async with page.expect_response(lambda response: response.url == f'{origin}/remote/{source}.json') as pending_response:
+       await page.goto(origin+'/remote/')
+      response=await pending_response.value
+      assert response.status == (200 if bad=='malformed' else 503), (source,response.status)
+      await expect(page.locator('#workspace-error')).to_be_visible();await expect(page.locator('#workspace-retry')).to_be_focused();await expect(page.locator('[data-view="sound"]')).to_be_disabled();assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
       await page.unroute('**/remote/'+source+'.json',refuse);await page.locator('#workspace-retry').click();await expect(page.locator('main')).to_have_attribute('aria-busy','false');await expect(page.locator('[data-view="sound"]')).to_be_enabled();await page.locator('[data-view="sound"]').click();await page.locator('#part').select_option('chicago');await expect(page.locator('#workspace-error')).to_be_hidden()
       wave=page.locator('[data-native-param="source-sound/CHICAGO/0|1:2:0:0:0"]');await wave.press('Home');await wave.press('ArrowRight');await expect(wave).to_have_value('1')
       main_geometry=await geometry(page)
