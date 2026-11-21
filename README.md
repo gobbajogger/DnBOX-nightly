@@ -1,7 +1,7 @@
 # DnBOX nightly
 
 This repository is the **beta / nightly channel** for DnBOX firmware and its web installer.
-The production repository is [gobbajogger/X0X37-for-Loopy-Pro](https://github.com/gobbajogger/X0X37-for-Loopy-Pro).
+The production repository is [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
 
 DnBOX is firmware for the **M-VAVE SMK-37 Elite** and the **SMK-37 Pro**.
 It turns the keyboard into a groovebox.
@@ -45,43 +45,43 @@ Over USB the keyboard is a MIDI device and an audio interface.
 The keyboard needs no driver.
 
 On the SMK-37, clip mode can act as an Akai APC40 mkII for Loopy Pro.
-See [ble/README.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/ble/README.md) in the production repository for Bluetooth MIDI.
+See [ble/README.md](https://github.com/gobbajogger/DnBOX/blob/main/ble/README.md) in the production repository for Bluetooth MIDI.
 
 ## Versions
 
-**Recommended published release (hardware qualification incomplete): DnBOX 0.0.25.1.** Its [GitHub Release](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1) is available, but the installed-package hash of the owner-reported Elite test was not confirmed and the Pro has not been device-tested. Downloadable model-specific packages:
+**Latest release: DnBOX 0.0.26.** The owner tested these release packages on a real SMK-37 Elite and SMK-37 Pro; startup and restart were OK. Its [GitHub Release](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) lists each file's size, CRC32 and SHA-256 (source commit `94197fc8`):
 
-- [SMK-37 Elite: `dnbox-x0x37-0.0.25.1-elite.fwsc`](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/download/v0.0.25.1/dnbox-x0x37-0.0.25.1-elite.fwsc)
-- [SMK-37 Pro: `dnbox-x0x37-0.0.25.1-pro.fwsc`](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/download/v0.0.25.1/dnbox-x0x37-0.0.25.1-pro.fwsc)
+- [SMK-37 Elite: `dnbox-x0x37-0.0.26-elite.fwsc`](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc)
+- [SMK-37 Pro: `dnbox-x0x37-0.0.26-pro.fwsc`](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc)
 
-**For hardware testing only: DnBOX 0.0.26 candidate** at `94197fc8`, in the [nightly installer](https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/install/). The [live package catalog](https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/versions.json) labels it **“HARDWARE TEST — BOOT/RESTART NOT YET VERIFIED”**. Its versioned filenames are `DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc` and `DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc`. Do not treat them as fully hardware-qualified or suitable for production use. An earlier 0.0.26 package was withdrawn following a boot concern.
+The same 0.0.26 packages are in the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/). The [live package catalog](https://gobbajogger.github.io/DnBOX-nightly/versions.json) labels them **“OWNER HARDWARE TESTED — STARTUP AND RESTART OK ON ELITE AND PRO”**. The emulator timing result in the release notes is not a hardware result.
 
-The owner reported trying 0.0.25.1 and an earlier 0.0.26 build on an SMK-37 Elite, without a confirmed installed-package hash. The current corrected 0.0.26 candidate still needs physical startup, restart and recovery testing. The SMK-37 Pro has no reported physical test; neither model has full hardware qualification. Keep a stable recovery package and sample backup before testing.
+Version 0.0.25.1 remains available as a fallback ([GitHub Release](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1)). An earlier 0.0.26 package was withdrawn after startup and restart problems; the current 0.0.26 packages replace it. Keep a stable recovery package and sample backup before installing.
 
 ## Install
 
 On desktop Chrome or Edge, connect by a USB data cable, click **Connect**, and grant **MIDI and SysEx** access. If denied, review browser MIDI/SysEx permission and retry; close other MIDI programs. Verify the model **printed on the hardware** (SMK-37 Elite or Pro), not just the USB name. Starrykey 37 Play uses the Pro package.
 
-- **[Recommended published 0.0.25.1 installer](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/install/)**: select the **visible model and admitted version** from the catalog. Its local `.fwsc` / stock chooser is **hidden and disabled**, so a downloaded file from [GitHub Releases](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/releases/tag/v0.0.25.1) cannot be dropped into that page.
-- **[Nightly installer](https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/install/)**: for deliberate developer/hardware testing only. Its 0.0.26 build at `94197fc8` has **unverified boot/restart**. The nightly source contains a separate, visible advanced local-file chooser, but its presence is **not proof of qualified stock recovery**; prefer listed admitted packages for DnBOX updates.
+- **[Main installer](https://gobbajogger.github.io/DnBOX/install/)** (its catalog lists 0.0.25.1): select the **visible model and admitted version** from the catalog. Its local `.fwsc` / stock chooser is **hidden and disabled**, so a downloaded file from [GitHub Releases](https://github.com/gobbajogger/DnBOX/releases) cannot be dropped into that page.
+- **[Nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/)**: lists DnBOX 0.0.26 (`94197fc8`), owner hardware tested with startup and restart OK on Elite and Pro. The nightly source contains a separate, visible advanced local-file chooser, but its presence is **not proof of qualified stock recovery**; prefer listed admitted packages for DnBOX updates.
 
 **First switch from M-VAVE factory firmware:** There is no DnBOX app or project yet, so a DnBOX `.x0xslots` sample backup and `.x0xproject` export are **not available**. Use any manufacturer-supported method to preserve factory data, if available. Choose only the admitted model-specific firmware shown in the installer; if the current app cannot complete the main installer's sample-layout preflight and installation is refused, **stop rather than bypass the check**. Do not assume the nightly installer's best-effort backup can save factory data.
 
-**For an existing running DnBOX app (update/reinstall):** Stop playback; use [Samples](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/breaks/) to save `.x0xslots` and separately use [Projects](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/projects/) to export a portable `.x0xproject` **with samples**. Verify both files exist. The main installer blocks a risky write if a required sample backup fails. The **published nightly installer** attempts a backup, but a backup failure can **show a warning and continue automatically without a recoverable archive**, permanently losing old loops. This warning applies to the published nightly site, **not** the older fail-closed installer source in this PR branch (see the source/deployment note below). Package and model admission checks still apply. Do not unplug USB during an active firmware write.
+**For an existing running DnBOX app (update/reinstall):** Stop playback; use [Samples](https://gobbajogger.github.io/DnBOX/breaks/) to save `.x0xslots` and separately use [Projects](https://gobbajogger.github.io/DnBOX/projects/) to export a portable `.x0xproject` **with samples**. Verify both files exist. The main installer blocks a risky write if a required sample backup fails. The **published nightly installer** attempts a backup, but a backup failure can **show a warning and continue automatically without a recoverable archive**, permanently losing old loops. This warning applies to the published nightly site, **not** to the older fail-closed installer source (see the source/deployment note below). Package and model admission checks still apply. Do not unplug USB during an active firmware write.
 ## Manual and help
 
-- **[SMK-37 keyboard map](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/SMK37.md)** for the older port; the [0.0.26 keyboard manual (draft)](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/docs/manual-94197fc8/docs/MANUAL.md) covers the newer controls, glyphs, chords and presets. It does not describe published 0.0.25.1. The [published web manual](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/manual/) still covers the FM-1.
-- **[Sample importer](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/breaks/)** — import your own break loops
-- **[Projects](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/projects/)** — save, load and export projects
+- **[SMK-37 keyboard map](https://github.com/gobbajogger/DnBOX/blob/main/SMK37.md)** for the older port; the [0.0.26 keyboard manual (draft)](https://github.com/gobbajogger/DnBOX/blob/archive/docs/manual-94197fc8/docs/MANUAL.md) covers the newer controls, glyphs, chords and presets. It does not describe published 0.0.25.1. The [published web manual](https://gobbajogger.github.io/DnBOX/manual/) still covers the FM-1.
+- **[Sample importer](https://gobbajogger.github.io/DnBOX/breaks/)** — import your own break loops
+- **[Projects](https://gobbajogger.github.io/DnBOX/projects/)** — save, load and export projects
 
-Repository and Pages URLs still use the previous name, because the GitHub repository has not been renamed.
+The repositories are renamed to `gobbajogger/DnBOX` and `gobbajogger/DnBOX-nightly`, and old GitHub repository links redirect. The websites are at [gobbajogger.github.io/DnBOX](https://gobbajogger.github.io/DnBOX/) and [gobbajogger.github.io/DnBOX-nightly](https://gobbajogger.github.io/DnBOX-nightly/).
 
 ## Restore
 
 Choose recovery by the **actual detected state**, not a transient disconnect or USB display name:
 
-1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. Use an **admitted published 0.0.25.1 package in the [main installer](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/install/)** when seeking the recommended release, not the main site's hidden local upload.
-2. **Only the update loader responds after an interrupted write.** The normal app's sample reader is absent, so **no new sample/project export is possible from the loader**. The published installer can resume an interrupted update from its loader using a **listed admitted package for the printed physical model**, but no app-side backup is made first; existing samples may be lost. A 0.0.26 nightly candidate remains an unqualified test even if the loader accepts it. If there is no safely admitted matching package, **stop**, rather than force a foreign image or guess a button gesture.
+1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. Use an **admitted package listed in an installer**: 0.0.26 in the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/), or 0.0.25.1 in the [main installer](https://gobbajogger.github.io/DnBOX/install/). Do not use the main site's hidden local upload.
+2. **Only the update loader responds after an interrupted write.** The normal app's sample reader is absent, so **no new sample/project export is possible from the loader**. The published installer can resume an interrupted update from its loader using a **listed admitted package for the printed physical model**, but no app-side backup is made first; existing samples may be lost. If there is no safely admitted matching package, **stop**, rather than force a foreign image or guess a button gesture.
 3. **Uncertain reboot or no device appears.** Wait for an active write to finish, then reconnect and use **Connect / Rescan** to check whether the normal app or `ota-` update loader actually answers. Check browser MIDI/SysEx permission; avoid blind retries. A loader identity is not a completed application boot.
 4. **Return to factory M-VAVE firmware.** Download the **exact model's** official stock package and follow [M-VAVE M-UPGRADE](https://www.m-vave.com/download). The main site's file chooser is hidden and no factory image is bundled. The nightly page has an advanced local chooser in its source, but it is not independently hardware-qualified as a stock-recovery route; the manufacturer path is the documented recommendation.
 
@@ -93,7 +93,7 @@ You can import your own loops into the sample slots at 44.1 kHz.
 The SMK-37 has three slots of 80, 120 and 32 KiB (about 3.7, 5.5 and 1.5 seconds, 10.7 seconds in all).
 You can ask for 22.05 kHz to fit twice as much at lower quality.
 
-The [sample importer](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/breaks/) does this from Chrome or Edge.
+The [sample importer](https://gobbajogger.github.io/DnBOX/breaks/) does this from Chrome or Edge.
 While the normal app responds, the Samples page can back up slots; after updating, compatible saved slots can be restored. In loader-only recovery, no new sample backup can be read.
 
 The production repository has command-line tools for the same work:
@@ -106,10 +106,10 @@ tools/x0x_slots.py backup my.x0xslots                  # save every slot (read-o
 tools/x0x_slots.py restore my.x0xslots                 # write a backup back (asks first)
 ```
 
-Those tools are in [gobbajogger/X0X37-for-Loopy-Pro](https://github.com/gobbajogger/X0X37-for-Loopy-Pro).
+Those tools are in [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
 
 You can save, load and reset a project on the keyboard.
-You can export or import a portable `.x0xproject` file from the [Projects](https://gobbajogger.github.io/X0X37-for-Loopy-Pro/projects/) page.
+You can export or import a portable `.x0xproject` file from the [Projects](https://gobbajogger.github.io/DnBOX/projects/) page.
 
 The device can recall factory Chicago and Miami presets.
 User preset file import and export is not in the current packages.
@@ -125,7 +125,7 @@ The installer takes its interaction patterns, not its code or assets, from [Mesh
 This source branch does not contain firmware `.fwsc` packages, controller images, proprietary SDK/toolchain files or credentials.
 The published Pages catalog on the `gh-pages` branch serves the live packages.
 
-**Installer source versus published site.** This PR branch's [local installer preview at `fca2333b`](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/blob/fca2333bb4abd635dfd31421935d98176786bd0a/docs/install/index.html#L2176-L2232) stops on required sample-backup failures; it is **not** the current nightly site's backup policy. The current [`main` installer source at `0fa5ac71`](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/blob/0fa5ac71371bcfe97ef8ebf1966df7477c1bea6b/docs/install/index.html#L2269-L2282) and the [published `gh-pages` installer at `5734c215`](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/blob/5734c215c233fb1431d80e26558f7ac662c6a992/install/index.html#L2269-L2282) instead catch backup failures, display a warning and can proceed **without** sample protection. These are pinned source artifacts, not a new browser or hardware test. Always save and verify independent backups before updating an existing DnBOX installation.
+**Installer source versus published site.** An older [installer source at `fca2333b`](https://github.com/gobbajogger/DnBOX-nightly/blob/fca2333bb4abd635dfd31421935d98176786bd0a/docs/install/index.html#L2176-L2232) stopped on required sample-backup failures; that is **not** the published nightly site's backup policy. The [`main` installer source at `0fa5ac71`](https://github.com/gobbajogger/DnBOX-nightly/blob/0fa5ac71371bcfe97ef8ebf1966df7477c1bea6b/docs/install/index.html#L2269-L2282) and the [published `gh-pages` installer at `5734c215`](https://github.com/gobbajogger/DnBOX-nightly/blob/5734c215c233fb1431d80e26558f7ac662c6a992/install/index.html#L2269-L2282) instead catch backup failures, display a warning and can proceed **without** sample protection. These are pinned source artifacts, not a new browser or hardware test. Always save and verify independent backups before updating an existing DnBOX installation.
 
 To preview installer source locally (this is not the live catalog):
 
@@ -140,7 +140,7 @@ Open `http://localhost:8000/install/` in Chrome or Edge. Do not flash a device o
 Committing source here does not, by itself, update the live nightly site, production `main`, or any device.
 Publication is a separate step.
 
-Firmware build steps are in [BUILDING.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/BUILDING.md) in the production repository.
+Firmware build steps are in [BUILDING.md](https://github.com/gobbajogger/DnBOX/blob/main/BUILDING.md) in the production repository.
 
 ## Licence and credits
 
@@ -161,7 +161,7 @@ The fonts are Barlow Semi Condensed and Terminus (SIL OFL 1.1).
 The BLE-MIDI host (from felucca-bsp) and the Bluetooth controller interface are MPL-2.0.
 JieLi's Bluetooth files are never part of the firmware source tree in the production repository.
 Packages include three JieLi SDK files (Apache-2.0).
-See [LICENSING.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/LICENSING.md) in the production repository and [LICENSE](LICENSE) in this repository for the full terms.
+See [LICENSING.md](https://github.com/gobbajogger/DnBOX/blob/main/LICENSING.md) in the production repository and [LICENSE](LICENSE) in this repository for the full terms.
 
 Felucca's own assets that are not under its GPL are not part of this fork.
 Those assets are the icon set, the panel photo and the Hügelton drum pack.
@@ -198,11 +198,11 @@ If you want to support it, support the original creators directly:
 
 ## More links
 
-- [Production repository](https://github.com/gobbajogger/X0X37-for-Loopy-Pro)
-- [BUILDING.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/BUILDING.md) in the production repository — how to build the firmware
-- [LICENSING.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/LICENSING.md) — licence terms
+- [Production repository](https://github.com/gobbajogger/DnBOX)
+- [BUILDING.md](https://github.com/gobbajogger/DnBOX/blob/main/BUILDING.md) in the production repository — how to build the firmware
+- [LICENSING.md](https://github.com/gobbajogger/DnBOX/blob/main/LICENSING.md) — licence terms
 - [LICENSE](LICENSE) — GPL-3.0-only text
-- [SMK37.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/SMK37.md) — SMK-37 keyboard map
-- [ble/README.md](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/main/ble/README.md) — Bluetooth MIDI
+- [SMK37.md](https://github.com/gobbajogger/DnBOX/blob/main/SMK37.md) — SMK-37 keyboard map
+- [ble/README.md](https://github.com/gobbajogger/DnBOX/blob/main/ble/README.md) — Bluetooth MIDI
 
-Use the GitHub issue tracker on the [production repository](https://github.com/gobbajogger/X0X37-for-Loopy-Pro) to report a problem.
+Use the GitHub issue tracker on the [production repository](https://github.com/gobbajogger/DnBOX) to report a problem.
