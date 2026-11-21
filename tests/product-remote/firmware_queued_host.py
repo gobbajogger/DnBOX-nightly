@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import json
 import subprocess
+from time import monotonic
 from playwright.async_api import expect
 
 SOURCE = '246ea3718c6c72ba80bbd1aafcd5356f871c78c8'
@@ -49,6 +50,7 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
     page = await browser.new_page(viewport={'width': 1280, 'height': 900}, has_touch=True)
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
+    phase, started = 'open Remote', monotonic()
     try:
         # The test adapter crosses Playwright and a subprocess for every MIDI
         # packet. Match the bridge's five-second response deadline.
@@ -56,6 +58,7 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         await attach(page, json.dumps(bundle), exchange)
         response = await page.goto(origin + '/remote/', wait_until='networkidle')
         assert response and response.ok, (page.url, response.status if response else None)
+        phase, started = 'connect', monotonic()
         await page.locator('#connect').click()
         await expect(page.locator('#conn-state')).to_have_text('Connected. 294 controls confirmed.', timeout=60000)
         field = page.locator('#fw-' + str(cutoff['id']))
@@ -68,12 +71,13 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         await field.click(timeout=8000)
         await field.tap(timeout=8000)
         await field.fill(str(changed), timeout=8000)
+        phase, started = 'cutoff Apply', monotonic()
         await page.locator('#apply').click()
-        await page.wait_for_function("!document.querySelector('#conn-state').textContent.startsWith('Connected.')")
         state = page.locator('#conn-state')
+        await expect(state).to_have_text(f'Stored {changed}. Update queued.', timeout=60000)
         assert await state.get_attribute('data-session') == 'ready', await state.inner_text()
         await expect(field).to_have_value(str(changed))
-        await expect(state).to_have_text(f'Stored {changed}. Update queued.')
+        phase, started = 'cutoff Undo', monotonic()
         await page.locator('#firmware-undo').click()
         await expect(state).to_have_text(f'Restored stored value {original}. Update queued.', timeout=60000)
         await expect(field).to_have_value(str(original))
@@ -97,6 +101,7 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
         await expect(threshold).to_have_value('64')
         for value, threshold_value, makeup_value, affected in [('96', '60', '85', 'THRESH'), ('95', '61', '84', 'THRESH, MAKEUP')]:
             await comp.fill(value)
+            phase, started = f'COMP Apply {value}', monotonic()
             await page.locator('#apply').click()
             await expect(state).to_have_text(f'Stored {value}. Update queued. Other control values changed ({affected}).', timeout=60000)
             await expect(comp).to_have_value(value)
@@ -116,7 +121,10 @@ async def verify_queued_cutoff(browser, origin, checkout, attach):
                           'THRESH': changed_controls[241], 'MAKEUP': changed_controls[245],
                           'COMP': changed_controls[253]}), flush=True)
     except Exception:
-        print(json.dumps({'url': page.url, 'frames': len(frames), 'lastFrames': frames[-6:],
+        last_read = next(({'control': control, 'status': status, 'revision': revision, 'value': value}
+                          for op, status, control, revision, value in reversed(frames) if op == 2), None)
+        print(json.dumps({'url': page.url, 'phase': phase, 'phaseElapsedMs': round((monotonic() - started) * 1000),
+                          'frames': len(frames), 'lastRead': last_read, 'lastFrames': frames[-6:],
                           'pageErrors': errors}), flush=True)
         raise
     finally:
