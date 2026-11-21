@@ -6,6 +6,8 @@ Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. 
 
 Twenty of the 33 remaining static drum controls now draw their original idle Decay or Tail curve. The ten 909 voices use their individual decay times. Three 808 toms use physical ring times and seven 808 voices use the native pot fallback. Across both kits, 70 of 83 captured control occurrences now change between endpoints. Thirteen remain static. All 88,400 compared coordinates matched the native renderer within 0.000052 source units. The separate 17:00 owner crosswalk and live envelope telemetry remain open. [Native source, measurements and reproduction](../../evidence/remote-owner-pages-20261121/drum-decay/README.md)
 
+The 909 kick’s pitch-depth trace also follows the current Tune, Depth and Pitch settings. The native fixed 100 ms window and 16 ms pitch hold are preserved. This brings the total to 71 of 83 changing occurrences, with 12 static. [Three-knob source comparison](../../evidence/remote-owner-pages-20261121/drum-kick-depth/README.md)
+
 ## Local gate temporary files
 
 The complete gate on `4421b615` exited 1 after the shared filesystem filled. The catalog test could not copy its fixture and the independent browser route test could not create an empty directory. Both failures are retained in the [original output](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7064754462).

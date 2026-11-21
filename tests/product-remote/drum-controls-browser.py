@@ -117,6 +117,37 @@ async def compact_bd_edits(page, screen):
  assert (await core.draft_state(page))['parameters']==edited['parameters']
 
 
+async def kick_depth_dependencies(page):
+ # Four source-compiled y coordinates from the native 25-point idle curve.
+ expected=[
+  [6.79083109,8.46621895,10.5005817,10.9320412],  # Tune 34, Depth 0, Pitch 45
+  [8.61200809,10.3244076,10.9316015,10.9417505],  # 0, 0, 45
+  [6.73025703,9.65477753,10.9016714,10.9238968],  # 0, 127, 45
+  [1.65163922,2.57380843,2.86714053,2.87189412],  # 0, 127, 127
+ ]
+ scope=':is([data-drum-editor],[data-drum-sound-strip])'
+ path=scope+' [data-source-control="1:0:0:4"] [data-glyph-semantic="P.DPTH"] path'
+ async def check(index):
+  await page.wait_for_function(r"""([sel,want])=>{
+   const d=document.querySelector(sel)?.getAttribute('d')??'';
+   const points=[...d.matchAll(/[ML]([\d.]+) ([\d.]+)/g)];
+   return points.length===25 && [0,6,12,24].every((i,j)=>Math.abs(+points[i][2]-want[j])<.00006)
+  }""",arg=[path,expected[index]])
+ await check(0)
+ for i,(param,value) in enumerate([(0,0),(4,127),(5,127)],1):
+  await page.locator(scope+f' [data-param$="|1:0:0:{param}"]').press('Enter')
+  editor=page.locator('#parameter-value')
+  await expect(editor).to_be_enabled()
+  await editor.fill(str(value));await editor.press('Enter');await editor.blur()
+  await check(i)
+ for i in [2,1,0]:
+  await page.locator('#undo').press('Enter');await check(i)
+ for i in [1,2,3]:
+  await page.locator('#redo').press('Enter');await check(i)
+ for i in [2,1,0]:
+  await page.locator('#undo').press('Enter');await check(i)
+
+
 async def frame_values(scene, screen):
  # All source labels and hit regions survive; only the archival numeric ink is hidden.
  rows = await scene.evaluate("""e => [...e.querySelectorAll('.source-hit')].map(button => {
@@ -276,6 +307,7 @@ async def cases(evidence=None):
       opener=page.get_by_role('button',name='Open original',exact=True)
       original_return=page.get_by_role('button',name='Return to Sound',exact=True)
       compact=None
+      if kit=='drum909' and voice=='0':await kick_depth_dependencies(page)
       if width==844:
        compact=await compact_voice(page,voice_screen)
        await expect(opener).to_be_visible()
@@ -301,7 +333,8 @@ async def cases(evidence=None):
         const kitSummary=semantic==='ACCENT' && ['1:0:11:1','1:1:11:1'].includes(id) &&
           role==='inactive bank parameter summary';
         const decay=['DECAY','TAIL'].includes(semantic) && id!=='1:1:6:2' && role==='active glyph/value control';
-        const eligible=semantic==='ATTACK' || id==='1:1:0:1' || tuningFork || kitSummary || decay;
+        const depth=id==='1:0:0:4' && semantic==='P.DPTH' && role==='active glyph/value control';
+        const eligible=semantic==='ATTACK' || id==='1:1:0:1' || tuningFork || kitSummary || decay || depth;
         if((glyph.getAttribute('data-glyph-origin')==='firmware dv_glyph')!==eligible)return false;
         if(!eligible)continue;
         glyph.setAttribute('data-glyph-origin',donor.getAttribute('data-glyph-origin'));

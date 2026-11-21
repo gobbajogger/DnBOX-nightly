@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 114927,
-      "sha256": "e74ce6abb9cfed1b0f571272373e19ba3c52b6c065468e438d0c3fe00e4d845c"
+      "bytes": 115191,
+      "sha256": "e52fc6f1b8c8d620b04caba2ff0281c1a5e78ef69384cb27f931d0debc3769e3"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -1179,8 +1179,8 @@
     },
     {
       "path": "remote/drum-strip.mjs",
-      "bytes": 9781,
-      "sha256": "5eaf3027ca5a84b9227941c1dd6a745428def3eaab844b42b4cc3a19f8f5262a"
+      "bytes": 12170,
+      "sha256": "4871ee008976a77d4b9f2e60a5c15069c7a7b7b2246fca8bf2149fd176984d1e"
     },
     {
       "path": "remote/drum-format.mjs",

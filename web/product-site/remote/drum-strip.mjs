@@ -93,6 +93,58 @@ function kickTone(q) {
   return points.join('');
 }
 
+// 9dd6f2df drum909_bd_hz and dv_glyph's P.Dpth branch. Tune and Pitch
+// have different original drawings; their Draft knobs only feed this trace.
+const kickTune='1:0:0:0', kickDepth='1:0:0:4', kickPitch='1:0:0:5';
+const sweeps=new WeakMap();
+function kickDepthPath(tune,depth,pitch) {
+  const pot=raw=>Math.fround(raw/127);
+  const tau=6+26*pot(tune), amount=pot(depth);
+  const lo=Math.fround(.43),ratio=Math.fround(Math.fround(4.7)/lo);
+  const multiplier=Math.fround(lo*Math.fround(ratio**pot(pitch)));
+  const base=49*(1+amount*(multiplier-1)),drop=4.6*tau*(1+1.2*amount);
+  const points=[];
+  for(let i=0;i<=24;i++){
+    const t=100*i/24;
+    const hz=base+drop*Math.exp(-Math.max(0,t-16)/tau);
+    const level=Math.max(0,Math.min(1,Math.log2(hz/40)/3.32));
+    points.push((i?'L':'M')+coordinate(31*i/24)+' '+coordinate(12*(1-level)));
+  }
+  return points.join('');
+}
+
+// The native renderer eases Depth alone and reads the other two knobs at their
+// current editable values. Either dependency must repaint the existing Depth path.
+export function paintKickDepth(root, changed, preview, read) {
+  if(!root?.querySelectorAll || ![kickTune,kickDepth,kickPitch].includes(changed))return;
+  const value=id=>id===changed?preview:read(id);
+  const tune=value(kickTune),depth=value(kickDepth),pitch=value(kickPitch);
+  if(![tune,depth,pitch].every(v=>Number.isInteger(v)&&v>=0&&v<=127))return;
+  const selector='[data-source-control="'+kickDepth+'"] [data-glyph-semantic="P.DPTH"]';
+  for(const glyph of root.querySelectorAll('[data-drum-editor] '+selector+', [data-drum-sound-strip] '+selector)){
+    let state=sweeps.get(glyph);
+    if(!state){
+      const path=glyph.querySelector('path');
+      if(!path)continue;
+      state={tune,pitch};
+      state.draw=q=>{
+        // dv_glyph rounds its eased binary32 pot position before engine_param_si.
+        const rawDepth=Math.trunc(Math.fround(Math.fround(127*q)+.5));
+        path.setAttribute('d',kickDepthPath(state.tune,rawDepth,state.pitch));
+      };
+      state.animator=new GlyphAnimator({value:depth/127,draw:state.draw});
+      glyph.setAttribute('data-glyph-origin','firmware dv_glyph');
+      sweeps.set(glyph,state);
+    }else{
+      if(state.tune!==tune || state.pitch!==pitch){
+        state.tune=tune;state.pitch=pitch;
+        state.draw(state.animator.value);
+      }
+      state.animator.set(depth/127);
+    }
+  }
+}
+
 const animators = new WeakMap();
 function drumShape(control) {
   const curve=decayCurves[control.identity];

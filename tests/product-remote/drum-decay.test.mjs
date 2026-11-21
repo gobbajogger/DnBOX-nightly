@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
-import {paintDrumGlyph} from '../../web/product-site/remote/drum-strip.mjs';
+import {paintDrumGlyph,paintKickDepth} from '../../web/product-site/remote/drum-strip.mjs';
 
 const {screens}=JSON.parse(readFileSync(new URL('../../web/product-site/remote/components.json',import.meta.url)));
 const controls=screens.filter(s=>s.path.includes('-voice-')).flatMap(s=>s.controls);
@@ -36,9 +36,9 @@ test('20 retained falling-tail donors follow the original idle curves at all 128
 });
 
 
-test('only 13 separately owned drum occurrences retain static donors',()=>{
+test('only 12 separately owned drum occurrences retain static donors',()=>{
   const staticIds=new Set([
-    '1:0:0:0','1:0:0:4','1:0:0:5','1:0:1:1','1:0:1:2','1:1:1:1','1:1:1:2',
+    '1:0:0:0','1:0:0:5','1:0:1:1','1:0:1:2','1:1:1:1','1:1:1:2',
     '1:1:2:3','1:1:3:3','1:1:4:3','1:1:5:3','1:1:6:4','1:1:6:2',
   ]);
   assert.equal(controls.length,83);
@@ -46,12 +46,18 @@ test('only 13 separately owned drum occurrences retain static donors',()=>{
   for(const c of controls){
     let drawing='retained';
     const path={setAttribute(key,value){drawing=value;}};
-    const root={querySelectorAll:()=>[{setAttribute(){},querySelector:()=>path}]};
-    paintDrumGlyph(root,c,0,127);
+    const glyph={setAttribute(){},querySelector:()=>path};
+    const root={querySelectorAll:q=>q.includes('[data-source-control="'+c.identity+'"]')?[glyph]:[]};
+    const maximum=c.context.name==='Sound'?1:127;
+    const paint=value=>{
+      paintDrumGlyph(root,c,value,maximum);
+      paintKickDepth(root,c.identity,value,id=>({'1:0:0:0':34,'1:0:0:4':0,'1:0:0:5':45})[id]);
+    };
+    paint(0);
     const low=drawing;
-    paintDrumGlyph(root,c,c.context.name==='Sound'?1:127,c.context.name==='Sound'?1:127);
+    paint(maximum);
     assert.equal(drawing===low,staticIds.has(c.identity),c.identity);
     if(drawing===low)unchanged++;
   }
-  assert.equal(unchanged,13);
+  assert.equal(unchanged,12);
 });
