@@ -103,6 +103,7 @@
 <option value="accent">Accent</option>
 <option value="release">Release</option>
 <option value="drumAccent">Drum accent</option>
+<option value="patternLock">Pattern lock</option>
 </select>
 <div id="velocity" aria-label="Velocity"></div>
 </div>
@@ -113,7 +114,13 @@
 <section id="other-view" hidden></section>
 </main>
 <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>
-<dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><button type="submit">Return</button></form></dialog>
+<dialog id="review-dialog" aria-labelledby="review-title"><form method="dialog">
+<h2 id="review-title">Local changes</h2>
+<div id="review-summary"><div id="changes"></div><p id="review-selections" hidden></p>
+<button type="submit">Return</button> <input type="button" id="review-discard" value="Discard draft"></div>
+<div id="review-confirm" hidden><p>Restore the starting notes, sounds, patterns and song? You can Undo this change in Draft.</p>
+<input type="button" id="review-keep" value="Keep editing"> <input type="button" id="review-reset" value="Discard draft"></div>
+</form></dialog>
 <dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
 <script type="module" src="startup.mjs"></script>
 </body>

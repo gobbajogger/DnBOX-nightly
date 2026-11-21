@@ -948,10 +948,16 @@ async def project_sound_edit_count_at_size(page,width,height):
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
+    from discard_draft_journey import exercise as review_discard
+    async def discard_draft(page):
+        await review_discard(page,draft_state,load_draft)
+    from pattern_lock_journey import exercise as pattern_locks
+    async def pattern_lock_points(page):
+        await pattern_locks(page,draft_state,load_draft)
     from bass_step_journey import exercise as bass_steps
     async def bass_step_fields(page):
         await bass_steps(page, draft_state, load_draft)
-    cases = (bass_step_fields, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
+    cases = (discard_draft, bass_step_fields, pattern_lock_points, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:

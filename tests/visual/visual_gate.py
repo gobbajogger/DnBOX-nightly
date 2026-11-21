@@ -45,6 +45,48 @@ FREEZE_CSS = "*,*::before,*::after{animation:none!important;transition:none!impo
 def port():
     s = socket.socket(); s.bind(('127.0.0.1', 0)); p = s.getsockname()[1]; s.close(); return p
 
+def wait_for_home_capture(page):
+    # The homepage statically declares its artwork, fonts and replay. Only these
+    # rendered assets determine the full-page screenshot.
+    page.evaluate("""async () => {
+        await document.fonts.ready;
+        const require = (ok, message) => { if (!ok) throw Error('Homepage capture: ' + message); };
+        require(document.readyState === 'complete', 'document has not loaded');
+        const sheet = [...document.styleSheets].find(s => s.href === new URL('site.css',location.href).href);
+        require(sheet?.cssRules.length, 'site.css did not load');
+        for (const weight of ['normal','700']) {
+            require([...document.fonts].some(f => f.family === 'Barlow' && f.weight === weight && f.status === 'loaded'),
+                    'Barlow ' + weight + ' did not load');
+        }
+        for (const image of document.images) {
+            await image.decode();
+            require(image.naturalWidth && image.naturalHeight, 'empty image ' + image.currentSrc);
+        }
+        const stage = document.querySelector('#replay-display'), play = document.querySelector('#demo-play');
+        const stop = document.querySelector('#demo-stop'), initial = document.querySelector('#frame-voice-0');
+        require(stage?.firstElementChild?.isEqualNode(initial?.content.firstElementChild),
+                'initial voice frame is missing or differs from source');
+        require(play?.textContent === 'Next control' && document.querySelector('.demo-tabs [data-demo=voice]')?.getAttribute('aria-pressed') === 'true',
+                'reduced-motion replay is not initialized');
+        require([stage,play,stop].every(el => el?.checkVisibility() && el.getBoundingClientRect().width > 0),
+                'replay display or controls are hidden');
+    }""")
+    frames = page.evaluate_handle("() => ({previous: null, stable: 0})")
+    try:
+        page.wait_for_function("""state => {
+            const boxes = ['body','header','#replay-display','#demo-play','#demo-stop','footer'].flatMap(s => {
+                const r=document.querySelector(s).getBoundingClientRect(); return [r.x,r.y,r.width,r.height];
+            });
+            const now = JSON.stringify(boxes);
+            state.stable = now === state.previous ? state.stable + 1 : 0;
+            state.previous = now;
+            return state.stable >= 2;
+        }""", arg=frames, polling='raf')
+    finally:
+        frames.dispose()
+
+
+
 def history_capture_timeout_ms(width, height):
     megapixels = width * height / 1_000_000
     return min(120_000, max(30_000, round(1_500 * megapixels)))
@@ -253,9 +295,13 @@ def main():
             def ctx(w, h):
                 c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
                 c.add_init_script(FREEZE_JS); return c
-            def settle(pg):
+            def settle(pg, site_route=None):
                 pg.add_style_tag(content=FREEZE_CSS)
-                pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                if site_route == 'index.html':
+                    wait_for_home_capture(pg)
+                else:
+                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle')
+                pg.wait_for_timeout(250)
             for w, h in SIZES:
                 tag = f'{w}x{h}'
                 c = ctx(w, h)
@@ -292,7 +338,8 @@ def main():
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/' + rel); settle(pg)
+                    print(f'Loading {full}: /product-site/{rel}', flush=True)
+                    pg.goto(base + '/product-site/' + rel); settle(pg, site_route=rel)
                     print(f'Capturing {full}', flush=True)
                     compare(full, capture_site_page(pg, rel), results); pg.close()
                 for rel in OFFLINE:

@@ -106,3 +106,35 @@ test('Song files preserve every low-five-bit mute mask and legacy all-on bytes',
  installWorkspaceDraft(target.state,target.codec,a.codec.decode(legacy));
  assert.deepEqual(target.state.arrangement.rows,[{patterns:[0,31,2,8,4],repeats:8}]);
 });
+
+test('pattern-owned step locks preserve catalog identity, owner, pattern, zero and legacy bytes',async()=>{
+ const {putPatternLock,checkedPatternLocks,patternLockSpecs,lockField}=await import('../../web/product-site/remote/pattern-locks.mjs');
+ const a=setup(),legacy=a.codec.encode(capture(a)),empty=()=>Array(16).fill(null);
+ for(const f of patternLockSpecs){
+  const c=catalog.controls.find(d=>d.id===f.id);
+  assert.deepEqual([c.kind,c.target,c.voice,c.parameter,c.min,c.max,c.sourceBank],['U32',f.part===4?3:2,f.part===4?0:f.part-2,f.parameter,0,127,f.part===4?-1:0]);
+ }
+ assert.equal(lockField('miami',['MIAMI','CHICAGO'],'roll').id,4130);assert.equal(lockField('chicago',['MIAMI','CHICAGO'],'roll'),undefined);
+ assert.equal(lockField('breaks',[],'sound'),undefined);assert.equal(lockField('drum909',[],'roll'),undefined);
+ let locks=[];
+ for(const spec of patternLockSpecs)for(let pattern=0;pattern<32;pattern++){
+  const values=empty();values[0]=0;values[15]=127;
+  locks=putPatternLock(locks,spec.id,pattern,values);
+ }
+ a.state.patternLocks=locks;const doc=capture(a);assert.equal(doc.patternLocks.length,96);
+ const b=setup();const ctx=installWorkspaceDraft(b.state,b.codec,doc);
+ assert.equal(b.codec.encode(capture({...b,context:ctx})),a.codec.encode(doc));
+ const wrong=structuredClone(doc),before=structuredClone(b.state.patternLocks);
+ for(const patch of [{pattern:32},{pattern:-1},{pattern:0.5},{catalogId:1154},{catalogId:4169},{extra:0},{values:[]},{values:[...empty(),1]},...[-1,128,255,.5,'32',true,undefined].map(bad=>({values:[bad,...empty().slice(1)]}))]){
+  wrong.patternLocks=[{...doc.patternLocks[0],...patch}];assert.throws(()=>installWorkspaceDraft(b.state,b.codec,wrong),/pattern lock/);assert.deepEqual(b.state.patternLocks,before);
+ }
+ assert.throws(()=>checkedPatternLocks([...locks,locks[0]]));
+ assert.throws(()=>checkedPatternLocks([locks[0],locks[0]]));
+ for(const rows of [null,{},[null],undefined])assert.throws(()=>checkedPatternLocks(rows));
+ const changed=structuredClone(doc);
+ changed.patternLocks=[{...doc.patternLocks[0],values:empty()}];assert.equal(a.codec.encode(changed),legacy);
+ changed.context.lane='patternLock';changed.context.part='chicago';changed.context.view='roll';
+ assert.equal(a.codec.decode(a.codec.encode(changed)).context.lane,'patternLock');
+ changed.soundBanks[0]='SuperJ6';assert.throws(()=>a.codec.validate(changed),/context/);
+ installWorkspaceDraft(b.state,b.codec,b.codec.decode(legacy));assert.deepEqual(b.state.patternLocks,[]);
+});

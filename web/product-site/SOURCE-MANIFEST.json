@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 96963,
-      "sha256": "9aadf91c495b5a4eda4372e26b7b0713485de488fe51edaf954b95fdf12a2920"
+      "bytes": 101746,
+      "sha256": "7f53e54dd1fc5c86338f2c456b82bf8b5f20f97a85fe1d41573bedf88eff9ed1"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -754,8 +754,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 11824,
-      "sha256": "f67a98aaf0ee08c390dd0b846ffc2658c8e78412b867826c46bee7b1e9c67412"
+      "bytes": 12599,
+      "sha256": "4b5ec578e6a76cabc78c6cef9945490ee09d142f1598f71ac41b9ed6434290eb"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2731,
-      "sha256": "ab0be631f3156e1278d5d0881d93a21984bb72c67c906eb546bdc9a858180b76"
+      "bytes": 2895,
+      "sha256": "6b1c5003dd6e88e18a53d2dcb7670e7f2ade6c0573e2607f953d805b942f91c1"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -834,8 +834,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 8456,
-      "sha256": "0dbb91d3087cf594c7a92ace513d61731d40786e6341f36ef92e814f26329d0f"
+      "bytes": 8948,
+      "sha256": "79c9a396260f03db9b0355f4cf899051a18a6fbd366c0e630212214383be4f9d"
     },
     {
       "path": "remote/lane.mjs",
@@ -964,8 +964,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 57220,
-      "sha256": "a1a2db04f0ad46441f8d4f94c2ee3abb5526e744382bb342cfb5a2db734c912a"
+      "bytes": 57549,
+      "sha256": "95a34cf2c6cb386044efa70a2e9d535c60aa5fe1baff96ddfdd6d551903f5a8d"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1216,6 +1216,11 @@
       "path": "remote/step-value-gesture.mjs",
       "bytes": 2169,
       "sha256": "909d6ffe9ee9ed61e1ecace101aac40ce4947b6c6de299f914476a54b986ab0c"
+    },
+    {
+      "path": "remote/pattern-locks.mjs",
+      "bytes": 1965,
+      "sha256": "8934a7a512d106ff26fa9ca40d6f17f3f0bf622708bcbf93b19407aeb5fdd241"
     }
   ],
   "notClaimed": [

@@ -21,6 +21,7 @@ PARTS = ('chicago', 'miami', 'drum909', 'drum808', 'breaks')
 def expected_states():
     return {
         'drums-accent-drum909', 'drums-accent-drum808',
+        'pattern-lock-bass-a-cutoff', 'pattern-lock-bass-b-cutoff', 'pattern-lock-break-level',
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
           for kit in ('drum909', 'drum808') for voice in range(11)),
@@ -31,7 +32,7 @@ def expected_states():
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
         *(f'bass-{part}-{field}' for part in ('chicago','miami') for field in ('gate','slide','accent','release')),
         'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
-        'review-dialog', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
+        'review-dialog', 'review-discard-confirm', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
     }
 
 
@@ -58,6 +59,40 @@ def author_break_chance(page):
     assert abs(roll_box['y'] + roll_box['height'] - lane_box['y']) <= 2
     assert 0 < lane_box['height'] and lane_box['y'] + lane_box['height'] <= viewport['height'] + 1
     return {'enabledSteps': 16, 'values': values, 'lane': lane_box, 'roll': roll_box, 'authoredCell': box}
+
+
+def inspect_pattern_locks(page,snap):
+    for engine,part,pattern,name,step,expected in [
+        ('chicago',2,0,'pattern-lock-bass-a-cutoff',3,'33 raw'),
+        ('miami',3,15,'pattern-lock-bass-b-cutoff',6,'33 raw'),
+        ('breaks',4,31,'pattern-lock-break-level',9,'126 raw'),
+    ]:
+        page.locator(f'[data-engine="{engine}"]').click()
+        if engine == 'miami':
+            page.locator('[data-view="sound"]').click()
+            page.locator('#sound-bank').select_option('CHICAGO')
+        page.locator('[data-view="patterns"]').click()
+        page.locator(f'[data-launch-part="{part}"][data-pattern="{pattern}"]').click()
+        page.locator('[data-view="roll"]').click()
+        if engine == 'breaks':
+            page.locator('[data-break-view="notes"]').click()
+        for _ in range(10):
+            if page.locator('#lane-kind').input_value() == 'patternLock':
+                break
+            page.locator('#lane-param').click()
+        assert page.locator('#lane-kind').input_value() == 'patternLock'
+        cells=page.locator('#velocity [role="slider"][data-lane-step]:enabled')
+        expect(cells).to_have_count(16)
+        target=cells.nth(step)
+        expect(target).to_be_visible()
+        expect(target).to_have_attribute('aria-valuetext','Unset')
+        target.press('ArrowDown' if engine=='breaks' else 'ArrowUp')
+        expect(target).to_be_focused()
+        expect(target).to_have_attribute('aria-valuetext',expected)
+        expect(page.locator('#lane-value')).to_have_text(f'P{pattern+1:02d} · {expected.split()[0]}')
+        geometry=target.evaluate("e=>{const b=e.getBoundingClientRect(),l=document.querySelector('#velocity').getBoundingClientRect();const h=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);return {hit:h===e||e.contains(h),visible:b.left>=l.left-1&&b.right<=l.right+1&&b.top>=0&&b.bottom<=innerHeight+1}}")
+        assert geometry['hit'] and geometry['visible'],(name,geometry)
+        snap(name,[11,15] if engine=='breaks' else [3,17,22])
 
 
 def inspect_bass_steps(page, part, snap):
@@ -291,6 +326,10 @@ def inspect(origin, site, output):
             view('patterns')
             menu('#review')
             snap('review-dialog', [13])
+            page.locator('#review-discard').tap()
+            assert page.locator('#review-keep').evaluate('b=>b===document.activeElement')
+            snap('review-discard-confirm', [13])
+            page.locator('#review-keep').tap()
             page.locator('#review-dialog button').click()
             page.locator('.overflow summary').click()
             snap('more-menu', [13])
@@ -360,6 +399,12 @@ def inspect(origin, site, output):
                 state[-1]['breakChance'] = details
 
             case('authored BREAK Chance', break_chance)
+
+            def pattern_locks():
+                page.goto(origin + '/remote/',wait_until='networkidle')
+                inspect_pattern_locks(page,snap)
+
+            case('authored pattern locks',pattern_locks)
 
             def synth_files():
                 page.goto(origin + '/remote/', wait_until='networkidle')

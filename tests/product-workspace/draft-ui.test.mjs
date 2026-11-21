@@ -44,3 +44,21 @@ test('file controls preserve a full SuperJ6 workspace with both owners and exist
  assert.equal(a.get('draft-replace').disabled,true);
  assert.match(a.get('draft-preview').textContent,/12 MiB/);
 });
+
+test('a prior dialog close cannot retire a new read, while Escape cancels its pending read', async()=>{
+ const a=setup(),dialog=a.get('draft-dialog'),button=a.get('draft-replace');
+ a.get('draft-save').onclick();
+ const text=a.downloads[0];
+ await choose(a,text);
+ a.get('draft-cancel').onclick();
+ let finish;
+ const read=()=>a.get('draft-file').onchange({target:{files:[{size:text.length,text:()=>new Promise(r=>finish=r)}]}});
+ const later=read();
+ dialog.onclose();
+ finish(text);await later;
+ assert.equal(button.disabled,false);assert.equal(dialog.open,true);
+ const canceled=read();
+ dialog.oncancel();dialog.close();
+ finish(text);await canceled;
+ assert.equal(button.disabled,true);assert.equal(dialog.open,false);
+});
