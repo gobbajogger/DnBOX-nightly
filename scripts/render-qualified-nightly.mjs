@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, cpSync, rmSync, rea
 import { join, resolve, relative, dirname, basename, sep, isAbsolute } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
-import { standaloneFontInputs } from './standalone-fonts.mjs';
+import { inlineStandaloneFonts, standaloneFontInputs } from './standalone-fonts.mjs';
 import { productOf, logicalImage, controllerOf } from '../web/fm1pkg.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -250,7 +250,7 @@ export async function verifyDownloads(catalog, fetcher = fetch) {
 
 export function renderInstaller(catalog) {
   const strip = s => s.replace(/^export\s+/gm, '').replace(/^import .*?;\r?\n/gm, '');
-  let html = readFileSync(join(root, inputs[0]), 'utf8');
+  let html = inlineStandaloneFonts(readFileSync(join(root, inputs[0]), 'utf8'));
   for (const [marker, content] of [['/*LIB*/', inputs.slice(1).map(p => strip(readFileSync(join(root, p), 'utf8'))).join('\n')],
     ['/*CATALOG*/', JSON.stringify(publicCatalog(catalog)).replace(/</g, '\\u003c')],
     ['/*PACKAGE_VERSION_ASSIGNMENTS*/[]', JSON.stringify(JSON.parse(readFileSync(join(root, 'package-version-assignments.json'), 'utf8')).assignments).replace(/</g, '\\u003c')]]) {

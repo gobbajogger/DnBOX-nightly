@@ -141,7 +141,7 @@ test('standalone tool fonts are bundled and changes invalidate earlier generated
   const f = await fixture(t);
   const fonts = standaloneFontInputs.filter(path => path.endsWith('.ttf'));
   assert.equal(fonts.length, 2);
-  for (const name of ['breaks', 'projects']) {
+  for (const name of ['install', 'breaks', 'projects']) {
     const file = readFileSync(join(f.candidate, name, 'index.html'), 'utf8');
     for (const path of fonts) {
       const bytes = readFileSync(join(f.dir, path)).toString('base64');
@@ -153,5 +153,5 @@ test('standalone tool fonts are bundled and changes invalidate earlier generated
   const prior = renderer.installerFingerprint();
   writeFileSync(join(f.dir, fonts[0]), 'changed source font fixture');
   assert.notEqual(renderer.installerFingerprint(), prior);
-  assert.deepEqual(paths(f.verify()), ['breaks/index.html', 'projects/index.html']);
+  assert.deepEqual(paths(f.verify()), ['breaks/index.html', 'install/index.html', 'projects/index.html']);
 });

@@ -5,7 +5,7 @@
      model, connect once, install over Web MIDI (Chrome or Edge). Sample slots that would move are
      saved and written back (x0x_breaks.js). tools/make_pages.py inlines fm1pkg.js, fm1ota.js,
      x0x_breaks.js at LIB and the release catalog at CATALOG. -->
-<html lang="en">
+<html lang="en" class="standalone-installer">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -439,6 +439,47 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
 .channel-label{font:700 11px var(--mono);color:var(--dim);white-space:nowrap;border:1px solid var(--rule);padding:4px 7px;border-radius:3px}
 .release-notice{margin:0 0 20px;border-left:3px solid var(--busy);padding:12px 16px;background:var(--card);font-size:14px}.release-notice p{margin:4px 0 0;color:var(--dim)}
 @media(max-width:600px){.header-top{flex-wrap:wrap;gap:12px}.head-nav{order:4;flex-basis:100%;margin:0;gap:20px;padding-bottom:10px}.channel-label{font-size:10px}.lang{margin-left:auto}.release-notice{font-size:13px}}
+
+  /* STANDALONE_BARLOW_FACES */
+  .standalone-installer:not([data-theme="light"]) {
+    --bg: #071014;
+    --card: #101a1f;
+    --card-raised: #17262c;
+    --soft: #17262c;
+    --fg: #dde7de;
+    --dim: #a9b9b8;
+    --muted: #99aaa9;
+    --rule: #415052;
+    --accent: #ffb337;
+    --accent-ink: #1c1404;
+  }
+  .standalone-installer body,
+  .standalone-installer .sample-prep { font-family: "DnBOX Barlow", sans-serif; }
+  .standalone-installer .header-top { flex-wrap: wrap; gap: 8px 18px; }
+  .standalone-installer .home { font: 700 24px/1 "DnBOX Barlow", sans-serif; letter-spacing: -.035em; }
+  .standalone-installer .home::before { content: none; }
+  .standalone-installer .channel-label { padding: 0; border: 0; font: 500 13px/1.3 "DnBOX Barlow", sans-serif; }
+  .standalone-installer .head-nav { flex-wrap: wrap; }
+  .standalone-installer .head-nav a,
+  .standalone-installer .workspace-nav a { display: inline-flex; min-height: 44px; align-items: center; }
+  .standalone-installer .lang { min-height: 44px; font: 700 13px/1.3 "DnBOX Barlow", sans-serif; }
+  .standalone-installer .workspace-nav a[aria-current="page"] { border-bottom-color: var(--accent); color: var(--fg); }
+  .standalone-installer #connbtn { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .standalone-installer .release-notice { border-left-color: var(--accent); }
+  .standalone-installer .sample-prep {
+    --prep-ink: var(--fg);
+    --prep-muted: var(--dim);
+    --prep-action: var(--accent);
+    background: var(--card-raised);
+    border-color: var(--rule);
+  }
+  @media (max-width: 360px) {
+    .standalone-installer .prep-head,
+    .standalone-installer .prep-audio,
+    .standalone-installer .prep-cuts { flex-wrap: wrap; }
+    .standalone-installer .prep-options { grid-template-columns: minmax(0, 1fr); }
+    .standalone-installer #prep-stop { margin-left: 0; }
+  }
 </style>
 </head>
 <body>
@@ -446,9 +487,9 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
 <main id="workspace-main">
   <header class="site-head">
     <div class="header-top">
-      <a class="home" href="../" aria-label="DnBOX home">DnBOX</a><span class="channel-label">SMK-37 · NIGHTLY</span>
+      <a class="home" href="#firmware" aria-label="DnBOX home">DnBOX</a><span class="channel-label">SMK-37 · NIGHTLY</span>
       <nav class="head-nav" aria-label="Site navigation">
-        <a href="../manual/" data-t="navmanual">Manual</a><a href="../new/">Changes</a><a href="https://github.com/gobbajogger/DnBOX-nightly">Source</a>
+        <a href="../manual/index.html" data-t="navmanual">Manual</a><a href="../new/index.html">Changes</a><a href="https://github.com/gobbajogger/DnBOX-nightly">Source</a>
       </nav>
       <button class="lang" id="lang" type="button"></button>
     </div>
@@ -550,7 +591,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
     <p class="small" data-t="archiveintro"></p><div id="buildhistory"></div>
   </details>
   <nav class="resource-links" aria-label="Other resources">
-    <a href="../new/" data-t="whatsnew">What's new</a>
+    <a href="../new/index.html" data-t="whatsnew">What's new</a>
     <a id="download" href="#" data-t="download">Download this package</a>
   </nav>
 
@@ -575,7 +616,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
   </section>
   </details>
 
-  <details class="connection-help"><summary>Connection &amp; recovery help</summary><p class="small" data-t="direct"></p><p class="small" data-t="helptext"></p><p class="small"><a href="../manual/" data-t="helpmanual">Open the manual</a></p>  <p class="small" id="recovery"><span data-t="brick"></span>
+  <details class="connection-help"><summary>Connection &amp; recovery help</summary><p class="small" data-t="direct"></p><p class="small" data-t="helptext"></p><p class="small"><a href="../manual/index.html" data-t="helpmanual">Open the manual</a></p>  <p class="small" id="recovery"><span data-t="brick"></span>
     <a href="https://github.com/gobbajogger/DnBOX/issues" style="color:inherit" data-t="bricklink"></a></p>
   <p class="small" data-t="back"></p></details>
   <section class="sample-prep" id="prepare-samples" aria-labelledby="prep-title">
@@ -604,7 +645,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
       <details><summary>Sequence and record <span>Patterns, motion and song.</span></summary><ul><li><b>32 patterns, up to 64 steps per part:</b> give parts different lengths and rates; each can use its own pattern.</li><li><b>Live or step recording:</b> tap drum hits, enter 303 notes or record while playing.</li><li><b>Motion and per-step locks:</b> record knob movement or hold a parameter value on one step for changing timbre and rhythm.</li><li><b>Probability and swing:</b> let selected steps vary between passes and shift the groove away from straight timing.</li><li><b>Chains and Song:</b> chain patterns for a jam or arrange bars with pattern choices and mutes.</li></ul></details>
       <details><summary>Perform and mix <span>Shape a groove as it plays.</span></summary><ul><li><b>Hands-on levels:</b> keyboard fader banks cover the five parts, reverb, delay and the master filter, with pickup for smooth handovers.</li><li><b>Sound movement:</b> use the performance controls, part mutes, pan and sends; a shared reverb, tape delay and master compressor bring the parts together.</li><li><b>SMC control:</b> expand the surface with eight strips and drum banks. The available firmware and newer UI preview are identified separately.</li><li><b>Loopy clip mode:</b> switch pads from local sequencing to the host's clip grid; return to normal X0X operation with KNOB BANK.</li><li><b>SCALE / CHORD / ARP for Loopy:</b> keep played notes in a scale, build chords with inversions and strum, or create arpeggios with rate, gate, swing, humanize and latch.</li></ul></details>
       <details><summary>Use your own loops and keep your work <span>Samples, backups and projects.</span></summary><ul><li><b>Sample management:</b> prepare your own loops, inspect available slots, then explicitly send them to the keyboard. Sample memory is limited; the tool shows what fits.</li><li><b>Backup and restore:</b> save sample slots to a file and restore them through Manage samples.</li><li><b>Project save / load:</b> keep the current sounds, patterns and song; autosave and undo / redo support editing. Sample backup is a separate step.</li><li><b>USB MIDI:</b> use note and clock connections with other apps; choose one clock source for a steady tempo.</li></ul></details>
-      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href="../manual/">Open the playing and setup manual</a></p></details>
+      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href="../manual/index.html">Open the playing and setup manual</a></p></details>
     </div></details>
   </section>
 

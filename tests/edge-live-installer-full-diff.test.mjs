@@ -3,6 +3,7 @@
 // gh-pages install/index.html (blob 15d43a0a, tip 6a9953de). Only allowlisted
 // hunks may remain; each has a declared reason.
 import test from 'node:test';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
@@ -35,10 +36,94 @@ function normalize(html) {
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
   {
-    id: 'published-0.0.26-release-notice',
-    reason: 'The public release records startup and restart on Elite and Pro. Only the notice changes from the pinned earlier installer.',
-    liveOnly: ["  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>"],
-    renderOnly: ["  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a></p></aside>"],
+    id: "standalone-installer-class",
+    reason: "Scope the standalone presentation on the document root.",
+    liveOnly: [
+      "<html lang=\"en\">",
+    ],
+    renderOnly: [
+      "<html lang=\"en\" class=\"standalone-installer\">",
+    ],
+  },
+  {
+    id: "standalone-barlow-and-palette",
+    reason: "Bundle the two licensed typefaces, their notice and the reviewed responsive controls. The hash covers the entire generated CSS hunk.",
+    liveOnly: [],
+    renderOnlySha256: '72d95202418be9129eacd992b639fc9673c7e07f37ce42211fce910e55d44291',
+  },
+  {
+    id: "standalone-header-links",
+    reason: "The firmware, manual and changes links reach documents on disk and when hosted.",
+    liveOnly: [
+      "      <a class=\"home\" href=\"../\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 · NIGHTLY</span>",
+      "        <a href=\"../manual/\" data-t=\"navmanual\">Manual</a><a href=\"../new/\">Changes</a><a href=\"https://github.com/gobbajogger/DnBOX-nightly\">Source</a>",
+    ],
+    renderOnly: [
+      "      <a class=\"home\" href=\"#firmware\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 · NIGHTLY</span>",
+      "        <a href=\"../manual/index.html\" data-t=\"navmanual\">Manual</a><a href=\"../new/index.html\">Changes</a><a href=\"https://github.com/gobbajogger/DnBOX-nightly\">Source</a>",
+    ],
+  },
+  {
+    id: "published-release-and-local-workspace-links",
+    reason: "Keep the published v0.0.26 hardware report and open the local tools by full filename.",
+    liveOnly: [
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/\">Open sample tools separately</a> if this panel does not load.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/\">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>",
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>",
+    ],
+    renderOnly: [
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" data-src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/index.html\">Open sample tools separately</a>.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" data-src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/index.html\">Open Songs &amp; projects separately</a>.</p></section>",
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a></p></aside>",
+    ],
+  },
+  {
+    id: "standalone-changes-link",
+    reason: "Open the changes document from the resources navigation.",
+    liveOnly: [
+      "    <a href=\"../new/\" data-t=\"whatsnew\">What's new</a>",
+    ],
+    renderOnly: [
+      "    <a href=\"../new/index.html\" data-t=\"whatsnew\">What's new</a>",
+    ],
+  },
+  {
+    id: "standalone-connection-help-link",
+    reason: "Open the local manual directly from connection help.",
+    liveOnly: [
+      "  <details class=\"connection-help\"><summary>Connection &amp; recovery help</summary><p class=\"small\" data-t=\"direct\"></p><p class=\"small\" data-t=\"helptext\"></p><p class=\"small\"><a href=\"../manual/\" data-t=\"helpmanual\">Open the manual</a></p>  <p class=\"small\" id=\"recovery\"><span data-t=\"brick\"></span>",
+    ],
+    renderOnly: [
+      "  <details class=\"connection-help\"><summary>Connection &amp; recovery help</summary><p class=\"small\" data-t=\"direct\"></p><p class=\"small\" data-t=\"helptext\"></p><p class=\"small\"><a href=\"../manual/index.html\" data-t=\"helpmanual\">Open the manual</a></p>  <p class=\"small\" id=\"recovery\"><span data-t=\"brick\"></span>",
+    ],
+  },
+  {
+    id: "standalone-compatibility-manual-link",
+    reason: "Open the same document from compatibility help.",
+    liveOnly: [
+      "      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href=\"../manual/\">Open the playing and setup manual</a></p></details>",
+    ],
+    renderOnly: [
+      "      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href=\"../manual/index.html\">Open the playing and setup manual</a></p></details>",
+    ],
+  },
+  {
+    id: "standalone-workspace-launch",
+    reason: "Hosted pages coordinate the real iframes. Downloads open the independent tools and skip the inaccessible child frames.",
+    liveOnly: [
+      "$(\"sample-frame\").addEventListener(\"load\", navigateWorkspace);",
+      "$(\"project-frame\").addEventListener(\"load\", navigateWorkspace);",
+    ],
+    renderOnly: [
+      "for (const id of [\"sample-frame\", \"project-frame\"]) {",
+      "  const frame = $(id);",
+      "  frame.addEventListener(\"load\", navigateWorkspace);",
+      "  // A browser cannot coordinate MIDI ownership across separate file origins.",
+      "  // The direct local links open each tool with its normal standalone controls.",
+      "  if (location.protocol === \"file:\") frame.hidden = true;",
+      "  else frame.src = frame.getAttribute(\"data-src\");",
+      "}",
+    ],
   },
   {
     id: 'programmed-sample-header-padding',
@@ -112,9 +197,14 @@ function assertAllowedRendered(rendered) {
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
-    const match = ALLOWED.find(allow =>
-      JSON.stringify(allow.liveOnly) === JSON.stringify(h.liveOnly) &&
-      JSON.stringify(allow.renderOnly) === JSON.stringify(h.renderOnly));
+    const added = JSON.stringify(h.renderOnly);
+    const match = ALLOWED.find(allow => {
+      if (JSON.stringify(allow.liveOnly) !== JSON.stringify(h.liveOnly)) return false;
+      if (allow.renderOnlySha256) {
+        return createHash('sha256').update(added).digest('hex') === allow.renderOnlySha256;
+      }
+      return JSON.stringify(allow.renderOnly) === added;
+    });
     if (!match) unexpected.push({ header: h.header, liveOnly: h.liveOnly, renderOnly: h.renderOnly });
     else unused.delete(match.id);
   }
@@ -128,6 +218,19 @@ function currentRendered() {
 test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
   assertAllowedRendered(currentRendered());
 });
+test('the standalone review rejects font, route and permission changes', () => {
+  const rendered = currentRendered();
+  for (const [before, after] of [
+    ['data:font/ttf;base64,AAE', 'data:font/ttf;base64,BAE'],
+    ['data-src="../breaks/?embedded=1"', 'data-src="../projects/?embedded=1"'],
+    ['frame.hidden = true;', 'navigator.requestMIDIAccess();'],
+    ['href="../manual/index.html" data-t="navmanual"', 'href="../" data-t="navmanual"'],
+  ]) {
+    assert.ok(rendered.includes(before), before);
+    assert.throws(() => assertAllowedRendered(rendered.replace(before, after)), /unexpected hunks/);
+  }
+});
+
 test('release notice comparison rejects a different tag or hardware claim', () => {
   const rendered = currentRendered();
   for (const modified of [
