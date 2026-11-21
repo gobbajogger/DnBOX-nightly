@@ -39,7 +39,8 @@ def main():
             raise SystemExit("Compiled INIT observations differ from the Remote data")
     else:
         target.write_text(text)
-    print("SYNTH_ONE_INIT 13 frozen values, 81 paired envelope observations at 44.1 kHz")
+    print(f"SYNTH_ONE_INIT 13 frozen values, 81 paired envelope observations at 44.1 kHz, "
+          f"voice inactive at frame {sample['voiceStopSample']}")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,4 @@
+import {SuperJ6Banks} from './superj6-banks.mjs';
 import {emptyBreakSequence,validateBreakSequence,installBreakSequence} from './break-sequence.mjs';
 import {SOUND_BANKS,superJ6Spec,acceptsSuperJ6} from './superj6.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
@@ -6,13 +7,17 @@ import{notesFromTrace}from'./model.mjs';
 import{chanceDomain}from'./sequence.mjs';
 const clone=x=>structuredClone(x),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
 const TRACKS=['chicago','miami','drum909','drum808','breaks'],VIEWS=['roll','drums','locks','sound','mix','patterns','song','files'];
-const SCHEMA='dnbox-local-workspace-draft/1',KIND='local-preview-only',MOTION='Bass B / MIAMI / CARRIER / WAVE',MAX_BYTES=4*1024*1024;
+const SCHEMA='dnbox-local-workspace-draft/1',KIND='local-preview-only',MOTION='Bass B / MIAMI / CARRIER / WAVE';
+const MAX_DRAFT_BYTES=12*1024*1024;
 function fail(message){throw Error('Local draft: '+message);}
+export function checkDraftFileSize(bytes){if(bytes>MAX_DRAFT_BYTES)fail('file exceeds 12 MiB');}
 function keys(value,required,optional=[]){if(!value||typeof value!=='object'||Array.isArray(value)||required.some(k=>!Object.hasOwn(value,k))||Object.keys(value).some(k=>!required.includes(k)&&!optional.includes(k)))fail('unknown or missing fields');}
 function array(value,max,min=0){if(!Array.isArray(value)||value.length<min||value.length>max)fail('array bound');}
 // JSON.parse alone silently accepts repeated object keys. Reject those and excessive nesting first.
 function parse(text){
- if(typeof text!=='string'||new TextEncoder().encode(text).length>MAX_BYTES)fail('file exceeds 4 MiB');let p=0;
+ if(typeof text!=='string')fail('expected JSON text');
+ checkDraftFileSize(text.length);
+ checkDraftFileSize(new TextEncoder().encode(text).length);let p=0;
  const ws=()=>{while(/[ \t\r\n]/.test(text[p]??'!'))p++;};
  const string=()=>{const begin=p++;for(;p<text.length;p++){if(text[p]==='\\'){p++;continue;}if(text[p]==='"'){p++;return JSON.parse(text.slice(begin,p));}}fail('unterminated string');};
  const value=depth=>{if(depth>32)fail('nesting bound');ws();const c=text[p];if(c==='"'){string();return;}if(c==='{'){p++;ws();const seen=new Set();if(text[p]==='}'){p++;return;}for(;;){ws();if(text[p]!=='"')fail('object key');const k=string();if(seen.has(k))fail('duplicate object key');seen.add(k);ws();if(text[p++]!==':')fail('object separator');value(depth+1);ws();if(text[p]==='}'){p++;return;}if(text[p++]!==',')fail('object delimiter');}}
@@ -33,7 +38,7 @@ export class WorkspaceDraftFile{
   array(parameters,10000);for(const s of parameters){if(typeof s?.id!=='string'||!s.id||s.id.length>1024||this.parameters.has(s.id)||![s.value,s.min,s.max,s.step].every(Number.isFinite)||s.max<=s.min||s.step<=0||s.value<s.min||s.value>s.max)fail('finite unique parameter spec');this.parameters.set(s.id,clone(s));}
  }
  validate(document){
-  keys(document,['schema','kind','identity','notes','parameters','motion','launch','song','soundBanks','context'],['breakSequence']);if(document.schema!==SCHEMA||document.kind!==KIND)fail('unsupported version or non-local format');
+  keys(document,['schema','kind','identity','notes','parameters','motion','launch','song','soundBanks','context'],['breakSequence','superJ6Banks']);if(document.schema!==SCHEMA||document.kind!==KIND)fail('unsupported version or non-local format');
   keys(document.identity,Object.keys(this.identity));if(Object.keys(this.identity).some(k=>document.identity[k]!==this.identity[k]))fail('source identity mismatch; no automatic migration');
   const ids=new Set();array(document.notes,20000);for(const n of document.notes){
    keys(n,['id','track','note','velocity','channel','start','end','sourceOrder','pulse'],['chance','pan','pitchOffset']);
@@ -43,12 +48,13 @@ export class WorkspaceDraftFile{
    if(Object.hasOwn(n,'pitchOffset')&&(!['drum909','drum808'].includes(n.track)||!int(n.pitchOffset,-24,24)))fail('invalid drum pitch offset');
    if(Object.hasOwn(n,'chance')&&(!['chicago','miami','drum909','drum808'].includes(n.track)||!chanceDomain.includes(n.chance)))fail('unsupported chance');
   }
-  const refs=new Set();array(document.parameters,this.parameters.size);
+  const imported=new SuperJ6Banks(document.superJ6Banks);
+  const refs=new Set();array(document.parameters,this.parameters.size+imported.fieldCount);
   for(const entry of document.parameters){
    keys(entry,['id','value']);
-   const {id,value}=entry,spec=this.parameters.get(id);
+   const {id,value}=entry,spec=this.parameters.get(id)??imported.spec(id);
    if(!spec||refs.has(id)||!Number.isFinite(value)||value<spec.min||value>spec.max)fail('unqualified parameter ref/raw value');
-   const sj6=superJ6Spec(id);
+   const sj6=superJ6Spec(id)??imported.spec(id);
    const valid=sj6?acceptsSuperJ6(sj6,value):
     value===spec.value||Math.abs((value-spec.min)/spec.step-Math.round((value-spec.min)/spec.step))<=1e-6;
    if(!valid)fail('unqualified parameter ref/raw value');
@@ -60,15 +66,16 @@ export class WorkspaceDraftFile{
   array(document.soundBanks,2,2);if(document.soundBanks.some(b=>b!=='JUNO'&&!SOUND_BANKS.includes(b)))fail('unsupported local bank');
   const c=document.context;keys(c,['part','view','mode','lane','zoom','selected','selection','drumVoice','motionSelected','multi','drumEdit']);array(c.selection,document.notes.length);if(new Set(c.selection).size!==c.selection.length||c.selection.some(id=>!ids.has(id))||c.selected!==null&&!ids.has(c.selected)||!TRACKS.includes(c.part)||!VIEWS.includes(c.view)||!['auto','select','move','draw','length','pan'].includes(c.mode)||!['velocity','chance','pitch','pan'].includes(c.lane)||!validRollZoom(c.zoom)||!int(c.drumVoice,0,10)||!int(c.motionSelected,0,15)||typeof c.multi!=='boolean'||typeof c.drumEdit!=='boolean')fail('unsupported editor context');
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
-  return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
+  return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(imported.banks.size?{superJ6Banks:imported.snapshot()}:{}),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
  }
- capture(state,context){if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,...(state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())?{breakSequence:state.breakSequence}:{}),notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
- encode(document){const text=JSON.stringify(this.validate(document),null,2)+'\n';if(new TextEncoder().encode(text).length>MAX_BYTES)fail('file exceeds 4 MiB');return text;}
+ capture(state,context){if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,...(state.superJ6Banks?.banks.size?{superJ6Banks:state.superJ6Banks.snapshot()}:{}),...(state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())?{breakSequence:state.breakSequence}:{}),notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
+ encode(document){const text=JSON.stringify(this.validate(document),null,2)+'\n';checkDraftFileSize(new TextEncoder().encode(text).length);return text;}
  decode(text){return this.validate(parse(text));}
 }
 export function installWorkspaceDraft(state,codec,document){
  // Complete validation/allocation precedes every write. Never infer a native transaction.
- const d=codec.validate(document),notes=clone(d.notes),next=(1+Math.max(-1,...notes.filter(n=>n.id.startsWith('draft')).map(n=>Number(n.id.slice(5)))))%(MAX_DRAFT_ID+1),selection=new Set(d.context.selection),parameters=new Map(d.parameters.map(p=>[p.id,p.value])),identities=new Map(d.parameters.map(p=>{const s=codec.parameters.get(p.id);return[p.id,{label:s.label,context:s.context}];}));
+ const d=codec.validate(document),imported=new SuperJ6Banks(d.superJ6Banks),notes=clone(d.notes),next=(1+Math.max(-1,...notes.filter(n=>n.id.startsWith('draft')).map(n=>Number(n.id.slice(5)))))%(MAX_DRAFT_ID+1),selection=new Set(d.context.selection),parameters=new Map(d.parameters.map(p=>[p.id,p.value])),identities=new Map(d.parameters.map(p=>{const s=codec.parameters.get(p.id)??imported.spec(p.id);return[p.id,{label:s.label,context:s.context}];}));
+ if(state.superJ6Banks)Object.assign(state.superJ6Banks,imported);
  state.breakChanceLane?.cancel();
  if(state.breakSequence)installBreakSequence(state.breakSequence,d.breakSequence??emptyBreakSequence());
  state.model.cancelAll();state.motion.cancel();state.model._notes=notes;state.model.next=next;state.model.selection=selection;state.model.clipboard=null;
@@ -78,6 +85,6 @@ export function installWorkspaceDraft(state,codec,document){
  state.timeline.past=[];state.timeline.future=[];return d.context;
 }
 export function hasDraftChanges(state,codec){
- if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture)return true;
+ if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture||state.superJ6Banks?.banks.size)return true;
  return !!state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())||!same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
 }

@@ -32,6 +32,19 @@ async def cases(origin):
        await page.locator('#undo').click();await page.wait_for_function('n=>controlPackets.length>n',arg=before_count+1);assert await page.evaluate('controlPackets.at(-1).controls')==baseline
        assert await target.evaluate("e=>e.tagName==='INPUT'?e.value:e.querySelector('output')?.textContent")==old_text
      assert len(seen)==29,seen
+     fx_send_keys=await page.locator('.mix-fx-sends [data-runtime-key]').evaluate_all('els=>els.map(e=>e.dataset.runtimeKey)')
+     assert fx_send_keys==[f'5:{part}:{effect}' for part in range(5) for effect in (1,2)],fx_send_keys
+     fx_send=page.locator('.mix-fx-sends [data-runtime-key="5:0:1"]')
+     before_count=await page.evaluate('controlPackets.length')
+     before=next(c for c in baseline if (c['target'],c['voice'],c['parameter'])==(5,0,1))
+     delta=-1 if before['value']==before['max'] else 1
+     await fx_send.press('ArrowLeft' if delta<0 else 'ArrowRight')
+     await page.wait_for_function('n=>controlPackets.length>n',arg=before_count)
+     expected=[dict(c,value=c['value']+delta) if c==before else c for c in baseline]
+     assert await page.evaluate('controlPackets.at(-1).controls')==expected
+     await page.locator('#undo').click()
+     await page.wait_for_function('n=>controlPackets.length>n',arg=before_count+1)
+     assert await page.evaluate('controlPackets.at(-1).controls')==baseline
      # Actual pointer/touch edits and cancellation use the same native owner.
      await page.locator('[data-mix-mode="sends"]').click()
      slider=page.locator('[data-runtime-key="5:0:1"]');await slider.scroll_into_view_if_needed();box=await slider.bounding_box();count=await page.evaluate('controlPackets.length')

@@ -4,12 +4,14 @@ import argparse
 from contextlib import suppress
 import hashlib
 import json
+import os
 import runpy
 import subprocess
 import tempfile
+import zipfile
 from pathlib import Path
 
-from playwright.sync_api import Error as PlaywrightError, sync_playwright
+from playwright.sync_api import Error as PlaywrightError, expect, sync_playwright
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -22,6 +24,8 @@ def expected_states():
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
           for kit in ('drum909', 'drum808') for voice in range(11)),
         *(f'sound-{part}-{bank}' for part in ('miami', 'chicago') for bank in ('MIAMI', 'CHICAGO', 'Synth One', 'SuperJ6', 'JUNO')),
+        *(f'sound-{part}-{state}' for part in ('chicago', 'miami')
+          for state in ('synth-one-file', 'superj6-import-partial', 'superj6-import-complete')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
         'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
@@ -52,6 +56,69 @@ def author_break_chance(page):
     assert abs(roll_box['y'] + roll_box['height'] - lane_box['y']) <= 2
     assert 0 < lane_box['height'] and lane_box['y'] + lane_box['height'] <= viewport['height'] + 1
     return {'enabledSteps': 16, 'values': values, 'lane': lane_box, 'roll': roll_box, 'authoredCell': box}
+
+
+def inspect_synth_files(page, snap):
+    field_names = runpy.run_path(str(ROOT / 'tools/check-superj6-draft-source.py'))['FIELDS']
+    field_ids = {'neon' + name: str(field) for field, name in field_names.items()}
+    original = os.environ.get('DNBOX_SUPERJ6_ARCHIVE')
+    if original:
+        filename = 'Intro Bank.superj6.bank.json'
+        with zipfile.ZipFile(original) as archive:
+            data = archive.read('J6presets/' + filename)
+    else:
+        # A local UI fixture can exercise both control layouts without the bank archive.
+        filename, data = runpy.run_path(str(HERE / 'superj6_bank_journey.py'))['fixture']()
+        fixture = json.loads(data)
+        fixture['presets'][0]['parameterValues'] = [
+            {'identifier': key, 'value': 0} for key in field_ids]
+        data = json.dumps(fixture).encode()
+    bank = json.loads(data)
+    programs = {}
+    for record in bank['presets']:
+        present = {field_ids[value['identifier']] for value in record['parameterValues']
+                   if value['identifier'] in field_ids}
+        state = 'complete' if len(present) == len(field_ids) else 'partial'
+        programs.setdefault(state, (record, present))
+    assert set(programs) == {'complete', 'partial'}
+
+    page.locator('[data-view="sound"]').click()
+    for slot, part in enumerate(('chicago', 'miami')):
+        page.locator(f'[data-engine="{part}"]').click()
+        engine = page.locator('#sound-bank')
+        engine.select_option('Synth One')
+        page.locator(f'[data-open-synth-one-files="{slot}"]').click()
+        dialog = page.locator(f'dialog[open][data-s1-file-slot="{slot}"]')
+        dialog.locator('[data-bank] option[value="Starter Bank.json"]').wait_for(state='attached')
+        dialog.locator('[data-bank]').select_option('Starter Bank.json')
+        cutoff = dialog.locator('[data-s1-field="cutoff"]')
+        expect(dialog.locator('[data-preset] option:checked')).to_have_text('Init')
+        expect(cutoff).to_be_enabled()
+        assert dialog.locator('[data-s1-field]').count() == 21
+        # Two real edits followed by Undo expose both history buttons to the hit test.
+        for value in ('4321', '5432'):
+            cutoff.fill(value)
+            cutoff.press('Tab')
+        dialog.locator('[data-undo]').click()
+        assert cutoff.input_value() == '4321' and dialog.locator('[data-redo]').is_enabled()
+        snap(f'sound-{part}-synth-one-file', [5])
+        dialog.locator('[data-close]').click()
+
+        engine.select_option('SuperJ6')
+        panel = page.locator('[data-superj6]')
+        if slot == 0:
+            with page.expect_file_chooser() as chooser:
+                panel.locator('[data-sj6-open]').click()
+            chooser.value.set_files({'name': filename, 'mimeType': 'application/json', 'buffer': data})
+        else:
+            panel.locator('[data-sj6-bank]').select_option(hashlib.sha256(data).hexdigest())
+        for state, (record, present) in programs.items():
+            panel.locator('[data-sj6-program]').select_option(record['uid'].upper())
+            assert panel.locator('h3').inner_text() == record['name']
+            shown = panel.locator('[data-sj6-field]').evaluate_all('els=>els.map(e=>e.dataset.sj6Field)')
+            absent = panel.locator('[data-sj6-absent]').evaluate_all('els=>els.map(e=>e.dataset.sj6Absent)')
+            assert set(shown) == present and set(absent) == set(field_ids.values()) - present
+            snap(f'sound-{part}-superj6-import-{state}', [5])
 
 
 def inspect(origin, site, output):
@@ -252,6 +319,12 @@ def inspect(origin, site, output):
                 state[-1]['breakChance'] = details
 
             case('authored BREAK Chance', break_chance)
+
+            def synth_files():
+                page.goto(origin + '/remote/', wait_until='networkidle')
+                inspect_synth_files(page, snap)
+
+            case('Synth One files and imported SuperJ6 programs', synth_files)
         finally:
             ctx.close()
             b.close()

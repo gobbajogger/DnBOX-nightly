@@ -98,6 +98,49 @@ async def mixer(page):
         arg=original)
     await page.locator('#undo').click()
 
+async def fx_part_sends(page):
+    await page.locator('[data-view="mix"]').click()
+    fx = page.locator('[data-mix-mode="fx"]')
+    sends = page.locator('[data-mix-mode="sends"]')
+    sliders = page.locator('.mix-send-strip input[data-native-param]')
+    expected = [f'current-state-and-reference/fx-reverb-direct.svg|1:5:{part}:{effect}'
+                for part in range(5) for effect in (1, 2)]
+    for width, height in ((1440, 900), (844, 390), (390, 844), (1024, 640)):
+        await page.set_viewport_size({'width': width, 'height': height})
+        await fx.click()
+        await expect(sliders).to_have_count(10)
+        assert await sliders.evaluate_all('els => els.map(e => e.dataset.nativeParam)') == expected
+        if width == 1440:
+            reverb, delay = (
+                page.get_by_role('heading', name='Reverb', exact=True),
+                page.get_by_role('heading', name='Delay', exact=True))
+            left, right = await reverb.bounding_box(), await delay.bounding_box()
+            assert abs(left['y'] - right['y']) <= 1 and left['x'] + left['width'] <= right['x']
+            for slider in await sliders.all():
+                await expect(slider).to_be_in_viewport(ratio=1)
+        else:
+            for slider in await sliders.all():
+                await slider.scroll_into_view_if_needed()
+                assert await slider.evaluate("""e => {
+                    const r = e.getBoundingClientRect();
+                    return r.height >= 44 && r.width >= 44 &&
+                      document.elementFromPoint(r.x+r.width/2, r.y+r.height/2) === e;
+                }""")
+        assert await page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+
+        last = sliders.last
+        before = await sliders.evaluate_all('els => els.map(e => e.value)')
+        decrease = before[-1] == await last.get_attribute('max')
+        await last.press('ArrowLeft' if decrease else 'ArrowRight')
+        changed = str(int(before[-1]) + (-1 if decrease else 1))
+        await expect(last).to_have_value(changed)
+        await sends.click()
+        assert await sliders.evaluate_all('els => els.map(e => e.value)') == before[:-1] + [changed]
+        await page.locator('#undo').click()
+        await fx.click()
+        assert await sliders.evaluate_all('els => els.map(e => e.value)') == before
+
+
 async def launcher(page):
     await page.locator('[data-engine="drum909"]').click()
     await page.locator('[data-view="patterns"]').click()
@@ -823,7 +866,7 @@ async def project_sound_edit_count_at_size(page,width,height):
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
-    cases = (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
+    cases = (roll, sequencer, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:

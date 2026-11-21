@@ -11,6 +11,9 @@ static void print_adsr(const s1_dry_adsr *a)
 
 int main(void)
 {
+    enum { gate_off = 8820, interval = 441, capture_end = 35280 };
+    unsigned stop_sample = 0;
+    float final_amp = 0.0f, final_filter = 0.0f;
     s1_dry_controls params;
     s1_dry_voice voice;
     s1_dry_frozen_controls(&params);
@@ -23,15 +26,26 @@ int main(void)
     print_adsr(&params.filter);
     printf(",\"cutoffHz\":%.9g,\"resonance\":%.9g,\"filterDepth\":%.9g,"
            "\"oscillator1Level\":%.9g,\"balance\":%.9g,"
-           "\"sampleRate\":%u,\"gateOffSample\":8820,\"intervalSamples\":441,\"points\":[",
+           "\"sampleRate\":%u,\"gateOffSample\":%u,\"intervalSamples\":%u,\"points\":[",
            params.cutoff_hz, params.resonance, params.filter_depth, params.oscillator1_level,
-           params.balance, (unsigned)S1_DRY_SAMPLE_RATE);
-    for (unsigned sample = 0; sample <= 35280; ++sample) {
-        if (sample % 64 == 0) s1_dry_begin_block(&voice);
-        if (sample == 8820) assert(s1_dry_note_off(&voice) == S1_DRY_OK);
-        (void)s1_dry_sample(&voice);
-        if (sample % 441 == 0)
+           params.balance, (unsigned)S1_DRY_SAMPLE_RATE, (unsigned)gate_off, (unsigned)interval);
+    for (unsigned sample = 0; sample <= capture_end; ++sample) {
+        if (sample % 64 == 0) {
+            int was_active = voice.started;
+            s1_dry_begin_block(&voice);
+            if (was_active && !voice.started) {
+                stop_sample = sample;
+                final_amp = voice.amp.level;
+                final_filter = voice.filter.level;
+            }
+        }
+        if (sample == gate_off) assert(s1_dry_note_off(&voice) == S1_DRY_OK);
+        float output = s1_dry_sample(&voice);
+        if (!voice.started) assert(output == 0.0f);
+        if (sample % interval == 0)
             printf("%s[%.8g,%.8g]", sample ? "," : "", voice.amp.level, voice.filter.level);
     }
-    puts("]}");
+    assert(stop_sample > gate_off && stop_sample < capture_end);
+    printf("],\"voiceStopSample\":%u,\"lastActiveLevels\":[%.8g,%.8g]}\n",
+           stop_sample, final_amp, final_filter);
 }

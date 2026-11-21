@@ -22,32 +22,40 @@ const sections=[
   ['LFO 3',[[197,'Mode','mode',1],[100,'Rate','rate',0.27862325]]],
 ];
 const specs=new Map();
-const slots=[new Map(),new Map()];
-for(const [slot,byField] of slots.entries()) {
+export function superJ6Fields(slot,program,values,prefix) {
+  const byField=new Map();
   for(const [section,fields] of sections) for(const [field,label,kind,raw] of fields) {
-    const {bankId,programId,bankArchiveSha256}=SUPERJ6_PROGRAM;
-    const id='superj6/'+bankArchiveSha256+'/'+slot+'/'+bankId+'/'+programId+'|'+field;
-    const spec=Object.freeze({id,field,label,kind,section,slot,value:Math.fround(raw),
-      context:'Bass '+(slot?'B':'A')+' / SuperJ6 / PWM String Pad / '+section,
-      min:0,max:1,step:kind==='wave'?1/3:kind==='enable'||kind==='mode'?1:2**-149});
-    specs.set(id,spec); byField.set(field,spec);
+    if(values && !Object.hasOwn(values,field))continue;
+    const id=prefix+'|'+field;
+    byField.set(field,Object.freeze({id,field,label,kind,section,slot,
+      value:values?values[field]:Math.fround(raw),
+      context:'Bass '+(slot?'B':'A')+' / SuperJ6 / '+program+' / '+section,
+      min:0,max:1,step:kind==='wave'?1/3:kind==='enable'||kind==='mode'?1:2**-149}));
   }
+  return byField;
 }
+const {bankArchiveSha256,bankId,programId}=SUPERJ6_PROGRAM;
+const slots=[0,1].map(slot=>superJ6Fields(slot,SUPERJ6_PROGRAM.name,null,
+  'superj6/'+bankArchiveSha256+'/'+slot+'/'+bankId+'/'+programId));
+for(const fields of slots)for(const spec of fields.values())specs.set(spec.id,spec);
 export const superJ6Specs=Object.freeze([...specs.values()]);
 export const superJ6Spec=id=>specs.get(id);
 export function acceptsSuperJ6(spec,value) {
-  if(!spec||!specs.has(spec.id)||!Number.isFinite(value)||value<0||value>1||Math.fround(value)!==value)return false;
+  if(!spec||!Number.isFinite(value)||value<0||value>1||Math.fround(value)!==value)return false;
   if(spec.kind==='wave')return WAVE_STOPS.includes(value);
   if(spec.kind==='enable'||spec.kind==='mode')return value===0||value===1;
   return true;
 }
 const current=(spec,edits)=>edits.get(spec.id)??spec.value;
-const read=(slot,field,edits)=>current(slots[slot].get(field),edits);
+const read=(fields,field,edits)=>fields.has(field)?current(fields.get(field),edits):undefined;
 const decimal=(v,places)=>Number(v.toFixed(places)).toString();
-function duty(slot,layer,edits) {
-  return read(slot,layer?211:210,edits)===1 ? .5-.47*read(slot,layer?79:78,edits) : .5;
+function duty(fields,layer,edits) {
+  const enabled=read(fields,layer?211:210,edits),width=read(fields,layer?79:78,edits);
+  if(enabled===0)return .5;
+  if(enabled===1 && width!==undefined)return .5-.47*width;
+  return undefined;
 }
-export function superJ6Text(spec,value,edits) {
+export function superJ6Text(spec,value,edits,fields=slots[spec.slot]) {
   switch(spec.kind) {
     case 'wave':return waveNames[WAVE_STOPS.indexOf(value)];
     case 'enable':return value?'On':'Off';
@@ -55,18 +63,19 @@ export function superJ6Text(spec,value,edits) {
     case 'level':return decimal(100*value,2)+'%';
     case 'width':return decimal(50-47*value,2)+'% duty';
     case 'rate':{
-      const mode=read(spec.slot,{88:195,96:196,100:197}[spec.field],edits);
+      const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
+      if(mode===undefined)return decimal(100*value,2)+'% position';
       return mode ? decimal(16*Math.pow(value,3.33),3)+' Hz' : decimal(100*value,2)+'% tempo position';
     }
   }
 }
-function glyph(spec,value,edits) {
+function glyph(spec,value,edits,fields) {
   const line=(points)=>'<svg aria-hidden="true" viewBox="0 0 64 24"><polyline points="'+points+'"/></svg>';
   const position=()=>line('2,19 '+decimal(2+60*value,2)+',19');
   if(spec.kind==='enable'||spec.kind==='mode')return line(value?'5,19 29,19 32,5 59,5':'5,19 59,19');
   if(spec.kind==='level')return position();
   if(spec.kind==='rate') {
-    if(read(spec.slot,{88:195,96:196,100:197}[spec.field],edits)===0)return position();
+    if(read(fields,{88:195,96:196,100:197}[spec.field],edits)!==1)return position();
     const hz=16*Math.pow(value,3.33);
     return line(Array.from({length:61},(_,x)=>(2+x)+','+decimal(12-8*Math.sin(2*Math.PI*x/60*hz*.25),2)).join(' '));
   }
@@ -75,35 +84,54 @@ function glyph(spec,value,edits) {
   if(shape===0)return line(Array.from({length:61},(_,x)=>(2+x)+','+decimal(12-8*Math.sin(x*Math.PI/30),2)).join(' '));
   if(shape===1)return line('2,12 17,3 47,21 62,12');
   if(shape===2)return line('2,21 31,3 31,21 62,3');
-  const width=spec.kind==='width'?.5-.47*value:duty(spec.slot,layer,edits);
+  const width=spec.kind==='width'?.5-.47*value:duty(fields,layer,edits);
+  if(width===undefined)return ''; // Original file has no pulse-width setting.
   const edge=decimal(2+60*width,2);
   return line('2,20 2,4 '+edge+',4 '+edge+',20 62,20');
 }
-function editor(spec,value,edits) {
+function editor(spec,value,edits,fields) {
   const attributes='data-sj6-field="'+spec.field+'" data-sj6-id="'+spec.id+'" aria-label="'+spec.section+' '+spec.label+'"';
   let options;
   if(spec.kind==='wave')options=WAVE_STOPS.map((stop,i)=>[stop,waveNames[i]]);
   if(spec.kind==='enable')options=[[0,'Off'],[1,'On']];
   if(spec.kind==='mode')options=[[0,'Tempo'],[1,'Hz']];
   if(options)return '<select '+attributes+'>'+options.map(([v,name])=>'<option value="'+v+'"'+(value===v?' selected':'')+'>'+name+'</option>').join('')+'</select>';
-  return '<input type="range" '+attributes+' aria-valuetext="'+superJ6Text(spec,value,edits)+'" min="0" max="1" step="any" value="'+value+'">';
+  return '<input type="range" '+attributes+' aria-valuetext="'+superJ6Text(spec,value,edits,fields)+'" min="0" max="1" step="any" value="'+value+'">';
 }
-export function renderSuperJ6(slot,edits) {
-  return '<section data-superj6 aria-label="SuperJ6 Draft"><header><h3>'+SUPERJ6_PROGRAM.name+'</h3><span>'+SUPERJ6_PROGRAM.bank+' · Draft</span></header>'+
+const escapeText=value=>value.replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+function bankPicker(library,slot) {
+  if(!library)return '';
+  const selected=library.selected[slot],bank=selected&&library.banks.get(selected[0]);
+  const option=(id,name,selected)=>'<option value="'+id+'"'+(selected?' selected':'')+'>'+escapeText(name)+'</option>';
+  const banks=library.banks.size?'<label>Bank <select data-sj6-bank>'+
+    option('',SUPERJ6_PROGRAM.bank+' · built-in',!selected)+
+    [...library.banks.values()].map(b=>option(b.digest,b.name,b===bank)).join('')+'</select></label>':'';
+  const programs=bank?'<label>Program <select data-sj6-program>'+
+    bank.programs.map(p=>option(p.id,p.name,p.id===selected[1])).join('')+'</select></label>':'';
+  return '<div class="sj6-bank-picker">'+banks+programs+
+    '<button type="button" data-sj6-open>Open bank…</button><input type="file" data-sj6-file hidden accept=".json,application/json"></div>';
+}
+export function renderSuperJ6(slot,edits,library) {
+  const active=library?.view(slot),byField=active?.fields??slots[slot];
+  return '<section data-superj6 aria-label="SuperJ6 Draft"><header><h3>'+escapeText(active?.name??SUPERJ6_PROGRAM.name)+'</h3><span>'+
+    escapeText(active?.bank??SUPERJ6_PROGRAM.bank)+' · Draft</span></header>'+
     '<div class="sj6-groups">'+sections.map(([section,fields])=>'<fieldset><legend>'+section+'</legend>'+
-      fields.map(([field])=>{
-        const spec=slots[slot].get(field),value=current(spec,edits);
-        return '<label class="sj6-unit"><span>'+spec.label+'</span><span data-sj6-glyph="'+field+'">'+glyph(spec,value,edits)+'</span>'+
-          '<output data-sj6-display="'+field+'">'+superJ6Text(spec,value,edits)+'</output>'+editor(spec,value,edits)+'</label>';
-      }).join('')+'</fieldset>').join('')+'</div></section>';
+      fields.map(([field,label])=>{
+        const spec=byField.get(field);
+        if(!spec)return '<div class="sj6-unit" data-sj6-absent="'+field+'"><span>'+label+'</span><output>Not stored</output></div>';
+        const value=current(spec,edits);
+        return '<label class="sj6-unit"><span>'+spec.label+'</span><span data-sj6-glyph="'+field+'">'+glyph(spec,value,edits,byField)+'</span>'+
+          '<output data-sj6-display="'+field+'">'+superJ6Text(spec,value,edits,byField)+'</output>'+editor(spec,value,edits,byField)+'</label>';
+      }).join('')+'</fieldset>').join('')+'</div>'+bankPicker(library,slot)+'</section>';
 }
-export function paintSuperJ6(root,slot,edits) {
-  for(const spec of slots[slot].values()){
+export function paintSuperJ6(root,slot,edits,library) {
+  const byField=library?.view(slot)?.fields??slots[slot];
+  for(const spec of byField.values()){
     const value=current(spec,edits),out=root.querySelector('[data-sj6-display="'+spec.field+'"]'),art=root.querySelector('[data-sj6-glyph="'+spec.field+'"]');
-    const text=superJ6Text(spec,value,edits);
+    const text=superJ6Text(spec,value,edits,byField);
     if(out)out.textContent=text;
     const input=root.querySelector('input[data-sj6-field="'+spec.field+'"]');
     if(input)input.setAttribute('aria-valuetext',text);
-    if(art)art.innerHTML=glyph(spec,value,edits);
+    if(art)art.innerHTML=glyph(spec,value,edits,byField);
   }
 }

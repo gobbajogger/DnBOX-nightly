@@ -529,8 +529,8 @@
     },
     {
       "path": "presets/interchange.mjs",
-      "bytes": 5257,
-      "sha256": "d6b04e41b2f04d3189ffb532c8a2a5541df30aeb2896f8a829af7ace6bf8972d"
+      "bytes": 6030,
+      "sha256": "9af9b8b8daed42e9c970add56648456c08c97e94fb74296aca988761159f4c7a"
     },
     {
       "path": "presets/legacy/app.mjs",
@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 87766,
-      "sha256": "3301513fca80dfe225e59f910e2193b63361a61f3f6ae8dd487587dcf8e4389a"
+      "bytes": 90976,
+      "sha256": "ef2f0616888152e8e8082654a953903fa5798801166f97f1b72cbb2db2cc602d"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -754,8 +754,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 10557,
-      "sha256": "fd4a6bce6de51a7593c29097768be53ce241d5e8cbfd6949800370b05a6cb5d7"
+      "bytes": 11183,
+      "sha256": "61129dc0ddf7a4b1e574d7e26da2a686dbed5de183c3e7f88bef642b4993536c"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2749,
-      "sha256": "dcaa288664e960e8828078033c9f47f872933de646cd71eca83477c715ac6b21"
+      "bytes": 2731,
+      "sha256": "ab0be631f3156e1278d5d0881d93a21984bb72c67c906eb546bdc9a858180b76"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -834,8 +834,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 8205,
-      "sha256": "d664d5ad1cb55336c88f180d9f2fabd181c07aab5cfdb48c0638c482fe0342b3"
+      "bytes": 8256,
+      "sha256": "d9b275ae60d11127f77584adb93b1903e4b04bab0e0623087a5d980020f4b4e3"
     },
     {
       "path": "remote/lane.mjs",
@@ -844,8 +844,8 @@
     },
     {
       "path": "remote/local-instrument.mjs",
-      "bytes": 1997,
-      "sha256": "8c0608ce12eeb848067ea82138dbbb4bb911a4e581bec3290114ad5cd4dacdb2"
+      "bytes": 2299,
+      "sha256": "6d75866785544da285c088d8cf9c274e8c24950e1e914db81342a9ec525d8b70"
     },
     {
       "path": "remote/mix-aliases.mjs",
@@ -854,8 +854,8 @@
     },
     {
       "path": "remote/mix-workspace.mjs",
-      "bytes": 688,
-      "sha256": "7f3be46f64d5eab3daae497bf20b70003ed64c3edf9b2c4a42d44e3ddbdcf8c2"
+      "bytes": 888,
+      "sha256": "c82e5e7f698498696d4e2a3bf130b1b8217691ced2af2659ab0603cdea4f5b4e"
     },
     {
       "path": "remote/mixer-format.json",
@@ -964,8 +964,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 52897,
-      "sha256": "825cfd36b7b190d492feaf6515da8c681580d48b32cf714c5be43d13707e8589"
+      "bytes": 55261,
+      "sha256": "2e7db8a9cabb516b88f86119fefeb00d0f45bb8ee043a06e199d6d3860b156d1"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1089,18 +1089,113 @@
     },
     {
       "path": "remote/superj6.mjs",
-      "bytes": 6338,
-      "sha256": "b6c31108e7fc225c4578a4ffff4ca40cd728cadd2dd3fa14cb82afbccf69ef12"
+      "bytes": 8266,
+      "sha256": "7450278860187ee97f2cbaf50fc9d10b1ab97acbc79000b963b177a07087aae4"
     },
     {
       "path": "remote/synth-one-init.mjs",
-      "bytes": 2959,
-      "sha256": "94cfab2d8fbd6999cc2530bb3ead49100a8f86d143535feb9b88ffeafdeaf2a0"
+      "bytes": 3989,
+      "sha256": "7e0d7d4c05d605d5c0f66cf084ed81ff160163380677630ed2ece1ff8a5f7efd"
     },
     {
       "path": "remote/synth-one-init-data.mjs",
-      "bytes": 2411,
-      "sha256": "12fc49a14d6da024df5609e6e26f42eb01d0fdad73557f1f341b4dd49ed0ad48"
+      "bytes": 2480,
+      "sha256": "6ffd2c5c0dc99722ef55bb85c75e8cdfe0bcc187f12cf7608ed38748d77d3107"
+    },
+    {
+      "path": "remote/superj6-banks.mjs",
+      "bytes": 8414,
+      "sha256": "843f91eb89840f5981aa0f60f06981eb636102e1712a7f400940a5f67ee4de7e"
+    },
+    {
+      "path": "remote/synth-one-banks/BankA.json",
+      "bytes": 152843,
+      "sha256": "1486c2b1fcb922d145541c96f436e7e15d755dba72ff9a8030052ef22d224bed"
+    },
+    {
+      "path": "remote/synth-one-banks/Bonus.json",
+      "bytes": 392851,
+      "sha256": "e189a9782469bd851d97a2bd157cfdd43692621287de68eb2909e8aabbd4b996"
+    },
+    {
+      "path": "remote/synth-one-banks/Brice Beasley.json",
+      "bytes": 141354,
+      "sha256": "a42a515cc66fc392f8831efa4865145dc9e2c8a8d9bc2554d1fd8a1aed242d45"
+    },
+    {
+      "path": "remote/synth-one-banks/DJ Puzzle.json",
+      "bytes": 83700,
+      "sha256": "6263b4c08143d5f62192ad48c881129ae0c2df80256abd010dee89ede10b6506"
+    },
+    {
+      "path": "remote/synth-one-banks/Electronisounds.json",
+      "bytes": 130496,
+      "sha256": "94447bcafd93b8e534b99347ef1a2ab7f96006364c36e85c88825e2480a026e7"
+    },
+    {
+      "path": "remote/synth-one-banks/Francis Preve.json",
+      "bytes": 75532,
+      "sha256": "7e45e985951bcff09de2745d7223a8523c559f7ae30c032cfeed81c6bf317187"
+    },
+    {
+      "path": "remote/synth-one-banks/JEC.json",
+      "bytes": 377802,
+      "sha256": "9af56a4f52d050c98da8bfc6bc355ac872772cdd419def188bb644b0c9dff0c0"
+    },
+    {
+      "path": "remote/synth-one-banks/LICENSE",
+      "bytes": 1075,
+      "sha256": "71ac2b8af8849096ba2d0f3510972b8384204f17517e773bfa52fc755fb0fc49"
+    },
+    {
+      "path": "remote/synth-one-banks/MANIFEST.json",
+      "bytes": 3074,
+      "sha256": "806d92dae2ef75b073168e5b85ee2dc6055f2c3b10ceca3a0e40933514c37622"
+    },
+    {
+      "path": "remote/synth-one-banks/Red Sky Lullaby.json",
+      "bytes": 311963,
+      "sha256": "db813fe373ebd0c2434c8c0af376b245c331c35080b396bce83bc4d9f2fb0aac"
+    },
+    {
+      "path": "remote/synth-one-banks/Sound of Izrael 2.json",
+      "bytes": 163872,
+      "sha256": "edf48f200ed2510b03d4b5e9e4c92c0306af0e38776c0916794d90e79572d861"
+    },
+    {
+      "path": "remote/synth-one-banks/Sound of Izrael.json",
+      "bytes": 382672,
+      "sha256": "1f100f20227401a47e17f91bac5be44efc6d5fef8d97f7ed2a64a2a7e1426462"
+    },
+    {
+      "path": "remote/synth-one-banks/Spidericemidas.json",
+      "bytes": 195532,
+      "sha256": "1cb034e91677be3b7bc0cddca64d821ddbfc132d79f98e4211053867f76eec35"
+    },
+    {
+      "path": "remote/synth-one-banks/Starter Bank.json",
+      "bytes": 58280,
+      "sha256": "f4da92584505084e3b0277cf1e1f1911050837014a5fa7371cc6879421cbe908"
+    },
+    {
+      "path": "remote/synth-one-file-model.mjs",
+      "bytes": 5581,
+      "sha256": "e0c736d2e2a941983ad6e64a3b6045f15b7d15666f4f30d2daf811d7483b8d47"
+    },
+    {
+      "path": "remote/synth-one-files.css",
+      "bytes": 3096,
+      "sha256": "2100256691982be1db8932187540e517e85a462d681b21b89ff147d387db8061"
+    },
+    {
+      "path": "remote/synth-one-files.mjs",
+      "bytes": 10524,
+      "sha256": "7290ac8026b538ea2a835dae7c799cb606926412bdfe78d6a23b7a460dcf4cd9"
+    },
+    {
+      "path": "remote/master-output.mjs",
+      "bytes": 4759,
+      "sha256": "627640f3c1d5a4230e8eefa9880aedef40fe866641be92b91f8e4a7d0f6877ff"
     }
   ],
   "notClaimed": [

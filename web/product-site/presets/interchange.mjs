@@ -19,3 +19,21 @@ export function inspect(bytes,profile){if(!(bytes instanceof Uint8Array)||bytes.
 }
 export function edit(doc,index,key,value){let state=hidden.get(doc);if(!state||!Number.isInteger(index)||index<0||index>=state.presets.length)throw Error('Invalid document/index');let allowed=doc.profile==='synthone'?['name','author','userText']:['name','infoText'];if(!allowed.includes(key)||typeof value!=='string'||value.length>8192)throw Error('Only verified existing text metadata is editable');let n=requireType(get(state.presets[index],key),'string');let result=encoder.encode(state.text.slice(0,n.start)+JSON.stringify(value)+state.text.slice(n.end));inspect(result,doc.profile);return result;}
 export function session(){let preview=null,kept=null;return {preview(bytes,profile){preview=null;preview=inspect(bytes,profile);return preview;},keep(){if(!preview)throw Error('Preview required');kept=preview.original();preview=null;return Uint8Array.from(kept);},cancel(){preview=null;},kept(){return kept&&Uint8Array.from(kept);}};}
+
+// UTF-16 offsets refer to the original decoded JSON. Numeric file editors use
+// these spans so an edit leaves every other token, including unknown data, intact.
+export function synthOneNumericTokens(doc, index, keys) {
+  const state = hidden.get(doc);
+  if (doc?.profile !== 'synthone' || !state || !Number.isInteger(index) || !state.presets[index]) {
+    throw new RangeError('Unknown Synth One preset');
+  }
+  const fields = {};
+  for (const key of keys) {
+    const node = get(state.presets[index], key);
+    if (!node || node.type !== 'number') continue;
+    const value = Number(node.raw);
+    if (!Number.isFinite(value)) throw new RangeError('Non-finite Synth One value: ' + key);
+    fields[key] = {value, start:node.start, end:node.end};
+  }
+  return fields;
+}

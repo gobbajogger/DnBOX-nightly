@@ -9,6 +9,8 @@ import subprocess
 import tempfile
 
 from playwright.async_api import async_playwright, expect
+from synth_one_file_journey import exercise_synth_one_files
+from superj6_bank_journey import exercise as exercise_superj6_bank
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -22,6 +24,20 @@ async def assert_compact_toolbar(page):
     bars = await page.locator("#other-view > .mix-modes, #other-view > h2, #sound-bank").evaluate_all(
         "nodes => nodes.map(node => { const r = node.getBoundingClientRect(); return [r.top, r.bottom] })")
     assert len(bars) == 3 and max(top for top, _ in bars) < min(bottom for _, bottom in bars), bars
+
+
+async def assert_init_envelopes(scene):
+    for name in ("Amplitude", "Filter"):
+        plot = scene.get_by_role("img", name=f"{name} envelope, note off at 200 ms, voice ends at 419 ms")
+        await expect(plot).to_be_visible()
+        width, ink, release = await plot.evaluate("""svg => {
+            const box = svg.getBoundingClientRect();
+            const curve = svg.querySelector('path').getBoundingClientRect();
+            const marker = svg.querySelector('line').getBoundingClientRect();
+            return [box.width, curve.width / box.width, (marker.x - curve.x) / curve.width];
+        }""")
+        assert width > 0 and abs(ink - 0.98) < 0.005, (name, width, ink)
+        assert abs(release - 8820 / 18495) < 0.002, (name, release)
 
 
 async def legacy_recovery(page, picker, modern_draft):
@@ -70,6 +86,7 @@ async def at_size(browser, size, output):
             await expect(scene.locator('[data-init-field="cutoffHz"] output')).to_have_text("2000 Hz")
             await expect(scene.locator('[data-init-field="filter-release"] dd')).to_have_text("500 ms")
             await expect(scene.locator("button,input,select,[data-param]")).to_have_count(0)
+            await assert_init_envelopes(scene)
             if width >= 1024:
                 tops = await scene.locator(".encoder-grid > .init-readout").evaluate_all(
                     "cards => cards.map(card => card.getBoundingClientRect().top)")
@@ -78,6 +95,7 @@ async def at_size(browser, size, output):
                 await assert_compact_toolbar(page)
             if output:
                 await page.screenshot(path=output / f"synth-one-{slot}-{width}x{height}.png")
+            await exercise_synth_one_files(page, slot, output / f"synth-one-files-{slot}-{width}x{height}.png" if output else None)
             await picker.select_option("SuperJ6")
             panel = page.locator("[data-superj6]")
             assert set(await panel.locator("[data-sj6-field]").evaluate_all("es=>es.map(e=>Number(e.dataset.sj6Field))")) == FIELDS
@@ -113,6 +131,8 @@ async def at_size(browser, size, output):
             assert await page.evaluate("document.documentElement.scrollWidth === innerWidth")
         await page.locator('[data-engine="chicago"]').click()
         await expect(page.locator('[data-sj6-display="82"]')).to_have_text("Sine")
+        if size == (1440, 900):
+            await exercise_superj6_bank(page, core)
         await legacy_recovery(page, picker, await core.draft_state(page))
         assert await page.evaluate("midiCalls") == 0 and not errors, errors
         print(f"SOURCE_BANKS {width}x{height} PASS both parts, independent edit, Draft round trip, old-file recovery and reset, MIDI=0", flush=True)

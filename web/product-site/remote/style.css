@@ -620,6 +620,15 @@ dialog::backdrop{background:#000a}
 [data-drum-sound-unit]{grid-template-rows:minmax(min-content,1fr) auto}
 .drum-sound-actions{flex:none}
 #other-view .drum-sound-actions button{min-height:44px}
+.master-output{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-block:4px 8px}
+.master-output>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;min-width:0}
+.master-output h4,.master-output output{margin:0;font:inherit;font-size:var(--fs-sm);color:var(--muted)}
+.master-output [data-wave-scale]{justify-self:end;font-size:var(--fs-sm);color:var(--muted)}
+.master-output output{justify-self:end;font-variant-numeric:tabular-nums;color:var(--fg)}
+.master-output svg{grid-column:1/-1;width:100%;height:32px;color:var(--accent);background:var(--bg)}
+.master-output path{fill:none;stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.master-output [data-wave=right]{color:var(--muted)}
+
 .synth-one-init .init-readout{cursor:default;touch-action:auto}
 .synth-one-init .init-envelopes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:8px;margin-top:8px}
 .synth-one-init .init-envelope{min-width:0;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel)}
@@ -632,7 +641,12 @@ dialog::backdrop{background:#000a}
 [data-superj6]{min-width:0}
 [data-superj6]>header{display:flex;align-items:baseline;gap:10px;margin:4px 0 10px}
 #other-view [data-superj6]>header h3{margin:0;font-size:17px;color:var(--fg)}
+[data-superj6]>header>*{min-width:0;overflow-wrap:anywhere}
 [data-superj6]>header span{color:var(--muted)}
+.sj6-bank-picker{display:flex;align-items:end;gap:8px;flex-wrap:wrap;margin-block:8px}
+.sj6-bank-picker>label,.sj6-bank-picker select{max-width:100%;min-width:0}
+.sj6-bank-picker button,.sj6-bank-picker select{min-height:44px}
+.sj6-bank-picker input[hidden]{display:none}
 .sj6-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .sj6-groups fieldset{display:flex;min-width:0;margin:0;padding:8px;gap:6px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
 .sj6-groups legend{color:var(--accent);font-weight:700;padding:0 4px}
@@ -667,3 +681,26 @@ dialog::backdrop{background:#000a}
 
 .legacy-bank-choice{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
 #other-view .legacy-bank-choice label{margin:0}
+
+/* Owner page 8 groups the effects with the five parts that feed them. */
+[data-mix-view="fx"] {grid-template-columns:minmax(0,1fr)}
+@media (min-width:700px) {
+ [data-mix-view="fx"] .mix-effects {grid-template-columns:repeat(10,minmax(0,1fr));align-items:start}
+ [data-mix-view="fx"] .mix-effects>.mix-panel {grid-column:span 5}
+ [data-mix-view="fx"] .mix-effects>.mix-fx-sends {grid-column:span 8}
+ [data-mix-view="fx"] .mix-fx-sends+.mix-panel {grid-column:span 2}
+ [data-mix-view="fx"] .mix-fx-sends+.mix-panel .encoder-grid {grid-template-columns:minmax(0,1fr)}
+ [data-mix-view="fx"] .mix-master-panel {display:grid;grid-template-columns:1fr 2fr;gap:8px}
+ [data-mix-view="fx"] .mix-master-panel .encoder-grid {grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+.mix-fx-sends .synth-range {accent-color:var(--part-color)}
+@media (min-width:1200px) and (min-height:820px) {
+ #other-view [data-mix-view="fx"] .mix-effects button.encoder {
+  display:grid;min-height:200px;align-content:center;gap:12px
+ }
+ [data-mix-view="fx"] .mix-effects button.encoder>span:last-child {
+  grid-row:1;font-size:20px;letter-spacing:0
+ }
+ [data-mix-view="fx"] .mix-effects button.encoder>.glyph {grid-row:2}
+ [data-mix-view="fx"] .mix-effects button.encoder>output {grid-row:3;font-size:28px}
+}

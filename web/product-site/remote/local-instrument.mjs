@@ -1,12 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Owns a user-started local native runtime. It does not apply Remote drafts,
 // request MIDI permissions or replace a connected instrument session.
+import {createMasterOutput} from './master-output.mjs';
 import {createRuntimePlayingState} from './runtime-playing-state.mjs';
 export function createLocalInstrument({load,attach,status=()=>{},onState=()=>{},onPlaying=()=>{}}){
  const playing=createRuntimePlayingState({onState:onPlaying});
  let active=null,binding=null,pending=null,generation=0;
+ let masterOutput=null;
+ function showMasterOutput(host){
+  if(!host||!active){masterOutput?.close();masterOutput=null;return;}
+  masterOutput ??= createMasterOutput(active);
+  masterOutput.mount(host);
+ }
  async function stop(message='Emulator stopped'){
-  ++generation;playing.close();pending?.abort();pending=null;
+  ++generation;showMasterOutput(null);playing.close();pending?.abort();pending=null;
   const old=active;active=null;binding?.close();binding=null;
   onState('stopped');status(message);if(old)await old.close();
  }
@@ -25,5 +32,5 @@ export function createLocalInstrument({load,attach,status=()=>{},onState=()=>{},
   }
  }
  const controlEndpoint=()=>active?{port:active.node.port,pin:active.observerPin}:null;
- return {start,stop,controlEndpoint,playingState:playing.snapshot};
+ return {start,stop,controlEndpoint,showMasterOutput,playingState:playing.snapshot};
 }
