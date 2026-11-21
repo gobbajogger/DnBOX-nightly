@@ -1,0 +1,47 @@
+{
+  "head": "b6c3ea4d6bc3838469c67bba822b372ac0a07a0c",
+  "tree": "fc1100483107b7870105a575b5c330fa15989f63",
+  "consolidated": "583f622961fc9975fac746592ce6c483073c4170",
+  "unfiltered": true,
+  "exit": 1,
+  "finished_utc": "2026-11-21T12:48:28Z",
+  "log_bytes": 137840,
+  "log_sha256": "27d673eccc162bb2860799530948226e2b386c928112e6cdb39d574988b263b3",
+  "passed": [
+    "clean-tree",
+    "setup",
+    "no-loss",
+    "limits",
+    "build"
+  ],
+  "failed": [
+    {
+      "stage": "unit-tests",
+      "route": "site-breaks-1440x900",
+      "detail": "Playwright networkidle timeout on mounted Samples",
+      "timeout_seconds": 30
+    },
+    {
+      "stage": "browser-tests",
+      "case": "FunkyBeats step_drums",
+      "location": "tests/product-remote/funkybeats-browser.py:369",
+      "detail": "Click on [data-view=\"roll\"] timed out switching to Sequence",
+      "timeout_seconds": 30
+    }
+  ],
+  "visual_reviews": {
+    "reviewed_slots": 84,
+    "total": 116,
+    "held_workspace_slots": 32,
+    "official_recomparisons": 28,
+    "fresh_accurate_installer_captures": 8
+  },
+  "catalog_checks": {
+    "versions": 37,
+    "model_rows": 74,
+    "verified_links": 74,
+    "matching_release_assets": 4,
+    "bytes_crc32_sha256_matches": 4
+  },
+  "complete_gate_on_aba00927": null
+}
