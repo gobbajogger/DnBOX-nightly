@@ -46,3 +46,12 @@ GitHub reports these PRs merged into `integration/dnbox-consolidated`. Each merg
 ## Owner-approved rules #172
 
 [Rules #172](https://github.com/gobbajogger/DnBOX-nightly/pull/172) merged into consolidated on 21 November 2026 at 10:43 UTC. [Merge `be65ec9c`](https://github.com/gobbajogger/DnBOX-nightly/commit/be65ec9c43b33d5a04133b267c675d070ede0d8f) has parents `56918d9e601c2eb6c6e9dd53b02ad06897bf2e3c` and `b2af3c995afedc32f06cd60df912efc6b6084329`. The three changed paths are AGENTS.md, CHECKLISTS.md and RULES.md.
+
+## Owner-approved rules #174 and #175
+
+| PR | Source branch | PR head | Consolidated merge |
+|---|---|---|---|
+| [#174](https://github.com/gobbajogger/DnBOX-nightly/pull/174) | `backup/rules-binary-20261121` | `9f5f20fe8e8a842f2331f3d3454eed1764a110a8` | `e8c8e0c337a594cf8411504783d1bc95ec08df96` |
+| [#175](https://github.com/gobbajogger/DnBOX-nightly/pull/175) | `backup/rules-site-gate-20261121` | `e502945758f67b6dde350b3931b60a7390fb109d` | `583f622961fc9975fac746592ce6c483073c4170` |
+
+The first parents are `be65ec9c43b33d5a04133b267c675d070ede0d8f` and `e8c8e0c337a594cf8411504783d1bc95ec08df96` respectively. The published integration PR incorporated #175 at `425812c2707a02157cc31e72d6d33723d7425280`, whose first parent is `061e95213f20126f39b51e7828eecf2c2f274289`. The consolidated tip is reachable from that integration head, with zero deleted paths relative to consolidated.

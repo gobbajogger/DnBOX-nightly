@@ -1,0 +1,84 @@
+{
+  "parent": "061e95213f20126f39b51e7828eecf2c2f274289",
+  "base": "583f622961fc9975fac746592ce6c483073c4170",
+  "review": "Four normally admitted default Pro Installer reference images, 10/10 in the default state. Reviewer did not implement the mounted product or edit its images. The public source and generated website were compared with the four original accepted images and the latest consolidated product.",
+  "admission": {
+    "source": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc",
+    "browser_download_name": "DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc",
+    "byte_count": 651730,
+    "sha256": "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8",
+    "evidence": "Four independent browser probes loaded the real package through normal selection, verified the admitted Blob and computed its digest. Their raw diagnostic erroneously expected the distribution filename. Matching their observed name against the selected catalog URL, and their observed browser hash and byte count against the release binary, verifies the actual product identity."
+  },
+  "workflow_verdict_at_parent": "9/10. Denied MIDI access pointed users at Install while Connect USB performs the retry.",
+  "corrected_workflow": "Independent review verified corrected English and Japanese recovery on both mounted and downloadable installers, including actual retry and fail-closed write controls. This review applies to the source identified by the following diff digest. Default PNGs remain byte-identical at all five sizes.",
+  "corrected_diff_sha256": "044f634b1465e699dd29c036be0e130a0d8fa9a1a652bce25611adafb395dc65",
+  "at_240": {
+    "prior_sha256": "7eb1009b6a5c2d111ee9fee6f3186796b3bbd410c0b67414854c2e2431638a2e",
+    "corrected_sha256": "7eb1009b6a5c2d111ee9fee6f3186796b3bbd410c0b67414854c2e2431638a2e",
+    "matched": true,
+    "prior_width": 240
+  },
+  "observations": "The consolidated layout puts Starting breaks before the install panel and extends 275px wide at 240. The integration layout places the release notice and model/package chooser first, and preserves all five chosen starting breaks below sample preparation. The candidate fits 240px and retains both primary navigation and tool tabs. All four full default candidate PNGs matched independent normal runtime-enabled captures and the USB correction captures byte for byte.",
+  "captures": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "base_render_sha256": "3b730cfb73f83dedf81828f6e660546abde43d47362e9399ee3bf0b6df170e54",
+      "candidate_size": [
+        1440,
+        3544
+      ],
+      "previous_reference_git_blob": "02082bb32058128b1e7c2b8a56c026eedc29b392",
+      "approved_file": "tests/visual/__snapshots__/site-install-1440x900.png",
+      "approved_sha256": "1ec3629ae613445a495b66455f3c575f3cdf1820a407a5e9d1c98ddba9b32d31",
+      "approved_git_blob": "bf1aa4e7bee194c0cb12d62cd3aa9985cf9ccbd4"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "base_render_sha256": "82e7058d89009d9e3510150a5e13b5ed085faf186b92e6c58f015369a0d51285",
+      "candidate_size": [
+        1024,
+        3753
+      ],
+      "previous_reference_git_blob": "97050395a500beaf5fe1a6e9b385fc164c395ec7",
+      "approved_file": "tests/visual/__snapshots__/site-install-1024x640.png",
+      "approved_sha256": "cbc24bdba66f2d1349cfc3b9d6dfa1a2344ee780c10d916fcb7f55b3896c8f46",
+      "approved_git_blob": "20cb69be3a2517515ea7ffdeca2f244a94d549c2"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "base_render_sha256": "9f9251f0d1c8a59a51ec51b7f917ed2bee9e545d55976d35939ea51602705d08",
+      "candidate_size": [
+        844,
+        3762
+      ],
+      "previous_reference_git_blob": "fab120e8525ef4f03cf2eaa74a5721f68b35113c",
+      "approved_file": "tests/visual/__snapshots__/site-install-844x390.png",
+      "approved_sha256": "824b432c239a06ed87c8d8bcf62afa560042f39c6f7efea0c1597499c0a62636",
+      "approved_git_blob": "432131250c9a0cbed5c7facbafeb369d3dd17baa"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "base_render_sha256": "0d65c73339268b8061596fb6503c7ede9490a01f1ef29d16bbc77d20260182d0",
+      "candidate_size": [
+        390,
+        4410
+      ],
+      "previous_reference_git_blob": "54c105ed4c39232b714cc3606f3f7821a3e6a70b",
+      "approved_file": "tests/visual/__snapshots__/site-install-390x844.png",
+      "approved_sha256": "7095170fa43b779be3ae84f01ef4d3aa94b1ad678de89fe8f91010223e757994",
+      "approved_git_blob": "307edab12577e65bca5d1fba5f7fa560dbd9041c"
+    }
+  ]
+}

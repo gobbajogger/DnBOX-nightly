@@ -291,6 +291,30 @@ def wait_for_homepage(page):
     }""")
 
 
+def wait_for_offline_installer(page):
+    # The empty preview eagerly opens two hidden workspaces. Their frame
+    # lifecycle may keep Playwright from reporting idle after all assets load.
+    page.wait_for_function("""() => {
+        const element = id => document.getElementById(id);
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'DnBOX Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        const readyFrame = (id, api) => {
+            const frame = element(id);
+            return frame?.contentDocument?.readyState === 'complete' &&
+                !!frame.contentWindow[api];
+        };
+        const pictures = [...document.querySelectorAll('.real-references img')];
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            weights.has('500') && weights.has('700') &&
+            pictures.length === 3 && pictures.every(image => image.complete && image.naturalWidth > 0) &&
+            element('firmware-panel')?.hidden === false && element('noversion')?.hidden === false &&
+            element('noversion').textContent.trim().length > 0 && element('version')?.options.length === 0 &&
+            element('go')?.disabled === true && element('download')?.hidden === true &&
+            readyFrame('sample-frame', 'sampleWorkspace') && readyFrame('project-frame', 'projectWorkspace');
+    }""")
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -304,12 +328,14 @@ def main():
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def settle(pg, url, name, *, homepage=False):
+            def settle(pg, url, name, *, homepage=False, offline_installer=False):
                 try:
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
                     if homepage:
                         wait_for_homepage(pg)
+                    elif offline_installer:
+                        wait_for_offline_installer(pg)
                     else:
                         pg.evaluate('document.fonts.ready')
                         pg.wait_for_load_state('networkidle')
@@ -369,7 +395,7 @@ def main():
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     if OFFLINE_BUILT[rel] == 'install/index.html':
                         attach_installer_responses(pg)
-                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full, offline_installer=(rel == 'x0x_installer.html'))
                     print(f'Capturing {full}', flush=True)
                     compare(full, capture_full_page(pg, rel, full), results); pg.close()
     finally:

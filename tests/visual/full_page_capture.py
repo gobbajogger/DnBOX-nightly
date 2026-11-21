@@ -99,7 +99,12 @@ def capture_full_page(page, route, name):
             if long_archive:
                 # The SMK manual reflows by up to several text rows on first paint.
                 # Its reference covers the entire settled document, including the footer.
-                return capture_bands(page, painted, deadline, band_rows=min(BAND_ROWS, MANUAL_BAND_ROWS))
+                rows = MANUAL_BAND_ROWS
+                if width <= 480 and painted[4] < painted[5]:
+                    # A narrow portrait tile stays under 16 MiB decoded at DPR 1.
+                    # Fewer native captures avoid repeating the compositor setup.
+                    rows = min(rows * 4, (4 * 1024 * 1024) // width)
+                return capture_bands(page, painted, deadline, band_rows=min(BAND_ROWS, rows))
             return capture_bands(page, painted, deadline)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
         verify_png(data)

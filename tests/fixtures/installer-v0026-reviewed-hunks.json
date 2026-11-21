@@ -135,17 +135,26 @@
   },
   {
     "id": "post-replug-identity",
-    "liveOnly": [],
+    "liveOnly": [
+      "      setConnected(false, t(\"notfound\"));"
+    ],
     "renderOnly": [
+      "      setConnected(false, t(\"connectNotFound\"));",
       "    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);"
-    ]
+    ],
+    "reason": "An empty scan offers Connect USB and a successful scan verifies the restarting device identity."
   },
   {
     "id": "refresh-report-count",
-    "liveOnly": [],
+    "liveOnly": [
+      "    setConnected(false, (e && e.message) || t(\"error\"));"
+    ],
     "renderOnly": [
-      "    midiAccess.reports?.refresh();"
-    ]
+      "    midiAccess.reports?.refresh();",
+      "    const detail = e?.code === \"denied\" ? t(\"connectDenied\") : (e && e.message) || t(\"error\");",
+      "    setConnected(false, detail);"
+    ],
+    "reason": "Successful scans refresh reporting. Denied scans offer Connect USB and other scan errors keep their own message."
   },
   {
     "id": "match-owner-ledger",
@@ -193,5 +202,23 @@
     "id": "load-current-records",
     "hunk_sha256": "a9f61fbac93eb251c3bd6a6b29e0877d3c0c81f5ad4fbb62a26a38a5a8eef55c",
     "reason": "Local-file workspaces open separately. Hosted installers retain their embedded tools and navigation listeners."
+  },
+  {
+    "id": "usb-scan-retry-ja",
+    "reason": "Japanese scan recovery names the active USB connection action.",
+    "liveOnly": [],
+    "renderOnly": [
+      "    connectDenied: \"サイト設定で MIDI（SysEx）を許可し、「USB 接続」をもう一度押してください。\",",
+      "    connectNotFound: \"機器が見つかりません。データ通信用の USB ケーブルを確認し、MIDI を使う他のアプリを閉じてから、「USB 接続」をもう一度押してください。\","
+    ]
+  },
+  {
+    "id": "usb-scan-retry-en",
+    "reason": "English scan recovery names the active USB connection action.",
+    "liveOnly": [],
+    "renderOnly": [
+      "    connectDenied: \"MIDI (SysEx) access was denied. Allow MIDI in your browser’s site settings, then select Connect USB again.\",",
+      "    connectNotFound: \"Device not found. Check the USB data cable, close other apps using MIDI, then select Connect USB again.\","
+    ]
   }
 ]

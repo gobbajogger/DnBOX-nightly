@@ -2435,6 +2435,8 @@ const TEXT = {
     start: "開始します", verify: "確認中", loader: "書き込みモードに切り替え中", write: "書き込み中",
     reboot: "再起動中", done: "完了しました", stopped: "途中で止まりました。USB を挿し直してもう一度押してください。",
     error: "エラー: ",
+    connectDenied: "サイト設定で MIDI（SysEx）を許可し、「USB 接続」をもう一度押してください。",
+    connectNotFound: "機器が見つかりません。データ通信用の USB ケーブルを確認し、MIDI を使う他のアプリを閉じてから、「USB 接続」をもう一度押してください。",
     denied: "MIDI（SysEx）の使用が許可されませんでした。アドレスバーのサイト設定で MIDI を許可して、もう一度押してください。",
     notfound: "機器が見つかりません。USB ケーブル（データ通信用か）を確かめ、MIDI を使う他のアプリを閉じてから、もう一度押してください。",
     model: "接続されている機器はこのパッケージ向けではありません。",
@@ -2544,6 +2546,8 @@ const TEXT = {
     start: "Starting", verify: "Verifying", loader: "Switching to update mode", write: "Writing",
     reboot: "Restarting", done: "Done", stopped: "Stopped. Replug the USB cable and press Install again.",
     error: "Error: ",
+    connectDenied: "MIDI (SysEx) access was denied. Allow MIDI in your browser’s site settings, then select Connect USB again.",
+    connectNotFound: "Device not found. Check the USB data cable, close other apps using MIDI, then select Connect USB again.",
     denied: "MIDI (SysEx) access was not allowed. Allow MIDI in the site settings (address bar) and press Install again.",
     notfound: "Device not found. Check the USB cable (a data cable), close other apps that use MIDI, and press Install again.",
     model: "The connected device does not match this package.",
@@ -2959,7 +2963,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
     if (!isCurrent()) { dev?.link.close(); return; }
     if (!dev) {
       lastId = null;
-      setConnected(false, t("notfound"));
+      setConnected(false, t("connectNotFound"));
       return;
     }
     lastId = dev.id;
@@ -2977,7 +2981,8 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
   } catch (e) {
     if (!isCurrent()) return;
     lastId = null;
-    setConnected(false, (e && e.message) || t("error"));
+    const detail = e?.code === "denied" ? t("connectDenied") : (e && e.message) || t("error");
+    setConnected(false, detail);
   }
 }
 

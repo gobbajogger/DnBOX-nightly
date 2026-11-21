@@ -1,0 +1,167 @@
+{
+  "head": "061e95213f20126f39b51e7828eecf2c2f274289",
+  "base": "583f622961fc9975fac746592ce6c483073c4170",
+  "reviewer": "independent nightly qualification worker, no authorship of either product page or previous references",
+  "scope": "Default Tools and What\u2019s New, four official snapshot widths plus 240x240. Full-page comparison of the older approved images, base source, base deployed-format build, candidate source and candidate deployed-format build.",
+  "score": {
+    "default Tools screen": 10,
+    "default What\u2019s New screen": 10
+  },
+  "observations": [
+    "Both pages fit at 1440, 1024, 844, 390 and 240. All eight main navigation items had nonzero on-screen rectangles. Real built pages had no page errors or failed resources. The 844 and 240 navigation wraps preserve the Sounds link.",
+    "The released Tools page adds the real playable-instrument CTA to the source-only edition. The link resolved HTTP 200, keyboard activation expanded its disclosure and Remote, current/legacy Presets and Admin destinations remained available at all five widths. All four official source images matched independent source captures pixel for pixel. The runtime-enabled images were separately reviewed and have different geometry.",
+    "What\u2019s New clearly separates the current verified release, formerly withdrawn package, fallback and restart handling. Both Elite and Pro owner confirmations rendered from the built data. All four real built outputs matched the official static-source captures pixel for pixel. The stock source-only server has no generated package-version-assignments.json and returned 404 for that secondary request. The official build supplies it and the browser loaded all resources."
+  ],
+  "surfaces": [
+    {
+      "route": "tools",
+      "viewport": [
+        1440,
+        900
+      ],
+      "candidate_built_sha256": "22fb52c2855c2262d9e6bdc0ab2b117f36e759b1355e23c62fcf37b28b48d724",
+      "base_built_sha256": "22fb52c2855c2262d9e6bdc0ab2b117f36e759b1355e23c62fcf37b28b48d724",
+      "base_source_sha256": "fcea286fff0d8d6fc377848d482b8deabb6dd4ac27b9d34e92e7f9afc2255041",
+      "workflow": "Remote, both preset paths, Admin, keyboard disclosure and instrument target returned 200",
+      "approved_path": "tests/visual/__snapshots__/site-tools-1440x900.png",
+      "previous_baseline_git_blob": "9773034e8ab4630a51fa8032c65250a5dd1ea3eb",
+      "approved_candidate_git_blob": "2ce648c5123400f5ec5e5faadb38208459b4714b",
+      "approved_candidate_sha256": "fcea286fff0d8d6fc377848d482b8deabb6dd4ac27b9d34e92e7f9afc2255041",
+      "independent_candidate_sha256": "fcea286fff0d8d6fc377848d482b8deabb6dd4ac27b9d34e92e7f9afc2255041"
+    },
+    {
+      "route": "tools",
+      "viewport": [
+        1024,
+        640
+      ],
+      "candidate_built_sha256": "9f9e28b17b5eca60a35830b9883ff4ba39824b6377e365b7d6d94cdd59c18b1f",
+      "base_built_sha256": "9f9e28b17b5eca60a35830b9883ff4ba39824b6377e365b7d6d94cdd59c18b1f",
+      "base_source_sha256": "93c6a5dbba26d104d497356819b27e1322ce6e38d0f2045d573d97ec24c76a30",
+      "workflow": "Remote, both preset paths, Admin, keyboard disclosure and instrument target returned 200",
+      "approved_path": "tests/visual/__snapshots__/site-tools-1024x640.png",
+      "previous_baseline_git_blob": "ebb89867ea7af6bdfe57f4bda7eee34026db96ec",
+      "approved_candidate_git_blob": "9cda97dcf2ff2236697976a5e0bf2bf3de449cf1",
+      "approved_candidate_sha256": "93c6a5dbba26d104d497356819b27e1322ce6e38d0f2045d573d97ec24c76a30",
+      "independent_candidate_sha256": "93c6a5dbba26d104d497356819b27e1322ce6e38d0f2045d573d97ec24c76a30"
+    },
+    {
+      "route": "tools",
+      "viewport": [
+        844,
+        390
+      ],
+      "candidate_built_sha256": "e7f4e8fece2a422ae2c9485570d31499f03140781a1e6814b855a24e8d9df0df",
+      "base_built_sha256": "445e0464801d4963bc47aa1defa7c64bcfb3ce9e98217254ded51510fb698dda",
+      "base_source_sha256": "c0cdedfd0275bddb24f6191c4a7a5846f4103e834d0d6f2072f7f45866346863",
+      "workflow": "Remote, both preset paths, Admin, keyboard disclosure and instrument target returned 200",
+      "approved_path": "tests/visual/__snapshots__/site-tools-844x390.png",
+      "previous_baseline_git_blob": "a3a9d3f1c5993fad43ed3e5447aa9aedf63eefc2",
+      "approved_candidate_git_blob": "f69eacbdd3462a197551b2befffcf2f01742aa7c",
+      "approved_candidate_sha256": "8ccf51c23fc5109fce643eadf4547461a61c4dca87c604e57863a2649a34eb0d",
+      "independent_candidate_sha256": "8ccf51c23fc5109fce643eadf4547461a61c4dca87c604e57863a2649a34eb0d"
+    },
+    {
+      "route": "tools",
+      "viewport": [
+        390,
+        844
+      ],
+      "candidate_built_sha256": "c5802f96a0f0929117296a6c32d1453d6324326cf2361f5cb8688196d8c45474",
+      "base_built_sha256": "551a725d5ae1e771779fd3875f556282c72b972796b1f101aad21c29c1e2969d",
+      "base_source_sha256": "5ac7828c34294e3865c27190d0e4c006981ad6a3a1495ece110d08470e61c017",
+      "workflow": "Remote, both preset paths, Admin, keyboard disclosure and instrument target returned 200",
+      "approved_path": "tests/visual/__snapshots__/site-tools-390x844.png",
+      "previous_baseline_git_blob": "37f1c8e5923eb3bfec0c34735eb4aa0d921f39a7",
+      "approved_candidate_git_blob": "791702a9f081ec27cd2a5fe3eed311f210333eec",
+      "approved_candidate_sha256": "b0922eef7365675e21f5c6c51c915e3365b1e2b76acd88cefeb63c16266dcbe1",
+      "independent_candidate_sha256": "b0922eef7365675e21f5c6c51c915e3365b1e2b76acd88cefeb63c16266dcbe1"
+    },
+    {
+      "route": "tools",
+      "viewport": [
+        240,
+        240
+      ],
+      "candidate_built_sha256": "9c19550fad7c2a698db954589d3236d87747b66128a5f7cad57cb6578ad2cb18",
+      "base_built_sha256": "bff11adaee72f2f900877a71c48820219fd6421c5028137b92d561a5d599d3e3",
+      "base_source_sha256": "b5e361368fbe169a01ef092c7b2c796a78ab4b7ddbbe30b19ac5d22a6ee0cba1",
+      "workflow": "Remote, both preset paths, Admin, keyboard disclosure and instrument target returned 200"
+    },
+    {
+      "route": "new",
+      "viewport": [
+        1440,
+        900
+      ],
+      "candidate_built_sha256": "7c3898f60346ab459411dadbe97b3878118454f8791b50366510de64d9868e44",
+      "base_built_sha256": "919517327c132fa7343c33190b8050411f48e0a5de24c07e51ea6c0d4cc42ac3",
+      "base_source_sha256": "919517327c132fa7343c33190b8050411f48e0a5de24c07e51ea6c0d4cc42ac3",
+      "workflow": "actual owner confirmation for both models, current, fallback and withdrawal notices and release links",
+      "approved_path": "tests/visual/__snapshots__/site-new-1440x900.png",
+      "previous_baseline_git_blob": "230d1d2417e8f75673e5df844ac2ae42028e62d7",
+      "approved_candidate_git_blob": "83f14b962b9b8f16d05742270871f3edbc075601",
+      "approved_candidate_sha256": "7c3898f60346ab459411dadbe97b3878118454f8791b50366510de64d9868e44",
+      "independent_candidate_sha256": "7c3898f60346ab459411dadbe97b3878118454f8791b50366510de64d9868e44"
+    },
+    {
+      "route": "new",
+      "viewport": [
+        1024,
+        640
+      ],
+      "candidate_built_sha256": "c208d886e0dfcfa5fe74264542398ed99272e4315347ca72dfed94d6820838b4",
+      "base_built_sha256": "d03819cb6e4ba7e827035e298641ab68fc60464155704f631d8e59124f0851c6",
+      "base_source_sha256": "d03819cb6e4ba7e827035e298641ab68fc60464155704f631d8e59124f0851c6",
+      "workflow": "actual owner confirmation for both models, current, fallback and withdrawal notices and release links",
+      "approved_path": "tests/visual/__snapshots__/site-new-1024x640.png",
+      "previous_baseline_git_blob": "68059e1d87530cc83c99c8f6d230b5c27a74eb4c",
+      "approved_candidate_git_blob": "f660a9e62c9621d94045732e2674655baba99725",
+      "approved_candidate_sha256": "c208d886e0dfcfa5fe74264542398ed99272e4315347ca72dfed94d6820838b4",
+      "independent_candidate_sha256": "c208d886e0dfcfa5fe74264542398ed99272e4315347ca72dfed94d6820838b4"
+    },
+    {
+      "route": "new",
+      "viewport": [
+        844,
+        390
+      ],
+      "candidate_built_sha256": "77dbb98cc22856c81e2fdcf92171e14ebfcb18b47b545e89fc794f6b581412d4",
+      "base_built_sha256": "3556df2b16b798e769c5b2ab5fd3f977d1fa9a6f99ba1bbd9b19d54527a788a4",
+      "base_source_sha256": "3556df2b16b798e769c5b2ab5fd3f977d1fa9a6f99ba1bbd9b19d54527a788a4",
+      "workflow": "actual owner confirmation for both models, current, fallback and withdrawal notices and release links",
+      "approved_path": "tests/visual/__snapshots__/site-new-844x390.png",
+      "previous_baseline_git_blob": "01bf79af3ba6fc054eabf7c32cee99556eaa2f82",
+      "approved_candidate_git_blob": "067405fa0b7bdbaabf9d0cdcd1b188d46735c7ac",
+      "approved_candidate_sha256": "77dbb98cc22856c81e2fdcf92171e14ebfcb18b47b545e89fc794f6b581412d4",
+      "independent_candidate_sha256": "77dbb98cc22856c81e2fdcf92171e14ebfcb18b47b545e89fc794f6b581412d4"
+    },
+    {
+      "route": "new",
+      "viewport": [
+        390,
+        844
+      ],
+      "candidate_built_sha256": "beb86038e034c3b29aa8590b8d78ba024f09680dd2dc90cc5528bce5f8905473",
+      "base_built_sha256": "40b0b4de02762840951d217b0fbca7a116cdbf21c322852b2066daa952b6ef0f",
+      "base_source_sha256": "40b0b4de02762840951d217b0fbca7a116cdbf21c322852b2066daa952b6ef0f",
+      "workflow": "actual owner confirmation for both models, current, fallback and withdrawal notices and release links",
+      "approved_path": "tests/visual/__snapshots__/site-new-390x844.png",
+      "previous_baseline_git_blob": "44e0b2bd2643af18706cdf0abe0b593ca590a6a2",
+      "approved_candidate_git_blob": "4af56dd8014741d267593602bac32ced0557a64d",
+      "approved_candidate_sha256": "beb86038e034c3b29aa8590b8d78ba024f09680dd2dc90cc5528bce5f8905473",
+      "independent_candidate_sha256": "beb86038e034c3b29aa8590b8d78ba024f09680dd2dc90cc5528bce5f8905473"
+    },
+    {
+      "route": "new",
+      "viewport": [
+        240,
+        240
+      ],
+      "candidate_built_sha256": "121a4e6b81610120f7cedb968857a137cda28d261a6848c6716e0626804dac5a",
+      "base_built_sha256": "59fc3d5b5ae12321a0943e2cd2cb9bd60cf84143f2e119dd09894e7dc5955cba",
+      "base_source_sha256": "59fc3d5b5ae12321a0943e2cd2cb9bd60cf84143f2e119dd09894e7dc5955cba",
+      "workflow": "actual owner confirmation for both models, current, fallback and withdrawal notices and release links"
+    }
+  ]
+}

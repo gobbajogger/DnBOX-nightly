@@ -1,0 +1,209 @@
+{
+  "head": "061e95213f20126f39b51e7828eecf2c2f274289",
+  "base": "583f622961fc9975fac746592ce6c483073c4170",
+  "head_tree": "a2ef500a79222d89a006d002abcb3f9ebfc6b9c1",
+  "unrestricted_gate": "running separately",
+  "reviewer": "independent nightly qualification worker; no authorship of Presets or current Manual pages or their references",
+  "score": {
+    "default Presets screen": 10,
+    "default current Manual landing": 10
+  },
+  "scope": "Eight snapshot files, four official widths on each route. Additional source and workflow review at 240x240 website viewport. This receipt covers only the named default surfaces.",
+  "method": "Fresh stock sandboxed Chromium from Playwright 1.62.0 captured both commits. Each full candidate agreed pixel for pixel with a second capture from the official candidate visual runner. Visually inspected all four full-page prior reference/candidate sheets and both latest-consolidated/candidate presentations. All eight navigation links were within the viewport on each candidate. No page errors, unsuccessful HTTP resources or document overflow across these ten candidate states. Direct candidate source and generated site HTML/route assets were verified equal.",
+  "findings": [
+    "On 1440 and 1024 both surfaces exactly matched their counterparts at the latest consolidated SHA. At 390 candidate changes were confined to the navigation strip, x 20\u2013360, y 48\u201360. The responsive wrap restores Sounds and keeps the primary destination accessible at 240 and 844.",
+    "The 844 candidate is three pixels taller for Presets and two pixels taller for the Manual. At 240 both gain 30 px for navigation wrapping. Each complete footer remains visible.",
+    "Presets retained the three editable-file stages in desktop columns and a phone stack. The browser imported a Synth One file, renamed it, kept it and downloaded both an exactly edited copy and its byte-exact original at five sizes.",
+    "Manual retained eight chapter controls, its initial beat diagram and starter chapter. Clicking the Projects topic opened the correct chapter at all five sizes."
+  ],
+  "approved_surfaces": [
+    {
+      "surface": "presets",
+      "viewport": [
+        1440,
+        900
+      ],
+      "consolidated_sha256": "3bf817482a1f7d78595f5830624c320ecb6b4d7572a36dc1c08cd9a0febc699e",
+      "independent_candidate_sha256": "3bf817482a1f7d78595f5830624c320ecb6b4d7572a36dc1c08cd9a0febc699e",
+      "workflow": "Synth One import, rename, keep and both byte-exact downloads",
+      "candidate_pixel_dimensions": [
+        1440,
+        1381
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-presets-1440x900.png",
+      "prior_reference_git_blob": "5765b66d3581f32ede1bf49a94c3a139dd0d31bf",
+      "approved_candidate_file": "site-presets-1440x900-actual.png",
+      "approved_candidate_git_blob": "867f491129a5a3442b63c821a8d601cb08074907",
+      "approved_candidate_sha256": "3bf817482a1f7d78595f5830624c320ecb6b4d7572a36dc1c08cd9a0febc699e",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "presets",
+      "viewport": [
+        1024,
+        640
+      ],
+      "consolidated_sha256": "cf1e3a9837e7e677e28c4489e3a0a1be72df1fe89ebd8d3710742de12605362d",
+      "independent_candidate_sha256": "cf1e3a9837e7e677e28c4489e3a0a1be72df1fe89ebd8d3710742de12605362d",
+      "workflow": "Synth One import, rename, keep and both byte-exact downloads",
+      "candidate_pixel_dimensions": [
+        1024,
+        1355
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-presets-1024x640.png",
+      "prior_reference_git_blob": "50164bda1ac29170d4e29cb0a731576295d0d9f0",
+      "approved_candidate_file": "site-presets-1024x640-actual.png",
+      "approved_candidate_git_blob": "9acc5f0b2b901c38cba8484073926e95210c209c",
+      "approved_candidate_sha256": "cf1e3a9837e7e677e28c4489e3a0a1be72df1fe89ebd8d3710742de12605362d",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "presets",
+      "viewport": [
+        844,
+        390
+      ],
+      "consolidated_sha256": "176c7a487059666f169ab700ee8a872a56b0338c630ff06b1ba22c9142cb94e3",
+      "independent_candidate_sha256": "88514359e58cf3d32267753921c418458186d12d440002a883b4ff90c95ce06a",
+      "workflow": "Synth One import, rename, keep and both byte-exact downloads",
+      "candidate_pixel_dimensions": [
+        844,
+        1197
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-presets-844x390.png",
+      "prior_reference_git_blob": "59b291e12fc87c5c01f823e22516710aaab8795f",
+      "approved_candidate_file": "site-presets-844x390-actual.png",
+      "approved_candidate_git_blob": "6f00b900596cf4fe9ca0bfbb341d951b028b769f",
+      "approved_candidate_sha256": "88514359e58cf3d32267753921c418458186d12d440002a883b4ff90c95ce06a",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "presets",
+      "viewport": [
+        390,
+        844
+      ],
+      "consolidated_sha256": "89d20da51d747cb0fa83542f9bbc65a2132914c5e2b33cc6ff83ef38105ec14c",
+      "independent_candidate_sha256": "e3c9eed452d49d322f335bf6db0c0c7ce613a9f854f4abddff1e5ef85882040e",
+      "workflow": "Synth One import, rename, keep and both byte-exact downloads",
+      "candidate_pixel_dimensions": [
+        390,
+        1847
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-presets-390x844.png",
+      "prior_reference_git_blob": "5d472831bc2b4dfdc09b6afb96b9af83b7dde2af",
+      "approved_candidate_file": "site-presets-390x844-actual.png",
+      "approved_candidate_git_blob": "ecc76eb10f7a5d4cbc1b5b630ea16356f01fd83e",
+      "approved_candidate_sha256": "e3c9eed452d49d322f335bf6db0c0c7ce613a9f854f4abddff1e5ef85882040e",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "presets",
+      "viewport": [
+        240,
+        240
+      ],
+      "consolidated_sha256": "6093b24b5b8bbcad8010f81a6ad1f6730e90d9bbbc9d15ab418a6e03ad88bf86",
+      "independent_candidate_sha256": "b42885dc5b7db72be874120a001f3863c191db11dc1eb401f9a35092cfbd5164",
+      "workflow": "Synth One import, rename, keep and both byte-exact downloads",
+      "candidate_pixel_dimensions": [
+        240,
+        2392
+      ]
+    },
+    {
+      "surface": "manual",
+      "viewport": [
+        1440,
+        900
+      ],
+      "consolidated_sha256": "7f031de1233dfb5bcc91a0d8d27ed56ef0ae5e4d8770e72246140ca0efccee63",
+      "independent_candidate_sha256": "7f031de1233dfb5bcc91a0d8d27ed56ef0ae5e4d8770e72246140ca0efccee63",
+      "workflow": "eight chapters and real Projects topic navigation",
+      "candidate_pixel_dimensions": [
+        1440,
+        2077
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-manual-1440x900.png",
+      "prior_reference_git_blob": "aab3b6b332766f9912513c01674ea4246105660e",
+      "approved_candidate_file": "site-manual-1440x900-actual.png",
+      "approved_candidate_git_blob": "2fab59cbe6148c33426fa81269e50e5bfdc89be4",
+      "approved_candidate_sha256": "7f031de1233dfb5bcc91a0d8d27ed56ef0ae5e4d8770e72246140ca0efccee63",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "manual",
+      "viewport": [
+        1024,
+        640
+      ],
+      "consolidated_sha256": "c9526cb36f38cd23ff240edf2b2e5d00e7057c5205f43f41155fb0acc4668052",
+      "independent_candidate_sha256": "c9526cb36f38cd23ff240edf2b2e5d00e7057c5205f43f41155fb0acc4668052",
+      "workflow": "eight chapters and real Projects topic navigation",
+      "candidate_pixel_dimensions": [
+        1024,
+        2073
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-manual-1024x640.png",
+      "prior_reference_git_blob": "ac7f45ae1387b8ac36292ef219e4c7f9290d785b",
+      "approved_candidate_file": "site-manual-1024x640-actual.png",
+      "approved_candidate_git_blob": "bd17e6a206d5db4bf64a413c746dd62b8f34925c",
+      "approved_candidate_sha256": "c9526cb36f38cd23ff240edf2b2e5d00e7057c5205f43f41155fb0acc4668052",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "manual",
+      "viewport": [
+        844,
+        390
+      ],
+      "consolidated_sha256": "ff33e6d3e0845ba0a8b58b2845060b579fc0840e2712c448677ab10dd13cec20",
+      "independent_candidate_sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "workflow": "eight chapters and real Projects topic navigation",
+      "candidate_pixel_dimensions": [
+        844,
+        2045
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-manual-844x390.png",
+      "prior_reference_git_blob": "430006e9e4e6e2d873c9ef06477252f7eb6668a9",
+      "approved_candidate_file": "site-manual-844x390-actual.png",
+      "approved_candidate_git_blob": "631fdcd121198de586c183beb7290253143ef4d8",
+      "approved_candidate_sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "manual",
+      "viewport": [
+        390,
+        844
+      ],
+      "consolidated_sha256": "588677db50b8c327a96217b9498cdab013996ff1fdb7d49fec8a35e122776f36",
+      "independent_candidate_sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "workflow": "eight chapters and real Projects topic navigation",
+      "candidate_pixel_dimensions": [
+        390,
+        2476
+      ],
+      "approved_file": "tests/visual/__snapshots__/site-manual-390x844.png",
+      "prior_reference_git_blob": "3f50d5245f8e77c0ab953b28f4b8e02aab16a296",
+      "approved_candidate_file": "site-manual-390x844-actual.png",
+      "approved_candidate_git_blob": "b9f34d3bb5a4cd9b126a53c5a09e1005617056a6",
+      "approved_candidate_sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "official_independent_rgb_identical": true
+    },
+    {
+      "surface": "manual",
+      "viewport": [
+        240,
+        240
+      ],
+      "consolidated_sha256": "0e44cb8b3422dd7ce9f998d82c5f4a977a0774c15635359fb644ee088589280c",
+      "independent_candidate_sha256": "5017ae3ac7d1a9c26f3329ba4a857e764ac6534feaf7a8c73f46b684f9895479",
+      "workflow": "eight chapters and real Projects topic navigation",
+      "candidate_pixel_dimensions": [
+        240,
+        3556
+      ]
+    }
+  ]
+}

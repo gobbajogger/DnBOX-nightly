@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Actual generated UI, synthetic state only; no device or physical MIDI access."""
-import asyncio, hashlib, json, threading
+import asyncio, hashlib, json, tempfile, threading
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.async_api import async_playwright
@@ -67,6 +67,6 @@ async def main():
  srv.shutdown()
  paths=['web/x0x_installer.html','web/x0x_projects.html','web/x0x_projects.js','scripts/build-preview.mjs','scripts/render-qualified-nightly.mjs','docs/install/index.html','docs/projects/index.html']
  receipt={'result':'PASS','checks':checks,'browser_errors':errors,'screenshots':screens,'sha256':{x:hashlib.sha256((ROOT/x).read_bytes()).hexdigest() for x in paths},'limit':'Headless actual UI with synthetic busy probe; no device/MIDI/flash or deployed proof.'}
- Path('/tmp/song-ux-review.json').write_text(json.dumps(receipt,indent=2)+'\n')
+ (Path(tempfile.gettempdir()) / 'song-ux-review.json').write_text(json.dumps(receipt,indent=2)+'\n')
  print(str(len(checks))+' project workspace browser checks PASS')
 asyncio.run(main())
