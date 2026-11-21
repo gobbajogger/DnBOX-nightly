@@ -220,6 +220,30 @@ def header_checks(h, w, fails):
     need(h['scrollW'] <= h['innerW'], f"horizontal overflow {h['scrollW']}>{h['innerW']}")
     need(not h['pageScrollable'], 'page scrolls')
 
+def sample_navigation_checks(page, tag, failures):
+    navigation = page.evaluate("""() => {
+        const visible = element => element.getClientRects().length > 0;
+        const links = [...document.querySelectorAll('header nav a')];
+        const home = [...document.querySelectorAll('a[href]')].filter(link =>
+            visible(link) && ['../', '../index.html'].includes(link.getAttribute('href')));
+        return {
+            destinations: links.filter(visible).map(link => link.textContent.trim()),
+            homeLinks: home.length,
+            current: links.find(link => link.getAttribute('aria-current') === 'page')?.textContent,
+            background: getComputedStyle(document.body).backgroundColor,
+            primary: getComputedStyle(document.querySelector('#connect')).backgroundColor,
+            fits: document.documentElement.scrollWidth === innerWidth
+        };
+    }""")
+    wanted = {
+        'destinations': ['Sounds', 'Remote', 'Samples', 'Projects', 'Presets', 'Manual', 'History', 'Install nightly'],
+        'homeLinks': 1, 'current': 'Samples', 'background': 'rgb(7, 16, 20)',
+        'primary': 'rgb(255, 179, 55)', 'fits': True
+    }
+    for key, expected in wanted.items():
+        if navigation.get(key) != expected:
+            failures.append(f'Samples {tag} {key}: {navigation.get(key)!r} (expected {expected!r})')
+
 def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
@@ -277,6 +301,8 @@ def main():
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(base + '/product-site/' + rel); settle(pg)
+                    if rel == 'breaks/index.html':
+                        sample_navigation_checks(pg, tag, header_fails)
                     print(f'Capturing {full}', flush=True)
                     compare(full, pg.screenshot(full_page=True), results); pg.close()
                 for rel in OFFLINE:

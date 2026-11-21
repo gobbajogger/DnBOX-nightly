@@ -51,7 +51,7 @@ def check_inbox(page, origin):
 def check_links(page, url, selector, width):
     page.goto(url)
     page.evaluate("document.fonts.ready")
-    if url.endswith(("/new/", "/projects/")):
+    if url.endswith(("/new/", "/projects/", "/breaks/")):
         nav = page.get_by_role("navigation", name="Main", exact=True)
         for name in ("Sounds", "Remote", "Samples", "Projects", "Presets", "Manual", "History", "Install nightly"):
             link = nav.get_by_role("link", name=name, exact=True)
@@ -83,6 +83,7 @@ def main():
                         actual = check_inbox(page, origin)
                         for path, selector in [("/new/", "body > header a:visible"),
                                                ("/projects/", "#dnbox-global-header header a:visible"),
+                                               ("/breaks/", "body > header a:visible"),
                                                ("/starting-breaks/", ".install-links a:visible")]:
                             error = check_links(page, origin + path, selector, width)
                             if error:

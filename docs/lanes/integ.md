@@ -4,13 +4,13 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 40 of those images. The other 64 remain open. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 44 of those images. The other 60 remain open. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
 | I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
-| C1–C6 | The full gate at `cbe03f76` failed its full-page capture and Native Sound checks. C2 passed. The current head needs a full gate and final independent review. |
+| C1–C6 | The full gate passed at `1afa3dad`. C2 passed. The subsequent Samples change needs its own full gate and final independent review. |
 
 This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
 
@@ -86,9 +86,21 @@ The visual test now logs the screen and size before capturing it. For identical 
 
 Songs & projects now uses DnBOX in its title, navigation, connection instructions, initial project name and file-size error. The offline page matches its template and both shipped libraries. Existing project files keep their `.x0xproject` extension. Across five widths including 240 px, all ten before/after comparisons of the mounted and offline pages preserved control geometry and disabled states. The standalone page still has the previous outstanding design finding for its white, system-font presentation.
 
-The earlier preset reader displays SuperJ6 in its target menu, preview and session. An existing engine 3 file imported and exported byte for byte as `Lead.juno.dnpr` at five widths. The historical `juno` token and the other engine labels are preserved. The 23 preset tests passed. The eight initial full-page references for the two screens matched independent captures pixel for pixel. A second review of the mounted Projects header found that its first link, Sounds, was hidden at 390 and 240 px. The original geometry check had examined only visible body controls. The shared mobile header rule now applies to the mounted Projects header. A browser test hit-tests all nine expected links at five sizes. The old page failed at the two narrow widths and the corrected page passed all five. Only the 390×844 reference changed. With the corrected header, 40 of the original 104 proposals have been independently accepted and 64 remain open.
+The earlier preset reader displays SuperJ6 in its target menu, preview and session. An existing engine 3 file imported and exported byte for byte as `Lead.juno.dnpr` at five widths. The historical `juno` token and the other engine labels are preserved. The 23 preset tests passed. The eight initial full-page references for the two screens matched independent captures pixel for pixel. A second review of the mounted Projects header found that its first link, Sounds, was hidden at 390 and 240 px. The original geometry check had examined only visible body controls. The shared mobile header rule now applies to the mounted Projects header. A browser test hit-tests all nine expected links at five sizes. The old page failed at the two narrow widths and the corrected page passed all five. Only the 390×844 reference changed. This checkpoint brought the reviewed total to 40 of the original 104 proposals.
 
 A later integration rehearsal at tree `9c7ce1b435d14fa43fa7d2afd7f979f2d5f89dfe` combined Web `8e2e9fb6`, Remote `0753ff3f` and integration `cbe03f76`. It built and byte-checked 253 product files with the qualified emulator. Its 232 manifest entries, 69 Node tests and 13 visual-test contracts passed. These checks cover that local tree. Final component merges, the complete candidate gates, a signed-in proposal vote and final independent acceptance are still open.
+
+### Passing nightly gate at `1afa3dad`
+
+The [complete Local gate](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058336748) exited 0 at `1afa3dade49e3d1079e61b4b3090b40e662e0c5f` with a clean tree before and after. It passed all 680 installer admission checks, Native Sound and R22 at three viewport sizes, and all required build, unit and browser stages. The visual run recorded 40 accepted PNG matches, five other passing checks, 64 missing references and zero image, header or page failures. The complete 204,497-byte log has SHA-256 `a742dbef10b3403643ad5268c2f8d46292c745d32e90a53587bb5466aeb44e36`.
+
+### Mounted Samples page
+
+The Samples workspace uses the shared product navigation and the R22 palette. Its home link appears once. On the previous page, Sounds disappeared at 240 and 390 px and Connect used the standalone tool's olive color. The visual check verifies all eight destinations, the current Samples link, the home link count, width and computed colors. The navigation regression also checks the expected links and their spacing at five widths, including 240 px.
+
+Independent review scored the four disconnected views 10/10 at 1440×900, 1024×640, 844×390 and 390×844. All four full-page PNGs matched independent captures. Native viewport captures at 844 and 1024 px varied by up to eight pixels with a maximum channel difference of 1/255. The original comparator counted zero changed pixels. Browser checks at those widths and 240×240 verified keyboard navigation and skip-to-content. The installer’s Samples iframe and the standalone page retained their controls. This brings the accepted set to 44 of 104. [Reviewed reference images and raw browser results](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058207004).
+
+The [receipt form and installer reader](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058014195) agreed on all eight form IDs for both released packages. Across 90 manual fixtures, only successful matching reports counted. All 270 mismatched-model, checksum and cached-port controls returned zero successful installs.
 
 ## Earlier evidence
 
