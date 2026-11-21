@@ -43,7 +43,9 @@ async def cases(origin,meta):
      if voice['engine']=='909':
       await page.locator('[data-engine="drum909"]').click();await page.locator('[data-view="sound"]').click();await page.locator('#sound-voice').select_option(str(voice['slot']))
      else:
-      await page.locator('[data-engine="'+('chicago' if voice['slot']==0 else 'miami')+'"]').click();await page.locator('[data-view="sound"]').click();await page.locator('#sound-bank').select_option(voice['engine'])
+      await page.locator('[data-engine="'+('chicago' if voice['slot']==0 else 'miami')+'"]').click();await page.locator('[data-view="sound"]').click()
+      if voice['engine']=='JUNO':await page.locator('[data-sound-source="emulator"]').click()
+      else:await page.locator('#sound-bank').select_option(voice['engine'])
      await expect(page.locator('#native-envelopes')).to_be_visible()
      await page.wait_for_function("([engine,slot,role])=>{const n=document.querySelector('[data-observed-role=\"'+role+'\"] [data-observed-level]');return n&&nativePackets.slice(-10).some(p=>p.voices.some(v=>v.engine===engine&&v.slot===slot&&v.role===role&&v.available&&String(v.snapshot.level??v.snapshot.raw_level)===n.dataset.observedLevel))}",arg=[voice['engine'],voice['slot'],voice['role']])
      assert await page.locator('#native-envelopes .envelope-graph').count()>0
@@ -65,8 +67,19 @@ async def cases(origin,meta):
       start=await page.evaluate('nativePackets.at(-1).sequence')
       await page.evaluate('nativeNodes.at(-1).port.postMessage({type:"keys",bits:1<<1})')
       await page.wait_for_function('([engine,start])=>nativePackets.some(p=>p.sequence>start&&p.voices.some(v=>v.engine===engine&&v.slot===1&&v.available&&(v.snapshot.level??0)>0))',arg=[engine,start])
-      await page.locator('[data-engine="miami"]').click();await page.locator('[data-view="sound"]').click();await page.locator('#sound-bank').select_option(engine)
-      await expect(page.locator('#part-title')).to_have_text(engine+' / P01')
+      await page.locator('[data-engine="miami"]').click();await page.locator('[data-view="sound"]').click()
+      await page.locator('[data-sound-source="draft"]').click()
+      picker=page.locator('#sound-bank')
+      if engine=='JUNO':
+       assert await picker.locator('option').evaluate_all('es=>es.map(e=>e.value)')==['CHICAGO','MIAMI','Synth One','SuperJ6']
+       assert await page.locator('[data-restore-legacy-juno]').count()==0
+       await page.locator('[data-sound-source="emulator"]').click()
+       await expect(page.locator('#part-title')).to_have_text('Sound / Emulator')
+       await expect(page.locator('#other-view [role=status]')).to_have_text('Emulator Sound controls unavailable')
+       await expect(page.locator('[data-native-param]:enabled')).to_have_count(0)
+      else:
+       await picker.select_option(engine)
+       await expect(page.locator('#part-title')).to_have_text(engine+' / P01')
       await expect(page.locator('#native-envelopes')).to_be_visible()
       await page.wait_for_function("([engine,role])=>{const n=document.querySelector('[data-observed-role=\"'+role+'\"] [data-observed-level]');return n&&nativePackets.slice(-10).some(p=>p.voices.some(v=>v.engine===engine&&v.slot===1&&v.role===role&&v.available&&String(v.snapshot.level)===n.dataset.observedLevel))}",arg=[engine,role])
       assert await page.locator('#native-envelopes .envelope-graph').count()>0

@@ -658,3 +658,6 @@ dialog::backdrop{background:#000a}
  #other-view .sj6-unit{grid-template-rows:16px 16px minmax(16px,auto) 44px;gap:1px}
  .sj6-unit [data-sj6-glyph]{height:16px}
 }
+
+.legacy-bank-choice{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+#other-view .legacy-bank-choice label{margin:0}

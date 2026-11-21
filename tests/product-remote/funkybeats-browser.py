@@ -407,14 +407,24 @@ async def thin_step_lanes(page):
         await page.screenshot(path=str(target/f'{width}x{height}.png'))
 
 async def full_envelopes(page):
+    await page.locator('#roll-grid [data-note]').first.wait_for(state='attached')
+    archived = Path(__file__).with_name('fixtures') / 'legacy-sound-banks' / 'both-owners.json'
+    await page.locator('#draft-file').set_input_files(archived)
+    await page.locator('#draft-replace').click()
     await page.locator('[data-view="sound"]').click()
     graph = page.locator('#other-view .envelope-graph')
     root = page.locator('#other-view .envelope-controls')
     buttons = root.locator('.envelope-stage')
     for part in ['chicago','miami']:
         await page.locator('[data-engine="'+part+'"]').click()
-        for bank in ['CHICAGO','JUNO']:
-            await page.locator('#sound-bank').select_option(bank)
+        picker = page.locator('#sound-bank')
+        await expect(picker).to_have_value('JUNO')
+        await picker.select_option('CHICAGO')
+        await page.locator('[data-restore-legacy-juno]').click()
+        for bank in ['JUNO','CHICAGO']:
+            if bank == 'CHICAGO':
+                await picker.select_option(bank)
+            await expect(picker).to_have_value(bank)
             await expect(buttons).to_have_count(4)
             for width,height in [(390,844),(844,390),(1440,900)]:
                 await page.set_viewport_size({'width':width,'height':height})

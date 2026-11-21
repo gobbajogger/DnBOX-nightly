@@ -148,11 +148,21 @@ async def cases(origin, meta):
                     await page.goto(origin+'/remote/', wait_until='networkidle')
                     # Author real Draft Sound values with both bank choices away
                     # from defaults before native admission. These must survive too.
+                    archived = Path(__file__).with_name('fixtures') / 'legacy-sound-banks' / 'both-owners.json'
+                    await page.locator('#draft-file').set_input_files(archived)
+                    await page.locator('#draft-replace').click()
                     authored = []
                     for part, bank in [('chicago', 'JUNO'), ('miami', 'CHICAGO')]:
                         await page.locator('[data-engine="'+part+'"]').click()
                         await page.locator('[data-view="sound"]').click()
-                        await page.locator('#sound-bank').select_option(bank)
+                        picker = page.locator('#sound-bank')
+                        if bank == 'JUNO':
+                            await expect(picker.locator('option:checked')).to_have_js_property('disabled', True)
+                            await picker.select_option('CHICAGO')
+                            await page.locator('[data-restore-legacy-juno]').click()
+                        else:
+                            await picker.select_option(bank)
+                        await expect(picker).to_have_value(bank)
                         parameter = page.locator('.source-sound-list button[data-param]').first
                         identity = await parameter.get_attribute('data-param')
                         await parameter.press('Enter')

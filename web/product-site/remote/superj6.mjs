@@ -9,7 +9,7 @@ export const SUPERJ6_PROGRAM = Object.freeze({
   programId:'4DBA5169-1A26-45B7-9A8C-BE968BB2EA36',
   bankArchiveSha256:'ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8',
 });
-export const SOUND_BANKS=Object.freeze(['CHICAGO','MIAMI','Synth One','SuperJ6','JUNO']);
+export const SOUND_BANKS=Object.freeze(['CHICAGO','MIAMI','Synth One','SuperJ6']);
 export const sourceOnlyBank=bank=>bank==='SuperJ6'||bank==='Synth One';
 export const WAVE_STOPS=Object.freeze([0,Math.fround(1/3),Math.fround(2/3),1]);
 const waveNames=['Sine','Triangle','Saw','Square'];

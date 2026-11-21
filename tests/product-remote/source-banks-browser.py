@@ -3,6 +3,7 @@
 import argparse
 import asyncio
 import importlib.util
+import json
 from pathlib import Path
 import subprocess
 import tempfile
@@ -23,6 +24,28 @@ async def assert_compact_toolbar(page):
     assert len(bars) == 3 and max(top for top, _ in bars) < min(bottom for _, bottom in bars), bars
 
 
+async def legacy_recovery(page, picker, modern_draft):
+    fixture = HERE / "fixtures" / "legacy-sound-banks" / "both-owners.json"
+    archived = json.loads(fixture.read_text())
+    await core.load_draft(page, archived)
+    assert await core.draft_state(page) == archived
+    restore = page.locator("[data-restore-legacy-juno]")
+    for part in ("chicago", "miami"):
+        await page.locator(f'[data-engine="{part}"]').click()
+        await expect(picker).to_have_value("JUNO")
+        await expect(picker.locator('option[value="JUNO"]')).to_have_js_property("disabled", True)
+        await picker.select_option("SuperJ6")
+        await expect(picker.locator('option[value="JUNO"]')).to_have_count(0)
+        await restore.click()
+        await expect(picker).to_have_value("JUNO")
+        await expect(page.locator(".source-sound-list")).to_be_visible()
+    await core.load_draft(page, modern_draft)
+    for part in ("chicago", "miami"):
+        await page.locator(f'[data-engine="{part}"]').click()
+        await expect(restore).to_have_count(0)
+        await expect(picker.locator('option[value="JUNO"]')).to_have_count(0)
+
+
 async def at_size(browser, size, output):
     width, height = size
     context = await browser.new_context(viewport={"width": width, "height": height},
@@ -39,7 +62,8 @@ async def at_size(browser, size, output):
         for slot, part in enumerate(("chicago", "miami")):
             await page.locator(f'[data-engine="{part}"]').click()
             options = await picker.locator("option").evaluate_all("es=>es.map(e=>e.value)")
-            assert options[:4] == ["CHICAGO", "MIAMI", "Synth One", "SuperJ6"], options
+            assert options == ["CHICAGO", "MIAMI", "Synth One", "SuperJ6"], options
+            await expect(page.locator("[data-restore-legacy-juno]")).to_have_count(0)
             await picker.select_option("Synth One")
             scene = page.locator(f'[data-synth-one-init="{slot}"]')
             await expect(scene.locator("[data-init-field]")).to_have_count(14)
@@ -89,8 +113,9 @@ async def at_size(browser, size, output):
             assert await page.evaluate("document.documentElement.scrollWidth === innerWidth")
         await page.locator('[data-engine="chicago"]').click()
         await expect(page.locator('[data-sj6-display="82"]')).to_have_text("Sine")
+        await legacy_recovery(page, picker, await core.draft_state(page))
         assert await page.evaluate("midiCalls") == 0 and not errors, errors
-        print(f"SOURCE_BANKS {width}x{height} PASS both parts, independent edit, genuine Draft round trip, MIDI=0", flush=True)
+        print(f"SOURCE_BANKS {width}x{height} PASS both parts, independent edit, Draft round trip, old-file recovery and reset, MIDI=0", flush=True)
     finally:
         await context.close()
 

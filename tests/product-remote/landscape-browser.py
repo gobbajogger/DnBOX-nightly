@@ -102,7 +102,9 @@ def inspect(origin, site, output):
                     snap('original-' + q + '-' + v, [18])
                     page.get_by_role('button', name='Return to Sound', exact=True).click()
             elif q in ['chicago', 'miami']:
-                vals = page.locator('#sound-bank option').evaluate_all('es=>es.filter(e=>!e.disabled).map(e=>e.value)')
+                vals = page.locator('#sound-bank option').evaluate_all('es=>es.map(e=>e.value)')
+                assert vals == ['CHICAGO', 'MIAMI', 'Synth One', 'SuperJ6'], (q, vals)
+                assert not page.locator('[data-restore-legacy-juno]').count()
                 for v in vals:
                     page.locator('#sound-bank').select_option(v)
                     snap('sound-' + q + '-' + v, [4, 5, 24])
@@ -111,6 +113,23 @@ def inspect(origin, site, output):
             for v, ref in [('patterns', [9, 19]), ('locks', [3, 17]), ('drums', [2, 15])]:
                 view(v)
                 snap(v + '-' + q, ref)
+
+        def legacy_basses():
+            archived = HERE / 'fixtures/legacy-sound-banks/both-owners.json'
+            page.locator('#draft-file').set_input_files(archived)
+            page.locator('#draft-replace').click()
+            for slot, q in enumerate(('chicago', 'miami')):
+                part(q)
+                view('sound')
+                picker = page.locator('#sound-bank')
+                assert picker.input_value() == 'JUNO' and picker.locator('option:checked').evaluate('option => option.disabled')
+                picker.select_option('CHICAGO')
+                assert picker.locator('option[value="JUNO"]').count() == 0
+                page.locator('[data-restore-legacy-juno]').click()
+                assert picker.input_value() == 'JUNO'
+                controls = page.locator(f'.source-sound-list [data-param^="source-sound/JUNO/{slot}|"]')
+                assert controls.count() == 16
+                snap('sound-' + q + '-JUNO', [4, 5, 24])
 
         def mixes(native=False):
             view('mix')
@@ -192,6 +211,7 @@ def inspect(origin, site, output):
                 case(q, lambda q=q: inspect_part(q))
             case('mix', mixes)
             case('dialogs', dialogs)
+            case('imported legacy basses', legacy_basses)
             case('native', native)
             for q in ('device', 'identity'):
                 page.goto(origin + '/remote/' + q + '/', wait_until='networkidle')

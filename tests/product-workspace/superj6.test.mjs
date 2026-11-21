@@ -24,7 +24,7 @@ test('the two Draft owners retain all 13 measured original float words and stabl
     assert.equal(superJ6Spec(spec.id),spec);
     assert.ok(acceptsSuperJ6(spec,spec.value));
   }
-  assert.deepEqual([...SOUND_BANKS],['CHICAGO','MIAMI','Synth One','SuperJ6','JUNO']);
+  assert.deepEqual([...SOUND_BANKS],['CHICAGO','MIAMI','Synth One','SuperJ6']);
   assert.equal(sourceOnlyBank('SuperJ6'),true);assert.equal(sourceOnlyBank('JUNO'),false);
 });
 test('original waveform stops, independent PWM, continuous SUB and all three clock modes',()=>{
