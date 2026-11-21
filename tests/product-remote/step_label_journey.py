@@ -56,6 +56,15 @@ async def exercise(page, draft_state, load_draft):
         await choose('release')
         await cells.first.focus()
         await expect(header).to_have_text('Legacy')
+        if (width,height) == (844,390):
+            text_box = await header.evaluate("""out => {
+                const range = document.createRange();
+                range.selectNodeContents(out);
+                const label = range.getBoundingClientRect();
+                const button = out.closest('button').getBoundingClientRect();
+                return {top:label.top-button.top, bottom:button.bottom-label.bottom};
+            }""")
+            assert min(text_box.values()) >= 0, ('Legacy readout clips',text_box)
         for _ in range(15):
             await cells.first.press('ArrowUp')
         await expect(header).to_have_text('15/15')
