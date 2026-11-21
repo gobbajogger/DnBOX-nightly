@@ -45,6 +45,10 @@ C1 and C3–C6 remain open pending the final exact-candidate gate, outstanding d
 - `deployment/account-pages/X0X37-for-Loopy-Pro/install/index.html` and `deployment/account-pages/x0x37-for-Loopy-Pro_nightly/install/index.html` were draft-only redirect pages.
 - `tests/edge-legacy-installer-pages.test.mjs` tested only those pages. All three paths were absent from the consolidated base.
 
+### Installer receipts and Local gates
+
+The install-report issue form records the build ID, model, firmware SHA-256, port name, startup result, restart result, browser and notes. Each startup and restart field accepts success, failure or an untested result. The dated Rule 2/C4 note distinguishes the owner’s reported disablement of `gates.yml` from the state returned by the public GitHub API. Repository-wide settings were inaccessible to the public reader.
+
 ## Earlier evidence
 
 Merged #155 as fbb9c46b0f435b1ac09f912f49104a79de3b501b; five-sample source/export and aliases landed, live publication remains separately qualified.

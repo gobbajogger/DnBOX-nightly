@@ -9,6 +9,8 @@ Thanks for your interest in DnBOX. By taking part in this repository you agree t
 
 Pick the Elite or Pro package that matches your keyboard, back up sample slots first, and do not unplug USB while writing. See the [README](README.md).
 
+After an install attempt, record the build, package checksum and what happened on your keyboard. [Open an install report](https://github.com/gobbajogger/DnBOX-nightly/issues/new?template=install-report.yml).
+
 ## Reporting a problem or idea
 
 Please use the issue forms. Do not attach private backups, credentials, or raw captures that you do not want public.

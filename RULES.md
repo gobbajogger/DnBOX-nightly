@@ -40,3 +40,4 @@
 
 ## Change log
 - 2026-11-16: v2 created from RULES.md v1 (19:50–20:10) and the User's decisions; process rules dropped.
+- 2026-11-21 UTC: The owner reported disabling `gates.yml` in DnBOX and DnBOX-nightly to comply with Rule 2 and checklist C4. At 02:32 UTC, GitHub’s public API still returned `active` for both workflow records. Repository-wide Actions permissions require administrative access. Project gates run locally.
