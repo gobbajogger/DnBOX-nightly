@@ -5,9 +5,9 @@ of source `363b128793c3aecf49a6eca293d6ab74a1cd7f0b` (root
 `d50b659b84de5859a3a0bd261221c2ed95ccda73`). It does not approve that source or
 replace the independent reviewer. The QA scripts and original findings remain
 at evidence commit `76e059e17db12265bf2062144eb7feee1df7e5f8`,
-[`docs/independent-qa/pr8-r1`](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/tree/76e059e17db12265bf2062144eb7feee1df7e5f8/docs/independent-qa/pr8-r1).
+[`docs/independent-qa/pr8-r1`](https://github.com/gobbajogger/DnBOX-nightly/tree/76e059e17db12265bf2062144eb7feee1df7e5f8/docs/independent-qa/pr8-r1).
 The review is
-[5638336932](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/8#pullrequestreview-5638336932).
+[5638336932](https://github.com/gobbajogger/DnBOX-nightly/pull/8#pullrequestreview-5638336932).
 
 ## Changed behavior
 

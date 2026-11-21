@@ -1,0 +1,178 @@
+test_capture_name_cannot_escape_output (test_capture_actual.Capture.test_capture_name_cannot_escape_output) ... ok
+test_capture_rejects_output_inside_baselines (test_capture_actual.Capture.test_capture_rejects_output_inside_baselines) ... ok
+test_explicit_update_preserves_supported_baseline_workflow (test_capture_actual.Capture.test_explicit_update_preserves_supported_baseline_workflow) ... ok
+test_failure_keeps_actual_pass_cleans_it_and_neither_changes_reference (test_capture_actual.Capture.test_failure_keeps_actual_pass_cleans_it_and_neither_changes_reference) ... ok
+test_missing_baseline_cleans_actual_without_creating_reference_directory (test_capture_actual.Capture.test_missing_baseline_cleans_actual_without_creating_reference_directory) ... ok
+test_normal_pass_cleanup_and_failure_signals_unchanged (test_capture_actual.Capture.test_normal_pass_cleanup_and_failure_signals_unchanged) ... ok
+test_output_directory_symlink_is_rejected (test_capture_actual.Capture.test_output_directory_symlink_is_rejected) ... ok
+test_output_links_never_overwrite_baselines (test_capture_actual.Capture.test_output_links_never_overwrite_baselines) ... ok
+test_summary_link_rejected_and_regular_output_can_be_replaced (test_capture_actual.Capture.test_summary_link_rejected_and_regular_output_can_be_replaced) ... ok
+test_first_paint_only_accepts_bounded_empty_canvas_below_native_rectangle (test_manual_capture.OriginalManualCapture.test_first_paint_only_accepts_bounded_empty_canvas_below_native_rectangle) ... ok
+test_manual_rejects_shrink_large_growth_and_changed_viewport_before_banding (test_manual_capture.OriginalManualCapture.test_manual_rejects_shrink_large_growth_and_changed_viewport_before_banding) ... ok
+test_other_manual_routes_keep_native_full_page (test_manual_capture.OriginalManualCapture.test_other_manual_routes_keep_native_full_page) ... ok
+test_stable_large_desktop_uses_painted_geometry_and_one_original_deadline (test_manual_capture.OriginalManualCapture.test_stable_large_desktop_uses_painted_geometry_and_one_original_deadline) ... ok
+test_three_compact_sizes_and_short_desktop_keep_native_capture (test_manual_capture.OriginalManualCapture.test_three_compact_sizes_and_short_desktop_keep_native_capture) ... ok
+test_all_png_filters_maintain_previous_row_across_strips (test_visual_gate.GateContract.test_all_png_filters_maintain_previous_row_across_strips) ... ok
+test_approved_identical_pixels_pass_three_repeats (test_visual_gate.GateContract.test_approved_identical_pixels_pass_three_repeats) ... ok
+test_bands_reject_invalid_png_and_changed_document (test_visual_gate.GateContract.test_bands_reject_invalid_png_and_changed_document) ... ok
+test_bands_retain_every_row_and_reject_a_changed_seam (test_visual_gate.GateContract.test_bands_retain_every_row_and_reject_a_changed_seam) ... ok
+test_bands_share_one_deadline_and_reject_late_completion (test_visual_gate.GateContract.test_bands_share_one_deadline_and_reject_late_completion) ... ok
+test_browser_errors_empty_runs_and_header_errors_fail (test_visual_gate.GateContract.test_browser_errors_empty_runs_and_header_errors_fail) ... ok
+test_capture_rejects_a_complete_image_after_the_total_deadline (test_visual_gate.GateContract.test_capture_rejects_a_complete_image_after_the_total_deadline) ... ok
+test_different_encoding_of_same_pixels_uses_pixel_comparison (test_visual_gate.GateContract.test_different_encoding_of_same_pixels_uses_pixel_comparison) ... ok
+test_exact_pixel_tolerance_changed_fraction_and_difference_image (test_visual_gate.GateContract.test_exact_pixel_tolerance_changed_fraction_and_difference_image) ... ok
+test_failed_streaming_diff_cannot_replace_previous_output (test_visual_gate.GateContract.test_failed_streaming_diff_cannot_replace_previous_output) ... ok
+test_filtered_passing_subset_cannot_qualify_publication (test_visual_gate.GateContract.test_filtered_passing_subset_cannot_qualify_publication) ... ok
+test_first_paint_rejects_scroll_viewport_or_dpr_drift (test_visual_gate.GateContract.test_first_paint_rejects_scroll_viewport_or_dpr_drift) ... ok
+test_first_paint_settles_fractional_height_before_any_band_is_retained (test_visual_gate.GateContract.test_first_paint_settles_fractional_height_before_any_band_is_retained) ... ok
+test_full_page_routes_keep_native_capture_for_regular_sizes (test_visual_gate.GateContract.test_full_page_routes_keep_native_capture_for_regular_sizes) ... ok
+test_identical_png_requires_complete_end_chunk (test_visual_gate.GateContract.test_identical_png_requires_complete_end_chunk) ... ok
+test_identical_png_skips_pixel_arrays_and_removes_actual (test_visual_gate.GateContract.test_identical_png_skips_pixel_arrays_and_removes_actual) ... ok
+test_identical_png_with_invalid_chunk_crc_fails (test_visual_gate.GateContract.test_identical_png_with_invalid_chunk_crc_fails) ... ok
+test_identical_png_with_invalid_pixels_still_fails (test_visual_gate.GateContract.test_identical_png_with_invalid_pixels_still_fails) ... ok
+test_incomplete_or_extra_inflated_rows_and_invalid_filter_raise (test_visual_gate.GateContract.test_incomplete_or_extra_inflated_rows_and_invalid_filter_raise) ... ok
+test_installer_routes_only_pause_the_two_public_requests (test_visual_gate.GateContract.test_installer_routes_only_pause_the_two_public_requests) ... ok
+test_invalid_native_builds_png_also_fails (test_visual_gate.GateContract.test_invalid_native_builds_png_also_fails) ... ok
+test_legacy_manual_keeps_the_entire_settled_footer_on_narrow_viewports (test_visual_gate.GateContract.test_legacy_manual_keeps_the_entire_settled_footer_on_narrow_viewports) ... ok
+test_legacy_portrait_batches_preserve_the_viewport_and_total_deadline (test_visual_gate.GateContract.test_legacy_portrait_batches_preserve_the_viewport_and_total_deadline) ... ok
+test_missing_baseline_is_reported_not_created (test_visual_gate.GateContract.test_missing_baseline_is_reported_not_created) ... ok
+test_palette_and_grayscale_keep_pillow_rgb_semantics (test_visual_gate.GateContract.test_palette_and_grayscale_keep_pillow_rgb_semantics) ... ok
+test_proposal_is_not_a_pass (test_visual_gate.GateContract.test_proposal_is_not_a_pass) ... ok
+test_render_mutant_fails_and_corrected_render_passes (test_visual_gate.GateContract.test_render_mutant_fails_and_corrected_render_passes) ... ok
+test_short_manuals_capture_the_complete_painted_document (test_visual_gate.GateContract.test_short_manuals_capture_the_complete_painted_document) ... ok
+test_size_change_fails (test_visual_gate.GateContract.test_size_change_fails) ... ok
+test_valid_padding_after_final_idat_stream_preserves_pixels (test_visual_gate.GateContract.test_valid_padding_after_final_idat_stream_preserves_pixels) ... ok
+test_mounted_installer_accepts_the_mke_only_catalog (test_visual_gate.MountedPackageTests.test_mounted_installer_accepts_the_mke_only_catalog) ... ok
+test_mounted_installer_requires_a_package_while_empty_preview_can_render (test_visual_gate.MountedPackageTests.test_mounted_installer_requires_a_package_while_empty_preview_can_render) ... ok
+test_truncated_and_same_size_unverified_files_cannot_be_served (test_visual_gate.MountedPackageTests.test_truncated_and_same_size_unverified_files_cannot_be_served) ... ok
+test_verified_bytes_are_served_without_network (test_visual_gate.MountedPackageTests.test_verified_bytes_are_served_without_network) ... ok
+test_all_cases_keep_original_order_and_each_viewport_closes_before_next (test_visual_viewports.VisualViewportContract.test_all_cases_keep_original_order_and_each_viewport_closes_before_next) ... FAIL screen: 1.00000 of pixels differ -> /workspace/scratch/1f3f01f99f53/votes/tmp/tmpybff9iu2/out/screen-diff.png
+FAIL screen: 0.00150 of pixels differ -> /workspace/scratch/1f3f01f99f53/votes/tmp/tmp81ho2nck/actual/screen-diff.png
+FAIL screen: 1.00000 of pixels differ -> /workspace/scratch/1f3f01f99f53/votes/tmp/tmpsooh8ny3/actual/screen-diff.png
+FAIL screen: size (30, 31, 3) != baseline (30, 30, 3)
+Capturing remote-sequence-1440x900
+Capturing remote-lane-chance-1440x900
+Capturing remote-lane-pitch-1440x900
+Capturing remote-lane-pan-1440x900
+Capturing remote-sound-1440x900
+Capturing remote-mix-1440x900
+Capturing remote-patterns-1440x900
+Capturing remote-files-1440x900
+Capturing site-index-1440x900
+Capturing site-install-1440x900
+Capturing site-breaks-1440x900
+Capturing site-starting-breaks-1440x900
+Capturing site-projects-1440x900
+Capturing site-presets-1440x900
+Capturing site-presets-legacy-1440x900
+Capturing site-manual-1440x900
+Capturing site-manual-original-1440x900
+Capturing site-manual-legacy-1440x900
+Capturing site-manual-projects-guide-1440x900
+Capturing site-manual-protocol-1440x900
+Capturing site-builds-1440x900
+Capturing site-tools-1440x900
+Capturing site-help-1440x900
+Capturing site-new-1440x900
+Capturing site-remote-identity-1440x900
+Capturing site-remote-device-1440x900
+Capturing offline-x0x_installer-1440x900
+Capturing offline-x0x_breaks-1440x900
+Capturing offline-x0x_projects-1440x900
+header SSIM vs page-01 = 1.0000 (gate >= 0.90)
+Capturing remote-sequence-1024x640
+Capturing remote-lane-chance-1024x640
+Capturing remote-lane-pitch-1024x640
+Capturing remote-lane-pan-1024x640
+Capturing remote-sound-1024x640
+Capturing remote-mix-1024x640
+Capturing remote-patterns-1024x640
+Capturing remote-files-1024x640
+Capturing site-index-1024x640
+Capturing site-install-1024x640
+Capturing site-breaks-1024x640
+Capturing site-starting-breaks-1024x640
+Capturing site-projects-1024x640
+Capturing site-presets-1024x640
+Capturing site-presets-legacy-1024x640
+Capturing site-manual-1024x640
+Capturing site-manual-original-1024x640
+Capturing site-manual-legacy-1024x640
+Capturing site-manual-projects-guide-1024x640
+Capturing site-manual-protocol-1024x640
+Capturing site-builds-1024x640
+Capturing site-tools-1024x640
+Capturing site-help-1024x640
+Capturing site-new-1024x640
+Capturing site-remote-identity-1024x640
+Capturing site-remote-device-1024x640
+Capturing offline-x0x_installer-1024x640
+Capturing offline-x0x_breaks-1024x640
+Capturing offline-x0x_projects-1024x640
+Capturing remote-sequence-844x390
+Capturing remote-lane-chance-844x390
+Capturing remote-lane-pitch-844x390
+Capturing remote-lane-pan-844x390
+Capturing remote-sound-844x390
+Capturing remote-mix-844x390
+Capturing remote-patterns-844x390
+Capturing remote-files-844x390
+Capturing site-index-844x390
+Capturing site-install-844x390
+Capturing site-breaks-844x390
+Capturing site-starting-breaks-844x390
+Capturing site-projects-844x390
+Capturing site-presets-844x390
+Capturing site-presets-legacy-844x390
+Capturing site-manual-844x390
+Capturing site-manual-original-844x390
+Capturing site-manual-legacy-844x390
+Capturing site-manual-projects-guide-844x390
+Capturing site-manual-protocol-844x390
+Capturing site-builds-844x390
+Capturing site-tools-844x390
+Capturing site-help-844x390
+Capturing site-new-844x390
+Capturing site-remote-identity-844x390
+Capturing site-remote-device-844x390
+Capturing offline-x0x_installer-844x390
+Capturing offline-x0x_breaks-844x390
+Capturing offline-x0x_projects-844x390
+Capturing remote-sequence-390x844
+Capturing remote-lane-chance-390x844
+Capturing remote-lane-pitch-390x844
+Capturing remote-lane-pan-390x844
+Capturing remote-sound-390x844
+Capturing remote-mix-390x844
+Capturing remote-patterns-390x844
+Capturing remote-files-390x844
+Capturing site-index-390x844
+Capturing site-install-390x844
+Capturing site-breaks-390x844
+Capturing site-starting-breaks-390x844
+Capturing site-projects-390x844
+Capturing site-presets-390x844
+Capturing site-presets-legacy-390x844
+Capturing site-manual-390x844
+Capturing site-manual-original-390x844
+Capturing site-manual-legacy-390x844
+Capturing site-manual-projects-guide-390x844
+Capturing site-manual-protocol-390x844
+Capturing site-builds-390x844
+Capturing site-tools-390x844
+Capturing site-help-390x844
+Capturing site-new-390x844
+Capturing site-remote-identity-390x844
+Capturing site-remote-device-390x844
+Capturing offline-x0x_installer-390x844
+Capturing offline-x0x_breaks-390x844
+Capturing offline-x0x_projects-390x844
+ok
+test_failed_action_identifies_state_and_releases_the_browser (test_visual_viewports.VisualViewportContract.test_failed_action_identifies_state_and_releases_the_browser) ... VISUAL {"screens": 121, "pass": 121, "fail": 0, "no_baseline": 0, "baseline_written": 0, "header_fail": 0, "page_errors": 0}
+Capturing remote-sequence-1440x900
+ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.860s
+
+OK

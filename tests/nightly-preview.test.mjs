@@ -37,7 +37,13 @@ assert.match(markup, /id="modeldetails"/, 'missing visible model choice');
 assert.match(markup, /@media\s*\(max-width:/, 'missing responsive CSS');
 assert.match(read('docs/index.html'), /NIGHTLY/i);
 assert.ok(existsSync(join(root,'docs/manual/index.html')));
-assert.ok(existsSync(join(root,'docs/new/index.html')));
+const statusLink = markup.match(/href="([^"]+)">Release status<\/a>/);
+assert.ok(statusLink, 'release notice needs a status link');
+const installerFile = new URL('../docs/install/index.html', import.meta.url);
+const statusFile = new URL(statusLink[1], installerFile);
+assert.equal(fileURLToPath(statusFile), join(root, 'docs/new/index.html'),
+  'opening Release status from the downloaded installer must select the local document');
+assert.ok(existsSync(statusFile));
 console.log('PASS: generated scripts, accessibility, safeguards, empty firmware catalog, site links');
 
 

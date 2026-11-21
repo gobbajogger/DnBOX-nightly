@@ -76,12 +76,14 @@ See [ble/README.md](https://github.com/gobbajogger/DnBOX/blob/main/ble/README.md
 
 ## Versions
 
-**[DnBOX 0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) is the Latest release.** The owner tested startup and restart on real SMK-37 Elite and SMK-37 Pro keyboards with the corrected firmware from `94197fc8`. The earlier `600b3b45` packages remain withdrawn.
+**[DnBOX 0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) is the Latest release.** The owner tested startup and restart on real SMK-37 Elite and SMK-37 Pro keyboards with the corrected firmware from `94197fc8`. The earlier `600b3b45` packages remain withdrawn. The release adds Juno with shared chorus, a String Machine engine and held-key chords on the polyphonic synth slots.
 
-- [SMK-37 Elite 0.0.26 package](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc)
-- [SMK-37 Pro 0.0.26 package](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc)
+| Package | Bytes | SHA-256 |
+|---|---:|---|
+| [SMK-37 Elite](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc) | 651,732 | `95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6` |
+| [SMK-37 Pro](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc) | 651,730 | `ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8` |
 
-[0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1) remains available as a fallback. The keyboard displays 0.0.25 for that version. Back up your sample slots and export your project before updating.
+[0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1) remains available as a fallback. The keyboard displays 0.0.25 for that version. Back up your sample slots and export your project before updating. The [release source](https://github.com/gobbajogger/DnBOX/commit/94197fc839b00aff47b98ca02f3c6396e4a6eabf) is the corrected build previously distributed for testing as `94197fc8-hwtest`.
 
 ## Install
 

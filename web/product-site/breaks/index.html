@@ -89,10 +89,29 @@
   .embedded p{font-weight:400}.embedded main>p:last-child{display:none}
 .empty{padding:14px 0}.embedded .empty{padding:14px 0}
 </style>
-<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
-<body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
+<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css">
+<style>
+  /* The product page shares the site's instrument palette and top-level header. */
+  html:not(.embedded) body.tool-surface {
+    --bg: #071014;
+    --ink: inherit;
+    --muted: inherit;
+    --line: inherit;
+    --fg: var(--ink);
+    --dim: var(--muted);
+    --rule: var(--line);
+    --accent: var(--control);
+    --wave: var(--muted);
+    color: var(--ink);
+  }
+  html:not(.embedded) #list { background: #101a1f; }
+  html:not(.embedded) #connect { color: #1c1404; }
+  .embedded .skip, .embedded #dnbox-global-header { display: none; }
+  #dnbox-global-header { border-bottom-color: var(--line); }
+  #dnbox-global-header [aria-current="page"] { text-decoration: underline; text-underline-offset: 0.2em; }
+</style></head>
+<body class="tool-surface"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header id="dnbox-global-header"><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/" aria-current="page">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header>
 <main id="dnbox-tool-main">
-  <a class="home" href="../">DnBOX</a>
   <h1>Import samples</h1>
   <p>Connect your keyboard by USB with DnBOX running. Use Chrome or Edge to add or replace loops.</p>
 
@@ -1755,7 +1774,6 @@ window.sampleWorkspace = {
   invalidate: () => { stopLoopPreview(); readOk = false; render(); say("Read device slots again before sending. Prepared loops are retained; reading replaces the draft after confirmation."); }
 };
 if (new URLSearchParams(location.search).has("embedded")) {
-  document.querySelector(".home").hidden = true;
   document.documentElement.classList.add("embedded");
   const fitWorkspace = () => {
     if (parent === window) return;

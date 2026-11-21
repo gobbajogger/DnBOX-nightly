@@ -169,8 +169,8 @@
     },
     {
       "path": "breaks/index.html",
-      "bytes": 96200,
-      "sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265"
+      "bytes": 96842,
+      "sha256": "e32b0bf3d9d2ad629a2b2b405204059b0ec2f1d0ee504f8648e62b2be79e578e"
     },
     {
       "path": "build-status.json",
@@ -189,8 +189,8 @@
     },
     {
       "path": "builds/index.html",
-      "bytes": 582149,
-      "sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98"
+      "bytes": 582702,
+      "sha256": "924046cff3c0f337ab5dd849f1dec1d6ba1a7f9c44e964aee92cf083415d5a22"
     },
     {
       "path": "components/archive/store.mjs",
@@ -253,14 +253,29 @@
       "sha256": "f69e303d2aaf503c4ccd36b7385bf3bca6d3ffab773f4affcdaade93b71a7f6e"
     },
     {
+      "path": "help/ideas/inbox.mjs",
+      "bytes": 2169,
+      "sha256": "ed7b6d3c2d2b45eccf675baa7421497f5f3ab29702dc377c2598bdf071123902"
+    },
+    {
+      "path": "help/ideas/index.html",
+      "bytes": 1137,
+      "sha256": "f4cc01dde6b227bf71c72004ded013833dd226010f89f76e298534d0b0cc967f"
+    },
+    {
+      "path": "help/ideas/page.mjs",
+      "bytes": 1309,
+      "sha256": "b753b91ca07ccbd5273e30f4264a741713a5a9442db08f88fe6cc432bdeceeea"
+    },
+    {
       "path": "help/index.html",
-      "bytes": 2783,
-      "sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+      "bytes": 2818,
+      "sha256": "abc1a5f5e8cceee622a0d08a726b72d46117be2474d3fdd7637db34a10d029e8"
     },
     {
       "path": "index.html",
-      "bytes": 5428379,
-      "sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+      "bytes": 5428589,
+      "sha256": "1c5cee4ad91584002d6f0deba47e452ddb7a1d1791e872ed1f23dd8f09c5029b"
     },
     {
       "path": "install-reports.mjs",
@@ -279,8 +294,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 647982,
-      "sha256": "b5048877d9dbca183f8bb4e43a36bdcd05487f9e63606d311bc509fb127b7097"
+      "bytes": 651442,
+      "sha256": "c9f4fa7db64bb1ecb3b027a880e1a2a2daf323a763bcf9c3f943dc28517fbc62"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -544,8 +559,8 @@
     },
     {
       "path": "manual/original/index.html",
-      "bytes": 59988,
-      "sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101"
+      "bytes": 60196,
+      "sha256": "43bf4bd4e36c2fbb7efe7b24c38318f2574dac979b9f24f3544489579b97b925"
     },
     {
       "path": "manual/projects-guide.html",
@@ -554,13 +569,13 @@
     },
     {
       "path": "manual/protocol.html",
-      "bytes": 5207,
-      "sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
+      "bytes": 5306,
+      "sha256": "74636d3a25ef271bb80813cd1e296090e3e9c0cbf190575ed5822b9a5b8e9b24"
     },
     {
       "path": "new/index.html",
-      "bytes": 18975,
-      "sha256": "3926400808343dccaf7aea47d49f679c1ebc14910ddf318da1b7e07bd93b5822"
+      "bytes": 19086,
+      "sha256": "aace66e7c66035356fbd4f5427780ba4b1fba53fd8126ea6bf6f74702aea04cb"
     },
     {
       "path": "presets/app.mjs",
@@ -584,18 +599,18 @@
     },
     {
       "path": "presets/legacy/app.mjs",
-      "bytes": 11378,
-      "sha256": "68af340ed31b031977bce9e99e9d548f889f5f47534304aba933c9a227b50e0b"
+      "bytes": 11385,
+      "sha256": "f6288708985c5c780fe47997a7b9fd44628275c66817fb75637412c73de8905b"
     },
     {
       "path": "presets/legacy/codec.mjs",
-      "bytes": 12667,
-      "sha256": "66563fb679f2ca15e5aadb7ecb86bcc3bc5a8b4b570ad41c7e9e069f5cbeaae9"
+      "bytes": 12795,
+      "sha256": "7a5fb4609e5ca709962cae6f9c357934d06944a404d0c6b57617a2fd4c7647d0"
     },
     {
       "path": "presets/legacy/index.html",
-      "bytes": 9943,
-      "sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+      "bytes": 9946,
+      "sha256": "5b4456c26f1c74fc6da46ceca45bcfab516f71f4c68eb9992e2be15c114e887c"
     },
     {
       "path": "presets/legacy/zip.mjs",
@@ -604,8 +619,8 @@
     },
     {
       "path": "presets/page.mjs",
-      "bytes": 4597,
-      "sha256": "2e24f58bc9dfe212cc34b9d79dfc04b21eaa58a296c9c28b5d6a9d18166c867f"
+      "bytes": 4633,
+      "sha256": "1f16e901432a084ecc6392c23ca68edec88fb89b1623e11a6432f4e91e75c979"
     },
     {
       "path": "presets/schema.mjs",
@@ -659,8 +674,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 118085,
-      "sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+      "bytes": 118108,
+      "sha256": "bc1933bbdbda3f5b1ed215806998c5122b30508fbdb4c1736284659ed54e6a76"
     },
     {
       "path": "reference/current-ui.html",
@@ -1099,8 +1114,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12093,
-      "sha256": "99d33a7a03628c1a4ea32817a5f069a439a360b4d3ffd7315b9815f478fb8aab"
+      "bytes": 12906,
+      "sha256": "00090ac63b48d4a225140d5aaaa7fbe98d53c41b06fe290eefa24c9f1558b8a3"
     },
     {
       "path": "starting-break-export.mjs",

@@ -7,10 +7,12 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, cpSync, rmSync } f
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { standaloneFontInputs } from '../scripts/standalone-fonts.mjs';
 import { spawnSync } from 'node:child_process';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const relativeInputs = [
+  ...standaloneFontInputs, 'scripts/standalone-fonts.mjs',
   'package.json', 'preview-catalog.json', 'package-version-assignments.json', 'build-status.json',
   'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs',
   'scripts/verify-pages-source-parity.mjs', 'scripts/legacy-controller-packages.json',
@@ -134,4 +136,23 @@ test('a missing staged page is a failing path instead of a partial pass', async 
   const result = f.verify();
   assert.equal(result.ok, false);
   assert.deepEqual(paths(result), ['projects/index.html']);
+});
+
+test('standalone tool fonts are bundled and changes invalidate earlier generated pages', async t => {
+  const f = await fixture(t);
+  const fonts = standaloneFontInputs.filter(path => path.endsWith('.ttf'));
+  assert.equal(fonts.length, 2);
+  for (const name of ['install', 'breaks', 'projects']) {
+    const file = readFileSync(join(f.candidate, name, 'index.html'), 'utf8');
+    for (const path of fonts) {
+      const bytes = readFileSync(join(f.dir, path)).toString('base64');
+      assert.ok(file.includes('data:font/ttf;base64,' + bytes), name + ' lost ' + path);
+    }
+    assert.ok(file.includes('SIL OPEN FONT LICENSE') && file.includes('The Barlow Project Authors'));
+  }
+  const renderer = await import(pathToFileURL(join(f.dir, 'scripts/render-qualified-nightly.mjs')));
+  const prior = renderer.installerFingerprint();
+  writeFileSync(join(f.dir, fonts[0]), 'changed source font fixture');
+  assert.notEqual(renderer.installerFingerprint(), prior);
+  assert.deepEqual(paths(f.verify()), ['breaks/index.html', 'install/index.html', 'projects/index.html']);
 });

@@ -1,6 +1,6 @@
 # PR8 R6 — local candidate output-parent revalidation
 
-Bounded response to [publisher finding6385802554](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/8#issuecomment-6385802554). Parent/base: accepted R5 `3b626af4d0b0314c1349094699be14fc781c9bcc`, root `40d4faab200df125d901f58b08cbece9b7697c4b`. Independent R5 [source-only acceptance5638712179](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/8#pullrequestreview-5638712179) remains scoped to its exact root and listed findings; it does not independently approve this additional renderer change.
+Bounded response to [publisher finding6385802554](https://github.com/gobbajogger/DnBOX-nightly/pull/8#issuecomment-6385802554). Parent/base: accepted R5 `3b626af4d0b0314c1349094699be14fc781c9bcc`, root `40d4faab200df125d901f58b08cbece9b7697c4b`. Independent R5 [source-only acceptance5638712179](https://github.com/gobbajogger/DnBOX-nightly/pull/8#pullrequestreview-5638712179) remains scoped to its exact root and listed findings; it does not independently approve this additional renderer change.
 
 ## Reproduction and correction
 

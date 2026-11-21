@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>X0X songs &amp; projects</title>
+<title>DnBOX songs &amp; projects</title>
 <style>
   :root { color-scheme: light dark; --bg: #f5f5f3; --card: #fff; --ink: #212321; --muted: #62685f; --line: #d7dbd2; --accent: #8a4b04; --error: #a32720; }
   @media (prefers-color-scheme: dark) {
@@ -72,16 +72,67 @@
   .embedded #status{font-size:.88rem;color:var(--muted)}
   p{max-width:72ch}.embedded section[aria-labelledby="export-title"]{grid-column:1/-1}.embedded section[aria-labelledby="keyboard-title"]{grid-column:1/-1}.check{min-height:44px}button,a,input,select{touch-action:manipulation}
 details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--muted);cursor:pointer}details p{margin:8px 0 12px}
+
+  /* STANDALONE_BARLOW_FACES */
+  html:not(.embedded) {
+    color-scheme: dark;
+    --bg: #071014;
+    --card: #101a1f;
+    --ink: #dde7de;
+    --muted: #a9b9b8;
+    --line: #415052;
+    --accent: #ffb337;
+    --error: #ffaaa2;
+  }
+  html:not(.embedded) body { font-family: "DnBOX Barlow", sans-serif; font-weight: 500; }
+  html:not(.embedded) nav {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 18px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  html:not(.embedded) nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  html:not(.embedded) .home {
+    margin-inline-end: auto;
+    color: var(--ink);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  html:not(.embedded) h1, html:not(.embedded) h2, html:not(.embedded) h3 { font-weight: 700; }
+  html:not(.embedded) section { border-radius: 5px; }
+  html:not(.embedded) #find, html:not(.embedded) #connect {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1c1404;
+    font-weight: 700;
+  }
+  html:not(.embedded) button:disabled {
+    color: var(--muted);
+    background: #172227;
+    border-color: var(--line);
+    opacity: 1;
+  }
+  html:not(.embedded) input::file-selector-button { font: inherit; }
+  html:not(.embedded) summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 360px) {
+    html:not(.embedded) nav .home { flex-basis: 100%; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <nav aria-label="X0X"><a href="../install/#firmware">Install firmware</a><a href="../install/#samples">Import samples</a></nav>
+  <nav aria-label="DnBOX">
+    <a class="home" href="../install/index.html">DnBOX</a>
+    <a href="../install/index.html#firmware">Install firmware</a>
+    <a href="../install/index.html#samples">Import samples</a>
+  </nav>
   <h1>Songs &amp; projects</h1>
   <p class="small">Move your whole live project—song arrangement, patterns and sounds—to or from a file. Include samples for a portable copy.</p>
   <section aria-labelledby="connection-title">
     <h2 id="connection-title">Connect your keyboard</h2>
-    <p class="small">Connect by USB with X0X running. Stop playback, recording and performance mode; close other editors.</p>
+    <p class="small">Connect by USB with DnBOX running. Stop playback, recording and performance mode; close other editors.</p>
     <button id="find">Find USB MIDI keyboard</button>
     <div id="ports" hidden>
       <div class="ports">
@@ -122,7 +173,7 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
   <section aria-labelledby="export-title">
     <h2 id="export-title">Export a project</h2>
     <label for="name" class="small">Project name</label>
-    <input id="name" type="text" maxlength="80" value="My X0X project" autocomplete="off">
+    <input id="name" type="text" maxlength="80" value="My DnBOX project" autocomplete="off">
     <label class="check"><input id="portable" type="checkbox" checked><span>Include original samples <span class="small">— recommended for moving a project or keeping a complete backup.</span></span></label>
     <details><summary>Details: project files</summary><p class="small">Portable files retain original sample bytes, playback rates and slot order. Without samples, a file imports only when every sample slot already matches.</p></details>
     <button id="export" disabled>Export project + samples</button>
@@ -298,7 +349,7 @@ $("file").onchange = () => {
   return run("Checking the project file…", async () => {
   clearPreview(); selected = null; const file = $("file").files[0];
   $("file-info").textContent = "Choose an .x0xproject file.";
-  if (file.size > PROJECT_MAX_FILE) throw new Error("This file is too large to be an X0X project bundle.");
+  if (file.size > PROJECT_MAX_FILE) throw new Error("This file is too large to be a DnBOX project bundle.");
   selected = await readProjectFile(new Uint8Array(await file.arrayBuffer()));
   const n = selected.meta.slots.filter((s) => !s.empty).length;
   $("file-info").textContent = `${selected.meta.name} · ${selected.portable ? "Project + original samples" : "Project only"} · ${n} populated sample slots · ${human(file.size)}`;

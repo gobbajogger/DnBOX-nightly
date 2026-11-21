@@ -1,7 +1,7 @@
 # PR14 optional hardware-fact type repair
 
 This is the bounded source-producer response to [independent review
-5640953891](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/14#pullrequestreview-5640953891).
+5640953891](https://github.com/gobbajogger/DnBOX-nightly/pull/14#pullrequestreview-5640953891).
 The inherited browser predicate admitted malformed `device_verified` and
 `hardware_tested` values. At both version and package scope, supplied values now
 must be literal `false` for this DEV path. Absence stays optional; `true` still

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-"""Capture the long, settled Builds route without allocating one giant Chromium surface."""
+"""Capture long Builds and archived Manual pages without allocating one giant Chromium surface."""
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 import struct
@@ -20,36 +20,120 @@ GEOMETRY = """() => {
   return [size('Width'), size('Height'), scrollX, scrollY, innerWidth, innerHeight, devicePixelRatio];
 }"""
 
+# The archived Manual uses the body's solid color as the document canvas.
+# Require that exact CSS case before accepting first-paint rounding below the native clip.
+MANUAL_BACKGROUND = r"""() => {
+  const root = getComputedStyle(document.documentElement);
+  const body = getComputedStyle(document.body);
+  if (root.backgroundImage !== 'none' || root.backgroundColor !== 'rgba(0, 0, 0, 0)' ||
+      body.backgroundImage !== 'none') return null;
+  const rgb = /^rgb\((\d+), (\d+), (\d+)\)$/.exec(body.backgroundColor);
+  return rgb ? rgb.slice(1).map(Number) : null;
+}"""
+MANUAL_MAX_PAINT_GROWTH = 16
+MANUAL_BAND_ROWS = 2048
+
+
+def remaining_ms(deadline):
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise TimeoutError('Complete full-page screenshot exceeded 30 seconds')
+    return max(1, int(1_000 * remaining))
+
+
+def verify_png(png):
+    # A decoder can recover pixels from a corrupt IDAT checksum or absent IEND.
+    # Walk the actual chunk boundaries so trailing data cannot hide after IEND.
+    if not png.startswith(b'\x89PNG\r\n\x1a\n'):
+        raise ValueError('Expected PNG screenshot')
+    data = memoryview(png)
+    offset = 8
+    while offset + 12 <= len(data):
+        size, kind = struct.unpack_from('>I4s', data, offset)
+        end = offset + 8 + size
+        if end + 4 > len(data) or zlib.crc32(data[offset + 4:end]) != struct.unpack_from('>I', data, end)[0]:
+            raise ValueError('Invalid PNG screenshot chunk')
+        offset = end + 4
+        if kind == b'IEND':
+            if size == 0 and offset == len(data):
+                return
+            break
+    raise ValueError('Incomplete or invalid PNG screenshot end chunk')
+
 
 def capture_full_page(page, route, name):
     try:
-        if route == 'builds/index.html':
-            deadline = time.monotonic() + 30
-            geometry = page.evaluate(GEOMETRY)
-            width, height = geometry[:2]
-            if geometry[-1] == 1 and width * height > SINGLE_CAPTURE_PIXELS and height > BAND_ROWS:
-                return capture_bands(page, geometry, deadline)
-        return page.screenshot(full_page=True)
+        short_manual = route in ('manual/projects-guide.html', 'manual/protocol.html')
+        if not short_manual and route not in ('builds/index.html', 'manual/original/index.html', 'manual/legacy.html'):
+            return page.screenshot(full_page=True)
+        deadline = time.monotonic() + 30
+        geometry = page.evaluate(GEOMETRY)
+        width, height = geometry[:2]
+        long_archive = route == 'manual/legacy.html'
+        needs_bands = geometry[-1] == 1 and height > BAND_ROWS and (long_archive or width * height > SINGLE_CAPTURE_PIXELS)
+        if short_manual or needs_bands:
+            # Chromium can finish fractional layout on its first compositor capture.
+            # Build History can retain this first band when the viewport and document
+            # stay fixed. Manuals have separate first-paint extent rules.
+            clip = (dict(x=0, y=0, width=width, height=BAND_ROWS) if route == 'builds/index.html'
+                    else dict(x=0, y=0, width=1, height=1))
+            first_paint = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
+            painted = page.evaluate(GEOMETRY)
+            if painted[0] != width or painted[2:] != geometry[2:]:
+                raise ValueError('Document viewport changed before the full-page capture')
+            if short_manual:
+                # On the phone Protocol page the first paint moves the final link below
+                # the initial capture height. Require every pixel of the stable document.
+                data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
+                verify_png(data)
+                with Image.open(BytesIO(data), formats=['PNG']) as image:
+                    if list(image.size) != painted[:2]:
+                        raise ValueError('Screenshot extent differs from the painted document')
+                    image.load()
+                if page.evaluate(GEOMETRY) != painted:
+                    raise ValueError('Document changed during the full-page capture')
+                remaining_ms(deadline)
+                return data
+            if route == 'manual/original/index.html':
+                if not 0 <= painted[1] - height <= MANUAL_MAX_PAINT_GROWTH:
+                    raise ValueError('Original Manual height changed beyond first-paint rounding')
+                # Playwright chooses the native full-page clip from the initial document size.
+                return capture_bands(page, painted, deadline, native_height=height)
+            if long_archive:
+                # The SMK manual reflows by up to several text rows on first paint.
+                # Its reference covers the entire settled document, including the footer.
+                # Each strip includes the previous strip's last row. Budget for
+                # that overlap as well as four channels per decoded pixel.
+                tile_rows = (4 * 1024 * 1024) // width
+                if tile_rows < 2:
+                    raise ValueError('Legacy Manual row and seam exceed the capture budget')
+                rows = min(MANUAL_BAND_ROWS, tile_rows - 1)
+                if tile_rows >= MANUAL_BAND_ROWS * 2:
+                    rows = min(MANUAL_BAND_ROWS * 4, tile_rows - 1, BAND_ROWS - 1)
+                return capture_bands(page, painted, deadline, band_rows=rows)
+            return capture_bands(page, painted, deadline, first_band=first_paint if painted == geometry else None)
+        data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
+        verify_png(data)
+        with Image.open(BytesIO(data), formats=['PNG']) as image:
+            image.load()
+        remaining_ms(deadline)
+        return data
     except Exception as error:
         raise RuntimeError(f'{name} full-page capture failed: {error}') from error
 
 
-def capture_bands(page, geometry, deadline):
-    width, height = geometry[:2]
+def capture_bands(page, geometry, deadline, *, native_height=None, band_rows=None, first_band=None):
+    width, painted_height = geometry[:2]
+    height = painted_height if native_height is None else native_height
     output = BytesIO()
     encoder = zlib.compressobj(1)
     mode = None
     last_row = None
     written_rows = 0
 
-    def remaining_ms():
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            raise TimeoutError('Complete full-page screenshot exceeded 30 seconds')
-        return max(1, int(1_000 * remaining))
-
     def append_band(png, rows, overlap):
         nonlocal mode, last_row, written_rows
+        verify_png(png)
         with Image.open(BytesIO(png)) as tile:
             if tile.format != 'PNG' or tile.mode not in ('RGB', 'RGBA') or tile.size != (width, rows + overlap):
                 raise ValueError(f'Unexpected screenshot band {tile.format} {tile.mode} {tile.size}')
@@ -73,21 +157,44 @@ def capture_bands(page, geometry, deadline):
             last_row = tile.crop((0, tile.height - 1, width, tile.height)).tobytes()
             written_rows += rows
 
+    if band_rows is None:
+        band_rows = BAND_ROWS if native_height is None else min(BAND_ROWS, MANUAL_BAND_ROWS)
     # Only compression overlaps the next read. Chromium captures in order on the original viewport.
     with ThreadPoolExecutor(max_workers=1) as worker:
         pending = None
-        for y in range(0, height, BAND_ROWS):
-            rows = min(BAND_ROWS, height - y)
+        for y in range(0, height, band_rows):
+            rows = min(band_rows, height - y)
             overlap = int(y > 0)
             clip = dict(x=0, y=y - overlap, width=width, height=rows + overlap)
-            png = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms())
+            if y == 0 and first_band is not None:
+                png = first_band
+            else:
+                png = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
             if pending is not None:
                 pending.result()
             pending = worker.submit(append_band, png, rows, overlap)
         pending.result()
+    if native_height is not None and native_height != painted_height:
+        # Capture the shared seam and every pixel below the native rectangle. Reject
+        # even one content-bearing pixel, including a uniform foreground-colored strip.
+        background = page.evaluate(MANUAL_BACKGROUND)
+        if background is None:
+            raise ValueError('Original Manual canvas background is not a solid opaque color')
+        clip = dict(x=0, y=height - 1, width=width, height=painted_height - height + 1)
+        strip = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
+        verify_png(strip)
+        with Image.open(BytesIO(strip), formats=['PNG']) as tail:
+            color = tuple(background) + ((255,) if mode == 'RGBA' else ())
+            if (tail.size != (width, clip['height']) or tail.mode != mode or
+                    tail.crop((0, 0, width, 1)).tobytes() != last_row or
+                    tail.getextrema() != tuple((channel, channel) for channel in color)):
+                raise ValueError('Original Manual gained visible content below its native rectangle')
+        if page.evaluate(MANUAL_BACKGROUND) != background:
+            raise ValueError('Original Manual canvas background changed during capture')
     if written_rows != height or page.evaluate(GEOMETRY) != geometry:
         raise ValueError('Document geometry changed during the full-page capture')
     putchunk(output, b'IDAT', encoder.flush())
     putchunk(output, b'IEND', b'')
-    remaining_ms()
-    return output.getvalue()
+    data = output.getvalue()
+    remaining_ms(deadline)
+    return data

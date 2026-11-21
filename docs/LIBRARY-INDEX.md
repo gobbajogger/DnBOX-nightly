@@ -18,3 +18,7 @@ These are the exact inputs consumed for the 2026-11-18 Remote continuation and t
 5. The recorded evidence version contains footer9fab's full gate, failures, focused regressions and independent review. Later versions may add native and post-merge receipts under the same Library identity; compare their own manifest/hash and the Space checkpoint rather than treating this historical version's size/hash as current.
 
 No main writes, force-push, physical devices, Codex, Actions or gh-pages publication are authorized by this checkpoint. Credentials are reused only in their existing cloud configuration and are never copied into source or recovery artifacts.
+
+## Integration visual proposals
+
+`DnBOX-nightly-914d68e8-visual-proposals.tar.gz` contains 104 PNGs from the exact consolidated branch and their manifest. The archive is 71,107,155 bytes. SHA-256 is `2eaff64e56a4d67e7ae86a3038da7aa03cb59d83db3a6fa3e325ff144cb53b0a`. Download it, verify that digest, and extract to a scratch directory. The lane record identifies reviewed references and open defects. [Download visual proposals](https://chatgpt.com/library?file_id=libfile_fde3_f-820d699ca0148191b3eaafedefc33c4d_2021479872048191acbfdca1f870a539&account_id=personal).

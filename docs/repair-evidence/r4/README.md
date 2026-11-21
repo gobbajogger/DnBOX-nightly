@@ -1,10 +1,10 @@
 # PR #8 R4 — finite known browser regressions repaired; independent review pending
 
 Parent requested the finite F1–F7 and browser model/binding/backup matrix at
-[`8357bea49e1b80c1d6b315dc749692c92424b0eb`](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/blob/8357bea49e1b80c1d6b315dc749692c92424b0eb/docs/independent-qa/final-browser-review/regression-matrix.md).
+[`8357bea49e1b80c1d6b315dc749692c92424b0eb`](https://github.com/gobbajogger/DnBOX-nightly/blob/8357bea49e1b80c1d6b315dc749692c92424b0eb/docs/independent-qa/final-browser-review/regression-matrix.md).
 This same owned PR8 branch continues from `068f3cd15dd4698cd6d609dee54628d73bd51686`
 (root `c39126aac8fcca9e72e5a7c1157b546ecb5366e3`). Independent review
-[5638498157](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/8#pullrequestreview-5638498157)
+[5638498157](https://github.com/gobbajogger/DnBOX-nightly/pull/8#pullrequestreview-5638498157)
 and exact fixtures at `255e00f5330409eb5bdb834d488ad8ee51602efc` were consumed.
 Earlier F1–F4 repairs remain; no new producer/merger/publisher was created.
 
@@ -95,7 +95,7 @@ PR9 `47cc6eaaa43655192c9ee88d9e1217473fe4f2f4`, root
 `fd5a9f26fe886cf787e6d82825656b7091a8b8f9`, was reread with its comments and
 handoff. It is a separate unmerged combined source proposal, not a reassignment
 of PR8 ownership or a new sole merger. Its publisher has an explicit NO-GO
-review [6384892539](https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly/pull/9#issuecomment-6384892539).
+review [6384892539](https://github.com/gobbajogger/DnBOX-nightly/pull/9#issuecomment-6384892539).
 No PR9 or Catalog/firmware source branch was edited, overwritten or rebased.
 Parent/sole merger must choose/reconcile the actual combined tree; PR9 must not
 publish using superseded PR8 QA. If it is selected, consume these exact repair

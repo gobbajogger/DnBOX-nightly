@@ -1,0 +1,16 @@
+Parent 3607b65c08f3c6b6cedc6063fb1ab1bb09c48ee9 plus the homepage readiness change in this commit.
+Command: VISUAL_ONLY=^site-index- npm run test:visual
+> x0x37-nightly-installer-preview@0.0.0-dev test:visual
+> python3 tests/visual/homepage-readiness-browser.py && python3 tests/visual/visual_gate.py
+
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.434s
+
+OK
+Capturing site-index-1440x900
+Capturing site-index-1024x640
+Capturing site-index-844x390
+Capturing site-index-390x844
+VISUAL {"screens": 4, "pass": 4, "fail": 0, "no_baseline": 0, "baseline_written": 0, "header_fail": 0, "page_errors": 0}
+Filtered visual runs deliberately return 1. The result covers the four named comparisons.

@@ -1,0 +1,14 @@
+Parent b6c3ea4d6bc3838469c67bba822b372ac0a07a0c
+Native Chromium 151.0.7922.34, normal sandbox.
+
+Unmodified offline readiness failed twice in separate invocations at the project-frame body locator outside the expected negative assertion: Timeout 700ms exceeded.
+After scoping the timeout, the genuine pending frame request, visible notice, disabled Go, missing notice and erased workspace API checks completed. Ran 1 test in 126.509s. OK.
+Visual runner unit suite: Ran 50 tests in 9.865s. OK.
+Independent code review verified the 1203-character predicate SHA-256 87f98453174364a9984b5c16a799933a1979bdd4a302880d4ef808026d3e3fb9. The normal registration uses the original page timeout. Only the two expected readiness failures receive 700 ms.
+
+What's New full-page registered capture, four exact matches to the approved Git blobs:
+1024x1775 f660a9e62c9621d94045732e2674655baba99725
+1440x1780 83f14b962b9b8f16d05742270871f3edbc075601
+390x2369 4af56dd8014741d267593602bac32ced0557a64d
+844x1767 067405fa0b7bdbaabf9d0cdcd1b188d46735c7ac
+The proposed extra paint produced 1024x1776 and 390x2370. The current capture matches the approved sizes and pixels and was retained.

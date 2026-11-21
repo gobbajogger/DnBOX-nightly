@@ -5,8 +5,8 @@
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
-import { execSync } from 'node:child_process';
-import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
+import { execSync, spawnSync } from 'node:child_process';
+import { writeFileSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -37,6 +37,64 @@ function normalize(html) {
 const ALLOWED = [
   // Exact reviewed UI and admission changes for the owner-tested 94197fc8 release.
   ...JSON.parse(readFileSync(join(root, 'tests/fixtures/installer-v0026-reviewed-hunks.json'), 'utf8')),
+  {
+    id: "standalone-installer-class",
+    reason: "Scope the standalone presentation on the document root.",
+    liveOnly: [
+      "<html lang=\"en\">",
+    ],
+    renderOnly: [
+      "<html lang=\"en\" class=\"standalone-installer\">",
+    ],
+  },
+  {
+    id: "standalone-barlow-and-palette",
+    reason: "Bundle the two licensed typefaces, their notice and the reviewed responsive controls. The hash covers the entire generated CSS hunk.",
+    liveOnly: [],
+    renderOnlySha256: '72d95202418be9129eacd992b639fc9673c7e07f37ce42211fce910e55d44291',
+  },
+  {
+    id: "standalone-header-links",
+    reason: "The firmware, manual and changes links reach documents on disk and when hosted.",
+    liveOnly: [
+      "      <a class=\"home\" href=\"../\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 · NIGHTLY</span>",
+      "        <a href=\"../manual/\" data-t=\"navmanual\">Manual</a><a href=\"../new/\">Changes</a><a href=\"https://github.com/gobbajogger/DnBOX-nightly\">Source</a>",
+    ],
+    renderOnly: [
+      "      <a class=\"home\" href=\"#firmware\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 · NIGHTLY</span>",
+      "        <a href=\"../manual/index.html\" data-t=\"navmanual\">Manual</a><a href=\"../new/index.html\">Changes</a><a href=\"https://github.com/gobbajogger/DnBOX-nightly\">Source</a>",
+    ],
+  },
+  {
+    id: "standalone-changes-link",
+    reason: "Open the changes document from the resources navigation.",
+    liveOnly: [
+      "    <a href=\"../new/\" data-t=\"whatsnew\">What's new</a>",
+    ],
+    renderOnly: [
+      "    <a href=\"../new/index.html\" data-t=\"whatsnew\">What's new</a>",
+    ],
+  },
+  {
+    id: "standalone-connection-help-link",
+    reason: "Open the local manual directly from connection help.",
+    liveOnly: [
+      "  <details class=\"connection-help\"><summary>Connection &amp; recovery help</summary><p class=\"small\" data-t=\"direct\"></p><p class=\"small\" data-t=\"helptext\"></p><p class=\"small\"><a href=\"../manual/\" data-t=\"helpmanual\">Open the manual</a></p>  <p class=\"small\" id=\"recovery\"><span data-t=\"brick\"></span>",
+    ],
+    renderOnly: [
+      "  <details class=\"connection-help\"><summary>Connection &amp; recovery help</summary><p class=\"small\" data-t=\"direct\"></p><p class=\"small\" data-t=\"helptext\"></p><p class=\"small\"><a href=\"../manual/index.html\" data-t=\"helpmanual\">Open the manual</a></p>  <p class=\"small\" id=\"recovery\"><span data-t=\"brick\"></span>",
+    ],
+  },
+  {
+    id: "standalone-compatibility-manual-link",
+    reason: "Open the same document from compatibility help.",
+    liveOnly: [
+      "      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href=\"../manual/\">Open the playing and setup manual</a></p></details>",
+    ],
+    renderOnly: [
+      "      <details><summary>Check the fit for your gear <span>Compatibility and practical limits.</span></summary><p>Supports SMK-37 Elite and Pro; check Install firmware for available packages. Starrykey 37 Play uses the Pro model; choose the name intended for your keyboard. The keyboard's pads and keys play with fixed velocity. SMC uses a single direct Bluetooth MIDI link; Loopy uses USB in the combined setup. No Bluetooth audio or direct multi-SMC connection is offered here.</p><p>A matching stock firmware package can be restored with the original updater; see Restore original firmware.</p><p><a href=\"../manual/index.html\">Open the playing and setup manual</a></p></details>",
+    ],
+  },
   {
     id: 'programmed-sample-header-padding',
     reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',
@@ -120,7 +178,7 @@ function parseUnifiedHunks(diff) {
   return hunks;
 }
 
-function assertAllowedRendered(rendered) {
+function assertAllowedRendered(rendered, tempRoot = tmpdir()) {
   const live = gitBlob(LIVE_INSTALL_BLOB);
   const catalog = JSON.parse(gitBlob(LIVE_CATALOG_BLOB));
   // The repos were renamed after this live snapshot (X0X37-for-Loopy-Pro -> DnBOX,
@@ -132,27 +190,32 @@ function assertAllowedRendered(rendered) {
   assert.equal(renamed.split(oldInstruction).length, 2);
   const a = normalize(renamed.replace(oldInstruction, 'return to normal DnBOX operation with KNOB BANK'));
   const b = normalize(rendered);
-  const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
+  const dir = mkdtempSync(join(tempRoot, 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
-  writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
-  writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
-  let diff = '';
+  let comparison;
   try {
-    execSync(`diff -u ${livePath} ${rendPath}`, { encoding: 'utf8', maxBuffer: 10e6 });
-  } catch (e) {
-    // diff exits 1 on differences
-    if (e.status !== 1) throw e;
-    diff = e.stdout;
+    writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
+    writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
+    comparison = spawnSync('diff', ['-u', livePath, rendPath], { encoding: 'utf8', maxBuffer: 10e6 });
+    if (comparison.error) throw comparison.error;
+    if (comparison.status !== 0 && comparison.status !== 1) {
+      throw new Error(`Installer comparison failed (${comparison.signal || comparison.status}): ${comparison.stderr}`);
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
-  const hunks = parseUnifiedHunks(diff);
+  const hunks = parseUnifiedHunks(comparison.stdout);
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
-    // Use exact byte digests for reviewed multi-function hunks to avoid duplicating the renderer.
-    const digest = createHash('sha256').update(JSON.stringify([h.liveOnly,h.renderOnly])).digest('hex');
-    const match = ALLOWED.find(allow => allow.hunk_sha256 ? digest === allow.hunk_sha256 :
-      JSON.stringify(allow.liveOnly) === JSON.stringify(h.liveOnly) &&
-      JSON.stringify(allow.renderOnly) === JSON.stringify(h.renderOnly));
+    const fullDigest = createHash('sha256').update(JSON.stringify([h.liveOnly, h.renderOnly])).digest('hex');
+    const added = JSON.stringify(h.renderOnly);
+    const match = ALLOWED.find(allow => {
+      if (allow.hunk_sha256) return allow.hunk_sha256 === fullDigest;
+      if (JSON.stringify(allow.liveOnly) !== JSON.stringify(h.liveOnly)) return false;
+      if (allow.renderOnlySha256) return createHash('sha256').update(added).digest('hex') === allow.renderOnlySha256;
+      return JSON.stringify(allow.renderOnly) === added;
+    });
     if (!match) unexpected.push({ header: h.header, liveOnly: h.liveOnly, renderOnly: h.renderOnly });
     else unused.delete(match.id);
   }
@@ -163,9 +226,43 @@ function assertAllowedRendered(rendered) {
 function currentRendered() {
   return renderInstaller(JSON.parse(gitBlob(LIVE_CATALOG_BLOB))).replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
 }
+test('full-file comparisons release scratch files, including after a rejected change', t => {
+  const scratch = mkdtempSync(join(tmpdir(), 'installer comparison '));
+  t.after(() => rmSync(scratch, { recursive: true, force: true }));
+  const rendered = currentRendered();
+  assertAllowedRendered(rendered, scratch);
+  assert.deepEqual(readdirSync(scratch), []);
+  assert.throws(() => assertAllowedRendered(rendered + '\n<!-- unreviewed -->', scratch), /unexpected hunks/);
+  assert.deepEqual(readdirSync(scratch), []);
+});
+
 test('full rendered installer vs live gh-pages differs only by allowlisted hunks', () => {
   assertAllowedRendered(currentRendered());
 });
+test('the standalone review rejects font, route and permission changes', () => {
+  const rendered = currentRendered();
+  for (const [before, after] of [
+    ['data:font/ttf;base64,AAE', 'data:font/ttf;base64,BAE'],
+    ['data-src="../breaks/?embedded=1"', 'data-src="../projects/?embedded=1"'],
+    ['frame.hidden = true;', 'navigator.requestMIDIAccess();'],
+    ['href="../manual/index.html" data-t="navmanual"', 'href="../" data-t="navmanual"'],
+  ]) {
+    assert.ok(rendered.includes(before), before);
+    assert.throws(() => assertAllowedRendered(rendered.replace(before, after)), /unexpected hunks/);
+  }
+});
+
+test('release notice comparison rejects a different tag or hardware claim', () => {
+  const rendered = currentRendered();
+  for (const modified of [
+    rendered.replace('releases/tag/v0.0.26\">0.0.26 release notes', 'releases/tag/v0.0.25.1\">0.0.26 release notes'),
+    rendered.replace('The owner verified startup and restart', 'The owner verified every function'),
+  ]) {
+    assert.notEqual(modified, rendered);
+    assert.throws(() => assertAllowedRendered(modified), /unexpected hunks|allowlisted hunk missing/);
+  }
+});
+
 test('exact Restore allowance rejects lost padding, forced full headers and unrelated changes', () => {
   const rendered=currentRendered();
   const selector='img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN';

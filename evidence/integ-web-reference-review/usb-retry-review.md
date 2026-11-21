@@ -1,0 +1,9 @@
+# Independent review of the corrected installer
+
+**10/10 for the corrected downloadable installer workflow and its reviewed screens.** The shared mounted installer correction also passed each recovery case in both languages. This approval applies to the compiled file hashes below on the local candidate derived from `061e95213f20126f39b51e7828eecf2c2f274289`.
+
+On both real pages in English and Japanese, the real Connect USB button (USB 接続 in Japanese) named the available retry action after permission denial and when the keyboard had no MIDI ports. Clicking it after a denial requested access again. A further click with empty ports rescanned the existing MIDI access object. A generic Error displayed its original message, and a null exception used the localized error fallback. Each browser started without a permission prompt. Each explicit flow produced two SysEx permission requests, retained the disabled firmware and stock write controls, and opened no write confirmation. The simulated MIDI boundary exposed no output devices.
+
+All 10 PNGs matched the pre-correction candidate bytes, covering 1440 × 900, 1024 × 640, 844 × 390, 390 × 844 and 240 × 240 on each surface. At all four registered widths both pages match their 061e proposed references. The mounted 240 comparison uses a separate fresh render on the unmodified 061e commit. The offline default state uses the compiled file with the empty catalog and the mounted state uses the released package bytes through the normal SHA-checked admission.
+
+Compiled downloadable page SHA-256 `1160f70dd99c3abc9c02068dedc9d5608fcae31d3fb32291ce9e40a5ec13670e`. Compiled mounted page SHA-256 `c9f4fa7db64bb1ecb3b027a880e1a2a2daf323a763bcf9c3f943dc28517fbc62`. Template SHA-256 `69a6dc5c6a81b82235426e015543b713814f92e2fee063670fa2b29b4381e345`. Tests used Chromium 151.0.7922.34. The registered production-function scan-order regression independently passed its six scenarios. No live keyboard was involved.

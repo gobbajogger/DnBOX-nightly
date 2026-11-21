@@ -4,6 +4,8 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { inlineStandaloneFonts } from './standalone-fonts.mjs';
+
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (name) => readFileSync(join(root, name), 'utf8');
 const catalog = JSON.parse(read('preview-catalog.json'));
@@ -19,15 +21,15 @@ function stripModule(source) {
 }
 const installerLibraries = ['web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js', 'web/product-site/install-reports.mjs']
   .map((name) => stripModule(read(name))).join('\n');
-let installer = replaceOnce(read('web/x0x_installer.html'), '/*LIB*/', installerLibraries, 'installer');
+let installer = replaceOnce(inlineStandaloneFonts(read('web/x0x_installer.html')), '/*LIB*/', installerLibraries, 'installer');
 installer = replaceOnce(installer, '/*CATALOG*/', JSON.stringify(catalog), 'installer');
 installer = replaceOnce(installer, '/*HARDWARE_TEST_DATA*/{"schema":1,"reports":[]}',
   JSON.stringify(JSON.parse(read('web/product-site/hardware-tests.json'))), 'installer');
 installer = replaceOnce(installer, '/*PACKAGE_VERSION_ASSIGNMENTS*/[]',
   JSON.stringify(JSON.parse(read('package-version-assignments.json')).assignments).replace(/</g, '\\u003c'), 'installer');
-const sampleImporter = replaceOnce(read('web/x0x_breaks.html'), '/*LIB*/',
+const sampleImporter = replaceOnce(inlineStandaloneFonts(read('web/x0x_breaks.html')), '/*LIB*/',
   stripModule(read('web/x0x_breaks.js')), 'sample importer');
-const projects = read('web/x0x_projects.html').replace(
+const projects = inlineStandaloneFonts(read('web/x0x_projects.html')).replace(
   /^import .* from "\.\/x0x_projects.js";$/m, '/*LIB*/');
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');

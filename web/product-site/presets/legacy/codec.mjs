@@ -5,7 +5,7 @@ export const DNPR_MAX_BYTES = 548;
 export const DNPR_ENGINES = Object.freeze({
   1: Object.freeze({ token: "chicago", title: "Chicago", params: 22, samples: 0, factory: 81 }),
   2: Object.freeze({ token: "miami", title: "Miami", params: 18, samples: 0, factory: 30 }),
-  3: Object.freeze({ token: "juno", title: "Juno", params: 18, samples: 0, factory: 4 }),
+  3: Object.freeze({ token: "juno", title: "SuperJ6", params: 18, samples: 0, factory: 4 }),
   4: Object.freeze({ token: "synthone", title: "Synth One", params: 8, samples: 0, factory: 4, adoptInit: true }),
   5: Object.freeze({ token: "909", title: "909", params: 132, samples: 4, factory: 0 }),
   6: Object.freeze({ token: "808", title: "808", params: 144, samples: -1, factory: 0 }),
@@ -41,8 +41,11 @@ const engineNumber = (id) => {
   if (key === LEGACY_SLOT2_INFIX) return 4;
   return Number(Object.keys(DNPR_ENGINES).find(k => DNPR_ENGINES[k].token === key)) || null;
 };
+export function engineMetadataLabel(record) {
+  return record.engineId === 3 ? record.title : record.title + " (" + record.engine + ")";
+}
 export function recordEngineLabel(record) {
-  return record.engineId === 4 ? "Synth One (init)" : record.title + " (" + record.engine + ")";
+  return record.engineId === 4 ? "Synth One (init)" : engineMetadataLabel(record);
 }
 // Names are opaque C byte strings. Escape controls for display, never edit original bytes.
 const readPad = (b, start, length) => {

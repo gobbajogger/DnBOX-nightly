@@ -2,11 +2,16 @@
   {
     "id": "v0026-release-notice",
     "liveOnly": [
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/\">Open sample tools separately</a> if this panel does not load.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/\">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>",
       "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>"
     ],
     "renderOnly": [
-      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest release</strong><p>The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with build 94197fc8. Choose 0.0.25.1 for the fallback. The earlier 600b build remains withdrawn. <a href=\"../new/\">Release status</a></p></aside>"
-    ]
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" data-src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/index.html\">Open sample tools separately</a>.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" data-src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/index.html\">Open Songs &amp; projects separately</a>.</p></section>",
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. Choose 0.0.25.1 for the fallback. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a> · <a href=\"../new/index.html\">Release status</a></p></aside>"
+    ],
+    "reason": "Samples, Projects and Release status open by filename offline. The release notice retains the published package link."
   },
   {
     "id": "v0026-release-model-picker",
@@ -130,17 +135,26 @@
   },
   {
     "id": "post-replug-identity",
-    "liveOnly": [],
+    "liveOnly": [
+      "      setConnected(false, t(\"notfound\"));"
+    ],
     "renderOnly": [
+      "      setConnected(false, t(\"connectNotFound\"));",
       "    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);"
-    ]
+    ],
+    "reason": "An empty scan offers Connect USB and a successful scan verifies the restarting device identity."
   },
   {
     "id": "refresh-report-count",
-    "liveOnly": [],
+    "liveOnly": [
+      "    setConnected(false, (e && e.message) || t(\"error\"));"
+    ],
     "renderOnly": [
-      "    midiAccess.reports?.refresh();"
-    ]
+      "    midiAccess.reports?.refresh();",
+      "    const detail = e?.code === \"denied\" ? t(\"connectDenied\") : (e && e.message) || t(\"error\");",
+      "    setConnected(false, detail);"
+    ],
+    "reason": "Successful scans refresh reporting. Denied scans offer Connect USB and other scan errors keep their own message."
   },
   {
     "id": "match-owner-ledger",
@@ -186,6 +200,25 @@
   },
   {
     "id": "load-current-records",
-    "hunk_sha256": "81d6405451b017d7581df3bb176070b7d29d7d2f822603fd07e2c24c13a3a46b"
+    "hunk_sha256": "a9f61fbac93eb251c3bd6a6b29e0877d3c0c81f5ad4fbb62a26a38a5a8eef55c",
+    "reason": "Local-file workspaces open separately. Hosted installers retain their embedded tools and navigation listeners."
+  },
+  {
+    "id": "usb-scan-retry-ja",
+    "reason": "Japanese scan recovery names the active USB connection action.",
+    "liveOnly": [],
+    "renderOnly": [
+      "    connectDenied: \"サイト設定で MIDI（SysEx）を許可し、「USB 接続」をもう一度押してください。\",",
+      "    connectNotFound: \"機器が見つかりません。データ通信用の USB ケーブルを確認し、MIDI を使う他のアプリを閉じてから、「USB 接続」をもう一度押してください。\","
+    ]
+  },
+  {
+    "id": "usb-scan-retry-en",
+    "reason": "English scan recovery names the active USB connection action.",
+    "liveOnly": [],
+    "renderOnly": [
+      "    connectDenied: \"MIDI (SysEx) access was denied. Allow MIDI in your browser’s site settings, then select Connect USB again.\",",
+      "    connectNotFound: \"Device not found. Check the USB data cable, close other apps using MIDI, then select Connect USB again.\","
+    ]
   }
 ]

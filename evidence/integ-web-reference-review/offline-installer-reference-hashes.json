@@ -1,0 +1,50 @@
+{
+  "1440x900": {
+    "dimensions": [
+      1440,
+      2401
+    ],
+    "file": "ebfa299e594b8a2ca98c8c3abbb5243383bc3c405ccb7f88d0400232f2d607ba",
+    "official": "ebfa299e594b8a2ca98c8c3abbb5243383bc3c405ccb7f88d0400232f2d607ba",
+    "approved": "bd50ce09dc5f013dd5b5cff39ab943dbdc984aec48d683485e6f7683836eebcb",
+    "http": "ebfa299e594b8a2ca98c8c3abbb5243383bc3c405ccb7f88d0400232f2d607ba"
+  },
+  "1024x640": {
+    "dimensions": [
+      1024,
+      2618
+    ],
+    "file": "70e38d7fbf8ffdf2c7c462828d283c61b07233c19ba7c6d4a69b395e91e92b0f",
+    "official": "70e38d7fbf8ffdf2c7c462828d283c61b07233c19ba7c6d4a69b395e91e92b0f",
+    "approved": "39ead750fb75c0dfc47d9f1a1f865917614877532990e00c1882a4a2e2717ba2",
+    "http": "70e38d7fbf8ffdf2c7c462828d283c61b07233c19ba7c6d4a69b395e91e92b0f"
+  },
+  "844x390": {
+    "dimensions": [
+      844,
+      2650
+    ],
+    "file": "7384a190784400ada23e1a344b3e0e185824330bce1c005ac029c8100dbce55c",
+    "official": "7384a190784400ada23e1a344b3e0e185824330bce1c005ac029c8100dbce55c",
+    "approved": "ac157c6eb7e583611e922f5bc390a7b6429abfcab460b9a64d4d09fdf73811ad",
+    "http": "7384a190784400ada23e1a344b3e0e185824330bce1c005ac029c8100dbce55c"
+  },
+  "390x844": {
+    "dimensions": [
+      390,
+      3291
+    ],
+    "file": "4686274fd6adabdc41e3b19982b12b5e0a4c1d771c77a2aef8b86dcc69e412a1",
+    "official": "4686274fd6adabdc41e3b19982b12b5e0a4c1d771c77a2aef8b86dcc69e412a1",
+    "approved": "9bc59cc4471fe5ff67ec3bd5edfaef2788a50c4da46f2384a6f976ed06ed98cc",
+    "http": "4686274fd6adabdc41e3b19982b12b5e0a4c1d771c77a2aef8b86dcc69e412a1"
+  },
+  "240x240": {
+    "dimensions": [
+      240,
+      4644
+    ],
+    "file": "2c448b63b57f37973efb3cfe87c0a0b8abcd768db8624397be05192c7ff3a516",
+    "http": "2c448b63b57f37973efb3cfe87c0a0b8abcd768db8624397be05192c7ff3a516"
+  }
+}

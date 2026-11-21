@@ -1,10 +1,18 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {test} from 'node:test';
+import { INFO_X0X } from './sample-discovery-r2/fake-midi-harness.mjs';
 const page=readFileSync(new URL('../web/x0x_breaks.html',import.meta.url),'utf8');
 test('sample page uses DnBOX and SMK-37 user-facing names',()=>{
- for(const text of ["<title>DnBOX break loops</title>","href=\"../\">DnBOX</a>","with DnBOX running.","says how DnBOX plays a loop.","The SMK-37 stopped answering.","No SMK-37 running DnBOX found.","This firmware can't send its loops back to the page. Update DnBOX, then connect again.","The SMK-37 couldn't clear its memory.","The SMK-37 couldn't erase its memory.","Writing to the SMK-37 failed.","The SMK-37 didn't accept the loops.","Done. On the SMK-37: BREAK, then EDIT, then LOOP A or LOOP B.","DnBOX builds on X0X and Felucca by Hügelton Instruments (GPL-3.0);"]) assert.ok(page.includes(text),text);
+ for(const text of ["<title>DnBOX break loops</title>","with DnBOX running.","says how DnBOX plays a loop.","The SMK-37 stopped answering.","No SMK-37 running DnBOX found.","This firmware can't send its loops back to the page. Update DnBOX, then connect again.","The SMK-37 couldn't clear its memory.","The SMK-37 couldn't erase its memory.","Writing to the SMK-37 failed.","The SMK-37 didn't accept the loops.","Done. On the SMK-37: BREAK, then EDIT, then LOOP A or LOOP B.","DnBOX builds on X0X and Felucca by Hügelton Instruments (GPL-3.0);"]) assert.ok(page.includes(text),text);
  for(const text of ["<title>X0X break loops</title>","href=\"../\">X0X</a>","with X0X running.","says how X0X plays a loop.","The FM-1 stopped answering.","No FM-1 running X0X found.","This X0X can't send its loops back to the page. Update X0X, then connect again.","The FM-1 couldn't clear its memory.","The FM-1 couldn't erase its memory.","Writing to the FM-1 failed.","The FM-1 didn't accept the loops.","Done. On the FM-1: BREAK, then EDIT, then LOOP A or LOOP B.","`x0x-slots-${stamp","X0X is GPL-3.0, built on Felucca by Hügelton Instruments;"]) assert.ok(!page.includes(text),text);
+});
+
+test('standalone Samples links home to the local installer in its source and downloadable copy',()=>{
+ for(const path of ['../web/x0x_breaks.html','../docs/breaks/index.html']){
+  const html=readFileSync(new URL(path,import.meta.url),'utf8');
+  assert.match(html,/<a class="home" href="\.\.\/install\/index\.html">DnBOX<\/a>/);
+ }
 });
 
 test('actual connect discovers DnBOX SMK models and retains legacy aliases',async()=>{
@@ -15,7 +23,7 @@ test('actual connect discovers DnBOX SMK models and retains legacy aliases',asyn
   const input={name,state,open:async()=>{opens++;}};
   const output={name:outputName,open:async()=>{opens++;}};
   const context={navigator:{requestMIDIAccess:async()=>({inputs:new Map([[1,input]]),outputs:new Map([[1,output]])})},
-   Link:class{constructor(i,o){this.input=i;this.output=o;}async retry(cmd,args,ms){requests++;assert.equal(cmd,1);assert.deepEqual(Array.from(args),[]);assert.equal(ms,1000);if(!answer)throw Error('no answer');}},
+   Link:class{constructor(i,o){this.input=i;this.output=o;}async retry(cmd,args,ms){requests++;assert.equal(cmd,1);assert.deepEqual(Array.from(args),[]);assert.equal(ms,1000);if(!answer)throw Error('no answer');return INFO_X0X;}},
    link:null,readOk:false,render(){},say(){}};
   const connect=runInNewContext(connectSource+';connect',context);
   try{await connect();return {ok:true,requests,opens};}catch{return {ok:false,requests,opens};}
@@ -36,4 +44,3 @@ test('backup basename is DnBOX while archive extension and upstream credit remai
  assert.ok(page.includes('}.x0xslots`'));
  assert.ok(page.includes('X0X and Felucca by Hügelton Instruments'));
 });
-

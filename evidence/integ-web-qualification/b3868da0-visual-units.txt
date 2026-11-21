@@ -1,0 +1,32 @@
+test_capture_name_cannot_escape_output (test_capture_actual.Capture.test_capture_name_cannot_escape_output) ... ok
+test_capture_rejects_output_inside_baselines (test_capture_actual.Capture.test_capture_rejects_output_inside_baselines) ... ok
+test_explicit_update_preserves_supported_baseline_workflow (test_capture_actual.Capture.test_explicit_update_preserves_supported_baseline_workflow) ... ok
+test_failure_keeps_actual_pass_cleans_it_and_neither_changes_reference (test_capture_actual.Capture.test_failure_keeps_actual_pass_cleans_it_and_neither_changes_reference) ... ok
+test_missing_baseline_cleans_actual_without_creating_reference_directory (test_capture_actual.Capture.test_missing_baseline_cleans_actual_without_creating_reference_directory) ... ok
+test_normal_pass_cleanup_and_failure_signals_unchanged (test_capture_actual.Capture.test_normal_pass_cleanup_and_failure_signals_unchanged) ... ok
+test_output_directory_symlink_is_rejected (test_capture_actual.Capture.test_output_directory_symlink_is_rejected) ... ok
+test_output_links_never_overwrite_baselines (test_capture_actual.Capture.test_output_links_never_overwrite_baselines) ... ok
+test_summary_link_rejected_and_regular_output_can_be_replaced (test_capture_actual.Capture.test_summary_link_rejected_and_regular_output_can_be_replaced) ... ok
+test_approved_identical_pixels_pass_three_repeats (test_visual_gate.GateContract.test_approved_identical_pixels_pass_three_repeats) ... ok
+test_bands_retain_every_row_and_reject_a_changed_seam (test_visual_gate.GateContract.test_bands_retain_every_row_and_reject_a_changed_seam) ... ok
+test_browser_errors_empty_runs_and_header_errors_fail (test_visual_gate.GateContract.test_browser_errors_empty_runs_and_header_errors_fail) ... ok
+test_capture_rejects_a_complete_image_after_the_total_deadline (test_visual_gate.GateContract.test_capture_rejects_a_complete_image_after_the_total_deadline) ... ok
+test_filtered_passing_subset_cannot_qualify_publication (test_visual_gate.GateContract.test_filtered_passing_subset_cannot_qualify_publication) ... ok
+test_full_page_routes_keep_native_capture_for_regular_sizes (test_visual_gate.GateContract.test_full_page_routes_keep_native_capture_for_regular_sizes) ... ok
+test_installer_routes_only_pause_the_two_public_requests (test_visual_gate.GateContract.test_installer_routes_only_pause_the_two_public_requests) ... ok
+test_missing_baseline_is_reported_not_created (test_visual_gate.GateContract.test_missing_baseline_is_reported_not_created) ... ok
+test_proposal_is_not_a_pass (test_visual_gate.GateContract.test_proposal_is_not_a_pass) ... ok
+test_render_mutant_fails_and_corrected_render_passes (test_visual_gate.GateContract.test_render_mutant_fails_and_corrected_render_passes) ... ok
+test_size_change_fails (test_visual_gate.GateContract.test_size_change_fails) ... ok
+test_all_cases_keep_original_order_and_each_viewport_closes_before_next (test_visual_viewports.VisualViewportContract.test_all_cases_keep_original_order_and_each_viewport_closes_before_next) ... ok
+test_failed_action_identifies_state_and_releases_the_browser (test_visual_viewports.VisualViewportContract.test_failed_action_identifies_state_and_releases_the_browser) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.550s
+
+OK
+FAIL screen: 1.00000 of pixels differ -> /workspace/scratch/1f3f01f99f53/votes/tmp/tmpqr_9b6ad/out/screen-diff.png
+FAIL screen: 1.00000 of pixels differ -> /workspace/scratch/1f3f01f99f53/votes/tmp/tmpv26zmv0t/actual/screen-diff.png
+FAIL screen: size (30, 31, 3) != baseline (30, 30, 3)
+header SSIM vs page-01 = 1.0000 (gate >= 0.90)
+VISUAL {"screens": 121, "pass": 121, "fail": 0, "no_baseline": 0, "baseline_written": 0, "header_fail": 0, "page_errors": 0}

@@ -13,10 +13,10 @@ Claims are grounded in the firmware first published from `4ee8f37714b0892f2c70d1
 
 ## Sources
 
-- [Playing manual](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/docs/manual.html): instruments, TB-3PO, patterns, recording, motion/locks/probability, Song, effects, save/load and MIDI.
-- [SMK controls and model compatibility](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/SMK37.md).
-- [Loopy / APC implementation](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/APC40_IMPLEMENTATION.md), current section rather than superseded historical sections.
-- [Current clip-key routing](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/main_fm1.c): SCALE→CHORD→ARP path and editor controls.
-- [SMC implementation](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/smc_mixer.c), [UI settings](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/ui.c), [one-link Bluetooth roles](https://github.com/gobbajogger/X0X37-for-Loopy-Pro/blob/4ee8f37714b0892f2c70d157fda9328da393e987/ble/README.md).
+- [Playing manual](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/docs/manual.html): instruments, TB-3PO, patterns, recording, motion/locks/probability, Song, effects, save/load and MIDI.
+- [SMK controls and model compatibility](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/SMK37.md).
+- [Loopy / APC implementation](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/APC40_IMPLEMENTATION.md), current section rather than superseded historical sections.
+- [Current clip-key routing](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/main_fm1.c): SCALE→CHORD→ARP path and editor controls.
+- [SMC implementation](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/smc_mixer.c), [UI settings](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/firmware/src/app/ui.c), [one-link Bluetooth roles](https://github.com/gobbajogger/DnBOX/blob/4ee8f37714b0892f2c70d157fda9328da393e987/ble/README.md).
 
 The current catalog's latest package includes the controller; older prose about building a separate image does not describe this latest bundled package. The page does not claim direct multiple SMCs, simultaneous Bluetooth roles, Bluetooth audio, velocity, a new extension installer, unlimited sample storage or physical-device proof.

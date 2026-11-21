@@ -11,6 +11,7 @@ import visual_gate as gate
 class VisualViewportContract(unittest.TestCase):
     def run_sweep(self, reject_lane=False):
         events, captures, clicks = [], [], []
+        history_pages = []
         image = io.BytesIO()
         Image.new('RGB', (2, 2)).save(image, format='PNG')
         playwright = MagicMock()
@@ -35,6 +36,10 @@ class VisualViewportContract(unittest.TestCase):
 
                 def page():
                     pg = Mock()
+                    def visit(url):
+                        if url.endswith('/product-site/builds/index.html'):
+                            history_pages.append(pg)
+                    pg.goto.side_effect = visit
                     pg.evaluate.return_value = 0
                     pg.screenshot.return_value = image.getvalue()
 
@@ -57,6 +62,8 @@ class VisualViewportContract(unittest.TestCase):
             captures.append(name)
             results.append((name, 'PASS', 0))
 
+        sample_navigation = Mock()
+        package_admission = Mock(wraps=gate.wait_for_admission)
         with ExitStack() as stack:
             for module, attr, value in [
                 (gate, 'sync_playwright', Mock(return_value=playwright)), (gate, 'port', Mock(return_value=49152)),
@@ -64,6 +71,8 @@ class VisualViewportContract(unittest.TestCase):
                 (gate, 'validate_capture_output', Mock()), (gate, 'write_actual_output', Mock()),
                 (gate, 'header_checks', Mock()), (gate, 'assert_grid_continuity', Mock(return_value={'samples': 1})),
                 (gate, 'ssim', Mock(return_value=1)), (gate, 'compare', record),
+                (gate, 'sample_navigation_checks', sample_navigation),
+                (gate, 'wait_for_admission', package_admission),
                 (gate, 'capture_full_page', Mock(return_value=image.getvalue())), (gate, 'ONLY', None),
             ]:
                 stack.enter_context(patch.object(module, attr, value))
@@ -74,6 +83,17 @@ class VisualViewportContract(unittest.TestCase):
                 with self.assertRaises(SystemExit) as exit_:
                     gate.main()
                 self.assertEqual(exit_.exception.code, 0)
+                self.assertEqual(
+                    [call.args[1] for call in sample_navigation.call_args_list],
+                    [f'{w}x{h}' for w, h in gate.SIZES],
+                )
+                self.assertEqual(len(history_pages), len(gate.SIZES))
+                for page in history_pages:
+                    registered = {call.args[0] for call in page.on.call_args_list}
+                    self.assertTrue({'response', 'requestfailed'} <= registered)
+                admitted = [call.args[1] for call in package_admission.call_args_list]
+                self.assertEqual(len(admitted), len(gate.SIZES))
+                self.assertTrue(all(name.endswith('.fwsc') for name in admitted))
         return events, captures, clicks
 
     def test_all_cases_keep_original_order_and_each_viewport_closes_before_next(self):

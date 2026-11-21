@@ -1,0 +1,23 @@
+✔ full-file comparisons release scratch files, including after a rejected change (601.485558ms)
+✔ full rendered installer vs live gh-pages differs only by allowlisted hunks (400.023928ms)
+✔ the standalone review rejects font, route and permission changes (1278.147913ms)
+✔ release notice comparison rejects a different tag or hardware claim (273.15659ms)
+✔ exact Restore allowance rejects lost padding, forced full headers and unrelated changes (542.399446ms)
+✔ approved release diff rejects drift in the restart handshake and report bindings (253.176704ms)
+✔ publicCatalog keeps display_version so 0.0.25.1 stays 0.0.25.1 (46.059766ms)
+✔ current release entry points identify the published source and startup/restart scope (4.709024ms)
+✔ installer source and both built surfaces link the release without modifying admission (19.736688ms)
+✔ build history distinguishes the current release from its archived entries (3.769902ms)
+✔ the archived FM-1 manual has a title and readable section numbers (1.618159ms)
+PASS: generated scripts, accessibility, safeguards, empty firmware catalog, site links
+PASS: Nightly versus production gates, history read-only and renderer syntax
+✔ tests/nightly-preview.test.mjs (363.676016ms)
+✔ tracked current sources have no retired engine name (216.049004ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3852.282113

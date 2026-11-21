@@ -1,0 +1,229 @@
+{
+  "method": "The repository visual comparator decoded the 28 retained, registered Chromium captures and compared them with the staged PNG bytes. The source SHA for the captures is 061e95213f20126f39b51e7828eecf2c2f274289. Each staged file also matched its independent review SHA-256. All differences were zero. This receipt covers these seven default views only.",
+  "cases": {
+    "offline-x0x_installer-1024x640": {
+      "capture_sha256": "70e38d7fbf8ffdf2c7c462828d283c61b07233c19ba7c6d4a69b395e91e92b0f",
+      "reference_sha256": "70e38d7fbf8ffdf2c7c462828d283c61b07233c19ba7c6d4a69b395e91e92b0f",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "offline-x0x_installer-1440x900": {
+      "capture_sha256": "ebfa299e594b8a2ca98c8c3abbb5243383bc3c405ccb7f88d0400232f2d607ba",
+      "reference_sha256": "ebfa299e594b8a2ca98c8c3abbb5243383bc3c405ccb7f88d0400232f2d607ba",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "offline-x0x_installer-390x844": {
+      "capture_sha256": "4686274fd6adabdc41e3b19982b12b5e0a4c1d771c77a2aef8b86dcc69e412a1",
+      "reference_sha256": "4686274fd6adabdc41e3b19982b12b5e0a4c1d771c77a2aef8b86dcc69e412a1",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "offline-x0x_installer-844x390": {
+      "capture_sha256": "7384a190784400ada23e1a344b3e0e185824330bce1c005ac029c8100dbce55c",
+      "reference_sha256": "7384a190784400ada23e1a344b3e0e185824330bce1c005ac029c8100dbce55c",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-install-1024x640": {
+      "capture_sha256": "cbc24bdba66f2d1349cfc3b9d6dfa1a2344ee780c10d916fcb7f55b3896c8f46",
+      "reference_sha256": "cbc24bdba66f2d1349cfc3b9d6dfa1a2344ee780c10d916fcb7f55b3896c8f46",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-install-1440x900": {
+      "capture_sha256": "1ec3629ae613445a495b66455f3c575f3cdf1820a407a5e9d1c98ddba9b32d31",
+      "reference_sha256": "1ec3629ae613445a495b66455f3c575f3cdf1820a407a5e9d1c98ddba9b32d31",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-install-390x844": {
+      "capture_sha256": "7095170fa43b779be3ae84f01ef4d3aa94b1ad678de89fe8f91010223e757994",
+      "reference_sha256": "7095170fa43b779be3ae84f01ef4d3aa94b1ad678de89fe8f91010223e757994",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-install-844x390": {
+      "capture_sha256": "824b432c239a06ed87c8d8bcf62afa560042f39c6f7efea0c1597499c0a62636",
+      "reference_sha256": "824b432c239a06ed87c8d8bcf62afa560042f39c6f7efea0c1597499c0a62636",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-manual-1024x640": {
+      "capture_sha256": "c9526cb36f38cd23ff240edf2b2e5d00e7057c5205f43f41155fb0acc4668052",
+      "reference_sha256": "c9526cb36f38cd23ff240edf2b2e5d00e7057c5205f43f41155fb0acc4668052",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-manual-1440x900": {
+      "capture_sha256": "7f031de1233dfb5bcc91a0d8d27ed56ef0ae5e4d8770e72246140ca0efccee63",
+      "reference_sha256": "7f031de1233dfb5bcc91a0d8d27ed56ef0ae5e4d8770e72246140ca0efccee63",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-manual-390x844": {
+      "capture_sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "reference_sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-manual-844x390": {
+      "capture_sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "reference_sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-new-1024x640": {
+      "capture_sha256": "c208d886e0dfcfa5fe74264542398ed99272e4315347ca72dfed94d6820838b4",
+      "reference_sha256": "c208d886e0dfcfa5fe74264542398ed99272e4315347ca72dfed94d6820838b4",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-new-1440x900": {
+      "capture_sha256": "7c3898f60346ab459411dadbe97b3878118454f8791b50366510de64d9868e44",
+      "reference_sha256": "7c3898f60346ab459411dadbe97b3878118454f8791b50366510de64d9868e44",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-new-390x844": {
+      "capture_sha256": "beb86038e034c3b29aa8590b8d78ba024f09680dd2dc90cc5528bce5f8905473",
+      "reference_sha256": "beb86038e034c3b29aa8590b8d78ba024f09680dd2dc90cc5528bce5f8905473",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-new-844x390": {
+      "capture_sha256": "77dbb98cc22856c81e2fdcf92171e14ebfcb18b47b545e89fc794f6b581412d4",
+      "reference_sha256": "77dbb98cc22856c81e2fdcf92171e14ebfcb18b47b545e89fc794f6b581412d4",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-presets-1024x640": {
+      "capture_sha256": "cf1e3a9837e7e677e28c4489e3a0a1be72df1fe89ebd8d3710742de12605362d",
+      "reference_sha256": "cf1e3a9837e7e677e28c4489e3a0a1be72df1fe89ebd8d3710742de12605362d",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-presets-1440x900": {
+      "capture_sha256": "3bf817482a1f7d78595f5830624c320ecb6b4d7572a36dc1c08cd9a0febc699e",
+      "reference_sha256": "3bf817482a1f7d78595f5830624c320ecb6b4d7572a36dc1c08cd9a0febc699e",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-presets-390x844": {
+      "capture_sha256": "e3c9eed452d49d322f335bf6db0c0c7ce613a9f854f4abddff1e5ef85882040e",
+      "reference_sha256": "e3c9eed452d49d322f335bf6db0c0c7ce613a9f854f4abddff1e5ef85882040e",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-presets-844x390": {
+      "capture_sha256": "88514359e58cf3d32267753921c418458186d12d440002a883b4ff90c95ce06a",
+      "reference_sha256": "88514359e58cf3d32267753921c418458186d12d440002a883b4ff90c95ce06a",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-remote-device-1024x640": {
+      "capture_sha256": "85f973e6b3a6612e5ab46356da34ad476ed0b787a70e67d673e23f71bddd5a54",
+      "reference_sha256": "85f973e6b3a6612e5ab46356da34ad476ed0b787a70e67d673e23f71bddd5a54",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-remote-device-1440x900": {
+      "capture_sha256": "f46bd042ffa64d95ccb2aa6768c5224395ae0c41b54c79d3deb5fe9bca4f52db",
+      "reference_sha256": "f46bd042ffa64d95ccb2aa6768c5224395ae0c41b54c79d3deb5fe9bca4f52db",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-remote-device-390x844": {
+      "capture_sha256": "087a6bc631ec5f73e5eba88e8d652b754cee4955f16de55dd78676537b58054a",
+      "reference_sha256": "087a6bc631ec5f73e5eba88e8d652b754cee4955f16de55dd78676537b58054a",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-remote-device-844x390": {
+      "capture_sha256": "31695bd0d892e73754beff82cff47cc71a8f7438efff527229692b127b27e9d4",
+      "reference_sha256": "31695bd0d892e73754beff82cff47cc71a8f7438efff527229692b127b27e9d4",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-tools-1024x640": {
+      "capture_sha256": "93c6a5dbba26d104d497356819b27e1322ce6e38d0f2045d573d97ec24c76a30",
+      "reference_sha256": "93c6a5dbba26d104d497356819b27e1322ce6e38d0f2045d573d97ec24c76a30",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-tools-1440x900": {
+      "capture_sha256": "fcea286fff0d8d6fc377848d482b8deabb6dd4ac27b9d34e92e7f9afc2255041",
+      "reference_sha256": "fcea286fff0d8d6fc377848d482b8deabb6dd4ac27b9d34e92e7f9afc2255041",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-tools-390x844": {
+      "capture_sha256": "b0922eef7365675e21f5c6c51c915e3365b1e2b76acd88cefeb63c16266dcbe1",
+      "reference_sha256": "b0922eef7365675e21f5c6c51c915e3365b1e2b76acd88cefeb63c16266dcbe1",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    },
+    "site-tools-844x390": {
+      "capture_sha256": "8ccf51c23fc5109fce643eadf4547461a61c4dca87c604e57863a2649a34eb0d",
+      "reference_sha256": "8ccf51c23fc5109fce643eadf4547461a61c4dca87c604e57863a2649a34eb0d",
+      "result": [
+        "PASS",
+        0.0
+      ]
+    }
+  }
+}

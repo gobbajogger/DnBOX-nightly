@@ -14,8 +14,27 @@
 .firmware-strip:first-child .source-cell{flex-basis:calc((100% - 20px)/2)}.reference-link{font-size:14px;color:var(--muted);margin:20px 0 35px}.ports{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ports label{display:grid;gap:8px}.ports select{font:inherit;min-height:44px;max-width:100%;background:#1c2a20;color:var(--ink);border:1px solid #6b815e;border-radius:7px}@media(max-width:600px){.ports{grid-template-columns:1fr}}
 
 @media (max-width: 900px) {
-  body > header, body > header nav { flex-wrap: wrap; }
-  body > header nav { padding-block: 8px; }
-  .build-record { overflow-wrap: anywhere; }
   .tool-surface .site-head { display: block; }
 }
+
+#proposals a{overflow-wrap:anywhere}
+
+@media (max-width: 900px) {
+  .build-record { overflow-wrap: anywhere; }
+  body > header, body > header nav,
+  .projects-page #dnbox-global-header header,
+  .projects-page #dnbox-global-header nav { flex-wrap: wrap; }
+  body > header,
+  .projects-page #dnbox-global-header header { column-gap: 16px; }
+  body > header nav,
+  .projects-page #dnbox-global-header nav { padding-block: 8px; }
+  body > header nav a:first-child,
+  .projects-page #dnbox-global-header nav a:first-child { display: inline; }
+}
+
+.starting-breaks-page .install-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+
+.fm1-reference figure img { max-width: 100%; height: auto; }
+@media (max-width: 480px) { .fm1-reference figure { margin-inline: 0; } }
+@media (max-width: 260px) { .fm1-reference { padding-top: 12px; } .fm1-reference h1 { font-size: 32px; margin-bottom: 12px; } }
+@media (max-width: 320px) { .demo-knobs { column-gap: 2px; } }

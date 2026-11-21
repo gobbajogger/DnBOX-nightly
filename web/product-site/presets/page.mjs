@@ -1,6 +1,7 @@
 import {inspect,edit} from './interchange.mjs';
 function exportName(name,doc){const suffix=doc.profile==='synthone'?(doc.container==='bank'?'.json':'.synth1'):'.superj6.bank.json';name=String(name??'presets').replace(/[\x00/\\]/g,'_');return name.toLowerCase().endsWith(suffix)?name:name.replace(/\.[^.]*$/,'')+suffix;}
 export function mount(root,{read=file=>file.arrayBuffer(),download}={}){
+ const document = root.ownerDocument ?? root;
  let revision=0,disposed=false,paused=false,doc=null,original=null,kept=null,originalName=null,keptName=null,keptWarnings=[];
  const cleanups=[],q=id=>root.querySelector('#'+id),status=t=>q('status').textContent=t;
  const text=(id,value)=>{const node=q(id);if(node)node.textContent=value;};
@@ -12,7 +13,7 @@ export function mount(root,{read=file=>file.arrayBuffer(),download}={}){
    if(file.size!==undefined&&(!Number.isSafeInteger(file.size)||file.size<0||file.size>8*1024*1024))throw Error('File too large');
    const bytes=new Uint8Array(await read(file));if(own!==revision||disposed||paused)return;
    doc=inspect(bytes,profile);original=doc.original();originalName=file.name;
-   const select=q('preset');doc.names.forEach((name,i)=>{const option=(root.ownerDocument??root).createElement('option');option.value=String(i);option.textContent=name;select.append(option);});
+   const select=q('preset');doc.names.forEach((name,i)=>{const option=(document??root).createElement('option');option.value=String(i);option.textContent=name;select.append(option);});
    select.value='0';q('name').value=doc.names[0]??'';
    q('keep').disabled=false;q('edit').disabled=!doc.count;q('name').disabled=!doc.count;q('preset').disabled=!doc.count;q('original').disabled=false;
    text('file-status',`${file.name} · ${doc.count} ${doc.count===1?'preset':'presets'}`);text('format-notes',doc.warnings.join(' '));

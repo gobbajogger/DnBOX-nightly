@@ -96,12 +96,35 @@ async function latestCanReportNotFoundAndError() {
     else {state.requests[0].resolve(null);await tick();state.requests[1].resolve(null);}
     await p;
     if(mode==='error')assert.deepEqual(state.changes.map(v=>v.on),[false]);
-    if(mode==='missing')assert.deepEqual(state.changes.map(v=>v.on),[false]);
+    if(mode==='missing')assert.deepEqual(state.changes, [{on:false, detail:'connectNotFound'}]);
     if(mode==='ota'){assert.equal(state.connected,true);assert.deepEqual(state.selected,['SMK-37 Elite']);}
   }
   return 'latest error, not-found and OTA result still work';
 }
-for (const check of [staleOverwritesWithNotFound,staleErrorMustNotOverride,staleWrongModelMustNotOverride,writeOverlapsOutstandingScan,latestCanReportNotFoundAndError]) {
+function checkTranslatedRetries() {
+  for (const edition of ['../web/x0x_installer.html', '../web/product-site/install/index.html']) {
+    const html = readFileSync(new URL(edition, import.meta.url), 'utf8');
+    const dictionary = html.match(/^const TEXT = \{[\s\S]*?^\};/m);
+    assert.ok(dictionary, `missing installer translations in ${edition}`);
+    const translations = new Script(dictionary[0] + '\nTEXT').runInNewContext();
+    for (const [language, labels] of Object.entries(translations)) {
+      for (const key of ['connectDenied', 'connectNotFound']) {
+        assert.ok(labels[key]?.includes(labels.connect),
+          `${edition} ${language} ${key} must name the visible USB connection button`);
+      }
+    }
+  }
+}
+checkTranslatedRetries();
+async function deniedScanOffersConnectionRetry() {
+  const {state, ctx} = setup();
+  ctx.midiAccess = async () => { throw Object.assign(new Error('install permission message'), {code:'denied'}); };
+  await ctx.start();
+  assert.deepEqual(state.changes, [{on:false, detail:'connectDenied'}]);
+  assert.deepEqual(state.selected, []);
+  return 'a denied scan leaves package selection alone and offers the connection retry';
+}
+for (const check of [deniedScanOffersConnectionRetry,staleOverwritesWithNotFound,staleErrorMustNotOverride,staleWrongModelMustNotOverride,writeOverlapsOutstandingScan,latestCanReportNotFoundAndError]) {
   const title=await check();console.log('PASS '+title);
 }
-console.log('PASS scan-race regression (5 scenarios; production function, simulated MIDI)');
+console.log('PASS scan-race regression (6 scenarios; production function, simulated MIDI)');

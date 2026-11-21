@@ -22,6 +22,38 @@ def check(v,label):
 def wav(samples):
  data=b''.join(struct.pack('<h',int(1000*math.sin(i/10))) for i in range(samples))
  return b'RIFF'+struct.pack('<I',36+len(data))+b'WAVEfmt '+struct.pack('<IHHIIHH',16,1,1,44100,88200,2,16)+b'data'+struct.pack('<I',len(data))+data
+async def check_downloaded_tools(browser):
+    context = await browser.new_context(offline=True)
+    try:
+        page = await context.new_page()
+        errors, network = [], []
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        page.on('request', lambda request: network.append(request.url)
+                if request.url.startswith(('http:', 'https:')) else None)
+        for tab, panel, filename, title in (
+            ('samples', 'samples', 'breaks', 'Import samples'),
+            ('projects', 'projects', 'projects', 'Songs & projects'),
+        ):
+            await page.goto((ROOT / 'docs/install/index.html').as_uri() + '#' + tab)
+            link = page.locator('#' + panel + '-panel a')
+            await link.wait_for(state='visible')
+            assert await page.locator('#' + panel + '-panel iframe').is_hidden()
+            await link.click()
+            assert page.url == (ROOT / 'docs' / filename / 'index.html').as_uri()
+            assert await page.locator('h1').inner_text() == title
+            await page.evaluate('document.fonts.ready')
+            weights = await page.evaluate("""[...document.fonts]
+                .filter(face => face.family.includes('DnBOX Barlow') && face.status === 'loaded')
+                .map(face => face.weight).sort()""")
+            assert weights == ['500', '700'], (filename, weights)
+            home = page.locator('a.home')
+            await home.focus()
+            await page.keyboard.press('Enter')
+            await page.wait_for_url((ROOT / 'docs/install/index.html').as_uri())
+        assert not errors and not network, (errors, network)
+    finally:
+        await context.close()
+
 async def main():
  srv=ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=srv.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{srv.server_port}'
  async with async_playwright() as pw:
@@ -87,6 +119,7 @@ async def main():
    check(await page.frames[1].evaluate('document.documentElement.scrollWidth<=innerWidth'),f'{width}px sample panel has no horizontal overflow')
    await page.locator('#firmware-tab').click()
   check(not errors,'no page script errors: '+str(errors))
+  await check_downloaded_tools(browser)
   await browser.close()
  srv.shutdown();print(json.dumps({'checks':len(checks),'failures':[x for x,v in checks if not v]}));assert all(v for _,v in checks)
 asyncio.run(main())

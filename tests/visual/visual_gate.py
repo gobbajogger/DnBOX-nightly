@@ -10,15 +10,15 @@ Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's 
 Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions off, fixed clock and random seed,
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
-import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
+import os, sys, json, socket, subprocess, time, re, stat, uuid
 from contextlib import closing
 from pathlib import Path
-from urllib.parse import urlencode
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
 from full_page_capture import capture_full_page
+from installer_package import installer_responses as make_installer_responses, wait_for_admission
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -106,7 +106,10 @@ def write_actual_output(filename, data):
         fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=directory)
         created = True
         with os.fdopen(fd, 'wb') as output:
-            output.write(data)
+            if callable(data):
+                data(output)
+            else:
+                output.write(data)
         # Atomic replacement replaces a raced-in link itself, never its target.
         os.replace(temporary, filename, src_dir_fd=directory, dst_dir_fd=directory)
         created = False
@@ -117,6 +120,8 @@ def write_actual_output(filename, data):
     return OUT / filename
 
 def compare(name, png_bytes, results):
+    from png_compare import Screenshot, compared_strips, write_diff
+
     validate_capture_output()
     OUT.mkdir(parents=True, exist_ok=True)
     base = SNAP / f'{name}.png'
@@ -129,20 +134,31 @@ def compare(name, png_bytes, results):
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
         tmp.unlink(missing_ok=True)
         results.append((name, 'NOBASE', 0.0)); return
-    a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
-    b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
-    if a.shape != b.shape:
-        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: size {a.shape} != baseline {b.shape}'); return
-    diff = (np.abs(a - b).max(axis=2) > PIXEL_THRESHOLD)
-    ratio = float(diff.mean())
+    reference_bytes = base.read_bytes()
+    if reference_bytes == png_bytes:
+        # Identical bytes prove equality only after a complete, valid decode.
+        Screenshot(png_bytes).validate_pixels()
+        tmp.unlink(missing_ok=True)
+        results.append((name, 'PASS', 0.0))
+        return
+    actual = Screenshot(png_bytes)
+    reference = Screenshot(reference_bytes)
+    if actual.size != reference.size:
+        actual.validate_pixels()
+        reference.validate_pixels()
+        results.append((name, 'FAIL', 1.0))
+        print(f'FAIL {name}: size {actual.size[::-1] + (3,)} != baseline {reference.size[::-1] + (3,)}')
+        return
+    changed = sum(np.count_nonzero(mask) for _, mask in compared_strips(actual, reference, PIXEL_THRESHOLD))
+    ratio = changed / (actual.size[0] * actual.size[1])
     if ratio > MAX_DIFF_RATIO:
-        vis = (np.asarray(Image.open(base).convert('RGB')) * 0.3).astype(np.uint8); vis[diff] = [255, 0, 255]
-        diff_png = io.BytesIO(); Image.fromarray(vis).save(diff_png, format='PNG')
-        write_actual_output(f'{name}-diff.png', diff_png.getvalue())
-        results.append((name, 'FAIL', ratio)); print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {OUT / (name + "-diff.png")}')
+        diff = write_actual_output(f'{name}-diff.png', lambda output: write_diff(output, actual, reference, PIXEL_THRESHOLD))
+        results.append((name, 'FAIL', ratio))
+        print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {diff}')
     else:
         tmp.unlink(missing_ok=True)
         results.append((name, 'PASS', ratio))
+
 
 HEADER_JS = """
 () => {
@@ -212,61 +228,40 @@ def header_checks(h, w, fails):
     need(h['scrollW'] <= h['innerW'], f"horizontal overflow {h['scrollW']}>{h['innerW']}")
     need(not h['pageScrollable'], 'page scrolls')
 
+def sample_navigation_checks(page, tag, failures):
+    navigation = page.evaluate("""() => {
+        const visible = element => element.getClientRects().length > 0;
+        const links = [...document.querySelectorAll('header nav a')];
+        const home = [...document.querySelectorAll('a[href]')].filter(link =>
+            visible(link) && ['../', '../index.html'].includes(link.getAttribute('href')));
+        return {
+            destinations: links.filter(visible).map(link => link.textContent.trim()),
+            targets: links.filter(visible).map(link => link.getAttribute('href')),
+            homeLinks: home.length,
+            current: links.find(link => link.getAttribute('aria-current') === 'page')?.textContent,
+            background: getComputedStyle(document.body).backgroundColor,
+            primary: getComputedStyle(document.querySelector('#connect')).backgroundColor,
+            fits: document.documentElement.scrollWidth === innerWidth
+        };
+    }""")
+    wanted = {
+        'destinations': ['Sounds', 'Remote', 'Samples', 'Projects', 'Presets', 'Manual', 'History', 'Install nightly'],
+        'targets': ['../index.html#sounds', '../remote/', '../breaks/', '../projects/', '../presets/',
+                    '../manual/', '../builds/', '../install/'],
+        'homeLinks': 1, 'current': 'Samples', 'background': 'rgb(7, 16, 20)',
+        'primary': 'rgb(255, 179, 55)', 'fits': True
+    }
+    for key, expected in wanted.items():
+        if navigation.get(key) != expected:
+            failures.append(f'Samples {tag} {key}: {navigation.get(key)!r} (expected {expected!r})')
+
 def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
 def installer_responses():
-    # Match only the two public requests made by the installer's initial state.
-    report_url = 'https://api.github.com/search/issues?' + urlencode({
-        'q': 'repo:gobbajogger/DnBOX is:issue in:title "Install report"', 'per_page': 100, 'page': 1,
-    })
-    source = (ROOT / 'web/product-site/install/index.html').read_text()
-    catalog = json.loads(re.search(r'^const catalog = (.+);$', source, re.M)[1])
-    version = next((row for row in catalog['versions'] if row['version'] == catalog['latest']), None)
-    models = version['models'] if version else {}
-    default_model = 'pro' if 'pro' in models else 'elite'
-    package = models.get(default_model)
-    if package:
-        digest = package['sha256']
-        if not re.fullmatch(r'[a-f0-9]{64}', digest) or not package['pkg'].startswith(
-            'https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/' + digest + '/'
-        ):
-            raise ValueError('Default installer package must have an immutable nightly URL')
-    saved = os.environ.get('DNBOX_RELEASE_PACKAGES')
-    data = None
+    return make_installer_responses(ROOT)
 
-    def respond(route):
-        nonlocal data
-        if route.request.method != 'GET':
-            return route.fallback()
-        if data is None:
-            if saved:
-                v = version['display_version']
-                if not re.fullmatch(r'\d+(?:\.\d+){2,3}', v):
-                    raise ValueError('Unexpected release package version')
-                body = (Path(saved) / ('v' + v) / f'dnbox-x0x37-{v}-{default_model}.fwsc').read_bytes()
-            else:
-                response = route.fetch(max_redirects=0)
-                if not response.ok:
-                    raise ValueError(f'Default package returned HTTP {response.status}. Set DNBOX_RELEASE_PACKAGES for offline captures.')
-                body = response.body()
-            if len(body) != package['size'] or hashlib.sha256(body).hexdigest() != digest:
-                raise ValueError('Default installer package does not match its committed size and SHA-256')
-            data = body
-        route.fulfill(body=data, content_type='application/octet-stream', headers={'Access-Control-Allow-Origin': '*'})
-
-    def attach(page):
-        def report(route):
-            if route.request.method != 'GET':
-                return route.fallback()
-            route.fulfill(json={'total_count': 0, 'incomplete_results': False, 'items': []},
-                          headers={'Access-Control-Allow-Origin': '*'})
-        page.route(re.compile('^' + re.escape(report_url) + '$'), report)
-        if package:
-            page.route(re.compile('^' + re.escape(package['pkg']) + '$'), respond)
-
-    return attach
 
 def viewport_contexts(pw):
     # Reclaim Chromium's compositor and caches along with the context after each viewport.
@@ -279,10 +274,74 @@ def viewport_contexts(pw):
                 yield w, h, context
 
 
+def wait_for_homepage(page):
+    # The replay replaces the static preview after its module loads. Check what
+    # will actually be captured, including both weights used by the site.
+    page.wait_for_function("""() => {
+        const frame = document.querySelector('#frame-voice-0')?.content.firstElementChild;
+        const displayed = document.querySelector('#replay-display')?.firstElementChild;
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            (weights.has('normal') || weights.has('400')) && weights.has('700') &&
+            document.querySelector('#demo-status')?.textContent === 'Ready.' &&
+            document.querySelector('#demo-play')?.textContent === 'Next control' &&
+            !!frame && !!displayed && displayed.isEqualNode(frame);
+    }""")
+
+
+def wait_for_mounted_samples(page, *, timeout=None):
+    # The unconnected workspace binds a local audition chooser before enabling any device writes.
+    page.wait_for_function("""() => {
+        const element = id => document.getElementById(id);
+        const chooser = element('auditionFile');
+        const styles = [...document.styleSheets];
+        const loaded = href => styles.some(sheet => !sheet.disabled &&
+            sheet.ownerNode?.getAttribute('href') === href && sheet.cssRules.length > 0);
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            loaded('../site.css') && loaded('../tool-theme.css') &&
+            (weights.has('normal') || weights.has('400')) && weights.has('700') &&
+            window.sampleWorkspace?.busy?.() === false && chooser?.type === 'file' &&
+            chooser.checkVisibility({visibilityProperty: true}) && !chooser.disabled &&
+            chooser.files.length === 0 && typeof chooser.onchange === 'function' &&
+            element('connect')?.disabled === false && element('add')?.disabled === true &&
+            element('send')?.disabled === true && element('auditionReference')?.disabled === true &&
+            element('auditionEncoded')?.disabled === true;
+    }""", timeout=timeout)
+
+
+def wait_for_offline_installer(page, *, timeout=None):
+    # The empty preview eagerly opens two hidden workspaces. Their frame
+    # lifecycle may keep Playwright from reporting idle after all assets load.
+    page.wait_for_function("""() => {
+        const element = id => document.getElementById(id);
+        const weights = new Set([...document.fonts]
+            .filter(face => face.family === 'DnBOX Barlow' && face.status === 'loaded')
+            .map(face => face.weight));
+        const readyFrame = (id, api) => {
+            const frame = element(id);
+            return frame?.contentDocument?.readyState === 'complete' &&
+                !!frame.contentWindow[api];
+        };
+        const pictures = [...document.querySelectorAll('.real-references img')];
+        return document.readyState === 'complete' && document.fonts.status === 'loaded' &&
+            weights.has('500') && weights.has('700') &&
+            pictures.length === 3 && pictures.every(image => image.complete && image.naturalWidth > 0) &&
+            element('firmware-panel')?.hidden === false && element('noversion')?.hidden === false &&
+            element('noversion').textContent.trim().length > 0 && element('version')?.options.length === 0 &&
+            element('go')?.disabled === true && element('download')?.hidden === true &&
+            readyFrame('sample-frame', 'sampleWorkspace') && readyFrame('project-frame', 'projectWorkspace');
+    }""", timeout=timeout)
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
-    srv = subprocess.Popen([sys.executable, '-m', 'http.server', str(p), '-d', str(ROOT / 'web')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    srv = subprocess.Popen([sys.executable, str(ROOT / 'tests/visual/serve_source.py'), str(p)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     p2 = port()
     srv2 = subprocess.Popen([sys.executable, '-m', 'http.server', str(p2), '-d', str(ROOT / 'docs')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(0.8)
@@ -292,11 +351,27 @@ def main():
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
             attach_installer_responses = installer_responses()
-            def settle(pg, url, name):
+            def settle(pg, url, name, *, homepage=False, offline_installer=False, mounted_samples=False, build_history=False):
                 try:
+                    if mounted_samples or build_history:
+                        def check_response(response):
+                            if response.status >= 400:
+                                errors.append(f'{name} HTTP {response.status}: {response.url}')
+                        pg.on('response', check_response)
+                        pg.on('requestfailed', lambda request: errors.append(
+                            f'{name} request failed: {request.url} ({request.failure})'))
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
-                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                    if homepage:
+                        wait_for_homepage(pg)
+                    elif mounted_samples:
+                        wait_for_mounted_samples(pg)
+                    elif offline_installer:
+                        wait_for_offline_installer(pg)
+                    else:
+                        pg.evaluate('document.fonts.ready')
+                        pg.wait_for_load_state('networkidle')
+                    pg.wait_for_timeout(250)
                 except Exception as error:
                     raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
             for w, h, c in viewports:
@@ -326,6 +401,7 @@ def main():
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     try:
                         if act: act(pg); pg.wait_for_timeout(150)
+                        print(f'Capturing {full}', flush=True)
                         screenshot = pg.screenshot()
                     except Exception as error:
                         raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
@@ -334,12 +410,17 @@ def main():
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    if rel == 'install/index.html':
-                        attach_installer_responses(pg)
-                    settle(pg, base + '/product-site/' + rel, full)
+                    package_name = attach_installer_responses(pg, require_package=True) if rel == 'install/index.html' else None
+                    settle(pg, base + '/product-site/' + rel, full, homepage=(rel == 'index.html'),
+                           mounted_samples=(rel == 'breaks/index.html'), build_history=(rel == 'builds/index.html'))
+                    if package_name:
+                        wait_for_admission(pg, package_name)
+                    if rel == 'breaks/index.html':
+                        sample_navigation_checks(pg, tag, header_fails)
                     scroll_width = pg.evaluate('document.documentElement.scrollWidth')
                     if scroll_width > w:
                         errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
+                    print(f'Capturing {full}', flush=True)
                     compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
@@ -347,7 +428,8 @@ def main():
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     if OFFLINE_BUILT[rel] == 'install/index.html':
                         attach_installer_responses(pg)
-                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full, offline_installer=(rel == 'x0x_installer.html'))
+                    print(f'Capturing {full}', flush=True)
                     compare(full, capture_full_page(pg, rel, full), results); pg.close()
     finally:
         srv.terminate(); srv2.terminate()

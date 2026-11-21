@@ -1,0 +1,56 @@
+{
+  "candidate": "061e95213f20126f39b51e7828eecf2c2f274289",
+  "consolidated": "583f622961fc9975fac746592ce6c483073c4170",
+  "route": "remote/device/index.html",
+  "review": "Approved default inactive native connection page, 10/10 for this state",
+  "scope": "Native catalog admission remains disabled. No instrument connection or physical device is claimed.",
+  "reviewer": "Integration reviewer, independent of the Remote Device page and responsive header implementation",
+  "checks": [
+    "Compared full-page registered capture with an independent Chromium render at all four screenshot widths; pixel-identical in each case.",
+    "Compared candidate to current consolidated at 1440, 1024, 844, 390 and 240 px. Three larger viewports were pixel-identical. Reviewed the responsive navigation reflow at 390 and 240.",
+    "Inspected full-page composition, clipping, labels, status, nav and footer at all five widths. Document width matched viewport. No unnamed links, unlabelled ports or page errors.",
+    "Verified six connection controls disabled, correctly labelled MIDI input and output, visible live admission status, keyboard navigation to earlier firmware connection information, successful return and zero MIDI permission requests in each width."
+  ],
+  "captures": [
+    {
+      "file": "site-remote-device-1024x640.png",
+      "width": 1024,
+      "dimensions": [
+        1024,
+        1077
+      ],
+      "sha256": "85f973e6b3a6612e5ab46356da34ad476ed0b787a70e67d673e23f71bddd5a54",
+      "blob": "30295afc15563f55ff328186fb0fbbcfd273d733"
+    },
+    {
+      "file": "site-remote-device-1440x900.png",
+      "width": 1440,
+      "dimensions": [
+        1440,
+        1055
+      ],
+      "sha256": "f46bd042ffa64d95ccb2aa6768c5224395ae0c41b54c79d3deb5fe9bca4f52db",
+      "blob": "a840242a0e72a0dd9c7e139d05a021ff57d266da"
+    },
+    {
+      "file": "site-remote-device-390x844.png",
+      "width": 390,
+      "dimensions": [
+        390,
+        1381
+      ],
+      "sha256": "087a6bc631ec5f73e5eba88e8d652b754cee4955f16de55dd78676537b58054a",
+      "blob": "2024712cc4eff85cb0e32def83cd5d4ab41a02c6"
+    },
+    {
+      "file": "site-remote-device-844x390.png",
+      "width": 844,
+      "dimensions": [
+        844,
+        1141
+      ],
+      "sha256": "31695bd0d892e73754beff82cff47cc71a8f7438efff527229692b127b27e9d4",
+      "blob": "c653a0d7392c153a097022a0904056fb6a34fdbf"
+    }
+  ]
+}

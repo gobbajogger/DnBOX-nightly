@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mount} from '../../web/product-site/presets/page.mjs';
 class E{constructor(){this.events={};this.value='';this.files=[];this.children=[];}addEventListener(k,f){this.events[k]=f;}replaceChildren(){this.children=[];}append(o){this.children.push(o);}async fire(k){await this.events[k]?.();}}
 const source='[{"uid":"u","name":"First","bank":"User","cutoff":1,"waveform1":0}]';
-function setup(read){let es=Object.fromEntries('file profile preset name keep edit original export cancel status file-status kept-status format-notes'.split(' ').map(k=>[k,new E()]));es.profile.value='synthone';let downloads=[];const api=mount({querySelector:s=>es[s.slice(1)],ownerDocument:{createElement:()=>new E()}},{read:read??(async()=>new TextEncoder().encode(source).buffer),download:(...x)=>downloads.push(x)});return{es,downloads,api};}
+function setup(read, documentRoot = false){let es=Object.fromEntries('file profile preset name keep edit original export cancel status file-status kept-status format-notes'.split(' ').map(k=>[k,new E()]));es.profile.value='synthone';let downloads=[];const dom = {querySelector:s=>es[s.slice(1)]}; const doc = {createElement:()=>new E()}; Object.assign(dom, documentRoot ? {...doc,ownerDocument:null} : {ownerDocument:doc}); const api=mount(dom,{read:read??(async()=>new TextEncoder().encode(source).buffer),download:(...x)=>downloads.push(x)});return{es,downloads,api};}
 test('file change previews, keep required, name edit original bytes and filename retained',async()=>{let{es,downloads}=setup();es.file.files=[{name:'first.original'}];await es.file.fire('change');await es.export.fire('click');assert.equal(downloads.length,0);es.preset.value='0';es.name.value='Edited';await es.edit.fire('click');await es.keep.fire('click');await es.original.fire('click');assert.equal(new TextDecoder().decode(downloads[0][0]),source);es.file.files=[{name:'second.other'}];await es.file.fire('change');await es.cancel.fire('click');await es.export.fire('click');assert.equal(downloads[1][2],'first.json');assert.match(new TextDecoder().decode(downloads[1][0]),/Edited/);});
 test('late file read cancelled and wrong profile fail closed',async()=>{let resolve;let{es}=setup(()=>new Promise(r=>resolve=r));es.file.files=[{name:'x'}];let pending=es.file.fire('change');await es.cancel.fire('click');resolve(new TextEncoder().encode(source).buffer);await pending;assert.equal(es.keep.disabled,true);es.profile.value='superj6';await es.profile.fire('change');assert.equal(es.original.disabled,true);});
 
@@ -22,3 +22,12 @@ test('closing or refusing a file clears stale editable names but keeps the saved
  await es.export.fire('click');assert.equal(new TextDecoder().decode(downloads[0][0]),source);assert.match(es['kept-status'].textContent,/first.json/);
 });
 test('an initial rejected file does not claim that a kept copy exists',async()=>{const {es}=setup(async()=>new TextEncoder().encode('{bad').buffer);es.file.files=[{name:'bad.json'}];await es.file.fire('change');assert.match(es.status.textContent,/Not imported/);assert.doesNotMatch(es.status.textContent,/kept copy/i);});
+
+test('a Document root creates populated preset options on import', async () => {
+  const {es} = setup(undefined, true);
+  es.file.files = [{name:'user.json'}];
+  await es.file.fire('change');
+  assert.equal(es.preset.children[0]?.textContent, 'First');
+  assert.equal(es.name.value, 'First');
+  assert.equal(es.keep.disabled, false);
+});
