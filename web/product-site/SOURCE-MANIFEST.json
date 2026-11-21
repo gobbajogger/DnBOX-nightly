@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 628021,
-      "sha256": "fa5e64a718bdf415dffbf38401e0745263480182dc25ee274410b8225f2e9970"
+      "bytes": 628330,
+      "sha256": "388506d0bbd250f891f27480292e27a22c8eb0fa809f5d0f238b650b298a43e5"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -359,8 +359,8 @@
     },
     {
       "path": "manual/index.html",
-      "bytes": 13872,
-      "sha256": "173f9275a55ae2ee8ea8ac061718fcc63b6f078ddf3376bca5c12971a61f10e9"
+      "bytes": 17504,
+      "sha256": "5e4f025db19590b6cdd152a7993e15f05215779b2d0fa15d6385ff00db178846"
     },
     {
       "path": "manual/legacy.html",
@@ -369,8 +369,8 @@
     },
     {
       "path": "manual/manual.js",
-      "bytes": 194,
-      "sha256": "03335a5401c7f70663386806b96c7db5b237c029f315d9c197cbdaf8abe5434e"
+      "bytes": 1241,
+      "sha256": "2437d9d22735aced7aa8b4a0ba175bcc27c505729ba1de3a951f31652acc05e8"
     },
     {
       "path": "manual/original/PROJECT_FILES.md",
@@ -524,8 +524,8 @@
     },
     {
       "path": "presets/index.html",
-      "bytes": 2832,
-      "sha256": "8c81a9a08f812b128efc3a4b8a4e1ddaf38bffb266795cc9e8cd867111c4f461"
+      "bytes": 7218,
+      "sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2"
     },
     {
       "path": "presets/interchange.mjs",
@@ -554,8 +554,8 @@
     },
     {
       "path": "presets/page.mjs",
-      "bytes": 3774,
-      "sha256": "2c0394c4b1d5243590c592026612e96ebd8cdf4374b00d9d4008093cf3ba39de"
+      "bytes": 4597,
+      "sha256": "2e24f58bc9dfe212cc34b9d79dfc04b21eaa58a296c9c28b5d6a9d18166c867f"
     },
     {
       "path": "presets/schema.mjs",
@@ -1024,8 +1024,8 @@
     },
     {
       "path": "tools/index.html",
-      "bytes": 2028,
-      "sha256": "ad73265dad3db536bc2d7a04792963658c91ada1fb240ab81282bf8677397c89"
+      "bytes": 2405,
+      "sha256": "220fc06614021b99ce201c2585a42e8be3c87614ac64e6c7a480cda0e6de0b90"
     },
     {
       "path": "tools/tools.js",
@@ -1036,6 +1036,11 @@
       "path": "versions.json",
       "bytes": 89223,
       "sha256": "84d79d2f5240eb02d0dadd810e84f2aec7577d9bf0218bfdbc6d187334285893"
+    },
+    {
+      "path": "manual/manual.css",
+      "bytes": 3226,
+      "sha256": "6a408d1d0c04b97fb4d2573d78f855ebc397433d1bb108aeef715f6420d3927a"
     }
   ],
   "notClaimed": [

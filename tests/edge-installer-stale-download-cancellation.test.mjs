@@ -60,7 +60,7 @@ function fixture() {
     return {ok: true, redirected: false, body: {getReader: () => secondReader}};
   }
   const mock = {
-    catalog: version, Blob, Uint8Array, AbortController,
+    catalog: version, Blob, Uint8Array, AbortController, setTimeout, clearTimeout,
     $: id => {if (!ui.has(id)) ui.set(id, {checked: false, disabled: false});return ui.get(id);},
     URL: {createObjectURL: () => 'blob:synthetic-verified', revokeObjectURL() {}},
     MODELS: {pro: 'Pro', elite: 'Elite'},

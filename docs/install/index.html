@@ -3048,24 +3048,30 @@ async function loadSelectedPackage() {
   };
   const controller = new AbortController();
   activeDownloadController = controller;
+  const isUsable = () => isLatest() && !controller.signal.aborted;
+  // Bound headers, body and late asynchronous verification as one download.
+  const deadline = setTimeout(() => {
+    controller.abort();
+    if (isLatest()) sayK("loadfail", "Download took too long. Reload this page to retry.");
+  }, 20000);
   try {
     const r = await fetch(pkg.pkg, {redirect: "error", signal: controller.signal});
-    if (!isLatest()) { try { await r.body?.cancel(); } catch {} return; }
+    if (!isUsable()) { try { await r.body?.cancel(); } catch {} return; }
     if (!r.ok || r.redirected) throw new Error(`${pkg.pkg}: HTTP ${r.status}`);
     const raw = await readApprovedPackage(r, pkg.size, isLatest, controller.signal);
-    if (!isLatest()) return;
+    if (!isUsable()) return;
     if (!raw) { sayK("badpkg"); return; }
     // Approved downloads require a SHA and the exact product/model identity.
     const hex = await sha256Hex(raw.buffer);
-    if (!isLatest()) return;
+    if (!isUsable()) return;
     if (hex !== pkg.sha256) { sayK("badpkg"); return; }
     const product = productOf(raw);
     if (product !== pkg.product) { sayK("badpkg"); return; }
     const logical = logicalImage(raw);
     if (bundledController(pkg)) {
       try { await verifyBundledController(logical, pkg); }
-      catch (e) { if (isLatest()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK("ctlbundlebad", " " + e.message); } return; }
-      if (!isLatest()) return;
+      catch (e) { if (isUsable()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK("ctlbundlebad", " " + e.message); } return; }
+      if (!isUsable()) return;
     }
     image = logical;
     selectedProduct = product;
@@ -3075,8 +3081,9 @@ async function loadSelectedPackage() {
       href: URL.createObjectURL(new Blob([raw], {type: "application/octet-stream"})) };
     say(`${buildDisplayLabel(ver,pkg)} · ${MODELS[model] || model}`);
     refreshMeta();
-  } catch (e) { if (isLatest() && !controller.signal.aborted) sayK("loadfail", e.message); }
+  } catch (e) { if (isUsable()) sayK("loadfail", e.message); }
   finally {
+    clearTimeout(deadline);
     if (activeDownloadController === controller) activeDownloadController = null;
   }
 }

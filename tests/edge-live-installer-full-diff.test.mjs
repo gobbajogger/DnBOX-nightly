@@ -63,6 +63,41 @@ const ALLOWED = [
       '  return name === "fm-1" ? null : name;',
     ],
   },
+  {
+    "id": "bounded-download-deadline",
+    "reason": "Reviewed download lifetime bound; native header/body cancellation and post-await fences prevent expired bytes from enabling Install. Covered by actual downloader and browser timeout/reload tests.",
+    "renderOnly": [
+      "  const isUsable = () => isLatest() && !controller.signal.aborted;",
+      "  // Bound headers, body and late asynchronous verification as one download.",
+      "  const deadline = setTimeout(() => {",
+      "    controller.abort();",
+      "    if (isLatest()) sayK(\"loadfail\", \"Download took too long. Reload this page to retry.\");",
+      "  }, 20000);",
+      "    if (!isUsable()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isUsable()) return;",
+      "    if (!isUsable()) return;",
+      "      catch (e) { if (isUsable()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isUsable()) return;"
+    ],
+    "liveOnly": [
+      "    if (!isLatest()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isLatest()) return;",
+      "    if (!isLatest()) return;",
+      "      catch (e) { if (isLatest()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isLatest()) return;"
+    ]
+  },
+  {
+    "id": "bounded-download-timer-cleanup",
+    "reason": "Always release the per-download deadline; reuse the identical selection-and-abort predicate for error reporting, preserving its evaluation order and controller identity cleanup.",
+    "renderOnly": [
+      "  } catch (e) { if (isUsable()) sayK(\"loadfail\", e.message); }",
+      "    clearTimeout(deadline);"
+    ],
+    "liveOnly": [
+      "  } catch (e) { if (isLatest() && !controller.signal.aborted) sayK(\"loadfail\", e.message); }"
+    ]
+  },
 ];
 
 function parseUnifiedHunks(diff) {
