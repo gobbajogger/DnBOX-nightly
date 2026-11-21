@@ -2,6 +2,10 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Full gate at bf9304fe
+
+This additional unfiltered gate completed with exit 1. It passed all 564 edge tests and all 26 FunkyBeats browser groups. The Workspace test applied an Attack-curve expectation to a kit summary glyph. The native Mix browser also required adjacent stored feedback values to display different percentages. Both test assumptions have since been corrected. The rebuilt `045d96dc` product passed the full Workspace and Remote suites; the real audio provider separately verified raw Delay Feedback values 52, 53 and 54, their 35%, 35% and 36% displays, and Undo readback at all three viewport sizes. [Complete output and revision-specific follow-ups](../../evidence/remote-qualification-944e99d8/follow-up-tests/README.md#full-gate-at-bf9304fe)
+
 ## Native Sound and LCD browser qualification
 
 At `59d83425` the real emulator and AudioWorklet passed the native Sound case on all three owner sizes across separate invocations. The unfiltered invocation passed desktop, then timed out on the portrait Undo button. Unchanged serial reruns passed both portrait and landscape. Each successful case exercised 40 controls, a 16-operation native Undo history, both Draft slots and exact restoration of the exported Draft bytes, with zero MIDI calls. [Successful measurements, original failure and diagnostic attempts](../../evidence/remote-qualification-944e99d8/follow-up-tests/native-sound-59d83425/README.md)
