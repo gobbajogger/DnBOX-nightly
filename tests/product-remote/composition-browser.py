@@ -116,6 +116,56 @@ async def check_pattern_scopes(page):
     assert await core.draft_state(page) == expected
 
 
+async def observe_break_preview(button):
+    # A genuine 1.58-second preview can end between Playwright polling turns.
+    # Observe the actual media events and button state before dispatching the click.
+    return await button.evaluate_handle("""button => {
+        const panel = button.closest('.break-picker');
+        const seen = {audio: null, stopShown: false, playRestored: false, ended: false};
+        panel.addEventListener('playing', event => {
+            if (event.target.matches('audio') && !event.target.paused) seen.audio = event.target;
+        }, {capture: true, once: true});
+        panel.addEventListener('ended', event => {
+            seen.ended = event.target === seen.audio && event.target.ended && event.target.currentTime > 0;
+        }, {capture: true, once: true});
+        const observer = new MutationObserver(() => {
+            const pressed = button.getAttribute('aria-pressed') === 'true';
+            if (pressed && button.textContent === 'Stop') seen.stopShown = true;
+            if (!pressed && seen.stopShown && button.textContent === 'Play') {
+                seen.playRestored = true;
+                observer.disconnect();
+            }
+        });
+        observer.observe(button, {attributes: true, attributeFilter: ['aria-pressed']});
+        return seen;
+    }""")
+
+async def check_break_playback(page, preview):
+    natural = await observe_break_preview(preview)
+    await preview.click()
+    await page.wait_for_function('s => s.audio && s.stopShown', arg=natural, timeout=5000)
+    await page.wait_for_function('s => s.ended && s.playRestored', arg=natural, timeout=7000)
+    await expect(preview).to_have_attribute('aria-pressed', 'false')
+    await expect(preview).to_have_text('Play')
+    await natural.dispose()
+
+    # Use the longest genuine clip for the separate keyboard navigation test.
+    # Focus Sound while the preview loads so entering the view needs one keystroke.
+    longer = page.locator('#break-sequence [data-action="play"][data-id="personal-br2-zone2"]')
+    sound_view = page.locator('[data-view="sound"]')
+    leaving = await observe_break_preview(longer)
+    await sound_view.evaluate("""(button, s) => button.addEventListener('click', event => {
+        s.leftWhilePlaying = event.isTrusted && !!s.audio && !s.audio.paused && !s.audio.ended;
+    }, {capture:true, once:true})""", leaving)
+    await longer.click()
+    await sound_view.focus()
+    await expect(sound_view).to_be_focused()
+    await page.wait_for_function('s => s.audio && s.stopShown', arg=leaving, timeout=5000)
+    await page.keyboard.press('Enter')
+    await expect(sound_view).to_have_attribute('aria-current', 'page')
+    assert await leaving.evaluate("s => s.leftWhilePlaying && !s.ended && s.audio.paused && !s.audio.hasAttribute('src')"), 'Sound must retire active audio before its natural end'
+    await leaving.dispose()
+
 async def cases(evidence=None):
  proof=[]
  async with async_playwright() as pw:
@@ -207,9 +257,7 @@ async def cases(evidence=None):
      for play in await plays.all():await reachable(play,44)
      await p.locator('#break-sequence [data-action="none"]').click();await expect(p.locator('#break-sequence [data-asset]:checked')).to_have_count(0);await p.locator('#break-sequence [data-action="all"]').click();await expect(p.locator('#break-sequence [data-asset]:checked')).to_have_count(5)
      await screenshot('break-previews')
-     preview=plays.first;await preview.click();await expect(preview).to_have_attribute('aria-pressed','true');await expect(preview).to_have_attribute('aria-pressed','false',timeout=7000);await expect(preview).to_have_text('Play')
-     await preview.click();await expect(preview).to_have_attribute('aria-pressed','true');audio=await p.locator('#break-sequence audio').element_handle();assert audio
-     await p.locator('[data-view="sound"]').click();assert await audio.evaluate('e=>e.paused&&!e.hasAttribute("src")'),'Preview did not retire on leaving Slices'
+     await check_break_playback(p, plays.first)
      await p.locator('[data-view="roll"]').click();await expect(plays).to_have_count(5)
      async def refuse_preview(route):await route.fulfill(status=503,body='Unavailable')
      await p.route('**/assets/starting-breaks/*.wav',refuse_preview);await plays.first.click();error=p.locator('#break-sequence [data-audio-status]');await expect(error).to_contain_text('Could not load this preview');await expect(plays.first).to_have_attribute('aria-pressed','false');await error.scroll_into_view_if_needed();await full_bounds(error);await screenshot('break-error');await p.unroute('**/assets/starting-breaks/*.wav',refuse_preview)
