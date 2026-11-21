@@ -990,9 +990,9 @@ async def project_sound_edit_count_at_size(page,width,height):
     assert '2 sound edits' in edited['summary']
     await page.locator('#undo').press('Enter')
     undone=await snapshot('Undo-Tune')
-    # Default-valued entries may remain explicit; preserve this existing representation.
-    assert undone['raw']=={attack_id:14,tune_id:34} and undone['effectiveTune']=='34'
-    assert '1 sound edits' in undone['summary'],('Projects must count changed values, not retained default entries',undone)
+    # Undo restores the entries that existed immediately before the Tune edit.
+    assert undone['raw']==before['raw'] and undone['effectiveTune']=='34'
+    assert '1 sound edits' in undone['summary']
     assert 'Attack: 10% → 11%' in undone['review'] and 'Tune:' not in undone['review']
     await page.locator('#redo').press('Enter')
     redone=await snapshot('Redo-Tune')
@@ -1001,9 +1001,23 @@ async def project_sound_edit_count_at_size(page,width,height):
     await page.locator('#undo').press('Enter')
     await page.locator('#undo').press('Enter')
     zero=await snapshot('Undo-Attack')
-    assert zero['raw']=={attack_id:13,tune_id:34} and zero['effectiveTune']=='34'
+    assert zero['raw']=={} and zero['effectiveTune']=='34'
     assert '0 sound edits' in zero['summary'] and zero['review']=='No changes.'
     await expect(page.locator('#undo')).to_be_disabled()
+    # Older Drafts can explicitly store the native Tune default. Keep that row on Undo.
+    imported=await draft_state(page)
+    assert imported['parameters']==[]
+    imported['parameters']=[{'id':tune_id,'value':34}]
+    await load_draft(page,imported)
+    await page.locator('[data-view="sound"]').click()
+    await page.locator('[data-param="'+tune_id+'"]').press('ArrowDown')
+    imported_edit=await snapshot('edited-explicit-Tune')
+    assert imported_edit['raw']=={tune_id:33} and imported_edit['effectiveTune']=='33'
+    assert '1 sound edits' in imported_edit['summary']
+    await page.locator('#undo').press('Enter')
+    restored=await snapshot('Undo-explicit-Tune')
+    assert restored['raw']=={tune_id:34} and restored['effectiveTune']=='34'
+    assert '0 sound edits' in restored['summary'] and restored['review']=='No changes.'
     print(f'PASS Projects sound-edit count follows actual Draft changes and preserves effective Undo/Redo {width}x{height}',flush=True)
 
 async def kit_accent_across_voices(page):
