@@ -36,6 +36,15 @@ The [complete gate at `5658da37`](https://github.com/gobbajogger/DnBOX-nightly/p
 
 The Native Sound test now launches one normally sandboxed Chromium process per viewport. An independent reviewer confirmed that the three original scenarios, interactions, timeouts and assertions are identical. In a [three-viewport run](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7057363710), desktop (1440×900), portrait (390×844) and landscape (844×390) each exercised all 40 controls and Undo depth 16, issued 159 native requests and made zero MIDI calls. All three browser processes exited cleanly. The 830-second run recorded no target crashes. The original crash cause remains open. The complete Local gate must pass on this commit before C1 can close.
 
+The [complete gate at `bd0eda7b`](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7057564627) exited 1 after 959 seconds. Two operations reached their original 30-second deadlines.
+
+| Gate stage | Last successful observation | Failure |
+|---|---|---|
+| Unit tests, visual capture | 16 images completed. The accepted desktop SMK-37 manual, Presets and Starting BREAK images matched. | Full-page capture of Build History at 1440×900 timed out after fonts loaded, before comparison. The earlier image of the same page was 1,440×72,069 pixels. [Capture details](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7057511931). |
+| Browser tests, installer admission | Checks 1–462 passed, including the four 320-pixel empty-installer checks. | At 390×900, the first check of the empty installer timed out locating the Install button (`#go`). The gate recorded neither its HTTP response nor its disabled state on that attempt. |
+
+The admission test, generated installer, visual test and Build History source have the same Git blobs as `5658da37`, which completed all 679 installer admission checks and captured Build History at four sizes. The host recorded memory exhaustion during the later run. Its counters did not identify the affected process. Separate checks on a quieter runner will record the page response, button state and full PNG dimensions. C1 remains open.
+
 A local reconciliation of Web `56c99fb8`, Remote `37982b3f` and integration `cfef0c05` preserved all 28 accepted reference blobs, all 197 existing history records and the new public release record. Its product build produced 247 files and passed 113 focused tests. The independent visual and full gate requirements continue to apply to a future actual merge. [Exact inputs, replayable patches and verification log](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7056578290).
 
 The deployed Starting BREAK page also passed real Chromium playback for all five samples with zero checkboxes selected, followed by selection and download. The resulting archive was 110,844 bytes and matched the independently verified digest. [Playback and export receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055766883).
