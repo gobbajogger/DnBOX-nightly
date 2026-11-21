@@ -17,7 +17,7 @@ All five Web checks passed on [`000e2910`](https://github.com/gobbajogger/DnBOX-
 | W5 | PASS | Nightly Pages fast-forwarded from `83406c1d` to [`3fbf1301`](https://github.com/gobbajogger/DnBOX-nightly/commit/3fbf130166733143b2996354c7731822cc2f8f91). All 265 files matched the gate build and the public server. All 18 firmware packages and 785 preceding paths were retained. [Complete HTTP receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7060004403) |
 | C2, C4 | PASS | Consolidated `914d68e8` is an ancestor. The no-loss and hard-limit checks passed. [Gate steps](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059943436) |
 | C5 | PASS | All Web checks have exact-source receipts above. |
-| C6 | Integ | The [live PR](https://github.com/gobbajogger/DnBOX-nightly/pull/156) records readiness and the consolidated merge. Integ owns that merge and its post-merge gate. The consolidated [branch ruleset](https://github.com/gobbajogger/DnBOX-nightly/rules/27423276) requires the exact-head `dnbox-gate` commit status. |
+| C6 | Integ | The [live PR](https://github.com/gobbajogger/DnBOX-nightly/pull/156) records readiness and the consolidated merge. It was merged into the consolidated branch as `b3868da0` on 2026-11-21. Merges into the integration branch no longer need the `dnbox-gate` status flag (RULES 9); the full gate runs on the combined branch after the final lane merge. |
 
 ### What's left
 
