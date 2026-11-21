@@ -2,6 +2,25 @@
 from playwright.async_api import expect
 
 
+async def check_slice_range(page, draft_state):
+    before = await draft_state(page)
+    button = page.get_by_role('button', name='Slice 1–32', exact=True)
+    await button.focus()
+    await button.press('Enter')
+    step_eight = page.locator('[data-break-step="7"]')
+    await expect(step_eight).to_be_focused()
+    assert await step_eight.locator('option').all_text_contents() == ['Auto', *map(str, range(1, 33))]
+    await step_eight.select_option('32')
+    await button.click()
+    await expect(step_eight).to_be_focused()
+    after = await draft_state(page)
+    expected = before.get('breakSequence', {}).get('slices', [0] * 16).copy()
+    expected[7] = 32
+    assert after['breakSequence']['slices'] == expected
+    for name in ('launch', 'motion', 'patternLocks'):
+        assert after.get(name) == before.get(name)
+
+
 async def check_lock_target(page):
     result = await page.locator('#lock-target').evaluate('''picker => {
         const host=picker.closest('label'), box=picker.getBoundingClientRect();
@@ -174,7 +193,7 @@ async def exercise(page, draft_state, load_draft):
     await expect(review).to_be_focused()
     saved = await draft_state(page)
     assert saved['context']['breakView'] == 'notes'
-    await page.locator('[data-break-view="slices"]').click()
+    await check_slice_range(page, draft_state)
     await load_draft(page,saved)
     await expect(page.locator('[data-break-view="notes"]')).to_have_attribute('aria-pressed','true')
     await expect(lane).to_have_value('patternLock')

@@ -214,10 +214,23 @@ for(const host of [$('break-generator'),$('other-view')]){
   }
  });
 }
-let breakView = 'slices', activeLaneStep = null;
-for(const button of document.querySelectorAll('[data-break-view]'))button.onclick = () => {
+let breakView = 'slices', activeLaneStep = null, focusedSliceStep = 0;
+$('break-sequence')?.addEventListener('focusin',event=>{
+ if(event.target.dataset.breakStep!==undefined)focusedSliceStep=Number(event.target.dataset.breakStep);
+});
+for(const button of document.querySelectorAll('[data-break-view]'))button.onclick = async () => {
+ const sliceStep=activeLaneStep??(breakView==='slices'?focusedSliceStep:0);
  cancelStepLane();activeLaneStep=null;
  if(button.dataset.breakView==='generator' && !knownBreakPattern(launch.targets[4]))return;
+ if(button.dataset.breakView==='slices'){
+  const sliceField=()=>$('break-sequence').querySelector('[data-break-step="'+sliceStep+'"]');
+  if(breakView==='slices' && sliceField()){sliceField().focus();return;}
+  breakView='slices';
+  button.focus();
+  await syncBreakView();
+  if(document.activeElement===button && !$('break-sequence').hidden)sliceField()?.focus();
+  return;
+ }
  breakView = button.dataset.breakView;
  syncBreakView();
  if (breakView === 'notes') {paintNotes(); fitPattern(); paintNotes();}
@@ -249,7 +262,8 @@ function syncBreakView() {
  $('roll-view').hidden = !['roll','locks'].includes(view) || active || generator;
  if (breakEditor) {
   $('break-sequence').hidden = !active;
-  if (active) void breakEditor.show(); else breakEditor.stop();
+  if (active) return breakEditor.show();
+  breakEditor.stop();
  }
 }
 const name=n=>names[n%12]+(Math.floor(n/12)-1),notes=()=>model.notes.filter(n=>n.track===$('part').value),current=()=>notes().find(n=>n.id===selected),point=e=>{const r=grid.getBoundingClientRect();return pointAt(e.clientX-r.left,e.clientY-r.top,{width,row,endSample:model.endSample});};
