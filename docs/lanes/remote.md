@@ -2,6 +2,12 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Local gate temporary files
+
+The complete gate on `4421b615` exited 1 after the shared filesystem filled. The catalog test could not copy its fixture and the independent browser route test could not create an empty directory. Both failures are retained in the [original output](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7064754462).
+
+At `678a60cd`, each catalog fixture uses 25,210,649 fewer bytes. The test retains the complete docs tree, its 159 other web files, the original assertions and the 15-second command deadline. The real CLI passed all 333 rejection cases and both output-parent controls. An independent comparison matched all 479 published files by path, length and SHA-256. The unfiltered run also passed all 397 build-status cases and the 148-record history check. The installer comparison test now removes both generated HTML files on normal and error exits. Four focused tests, including the six deliberate drift checks, released all seven temporary directories. A failed write and a missing comparison executable each preserved the expected failure and left no temporary comparison files. [Independent qualification by revision](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7062541508).
+
 ## Owner page 11 and the complete control comparison
 
 BREAK now opens its pattern's 16 level locks and Draft Review directly. Opening Step locks focuses the first enabled step. A Draft file preserves the selected BREAK editor and its lock lane. Opening an empty pattern now measures the visible roll at the selected zoom. On the 844 × 390 screen at 1× the time axis fell from 1,400 to 660 pixels, which exposed all 16 steps in place of seven.

@@ -6,7 +6,7 @@ import test from 'node:test';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
+import { writeFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -130,16 +130,20 @@ function assertAllowedRendered(rendered) {
   const a = normalize(renamed.replace(oldInstruction, 'return to normal DnBOX operation with KNOB BANK'));
   const b = normalize(rendered);
   const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
-  const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
-  writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
-  writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
   let diff = '';
   try {
-    execFileSync('diff', ['-u', livePath, rendPath], { encoding: 'utf8', maxBuffer: 10e6 });
-  } catch (e) {
-    // diff exits 1 on differences
-    if (e.status !== 1) throw e;
-    diff = e.stdout;
+    const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
+    writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
+    writeFileSync(rendPath, b.endsWith('\n') ? b : b + '\n');
+    try {
+      execFileSync('diff', ['-u', livePath, rendPath], { encoding: 'utf8', maxBuffer: 10e6 });
+    } catch (e) {
+      // diff exits 1 on differences
+      if (e.status !== 1) throw e;
+      diff = e.stdout;
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
   const hunks = parseUnifiedHunks(diff);
   const unused = new Set(ALLOWED.map(x => x.id));
