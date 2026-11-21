@@ -74,7 +74,7 @@ On desktop Chrome or Edge, connect by a USB data cable, click **Connect**, and g
 - **[Sample importer](https://gobbajogger.github.io/DnBOX/breaks/)** — import your own break loops
 - **[Projects](https://gobbajogger.github.io/DnBOX/projects/)** — save, load and export projects
 
-Repository and Pages URLs still use the previous name, because the GitHub repository has not been renamed.
+The repositories are renamed to `gobbajogger/DnBOX` and `gobbajogger/DnBOX-nightly`, and old GitHub repository links redirect. The websites are at [gobbajogger.github.io/DnBOX](https://gobbajogger.github.io/DnBOX/) and [gobbajogger.github.io/DnBOX-nightly](https://gobbajogger.github.io/DnBOX-nightly/).
 
 ## Restore
 

@@ -14,7 +14,7 @@ DnBOX is firmware for the SMK-37 keyboard (Elite and Pro builds; `gobbajogger/Dn
 - Lanes work on `lane/<lane>-<topic>` branches cut from `integration/dnbox-consolidated` and merge there (RULES 5 and 9). Never branch from `main` for lane work.
 - Code reaches `main` only as a PR the User merges (RULES 1 and 11), after the full Local gate passes at the exact SHA (RULES 9).
 - `gh-pages` (the nightly site and installer) is fast-forwarded only after the full Local gate passes (RULES 9 and 16). The installer flashes keyboards: device writes stay the User's only (RULES 15).
-- A docs-only PR into `main` (`.md` files only) needs content, link and policy checks and an independent QA review.
+- Documentation-only PRs (only .md docs; no firmware, code, .github, Pages, installer or gh-pages files) may be merged into `main` or `nightly` by an agent once content, link and policy checks and an independent QA review pass. They need no full Local gate and no device tests ([RULES 9 and 11](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)).
 
 ## Local gate (one command)
 The gate script [scripts/dnbox-gate.sh](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/scripts/dnbox-gate.sh) is on `integration/dnbox-consolidated`, not on `main`. When it is required, what it runs, and what counts as PASS are in the integration [AGENTS.md](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/AGENTS.md) and RULES 9.
@@ -33,4 +33,4 @@ The gate script [scripts/dnbox-gate.sh](https://github.com/gobbajogger/DnBOX-nig
 Historical note: the older x0x37 nightly instructions (the previous AGENTS.md, `coordination/` and its merge-queue contract) are history and have no force.
 
 ## Never
-Force-push; push or merge to `main` without the User; Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git; `.img`, `.component` or `.vst3` files in Git. `.fwsc` firmware and sanitized test evidence may be in Git ([RULES 13](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)).
+Force-push; push or merge firmware or code to `main` without the User (documentation-only PRs: [RULES 9](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)); Secrets in Git; PSRAM; device writes (flash, release, BTIF, USRTRIM, efuse, key_mac, bootloader); GitHub Actions or workflow files; Cursor cloud agents; SuperJ6 .ipa or AU installer in Git; `.img`, `.component` or `.vst3` files in Git. `.fwsc` firmware and sanitized test evidence may be in Git ([RULES 13](https://github.com/gobbajogger/DnBOX-nightly/blob/integration/dnbox-consolidated/RULES.md)).
