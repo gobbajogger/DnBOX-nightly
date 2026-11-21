@@ -8,7 +8,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {mountFirmwareLink} from '../../web/product-site/remote/firmware-link.mjs';
-import {OP,encodeCommand,decodeCommand,decodeReply} from '../../web/product-site/remote/device/vendor/codec.mjs';
+import {OP,STATUS,encodeCommand,decodeCommand,decodeReply,encodeReply} from '../../web/product-site/remote/device/vendor/codec.mjs';
 
 const dir=fileURLToPath(new URL('./tests/',import.meta.url));
 const binary=join(mkdtempSync(join(tmpdir(),'dnr2-remote-')),'fixture');
@@ -40,20 +40,20 @@ class El{
 }
 function dom(){
  const nodes=new Map();
- const document={createElement(tag){const el=new El(tag);el.owner={nodes};return el;},getElementById(id){return nodes.get(id)??null;}};
+ const document={defaultView:new EventTarget(),createElement(tag){const el=new El(tag);el.owner={nodes};return el;},getElementById(id){return nodes.get(id)??null;}};
  for(const id of ['connect','apply','conn-state','firmware-safety','firmware-controls']){const el=new El('node');el.owner={nodes};el.id=id;el.textContent=id==='connect'?'Connect':'';}
  return {document,nodes};
 }
-function midi(fixture,ops,replies){
+function midi(fixture,ops,replies,afterReply=async(_command,reply)=>reply){
  const input={state:'connected',type:'input',listeners:[],addEventListener(type,fn){if(type==='midimessage')this.listeners.push(fn);},removeEventListener(type,fn){this.listeners=this.listeners.filter(item=>item!==fn);},open:async()=>{},close:async()=>{},deliver(data){for(const fn of this.listeners)fn({data});}};
- const output={state:'connected',type:'output',open:async()=>{},close:async()=>{},send(bytes){const command=decodeCommand(bytes);ops.push(command.op);fixture.send(Buffer.from(bytes).toString('hex')).then(reply=>{if(!reply.hex)return;const raw=Buffer.from(reply.hex,'hex');replies.push(decodeReply(raw));input.deliver(raw);}).catch(()=>{});}};
+ const output={state:'connected',type:'output',open:async()=>{},close:async()=>{},send(bytes){const command=decodeCommand(bytes);ops.push(command.op);fixture.send(Buffer.from(bytes).toString('hex')).then(async reply=>{if(!reply.hex)return;const decoded=decodeReply(Buffer.from(reply.hex,'hex'));const actual=await afterReply(command,decoded);replies.push(actual);input.deliver(encodeReply(actual));}).catch(()=>{});}};
  return {access:{inputs:new Map([['in',input]]),outputs:new Map([['out',output]])},input,output};
 }
 async function until(read,label){const start=Date.now();let value;while(Date.now()-start<3000){value=read();if(value)return value;await new Promise(resolve=>setTimeout(resolve,10));}throw Error(`${label}: ${value}`);}
 
 test('a page with no reviewed catalog sends nothing and leaves Apply disabled',async()=>{const {document,nodes}=dom();let calls=0;mountFirmwareLink({document,navigator:{requestMIDIAccess(){calls++;throw Error('should not be called');}},bundle:null});assert.equal(nodes.get('firmware-safety').textContent,'No reviewed firmware catalog. Apply stays off.');await nodes.get('connect').click();assert.equal(calls,0);assert.match(nodes.get('conn-state').textContent,/Apply stays off/);assert.equal(nodes.get('apply').disabled,true);});
 
-test('the C fixture handshake reads confirmed values and Apply is the only write',async()=>{
+test('the C fixture handshake reads confirmed values and a conflicting Apply is refused',async()=>{
  const fixture=host(),ops=[],replies=[];const {document,nodes}=dom();const ports=midi(fixture,ops,replies);
  mountFirmwareLink({document,navigator:{requestMIDIAccess:async()=>ports.access},bundle:bundle(controls)});
  try{
@@ -97,4 +97,129 @@ test('an unsupported C control stays unconfirmed and cannot be applied',async()=
   assert.equal(nodes.get('apply').disabled,true);
   assert.equal(ops.includes(OP.SET),false);
  }finally{fixture.close();}
+});
+
+async function connectFixture(t,afterReply){
+ const fixture=host(),ops=[],replies=[],{document,nodes}=dom();
+ const ports=midi(fixture,ops,replies,afterReply);
+ const link=mountFirmwareLink({document,bundle:bundle(controls),navigator:{requestMIDIAccess:async()=>ports.access}});
+ t.after(async()=>{await link.destroy();fixture.close();});
+ await nodes.get('connect').click();
+ await until(()=>nodes.get('conn-state').textContent.startsWith('Connected'),'connect');
+ async function edit(value){
+  const field=nodes.get('fw-1');field.value=String(value);field.fire('input');
+  await nodes.get('apply').click();
+ }
+ return {fixture,ops,replies,nodes,link,edit,document};
+}
+
+test('Apply and instrument Undo require independent reads of the committed revision',async t=>{
+ const {ops,replies,nodes,edit}=await connectFixture(t);
+ const start=ops.length;
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed 800.','stored edit');
+ assert.deepEqual(ops.slice(start).filter(op=>op!==OP.KEEPALIVE),[OP.SET,OP.READ,OP.READ,OP.READ]);
+ const edited=replies.find(r=>r.op===OP.SET);
+ assert.deepEqual([edited.value,edited.revision],[800,2]);
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').textContent==='Firmware restored 500.','stored Undo');
+ assert.deepEqual(ops.slice(start).filter(op=>op!==OP.KEEPALIVE),[OP.SET,OP.READ,OP.READ,OP.READ,OP.READ,OP.SET,OP.READ,OP.READ,OP.READ]);
+ const last=replies.filter(r=>r.op===OP.READ&&r.control===1).at(-1);
+ assert.deepEqual([last.value,last.revision],[500,3]);
+ assert.equal(nodes.get('fw-1').value,'500');
+ assert.equal(nodes.get('firmware-controls').children.includes(nodes.get('firmware-undo')),false);
+});
+
+test('Undo keeps a later firmware revision even when the parameter value matches',async t=>{
+ const {fixture,ops,nodes,edit}=await connectFixture(t);
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed 800.','stored edit');
+ const undo=nodes.get('firmware-undo');
+ await fixture.send('change');
+ await undo.click();
+ await until(()=>nodes.get('conn-state').textContent.includes('instrument changed'),'stale Undo');
+ assert.equal(ops.filter(op=>op===OP.SET).length,1);
+ await undo.click();
+ assert.equal(ops.filter(op=>op===OP.SET).length,1);
+ assert.equal(nodes.get('apply').disabled,true);
+});
+
+test('the C revision guard refuses a change between the Undo read and write',async t=>{
+ let changeAfterRead=false;
+ const {fixture,nodes,replies,edit}=await connectFixture(t,async(command,reply)=>{
+  if(changeAfterRead&&command.op===OP.READ){changeAfterRead=false;await fixture.send('change');}
+  return reply;
+ });
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed 800.','stored edit');
+ changeAfterRead=true;
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').textContent.includes('instrument changed'),'conflict');
+ assert.equal(replies.filter(r=>r.op===OP.SET).at(-1).status,STATUS.CONFLICT);
+});
+
+test('queued or unverifiable writes do not create an Undo action',async t=>{
+ for(const scenario of ['queued','different revision','different stored value']){
+  await t.test(scenario,async t=>{
+   let wrote=false;
+   const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
+    if(command.op===OP.SET){
+     wrote=true;
+     if(scenario==='queued')return {...reply,status:STATUS.QUEUED};
+    }
+    if(wrote&&command.op===OP.READ){
+     if(scenario==='different revision')return {...reply,revision:reply.revision+1};
+     if(scenario==='different stored value'&&command.control===1)return {...reply,value:799};
+    }
+    return reply;
+   });
+   await edit(800);
+   await until(()=>nodes.get('conn-state').dataset.session==='disconnected','uncertain outcome');
+   assert.equal(nodes.get('firmware-undo'),undefined);
+   assert.equal(nodes.get('apply').disabled,true);
+  });
+ }
+});
+
+test('destroy during a pending readback retires the old connection and Undo',async t=>{
+ let unblock,requested=false,written=false;
+ const delayed=new Promise(resolve=>unblock=resolve);
+ const {nodes,link,edit}=await connectFixture(t,async(command,reply)=>{
+  if(command.op===OP.SET)written=true;
+  if(written&&command.op===OP.READ){requested=true;await delayed;}
+  return reply;
+ });
+ await edit(800);
+ await until(()=>requested,'pending READ');
+ const closed=link.destroy();unblock();await closed;
+ assert.equal(nodes.get('firmware-undo'),undefined);
+ assert.equal(nodes.get('apply').disabled,true);
+ assert.equal(nodes.get('conn-state').dataset.session,'disconnected');
+});
+
+test('expired firmware lease rejects Undo even if a READ is still available',async t=>{
+ const {fixture,nodes,replies,edit}=await connectFixture(t);
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed 800.','stored edit');
+ assert.equal((await fixture.send('tick 5000')).active,0);
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').dataset.session==='disconnected','expired');
+ assert.equal(replies.filter(r=>r.op===OP.SET).at(-1).status,STATUS.STALE);
+ assert.equal(nodes.get('apply').disabled,true);
+});
+
+test('returning to a cached page requires a new handshake and drops the prior Undo',async t=>{
+ const {document,nodes,ops,replies,edit}=await connectFixture(t);
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Firmware confirmed 800.','stored edit');
+ const oldUndo=nodes.get('firmware-undo');
+ document.defaultView.dispatchEvent(new Event('pagehide'));
+ await until(()=>nodes.get('conn-state').textContent==='Disconnected','released on pagehide');
+ document.defaultView.dispatchEvent(new Event('pageshow'));
+ await nodes.get('connect').click();
+ await until(()=>nodes.get('conn-state').textContent.startsWith('Connected'),'fresh open');
+ assert.deepEqual(replies.filter(r=>r.op===OP.OPEN).map(r=>r.epoch),[1,2]);
+ assert.equal(nodes.get('fw-1').value,'800');
+ await oldUndo.click();
+ assert.equal(ops.filter(op=>op===OP.SET).length,1);
 });

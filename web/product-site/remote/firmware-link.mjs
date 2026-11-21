@@ -12,7 +12,7 @@
 // The older 36-byte header F0 7D 44 4E 01 in remote/vendor/codec.mjs is not this core.
 // Firmware repository main usb.c dispatches other SysEx and does not dispatch 7D 44 4E.
 // This module therefore sends nothing until the user clicks Connect, and it sends SET
-// only from Apply for a control the latest READ marked available.
+// only for an explicit Apply or Undo of a control the instrument confirmed.
 import {MidiBroker,RemoteClient} from './device/vendor/client.mjs';
 import {OP} from './device/vendor/codec.mjs';
 import {validateBundle,friendly} from './device/session.mjs';
@@ -24,6 +24,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
  const $ =id=>doc.getElementById(id);
  const connect=$('connect'),apply=$('apply'),state=$('conn-state'),safety=$('firmware-safety'),list=$('firmware-controls');
  if(!connect||!apply||!state)return {destroy(){}};
+ let undoEdit=null,generation=0,disposed=false,closing=null;
  let admitted=null,client=null,broker=null,confirmed=new Map(),pending=null,busy=false;
  apply.disabled=true;
  if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
@@ -31,11 +32,16 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
  const say=text=>{state.textContent=text;if(message)message.textContent=text;};
  $('close-connection')?.addEventListener('click',()=>{if(result)result.hidden=true;connect.focus?.();});
  function stage(descriptor,input){
-  const value=Number(input.value);
+  if(busy||disposed||state.dataset.session!=='ready'||$(input.id)!==input)return;
+  const value=input.value===''?NaN:Number(input.value);
   const known=confirmed.get(descriptor.id);
   const ok=known&&known.available!==false&&Number.isFinite(value)&&value>=descriptor.min&&value<=descriptor.max&&(descriptor.kind!==1||Number.isInteger(value))&&value!==known.value;
   pending=ok?{id:descriptor.id,value}:null;
   apply.disabled=!ok;
+ }
+ function invalidate(text){
+  undoEdit=null;pending=null;confirmed.clear();apply.disabled=true;
+  list?.replaceChildren();state.dataset.session='disconnected';say(text);
  }
  function renderControls(){
   if(!list?.replaceChildren||!doc.createElement)return;
@@ -55,21 +61,36 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    input.addEventListener('input',()=>stage(descriptor,input));
    label.append(input);list.append(label);
   }
+  if(undoEdit){
+   const edit=undoEdit;
+   const button=doc.createElement('button');
+   button.type='button';button.className='btn';button.id='firmware-undo';
+   button.textContent='Undo instrument edit';
+   button.addEventListener('click',()=>{
+    if(undoEdit===edit)void writeControl(edit,true);
+   });
+   list.append(button);
+  }
  }
- async function shutdown(announce){
-  busy=true;state.dataset.session='disconnected';apply.disabled=true;pending=null;confirmed=new Map();admitted=null;
-  if(list?.replaceChildren)list.replaceChildren();
+ function shutdown(announce){
+  if(closing)return closing;
+  ++generation;undoEdit=null;busy=true;state.dataset.session='disconnected';
+  apply.disabled=true;pending=null;confirmed.clear();admitted=null;
+  list?.replaceChildren();
   const current=client,link=broker;client=null;broker=null;
-  let released=true;
-  try{if(current)released=(await current.close()).released===true;}catch{released=false;}
-  link?.dispose();
-  connect.textContent='Connect';
-  if(announce)say(released?'Disconnected':'Release was not confirmed.');
-  if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
-  busy=false;return released;
+  closing=Promise.resolve().then(async()=>{
+   let released=true;
+   try{if(current)released=(await current.close()).released===true;}catch{released=false;}
+   link?.dispose();
+   connect.textContent='Connect';
+   if(announce)say(released?'Disconnected':'Release was not confirmed.');
+   if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
+   return released;
+  }).finally(()=>{closing=null;busy=false;});
+  return closing;
  }
  async function onConnect(){
-  if(busy||client)return;busy=true;apply.disabled=true;pending=null;say('Connecting');
+  if(disposed||busy||client)return;const own=++generation;busy=true;apply.disabled=true;pending=null;say('Connecting');
   try{
    let parsed=null;
    if(bundle){try{parsed=validateBundle(bundle);}catch{parsed=null;}}
@@ -77,17 +98,22 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    const request=nav?.requestMIDIAccess;
    if(typeof request!=='function')throw Error('MIDI access is unavailable in this browser.');
    const access=await request.call(nav,{sysex:true});
+   if(own!==generation)return;
    const input=[...access.inputs.values()].find(port=>port.state==='connected');
    const output=[...access.outputs.values()].find(port=>port.state==='connected');
    if(!input||!output){say('No MIDI input and output pair is connected. Connect your instrument and try again.');return;}
-   await input.open?.();await output.open?.();
+   await input.open?.();if(own!==generation)return;
+   await output.open?.();if(own!==generation)return;
    const timeoutMs=Number.isFinite(globalThis.__DNBOX_MIDI_TIMEOUT)?globalThis.__DNBOX_MIDI_TIMEOUT:400;
    broker=new MidiBroker({input,output,timeoutMs});
    const pin={crc:parsed.catalog.crc,count:parsed.catalog.count,admitted:true,controls:parsed.catalog.controls.map(descriptor=>({id:descriptor.id,kind:descriptor.kind,min:descriptor.min,max:descriptor.max,...(descriptor.readMin!==undefined?{readMin:descriptor.readMin}:{}),...(descriptor.readMax!==undefined?{readMax:descriptor.readMax}:{})}))};
-   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(note.phase==='connection-lost'){state.dataset.session='disconnected';say('Connection lost. Apply stays off.');apply.disabled=true;}}});
-   await client.identify();
-   await client.open();
+   client=new RemoteClient({transport:broker,pin,client:91,onState:note=>{if(own!==generation)return;
+    if(note.phase==='connection-lost')invalidate('Connection lost. Disconnect and reconnect.');
+    if(note.phase==='refresh-required')invalidate('The instrument changed. Disconnect and reconnect.');}});
+   await client.identify();if(own!==generation)return;
+   await client.open();if(own!==generation)return;
    const snapshot=await client.snapshot(parsed.catalog.controls.map(descriptor=>descriptor.id));
+   if(own!==generation)return;
    if(!parsed.admission.testOnly)client.startKeepalive();
    admitted=parsed;confirmed=new Map(snapshot.values.map(reading=>[reading.id,reading]));pending=null;
    renderControls();apply.disabled=true;
@@ -96,22 +122,57 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    if(safety)safety.textContent=`${parsed.admission.testOnly?'Simulator catalog. Not a device. ':''}${SAFETY_ON}`;
    connect.textContent='Disconnect';
   }catch(error){
-   say(friendly(error));apply.disabled=true;await shutdown(false);say(friendly(error));
-  }finally{busy=false;}
+   if(own!==generation)return;
+   await shutdown(false);if(!disposed)say(friendly(error));
+  }finally{if(own===generation)busy=false;}
  }
- async function onApply(){
-  if(busy||!client||!pending)return;
-  const job=pending;pending=null;apply.disabled=true;busy=true;
+ async function writeControl(job,reversing){
+  if(!job||busy||disposed||!client||state.dataset.session!=='ready')return;
+  const current=client,own=generation;
+  const prior=confirmed.get(job.id);
+  if(!prior?.available)return;
+  pending=null;undoEdit=null;apply.disabled=true;busy=true;
   try{
-   const result=await client.set(job.id,job.value);
-   const prior=confirmed.get(job.id);
-   confirmed.set(job.id,{...prior,value:result.value,available:true});
-   const input=doc.getElementById(`fw-${job.id}`);if(input)input.value=String(result.value);
-   say(`Firmware confirmed ${result.value}.`);
-  }catch(error){say(friendly(error));apply.disabled=true;}
-  finally{busy=false;}
+   if(reversing){
+    // READ does not acquire a write lease. The SET below also checks this
+    // revision in the firmware, covering a device edit between READ and SET.
+    const before=await current.snapshot([job.id]);
+    if(own!==generation||state.dataset.session!=='ready')return;
+    const value=before.values[0];
+    if(before.revision!==job.revision||!value.available||!Object.is(value.value,job.after))
+     throw Error('The instrument changed.');
+   }
+   const ack=await current.set(job.id,job.value);
+   if(own!==generation||state.dataset.session!=='ready')return;
+   if(ack.queued){
+    invalidate('Change queued. Reconnect to read the stored value.');
+    return;
+   }
+   const snapshot=await current.snapshot(admitted.catalog.controls.map(control=>control.id));
+   if(own!==generation||state.dataset.session!=='ready')return;
+   const reading=snapshot.values.find(control=>control.id===job.id);
+   if(!reading?.available||snapshot.revision!==ack.revision||!Object.is(reading.value,ack.value))
+    throw Error('The instrument changed.');
+   if(reversing&&!Object.is(reading.value,job.value))throw Error('Restore was not confirmed.');
+   confirmed=new Map(snapshot.values.map(control=>[control.id,control]));
+   const descriptor=admitted.catalog.controls.find(control=>control.id===job.id);
+   if(!reversing&&!Object.is(prior.value,reading.value)&&prior.value>=descriptor.min&&prior.value<=descriptor.max)
+    undoEdit={id:job.id,value:prior.value,after:reading.value,revision:snapshot.revision};
+   renderControls();
+   say(reversing?`Firmware restored ${reading.value}.`:`Firmware confirmed ${reading.value}.`);
+  }catch(error){
+   if(own===generation)invalidate(error.message.includes('instrument changed')
+    ?'The instrument changed. Disconnect and reconnect.':'The edit was not confirmed. Disconnect and reconnect.');
+  }finally{if(own===generation)busy=false;}
  }
- connect.addEventListener('click',event=>{event.preventDefault?.();if(result)result.hidden=false;if(busy)return;void (client?shutdown(true):onConnect());});
- apply.addEventListener('click',()=>{void onApply();});
- return {destroy(){return shutdown(false);},op:OP};
+ connect.addEventListener('click',event=>{
+  event.preventDefault?.();if(disposed||closing)return;
+  if(result)result.hidden=false;
+  if(client)void shutdown(true);else if(!busy)void onConnect();
+ });
+ apply.addEventListener('click',()=>{void writeControl(pending,false);});
+ const page=doc.defaultView;
+ const leave=()=>{if(client||busy)void shutdown(true);};
+ page?.addEventListener('pagehide',leave);
+ return {destroy(){disposed=true;page?.removeEventListener('pagehide',leave);return shutdown(false);},op:OP};
 }

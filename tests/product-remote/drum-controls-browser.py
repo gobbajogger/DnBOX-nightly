@@ -38,6 +38,8 @@ COMPACT_BOXES = """units => units.map(unit => {
          value:value.textContent.trim(), down:action('[data-drum-decrement]'), up:action('[data-drum-increment]')};
 })"""
 
+FIRMWARE_DEFAULTS = json.loads((ROOT / 'tests/product-remote/fixtures/drum-firmware-defaults.json').read_text())
+
 async def compact_voice(page, screen):
  strip=page.locator('[data-drum-sound-strip]')
  await expect(strip).to_be_visible()
@@ -49,7 +51,7 @@ async def compact_voice(page, screen):
   context=control['context']
   expected_name='Pitch depth' if context['name']=='P.Dpth' else context['name']
   expected_role='active' if control['markers']['visual-role']=='active glyph/value control' else 'summary'
-  assert (row['label'],row['value'],row['role'])==(expected_name,context['display'],expected_role),(control,row)
+  assert (row['label'],row['value'],row['role'])==(expected_name,FIRMWARE_DEFAULTS[screen['path']][i],expected_role),(control,row)
   assert row['contentsFit'] and row['visible'] and (i==0 or rows[i-1]['box']['right']<=row['box']['x']+1),(screen['path'],row)
   assert row['originalIds']==[screen['path']+'|'+control['identity']],row
   for action in [row['down'],row['up']]:
@@ -84,26 +86,26 @@ async def compact_bd_edits(page, screen):
   await action.press('Enter')
   changes[screen['path']+'|'+control['identity']]=raw+delta
  values=units.locator('[data-drum-value]')
- await expect(values.nth(4)).to_have_text('46')
- await expect(values.nth(5)).to_have_text('126')
+ await expect(values.nth(4)).to_have_text('+0.4st')
+ await expect(values.nth(5)).to_have_text('99%')
  edited=await core.draft_state(page)
  saved={p['id']:p['value'] for p in edited['parameters']}
  assert all(saved.get(k)==v for k,v in changes.items()),(changes,saved)
  await page.locator('#undo').press('Enter')
- await expect(values.nth(5)).to_have_text('127')
+ await expect(values.nth(5)).to_have_text('100%')
  await page.locator('#undo').press('Enter')
- await expect(values.nth(4)).to_have_text('45')
+ await expect(values.nth(4)).to_have_text('+0.1st')
  await page.locator('#redo').press('Enter')
- await expect(values.nth(4)).to_have_text('46')
+ await expect(values.nth(4)).to_have_text('+0.4st')
  await page.locator('#redo').press('Enter')
- await expect(values.nth(5)).to_have_text('126')
+ await expect(values.nth(5)).to_have_text('99%')
  assert (await core.draft_state(page))['parameters']==edited['parameters']
  await core.load_draft(page,before)
- await expect(values.nth(4)).to_have_text('45')
- await expect(values.nth(5)).to_have_text('127')
+ await expect(values.nth(4)).to_have_text('+0.1st')
+ await expect(values.nth(5)).to_have_text('100%')
  await core.load_draft(page,edited)
- await expect(values.nth(4)).to_have_text('46')
- await expect(values.nth(5)).to_have_text('126')
+ await expect(values.nth(4)).to_have_text('+0.4st')
+ await expect(values.nth(5)).to_have_text('99%')
  assert (await core.draft_state(page))['parameters']==edited['parameters']
 
 

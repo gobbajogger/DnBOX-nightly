@@ -360,6 +360,7 @@ dialog::backdrop{background:#000a}
 #project-preset-dialog output:not(:empty){display:block;margin:8px 0;overflow-wrap:anywhere}
 #project-preset-dialog .project-actions{margin-top:10px}
 @media(max-width:600px){.project-preset-fields{grid-template-columns:1fr}}
+.project-tools{margin-top:8px}
 .project-guide{margin:10px 0}
 .project-guide summary{width:fit-content;cursor:pointer}
 .project-guide p{white-space:pre-line;overflow-wrap:anywhere;max-width:78ch}

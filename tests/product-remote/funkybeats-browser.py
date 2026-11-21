@@ -774,6 +774,12 @@ async def project_files(page):
         if width == 844:
             bounds = [await card.bounding_box() for card in await cards.all()]
             assert len({box['y'] for box in bounds}) == 1
+            resources = page.get_by_role('navigation', name='Project resources')
+            for name in ('Samples', 'Manual'):
+                link = resources.get_by_role('link', name=name, exact=True)
+                await expect(link).to_be_in_viewport(ratio=1)
+                box = await link.bounding_box()
+                assert box and box['width'] >= 44 and box['height'] >= 44, (name, box)
         await page.locator('.project-guide summary').click()
         await expect(page.locator('.project-guide p')).to_contain_text('Import project.mid into Ableton Live')
         await page.locator('.project-guide summary').click()

@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 105434,
-      "sha256": "c4f935d8a766186cf51d3176c54f2c55b908d65a5ac0f051fa712c54d2a6b63d"
+      "bytes": 105601,
+      "sha256": "65388cc78df741dd5e4b1de5276c1d8f098aed7f1f85a5185bdd4be4f10db43b"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -859,8 +859,8 @@
     },
     {
       "path": "remote/firmware-link.mjs",
-      "bytes": 7423,
-      "sha256": "93d859f66e503f6645641b0403234ea29487432e99e1cb8f78c21213c912f154"
+      "bytes": 10466,
+      "sha256": "9b329e7f7df7adf1e009b243771b291b4c3ee9e70cd786340887bc70ae0b185a"
     },
     {
       "path": "remote/frame.mjs",
@@ -938,14 +938,19 @@
       "sha256": "1ba2e99afbba3b3ba98e6eeef49b5431e89f987e8923468e4c2bbeb3f2c5cdf1"
     },
     {
+      "path": "remote/fx-format.json",
+      "bytes": 7364,
+      "sha256": "ed4cfc2f43ebdf2a191543cfa70f3660b824af10388ae13a2f4508d4784e09f1"
+    },
+    {
       "path": "remote/mixer-format.json",
       "bytes": 59444,
       "sha256": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69"
     },
     {
       "path": "remote/mixer-format.mjs",
-      "bytes": 712,
-      "sha256": "f63b485884244656a7853c6fb858baf67b00118172974a9007c4505f8158f404"
+      "bytes": 1165,
+      "sha256": "a2cdf9ef8f5f0689e4a3e8728d49961c2562e0dc5b90f3ea7e27da7c469bda38"
     },
     {
       "path": "remote/model.mjs",
@@ -1034,8 +1039,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 62543,
-      "sha256": "90074d9b409aebba77c64a7d4b48cfcf94cac3e9049ff800879385b3f4c85543"
+      "bytes": 62574,
+      "sha256": "5bf9b13adb9d0b545b89cb5f8fd359a2565e20451bff267a62f3021b1d8c635c"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1164,13 +1169,13 @@
     },
     {
       "path": "remote/drum-strip.mjs",
-      "bytes": 3301,
-      "sha256": "9f16dd7264376dec115518e04269d88863c4e58023a676268ca75a28b6104dc5"
+      "bytes": 3227,
+      "sha256": "9fb7fbeaed65db28778488290ceca2b9292888f59fc0cc867addef49d6fdb511"
     },
     {
       "path": "remote/drum-format.mjs",
-      "bytes": 23047,
-      "sha256": "743f8049e986d6b84f028f50ab3098f82d8daeeb78f53b77068c16e76a945a85"
+      "bytes": 25099,
+      "sha256": "9c9a85676a3692f878e53b67c894d0505f2197137f42af7570c37f0bef836753"
     },
     {
       "path": "remote/superj6.mjs",

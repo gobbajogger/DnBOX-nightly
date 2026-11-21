@@ -29,9 +29,7 @@ function glyphsFor(screen) {
 }
 
 export function drumValueText(control, value) {
-  return value === Number(control.context.raw)
-    ? control.context.display
-    : drumDisplay(control.identity, value) ?? 'Raw '+value;
+  return drumDisplay(control.identity, value) ?? 'Raw '+value;
 }
 
 export function renderDrumStrip(screen, getSpec, glyphs = glyphsFor(screen)) {

@@ -68,6 +68,17 @@ async def main():
       await mode(page,view);assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(w,view)
       for target in await page.locator('[data-mix-mode]').all():assert (await target.bounding_box())['height']>=44
       out=ROOT/'test-results/mix-family';out.mkdir(parents=True,exist_ok=True);await page.screenshot(path=str(out/f'{view}-{w}x{h}.png'),full_page=True)
+     # FX edits keep the firmware display and raw Draft storage in sync.
+     for label, initial, changed in [('Reverb DECAY','62%','63%'), ('Delay TIME','1/8.','1/4')]:
+      target=page.get_by_role('button',name=label+' '+initial,exact=True)
+      await expect(target.locator('output')).to_have_text(initial)
+      await target.press('ArrowUp')
+      edited=page.get_by_role('button',name=label+' '+changed,exact=True)
+      await expect(edited.locator('output')).to_have_text(changed)
+      await expect(page.locator('#parameter-readout')).to_have_text(changed)
+      await page.locator('#undo').click()
+      await expect(target.locator('output')).to_have_text(initial)
+      assert (await state(page))['parameters']==before['parameters']
      await mode(page,'levels')
      for i in range(5):
       slider=page.locator('.mixer-fader').nth(i);old=int(await slider.input_value());await slider.press('ArrowRight');after=await state(page);assert values(after)[await slider.get_attribute('data-native-param')]==old+1;await page.locator('#undo').click();assert (await state(page))['parameters']==before['parameters']

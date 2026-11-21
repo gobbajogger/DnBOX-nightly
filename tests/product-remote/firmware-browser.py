@@ -122,6 +122,12 @@ async def main():
         await page.locator('details.overflow').evaluate('d=>{d.open=true}');await page.locator('#apply').click()
         await page.wait_for_function('document.getElementById("conn-state").textContent === "Firmware confirmed 800."')
         check(OPS.count(3) == 1, 'Apply writes the edited control once')
+        check(OPS[-3:] == [2, 2, 2], 'Apply reads the committed catalog back')
+        await page.get_by_role('button', name='Undo instrument edit').click()
+        await page.wait_for_function('document.getElementById("conn-state").textContent === "Firmware restored 500."')
+        check(OPS[-5:] == [2, 3, 2, 2, 2] and await page.locator('#fw-1').input_value() == '500',
+              'Undo checks the revision, writes once and shows the fresh stored value')
+        check(await page.locator('#firmware-undo').count() == 0, 'confirmed instrument Undo is consumed')
         fixture('change')
         await page.locator('#fw-1').evaluate('el=>{el.value="700";el.dispatchEvent(new Event("input"));}')
         await page.locator('details.overflow').evaluate('d=>{d.open=true}');await page.locator('#apply').click()

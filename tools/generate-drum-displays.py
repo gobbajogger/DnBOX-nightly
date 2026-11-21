@@ -114,17 +114,27 @@ def main():
     assert len(controls) == 83
     with tempfile.TemporaryDirectory(prefix="remote-drum-formats-") as temp:
         rows = run_oracle(args.firmware.resolve(), identities, Path(temp))
-    for control in controls:
-        context = control["context"]
-        actual = rows[control["identity"]][int(context["raw"])]
-        assert actual == context["display"], (control["identity"], actual, context["display"])
-    module = build_module(rows)
-    target = REMOTE / "drum-format.mjs"
-    if args.check:
-        if target.read_text() != module:
-            raise SystemExit("drum-format.mjs differs from the original C output")
-    else:
-        target.write_text(module)
+    # The original SVG examples retain the numbers printed by their older firmware.
+    # Qualify today's editable projection at those same stored raw settings.
+    defaults = {}
+    for screen in components["screens"]:
+        if "-voice-" not in screen["path"]:
+            continue
+        defaults[screen["path"]] = [
+            rows[control["identity"]][int(control["context"]["raw"])]
+            for control in screen["controls"]
+        ]
+    products = {
+        REMOTE / "drum-format.mjs": build_module(rows),
+        ROOT / "tests/product-remote/fixtures/drum-firmware-defaults.json":
+            json.dumps(defaults, indent=2) + "\n",
+    }
+    for target, expected in products.items():
+        if args.check:
+            if target.read_text() != expected:
+                raise SystemExit(f"{target.name} differs from the pinned firmware output")
+        else:
+            target.write_text(expected)
     print(f"DRUM_DISPLAY {len(controls)} source presentations, {len(rows)} unique controls, "
           f"{sum(map(len, rows.values()))} source readouts")
 
