@@ -224,5 +224,174 @@
     "action": "Click Slices after Draft download",
     "deadlineMs": 30000,
     "result": "Timeout after visible, enabled and stable checks; first post-sizing pass stopped before portrait."
+  },
+  "passedCorrectedPointerAndFileReplay": {
+    "appSHA256": "ba52fd20d92c7cda3bc8b576236cf742c83461563897a22c7304ed0fe82e2cc3",
+    "browser": "151.0.7922.34",
+    "pageErrors": [],
+    "workflow": [
+      "open selected BREAK pattern P03 level locks",
+      "focus first step",
+      "edit step 8 to -0.1dB",
+      "review exact entry and restore dialog focus",
+      "Undo clears override and Redo restores value",
+      "export and reopen on Notes and patternLock",
+      "Delete clears override"
+    ],
+    "checks": {
+      "1440": {
+        "AXIS": {
+          "axis": 1342,
+          "pane": 1342,
+          "viewport": 1342,
+          "scale": 1,
+          "completeSteps": 16
+        },
+        "JOURNEY": [
+          [
+            "Slices",
+            20,
+            159,
+            61,
+            40,
+            true
+          ],
+          [
+            "Generator",
+            85,
+            159,
+            79,
+            40,
+            true
+          ],
+          [
+            "Notes",
+            168,
+            159,
+            60,
+            40,
+            true
+          ],
+          [
+            "Step locks",
+            232,
+            159,
+            83,
+            40,
+            true
+          ],
+          [
+            "Review draft",
+            319,
+            159,
+            94,
+            40,
+            true
+          ]
+        ]
+      },
+      "844": {
+        "AXIS": {
+          "axis": 660,
+          "pane": 660,
+          "viewport": 660,
+          "scale": 1,
+          "completeSteps": 16
+        },
+        "JOURNEY": [
+          [
+            "Slices",
+            12,
+            88,
+            94,
+            40,
+            true
+          ],
+          [
+            "Generator",
+            12,
+            132,
+            94,
+            40,
+            true
+          ],
+          [
+            "Notes",
+            12,
+            176,
+            94,
+            40,
+            true
+          ],
+          [
+            "Step locks",
+            12,
+            220,
+            94,
+            40,
+            true
+          ],
+          [
+            "Review draft",
+            12,
+            264,
+            94,
+            40,
+            true
+          ]
+        ]
+      },
+      "390": {
+        "AXIS": {
+          "axis": 300,
+          "pane": 300,
+          "viewport": 300,
+          "scale": 1,
+          "completeSteps": 16
+        },
+        "JOURNEY": [
+          [
+            "Slices",
+            12,
+            187,
+            61,
+            40,
+            true
+          ],
+          [
+            "Generator",
+            77,
+            187,
+            79,
+            40,
+            true
+          ],
+          [
+            "Notes",
+            160,
+            187,
+            60,
+            40,
+            true
+          ],
+          [
+            "Step locks",
+            224,
+            187,
+            83,
+            40,
+            true
+          ],
+          [
+            "Review draft",
+            12,
+            231,
+            94,
+            40,
+            true
+          ]
+        ]
+      }
+    }
   }
 }
