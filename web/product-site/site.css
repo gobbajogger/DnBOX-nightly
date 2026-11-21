@@ -32,3 +32,4 @@
 .fm1-reference figure img { max-width: 100%; height: auto; }
 @media (max-width: 480px) { .fm1-reference figure { margin-inline: 0; } }
 @media (max-width: 260px) { .fm1-reference { padding-top: 12px; } .fm1-reference h1 { font-size: 32px; margin-bottom: 12px; } }
+@media (max-width: 320px) { .demo-knobs { column-gap: 2px; } }

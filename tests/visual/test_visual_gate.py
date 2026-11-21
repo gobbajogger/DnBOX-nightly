@@ -5,7 +5,8 @@ import io
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
+import full_page_capture as capture
 import zlib
 from PIL import Image
 
@@ -36,6 +37,153 @@ class GateContract(unittest.TestCase):
     def approve(self):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
+
+    def test_full_page_routes_keep_native_capture_for_regular_sizes(self):
+        page = Mock()
+        page.screenshot.return_value = self.image
+        page.evaluate.return_value = [390, 1000, 0, 0, 390, 844, 1]
+        self.assertEqual(capture.capture_full_page(page, 'projects/index.html', 'fixture'), self.image)
+        page.evaluate.assert_not_called()
+        page.screenshot.assert_called_once_with(full_page=True)
+        page.screenshot.reset_mock()
+        with patch.object(capture.time, 'monotonic', side_effect=[10, 12, 14]):
+            self.assertEqual(capture.capture_full_page(page, 'builds/index.html', 'fixture'), self.image)
+        page.screenshot.assert_called_once_with(full_page=True, timeout=28_000)
+
+    def test_invalid_native_builds_png_also_fails(self):
+        page = Mock()
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 30, 1]
+        page.screenshot.return_value = self.image[:-12]
+        with self.assertRaisesRegex(RuntimeError, 'small-builds full-page capture failed'):
+            capture.capture_full_page(page, 'builds/index.html', 'small-builds')
+
+    def test_first_paint_settles_fractional_height_before_any_band_is_retained(self):
+        original = [3, 6, 0, 0, 3, 2, 1]
+        painted = [3, 7, *original[2:]]
+        page = Mock()
+        page.evaluate.side_effect = [original, painted, painted]
+        clips = []
+        def screenshot(*, full_page, clip, timeout):
+            clips.append((clip['y'], clip['width'], clip['height']))
+            output = io.BytesIO()
+            Image.new('RGB', (clip['width'], clip['height']), 'red').save(output, format='PNG')
+            return output.getvalue()
+        page.screenshot.side_effect = screenshot
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+            png = capture.capture_full_page(page, 'builds/index.html', 'builds-case')
+        with Image.open(io.BytesIO(png)) as actual:
+            self.assertEqual(actual.size, (3, 7))
+            self.assertEqual(actual.getpixel((2, 6)), (255, 0, 0))
+        self.assertEqual(clips, [(0, 1, 1), (0, 3, 3), (2, 3, 4), (5, 3, 2)])
+
+    def test_first_paint_rejects_scroll_viewport_or_dpr_drift(self):
+        original = [3, 7, 0, 0, 3, 2, 1]
+        for index in (0, 2, 3, 4, 5, 6):
+            with self.subTest(index=index):
+                changed = original.copy()
+                changed[index] += 1
+                page = Mock()
+                page.evaluate.side_effect = [original, changed]
+                with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+                    with self.assertRaisesRegex(RuntimeError, 'viewport changed'):
+                        capture.capture_full_page(page, 'builds/index.html', 'builds-case')
+                self.assertEqual(page.screenshot.call_count, 1)
+
+    def test_bands_retain_every_row_and_reject_a_changed_seam(self):
+        expected = Image.new('RGBA', (3, 7))
+        expected.putdata([(x, y, 50, y + 17) for y in range(7) for x in range(3)])
+        for mutate in (False, True):
+            page = Mock()
+            page.evaluate.return_value = [3, 7, 0, 0, 3, 2, 1]
+            def clipped_png(full_page, clip, timeout):
+                self.assertTrue(full_page)
+                self.assertTrue(0 < timeout <= 30_000)
+                y = clip['y']
+                band = expected.crop((0, y, 3, y + clip['height']))
+                if mutate and y > 0:
+                    band.putpixel((0, 0), (1, 2, 3, 4))
+                data = io.BytesIO()
+                band.save(data, format='PNG')
+                return data.getvalue()
+            page.screenshot.side_effect = clipped_png
+            with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+                if mutate:
+                    with self.assertRaisesRegex(RuntimeError, 'build-history.*seam'):
+                        capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                else:
+                    data = capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                    with Image.open(io.BytesIO(data)) as actual:
+                        self.assertEqual((actual.size, actual.mode), (expected.size, expected.mode))
+                        self.assertEqual(actual.tobytes(), expected.tobytes())
+
+    def test_capture_rejects_a_complete_image_after_the_total_deadline(self):
+        page = Mock()
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 10, 1]
+        elapsed = [0]
+        def capture_band(*, full_page, clip, timeout):
+            self.assertTrue(full_page)
+            if clip['width'] == 1:
+                self.assertEqual(timeout, 30_000)
+                elapsed[0] += 1
+            else:
+                self.assertEqual(timeout, 29_000 if clip['y'] == 0 else 2_000)
+                elapsed[0] += 27 if clip['y'] == 0 else 3
+            image = Image.new('RGB', (clip['width'], clip['height']))
+            data = io.BytesIO()
+            image.save(data, format='PNG')
+            return data.getvalue()
+        page.screenshot.side_effect = capture_band
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15):
+            with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
+                with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
+                    capture.capture_full_page(page, 'builds/index.html', 'build-history')
+        self.assertEqual(page.screenshot.call_count, 3)
+
+    def test_bands_reject_invalid_png_and_changed_document(self):
+        size = [3, 6, 0, 0, 3, 2, 1]
+        image = Image.new('RGB', (3, 6), 'black')
+        for defect in ('missing-end', 'bad-data-crc', 'extra-end', 'truncated', 'wrong-width', 'changed-geometry'):
+            with self.subTest(defect=defect):
+                page = Mock()
+                page.evaluate.side_effect = [size, size, [3, 7, *size[2:]] if defect == 'changed-geometry' else size]
+                def screenshot(full_page, clip, timeout):
+                    self.assertTrue(full_page)
+                    self.assertLessEqual(timeout, 30_000)
+                    y = clip['y']
+                    band = image.crop((0, y, 2 if defect == 'wrong-width' else 3, y + clip['height']))
+                    data = io.BytesIO()
+                    band.save(data, format='PNG')
+                    raw = data.getvalue()
+                    if defect == 'missing-end':
+                        return raw[:-12]
+                    if defect == 'bad-data-crc':
+                        return raw[:-13] + bytes([raw[-13] ^ 128]) + raw[-12:]
+                    if defect == 'extra-end':
+                        return raw + raw[-12:]
+                    if defect == 'truncated':
+                        return raw[:20]
+                    return raw
+                page.screenshot.side_effect = screenshot
+                with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+                    with self.assertRaisesRegex(RuntimeError, 'builds-case full-page capture failed'):
+                        capture.capture_full_page(page, 'builds/index.html', 'builds-case')
+
+    def test_bands_share_one_deadline_and_reject_late_completion(self):
+        page = Mock()
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 20, 1]
+        timeouts = []
+        def screenshot(full_page, clip, timeout):
+            timeouts.append(timeout)
+            band = Image.new('RGB', (clip['width'], clip['height']), 'black')
+            data = io.BytesIO()
+            band.save(data, format='PNG')
+            return data.getvalue()
+        page.screenshot.side_effect = screenshot
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 20):
+            with patch.object(capture.time, 'monotonic', side_effect=[10, 11, 15, 32, 41]):
+                with self.assertRaisesRegex(RuntimeError, 'exceeded 30 seconds'):
+                    capture.capture_full_page(page, 'builds/index.html', 'builds-case')
+        self.assertEqual(timeouts, [29_000, 25_000, 8_000])
 
     def test_missing_baseline_is_reported_not_created(self):
         result = self.compare()

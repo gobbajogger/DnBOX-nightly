@@ -219,8 +219,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5428379,
-      "sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+      "bytes": 5428589,
+      "sha256": "1c5cee4ad91584002d6f0deba47e452ddb7a1d1791e872ed1f23dd8f09c5029b"
     },
     {
       "path": "install.html",
@@ -999,8 +999,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12720,
-      "sha256": "f55267dcfa51920f1fe92a17e25b9021b7a30aff0214d27ed4521fb3e6455d00"
+      "bytes": 12783,
+      "sha256": "fe562032da1b6938a0625fd8634efd9f4947bbbe7464505f84b43eaf3efbcfdb"
     },
     {
       "path": "starting-break-export.mjs",

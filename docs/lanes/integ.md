@@ -4,15 +4,19 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 44 of those images. The other 60 remain open. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The updater generated 104 proposed images. Independent review has accepted 48 of 104 references, including the four homepage views. The other 56 remain open. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
 | I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
 | I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
 | I7 | Canonical links are verified. The owner retired the old installer paths and retained GitHub’s automatic repository redirects. Cleanup follows the lane merges. |
-| C1–C6 | The full gate passed at `1afa3dad`. C2 passed. The subsequent Samples change needs its own full gate and final independent review. |
+| C1–C6 | C2 passed. The parent `fe293c51` full gate failed when the 1440×900 Builds capture exceeded 30 seconds. The browser stage passed. The successor awaits its full gate and final review. [Parent gate receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7058547649). |
 
 This branch changes the product site, documentation and host tests. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
+
+## Homepage and Builds follow-up
+
+The Chicago hero shows SAW at raw WAVE 0. The sound list names SuperJ6, and the archived Juno demo keeps its original frames. Independent full-page captures matched all four homepage references. At 240 px the eight physical knobs and nine header links fit. The Builds capture divided the 197-record page into checked bands and finished within the original 30-second budget at all four gate sizes. The Builds screenshots remain under design review.
 
 ## Reproduced results at nightly 914d68e8
 

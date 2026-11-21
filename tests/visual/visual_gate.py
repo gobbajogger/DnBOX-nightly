@@ -15,6 +15,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
+from full_page_capture import capture_full_page
 from grid_continuity import assert_grid_continuity
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -304,7 +305,7 @@ def main():
                     if rel == 'breaks/index.html':
                         sample_navigation_checks(pg, tag, header_fails)
                     print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue

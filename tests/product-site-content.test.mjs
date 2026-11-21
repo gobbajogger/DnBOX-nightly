@@ -26,3 +26,30 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
  assert.match(html,/src="\.\.\/install\.mjs"/);
 });
+
+test('homepage separates the current Chicago waveform and SuperJ6 name from archived control replays', async () => {
+ const home = read('index.html');
+ const presentation = JSON.parse(read('APPROVED-PRESENTATION.json'));
+ const original = presentation.frames.find(frame => frame.id === 'voice-0');
+ const {waveDisplay} = await import('../web/product-site/remote/wave-display.mjs');
+ const name = waveDisplay('CHICAGO', original.source_params.actual_wave);
+ assert.equal(name, 'SAW');
+ const hero = home.match(/<div class="hero-ui"[\s\S]*?<\/svg>/)[0];
+ const value = hero.match(/<g role="text" aria-label="SAW"[^>]*>([\s\S]*?)<\/g>/);
+ assert.ok(value, 'Chicago WAVE value in the static hero');
+ assert.match(hero, /role="img" aria-label="Chicago oscillator wave, SAW"/);
+ assert.doesNotMatch(hero, /aria-label="0%"/);
+ const miami = home.match(/<template id="frame-miami-0">([\s\S]*?)<\/template>/)[1];
+ const originalGlyphs = miami.match(/<g role="text" aria-label="SAW"[^>]*>([\s\S]*?)<\/g>/)[1];
+ const outlines = group => Array.from(group.matchAll(/<path [^>]*\bd="([^"]+)"/g), m => m[1]);
+ assert.equal(outlines(value[1]).length, 3);
+ assert.deepEqual(outlines(value[1]), outlines(originalGlyphs));
+ const sound = home.match(/<section class="sound-section"[\s\S]*?<\/section>/)[0];
+ assert.match(sound, /Chicago, Miami and SuperJ6/);
+ assert.match(sound, /<span>SuperJ6<\/span>/);
+ assert.doesNotMatch(sound, /\bJuno\b/);
+ assert.match(home, /data-demo="juno"[^>]*>Juno \(archived\)<\/button>/);
+ const frames = JSON.parse(home.match(/<script id="replay-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+ assert.equal(frames.juno.length, 7);
+ assert.ok(frames.juno.every(frame => frame.text.startsWith('JUNO ')));
+});
