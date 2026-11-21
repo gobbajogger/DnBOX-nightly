@@ -45,6 +45,31 @@ FREEZE_CSS = "*,*::before,*::after{animation:none!important;transition:none!impo
 def port():
     s = socket.socket(); s.bind(('127.0.0.1', 0)); p = s.getsockname()[1]; s.close(); return p
 
+def history_capture_timeout_ms(width, height):
+    megapixels = width * height / 1_000_000
+    return min(120_000, max(30_000, round(1_500 * megapixels)))
+
+def capture_site_page(page, route):
+    if route != 'builds/index.html':
+        return page.screenshot(full_page=True)
+
+    # The settled history can exceed 100 megapixels at DPR 1. Bound the
+    # native PNG capture separately from navigation, fonts and UI actions.
+    width, height = page.evaluate("""() => {
+        const root = document.documentElement, body = document.body;
+        const width = Math.max(innerWidth, root.scrollWidth, body.scrollWidth);
+        const height = Math.max(innerHeight, root.scrollHeight, body.scrollHeight);
+        return [width, height];
+    }""")
+    timeout_ms = history_capture_timeout_ms(width, height)
+    print(f'Builds native full-page PNG: {width}x{height}, timeout {timeout_ms} ms', flush=True)
+    png = page.screenshot(full_page=True, timeout=timeout_ms)
+    with Image.open(io.BytesIO(png)) as captured:
+        if captured.format != 'PNG' or captured.size != (width, height):
+            raise ValueError(f'Expected full Builds PNG {width}x{height}, got {captured.format} {captured.size}')
+        captured.verify()
+    return png
+
 def remote_states():
     def lane(n):
         def f(pg):
@@ -269,7 +294,7 @@ def main():
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
                     pg.goto(base + '/product-site/' + rel); settle(pg)
                     print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
+                    compare(full, capture_site_page(pg, rel), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue

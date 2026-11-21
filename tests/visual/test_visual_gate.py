@@ -5,6 +5,7 @@ import io
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import Mock
 from PIL import Image
 
 spec = importlib.util.spec_from_file_location('visual_gate', Path(__file__).with_name('visual_gate.py'))
@@ -34,6 +35,58 @@ class GateContract(unittest.TestCase):
     def approve(self):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
+
+    def test_full_page_capture_returns_the_single_native_png(self):
+        page = Mock()
+        page.screenshot.return_value = self.image
+        self.assertIs(gate.capture_site_page(page, 'presets/index.html'), self.image)
+        page.evaluate.assert_not_called()
+        page.screenshot.assert_called_once_with(full_page=True)
+
+        page.reset_mock()
+        page.evaluate.return_value = (30, 30)
+        self.assertIs(gate.capture_site_page(page, 'builds/index.html'), self.image)
+        page.evaluate.assert_called_once()
+        page.screenshot.assert_called_once_with(full_page=True, timeout=30_000)
+
+    def test_history_budget_has_a_floor_and_a_hard_cap(self):
+        for width, height, budget in [(1000, 800, 30_000), (1000, 70_000, 105_000),
+                                      (3000, 50_000, 120_000)]:
+            with self.subTest(width=width, height=height):
+                self.assertEqual(gate.history_capture_timeout_ms(width, height), budget)
+
+    def test_history_capture_rejects_missing_rows_and_truncated_pngs(self):
+        page = Mock()
+        page.evaluate.return_value = (30, 31)
+        page.screenshot.return_value = self.image
+        with self.assertRaisesRegex(ValueError, 'Expected full Builds PNG'):
+            gate.capture_site_page(page, 'builds/index.html')
+        page.evaluate.return_value = (30, 30)
+        page.screenshot.return_value = self.image[:-12]
+        with self.assertRaises(OSError):
+            gate.capture_site_page(page, 'builds/index.html')
+
+    def test_history_capture_rejects_wrong_format_and_corrupt_png_data(self):
+        page = Mock()
+        page.evaluate.return_value = (30, 30)
+        jpeg = io.BytesIO()
+        Image.new('RGB', (30, 30)).save(jpeg, format='JPEG')
+        page.screenshot.return_value = jpeg.getvalue()
+        with self.assertRaisesRegex(ValueError, 'Expected full Builds PNG'):
+            gate.capture_site_page(page, 'builds/index.html')
+        damaged = bytearray(self.image)
+        damaged[damaged.index(b'IDAT') + 4] ^= 1
+        page.screenshot.return_value = bytes(damaged)
+        with self.assertRaisesRegex(SyntaxError, 'checksum'):
+            gate.capture_site_page(page, 'builds/index.html')
+
+    def test_failed_history_capture_propagates_without_retry(self):
+        page = Mock()
+        page.evaluate.return_value = (1000, 70_000)
+        page.screenshot.side_effect = TimeoutError('native capture exceeded its budget')
+        with self.assertRaisesRegex(TimeoutError, 'exceeded its budget'):
+            gate.capture_site_page(page, 'builds/index.html')
+        page.screenshot.assert_called_once_with(full_page=True, timeout=105_000)
 
     def test_missing_baseline_is_reported_not_created(self):
         result = self.compare()
