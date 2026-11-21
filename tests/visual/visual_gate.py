@@ -17,6 +17,7 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
+from full_page_capture import capture_full_page
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -329,7 +330,7 @@ def main():
                     scroll_width = pg.evaluate('document.documentElement.scrollWidth')
                     if scroll_width > w:
                         errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
@@ -337,7 +338,7 @@ def main():
                     if OFFLINE_BUILT[rel] == 'install/index.html':
                         attach_installer_responses(pg)
                     settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 c.close()
             b.close()
     finally:

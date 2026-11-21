@@ -1,5 +1,15 @@
 # Web lane · PR #156
 
+## Exact-head browser qualification · 21 November
+
+The [complete gate at `8e2e9fb6`](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7057950340) passed the clean tree, setup, no-loss, hard limits and 240-file build. The installer passed 679 browser checks. The unit stage lost Chromium during a full-page screenshot, and the browser stage exceeded its 30-second deadline pressing Enter on Master Drive at 390×844. The numeric control had resolved. The web lane continues to track publication and independent review in the [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794).
+
+The visual sweep captures the oversized Builds page in lossless document-coordinate bands. It preserves the full page, checks the overlapping rows and charges all bands and PNG assembly to the original 30-second budget. Comparing it with the native full-page capture at each of the four viewport sizes found zero differences across 281,494,132 RGB pixels. All 198 history entries and the final row appear at every width. The final helper took 14.976–25.770 seconds in these runs. The [capture receipt](../../evidence/web-routes/builds-full-page-capture.json) records source identities, timings and full-image hashes. Capture errors now include their route and viewport.
+
+The glyph-domain check now launches a fresh sandboxed Chromium process for each viewport. It retains all eight Sound and Mix value checks per viewport and the 30-second Master Drive keyboard deadline. On the same runner the original test passed in 12.166 seconds and the isolated version passed in 7.959 seconds. The focused replay did not reproduce the earlier timeout; the full gate remains authoritative.
+
+A [mounted 79-observation replay](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7058028085) exercised five parts through the visible panel controls. All 4,550,400 RGB565 pixel comparisons matched the native host at the pinned firmware, covering 50 distinct frames with zero page errors. The same input program on FWUI `4c05722d` matched one distinct frame, the 808 kick, on three visits. The remaining 76 observations differed by 237–7,142 pixels. The linked receipt contains both input programs, per-state hashes and reproduction instructions. W3 and independent C3 remain open.
+
 ## Package reporting and qualification corrections · 21 November
 
 The public status view now resolves the selected catalog entry against its own package records. Two builds can both display 0.0.26 while carrying different firmware bytes. A test reproduced the earlier false public-latest result by changing only the Elite digest. The rebuilt status view leaves that selection unconfirmed and deduplicates the proven version list. Release denials at either the build or model still apply when owner evidence exists. The installer retries a failed public report lookup on the next selection refresh and shares successful reads across selections.

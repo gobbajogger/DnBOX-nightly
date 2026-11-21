@@ -3,7 +3,8 @@
 import importlib.util
 import io
 import re
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
+import full_page_capture as capture
 from pathlib import Path
 import tempfile
 import unittest
@@ -36,6 +37,60 @@ class GateContract(unittest.TestCase):
     def approve(self):
         gate.SNAP.mkdir(parents=True, exist_ok=True)
         (gate.SNAP / 'screen.png').write_bytes(self.image)
+
+    def test_full_page_routes_keep_native_capture_for_regular_sizes(self):
+        for route in ('projects/index.html', 'builds/index.html'):
+            page = Mock()
+            page.screenshot.return_value = self.image
+            page.evaluate.return_value = [390, 1000, 0, 0, 390, 844, 1]
+            self.assertEqual(capture.capture_full_page(page, route, 'fixture'), self.image)
+            page.screenshot.assert_called_once_with(full_page=True)
+
+    def test_bands_retain_every_row_and_reject_a_changed_seam(self):
+        expected = Image.new('RGBA', (3, 7))
+        expected.putdata([(x, y, 50, y + 17) for y in range(7) for x in range(3)])
+        for mutate in (False, True):
+            page = Mock()
+            page.evaluate.return_value = [3, 7, 0, 0, 3, 2, 1]
+            def clipped_png(full_page, clip, timeout):
+                self.assertTrue(full_page)
+                self.assertTrue(0 < timeout <= 30_000)
+                y = clip['y']
+                band = expected.crop((0, y, 3, y + clip['height']))
+                if mutate and y > 0:
+                    band.putpixel((0, 0), (1, 2, 3, 4))
+                data = io.BytesIO()
+                band.save(data, format='PNG')
+                return data.getvalue()
+            page.screenshot.side_effect = clipped_png
+            with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 3):
+                if mutate:
+                    with self.assertRaisesRegex(RuntimeError, 'build-history.*seam'):
+                        capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                else:
+                    data = capture.capture_full_page(page, 'builds/index.html', 'build-history')
+                    with Image.open(io.BytesIO(data)) as actual:
+                        self.assertEqual((actual.size, actual.mode), (expected.size, expected.mode))
+                        self.assertEqual(actual.tobytes(), expected.tobytes())
+
+    def test_capture_rejects_a_complete_image_after_the_total_deadline(self):
+        page = Mock()
+        page.evaluate.return_value = [30, 30, 0, 0, 30, 10, 1]
+        elapsed = [0]
+        def capture_band(*, full_page, clip, timeout):
+            self.assertTrue(full_page)
+            self.assertEqual(timeout, 30_000 if clip['y'] == 0 else 2_000)
+            elapsed[0] += 28 if clip['y'] == 0 else 3
+            image = Image.new('RGB', (clip['width'], clip['height']))
+            data = io.BytesIO()
+            image.save(data, format='PNG')
+            return data.getvalue()
+        page.screenshot.side_effect = capture_band
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15):
+            with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
+                with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
+                    capture.capture_full_page(page, 'builds/index.html', 'build-history')
+        self.assertEqual(page.screenshot.call_count, 2)
 
     def test_installer_routes_only_pause_the_two_public_requests(self):
         page = Mock()
