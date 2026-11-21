@@ -472,7 +472,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
   <section id="samples-panel" aria-label="Sample workspace" hidden><iframe id="sample-frame" title="Import break loops, back up or restore sample slots" src="../breaks/?embedded=1" allow="midi"></iframe><p class="small"><a href="../breaks/">Open sample tools separately</a> if this panel does not load.</p></section>
   <section id="projects-panel" aria-label="Songs and projects workspace" hidden><iframe id="project-frame" title="Import or export a whole song project; reset project while keeping samples" src="../projects/?embedded=1" allow="midi"></iframe><p class="small"><a href="../projects/">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>
   <div id="firmware-panel">
-  <aside class="release-notice" aria-label="Release status"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href="../new/">Release status</a></p></aside>
+  <aside class="release-notice" aria-label="Release status"><strong>DnBOX 0.0.26 is the latest release</strong><p>The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with build 94197fc8. Choose 0.0.25.1 for the fallback. The earlier 600b build remains withdrawn. <a href="../new/">Release status</a></p></aside>
 
   <div class="install-layout">
     <div class="install-primary" id="firmware">
@@ -523,7 +523,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
     <div class="flash-action">
           <div class="step-kicker" data-t="stage3">Step 03 / Install</div>
           <p class="action-safety">First install replaces previous working data. <a href="#samples">Back up important samples</a> before switching. Keep USB connected until installation finishes.</p>
-          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span data-t="devagree">I accept hardware-untested development firmware for my selected keyboard model.</span></label>
+          <label id="devagreewrap" hidden><input type="checkbox" id="devagree"> <span id="consent-copy" data-t="devagree">I accept hardware-untested development firmware for my selected keyboard model.</span></label>
           <button id="go" disabled data-t="install">Install</button>
           <div id="inconfirm" role="alertdialog" aria-live="assertive" hidden style="border:2px solid #c80;padding:8px;margin:6px 0;white-space:pre-wrap"><div id="inconfirmtext"></div><button id="inconfirmok" type="button">OK — write firmware</button> <button id="inconfirmno" type="button">Cancel</button></div>
           <p class="install-hint" id="installhint" aria-live="polite"></p>
@@ -2324,6 +2324,8 @@ const TEXT = {
     hintready: "書き込む準備ができました。開始前に機種と内容をもう一度確認します。",
     hintbusy: "インストールの処理中です。USB を抜かず、ページを閉じないでください。",
     latestdev: "最新の利用可能な DEV", devchecked: "DEV CHECKED", hardwareuntested: "実機未テスト", superseded: "旧ビルド・非推奨",
+    ownertested: "オーナーが Elite と Pro の実機で起動と再起動を確認済み",
+    releaseagree: "機種を確認し、データをバックアップしてからこのリリースをインストールします。",
     devagree: "実機未テストの開発版であることを理解し、機種と大切なサンプルのバックアップを確認しました。",
     ctrlwarning: "この旧パッケージのインストールには、一致するローカル ctl.img が必要です。",
     ctlbundlepending: "パッケージに一致する Bluetooth コントローラーを確認しています…",
@@ -2430,6 +2432,8 @@ const TEXT = {
     hintready: "Ready to install.",
     hintbusy: "An installation operation is in progress. Keep USB connected and this page open.",
     latestdev: "LATEST AVAILABLE DEV", devchecked: "DEV CHECKED", hardwareuntested: "HARDWARE UNTESTED", superseded: "SUPERSEDED",
+    ownertested: "Owner tested startup and restart on Elite and Pro",
+    releaseagree: "I have checked my keyboard model and backed up my data before installing this release.",
     devagree: "I accept hardware-untested development firmware for my selected keyboard model.",
     ctrlwarning: "This legacy package requires the matching local ctl.img before installation.",
     ctlbundlepending: "Checking this package for its matching included Bluetooth controller…",
@@ -2703,13 +2707,18 @@ function modelKeyForProduct(product) {
 // Revocation is monotonic: any explicit denial wins over a checked status.
 // Optional approval hints must be true when present. They are not qualification
 // receipts; the publisher's preparation path still checks those independently.
+function ownerTestedRelease(v) {
+  return v?.version === "nightly-94197fc8-dev" && v.status === "release-checked" &&
+    v.hardware_tested === true && assignedPackageVersion(v)?.version === "0.0.26";
+}
 function catalogDenied(record) {
   return !record || ["revoked", "blocked", "withdrawn"].some(k =>
     record[k] !== undefined && record[k] !== false) ||
     ["qualified", "installable", "qa_pass", "source_licenses_approved", "immutable_http_pass",
       "backup_integrity_pass", "model_and_controller_pass"].some(k => Object.hasOwn(record, k) && record[k] !== true) ||
     (record.fromRelease !== undefined && record.fromRelease !== false) ||
-    ["device_verified", "hardware_tested"].some(k => Object.hasOwn(record, k) && record[k] !== false) ||
+    (Object.hasOwn(record, "device_verified") && record.device_verified !== false) ||
+    (Object.hasOwn(record, "hardware_tested") && record.hardware_tested !== false && !ownerTestedRelease(record)) ||
     (record.lifecycle !== undefined && record.lifecycle !== "current");
 }
 function selectionIdentity(v, p) {
@@ -2719,7 +2728,7 @@ function selectionIdentity(v, p) {
 function availableModels(ver) {
   // Picker and model radios only offer non-denied, currently checked packages.
   if (!ver || !ver.models || catalogDenied(ver) ||
-      (ver.status !== undefined && ver.status !== "dev-checked")) return [];
+      (ver.status !== undefined && ver.status !== "dev-checked" && !ownerTestedRelease(ver))) return [];
   return MODEL_KEYS.filter((k) => {
     const p = ver.models[k];
     return p && !catalogDenied(p) &&
@@ -2791,7 +2800,8 @@ async function verifyBundledController(logical, p) {
 }
 function isCatalogChecked(v,p) {
   try {
-    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || v.status !== "dev-checked" ||
+    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) ||
+        (v.status !== "dev-checked" && !ownerTestedRelease(v)) ||
         (p.status !== undefined && p.status !== "dev-checked") ||
         p.fromRelease === true || v.models?.[chosenModel] !== p ||
         modelKeyForProduct(p.product) !== chosenModel ||
@@ -2914,6 +2924,7 @@ function renderBuildInfo(v,p) {
   const b=$("buildbadges");b.replaceChildren();
   if(v.version===catalogLive.latest && v.status==="dev-checked") b.append(buildBadge(t("latestdev"),"important"));
   if(v.status==="dev-checked") b.append(buildBadge(t("devchecked")));
+  if(ownerTestedRelease(v)) b.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
   if(v.hardware_tested!==true) b.append(buildBadge(t("hardwareuntested"),"important"));
   if(v.lifecycle==="superseded") b.append(buildBadge(t("superseded"),"blocked"));
   $("buildsummary").textContent=buildDisplayLabel(v,p)+" · "+(nightlyProductIdentity(p.product)?.model || "")+
@@ -2924,7 +2935,9 @@ function renderBuildInfo(v,p) {
     " · "+(v.built_at||"undated")+" · Product: "+(p.product||"unknown")+" · SHA-256: "+(p.sha256||"not recorded");
   const link=$("buildevidence"), evidence=evidenceUrl(v.evidence_url);link.hidden=!evidence;
   if(evidence)link.href=evidence;else link.removeAttribute("href");
-  $("devagreewrap").hidden=v.status!=="dev-checked";
+  const tested = ownerTestedRelease(v);
+  $("devagreewrap").hidden = v.status !== "dev-checked" && !tested;
+  $("consent-copy").textContent = t(tested ? "releaseagree" : "devagree");
   updateInstallGate();
 }
 function renderBuildHistory() {
@@ -2935,6 +2948,7 @@ function renderBuildHistory() {
     const badges=document.createElement("div");badges.className="build-badges";
     if(v.version===catalogLive.latest && v.status==="dev-checked")badges.append(buildBadge(t("latestdev"),"important"));
     if(v.status==="dev-checked")badges.append(buildBadge(t("devchecked")));
+    if(ownerTestedRelease(v)) badges.append(buildBadge(t("verrelease")),buildBadge(t("ownertested"),"important"));
     if(v.hardware_tested!==true)badges.append(buildBadge(t("hardwareuntested"),"important"));
     if(v.lifecycle==="superseded")badges.append(buildBadge(t("superseded"),"blocked"));
     el.append(badges);
@@ -3091,7 +3105,7 @@ async function loadSelectedPackage() {
 function versionOptionCaption(v) {
   const kind = v.status === "dev-checked"
     ? (v.lifecycle === "superseded" ? "verolder" : (v.version === catalogLive.latest ? "verlatest" : "verdev"))
-    : (v.status === "release-checked" ? "verrelease" : "verunverified");
+    : (ownerTestedRelease(v) ? "verrelease" : "verunverified");
   return buildDisplayLabel(v) + " · " + t(kind);
 }
 function refreshVersionLabels() {
@@ -3361,12 +3375,12 @@ const installBlocked = (why) => { $("status").textContent = why; $("installhint"
 $("go").parentElement.addEventListener("click", (e) => {
   if (e.target !== $("go") && !(e.target.contains && e.target.contains($("go")))) return;
   if (!$("go").disabled || writing) return;
-  installBlocked(!$("devagree").checked ? "Install is locked: tick the development-firmware consent box above, then press Install."
+  installBlocked(!$("devagree").checked ? "Install is locked: tick the firmware consent box above, then press Install."
     : "Install is locked: the selected package is not downloaded and verified yet. Choose the model/version again and wait for 'Ready to install'.");
 });
 $("go").addEventListener("click", async () => {
   if (writing) { installBlocked("An install is already running."); return; }
-  if (!$("devagree").checked) { installBlocked("Tick the development-firmware consent box above, then press Install."); return; }
+  if (!$("devagree").checked) { installBlocked("Tick the firmware consent box above, then press Install."); return; }
   if ($("go").disabled || !hasCurrentVerifiedSelection()) { installBlocked("The selected package is not verified yet. Choose the model/version again and wait for 'Ready to install'."); return; }
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";

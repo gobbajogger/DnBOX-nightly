@@ -2,7 +2,7 @@ import test from'node:test';import assert from'node:assert/strict';import{readFi
 const root=new URL('../',import.meta.url),P=new URL('web/product-site/',root),read=n=>readFileSync(new URL(n,P),'utf8');
 function isolatedOutput(t){const base=fileURLToPath(new URL('.output/',root));mkdirSync(base,{recursive:true});const output=mkdtempSync(join(base,'content-test-'));t.after(()=>rmSync(output,{recursive:true,force:true}));return output;}
 test('complete source manifest builds byte-identical local output without deployment',t=>{const output=isolatedOutput(t),r=buildProductSite({output});assert.equal(r.published,false);assert.deepEqual(r.catalogMutations,[]);assert.equal(r.files,JSON.parse(readFileSync(new URL('../web/product-site/SOURCE-MANIFEST.json',import.meta.url))).files.length+10);buildProductSite({output,check:true});});
-test('both manual families and197 true history records survive source integration',()=>{const smk=read('manual/legacy.html'),fm=read('manual/original/index.html');for(let i=1;i<=21;i++)assert.ok(smk.includes('id="s'+i+'"'));assert.ok(smk.includes('94197fc8'));assert.ok(fm.length>40000);assert.equal((read('builds/index.html').match(/data-record-id=/g)||[]).length,197);for(const p of['manual/','builds/','tools/','help/'])assert.ok(read('index.html').includes('href="'+p));});
+test('both manual families, 197 historical records and the new release survive source integration',()=>{const smk=read('manual/legacy.html'),fm=read('manual/original/index.html');for(let i=1;i<=21;i++)assert.ok(smk.includes('id="s'+i+'"'));assert.ok(smk.includes('94197fc8'));assert.ok(fm.length>40000);assert.equal((read('builds/index.html').match(/data-record-id=/g)||[]).length,198);for(const p of['manual/','builds/','tools/','help/'])assert.ok(read('index.html').includes('href="'+p));});
 test('source admission remains explicit, no original-format or remote capability fabricated',()=>{const presets=read('presets/index.html');assert.match(read('remote/catalog.mjs'),/null/);assert.match(read('projects/exchange/provider.mjs'),/provider=null/);assert.ok(presets.includes('file editor, not sound audition'));assert.ok(presets.includes('Only existing preset names change here.'));assert.ok(presets.includes('Nothing is sent to an instrument.'));assert.ok(existsSync(new URL('presets/legacy/codec.mjs',P)));const p=JSON.parse(read('APPROVED-PRESENTATION.json'));assert.equal(p.native_source,'3c41ef4bedf9701f549ce2752b73306e2fab1eb8');assert.equal(p.baseline_shared_website_instrument_paths_sha256,'e9f35e989f64ad97d1a936bde8467a86f1bc440dc8e1855c0914aed724fcbdc2');assert.equal(p.R22HiHat.sha256,'2d234b1ee918ae9b882800256ed3867757a64304ade44d0a352f3f50f6ccc4cd');assert.equal(p.R22HiHat.sourceFreeze,'dc0f8a080843b427cda17e6c55e80043aef40788e5d711e7c6f13382c5c966ff');assert.equal(p.R22HiHat.occurrences,14);});
 
 test('R16 composed source names exact workspace and contains safe local editing endpoints only',()=>{const t=JSON.parse(read('SOURCE-TRACE.json'));assert.match(t.remote,/R16/);assert.equal(t.candidatePins.workspaceManifest,'0013f29a990fbc2305a3269f4da1f87182ec3a29b7e3b35ca760281c132e2186');assert.equal(t.retainedHistoricalSources.count,10);assert.equal(t.deployed,false);assert.equal(t.browserProvider,null);assert.match(read('remote/sequence.mjs'),/beginSelectionGesture/);assert.match(read('remote/roll.mjs'),/g.edge==='start'/);assert.match(read('remote/device/catalog.mjs'),/null/)});
@@ -60,6 +60,28 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/\.starting-breaks-page header\{[^}]*flex-wrap:wrap/);
  assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
  assert.match(html,/src="\.\.\/install\.mjs"/);
+});
+
+test('release notices identify the two tested models, the withdrawal and the fallback', () => {
+ const release = 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26';
+ const fallback = release.replace('v0.0.26', 'v0.0.25.1');
+ const records = JSON.parse(read('data/history.json'));
+ const published = records.find(row => row.id === 'release-v0.0.26-94197fc8');
+ assert.equal(published.original.evidence_url, release);
+ assert.equal(published.original.source_commit, '94197fc839b00aff47b98ca02f3c6396e4a6eabf');
+ assert.deepEqual(published.models, ['elite','pro']);
+ assert.equal(published.original.fallback_url, fallback);
+ const notes = [read('new/index.html'), read('manual/index.html'), read('manual/legacy.html'),
+  read('builds/index.html'), readFileSync(new URL('docs/new/index.html',root),'utf8')];
+ for (const page of notes) {
+  assert.ok(page.includes('href="'+release+'"'));
+  assert.ok(page.includes('href="'+fallback+'"'));
+  assert.match(page, /600b3b45/);
+  assert.match(page, /owner tested startup and restart/i);
+ }
+ const historical = records.filter(row => row.id !== published.id);
+ assert.equal(historical.length, 197);
+ assert.equal(historical.find(row => row.id === 'night-versions-0').original.hardware_tested, false);
 });
 
 test('published release records, backup workflows and history bookmarks survive site composition',()=>{

@@ -1,5 +1,20 @@
 # Web lane · PR #156
 
+## Owner-tested DnBOX 0.0.26
+
+The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with the 94197fc8 packages in [release v0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26). All four original files for this release and the 0.0.25.1 fallback matched the published sizes and checksums. The firmware tag resolves to `94197fc839b00aff47b98ca02f3c6396e4a6eabf`.
+
+| Model | 0.0.26 bytes | 0.0.26 SHA-256 |
+|---|---:|---|
+| SMK-37 Elite | 651,732 | `95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6` |
+| SMK-37 Pro | 651,730 | `ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8` |
+
+The main installer lives in a separate repository. The [patch and reproduction steps](../integration/main-installer-0.0.26/README.md) target the deployed DnBOX Pages tree at `5a4520f4`. The patched picker defaults to 0.0.26 and offers 0.0.25.1 as the fallback. A sandboxed Chromium replay selected each version and model, verified all four downloads, and cancelled at confirmation. Corrupt bytes and a changed source also failed their checks.
+
+The nightly installer binds the owner-tested status to the assigned source, tree and both model packages. The release notice, build history and manuals record which hardware operations the owner tested. The 600b withdrawal remains in history. The site preserves all 197 previous history records and adds one release event. The firmware, memory layout and emulator pin are unchanged. No paths were deleted. The branch includes consolidated `914d68e8`.
+
+The [exact-head Local gate record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) tracks the result and raw log. The owner requested a draft for review, so the main and nightly Pages changes await publication. W3 and C3 still need matched firmware UI captures from the FWUI lane.
+
 ## Qualification at the current PR head
 
 Branch `lane/web` targets `integration/dnbox-consolidated`. The [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) identifies the exact GitHub commit, Local gate log and latest public hash check. The starting head was `9172ce84caefd9350357895f4d69c99c51e00ade`. Reading the branch ref found consolidated at `914d68e8ed50698ea77c9d18c221c404629b9332`, seven commits beyond the base SHA in the PR metadata.

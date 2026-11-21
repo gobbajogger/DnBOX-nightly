@@ -164,8 +164,8 @@
     },
     {
       "path": "builds/index.html",
-      "bytes": 579817,
-      "sha256": "3ddf07a77a865ffb834a7f1be086054cca700927c5a64fe611b116a70da51315"
+      "bytes": 581874,
+      "sha256": "82dcd6dcb9943609380ad149aea5de232438e69b6751fd34ac7beb3a093fef49"
     },
     {
       "path": "components/archive/store.mjs",
@@ -209,8 +209,8 @@
     },
     {
       "path": "data/history.json",
-      "bytes": 372150,
-      "sha256": "ad782e5bb3cc16bae209515ce41ae4c20a4508cb1ebed22cf0836e0cef471cfe"
+      "bytes": 373232,
+      "sha256": "d0a47bbd74110b0fb21d46f0c8e83b90718117944c9caeca830f8e18f4f8d517"
     },
     {
       "path": "help/index.html",
@@ -234,8 +234,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 628332,
-      "sha256": "16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95"
+      "bytes": 629270,
+      "sha256": "0a1dcf7efb2f3ba0aa397b28356e083d51971ede72370e6171f24745f390484b"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -359,13 +359,13 @@
     },
     {
       "path": "manual/index.html",
-      "bytes": 17504,
-      "sha256": "5e4f025db19590b6cdd152a7993e15f05215779b2d0fa15d6385ff00db178846"
+      "bytes": 17384,
+      "sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7"
     },
     {
       "path": "manual/legacy.html",
-      "bytes": 64789,
-      "sha256": "3e48f161394b20e615284b2be232c42ba82f9967ac5d7304526c9116cc77ca8d"
+      "bytes": 64421,
+      "sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f"
     },
     {
       "path": "manual/manual.js",
@@ -509,8 +509,8 @@
     },
     {
       "path": "new/index.html",
-      "bytes": 18922,
-      "sha256": "c5a0a3d8608c763e8252f6fd943dfb0a32175884279bf2ba144795346370f7d3"
+      "bytes": 18700,
+      "sha256": "48f22d3c3dc8d78e82b993e3fe05f4b86e81abddea758b04b9e741be0bc56e46"
     },
     {
       "path": "presets/app.mjs",
@@ -1034,8 +1034,8 @@
     },
     {
       "path": "versions.json",
-      "bytes": 89223,
-      "sha256": "84d79d2f5240eb02d0dadd810e84f2aec7577d9bf0218bfdbc6d187334285893"
+      "bytes": 89057,
+      "sha256": "16ebb499832952dc93534865f6d69e7f0535aabcdab2aad2bafe1c811c059ce1"
     },
     {
       "path": "manual/manual.css",

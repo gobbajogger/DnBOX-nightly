@@ -34,6 +34,8 @@ function normalize(html) {
 
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
+  // Exact reviewed UI and admission changes for the owner-tested 94197fc8 release.
+  ...JSON.parse(readFileSync(join(root, 'tests/fixtures/installer-v0026-reviewed-hunks.json'), 'utf8')),
   {
     id: 'programmed-sample-header-padding',
     reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "v0026-release-notice",
+    "liveOnly": [
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>"
+    ],
+    "renderOnly": [
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest release</strong><p>The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with build 94197fc8. Choose 0.0.25.1 for the fallback. The earlier 600b build remains withdrawn. <a href=\"../new/\">Release status</a></p></aside>"
+    ]
+  },
+  {
+    "id": "v0026-consent-label",
+    "liveOnly": [
+      "          <label id=\"devagreewrap\" hidden><input type=\"checkbox\" id=\"devagree\"> <span data-t=\"devagree\">I accept hardware-untested development firmware for my selected keyboard model.</span></label>"
+    ],
+    "renderOnly": [
+      "          <label id=\"devagreewrap\" hidden><input type=\"checkbox\" id=\"devagree\"> <span id=\"consent-copy\" data-t=\"devagree\">I accept hardware-untested development firmware for my selected keyboard model.</span></label>"
+    ]
+  },
+  {
+    "id": "v0026-ja-owner-test",
+    "liveOnly": [],
+    "renderOnly": [
+      "    ownertested: \"オーナーが Elite と Pro の実機で起動と再起動を確認済み\",",
+      "    releaseagree: \"機種を確認し、データをバックアップしてからこのリリースをインストールします。\","
+    ]
+  },
+  {
+    "id": "v0026-en-owner-test",
+    "liveOnly": [],
+    "renderOnly": [
+      "    ownertested: \"Owner tested startup and restart on Elite and Pro\",",
+      "    releaseagree: \"I have checked my keyboard model and backed up my data before installing this release.\","
+    ]
+  },
+  {
+    "id": "v0026-pinned-release-identity",
+    "liveOnly": [
+      "    [\"device_verified\", \"hardware_tested\"].some(k => Object.hasOwn(record, k) && record[k] !== false) ||"
+    ],
+    "renderOnly": [
+      "function ownerTestedRelease(v) {",
+      "  return v?.version === \"nightly-94197fc8-dev\" && v.status === \"release-checked\" &&",
+      "    v.hardware_tested === true && assignedPackageVersion(v)?.version === \"0.0.26\";",
+      "}",
+      "    (Object.hasOwn(record, \"device_verified\") && record.device_verified !== false) ||",
+      "    (Object.hasOwn(record, \"hardware_tested\") && record.hardware_tested !== false && !ownerTestedRelease(record)) ||"
+    ]
+  },
+  {
+    "id": "v0026-release-model-picker",
+    "liveOnly": [
+      "      (ver.status !== undefined && ver.status !== \"dev-checked\")) return [];"
+    ],
+    "renderOnly": [
+      "      (ver.status !== undefined && ver.status !== \"dev-checked\" && !ownerTestedRelease(ver))) return [];"
+    ]
+  },
+  {
+    "id": "v0026-release-download-admission",
+    "liveOnly": [
+      "    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || v.status !== \"dev-checked\" ||"
+    ],
+    "renderOnly": [
+      "    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) ||",
+      "        (v.status !== \"dev-checked\" && !ownerTestedRelease(v)) ||"
+    ]
+  },
+  {
+    "id": "v0026-selected-release-badges",
+    "liveOnly": [],
+    "renderOnly": [
+      "  if(ownerTestedRelease(v)) b.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));"
+    ]
+  },
+  {
+    "id": "v0026-release-consent",
+    "liveOnly": [
+      "  $(\"devagreewrap\").hidden=v.status!==\"dev-checked\";"
+    ],
+    "renderOnly": [
+      "  const tested = ownerTestedRelease(v);",
+      "  $(\"devagreewrap\").hidden = v.status !== \"dev-checked\" && !tested;",
+      "  $(\"consent-copy\").textContent = t(tested ? \"releaseagree\" : \"devagree\");"
+    ]
+  },
+  {
+    "id": "v0026-history-release-badges",
+    "liveOnly": [],
+    "renderOnly": [
+      "    if(ownerTestedRelease(v)) badges.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));"
+    ]
+  },
+  {
+    "id": "v0026-release-option-caption",
+    "liveOnly": [
+      "    : (v.status === \"release-checked\" ? \"verrelease\" : \"verunverified\");"
+    ],
+    "renderOnly": [
+      "    : (ownerTestedRelease(v) ? \"verrelease\" : \"verunverified\");"
+    ]
+  },
+  {
+    "id": "v0026-install-lock-wording",
+    "liveOnly": [
+      "  installBlocked(!$(\"devagree\").checked ? \"Install is locked: tick the development-firmware consent box above, then press Install.\"",
+      "  if (!$(\"devagree\").checked) { installBlocked(\"Tick the development-firmware consent box above, then press Install.\"); return; }"
+    ],
+    "renderOnly": [
+      "  installBlocked(!$(\"devagree\").checked ? \"Install is locked: tick the firmware consent box above, then press Install.\"",
+      "  if (!$(\"devagree\").checked) { installBlocked(\"Tick the firmware consent box above, then press Install.\"); return; }"
+    ]
+  }
+]
