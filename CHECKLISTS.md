@@ -2,7 +2,7 @@
 Rules: `RULES.md` (v2). A lane is finished when every line of its section is PASS at one SHA, with the log path or PR comment link written next to it in `docs/lanes/<lane>.md`. A check that did not run is FAIL, not "pending". Never weaken a threshold to make a check pass; if a check is wrong, the fix and its reason go in the lane file and `test-and-merge` reviews it.
 
 Common to every lane (C1–C6)
-- C1 Local gate PASS at the lane PR head SHA (`tools/dnbox-gate.sh` firmware, `scripts/dnbox-gate.sh` nightly); log posted as a PR comment naming the SHA.
+- C1 The lane's focused tests PASS at the lane PR head SHA (plus Elite and Pro builds when firmware changed); result posted as a PR comment naming the SHA. The full Local gate runs on the combined branch after the final lane merge (RULES 9), not per lane PR.
 - C2 Lane branch contains `integration/dnbox-consolidated` (merge, not rebase); no unexplained file deletions (gate step `no-loss`).
 - C3 Independent Review 10/10 on every screen it touches at 1440x900, 390x844, 844x390 and 240x240 (firmware), by `test-and-merge`; every defect found has an automated test in the same PR.
 - C4 Hard-limit scan clean: no Secrets, no `.github/workflows`, no SuperJ6 installer, no PSRAM, no file ≥ 50 MB outside LFS (gate step `limits`).
@@ -28,7 +28,7 @@ Common to every lane (C1–C6)
 - F7 SuperJ6 and Synth One pages exist with label + glyph + value-with-unit controls; no explanatory text on any screen (text scan test).
 
 ## integ — consolidation, combined firmware, cleanup
-- I0 First job: both consolidated branches pass their own Local gate (green baseline). Until then, list every failing test at the consolidated SHA in `docs/lanes/integ.md`; merges are judged by RULES 9(b) (no test that passes on consolidated may fail after). Nightly today: 43 visual-gate screens have no baseline (generate with `npm run test:visual:update` at the consolidated SHA, then Review them) and `tests/qualified-catalog.test.mjs` needs its output dir outside the repo.
+- I0 First job: both consolidated branches pass their own Local gate (green baseline). Until then, list every failing test at the consolidated SHA in `docs/lanes/integ.md`; merges are judged by RULES 9 (no test that passes on consolidated may fail after). Nightly today: 43 visual-gate screens have no baseline (generate with `npm run test:visual:update` at the consolidated SHA, then Review them) and `tests/qualified-catalog.test.mjs` needs its output dir outside the repo.
 - I1 `integration/dnbox-consolidated` + `CONSOLIDATED-STATE.md` in both repos, listing every merged branch/PR with SHAs.
 - I2 Combined Elite/Pro firmware (PR #869 work) builds from the consolidated branch with all lanes merged; full host suite 0 FAIL / 0 NOT_RUN (today 426 ok / 28 FAIL).
 - I3 Zero dropouts: heavy-playback host measurement with all engines, 0 dropouts, Chicago coefficient cache and Miami options kept (R013/R014).
