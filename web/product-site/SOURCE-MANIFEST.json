@@ -614,13 +614,13 @@
     },
     {
       "path": "reference/current-ui.html",
-      "bytes": 5371231,
-      "sha256": "ab53d6b81e1cf58e7fc4c496b99a68ccefdfd4bbd01b8338fa32fefe078e6399"
+      "bytes": 5371207,
+      "sha256": "3affa2295f0e4b8adf9a3f6482bb05534bea50fb2aa3ebcf8887f6faaa6b4351"
     },
     {
       "path": "reference/index.html",
-      "bytes": 1436,
-      "sha256": "f90756518c094213edf81a3c69dd54bc0cd8bb16a517606aae8f5bf63dadaefb"
+      "bytes": 1452,
+      "sha256": "85988eef47013b903686d7a148970371793d7c552c09c0514f9770590a373692"
     },
     {
       "path": "reference/r22.html",

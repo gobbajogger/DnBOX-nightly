@@ -1,6 +1,6 @@
 # Independent website route review
 
-Reviewer: `parity`, independent of the implementation. Consolidated comparison source: `914d68e8ed50698ea77c9d18c221c404629b9332`. The candidate preserves merge `6326d8a68eccb214930535d3abf6f364f560c970` and adds the installer wording, restore-padding and project-guide changes. Exact reviewed product source manifest SHA-256: `a598a87e4d358ea40944e5f72587f38b9dd14c0e6df2ad06c89d79f34df1d77c`.
+Reviewer: `parity`, independent of the implementation. Consolidated comparison source: `914d68e8ed50698ea77c9d18c221c404629b9332`. The candidate preserves merge `6326d8a68eccb214930535d3abf6f364f560c970` and adds the installer wording, restore-padding, project-guide and versioned firmware-reference changes. Exact reviewed product source manifest SHA-256: `adbed84e7693e6ffb8d2f714b9496c30422cd1e05f54611da33ac2d28a300d8f`.
 
 **PASS for the 19 web entry routes at three sizes.** Playwright 1.62.0, bundled Chrome 151.0.7922.34, normal sandbox, device scale 1, emulated touch on both phone viewports, local HTTP and the pinned ten-file 4758 emulator. All 57 final navigations returned 200 with no page errors, failed HTTP resource responses or horizontal page overflow. The reviewer inspected the initial rendered views and the task copy; the Remote review waited for its interactive roll. Base had 13 page overflows in portrait and one in landscape. This exercise covers browser behavior and content; it establishes no physical device result, full firmware pixel parity or score for other lanes.
 
@@ -30,6 +30,12 @@ The table gives document widths in pixels at 1440×900, 390×844 and 844×390, i
 
 The Projects guide previously exposed development-server instructions before the user could find the project tool. In the repaired guide, all three viewports reached **Find USB MIDI keyboard** through its Projects link. The optional **File format and MIDI protocol** disclosure opened. Recovery guidance remained accessible. The static link inventory found 391 same-origin links on the 19 entry pages. Every path existed. Both `#projects` links without a static HTML ID activated the actual Projects tab; the keyboard-manual Appendix C bookmark also navigated correctly. The dedicated historical and developer reference pages retain their explicit purpose. No unresolved defect was observed in the reviewed route and guide checks.
 
+## Firmware-reference correction
+
+The final output differs from the prior 230-file output only in `reference/index.html` and `reference/current-ui.html`. All HTML and dependent assets used for the original 57 entry-route results are byte-identical. The independent reviewer opened both corrected reference pages at 1440×900, 390×844 and 844×390 (6 additional views). Both document widths equalled their viewport at every size. At each size the reviewer followed Home → Interface studies → the four screens at `3c41ef4b` → Tools. The Tools page opened. The GitHub commit destination resolved to `3c41ef4bedf9701f549ce2752b73306e2fab1eb8`. The four reference panels (Voice, Pattern, Miami and Juno) each rendered at 240×240; all 12 before/after panel screenshot pairs were pixel-identical.
+
+The first version of the new revision and Tools links used browser-default blue on the dark background (contrast 1.934:1). The repaired historical page retains its underlined links and inherits the text color. Measured link contrast was 15.341:1 at all three sizes. No page error, failing HTTP response, broken local navigation or overflow was observed. These four panels retain their historical firmware identity.
+
 ## Reproduce
 
 From a checkout, build with `DNBOX_EMULATOR_RUNTIME` pointing to the ten files matching `scripts/emulator-runtime-pin.json`. Use the bundled Playwright browser. The script prints a result for each route and viewport, including each HTML SHA-256. To inspect screenshots, add `--screenshots PATH`. For the base workspace, add `--baseline` to record its old widths and skip the revised guide checks.
@@ -41,7 +47,7 @@ python3 evidence/web-routes/check-web-routes.py .output/product-site
 
 ## Qualification identities
 
-- Rendered product tree, 230 files, SHA-256 `45760c01e462c7dd24f1d736c419fa7c2859b36c4f600ced569e47e93829c41f` of the UTF-8 manifest. Sort by relative path, one line per file containing SHA-256, two spaces, relative path and LF.
+- Rendered product tree, 230 files, SHA-256 `750cc7977bb79347ccfbbbc24ddf35f8ebb577f3f4c4586cf25ea2eaede162e7` of the UTF-8 manifest. Sort by relative path, one line per file containing SHA-256, two spaces, relative path and LF.
 - `install/index.html` SHA-256 `16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95`.
 - `projects/index.html` SHA-256 `c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321`.
 - `manual/projects-guide.html` SHA-256 `df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92`.

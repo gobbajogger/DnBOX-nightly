@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
-"""Compare the mounted emulator's four stopped LCD states with native host frames."""
+"""Check the emulator LCD and the four historical HTML screens against their native frames."""
 import base64
 import hashlib
 import io
@@ -71,6 +71,35 @@ def check_page(page, url, manifest):
         print(f"PASS {name}: 57600/57600 RGB565 pixels match {manifest['frames'][name]}")
 
 
+def check_historical_reference(page, origin, presentation):
+    source = "3c41ef4bedf9701f549ce2752b73306e2fab1eb8"
+    assert presentation["native_source"] == source
+    names = ["Voice", "Pattern", "Miami", "Juno"]
+    first_frames = {frame["id"]: frame["proof"]["native_sha256"] for frame in presentation["frames"]}
+    page.set_viewport_size({"width": 1440, "height": 900})
+    response = page.goto(f"{origin}/reference/current-ui.html")
+    assert response and response.ok, "Historical HTML reference failed to load"
+    assert page.get_by_role("heading", level=1).inner_text() == "Firmware UI at 3c41ef4b"
+    tools_link = page.get_by_role("link", name="Tools", exact=True)
+    assert tools_link.get_attribute("href") == "../tools/"
+    assert tools_link.evaluate("(a) => getComputedStyle(a).color === getComputedStyle(document.body).color")
+    articles = page.locator("article")
+    assert articles.locator("h2").all_text_contents() == names
+    for article, name in zip(articles.all(), names):
+        panel = article.locator(".native-screen")
+        panel.scroll_into_view_if_needed()
+        box = panel.bounding_box()
+        assert box and (box["width"], box["height"]) == (240, 240), (name, box)
+        # CSS text flow may place the panel origin between physical pixels.
+        # At device scale 1 the browser paints its integer runs at the nearest pixel.
+        clip = {"x": round(box["x"]), "y": round(box["y"]), "width": 240, "height": 240}
+        with Image.open(io.BytesIO(page.screenshot(clip=clip))) as image:
+            digest = hashlib.sha256(rgb565(image, browser=False)).hexdigest()
+        expected = first_frames[f"{name.lower()}-0"]
+        assert digest == expected, f"{name} HTML raster {digest} differs from {source} {expected}"
+        print(f"PASS historical {name}: 57600/57600 RGB565 pixels match {expected}")
+
+
 def main():
     manifest = json.loads((FIXTURES / "frames.json").read_text())
     output_root = ROOT / '.output'
@@ -91,10 +120,13 @@ def main():
                 with sync_playwright() as pw:
                     browser = pw.chromium.launch(chromium_sandbox=True)
                     try:
-                        page = browser.new_page(viewport={"width": 844, "height": 390})
+                        page = browser.new_page(viewport={"width": 844, "height": 390}, device_scale_factor=1)
                         errors = []
                         page.on("pageerror", lambda error: errors.append(str(error)))
-                        check_page(page, f"http://127.0.0.1:{server.server_port}/emu/", manifest)
+                        origin = f"http://127.0.0.1:{server.server_port}"
+                        check_page(page, f"{origin}/emu/", manifest)
+                        presentation = json.loads((site / "APPROVED-PRESENTATION.json").read_text())
+                        check_historical_reference(page, origin, presentation)
                         assert not errors, errors
                     finally:
                         browser.close()
