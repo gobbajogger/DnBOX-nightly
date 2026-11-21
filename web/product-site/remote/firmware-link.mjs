@@ -65,7 +65,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    const edit=undoEdit;
    const button=doc.createElement('button');
    button.type='button';button.className='btn';button.id='firmware-undo';
-   button.textContent='Undo instrument edit';
+   button.textContent=edit.storedLabel ? `Undo stored ${edit.storedLabel} value` : 'Undo instrument edit';
    button.addEventListener('click',()=>{
     if(undoEdit===edit)void writeControl(edit,true);
    });
@@ -144,22 +144,28 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    }
    const ack=await current.set(job.id,job.value);
    if(own!==generation||state.dataset.session!=='ready')return;
-   if(ack.queued){
-    invalidate('Change queued. Reconnect to read the stored value.');
-    return;
-   }
    const snapshot=await current.snapshot(admitted.catalog.controls.map(control=>control.id));
    if(own!==generation||state.dataset.session!=='ready')return;
    const reading=snapshot.values.find(control=>control.id===job.id);
    if(!reading?.available||snapshot.revision!==ack.revision||!Object.is(reading.value,ack.value))
     throw Error('The instrument changed.');
    if(reversing&&!Object.is(reading.value,job.value))throw Error('Restore was not confirmed.');
+   // A stored scalar can also move other controls (for example, a compressor
+   // macro). One inverse SET cannot promise to restore those controls.
+   const storedTarget=ack.queued||Boolean(reversing&&job.storedLabel);
+   const otherValuesChanged=storedTarget&&snapshot.values.some(next=>{
+    const previous=confirmed.get(next.id);
+    return next.id!==job.id&&(next.available!==previous?.available||!Object.is(next.value,previous?.value));
+   });
    confirmed=new Map(snapshot.values.map(control=>[control.id,control]));
    const descriptor=admitted.catalog.controls.find(control=>control.id===job.id);
-   if(!reversing&&!Object.is(prior.value,reading.value)&&prior.value>=descriptor.min&&prior.value<=descriptor.max)
-    undoEdit={id:job.id,value:prior.value,after:reading.value,revision:snapshot.revision};
+   if(!reversing&&!otherValuesChanged&&!Object.is(prior.value,reading.value)&&prior.value>=descriptor.min&&prior.value<=descriptor.max)
+    undoEdit={id:job.id,value:prior.value,after:reading.value,revision:snapshot.revision,storedLabel:ack.queued?descriptor.label:null};
    renderControls();
-   say(reversing?`Firmware restored ${reading.value}.`:`Firmware confirmed ${reading.value}.`);
+   if(storedTarget){
+    const stored=reversing?`Restored stored value ${reading.value}.`:`Stored ${reading.value}.`;
+    say(stored+(ack.queued?' Update queued.':'')+(otherValuesChanged?' Other control values changed.':''));
+   }else say(reversing?`Firmware restored ${reading.value}.`:`Firmware confirmed ${reading.value}.`);
   }catch(error){
    if(own===generation)invalidate(error.message.includes('instrument changed')
     ?'The instrument changed. Disconnect and reconnect.':'The edit was not confirmed. Disconnect and reconnect.');

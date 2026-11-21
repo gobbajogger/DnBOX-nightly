@@ -864,8 +864,8 @@
     },
     {
       "path": "remote/firmware-link.mjs",
-      "bytes": 10466,
-      "sha256": "9b329e7f7df7adf1e009b243771b291b4c3ee9e70cd786340887bc70ae0b185a"
+      "bytes": 11170,
+      "sha256": "7012164bb95957ae82d0c538b5c9f6638af9407697cbdb1188937022889fca96"
     },
     {
       "path": "remote/frame.mjs",
@@ -1044,8 +1044,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 67798,
-      "sha256": "6fce87bac17d65622845a8d307e84a7d3f25948d2bf1e3328b63aa126366a629"
+      "bytes": 68213,
+      "sha256": "928ab2e9ab7530ce8c99836542c025ee990b56ff7ad4d83f4478c2bd7f5e8136"
     },
     {
       "path": "remote/timeline.mjs",

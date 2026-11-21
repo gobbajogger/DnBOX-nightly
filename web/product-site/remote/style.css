@@ -49,6 +49,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 .overflow summary::-webkit-details-marker{display:none}
 .overflow-list{position:absolute;right:0;top:calc(100% + 8px);z-index:10;display:none;flex-direction:column;align-items:stretch;gap:8px;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);min-width:max-content}
 .overflow[open] .overflow-list{display:flex}
+.overflow-list:has(#firmware-controls:not([hidden])){width:min(20rem,80vw);min-width:0;max-height:55dvh;overflow:auto}
+.overflow-list:has(#firmware-controls:not([hidden]))>*{flex:none}
+#firmware-controls:not([hidden]){display:grid;gap:4px;max-height:30dvh;overflow:auto}
+#firmware-controls label{display:grid;grid-template-columns:minmax(0,1fr) 6em;align-items:center;gap:8px}
+#firmware-controls input{min-width:0}
 .draft-open input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
 .tabs{display:flex;gap:var(--tab-gap);height:34px;margin-top:5px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
 .tabs::-webkit-scrollbar{display:none}

@@ -158,17 +158,97 @@ test('the C revision guard refuses a change between the Undo read and write',asy
  assert.equal(replies.filter(r=>r.op===OP.SET).at(-1).status,STATUS.CONFLICT);
 });
 
-test('queued or unverifiable writes do not create an Undo action',async t=>{
- for(const scenario of ['queued','different revision','different stored value']){
+test('queued scalar Apply and inverse SET confirm the stored target at the acknowledged revision',async t=>{
+ const {nodes,ops,replies,edit}=await connectFixture(t,async(command,reply)=>
+  command.op===OP.SET?{...reply,status:STATUS.QUEUED}:reply);
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent==='Stored 800. Update queued.','queued edit readback');
+ assert.equal(nodes.get('fw-1').value,'800');
+ assert.equal(nodes.get('firmware-undo').textContent,'Undo stored Scalar value');
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').textContent==='Restored stored value 500. Update queued.','queued inverse readback');
+ assert.equal(nodes.get('fw-1').value,'500');
+ assert.deepEqual(replies.filter(r=>r.op===OP.SET).map(r=>[r.status,r.revision]),[[STATUS.QUEUED,2],[STATUS.QUEUED,3]]);
+ assert.equal(ops.filter(op=>op===OP.SET).length,2);
+});
+
+test('queued confirmation uses the canonical float returned by firmware',async t=>{
+ const {nodes}=await connectFixture(t,async(command,reply)=>
+  command.op===OP.SET?{...reply,status:STATUS.QUEUED}:reply);
+ const field=nodes.get('fw-2');
+ field.value='0.1';field.fire('input');
+ await nodes.get('apply').click();
+ const stored=Math.fround(0.1);
+ await until(()=>nodes.get('conn-state').textContent===`Stored ${stored}. Update queued.`,'float32 readback');
+ assert.equal(Number(nodes.get('fw-2').value),stored);
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('fw-2').value==='128.5','canonical inverse');
+});
+
+test('a queued edit that changes another control refreshes both values and offers no scalar Undo',async t=>{
+ let wrote=false;
+ const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
+  if(command.op===OP.SET){wrote=true;return {...reply,status:STATUS.QUEUED};}
+  if(wrote&&command.op===OP.READ&&command.control===2)return {...reply,value:0x43000000}; // float32 128
+  return reply;
+ });
+ await edit(800);
+ await until(()=>nodes.get('conn-state').textContent.includes('Other control values changed.'),'coupled controls');
+ assert.equal(nodes.get('fw-1').value,'800');
+ assert.equal(nodes.get('fw-2').value,'128');
+ assert.equal(nodes.get('firmware-undo'),undefined);
+});
+
+test('an inverse of a queued edit reports changes outside the addressed stored value',async t=>{
+ for(const inverseStatus of [STATUS.QUEUED,STATUS.OK]){
+  await t.test(inverseStatus===STATUS.QUEUED?'queued inverse':'immediate inverse',async t=>{
+   let writes=0;
+   const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
+    if(command.op===OP.SET){
+     writes++;
+     return {...reply,status:writes===1?STATUS.QUEUED:inverseStatus};
+    }
+    if(writes===2&&command.op===OP.READ&&command.control===2)return {...reply,value:0x43000000};
+    return reply;
+   });
+   await edit(800);
+   await until(()=>nodes.get('firmware-undo'),'stored forward value');
+   await nodes.get('firmware-undo').click();
+   const queued=inverseStatus===STATUS.QUEUED?' Update queued.':'';
+   await until(()=>nodes.get('conn-state').textContent===`Restored stored value 500.${queued} Other control values changed.`,'inverse scope');
+   assert.equal(nodes.get('fw-1').value,'500');
+   assert.equal(nodes.get('fw-2').value,'128');
+  });
+ }
+});
+
+test('a queued inverse whose prior value is not read back fails closed',async t=>{
+ let sets=0;
+ const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
+  if(command.op===OP.SET){sets++;return {...reply,status:STATUS.QUEUED};}
+  if(sets===2&&command.op===OP.READ&&command.control===1)return {...reply,value:800};
+  return reply;
+ });
+ await edit(800);
+ await until(()=>nodes.get('firmware-undo'),'verified original edit');
+ await nodes.get('firmware-undo').click();
+ await until(()=>nodes.get('conn-state').dataset.session==='disconnected','unconfirmed inverse');
+ assert.equal(nodes.get('apply').disabled,true);
+ assert.equal(nodes.get('firmware-controls').children.length,0);
+});
+
+test('unverifiable writes do not create an Undo action',async t=>{
+ for(const scenario of ['queued not stored','queued with different revision','different revision','different stored value']){
   await t.test(scenario,async t=>{
    let wrote=false;
    const {nodes,edit}=await connectFixture(t,async(command,reply)=>{
     if(command.op===OP.SET){
      wrote=true;
-     if(scenario==='queued')return {...reply,status:STATUS.QUEUED};
+     if(scenario.startsWith('queued'))return {...reply,status:STATUS.QUEUED};
     }
     if(wrote&&command.op===OP.READ){
-     if(scenario==='different revision')return {...reply,revision:reply.revision+1};
+     if(scenario.includes('different revision'))return {...reply,revision:reply.revision+1};
+     if(scenario==='queued not stored'&&command.control===1)return {...reply,value:500};
      if(scenario==='different stored value'&&command.control===1)return {...reply,value:799};
     }
     return reply;
