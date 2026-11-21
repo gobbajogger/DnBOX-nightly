@@ -42,3 +42,7 @@ GitHub reports these PRs merged into `integration/dnbox-consolidated`. Each merg
 ## Owner-approved rules #171
 
 [Rules #171](https://github.com/gobbajogger/DnBOX-nightly/pull/171) merged into consolidated on 21 November 2026 at 10:28 UTC. Its source head was `0a80c86bf18a36c80613dbdd7cc2183acfc44ecf`. The two parents of [merge `56918d9e601c2eb6c6e9dd53b02ad06897bf2e3c`](https://github.com/gobbajogger/DnBOX-nightly/commit/56918d9e601c2eb6c6e9dd53b02ad06897bf2e3c) are `b3868da0df1237d86d442cb9259262ee90a13dcb` and that source head. The four changed paths are `AGENTS.md`, `CHECKLISTS.md`, `RULES.md` and `docs/lanes/web.md`.
+
+## Owner-approved rules #172
+
+[Rules #172](https://github.com/gobbajogger/DnBOX-nightly/pull/172) merged into consolidated on 21 November 2026 at 10:43 UTC. [Merge `be65ec9c`](https://github.com/gobbajogger/DnBOX-nightly/commit/be65ec9c43b33d5a04133b267c675d070ede0d8f) has parents `56918d9e601c2eb6c6e9dd53b02ad06897bf2e3c` and `b2af3c995afedc32f06cd60df912efc6b6084329`. The three changed paths are AGENTS.md, CHECKLISTS.md and RULES.md.
