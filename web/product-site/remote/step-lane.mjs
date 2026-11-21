@@ -47,11 +47,19 @@ const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 // The lane header and slider accessibility text keep the complete value. A
 // narrow cell can repeat the number without its unit or release denominator.
 const compactStepWords = {Unset:'—', Mixed:'≠', Legacy:'Leg.'};
+// Short panel labels are distinct within each Chicago selector. The full stock
+// name remains the slider value and the selected step's readout.
+const compactLockNames = {
+ 'SAW/PUL':'S/P', GATE:'GT', DOWN:'↓', 'UP/DN':'↕', '1 OCT':'1', '2 OCT':'2',
+ 'CHO/FLG':'C/F', PHASER:'PHA', 'RING MOD':'RM', COMPRESSOR:'CMP',
+ DECIMATOR:'DEC', ENSEM:'ENS', 'SH DLY':'SH', 'BPM DL':'BPM', HALL:'HL', 'GT REV':'GR',
+};
 function stepOutput(text) {
- const compact = compactStepWords[text] ?? text.replace(/^([+-]?\d+(?:\.\d+)?)(?: *%|st|dB|\/15)$/, '$1');
+ const shortName = compactLockNames[text];
+ const compact = shortName ?? compactStepWords[text] ?? text.replace(/^([+-]?\d+(?:\.\d+)?)(?: *%|st|dB|\/15)$/, '$1');
  const full = escape(text);
  if (compact === text) return '<output aria-hidden="true">'+full+'</output>';
- return '<output aria-hidden="true"><span class="step-full">'+full+
+ return '<output aria-hidden="true"'+(shortName?' class="step-enum"':'')+'><span class="step-full">'+full+
    '</span><span class="step-compact">'+escape(compact)+'</span></output>';
 }
 export function renderStepSliders(groups,{kind='velocity',base=n=>n.note,selected=null,breakChance=null,activeStep=null,stepValue=null}={}){

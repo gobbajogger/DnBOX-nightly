@@ -33,6 +33,14 @@ async def exercise(page, draft_state, load_draft):
     doc = await draft_state(page)
     first = next(n for n in doc['notes'] if n['track'] == 'chicago')
     doc['notes'].append(dict(first,id='draft999',sourceOrder=None,note=first['note']+4,velocity=80))
+    selector_rows = {
+        4096:[0,64,127], 4107:[0,127], 4110:[0,64,127], 4111:[0,64,127],
+        4113:list(range(12)),
+    }
+    doc['patternLocks'] = [
+        {'catalogId':target,'pattern':0,'values':[*values,*([None]*(16-len(values)))]}
+        for target,values in selector_rows.items()
+    ]
     await load_draft(page,doc)
 
     for width,height in [(390,844),(844,390),(1024,640),(1440,900)]:
@@ -79,6 +87,8 @@ async def exercise(page, draft_state, load_draft):
             assert all(r['fits'] for r in rows), (width,field,rows)
             if field == 'chance':
                 assert any(r['full'] == '100%' and r['shown'] in ('100','100%') for r in rows)
+        picker = page.locator('#lock-target')
+        await picker.select_option('4098')
         await cells.first.press('Delete')
         await cells.first.press('ArrowUp')
         await expect(cells.first).to_have_attribute('aria-valuetext','26%')
@@ -87,4 +97,14 @@ async def exercise(page, draft_state, load_draft):
         assert row['fits'] and row['shown'] in ('26','26%'), (width,'cutoff',row)
         await cells.first.press('ArrowDown')
         await expect(header).to_have_text('P01 · 25%')
+        for target, values in selector_rows.items():
+            await picker.select_option(str(target))
+            labels = (await metrics())[:len(values)]
+            assert all(r['fits'] and r['shown'] for r in labels), (width,target,labels)
+            assert len({r['shown'] for r in labels}) == len(values), (width,target,labels)
+        compressor = cells.nth(4)
+        await compressor.focus()
+        await expect(compressor).to_have_accessible_name('Step 5, FX type lock COMPRESSOR')
+        await expect(header).to_have_text('P01 · COMPRESSOR')
+        await picker.select_option('4098')
         print('STEP_LABELS PASS',width,height,'16 cell bounds, 9 lanes, mixed and complete selected readouts',flush=True)

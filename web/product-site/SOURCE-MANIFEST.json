@@ -1039,13 +1039,13 @@
     },
     {
       "path": "remote/step-lane.mjs",
-      "bytes": 7135,
-      "sha256": "e5256f685bd727342b59edd7462fd7c376f43d21ed9ceb59d73f442b2160b4aa"
+      "bytes": 7643,
+      "sha256": "68c67fac37e5110374e0a5f4b45009871e8b02ff46f6c2074be2788b99e9e01a"
     },
     {
       "path": "remote/style.css",
-      "bytes": 67602,
-      "sha256": "1fa3fdf9f9b1d68fa9de5664e2d859b14e7ad420944500a3061a7778d82d7aad"
+      "bytes": 67798,
+      "sha256": "6fce87bac17d65622845a8d307e84a7d3f25948d2bf1e3328b63aa126366a629"
     },
     {
       "path": "remote/timeline.mjs",
