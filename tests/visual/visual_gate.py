@@ -10,14 +10,15 @@ Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's 
 Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions off, fixed clock and random seed,
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
-import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
+import os, sys, json, socket, subprocess, time, re, stat, uuid
+from contextlib import closing
 from pathlib import Path
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
-from installer_package import route_default_package, wait_for_admission
-from full_page_capture import capture_full_page
 from grid_continuity import assert_grid_continuity
+from full_page_capture import capture_full_page
+from installer_package import installer_responses as make_installer_responses, wait_for_admission
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -30,6 +31,7 @@ PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as di
 SIZES = [(1440, 900), (1024, 640), (844, 390), (390, 844)]
 SITE = ['index.html', 'install/index.html', 'breaks/index.html', 'starting-breaks/index.html', 'projects/index.html',
         'presets/index.html', 'presets/legacy/index.html', 'manual/index.html', 'manual/original/index.html',
+        'manual/legacy.html', 'manual/projects-guide.html', 'manual/protocol.html',
         'builds/index.html', 'tools/index.html', 'help/index.html', 'new/index.html', 'remote/identity/index.html']
 OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 # The web/x0x_*.html files are templates (/*LIB*/, /*CATALOG*/); npm run build compiles
@@ -104,7 +106,10 @@ def write_actual_output(filename, data):
         fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=directory)
         created = True
         with os.fdopen(fd, 'wb') as output:
-            output.write(data)
+            if callable(data):
+                data(output)
+            else:
+                output.write(data)
         # Atomic replacement replaces a raced-in link itself, never its target.
         os.replace(temporary, filename, src_dir_fd=directory, dst_dir_fd=directory)
         created = False
@@ -115,6 +120,8 @@ def write_actual_output(filename, data):
     return OUT / filename
 
 def compare(name, png_bytes, results):
+    from png_compare import Screenshot, compared_strips, write_diff
+
     validate_capture_output()
     OUT.mkdir(parents=True, exist_ok=True)
     base = SNAP / f'{name}.png'
@@ -127,32 +134,31 @@ def compare(name, png_bytes, results):
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
         tmp.unlink(missing_ok=True)
         results.append((name, 'NOBASE', 0.0)); return
-    if base.stat().st_size == len(png_bytes) and base.read_bytes() == png_bytes:
-        # Matching bytes establish pixel equality once the PNG is known to decode.
-        # Pillow stops verify() at IEND, which has zero payload and a fixed CRC.
-        if not png_bytes.endswith(b'\x00\x00\x00\x00IEND\xaeB\x60\x82'):
-            raise ValueError('Incomplete or invalid PNG end chunk')
-        with Image.open(io.BytesIO(png_bytes), formats=['PNG']) as image:
-            image.verify()
-        with Image.open(io.BytesIO(png_bytes), formats=['PNG']) as image:
-            image.load()
+    reference_bytes = base.read_bytes()
+    if reference_bytes == png_bytes:
+        # Identical bytes prove equality only after a complete, valid decode.
+        Screenshot(png_bytes).validate_pixels()
         tmp.unlink(missing_ok=True)
         results.append((name, 'PASS', 0.0))
         return
-    a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
-    b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
-    if a.shape != b.shape:
-        results.append((name, 'FAIL', 1.0)); print(f'FAIL {name}: size {a.shape} != baseline {b.shape}'); return
-    diff = (np.abs(a - b).max(axis=2) > PIXEL_THRESHOLD)
-    ratio = float(diff.mean())
+    actual = Screenshot(png_bytes)
+    reference = Screenshot(reference_bytes)
+    if actual.size != reference.size:
+        actual.validate_pixels()
+        reference.validate_pixels()
+        results.append((name, 'FAIL', 1.0))
+        print(f'FAIL {name}: size {actual.size[::-1] + (3,)} != baseline {reference.size[::-1] + (3,)}')
+        return
+    changed = sum(np.count_nonzero(mask) for _, mask in compared_strips(actual, reference, PIXEL_THRESHOLD))
+    ratio = changed / (actual.size[0] * actual.size[1])
     if ratio > MAX_DIFF_RATIO:
-        vis = (np.asarray(Image.open(base).convert('RGB')) * 0.3).astype(np.uint8); vis[diff] = [255, 0, 255]
-        diff_png = io.BytesIO(); Image.fromarray(vis).save(diff_png, format='PNG')
-        write_actual_output(f'{name}-diff.png', diff_png.getvalue())
-        results.append((name, 'FAIL', ratio)); print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {OUT / (name + "-diff.png")}')
+        diff = write_actual_output(f'{name}-diff.png', lambda output: write_diff(output, actual, reference, PIXEL_THRESHOLD))
+        results.append((name, 'FAIL', ratio))
+        print(f'FAIL {name}: {ratio:.5f} of pixels differ -> {diff}')
     else:
         tmp.unlink(missing_ok=True)
         results.append((name, 'PASS', ratio))
+
 
 HEADER_JS = """
 () => {
@@ -253,6 +259,21 @@ def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
+def installer_responses():
+    return make_installer_responses(ROOT)
+
+
+def viewport_contexts(pw):
+    # Reclaim Chromium's compositor and caches along with the context after each viewport.
+    for w, h in SIZES:
+        with pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb']) as browser:
+            with browser.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1,
+                                     has_touch=w < 900, reduced_motion='reduce', locale='en-US',
+                                     timezone_id='UTC') as context:
+                context.add_init_script(FREEZE_JS)
+                yield w, h, context
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -264,23 +285,23 @@ def main():
     results, header_fails, errors = [], [], []
     base = f'http://127.0.0.1:{p}'
     try:
-        with sync_playwright() as pw:
-            b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
-            def ctx(w, h):
-                c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
-                c.add_init_script(FREEZE_JS); return c
-            def settle(pg):
-                pg.add_style_tag(content=FREEZE_CSS)
-                pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
-            for w, h in SIZES:
+        with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
+            attach_installer_responses = installer_responses()
+            def settle(pg, url, name):
+                try:
+                    pg.goto(url)
+                    pg.add_style_tag(content=FREEZE_CSS)
+                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                except Exception as error:
+                    raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
+            for w, h, c in viewports:
                 tag = f'{w}x{h}'
-                c = ctx(w, h)
                 # Remote: header conformance + every tab/lane/overflow state
                 for name, act in remote_states():
                     full = f'remote-{name}-{tag}'
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/remote/index.html'); settle(pg)
+                    settle(pg, base + '/product-site/remote/index.html', full)
                     if name == 'sequence':
                         header_checks(pg.evaluate(HEADER_JS), tag, header_fails)
                         try:
@@ -298,31 +319,37 @@ def main():
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
-                    if act: act(pg); pg.wait_for_timeout(150)
-                    print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(), results); pg.close()
+                    try:
+                        if act: act(pg); pg.wait_for_timeout(150)
+                        print(f'Capturing {full}', flush=True)
+                        screenshot = pg.screenshot()
+                    except Exception as error:
+                        raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
+                    compare(full, screenshot, results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    if rel == 'install/index.html':
-                        package_name = route_default_package(pg, ROOT)
-                    pg.goto(base + '/product-site/' + rel); settle(pg)
-                    if rel == 'install/index.html':
+                    package_name = attach_installer_responses(pg, require_package=True) if rel == 'install/index.html' else None
+                    settle(pg, base + '/product-site/' + rel, full)
+                    if package_name:
                         wait_for_admission(pg, package_name)
                     if rel == 'breaks/index.html':
                         sample_navigation_checks(pg, tag, header_fails)
+                    scroll_width = pg.evaluate('document.documentElement.scrollWidth')
+                    if scroll_width > w:
+                        errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
                     print(f'Capturing {full}', flush=True)
                     compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
+                    if OFFLINE_BUILT[rel] == 'install/index.html':
+                        attach_installer_responses(pg)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
                     print(f'Capturing {full}', flush=True)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
-                c.close()
-            b.close()
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
     finally:
         srv.terminate(); srv2.terminate()
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')

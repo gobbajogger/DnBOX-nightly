@@ -1,0 +1,197 @@
+[
+  {
+    "id": "v0026-release-notice",
+    "liveOnly": [
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/\">Open sample tools separately</a> if this panel does not load.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/\">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>",
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>"
+    ],
+    "renderOnly": [
+      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" data-src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/index.html\">Open sample tools separately</a>.</p></section>",
+      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" data-src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/index.html\">Open Songs &amp; projects separately</a>.</p></section>",
+      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. Choose 0.0.25.1 for the fallback. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a> · <a href=\"../new/\">Release status</a></p></aside>"
+    ],
+    "reason": "Samples and Projects open by filename offline. The release notice retains the published package and status links."
+  },
+  {
+    "id": "v0026-release-model-picker",
+    "liveOnly": [
+      "      (ver.status !== undefined && ver.status !== \"dev-checked\")) return [];"
+    ],
+    "renderOnly": [
+      "      (ver.status !== undefined && ver.status !== \"dev-checked\" && !ownerTestedRelease(ver))) return [];"
+    ]
+  },
+  {
+    "id": "v0026-release-download-admission",
+    "liveOnly": [
+      "    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) || v.status !== \"dev-checked\" ||"
+    ],
+    "renderOnly": [
+      "    if (!isRecord(v) || !isRecord(p) || catalogDenied(v) || catalogDenied(p) ||",
+      "        (v.status !== \"dev-checked\" && !ownerTestedRelease(v)) ||"
+    ]
+  },
+  {
+    "id": "v0026-release-consent",
+    "liveOnly": [
+      "  $(\"devagreewrap\").hidden=v.status!==\"dev-checked\";"
+    ],
+    "renderOnly": [
+      "  const tested = ownerTestedRelease(v);",
+      "  $(\"devagreewrap\").hidden = v.status !== \"dev-checked\" && !tested;",
+      "  $(\"consent-copy\").textContent = t(tested ? \"releaseagree\" : \"devagree\");"
+    ]
+  },
+  {
+    "id": "v0026-history-release-badges",
+    "liveOnly": [
+      "    if(v.hardware_tested!==true)badges.append(buildBadge(t(\"hardwareuntested\"),\"important\"));"
+    ],
+    "renderOnly": [
+      "    if(ownerTestedRelease(v)) badges.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));",
+      "    const reported = Object.keys(v.models || {}).filter(model => hardwareTestsFor(currentHardwareLedger, v, model));",
+      "    if (!reported.length) badges.append(buildBadge(t(\"hardwareuntested\"),\"important\"));",
+      "    else if (!ownerTestedRelease(v)) {",
+      "      for (const model of Object.keys(v.models || {})) {",
+      "        badges.append(buildBadge(t(reported.includes(model) ? \"modeltested\" : \"hardwareuntested\") + \" · \" + (MODELS[model] || model), \"important\"));",
+      "      }",
+      "    }"
+    ]
+  },
+  {
+    "id": "v0026-release-option-caption",
+    "liveOnly": [
+      "    : (v.status === \"release-checked\" ? \"verrelease\" : \"verunverified\");"
+    ],
+    "renderOnly": [
+      "    : (ownerTestedRelease(v) ? \"verrelease\" : \"verunverified\");"
+    ]
+  },
+  {
+    "id": "v0026-install-lock-wording",
+    "liveOnly": [
+      "  installBlocked(!$(\"devagree\").checked ? \"Install is locked: tick the development-firmware consent box above, then press Install.\"",
+      "  if (!$(\"devagree\").checked) { installBlocked(\"Tick the development-firmware consent box above, then press Install.\"); return; }"
+    ],
+    "renderOnly": [
+      "  installBlocked(!$(\"devagree\").checked ? \"Install is locked: tick the firmware consent box above, then press Install.\"",
+      "  if (!$(\"devagree\").checked) { installBlocked(\"Tick the firmware consent box above, then press Install.\"); return; }"
+    ]
+  },
+  {
+    "id": "public-install-count",
+    "liveOnly": [],
+    "renderOnly": [
+      "    <p class=\"small\" id=\"public-installs\" aria-live=\"polite\"></p>"
+    ]
+  },
+  {
+    "id": "receipt-panel-and-consent",
+    "hunk_sha256": "c3249515138557f8220e7a37d7d621787d825767d1213acdb9d495a3a984100e"
+  },
+  {
+    "id": "reset-application-identity",
+    "liveOnly": [],
+    "renderOnly": [
+      "    this.application = null;"
+    ]
+  },
+  {
+    "id": "capture-confirmed-application-pair",
+    "liveOnly": [],
+    "renderOnly": [
+      "      this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};"
+    ]
+  },
+  {
+    "id": "shared-report-workflow",
+    "hunk_sha256": "8d693cec61fc3df3d9feaa3f4b6429018a40d0d31bbec17669be5a1211aa6dcf"
+  },
+  {
+    "id": "ja-owner-status",
+    "liveOnly": [],
+    "renderOnly": [
+      "    modeltested: \"この機種で起動と再起動を確認済み\",",
+      "    ownertested: \"オーナーが Elite と Pro の実機で起動と再起動を確認済み\",",
+      "    releaseagree: \"機種を確認し、データをバックアップしてからこのリリースをインストールします。\","
+    ]
+  },
+  {
+    "id": "en-owner-status",
+    "liveOnly": [],
+    "renderOnly": [
+      "    modeltested: \"Owner confirmed startup and restart\",",
+      "    ownertested: \"Owner tested startup and restart on Elite and Pro\",",
+      "    releaseagree: \"I have checked my keyboard model and backed up my data before installing this release.\","
+    ]
+  },
+  {
+    "id": "stamp-fresh-scan",
+    "liveOnly": [],
+    "renderOnly": [
+      "    const restartTicket = midiAccess.restartCheck?.ticket();"
+    ]
+  },
+  {
+    "id": "post-replug-identity",
+    "liveOnly": [],
+    "renderOnly": [
+      "    if (!inOta && midiAccess.restartCheck) midiAccess.restartCheck.reidentify(restartTicket, dev, up.ports().length === 1);"
+    ]
+  },
+  {
+    "id": "refresh-report-count",
+    "liveOnly": [],
+    "renderOnly": [
+      "    midiAccess.reports?.refresh();"
+    ]
+  },
+  {
+    "id": "match-owner-ledger",
+    "hunk_sha256": "429704b5e7eb450489bb9266c6f2f1e07c37c6ffc8f44cf365671f92cb60585e"
+  },
+  {
+    "id": "per-model-owner-test",
+    "liveOnly": [
+      "  if(v.hardware_tested!==true) b.append(buildBadge(t(\"hardwareuntested\"),\"important\"));"
+    ],
+    "renderOnly": [
+      "  if(ownerTestedRelease(v)) b.append(buildBadge(t(\"verrelease\")),buildBadge(t(\"ownertested\"),\"important\"));",
+      "  const modelReport = hardwareTestsFor(currentHardwareLedger, v, chosenModel);",
+      "  if (modelReport && !ownerTestedRelease(v)) b.append(buildBadge(t(\"modeltested\") + \" · \" + MODELS[chosenModel], \"important\"));",
+      "  if (!modelReport) b.append(buildBadge(t(\"hardwareuntested\"), \"important\"));"
+    ]
+  },
+  {
+    "id": "clear-old-receipt",
+    "liveOnly": [],
+    "renderOnly": [
+      "  midiAccess.reports?.reset();",
+      "  midiAccess.restartCheck = null;"
+    ]
+  },
+  {
+    "id": "arm-after-slot-restoration",
+    "liveOnly": [],
+    "renderOnly": [
+      "    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.",
+      "    if (!foreign && opts.receiptBuild && up.verified && up.application)",
+      "      midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);"
+    ]
+  },
+  {
+    "id": "bind-receipt-to-selected-package",
+    "liveOnly": [
+      "  run(img, selectedProduct, { foreign: false, admitted: () => loadSerial === serial &&"
+    ],
+    "renderOnly": [
+      "  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&"
+    ]
+  },
+  {
+    "id": "load-current-records",
+    "hunk_sha256": "a9f61fbac93eb251c3bd6a6b29e0877d3c0c81f5ad4fbb62a26a38a5a8eef55c",
+    "reason": "Local-file workspaces open separately. Hosted installers retain their embedded tools and navigation listeners."
+  }
+]

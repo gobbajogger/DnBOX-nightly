@@ -35,6 +35,8 @@ function normalize(html) {
 
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
+  // Exact reviewed UI and admission changes for the owner-tested 94197fc8 release.
+  ...JSON.parse(readFileSync(join(root, 'tests/fixtures/installer-v0026-reviewed-hunks.json'), 'utf8')),
   {
     id: "standalone-installer-class",
     reason: "Scope the standalone presentation on the document root.",
@@ -61,20 +63,6 @@ const ALLOWED = [
     renderOnly: [
       "      <a class=\"home\" href=\"#firmware\" aria-label=\"DnBOX home\">DnBOX</a><span class=\"channel-label\">SMK-37 · NIGHTLY</span>",
       "        <a href=\"../manual/index.html\" data-t=\"navmanual\">Manual</a><a href=\"../new/index.html\">Changes</a><a href=\"https://github.com/gobbajogger/DnBOX-nightly\">Source</a>",
-    ],
-  },
-  {
-    id: "published-release-and-local-workspace-links",
-    reason: "Keep the published v0.0.26 hardware report and open the local tools by full filename.",
-    liveOnly: [
-      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/\">Open sample tools separately</a> if this panel does not load.</p></section>",
-      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/\">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>",
-      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>0.0.26 hardware-test candidate available</strong><p>The original 600b build remains withdrawn. Candidate 94197fc8 includes the boot-guard correction, but physical startup/restart is not yet verified. 0.0.25.1 remains the known-good fallback. <a href=\"../new/\">Release status</a></p></aside>",
-    ],
-    renderOnly: [
-      "  <section id=\"samples-panel\" aria-label=\"Sample workspace\" hidden><iframe id=\"sample-frame\" title=\"Import break loops, back up or restore sample slots\" data-src=\"../breaks/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../breaks/index.html\">Open sample tools separately</a>.</p></section>",
-      "  <section id=\"projects-panel\" aria-label=\"Songs and projects workspace\" hidden><iframe id=\"project-frame\" title=\"Import or export a whole song project; reset project while keeping samples\" data-src=\"../projects/?embedded=1\" allow=\"midi\"></iframe><p class=\"small\"><a href=\"../projects/index.html\">Open Songs &amp; projects separately</a>.</p></section>",
-      "  <aside class=\"release-notice\" aria-label=\"Release status\"><strong>DnBOX 0.0.26 is the latest public release</strong><p>The owner verified startup and restart on SMK-37 Elite and Pro. The earlier 600b3b45 build remains withdrawn. <a href=\"https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26\">0.0.26 release notes and checksums</a></p></aside>",
     ],
   },
   {
@@ -108,24 +96,6 @@ const ALLOWED = [
     ],
   },
   {
-    id: "standalone-workspace-launch",
-    reason: "Hosted pages coordinate the real iframes. Downloads open the independent tools and skip the inaccessible child frames.",
-    liveOnly: [
-      "$(\"sample-frame\").addEventListener(\"load\", navigateWorkspace);",
-      "$(\"project-frame\").addEventListener(\"load\", navigateWorkspace);",
-    ],
-    renderOnly: [
-      "for (const id of [\"sample-frame\", \"project-frame\"]) {",
-      "  const frame = $(id);",
-      "  frame.addEventListener(\"load\", navigateWorkspace);",
-      "  // A browser cannot coordinate MIDI ownership across separate file origins.",
-      "  // The direct local links open each tool with its normal standalone controls.",
-      "  if (location.protocol === \"file:\") frame.hidden = true;",
-      "  else frame.src = frame.getAttribute(\"data-src\");",
-      "}",
-    ],
-  },
-  {
     id: 'programmed-sample-header-padding',
     reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',
     liveOnly: ['  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, SLOT_HDR_LEN))], 5000);'],
@@ -154,6 +124,41 @@ const ALLOWED = [
       '  return name === "fm-1" ? null : name;',
     ],
   },
+  {
+    "id": "bounded-download-deadline",
+    "reason": "Reviewed download lifetime bound; native header/body cancellation and post-await fences prevent expired bytes from enabling Install. Covered by actual downloader and browser timeout/reload tests.",
+    "renderOnly": [
+      "  const isUsable = () => isLatest() && !controller.signal.aborted;",
+      "  // Bound headers, body and late asynchronous verification as one download.",
+      "  const deadline = setTimeout(() => {",
+      "    controller.abort();",
+      "    if (isLatest()) sayK(\"loadfail\", \"Download took too long. Reload this page to retry.\");",
+      "  }, 20000);",
+      "    if (!isUsable()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isUsable()) return;",
+      "    if (!isUsable()) return;",
+      "      catch (e) { if (isUsable()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isUsable()) return;"
+    ],
+    "liveOnly": [
+      "    if (!isLatest()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isLatest()) return;",
+      "    if (!isLatest()) return;",
+      "      catch (e) { if (isLatest()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isLatest()) return;"
+    ]
+  },
+  {
+    "id": "bounded-download-timer-cleanup",
+    "reason": "Always release the per-download deadline; reuse the identical selection-and-abort predicate for error reporting, preserving its evaluation order and controller identity cleanup.",
+    "renderOnly": [
+      "  } catch (e) { if (isUsable()) sayK(\"loadfail\", e.message); }",
+      "    clearTimeout(deadline);"
+    ],
+    "liveOnly": [
+      "  } catch (e) { if (isLatest() && !controller.signal.aborted) sayK(\"loadfail\", e.message); }"
+    ]
+  },
 ];
 
 function parseUnifiedHunks(diff) {
@@ -180,7 +185,11 @@ function assertAllowedRendered(rendered, tempRoot = tmpdir()) {
   // x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Map the old names in the
   // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
   const renamed = live.replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
-  const a = normalize(renamed), b = normalize(rendered);
+  // This pinned clip-mode instruction predates the DnBOX name.
+  const oldInstruction = 'return to normal X0X operation with KNOB BANK';
+  assert.equal(renamed.split(oldInstruction).length, 2);
+  const a = normalize(renamed.replace(oldInstruction, 'return to normal DnBOX operation with KNOB BANK'));
+  const b = normalize(rendered);
   const dir = mkdtempSync(join(tempRoot, 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
   let comparison;
@@ -199,12 +208,12 @@ function assertAllowedRendered(rendered, tempRoot = tmpdir()) {
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
+    const fullDigest = createHash('sha256').update(JSON.stringify([h.liveOnly, h.renderOnly])).digest('hex');
     const added = JSON.stringify(h.renderOnly);
     const match = ALLOWED.find(allow => {
+      if (allow.hunk_sha256) return allow.hunk_sha256 === fullDigest;
       if (JSON.stringify(allow.liveOnly) !== JSON.stringify(h.liveOnly)) return false;
-      if (allow.renderOnlySha256) {
-        return createHash('sha256').update(added).digest('hex') === allow.renderOnlySha256;
-      }
+      if (allow.renderOnlySha256) return createHash('sha256').update(added).digest('hex') === allow.renderOnlySha256;
       return JSON.stringify(allow.renderOnly) === added;
     });
     if (!match) unexpected.push({ header: h.header, liveOnly: h.liveOnly, renderOnly: h.renderOnly });
@@ -261,6 +270,14 @@ test('exact Restore allowance rejects lost padding, forced full headers and unre
   for(const changed of [rendered.replace(selector,'SLOT_HDR_LEN'),rendered.replace(selector,'SLOT_HDR_AREA'),rendered.replace(selector,selector.replace('!==','===')),rendered.replace('if (name === "fm-1") return null;','if (name === "smk-37") return null;')]) {
     assert.notEqual(changed,rendered);
     assert.throws(()=>assertAllowedRendered(changed),/unexpected hunks|allowlisted hunk missing/);
+  }
+});
+
+test('approved release diff rejects drift in the restart handshake and report bindings', () => {
+  const current = currentRendered();
+  for (const old of ['restartTicket, dev, up.ports().length === 1','receiptBuild: selectedInstallBuild(ver, pkg, chosenModel)']) {
+    assert.equal(current.split(old).length,2);
+    assert.throws(()=>assertAllowedRendered(current.replace(old,'undefined')),/unexpected hunks|allowlisted hunk missing/);
   }
 });
 

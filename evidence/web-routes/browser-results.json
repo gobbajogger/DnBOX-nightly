@@ -1,0 +1,746 @@
+{
+  "browser": "151.0.7922.34",
+  "rows": [
+    {
+      "route": "index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "DnBOX \u00b7 Drums, synths, samples",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+    },
+    {
+      "route": "breaks/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "DnBOX break loops",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265"
+    },
+    {
+      "route": "builds/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Build history \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3ddf07a77a865ffb834a7f1be086054cca700927c5a64fe611b116a70da51315"
+    },
+    {
+      "route": "help/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Setup and help \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+    },
+    {
+      "route": "install/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95"
+    },
+    {
+      "route": "manual/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "5e4f025db19590b6cdd152a7993e15f05215779b2d0fa15d6385ff00db178846"
+    },
+    {
+      "route": "manual/legacy.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3e48f161394b20e615284b2be232c42ba82f9967ac5d7304526c9116cc77ca8d"
+    },
+    {
+      "route": "manual/original/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Original FM-1 reference \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101"
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Project files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
+    },
+    {
+      "route": "manual/protocol.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Protocol identifiers \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
+    },
+    {
+      "route": "new/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "What\u2019s new \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c5a0a3d8608c763e8252f6fd943dfb0a32175884279bf2ba144795346370f7d3"
+    },
+    {
+      "route": "presets/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Rename preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2"
+    },
+    {
+      "route": "presets/legacy/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Earlier preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+    },
+    {
+      "route": "projects/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "X0X songs & projects",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+    },
+    {
+      "route": "remote/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
+    },
+    {
+      "route": "remote/device/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Remote connection \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d"
+    },
+    {
+      "route": "remote/identity/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f"
+    },
+    {
+      "route": "starting-breaks/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Starting breaks \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348"
+    },
+    {
+      "route": "tools/index.html",
+      "viewport": [
+        1440,
+        900
+      ],
+      "title": "Tools \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 1440,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "220fc06614021b99ce201c2585a42e8be3c87614ac64e6c7a480cda0e6de0b90"
+    },
+    {
+      "route": "index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "DnBOX \u00b7 Drums, synths, samples",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+    },
+    {
+      "route": "breaks/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "DnBOX break loops",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265"
+    },
+    {
+      "route": "builds/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Build history \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3ddf07a77a865ffb834a7f1be086054cca700927c5a64fe611b116a70da51315"
+    },
+    {
+      "route": "help/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Setup and help \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+    },
+    {
+      "route": "install/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95"
+    },
+    {
+      "route": "manual/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "5e4f025db19590b6cdd152a7993e15f05215779b2d0fa15d6385ff00db178846"
+    },
+    {
+      "route": "manual/legacy.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3e48f161394b20e615284b2be232c42ba82f9967ac5d7304526c9116cc77ca8d"
+    },
+    {
+      "route": "manual/original/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Original FM-1 reference \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101"
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Project files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
+    },
+    {
+      "route": "manual/protocol.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Protocol identifiers \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
+    },
+    {
+      "route": "new/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "What\u2019s new \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c5a0a3d8608c763e8252f6fd943dfb0a32175884279bf2ba144795346370f7d3"
+    },
+    {
+      "route": "presets/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Rename preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2"
+    },
+    {
+      "route": "presets/legacy/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Earlier preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+    },
+    {
+      "route": "projects/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "X0X songs & projects",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+    },
+    {
+      "route": "remote/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
+    },
+    {
+      "route": "remote/device/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Remote connection \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d"
+    },
+    {
+      "route": "remote/identity/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f"
+    },
+    {
+      "route": "starting-breaks/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Starting breaks \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348"
+    },
+    {
+      "route": "tools/index.html",
+      "viewport": [
+        390,
+        844
+      ],
+      "title": "Tools \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 390,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "220fc06614021b99ce201c2585a42e8be3c87614ac64e6c7a480cda0e6de0b90"
+    },
+    {
+      "route": "index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "DnBOX \u00b7 Drums, synths, samples",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+    },
+    {
+      "route": "breaks/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "DnBOX break loops",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265"
+    },
+    {
+      "route": "builds/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Build history \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3ddf07a77a865ffb834a7f1be086054cca700927c5a64fe611b116a70da51315"
+    },
+    {
+      "route": "help/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Setup and help \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+    },
+    {
+      "route": "install/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "16dae111b42a206dbb3482b15463615043901d3088c7f65b3c78cb6b66a13b95"
+    },
+    {
+      "route": "manual/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "5e4f025db19590b6cdd152a7993e15f05215779b2d0fa15d6385ff00db178846"
+    },
+    {
+      "route": "manual/legacy.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Manual \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "3e48f161394b20e615284b2be232c42ba82f9967ac5d7304526c9116cc77ca8d"
+    },
+    {
+      "route": "manual/original/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Original FM-1 reference \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101"
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Project files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
+    },
+    {
+      "route": "manual/protocol.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Protocol identifiers \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4"
+    },
+    {
+      "route": "new/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "What\u2019s new \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c5a0a3d8608c763e8252f6fd943dfb0a32175884279bf2ba144795346370f7d3"
+    },
+    {
+      "route": "presets/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Rename preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2"
+    },
+    {
+      "route": "presets/legacy/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Earlier preset files \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+    },
+    {
+      "route": "projects/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "X0X songs & projects",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+    },
+    {
+      "route": "remote/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
+    },
+    {
+      "route": "remote/device/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Remote connection \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d"
+    },
+    {
+      "route": "remote/identity/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "DnBOX Remote",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f"
+    },
+    {
+      "route": "starting-breaks/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Starting breaks \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348"
+    },
+    {
+      "route": "tools/index.html",
+      "viewport": [
+        844,
+        390
+      ],
+      "title": "Tools \u00b7 DnBOX",
+      "status": 200,
+      "scroll_width": 844,
+      "page_errors": [],
+      "failed_resources": [],
+      "page_sha256": "220fc06614021b99ce201c2585a42e8be3c87614ac64e6c7a480cda0e6de0b90"
+    }
+  ]
+}

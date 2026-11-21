@@ -1,0 +1,253 @@
+{
+  "reviewer": "Independent test-and-merge reviewer, distinct from the Web writer, controls and firmware-reference implementers",
+  "base": "914d68e8ed50698ea77c9d18c221c404629b9332",
+  "previous_web_head": "c827d46c4bfd3083d050859fc618987c3758be32",
+  "browser": "Playwright 1.62.0, Chromium 151.0.7922.34 with its normal sandbox, three viewports at device scale 1",
+  "web_route_comparison": {
+    "routes": 19,
+    "observations_per_composition": 57,
+    "before_horizontal_overflows": 14,
+    "previous_web_head_horizontal_overflows": 0,
+    "before_receipt_sha256": "7efcb2e093526504a284deded343f7727a2def29384bb900b82ed700660bc523",
+    "previous_web_head_receipt_sha256": "f9dac4684268239cfad498e3299668ea3d0300809983e77e545efc9350419c6a"
+  },
+  "admin": {
+    "before": {
+      "index.html": "0e938b8750bde572aa6d31c3d1f17475f6b840e67e25652b44b9141d72939918",
+      "admin.bundle.js": "e0ec1ca678607d43cbf9a8980e83f123701ed4726e7826b65045b7ee45744c97",
+      "admin.css": "decbec2ef8ead1bdc67c975962f1ed2f7148d01dbe8e17f2518cf93f5445ccff",
+      "github.mjs": "ae8ec22a3ec78149885547e26cde94bfaeda4dc453f12b0a2a4eed5acaa5c603",
+      "admin.mjs": "5c96f8fdc1f8b6dabd6266c95b6e110532f0880e6c35b2bf0fe0188f801371c3"
+    },
+    "after": {
+      "index.html": "977914c5f340e26e43d4934f63132ea4155a41cad1a7f84408453bdb56ff2c64",
+      "github.mjs": "329c341ff94ab451f64a32f41f4b2a22f9e6172a381a96cc19abbc4df11475c4",
+      "admin.mjs": "4008e94248d9286b3ba5b67bee5f8ef84df5795c52a9582b77284c39237fcce5",
+      "admin.css": "decbec2ef8ead1bdc67c975962f1ed2f7148d01dbe8e17f2518cf93f5445ccff",
+      "admin.bundle.js": "dd1cb974cf53d3eadc49885811c37165be63889bfef2de5d0a8818ed0d6051a7"
+    },
+    "viewport_checks": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "verified": [
+          "public",
+          "expanded catalog",
+          "connected"
+        ],
+        "public_calls": 12,
+        "errors": [],
+        "mutations": [
+          [
+            "PATCH",
+            "/repos/gobbajogger/DnBOX/releases/26"
+          ]
+        ]
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "verified": [
+          "public",
+          "expanded catalog",
+          "connected"
+        ],
+        "public_calls": 12,
+        "errors": [],
+        "mutations": [
+          [
+            "PATCH",
+            "/repos/gobbajogger/DnBOX/releases/26"
+          ]
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "verified": [
+          "public",
+          "expanded catalog",
+          "connected"
+        ],
+        "public_calls": 12,
+        "errors": [],
+        "mutations": [
+          [
+            "PATCH",
+            "/repos/gobbajogger/DnBOX/releases/26"
+          ]
+        ]
+      }
+    ],
+    "reviewed": [
+      "Destination-specific release holds/build identity are preserved",
+      "Selected controller/version changes cannot reassign a hardware observation",
+      "Anonymous and authenticated controls, public reports, rendered model/package/controller identity, tab ordering, release edit, disconnect and no viewport overflow"
+    ],
+    "tests": 16
+  },
+  "installer_export": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "ab28a7218cfdc501add74a41d7a59f059990e397e1338bb8e2489eaa2e04734b",
+      "bytes": 45391,
+      "slot_names": [
+        "BR1",
+        "BR2"
+      ],
+      "midi": 0,
+      "page_errors": []
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "ab28a7218cfdc501add74a41d7a59f059990e397e1338bb8e2489eaa2e04734b",
+      "bytes": 45391,
+      "slot_names": [
+        "BR1",
+        "BR2"
+      ],
+      "midi": 0,
+      "page_errors": []
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "ab28a7218cfdc501add74a41d7a59f059990e397e1338bb8e2489eaa2e04734b",
+      "bytes": 45391,
+      "slot_names": [
+        "BR1",
+        "BR2"
+      ],
+      "midi": 0,
+      "page_errors": []
+    }
+  ],
+  "playable_session": {
+    "rows": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "route": "/emu/",
+        "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "wasm": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "route": "/emu/previous/",
+        "firmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
+        "wasm": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "route": "/emu/",
+        "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "wasm": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "route": "/emu/previous/",
+        "firmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
+        "wasm": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "route": "/emu/",
+        "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "wasm": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "route": "/emu/previous/",
+        "firmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
+        "wasm": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b",
+        "project_bytes": 4894,
+        "project_sha256": "f6533a53ab9db6c40a29febbdc91514c79106651c6a954c840151d7fd36a8cf6",
+        "same_runtime_restore": true
+      }
+    ],
+    "historical_file_sha256": {
+      "kernel.wasm": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b",
+      "native-session.mjs": "077161f1641a927df241112b71bfa46e25023d3808d08469851838dd9c876360",
+      "index.html": "010718d268ec15e83da8c641eb82ec30588d3d001bd4cf07fb15a182bd82fc0b",
+      "session-codec.mjs": "5924c689e512fc1c4e14718e0d267dce7ef287ec51183d1902e3d7902134845d",
+      "page.mjs": "f4348ebcbedc94495c60f6bcf93848567fc6a0d3d9961f08c81c613fab5d9966",
+      "wasi.mjs": "76221f9d11ff8be10d9844f0ecc696ddc0bafb694775a12a6b665c4d77a78f18",
+      "style.css": "f9d8c09ebe689442f027b038482488a6e02db255db7553127b92b907b68cd5b8",
+      "runtime.json": "f11271f85ad61c9c5bc5f3959f8b5ffa2e3a8c8cbab90f4b43c7aeb94676b4e0",
+      "worklet.mjs": "3841c8754053df804e103dc80ea31ab3dc0c4063112aa20b45f3b1421adbd034",
+      "observer.mjs": "525c2437315760e448e4f631ca9ba1a9e2311d216b18ef93852969d09098b2d3"
+    }
+  },
+  "firmware_screen_reference": {
+    "inputs": {
+      "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "fwui_evidence_commit": "3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d",
+      "matched_pixels": 105868800,
+      "primary_oracles": {
+        "current/native-routes/normal-loop/normal-loop.json": "cbffc83ac29dbc84884b23acc888ac574e51ae33",
+        "current/native-routes/screen-index.tsv": "a3a7eb4137315a295df0d51df85c66b044620098",
+        "screens/screen-index.tsv": "4ad5620976f6b3ad5a04594a64bb25ebc9cfcb86"
+      },
+      "states": 1838,
+      "supplemental_sound_provider": "80b7e1db59e5c3eceb2b3530e80c2cedf29c5b7f"
+    },
+    "WASM_sha256": {
+      "fwui.wasm": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234",
+      "routes.wasm": "14933fa20648bb5af6512f9d6c2396a00c13f3227ca87522078584fff872661f",
+      "wave.wasm": "49101296f3df51140b0806bccfd9f95fc202b89058354795305f15eb68760e98",
+      "normal.wasm": "d79cef27e61b48f1389eb7210b45ae8459bdef15735ed6aed74969050ba83444",
+      "guard.wasm": "36c6e241220c75362d8f03a50aeb8e2bfc81b7ce7a30a145df796ce6cf528d03",
+      "synthone-patch.wasm": "6109bf9b0a05f9ea6b7a9f684a86fa05b1d3284f7fa177e7d816bd5008bd5aec",
+      "synthone-frame.wasm": "cb2a8cc390d579433cdca1de2c25c9e89f3dd0ba1997fc1ed21dbf54fe909d33"
+    },
+    "per_state_hashes_file_sha256": "55a75b7b993cc0b88f32b6b0bcb162fefe2346cad79f8f65dfc81a646d9b92ca",
+    "mounted_observations": 32,
+    "note": "The three full-size browser views check the mounted canvas and keyboard selection. Separate independent stand-alone execution runs the production canvas painter through every recorded state; duplicate appearances share pixels. Stock-device operation was outside this browser review."
+  }
+}

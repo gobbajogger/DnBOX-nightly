@@ -2,12 +2,14 @@
 """Local gate contract tests; no browser, device or baseline approval is implied."""
 import importlib.util
 import io
+import json
+import re
 from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
 import full_page_capture as capture
-from installer_package import read_package
+from installer_package import installer_responses, read_package
 from hashlib import sha256
 import zlib
 from PIL import Image
@@ -17,6 +19,35 @@ gate = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gate)
 
 class MountedPackageTests(unittest.TestCase):
+    def test_mounted_installer_requires_a_package_while_empty_preview_can_render(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            installer = root / "web/product-site/install/index.html"
+            installer.parent.mkdir(parents=True)
+            installer.write_text('\nconst catalog = {"latest":null,"versions":[]};')
+            attach = installer_responses(root)
+            mounted = Mock()
+            with self.assertRaisesRegex(ValueError, "requires a default release package"):
+                attach(mounted, require_package=True)
+            mounted.route.assert_not_called()
+            preview = Mock()
+            self.assertIsNone(attach(preview))
+            self.assertEqual(preview.route.call_count, 1)
+
+    def test_mounted_installer_accepts_the_mke_only_catalog(self):
+        digest = "a" * 64
+        url = f"https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/{digest}/mke.fwsc"
+        catalog = {"latest": "release", "versions": [{"version": "release", "display_version": "0.0.26",
+                   "models": {"mke": {"pkg": url, "sha256": digest, "size": 1}}}]}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            installer = root / "web/product-site/install/index.html"
+            installer.parent.mkdir(parents=True)
+            installer.write_text("\nconst catalog = " + json.dumps(catalog) + ";")
+            page = Mock()
+            self.assertEqual(installer_responses(root)(page, require_package=True), "mke.fwsc")
+            self.assertEqual(page.route.call_count, 2)
+
     def test_verified_bytes_are_served_without_network(self):
         data = b"visual package integrity fixture"
         digest = sha256(data).hexdigest()
@@ -208,6 +239,19 @@ class GateContract(unittest.TestCase):
                     capture.capture_full_page(page, 'builds/index.html', 'builds-case')
         self.assertEqual(timeouts, [29_000, 25_000, 8_000])
 
+    def test_installer_routes_only_pause_the_two_public_requests(self):
+        page = Mock()
+        gate.installer_responses()(page)
+        patterns = [call.args[0] for call in page.route.call_args_list]
+        self.assertEqual(len(patterns), 2)
+        # Playwright sends callable URL matchers to Chromium as a catch-all.
+        for pattern in patterns:
+            self.assertIsInstance(pattern, re.Pattern)
+            self.assertIsNone(pattern.search('http://127.0.0.1:8000/product-site/index.html'))
+        self.assertIsNotNone(patterns[0].fullmatch(
+            'https://api.github.com/search/issues?q=repo%3Agobbajogger%2FDnBOX+is%3Aissue+in%3Atitle+%22Install+report%22&per_page=100&page=1'
+        ))
+
     def test_missing_baseline_is_reported_not_created(self):
         result = self.compare()
         self.assertEqual(result[0][1], 'NOBASE')
@@ -296,6 +340,114 @@ class GateContract(unittest.TestCase):
         self.assertEqual(gate.exit_status(passed, [], ['uncaught error']), 1)
         self.assertEqual(gate.exit_status(passed, ['clipped control'], []), 1)
         self.assertEqual(gate.exit_status([], [], []), 1)
+
+    def test_exact_pixel_tolerance_changed_fraction_and_difference_image(self):
+        base = Image.new('RGB', (200, 10), (160, 110, 70))
+        original = io.BytesIO()
+        base.save(original, 'PNG')
+        self.image = original.getvalue()
+        self.approve()
+        for significant in (1, 2, 3):
+            with self.subTest(significant=significant):
+                actual = base.convert('RGBA')
+                actual.putpixel((0, 1), (185, 85, 70, 0))  # ±25 and alpha do not count.
+                for x in range(significant):
+                    actual.putpixel((x, 0), (160, 110, 70 + (26 if x % 2 else -26), 8))
+                out = io.BytesIO()
+                actual.save(out, 'PNG')
+                status = 'FAIL' if significant == 3 else 'PASS'
+                self.assertEqual(self.compare(out.getvalue()), [('screen', status, significant / 2000)])
+                if significant == 3:
+                    expected = Image.new('RGB', base.size, (48, 33, 21))
+                    for x in range(significant):
+                        expected.putpixel((x, 0), (255, 0, 255))
+                    with Image.open(gate.OUT / 'screen-diff.png') as diff:
+                        self.assertEqual(diff.mode, 'RGB')
+                        self.assertEqual(diff.tobytes(), expected.tobytes())
+                    self.assertEqual((gate.OUT / 'screen-actual.png').read_bytes(), out.getvalue())
+                else:
+                    self.assertFalse((gate.OUT / 'screen-diff.png').exists())
+
+    def test_all_png_filters_maintain_previous_row_across_strips(self):
+        from PIL.PngImagePlugin import putchunk
+        import struct
+        for mode, channels, color_type in [('RGB', 3, 2), ('RGBA', 4, 6)]:
+            with self.subTest(mode=mode):
+                width, height = 5, 645
+                out = io.BytesIO()
+                out.write(b'\x89PNG\r\n\x1a\n')
+                putchunk(out, b'IHDR', struct.pack('>IIBBBBB', width, height, 8, color_type, 0, 0, 0))
+                raw = b''.join(bytes([y % 5]) + bytes((17 * y + x) % 256 for x in range(width * channels))
+                               for y in range(height))
+                encoded = zlib.compress(raw)
+                for start in range(0, len(encoded), 109):
+                    putchunk(out, b'IDAT', encoded[start:start + 109])
+                putchunk(out, b'IEND', b'')
+                self.image = out.getvalue()
+                self.approve()
+                with Image.open(io.BytesIO(self.image)) as whole:
+                    rgb = whole.convert('RGB')
+                    # Force another color layout/encoding. This exercises pixel conversion, including alpha.
+                    alternate = rgb.convert('RGBA' if mode == 'RGB' else 'RGB')
+                    different = io.BytesIO()
+                    alternate.save(different, 'PNG', compress_level=9)
+                self.assertNotEqual(different.getvalue(), self.image)
+                self.assertEqual(self.compare(different.getvalue()), [('screen', 'PASS', 0.0)])
+
+    def test_palette_and_grayscale_keep_pillow_rgb_semantics(self):
+        for mode in ('P', 'L', 'LA', '1'):
+            with self.subTest(mode=mode):
+                original = Image.new(mode, (3, 258))
+                for y in range(0, 258, 3):
+                    original.putpixel((1, y), (190, 40) if mode == 'LA' else 1)
+                if mode == 'P':
+                    original.putpalette([0, 0, 0, 199, 91, 45] + [0] * 762)
+                encoded = io.BytesIO()
+                original.save(encoded, 'PNG')
+                self.image = encoded.getvalue()
+                self.approve()
+                decoded_rgb = io.BytesIO()
+                original.convert('RGB').save(decoded_rgb, 'PNG')
+                self.assertEqual(self.compare(decoded_rgb.getvalue()), [('screen', 'PASS', 0.0)])
+
+    def test_incomplete_or_extra_inflated_rows_and_invalid_filter_raise(self):
+        from PIL.PngImagePlugin import putchunk
+        import struct
+        stride = 1 + 3 * 30
+        for label, raw in (('incomplete', bytes(stride * 29)),
+                           ('extra', bytes(stride * 30 + 1)),
+                           ('invalid filter', b'\x05' + bytes(stride * 30 - 1))):
+            with self.subTest(label=label):
+                out = io.BytesIO()
+                out.write(b'\x89PNG\r\n\x1a\n')
+                putchunk(out, b'IHDR', struct.pack('>IIBBBBB', 30, 30, 8, 2, 0, 0, 0))
+                putchunk(out, b'IDAT', zlib.compress(raw))
+                putchunk(out, b'IEND', b'')
+                self.approve()
+                with self.assertRaises((ValueError, OSError)):
+                    self.compare(out.getvalue())
+
+    def test_valid_padding_after_final_idat_stream_preserves_pixels(self):
+        # PNG 11.2.3 allows padding inside the last IDAT after the zlib stream.
+        self.approve()
+        size = int.from_bytes(self.image[33:37], 'big')
+        self.assertEqual(self.image[37:41], b'IDAT')
+        data = self.image[41:41 + size] + bytes(5)
+        alternate = (self.image[:33] + len(data).to_bytes(4, 'big') + b'IDAT' + data
+                     + zlib.crc32(b'IDAT' + data).to_bytes(4, 'big') + self.image[45 + size:])
+        self.assertEqual(self.compare(alternate), [('screen', 'PASS', 0.0)])
+
+    def test_failed_streaming_diff_cannot_replace_previous_output(self):
+        destination = gate.write_actual_output('screen-diff.png', b'previous')
+
+        def interrupted(output):
+            output.write(b'partial')
+            raise OSError('interrupted comparison output')
+
+        with self.assertRaisesRegex(OSError, 'interrupted'):
+            gate.write_actual_output('screen-diff.png', interrupted)
+        self.assertEqual(destination.read_bytes(), b'previous')
+        self.assertEqual(list(gate.OUT.iterdir()), [destination])
 
 if __name__ == '__main__':
     unittest.main()

@@ -86,15 +86,40 @@ async def assert_readings(page, packet):
         assert 0 <= c['value'] <= c['max']
         assert isinstance(c['display'], str) and len(c['display']) <= 63
         assert isinstance(c['unit'], str) and len(c['unit']) <= 31
-        field = page.locator(control(packet['voice'], c['parameter']))
-        await expect(field).to_have_value(str(c['value']))
-        await expect(field).to_have_attribute('min', '0')
-        await expect(field).to_have_attribute('max', str(c['max']))
-        # The consumer may add whitespace between native display and unit only.
-        rendered = await field.get_attribute('aria-valuetext')
-        assert ''.join(rendered.split()) == ''.join((c['display']+c['unit']).split()), (c, rendered)
-        out = await field.evaluate('e=>e.closest(".funkybeats-typed-unit").querySelector("[data-param-value]").textContent')
-        assert out == rendered, (c, out, rendered)
+    selectors = [control(packet['voice'], c['parameter']) for c in packet['controls']]
+    # Every row comes from the same DOM turn, including its visible readout.
+    snapshot = """selectors => selectors.map(selector => {
+      const fields = document.querySelectorAll(selector);
+      if (fields.length !== 1) return {count: fields.length};
+      const field = fields[0];
+      const output = field.closest('.funkybeats-typed-unit')?.querySelector('[data-param-value]');
+      return {count: 1, value: field.value, min: field.getAttribute('min'),
+              max: field.getAttribute('max'), label: field.getAttribute('aria-valuetext'),
+              output: output?.textContent ?? null};
+    })"""
+    mismatch = None
+
+    async def wait_for_readings():
+        nonlocal mismatch
+        while True:
+            rows = await page.evaluate(snapshot, selectors)
+            for c, row in zip(packet['controls'], rows):
+                label = row.get('label')
+                if (row['count'] == 1 and row['value'] == str(c['value'])
+                        and row['min'] == '0' and row['max'] == str(c['max'])
+                        and label is not None and label == row['output']
+                        and ''.join(label.split()) == ''.join((c['display'] + c['unit']).split())):
+                    continue
+                mismatch = (c, row)
+                break
+            else:
+                return
+            await asyncio.sleep(0.05)
+
+    try:
+        await asyncio.wait_for(wait_for_readings(), timeout=5)
+    except asyncio.TimeoutError as timeout:
+        raise AssertionError(f'Native Sound readings did not settle within 5 seconds: {mismatch}') from timeout
 
 async def edit(page, voice, parameter):
     old = await page.evaluate('soundPackets.at(-1)')

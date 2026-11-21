@@ -43,3 +43,47 @@ test('symlink manifest refuses without reading an outside manifest',()=>{
  const f=fixture(),manifest=join(f.src,'SOURCE-MANIFEST.json'),outside=join(f.root,'outside.json');writeFileSync(outside,JSON.stringify(f.m));unlinkSync(manifest);symlinkSync(outside,manifest);
  assert.throws(()=>buildProductSite({repoRoot:f.root}),/symlink/);assert.equal(existsSync(join(f.root,'.output')),false);
 });
+
+
+test('build uses current editable source and check detects stale output', () => {
+ const f=fixture(),path=join(f.src,'index.html');
+ for(const text of ['<h1>Other</h1>','<h1>A longer musician-facing page</h1>']){
+  writeFileSync(path,text);
+  const {output}=buildProductSite({repoRoot:f.root});
+  assert.equal(readFileSync(join(output,'index.html'),'utf8'),text);
+  buildProductSite({repoRoot:f.root,check:true});
+ }
+ writeFileSync(path,'<h1>A newer page</h1>');
+ assert.throws(()=>buildProductSite({repoRoot:f.root,check:true}),/Product output differs: index.html/);
+});
+
+test('built catalog renames only legacy transport fields and preserves pinned package metadata',()=>{
+ const f=fixture();
+ const legacyRoot='https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly';
+ const source={
+  repo:'https://github.com/gobbajogger/x0x37-for-Loopy-Pro_nightly',
+  pages:legacyRoot+'/',
+  latest:'eligible',
+  versions:[
+   {version:'eligible',status:'dev-checked',evidence_url:'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/869',models:{
+    elite:{pkg:legacyRoot+'/artifacts/elite.fwsc',sha256:'a'.repeat(64),size:651732},
+    pro:{pkg:legacyRoot+'-another/artifacts/pro.fwsc',sha256:'b'.repeat(64),size:651712},
+   }},
+   {version:'historical',models:{elite:{pkg:'https://raw.githubusercontent.com/gobbajogger/X0X37-for-Loopy-Pro/abc/file.fwsc'}},notes:legacyRoot+'/historical',evidence_url:'https://api.github.com/repos/gobbajogger/x0x37-for-Loopy-Pro_nightly/pulls/10/reviews/5638858728'},
+  ],
+ };
+ const bytes=JSON.stringify(source,null,2)+'\n';
+ writeFileSync(join(f.src,'versions.json'),bytes);
+ f.m.files.push({path:'versions.json',bytes:Buffer.byteLength(bytes),sha256:createHash('sha256').update(bytes).digest('hex')});f.save();
+ const {output}=buildProductSite({repoRoot:f.root});
+ const expected=structuredClone(source);
+ expected.repo='https://github.com/gobbajogger/DnBOX-nightly';
+ expected.pages='https://gobbajogger.github.io/DnBOX-nightly/';
+ expected.versions[0].evidence_url='https://github.com/gobbajogger/DnBOX/pull/869';
+ expected.versions[0].models.elite.pkg=expected.pages+'artifacts/elite.fwsc';
+ expected.versions[1].models.elite.pkg='https://raw.githubusercontent.com/gobbajogger/DnBOX/abc/file.fwsc';
+ expected.versions[1].evidence_url='https://api.github.com/repos/gobbajogger/DnBOX-nightly/pulls/10/reviews/5638858728';
+ assert.deepEqual(JSON.parse(readFileSync(join(output,'versions.json'),'utf8')),expected);
+ assert.equal(readFileSync(join(f.src,'versions.json'),'utf8'),bytes);
+ buildProductSite({repoRoot:f.root,check:true});
+});

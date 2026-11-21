@@ -8,8 +8,8 @@
 
 This is the **beta / nightly channel** for the DnBOX website, browser Remote, and untested firmware builds. The firmware source of record is [gobbajogger/DnBOX](https://github.com/gobbajogger/DnBOX).
 
-- **Stable installer** — https://gobbajogger.github.io/DnBOX/install/
-- **Install v0.0.26 (build `94197fc8`)** — https://gobbajogger.github.io/DnBOX-nightly/install/
+- **Install (Latest release 0.0.26):** https://gobbajogger.github.io/DnBOX/install/
+- **Install (nightly catalog):** https://gobbajogger.github.io/DnBOX-nightly/install/
 - **Integration branch:** `integration/dnbox-consolidated` (tags `dnbox-start-2026-11-17` and `start-nt-2026-11-17`)
 - **What's done and what's left:** [docs/START-POINT.md](docs/START-POINT.md) and [docs/DELIVERY-PLAN.md](docs/DELIVERY-PLAN.md)
 
@@ -76,28 +76,28 @@ See [ble/README.md](https://github.com/gobbajogger/DnBOX/blob/main/ble/README.md
 
 ## Versions
 
-**Latest published firmware: [DnBOX 0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26).** The owner verified startup and restart on a physical SMK-37 Elite and SMK-37 Pro. The release includes the boot-guard correction, sample-import integrity fixes and model-specific USB/Bluetooth names. It adds Juno with shared chorus, a String Machine engine, and held-key chords on the polyphonic synth slots.
+**[DnBOX 0.0.26](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) is the Latest release.** The owner tested startup and restart on real SMK-37 Elite and SMK-37 Pro keyboards with the corrected firmware from `94197fc8`. The earlier `600b3b45` packages remain withdrawn. The release adds Juno with shared chorus, a String Machine engine and held-key chords on the polyphonic synth slots.
 
 | Package | Bytes | SHA-256 |
 |---|---:|---|
 | [SMK-37 Elite](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc) | 651,732 | `95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6` |
 | [SMK-37 Pro](https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc) | 651,730 | `ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8` |
 
-The release came from source [`94197fc8`](https://github.com/gobbajogger/DnBOX/commit/94197fc839b00aff47b98ca02f3c6396e4a6eabf). Before publication, the nightly used the `94197fc8-hwtest` filenames. The earlier `600b3b45` packages were withdrawn after startup problems. [0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1) remains available as a previous release.
+[0.0.25.1](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1) remains available as a fallback. The keyboard displays 0.0.25 for that version. Back up your sample slots and export your project before updating. The [release source](https://github.com/gobbajogger/DnBOX/commit/94197fc839b00aff47b98ca02f3c6396e4a6eabf) is the corrected build previously distributed for testing as `94197fc8-hwtest`.
 
 ## Install
 
 On desktop Chrome or Edge, connect by a USB data cable, click **Connect**, and grant **MIDI and SysEx** access. If denied, review browser MIDI/SysEx permission and retry; close other MIDI programs. Verify the model **printed on the hardware** (SMK-37 Elite or Pro), not just the USB name. Starrykey 37 Play uses the Pro package.
 
-- **[Stable installer](https://gobbajogger.github.io/DnBOX/install/).** Its live catalog listed 0.0.25.1 on 21 November 2026 UTC. Its local file chooser is hidden and disabled.
-- **[Nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/).** For 0.0.26, select `nightly-94197fc8-dev` and the model printed on your keyboard. The catalog still shows its earlier hardware-test label. Both package checksums match the published release above.
+- **[Published installer](https://gobbajogger.github.io/DnBOX/install/)** — select the listed version for the model printed on your keyboard. Model-specific [0.0.26 downloads and checksums](https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26) are also available.
+- **[Nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/)** — choose 0.0.26 for the published release or inspect earlier builds in the catalog. Its separate advanced local-file section supports additional workflows.
 
 **First switch from M-VAVE factory firmware:** There is no DnBOX app or project yet, so a DnBOX `.x0xslots` sample backup and `.x0xproject` export are **not available**. Use any manufacturer-supported method to preserve factory data, if available. Choose only the admitted model-specific firmware shown in the installer; if the current app cannot complete the main installer's sample-layout preflight and installation is refused, **stop rather than bypass the check**. Do not assume the nightly installer's best-effort backup can save factory data.
 
 **For an existing running DnBOX app (update/reinstall):** Stop playback; use [Samples](https://gobbajogger.github.io/DnBOX/breaks/) to save `.x0xslots` and separately use [Projects](https://gobbajogger.github.io/DnBOX/projects/) to export a portable `.x0xproject` **with samples**. Verify both files exist. The main installer blocks a risky write if a required sample backup fails. The **published nightly installer** attempts a backup, but a backup failure can **show a warning and continue automatically without a recoverable archive**, permanently losing old loops. This warning applies to the published nightly site, **not** the older fail-closed installer source in this PR branch (see the source/deployment note below). Package and model admission checks still apply. Do not unplug USB during an active firmware write.
 ## Manual and help
 
-- **[SMK-37 keyboard map](https://github.com/gobbajogger/DnBOX/blob/main/SMK37.md)** for the older port; the [0.0.26 keyboard manual (draft)](https://github.com/gobbajogger/DnBOX/blob/docs/manual-94197fc8/docs/MANUAL.md) covers the newer controls, glyphs, chords and presets. The [published web manual](https://gobbajogger.github.io/DnBOX/manual/) still covers the FM-1.
+- **[SMK-37 keyboard map](https://github.com/gobbajogger/DnBOX/blob/main/SMK37.md)** for the older port; the [0.0.26 keyboard manual (draft)](https://github.com/gobbajogger/DnBOX/blob/docs/manual-94197fc8/docs/MANUAL.md) covers the newer controls, glyphs, chords and presets. The 0.0.25.1 fallback predates those controls. The [published web manual](https://gobbajogger.github.io/DnBOX/manual/) still covers the FM-1.
 - **[Sample importer](https://gobbajogger.github.io/DnBOX/breaks/)** — import your own break loops
 - **[Projects](https://gobbajogger.github.io/DnBOX/projects/)** — save, load and export projects
 
@@ -107,8 +107,8 @@ Source and issue tracking are in this repository, [gobbajogger/DnBOX-nightly](ht
 
 Choose recovery by the **actual detected state**, not a transient disconnect or USB display name:
 
-1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. For 0.0.26, select build `94197fc8` for your model in the [nightly installer](https://gobbajogger.github.io/DnBOX-nightly/install/).
-2. **Only the update loader responds after an interrupted write.** The normal app's sample reader is absent, so **no new sample/project export is possible from the loader**. The published installer can resume an interrupted update from its loader using a **listed admitted package for the printed physical model**, but no app-side backup is made first; existing samples may be lost. Loader acceptance alone does not qualify a development package. If there is no safely admitted matching package, **stop**, rather than force a foreign image or guess a button gesture.
+1. **Already-running DnBOX app (update or reinstall).** Back up **both** `.x0xslots` and `.x0xproject` while they are readable. Use the **listed 0.0.26 release for your printed model in the [main installer](https://gobbajogger.github.io/DnBOX/install/)**.
+2. **Only the update loader responds after an interrupted write.** The normal app's sample reader is absent, so **no new sample/project export is possible from the loader**. The published installer can resume an interrupted update from its loader using a **listed admitted package for the printed physical model**, but no app-side backup is made first; existing samples may be lost. If there is no safely admitted matching package, **stop**, rather than force a foreign image or guess a button gesture.
 3. **Uncertain reboot or no device appears.** Wait for an active write to finish, then reconnect and use **Connect / Rescan** to check whether the normal app or `ota-` update loader actually answers. Check browser MIDI/SysEx permission; avoid blind retries. A loader identity is not a completed application boot.
 4. **Return to factory M-VAVE firmware.** Download the **exact model's** official stock package and follow [M-VAVE M-UPGRADE](https://www.m-vave.com/download). The main site's file chooser is hidden and no factory image is bundled. The nightly page has an advanced local chooser in its source, but it is not independently hardware-qualified as a stock-recovery route; the manufacturer path is the documented recommendation.
 

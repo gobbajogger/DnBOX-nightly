@@ -13,6 +13,10 @@
 
 .firmware-strip:first-child .source-cell{flex-basis:calc((100% - 20px)/2)}.reference-link{font-size:14px;color:var(--muted);margin:20px 0 35px}.ports{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ports label{display:grid;gap:8px}.ports select{font:inherit;min-height:44px;max-width:100%;background:#1c2a20;color:var(--ink);border:1px solid #6b815e;border-radius:7px}@media(max-width:600px){.ports{grid-template-columns:1fr}}
 
+@media (max-width: 900px) {
+  .tool-surface .site-head { display: block; }
+}
+
 #proposals a{overflow-wrap:anywhere}
 
 @media (max-width: 900px) {

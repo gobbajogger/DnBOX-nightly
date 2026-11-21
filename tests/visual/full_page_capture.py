@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-"""Capture the long, settled Builds route without allocating one giant Chromium surface."""
+"""Capture long Builds and original Manual pages without allocating one giant Chromium surface."""
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 import struct
@@ -19,6 +19,19 @@ GEOMETRY = """() => {
     ['client', 'scroll', 'offset'].map(key => e[key + axis])));
   return [size('Width'), size('Height'), scrollX, scrollY, innerWidth, innerHeight, devicePixelRatio];
 }"""
+
+# The archived Manual uses the body's solid color as the document canvas.
+# Require that exact CSS case before accepting first-paint rounding below the native clip.
+MANUAL_BACKGROUND = r"""() => {
+  const root = getComputedStyle(document.documentElement);
+  const body = getComputedStyle(document.body);
+  if (root.backgroundImage !== 'none' || root.backgroundColor !== 'rgba(0, 0, 0, 0)' ||
+      body.backgroundImage !== 'none') return null;
+  const rgb = /^rgb\((\d+), (\d+), (\d+)\)$/.exec(body.backgroundColor);
+  return rgb ? rgb.slice(1).map(Number) : null;
+}"""
+MANUAL_MAX_PAINT_GROWTH = 16
+MANUAL_BAND_ROWS = 2048
 
 
 def remaining_ms(deadline):
@@ -50,7 +63,7 @@ def verify_png(png):
 
 def capture_full_page(page, route, name):
     try:
-        if route != 'builds/index.html':
+        if route not in ('builds/index.html', 'manual/original/index.html'):
             return page.screenshot(full_page=True)
         deadline = time.monotonic() + 30
         geometry = page.evaluate(GEOMETRY)
@@ -61,7 +74,12 @@ def capture_full_page(page, route, name):
             page.screenshot(full_page=True, clip=dict(x=0, y=0, width=1, height=1), timeout=remaining_ms(deadline))
             painted = page.evaluate(GEOMETRY)
             if painted[0] != width or painted[2:] != geometry[2:]:
-                raise ValueError('Builds viewport changed before the full-page capture')
+                raise ValueError('Document viewport changed before the full-page capture')
+            if route == 'manual/original/index.html':
+                if not 0 <= painted[1] - height <= MANUAL_MAX_PAINT_GROWTH:
+                    raise ValueError('Original Manual height changed beyond first-paint rounding')
+                # Playwright chooses the native full-page clip from the initial document size.
+                return capture_bands(page, painted, deadline, native_height=height)
             return capture_bands(page, painted, deadline)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
         verify_png(data)
@@ -73,8 +91,9 @@ def capture_full_page(page, route, name):
         raise RuntimeError(f'{name} full-page capture failed: {error}') from error
 
 
-def capture_bands(page, geometry, deadline):
-    width, height = geometry[:2]
+def capture_bands(page, geometry, deadline, *, native_height=None):
+    width, painted_height = geometry[:2]
+    height = painted_height if native_height is None else native_height
     output = BytesIO()
     encoder = zlib.compressobj(1)
     mode = None
@@ -107,11 +126,12 @@ def capture_bands(page, geometry, deadline):
             last_row = tile.crop((0, tile.height - 1, width, tile.height)).tobytes()
             written_rows += rows
 
+    band_rows = BAND_ROWS if native_height is None else min(BAND_ROWS, MANUAL_BAND_ROWS)
     # Only compression overlaps the next read. Chromium captures in order on the original viewport.
     with ThreadPoolExecutor(max_workers=1) as worker:
         pending = None
-        for y in range(0, height, BAND_ROWS):
-            rows = min(BAND_ROWS, height - y)
+        for y in range(0, height, band_rows):
+            rows = min(band_rows, height - y)
             overlap = int(y > 0)
             clip = dict(x=0, y=y - overlap, width=width, height=rows + overlap)
             png = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
@@ -119,6 +139,23 @@ def capture_bands(page, geometry, deadline):
                 pending.result()
             pending = worker.submit(append_band, png, rows, overlap)
         pending.result()
+    if native_height is not None and native_height != painted_height:
+        # Capture the shared seam and every pixel below the native rectangle. Reject
+        # even one content-bearing pixel, including a uniform foreground-colored strip.
+        background = page.evaluate(MANUAL_BACKGROUND)
+        if background is None:
+            raise ValueError('Original Manual canvas background is not a solid opaque color')
+        clip = dict(x=0, y=height - 1, width=width, height=painted_height - height + 1)
+        strip = page.screenshot(full_page=True, clip=clip, timeout=remaining_ms(deadline))
+        verify_png(strip)
+        with Image.open(BytesIO(strip), formats=['PNG']) as tail:
+            color = tuple(background) + ((255,) if mode == 'RGBA' else ())
+            if (tail.size != (width, clip['height']) or tail.mode != mode or
+                    tail.crop((0, 0, width, 1)).tobytes() != last_row or
+                    tail.getextrema() != tuple((channel, channel) for channel in color)):
+                raise ValueError('Original Manual gained visible content below its native rectangle')
+        if page.evaluate(MANUAL_BACKGROUND) != background:
+            raise ValueError('Original Manual canvas background changed during capture')
     if written_rows != height or page.evaluate(GEOMETRY) != geometry:
         raise ValueError('Document geometry changed during the full-page capture')
     putchunk(output, b'IDAT', encoder.flush())

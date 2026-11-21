@@ -35,7 +35,10 @@ test('installer source and both built surfaces link the release without modifyin
 test('build history distinguishes the current release from its archived entries', () => {
   const page = read('web/product-site/builds/index.html');
   assert.ok(page.slice(0, page.indexOf('data-record-id=')).includes(release));
-  assert.equal((page.match(/data-record-id=/g) || []).length, 197);
+  const recordIds = [...page.matchAll(/data-record-id="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(recordIds.filter(id => id === 'release-v0.0.26-94197fc8').length, 1);
+  assert.equal(new Set(recordIds.filter(id => id !== 'release-v0.0.26-94197fc8')).size, 197);
+  assert.equal(recordIds.length, 198);
 });
 
 test('the archived FM-1 manual has a title and readable section numbers', () => {

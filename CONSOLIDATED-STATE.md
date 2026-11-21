@@ -34,3 +34,7 @@ GitHub reports these PRs merged into `integration/dnbox-consolidated`. Each merg
 | [#166](https://github.com/gobbajogger/DnBOX-nightly/pull/166) | `lane/remote` | `f8892ae7e74e3a6f6d5b5afe6718359939b5fbb3` | `cd2926dc7892a73a9d1ea4719ab36f88f221d384` |
 | [#167](https://github.com/gobbajogger/DnBOX-nightly/pull/167) | `lane/remote` | `9fab9d092887ebab9faf75d9eadf2fec1fd1a5ee` | `dd3e2cfb7a0cde404415029e6d1bca3aefb7960a` |
 | [#168](https://github.com/gobbajogger/DnBOX-nightly/pull/168) | `lane/remote` | `1f794c3784594a442d5949bd07a279e46d481ac6` | `914d68e8ed50698ea77c9d18c221c404629b9332` |
+
+## Web #156
+
+[Web #156](https://github.com/gobbajogger/DnBOX-nightly/pull/156) merged into consolidated on 21 November 2026 at 10:09 UTC. Its head was `c1755d2ea6166f224f6d3db518a3890a3a96404e`. The two parents of [merge `b3868da0df1237d86d442cb9259262ee90a13dcb`](https://github.com/gobbajogger/DnBOX-nightly/commit/b3868da0df1237d86d442cb9259262ee90a13dcb) are `914d68e8ed50698ea77c9d18c221c404629b9332` and that Web head. [Web gate](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7060190753) · [Independent Web review](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7060198599).

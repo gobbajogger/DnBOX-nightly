@@ -1,0 +1,32 @@
+--- a/host/x0x_host.c
++++ b/host/x0x_host.c
+@@ -568,6 +568,9 @@
+                 pr0[k] = eng_prof[k];
+             engine_render(blk, 256);
+             engine_volume(blk, 256);
++#ifdef X0X_WEB
++            web_audio(blk, 256);
++#endif
+             di = instr_now() - i0;
+             dt = now_ns() - t0;
+             if (seq.playing) {                           /* the cost that matters: while it plays */
+--- a/firmware/src/app/engine.c
++++ b/firmware/src/app/engine.c
+@@ -1964,9 +1964,15 @@
+             continue;
+         uint32_t rec_epoch = a >> 1;
+         if (type == C_REC) a &= 1u;
+-        if (type < 8u)
++        if (type < 8u) {
+             apply_param((int)type, (int)a, (int)b, (int)v);
+-        else if (type == C_MOD)
++#ifdef X0X_WEB
++            /* Serialized Web adapter: report actual applied command, not a
++             * queue cursor that may have skipped a replaced parameter. */
++            extern void web_engine_param_applied(unsigned,unsigned,unsigned,unsigned,unsigned);
++            web_engine_param_applied(type,a,b,v,r);
++#endif
++        } else if (type == C_MOD)
+             mod_apply((int)a, (int)v);
+         else if (type == C_BASE) {
+             if (a < NTARGETS) apply_base((int)a, (int)b, (int)v);

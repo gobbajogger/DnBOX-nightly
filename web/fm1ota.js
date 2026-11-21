@@ -411,6 +411,7 @@ export class Updater {
   // The protocol has no unit serial or flash hash: this is not exact-byte proof.
   async finishApplication(product, step) {
     this.verified = false;
+    this.application = null;
     step("reboot");
     await sleep(3000);
     // Loader terminal retries can take 4 × 3 × 5 seconds before reset.
@@ -424,6 +425,7 @@ export class Updater {
         throw fail("model", `The selected keyboard changed model during the update: ${back.id.text}`);
       if (back.id.text !== product) throw fail("mismatch", `installed, but the device reports ${back.id.text}`, back.id.text);
       this.targetName = back.name;
+      this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};
     } finally { back.link.close(); }
     this.verified = true;
     step("done", back.id.text);
