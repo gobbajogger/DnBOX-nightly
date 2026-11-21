@@ -16,6 +16,7 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
+from manual_capture import capture_original_manual
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -92,6 +93,8 @@ def history_capture_timeout_ms(width, height):
     return min(120_000, max(30_000, round(1_500 * megapixels)))
 
 def capture_site_page(page, route):
+    if route == 'manual/original/index.html':
+        return capture_original_manual(page)
     if route != 'builds/index.html':
         return page.screenshot(full_page=True)
 
