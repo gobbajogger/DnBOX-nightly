@@ -8,13 +8,16 @@ The [current gate, independent review and nightly publication ledger](https://gi
 |---|---|
 | C1, W1 | The full offline Web gate builds the 19 routes and redirects and runs the complete unit, visual, installer and browser chains. The unchanged Master Drive keyboard, Mix draft-save and Remote lane-selector cases passed on [the preceding c827d46c head](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7058670284). The current receipt is in the ledger above. |
 | C2, C4 | The no-loss and hard-limit checks run at the same head against consolidated. Firmware and reference binaries are admitted by the checked-in SHA-256 pins during the product build. |
-| W2 | Tools opens the playable firmware panel. Both emulator editions preserve their own saved sessions. The installer exports the selected starting breaks, and the release admin checks the selected controller and destination records before writing. Browser tests exercise the actual links, downloads, and denied or stale operations. |
-| W3 | The [screen selector](https://gobbajogger.github.io/DnBOX-nightly/reference/screens/) renders 1,838 named states at 240×240. The shipping firmware for the web instrument and the primary native frames is FWUI [61827a71](https://github.com/gobbajogger/DnBOX/commit/61827a714ca7b240c01a55ed347b5fd7b847c7c2). Guard registers and optional Synth One fixtures come from [3e67b59c](https://github.com/gobbajogger/DnBOX/commit/3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d). The selector identifies the optional firmware/Sound composition separately. Its browser gate compares 1,912 canvas observations with independent native RGB. The playable panel also [passed 79/79 public-input observations](../../evidence/web-routes/firmware-panel-replay.json) against the same firmware. The earlier 06bd40c5 emulator is retained for its saved sessions. |
+| W2 | Tools opens the playable firmware panel when the qualified runtime is present. The source-only build retains the ordinary Remote link. Both emulator editions preserve their own saved sessions. The installer exports the selected starting breaks, and the release admin checks the selected controller and destination records before writing. Browser tests exercise the actual links, downloads, and denied or stale operations. |
+| W3 | The [screen selector](https://gobbajogger.github.io/DnBOX-nightly/reference/screens/) renders 1,838 named states at 240×240. The shipping firmware for the web instrument and the primary native frames is FWUI [61827a71](https://github.com/gobbajogger/DnBOX/commit/61827a714ca7b240c01a55ed347b5fd7b847c7c2). Guard registers and optional Synth One fixtures come from [3e67b59c](https://github.com/gobbajogger/DnBOX/commit/3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d). The selector identifies the optional firmware/Sound composition separately. Select a state and use **Compare with native frame** to check the displayed pixels. Its browser gate compares 1,912 canvas observations with independent native RGB. Both firmware commits have the same shipping firmware tree, `ec650d510c322d14d107c4278d91ab7ad730f394`. The playable panel also [passed 79/79 public-input observations](../../evidence/web-routes/firmware-panel-replay.json) against the same firmware, in both WASM and the mounted browser instrument. The earlier 06bd40c5 emulator is retained for its saved sessions. |
 | C3, W4 | Independent before/after review covers the 19 routes at 1440×900, 390×844 and 844×390, the 240×240 render and the installer, release administration, playable instrument and screen selector journeys. The [independent review evidence](../../evidence/web-routes/firmware-screen-review.json) identifies the tested assets and cases. Defect-specific browser and unit regressions ship with this change. The signed-off disposition is in the current ledger. |
 | C5, W5 | The current ledger records completion, the fast-forward from the previous nightly Pages tree, preservation of package and hardware records, and per-file public readback against the gate build. |
 | C6 | Consolidated integration belongs to Integ under RULES §9. The PR and the current ledger record its disposition separately from the Web publication. |
 
 To reproduce W3, run `scripts/firmware-emulator/build.sh` with the firmware checkout, the pinned previous runtime and an empty output destination. Run `python3 tests/firmware-reference/build-reference.py --help` for the selector producer. Supply both outputs through `DNBOX_EMULATOR_RUNTIME` and `DNBOX_FWUI_RUNTIME`, respectively, when running `bash scripts/gate.sh web`. CSS pixels are compared at device scale one. The [PNG fixtures](../../tests/fixtures/emulator-lcd-61827a/frames.json) pin the public panel and the [native RGB inventory](../../tests/firmware-reference/native-rgb.tsv) pins the selector.
+
+<details>
+<summary>Earlier Web qualification and delivery records</summary>
 
 ## Exact-head browser qualification · 21 November
 
@@ -65,7 +68,7 @@ The nightly installer binds the owner-tested status to the assigned source, tree
 
 The [exact-head Local gate record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) tracks the result and raw log. The owner requested a draft for review, so the main and nightly Pages changes await publication. W3 and C3 still need matched firmware UI captures from the FWUI lane.
 
-## Qualification at the current PR head
+## Qualification before the common-revision firmware update
 
 Branch `lane/web` targets `integration/dnbox-consolidated`. The [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) identifies the exact GitHub commit, Local gate log and latest public hash check. The starting head was `9172ce84caefd9350357895f4d69c99c51e00ade`. Reading the branch ref found consolidated at `914d68e8ed50698ea77c9d18c221c404629b9332`, seven commits beyond the base SHA in the PR metadata.
 
@@ -85,7 +88,7 @@ The recovered Web candidate has 1,022 paths and tree `15849e511a449b92e3504af8c3
 | C5 · complete lane ledger | **FAIL** while W3 and C3 remain open. |
 | C6 · readiness and integration | **FAIL** while the remaining acceptance evidence is open. PR #156 is draft. Integ owns the final merge after RULES 9. |
 
-## What's left
+## Outstanding at that checkpoint
 
 - Full W3 requires a Web renderer and FWUI reference frames at the same agreed revision, including a way to select the remaining states. The current 240×240 comparisons above locate the revision mismatch. Test-and-merge owns the independent before/after acceptance.
 - The [qualification record](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7055380794) tracks the gate, any outstanding website findings and served-byte verification without changing the commit being tested.
@@ -210,5 +213,7 @@ The build history page now links 0.0.24 and 0.0.24.1 to the immutable commits pr
 A publication rehearsal found stale repository addresses in the generated catalog. The product builder now rewrites only exact historical URL roots in the published catalog’s repo, pages, evidence_url and model pkg fields. The sealed input stays byte-identical. The regenerated 37-version catalog matches the current public Pages file exactly (SHA256 527bf68e895ef8f6adaa66e35b368a4492ef5422cde4a43d9b9b461672833e88), including all 74 model entries and package hashes. The transport-field regression failed before the fix and passes with a lookalike URL and historical free text preserved.
 
 Recovered the four published SMK release-status sections from Pages 42d4027, including the 600b3b45 withdrawal and 94197fc8 evidence. The manual retains the direct backup, project, support and historical documentation destinations. Build history retains its raw inventory link and five published fragment targets. The seven repeated release-note IDs now have distinct anchors; the original first bookmark remains usable. The scoped publication-continuity regression failed before these changes and passed afterward.
+
+</details>
 
 </details>

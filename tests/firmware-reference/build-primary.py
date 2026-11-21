@@ -18,7 +18,8 @@ REVISION = '61827a714ca7b240c01a55ed347b5fd7b847c7c2'
 def source_tree(repo, work):
     paths = ['assets', 'firmware', 'host', 'tools', 'experiments/original_synth',
              'experiments/wobble', 'tests/host', 'tests/ui_inventory',
-             'tests/ui_geometry', 'tests/ui_defects/first_slice']
+             'tests/ui_geometry', 'tests/ui_defects/first_slice',
+             'docs/lanes/fwui/screens', 'docs/lanes/fwui/current/native-routes']
     with tempfile.TemporaryFile() as data:
         subprocess.run(['git', '-C', repo, 'archive', REVISION, '--', *paths], stdout=data, check=True)
         data.seek(0)

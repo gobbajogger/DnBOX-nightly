@@ -26,6 +26,50 @@ class Quiet(SimpleHTTPRequestHandler):
         pass
 
 
+def check_comparison(page, origin, expected):
+    url = origin + '/reference/screens/'
+    name = 'home-playing'
+    oracle_url = '**/native-rgb.tsv'
+    compare = page.get_by_role('button', name='Compare with native frame')
+    result = page.locator('#comparison')
+    page.goto(url + '#' + name)
+    page.wait_for_selector('#lcd[data-state="home-playing"]')
+    compare.click()
+    page.wait_for_function("document.querySelector('#comparison').textContent === 'All 57,600 pixels match the native frame.'")
+    assert page.locator('#state').input_value() == name
+    assert page.locator('#lcd').bounding_box()['width'] == 240
+
+    # Hold the native lookup across a selection change. Its eventual completion
+    # must not display the previous frame's result beside the current selection.
+    held = []
+    page.route(oracle_url, lambda route: held.append(route))
+    page.reload()
+    page.wait_for_selector('#lcd[data-state="home-playing"]')
+    with page.expect_request(oracle_url):
+        compare.click()
+    other = page.locator('#state option').evaluate_all('(opts, initial) => opts.find(o => o.value !== initial).value', name)
+    page.select_option('#state', other)
+    page.wait_for_function("s => document.querySelector('#lcd').dataset.state === s", arg=other)
+    with page.expect_response(oracle_url):
+        held[0].fulfill(body=ORACLE.read_text())
+    assert result.inner_text() == ''
+    compare.click()
+    page.wait_for_function("document.querySelector('#comparison').textContent === 'All 57,600 pixels match the native frame.'")
+    page.unroute(oracle_url)
+
+    # A valid, deliberately incorrect native hash must produce an explicit mismatch.
+    wrong = '0' * 64
+    altered = ORACLE.read_text().replace(other + '\t' + expected[other], other + '\t' + wrong)
+    assert altered != ORACLE.read_text()
+    page.route(oracle_url, lambda route: route.fulfill(body=altered))
+    page.reload()
+    page.wait_for_function("s => document.querySelector('#lcd').dataset.state === s", arg=other)
+    compare.click()
+    page.wait_for_function("document.querySelector('#comparison').textContent.includes('differs from the native frame')")
+    assert expected[other] in result.inner_text() and wrong in result.inner_text()
+    page.unroute(oracle_url)
+
+
 def sweep(page, origin, site):
     expected = dict(line.split('\t') for line in ORACLE.read_text().splitlines())
     manifest = json.loads((site / 'reference/screens/states.json').read_text())
@@ -33,6 +77,8 @@ def sweep(page, origin, site):
     assert manifest['firmware'] == SHA
     assert len(expected) == len(states) == 1838
     assert {row[0] for row in states} == set(expected)
+    assert (site / 'reference/screens/native-rgb.tsv').read_bytes() == ORACLE.read_bytes()
+    check_comparison(page, origin, expected)
     page.goto(origin + '/reference/screens/')
     page.wait_for_selector('#lcd[data-state]')
     assert page.locator('a[href$="' + SHA + '"]').count() == 1

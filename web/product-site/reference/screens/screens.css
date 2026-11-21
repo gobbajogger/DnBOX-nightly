@@ -2,6 +2,11 @@
 .screen-grid label { display: block; margin: 0 0 .35rem; font-weight: 700; }
 .screen-grid select { display: block; width: 100%; margin-bottom: 1rem; padding: .55rem; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-control); }
 .screen-grid select:focus-visible { outline: 3px solid var(--control); outline-offset: 2px; }
+.screen-grid button { font: inherit; cursor: pointer; }
+.screen-grid button:disabled { opacity: .65; cursor: default; }
+.screen-grid button:focus-visible { outline: 3px solid var(--control); outline-offset: 2px; }
+#comparison { overflow-wrap: anywhere; }
+#comparison:empty { display: none; }
 .screen-grid figure { margin: 0; max-width: 100%; }
 .screen-grid canvas { display: block; width: 240px; max-width: 100%; height: auto; aspect-ratio: 1; background: var(--bg); outline: 1px solid var(--line); image-rendering: pixelated; }
 .screen-grid figcaption { margin: .5rem 0 0; color: var(--muted); overflow-wrap: anywhere; }

@@ -27,4 +27,4 @@ With both `DNBOX_FWUI_RUNTIME` and `DNBOX_EMULATOR_RUNTIME` set, the Web build i
 python3 tests/firmware-reference-browser.py
 ```
 
-The browser test checks all 1,838 selectable state IDs and 1,912 capture events. It compares the decoded canvas PNG with the native RGB hash. It separately uses the public group and state controls, captures the displayed LCD at three viewport sizes, checks rapid reselection, and restores the selected URL fragment after reload.
+The browser test checks all 1,838 selectable state IDs and 1,912 capture events. It compares the decoded canvas PNG with the native RGB hash. It separately uses the public group and state controls, captures the displayed LCD at three viewport sizes, checks rapid reselection, and restores the selected URL fragment after reload. The “Compare with native frame” button hashes the displayed canvas and checks the selected state against the same staged native hashes. Browser tests exercise a match, an intentionally incorrect hash and a selection change during comparison.

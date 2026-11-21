@@ -72,7 +72,23 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
  const derived = new Map(inputs);
+ if (emulatorRuntime && derived.has('tools/index.html')) {
+  const toolsPage = derived.get('tools/index.html').toString('utf8');
+  const panelLink = '<a class="button" href="../emu/">Play the browser instrument</a>';
+  derived.set('tools/index.html', Buffer.from(toolsPage.replace('<!-- playable-panel-link -->', panelLink)));
+ }
  if (derived.has('reference/screens/index.html') && (emulatorRuntime || firmwareReferenceRuntime)) {
+  const oraclePath = join(repoRoot, 'tests/firmware-reference/native-rgb.tsv');
+  const oracleName = 'reference/screens/native-rgb.tsv';
+  noLinks(oraclePath, repoRoot);
+  if (seen.has(oracleName) || !lstatSync(oraclePath).isFile()) throw Error('Expected canonical native frame hashes');
+  derived.set(oracleName, readFileSync(oraclePath));
+  seen.add(oracleName);
+  if (derived.has('reference/index.html')) {
+   const referencePage = derived.get('reference/index.html').toString('utf8');
+   const screenLink = '<p><a class="button" href="screens/">Explore the firmware screen reference</a></p>';
+   derived.set('reference/index.html', Buffer.from(referencePage.replace('<!-- firmware-screen-link -->', screenLink)));
+  }
   for (const [name, data] of readFirmwareReference(repoRoot, firmwareReferenceRuntime)) {
    if (seen.has(name)) throw Error('Firmware reference output collision');
    derived.set(name, data); seen.add(name);
