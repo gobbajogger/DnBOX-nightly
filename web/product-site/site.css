@@ -16,10 +16,15 @@
 #proposals a{overflow-wrap:anywhere}
 
 @media (max-width: 900px) {
-  body > header, body > header nav { flex-wrap: wrap; }
-  body > header { column-gap: 16px; }
-  body > header nav { padding-block: 8px; }
-  body > header nav a:first-child { display: inline; }
+  body > header, body > header nav,
+  .projects-page #dnbox-global-header header,
+  .projects-page #dnbox-global-header nav { flex-wrap: wrap; }
+  body > header,
+  .projects-page #dnbox-global-header header { column-gap: 16px; }
+  body > header nav,
+  .projects-page #dnbox-global-header nav { padding-block: 8px; }
+  body > header nav a:first-child,
+  .projects-page #dnbox-global-header nav a:first-child { display: inline; }
 }
 
 .starting-breaks-page .install-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }

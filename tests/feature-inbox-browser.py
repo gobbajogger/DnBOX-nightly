@@ -51,8 +51,12 @@ def check_inbox(page, origin):
 def check_links(page, url, selector, width):
     page.goto(url)
     page.evaluate("document.fonts.ready")
-    if url.endswith("/new/") and not page.locator("header").get_by_role("link", name="Sounds", exact=True).is_visible():
-        return f"Sounds link hidden at {width}px on {url}"
+    if url.endswith(("/new/", "/projects/")):
+        nav = page.get_by_role("navigation", name="Main", exact=True)
+        for name in ("Sounds", "Remote", "Samples", "Projects", "Presets", "Manual", "History", "Install nightly"):
+            link = nav.get_by_role("link", name=name, exact=True)
+            if not link.is_visible():
+                return f"{name} link hidden or missing at {width}px on {url}"
     handles = page.locator(selector)
     assert handles.count() >= 2, f"Missing navigation links on {url}"
     boxes = [item.bounding_box() for item in handles.all()]
@@ -73,11 +77,12 @@ def main():
         Thread(target=server.serve_forever, daemon=True).start()
         try:
             with sync_playwright() as playwright, playwright.chromium.launch(chromium_sandbox=True) as browser:
-                for width, height in [(1440, 900), (390, 844), (844, 390), (240, 240)]:
+                for width, height in [(1440, 900), (1024, 640), (844, 390), (390, 844), (240, 240)]:
                     with browser.new_page(viewport={"width": width, "height": height}) as page:
                         origin = f"http://127.0.0.1:{server.server_port}"
                         actual = check_inbox(page, origin)
                         for path, selector in [("/new/", "body > header a:visible"),
+                                               ("/projects/", "#dnbox-global-header header a:visible"),
                                                ("/starting-breaks/", ".install-links a:visible")]:
                             error = check_links(page, origin + path, selector, width)
                             if error:

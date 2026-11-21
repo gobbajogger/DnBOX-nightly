@@ -609,8 +609,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 118006,
-      "sha256": "b06cd9014f9d558b871fa39c07e9aefafb455948e79faf96c8ba80dc6831c7a4"
+      "bytes": 118020,
+      "sha256": "6bea1592525f87ec53ea2e1a67c1faa94a22284b370bfc3f1ee4bb07f103802d"
     },
     {
       "path": "reference/current-ui.html",
@@ -999,8 +999,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12485,
-      "sha256": "0206e6a0779edd9a612ade53494c2902f26258a56f58ef0ac052d8dcf8169279"
+      "bytes": 12720,
+      "sha256": "f55267dcfa51920f1fe92a17e25b9021b7a30aff0214d27ed4521fb3e6455d00"
     },
     {
       "path": "starting-break-export.mjs",
