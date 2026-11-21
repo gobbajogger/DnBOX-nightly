@@ -156,6 +156,41 @@ class GateContract(unittest.TestCase):
             self.assertEqual([output.getpixel((1, y)) for y in range(25)], [(0, y, 10) for y in range(25)])
         self.assertLessEqual(max(clip['height'] for clip in clips), 4)
 
+    def test_short_manuals_capture_the_complete_painted_document(self):
+        initial = [3, 4, 0, 0, 3, 2, 1]
+        painted = [3, 7, *initial[2:]]
+        for route in ('manual/projects-guide.html', 'manual/protocol.html'):
+            with self.subTest(route=route):
+                for failure in (None, 'short-image', 'changing-layout'):
+                    with self.subTest(failure=failure):
+                        page = Mock()
+                        final = initial if failure == 'changing-layout' else painted
+                        page.evaluate.side_effect = [initial, painted, final]
+                        warm = False
+
+                        def screenshot(*, full_page, clip=None, timeout=None):
+                            nonlocal warm
+                            self.assertTrue(full_page)
+                            data = io.BytesIO()
+                            if clip:
+                                self.assertEqual(clip, dict(x=0, y=0, width=1, height=1))
+                                warm = True
+                                size = (1, 1)
+                            else:
+                                size = (3, 7 if warm and failure != 'short-image' else 4)
+                            Image.new('RGB', size, 'red').save(data, format='PNG')
+                            return data.getvalue()
+
+                        page.screenshot.side_effect = screenshot
+                        if failure:
+                            with self.assertRaisesRegex(RuntimeError, 'full-page capture failed'):
+                                capture.capture_full_page(page, route, 'manual-short')
+                        else:
+                            data = capture.capture_full_page(page, route, 'manual-short')
+                            with Image.open(io.BytesIO(data)) as image:
+                                self.assertEqual(image.size, (3, 7))
+                                self.assertEqual(image.getpixel((2, 6)), (255, 0, 0))
+
     def test_first_paint_rejects_scroll_viewport_or_dpr_drift(self):
         original = [3, 7, 0, 0, 3, 2, 1]
         for index in (0, 2, 3, 4, 5, 6):

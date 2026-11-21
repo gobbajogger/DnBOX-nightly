@@ -63,19 +63,34 @@ def verify_png(png):
 
 def capture_full_page(page, route, name):
     try:
-        if route not in ('builds/index.html', 'manual/original/index.html', 'manual/legacy.html'):
+        short_manual = route in ('manual/projects-guide.html', 'manual/protocol.html')
+        if not short_manual and route not in ('builds/index.html', 'manual/original/index.html', 'manual/legacy.html'):
             return page.screenshot(full_page=True)
         deadline = time.monotonic() + 30
         geometry = page.evaluate(GEOMETRY)
         width, height = geometry[:2]
         long_archive = route == 'manual/legacy.html'
-        if geometry[-1] == 1 and height > BAND_ROWS and (long_archive or width * height > SINGLE_CAPTURE_PIXELS):
+        needs_bands = geometry[-1] == 1 and height > BAND_ROWS and (long_archive or width * height > SINGLE_CAPTURE_PIXELS)
+        if short_manual or needs_bands:
             # Chromium can finish fractional layout on its first compositor capture.
             # Paint one pixel first, then size and check every stored band on the settled page.
             page.screenshot(full_page=True, clip=dict(x=0, y=0, width=1, height=1), timeout=remaining_ms(deadline))
             painted = page.evaluate(GEOMETRY)
             if painted[0] != width or painted[2:] != geometry[2:]:
                 raise ValueError('Document viewport changed before the full-page capture')
+            if short_manual:
+                # On the phone Protocol page the first paint moves the final link below
+                # the initial capture height. Require every pixel of the stable document.
+                data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
+                verify_png(data)
+                with Image.open(BytesIO(data), formats=['PNG']) as image:
+                    if list(image.size) != painted[:2]:
+                        raise ValueError('Screenshot extent differs from the painted document')
+                    image.load()
+                if page.evaluate(GEOMETRY) != painted:
+                    raise ValueError('Document changed during the full-page capture')
+                remaining_ms(deadline)
+                return data
             if route == 'manual/original/index.html':
                 if not 0 <= painted[1] - height <= MANUAL_MAX_PAINT_GROWTH:
                     raise ValueError('Original Manual height changed beyond first-paint rounding')

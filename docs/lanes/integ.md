@@ -237,3 +237,9 @@ In a fresh Chromium process at each viewport, the SMK archive grew by 86–116 C
 ### Owner-approved rules #172
 
 The new consolidated parent changed only AGENTS.md, CHECKLISTS.md and RULES.md. All three match the owner-approved files verbatim. The website, generated previews, visual runner and committed references retain their exact trees from the preceding capture repair. [Four-width independent-review inputs](https://github.com/gobbajogger/DnBOX-nightly/blob/d297d1db496ee07065345a7be9ca0474e4eb2894/receipt.json) hold the base and PR full-page pixels for the three newly covered Manual routes. Untested checks remain NOT_RUN until the corresponding evidence exists.
+
+### Complete Guide and Protocol captures
+
+Independent inspection found the final “Source and credits” link cut off in both 390px Protocol screenshots. Chromium initially reported 3,763 CSS pixels. Its first full-document paint settled at 3,817 pixels, with the final link ending at 3,771.98. The Guide and Protocol captures now verify that the decoded PNG matches the complete settled document and that the viewport and document stay fixed during capture. The regression rejects short images and late layout changes on both routes. [Corrected phone screenshots and native measurements](https://github.com/gobbajogger/DnBOX-nightly/tree/06150c905a8ecfd9bb259e0bf1a39adc13e2cb9f/surfaces).
+
+At c90b08e3 the unrestricted sweep completed the two desktop sizes and the SMK Manual at 844px. It recorded 17 size mismatches against inherited references before the 844px Build History screenshot exhausted the 30-second capture budget. The five-viewport Feature Inbox browser and focused native suite passed on 7fe02e9c. The unrestricted visual gate and outstanding independent review remain open.

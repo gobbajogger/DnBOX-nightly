@@ -99,7 +99,7 @@ class OriginalManualCapture(unittest.TestCase):
                 bands.assert_not_called()
 
     def test_other_manual_routes_keep_native_full_page(self):
-        for route in ('manual/index.html', 'manual/projects-guide.html', 'manual/original/other.html'):
+        for route in ('manual/index.html', 'manual/original/other.html'):
             with self.subTest(route=route):
                 page = Mock()
                 capture.capture_full_page(page, route, 'other')
