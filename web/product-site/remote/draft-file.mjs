@@ -1,4 +1,4 @@
-import {emptyBreakSequence,validateBreakSequence} from './break-sequence.mjs';
+import {emptyBreakSequence,validateBreakSequence,installBreakSequence} from './break-sequence.mjs';
 import {SOUND_BANKS,superJ6Spec,acceptsSuperJ6} from './superj6.mjs';
 import{MAX_DRAFT_ID}from'./draft-identity.mjs';
 // Explicit LOCAL example-draft file, not an instrument project, preset, engine or MIDI format.
@@ -62,14 +62,15 @@ export class WorkspaceDraftFile{
   // Normalize property order so an equivalent reordered file has the same snapshot semantics.
   return{schema:SCHEMA,kind:KIND,identity:clone(this.identity),notes:document.notes.map(n=>{const a={};for(const k of['id','track','note','velocity','channel','start','end','sourceOrder','pulse','chance','pan','pitchOffset'])if(Object.hasOwn(n,k))a[k]=n[k];return a;}),parameters:clone(document.parameters),...(Object.hasOwn(document,'breakSequence')?{breakSequence:validateBreakSequence(document.breakSequence)}:{}),motion:{target:MOTION,values:[...document.motion.values]},launch:[...document.launch],song:document.song.map(r=>({patterns:[...r.patterns],repeats:r.repeats})),soundBanks:[...document.soundBanks],context:clone(c)};
  }
- capture(state,context){if(state.model.gesture||state.motion.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,...(state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())?{breakSequence:state.breakSequence}:{}),notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
+ capture(state,context){if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture)fail('finish or cancel active gesture before saving');return this.validate({schema:SCHEMA,kind:KIND,identity:this.identity,...(state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())?{breakSequence:state.breakSequence}:{}),notes:state.model.notes,parameters:[...state.parameterDraft].map(([id,value])=>({id,value})),motion:{target:MOTION,values:state.motion.values},launch:state.launch.targets,song:state.arrangement.rows,soundBanks:state.soundBanks,context});}
  encode(document){const text=JSON.stringify(this.validate(document),null,2)+'\n';if(new TextEncoder().encode(text).length>MAX_BYTES)fail('file exceeds 4 MiB');return text;}
  decode(text){return this.validate(parse(text));}
 }
 export function installWorkspaceDraft(state,codec,document){
  // Complete validation/allocation precedes every write. Never infer a native transaction.
  const d=codec.validate(document),notes=clone(d.notes),next=(1+Math.max(-1,...notes.filter(n=>n.id.startsWith('draft')).map(n=>Number(n.id.slice(5)))))%(MAX_DRAFT_ID+1),selection=new Set(d.context.selection),parameters=new Map(d.parameters.map(p=>[p.id,p.value])),identities=new Map(d.parameters.map(p=>{const s=codec.parameters.get(p.id);return[p.id,{label:s.label,context:s.context}];}));
- if(state.breakSequence)Object.assign(state.breakSequence,d.breakSequence??emptyBreakSequence());
+ state.breakChanceLane?.cancel();
+ if(state.breakSequence)installBreakSequence(state.breakSequence,d.breakSequence??emptyBreakSequence());
  state.model.cancelAll();state.motion.cancel();state.model._notes=notes;state.model.next=next;state.model.selection=selection;state.model.clipboard=null;
  for(const m of[state.model,state.motion,state.arrangement]){m.history=[];m.future=[];}
  state.motion.values=d.motion.values;state.arrangement.rows=d.song;state.launch.targets=d.launch;state.soundBanks.splice(0,2,...d.soundBanks);
@@ -77,6 +78,6 @@ export function installWorkspaceDraft(state,codec,document){
  state.timeline.past=[];state.timeline.future=[];return d.context;
 }
 export function hasDraftChanges(state,codec){
- if(state.model.gesture||state.motion.gesture)return true;
+ if(state.model.gesture||state.motion.gesture||state.breakChanceLane?.gesture)return true;
  return !!state.breakSequence&&!same(state.breakSequence,emptyBreakSequence())||!same(state.model.notes,codec.original)||[...state.parameterDraft].some(([id,value])=>value!==codec.parameters.get(id)?.value)||state.motion.values.some(v=>v!==null)||state.arrangement.rows.length>0||state.launch.targets.some(v=>v!==null)||!same(state.soundBanks,['CHICAGO','MIAMI']);
 }

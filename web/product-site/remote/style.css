@@ -189,6 +189,12 @@ dialog::backdrop{background:#000a}
 #other-view .source-scene .source-hit[data-live=pan]{background:rgba(14,20,22,.72)}
 .source-caption{font-size:var(--fs-xs);color:var(--muted)}
 .source-sound-list{display:block}
+.chicago-draft-sections > section{display:contents}
+@media (min-width:1200px) and (min-height:720px){
+ .chicago-draft-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;align-items:start}
+ .chicago-draft-sections > section{display:block;min-width:0}
+ .chicago-draft-sections .encoder-grid:not(.envelope-controls){grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+}
 .source-sound-row{display:grid;grid-template-columns:minmax(5rem,1fr) minmax(4rem,1fr) auto;align-items:center;gap:var(--u);min-height:var(--hit);width:100%;padding:.65rem .8rem;border:1px solid var(--line);border-radius:10px;text-align:left;background:#121a1c;color:var(--fg)}
 .source-sound-row.has-glyph{grid-template-columns:auto minmax(5rem,1fr) minmax(4rem,1fr) auto}
 .source-sound-row small{font-size:var(--fs-xs);color:var(--muted)}

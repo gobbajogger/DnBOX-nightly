@@ -56,3 +56,31 @@ test('SuperJ6 source records and legacy JUNO survive one file, and rejected inpu
   assert.equal(codec.encode(capture(fresh)),before);
  }
 });
+
+test('BREAK chance is stored once per local step and old Drafts clear its optional state',()=>{
+ const one=setup(), previous=one.codec.encode(capture(one));
+ const empty={loops:[null,null],rate:'1/16',slices:Array(16).fill(0)};
+ one.state.breakSequence=structuredClone(empty);
+ assert.equal(one.codec.encode(capture(one)),previous);
+ one.state.model.add({track:'breaks',note:60,start:0,end:100});
+ one.state.model.add({track:'breaks',note:62,start:0,end:70});
+ one.state.breakSequence.chance=[95,101,102,135,...Array(12).fill(null)];
+ const encoded=one.codec.encode(capture(one)), recovered=one.codec.decode(encoded);
+ assert.deepEqual(recovered.breakSequence.chance,one.state.breakSequence.chance);
+ assert.ok(recovered.notes.every(n=>!Object.hasOwn(n,'chance')));
+ const target=setup();target.state.breakSequence=structuredClone(empty);
+ installWorkspaceDraft(target.state,target.codec,recovered);
+ assert.deepEqual(target.state.breakSequence,one.state.breakSequence);
+ for(const invalid of [0,1,99,100,136,255,-1,'1:2',NaN]){
+  const wrong=structuredClone(recovered);wrong.breakSequence.chance[0]=invalid;
+  assert.throws(()=>installWorkspaceDraft(target.state,target.codec,wrong),/invalid BREAK/);
+  assert.deepEqual(target.state.breakSequence,one.state.breakSequence);
+ }
+ const wrong=structuredClone(recovered);wrong.breakSequence.chance.pop();
+ assert.throws(()=>one.codec.validate(wrong),/invalid BREAK/);
+ const canonical=structuredClone(recovered);canonical.breakSequence.chance.fill(null);
+ assert.ok(!Object.hasOwn(one.codec.validate(canonical).breakSequence,'chance'));
+ installWorkspaceDraft(target.state,target.codec,target.codec.decode(previous));
+ assert.deepEqual(target.state.breakSequence,empty);
+ assert.equal(target.codec.encode(capture(target)),previous);
+});

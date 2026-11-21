@@ -24,9 +24,34 @@ def expected_states():
         *(f'sound-{part}-{bank}' for part in ('miami', 'chicago') for bank in ('MIAMI', 'CHICAGO', 'Synth One', 'SuperJ6', 'JUNO')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
-        'break-notes', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
+        'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
         'review-dialog', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
     }
+
+
+def author_break_chance(page):
+    lane = page.locator('#velocity')
+    cells = lane.locator('[data-lane-step]')
+    page.locator('#lane-param').click()
+    assert page.locator('#lane-kind').input_value() == 'chance'
+    assert cells.count() == 16 and lane.locator('[data-lane-step]:enabled').count() == 16
+    assert cells.evaluate_all("items => items.every(item => item.getAttribute('aria-valuetext') === '100%')")
+
+    target = cells.nth(2)
+    assert '0 notes' in target.get_attribute('aria-label')
+    box = target.bounding_box()
+    target.click(position={'x': box['width'] / 2, 'y': box['height'] - 2})
+    values = cells.evaluate_all("items => items.map(item => item.getAttribute('aria-valuetext'))")
+    assert values == ['100%', '100%', '8:8'] + ['100%'] * 13
+    assert page.locator('#lane-param output').inner_text() == '8:8'
+
+    lane_box = lane.bounding_box()
+    roll_box = page.locator('#roll-scroll').bounding_box()
+    viewport = page.viewport_size
+    assert 0 <= lane_box['x'] and lane_box['x'] + lane_box['width'] <= viewport['width'] + 1
+    assert abs(roll_box['y'] + roll_box['height'] - lane_box['y']) <= 2
+    assert 0 < lane_box['height'] and lane_box['y'] + lane_box['height'] <= viewport['height'] + 1
+    return {'enabledSteps': 16, 'values': values, 'lane': lane_box, 'roll': roll_box, 'authoredCell': box}
 
 
 def inspect(origin, site, output):
@@ -216,6 +241,17 @@ def inspect(origin, site, output):
             for q in ('device', 'identity'):
                 page.goto(origin + '/remote/' + q + '/', wait_until='networkidle')
                 snap(q, [13])
+
+            def break_chance():
+                page.goto(origin + '/remote/', wait_until='networkidle')
+                part('breaks')
+                view('roll')
+                page.locator('[data-break-view="notes"]').click()
+                details = author_break_chance(page)
+                snap('break-chance-authored', [11, 15])
+                state[-1]['breakChance'] = details
+
+            case('authored BREAK Chance', break_chance)
         finally:
             ctx.close()
             b.close()

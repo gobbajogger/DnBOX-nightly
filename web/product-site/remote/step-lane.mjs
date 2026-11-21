@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {breakChanceText} from './break-chance.mjs';
 import {chanceDomain} from './sequence.mjs';
 import {LANE_KINDS,chanceFromLane,velocityFromLane,panFromLane,pitchOffsetFromLane,laneFraction,laneText} from './lane.mjs';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -43,11 +44,12 @@ export class StepLaneGesture{
  cancelPointer(owner){this.owners.delete(owner);this.cancel(false);}
 }
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function renderStepSliders(groups,{kind='velocity',base=n=>n.note,selected=null}={}){
+export function renderStepSliders(groups,{kind='velocity',base=n=>n.note,selected=null,breakChance=null,activeStep=null}={}){
  return groups.map(({step,notes})=>{
+  const point = breakChance ? breakChanceText(breakChance[step]) : null;
   const values=notes.map(n=>kind==='pitch'&&['drum909','drum808'].includes(n.track)?`${(n.pitchOffset??0)>0?'+':''}${n.pitchOffset??0}st`:laneText(kind,n,base(n)));
-  const mixed=new Set(values).size>1,value=mixed?'Mixed':values[0]??'',active=notes.some(n=>n.id===selected),level=notes.length?notes.reduce((sum,n)=>sum+(kind==='pitch'&&['drum909','drum808'].includes(n.track)?clamp(.5+(n.pitchOffset??0)/48,0,1):laneFraction(kind,n,base(n))),0)/notes.length:0;
+  const mixed=new Set(values).size>1,value=point??(mixed?'Mixed':values[0]??''),active=point&&activeStep!==null?step===activeStep:notes.some(n=>n.id===selected),level=point?laneFraction('chance',{chance:point}):notes.length?notes.reduce((sum,n)=>sum+(kind==='pitch'&&['drum909','drum808'].includes(n.track)?clamp(.5+(n.pitchOffset??0)/48,0,1):laneFraction(kind,n,base(n))),0)/notes.length:0;
   const label=`Step ${step+1}, ${notes.length} notes, ${kind} ${value||'empty'}`;
-  return `<button class="step-slider" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(level*100)}" aria-valuetext="${escape(value||'empty')}" data-lane-step="${step}"${notes.length&&supports(notes,kind)?` data-select="${escape(notes[0].id)}"`:' disabled'} style="left:${step/groups.length*100}%;width:${100/groups.length}%;--v:${level.toFixed(4)}" aria-label="${escape(label)}" aria-pressed="${active}"${['pitch','pan'].includes(kind)?' data-bipolar':''}><i class="step-slider-fill"></i><output>${escape(value)}</output></button>`;
+  return `<button class="step-slider" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(level*100)}" aria-valuetext="${escape(value||'empty')}" data-lane-step="${step}"${notes.length&&supports(notes,kind)?` data-select="${escape(notes[0].id)}"`:breakChance?'':' disabled'} style="left:${step/groups.length*100}%;width:${100/groups.length}%;--v:${level.toFixed(4)}" aria-label="${escape(label)}" aria-pressed="${active}"${['pitch','pan'].includes(kind)?' data-bipolar':''}><i class="step-slider-fill"></i><output>${escape(value)}</output></button>`;
  }).join('');
 }

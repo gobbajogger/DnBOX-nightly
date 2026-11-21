@@ -8,11 +8,13 @@ its persistence/undo, rather than accepting only that a heading is visible.
 """
 import asyncio
 import json
+import linecache
 import mimetypes
 import re
 import subprocess
 import tempfile
 import time
+import traceback
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 from playwright.async_api import async_playwright, expect
@@ -406,7 +408,54 @@ async def thin_step_lanes(page):
         target.mkdir(parents=True,exist_ok=True)
         await page.screenshot(path=str(target/f'{width}x{height}.png'))
 
+async def chicago_sound_desktop(page):
+    await page.set_viewport_size({'width': 1440, 'height': 900})
+    await page.locator('#roll-grid [data-note]').first.wait_for(state='attached')
+    await page.locator('[data-engine="chicago"]').click()
+    await page.locator('[data-view="sound"]').click()
+    await expect(page.locator('#sound-bank')).to_have_value('CHICAGO')
+    await expect(page.locator('[data-sound-source="draft"]')).to_have_attribute('aria-pressed', 'true')
+
+    section = page.locator('.source-sound-list .envelope-controls')
+    stages = section.locator('.envelope-stage')
+    await expect(stages.locator('span')).to_have_text(['ATTACK', 'DECAY', 'SUSTAIN', 'RELEASE'])
+    await expect(stages.locator('output')).to_have_text(['27%', '40%', '57%', '17%'])
+    await expect(page.locator('.source-sound-list [aria-label="WAVE"]')).to_have_attribute('aria-valuetext', 'SAW')
+    assert await page.locator('#other-view').evaluate('viewport => viewport.scrollTop') == 0
+    for target in [section.locator('svg.envelope-graph'), *await stages.all()]:
+        await expect(target).to_be_in_viewport(ratio=1)
+    await stages.first.focus()
+    await page.keyboard.press('Tab')
+    await expect(stages.nth(1)).to_be_focused()
+
 async def full_envelopes(page):
+    try:
+        await check_draft_envelopes(page)
+    except Exception as error:
+        try:
+            frame, line = next(((frame, line) for frame, line in traceback.walk_tb(error.__traceback__)
+                                if frame.f_code is check_draft_envelopes.__code__), (None, 0))
+            observed = frame.f_locals if frame else {}
+            details = {key: observed.get(key) for key in ('part', 'bank', 'stage_index')}
+            details.update(case='full_envelopes', operation=linecache.getline(__file__, line).strip(),
+                           viewport=page.viewport_size, dom=None)
+            try:
+                if not page.is_closed():
+                    details['dom'] = await asyncio.wait_for(page.evaluate("""() => {
+                      const owner = document.querySelector('[data-engine][aria-pressed="true"]');
+                      const stages = [...document.querySelectorAll('#other-view .envelope-controls .envelope-stage')];
+                      return {part: owner?.dataset.engine, bank: document.querySelector('#sound-bank')?.value,
+                        count: stages.length, stages: stages.map(b => ({id: b.dataset.param, label: b.querySelector('span')?.textContent}))};
+                    }"""), timeout=0.65)
+            except Exception:
+                pass
+            print('Draft envelope context', json.dumps(details), flush=True)
+        except Exception:
+            pass  # Reporting must preserve the original fixture failure.
+        raise
+
+
+async def check_draft_envelopes(page):
     await page.locator('#roll-grid [data-note]').first.wait_for(state='attached')
     archived = Path(__file__).with_name('fixtures') / 'legacy-sound-banks' / 'both-owners.json'
     await page.locator('#draft-file').set_input_files(archived)
@@ -416,6 +465,7 @@ async def full_envelopes(page):
     root = page.locator('#other-view .envelope-controls')
     buttons = root.locator('.envelope-stage')
     for part in ['chicago','miami']:
+        bank = stage_index = None
         await page.locator('[data-engine="'+part+'"]').click()
         picker = page.locator('#sound-bank')
         await expect(picker).to_have_value('JUNO')
@@ -429,7 +479,7 @@ async def full_envelopes(page):
             for width,height in [(390,844),(844,390),(1440,900)]:
                 await page.set_viewport_size({'width':width,'height':height})
                 assert (await graph.bounding_box())['width'] >= (await root.bounding_box())['width'] - 18
-            for button in await buttons.all():
+            for stage_index, button in enumerate(await buttons.all()):
                 before = await graph.screenshot()
                 original_shape = await graph.locator('path').get_attribute('d')
                 initial = await button.locator('output').inner_text()
@@ -442,6 +492,7 @@ async def full_envelopes(page):
                 await page.locator('#undo').click()
                 await expect(button.locator('output')).to_have_text(initial)
                 assert await graph.locator('path').get_attribute('d') == original_shape
+            stage_index = None
             await buttons.first.press('ArrowRight')
             saved = await draft_state(page)
             shape = await graph.locator('path').get_attribute('d')
@@ -449,6 +500,56 @@ async def full_envelopes(page):
             assert shape == await graph.locator('path').get_attribute('d')
     await page.locator('#sound-bank').select_option('MIAMI')
     await expect(graph).to_have_count(0)
+
+async def break_step_chance(page, previous):
+    # Import two ordinary pre-Chance notes on one step; the lock belongs to that step only.
+    previous = dict(previous, notes=[*previous['notes'], dict(next(n for n in previous['notes'] if n['id']=='draft998'), id='draft999', note=64)])
+    await load_draft(page, previous)
+    await page.locator('[data-break-view="notes"]').click()
+    await page.locator('#lane-param').click()
+    owner=page.locator('#velocity [data-lane-step="0"]')
+    await expect(owner).to_have_attribute('aria-label','Step 1, 2 notes, chance 100%')
+    await owner.press('ArrowUp')
+    assert 'breakSequence' not in await draft_state(page)
+    await owner.press('ArrowDown')
+    await expect(owner).to_have_attribute('aria-valuetext','95%')
+    saved=await draft_state(page)
+    assert saved['breakSequence']['chance']==[95]+[None]*15 and saved['notes']==previous['notes']
+    await page.locator('#undo').click()
+    assert 'breakSequence' not in await draft_state(page)
+    await page.locator('#redo').click()
+    await expect(owner).to_have_attribute('aria-valuetext','95%')
+    # A real stroke into an empty step stores the whole gesture as one command.
+    silent=page.locator('#velocity [data-lane-step="2"]')
+    first=await owner.bounding_box(); third=await silent.bounding_box()
+    await page.mouse.move(first['x']+first['width']/2,first['y']+2);await page.mouse.down()
+    await page.mouse.move(third['x']+third['width']/2,third['y']+third['height']-2,steps=3);await page.mouse.up()
+    await expect(silent).to_have_attribute('aria-valuetext','8:8')
+    await expect(page.locator('#lane-param output')).to_have_text('8:8')
+    stroke=await draft_state(page)
+    assert stroke['breakSequence']['chance'][0] is None and stroke['breakSequence']['chance'][2]==135
+    assert stroke['notes']==previous['notes'] and await page.locator('#apply').is_disabled()
+    await page.locator('#undo').click()
+    assert (await draft_state(page))['breakSequence']==saved['breakSequence']
+    # Focus on a different step must not change the step under the pointer.
+    await owner.focus()
+    await page.mouse.move(third['x']+third['width']/2,third['y']+third['height']-2);await page.mouse.down()
+    await expect(page.locator('#lane-param output')).to_have_text('8:8')
+    await expect(silent).to_have_attribute('aria-pressed','true')
+    # Keyboard navigation away from Notes cancels the held preview.
+    await page.locator('[data-break-view="slices"]').press('Enter');await page.mouse.up()
+    await page.locator('[data-break-view="notes"]').click()
+    assert (await draft_state(page))['breakSequence']==saved['breakSequence']
+    await silent.press('ArrowDown')
+    await expect(page.locator('#lane-param output')).to_have_text('95%')
+    await expect(silent).to_have_attribute('aria-pressed','true')
+    await load_draft(page,stroke)
+    await page.locator('[data-view="patterns"]').click()
+    await page.get_by_role('button',name='BREAK P2, not loaded',exact=True).click()
+    selected=await draft_state(page)
+    assert selected['launch'][4]==1 and selected['breakSequence']==stroke['breakSequence']
+    await load_draft(page,previous)
+    assert 'breakSequence' not in await draft_state(page)
 
 async def break_and_tape(page):
     await page.locator('[data-engine="breaks"]').click()
@@ -506,6 +607,7 @@ async def break_and_tape(page):
     legacy_file = await draft_state(page)
     assert next(n for n in legacy_file['notes'] if n['id']=='draft998')['note'] == 61
     assert 'breakSequence' not in legacy_file
+    await break_step_chance(page,legacy_file)
     await page.locator('[data-break-view="slices"]').click()
     await page.locator('[data-engine="chicago"]').click()
     await expect(page.locator('#roll-view')).to_be_visible()
@@ -721,7 +823,7 @@ async def project_sound_edit_count_at_size(page,width,height):
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
-    cases = (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
+    cases = (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
