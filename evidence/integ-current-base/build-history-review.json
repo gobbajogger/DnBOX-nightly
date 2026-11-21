@@ -1,0 +1,401 @@
+{
+  "head": "aba00927e0504148a482d38bea998747f90e6828",
+  "prior_approved_source": "4d2ff12d9b8f7904934568dc1b8ebeec4ceac560",
+  "scope": "Build History at four registered viewports, on an exact Git archive, with normal sandbox, Chromium 151.0.7922.34 bundled headless shell, DPR 1, gate font and color flags, CSS freeze, clock, reduced motion and original 30-second capture deadline. The 1440 candidate is the unmodified registered gate output; its content, geometry, prior reference, RGB scanlines and footer were independently reviewed.",
+  "served_inputs_sha256": {
+    "builds/index.html": "924046cff3c0f337ab5dd849f1dec1d6ba1a7f9c44e964aee92cf083415d5a22",
+    "builds/history.mjs": "a009a008798a98d67b46832600dca3f69502770ac242b1f0635b8a19098d3080",
+    "builds/history-filter.mjs": "9ebfb0b241de121011e7dabd3cecaf052060838f3009a9bf7d822bf4382b8cd7",
+    "data/history.json": "d0a47bbd74110b0fb21d46f0c8e83b90718117944c9caeca830f8e18f4f8d517",
+    "site.css": "00090ac63b48d4a225140d5aaaa7fbe98d53c41b06fe290eefa24c9f1558b8a3",
+    "assets/BarlowSemiCondensed-Medium.ttf": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+    "assets/BarlowSemiCondensed-Bold.ttf": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb",
+    "hardware-status.mjs": "1d2c5da9edb0c010cb13074d1191dfa1a97932a4860f63cd9c324592072d67ef",
+    "hardware-tests.mjs": "f69e303d2aaf503c4ccd36b7385bf3bca6d3ffab773f4affcdaade93b71a7f6e",
+    "hardware-tests.json": "44cd5bb4ef55457a6a65a8aab9c36f32c1d5780040aa07899a2fb39a030c2384",
+    "versions.json": "16ebb499832952dc93534865f6d69e7f0535aabcdab2aad2bafe1c811c059ce1"
+  },
+  "source": {
+    "old_head": "4d2ff12d9b8f7904934568dc1b8ebeec4ceac560",
+    "head": "aba00927e0504148a482d38bea998747f90e6828",
+    "old_records": 197,
+    "current_records": 198,
+    "additions": [
+      {
+        "id": "release-v0.0.26-94197fc8",
+        "channel": "main",
+        "sourcePath": "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26",
+        "collection": "releases",
+        "models": [
+          "elite",
+          "pro"
+        ],
+        "title": "DnBOX 0.0.26 — Latest release for SMK-37 Elite and Pro",
+        "status": "published",
+        "original": {
+          "title": "DnBOX 0.0.26 — Latest release for SMK-37 Elite and Pro",
+          "tag": "v0.0.26",
+          "source_commit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+          "published_at": "2026-11-21T02:16:00Z",
+          "evidence_url": "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26",
+          "fallback_url": "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1",
+          "description": "The owner tested startup and restart on both models with the corrected 94197fc8 firmware. The earlier 600b3b45 build remains withdrawn. Version 0.0.25.1 remains the fallback."
+        }
+      }
+    ],
+    "all_original_values_and_order": true,
+    "all_original_article_order": true,
+    "prior_links": 255,
+    "current_links": 257,
+    "added_links": [
+      [
+        "release-v0.0.26-94197fc8",
+        [
+          [
+            "0.0.26 packages and owner test results",
+            "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26"
+          ],
+          [
+            "0.0.25.1 fallback",
+            "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.25.1"
+          ]
+        ]
+      ]
+    ],
+    "prior_article_html_changes": [
+      {
+        "id": "main-versions-0",
+        "differing_attributes": {},
+        "labels_or_urls": [],
+        "visible_text": [
+          [
+            "MAIN · dev-checked",
+            "Archived catalog entry before the 0.0.26 release · MAIN · dev-checked"
+          ]
+        ]
+      },
+      {
+        "id": "night-versions-0",
+        "differing_attributes": {},
+        "labels_or_urls": [],
+        "visible_text": [
+          [
+            "NIGHTLY · dev-checked",
+            "Archived catalog entry before the 0.0.26 release · NIGHTLY · dev-checked"
+          ]
+        ]
+      },
+      {
+        "id": "night-versions-11",
+        "differing_attributes": {},
+        "labels_or_urls": [
+          [
+            [
+              "Build 0.0.24.1 evidence folder",
+              "https://github.com/gobbajogger/DnBOX/tree/build/0.0.24.1/docs/evidence/build-0.0.24.1"
+            ],
+            [
+              "Build 0.0.24.1 evidence folder",
+              "https://github.com/gobbajogger/DnBOX/tree/c20943a75d9e680a64e0384458245db4d7999e05/docs/evidence/build-0.0.24.1"
+            ]
+          ]
+        ],
+        "visible_text": []
+      },
+      {
+        "id": "night-versions-12",
+        "differing_attributes": {},
+        "labels_or_urls": [
+          [
+            [
+              "Build 0.0.24 source tree",
+              "https://github.com/gobbajogger/DnBOX/tree/build/0.0.24"
+            ],
+            [
+              "Build 0.0.24 source tree",
+              "https://github.com/gobbajogger/DnBOX/tree/d8086cc09203945919c70d3c805f8ca3e6acbe5a"
+            ]
+          ]
+        ],
+        "visible_text": []
+      },
+      {
+        "id": "night-builds-0",
+        "differing_attributes": {
+          "id": [
+            null,
+            "builds"
+          ]
+        },
+        "labels_or_urls": [],
+        "visible_text": []
+      },
+      {
+        "id": "night-history-0",
+        "differing_attributes": {
+          "id": [
+            null,
+            "history"
+          ]
+        },
+        "labels_or_urls": [],
+        "visible_text": []
+      }
+    ],
+    "footer_html_unchanged": true,
+    "pinned_link_target_validation": {
+      "d8086cc09203945919c70d3c805f8ca3e6acbe5a": "Firmware source tree exists.",
+      "c20943a75d9e680a64e0384458245db4d7999e05/docs/evidence/build-0.0.24.1": "Firmware directory exists at Git tree 92029106a8ab58f9cd95fcc58861a0464822196a.",
+      "web_repair_commit": "0da30e5",
+      "historical_url_status": "Web owner records both retired branch destinations returned 404 and both pinned replacements returned 200."
+    }
+  },
+  "static_server": "The optional package-version-assignments.json fetch returned 404. The site fallback displayed the correct v0.0.26 hardware report for Elite and Pro. No page errors.",
+  "pixel_registration": "For each unmodified serialized original article body, compare full-width RGB scanline SHA-256 values within one row of the displacement measured from both rendered DOM rectangles. Compare leading and trailing scanlines exactly, with the footer bottom-aligned. Geometry is also verified independently from both DOMs. No baseline tolerance or screenshot deadline adjustments.",
+  "viewport_reviews": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "prior_image_height": 104451,
+      "prior_png_sha256": "f621ec31e6cbd20fde1845fed3bb3cee2285e27052182599ea7fab403eb65a64",
+      "current_settled_height": 105158,
+      "height_increase": 707,
+      "header_and_footer_links_preserved": true,
+      "header_links": 9,
+      "footer_links": 6,
+      "prior_footer_xywh": [
+        0,
+        104254.265625,
+        390,
+        196.75
+      ],
+      "current_footer_xywh": [
+        0,
+        104960.921875,
+        390,
+        196.75
+      ],
+      "all_original_card_horizontal_extents_preserved": true,
+      "changed_original_card_heights": [
+        {
+          "id": "main-versions-0",
+          "before": 559.734375,
+          "after": 580.03125
+        },
+        {
+          "id": "night-versions-0",
+          "before": 1003.375,
+          "after": 1023.671875
+        }
+      ],
+      "status": "198 of 198 records",
+      "hardware_report": "DnBOX 0.0.26 · SMK-37 Elite, SMK-37 Pro · Startup and restart confirmed",
+      "horizontal_overflow_count": 0,
+      "all_visible_and_collapsed": true,
+      "positioned_overlays": [],
+      "independent_capture_attempts": [
+        {
+          "method": "exact-canonical-390",
+          "seconds": 31.032,
+          "size": null,
+          "error": "exact-canonical-390 full-page capture failed: Page.screenshot: Timeout 482ms exceeded."
+        },
+        {
+          "method": "exact-cdp-390-0",
+          "seconds": 30.036,
+          "size": null,
+          "error": "TimeoutError: "
+        },
+        {
+          "method": "exact-cdp-390-16384",
+          "seconds": 30.275,
+          "size": null,
+          "error": "TimeoutError: "
+        },
+        {
+          "method": "exact-native-390",
+          "seconds": 26.82,
+          "size": [
+            390,
+            105157
+          ],
+          "error": null,
+          "png_sha256": "2f790207f7e70b7b49e5b5e6054cf074a720bfb4fb3e35ff9213c38ca4b6d642"
+        },
+        {
+          "method": "exact-warm-390",
+          "seconds": 30.15,
+          "size": null,
+          "error": "Page.screenshot: Timeout 26563ms exceeded."
+        }
+      ],
+      "pixel_review": {
+        "image": [
+          390,
+          105157
+        ],
+        "sha256": "2f790207f7e70b7b49e5b5e6054cf074a720bfb4fb3e35ff9213c38ca4b6d642",
+        "git_blob": "b232fe3ac636b642bb43e19f7c5df43e8977ee91",
+        "rgb_sha256": "e853879b9a9e3177fbd1230454772dda8e438a236c32b11719c0a2eced278861",
+        "identical_header_rows": 226,
+        "identical_final_rows_when_bottom_aligned": 49,
+        "unchanged_rendered_article_bodies": 191,
+        "body_scanlines_checked": 99538,
+        "identical_old_scanlines_within_one_row": 99482
+      },
+      "result": "Open. The native first-paint image is one row short of the settled document. This image is diagnostic only."
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "prior_image_height": 73342,
+      "prior_png_sha256": "0c480b01237c84ed9f4f183397af3924f6936f031755fb3cf7bbbee821819dfe",
+      "current_settled_height": 73793,
+      "height_increase": 451,
+      "header_and_footer_links_preserved": true,
+      "header_links": 9,
+      "footer_links": 6,
+      "prior_footer_xywh": [
+        0,
+        73220.1875,
+        844,
+        121.59375
+      ],
+      "current_footer_xywh": [
+        0,
+        73671.640625,
+        844,
+        121.59375
+      ],
+      "all_original_card_horizontal_extents_preserved": true,
+      "changed_original_card_heights": [],
+      "status": "198 of 198 records",
+      "hardware_report": "DnBOX 0.0.26 · SMK-37 Elite, SMK-37 Pro · Startup and restart confirmed",
+      "horizontal_overflow_count": 0,
+      "all_visible_and_collapsed": true,
+      "positioned_overlays": [],
+      "independent_capture_attempts": [
+        {
+          "method": "exact-canonical-844",
+          "seconds": 30.08,
+          "size": null,
+          "error": "exact-canonical-844 full-page capture failed: Page.screenshot: Timeout 7354ms exceeded."
+        },
+        {
+          "method": "exact-native-844",
+          "seconds": 30.215,
+          "size": null,
+          "error": "Page.screenshot: Timeout 30000ms exceeded."
+        }
+      ],
+      "result": "Open. DOM and preserved records verified. A complete under-budget PNG is pending."
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "prior_image_height": 72569,
+      "prior_png_sha256": "63f04d5b30937ca20a9ec972e3d414e8dc7b420b13762c4795300e5cad07b6c2",
+      "current_settled_height": 73021,
+      "height_increase": 452,
+      "header_and_footer_links_preserved": true,
+      "header_links": 9,
+      "footer_links": 6,
+      "prior_footer_xywh": [
+        0,
+        72447.828125,
+        1024,
+        121.59375
+      ],
+      "current_footer_xywh": [
+        0,
+        72899.28125,
+        1024,
+        121.59375
+      ],
+      "all_original_card_horizontal_extents_preserved": true,
+      "changed_original_card_heights": [],
+      "status": "198 of 198 records",
+      "hardware_report": "DnBOX 0.0.26 · SMK-37 Elite, SMK-37 Pro · Startup and restart confirmed",
+      "horizontal_overflow_count": 0,
+      "all_visible_and_collapsed": true,
+      "positioned_overlays": [],
+      "independent_capture_attempts": [
+        {
+          "method": "exact-canonical-1024",
+          "seconds": 30.019,
+          "size": null,
+          "error": "exact-canonical-1024 full-page capture failed: Page.screenshot: Timeout 6602ms exceeded."
+        },
+        {
+          "method": "exact-native-1024",
+          "seconds": 30.006,
+          "size": null,
+          "error": "Page.screenshot: Timeout 30000ms exceeded."
+        }
+      ],
+      "result": "Open. DOM and preserved records verified. A complete under-budget PNG is pending."
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "prior_image_height": 72171,
+      "prior_png_sha256": "a33e527fe0faed05ac3c0683c1f4d8c4f5cf389a48ff6729570f79c6a24ea424",
+      "current_settled_height": 72622,
+      "height_increase": 451,
+      "header_and_footer_links_preserved": true,
+      "header_links": 9,
+      "footer_links": 6,
+      "prior_footer_xywh": [
+        80,
+        72049.390625,
+        1280,
+        121.59375
+      ],
+      "current_footer_xywh": [
+        80,
+        72500.84375,
+        1280,
+        121.59375
+      ],
+      "all_original_card_horizontal_extents_preserved": true,
+      "changed_original_card_heights": [],
+      "status": "198 of 198 records",
+      "hardware_report": "DnBOX 0.0.26 · SMK-37 Elite, SMK-37 Pro · Startup and restart confirmed",
+      "horizontal_overflow_count": 0,
+      "all_visible_and_collapsed": true,
+      "positioned_overlays": [],
+      "independent_capture_attempts": [
+        {
+          "method": "exact-native-1440",
+          "seconds": 30.187,
+          "size": null,
+          "error": "Page.screenshot: Timeout 30000ms exceeded."
+        }
+      ],
+      "pixel_review": {
+        "image": [
+          1440,
+          72622
+        ],
+        "sha256": "68b8a0d6e7ac6cd122db02c5503f4e60572bccdf964440b52d8850ad0469f0ed",
+        "git_blob": "6b70ae6db23d61f7523863f97687a60810ef0553",
+        "rgb_sha256": "7678a01bcfa2fcc827fa929d9a59a860249cea1786e59b0c9b1cc1f79b407f68",
+        "identical_header_rows": 242,
+        "identical_final_rows_when_bottom_aligned": 53,
+        "unchanged_rendered_article_bodies": 191,
+        "body_scanlines_checked": 68775,
+        "identical_old_scanlines_within_one_row": 68678
+      },
+      "result": "Independently reviewed complete registered replacement."
+    }
+  ],
+  "negative_controls": "Five exact-head gate regression tests passed, covering changed seams, first-paint viewport/scroll/DPR drift, malformed PNGs, document changes, total capture deadline, and identical RGB with alternate PNG encoding. Timing-only CDP experiments did not qualify as replacement screenshots."
+}

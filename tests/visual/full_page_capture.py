@@ -99,12 +99,15 @@ def capture_full_page(page, route, name):
             if long_archive:
                 # The SMK manual reflows by up to several text rows on first paint.
                 # Its reference covers the entire settled document, including the footer.
-                rows = MANUAL_BAND_ROWS
-                if width <= 480 and painted[4] < painted[5]:
-                    # A narrow portrait tile stays under 16 MiB decoded at DPR 1.
-                    # Fewer native captures avoid repeating the compositor setup.
-                    rows = min(rows * 4, (4 * 1024 * 1024) // width)
-                return capture_bands(page, painted, deadline, band_rows=min(BAND_ROWS, rows))
+                # Each strip includes the previous strip's last row. Budget for
+                # that overlap as well as four channels per decoded pixel.
+                tile_rows = (4 * 1024 * 1024) // width
+                if tile_rows < 2:
+                    raise ValueError('Legacy Manual row and seam exceed the capture budget')
+                rows = min(MANUAL_BAND_ROWS, tile_rows - 1)
+                if tile_rows >= MANUAL_BAND_ROWS * 2:
+                    rows = min(MANUAL_BAND_ROWS * 4, tile_rows - 1, BAND_ROWS - 1)
+                return capture_bands(page, painted, deadline, band_rows=rows)
             return capture_bands(page, painted, deadline)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
         verify_png(data)

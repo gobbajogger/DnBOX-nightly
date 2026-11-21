@@ -156,8 +156,9 @@ class GateContract(unittest.TestCase):
             self.assertEqual([output.getpixel((1, y)) for y in range(25)], [(0, y, 10) for y in range(25)])
         self.assertLessEqual(max(clip['height'] for clip in clips), 4)
 
-    def test_legacy_portrait_batches_preserve_the_viewport_and_total_deadline(self):
-        for width, viewport_height, rows in [(390, 844, 8192), (844, 390, 2048)]:
+    def test_legacy_batches_preserve_the_viewport_and_total_deadline(self):
+        for width, viewport_height, rows in [(390, 844, 8192), (844, 390, 4968),
+                                             (1024, 640, 4095), (1440, 900, 2048)]:
             with self.subTest(width=width):
                 initial = [width, 45_591, 0, 0, width, viewport_height, 1]
                 painted = [width, 45_592, *initial[2:]]
@@ -170,6 +171,15 @@ class GateContract(unittest.TestCase):
                                                         timeout=28_000)
                 bands.assert_called_once_with(page, painted, 40.0, band_rows=rows)
                 page.set_viewport_size.assert_not_called()
+
+    def test_legacy_rejects_a_row_and_seam_over_the_tile_budget(self):
+        geometry = [2_097_153, 45_592, 0, 0, 1024, 640, 1]
+        page = Mock()
+        page.evaluate.return_value = geometry
+        with patch.object(capture, 'capture_bands') as bands:
+            with self.assertRaisesRegex(RuntimeError, 'row and seam exceed'):
+                capture.capture_full_page(page, 'manual/legacy.html', 'legacy-wide')
+        bands.assert_not_called()
 
     def test_short_manuals_capture_the_complete_painted_document(self):
         initial = [3, 4, 0, 0, 3, 2, 1]
