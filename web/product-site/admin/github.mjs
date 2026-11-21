@@ -142,7 +142,7 @@ export function createGitHub(fetcher = fetch) {
   }
   async function markTested(selection,evidenceUrl) {
     const {ref,catalog}=await snapshot(NIGHTLY);
-    const row=selected(catalog.value,selection);
+    const row=selected(catalog.value,selection,[selection.model]);
     const entry=candidate(row,selection.model);
     const url=new URL(evidenceUrl);
     if(url.protocol!=='https:' || url.host!=='github.com'||url.username||url.password||url.search||
@@ -163,7 +163,21 @@ export function createGitHub(fetcher = fetch) {
     const ledger=await readJson(NIGHTLY,'hardware-tests.json',src.ref);
     validateHardwareTests(ledger.value);
     if(!MODELS.every(m=>hardwareTestsFor(ledger.value,row,m))) throw Error('Both model packages need an owner startup and restart record.');
-    const target=structuredClone(row), files=[];
+    const existing=dest.catalog.value.versions.filter(v=>v.version===row.version);
+    if(existing.length>1) throw Error('The MAIN catalog has duplicate entries for this build ID.');
+    const prior=existing[0];
+    if(prior) {
+      if(!sameFirmware(prior,row,MODELS)) throw Error('The existing build ID has different firmware.');
+      if(!permitsRelease(prior) || !['dev-checked','release-checked'].includes(prior.status) ||
+         (prior.hardware_tested!==undefined && typeof prior.hardware_tested!=='boolean') ||
+         Object.keys(prior.models||{}).sort().join(',')!=='elite,pro' ||
+         !MODELS.every(model=>{
+           const pkg=prior.models[model];
+           return permitsRelease(pkg) && (pkg.status===undefined || pkg.status===prior.status) &&
+             (pkg.hardware_tested===undefined || pkg.hardware_tested===false);
+         })) throw Error('The existing MAIN build or model is unavailable.');
+    }
+    const target=structuredClone(prior || row), files=[];
     for(const model of MODELS) {
       const entry=candidate(row,model);
       const prefix='/DnBOX-nightly/artifacts/';
@@ -179,18 +193,9 @@ export function createGitHub(fetcher = fetch) {
       files.push({path:to,bytes:pkg.bytes,original:pkg.sha});
       target.models[model].pkg='https://gobbajogger.github.io/DnBOX/'+to;
       // MAIN checks an explicit model status against the promoted catalog row.
-      if (entry.status!==undefined) target.models[model].status='release-checked';
+      if (target.models[model].status!==undefined) target.models[model].status='release-checked';
     }
     Object.assign(target,{hardware_tested:true,status:'release-checked',lifecycle:'current'});
-    const prior=dest.catalog.value.versions.find(v=>v.version===target.version);
-    if (prior) {
-      const buildFields = ['source_commit', 'source_tree', 'display_version'];
-      const modelFields = ['product', 'sha256', 'size', 'controller_sha256', 'controller_size', 'controller_strategy'];
-      if (buildFields.some(key => prior[key] !== target[key]) ||
-          MODELS.some(model => modelFields.some(key => prior.models?.[model]?.[key] !== target.models[model][key]))) {
-        throw Error('The existing build ID has different firmware.');
-      }
-    }
     const next={...dest.catalog.value,latest:target.version,versions:[target,...dest.catalog.value.versions.filter(v=>v.version!==target.version)]};
     const root=repoPath(MAIN)+'/git/';
     const parent=await request(root+'commits/'+dest.ref);
@@ -223,16 +228,23 @@ export function createGitHub(fetcher = fetch) {
   }
   return {connect,lock,head,snapshot,readJson,lanePRs,checks,markTested,promote,release,saveNotes};
 }
-function selected(catalog,selection) {
-  const matches=catalog.versions.filter(v=>v.version===selection.id);
+function sameFirmware(actual,expected,models) {
+  const buildFields=['source_commit','source_tree','display_version'];
+  const packageFields=['product','sha256','size','controller_sha256','controller_size','controller_strategy'];
+  return buildFields.every(key=>actual[key]===expected[key]) && models.every(model=>{
+    const a=actual.models?.[model], b=expected.models?.[model];
+    return MODELS.includes(model) && a && b && packageFields.every(key=>a[key]===b[key]);
+  });
+}
+function selected(catalog,selection,models=MODELS) {
+  const matches=catalog.versions.filter(v=>v.version===selection.build?.version);
   const row=matches[0];
-  if(matches.length!==1 || !permitsRelease(row) || row.source_commit!==selection.source ||
+  if(matches.length!==1 || !permitsRelease(row) || !sameFirmware(row,selection.build,models) ||
      !HEX40.test(row.source_commit) || !HEX40.test(row.source_tree) ||
      !/^\d+\.\d+\.\d+(?:\.\d+)?$/.test(row.display_version) ||
      !['dev-checked','release-checked'].includes(row.status) ||
      (row.hardware_tested!==undefined && typeof row.hardware_tested!=='boolean') ||
-     Object.keys(row.models||{}).sort().join(',')!=='elite,pro' ||
-     !MODELS.every(m=>row.models[m]?.sha256===selection.digests?.[m]))
+     Object.keys(row.models||{}).sort().join(',')!=='elite,pro')
     throw Error('The selected build changed or is unavailable. Refresh the catalog.');
   return row;
 }

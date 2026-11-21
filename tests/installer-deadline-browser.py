@@ -54,6 +54,25 @@ async def main(site):
     expected='elite' if mode=='new-selection' else 'pro'
     got=await p.evaluate("async()=>Array.from(new Uint8Array(await(await fetch(deadlineState().href)).arrayBuffer()))")
     assert bytes(got)==RAW[expected]
+    if mode=='normal':
+     # The installer embeds its own picker. A link to the separate page
+     # cannot complete a selection the visitor just made here.
+     picker=p.locator('#sample-picker')
+     choices=picker.get_by_role('checkbox')
+     await choices.first.wait_for()
+     for choice in await choices.all():
+      await choice.uncheck()
+     button=p.get_by_role('button',name='Download chosen breaks',exact=True)
+     assert await button.count()==1, 'Installer sample download control missing'
+     assert await button.is_disabled()
+     await choices.first.check()
+     async with p.expect_download() as download_event:
+      await button.click()
+     download=await download_event.value
+     assert download.suggested_filename=='DnBOX-starting-breaks.x0xslots'
+     assert (await download.path()).stat().st_size>512
+     assert 'File prepared' in await p.locator('#download-status').inner_text()
+
     assert await p.evaluate('midiRequests')==0;assert not errors,errors
     print('PASS installer deadline',mode,'verified retry/selection, MIDI0',flush=True)
    finally:release.set();await c.close()

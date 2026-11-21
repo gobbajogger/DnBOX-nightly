@@ -1,0 +1,33 @@
+{
+  "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+  "files": {
+    "fwui.wasm": {
+      "bytes": 1292091,
+      "sha256": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234"
+    },
+    "routes.wasm": {
+      "bytes": 112563,
+      "sha256": "14933fa20648bb5af6512f9d6c2396a00c13f3227ca87522078584fff872661f"
+    },
+    "normal.wasm": {
+      "bytes": 1030165,
+      "sha256": "d79cef27e61b48f1389eb7210b45ae8459bdef15735ed6aed74969050ba83444"
+    },
+    "wave.wasm": {
+      "bytes": 1160050,
+      "sha256": "49101296f3df51140b0806bccfd9f95fc202b89058354795305f15eb68760e98"
+    },
+    "guard.wasm": {
+      "bytes": 104245,
+      "sha256": "36c6e241220c75362d8f03a50aeb8e2bfc81b7ce7a30a145df796ce6cf528d03"
+    },
+    "synthone-patch.wasm": {
+      "bytes": 1183733,
+      "sha256": "6109bf9b0a05f9ea6b7a9f684a86fa05b1d3284f7fa177e7d816bd5008bd5aec"
+    },
+    "synthone-frame.wasm": {
+      "bytes": 1178303,
+      "sha256": "cb2a8cc390d579433cdca1de2c25c9e89f3dd0ba1997fc1ed21dbf54fe909d33"
+    }
+  }
+}

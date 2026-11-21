@@ -22,7 +22,7 @@ function fixture(){
     row.models[m]={size:bytes.length,sha256:sha,controller_sha256:'e'.repeat(64),product:'SMK-37 '+(m==='pro'?'Pro':'Elite')+'_900',pkg:'https://gobbajogger.github.io/DnBOX-nightly/'+path};
     files[NIGHTLY].set(path,bytes);
   }
-  const selection={id:row.version,source,model:'elite',digests:Object.fromEntries(models.map(m=>[m,row.models[m].sha256]))};
+  const selection={build:structuredClone(row),model:'elite'};
   const reports=models.map(model=>({version:'0.0.27',source_commit:source,model,package_sha256:row.models[model].sha256,controller_sha256:row.models[model].controller_sha256,startup:true,restart:true,evidence_url:'https://github.com/gobbajogger/DnBOX/issues/9',reported_by:'owner'}));
   const main={installer_promotion_schema:1,latest:'fallback',versions:[{version:'fallback'}]};
   const f={user:'gobbajogger',row,reports,calls,blobs,files,main,selection,ref:root};
@@ -86,7 +86,7 @@ test('mark tested writes only the nightly ledger with expected blob, preserves p
   f.conflict=true;await assert.rejects(f.github.markTested(f.selection,evidence),/409/);
   f.conflict=false;await f.github.markTested(f.selection,evidence);await f.github.markTested(f.selection,evidence);
   const receipts=JSON.parse(f.files[NIGHTLY].get('hardware-tests.json')).reports;
-  assert.deepEqual(receipts[0],f.reports[1]);assert.equal(receipts[1].package_sha256,f.selection.digests.elite);
+  assert.deepEqual(receipts[0],f.reports[1]);assert.equal(receipts[1].package_sha256,f.selection.build.models.elite.sha256);
   assert.equal(f.calls.filter(c=>c.method!=='GET').length,2);
 });
 test('promotion atomically stages both verified files and retains fallback with a fast-forward ref update',async()=>{
@@ -115,7 +115,7 @@ test('promotions reject corrupt bytes, missing tests, withdrawn rows, mismatched
     if(fault==='corrupt')f.files[NIGHTLY].set([...f.files[NIGHTLY].keys()][0],Buffer.alloc(f.row.models.elite.size));
     if(fault==='untested')f.files[NIGHTLY].set('hardware-tests.json',json({schema:1,reports:f.reports.slice(0,1)}));
     if(fault==='withdrawn'){f.row.withdrawn=true;f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));}
-    if(fault==='id')f.selection.source=tree;
+    if(fault==='id')f.selection.build.source_commit=tree;
     if(fault==='incompatible')f.files[MAIN].set('versions.json',json({latest:'fallback',versions:f.main.versions}));
     if(fault==='source changed')f.racedSource=true;
     if(fault==='concurrent destination')f.conflict=true;
@@ -127,6 +127,7 @@ test('promotion uses the installer’s exact legacy or seven-digit numeric model
   for (const [suffix,accepted] of [['9010203',true],['9001',false],['900000000',false]]) {
     const f=fixture();await f.github.connect(token);
     f.row.models.pro.product='SMK-37 Pro_'+suffix;
+    f.selection.build=structuredClone(f.row);
     f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));
     if(accepted) await f.github.promote(f.selection);
     else await assert.rejects(f.github.promote(f.selection),/unavailable/);
@@ -147,6 +148,7 @@ test('promotion validates both model controller contracts before changing MAIN',
     ]) {
       const f=fixture();
       Object.assign(f.row.models[model],metadata);
+      f.selection.build=structuredClone(f.row);
       f.files[NIGHTLY].set('versions.json',json({latest:f.row.version,versions:[f.row]}));
       await f.github.connect(token);
       if (accepted) {
@@ -177,6 +179,89 @@ test('promotion preserves the source and controller identity of an existing MAIN
     assert.ok(f.calls.every(c=>c.method==='GET'));
   }
 });
+test('MAIN build and model denials stop same-ID promotion before staging', async () => {
+  for (const where of ['build', ...models]) {
+    for (const flags of [{blocked:true}, {revoked:true}, {withdrawn:true}, {lifecycle:'superseded'},
+        {installable:false}, {qualified:null}, {fromRelease:true}, {device_verified:true}, {status:'failed'},
+        {hardware_tested:where==='build' ? 'yes' : true}]) {
+      const f=fixture();
+      const prior=structuredClone(f.row);
+      Object.assign(where==='build' ? prior : prior.models[where], flags);
+      f.main.versions.push(prior);
+      f.files[MAIN].set('versions.json',json(f.main));
+      await f.github.connect(token);
+      await assert.rejects(f.github.promote(f.selection),/unavailable/,where+JSON.stringify(flags));
+      assert.ok(f.calls.every(c=>c.method==='GET'));
+    }
+  }
+});
+
+test('duplicate MAIN build IDs and mismatched model status leave the destination untouched', async () => {
+  for (const duplicate of [false,true]) {
+    const f=fixture(),prior=structuredClone(f.row);
+    f.main.versions.push(prior);
+    if(duplicate) f.main.versions.push({...prior,withdrawn:true});
+    else prior.models.pro.status='release-checked';
+    f.files[MAIN].set('versions.json',json(f.main));
+    await f.github.connect(token);
+    await assert.rejects(f.github.promote(f.selection),duplicate ? /duplicate/ : /unavailable/);
+    assert.ok(f.calls.every(c=>c.method==='GET'));
+  }
+});
+
+test('refreshing an admitted MAIN build preserves destination metadata and other releases', async () => {
+  const f=fixture();
+  const prior=structuredClone(f.row);
+  Object.assign(prior,{title:'MAIN title',description:'MAIN notes',qualified:true});
+  Object.assign(prior.models.elite,{note:'MAIN model notes',installable:true,status:'dev-checked'});
+  prior.models.pro.hardware_tested=false;
+  f.main.versions.push(prior);
+  f.files[MAIN].set('versions.json',json(f.main));
+  await f.github.connect(token);
+  await f.github.promote(f.selection);
+  const next=JSON.parse(f.blobs.get(f.tree.tree.find(e=>e.path==='versions.json').sha));
+  const target=next.versions[0];
+  for(const field of ['title','description','qualified']) assert.equal(target[field],prior[field],field);
+  for(const field of ['note','installable']) assert.equal(target.models.elite[field],prior.models.elite[field],field);
+  assert.equal(target.models.elite.status,'release-checked');
+  assert.equal(target.models.pro.hardware_tested,false);
+  assert.deepEqual(next.versions.slice(1),[f.main.versions[0]]);
+});
+
+test('mark tested requires the displayed build and selected model identity before any ledger write', async () => {
+  for (const model of models) {
+    for (const change of [r=>r.display_version='0.0.28',r=>r.source_commit=root,r=>r.source_tree=root,
+        r=>r.models[model].product='SMK-37 '+(model==='elite'?'Elite':'Pro')+'_9000001',
+        r=>r.models[model].size++,r=>r.models[model].sha256='1'.repeat(64),
+        r=>r.models[model].controller_sha256='2'.repeat(64),r=>r.models[model].controller_size=68,
+        r=>r.models[model].controller_strategy='owner-supplied']) {
+      const f=fixture();
+      f.selection.model=model;
+      change(f.row);
+      f.files[NIGHTLY].set('versions.json',json({versions:[f.row]}));
+      f.files[NIGHTLY].set('hardware-tests.json',json({schema:1,reports:[]}));
+      await f.github.connect(token);
+      await assert.rejects(f.github.markTested(f.selection,f.reports[0].evidence_url),/changed|unavailable/);
+      assert.ok(f.calls.every(c=>c.method==='GET'));
+    }
+  }
+});
+
+test('marking Elite permits an unrelated Pro or label change while promotion checks both models', async () => {
+  const f=fixture(), evidence=f.reports[0].evidence_url;
+  f.row.label='New editorial label';
+  f.row.models.pro.controller_sha256='3'.repeat(64);
+  f.files[NIGHTLY].set('versions.json',json({versions:[f.row]}));
+  f.files[NIGHTLY].set('hardware-tests.json',json({schema:1,reports:[]}));
+  await f.github.connect(token);
+  await f.github.markTested(f.selection,evidence);
+  const {reports}=JSON.parse(f.files[NIGHTLY].get('hardware-tests.json'));
+  assert.equal(reports.length,1);
+  assert.equal(reports[0].controller_sha256,f.row.models.elite.controller_sha256);
+  await assert.rejects(f.github.promote(f.selection),/changed/);
+  assert.deepEqual(f.calls.filter(c=>c.method!=='GET').map(c=>c.method),['PUT']);
+});
+
 test('promotion rejects a release filename without a basename', async () => {
   const f=fixture();
   const entry=f.row.models.pro;

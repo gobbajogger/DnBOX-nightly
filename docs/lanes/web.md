@@ -1,5 +1,21 @@
 # Web lane · PR #156
 
+## Current Web delivery · 21 November 2026
+
+The [current gate, independent review and nightly publication ledger](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059684119) records the tested Web commit, the seven gate results, the reviewer’s disposition and the deployed tree and byte counts. Each result applies to the exact commit named there. Earlier sections below are dated checkpoints.
+
+| Item | Evidence |
+|---|---|
+| C1, W1 | The full offline Web gate builds the 19 routes and redirects and runs the complete unit, visual, installer and browser chains. The unchanged Master Drive keyboard, Mix draft-save and Remote lane-selector cases passed on [the preceding c827d46c head](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7058670284). The current receipt is in the ledger above. |
+| C2, C4 | The no-loss and hard-limit checks run at the same head against consolidated. Firmware and reference binaries are admitted by the checked-in SHA-256 pins during the product build. |
+| W2 | Tools opens the playable firmware panel. Both emulator editions preserve their own saved sessions. The installer exports the selected starting breaks, and the release admin checks the selected controller and destination records before writing. Browser tests exercise the actual links, downloads, and denied or stale operations. |
+| W3 | The [screen selector](https://gobbajogger.github.io/DnBOX-nightly/reference/screens/) renders 1,838 named states at 240×240. The shipping firmware for the web instrument and the primary native frames is FWUI [61827a71](https://github.com/gobbajogger/DnBOX/commit/61827a714ca7b240c01a55ed347b5fd7b847c7c2). Guard registers and optional Synth One fixtures come from [3e67b59c](https://github.com/gobbajogger/DnBOX/commit/3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d). The selector identifies the optional firmware/Sound composition separately. Its browser gate compares 1,912 canvas observations with independent native RGB. The playable panel also [passed 79/79 public-input observations](../../evidence/web-routes/firmware-panel-replay.json) against the same firmware. The earlier 06bd40c5 emulator is retained for its saved sessions. |
+| C3, W4 | Independent before/after review covers the 19 routes at 1440×900, 390×844 and 844×390, the 240×240 render and the installer, release administration, playable instrument and screen selector journeys. The [independent review evidence](../../evidence/web-routes/firmware-screen-review.json) identifies the tested assets and cases. Defect-specific browser and unit regressions ship with this change. The signed-off disposition is in the current ledger. |
+| C5, W5 | The current ledger records completion, the fast-forward from the previous nightly Pages tree, preservation of package and hardware records, and per-file public readback against the gate build. |
+| C6 | Consolidated integration belongs to Integ under RULES §9. The PR and the current ledger record its disposition separately from the Web publication. |
+
+To reproduce W3, run `scripts/firmware-emulator/build.sh` with the firmware checkout, the pinned previous runtime and an empty output destination. Run `python3 tests/firmware-reference/build-reference.py --help` for the selector producer. Supply both outputs through `DNBOX_EMULATOR_RUNTIME` and `DNBOX_FWUI_RUNTIME`, respectively, when running `bash scripts/gate.sh web`. CSS pixels are compared at device scale one. The [PNG fixtures](../../tests/fixtures/emulator-lcd-61827a/frames.json) pin the public panel and the [native RGB inventory](../../tests/firmware-reference/native-rgb.tsv) pins the selector.
+
 ## Exact-head browser qualification · 21 November
 
 The [independent gate at `8a6f110c`](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7058183871) completed the desktop captures before a Remote lane-selector click exceeded 30 seconds later in the sweep. The separate browser suite passed 14 FunkyBeats pages and then exceeded its click deadline saving a draft in the Mix family test. The unchanged Mix family browser completed all three viewports independently in 42.57 seconds, with the download, cancellation, Undo and Sound routes exercised.

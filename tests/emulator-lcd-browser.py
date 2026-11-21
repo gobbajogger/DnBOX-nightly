@@ -17,7 +17,8 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURES = ROOT / "tests/fixtures/emulator-lcd-06bd40"
+FIXTURES = ROOT / "tests/fixtures/emulator-lcd-61827a"
+PREVIOUS = ROOT / "tests/fixtures/emulator-lcd-06bd40"
 # Each state names its native frame, accessible control and minimum simulated delay.
 # Capture SAVE while its banner is up. Wait for it to expire on HOME.
 STATES = (
@@ -57,7 +58,7 @@ def rgb565(image, *, browser):
     return packed
 
 
-def check_page(page, url, manifest):
+def check_page(page, url, manifest, fixtures=FIXTURES):
     page.goto(url)
     page.locator("#start").click()
     lcd = page.locator("#lcd")
@@ -74,7 +75,7 @@ def check_page(page, url, manifest):
         png = lcd.evaluate("c => c.toDataURL('image/png').split(',')[1]")
         with Image.open(io.BytesIO(base64.b64decode(png))) as actual:
             pixels = rgb565(actual, browser=True)
-        with Image.open(FIXTURES / f"{name}.png") as native:
+        with Image.open(fixtures / f"{name}.png") as native:
             expected = rgb565(native, browser=False)
         assert hashlib.sha256(expected).hexdigest() == manifest["frames"][name], name
         if pixels != expected:
@@ -136,7 +137,19 @@ def main():
                         errors = []
                         page.on("pageerror", lambda error: errors.append(str(error)))
                         origin = f"http://127.0.0.1:{server.server_port}"
-                        check_page(page, f"{origin}/emu/", manifest)
+                        page.goto(f"{origin}/tools/")
+                        page.get_by_role("link", name="Play the browser instrument").click()
+                        assert page.url == f"{origin}/emu/"
+                        check_page(page, page.url, manifest)
+                        previous = json.loads((PREVIOUS / "frames.json").read_text())
+                        previous_files = runtime / "previous"
+                        assert hashlib.sha256((previous_files / "kernel.wasm").read_bytes()).hexdigest() == previous["wasm_sha256"]
+                        page.get_by_text("What this development build includes", exact=True).click()
+                        previous_link = page.get_by_role("link", name="Open the previous emulator for sessions saved at 06bd40c5")
+                        assert previous_link.get_attribute("href") == "previous/"
+                        previous_link.click()
+                        assert page.url == f"{origin}/emu/previous/"
+                        check_page(page, page.url, previous, PREVIOUS)
                         presentation = json.loads((site / "APPROVED-PRESENTATION.json").read_text())
                         check_historical_reference(page, origin, presentation)
                         assert not errors, errors

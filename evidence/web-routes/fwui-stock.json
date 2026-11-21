@@ -1,0 +1,259 @@
+{
+  "firmware_commit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+  "test_and_evidence_commit": "3e67b59c8e4dd3d5994680d857ec4e2ea755ab6d",
+  "verified_package_build_inputs": 672,
+  "strict_clock_mhz": 360,
+  "models": {
+    "elite": {
+      "package": "5219e7f5f9c1a2b47b23f8d37690f048374be480c9f8281159bf7180db2a2d6b",
+      "elf": "5850e447c4be5d150b137893af2318b52b822a626544d8c9adaceaf0b53db28e",
+      "stockEmulator": "04c795b1961298cbd10d4bd9881ab97fde5eef7ff179f49a6b953dab78d43dc8",
+      "guardEmulator": "e4a0db126d31e096f6e548d515ce4a5b77b12e4ccb43111988a07a7e699cf31d",
+      "startup": {
+        "package": {
+          "state": "lcd-init-clear",
+          "ms": 1,
+          "flashOperations": 0,
+          "panelSha256": "d8b443032200e143b1c49820b6d78c32d519553a3f63a38f48e8bc31da084f0a"
+        },
+        "recover-splash": {
+          "state": "startup-recovered-splash",
+          "ms": 448,
+          "flashOperations": 18,
+          "panelSha256": "3f3295b59fadf90714afffd3760db7ecced667ac52e82e5352e9849e4f0b546a"
+        },
+        "already-live-splash": {
+          "state": "boot-custom-text",
+          "ms": 448,
+          "flashOperations": 1,
+          "panelSha256": "3f3295b59fadf90714afffd3760db7ecced667ac52e82e5352e9849e4f0b546a"
+        },
+        "recover": {
+          "state": "startup-sample-recovered",
+          "ms": 1500,
+          "flashOperations": 18,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        },
+        "already-live": {
+          "state": "startup-sample-already-live",
+          "ms": 1500,
+          "flashOperations": 1,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        },
+        "restart": {
+          "state": "startup-store-owned",
+          "ms": 1500,
+          "flashOperations": 0,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        }
+      },
+      "guard": {
+        "guard-elite-first-fault": {
+          "canonicalRgbSha256": "f54e936bce711b86770c7fb014a58e9e60c313a3c46b695d45f56608c9e39caa",
+          "panelSha256": "02adb86aa64c889965b7cdb73f937ea0e5fc1b0a165ba1766f4ca34767d2907a",
+          "firstMs": 1312
+        },
+        "guard-elite-safe-play-fault": {
+          "canonicalRgbSha256": "dffc3985a2b18ea643fdbbaf3849453f1f34a3b34db5f1ff78abc1f9640cabaf",
+          "panelSha256": "0cc6ec6c087fc37049a2e1eb253155fb7fd20d2d6cf6e641919db17acc327ae7",
+          "firstMs": 9312
+        },
+        "guard-elite-safe-play-safe": {
+          "canonicalRgbSha256": "b77d7f753bbe736a83e4d26b7978b314fd7200256fc5dcf3d7694eae9678abc7",
+          "panelSha256": "599c7ead2245ab95d31a5150ebd2d6b678092322ffd5c69914d21e23099aca0a",
+          "firstMs": 13840
+        },
+        "guard-elite-safe-play-retry": {
+          "canonicalRgbSha256": "d5d4ebd1a97b42400209a6dcbe066e365440adc19b58341136bfbe601ea773d1",
+          "panelSha256": "cb933a30d258d924b6f019118681b1534e23849c8358dfddd2e2f36c49495179",
+          "firstMs": 15216
+        },
+        "guard-elite-safe-play-post-crash": {
+          "canonicalRgbSha256": "6c50e1a1aa8c48e0490fad0e7d057718a15cfb4bcf532f3b8ec65772e9d77616",
+          "panelSha256": "8d571e9662409420d931e4a78c4e2854554297264fe9c188a8b1a1f82a4cfee4",
+          "firstMs": 15664
+        }
+      },
+      "panel": {
+        "seed": {
+          "observedFrames": 1,
+          "firstMatchingFrameMs": {},
+          "flashOperations": 0
+        },
+        "calibration": {
+          "observedFrames": 507,
+          "firstMatchingFrameMs": {
+            "calibration-title": 608,
+            "hardware-calibration-button-00": 1216,
+            "hardware-calibration-button-01": 1472,
+            "hardware-calibration-button-02": 1616,
+            "hardware-calibration-button-03": 1760,
+            "hardware-calibration-button-04": 1920,
+            "hardware-calibration-button-05": 2064,
+            "hardware-calibration-button-06": 2224,
+            "hardware-calibration-button-07": 2368,
+            "hardware-calibration-button-08": 2512,
+            "hardware-calibration-button-09": 2672,
+            "hardware-calibration-button-10": 2816,
+            "hardware-calibration-button-11": 2960,
+            "hardware-calibration-button-12": 3120,
+            "hardware-calibration-button-13": 3264,
+            "hardware-calibration-encoder-00": 3424,
+            "hardware-calibration-encoder-01": 4000,
+            "hardware-calibration-encoder-02": 4528,
+            "hardware-calibration-encoder-03": 5056,
+            "hardware-calibration-encoder-04": 5568,
+            "hardware-calibration-encoder-05": 6096,
+            "hardware-calibration-encoder-06": 6624
+          },
+          "flashOperations": 3
+        },
+        "cold-reload": {
+          "observedFrames": 94,
+          "firstMatchingFrameMs": {},
+          "flashOperations": 0
+        },
+        "usb-updater": {
+          "observedFrames": 163,
+          "firstMatchingFrameMs": {
+            "boot-uboot-usb": 2080
+          },
+          "flashOperations": 0
+        },
+        "octave-updater": {
+          "observedFrames": 444,
+          "firstMatchingFrameMs": {
+            "boot-uboot": 6592
+          },
+          "flashOperations": 0
+        }
+      }
+    },
+    "pro": {
+      "package": "61a21d2da4d195d34970d02b66e79118f1c357b80471112926394d4042e32093",
+      "elf": "0d42a313c4c44ddab0c56eac479ed60be22813dc6d291e5622dc85fc6f1d0a81",
+      "stockEmulator": "04c795b1961298cbd10d4bd9881ab97fde5eef7ff179f49a6b953dab78d43dc8",
+      "guardEmulator": "e4a0db126d31e096f6e548d515ce4a5b77b12e4ccb43111988a07a7e699cf31d",
+      "startup": {
+        "package": {
+          "state": "lcd-init-clear",
+          "ms": 1,
+          "flashOperations": 0,
+          "panelSha256": "d8b443032200e143b1c49820b6d78c32d519553a3f63a38f48e8bc31da084f0a"
+        },
+        "recover-splash": {
+          "state": "startup-recovered-splash",
+          "ms": 448,
+          "flashOperations": 18,
+          "panelSha256": "3f3295b59fadf90714afffd3760db7ecced667ac52e82e5352e9849e4f0b546a"
+        },
+        "already-live-splash": {
+          "state": "boot-custom-text",
+          "ms": 448,
+          "flashOperations": 1,
+          "panelSha256": "3f3295b59fadf90714afffd3760db7ecced667ac52e82e5352e9849e4f0b546a"
+        },
+        "recover": {
+          "state": "startup-sample-recovered",
+          "ms": 1500,
+          "flashOperations": 18,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        },
+        "already-live": {
+          "state": "startup-sample-already-live",
+          "ms": 1500,
+          "flashOperations": 1,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        },
+        "restart": {
+          "state": "startup-store-owned",
+          "ms": 1500,
+          "flashOperations": 0,
+          "panelSha256": "fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688"
+        }
+      },
+      "guard": {
+        "guard-pro-first-fault": {
+          "canonicalRgbSha256": "3f9ea7a2bfb3f30893998752424e28389869fe5302234d6840613eafc95482fb",
+          "panelSha256": "589615b62ef387ee074074f4baea63af7ffc118e4de6a1a82cef9aee60f20cde",
+          "firstMs": 1312
+        },
+        "guard-pro-safe-play-fault": {
+          "canonicalRgbSha256": "a9ec26b596eb3bc8c4660a58ca4628354f236418650eb332e38997f2345eac76",
+          "panelSha256": "7c854839afcb6f4cf526d7ef13c2f1a683f5863cab8f317e5ea5fdfb02d58120",
+          "firstMs": 9312
+        },
+        "guard-pro-safe-play-safe": {
+          "canonicalRgbSha256": "b7ee744e05a96a63726016d541bc9738115ae287e0fda8276769f81a446b85c9",
+          "panelSha256": "c5451dbe979a6c7a9c7e14f14eaac5309047c9055cf8972163f684af33fbe2c1",
+          "firstMs": 13840
+        },
+        "guard-pro-safe-play-retry": {
+          "canonicalRgbSha256": "580095995e8f58cb15f79a1615e2271223bc92cac09ff028d9b48ddbf41d4577",
+          "panelSha256": "b26089fa841f22316d21e44fcf911b2927b342698fe1db5555abced4dd1ea343",
+          "firstMs": 15216
+        },
+        "guard-pro-safe-play-post-crash": {
+          "canonicalRgbSha256": "3d5bb3dbb196eb5a7613906a67dc0eb86a3cf2e7be4862254b1b3315735012f5",
+          "panelSha256": "b1f875813d7ef141c1f316be4647db92378e1d0805617c0cb465a9366d828dfc",
+          "firstMs": 15664
+        }
+      },
+      "panel": {
+        "seed": {
+          "observedFrames": 1,
+          "firstMatchingFrameMs": {},
+          "flashOperations": 0
+        },
+        "calibration": {
+          "observedFrames": 507,
+          "firstMatchingFrameMs": {
+            "calibration-title": 608,
+            "hardware-calibration-button-00": 1216,
+            "hardware-calibration-button-01": 1472,
+            "hardware-calibration-button-02": 1616,
+            "hardware-calibration-button-03": 1760,
+            "hardware-calibration-button-04": 1920,
+            "hardware-calibration-button-05": 2064,
+            "hardware-calibration-button-06": 2224,
+            "hardware-calibration-button-07": 2368,
+            "hardware-calibration-button-08": 2512,
+            "hardware-calibration-button-09": 2672,
+            "hardware-calibration-button-10": 2816,
+            "hardware-calibration-button-11": 2960,
+            "hardware-calibration-button-12": 3120,
+            "hardware-calibration-button-13": 3264,
+            "hardware-calibration-encoder-00": 3424,
+            "hardware-calibration-encoder-01": 4000,
+            "hardware-calibration-encoder-02": 4528,
+            "hardware-calibration-encoder-03": 5056,
+            "hardware-calibration-encoder-04": 5568,
+            "hardware-calibration-encoder-05": 6096,
+            "hardware-calibration-encoder-06": 6624
+          },
+          "flashOperations": 3
+        },
+        "cold-reload": {
+          "observedFrames": 94,
+          "firstMatchingFrameMs": {},
+          "flashOperations": 0
+        },
+        "usb-updater": {
+          "observedFrames": 163,
+          "firstMatchingFrameMs": {
+            "boot-uboot-usb": 2080
+          },
+          "flashOperations": 0
+        },
+        "octave-updater": {
+          "observedFrames": 444,
+          "firstMatchingFrameMs": {
+            "boot-uboot": 6592
+          },
+          "flashOperations": 0
+        }
+      }
+    }
+  },
+  "scope": "Linked Elite and Pro code after modeled SPL handoff. Ordinary startup and recovery compare actual stock and browser framebuffers as panel RGB565. Guard uses the guest crash-register snapshots from two simulated guard interrupts. Calibration/updater target detections compare with the canonical native RGB digests also seen on the rendered canvas. Initial cold-reload has a program-state assertion but no indexed complete-frame detection. Physical operation is outside this replay."
+}

@@ -7,21 +7,28 @@ const names=['runtime.json','kernel.wasm','native-session.mjs','observer.mjs','s
 export function readEmulatorRuntime({directory,pin}={}){
  if(typeof directory!=='string'||!directory)throw Error('Explicit native runtime directory required');
  if(typeof pin?.firmware!=='string'||!/^[a-f0-9]{40}$/.test(pin.firmware)||typeof pin?.kernel!=='string'||!/^[a-f0-9]{40}$/.test(pin.kernel)||!pin.files||Object.keys(pin.files).sort().join('|')!==[...names].sort().join('|'))throw Error('Invalid native runtime closure');
+ const limits=Object.fromEntries(names.map(name=>[name,name==='kernel.wasm'?16*1024*1024:name==='runtime.json'?4096:1024*1024]));
+ const inputs=readRuntimeFiles({directory,files:pin.files,limits,prefix:'emu/'});
+ const metadata=JSON.parse(inputs[0][1].toString('utf8')),wasm=pin.files['kernel.wasm'];
+ if(metadata.firmware_source!==pin.firmware||metadata.kernel_source!==pin.kernel||metadata.wasm_sha256!==wasm.sha256||metadata.wasm_bytes!==wasm.bytes||metadata.device_control!==false||metadata.full_physical_panel!==false)throw Error('Native runtime metadata mismatch');
+ return inputs;
+}
+
+// Bind each accepted filename, byte length and digest before staging any output.
+export function readRuntimeFiles({directory,files,limits,prefix}){
  const root=resolve(directory);let at=parse(root).root;
  for(const part of root.slice(at.length).split(sep).filter(Boolean)){at=join(at,part);if(lstatSync(at).isSymbolicLink())throw Error('Runtime symlink refused');}
  if(!lstatSync(root).isDirectory())throw Error('Regular runtime directory required');
  const inputs=[];
- for(const name of names){
-  const expected=pin.files[name],limit=name==='kernel.wasm'?16*1024*1024:name==='runtime.json'?4096:1024*1024;
+ for(const [name,limit] of Object.entries(limits)){
+  const expected=files[name];
   if(!Number.isSafeInteger(expected?.bytes)||expected.bytes<1||expected.bytes>limit||typeof expected.sha256!=='string'||!/^[a-f0-9]{64}$/.test(expected.sha256))throw Error('Invalid runtime closure bound');
   const path=join(root,name),before=lstatSync(path);if(before.isSymbolicLink())throw Error('Runtime symlink refused');if(!before.isFile())throw Error('Regular runtime input required');
   const fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);let bytes;
   try{const stat=fstatSync(fd);if(!stat.isFile())throw Error('Regular runtime input required');if(stat.size!==expected.bytes)throw Error('Native runtime size mismatch: '+name);bytes=readFileSync(fd);}finally{closeSync(fd);}
   if(bytes.length!==expected.bytes||createHash('sha256').update(bytes).digest('hex')!==expected.sha256)throw Error('Native runtime hash mismatch: '+name);
-  inputs.push(['emu/'+name,bytes]);
+  inputs.push([prefix+name,bytes]);
  }
- const metadata=JSON.parse(inputs[0][1].toString('utf8')),wasm=pin.files['kernel.wasm'];
- if(metadata.firmware_source!==pin.firmware||metadata.kernel_source!==pin.kernel||metadata.wasm_sha256!==wasm.sha256||metadata.wasm_bytes!==wasm.bytes||metadata.device_control!==false||metadata.full_physical_panel!==false)throw Error('Native runtime metadata mismatch');
  return inputs;
 }
 

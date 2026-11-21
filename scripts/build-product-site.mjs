@@ -35,10 +35,11 @@ function buildCatalog(source) {
  }
  return Buffer.from(JSON.stringify(catalog,null,2)+'\n');
 }
+import {readFirmwareReference} from './firmware-reference-runtime.mjs';
 import {adminAssets} from './build-admin.mjs';
 import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,pagesBase}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,firmwareReferenceRuntime,pagesBase}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -71,6 +72,12 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   inputs.push([row.path,row.path==='versions.json'?buildCatalog(data):data]);
  }
  const derived = new Map(inputs);
+ if (derived.has('reference/screens/index.html') && (emulatorRuntime || firmwareReferenceRuntime)) {
+  for (const [name, data] of readFirmwareReference(repoRoot, firmwareReferenceRuntime)) {
+   if (seen.has(name)) throw Error('Firmware reference output collision');
+   derived.set(name, data); seen.add(name);
+  }
+ }
  if (derived.has('hardware-tests.json')) {
   const name = 'package-version-assignments.json', path = join(repoRoot,name);
   noLinks(path,repoRoot);
@@ -109,7 +116,15 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
  // Explicit qualified runtime staging. Absence remains unavailable, never a fake emulator.
  if(emulatorRuntime){
   const pin=readEmulatorPin(join(repoRoot,'scripts/emulator-runtime-pin.json'));
-  for(const [name,data] of readEmulatorRuntime({directory:emulatorRuntime,pin})){
+  const editions = readEmulatorRuntime({directory:emulatorRuntime,pin});
+  if (pin.previousFirmware) {
+   const previous = readEmulatorPin(join(repoRoot,'scripts/firmware-emulator/previous-runtime.json'));
+   if (pin.previousFirmware !== previous.firmware) throw Error('Previous firmware pin mismatch');
+   for (const [path, bytes] of readEmulatorRuntime({directory:join(emulatorRuntime,'previous'),pin:previous})) {
+    editions.push(['emu/previous/' + path.slice('emu/'.length), bytes]);
+   }
+  }
+  for(const [name,data] of editions){
    if(seen.has(name))throw Error('Native runtime output collision');seen.add(name);inputs.push([name,data]);
   }
  }
@@ -123,5 +138,5 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
  const p=args.indexOf('--pages-base');if(p!==-1&&!args[p+1])throw Error('--pages-base requires a local Pages tree');
- console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
+ console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),firmwareReferenceRuntime:process.env.DNBOX_FWUI_RUNTIME,emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }
