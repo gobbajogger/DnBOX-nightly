@@ -130,6 +130,32 @@ class GateContract(unittest.TestCase):
             self.assertEqual(actual.getpixel((2, 6)), (255, 0, 0))
         self.assertEqual(clips, [(0, 1, 1), (0, 3, 3), (2, 3, 4), (5, 3, 2)])
 
+    def test_legacy_manual_keeps_the_entire_settled_footer_on_narrow_viewports(self):
+        initial = [3, 5, 0, 0, 3, 2, 1]
+        painted = [3, 25, *initial[2:]]
+        page = Mock()
+        page.evaluate.side_effect = [initial, painted, painted]
+        clips = []
+
+        def screenshot(*, full_page, clip, timeout):
+            self.assertTrue(full_page)
+            self.assertTrue(0 < timeout <= 30_000)
+            clips.append(clip)
+            image = Image.new('RGB', (clip['width'], clip['height']))
+            for y in range(image.height):
+                image.paste((0, clip['y'] + y, 10), (0, y, image.width, y + 1))
+            data = io.BytesIO()
+            image.save(data, format='PNG')
+            return data.getvalue()
+
+        page.screenshot.side_effect = screenshot
+        with patch.object(capture, 'BAND_ROWS', 4), patch.object(capture, 'MANUAL_BAND_ROWS', 3):
+            data = capture.capture_full_page(page, 'manual/legacy.html', 'legacy-mobile')
+        with Image.open(io.BytesIO(data)) as output:
+            self.assertEqual(output.size, (3, 25))
+            self.assertEqual([output.getpixel((1, y)) for y in range(25)], [(0, y, 10) for y in range(25)])
+        self.assertLessEqual(max(clip['height'] for clip in clips), 4)
+
     def test_first_paint_rejects_scroll_viewport_or_dpr_drift(self):
         original = [3, 7, 0, 0, 3, 2, 1]
         for index in (0, 2, 3, 4, 5, 6):

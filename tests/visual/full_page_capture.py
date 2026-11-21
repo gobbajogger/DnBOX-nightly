@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-"""Capture long Builds and original Manual pages without allocating one giant Chromium surface."""
+"""Capture long Builds and archived Manual pages without allocating one giant Chromium surface."""
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 import struct
@@ -63,12 +63,13 @@ def verify_png(png):
 
 def capture_full_page(page, route, name):
     try:
-        if route not in ('builds/index.html', 'manual/original/index.html'):
+        if route not in ('builds/index.html', 'manual/original/index.html', 'manual/legacy.html'):
             return page.screenshot(full_page=True)
         deadline = time.monotonic() + 30
         geometry = page.evaluate(GEOMETRY)
         width, height = geometry[:2]
-        if geometry[-1] == 1 and width * height > SINGLE_CAPTURE_PIXELS and height > BAND_ROWS:
+        long_archive = route == 'manual/legacy.html'
+        if geometry[-1] == 1 and height > BAND_ROWS and (long_archive or width * height > SINGLE_CAPTURE_PIXELS):
             # Chromium can finish fractional layout on its first compositor capture.
             # Paint one pixel first, then size and check every stored band on the settled page.
             page.screenshot(full_page=True, clip=dict(x=0, y=0, width=1, height=1), timeout=remaining_ms(deadline))
@@ -80,6 +81,10 @@ def capture_full_page(page, route, name):
                     raise ValueError('Original Manual height changed beyond first-paint rounding')
                 # Playwright chooses the native full-page clip from the initial document size.
                 return capture_bands(page, painted, deadline, native_height=height)
+            if long_archive:
+                # The SMK manual reflows by up to several text rows on first paint.
+                # Its reference covers the entire settled document, including the footer.
+                return capture_bands(page, painted, deadline, band_rows=min(BAND_ROWS, MANUAL_BAND_ROWS))
             return capture_bands(page, painted, deadline)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
         verify_png(data)
@@ -91,7 +96,7 @@ def capture_full_page(page, route, name):
         raise RuntimeError(f'{name} full-page capture failed: {error}') from error
 
 
-def capture_bands(page, geometry, deadline, *, native_height=None):
+def capture_bands(page, geometry, deadline, *, native_height=None, band_rows=None):
     width, painted_height = geometry[:2]
     height = painted_height if native_height is None else native_height
     output = BytesIO()
@@ -126,7 +131,8 @@ def capture_bands(page, geometry, deadline, *, native_height=None):
             last_row = tile.crop((0, tile.height - 1, width, tile.height)).tobytes()
             written_rows += rows
 
-    band_rows = BAND_ROWS if native_height is None else min(BAND_ROWS, MANUAL_BAND_ROWS)
+    if band_rows is None:
+        band_rows = BAND_ROWS if native_height is None else min(BAND_ROWS, MANUAL_BAND_ROWS)
     # Only compression overlaps the next read. Chromium captures in order on the original viewport.
     with ThreadPoolExecutor(max_workers=1) as worker:
         pending = None

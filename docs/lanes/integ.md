@@ -227,3 +227,9 @@ The native sample protocol leaves bytes 480–511 erased when committing a 480-b
 Merged #161 as bd449d7; the five live sample URLs and corrected exporter returned their exact bytes. Restore now selects the complete 512-byte header only when padding contains programmed bytes, retaining 480-byte compatibility for erased padding. The canonical writers, generated pages and project exchange copy share this behavior. The regression executes the actual writers against simulated erased flash and compares the entire image. It is not physical-device verification. Full exact-head gate and live corrected Restore deployment remain pending.
 
 The exact eca8f00b full gate passed its browser chain but failed the archived installer-diff test on the intended header-padding selector. Its exact hunk is now recognized; four actual-render negatives still reject short-only, full-only, inverted-padding and unrelated model-guard changes. Production bytes are unchanged by this test correction. Fresh full gate remains required.
+
+### Legacy SMK Manual capture
+
+The [native focused receipt at 81f837d8](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7061416989) records 86 passing Node tests, 47 passing visual Python tests and five passing Feature Inbox browser viewports. The unrestricted capture then timed out on the 1440px legacy SMK Manual after reporting existing reference differences on Installer, Presets and Manual.
+
+In a fresh Chromium process at each viewport, the SMK archive grew by 86–116 CSS pixels on its first full-document compositor paint. The capture helper retains the entire settled SMK document in overlapping bands under the existing 30-second total limit. Its regression test checks the final pixel row and every intervening row. Independent 10/10 review and the outstanding reference decisions remain open.
