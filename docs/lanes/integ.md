@@ -4,15 +4,15 @@ Target `integration/dnbox-consolidated` at `914d68e8ed50698ea77c9d18c221c404629b
 
 | Item | Evidence at this checkpoint |
 |---|---|
-| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The coverage of the stored visual references is being checked separately. |
+| I0 | The full local gate passed at the exact consolidated SHA, exit 0, in 842.50 seconds. GitHub status 59271332355 and [#168 gate log receipt](https://github.com/gobbajogger/DnBOX-nightly/pull/168#issuecomment-6984429586). The unmodified updater generated all 104 absent images. Accepted references and open defects are recorded below. |
 | I1 | `CONSOLIDATED-STATE.md` records 23 merged PRs and their source and merge SHAs. GitHub compare confirms ancestry for each. |
 | I2–I3 | Final combined firmware and all-engine dropout qualification depend on the open Sound and FWUI PRs. |
-| I4–I5 | See the compact-program sanitizer and five-BREAK restore records below. Final composition qualification is open. |
-| I6 | Reconcile the owner-request rows, generated status views and the feature-list voting implementation. |
+| I4–I5 | Firmware I4 passed on stock Linux at 76040daa. All five live BREAK previews and the corrected archive were verified. Firmware-default delivery exceeds both models’ flash headroom. |
+| I6 | Firmware #976 reconciles the roadmap. The inbox and four-size vote refresh regression pass. A signed-in GitHub write/readback remains open. |
 | I7 | Both canonical installer URLs return 200. The two old Pages paths return 404. Cleanup is deferred until the lanes merge. |
 | C1–C6 | Candidate gate and independent review remain outstanding. The draft is ineligible for merge. |
 
-This checkpoint changes documentation only. Stock firmware source, build configuration and memory layout have no delta from the base. Exact-candidate gate and memory measurements are outstanding.
+This branch changes the product site, host tests and the staged account-site redirects. Firmware sources and packaged image payloads are identical to the consolidated base. No production deployment is included.
 
 ## Reproduced results at nightly 914d68e8
 
@@ -22,6 +22,18 @@ This checkpoint changes documentation only. Stock firmware source, build configu
 - I6. The Help page now links to the proposal inbox. Requests and opening-post votes are stored on GitHub. The page reads open feature issues and counts unique voters, identifies the project owner by numeric ID, and refreshes on return. Errors leave the vote count unknown. Three tests cover pagination, identity, counts and failed reads. Chromium verified the navigation, refresh and error views at four sizes with a simulated GitHub read response. The signed-in submit-and-return test on GitHub remains open.
 - I7 decision. Each project Pages site controls only its own prefix. GitHub does not redirect project Pages on rename; reusing an old repository name breaks the existing repository redirect ([GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)). Both canonical installers returned 200, both historical paths returned 404, and the old GitHub repository names still resolved to repository IDs 1426904592 and 1430294677. The 344 inspected README/documentation files contained no live old Pages link. Preserved archival citations still resolve through GitHub.
 - I7 implementation. Publish the contents of `deployment/account-pages/` at the `gobbajogger.github.io` account-site root. Each old installer path sends visitors to the matching installer, preserving the query and fragment with JavaScript and providing a fixed fallback otherwise. The project build deliberately excludes these files. The account-site repository returned 404 to the connector; its creation, settings and publication are outside these two PRs. Verify both real legacy URLs after account-site deployment. Clean up old branches only after the lane merges.
+
+### Independent visual and browser review
+
+The [full proposal archive and recovery instructions](../LIBRARY-INDEX.md#integration-visual-proposals) cover 26 states at four viewport sizes from `914d68e8ed50698ea77c9d18c221c404629b9332`. The candidate includes **22 independently approved default-state references**. What’s New, Help, Tools, Presets and Starting BREAK passed at 1440×900, 1024×640, 844×390 and 390×844. The disconnected Remote Identity view passed at both desktop sizes. The other 82 states remain open. The gate continues to report missing references explicitly.
+
+The shared header overflowed 390 px and 240 px viewports. At 844 px only 0.39 px separated the wordmark from the first navigation link. This branch reuses the header wrapping from [Web #156](https://github.com/gobbajogger/DnBOX-nightly/pull/156) and gives these controls a horizontal gap. Two installer links on Starting BREAK also touched at all four tested sizes. Both defects now have native Chromium navigation-box tests. Inbox titles containing a 64-character hash expanded the document to 596 px on mobile. Long titles now wrap. The browser regression verifies the GitHub issue link, initial empty vote count, refreshed owner vote and navigation geometry at 1440×900, 390×844, 844×390 and 240×240. The first navigation link is visible at 390 and 240 px. A separate real-browser preset import exposed a Document mount error. The repaired page imports, renames, retains and downloads the edited preset. All 11 focused Node tests, the browser sandbox contract and the 222-file build passed. A live invocation of the production inbox reader received HTTP 200 for the repository and open issues and returned the expected empty list on 2026-11-21 at 02:03 UTC. A signed-in vote still needs a real proposal.
+
+Independent reference review held all 32 Remote proposals. The owner's PDF and corrections require green Bass A notes and thin step lanes, per-part Mix controls, selected-pattern operations, and grouped Chicago controls. These requirements are tracked by the Remote lane. The current home hero still shows WAVE as a percentage. The installation view contains a compressed duplicate navigation header. The old manual’s release instructions need reconciliation before freezing its screenshots. [Review findings](https://github.com/gobbajogger/DnBOX-nightly/pull/170#issuecomment-7055501295).
+
+The two static installer redirects passed navigation, Back, query/fragment and no-JavaScript tests locally. The public account-site root is required to serve the legacy URLs. I7 remains open until both old paths work publicly and cleanup qualifies.
+
+C1 and C3–C6 remain open pending the final exact-candidate gate, outstanding design defects and independent acceptance. C2 was verified against the pinned base. No tracked project file was removed. The candidate hard-limit scan must pass again.
 
 ## Earlier evidence
 

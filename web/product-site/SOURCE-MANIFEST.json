@@ -554,8 +554,8 @@
     },
     {
       "path": "presets/page.mjs",
-      "bytes": 3774,
-      "sha256": "2c0394c4b1d5243590c592026612e96ebd8cdf4374b00d9d4008093cf3ba39de"
+      "bytes": 3810,
+      "sha256": "ce93677b6224eb4a1fb7cd9a8c58416da300465e5b0a5107aaa39665856a934f"
     },
     {
       "path": "presets/schema.mjs",
@@ -999,8 +999,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 11870,
-      "sha256": "62579cf8f5058cc79137d96005634c8d2a032b5a8dfce1dae2fc79bf7230c605"
+      "bytes": 12221,
+      "sha256": "96ecdf18fe8a3704dfc702fdc9771cee7a6ce5e6d19532c7d2ae08c08f3ab908"
     },
     {
       "path": "starting-break-export.mjs",
