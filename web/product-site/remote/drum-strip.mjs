@@ -34,6 +34,24 @@ function glyphsFor(screen) {
 // These are the idle control curves in its 32 x 18 slot coordinates.
 const coordinate = n => Number(n.toFixed(4));
 const attackEdge = q => 'M1 12L'+coordinate(1+30*q)+' 0L31 0';
+// dv_tune_fork samples eight segments per quadratic at the current value.
+function tuneFork(q) {
+  const half = 7 * (0.62 + 0.76*q);
+  const left = 16-half, right = 16+half;
+  const drop = 11+2*(q-0.27), tip = 17+1.5*(q-0.27);
+  const point = (x,y) => coordinate(x)+' '+coordinate(y);
+  let path = 'M'+point(left,0)+'L'+point(left,6);
+  for (let i=1; i<=8; i++) {
+    const t=i/8, u=1-t;
+    path += 'L'+point(left+half*t*t,drop+(6-drop)*u*u);
+  }
+  for (let i=1; i<=8; i++) {
+    const t=i/8, u=1-t;
+    path += 'L'+point(right-half*u*u,drop+(6-drop)*t*t);
+  }
+  return path+'L'+point(right,0)+'M'+point(16,drop)+'L'+point(16,tip);
+}
+
 function kickTone(q) {
   const cutoff = 300 * 20 ** q;
   const pole = Math.exp(-2 * Math.PI * cutoff / 44100);
@@ -49,9 +67,16 @@ function kickTone(q) {
 }
 
 const animators = new WeakMap();
+function drumShape(control) {
+  if (control.context.name==='Attack') return attackEdge;
+  if (control.identity==='1:1:0:1') return kickTone;
+  // The 909 kick uses DG_BDSWEEP, whose curve also depends on Pitch and Depth.
+  if (control.context.name==='Tune' && control.identity!=='1:0:0:0') return tuneFork;
+  return null;
+}
+
 export function paintDrumGlyph(root,control,raw,max) {
-  const shape = control.context.name === 'Attack' ? attackEdge :
-    control.identity === '1:1:0:1' ? kickTone : null;
+  const shape = drumShape(control);
   if (!shape || !root?.querySelectorAll || !Number.isFinite(raw) || !(max>0)) return;
   const q = Math.max(0,Math.min(1,raw/max));
   const selector = '[data-source-control="'+control.identity+'"] [data-glyph-semantic]';

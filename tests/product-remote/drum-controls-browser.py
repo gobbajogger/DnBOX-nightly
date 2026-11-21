@@ -293,7 +293,9 @@ async def cases(evidence=None):
        const copy=svg.cloneNode(true);
        if(svg.closest('[data-drum-editor]'))for(const cell of copy.querySelectorAll('[data-source-control]')){
         const id=cell.getAttribute('data-source-control'), glyph=cell.querySelector('[data-glyph-semantic]');
-        if(glyph?.getAttribute('data-glyph-semantic')!=='ATTACK' && id!=='1:1:0:1')continue;
+        const semantic=glyph?.getAttribute('data-glyph-semantic');
+        const tuningFork=semantic==='TUNE' && id!=='1:0:0:0';
+        if(semantic!=='ATTACK' && id!=='1:1:0:1' && !tuningFork)continue;
         const donor=original.querySelector('[data-source-control="'+id+'"] [data-glyph-semantic]');
         if(glyph.getAttribute('data-glyph-origin')!=='firmware dv_glyph')return false;
         glyph.setAttribute('data-glyph-origin',donor.getAttribute('data-glyph-origin'));
