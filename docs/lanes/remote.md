@@ -4,6 +4,18 @@ Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `la
 
 This file records the implementation checkpoint before its own exact-head gate. Post-commit and post-merge results are recorded with exact SHAs in the lane PR and [recovery checkpoint](https://chatgpt.com/space/page_d663ea30f1b48191acd9762ff4732a33). Never infer a new SHA's result from an older run. Whole-lane completion is not claimed.
 
+## Header, navigation and stock-host qualification (2026-11-20)
+
+The input is draft PR #169 at f7867dc8571ccb7d6248a849ac268524a51ddc73. The lane contains consolidated 914d68e8ed50698ea77c9d18c221c404629b9332. This change touches browser code and host tests. Firmware binaries, the ten pinned emulator inputs and stock memory allocations are unchanged. No files were deleted.
+
+The controlled 1024×640 run reproduced ce0d at 0.905927401190831 and cb29 at 0.8973681065066039. The extra emulator readout occupied the project-name field. Placing it below the connection state beside Connect restores 0.905927401190831 with the established 0.90 threshold and original page-01 reference. The mandatory playing test drives the real emulator from stopped to playing and back, and checks both status readouts fit while the project, transport and roll keep their positions. The four-size independent review measured the readout ink in eight views. See [captured header evidence](../../evidence/remote-header-20261120/).
+
+The Remote connection page used 27 px brand typography on every navigation link. The page measured 1,000 px wide at 844×390 and 695 px at 390×844. The corrected navigation fits each viewport, including 1440×900. All eight links are reachable by pointer and keyboard. The page-19 Patterns display now switches between the selected part's 32 choices and all five rows (160 choices). Switching preserves the Draft byte content and keyboard focus. Selecting a target in All parts updates only its own part. Command-wheel now zooms around the pointer and Shift-wheel pans time on both forms of wheel-axis delivery.
+
+The stock host at 76040daa5b52d686a8b7b544296ba5d79610a95d accepted all 32 musical note pairs from the actual Lua scripts extracted from the packed TouchOSC layout. Two host-generated kick note pairs updated feedback without MIDI echo. Channel 16 stayed silent. Run `python3 tests/product-remote/touchosc-host.py /path/to/DnBOX --json result.json`. The [recorded result](../../evidence/remote-protocol/touchosc-host.json) names the firmware commit and layout hash. Stock browser parameter editing still requires the firmware dispatcher and a matching admitted control catalog.
+
+The exact-head gate and remaining independent review are recorded on the PR. Outstanding owner-reference gaps include the SuperJ6 page, Synth One, live musical position and the combined website/firmware comparison. The visual gate performs four grid-continuity checks and one historical header comparison. Its 104 whole-page screenshot targets comprise 32 Remote workspace states, 60 website states including connection pages, and 12 offline states. All 104 lack approved screenshots at the intake SHA.
+
 ## Recovery result and PID 2 correction
 
 The one-shot recovery at b421 finished on 19 November at 00:55:44 UTC. Its journal contains all 6,167 intended removals and completions. All 3,794 distinct keepers rehashed unchanged and 1,652 neighboring entries were preserved. Available space on the Remote scratch mount increased by 802,582,528 bytes; the separate gate temp mount still reported zero user-available bytes. [Actual result](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-6996301642). Do **not** repeat this operation. Before reusing any affected generated build, restore the required missing outputs from their exact mappings and verified keepers.
@@ -135,7 +147,7 @@ Motion original setup2858400 failed before candidate execution because unsupport
 
 Masterv2 was integrated with the composed app/style and Motion fixture preserved. Earlier actual fixture setup failures and independent corrections remain recorded in the recovery artifact: keyboard starting focus, menu interception of a drag, and menu closure behind the Review modal. The original bb53 main fixture and 84c3 counter checkpoint were followed by the executed strict-ring and textContent versions documented above. All three independent composition failures remain preserved; the final c9ca actual pass is recorded above. No full-gate result transfers to this checkpoint.
 
-## Whole-lane checklist snapshot
+## Whole-lane checklist snapshot before the header correction
 
 | ID | Status at this implementation checkpoint | Evidence or remaining work |
 |---|---|---|

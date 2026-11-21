@@ -12,6 +12,37 @@ async def full_bounds(target,child=None):
  assert result['box']['width']>0 and result['box']['height']>0,('Detached/empty target',result)
  assert result['width']>=result['box']['width']-.2 and result['height']>=result['box']['height']-.2,('Control clipped by viewport/ancestor',result)
  return result
+async def check_pattern_scopes(page):
+    selected = page.get_by_role('button', name='Selected part', exact=True)
+    all_parts = page.get_by_role('button', name='All parts', exact=True)
+    await expect(selected).to_have_attribute('aria-pressed', 'true', timeout=2500)
+    initial = await core.draft_state(page)
+    await all_parts.press('Enter')
+    await expect(all_parts).to_be_focused()
+    await expect(page.locator('#part-title')).to_have_text('All parts · Draft')
+    await expect(all_parts).to_have_attribute('aria-pressed', 'true')
+    await expect(page.locator('[data-launch-part]')).to_have_count(160)
+    assert await core.draft_state(page) == initial
+    for part in range(5):
+        choices = page.locator(f'[data-launch-part="{part}"]')
+        await expect(choices).to_have_count(32)
+        assert await choices.evaluate_all('cells => cells.map(c => Number(c.dataset.pattern))') == list(range(32))
+    target = page.locator('[data-launch-part="4"][data-pattern="31"]')
+    await target.tap()
+    await expect(target).to_be_focused()
+    await expect(target).to_have_attribute('aria-pressed', 'true')
+    await full_bounds(target)
+    expected = json.loads(json.dumps(initial))
+    expected['launch'][4] = 31
+    assert await core.draft_state(page) == expected
+    assert await page.evaluate('document.documentElement.scrollWidth === innerWidth')
+    await selected.press('Space')
+    await expect(selected).to_be_focused()
+    await expect(page.locator('[data-launch-part]')).to_have_count(32)
+    await expect(page.locator('#pattern-target')).to_have_text('P32')
+    assert await core.draft_state(page) == expected
+
+
 async def cases(evidence=None):
  proof=[]
  async with async_playwright() as pw:
@@ -86,6 +117,7 @@ async def cases(evidence=None):
      saved=await core.draft_state(p);await core.load_draft(p,saved);assert (await core.draft_state(p))['launch']==targets
      await p.locator('#pattern-review').click();await expect(p.locator('#review-dialog')).to_be_visible();await p.locator('#review-dialog').get_by_role('button',name='Return').click();await expect(p.locator('#pattern-review')).to_be_focused()
      await screenshot('patterns')
+     await check_pattern_scopes(p)
      await p.locator('[data-pattern-action="song"]').click();await expect(p.locator('#song-add')).to_be_visible()
      await p.locator('[data-engine="breaks"]').click();await p.locator('[data-view="roll"]').click();await expect(p.locator('[data-break-step]')).to_have_count(16)
      plays=p.locator('#break-sequence [data-action="play"]');await expect(plays).to_have_count(5)

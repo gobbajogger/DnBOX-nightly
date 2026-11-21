@@ -17,13 +17,41 @@ async def pulse_play(page):
     await page.wait_for_function('n=>nativeFrames.length>=n+4',arg=before)
 
 async def geometry(page):
-    return await page.evaluate("['.hdr','.project-name','#roll-scroll'].map(s=>{const r=document.querySelector(s).getBoundingClientRect();return {s,x:r.x,y:r.y,width:r.width,height:r.height}})")
+    return await page.evaluate("""() => {
+        const selectors = ['.hdr', '.project-name', '#conn-state', '#native-playing', '#connect', '#roll-scroll'];
+        return selectors.map(selector => {
+            const {x, y, width, height} = document.querySelector(selector).getBoundingClientRect();
+            return {selector, x, y, width, height};
+        });
+    }""")
+
+async def check_status_area(page):
+    # The project title and musical position retain their own header fields.
+    # Both live readouts belong beside Connect, with their complete text visible.
+    await expect(page.locator('.project-name')).to_have_text('Example project')
+    await expect(page.locator('#native-playing')).to_have_attribute('aria-live', 'polite')
+    await expect(page.locator('#native-playing')).to_have_attribute('aria-atomic', 'true')
+    bounds = await page.evaluate("""() => {
+        const textBox = selector => {
+            const range = document.createRange();
+            range.selectNodeContents(document.querySelector(selector));
+            return range.getBoundingClientRect().toJSON();
+        };
+        const box = selector => document.querySelector(selector).getBoundingClientRect().toJSON();
+        return {connection: textBox('#conn-state'), playing: textBox('#native-playing'),
+                connect: box('#connect'), group: box('.link-status'), header: box('.hdr')};
+    }""")
+    group, header = bounds['group'], bounds['header']
+    for text in (bounds['connection'], bounds['playing']):
+        assert group['left'] <= text['left'] < text['right'] <= bounds['connect']['left'], bounds
+        assert header['top'] <= text['top'] < text['bottom'] <= header['bottom'], bounds
+    assert bounds['connection']['bottom'] <= bounds['playing']['top'] + 1, bounds
 
 async def cases(origin,meta,out):
     async with async_playwright() as pw:
         browser=await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for width,height in sound.SIZES:
+            for width,height in [*sound.SIZES, (1024, 640)]:
                 context=await browser.new_context(viewport={'width':width,'height':height},accept_downloads=True)
                 page=await context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
                 await page.add_init_script(sound.INSTRUMENT)
@@ -31,12 +59,14 @@ async def cases(origin,meta,out):
                     await page.goto(origin+'/remote/',wait_until='networkidle')
                     indicator=page.locator('#native-playing');await expect(indicator).to_have_text('Emulator play: —')
                     await expect(indicator).to_be_visible();await expect(indicator).to_have_attribute('aria-label','Emulator sequencer unavailable')
+                    await check_status_area(page)
                     note=page.locator('#roll-grid [data-note]').first;note_id=await note.get_attribute('data-note');before=await note.get_attribute('aria-label');await note.press('ArrowUp');edited=await note.get_attribute('aria-label');assert edited!=before
                     draft=await sound.draft_bytes(page);layout=await geometry(page)
                     await sound.menu_action(page,'#emulator-start');await expect(indicator).to_have_text('Emulator play: off',timeout=20000)
                     await expect(indicator).to_have_attribute('aria-label','Emulator sequencer stopped');assert await geometry(page)==layout
                     await page.locator('#play').click();await expect(indicator).to_have_text('Emulator play: off')
                     await pulse_play(page);await expect(indicator).to_have_text('Emulator play: on');await expect(indicator).to_have_attribute('aria-label','Emulator sequencer playing');assert await geometry(page)==layout
+                    await check_status_area(page)
                     await page.locator('#stop').click();await expect(indicator).to_have_text('Emulator play: on')
                     await page.locator('[data-view="sound"]').click();await expect(indicator).to_have_text('Emulator play: on')
                     await page.locator('[data-view="roll"]').click()

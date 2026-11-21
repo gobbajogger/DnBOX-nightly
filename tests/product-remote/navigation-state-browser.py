@@ -15,6 +15,28 @@ async def choose(page,view):
     if view in ['drums','locks','song'] and not await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
     await action.click()
     if await page.locator('.overflow').evaluate('e=>e.open'):await page.locator('.overflow summary').click()
+async def check_device_navigation(page, origin):
+    await page.goto(origin + '/remote/device/', wait_until='networkidle')
+    await page.evaluate('document.fonts.ready')
+    links = page.get_by_role('navigation', name='Main').get_by_role('link')
+    expected = ['Sounds', 'Remote', 'Samples', 'Projects', 'Presets', 'Manual', 'History', 'Install nightly']
+    assert await links.all_text_contents() == expected
+    bounds = await page.evaluate("""() => ({
+        viewport: innerWidth,
+        document: document.documentElement.scrollWidth,
+        links: [...document.querySelectorAll('header nav a')].map(a => {
+            const r = a.getBoundingClientRect();
+            const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+            return {name: a.textContent, left: r.left, right: r.right,
+                    reachable: Boolean(r.width && r.height && hit && a.contains(hit))};
+        })
+    })""")
+    assert bounds['document'] == bounds['viewport'], bounds
+    for link in bounds['links']:
+        assert link['reachable'] and 0 <= link['left'] < link['right'] <= bounds['viewport'], link
+    return bounds
+
+
 async def run(origin,out,negative):
     f.ORIGIN=origin
     async with async_playwright() as pw:
@@ -23,8 +45,10 @@ async def run(origin,out,negative):
             for width,height in [(1440,900),(390,844),(844,390)]:
                 context=await browser.new_context(viewport={'width':width,'height':height},accept_downloads=True,has_touch=True);page=await context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
                 await page.add_init_script("window.navigationMidiCalls=0;navigator.requestMIDIAccess=()=>{navigationMidiCalls++;throw Error('No device access')};")
-                history=[]
+                history=[]; device_navigation=None
                 try:
+                    if not negative:
+                        device_navigation = await check_device_navigation(page, origin)
                     await page.goto(origin+'/remote/',wait_until='networkidle')
                     for view in (['drums'] if negative else VIEWS):
                         await choose(page,view)
@@ -34,12 +58,13 @@ async def run(origin,out,negative):
                         # A second user activation of the active action stays strict and functional.
                         await choose(page,view);await expect(page.locator('[data-view="'+view+'"]')).to_have_count(1)
                         await expect(page.locator('#workspace-main')).not_to_have_attribute('aria-current','page')
+                        assert await page.evaluate('document.documentElement.scrollWidth === innerWidth'), (width,height,view)
                         if view=='locks':await expect(page.locator('#roll-view')).to_be_visible();await expect(page.locator('#motion-grid')).to_be_visible();await expect(page.locator('#motion-sequence-context')).to_contain_text('Sequence ·')
                     await page.goto(origin+'/remote/',wait_until='networkidle')
                     await f.step_drums(page)  # exact existing implementation, no selector narrowing
                     assert not errors,errors;assert await page.evaluate('navigationMidiCalls')==0
                     assets={name:hashlib.sha256(await (await page.request.get(origin+'/remote/'+name)).body()).hexdigest() for name in ['app.mjs','style.css','index.html']}
-                    (out/f'{width}x{height}.json').write_text(json.dumps({'viewport':[width,height],'navigation':history,'existingCase':'funkybeats-browser.py:step_drums unchanged','assetSha256':assets,'pageErrors':errors,'midiCalls':0},indent=2)+'\n');await page.screenshot(path=str(out/f'{width}x{height}.png'));print(f'PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums {width}x{height}',flush=True)
+                    (out/f'{width}x{height}.json').write_text(json.dumps({'viewport':[width,height],'navigation':history,'deviceNavigation':device_navigation,'existingCase':'funkybeats-browser.py:step_drums unchanged','assetSha256':assets,'pageErrors':errors,'midiCalls':0},indent=2)+'\n');await page.screenshot(path=str(out/f'{width}x{height}.png'));print(f'PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums {width}x{height}',flush=True)
                 except BaseException as error:
                     (out/f'{width}x{height}-failure.json').write_text(json.dumps({'exception':str(error),'navigation':history,'pageErrors':errors},indent=2)+'\n');await page.screenshot(path=str(out/f'{width}x{height}-failure.png'));raise
                 finally:await context.close()

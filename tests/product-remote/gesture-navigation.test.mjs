@@ -59,3 +59,19 @@ test('double tap can delete narrow notes whose resize handles cover the body',()
  const fire=(type,time)=>s.listeners[type]({button:0,pointerId:1,clientX:150,clientY:40,timeStamp:time,preventDefault(){},target:{closest:selector=>({dataset:selector==='[data-edge]'?{edge:'end'}:{note:s.id}})}});
  fire('pointerdown',100);fire('pointerup',110);fire('pointerdown',200);fire('pointerup',210);assert.equal(s.model.notes.length,0);
 });
+
+test('Command-wheel anchors zoom and Shift-wheel pans time without changing pitch', () => {
+ const s = setup(), original = s.model.notes;
+ const wheel = (deltaX, deltaY, modifiers) => s.listeners.wheel({
+  clientX: 100, deltaX, deltaY, ...modifiers, preventDefault() {}
+ });
+ wheel(0, -80, {metaKey: true});
+ assert.equal(s.scale(), 1.25);
+ assert.equal(s.viewport.scrollLeft, 150);
+ wheel(0, 40, {shiftKey: true});
+ assert.equal(s.viewport.scrollLeft, 190);
+ wheel(-30, 0, {shiftKey: true});
+ assert.equal(s.viewport.scrollLeft, 160);
+ assert.equal(s.viewport.scrollTop, 100);
+ assert.deepEqual(s.model.notes, original);
+});

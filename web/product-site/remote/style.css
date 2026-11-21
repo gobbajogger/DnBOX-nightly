@@ -263,11 +263,12 @@ dialog::backdrop{background:#000a}
 #roll-grid .black-key{z-index:0}
 #roll-grid::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--vertical-grid);background-repeat:repeat-y;background-size:100% 1px}
 #roll-grid .note{z-index:2}
-/* Connection state sits in row 1 beside Connect; the actions menu lives in the engine row. */
-.hdr .conn-state{margin-left:auto;padding-right:16px}
-.hdr .conn-state + .hdr-actions{margin-left:0}
+/* Connection and emulator observations share the status area beside Connect. */
+.link-status{display:grid;justify-items:end;align-content:center;margin-left:auto;padding-right:16px;min-width:0}
+#native-playing{min-inline-size:14ch;text-align:end;font-size:var(--fs-xs);font-weight:400;color:var(--muted);white-space:nowrap}
+.link-status + .hdr-actions{margin-left:0}
 .engines .overflow{margin-left:8px;flex:none}
-@media (orientation:portrait) and (max-width:600px){.hdr .conn-state{order:2;padding-right:8px;font-size:11px}.hdr .conn-state + .hdr-actions{margin-left:0;order:2}}
+@media (orientation:portrait) and (max-width:600px){.link-status{order:2;padding-right:8px}.link-status .conn-state{font-size:11px}#native-playing{font-size:10px}.link-status + .hdr-actions{margin-left:0;order:2}}
 
 /* Actual FunkyBeats sequencer structure, restyled to the locked R22 panels. */
 .drum-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px);gap:16px;align-items:start}
@@ -420,12 +421,6 @@ dialog::backdrop{background:#000a}
 #other-view .song-row-choice input{min-height:0;width:20px;height:20px;margin:0;accent-color:var(--accent)}
 .song-row-choice:has(input:checked){color:var(--accent)}
 
-/* Persistent read-only observation uses the existing project header footprint. */
-.project-name{display:flex;align-items:center;gap:8px}
-.project-name>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
-#native-playing{flex:none;inline-size:22ch;font-size:11px;font-weight:400;color:var(--muted);white-space:nowrap}
-@media (orientation:portrait) and (max-width:600px){#native-playing{font-size:10px}}
-
 /* Motion is a fixed-target Draft study beside the actual selected-part sequence. */
 #workspace-main[data-layout-view="locks"]{display:grid;grid-template-columns:minmax(0,3fr) minmax(280px,2fr);gap:12px}
 #workspace-main[data-layout-view="locks"] #roll-view{display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;min-width:0}
@@ -467,6 +462,8 @@ dialog::backdrop{background:#000a}
 
 .patterns-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:12px;align-items:start}
 .patterns-grid-panel,.patterns-actions{min-width:0}
+.pattern-scope{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+#other-view .pattern-scope button{min-height:44px}
 .patterns-actions{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
 #other-view .patterns-actions h3,.patterns-actions p{margin:0}
 .patterns-actions output{font-size:var(--fs-value);color:var(--accent)}
