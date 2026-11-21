@@ -16,6 +16,7 @@
 <a class="brand" href="../">DnBOX <small>REMOTE</small></a>
 <span class="project-name">Example project</span>
 <div class="pattern-readout"><strong id="pattern-no">P01</strong><i class="pattern-mark" aria-hidden="true"></i><span id="tempo">120 BPM</span></div>
+<label id="lock-choice" hidden><span aria-hidden="true">Locks ▾</span><select id="lock-target" aria-label="Choose lock target"></select></label>
 <div class="link-status">
 <span id="conn-state" class="conn-state">Not connected</span>
 <output id="native-playing" aria-live="polite" aria-atomic="true" aria-label="Emulator sequencer unavailable">Emulator play: —</output>
@@ -82,7 +83,7 @@
 </header>
 <aside id="connection-result" aria-labelledby="connection-heading" hidden><h2 id="connection-heading">Connection</h2><p id="connection-message" role="status"></p><button type="button" id="close-connection">Return to draft</button></aside>
 <main id="workspace-main">
-<nav id="break-views" aria-label="BREAK editor" hidden><button type="button" data-break-view="slices" aria-pressed="true">Slices</button><button type="button" data-break-view="notes" aria-pressed="false">Notes</button></nav>
+<nav id="break-views" aria-label="BREAK editor" hidden><button type="button" data-break-view="slices" aria-pressed="true">Slices</button><button type="button" data-break-view="generator" aria-controls="break-generator" aria-pressed="false" disabled>Generator</button><button type="button" data-break-view="notes" aria-pressed="false">Notes</button></nav>
 <section id="roll-view">
 <h2 id="motion-sequence-context" hidden></h2>
 <div class="roll-panel">
@@ -110,6 +111,7 @@
 </div>
 <aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
 </section>
+<section id="break-generator" aria-label="BREAK generator settings" hidden></section>
 <section id="break-sequence" aria-label="BREAK sequence" hidden></section>
 <section id="other-view" hidden></section>
 </main>

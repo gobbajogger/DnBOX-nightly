@@ -8,7 +8,11 @@ const percentParameters = [
  new Set([1, 2, 4, 5, 8, 9, 10, 12, 14, 15]),  // Miami
 ];
 
-export const unipolarPercent = raw => Math.floor((raw * 100 + 63) / 127) + ' %';
+export function knobPercent(raw) {
+ return Math.floor((raw * 100 + 63) / 127);
+}
+
+export const unipolarPercent = raw => knobPercent(raw) + ' %';
 
 export function sourcePercent(row, raw) {
  if (row?.kind !== 1 || row.target !== 2 || (row.voice !== 0 && row.voice !== 1) ||

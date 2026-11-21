@@ -1,4 +1,4 @@
-import {patternLockSpecs,lockField,putPatternLock} from './pattern-locks.mjs';
+import {patternLockSpecs,lockField,putPatternLock,nudgeLock} from './pattern-locks.mjs';
 import {stepField,viewStepFields,stepValueText,stepCanEdit,changeStepRow,replaceStepRows} from './local-step-rows.mjs';
 import {StepValueGesture} from './step-value-gesture.mjs';
 import {chicagoControlBindings} from './runtime-sound-map.mjs';
@@ -8,6 +8,7 @@ import {createRuntimeMixState} from './runtime-mix-state.mjs';
 import {createLocalInstrument} from './local-instrument.mjs';
 import {mountEnvelopeObservations} from './envelope-view.mjs';
 import {BreakChanceLane,breakChanceText} from './break-chance.mjs';
+import {breakGeneratorPanel,breakSoundChance,refreshBreakFields,showBreakGlyph,breakGeneratorChanges,breakPatternName,knownBreakPattern,legacyBreakChanceId,putBreakSetting} from './break-generator.mjs';
 import {emptyBreakSequence,mountBreakSequence,installBreakSequence} from './break-sequence.mjs';
 import{mixAliases,mixRead,mixChange,normalizeMixEdits}from'./mix-aliases.mjs';
 import{createMasterDraft}from'./master-draft.mjs';
@@ -69,13 +70,44 @@ export function attachEnvelopeObserver(port,pin){
 }
 const timeline=new WorkspaceTimeline();const motion=new MotionDraft();let drumVoice=0,drumEdit=false;let motionSelected=0;const arrangement=new Arrangement();let songSelected=null,songNextSelection;const launch=new LaunchSelection();const model=new SequenceDraft({trace}),groups=groupsFromCatalog(catalog);let multi=false;let focusSelection=false;let selected=null,mode='auto',view='roll',disposed=false,width=1400,row=44,fitted=false;const grid=$('roll-grid'),scroll=$('roll-scroll'),names=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
 const stepLanes = {},patternLocks=[];
-function currentLock(){return lockField($('part').value,soundBanks,view);}
+const selectedLocks=new Map();
+function restoreLockChoice(context){
+ selectedLocks.clear();
+ if(context.lockTarget!==undefined)selectedLocks.set(context.part,context.lockTarget);
+}
+function currentLock(){
+ const part=$('part').value;
+ return lockField(part,soundBanks,view,selectedLocks.get(part)) ?? lockField(part,soundBanks,view);
+}
+function syncLockPicker(kind) {
+ const picker=$('lock-target'),host=$('lock-choice');
+ if(!picker||!host)return;
+ const field=currentLock();
+ host.hidden=field?.bank!=='CHICAGO' || (kind!=='patternLock' && view!=='locks');
+ if(host.hidden)return;
+ if(picker.dataset.owner!==field.owner){
+  picker.innerHTML='<option value="" disabled>Choose target</option>'+patternLockSpecs.filter(f=>f.part===field.part && f.bank===field.bank)
+   .map(f=>'<option value="'+f.id+'">'+esc(f.label.replace(/ lock$/,''))+'</option>').join('');
+  picker.dataset.owner=field.owner;
+ }
+ picker.value=kind==='patternLock'?String(field.id):'';
+}
+if($('lock-target'))$('lock-target').onchange=()=>{
+ const part=$('part').value,field=lockField(part,soundBanks,view,Number($('lock-target').value));
+ if(!field)return;
+ cancelParameters();selectedLocks.set(part,field.id);activeLaneStep=null;
+ $('lane-kind').value='patternLock';paintNotes();
+};
 function laneSpec(kind=laneKind()){return kind==='patternLock'?currentLock():stepField(kind);}
 function lockPattern(){return launch.targets[currentLock()?.part];}
 function editPatternLock(points){
  const field=currentLock(),pattern=lockPattern();
  if(!field || !Number.isInteger(pattern))return;
- const before=structuredClone(patternLocks),next=putPatternLock(before,field.id,pattern,points);
+ const before=structuredClone(patternLocks);
+ if(before.length>=160 && !before.some(r=>r.catalogId===field.id && r.pattern===pattern) && points.some(v=>v!==null)){
+  status('All 160 pattern lock lanes are in use.');return;
+ }
+ const next=putPatternLock(before,field.id,pattern,points);
  if(JSON.stringify(before)===JSON.stringify(next))return;
  const apply=rows=>patternLocks.splice(0,patternLocks.length,...rows);
  apply(next);timeline.record({label:field.label,undo:()=>apply(before),redo:()=>apply(next)});
@@ -112,7 +144,7 @@ const stepValueLane = new StepValueGesture({
  },
  nudged:(value,direction)=>{
   if(direction===0)return null;
-  if(laneKind()==='patternLock'&&value===null)value=lockBase();
+  if(laneKind()==='patternLock')return nudgeLock(currentLock(),value??lockBase(),direction);
   const domain=laneSpec().domain;
   return domain[Math.max(0,Math.min(domain.length-1,domain.indexOf(value)+direction))];
  }
@@ -121,7 +153,7 @@ const breakSequence = emptyBreakSequence();
 function changeBreakSequence(next, label='BREAK sequence') {
  const before=structuredClone(breakSequence);
  if (JSON.stringify(before)===JSON.stringify(next)) return;
- const apply=value=>{installBreakSequence(breakSequence,value);breakEditor?.paint();};
+ const apply=value=>{installBreakSequence(breakSequence,value);breakEditor?.paint();paintBreakGenerator();};
  apply(next);timeline.record({label,undo:()=>apply(before),redo:()=>apply(next)});status();
 }
 const breakEditor = $('break-sequence') && mountBreakSequence($('break-sequence'),breakSequence,changeBreakSequence);
@@ -134,19 +166,74 @@ const breakChanceLane = new BreakChanceLane({
  },
  paint:()=>paintNotes()
 });
+function paintBreakGenerator() {
+ const host=$('break-generator'),pattern=launch.targets[4];
+ if(!host || host.hidden)return;
+ const field=host.querySelector('[data-break-pattern]');
+ if(field && Number(field.dataset.breakPattern)===pattern)refreshBreakFields(host,breakSequence.generators,pattern);
+ else host.innerHTML=breakGeneratorPanel(breakSequence.generators,pattern);
+}
+function breakSettingHost(input) {
+ if(input.dataset?.breakSetting===undefined || $('part').value!=='breaks')return null;
+ const id=Number(input.dataset.breakSetting),pattern=Number(input.dataset.breakPattern);
+ if(!knownBreakPattern(pattern) || launch.targets[4]!==pattern)return null;
+ const host=id===9 && view==='sound' && !nativeSoundMode ? $('other-view') :
+   id!==9 && view==='roll' && breakView==='generator' ? $('break-generator') : null;
+ return host?.contains(input) ? host : null;
+}
+function previewBreakSetting(input,host) {
+ if(!input.validity.valid || input.value==='')return;
+ const id=Number(input.dataset.breakSetting),value=Number(input.value);
+ const phrase=Number(host.querySelector('[data-break-setting="8"]')?.value);
+ showBreakGlyph(host,id,value,phrase);
+ if(id===8)showBreakGlyph(host,3,Number(host.querySelector('[data-break-setting="3"]').value),value);
+}
+function changeBreakSetting(event) {
+ const input=event.target,host=breakSettingHost(input);
+ if(!host)return;
+ const id=Number(input.dataset.breakSetting),pattern=Number(input.dataset.breakPattern);
+ const value=input.value===''?NaN:Number(input.value);
+ if(!input.validity.valid || !Number.isInteger(value)){
+  input.value=input.defaultValue;previewBreakSetting(input,host);return;
+ }
+ const next=structuredClone(breakSequence);
+ const rows=putBreakSetting(next.generators,pattern,id,value);
+ if(rows.length)next.generators=rows;else delete next.generators;
+ changeBreakSequence(next,'BREAK '+breakPatternName(pattern)+' '+input.labels[0].firstChild.textContent);
+ if(id===9){input.defaultValue=input.value;previewBreakSetting(input,host);}
+}
+for(const host of [$('break-generator'),$('other-view')]){
+ host?.addEventListener('input',event=>{
+  if(breakSettingHost(event.target))previewBreakSetting(event.target,host);
+ });
+ host?.addEventListener('change',changeBreakSetting);
+ host?.addEventListener('keydown',event=>{
+  const input=event.target;
+  if(event.key==='Escape' && input.type==='number' && breakSettingHost(input)){
+   event.preventDefault();input.value=input.defaultValue;previewBreakSetting(input,host);
+  }
+ });
+}
 let breakView = 'slices', activeLaneStep = null;
 for(const button of document.querySelectorAll('[data-break-view]'))button.onclick = () => {
  cancelStepLane();activeLaneStep=null;
+ if(button.dataset.breakView==='generator' && !knownBreakPattern(launch.targets[4]))return;
  breakView = button.dataset.breakView;
  syncBreakView();
  if (breakView === 'notes') {paintNotes(); fitPattern(); paintNotes();}
 };
 function syncBreakView() {
  const editingBreak = view === 'roll' && $('part').value === 'breaks';
+ const generatorButton=document.querySelector('[data-break-view="generator"]');
+ const ownsPattern=knownBreakPattern(launch.targets[4]);
+ if(generatorButton){generatorButton.disabled=!ownsPattern;generatorButton.title=ownsPattern?'':'Select a BREAK pattern in Patterns & Song';}
+ if(breakView==='generator' && !ownsPattern)breakView='slices';
+ const generator=editingBreak && breakView==='generator';
+ if($('break-generator')){$('break-generator').hidden=!generator;if(generator)paintBreakGenerator();}
  const active = editingBreak && breakView === 'slices';
  if ($('break-views')) $('break-views').hidden = !editingBreak;
  for (const button of document.querySelectorAll('[data-break-view]')) button.setAttribute('aria-pressed',String(button.dataset.breakView === breakView));
- $('roll-view').hidden = !['roll','locks'].includes(view) || active;
+ $('roll-view').hidden = !['roll','locks'].includes(view) || active || generator;
  if (breakEditor) {
   $('break-sequence').hidden = !active;
   if (active) void breakEditor.show(); else breakEditor.stop();
@@ -178,11 +265,21 @@ function laneBar(n){const span=laneSpan(),kind=laneKind();if(kind==='chance')ret
 function laneSpoken(n){const kind=laneKind();if(kind==='pan')return `${name(n.note)}, pan ${laneText('pan',n)}, local draft`;if(kind==='chance')return `${name(n.note)}, ${n.chance?(n.chance.endsWith('%')?'chance ':'condition ')+n.chance:'chance not set'}, local draft`;if(kind==='pitch')return `${name(n.note)}, pitch ${n.note}, local draft`;return `${name(n.note)}, velocity ${n.velocity}, local draft`;}
 function laneFigure(n){if(n.id!==selected)return '';const kind=laneKind();if(kind==='chance')return breakChanceMode()?selectedLaneText(kind,n):n.chance??'—';if(kind==='pitch')return name(n.note);return n.velocity;}
 function syncLaneLabel(focusedValue){const kind=laneKind(),btn=$('lane-param');if(!btn)return;const lock=kind==='patternLock',word=btn.querySelector?.('.lane-word');
- btn.dataset.patternLock=String(lock);
+ btn.dataset.patternLock=String(lock);syncLockPicker(kind);
  const label=lock?currentLock().label.replace(' lock','').toUpperCase():laneWord(kind);
  if(word)word.textContent=label;else btn.textContent=label;
  const value=focusedValue??selectedLaneText(kind,current()),out=btn.querySelector?.('output');
- if(out)out.textContent=lock?(Number.isInteger(lockPattern())?value:'Pick pattern'):value;
+ if(out){
+  out.textContent=lock?(Number.isInteger(lockPattern())?value:'Pick pattern'):value;
+  if(lock && Number.isInteger(lockPattern()) && activeLaneStep!==null){
+   const [pattern,display]=out.textContent.split(' · ');
+   const prefix=document.createElement('span'),readout=document.createElement('span');
+   prefix.className='lock-pattern';prefix.textContent=pattern+' · ';
+   readout.className='lock-display';readout.textContent=display;
+   readout.dataset.long=String(display.length>7);
+   out.replaceChildren(prefix,readout);
+  }
+ }
  const dots=btn.querySelector?.('.lane-dots');if(dots)dots.innerHTML=availableLanes().map(k=>`<b class="${k===kind?'on':''}"></b>`).join('');btn.setAttribute('aria-label',laneWord(kind)+(value?' '+value:''));if($('velocity')?.setAttribute)$('velocity').setAttribute('aria-label',laneWord(kind));}
 const laneBases=new Map();function laneBase(n){return laneBases.get(n.id)??n.note;}
 function minRow(){const w=globalThis.innerWidth??1024,h=globalThis.innerHeight??640;if(h<=500&&w>h)return 16;if(w<=600&&h>w)return 28;return 20;}
@@ -333,6 +430,7 @@ function changeLines(){
  });
  const masterSeen=new Set(), kitsSeen=new Set();
  for(const [id,value] of parameterDraft){
+  if(id===legacyBreakChanceId){lines.push('BREAK · Unassigned B chance from file · '+value+'%');continue;}
   const kit=kitAccentById.get(id);
   if(kit){
    if(kitsSeen.has(kit))continue;
@@ -375,7 +473,8 @@ function changeLines(){
   const name={chicago:'Bass A',miami:'Bass B',drum909:'909',drum808:'808'}[part];
   points.forEach((value,i)=>{if(value!==null)lines.push(name+' · Step '+(i+1)+' · '+stepField(kind).label+': '+stepValueText(kind,value));});
  }
- const {chance:breakChance,...sliceSequence}=breakSequence;
+ const {chance:breakChance,generators,...sliceSequence}=breakSequence;
+ lines.push(...breakGeneratorChanges(generators));
  if(JSON.stringify(sliceSequence)!==JSON.stringify(emptyBreakSequence()))lines.push('BREAK · '+breakSequence.rate+' · '+breakSequence.slices.filter(Boolean).length+' assigned slices · loops '+breakSequence.loops.map(id=>id??'None').join(' / '));
  breakChance?.forEach((value,step)=>{if(value!==null)lines.push(`BREAK · Step ${step+1} · Chance: ${breakChanceText(value)}`);});
  motion.values.forEach((value,i)=>{if(value!==null)lines.push(`Motion · MIAMI Wave · Step ${i+1}: unset → ${value} raw`);});
@@ -567,6 +666,7 @@ function soundControls(part){
   const heading=c.sourceSection&&section!==c.sourceSection?'<h3>'+esc(c.sourceSection)+'</h3>':'';section=c.sourceSection;const label=esc(c.label),display=esc(c.display),id=esc(c.id),value=parameterDraft.has(c.id)?parameterDraft.get(c.id):c.raw;
   const open=heading||!section0?(section0++?closeGroup:'')+(chicago?'<section>':'')+heading+
    (envelopeRows(c)?'<div class="encoder-grid envelope-controls">':'<div class="encoder-grid">'):'';
+  if(c.id===legacyBreakChanceId)return open+breakSoundChance(breakSequence.generators,launch.targets[4],parameterDraft.get(c.id));
   if(envelopeRows(c) && c.enabled) {
    const graph=heading?envelopeGraph(bank,slot,rows.filter(envelopeRows)):'';
    return open+graph+`<button type="button" class="parameter envelope-stage" data-param="${id}"><span>${label}</span><output data-param-value="${id}">${envelopeValue(c,value)}</output></button>`;
@@ -664,7 +764,7 @@ function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const lan
   }
  }
  if(sj6Focus)$('other-view').querySelector('[data-sj6-id="'+sj6Focus+'"]')?.focus({preventScroll:true});if(laneFocus!==undefined)$('other-view').querySelector(`[data-lane-step="${laneFocus}"]`)?.focus({preventScroll:true});if(['sound','mix','drums'].includes(view)){(view==='drums'?$('other-view').querySelector('.drum-sound-panel')??$('other-view'):$('other-view')).insertAdjacentHTML?.('beforeend','<div id="parameter-inspector"><label><span></span><output id="parameter-readout"></output><input id="parameter-value" type="number" disabled></label><button id="parameter-undo" disabled>Undo</button></div>');paintLivePan();}mountLiveGlyphs($('other-view'));bindParameterFields();if(view==='locks')bindMotion();paintSoundPanel();nativeEnvelopeBinding?.render();markRuntimeMixControls();status();}
-function partTitle(){if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return 'BREAK / P01';return 'P01';}
+function partTitle(){if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return knownBreakPattern(launch.targets[4])?'BREAK / '+breakPatternName(launch.targets[4]):'BREAK';return 'P01';}
 function syncPartTitle(){const el=$('part-title');if(el)el.textContent=partTitle();}
 function syncEngines(){const part=$('part')?.value;document.querySelectorAll('[data-engine]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.engine===part)));syncPartTitle();}
 function paintSoundPanel(){const root=$('glyph-card');if(!root)return;syncPartTitle();const part=$('part').value,slot=part==='chicago'?0:part==='miami'?1:-1,bank=slot<0?'':view==='sound'&&nativeSoundMode?'CHICAGO':soundBanks[slot];if(view==='sound'&&nativeSoundMode&&!['ready','busy'].includes(nativeSound()?.snapshot().phase)){root.innerHTML='<strong>Sound · Emulator</strong><output>—</output>';return;}const n=current(),lane=STEP_LANES.find(l=>l.id===laneKind())||STEP_LANES[0],readout=n?String(laneFigure(n)||'—'):'—';const titles={OSCILLATOR:'OSC',ENVELOPE:'ENV'};let sections='';if(slot>=0&&!sourceOnlyBank(bank)){const rows=sourceSounds.controls(bank,slot).filter(c=>c.enabled);const order=bank==='CHICAGO'?['OSCILLATOR','FILTER 1','FILTER 2','ENVELOPE']:[...new Set(rows.map(c=>c.sourceSection))].filter(Boolean).slice(0,4);for(const section of order){const group=rows.filter(c=>c.sourceSection===section);if(!group.length)continue;const curve=section==='ENVELOPE'?envelopeGraph(bank,slot,group):'';sections+=`<div class="panel-section"><h3>${esc(titles[section]||section)}</h3><div class="panel-cells">${group.map(c=>`<div class="panel-cell">${curve?'':`<span class="glyph">${soundGlyph(c,bank,valueOfSound(c))}</span>`}<output>${esc(soundNativeId(c.id)?nativeSoundDisplay(c.id):curve?envelopeValue(c,valueOfSound(c)):miamiWave(miamiWaveParameter(c),valueOfSound(c))?.name??c.display)}</output><span>${esc(c.label)}</span></div>`).join('')}</div>${curve}</div>`;}}root.innerHTML=`<strong>${esc(slot<0?partTitle():bank+' '+(slot?'B':'A'))}</strong>${sections}<output class="panel-readout"><small>${esc(lane.label)}</small>${esc(readout)}</output>`;}
@@ -836,7 +936,7 @@ window.addEventListener('blur',()=>{rollBinding.cancel();cancelParameters();});d
 const draftState={patternLocks,stepLanes,stepValueLane,superJ6Banks,breakSequence,breakChanceLane,model,motion,arrangement,launch,parameterDraft,parameterIdentity,timeline,soundBanks};
 class MixWorkspaceDraftFile extends WorkspaceDraftFile{validate(document){const checked=super.validate(document);return super.validate({...checked,parameters:masterDraft.normalize(normalizeMixEdits(checked.parameters,mixAliasIndex))});}}
 const draftCodec=new MixWorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean)});
-const draftContext=()=>({part:$('part').value,view,mode,lane:laneKind(),zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
+const draftContext=()=>({part:$('part').value,view,...(view==='roll'&&$('part').value==='breaks'&&breakView==='generator'?{breakView}:{}),mode,lane:laneKind(),...(laneKind()==='patternLock'&&currentLock()?.id!==lockField($('part').value,soundBanks,view)?.id?{lockTarget:currentLock().id}:{}),zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
 const startingDraft=draftCodec.capture(draftState,draftContext());
 
 function showReviewConfirmation(confirm) {
@@ -872,7 +972,8 @@ $('review-reset').onclick=()=>{
  const nextId=model.next, priorLegacy=[...importedJunoOwners];
  function apply(snapshot, song, legacy) {
   const context=installWorkspaceDraft(draftState,draftCodec,snapshot,{keepSession:true});
-  selected=context.selected;songSelected=song;activeLaneStep=null;laneBases.clear();
+  restoreLockChoice(context);selected=context.selected;songSelected=song;activeLaneStep=null;laneBases.clear();
+  if(context.breakView==='generator' && view==='roll' && $('part').value==='breaks')breakView='generator';
   importedJunoOwners.clear();for(const owner of legacy)importedJunoOwners.add(owner);
   activeParameter=null;activePresentation=null;
   breakEditor?.paint();syncBreakView();
@@ -883,7 +984,7 @@ $('review-reset').onclick=()=>{
  $('review-dialog').close();
  paintNotes();if(view!=='roll')other();status('Local draft discarded. Undo in Draft to restore it.');
 };
-bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{rollBinding.cancel();cancelParameters();},restoreContext:c=>{retireNativeSound();recoverLegacySoundOwners();activeLaneStep=null;laneBases.clear();$('part').value=c.part;selected=c.selected;mode='auto';multi=c.multi;drumVoice=c.drumVoice;drumOriginal=false;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=rollBasis()*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
+bindDraftFiles({document,window,codec:draftCodec,state:draftState,getContext:draftContext,cancel:()=>{rollBinding.cancel();cancelParameters();},restoreContext:c=>{retireNativeSound();recoverLegacySoundOwners();restoreLockChoice(c);activeLaneStep=null;laneBases.clear();$('part').value=c.part;if(c.breakView==='generator')breakView='generator';else if(breakView==='generator')breakView='slices';selected=c.selected;mode='auto';multi=c.multi;drumVoice=c.drumVoice;drumOriginal=false;drumEdit=c.drumEdit;motionSelected=c.motionSelected;$('lane-kind').value=c.lane;$('zoom').value=c.zoom;width=rollBasis()*c.zoom;activeParameter=null;activePresentation=null;for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));$('multi').setAttribute('aria-pressed',String(multi));view=c.view;},render:()=>setView(view),status});
 // Explicit simulator admission only. Native endpoint/catalog admission is not yet qualified.
 const simulatorBundle=globalThis.__DNBOX_FIRMWARE_BUNDLE?.admission?.testOnly===true?globalThis.__DNBOX_FIRMWARE_BUNDLE:null;
 if(simulatorBundle){for(const id of['firmware-safety','firmware-controls'])if($(id))$(id).hidden=false;}

@@ -149,7 +149,7 @@ test('pattern-owned step locks preserve catalog identity, owner, pattern, zero a
  const a=setup(),legacy=a.codec.encode(capture(a)),empty=()=>Array(16).fill(null);
  for(const f of patternLockSpecs){
   const c=catalog.controls.find(d=>d.id===f.id);
-  assert.deepEqual([c.kind,c.target,c.voice,c.parameter,c.min,c.max,c.sourceBank],['U32',f.part===4?3:2,f.part===4?0:f.part-2,f.parameter,0,127,f.part===4?-1:f.bank==='MIAMI'?1:0]);
+  assert.deepEqual([c.kind,c.target,c.voice,c.parameter,c.min,c.max,c.sourceBank],['U32',f.part===4?3:2,f.part===4?0:f.part-2,f.parameter,0,f.domain.at(-1),f.part===4?-1:f.bank==='MIAMI'?1:0]);
  }
  assert.equal(lockField('miami',['MIAMI','CHICAGO'],'roll').id,4130);assert.equal(lockField('chicago',['MIAMI','CHICAGO'],'roll').id,4169);
  assert.equal(lockField('miami',['CHICAGO','MIAMI'],'locks').id,4201);
@@ -159,10 +159,12 @@ test('pattern-owned step locks preserve catalog identity, owner, pattern, zero a
  const gains=Array.from({length:128},(_,i)=>breakLevel(i)).join('\n')+'\n';
  assert.equal(createHash('sha256').update(gains).digest('hex'),'359ed007a5c74ecf111e406b90f8e18a1a73c1286ca92e349ab65f610ad9bb55');
  assert.equal(lockField('miami',['CHICAGO','MIAMI'],'locks').text(77),'61 %');
- assert.equal(lockField('chicago',['CHICAGO','MIAMI'],'roll').text(31),'24 %');
+ assert.equal(lockField('chicago',['CHICAGO','MIAMI'],'roll').text(31),'24%');
+ assert.equal(lockField('miami',['CHICAGO','MIAMI'],'roll',4130),undefined);
+ assert.equal(lockField('miami',['CHICAGO','CHICAGO'],'roll',4201),undefined);
  assert.equal(lockField('breaks',[],'sound'),undefined);assert.equal(lockField('drum909',[],'roll'),undefined);
  let locks=[];
- for(const spec of patternLockSpecs)for(let pattern=0;pattern<32;pattern++){
+ for(const spec of patternLockSpecs.filter(f=>[4098,4130,4169,4201,1153].includes(f.id)))for(let pattern=0;pattern<32;pattern++){
   const values=empty();values[0]=0;values[15]=127;
   locks=putPatternLock(locks,spec.id,pattern,values);
  }
@@ -182,4 +184,101 @@ test('pattern-owned step locks preserve catalog identity, owner, pattern, zero a
  assert.equal(a.codec.decode(a.codec.encode(changed)).context.lane,'patternLock');
  changed.soundBanks[0]='SuperJ6';assert.throws(()=>a.codec.validate(changed),/context/);
  installWorkspaceDraft(b.state,b.codec,b.codec.decode(legacy));assert.deepEqual(b.state.patternLocks,[]);
+});
+
+test('Chicago Sustain and Miami Cutoff retain separate Draft rows for the same stock motion parameter',async()=>{
+ const {lockField,putPatternLock}=await import('../../web/product-site/remote/pattern-locks.mjs');
+ const local=setup(),target=setup(),pattern=6,empty=Array(16).fill(null);
+ for(const [slot,part] of ['chicago','miami'].entries()){
+  const sustain=lockField(part,['CHICAGO','CHICAGO'],'locks',4105+32*slot);
+  const cutoff=lockField(part,['MIAMI','MIAMI'],'locks');
+  assert.equal(sustain.parameter,9);assert.equal(cutoff.parameter,9);
+  assert.equal(sustain.part,cutoff.part);assert.notEqual(sustain.id,cutoff.id);
+  for(const [field,value] of [[sustain,18],[cutoff,101]]){
+   const values=[...empty];values[9]=value;
+   local.state.patternLocks=putPatternLock(local.state.patternLocks??[],field.id,pattern,values);
+  }
+ }
+ const saved=local.codec.encode(capture(local));
+ const context=installWorkspaceDraft(target.state,target.codec,target.codec.decode(saved));
+ assert.equal(target.codec.encode(capture({...target,context})),saved);
+ const surviving=putPatternLock(target.state.patternLocks,4137,pattern,empty);
+ assert.deepEqual(surviving.map(r=>[r.catalogId,r.values[9]]),[[4105,18],[4169,101],[4201,101]]);
+});
+
+test('Chicago lock addresses match the captured original controls and native selector detents', async()=>{
+ const {patternLockSpecs,lockField,nudgeLock,checkedPatternLocks,putPatternLock}=await import('../../web/product-site/remote/pattern-locks.mjs');
+ const {readFileSync}=await import('node:fs');
+ const observed=JSON.parse(readFileSync(new URL('../../web/product-site/remote/source-sounds.json',import.meta.url)));
+ // 76040daa ui_original_controls.h:53 and ui.c:original_switch_turn.
+ const detents={11:[0,127],13:[0,127],14:[0,64,127],15:[0,64,127],16:[0,14,28,42,56,71,85,99,113,127]};
+ for(const group of observed.contexts.filter(g=>g.bank==='CHICAGO')){
+  const fields=patternLockSpecs.filter(f=>f.part===group.part&&f.bank===group.bank);
+  const source=group.controls.filter(c=>c.kind===1&&!c.readonly);
+  assert.equal(source.length,20);assert.equal(fields.length,source.length);
+  for(const c of source){
+   const cat=catalog.controls.find(d=>d.kind==='U32'&&d.target===c.target&&d.voice===c.voice&&d.sourceBank===c.sourceBank&&d.parameter===c.parameter);
+   const field=fields.find(f=>f.id===cat.id);assert.equal(field.parameter,c.parameter);
+   const expected=detents[c.parameter]??Array.from({length:c.max+1},(_,i)=>i);
+   assert.deepEqual(field.domain,expected);
+   for(let i=0;i<expected.length;i++)assert.equal(nudgeLock(field,expected[i],1),expected[Math.min(i+1,expected.length-1)]);
+  }
+ }
+ const speed=lockField('chicago',['CHICAGO','MIAMI'],'roll',4112);
+ assert.equal(nudgeLock(speed,106,1),127);
+ assert.equal(nudgeLock(speed,106,-1),99);
+ assert.equal(lockField('miami',['CHICAGO','CHICAGO'],'locks',4112),undefined);
+ const local=setup(),document=capture(local);
+ Object.assign(document.context,{view:'locks',lane:'patternLock',lockTarget:4112});
+ assert.equal(local.codec.decode(local.codec.encode(document)).context.lockTarget,4112);
+ for(const override of [{part:'miami'},{lane:'velocity'},{view:'sound'},{lockTarget:4144},{lockTarget:'4112'}]){
+  const bad=structuredClone(document);Object.assign(bad.context,override);
+  assert.throws(()=>installWorkspaceDraft(local.state,local.codec,bad),/context/);
+ }
+ const row={catalogId:speed.id,pattern:0,values:[106,...Array(15).fill(null)]};
+ assert.throws(()=>checkedPatternLocks([row]),/invalid pattern lock/);
+ const full=Array.from({length:160},(_,i)=>({catalogId:4096+Math.floor(i/32),pattern:i%32,values:[0,...Array(15).fill(null)]}));
+ const empty=Array(16).fill(null);
+ assert.equal(checkedPatternLocks(full).length,160);
+ assert.deepEqual(putPatternLock(full,4101,0,empty),full);
+ assert.equal(putPatternLock(full,4096,0,empty).length,159);
+ assert.throws(()=>putPatternLock(full,4101,0,full[0].values),/pattern lock/);
+ assert.throws(()=>checkedPatternLocks([...full,{...full[0],catalogId:4101}]),/pattern lock/);
+});
+
+
+test('Chicago lock readouts match all 2,444 pinned native panel values on both slots', async()=>{
+ const {patternLockSpecs}=await import('../../web/product-site/remote/pattern-locks.mjs');
+ // SHA-256 of JSON.stringify for the 20 web_sound_read value+unit curves,
+ // collected from kernel.wasm 9ad1ab9c on voice 1, over every possible raw input.
+ const nativeHash='b66544df5096dd2ca298db941e9a69be5682a1f0f7f07d4ec8a6fe1b02edbe11';
+ for(const part of [2,3]){
+  const curves=patternLockSpecs.filter(f=>f.part===part&&f.bank==='CHICAGO').map(f=>Array.from(
+   {length:f.parameter===17?12:128},(_,value)=>f.text(value)));
+  assert.equal(createHash('sha256').update(JSON.stringify(curves)).digest('hex'),nativeHash);
+ }
+});
+
+test('old BREAK B chance values round-trip independently from pattern-owned Generator settings',()=>{
+ const a=setup(),state=a.state,old=capture(a),id='source-sound/BREAK/-1|10:0:0:9:-1';
+ state.breakSequence={loops:[null,null],rate:'1/16',slices:Array(16).fill(0)};
+ for(const legacy of [undefined,0,37]){
+  const imported=structuredClone(old);
+  if(legacy!==undefined)imported.parameters.push({id,value:legacy});
+  installWorkspaceDraft(state,a.codec,imported);
+  const saved=capture(a);
+  assert.deepEqual(saved,imported);
+  assert.equal(hasDraftChanges(state,a.codec),legacy!==undefined);
+  assert.equal(saved.breakSequence,undefined);
+ }
+ state.launch.choose(4,31);state.breakSequence.generators=[{pattern:31,settings:[49,0,0,0,0,0,0,0,0,81,2,2]}];
+ const current=capture(a);const copy=a.codec.decode(a.codec.encode(current));
+ assert.equal(copy.parameters.find(p=>p.id===id).value,37);
+ assert.equal(copy.breakSequence.generators[0].settings[9],81);
+ installWorkspaceDraft(state,a.codec,old);
+ assert.equal(state.parameterDraft.has(id),false);assert.equal(state.breakSequence.generators,undefined);
+ installWorkspaceDraft(state,a.codec,copy);assert.deepEqual(capture(a),current);
+ const generatorContext={...copy,context:{...copy.context,view:'roll',part:'breaks',breakView:'generator'}};
+ assert.deepEqual(a.codec.decode(a.codec.encode(generatorContext)),generatorContext);
+ const unknown=structuredClone(generatorContext);unknown.launch[4]=null;assert.throws(()=>a.codec.validate(unknown));
 });

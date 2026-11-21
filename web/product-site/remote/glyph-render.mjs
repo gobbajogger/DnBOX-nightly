@@ -385,3 +385,44 @@ export function morphFrames(fnId, from, to, engineId, state={}){
  const span=samples[samples.length-1];
  return samples.map(ms=>render(fnId, from+(to-from)*(ms/span), engineId, state));
 }
+
+// BREAK knob strip, pinned FWUI 9dd6f2df: ui_break_layout_controls.h and
+// gfinal/ui_chance_exact.c. Coordinates below are in original firmware pixels.
+export function breakGlyphShapes(setting, value, phrase) {
+ const shapes = [];
+ const rect = (x, y, w, h, ink, radius = 0) => shapes.push({x,y,w,h,ink,radius});
+ const strength = Math.floor((value * 16 + 50) / 100) / 16;
+ if (setting === 2 || (setting >= 4 && setting <= 7) || setting === 9) {
+  const count = Math.floor((value * 3 + 25) / 50) - Number(value === 75);
+  // The native 26×19 die is centered in the shared 48×19 strip.
+  rect(18,3,11,1,1); rect(18,15,11,1,1); rect(17,4,1,11,1); rect(29,4,1,11,1);
+  for (const x of [17,29]) for (const y of [3,15]) rect(x,y,1,1,15/16);
+  for (const [x,y,on] of [[11,8,count%2],[8,5,count>=2],[14,11,count>=2],
+                          [14,5,count>=4],[8,11,count>=4],[8,8,count===6],[14,8,count===6]]) {
+   rect(x+11,y,2,2,on ? 1 : 0);
+  }
+  return shapes;
+ }
+ if (setting === 8 || setting === 10 || setting === 11) {
+  const count = setting === 8 ? 5 : 6;
+  const left = 24 - Math.floor((count * 8 - 2) / 2);
+  for (let i=0; i<count; i++) rect(left+i*8,5,6,9,i===value ? 1 : 0,2);
+  return shapes;
+ }
+ for (let i=0; i<8; i++) {
+  const x = 6 + i * 5;
+  if (setting === 0) {
+   rect(x,15,3,3,1);
+   rect(x,3+(i%2)*4,3,3,strength);
+  } else if (setting === 1) {
+   rect(x,10,3,3,0);
+   if (i%4 === 0) rect(x,4,3,12,strength);
+  } else if (setting === 3) {
+   const step = 6 + i*4 + (i>=4 ? 4 : 0);
+   rect(step,15,3,3,phrase ? 1 : 0);
+   if (i>=4) rect(step,4,3,4,phrase ? strength : 0);
+  }
+ }
+ if (setting === 3) rect(23,4,1,14,0);
+ return shapes;
+}

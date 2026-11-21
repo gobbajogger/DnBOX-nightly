@@ -28,8 +28,16 @@ function scan(cwd) {
     assert.equal(createHash('sha256').update(bytes).digest('hex'), sha256,
       `Pinned historical input bytes changed: ${path}`);
   }
+  // Rule 19 uses the retired name to identify the label it prohibits.
+  // Only the original line is allowed. A second mention or a changed line
+  // keeps the entire document in the scan.
+  const rules = spawnSync('git', ['grep', '-hiwI', name, '--', 'RULES.md'], { cwd, encoding: 'utf8' });
+  if (rules.status !== 0 && rules.status !== 1) return rules;
+  const originalRule = rules.status === 0 && createHash('sha256').update(rules.stdout).digest('hex') ===
+    '4ea2ad4de54900b167005e4cf3cd289aa020fe1ca99b26752e89b8bb8976a347';
   return spawnSync('git', ['grep', '-liwI', name, '--', '.',
     ':!*CHANGELOG*', ':!docs/history/**', ':!docs/scheduler-handoffs/**',
+    ...(originalRule ? [':!RULES.md'] : []),
     ...[...historicalInputs.keys()].map(path => `:!${path}`)], { cwd, encoding: 'utf8' });
 }
 
@@ -65,6 +73,19 @@ test('exact historical inputs alone do not fail the current-source scan', () => 
   trackedFixture({ 'web/current-engine.mjs': 'Synth One\n' }, cwd => {
     const result = scan(cwd);
     assert.equal(result.status, 1, result.stdout || result.stderr);
+  });
+});
+
+test('only the original prohibition in the rules is exempt', () => {
+  const rule = readFileSync(join(root, 'RULES.md'), 'utf8').split('\n').find(line => line.startsWith('19. '));
+  trackedFixture({ 'RULES.md': rule + '\n' }, cwd => {
+    assert.equal(scan(cwd).status, 1);
+    for (const text of [rule + ' changed\n', rule + '\n' + name + '\n', rule + '\n' + rule + '\n']) {
+      writeFileSync(join(cwd, 'RULES.md'), text);
+      const result = scan(cwd);
+      assert.equal(result.status, 0, result.stderr);
+      assert.ok(result.stdout.split('\n').includes('RULES.md'));
+    }
   });
 });
 
