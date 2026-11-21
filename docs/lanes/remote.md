@@ -2,6 +2,14 @@
 
 Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
 
+## Native synth Apply and Undo
+
+At [`71806ae2`](https://github.com/gobbajogger/DnBOX-nightly/commit/71806ae202fc820df5ce2635a9e380d2b0a03e63), a queued scalar SET stays connected while the page reads back the full catalog. The browser compares the stored value and revision with the acknowledgement before offering Undo. The scrollable control list keeps both actions reachable with 326 descriptors.
+
+In sandboxed Chromium, Chicago Cutoff 257 read 32. Apply sent 33 and a fresh read returned 33 at revision 2. Undo checked revision 2, sent 32 and read 32 back at revision 3. The archived firmware host uses real UI and engine state over a test-only transport. Its 326-control snapshots also found that COMP 95 → 96 changed Threshold from 64 to 60. The page reported the additional change and withheld scalar Undo. An explicit second Apply back to COMP 95 returned Threshold 61 and Makeup 84. The browser fixture exited 0 and 21 focused tests passed independently. [Browser exchange, control measurements and reproduction](../../evidence/remote-protocol/pilot-246ea371/browser-undo/README.md)
+
+Stock R6 remains open. The stock dispatcher returned device identity and zero bytes for DNR2 HELLO. The archived host result verifies stored targets. The current stock dispatcher, reviewed catalog and attached keyboard are still required to verify USB or BLE transactions.
+
 ## Local gate test repairs
 
 Two unfiltered runs exposed failures in both test phases. On `b90b3bbc` the catalog's stable-parent control returned a null exit status and Chromium timed out on a Draft Save click after clearing a Chicago lock. On `242f0189` the first valid catalog output returned a null exit status and Chromium timed out while inspecting the visible overflow menu during the first Draft export. Both runs passed setup, ancestry/no-loss, limits and the 303-file build. [First full log](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063956594) · [Second full log](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7063990278).
