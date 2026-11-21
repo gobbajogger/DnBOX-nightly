@@ -1,10 +1,10 @@
 # DnBOX finish-line checklists
-Rules: `RULES.md` (v2). A lane is finished when every line of its section is PASS at one SHA, with the log path or PR comment link written next to it in `docs/lanes/<lane>.md`. A check that did not run is FAIL, not "pending". Never weaken a threshold to make a check pass; if a check is wrong, the fix and its reason go in the lane file and `test-and-merge` reviews it.
+Rules: `RULES.md` (v2). A lane is finished when every line of its section is PASS at one SHA, with the log path or PR comment link written next to it in `docs/lanes/<lane>.md`. A check that did not run is not PASS; write NOT_RUN and the reason. For the full gate before a `gh-pages` fast-forward or `main`, NOT_RUN = FAIL. Never weaken a threshold to make a check pass; if a check is wrong, the fix and its reason go in the lane file and `test-and-merge` reviews it.
 
 Common to every lane (C1–C6)
 - C1 The lane's focused tests PASS at the lane PR head SHA (plus Elite and Pro builds when firmware changed); result posted as a PR comment naming the SHA. The full Local gate runs on the combined branch after the final lane merge (RULES 9), not per lane PR.
 - C2 Lane branch contains `integration/dnbox-consolidated` (merge, not rebase); no unexplained file deletions (gate step `no-loss`).
-- C3 Independent Review 10/10 on every screen it touches at 1440x900, 390x844, 844x390 and 240x240 (firmware), by `test-and-merge`; every defect found has an automated test in the same PR.
+- C3 Independent Review per RULES 9(c), only when the lane changes screens.
 - C4 Hard-limit scan clean: no Secrets, no `.github/workflows`, no SuperJ6 installer, no PSRAM, no file ≥ 50 MB outside LFS (gate step `limits`).
 - C5 `docs/lanes/<lane>.md` lists every item below with PASS + evidence; "What's left" is empty.
 - C6 Draft PR marked ready, merged into `integration/dnbox-consolidated` by `integ` after the three checks (RULES 9).
