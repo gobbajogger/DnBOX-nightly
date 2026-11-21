@@ -177,6 +177,8 @@ async def cases(origin, meta):
                     # Author real Draft Sound values with both bank choices away
                     # from defaults before native admission. These must survive too.
                     archived = Path(__file__).with_name('fixtures') / 'legacy-sound-banks' / 'both-owners.json'
+                    # Upload dispatches change immediately; startup binds its handler after source validation.
+                    await page.locator('main[aria-busy="false"]').wait_for()
                     await page.locator('#draft-file').set_input_files(archived)
                     await page.locator('#draft-replace').click()
                     authored = []
