@@ -1,6 +1,12 @@
 # Lane: remote
 
-Owner: Classic Remote, sole lane writer; Dot Remote frozen. Existing branch: `lane/remote`; target: `integration/dnbox-consolidated`. Intake head `fd6bcf8fee2841466de3291ea46a78952c440ee7`. Current successor descends normally from published PR169 head `b42102df456f387314ad48cc1e1bd7fdde1a229c` and merged base `914d68e8ed50698ea77c9d18c221c404629b9332`. The same branch and PR are preserved; all five earlier PR169 full-gate failures remain recorded below and in the recovery evidence.
+Branch `lane/remote` targets `integration/dnbox-consolidated` in draft PR #169. Integration owns the eventual merge. The receipts below retain the original revision for each result.
+
+## Current integration and verification
+
+The branch incorporates integration `583f622961fc9975fac746592ce6c483073c4170` and the tested Remote candidate `d78311dadcfb3fd7674e8d4e3fe3a622f61462df`. The latter includes the 1,024-row Song guard, the 18 source-backed synth percentage displays and the Web reconciliation. Integration changed AGENTS.md, CHECKLISTS.md and RULES.md after the candidate's previous merge. All three files match integration. No tracked file from either parent was removed. This update changes no firmware or memory allocation.
+
+The full Local gate failed on the previous published head `90cf5429`. Its original log identifies missing integration ancestry and a Playwright launch failure. Fresh gate, landscape, structural, whole-page review and stock protocol results must identify the revision they exercised. R1, R5, R6 and R7 remain open. [Original gate](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7061106028) · [Candidate source and focused test results](https://github.com/gobbajogger/DnBOX-nightly/pull/169#issuecomment-7061291872)
 
 ## Remote acceptance, 21 November 2026
 
