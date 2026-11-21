@@ -1,0 +1,74 @@
+{
+  "tested_head": "6ec5f5ba3f78a85b84d46679b302cb8880986bf6",
+  "summary_type": "observed terminal results and last available output",
+  "product_build": {
+    "files": 240
+  },
+  "edge": {
+    "passed": 568,
+    "failed": 0,
+    "skipped": 0
+  },
+  "visual_unit": {
+    "passed": 52
+  },
+  "chromium": {
+    "distribution": "Debian headless shell",
+    "version": "156.0.8078.79",
+    "sandbox": true
+  },
+  "vote": {
+    "reader_tests": 3,
+    "fixture_viewports": [
+      "1440x900",
+      "1024x640",
+      "844x390",
+      "390x844",
+      "240x240"
+    ],
+    "fixture_result": "Opening a proposal and refreshing changed 0 votes to 1 vote, including the owner label. Document width equaled viewport width in all five tests.",
+    "live_issue": 984,
+    "live_issue_state": "closed",
+    "opening_post_thumbs_up": 0,
+    "inbox_public_reads": [
+      200,
+      200
+    ],
+    "live_authenticated_increment": "unverified; GitHub web session signed out"
+  },
+  "build_history": {
+    "viewport": "390x844",
+    "articles": 198,
+    "initial_dimensions": [
+      390,
+      105157
+    ],
+    "warmup_seconds": 24.642,
+    "deadline_seconds": 30,
+    "observed_elapsed_seconds": 30.646,
+    "completed_images": 0,
+    "result": "First full-width strip timed out"
+  },
+  "samples": {
+    "standalone_readiness": "First local attempt timed out at browser launch after 180 seconds",
+    "registered_capture_labels": [
+      "1440x900",
+      "1024x640",
+      "844x390"
+    ],
+    "terminal_result": null
+  },
+  "original_manual": {
+    "fresh_terminal_result": null,
+    "previous_1440x900_result": "7935a5bf exceeded 30 seconds"
+  },
+  "bundled_controller": {
+    "last_checks": [
+      "Elite included the bundled controller",
+      "Verified download while DEV consent blocked install",
+      "Elite bundled bytes installed in the fixture with stale local input ignored"
+    ],
+    "terminal_result": null
+  },
+  "remaining_remote_reference_slots": 32
+}
