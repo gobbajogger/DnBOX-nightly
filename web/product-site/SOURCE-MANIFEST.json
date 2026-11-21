@@ -529,8 +529,8 @@
     },
     {
       "path": "presets/interchange.mjs",
-      "bytes": 6030,
-      "sha256": "9af9b8b8daed42e9c970add56648456c08c97e94fb74296aca988761159f4c7a"
+      "bytes": 7375,
+      "sha256": "7c64284b97feb69bdf135b99ab7c8e56ce82acc5ef1f23e385292ad9d4401a57"
     },
     {
       "path": "presets/legacy/app.mjs",
@@ -654,8 +654,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 90976,
-      "sha256": "ef2f0616888152e8e8082654a953903fa5798801166f97f1b72cbb2db2cc602d"
+      "bytes": 96963,
+      "sha256": "9aadf91c495b5a4eda4372e26b7b0713485de488fe51edaf954b95fdf12a2920"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -674,8 +674,8 @@
     },
     {
       "path": "remote/break-chance.mjs",
-      "bytes": 2619,
-      "sha256": "602f991dab5fc2fc78566784f4f39a2cb46859f90cdf66c995942f91ec68b3e3"
+      "bytes": 1105,
+      "sha256": "9f0045cc91f5b3fb8161fd7242e4bf35e027a0a10e9198401671360c8b662dee"
     },
     {
       "path": "remote/break-sequence.mjs",
@@ -754,8 +754,8 @@
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 11183,
-      "sha256": "61129dc0ddf7a4b1e574d7e26da2a686dbed5de183c3e7f88bef642b4993536c"
+      "bytes": 11824,
+      "sha256": "f67a98aaf0ee08c390dd0b846ffc2658c8e78412b867826c46bee7b1e9c67412"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -789,8 +789,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 10155,
-      "sha256": "69b240f29756d699df299f9dbf1265b69cb94761218a880c248a41e873b4570f"
+      "bytes": 11469,
+      "sha256": "a2b95ab5897903a0dff96039eac8ce8ee79e79097e3bc97620588c3f4c485cae"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -834,8 +834,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 8256,
-      "sha256": "d9b275ae60d11127f77584adb93b1903e4b04bab0e0623087a5d980020f4b4e3"
+      "bytes": 8456,
+      "sha256": "0dbb91d3087cf594c7a92ace513d61731d40786e6341f36ef92e814f26329d0f"
     },
     {
       "path": "remote/lane.mjs",
@@ -929,8 +929,8 @@
     },
     {
       "path": "remote/sequence.mjs",
-      "bytes": 8731,
-      "sha256": "50549117efe340c3a5400b69094314f89a53aa3d22b8f31237b0c2b3bd16672b"
+      "bytes": 9303,
+      "sha256": "ef988db85eea3e00b343e8eef0cec141683abd32a05282b6f020934d7b813341"
     },
     {
       "path": "remote/session.mjs",
@@ -939,8 +939,8 @@
     },
     {
       "path": "remote/song-view.mjs",
-      "bytes": 1741,
-      "sha256": "03f3d431e74ef0aca9c8ebc6dcd6f748cd4e77249f952941cded808b331b4058"
+      "bytes": 2093,
+      "sha256": "cece58447a4b4c53521f835a11b6407699fa7a4f2585afba82265bcade72478e"
     },
     {
       "path": "remote/sound.mjs",
@@ -959,13 +959,13 @@
     },
     {
       "path": "remote/step-lane.mjs",
-      "bytes": 5822,
-      "sha256": "ffd0b814cd82452f4e0569bebbf8ec1ae599dca83acc2a90b33f47248e3396f9"
+      "bytes": 6552,
+      "sha256": "2cc0796299aa898dd5550ff4db8541a25b053bd4ae50b65e129a2627f29c8be6"
     },
     {
       "path": "remote/style.css",
-      "bytes": 55261,
-      "sha256": "2e7db8a9cabb516b88f86119fefeb00d0f45bb8ee043a06e199d6d3860b156d1"
+      "bytes": 57220,
+      "sha256": "a1a2db04f0ad46441f8d4f94c2ee3abb5526e744382bb342cfb5a2db734c912a"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1089,8 +1089,8 @@
     },
     {
       "path": "remote/superj6.mjs",
-      "bytes": 8266,
-      "sha256": "7450278860187ee97f2cbaf50fc9d10b1ab97acbc79000b963b177a07087aae4"
+      "bytes": 8512,
+      "sha256": "429fd2c9e2de54745865ff159ebb4d6c29fe6564e9c59f2ff21c19c098049b6a"
     },
     {
       "path": "remote/synth-one-init.mjs",
@@ -1104,8 +1104,8 @@
     },
     {
       "path": "remote/superj6-banks.mjs",
-      "bytes": 8414,
-      "sha256": "843f91eb89840f5981aa0f60f06981eb636102e1712a7f400940a5f67ee4de7e"
+      "bytes": 10159,
+      "sha256": "fae58489a87f4a181c9b4fd249b9a5761660d5c640cd4821a53353fea25a3cd5"
     },
     {
       "path": "remote/synth-one-banks/BankA.json",
@@ -1189,13 +1189,33 @@
     },
     {
       "path": "remote/synth-one-files.mjs",
-      "bytes": 10524,
-      "sha256": "7290ac8026b538ea2a835dae7c799cb606926412bdfe78d6a23b7a460dcf4cd9"
+      "bytes": 11172,
+      "sha256": "dd8a7a6fe80058a9f292b6cfb8e37925fb0a2cc8e2357f7bfa15ff91c67bdaa2"
     },
     {
       "path": "remote/master-output.mjs",
       "bytes": 4759,
       "sha256": "627640f3c1d5a4230e8eefa9880aedef40fe866641be92b91f8e4a7d0f6877ff"
+    },
+    {
+      "path": "remote/synth-one-wave.mjs",
+      "bytes": 1332,
+      "sha256": "e8c3852f18364b01c191071aa0ff3ded8bb90a6415615b859fbf0269ec635061"
+    },
+    {
+      "path": "remote/drum-accent.mjs",
+      "bytes": 336,
+      "sha256": "b6ae42bfb3dd3a0851aa39da21112c41839e373e19501f1ac25f6d67526a8979"
+    },
+    {
+      "path": "remote/local-step-rows.mjs",
+      "bytes": 3080,
+      "sha256": "1396e5d26291c92eecfdb02edbf48b9d9a3d20cc2af799fd0ccd158774c4ae0f"
+    },
+    {
+      "path": "remote/step-value-gesture.mjs",
+      "bytes": 2169,
+      "sha256": "909d6ffe9ee9ed61e1ecace101aac40ce4947b6c6de299f914476a54b986ab0c"
     }
   ],
   "notClaimed": [

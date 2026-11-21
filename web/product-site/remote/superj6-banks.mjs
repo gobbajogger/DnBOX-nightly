@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Files stay in the browser. Keep only the fields the SuperJ6 Draft can display.
-import {inspect} from '../presets/interchange.mjs';
+// Drafts store the measured fields. A bass can retain one original file for lossless copies.
+import {inspect,superJ6NumericCopy} from '../presets/interchange.mjs';
 import {SUPERJ6_PROGRAM, superJ6Specs, superJ6Fields, acceptsSuperJ6} from './superj6.mjs';
 
 const fieldsByName = new Map([
@@ -58,12 +58,12 @@ function validateBank(bank) {
   });
   return {digest:bank.digest,id:identity(bank.id),name:name(bank.name),programs};
 }
-export async function readSuperJ6Bank(file) {
+export async function readSuperJ6Original(file) {
   if(!file || !Number.isSafeInteger(file.size) || file.size<1 || file.size>byteLimit)fail('file exceeds 4 MiB or is empty');
   const bytes=await file.arrayBuffer();
   if(bytes.byteLength!==file.size)fail('file size changed');
   const original=new Uint8Array(bytes);
-  inspect(original,'superj6');
+  const doc=inspect(original,'superj6');
   const raw=JSON.parse(new TextDecoder().decode(original));
   if(!object(raw))fail('expected a .superj6.bank.json file');
   const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
@@ -82,13 +82,18 @@ export async function readSuperJ6Bank(file) {
     }
     return {id:record.uid,name:record.name,values};
   });
-  return validateBank({digest,id:raw.uuid,name:raw.name,programs});
+  const bank=validateBank({digest,id:raw.uuid,name:raw.name,programs});
+  return {bank,doc,filename:file.name || bank.name+'.superj6.bank.json'};
+}
+export async function readSuperJ6Bank(file) {
+  return (await readSuperJ6Original(file)).bank;
 }
 
 export class SuperJ6Banks {
   constructor(snapshot) {
     this.banks=new Map();
     this.selected=[null,null];
+    this.originalFiles=[null,null];
     this.cache=new Map();
     this.records=new Map();
     this.fieldCount=0;
@@ -121,6 +126,38 @@ export class SuperJ6Banks {
     const prefix='superj6-bank/'+bank.digest+'/'+slot+'/'+bank.id+'/'+program.id;
     if(!this.cache.has(prefix))this.cache.set(prefix,superJ6Fields(slot,program.name,program.values,prefix));
     return this.cache.get(prefix);
+  }
+  copyDigest(slot) {
+    if(slot!==0 && slot!==1)fail('unknown bass owner');
+    return this.selected[slot]?.[0]??originalIntroDigest;
+  }
+  retainOriginal(slot,source) {
+    if(source.bank.digest!==this.copyDigest(slot))fail('choose the same original bank file for this bass');
+    const known=this.banks.get(source.bank.digest);
+    if(known && JSON.stringify(known)!==JSON.stringify(source.bank))fail('saved bank differs from the opened file');
+    this.originalFiles[slot]=source;
+  }
+  originalFor(slot) {
+    const digest=this.copyDigest(slot);
+    return [this.originalFiles[slot],this.originalFiles[1-slot]].find(file=>file?.bank.digest===digest);
+  }
+  copy(slot,edits) {
+    const source=this.originalFor(slot);
+    if(!source)fail('reopen the original bank for this bass');
+    const {bank,doc,filename}=source,changes=new Map();
+    if(edits.size)for(const [index,program] of bank.programs.entries()) {
+      const group=this.group(slot,bank,program),record=new Map();
+      for(const [key,id] of fieldsByName) {
+        const spec=group.get(id);
+        if(!spec || !edits.has(spec.id))continue;
+        const value=edits.get(spec.id);
+        if(!acceptsSuperJ6(spec,value))fail('invalid value for field '+id);
+        // Source decimals may differ from their rounded binary32 control baseline.
+        if(value!==spec.value)record.set(key,value);
+      }
+      if(record.size)changes.set(index,record);
+    }
+    return {filename,bytes:superJ6NumericCopy(doc,changes)};
   }
   fieldsOf(id) {
     if(typeof id!=='string' || !id.startsWith('superj6-bank/'))return;

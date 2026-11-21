@@ -104,7 +104,11 @@ async def at_size(browser, size, output):
             await expect(panel.locator('[data-sj6-display="96"]')).to_contain_text("tempo position")
             await expect(panel.locator('[data-sj6-display="88"]')).to_contain_text("Hz")
             await expect(page.locator('[data-sound-source="emulator"]')).to_be_disabled()
+            file_actions = await panel.locator('[data-sj6-open],[data-sj6-save]').evaluate_all(
+                "els => els.map(e => {const r=e.getBoundingClientRect();return [r.height,r.top,r.right,r.bottom]})")
+            assert len(file_actions) == 2 and all(h >= 44 for h,_,_,_ in file_actions), file_actions
             if size == (844, 390):
+                assert all(top >= 0 and right <= width and bottom <= height for _,top,right,bottom in file_actions), file_actions
                 await assert_compact_toolbar(page)
                 edits = await panel.locator("[data-sj6-field]").evaluate_all(
                     "nodes => nodes.map(node => { const r = node.getBoundingClientRect(); return [r.height, r.bottom] })")

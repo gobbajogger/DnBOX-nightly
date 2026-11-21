@@ -103,6 +103,7 @@ main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px va
 .lane-dots{display:flex;gap:3px;margin-top:auto}
 .lane-dots b{width:4px;height:4px;border-radius:50%;background:var(--line-strong)}
 .lane-dots b.on{background:var(--fg)}
+.lane-dots:has(b:nth-child(5)){display:grid;grid-template-columns:repeat(4,4px);gap:2px}
 .lane-kind{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}
 #velocity{position:relative;overflow:hidden;touch-action:none;min-width:0;overscroll-behavior:contain}
 .lane-track{position:relative;height:100%}
@@ -153,8 +154,6 @@ dialog button{background:var(--control);border:1px solid var(--line-strong);bord
 .pattern-grid{display:grid;grid-template-columns:repeat(8,minmax(48px,1fr));gap:8px}
 table{width:100%;border-collapse:collapse}
 th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px}
-.destinations{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-.destinations a{display:block;padding:14px;border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--accent)}
 footer{padding:2px 12px;min-height:18px;font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 dialog{max-width:min(600px,calc(100vw - 24px));background:var(--panel);color:inherit;border:1px solid var(--line-strong);border-radius:14px}
 dialog::backdrop{background:#000a}
@@ -335,7 +334,16 @@ dialog::backdrop{background:#000a}
 .project-summary,.destinations section{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);padding:16px;min-width:0}
 .project-summary{margin-bottom:12px}
 .project-actions{display:flex;flex-wrap:wrap;gap:8px}
-.destinations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.destinations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.destinations section{display:flex;flex-direction:column;gap:8px}
+.destinations h3,.destinations p{margin:0}
+.destinations section>div,.project-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.destinations a,.project-tools a,.project-guide summary{box-sizing:border-box;min-height:44px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--accent);align-content:center}
+.project-guide{margin:10px 0}
+.project-guide summary{width:fit-content;cursor:pointer}
+.project-guide p{white-space:pre-line;overflow-wrap:anywhere;max-width:78ch}
+@media(min-width:1100px){.destinations{grid-template-columns:1fr}.destinations section{display:grid;grid-template-columns:minmax(180px,32%) 1fr;align-items:center}}
+@media(min-width:601px) and (max-width:1099px){.destinations section{padding:10px}.destinations section>div{align-items:stretch;flex-direction:column}}
 .destinations p,.project-summary p{color:var(--muted);line-height:1.4}
 .funkybeats-launcher .perform-grid{grid-template-columns:repeat(8,minmax(0,1fr));min-width:0;width:100%}
 .funkybeats-launcher .perform-row-label{grid-column:1/-1;position:static;padding:8px 2px}
@@ -431,7 +439,10 @@ dialog::backdrop{background:#000a}
 .song-scroll{max-width:100%;overflow:auto}
 .song-table{width:100%;min-width:740px;border-collapse:collapse;text-align:left}
 .song-table th,.song-table td{padding:4px;border-bottom:1px solid var(--line)}
-#other-view .song-table select{width:100%;min-width:82px}
+.song-part-cell{display:flex;align-items:center;gap:4px}
+#other-view .song-part-cell select{width:100%;min-width:58px;padding:0 3px}
+#other-view .song-part-cell [role=switch]{flex:none;width:44px;min-height:44px;padding:0}
+#other-view .song-part-cell [aria-checked=true]{color:var(--accent);border-color:var(--accent)}
 #other-view .song-table input[type=number]{width:76px}
 .song-row-choice{display:flex;align-items:center;gap:8px;min-height:var(--hit);cursor:pointer}
 #other-view .song-row-choice input{min-height:0;width:20px;height:20px;margin:0;accent-color:var(--accent)}
@@ -475,6 +486,10 @@ dialog::backdrop{background:#000a}
 #other-view .drum-layout .seq-step{min-width:40px;min-height:40px}
 #other-view .drum-layout .sequencer-grid{flex:1;min-width:768px;overflow-x:hidden}
 .drum-layout .drum-step-lane{width:max(100%,768px)}
+.drum-accent-row{border-top:1px solid var(--line)}
+#other-view .drum-layout .drum-accent-step{min-height:44px;font-size:15px}
+.drum-accent-step[aria-pressed="mixed"]{color:var(--muted)}
+#other-view .drum-accent-step[aria-pressed="true"]{color:var(--track);border-color:var(--track)}
 
 .patterns-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:12px;align-items:start}
 .patterns-grid-panel,.patterns-actions{min-width:0}
@@ -645,7 +660,7 @@ dialog::backdrop{background:#000a}
 [data-superj6]>header span{color:var(--muted)}
 .sj6-bank-picker{display:flex;align-items:end;gap:8px;flex-wrap:wrap;margin-block:8px}
 .sj6-bank-picker>label,.sj6-bank-picker select{max-width:100%;min-width:0}
-.sj6-bank-picker button,.sj6-bank-picker select{min-height:44px}
+#other-view .sj6-bank-picker button,#other-view .sj6-bank-picker select{min-height:44px}
 .sj6-bank-picker input[hidden]{display:none}
 .sj6-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .sj6-groups fieldset{display:flex;min-width:0;margin:0;padding:8px;gap:6px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
@@ -671,7 +686,15 @@ dialog::backdrop{background:#000a}
  #other-view:has(>:is([data-superj6],.synth-one-init))>h2{font-size:16px}
  #other-view>:is([data-superj6],.synth-one-init){grid-column:1/-1}
  #other-view [data-superj6]>header,#other-view>.synth-one-init>h3{margin:0 0 4px;line-height:20px}
- #other-view [data-superj6]>header{margin-bottom:2px}
+ #other-view:has(>[data-superj6]){grid-template-columns:auto minmax(0,1fr) auto auto auto}
+ #other-view:has(>[data-superj6])>:is(.mix-modes,h2,label,.legacy-bank-choice){grid-row:1}
+ #other-view:has(>[data-superj6])>:is(label,.legacy-bank-choice){grid-column:5}
+ #other-view>[data-superj6],#other-view .sj6-bank-picker{display:contents}
+ #other-view [data-superj6]>header{grid-column:1/-1;grid-row:2;margin-bottom:2px}
+ #other-view .sj6-groups{grid-column:1/-1;grid-row:3}
+ #other-view .sj6-bank-picker [data-sj6-open]{grid-column:3;grid-row:1}
+ #other-view .sj6-bank-picker [data-sj6-save]{grid-column:4;grid-row:1}
+ #other-view .sj6-bank-picker label{grid-column:span 2}
  .sj6-groups{gap:2px 8px}
  .sj6-groups fieldset{padding:0 6px 2px}
  .sj6-groups legend{font-size:12px;line-height:14px}

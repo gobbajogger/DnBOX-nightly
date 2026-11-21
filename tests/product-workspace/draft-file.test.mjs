@@ -84,3 +84,25 @@ test('BREAK chance is stored once per local step and old Drafts clear its option
  assert.deepEqual(target.state.breakSequence,empty);
  assert.equal(target.codec.encode(capture(target)),previous);
 });
+
+test('Song files preserve every low-five-bit mute mask and legacy all-on bytes',()=>{
+ const a=edited(),legacy=a.codec.encode(capture(a)),target=setup(),draft=a.codec.decode(legacy);
+ for(let muteMask=0;muteMask<32;muteMask++){
+  draft.song[0].muteMask=muteMask;
+  const stored=a.codec.encode(draft),doc=target.codec.decode(stored);
+  const ctx=installWorkspaceDraft(target.state,target.codec,doc);
+  assert.equal(target.codec.encode(capture({...target,context:ctx})),stored);
+  assert.equal(doc.song[0].muteMask??0,muteMask);assert.equal(doc.song[0].repeats,8);
+  assert.equal(Object.hasOwn(doc.song[0],'muteMask'),muteMask!==0);
+  if(!muteMask)assert.equal(stored,legacy);
+ }
+ target.state.arrangement.setPartOn(0,1,true);target.state.arrangement.undo();
+ const before=structuredClone([target.state.arrangement.rows,target.state.arrangement.history,target.state.arrangement.future]);
+ for(const bad of [null,true,'3',.25,-1,32,128,255,undefined,NaN]){
+  draft.song[0].muteMask=bad;
+  assert.throws(()=>installWorkspaceDraft(target.state,target.codec,draft),/Song row/);
+  assert.deepEqual([target.state.arrangement.rows,target.state.arrangement.history,target.state.arrangement.future],before);
+ }
+ installWorkspaceDraft(target.state,target.codec,a.codec.decode(legacy));
+ assert.deepEqual(target.state.arrangement.rows,[{patterns:[0,31,2,8,4],repeats:8}]);
+});

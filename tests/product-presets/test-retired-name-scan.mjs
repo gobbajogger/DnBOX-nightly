@@ -10,11 +10,16 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const name = String.fromCharCode(100, 114, 111, 110, 101);
 // Byte-exact GPL qualification inputs at ffd31a735acc5721d1f90a30fc1ceb283aad6fc5,
-// not current engine labels. Exceptions cover these two originals only: newly
-// added siblings and modified copies must not inherit a directory-wide bypass.
+// plus original AudioKit bank descriptions and patch names at 6466a371.
+// Each exemption identifies exact original bytes; siblings stay in scope.
 const historicalInputs = new Map([
   ['tools/master-source/firmware/src/app/engine.c', '67c77e856e761f29f646c9f5842d99db87c284c8a0a38fc2ade128ebab27f580'],
   ['tools/master-source/firmware/src/app/ui.c', 'd7f9db8ec08f62ae65a6a6d6e9a25f26aaf7069143a8b4b54a78d7d6f6d6526a'],
+  ['web/product-site/remote/synth-one-banks/BankA.json', '1486c2b1fcb922d145541c96f436e7e15d755dba72ff9a8030052ef22d224bed'],
+  ['web/product-site/remote/synth-one-banks/Bonus.json', 'e189a9782469bd851d97a2bd157cfdd43692621287de68eb2909e8aabbd4b996'],
+  ['web/product-site/remote/synth-one-banks/Brice Beasley.json', 'a42a515cc66fc392f8831efa4865145dc9e2c8a8d9bc2554d1fd8a1aed242d45'],
+  ['web/product-site/remote/synth-one-banks/JEC.json', '9af56a4f52d050c98da8bfc6bc355ac872772cdd419def188bb644b0c9dff0c0'],
+  ['web/product-site/remote/synth-one-banks/Red Sky Lullaby.json', 'db813fe373ebd0c2434c8c0af376b245c331c35080b396bce83bc4d9f2fb0aac'],
 ]);
 
 function scan(cwd) {
@@ -23,7 +28,7 @@ function scan(cwd) {
     assert.equal(createHash('sha256').update(bytes).digest('hex'), sha256,
       `Pinned historical input bytes changed: ${path}`);
   }
-  return spawnSync('git', ['grep', '-niwI', name, '--', '.',
+  return spawnSync('git', ['grep', '-liwI', name, '--', '.',
     ':!*CHANGELOG*', ':!docs/history/**', ':!docs/scheduler-handoffs/**',
     ...[...historicalInputs.keys()].map(path => `:!${path}`)], { cwd, encoding: 'utf8' });
 }
@@ -67,21 +72,25 @@ for (const path of [
   'firmware/src/app/current-engine.c',
   'web/product-site/remote/current-engine.mjs',
   'tests/product-presets/current-engine.mjs',
+  'web/product-site/remote/synth-one-banks/unreviewed.json',
   'tools/master-source/firmware/src/app/current-engine.c',
 ]) {
   test(`current-source detection still rejects ${path}`, () => {
     trackedFixture({ [path]: name.toUpperCase() + '\n' }, cwd => {
       const result = scan(cwd);
       assert.equal(result.status, 0, result.stderr);
-      assert.ok(result.stdout.includes(path + ':1:'), result.stdout);
+      assert.ok(result.stdout.split('\n').includes(path), result.stdout);
     });
   });
 }
 
 test('a changed historical input fails its pinned identity instead of bypassing detection', () => {
   trackedFixture({}, cwd => {
-    const path = [...historicalInputs.keys()][0];
-    writeFileSync(join(cwd, path), readFileSync(join(cwd, path), 'utf8') + '\n// changed\n');
-    assert.throws(() => scan(cwd), /Pinned historical input bytes changed/);
+    for (const path of ['tools/master-source/firmware/src/app/engine.c','web/product-site/remote/synth-one-banks/BankA.json']) {
+      const original = readFileSync(join(cwd,path));
+      writeFileSync(join(cwd,path), Buffer.concat([original,Buffer.from('\n')]));
+      assert.throws(() => scan(cwd), /Pinned historical input bytes changed/);
+      writeFileSync(join(cwd,path), original);
+    }
   });
 });

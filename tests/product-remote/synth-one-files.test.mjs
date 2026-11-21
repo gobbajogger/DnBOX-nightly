@@ -87,3 +87,29 @@ test('factory endpoint values follow binary32 bounds and preserve the one out-of
   assert.deepEqual(Object.fromEntries(counts),{filterADSRMix:192,filterDecay:30,decayDuration:14});
   assert.deepEqual(outside,[['Bonus.json','Wavesss','noiseVolume',0.5]]);
 });
+
+test('oscillator diagrams reproduce the original base tables and name their intermediate blends', async () => {
+  const {synthOneWave} = await import('../../web/product-site/remote/synth-one-wave.mjs');
+  // Digests of the 4,096 little-endian float samples in AudioKitSynthOne 6466a371.
+  const digests = [
+    '1aff67ae504b744f0e141c7b09c3367de356a953b8473e9ef20ea181ef8fc02e',
+    '9e1133ddf270aff69254fb4ef1fc60b3603980ecef56b5cf1e86bd0b88f9a898',
+    '9fb0013c933d3fd630782f0fd672ccfb39801f4aad1bd5e46761605ea9749675',
+    '50970075d0e3c022fdfb65368b693aba6b53f25579a05b4b8564ebb7f1e105f1'
+  ];
+  const names = ['Triangle','Square','Narrow pulse','Saw'];
+  for (const invalid of [1.25,-0.1,NaN,Infinity]) assert.throws(() => synthOneWave(invalid),RangeError);
+  for (const [index,hash] of digests.entries()) {
+    const wave = synthOneWave(index/3), bytes = Buffer.alloc(4096*4);
+    for (let sample=0; sample<4096; sample++) bytes.writeFloatLE(wave.sample(sample),sample*4);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
+    assert.equal(wave.label,names[index]);
+    if (index === 3) continue;
+    const blend = synthOneWave((index+0.5)/3), next = synthOneWave((index+1)/3);
+    assert.equal(blend.label, names[index]+' ↔ '+names[index+1]);
+    assert.notEqual(blend.path, wave.path);
+    for (let sample=0; sample<4096; sample++) {
+      assert.equal(blend.sample(sample),(wave.sample(sample)+next.sample(sample))/2);
+    }
+  }
+});

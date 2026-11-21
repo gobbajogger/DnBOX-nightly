@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {synthOneWave} from './synth-one-wave.mjs';
 import {renderSvg} from './glyph-render.mjs';
 import {S1_FILE_FIELDS, acceptsSynthOneFileValue, openSynthOneFile, loadFactoryBanks, loadFactoryBank} from './synth-one-file-model.mjs';
 
@@ -20,6 +21,17 @@ function buildField(spec, value, commit) {
   drawing.className = 's1-file-glyph';
   drawing.setAttribute('aria-hidden', 'true');
   const paint = raw => {
+    if (spec.key === 'waveform1' || spec.key === 'waveform2') {
+      if (!acceptsSynthOneFileValue(spec, raw)) {
+        name.textContent = 'Wave · Outside range';
+        drawing.replaceChildren();
+        return;
+      }
+      const wave = synthOneWave(raw);
+      name.textContent = 'Wave · ' + wave.label;
+      drawing.innerHTML = '<svg viewBox="0 0 64 20" aria-hidden="true"><path d="'+wave.path+'" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+      return;
+    }
     const fraction = (raw - spec.min) / (spec.max - spec.min);
     drawing.innerHTML = renderSvg(spec.glyph, fraction, 'synth-one');
   };
@@ -69,12 +81,13 @@ function buildField(spec, value, commit) {
 }
 
 function saveCopy(file) {
-  const name = file.filename.replace(/\.json$/i, '');
+  const extension = file.filename.match(/\.(?:synth1|json)$/i)?.[0] ?? '.json';
+  const name = file.filename.replace(/\.(?:synth1|json)$/i, '');
   const blob = new Blob([file.model.bytes()], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = name + ' - copy.json';
+  link.download = name + ' - copy' + extension;
   document.body.append(link);
   try { link.click(); }
   finally {
@@ -99,7 +112,7 @@ export function openSynthOneFiles(button, slot) {
       <label>Bank or file<select data-bank aria-label="Bank or file"></select></label>
       <label>Preset<select data-preset aria-label="Preset"></select></label>
       <button type="button" data-open>Open original</button>
-      <input data-upload type="file" accept=".json,application/json" hidden>
+      <input data-upload type="file" accept=".synth1,.json,application/json" hidden>
     </div>
     <div data-fields class="s1-file-fields"></div>
     <footer><span role="status" aria-live="polite"></span>

@@ -19,6 +19,17 @@ async def exercise_synth_one_files(page, slot, evidence=None):
     await expect(cutoff).to_have_value("2000")
     await expect(dialog.locator("[data-s1-field]")).to_have_count(21)
     await expect(dialog).to_be_visible()
+    wave = dialog.locator('[data-s1-field="waveform1"]')
+    control = wave.locator('..').locator('..')
+    original_wave = await wave.input_value()
+    for position,label in [("0","Triangle"),("50","Square ↔ Narrow pulse"),("100","Saw")]:
+        await wave.fill(position)
+        await wave.press("Tab")
+        await expect(control.locator("span").first).to_have_text("Wave · "+label)
+        assert await control.locator("svg path").get_attribute("d")
+    while await dialog.locator("[data-undo]").is_enabled():
+        await dialog.locator("[data-undo]").click()
+    await expect(wave).to_have_value(original_wave)
     reach = await dialog.locator("input:not([hidden]), select, button:enabled").evaluate_all("""controls => {
       const clipped = [];
       for (const el of controls) {
@@ -91,11 +102,20 @@ async def exercise_synth_one_files(page, slot, evidence=None):
     # Exercise a separate single-preset file, using names obtained from the real bank.
     record = json.loads(exported)[0]
     record["name"] = "<Bass & strings>"
+    record["waveform1"] = 1.25
     opened = json.dumps(record, ensure_ascii=False).encode()
     upload = dialog.locator("[data-upload]")
-    await upload.set_input_files({"name":"Custom.json","mimeType":"application/json","buffer":opened})
+    await upload.set_input_files({"name":"Custom.synth1","mimeType":"application/json","buffer":opened})
     await expect(preset.locator("option:checked")).to_have_text("<Bass & strings>")
     await expect(cutoff).to_have_value(changed)
+    await expect(control.locator("span").first).to_have_text("Wave · Outside range")
+    await expect(control.locator("svg")).to_have_count(0)
+    assert ".synth1" in await upload.get_attribute("accept")
+    async with page.expect_download() as copy_request:
+        await dialog.locator("[data-save]").click()
+    copy = await copy_request.value
+    assert copy.suggested_filename == "Custom - copy.synth1"
+    assert (await copy.path()).read_bytes() == opened
     await upload.set_input_files({"name":"Broken.json","mimeType":"application/json","buffer":b"{"})
     await expect(dialog.get_by_role("status")).to_contain_text("Could not open")
     await expect(preset.locator("option:checked")).to_have_text("<Bass & strings>")

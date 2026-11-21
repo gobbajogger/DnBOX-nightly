@@ -109,7 +109,9 @@ function bankPicker(library,slot) {
   const programs=bank?'<label>Program <select data-sj6-program>'+
     bank.programs.map(p=>option(p.id,p.name,p.id===selected[1])).join('')+'</select></label>':'';
   return '<div class="sj6-bank-picker">'+banks+programs+
-    '<button type="button" data-sj6-open>Open bank…</button><input type="file" data-sj6-file hidden accept=".json,application/json"></div>';
+    '<button type="button" data-sj6-open>Open original</button><input type="file" data-sj6-file hidden accept=".json,application/json">'+
+    '<button type="button" data-sj6-save'+(library.originalFor(slot)?'':' title="Choose the matching original bank file to save a copy"')+'>Save a copy</button>'+
+    '<input type="file" data-sj6-reopen hidden accept=".json,application/json"></div>';
 }
 export function renderSuperJ6(slot,edits,library) {
   const active=library?.view(slot),byField=active?.fields??slots[slot];

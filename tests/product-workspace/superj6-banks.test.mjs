@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {SuperJ6Banks,readSuperJ6Bank} from '../../web/product-site/remote/superj6-banks.mjs';
+import {SuperJ6Banks,readSuperJ6Bank,readSuperJ6Original} from '../../web/product-site/remote/superj6-banks.mjs';
 import {renderSuperJ6,SUPERJ6_PROGRAM,superJ6Spec} from '../../web/product-site/remote/superj6.mjs';
 
 const bankId='1664F450-5DBE-42BB-9658-C6FFC459E67D', first='0FECC001-DB40-473D-96B7-F91BDE6BDAFE', second='E83DA9F1-4185-4E84-81E9-973CB62A5902';
@@ -60,6 +60,39 @@ test('malformed and ambiguous banks fail before the active bank or owner changes
   ]){const s=structuredClone(library.snapshot());mutate(s);assert.throws(()=>new SuperJ6Banks(s));}
   assert.equal(JSON.stringify(library.snapshot()),before);
 });
+test('copies edit only the selected bass and bank’s existing value tokens across programs',async()=>{
+  const template=JSON.stringify(example(),null,2)
+    .replace('"midiBankChangeNumber": 0','"unknown": {"text":"雪💿", "large":987654321012345678901, "v":-0.000E+03},\r\n  "midiBankChangeNumber": 0')
+    .replace('"neonlfo1Rate",\n          "value": 0.5','"neonlfo1Rate",\n          "value": 5.00000e-1')
+    .replace('"neonlayer2PWM",\n          "value": 0','"neonlayer2PWM",\n          "value": -0.0');
+  const filename='音.superj6.bank.json';
+  const read=async text=>readSuperJ6Original(new File([text],filename));
+  const source=await read(template),other=await read(template+'\n'),library=new SuperJ6Banks(),bank=source.bank;
+  const originals=slot=>Buffer.from(library.copy(slot,edits).bytes).toString(),edits=new Map();
+  for(const slot of [0,1]){
+    library.choose(slot,[bank.digest,first],slot?null:bank);library.retainOriginal(slot,source);
+    assert.equal(originals(slot),template);assert.equal(library.copy(slot,edits).filename,filename);
+  }
+  const rate=library.view(0).fields.get(88),otherOwner=library.view(1).fields.get(88);
+  edits.set(rate.id,.25);edits.set(otherOwner.id,.75);
+  library.choose(0,[bank.digest,second]);edits.set(library.view(0).fields.get(79).id,.5);
+  const expected=template.replace('5.00000e-1','0.25').replace('"neonlayer2PWM",\n          "value": -0.0','"neonlayer2PWM",\n          "value": 0.5');
+  assert.notEqual(template,expected);assert.equal(originals(0),expected);
+  assert.equal(originals(1),template.replace('5.00000e-1','0.75'));
+  const updated=await read(originals(0));assert.deepEqual(updated.bank.programs.map(p=>p.values),[{82:1,88:.25,202:0},{79:.5,83:0,211:0}]);
+  assert.throws(()=>library.retainOriginal(0,other),/same original/);assert.equal(originals(0),expected);
+  const oldChoice=library.selected[0];library.choose(0,[other.bank.digest,first],other.bank);
+  assert.equal(library.originalFor(0),undefined);library.retainOriginal(0,other);assert.equal(originals(0),template+'\n');
+  library.choose(0,oldChoice);assert.equal(originals(0),expected); // Bass B retains these identical source bytes.
+  library.choose(1,[other.bank.digest,first]);library.retainOriginal(1,other);
+  assert.equal(library.originalFor(0),undefined);assert.throws(()=>originals(0),/reopen/);
+  library.retainOriginal(0,source);edits.set(rate.id,rate.value);edits.delete(library.view(0).fields.get(79).id);assert.equal(originals(0),template);
+  const snapshot=library.snapshot();assert.ok(!JSON.stringify(snapshot).includes('987654321012345678901'));
+  const restored=new SuperJ6Banks(snapshot);assert.equal(restored.originalFor(0),undefined);
+  restored.retainOriginal(0,source);assert.equal(Buffer.from(restored.copy(0,edits).bytes).toString(),template);
+  const tampered=structuredClone(snapshot);tampered.banks[0].programs[0].name='different';
+  assert.throws(()=>new SuperJ6Banks(tampered).retainOriginal(0,source),/differs/);
+});
 if(process.env.DNBOX_SUPERJ6_ARCHIVE){
   test('12 original bank files open and all 640 programs retain the recorded field presence and binary32 words',async()=>{
     const archive=process.env.DNBOX_SUPERJ6_ARCHIVE;
@@ -70,8 +103,23 @@ if(process.env.DNBOX_SUPERJ6_ARCHIVE){
     const library=new SuperJ6Banks();let count=0,present=0,complete=0;
     for(const path of entries){
       const bytes=execFileSync('unzip',['-p',archive,path],{maxBuffer:4*1024*1024});
-      const bank=await readSuperJ6Bank(new Blob([bytes])),original=JSON.parse(bytes);
+      const source=await readSuperJ6Original(new File([bytes],path.split('/').at(-1))),bank=source.bank,original=JSON.parse(bytes);
       library.choose(0,[bank.digest,bank.programs[0].id],bank);
+      library.retainOriginal(0,source);
+      assert.deepEqual(Buffer.from(library.copy(0,new Map()).bytes),bytes);
+      if(bank.id===SUPERJ6_PROGRAM.bankId){
+        const builtin=new SuperJ6Banks();builtin.retainOriginal(1,source);
+        library.choose(0,[bank.digest,SUPERJ6_PROGRAM.programId]);
+        const a=library.view(0).fields.get(78),aValue=a.value===.25?.5:.25;
+        const bId=a.id.replace('/0/','/1/'),bValue=.75;
+        const edits=new Map([[a.id,aValue],[bId,bValue]]);
+        const authored=(slot,lib)=>JSON.parse(Buffer.from(lib.copy(slot,edits).bytes));
+        for(const [slot,lib,want] of [[0,library,aValue],[1,builtin,bValue]]){
+          const expected=structuredClone(original);
+          expected.presets.find(p=>p.uid===SUPERJ6_PROGRAM.programId).parameterValues.find(v=>v.identifier==='neonlayer1PWM').value=want;
+          assert.deepEqual(authored(slot,lib),expected);
+        }
+      }
       for(const [i,row] of original.presets.entries()){
         const values=new Map(row.parameterValues.map(p=>[p.identifier,p.value]));
         const program=bank.programs[i];assert.equal(program.id,row.uid);assert.equal(program.name,row.name);

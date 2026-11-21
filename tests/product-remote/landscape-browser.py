@@ -20,6 +20,7 @@ PARTS = ('chicago', 'miami', 'drum909', 'drum808', 'breaks')
 
 def expected_states():
     return {
+        'drums-accent-drum909', 'drums-accent-drum808',
         *(f'{view}-{part}' for view in ('roll', 'patterns', 'locks', 'drums') for part in PARTS),
         *(f'{view}-{kit}-{voice}' for view in ('sound', 'original')
           for kit in ('drum909', 'drum808') for voice in range(11)),
@@ -28,6 +29,7 @@ def expected_states():
           for state in ('synth-one-file', 'superj6-import-partial', 'superj6-import-complete')),
         *(f'native-sound-{part}' for part in ('miami', 'chicago', 'choice-unavailable')),
         *(f'{source}-mix-{mode}' for source in ('draft', 'native') for mode in ('levels', 'pan', 'sends', 'fx')),
+        *(f'bass-{part}-{field}' for part in ('chicago','miami') for field in ('gate','slide','accent','release')),
         'break-notes', 'break-chance-authored', 'sound-breaks', 'projects', 'song-empty', 'song-row', 'all-part-patterns',
         'review-dialog', 'more-menu', 'connect-feedback', 'draft-invalid', 'draft-import', 'device', 'identity',
     }
@@ -56,6 +58,31 @@ def author_break_chance(page):
     assert abs(roll_box['y'] + roll_box['height'] - lane_box['y']) <= 2
     assert 0 < lane_box['height'] and lane_box['y'] + lane_box['height'] <= viewport['height'] + 1
     return {'enabledSteps': 16, 'values': values, 'lane': lane_box, 'roll': roll_box, 'authoredCell': box}
+
+
+def inspect_bass_steps(page, part, snap):
+    menu = page.locator('.overflow')
+    menu.locator('summary').click()
+    with page.expect_download() as saved:
+        page.locator('#draft-save').click()
+    old = Path(saved.value.path()).read_bytes()
+    menu.locator('summary').click()
+    cells = page.locator('#velocity [data-lane-step]')
+    for field in ('gate','slide','accent','release'):
+        for _ in range(8):
+            if page.locator('#lane-kind').input_value() == field:
+                break
+            page.locator('#lane-param').click()
+        assert page.locator('#lane-kind').input_value() == field
+        if field == 'gate':
+            for cell in cells.all():
+                cell.press('ArrowUp')
+                cell.press('ArrowUp')
+        assert cells.count() == 16 and page.locator('#velocity [data-lane-step]:enabled').count() == 16
+        cells.first.focus()
+        snap('bass-'+part+'-'+field,[3,22])
+    page.locator('#draft-file').set_input_files({'name':'prior.json','mimeType':'application/json','buffer':old})
+    page.locator('#draft-replace').click()
 
 
 def inspect_synth_files(page, snap):
@@ -180,6 +207,8 @@ def inspect(origin, site, output):
             part(q)
             view('roll')
             snap('roll-' + q, [1, 2, 14, 15, 21] if q != 'breaks' else [11])
+            if q in ('chicago','miami'):
+                inspect_bass_steps(page,q,snap)
             if q == 'breaks':
                 page.locator('[data-break-view="notes"]').click()
                 snap('break-notes', [11])
@@ -205,6 +234,18 @@ def inspect(origin, site, output):
             for v, ref in [('patterns', [9, 19]), ('locks', [3, 17]), ('drums', [2, 15])]:
                 view(v)
                 snap(v + '-' + q, ref)
+                if v == 'drums' and q in ('drum909', 'drum808'):
+                    accents = page.locator('.drum-accent-row [data-drum-accent-step]')
+                    assert accents.count() == 16
+                    accents.last.tap()
+                    accents.first.tap()
+                    accents.first.tap()
+                    assert accents.first.get_attribute('aria-pressed') == 'false'
+                    assert accents.last.get_attribute('aria-pressed') == 'true'
+                    snap('drums-accent-' + q, ref)
+                    for _ in range(3):
+                        page.locator('#undo').tap()
+                    assert accents.first.get_attribute('aria-pressed') == 'mixed'
 
         def legacy_basses():
             archived = HERE / 'fixtures/legacy-sound-banks/both-owners.json'

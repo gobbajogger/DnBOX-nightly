@@ -23,3 +23,31 @@ test('Song invalid operations are atomic for rows and history',()=>{
   assert.throws(run);assert.deepEqual(a.rows,before);assert.deepEqual(a.history,history);assert.deepEqual(a.future,[]);
  }
 });
+
+test('five Song switches change only their own low bit and preserve repeats, references and neighbors',()=>{
+ for(let repeats=1;repeats<=8;repeats++)for(let mask=0;mask<32;mask++){
+  const a=make();a.update(1,{repeats,muteMask:mask});
+  const original=structuredClone(a.rows);
+  for(let part=0;part<5;part++){
+   const on=!(mask&(1<<part)),history=a.history.length;
+   assert.equal(a.setPartOn(1,part,on),false);assert.equal(a.history.length,history);
+   assert.equal(a.setPartOn(1,part,!on),true);assert.equal(a.history.length,history+1);
+   const next=mask^(1<<part);
+   assert.deepEqual(a.rows,[original[0],{patterns:[5,6,7,8,9],repeats,...(next?{muteMask:next}:{})},original[2]]);
+   a.undo();assert.deepEqual(a.rows,original);a.redo();assert.equal(a.rows[1].muteMask??0,next);a.undo();
+  }
+ }
+});
+test('invalid Song masks, rows, part indexes and switch values leave both histories intact',()=>{
+ const a=make();a.setPartOn(1,4,false);a.undo();
+ const snapshot=()=>structuredClone([a.rows,a.history,a.future]),before=snapshot();
+ for(const value of [undefined,null,-1,32,.5,'1',true,NaN,Infinity]){
+  assert.throws(()=>a.update(1,{muteMask:value}));assert.deepEqual(snapshot(),before);
+ }
+ for(const args of [[1,5,false],[1,-1,false],[1,.1,false],['1',0,true],[3,0,false],[1,'2',false],[1,0,1],[1,0,'false'],[1,0,null]]){
+  assert.throws(()=>a.setPartOn(...args));assert.deepEqual(snapshot(),before);
+ }
+ a.redo();a.move(1,-1);assert.equal(a.rows[0].muteMask,16);
+ a.setPattern(0,4,31);a.update(0,{repeats:8});assert.equal(a.rows[0].muteMask,16);
+ a.setPartOn(0,4,true);assert.ok(!Object.hasOwn(a.rows[0],'muteMask'));
+});

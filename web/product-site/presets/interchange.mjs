@@ -37,3 +37,33 @@ export function synthOneNumericTokens(doc, index, keys) {
   }
   return fields;
 }
+
+// Replace existing numeric values in record order, preserving every other token.
+export function superJ6NumericCopy(doc, changes) {
+  const state = hidden.get(doc);
+  if (doc?.profile !== 'superj6' || !state || !(changes instanceof Map)) throw Error('Expected original SuperJ6 bank');
+  if (!changes.size) return doc.original();
+  const pieces = [];
+  let end = 0, matched = 0;
+  for (const [index, preset] of state.presets.entries()) {
+    const edits = changes.get(index);
+    if (!edits) continue;
+    if (!(edits instanceof Map) || !edits.size) throw Error('Expected SuperJ6 parameter edits');
+    const seen = new Set();
+    for (const item of get(preset, 'parameterValues').children) {
+      const key = get(item, 'identifier').value;
+      if (!edits.has(key)) continue;
+      const value = edits.get(key);
+      if (seen.has(key) || !Number.isFinite(value)) throw Error('Ambiguous or invalid SuperJ6 parameter edit');
+      const token = get(item, 'value');
+      pieces.push(state.text.slice(end, token.start), JSON.stringify(value));
+      end = token.end;
+      seen.add(key);
+    }
+    if (seen.size !== edits.size) throw Error('Missing SuperJ6 parameter');
+    matched++;
+  }
+  if (matched !== changes.size) throw Error('Missing SuperJ6 program');
+  pieces.push(state.text.slice(end));
+  return encoder.encode(pieces.join(''));
+}

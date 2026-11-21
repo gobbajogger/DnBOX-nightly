@@ -10,7 +10,7 @@ async def cases(evidence=None):
  async with async_playwright() as pw:
   browser=await pw.chromium.launch(chromium_sandbox=True)
   try:
-   for w,h in [(1440,900),(390,844),(844,390)]:
+   for w,h in [(1440,900),(390,844),(844,390),(1024,640)]:
     c=await browser.new_context(viewport={'width':w,'height':h},has_touch=True);await c.route('**/*',core.serve);p=await c.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
     await p.add_init_script('window.midiCalls=0;navigator.requestMIDIAccess=()=>{midiCalls++;throw Error("No device access")}')
     try:
@@ -23,13 +23,40 @@ async def cases(evidence=None):
      async def song():return (await core.draft_state(p))['song']
      def radio(i):return p.locator(f'[data-song-select="{i}"]')
      def pattern(i,part):return p.locator(f'[data-song-pattern="{i}"][data-song-part="{part}"]')
+     def switch(i,part):return p.locator(f'[data-song-on="{i}"][data-song-part="{part}"]')
+     await expect(p.get_by_role('switch')).to_have_count(15)
      await radio(0).focus();await p.keyboard.press('Tab')
      for row in range(3):
       for part in range(5):
        field=pattern(row,part);await expect(field).to_be_focused();assert await field.locator('option').count()==32
        box=await field.bounding_box();assert box and box['height']>=40 and box['x']>=0 and box['x']+box['width']<=w+1, {'size':[w,h],'row':row,'part':part,'box':box,'scroll':await p.locator('.song-scroll').evaluate('e=>({width:e.clientWidth,left:e.scrollLeft,scrollWidth:e.scrollWidth,box:e.getBoundingClientRect().toJSON()})')}
        await p.keyboard.press('Tab')
+       toggle=switch(row,part);await expect(toggle).to_be_focused();await expect(toggle).to_be_checked();await expect(toggle).to_have_text('On')
+       box=await toggle.bounding_box();assert box and box['height']>=44 and box['width']>=44 and box['x']>=0 and box['x']+box['width']<=w+1
+       assert await toggle.evaluate("e=>{const b=e.getBoundingClientRect();return document.elementFromPoint(b.x+b.width/2,b.y+b.height/2)===e}")
+       await p.keyboard.press('Tab')
       await expect(p.locator(f'[data-song-row="{row}"]')).to_be_focused();await p.keyboard.press('Tab')
+     # Toggle all five independently on the middle row; leave patterns and neighbors untouched.
+     muted=json.loads(json.dumps(ROWS));mask=0
+     for part in range(5):
+      toggle=switch(1,part)
+      if part%2==0:await toggle.press('Space')
+      else:await toggle.tap()
+      mask|=1<<part;muted[1]['muteMask']=mask
+      await expect(toggle).not_to_be_checked();await expect(toggle).to_have_text('Off');await expect(toggle).to_be_focused()
+      await expect(radio(1)).to_be_checked();assert await song()==muted
+     await p.locator('#song-undo').press('Enter');await expect(switch(1,4)).to_be_checked();await expect(radio(1)).to_be_focused()
+     await p.locator('#song-redo').press('Space');await expect(switch(1,4)).not_to_be_checked();assert await song()==muted
+     await p.locator('#song-up').click();assert await song()==[muted[1],muted[0],muted[2]]
+     await p.locator('#song-undo').click();assert await song()==muted
+     await p.locator('#song-review').click();await expect(p.locator('#changes')).to_contain_text('P6 (off) / P7 (off) / P8 (off) / P9 (off) / P10 (off)')
+     await p.locator('#review-dialog').get_by_role('button',name='Return').click()
+     saved=await core.draft_state(p);await core.load_draft(p,saved);assert await song()==muted
+     await screenshot('part-switches')
+     for part in range(5):
+      toggle=switch(1,part);await expect(toggle).not_to_be_checked();await toggle.press('Enter');await expect(toggle).to_be_checked()
+     assert await song()==ROWS
+     await core.load_draft(p,seed);await radio(0).check()
      await pattern(1,2).focus();await pattern(1,2).press('End');await pattern(1,2).press('Tab');await expect(pattern(1,2)).to_have_value('31')
      changed=json.loads(json.dumps(ROWS));changed[1]['patterns'][2]=31;assert await song()==changed
      await p.locator('#song-undo').click();await expect(radio(0)).to_be_checked();await expect(radio(0)).to_be_focused();assert await song()==ROWS
@@ -57,12 +84,12 @@ async def cases(evidence=None):
      await expect(p.locator('#song-add')).to_be_focused();await expect(p.locator('#song-remove')).to_be_disabled();await screenshot('empty');assert await song()==[]
      await p.locator('#song-undo').click();await expect(radio(0)).to_be_focused();assert await song()==[changed[0]]
      assert await p.evaluate('document.documentElement.scrollWidth<=innerWidth');assert await p.evaluate('midiCalls')==0;assert not errors,errors
-     proof.append({'size':[w,h],'rowsRoundTripped':4,'fivePartChoices':15,'patternBounds':[0,31],'invalidAtomic':True,'focusAndBoundaries':True,'midiCalls':0})
-     print('SONG_BROWSER PASS',w,h,'choose/move/remove/history/atomic-invalid/roundtrip/focus',flush=True)
+     proof.append({'size':[w,h],'rowsRoundTripped':4,'fivePartChoices':15,'partSwitches':15,'checkedMuteMasks':[1,3,7,15,31],'patternBounds':[0,31],'invalidAtomic':True,'focusAndBoundaries':True,'midiCalls':0})
+     print('SONG_BROWSER PASS',w,h,'choose/on-off/move/remove/history/atomic-invalid/roundtrip/focus',flush=True)
     finally:await c.close()
   finally:await browser.close()
  if evidence:Path(evidence).write_text(json.dumps(proof,indent=2)+'\n')
- print('SONG_BROWSER PASS all3sizes; Draft only',flush=True)
+ print('SONG_BROWSER PASS all4sizes; Draft only',flush=True)
 def main():
  (ROOT/'.output').mkdir(exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='song-',dir=ROOT/'.output') as output:

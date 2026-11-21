@@ -63,6 +63,69 @@ async def sequencer(page):
     await page.locator('#undo').click()
     await expect(cells.first).to_have_attribute('aria-pressed', before)
 
+async def drum_accent(page):
+    # Old v1 Drafts captured MIDI events, which cannot recover the kit accent bits.
+    archive = Path(__file__).resolve().parent / 'fixtures/legacy-sound-banks/both-owners.json'
+    old = json.loads(archive.read_text())
+    assert 'stepLanes' not in old
+    assert 'stepLanes' not in await draft_state(page)
+    row = page.locator('.drum-accent-row')
+    buttons = row.locator('[data-drum-accent-step]')
+    for width, height in ((844, 390), (390, 844)):
+        await page.set_viewport_size({'width': width, 'height': height})
+        await load_draft(page, old)
+        for kit in ('909', '808'):
+            owner = 'drum' + kit
+            await page.locator(f'[data-engine="{owner}"]').tap()
+            await page.locator('.overflow summary').tap()
+            await page.locator('[data-view="drums"]').tap()
+            await page.locator('.overflow summary').tap()
+            await expect(buttons).to_have_count(16)
+            await expect(row.locator('[aria-pressed="mixed"]')).to_have_count(16)
+            await expect(buttons.first).to_have_attribute('data-accent-track', owner)
+            # Edit the right edge of both grids by real touch, including silent steps.
+            cell = buttons.last
+            await cell.tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'true')
+            await page.locator('#undo').tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'mixed')
+            await page.locator('#redo').tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'true')
+            await page.locator('#sound-voice').select_option('3')
+            await expect(cell).to_have_attribute('aria-pressed', 'true')
+            await cell.tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'false')
+            await page.locator('#undo').tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'true')
+            await page.locator('#redo').tap()
+            await expect(cell).to_have_attribute('aria-pressed', 'false')
+            await buttons.first.tap()
+            await expect(buttons.first).to_have_attribute('aria-pressed', 'true')
+            saved = await draft_state(page)
+            assert saved['notes'] == old['notes'] and saved['parameters'] == old['parameters']
+            assert saved['stepLanes'][owner]['drumAccent'] == [True] + [None] * 14 + [False]
+            if kit == '909':
+                assert 'drum808' not in saved['stepLanes']
+            else:
+                assert saved['stepLanes']['drum909'] == saved['stepLanes']['drum808']
+            await load_draft(page, saved)
+            await expect(buttons.first).to_have_attribute('aria-pressed', 'true')
+            await expect(cell).to_have_attribute('aria-pressed', 'false')
+            assert (await draft_state(page))['stepLanes'] == saved['stepLanes']
+            # A velocity or integer masquerading as a stored bit cannot replace this Draft.
+            invalid = json.loads(json.dumps(saved))
+            invalid['stepLanes'][owner]['drumAccent'][0] = 1
+            await page.locator('#draft-file').set_input_files({
+                'name':'bad-accent.json', 'mimeType':'application/json', 'buffer':json.dumps(invalid).encode()})
+            await expect(page.locator('#draft-dialog')).to_be_visible()
+            await expect(page.locator('#draft-replace')).to_be_disabled()
+            await page.locator('#draft-cancel').tap()
+            assert (await draft_state(page))['stepLanes'] == saved['stepLanes']
+            print(f'PASS {kit} kit Accent 16 real touch targets {width}x{height}, two voices, '
+                  'Undo/Redo, unknown/off/on, v1 file and invalid rejection', flush=True)
+        await load_draft(page, old)
+        assert 'stepLanes' not in await draft_state(page)
+
 async def mixer(page):
     await page.locator('[data-view="mix"]').click()
     faders = page.locator('input.mixer-fader[data-native-param]')
@@ -437,6 +500,9 @@ async def step_drums(page):
             await page.locator('#undo').click()
             assert (await draft_state(page))['notes']==before
             await page.locator('[data-lane-cycle]').click()
+        await expect(page.locator('#lane-kind')).to_have_value('drumAccent')
+        await page.locator('[data-lane-cycle]').click()
+        await expect(page.locator('#lane-kind')).to_have_value('velocity')
         assert await page.locator('.drum-step-lane').evaluate('e=>e.getBoundingClientRect().height') <= 49
         assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
         await expect(page.locator('#inspector')).to_have_count(0)
@@ -672,17 +738,23 @@ async def project_files(page):
         summary = page.locator('.project-summary')
         await expect(summary.get_by_role('heading',name='Current session',exact=True)).to_be_visible()
         await expect(summary.locator('p')).to_have_text(re.compile(r'\d+ notes · \d+ sound edits · \d+ song rows'))
-        destinations = [('Projects','/projects/'),('Samples','/breaks/'),('Presets','/presets/'),('MIDI exchange','/projects/#project-exchange-root')]
+        destinations = [
+            ('Export backup', '/projects/#export-title', '#export'),
+            ('Inspect restore', '/projects/#import-title', '#file'),
+            ('Open original', '/presets/#file', '#file'),
+            ('Choose range', '/projects/#project-exchange-root', '#project-exchange-root input[type="number"]'),
+            ('Export availability', '/projects/#project-exchange-availability', '#project-exchange-availability'),
+            ('Samples', '/breaks/', 'h1'),
+            ('Manual', '/manual/', 'h1'),
+        ]
         cards = page.locator('.destinations>section')
-        await expect(cards).to_have_count(4)
-        for index,(name,path) in enumerate(destinations):
-            card = cards.nth(index)
-            await expect(card.get_by_role('heading',name=name,exact=True)).to_be_visible()
-            await expect(card.get_by_role('link',name='Open '+name,exact=True)).to_have_attribute('href','..'+path)
-            # A Remote destination card contains its label and action only.
-            # Keep counters/statuses elsewhere; do not replace their semantics with a text ban.
-            await expect(card.locator('p')).to_have_count(0)
-            assert (await card.inner_text()).splitlines()==[name,'Open '+name]
+        assert await cards.locator('h3').all_text_contents() == ['Project backup','Original presets','MIDI for a DAW']
+        if width == 844:
+            bounds = [await card.bounding_box() for card in await cards.all()]
+            assert len({box['y'] for box in bounds}) == 1
+        await page.locator('.project-guide summary').click()
+        await expect(page.locator('.project-guide p')).to_contain_text('Import project.mid into Ableton Live')
+        await page.locator('.project-guide summary').click()
         async def save():
             async with page.expect_download() as requested:
                 await summary.get_by_role('button',name='Save draft',exact=True).click()
@@ -703,16 +775,26 @@ async def project_files(page):
         assert await page.locator('#status').inner_text()
         after = await save()
         assert after==before, 'Rejected draft changed Current session'
-        for name,path in destinations:
-            response = None
-            async with page.expect_navigation() as navigation:
-                await page.get_by_role('link',name='Open '+name,exact=True).click()
-            response = await navigation.value
-            assert response and response.status==200, (name,'Destination is unreachable')
-            assert page.url==ORIGIN+path, (name,page.url)
-            await page.goto(ORIGIN+'/remote/')
-            await page.locator('[data-view="files"]').click()
-        print(f'PASS Projects controls/statuses/actions and four reachable destinations {width}x{height}',flush=True)
+        for name,path,target in destinations:
+            action = page.get_by_role('link',name=name,exact=True)
+            await expect(action).to_have_attribute('href','..'+path)
+            async with page.expect_popup() as opened:
+                await action.click()
+            tab = await opened.value
+            try:
+                await tab.wait_for_url(ORIGIN+path)
+                await expect(tab.locator(target).first).to_be_visible()
+                if name == 'Choose range':
+                    await tab.locator(target).fill('12')
+                    await expect(tab.get_by_role('button',name='Prepare MIDI export')).to_be_disabled()
+                elif name == 'Open original':
+                    await expect(tab.get_by_role('button',name='Download original bytes unchanged')).to_be_disabled()
+                elif name == 'Export availability':
+                    await expect(tab.locator(target)).to_contain_text('no qualified source-executed browser provider')
+            finally:
+                await tab.close()
+        assert await save() == before, 'Opening a companion tool discarded or changed the local Draft'
+        print(f'PASS Projects: backup, presets, MIDI range and guide, samples, manual, original Draft preserved {width}x{height}',flush=True)
 
 async def motion_keyboard(page):
     for width,height in [(1440,900),(390,844),(844,390)]:
@@ -866,7 +948,10 @@ async def project_sound_edit_count_at_size(page,width,height):
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
     assert 'Permission is hereby granted' in notice
-    cases = (roll, sequencer, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
+    from bass_step_journey import exercise as bass_steps
+    async def bass_step_fields(page):
+        await bass_steps(page, draft_state, load_draft)
+    cases = (bass_step_fields, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, motion_context)
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
