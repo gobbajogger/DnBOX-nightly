@@ -7,15 +7,15 @@
     {
       "version": "nightly-94197fc8-dev",
       "display_version": "0.0.26",
-      "label": "HARDWARE TEST — BOOT/RESTART NOT YET VERIFIED",
-      "status": "dev-checked",
+      "label": "OWNER HARDWARE TESTED — STARTUP AND RESTART OK ON ELITE AND PRO",
+      "status": "release-checked",
       "config": "X0X_DEV_PADCAL=0",
-      "hardware_tested": false,
+      "hardware_tested": true,
       "source_commit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
       "source_tree": "72d28fbc741244d18fa3d18495da16ab0fcb1d24",
-      "title": "DnBOX 0.0.26 — corrected boot-guard hardware test (94197fc8)",
-      "description": "Owner-test candidate, not hardware-proven or production. Replaces the withdrawn 600b build; includes the reviewed retained-RAM boot-guard correction, SMK-37 identity, sample-integrity fixes and host fixture repair. Physical startup/restart and recovery still require owner testing. Keep a backup and the known-good 0.0.25.1 package. Exact-head Elite/Pro native builds PASS: app544232/544224B, free flash8440/8448B, pool8340B each. SDKV1.2.14/PADCAL0; bundledBTa334208b61552B CRC32564a8f55; package checks PASS. Full-suite raw434PASS/6FAIL/2NOT_RUN retained; subsequent focused checks close the four fixture failures, Lua,808/909 reference gaps and hiddenTB3PO gap; browser-only test N/A, not passed. Owner strict emu360 on unchanged d408 production inputs: Elite11406us/Pro11410us, zero late,648halves,3repeats. Not a measurement of these newly rebuilt image hashes. Boot-guard native checks and90seeded cases/model PASS, not hardware proof.",
-      "evidence_url": "https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/869",
+      "title": "DnBOX 0.0.26",
+      "description": "The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with these release packages. Version 0.0.25.1 remains available as a fallback. The earlier 600b build remains withdrawn. Exact-head Elite/Pro native builds PASS: app544232/544224B, free flash8440/8448B, pool8340B each. SDKV1.2.14/PADCAL0; bundledBTa334208b61552B CRC32564a8f55; package checks PASS. Full-suite raw434PASS/6FAIL/2NOT_RUN retained; subsequent focused checks close the four fixture failures, Lua,808/909 reference gaps and hiddenTB3PO gap; browser-only test N/A, not passed. Owner strict emu360 on unchanged d408 production inputs: Elite11406us/Pro11410us, zero late,648halves,3repeats. Not a measurement of these newly rebuilt image hashes. Boot-guard native checks and90seeded cases/model PASS, not hardware proof.",
+      "evidence_url": "https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26",
       "models": {
         "elite": {
           "product": "SMK-37 Elite_900",

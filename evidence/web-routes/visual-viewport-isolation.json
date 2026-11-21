@@ -1,0 +1,85 @@
+{
+  "source_head": "8a6f110c0281ea03ae31e28a1e1e511cbc4fb5ce",
+  "candidate_sha256": {
+    "tests/visual/visual_gate.py": "fe5faeb55860bbeda4df1e1598b99a0cf82556008cd24fe8d513c5e979fe3ec2",
+    "tests/visual/test_visual_viewports.py": "384afa80b81cc6b272a6618b079928261eac1d0ad24b87e14513468120b73615"
+  },
+  "browser": "Playwright 1.62.0 with Chromium 151.0.7922.34, standard sandbox and unchanged visual flags",
+  "schedule": "One page per case within one shared context per viewport. Each viewport runs in a new Chromium process. Context and browser close before the next viewport, including on failures. The unfiltered sweep runs the original 116 page screenshots, four grid continuity checks and one header SSIM comparison.",
+  "baseline": "The full Local gate at the source head passed the desktop viewport and the 1024 header SSIM. Its 30-second click timed out after resolving #lane-param and waiting for it to be visible, enabled and stable. The browser check failed separately. Neither the old nor new runs isolate the cause of host contention.",
+  "test_controls": "An offline schedule test observed all 116 screenshot names in their original order and all 40 selector clicks. A separate injected lane-chance timeout preserved its viewport/state and closed context plus browser. Both tests failed on the original source and passed on the candidate.",
+  "measurement": "Sample the local test process and its descendants every five seconds. PSS and RSS are samples, not instantaneous maxima. Host memory and load include concurrent work. The focused filter intentionally exits 1; full acceptance needs an unfiltered successful run.",
+  "focused_1024_remote": {
+    "exit": 1,
+    "wall_seconds": 14.663,
+    "summary": {
+      "screens": 6,
+      "pass": 2,
+      "fail": 0,
+      "no_baseline": 4,
+      "baseline_written": 0,
+      "header_fail": 0,
+      "page_errors": 0
+    },
+    "header_ssim": 0.905927401190831,
+    "samples": 3,
+    "monitored_main_browser_processes": [
+      {
+        "first_sample_s": 5.048,
+        "last_sample_s": 10.093,
+        "peak_sampled_group_pss_kib": 384004
+      }
+    ],
+    "max_simultaneous_main_browsers": 1,
+    "sampled_peak_process_tree_pss_kib": 384004,
+    "sampled_peak_process_tree_rss_kib": 661116,
+    "sampled_min_host_mem_available_kib": 3094284,
+    "sampled_peak_system_load1": 12.68,
+    "sampled_min_overlay_free_kib": 1270520,
+    "sampled_min_browser_tmp_free_kib": 4873392
+  },
+  "unfiltered": {
+    "exit": 0,
+    "wall_seconds": 200.764,
+    "summary": {
+      "screens": 121,
+      "pass": 5,
+      "fail": 0,
+      "no_baseline": 116,
+      "baseline_written": 0,
+      "header_fail": 0,
+      "page_errors": 0
+    },
+    "header_ssim": 0.905927401190831,
+    "samples": 40,
+    "monitored_main_browser_processes": [
+      {
+        "first_sample_s": 5.129,
+        "last_sample_s": 60.83,
+        "peak_sampled_group_pss_kib": 1104127
+      },
+      {
+        "first_sample_s": 65.898,
+        "last_sample_s": 111.506,
+        "peak_sampled_group_pss_kib": 743086
+      },
+      {
+        "first_sample_s": 116.536,
+        "last_sample_s": 156.924,
+        "peak_sampled_group_pss_kib": 766396
+      },
+      {
+        "first_sample_s": 161.953,
+        "last_sample_s": 197.193,
+        "peak_sampled_group_pss_kib": 786414
+      }
+    ],
+    "max_simultaneous_main_browsers": 1,
+    "sampled_peak_process_tree_pss_kib": 1104127,
+    "sampled_peak_process_tree_rss_kib": 1353972,
+    "sampled_min_host_mem_available_kib": 1444916,
+    "sampled_peak_system_load1": 13.02,
+    "sampled_min_overlay_free_kib": 1161808,
+    "sampled_min_browser_tmp_free_kib": 3997088
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "firmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
+  "kernel": "4758a9573e0a2a95e73cb054a74e0aad39d5741e",
+  "files": {
+    "runtime.json": {
+      "bytes": 285,
+      "sha256": "f11271f85ad61c9c5bc5f3959f8b5ffa2e3a8c8cbab90f4b43c7aeb94676b4e0"
+    },
+    "kernel.wasm": {
+      "bytes": 941835,
+      "sha256": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b"
+    },
+    "native-session.mjs": {
+      "bytes": 13837,
+      "sha256": "077161f1641a927df241112b71bfa46e25023d3808d08469851838dd9c876360"
+    },
+    "observer.mjs": {
+      "bytes": 2631,
+      "sha256": "525c2437315760e448e4f631ca9ba1a9e2311d216b18ef93852969d09098b2d3"
+    },
+    "session-codec.mjs": {
+      "bytes": 1982,
+      "sha256": "5924c689e512fc1c4e14718e0d267dce7ef287ec51183d1902e3d7902134845d"
+    },
+    "worklet.mjs": {
+      "bytes": 10887,
+      "sha256": "3841c8754053df804e103dc80ea31ab3dc0c4063112aa20b45f3b1421adbd034"
+    },
+    "wasi.mjs": {
+      "bytes": 1507,
+      "sha256": "76221f9d11ff8be10d9844f0ecc696ddc0bafb694775a12a6b665c4d77a78f18"
+    },
+    "index.html": {
+      "bytes": 2083,
+      "sha256": "010718d268ec15e83da8c641eb82ec30588d3d001bd4cf07fb15a182bd82fc0b"
+    },
+    "page.mjs": {
+      "bytes": 9154,
+      "sha256": "f4348ebcbedc94495c60f6bcf93848567fc6a0d3d9961f08c81c613fab5d9966"
+    },
+    "style.css": {
+      "bytes": 1903,
+      "sha256": "f9d8c09ebe689442f027b038482488a6e02db255db7553127b92b907b68cd5b8"
+    }
+  }
+}

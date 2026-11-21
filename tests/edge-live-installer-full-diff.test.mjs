@@ -3,6 +3,7 @@
 // gh-pages install/index.html (blob 15d43a0a, tip 6a9953de). Only allowlisted
 // hunks may remain; each has a declared reason.
 import test from 'node:test';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
@@ -34,6 +35,8 @@ function normalize(html) {
 
 // Allowlisted remaining hunks. Anything else fails the test.
 const ALLOWED = [
+  // Exact reviewed UI and admission changes for the owner-tested 94197fc8 release.
+  ...JSON.parse(readFileSync(join(root, 'tests/fixtures/installer-v0026-reviewed-hunks.json'), 'utf8')),
   {
     id: 'programmed-sample-header-padding',
     reason: 'Restore preserves bytes 480..511 when programmed; erased padding retains the legacy short-header commit. Verified by actual-writer simulated-flash regressions, not a physical-device claim.',
@@ -63,6 +66,41 @@ const ALLOWED = [
       '  return name === "fm-1" ? null : name;',
     ],
   },
+  {
+    "id": "bounded-download-deadline",
+    "reason": "Reviewed download lifetime bound; native header/body cancellation and post-await fences prevent expired bytes from enabling Install. Covered by actual downloader and browser timeout/reload tests.",
+    "renderOnly": [
+      "  const isUsable = () => isLatest() && !controller.signal.aborted;",
+      "  // Bound headers, body and late asynchronous verification as one download.",
+      "  const deadline = setTimeout(() => {",
+      "    controller.abort();",
+      "    if (isLatest()) sayK(\"loadfail\", \"Download took too long. Reload this page to retry.\");",
+      "  }, 20000);",
+      "    if (!isUsable()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isUsable()) return;",
+      "    if (!isUsable()) return;",
+      "      catch (e) { if (isUsable()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isUsable()) return;"
+    ],
+    "liveOnly": [
+      "    if (!isLatest()) { try { await r.body?.cancel(); } catch {} return; }",
+      "    if (!isLatest()) return;",
+      "    if (!isLatest()) return;",
+      "      catch (e) { if (isLatest()) { bundledFailure = true; renderBuildInfo(ver,pkg); sayK(\"ctlbundlebad\", \" \" + e.message); } return; }",
+      "      if (!isLatest()) return;"
+    ]
+  },
+  {
+    "id": "bounded-download-timer-cleanup",
+    "reason": "Always release the per-download deadline; reuse the identical selection-and-abort predicate for error reporting, preserving its evaluation order and controller identity cleanup.",
+    "renderOnly": [
+      "  } catch (e) { if (isUsable()) sayK(\"loadfail\", e.message); }",
+      "    clearTimeout(deadline);"
+    ],
+    "liveOnly": [
+      "  } catch (e) { if (isLatest() && !controller.signal.aborted) sayK(\"loadfail\", e.message); }"
+    ]
+  },
 ];
 
 function parseUnifiedHunks(diff) {
@@ -89,7 +127,11 @@ function assertAllowedRendered(rendered) {
   // x0x37-for-Loopy-Pro_nightly -> DnBOX-nightly). Map the old names in the
   // snapshot and in the catalog it carries, so the rename itself is not reported as a hunk.
   const renamed = live.replaceAll('x0x37-for-Loopy-Pro_nightly', 'DnBOX-nightly').replaceAll('X0X37-for-Loopy-Pro', 'DnBOX');
-  const a = normalize(renamed), b = normalize(rendered);
+  // This pinned clip-mode instruction predates the DnBOX name.
+  const oldInstruction = 'return to normal X0X operation with KNOB BANK';
+  assert.equal(renamed.split(oldInstruction).length, 2);
+  const a = normalize(renamed.replace(oldInstruction, 'return to normal DnBOX operation with KNOB BANK'));
+  const b = normalize(rendered);
   const dir = mkdtempSync(join(tmpdir(), 'installer-diff-'));
   const livePath = join(dir, 'live.html'), rendPath = join(dir, 'rendered.html');
   writeFileSync(livePath, a.endsWith('\n') ? a : a + '\n');
@@ -106,7 +148,9 @@ function assertAllowedRendered(rendered) {
   const unused = new Set(ALLOWED.map(x => x.id));
   const unexpected = [];
   for (const h of hunks) {
-    const match = ALLOWED.find(allow =>
+    // Use exact byte digests for reviewed multi-function hunks to avoid duplicating the renderer.
+    const digest = createHash('sha256').update(JSON.stringify([h.liveOnly,h.renderOnly])).digest('hex');
+    const match = ALLOWED.find(allow => allow.hunk_sha256 ? digest === allow.hunk_sha256 :
       JSON.stringify(allow.liveOnly) === JSON.stringify(h.liveOnly) &&
       JSON.stringify(allow.renderOnly) === JSON.stringify(h.renderOnly));
     if (!match) unexpected.push({ header: h.header, liveOnly: h.liveOnly, renderOnly: h.renderOnly });
@@ -129,6 +173,14 @@ test('exact Restore allowance rejects lost padding, forced full headers and unre
   for(const changed of [rendered.replace(selector,'SLOT_HDR_LEN'),rendered.replace(selector,'SLOT_HDR_AREA'),rendered.replace(selector,selector.replace('!==','===')),rendered.replace('if (name === "fm-1") return null;','if (name === "smk-37") return null;')]) {
     assert.notEqual(changed,rendered);
     assert.throws(()=>assertAllowedRendered(changed),/unexpected hunks|allowlisted hunk missing/);
+  }
+});
+
+test('approved release diff rejects drift in the restart handshake and report bindings', () => {
+  const current = currentRendered();
+  for (const old of ['restartTicket, dev, up.ports().length === 1','receiptBuild: selectedInstallBuild(ver, pkg, chosenModel)']) {
+    assert.equal(current.split(old).length,2);
+    assert.throws(()=>assertAllowedRendered(current.replace(old,'undefined')),/unexpected hunks|allowlisted hunk missing/);
   }
 });
 

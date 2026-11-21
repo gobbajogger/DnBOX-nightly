@@ -11,11 +11,14 @@ Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions o
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
 import os, sys, json, socket, subprocess, time, re, hashlib, shutil, io, stat, uuid
+from contextlib import closing
 from pathlib import Path
+from urllib.parse import urlencode
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
+from full_page_capture import capture_full_page
 
 ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / 'tests/visual/__snapshots__'
@@ -28,6 +31,7 @@ PIXEL_THRESHOLD = 0.1 * 255  # per-channel tolerance before a pixel counts as di
 SIZES = [(1440, 900), (1024, 640), (844, 390), (390, 844)]
 SITE = ['index.html', 'install/index.html', 'breaks/index.html', 'starting-breaks/index.html', 'projects/index.html',
         'presets/index.html', 'presets/legacy/index.html', 'manual/index.html', 'manual/original/index.html',
+        'manual/legacy.html', 'manual/projects-guide.html', 'manual/protocol.html',
         'builds/index.html', 'tools/index.html', 'help/index.html', 'new/index.html', 'remote/identity/index.html']
 OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 # The web/x0x_*.html files are templates (/*LIB*/, /*CATALOG*/); npm run build compiles
@@ -212,6 +216,69 @@ def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
 
+def installer_responses():
+    # Match only the two public requests made by the installer's initial state.
+    report_url = 'https://api.github.com/search/issues?' + urlencode({
+        'q': 'repo:gobbajogger/DnBOX is:issue in:title "Install report"', 'per_page': 100, 'page': 1,
+    })
+    source = (ROOT / 'web/product-site/install/index.html').read_text()
+    catalog = json.loads(re.search(r'^const catalog = (.+);$', source, re.M)[1])
+    version = next((row for row in catalog['versions'] if row['version'] == catalog['latest']), None)
+    models = version['models'] if version else {}
+    default_model = 'pro' if 'pro' in models else 'elite'
+    package = models.get(default_model)
+    if package:
+        digest = package['sha256']
+        if not re.fullmatch(r'[a-f0-9]{64}', digest) or not package['pkg'].startswith(
+            'https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/' + digest + '/'
+        ):
+            raise ValueError('Default installer package must have an immutable nightly URL')
+    saved = os.environ.get('DNBOX_RELEASE_PACKAGES')
+    data = None
+
+    def respond(route):
+        nonlocal data
+        if route.request.method != 'GET':
+            return route.fallback()
+        if data is None:
+            if saved:
+                v = version['display_version']
+                if not re.fullmatch(r'\d+(?:\.\d+){2,3}', v):
+                    raise ValueError('Unexpected release package version')
+                body = (Path(saved) / ('v' + v) / f'dnbox-x0x37-{v}-{default_model}.fwsc').read_bytes()
+            else:
+                response = route.fetch(max_redirects=0)
+                if not response.ok:
+                    raise ValueError(f'Default package returned HTTP {response.status}. Set DNBOX_RELEASE_PACKAGES for offline captures.')
+                body = response.body()
+            if len(body) != package['size'] or hashlib.sha256(body).hexdigest() != digest:
+                raise ValueError('Default installer package does not match its committed size and SHA-256')
+            data = body
+        route.fulfill(body=data, content_type='application/octet-stream', headers={'Access-Control-Allow-Origin': '*'})
+
+    def attach(page):
+        def report(route):
+            if route.request.method != 'GET':
+                return route.fallback()
+            route.fulfill(json={'total_count': 0, 'incomplete_results': False, 'items': []},
+                          headers={'Access-Control-Allow-Origin': '*'})
+        page.route(re.compile('^' + re.escape(report_url) + '$'), report)
+        if package:
+            page.route(re.compile('^' + re.escape(package['pkg']) + '$'), respond)
+
+    return attach
+
+def viewport_contexts(pw):
+    # Reclaim Chromium's compositor and caches along with the context after each viewport.
+    for w, h in SIZES:
+        with pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb']) as browser:
+            with browser.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1,
+                                     has_touch=w < 900, reduced_motion='reduce', locale='en-US',
+                                     timezone_id='UTC') as context:
+                context.add_init_script(FREEZE_JS)
+                yield w, h, context
+
+
 def main():
     validate_capture_output()  # reject unsafe output before any browser/server starts
     p = port()
@@ -223,23 +290,23 @@ def main():
     results, header_fails, errors = [], [], []
     base = f'http://127.0.0.1:{p}'
     try:
-        with sync_playwright() as pw:
-            b = pw.chromium.launch(chromium_sandbox=True, args=['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'])
-            def ctx(w, h):
-                c = b.new_context(viewport={'width': w, 'height': h}, device_scale_factor=1, has_touch=w < 900, reduced_motion='reduce', locale='en-US', timezone_id='UTC')
-                c.add_init_script(FREEZE_JS); return c
-            def settle(pg):
-                pg.add_style_tag(content=FREEZE_CSS)
-                pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
-            for w, h in SIZES:
+        with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
+            attach_installer_responses = installer_responses()
+            def settle(pg, url, name):
+                try:
+                    pg.goto(url)
+                    pg.add_style_tag(content=FREEZE_CSS)
+                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                except Exception as error:
+                    raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
+            for w, h, c in viewports:
                 tag = f'{w}x{h}'
-                c = ctx(w, h)
                 # Remote: header conformance + every tab/lane/overflow state
                 for name, act in remote_states():
                     full = f'remote-{name}-{tag}'
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/remote/index.html'); settle(pg)
+                    settle(pg, base + '/product-site/remote/index.html', full)
                     if name == 'sequence':
                         header_checks(pg.evaluate(HEADER_JS), tag, header_fails)
                         try:
@@ -257,22 +324,31 @@ def main():
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
-                    if act: act(pg); pg.wait_for_timeout(150)
-                    compare(full, pg.screenshot(), results); pg.close()
+                    try:
+                        if act: act(pg); pg.wait_for_timeout(150)
+                        screenshot = pg.screenshot()
+                    except Exception as error:
+                        raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
+                    compare(full, screenshot, results); pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(base + '/product-site/' + rel); settle(pg)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
+                    if rel == 'install/index.html':
+                        attach_installer_responses(pg)
+                    settle(pg, base + '/product-site/' + rel, full)
+                    scroll_width = pg.evaluate('document.documentElement.scrollWidth')
+                    if scroll_width > w:
+                        errors.append(f'{full}: page extends to {scroll_width}px in a {w}px viewport')
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
                 for rel in OFFLINE:
                     full = 'offline-' + rel.replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
                     pg = c.new_page(); pg.on('pageerror', lambda e, n=full: errors.append(f'{n}: {e}'))
-                    pg.goto(built + '/' + OFFLINE_BUILT[rel]); settle(pg)
-                    compare(full, pg.screenshot(full_page=True), results); pg.close()
-                c.close()
-            b.close()
+                    if OFFLINE_BUILT[rel] == 'install/index.html':
+                        attach_installer_responses(pg)
+                    settle(pg, built + '/' + OFFLINE_BUILT[rel], full)
+                    compare(full, capture_full_page(pg, rel, full), results); pg.close()
     finally:
         srv.terminate(); srv2.terminate()
     passed = sum(1 for r in results if r[1] == 'PASS'); failed = sum(1 for r in results if r[1] == 'FAIL'); made = sum(1 for r in results if r[1] == 'BASELINE')

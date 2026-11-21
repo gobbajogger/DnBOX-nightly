@@ -1,0 +1,52 @@
+wait 523
+expect playing 0
+shot boot.png
+wait 35
+press FX
+wait 78
+release FX
+wait 440
+expect playing 0
+shot fx.png
+wait 35
+press SAVE
+wait 78
+release SAVE
+wait 197
+expect playing 0
+shot save.png
+wait 69
+press HOME
+wait 78
+release HOME
+wait 2949
+expect playing 0
+shot home.png
+tap LFO
+wait 1700
+expect playing 0
+shot mix.png
+spin K1 1
+wait 1700
+expect playing 0
+shot mix-level.png
+tap EDIT
+wait 1700
+expect playing 0
+shot kick-909.png
+spin ALGO 1
+wait 1700
+expect playing 0
+shot kick-808.png
+tap SEQ
+wait 1700
+expect playing 0
+shot seq-808.png
+tap GLO
+wait 1700
+expect playing 0
+shot global.png
+tap SEL
+wait 1700
+expect playing 0
+shot midi-clock.png

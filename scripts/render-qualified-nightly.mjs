@@ -11,7 +11,7 @@ const legacyControllers = JSON.parse(readFileSync(join(root, 'scripts/legacy-con
 const sha256 = b => createHash('sha256').update(b).digest('hex');
 const hex40 = s => typeof s === 'string' && /^[a-f0-9]{40}$/.test(s);
 const hex64 = s => typeof s === 'string' && /^[a-f0-9]{64}$/.test(s);
-const inputs = ['web/x0x_installer.html', 'web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js'];
+const inputs = ['web/x0x_installer.html', 'web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js', 'web/product-site/install-reports.mjs'];
 // Distribution licensing is not a nightly qualification gate. Corresponding
 // source existed only to satisfy that license, so it does not block either.
 // Both names may still appear on a receipt; neither is required to be PASS.
@@ -25,7 +25,7 @@ export const requiredGates = ['package-integrity', 'model-controller',
 const gateNames = ['native-build', ...requiredGates, ...retiredLicenseGates];
 
 export function installerFingerprint() {
-  return sha256(JSON.stringify([...inputs, 'web/x0x_breaks.html', 'web/x0x_projects.html', 'web/x0x_projects.js', 'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs', 'scripts/legacy-controller-packages.json', 'package-version-assignments.json']
+  return sha256(JSON.stringify([...inputs, 'web/x0x_breaks.html', 'web/x0x_projects.html', 'web/x0x_projects.js', 'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs', 'scripts/legacy-controller-packages.json', 'package-version-assignments.json', 'web/product-site/hardware-tests.json', 'web/product-site/hardware-tests.mjs']
     .map(p => [p, sha256(readFileSync(join(root, p)))])));
 }
 
@@ -252,6 +252,7 @@ export function renderInstaller(catalog) {
   let html = readFileSync(join(root, inputs[0]), 'utf8');
   for (const [marker, content] of [['/*LIB*/', inputs.slice(1).map(p => strip(readFileSync(join(root, p), 'utf8'))).join('\n')],
     ['/*CATALOG*/', JSON.stringify(publicCatalog(catalog)).replace(/</g, '\\u003c')],
+    ['/*HARDWARE_TEST_DATA*/{"schema":1,"reports":[]}', JSON.stringify(JSON.parse(readFileSync(join(root, 'web/product-site/hardware-tests.json'), 'utf8')))],
     ['/*PACKAGE_VERSION_ASSIGNMENTS*/[]', JSON.stringify(JSON.parse(readFileSync(join(root, 'package-version-assignments.json'), 'utf8')).assignments).replace(/</g, '\\u003c')]]) {
     if (html.split(marker).length !== 2) throw new Error(`expected one ${marker}`);
     html = html.replace(marker, () => content);
