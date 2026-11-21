@@ -557,3 +557,30 @@ dialog::backdrop{background:#000a}
  #workspace-main:has(#break-views:not([hidden])){display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px}
  #break-views:not([hidden]){flex-direction:column;align-self:start;margin:0}
 }
+
+/* Show the Draft master and its detailed controls together on wide workstations. */
+@media (min-width:1200px) and (min-height:720px) {
+ .mix-workspace:has(.mix-parts-panel):has(.master-more) {
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  align-items:start;
+ }
+ .mix-workspace:has(.mix-parts-panel) .mix-master-panel:has(.master-more) {display:contents}
+ .mix-workspace:has(.mix-parts-panel) .mix-master-panel:has(.master-more)>.mix-panel {
+  padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel)
+ }
+ .mix-workspace:has(.mix-parts-panel) .mix-master-panel:has(.master-more)>.mix-panel:first-child {grid-column:1;grid-row:2}
+ .mix-workspace:has(.mix-parts-panel) .mix-master-panel:has(.master-more)>.mix-panel:first-child .encoder-grid {grid-template-columns:repeat(4,minmax(0,1fr))}
+ .mix-workspace:has(.mix-parts-panel) .master-more {grid-column:2;grid-row:1/span 2}
+ #other-view .mix-workspace:has(.mix-parts-panel) .master-more .encoder {
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;min-height:64px
+ }
+ .mix-workspace:has(.mix-parts-panel) .master-more .glyph {grid-column:1;grid-row:1/span 2}
+ .mix-workspace:has(.mix-parts-panel) .master-more .encoder>output,.mix-workspace:has(.mix-parts-panel) .master-more .encoder>span:last-child {grid-column:2;justify-self:end}
+ #break-sequence:not([hidden]) {flex:1;display:flex;flex-direction:column;gap:clamp(16px,4vh,40px)}
+ #break-sequence .break-steps {grid-template-columns:repeat(16,minmax(0,1fr))}
+ #break-sequence .break-assignment,#break-sequence .break-steps {padding:12px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel)}
+ #break-sequence .break-assignment {margin-bottom:12px}
+ #break-sequence .break-steps label {gap:12px}
+ #break-sequence .break-steps select {min-height:clamp(64px,11vh,112px)}
+ #break-sequence .break-rows li {min-height:clamp(128px,18vh,180px)}
+}

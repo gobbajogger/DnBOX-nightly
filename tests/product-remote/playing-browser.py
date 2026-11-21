@@ -54,7 +54,7 @@ async def cases(origin,meta,out):
             for width,height in [*sound.SIZES, (1024, 640)]:
                 context=await browser.new_context(viewport={'width':width,'height':height},accept_downloads=True)
                 page=await context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-                await page.add_init_script(sound.INSTRUMENT)
+                await page.add_init_script('window.recordNativeFrameHistory=true;\n'+sound.INSTRUMENT)
                 try:
                     await page.goto(origin+'/remote/',wait_until='networkidle')
                     indicator=page.locator('#native-playing');await expect(indicator).to_have_text('Emulator play: —')
@@ -93,14 +93,21 @@ async def cases(origin,meta,out):
                     assert await page.evaluate('midiCalls')==0;assert not errors,errors
                     assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     await expect(indicator).to_be_visible();assert await geometry(page)==layout
-                    frames=await page.evaluate('nativeFrames.map(m=>({playing:m.playing,time:m.time,framebufferLength:m.framebuffer?.length}))')
+                    frames=await page.evaluate('nativeFrames')
                     assert all(f['playing'] in [0,1] and f['framebufferLength']==57600 for f in frames)
                     (out/f'{width}x{height}.json').write_text(json.dumps({'viewport':[width,height],'runtime':meta,'frames':frames,'draftSha256':hashlib.sha256(draft).hexdigest(),'geometry':layout,'midiCalls':0,'pageErrors':errors},indent=2)+'\n')
                     await page.screenshot(path=str(out/f'{width}x{height}.png'))
                     print(f'PASS actual product playing0-1-0/expiry/restart/cancel/Draft/history/geometry/MIDI0 {width}x{height}',flush=True)
                 except BaseException as error:
-                    (out/f'{width}x{height}-failure.json').write_text(json.dumps({'exception':str(error),'indicator':await page.locator('#native-playing').text_content(),'frames':await page.evaluate('nativeFrames.map(m=>({playing:m.playing,time:m.time}))'),'pageErrors':errors},indent=2)+'\n')
-                    await page.screenshot(path=str(out/f'{width}x{height}-failure.png'));raise
+                    diagnostics={'exception':str(error),'pageErrors':errors}
+                    try:
+                        diagnostics.update(indicator=await page.locator('#native-playing').text_content(),
+                                           frames=await page.evaluate('nativeFrames'))
+                        await page.screenshot(path=str(out/f'{width}x{height}-failure.png'))
+                    except Exception as capture_error:
+                        diagnostics['captureError']=str(capture_error)
+                    (out/f'{width}x{height}-failure.json').write_text(json.dumps(diagnostics,indent=2)+'\n')
+                    raise
                 finally:await context.close()
         finally:await browser.close()
 

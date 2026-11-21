@@ -22,7 +22,7 @@ async def cases(origin,meta):
    for w,h in [(1440,900),(390,844),(844,390)]:
     c=await browser.new_context(viewport={'width':w,'height':h});page=await c.new_page();errors=[]
     page.on('pageerror',lambda e:errors.append(str(e)))
-    await page.add_init_script("window.nativePackets=[];window.nativeFrames=[];window.nativeNodes=[];window.contexts=[];window.midiCalls=0;navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};const AC=AudioContext;window.AudioContext=class extends AC{constructor(o){super(o);contexts.push(this)}};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);this.port.addEventListener('message',e=>{if(e.data?.type==='envelopes')nativePackets.push(e.data);if(e.data?.type==='frame')nativeFrames.push(e.data)});this.port.start()}};")
+    await page.add_init_script("window.nativePackets=[];window.nativePlaying=null;window.nativeNodes=[];window.contexts=[];window.midiCalls=0;navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};const AC=AudioContext;window.AudioContext=class extends AC{constructor(o){super(o);contexts.push(this)}};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);this.port.addEventListener('message',e=>{if(e.data?.type==='envelopes')nativePackets.push(e.data);if(e.data?.type==='frame')nativePlaying=e.data.playing});this.port.start()}};")
     try:
      await page.goto(origin+'/remote/',wait_until='networkidle');await page.wait_for_function("document.querySelector('#status').textContent.includes('Draft')")
      note=page.locator('#roll-grid [data-note]').first;note_id=await note.get_attribute('data-note');before=await note.get_attribute('aria-label');await note.press('ArrowUp');edited=await note.get_attribute('aria-label');assert edited!=before
@@ -37,7 +37,7 @@ async def cases(origin,meta):
       await page.wait_for_function('t=>nativePackets.at(-1).timeMs>=t+180',arg=at)
      for key in [2,1,15]:await pulse('keys',1<<key)
      await pulse('buttons',1<<10)
-     await page.wait_for_function('nativeFrames.at(-1)?.playing===1')
+     await page.wait_for_function('nativePlaying===1')
      await page.wait_for_function("nativePackets.some(p=>p.voices.some(v=>v.available&&(v.snapshot.level??v.snapshot.raw_level??0)>0))")
      voice=await page.evaluate("nativePackets.flatMap(p=>p.voices).find(v=>v.available&&['amp','amp-filter'].includes(v.role)&&(v.snapshot.level??v.snapshot.raw_level??0)>0)")
      if voice['engine']=='909':

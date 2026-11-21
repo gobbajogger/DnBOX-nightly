@@ -114,7 +114,7 @@ async def cases(origin,evidence,capture_only=False):
     RUN=evidence/f'{width}x{height}';RUN.mkdir(parents=True,exist_ok=False);PROOFS=[]
     (RUN/'source-identities.json').write_text(json.dumps(SOURCE_ID,indent=2)+'\n')
     ctx=await browser.new_context(viewport={'width':width,'height':height},has_touch=True,accept_downloads=True);page=await ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-    await page.add_init_script('''window.midiCalls=0;window.nativeRequests=[];window.nativeReplies=[];window.nativeNodes=[];navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);const post=this.port.postMessage.bind(this.port);this.port.postMessage=(m,...rest)=>{nativeRequests.push({type:m?.type,op:m?.op,operation:m?.operation,kind:m?.kind,command:m?.command});return post(m,...rest)};this.port.addEventListener('message',({data:m})=>nativeReplies.push(m));this.port.start()}};''')
+    await page.add_init_script('''window.midiCalls=0;window.nativeRequests=[];window.nativeNodes=[];navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);const post=this.port.postMessage.bind(this.port);this.port.postMessage=(m,...rest)=>{nativeRequests.push({type:m?.type,op:m?.op,operation:m?.operation,kind:m?.kind,command:m?.command});return post(m,...rest)};this.port.start()}};''')
     try:
      await page.goto(origin+'/remote/');await page.locator('[data-view="mix"]').click()
      if capture_only:
@@ -122,6 +122,12 @@ async def cases(origin,evidence,capture_only=False):
        await page.locator('#other-view').evaluate('(e,n)=>{e.scrollTop=n===0?0:n===1?e.scrollHeight/2:e.scrollHeight}',{'top':0,'middle':1,'bottom':2}[name]);await image_proof(page,'baseline-'+name)
       (RUN/'proof.json').write_text(json.dumps({'captureOnly':True,'source':SOURCE_ID,'images':[exact_hash(p) for p in sorted(RUN.glob('*.png'))]},indent=2)+'\n');continue
      await expect(page.locator('.master-more [data-master-control]')).to_have_count(12)
+     if width==1440:
+      # All twelve controls share the first desktop viewport with the four Master macros.
+      for control in await page.locator('.mix-master-panel [data-param]').all():
+       geometry=await control.evaluate(GEOMETRY)
+       whole(geometry['unit'])
+       assert all(hit['owned'] for hit in geometry['hits']),geometry
      before=await draft(page);before_params=before['parameters'];seen=[]
      # Real forward and reverse Tab, without corrective programmatic scrolling after Tab.
      anchor=page.locator('.mix-master-panel [data-param]').nth(3);await anchor.focus();await expect(anchor).to_be_focused()

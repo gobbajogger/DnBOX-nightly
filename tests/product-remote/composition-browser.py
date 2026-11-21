@@ -160,6 +160,14 @@ async def cases(evidence=None):
      await p.locator('[data-engine="breaks"]').click();await p.locator('[data-view="roll"]').click();await expect(p.locator('[data-break-step]')).to_have_count(16)
      plays=p.locator('#break-sequence [data-action="play"]');await expect(plays).to_have_count(5)
      boxes=await p.locator('#break-sequence .break-rows li').evaluate_all('es=>es.map(e=>e.getBoundingClientRect().toJSON())')
+     if w==1440:
+      steps=p.locator('[data-break-step]')
+      step_boxes=await steps.evaluate_all('es=>es.map(e=>e.getBoundingClientRect().toJSON())')
+      assert len(step_boxes)==16 and len({box['top'] for box in step_boxes})==1,step_boxes
+      for step in await steps.all():
+       await full_bounds(step)
+      for play in await plays.all():
+       await full_bounds(play)
      if w>600:assert max(b['y'] for b in boxes)-min(b['y'] for b in boxes)<1,(w,boxes)
      for play in await plays.all():await reachable(play,44)
      await p.locator('#break-sequence [data-action="none"]').click();await expect(p.locator('#break-sequence [data-asset]:checked')).to_have_count(0);await p.locator('#break-sequence [data-action="all"]').click();await expect(p.locator('#break-sequence [data-asset]:checked')).to_have_count(5)
@@ -184,14 +192,14 @@ async def observed_cases(origin,evidence=None):
   try:
    for w,h in [(1440,900),(390,844),(844,390)]:
     c=await browser.new_context(viewport={'width':w,'height':h});p=await c.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
-    await p.add_init_script("window.nativePackets=[];window.nativeFrames=[];window.nativeNodes=[];window.contexts=[];window.midiCalls=0;navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No device access')};const AC=AudioContext;window.AudioContext=class extends AC{constructor(o){super(o);contexts.push(this)}};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);this.port.addEventListener('message',e=>{if(e.data?.type==='envelopes')nativePackets.push(e.data);if(e.data?.type==='frame')nativeFrames.push(e.data)});this.port.start()}};")
+    await p.add_init_script("window.nativePackets=[];window.nativePlaying=null;window.nativeNodes=[];window.contexts=[];window.midiCalls=0;navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No device access')};const AC=AudioContext;window.AudioContext=class extends AC{constructor(o){super(o);contexts.push(this)}};const AW=AudioWorkletNode;window.AudioWorkletNode=class extends AW{constructor(...a){super(...a);nativeNodes.push(this);this.port.addEventListener('message',e=>{if(e.data?.type==='envelopes')nativePackets.push(e.data);if(e.data?.type==='frame')nativePlaying=e.data.playing});this.port.start()}};")
     try:
      await p.goto(origin+'/remote/');await expect(p.locator('main')).to_have_attribute('aria-busy','false');await p.locator('.overflow summary').click();await p.locator('#emulator-start').click();await expect(p.locator('#status')).to_contain_text('Emulator running',timeout=20000);await p.locator('.overflow summary').click();await p.wait_for_function('nativePackets.length>2')
      meta=json.loads((core.SOURCE/'emu/runtime.json').read_text());packet=await p.evaluate('nativePackets.at(-1)');assert packet['firmware']==meta['firmware_source'] and packet['kernel']==meta['wasm_sha256']
      async def pulse(kind,bits):
       at=await p.evaluate('nativePackets.at(-1).timeMs');await p.evaluate('([type,bits])=>nativeNodes.at(-1).port.postMessage({type,bits})',[kind,bits]);await p.wait_for_function('t=>nativePackets.at(-1).timeMs>=t+90',arg=at);await p.evaluate('type=>nativeNodes.at(-1).port.postMessage({type,bits:0})',kind);await p.wait_for_function('t=>nativePackets.at(-1).timeMs>=t+180',arg=at)
      for key in [2,1,15]:await pulse('keys',1<<key)
-     await pulse('buttons',1<<10);await p.wait_for_function('nativeFrames.at(-1)?.playing===1')
+     await pulse('buttons',1<<10);await p.wait_for_function('nativePlaying===1')
      await p.locator('[data-engine="drum909"]').click();await p.locator('.overflow summary').click();await p.locator('[data-view="drums"]').click();await p.locator('.overflow summary').click()
      for slot in [0,1]:
       await p.locator('#sound-voice').select_option(str(slot));await expect(p.locator('#native-envelopes')).to_be_visible()

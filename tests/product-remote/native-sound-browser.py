@@ -19,25 +19,7 @@ spec = importlib.util.spec_from_file_location('envelope_core', Path(__file__).wi
 core = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(core)
 SIZES = [(1440, 900), (390, 844), (844, 390)]
-INSTRUMENT = """
-window.soundPackets=[];window.soundErrors=[];window.soundRequests=[];
-window.nativePackets=[];window.nativeFrames=[];window.nativeNodes=[];window.midiCalls=0;
-navigator.requestMIDIAccess=()=>{midiCalls++;throw Error('No devices')};
-const AW=AudioWorkletNode;
-window.AudioWorkletNode=class extends AW{
- constructor(...a){super(...a);nativeNodes.push(this);window.nativeContext=a[0];
-  window.nativeFrames=[];window.nativePackets=[];
-  const post=this.port.postMessage.bind(this.port);
-  this.port.postMessage=(m,...rest)=>{if(m?.type==='sound-controls')soundRequests.push(structuredClone(m));return post(m,...rest)};
-  this.port.addEventListener('message',({data:m})=>{
-   if(m?.type==='sound-result')soundPackets.push(m);
-   if(m?.type==='sound-error')soundErrors.push(m);
-   if(m?.type==='envelopes'&&this===nativeNodes.at(-1))nativePackets.push(m);
-   if(m?.type==='frame'&&this===nativeNodes.at(-1))nativeFrames.push(m);
-  });this.port.start();
- }
-};
-"""
+INSTRUMENT = Path(__file__).with_name('native-sound-instrument.js').read_text()
 
 def control(voice, parameter):
     return f'[data-native-param="source-sound/CHICAGO/{voice}|1:2:{voice}:{parameter}:0"]'
@@ -473,9 +455,16 @@ async def cases(origin, meta):
                     proof = {'viewport': [width, height], 'firmware': meta['firmware_source'], 'kernel': meta['wasm_sha256'], 'controls': 40, 'p17Endpoints': endpoint_proof, 'nativeHistory': depth_proof, 'pendingReadRetirements': ['source', 'view', 'stop'], 'readSupersession': supersession_proof, 'draftSoundUndoRedoSlots': [0, 1], 'authoredDraft': authored, 'draftBanks': saved_draft['soundBanks'], 'midiCalls': 0, 'draftSha256': hashlib.sha256(draft).hexdigest(), 'requests': await page.evaluate('soundRequests'), 'errors': await page.evaluate('soundErrors')}
                     (out/'proof.json').write_text(json.dumps(proof, indent=2)+'\n')
                     print(f'PASS actual native Chicago40/p17max11/formatter/Undo16/busy retry/choice stale/read-set-undo lifecycle/authored Draft/MIDI0 {width}x{height}', flush=True)
-                except BaseException:
-                    await page.screenshot(path=str(out/'failure.png'), full_page=True)
-                    (out/'failure.json').write_text(json.dumps({'status': await page.locator('#status').text_content(), 'requests': await page.evaluate('soundRequests'), 'errors': await page.evaluate('soundErrors'), 'pageErrors': errors}, indent=2)+'\n')
+                except BaseException as error:
+                    diagnostics = {'exception': str(error), 'pageErrors': errors}
+                    try:
+                        await page.screenshot(path=str(out/'failure.png'), full_page=True)
+                        diagnostics.update(status=await page.locator('#status').text_content(),
+                                           requests=await page.evaluate('soundRequests'),
+                                           errors=await page.evaluate('soundErrors'))
+                    except Exception as capture_error:
+                        diagnostics['captureError'] = str(capture_error)
+                    (out/'failure.json').write_text(json.dumps(diagnostics, indent=2)+'\n')
                     raise
                 finally:
                     await context.close()

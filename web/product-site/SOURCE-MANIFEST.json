@@ -959,8 +959,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 45144,
-      "sha256": "492c3efc234767d79c2519bb2a1902f6d5eacd2243e65361c072c027e77ccd15"
+      "bytes": 47127,
+      "sha256": "571cd4be3d6d6b9b7004c51c6719b1d560a269e1a59220bceeb32109ab892e4b"
     },
     {
       "path": "remote/timeline.mjs",
