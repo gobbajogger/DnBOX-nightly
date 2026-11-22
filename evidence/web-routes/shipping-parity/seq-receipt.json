@@ -1,0 +1,42 @@
+[
+  {
+    "engine": "909",
+    "state": "view-08-part-00-voice-00-page-00",
+    "png_sha256": [
+      "e233d90e293d1a1e6a2f84a27f03e11bd31a70670edcf5fe88dc62427bd07226",
+      "b49b99869101ef9cbc4aae3ec996309edb9b32f8fc40fce67d4d0b9d69caeb18",
+      "5f6c5250f0e67a470ed3c2d98731d9d4bf708451e7f6f3eca6b220a734c0e398"
+    ],
+    "rgb_sha256": [
+      "75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3",
+      "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527",
+      "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc"
+    ],
+    "different_pixels": {
+      "0-1": 13267,
+      "0-2": 11166,
+      "1-2": 19770
+    },
+    "panel_sha256": "c8740ce370e7985858db823bdadc4110ec3da0daea8e52e87d6f9666c477bf95"
+  },
+  {
+    "engine": "808",
+    "state": "view-08-part-01-voice-00-page-00",
+    "png_sha256": [
+      "8711775b8ec10de0a44e57e5893eecab9604ff51491ad92f093eeca4d14e581d",
+      "baa1ee7962cf55ad8f092dfb4236de2f67147afc22e839c3210c1c12fe0ab00d",
+      "591a16125b8a87cafd422303866bfb515002189f2c7cf5c01b3edad329a35f4d"
+    ],
+    "rgb_sha256": [
+      "23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030",
+      "49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319",
+      "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf"
+    ],
+    "different_pixels": {
+      "0-1": 13249,
+      "0-2": 11159,
+      "1-2": 19752
+    },
+    "panel_sha256": "09d0aca8571b28a3e1dafa761002611b2170f23cc740d9dd35c980529a2cc616"
+  }
+]

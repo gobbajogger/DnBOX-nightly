@@ -1,5 +1,9 @@
 # Web lane · PR #156
 
+## PR #177 parity follow-up · 22 November 2026
+
+The [shipping and R22 comparison](../../evidence/web-routes/shipping-parity/README.md) records the newly measured 909 and 808 sequencer renders, the 909 kick comparison and an independent disposition. Shipping/R22/Web parity remains open. The previous route evidence ZIP is verified in LoopyX0X37 Project Sources.
+
 ## Lane requalification · 22 November 2026
 
 The lane started from `583f6229`, whose product and test sources carry the accepted `000e2910` tree. An unavailable history data request left search inert. Build History now filters the records embedded in the page when the request fails. The online data source is unchanged. [Chromium receipt](../../evidence/web-routes/history-offline.json) records the search and reset over all 198 records at desktop, portrait and landscape widths.
