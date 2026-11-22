@@ -1,0 +1,1105 @@
+{
+  "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+  "phase": "registered",
+  "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1",
+  "productAppSHA256": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+  "states": {
+    "remote-sequence-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sequence-1440x900.png",
+      "sha256": "de2df305ccb86fcabef92e6a08d7130695ca773ad0a68eba0dd162edd2824d72",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-chance-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "chance",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-chance-1440x900.png",
+      "sha256": "27f6a9e9232826050a7f93f8ba593b7976fdc6102e2e122c978402474f2dc524",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pitch-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pitch",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pitch-1440x900.png",
+      "sha256": "039c90807a362eeeb19a91a173211a46aba2e0adf1bda8d5d20a810b9ee25701",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pan-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pan",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pan-1440x900.png",
+      "sha256": "177bb5ea8cc70e1d241135ff340f3decb94659869758be80ac5215b572e53929",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sound-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "sound",
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sound-1440x900.png",
+      "sha256": "0339be483953c83825517dcb7af6f9af31e1c0e51dbe8d0d81d89d734afdb9fb",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-mix-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "mix",
+      "lane": "velocity",
+      "title": "Mix \u00b7 Levels",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-mix-1440x900.png",
+      "sha256": "898f03f6f34510c375beaf02d41da232a58a204da22e4ad3c6eca18fc773d6e7",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-patterns-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "patterns",
+      "lane": "velocity",
+      "title": "Bass A \u00b7 Not selected \u00b7 Draft",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-patterns-1440x900.png",
+      "sha256": "0e1a0a5fda233eff5158211c57ede9923f33c980352388848153914ff5607652",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-files-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "files",
+      "lane": "velocity",
+      "title": "Project files",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-files-1440x900.png",
+      "sha256": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sequence-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sequence-1024x640.png",
+      "sha256": "d9260c9b44e34e7ac471211a991f84263c51058c1529bd330adf8a4a2318e974",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-chance-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "chance",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-chance-1024x640.png",
+      "sha256": "e9e2018a4df434ce977894bfecb29c331e1c2aa3413745ebdd2b421a6a1b1bee",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pitch-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pitch",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pitch-1024x640.png",
+      "sha256": "4a50ae0cdd132709ec24176dea4cdb87e827c3a8affa89d7596d9a630d1b82b2",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pan-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pan",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pan-1024x640.png",
+      "sha256": "5ce3439770f8f2f15295ea68632c6658c70fad439ab587add50dc72c8f385e1c",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sound-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "sound",
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sound-1024x640.png",
+      "sha256": "ada6f72b7e86df956655db254ca28da1b073c4eb3e8b6c29e7784b977b81f4f5",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-mix-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "mix",
+      "lane": "velocity",
+      "title": "Mix \u00b7 Levels",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-mix-1024x640.png",
+      "sha256": "4b6637e2911b875be01860633070dc25d24b31be68608dd6cc7d46864e0016ee",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-patterns-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "patterns",
+      "lane": "velocity",
+      "title": "Bass A \u00b7 Not selected \u00b7 Draft",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-patterns-1024x640.png",
+      "sha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-files-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "body": [
+        1024,
+        640
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "files",
+      "lane": "velocity",
+      "title": "Project files",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-files-1024x640.png",
+      "sha256": "4a2234507d5f0c224d1238b86b6f25f2141bec56c2c5cb31346f6b37287d6562",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sequence-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sequence-844x390.png",
+      "sha256": "567a77ab09baee680830aafac22f0e2ae0b399b7dda53757b20d6287d926b0b8",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-chance-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "chance",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-chance-844x390.png",
+      "sha256": "96bacca49f623319db76618adc81dbd235873f41ef7c294bcd180d6204f7607a",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pitch-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pitch",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pitch-844x390.png",
+      "sha256": "273233c6f4a43f2a0ad1abd332566a8b3782f8d62321b85e53ab40af43a9b6dc",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pan-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pan",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pan-844x390.png",
+      "sha256": "064d3170e8741ced1a490b9af9ce9aa40c3ed527dabb4b283933781afde8fbb1",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sound-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "sound",
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sound-844x390.png",
+      "sha256": "ffefcbf4f78e1751fef24ba5eb02e55ecef587a8a5490769819cd7539734d354",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-mix-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "mix",
+      "lane": "velocity",
+      "title": "Mix \u00b7 Levels",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-mix-844x390.png",
+      "sha256": "266aa2d172b355f685c6853a554637de65707aea3efecdb5a634a795956e68da",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-patterns-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "patterns",
+      "lane": "velocity",
+      "title": "Bass A \u00b7 Not selected \u00b7 Draft",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-patterns-844x390.png",
+      "sha256": "85904d59bf231fcbeba420c25d8ca5ba52f0bd2ebd5fb18ef29e5b7eba918a6f",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-files-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "body": [
+        844,
+        390
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "files",
+      "lane": "velocity",
+      "title": "Project files",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-files-844x390.png",
+      "sha256": "89c34a8d09e2ed6b745ef6229fa7ed81f18b8ea319003411bb563db6e1e31ddb",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sequence-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sequence-390x844.png",
+      "sha256": "19735a36293c5420d17b539520c529d114c8294ebf31d4a359749b135c36c3a8",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-chance-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "chance",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-chance-390x844.png",
+      "sha256": "5e87f2bff1682ac3d2fe8b200da53457296ab4ced6a7f298c6104f9b49beb6b6",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pitch-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pitch",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pitch-390x844.png",
+      "sha256": "bfe45195295d7168688e5e2848cc78ff9ffad7fe5d07f6f74da68bb34dfe3167",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-lane-pan-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": null,
+      "lane": "pan",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-lane-pan-390x844.png",
+      "sha256": "45f2b9b83318ef860e36b0600ab767fe57a3e07ad9359d3996d5bc054dda1bb6",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-sound-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "sound",
+      "lane": "velocity",
+      "title": "CHICAGO / P01",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-sound-390x844.png",
+      "sha256": "71092334dd60ef3d92b3e2c9fc20641c48b51bb28775009a4e40a82494fd7ca2",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-mix-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "mix",
+      "lane": "velocity",
+      "title": "Mix \u00b7 Levels",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-mix-390x844.png",
+      "sha256": "d7fb2adfd799eb18aada72574266a99a0eb4d46d8adc75aa291521614c6622db",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-patterns-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "patterns",
+      "lane": "velocity",
+      "title": "Bass A \u00b7 Not selected \u00b7 Draft",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-patterns-390x844.png",
+      "sha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    },
+    "remote-files-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        390,
+        844
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "part": "chicago",
+      "view": "files",
+      "lane": "velocity",
+      "title": "Project files",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "clock": 1794790800000,
+      "midiCalls": 0,
+      "filename": "remote-files-390x844.png",
+      "sha256": "0a45e2c49dde40ded2194a2993cba42fd3b5b50fe31dd5bd7e707e31c199ad25",
+      "capture": "Fresh registered candidate, frozen clock and random seed",
+      "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1"
+    }
+  },
+  "behaviors": {},
+  "errors": [],
+  "baselineState": "NOT_RECOVERED (unapproved historical 32 proposal reference files)",
+  "builtRemoteSHA256": {
+    "FUNKYBEATS-MIT-NOTICE.md": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80",
+    "SOURCE-PINS.json": "a0084bd01f70e6adb19fc4e78a3e2b9e860524ff19014822c0cd29b264fa536d",
+    "WORKSPACE-SOURCE-PINS.json": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4",
+    "aa-ease.mjs": "3206359dd72f6e551676f7cf8a81178b34e96b04ea2e64700c6abcb54a49e11d",
+    "app.mjs": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+    "assets/Barlow-OFL.txt": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+    "assets/BarlowSemiCondensed-Bold.ttf": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb",
+    "assets/BarlowSemiCondensed-Medium.ttf": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+    "break-chance.mjs": "9f0045cc91f5b3fb8161fd7242e4bf35e027a0a10e9198401671360c8b662dee",
+    "break-generator.mjs": "6995ece2dc203c9c7f77e2b1be02a8187f1a7c167493f4afb796975dfd692972",
+    "break-sequence.mjs": "93934ec00c03c1581d4c98e6ca40a9f403cbce604599d79a18dbfbd1b140080a",
+    "break-slice-glyph.mjs": "6b03df23dca5bba65fd615ff5597f09af6dac258d1ae72d12eb89dfc4a735686",
+    "catalog.json": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+    "catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "clap-draft.mjs": "347e0ee5a087f8dcd5f136c70c888da47187bb45f53cb31fec11db02e3a99acb",
+    "components.json": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+    "connection.mjs": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+    "device/app.mjs": "e2b87b25b03a1340958154b593692f254f94201b9bfb1e7096199089d351d8ae",
+    "device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "device/connection.mjs": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+    "device/index.html": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+    "device/page.mjs": "8ff67bf4d71dc2153aa91e25e66f7bf8e44da32497f8fdd599cb8c3d885b083b",
+    "device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+    "device/style.css": "70886214b7febfb46c74968500ad12d92d01184a6141ebaf887fb594345abfd1",
+    "device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+    "device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+    "device/view.mjs": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba",
+    "draft-file.mjs": "f03017d83214095240c64e59f54ca80a436afa5aebadb97bc40c490d89597d08",
+    "draft-identity.mjs": "46b03d40fd30b8e08de33e234d24c67fcbda7af9c8ed662f9eacb3974b206753",
+    "draft-ui.mjs": "6b1c5003dd6e88e18a53d2dcb7670e7f2ade6c0573e2607f953d805b942f91c1",
+    "drum-accent.mjs": "6d814dee3b196a307ced2cbb1b18115a82834ecde22bb61bfabec8178f19d2ea",
+    "drum-clap-stages.mjs": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61",
+    "drum-decay-times.mjs": "ed85dee39a40a1a3c32fa6b6811191d3066c9cf1d6bd5243fe164e6fa8d512d7",
+    "drum-format.mjs": "9c9a85676a3692f878e53b67c894d0505f2197137f42af7570c37f0bef836753",
+    "drum-strip.mjs": "a07f9cfefdb0de6c653c0e1f3e1e72189f2ac6eeb56d514da1d6ba869ba837ab",
+    "envelope-observations.mjs": "925d3648652b8cdb0aee639479f1f62c7b48323b654af56c2b5a79f16ff264bf",
+    "envelope-view.mjs": "bb0ea4fdb883caa0f22938ba78edd4f740a78b192a59e09f7411eee081ddcffd",
+    "firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "frame.mjs": "78b6d3d55944cd33c593485748a74c441aef46ba5c66c4024e83d7b895cc9f09",
+    "funkybeats-view.mjs": "059e60a0952ba412a5ec00649fbcdcf5decec41ac410423148b58051c9802e41",
+    "fx-format.json": "ed4cfc2f43ebdf2a191543cfa70f3660b824af10388ae13a2f4508d4784e09f1",
+    "glyph-live.mjs": "1d185ab47857dba725e709c8bacc3733dd63c7695614c4e299ab88fc9253edef",
+    "glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+    "glyph-render.mjs": "263631d0a7fe900f5ae43a1777de818455bde3ed4c7b284bd940129122449ccd",
+    "glyphs.mjs": "4dc717f77f1d6f3a2ae58411df4648753354bf33f7921be78c6da22d7246ae1e",
+    "grid.mjs": "042e178d7a996761501d6af11d72040d0e64f1cb5f2e4884fc0c3530068deb48",
+    "identity/app.mjs": "9eba18e1d701402c1eac4a329fc7cdb5411b5093c0c1b53b8babd8481b8dcfee",
+    "identity/index.html": "2e55cae2272c4a6c8ee3a793f5d370aa365450cb230c04451f5ade1365cdfdeb",
+    "identity/remote.mjs": "e070d1c419ad9cb1a52c2fa1b2f8a8fcf51a72bfd93d0d5e0fb7e2b90422d5e1",
+    "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "lane.mjs": "144af779aed9642acd7fdabc5a091f29f55413ffc9e3d682cb61e5d0f2855288",
+    "local-instrument.mjs": "6d75866785544da285c088d8cf9c274e8c24950e1e914db81342a9ec525d8b70",
+    "local-step-rows.mjs": "1396e5d26291c92eecfdb02edbf48b9d9a3d20cc2af799fd0ccd158774c4ae0f",
+    "master-draft.mjs": "ac8d2b5d28da72e2ad254c65e34a791783342062e41593fdb8b26d7e7e9de779",
+    "master-output.mjs": "627640f3c1d5a4230e8eefa9880aedef40fe866641be92b91f8e4a7d0f6877ff",
+    "master-source.mjs": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783",
+    "mix-aliases.mjs": "ce42742a4c3908e480d8511f52897ae7facbaf238662971671ca01523ef1a0c5",
+    "mix-workspace.mjs": "1ba2e99afbba3b3ba98e6eeef49b5431e89f987e8923468e4c2bbeb3f2c5cdf1",
+    "mixer-format.json": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69",
+    "mixer-format.mjs": "051813e998c32ecc790d3ce16e98b38bac8a5d6a1134757565e9492a6db4d5ec",
+    "model.mjs": "f6773866a57f0bc23b96b6b94f42b0ebf782aa8bd7f5af186549ff5e65f8577c",
+    "motion.mjs": "f65eedc0c106b2259b9a64c2c29d22d52fb963742138d207f46ba086551f3eab",
+    "page.mjs": "19dc0169e109ce5e6b7619bca40f33001d4569ae1c0be7bfd320d9c72a1c4ac6",
+    "pan.mjs": "c07a75811fd0df011d5226963eda44b01acd28398018f85dcfb9c4ca78a536a6",
+    "parameter.mjs": "0cad6cffbc0f5ff58765eed37082303380045a9517dd9de02deb4c7d6d8b63d6",
+    "pattern-locks.mjs": "1814ccf9b253947c773c05225ecceaf7a010840c3b3cc3ab7afe2411f82e9aaf",
+    "project-preset.mjs": "5b990f5c7cc783aa51517bcaab51c17fc0c8967c4ff3862a44a506d5b0376957",
+    "remote.mjs": "adb9403995a8b728cc057ecddd7af29c66fdfd53f461e99a40d58727e0e9276f",
+    "roll.mjs": "7167c3c9c3c892244026dc2660176336b3b43d1dc4af2279b71c5a70c046bc3d",
+    "runtime-mix-map.mjs": "b3a7f44bb361f970340a4349ae8c3838262cf8306690c0e78be35c6e2b4a3ec2",
+    "runtime-mix-state.mjs": "684ff1192e27d2afacbdec08187d1884b1c1a1aaf9cd142f05c797c2446f3469",
+    "runtime-playing-state.mjs": "c41a6629933f007c176ada0811a4eb77d754318ddf75c1f3a554ddaa9046c4ab",
+    "runtime-sound-map.mjs": "44b1e6ec4dea9730bb7db3484bcbd1784d9d0f731cbfecbd2c294219d559df6d",
+    "runtime-sound-state.mjs": "54055bc5278e6fbb65756eb9fe6af356b10d75f07a12e4d5293911c2094e9ebd",
+    "sequence.mjs": "318ee8c81788af37ed1f836a18e302728dde36fb9ee2edfe2433c2ee6e1938f9",
+    "session.mjs": "7ccfbb84d1700a81dfd2c6a1ebbc433aefea6780177f33abefd5817a646ce521",
+    "song-view.mjs": "e409b54eaa1dc94d3daca05b9ff07ef29722d2d7aa69ce5524d02a5a60215200",
+    "sound.mjs": "b11ea2ba646a0e382ef64e77d6047f70ce081b145c823a973705dc9ef217c8d4",
+    "source-sound-glyphs.mjs": "6cb22e08490b4a1cfaae03a14408f1aced143630fba3778be59ee947aa557770",
+    "source-sounds.json": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+    "startup.mjs": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6",
+    "step-lane.mjs": "68c67fac37e5110374e0a5f4b45009871e8b02ff46f6c2074be2788b99e9e01a",
+    "step-value-gesture.mjs": "909d6ffe9ee9ed61e1ecace101aac40ce4947b6c6de299f914476a54b986ab0c",
+    "style.css": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043",
+    "superj6-banks.mjs": "fae58489a87f4a181c9b4fd249b9a5761660d5c640cd4821a53353fea25a3cd5",
+    "superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5",
+    "synth-one-banks/BankA.json": "1486c2b1fcb922d145541c96f436e7e15d755dba72ff9a8030052ef22d224bed",
+    "synth-one-banks/Bonus.json": "e189a9782469bd851d97a2bd157cfdd43692621287de68eb2909e8aabbd4b996",
+    "synth-one-banks/Brice Beasley.json": "a42a515cc66fc392f8831efa4865145dc9e2c8a8d9bc2554d1fd8a1aed242d45",
+    "synth-one-banks/DJ Puzzle.json": "6263b4c08143d5f62192ad48c881129ae0c2df80256abd010dee89ede10b6506",
+    "synth-one-banks/Electronisounds.json": "94447bcafd93b8e534b99347ef1a2ab7f96006364c36e85c88825e2480a026e7",
+    "synth-one-banks/Francis Preve.json": "7e45e985951bcff09de2745d7223a8523c559f7ae30c032cfeed81c6bf317187",
+    "synth-one-banks/JEC.json": "9af56a4f52d050c98da8bfc6bc355ac872772cdd419def188bb644b0c9dff0c0",
+    "synth-one-banks/LICENSE": "71ac2b8af8849096ba2d0f3510972b8384204f17517e773bfa52fc755fb0fc49",
+    "synth-one-banks/MANIFEST.json": "806d92dae2ef75b073168e5b85ee2dc6055f2c3b10ceca3a0e40933514c37622",
+    "synth-one-banks/Red Sky Lullaby.json": "db813fe373ebd0c2434c8c0af376b245c331c35080b396bce83bc4d9f2fb0aac",
+    "synth-one-banks/Sound of Izrael 2.json": "edf48f200ed2510b03d4b5e9e4c92c0306af0e38776c0916794d90e79572d861",
+    "synth-one-banks/Sound of Izrael.json": "1f100f20227401a47e17f91bac5be44efc6d5fef8d97f7ed2a64a2a7e1426462",
+    "synth-one-banks/Spidericemidas.json": "1cb034e91677be3b7bc0cddca64d821ddbfc132d79f98e4211053867f76eec35",
+    "synth-one-banks/Starter Bank.json": "f4da92584505084e3b0277cf1e1f1911050837014a5fa7371cc6879421cbe908",
+    "synth-one-file-model.mjs": "e0c736d2e2a941983ad6e64a3b6045f15b7d15666f4f30d2daf811d7483b8d47",
+    "synth-one-files.css": "2100256691982be1db8932187540e517e85a462d681b21b89ff147d387db8061",
+    "synth-one-files.mjs": "dd8a7a6fe80058a9f292b6cfb8e37925fb0a2cc8e2357f7bfa15ff91c67bdaa2",
+    "synth-one-init-data.mjs": "6ffd2c5c0dc99722ef55bb85c75e8cdfe0bcc187f12cf7608ed38748d77d3107",
+    "synth-one-init.mjs": "7e0d7d4c05d605d5c0f66cf084ed81ff160163380677630ed2ece1ff8a5f7efd",
+    "synth-one-wave.mjs": "e8c3852f18364b01c191071aa0ff3ded8bb90a6415615b859fbf0269ec635061",
+    "timeline.mjs": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152",
+    "trace.json": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55",
+    "vendor/client.mjs": "0a9a11b4514fab1fdbb905f1385c1c5f54986acae924fd6de5f9f5ec71a3176c",
+    "vendor/codec.mjs": "c4836c6aff371cc21ae790b51804b9634d9118c2ef3d05da9d05b54388303d40",
+    "vendor/funkybeats-core.mjs": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c",
+    "view.mjs": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9",
+    "wave-display.mjs": "6287ea63be3f5f30620316a49ba190001bf164afe3e496440d2491438575621b",
+    "workspace.mjs": "2640ec7a2f8a7c436567fb30f1d5328d4ffc1b052b9df699b5b84f1cc24bba32"
+  },
+  "clockInputs": {
+    "epochMs": 1794790800000,
+    "randomSeed": 42,
+    "locale": "en-US",
+    "timezone": "UTC",
+    "DPR": 1,
+    "motion": "reduce",
+    "flags": [
+      "--font-render-hinting=none",
+      "--disable-lcd-text",
+      "--force-color-profile=srgb"
+    ],
+    "freezeJS": "4247f208e21f7ecb1cf4e3c1c4e774a065d6db1f63bd22d5929ed83d7b74c420",
+    "freezeCSS": "fe1841a22c3db8a1c5d52f612ec29e9c90c3e823a2988e41bb85739ff199ed5a"
+  },
+  "chromium": "151.0.7922.34",
+  "result": "PASS"
+}

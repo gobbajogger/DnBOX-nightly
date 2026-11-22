@@ -11,7 +11,9 @@ export function createMasterDraft(components,catalog){
  const id=(target,parameter)=>prefix+target+'/0/'+parameter;
  for(const c of source.controls){const key=c.target+':'+c.parameter,canonical=id(c.target,c.parameter),rows=catalog.controls.filter(d=>d.target===c.target&&d.voice===0&&d.parameter===c.parameter);
   if(groups.has(key)||rows.length!==1||rows[0].kind!=='U32'||rows[0].min!==0||rows[0].max!==c.max||!Number.isInteger(c.default)||c.default<0||c.default>c.max||c.displays.length!==c.max+1||c.displays.some(v=>typeof v!=='string'||!v||v.length>32))throw Error('Master source/catalog identity mismatch');
-  const g={...c,id:canonical,ids:[canonical],min:0,step:1,value:c.default,label:c.target===6?names[c.parameter]:['Volume','Distortion','Drive','Glue'][c.parameter],glyph:c.target===6?glyphs[c.parameter]:['LEVEL','DIST','DRIVE','GLUE'][c.parameter],context:c.target===6?'Master':'Master FX',runtime_admitted:false};groups.set(key,g);byId.set(canonical,g);
+  const defaultGlyph=c.target===6?glyphs[c.parameter]:['LEVEL','DIST','DRIVE','GLUE'][c.parameter];
+  const glyph=moreKeys.includes(key)?(c.max===127?'MASTER MORE AMOUNT':'MASTER MORE CHOICE '+(c.max+1)):defaultGlyph;
+  const g={...c,id:canonical,ids:[canonical],min:0,step:1,value:c.default,label:c.target===6?names[c.parameter]:['Volume','Distortion','Drive','Glue'][c.parameter],glyph,context:c.target===6?'Master':'Master FX',runtime_admitted:false};groups.set(key,g);byId.set(canonical,g);
  }
  for(const screen of components.screens)for(const c of screen.controls){const m=/^1:([46]):0:(\d+)$/.exec(c.identity);if(!m)continue;const g=groups.get(m[1]+':'+m[2]);if(!g)continue;if(Number(c.context.raw)!==g.value)throw Error('Master captured/source baseline drift');const alias=screen.path+'|'+c.identity;if(byId.has(alias)&&byId.get(alias)!==g)throw Error('Master alias identity conflict');if(!g.ids.includes(alias))g.ids.push(alias);byId.set(alias,g);}
  const valid=(g,value)=>Number.isInteger(value)&&value>=0&&value<=g.max;
@@ -34,6 +36,11 @@ export function createMasterDraft(components,catalog){
   cutoff:read(id(6,9),edits),
   resonance:read(id(6,10),edits)
  });
+ const compState=edits=>({
+  threshold:read(id(6,0),edits),
+  ratio:read(id(6,1),edits),
+  blend:read(id(6,5),edits)
+ });
  const specs=[...groups.values()].map(g=>({...g,ids:[...g.ids]}));
- return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,filterState,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return fxDisplay(`1:${g.target}:0:${g.parameter}`,value)??g.displays[value];},normalize,change};
+ return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,filterState,compState,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return fxDisplay(`1:${g.target}:0:${g.parameter}`,value)??g.displays[value];},normalize,change};
 }

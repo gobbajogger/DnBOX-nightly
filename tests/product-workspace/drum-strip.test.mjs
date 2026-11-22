@@ -80,7 +80,8 @@ test('editable kit glyphs update their mounted source paths at every raw value',
       assert.ok(selector.includes('[data-source-control="'+control.identity+'"]'));
       return [glyph];
     }};
-    paintDrumGlyph(root,control,0,127);
+    const maximum=control.context.name==='Sound'?1:127;
+    paintDrumGlyph(root,control,0,maximum);
     if(!attributes.has('d'))continue;
     const firstCurve=attributes.get('d');
     const fork=control.context.name==='Tune' && control.identity!=='1:0:0:0';
@@ -90,8 +91,8 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     else if(fork)tuneForks++;
     else if(summary)kitSummaries++;
     else envelopeControls.push(control.identity);
-    for(let raw=0;raw<=127;raw++){
-      paintDrumGlyph(root,control,raw,127);
+    for(let raw=0;raw<=maximum;raw++){
+      paintDrumGlyph(root,control,raw,maximum);
       const curve=attributes.get('d');
       if(decay){
         const points=[...curve.matchAll(/[ML]([\d.]+) ([\d.]+)/g)];
@@ -102,6 +103,8 @@ test('editable kit glyphs update their mounted source paths at every raw value',
         assert.equal(curve.match(/[ML]/g).join(''),'M'+'L'.repeat(18)+'ML');
       }else if(summary){
         assert.match(curve,/^(?:M\d+ 12V[\d.]+){4}$/);
+      }else if(control.context.name==='Snappy'||control.context.name==='Sound'){
+        assert.equal(Array.from(curve.matchAll(/[ML]/g)).length,control.context.name==='Snappy'?17:13);
       }else if(control.identity==='1:1:1:1'){
         assert.match(curve,/^M7 12L11 -?[\d.]+L15 12M17 12L21 -?[\d.]+L25 12$/);
       }else if(control.identity==='1:1:0:1'){
@@ -119,5 +122,5 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     assert.equal(pathLookups,1,'updates reuse the mounted glyph path');
   }
   assert.equal(tuneForks,21);assert.equal(kitSummaries,22);assert.equal(fallingTails,21);
-  assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:1:1','1:1:6:3']);
+  assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:1:2','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:1:1','1:1:1:2','1:1:2:3','1:1:3:3','1:1:4:3','1:1:5:3','1:1:6:3','1:1:6:4']);
 });

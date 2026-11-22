@@ -1,0 +1,14 @@
+{
+  "filename": "lane-remote-resume-0130-c7b026cf86b3-software-evidence.zip",
+  "bytes": 22858396,
+  "sha256": "43d085cb933ed2df36ebd760f5eab81edbcb4c90340cd966102beb0bd9c0ad1c",
+  "files": 113,
+  "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "verified": "ZIP CRC and every member size/SHA256",
+  "upload": "READY_NOT_ATTEMPTED_SAME_PROJECT_CAPACITY",
+  "previousRejectedFile": "lane-remote-resume-0130-efb4c070a81d-software-evidence.zip",
+  "siteMessage": "Remove a source to make room, then retry",
+  "requiredNextAction": "Free capacity in the same private project, then upload this exact C7 file through the normal source uploader.",
+  "originalInstallersIncluded": false,
+  "alreadyUploadedFiveIncluded": false
+}

@@ -1,0 +1,16 @@
+{
+  "remoteSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+  "hostSource": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8",
+  "stockSource": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "browser": "151.0.7922.34",
+  "exit": 0,
+  "proof": "Actual app-core Chicago Cutoff257: READ32, SET33 QUEUED, freshREAD33, guardedREAD33, inverseSET32 QUEUED, freshREAD32. Coupled COMP withholds scalar Undo.",
+  "catalog": {
+    "count": 326,
+    "crc": "eec38bc1",
+    "admitted": false,
+    "testOnly": true
+  },
+  "stockQualification": "NOT claimed; stock INFO25bytes and HELLO0bytes remain the production-dispatch result.",
+  "logSHA256": "2943a3b7f8863c1a4ccba5fca0bd33162185b1a0df9142813cd33ff4ffc64df1"
+}

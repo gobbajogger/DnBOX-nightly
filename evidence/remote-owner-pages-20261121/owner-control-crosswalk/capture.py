@@ -9,6 +9,7 @@ parser.add_argument('output',type=Path)
 parser.add_argument('--break-journey',action='store_true')
 parser.add_argument('--site',type=Path)
 parser.add_argument('--landscape-only',action='store_true')
+parser.add_argument('--owner-cutoff',action='store_true',help='Capture the source-supported page 3 Cutoff/P01 state only')
 a=parser.parse_args()
 checkout=a.checkout.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
 site=(a.site or checkout/'.output/product-site').resolve()
@@ -28,10 +29,11 @@ async def run():
     await p.goto(origin+'/remote/',timeout=120000,wait_until='domcontentloaded')
     await p.wait_for_function("typeof document.querySelector('[data-engine]').onclick==='function' && document.getElementById('status').textContent.includes('Draft')",timeout=180000)
     print('BOOT',round(time.monotonic()-t0,2),b.version,flush=True)
-    async def snap(key,pages):
+    async def snap(key,pages,owner_comparison=None):
      await p.evaluate('document.fonts.ready')
      data=await p.evaluate(INVENTORY)
      data['pages']=pages
+     if owner_comparison is not None:data['ownerComparison']=owner_comparison
      assert data['bodyWidth']==p.viewport_size['width'],(key,data['bodyWidth'],p.viewport_size)
      data['screenshotSHA256']=hashlib.sha256(await p.screenshot(path=out/(key+'.png'),animations='disabled',timeout=45000)).hexdigest()
      result['states'][key]=data
@@ -46,7 +48,34 @@ async def run():
     async def choose(pattern):
      await view('patterns');await p.locator(f'[data-launch-part="4"][data-pattern="{pattern}"]').click()
      await view('roll')
-    if a.break_journey:
+    if a.owner_cutoff:
+     await part('chicago');await view('patterns')
+     await p.locator('[data-launch-part="2"][data-pattern="0"]').click()
+     await view('roll')
+     lane=p.locator('#lane-kind');cycle=p.locator('#lane-param')
+     for _ in range(10):
+      if await lane.input_value()=='patternLock':break
+      await cycle.click()
+     await expect(lane).to_have_value('patternLock')
+     await expect(p.locator('#lock-target')).to_have_value('4098')
+     await expect(cycle).to_contain_text('P01')
+     cells=p.locator('#velocity [data-lane-step]:enabled')
+     await expect(cells).to_have_count(16)
+     for _ in range(40):await cells.first.press('ArrowUp')
+     await expect(cells.first).to_have_attribute('aria-valuetext','57%')
+     await snap('03-motion',[3],{
+      'state':'KNOWN_CUTOFF_PARTIAL', 'pixelAcceptanceEligible':False,
+      'ownerVisibleState':'CHICAGO / Step 01, Cutoff / P01, selected override 72 on the highlighted first step',
+      'productState':'Bass A CHICAGO / P01, Cutoff lock 4098, step 1 raw 72 displayed as 57%, thin lane',
+      'reason':'The drawing has the superseded timing inspector and separate lock bank. Only the selected lock input is directly matched.',
+     })
+     await p.locator('.overflow').evaluate('e=>e.open=true')
+     async with p.expect_download() as receipt:await p.locator('#draft-save').click()
+     doc=json.loads(Path(await (await receipt.value).path()).read_text())
+     expected={'catalogId':4098,'pattern':0,'values':[72]+[None]*15}
+     assert doc['patternLocks']==[expected],doc['patternLocks']
+     result['ownerCutoffDraftReadback']=expected
+    elif a.break_journey:
      for w,h in ([(844,390)] if a.landscape_only else [(1440,900),(844,390),(390,844)]):
       await p.set_viewport_size({'width':w,'height':h})
       await part('breaks'); await view('roll'); await p.locator('[data-break-view="slices"]').click()
@@ -95,7 +124,10 @@ async def run():
     else:
      await part('chicago');await view('roll');await snap('01-notes',[1])
      await part('drum909');await view('drums');await snap('02-steps',[2])
-     await part('chicago');await view('locks');await snap('03-motion',[3])
+     await part('chicago');await view('locks');await snap('03-motion',[3],{
+      'state':'DIFFERENT_CONTROL', 'pixelAcceptanceEligible':False,
+      'reason':'This route enters MIAMI Wave Motion. Page 3 depicts Bass A CHICAGO Cutoff / P01. Run --owner-cutoff for the supported partial state.',
+     })
      await view('sound');await p.locator('#sound-bank').select_option('CHICAGO');await snap('04-chicago',[4])
      await part('miami');await p.locator('#sound-bank').select_option('MIAMI'); await snap('05-miami',[5])
      await p.locator('#sound-bank').select_option('SuperJ6');await snap('05-superj6',[5])
@@ -116,7 +148,10 @@ async def run():
      await part('chicago');await view('roll');await snap('14-notes',[14])
      await part('drum909');await view('drums');await snap('15-steps',[15])
      await view('mix');await p.locator('[data-mix-mode="levels"]').click();await snap('16-levels',[16])
-     await part('chicago');await view('locks');await snap('17-motion',[17])
+     await part('chicago');await view('locks');await snap('17-motion',[17],{
+      'state':'UNKNOWN_STATE', 'pixelAcceptanceEligible':False,
+      'reason':'Page 17 has a superseded timing inspector and no selected lock target or raw lock value. The current Motion view is a different state.',
+     })
      await part('drum909');await view('sound');await p.locator('#sound-voice').select_option('0');await snap('18-bassdrum',[18])
      await part('chicago');await view('patterns');await p.locator('[data-pattern-scope="selected"]').click();await snap('19-patterns',[19])
      await view('files');await snap('20-projects',[20])

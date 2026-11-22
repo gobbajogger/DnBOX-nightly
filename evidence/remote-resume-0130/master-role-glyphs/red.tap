@@ -1,0 +1,45 @@
+✖ only the sourced Mix control identities select the native amount drawings (1.493551ms)
+✖ Master COMP responds to independent threshold, ratio and blend values (0.998137ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 102.53664
+
+✖ failing tests:
+
+test at tests/product-remote/master-role-glyphs.test.mjs:12:1
+✖ only the sourced Mix control identities select the native amount drawings (1.493551ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'MASTER DRIVE'
+  
+      at TestContext.<anonymous> (file:///tmp/dnbox-master-cues-dfb-857bb240/tests/product-remote/master-role-glyphs.test.mjs:22:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'MASTER DRIVE',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/product-remote/master-role-glyphs.test.mjs:31:1
+✖ Master COMP responds to independent threshold, ratio and blend values (0.998137ms)
+  TypeError [Error]: model.compState is not a function
+      at glyph (file:///tmp/dnbox-master-cues-dfb-857bb240/tests/product-remote/master-role-glyphs.test.mjs:34:60)
+      at TestContext.<anonymous> (file:///tmp/dnbox-master-cues-dfb-857bb240/tests/product-remote/master-role-glyphs.test.mjs:35:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

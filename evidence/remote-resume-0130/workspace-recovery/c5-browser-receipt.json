@@ -1,0 +1,25 @@
+{
+  "source": "3c5a9142b5013ffc6d5178825a0e4fc10692be4e",
+  "tree": "15f14d39f188582fe26315d890fbe6327d0b227b",
+  "status": "VERIFIED_BEFORE_RESET_BYTES_CURRENTLY_UNREACHABLE",
+  "artifact": {
+    "name": "lane-remote-resume-0130-3c5a9142b5013ffc6d5178825a0e4fc10692be4e-targeted-browser-refresh.tar.gz",
+    "bytes": 2226746,
+    "sha256": "426ced718e96bdb9597f2c8803e3ffb19f40a917c8ea5e94f84d345043a9bb8e",
+    "manifestSha256": "2b4df530503b55fe26e10618ecb9ab887ebd65a36fb33e17cfdae66317746fd9"
+  },
+  "capturedFrames": 49,
+  "frames": {
+    "sound": 32,
+    "registered": 6,
+    "owner": 11
+  },
+  "softwareOnly": true,
+  "qualification": "four viewport five-owner 808 keyboard/edit/fresh-read/UndoRedo/DTOreopen; actual Master COMP and Filter independent canvas/state/DTO Undo; actual owner03Cutoff raw72 export",
+  "retainedFailures": [
+    "Chromium Target crashed at844x390 voice03 Decay; same-build resume passed",
+    "Mix verifier originally counted hidden dialog controls and assumed13compact actions; corrected to the existing12named visible compact controls, with hidden Inspect explicit; no source change"
+  ],
+  "upload": "NOT_ATTEMPTED_LAST_PROJECT_CAPACITY_FAILURE_THEN_RESET_SIGN_IN_WALL",
+  "note": "Desktop and independent Owner agents verified the49archive members before the workspace reset. Root reviewed selected frames. This metadata preserves their reported exact hashes and scope; the inaccessible bytes are not represented as delivered."
+}

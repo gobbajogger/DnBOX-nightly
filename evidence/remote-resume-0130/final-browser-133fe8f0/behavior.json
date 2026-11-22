@@ -1,0 +1,3606 @@
+{
+  "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+  "phase": "behavior",
+  "captureScriptSHA256": "bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1",
+  "productAppSHA256": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+  "states": {},
+  "behaviors": {
+    "1440x900": {
+      "sourceBanks": {
+        "chicago-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "224148c7887884e56b6f75b6802f20824ffc584dcc87721f09e2734057f63f00",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5879580a5e162614b16509171f0702a7b5df2850090caac436eb19db87f7e3b2",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "48f7c6cda6e3e700dfb27359d3251f4c86298c4949d7190ed85d9c55e16bf5cc",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "5845915db4162485cbde15b3e2866aff153079597e1a6f3b357ff302c4f62de3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "9698a1f68b4112b8ce60a449200c53062806e1f0d14b6f63dd20d7ec0226dbd7",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "0de2a38a821ab624b4b6d138c7c2186d401c71e9fb2c1deb8cd95ba9c3c2acda",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "1b3350f41f50c382490ceefe1f01e95f009149299c523b8d5872bdf7324a24d7",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "6885b47af67b1eea1e94bf6422680ebc01dec4716fbe682b761089483a09b1d3",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "2c8c771f5d5a99662cd4c0eaf604ef3039db5786c9c8ee90167827e40ceb1dab",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "b13ee4f67f8d55d9392398b113c77b30281385a1faf1987b829579839ae48fdd",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "chicago-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "4440565ba1a9f2ecbaeec91b87cee6a665f611b855f31d3c236a5ab32b04668c",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        },
+        "miami-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "224148c7887884e56b6f75b6802f20824ffc584dcc87721f09e2734057f63f00",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5879580a5e162614b16509171f0702a7b5df2850090caac436eb19db87f7e3b2",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "48f7c6cda6e3e700dfb27359d3251f4c86298c4949d7190ed85d9c55e16bf5cc",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "5845915db4162485cbde15b3e2866aff153079597e1a6f3b357ff302c4f62de3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "9698a1f68b4112b8ce60a449200c53062806e1f0d14b6f63dd20d7ec0226dbd7",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "0de2a38a821ab624b4b6d138c7c2186d401c71e9fb2c1deb8cd95ba9c3c2acda",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "1b3350f41f50c382490ceefe1f01e95f009149299c523b8d5872bdf7324a24d7",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "6885b47af67b1eea1e94bf6422680ebc01dec4716fbe682b761089483a09b1d3",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "2c8c771f5d5a99662cd4c0eaf604ef3039db5786c9c8ee90167827e40ceb1dab",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "b13ee4f67f8d55d9392398b113c77b30281385a1faf1987b829579839ae48fdd",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "miami-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "4440565ba1a9f2ecbaeec91b87cee6a665f611b855f31d3c236a5ab32b04668c",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        }
+      },
+      "breakSlices": {
+        "source-sound/BREAK/-1|11:0:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "e300b96141db470c7ddb38487e180ceb8e785427846f6694e31ec103b256a8ff",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "4d2c04bc50d1e9232c7af2f0674b9d5aabfd8e6c8dc26801653f967e10ab44ea",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "d32e862690d86b274836a4e84e56b9b54a8593920c5e2c8104b61a13240598ea",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "46aa16a43f16f16ac8e677a12d929f2018e3e567fccbd5fce655f68cac253ad6",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        },
+        "source-sound/BREAK/-1|11:1:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "e300b96141db470c7ddb38487e180ceb8e785427846f6694e31ec103b256a8ff",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "4d2c04bc50d1e9232c7af2f0674b9d5aabfd8e6c8dc26801653f967e10ab44ea",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "d32e862690d86b274836a4e84e56b9b54a8593920c5e2c8104b61a13240598ea",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "46aa16a43f16f16ac8e677a12d929f2018e3e567fccbd5fce655f68cac253ad6",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        }
+      },
+      "masterMore": [
+        {
+          "identity": "6:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 305.59375,
+            "right": 1140.59375,
+            "bottom": 363.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.5039370078740157",
+            "canvasSHA256": "0107874a5e9964b61eab26696fc53ddbe5fc69a052a612dd67673bd55e54d925",
+            "readout": "-24dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:1",
+          "role": "MASTER MORE CHOICE 10",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 305.59375,
+            "right": 1406.984375,
+            "bottom": 363.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "0.4444444444444444",
+            "canvasSHA256": "1cbc88ce13229b93209031622e335f047d21bf153d24a3a9a8c48a6d76e774c5",
+            "readout": "4:1"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "c103b1a895f1ca35361c68959b7f1bb0eac1bad963dbad7092af605341afbbf7",
+            "readout": "INF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:2",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 371.59375,
+            "right": 1140.59375,
+            "bottom": 429.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "64a9dd75c93d4d8b391e201b37a7a2e31c7cd634fd28c26909f9e393f7bfdc63",
+            "readout": "10ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 371.59375,
+            "right": 1406.984375,
+            "bottom": 429.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.4566929133858268",
+            "canvasSHA256": "8eedaddf51c7339719b32deed47d463510a16c864ca8da4d2508d33f9ae3f1ce",
+            "readout": "99ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "1500ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:4",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 437.59375,
+            "right": 1140.59375,
+            "bottom": 495.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "64a9dd75c93d4d8b391e201b37a7a2e31c7cd634fd28c26909f9e393f7bfdc63",
+            "readout": "16.1dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "24.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:5",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 437.59375,
+            "right": 1406.984375,
+            "bottom": 495.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:7",
+          "role": "MASTER MORE CHOICE 3",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 503.59375,
+            "right": 1140.59375,
+            "bottom": 561.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "15091cdb80f3abc7285813cafd6762e139e60e814e4d8716676e4336e10e1db6",
+            "readout": "909"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "20f5dd32b4783d3c187197b0d327c8eb14f193c6bfab642b873b9b6891a77548",
+            "readout": "BOTH"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:10",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 503.59375,
+            "right": 1406.984375,
+            "bottom": 561.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.15748031496062992",
+            "canvasSHA256": "00eb012826852fa1ab89a588a6af556d4d73314bddf049710fd0770262b2a358",
+            "readout": "20"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "127"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:11",
+          "role": "MASTER MORE CHOICE 2",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 569.59375,
+            "right": 1140.59375,
+            "bottom": 627.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "3a651573ea9e0ba468e127fbf8e279e012f27e8f49ac293ef464cf5282224e7a",
+            "readout": "ON"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "c8107485bbcea2d31bcf745f2e46777dfbbe078287d2c3404df47970ae3bc59f",
+            "readout": "OFF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:1",
+          "role": "MASTER MORE CHOICE 8",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 569.59375,
+            "right": 1406.984375,
+            "bottom": 627.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "9dbb54d785d83d2fcee57da6eea6865a469806d00a8a415f4d3b7c71fdeeff14",
+            "readout": "Off"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "7077be8ae95101690091c8ed1aae6c5bb1a3cc5b04599566012d3cbf9b1abb52",
+            "readout": "Crush"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 882.203125,
+            "top": 635.59375,
+            "right": 1140.59375,
+            "bottom": 693.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 1148.59375,
+            "top": 635.59375,
+            "right": 1406.984375,
+            "bottom": 693.59375,
+            "width": 258.390625,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.3464566929133858",
+            "canvasSHA256": "490dd04a244a9062de254886f62178c5a0ca1ba65f5b3e9e84f7a11b291cb1d9",
+            "readout": "-9.2dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        }
+      ],
+      "midiCalls": 0
+    },
+    "1024x640": {
+      "sourceBanks": {
+        "chicago-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "224148c7887884e56b6f75b6802f20824ffc584dcc87721f09e2734057f63f00",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5879580a5e162614b16509171f0702a7b5df2850090caac436eb19db87f7e3b2",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "48f7c6cda6e3e700dfb27359d3251f4c86298c4949d7190ed85d9c55e16bf5cc",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "5845915db4162485cbde15b3e2866aff153079597e1a6f3b357ff302c4f62de3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "9698a1f68b4112b8ce60a449200c53062806e1f0d14b6f63dd20d7ec0226dbd7",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "0de2a38a821ab624b4b6d138c7c2186d401c71e9fb2c1deb8cd95ba9c3c2acda",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "1b3350f41f50c382490ceefe1f01e95f009149299c523b8d5872bdf7324a24d7",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "6885b47af67b1eea1e94bf6422680ebc01dec4716fbe682b761089483a09b1d3",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "2c8c771f5d5a99662cd4c0eaf604ef3039db5786c9c8ee90167827e40ceb1dab",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "b13ee4f67f8d55d9392398b113c77b30281385a1faf1987b829579839ae48fdd",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "chicago-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "4440565ba1a9f2ecbaeec91b87cee6a665f611b855f31d3c236a5ab32b04668c",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        },
+        "miami-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "224148c7887884e56b6f75b6802f20824ffc584dcc87721f09e2734057f63f00",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5879580a5e162614b16509171f0702a7b5df2850090caac436eb19db87f7e3b2",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "48f7c6cda6e3e700dfb27359d3251f4c86298c4949d7190ed85d9c55e16bf5cc",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "d1379cd703a7af5f939220a35c04ecf3d941db7cea1f321b962596d3f421e045",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "5845915db4162485cbde15b3e2866aff153079597e1a6f3b357ff302c4f62de3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "9698a1f68b4112b8ce60a449200c53062806e1f0d14b6f63dd20d7ec0226dbd7",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "0de2a38a821ab624b4b6d138c7c2186d401c71e9fb2c1deb8cd95ba9c3c2acda",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "1b3350f41f50c382490ceefe1f01e95f009149299c523b8d5872bdf7324a24d7",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "6885b47af67b1eea1e94bf6422680ebc01dec4716fbe682b761089483a09b1d3",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "2c8c771f5d5a99662cd4c0eaf604ef3039db5786c9c8ee90167827e40ceb1dab",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "b13ee4f67f8d55d9392398b113c77b30281385a1faf1987b829579839ae48fdd",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "miami-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "e2baaa7a26eff4efd1771936a4355c9d7c81c30b20c3014a3fdd732b42a750f4",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "5fa1fe88eef525fd8cdd1f440d6e927c9fb771f5dc2638d8a8fd6204f4e9400e",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "4440565ba1a9f2ecbaeec91b87cee6a665f611b855f31d3c236a5ab32b04668c",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        }
+      },
+      "breakSlices": {
+        "source-sound/BREAK/-1|11:0:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "e300b96141db470c7ddb38487e180ceb8e785427846f6694e31ec103b256a8ff",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "4d2c04bc50d1e9232c7af2f0674b9d5aabfd8e6c8dc26801653f967e10ab44ea",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "d32e862690d86b274836a4e84e56b9b54a8593920c5e2c8104b61a13240598ea",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "46aa16a43f16f16ac8e677a12d929f2018e3e567fccbd5fce655f68cac253ad6",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        },
+        "source-sound/BREAK/-1|11:1:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "e300b96141db470c7ddb38487e180ceb8e785427846f6694e31ec103b256a8ff",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "4d2c04bc50d1e9232c7af2f0674b9d5aabfd8e6c8dc26801653f967e10ab44ea",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "d32e862690d86b274836a4e84e56b9b54a8593920c5e2c8104b61a13240598ea",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "46aa16a43f16f16ac8e677a12d929f2018e3e567fccbd5fce655f68cac253ad6",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        }
+      },
+      "masterMore": [
+        {
+          "identity": "6:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 305.59375,
+            "right": 807.140625,
+            "bottom": 363.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.5039370078740157",
+            "canvasSHA256": "1bfad5b62839950e4825d7627f9ca0955d9adfe846504a437bd4435f47fa186a",
+            "readout": "-24dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "ee2a337473fed3433a13c9a4053a319ff0dceefe81abd92352dda8cdba505b47",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:1",
+          "role": "MASTER MORE CHOICE 10",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 305.59375,
+            "right": 991,
+            "bottom": 363.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "0.4444444444444444",
+            "canvasSHA256": "1cbc88ce13229b93209031622e335f047d21bf153d24a3a9a8c48a6d76e774c5",
+            "readout": "4:1"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "c103b1a895f1ca35361c68959b7f1bb0eac1bad963dbad7092af605341afbbf7",
+            "readout": "INF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:2",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 166.59375,
+            "right": 807.140625,
+            "bottom": 224.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "63f5a27ff8a375b377d65d04683ece137aa3ade53336a6982ac3099c4d3cddfe",
+            "readout": "10ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "aa94266996c73c113a43650a264c01e729413d48d7bbb6fc1b5629646947c90c",
+            "readout": "100ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 166.59375,
+            "right": 991,
+            "bottom": 224.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.4566929133858268",
+            "canvasSHA256": "ab894c783f0ab3613d6d4f2f929d7c28db778bfb6058279e7d6fa1f63e60d000",
+            "readout": "99ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1707fbcdbf1b1b0c9f5c19666efc99b5a9e11b776b17166a17a7a5b4d0d2b7ef",
+            "readout": "1500ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:4",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 232.59375,
+            "right": 807.140625,
+            "bottom": 290.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "ab273ba771f7ec23d2f0d3eb52e88e98ca0d7e01dfe9392be6c573f85116d102",
+            "readout": "16.1dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "c4a93e9852d1ad7f7b530c2290c1f581ef66ec7246f9b6132507470a48ba697d",
+            "readout": "24.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:5",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 232.59375,
+            "right": 991,
+            "bottom": 290.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "a90fdbc4f3caf2209280a2acbd0be8fa13f5cb3c903f0c3b2e547e03f3f1fa20",
+            "readout": "100%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:7",
+          "role": "MASTER MORE CHOICE 3",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 298.59375,
+            "right": 807.140625,
+            "bottom": 356.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "1edaa7cc04a0d984f668a719f38490c6e314a62d622429966c67c22e8c69464d",
+            "readout": "909"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "fbbdfb574b5287e75388a6a5bf65c47ed41cb78f17357c50014d58cbe253285b",
+            "readout": "BOTH"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:10",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 298.59375,
+            "right": 991,
+            "bottom": 356.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.15748031496062992",
+            "canvasSHA256": "f3ccc75cf7080ebe564a723de04ab044791eb651781f52ddf92ba0aca5de7052",
+            "readout": "20"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "4b1d3ab789b9f0f88f833a517516f5eea849e8957cf4b8eed9153c24cd6c7924",
+            "readout": "127"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:11",
+          "role": "MASTER MORE CHOICE 2",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 364.59375,
+            "right": 807.140625,
+            "bottom": 422.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "9d0052dac48767f504fa3c2592bf298277d2578edc37e869f19f24fe1d306837",
+            "readout": "ON"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "818792e340531e77ea1f28f5291b1dfef9cfcc6d3253ce136ee965896e027737",
+            "readout": "OFF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:1",
+          "role": "MASTER MORE CHOICE 8",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 364.59375,
+            "right": 991,
+            "bottom": 422.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "bfaa648c3d8809bb27f038a490c0d33f09205f0048fb2f901256220b242d4482",
+            "readout": "Off"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1bf8b93c47b295f2369b08b799dae275a945251b0c18b2b89f143b347855389f",
+            "readout": "Crush"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 631.28125,
+            "top": 430.59375,
+            "right": 807.140625,
+            "bottom": 488.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "a90fdbc4f3caf2209280a2acbd0be8fa13f5cb3c903f0c3b2e547e03f3f1fa20",
+            "readout": "100%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 815.140625,
+            "top": 430.59375,
+            "right": 991,
+            "bottom": 488.59375,
+            "width": 175.859375,
+            "height": 58
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.3464566929133858",
+            "canvasSHA256": "d0ac64eafcaee2e4baa8935a5a45d70a5527e7f5fa74e924f26f55ea5f26d5b9",
+            "readout": "-9.2dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "a90fdbc4f3caf2209280a2acbd0be8fa13f5cb3c903f0c3b2e547e03f3f1fa20",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        }
+      ],
+      "midiCalls": 0
+    },
+    "844x390": {
+      "sourceBanks": {
+        "chicago-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "b5920be8e927a8dd7b3a7a3f9e4e56005dd7b813a7d3c99eaee2dacdb61b6f97",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "db22139f3dab2ac5721245f478cb5fabf7c13cbda493cbedba4fba94c4049fe5",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "7251e0676c8ed47b7739af3a785284e2bca05c11d7e9582826bff98c33bd3812",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "aaa631502f2ffb4f4538a0be4bcaf0a5b28f0d0ac527d8ff8be02a96530dee3e",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "db22139f3dab2ac5721245f478cb5fabf7c13cbda493cbedba4fba94c4049fe5",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "f7290618f831aeb3dc47c9ca6f2386f17cba226f45d0683486d12f3145992331",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "364a2bf0dc19e5cd6f9815c0f5ea5bcf7469caacb10dc8013dbab315253d6223",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "d0f83e65f2786b6a974d37f7c4a13501077c19ac8b49215a37a55edcf5346674",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "5d23b0d91e97733a71ce62bf78e355c29e79065c7d1d39095103a3a34051a629",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "98853420ca0a7b74ce3b779976ff5ceda526cd1274d828510feceeae97aded38",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "d1fc91442c5d91792ac4835e2d185d9b5770658cd2d8f5ccf08c8201cca5a8d5",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "286a4682c5f214c40529ac7096bdf35bde5f6798e11f83e197377c81c60a3651",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "chicago-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "7eac93fb0df213ba7e3f083bed58e97c04e1732e166964995dfebc4c4cc20c97",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "7eac93fb0df213ba7e3f083bed58e97c04e1732e166964995dfebc4c4cc20c97",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "94f49874a55ba37e1ae41f1a465fc94bfccf3cbc777105fb1ba9ecc2286135f9",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        },
+        "miami-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "b5920be8e927a8dd7b3a7a3f9e4e56005dd7b813a7d3c99eaee2dacdb61b6f97",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "db22139f3dab2ac5721245f478cb5fabf7c13cbda493cbedba4fba94c4049fe5",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "7251e0676c8ed47b7739af3a785284e2bca05c11d7e9582826bff98c33bd3812",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "aaa631502f2ffb4f4538a0be4bcaf0a5b28f0d0ac527d8ff8be02a96530dee3e",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "db22139f3dab2ac5721245f478cb5fabf7c13cbda493cbedba4fba94c4049fe5",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "f7290618f831aeb3dc47c9ca6f2386f17cba226f45d0683486d12f3145992331",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "364a2bf0dc19e5cd6f9815c0f5ea5bcf7469caacb10dc8013dbab315253d6223",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "d0f83e65f2786b6a974d37f7c4a13501077c19ac8b49215a37a55edcf5346674",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "5d23b0d91e97733a71ce62bf78e355c29e79065c7d1d39095103a3a34051a629",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "98853420ca0a7b74ce3b779976ff5ceda526cd1274d828510feceeae97aded38",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "d1fc91442c5d91792ac4835e2d185d9b5770658cd2d8f5ccf08c8201cca5a8d5",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "286a4682c5f214c40529ac7096bdf35bde5f6798e11f83e197377c81c60a3651",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "miami-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "7eac93fb0df213ba7e3f083bed58e97c04e1732e166964995dfebc4c4cc20c97",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "7eac93fb0df213ba7e3f083bed58e97c04e1732e166964995dfebc4c4cc20c97",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "d11449eb6f79ade445bb76b131c74b5a8bbf8c2dc6c9636e6f95b6926d69f838",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "94f49874a55ba37e1ae41f1a465fc94bfccf3cbc777105fb1ba9ecc2286135f9",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        }
+      },
+      "breakSlices": {
+        "source-sound/BREAK/-1|11:0:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "5c8fcc912dfa878c56ff827c94f80ed77cd5b5e3d0b15f601083d3fca7cb8c38",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "3605aa5c220c3a675f49d400b10f82436a9b3e65a9f17bd69165031b73e32d67",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "0e35e98611bc0dc0bffe8153271838e6a2bb1afb126c3e1d8cb29f9aaf730e3e",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "08b440ee6622fd834f47400cac398fa8d14168650f25a105dc99818881ece85a",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        },
+        "source-sound/BREAK/-1|11:1:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "5c8fcc912dfa878c56ff827c94f80ed77cd5b5e3d0b15f601083d3fca7cb8c38",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "3605aa5c220c3a675f49d400b10f82436a9b3e65a9f17bd69165031b73e32d67",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "0e35e98611bc0dc0bffe8153271838e6a2bb1afb126c3e1d8cb29f9aaf730e3e",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "08b440ee6622fd834f47400cac398fa8d14168650f25a105dc99818881ece85a",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        }
+      },
+      "masterMore": [
+        {
+          "identity": "6:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 234.59375,
+            "right": 667.671875,
+            "bottom": 310.59375,
+            "width": 143.3125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.5039370078740157",
+            "canvasSHA256": "33a086562dd97972017da39ec9eec8d46f200c12777e3dd9f3bdb52a44aa751d",
+            "readout": "-24dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "61cc7b0e7ad0fef79bb296d0bce977125392f5fe312326937460cb98b6f04341",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:1",
+          "role": "MASTER MORE CHOICE 10",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 200.59375,
+            "right": 819,
+            "bottom": 276.59375,
+            "width": 143.328125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "0.4444444444444444",
+            "canvasSHA256": "b484421432822959ffb26983e7d50eed3d196c764b929f74e222e286daa15ca3",
+            "readout": "4:1"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "cda86fd70b8f5aee360d5234c8d0f5c88345e54131d1c47009dbb9ad4e41ce3e",
+            "readout": "INF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:2",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 200.59375,
+            "right": 667.671875,
+            "bottom": 276.59375,
+            "width": 143.3125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "dce30309d343f282efbee1460925d6386dc98efce29f63b9fb5afd2211e7329a",
+            "readout": "10ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "611f921c9918b1a4902f1959196f0c67e48a20c4807c2bdce999e4914987f693",
+            "readout": "100ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 200.59375,
+            "right": 819,
+            "bottom": 276.59375,
+            "width": 143.328125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.4566929133858268",
+            "canvasSHA256": "8530e3cf7b6dd13e7493c07830ffbdba8b727a246f957b5221de359d0b38ada5",
+            "readout": "99ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "e7eb7004bcafab41e4d0666664625dd98bff824cc39588c4a8398fdf8a0bbf1f",
+            "readout": "1500ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:4",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 200.59375,
+            "right": 667.671875,
+            "bottom": 276.59375,
+            "width": 143.3125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "da05dc2efb80e2f649432ab2d1563b5caaddc9b17e200e27ff8fde840ee98432",
+            "readout": "16.1dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "02722f3d48e20c48063ab83da785f49d93b390e55f8957d050e93c99ce11f894",
+            "readout": "24.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:5",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 200.59375,
+            "right": 819,
+            "bottom": 276.59375,
+            "width": 143.328125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "e45ea5a7aa65ac1a18fc51396380bf1c47e007256c6e296f535b96375d45245e",
+            "readout": "100%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "d15b176758f9e46c60a631765c5b0376b27abcaeb48f8d342a3812eeea7f06ea",
+            "readout": "0%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:7",
+          "role": "MASTER MORE CHOICE 3",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 88,
+            "right": 667.671875,
+            "bottom": 163.59375,
+            "width": 143.3125,
+            "height": 75.59375
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "39bede2d392ef24e077a27d56b3434926292ade6a11b319da9b1b8dce1aa7561",
+            "readout": "909"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "7bb799e9bc2e85e317c38a622500d0623651f9b328adc613017788aeb351ed73",
+            "readout": "BOTH"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:10",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 88,
+            "right": 819,
+            "bottom": 163.59375,
+            "width": 143.328125,
+            "height": 75.59375
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.15748031496062992",
+            "canvasSHA256": "6c2c90e83365628c6ee343eb8dc42a9118cfa73f2a5fc29a8ccf6cd9a095a78f",
+            "readout": "20"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "e4a8b662602a27c056dd98b12763cc168be6e2978d3482330515b2ea1086a7eb",
+            "readout": "127"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:11",
+          "role": "MASTER MORE CHOICE 2",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 118.59375,
+            "right": 667.671875,
+            "bottom": 194.59375,
+            "width": 143.3125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "08b9d833c17abeb06c1ef8ec086839c97fb3de2d736ea61ff4923d18fed3c0a9",
+            "readout": "ON"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "75e8ecf8b055159014ac47cceaa463f1d2aefd731efed8e9e1899c08ade7ee4d",
+            "readout": "OFF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:1",
+          "role": "MASTER MORE CHOICE 8",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 118.59375,
+            "right": 819,
+            "bottom": 194.59375,
+            "width": 143.328125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "cbfd13be30c10bc18927a6df7c5a714f729e1e80ec0a678cf686a355e697bc24",
+            "readout": "Off"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "06a77ed8514eb975975799799551daa5d89b5079d251337c52784057e77fa122",
+            "readout": "Crush"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 524.359375,
+            "top": 202.59375,
+            "right": 667.671875,
+            "bottom": 278.59375,
+            "width": 143.3125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "d15b176758f9e46c60a631765c5b0376b27abcaeb48f8d342a3812eeea7f06ea",
+            "readout": "0%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "e45ea5a7aa65ac1a18fc51396380bf1c47e007256c6e296f535b96375d45245e",
+            "readout": "100%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 675.671875,
+            "top": 202.59375,
+            "right": 819,
+            "bottom": 278.59375,
+            "width": 143.328125,
+            "height": 76
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.3464566929133858",
+            "canvasSHA256": "f0ea4a544a3cf5a69fda0b640a42d952940120375bbfbe1fb9c30b95d6bb7cf2",
+            "readout": "-9.2dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "e45ea5a7aa65ac1a18fc51396380bf1c47e007256c6e296f535b96375d45245e",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        }
+      ],
+      "midiCalls": 0
+    },
+    "390x844": {
+      "sourceBanks": {
+        "chicago-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5062802c671178c4a4fb9d93608e62d9d23bb23f2fcc8f711008a58797e7993c",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "92fce760bfa8dc54cefb95f31d033011e2693a08e64c47999e4cf71d26cdbf5e",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "83aa35760b01714f8a50574a0d8dee6e3c3635cb74e1f1c9818723c8bdefe73d",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "35e99c28727ebb11d0c4b31334b6a22ae932b2af9eee35b488ae656f39501808",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "92fce760bfa8dc54cefb95f31d033011e2693a08e64c47999e4cf71d26cdbf5e",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "7b66fe0941180b14d5af6e3a01fe84c719e33522b679dfb2e1767286f064bbc3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "8e099688c3606af8eed52c8de4ac19ebd72ddc6a216c4b195357991033fe90a5",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "8d5c0155aba0a5e78cfd78cb1e53d45251eca53966cf8bdb9d100db7e094fe96",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "5089bc9e28a8d6542d34a1601cef0066c8492687529dc95e02e0c1dfac0d8e76",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "c18baa1b8b83d74265db22dfdd8dbeb15c83766d953c71adb85217af5207d8ee",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "ae1af5fbfd4e89e3f0b1abe07676e6a8bbd35ce262fa077b5a861f277c75de02",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "ca4097f531755ede31b7c87c753a9dabb0021434c8e653db1befdcc9d4363212",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "chicago-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "365763e44c563e5082a2e5bfce0ce03bcd0ac9d7d091418a2958b334f4f2d924",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "365763e44c563e5082a2e5bfce0ce03bcd0ac9d7d091418a2958b334f4f2d924",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "79f04e2a7d67a80e4e0ca403d686190151c90e0499a4f38474b73878ba1ea989",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        },
+        "miami-chicago": {
+          "coupled": [
+            {
+              "changed": 2,
+              "raw": [
+                32,
+                101,
+                32
+              ],
+              "before": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "32",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "5062802c671178c4a4fb9d93608e62d9d23bb23f2fcc8f711008a58797e7993c",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "92fce760bfa8dc54cefb95f31d033011e2693a08e64c47999e4cf71d26cdbf5e",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "3": {
+                  "role": "SOURCE CHICAGO 3",
+                  "pots": "101",
+                  "normalized": "0.7480314960629921",
+                  "canvasSHA256": "83aa35760b01714f8a50574a0d8dee6e3c3635cb74e1f1c9818723c8bdefe73d",
+                  "readout": "75 %"
+                },
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "101:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "35e99c28727ebb11d0c4b31334b6a22ae932b2af9eee35b488ae656f39501808",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 3,
+              "raw": [
+                95,
+                7,
+                95
+              ],
+              "before": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:95",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "92fce760bfa8dc54cefb95f31d033011e2693a08e64c47999e4cf71d26cdbf5e",
+                  "readout": "+56 %"
+                }
+              },
+              "after": {
+                "4": {
+                  "role": "SOURCE CHICAGO 4",
+                  "pots": "32:7",
+                  "normalized": "0.7795275590551181",
+                  "canvasSHA256": "7b66fe0941180b14d5af6e3a01fe84c719e33522b679dfb2e1767286f064bbc3",
+                  "readout": "+56 %"
+                }
+              }
+            },
+            {
+              "changed": 13,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "8e099688c3606af8eed52c8de4ac19ebd72ddc6a216c4b195357991033fe90a5",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "127",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "8d5c0155aba0a5e78cfd78cb1e53d45251eca53966cf8bdb9d100db7e094fe96",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "127",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "5089bc9e28a8d6542d34a1601cef0066c8492687529dc95e02e0c1dfac0d8e76",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "14": {
+                  "role": "SOURCE CHICAGO 14",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "c18baa1b8b83d74265db22dfdd8dbeb15c83766d953c71adb85217af5207d8ee",
+                  "readout": "UP"
+                },
+                "15": {
+                  "role": "SOURCE CHICAGO 15",
+                  "pots": "0",
+                  "normalized": "0.5039370078740157",
+                  "canvasSHA256": "ae1af5fbfd4e89e3f0b1abe07676e6a8bbd35ce262fa077b5a861f277c75de02",
+                  "readout": "2 OCT"
+                },
+                "16": {
+                  "role": "SOURCE CHICAGO 16",
+                  "pots": "0",
+                  "normalized": "0.8346456692913385",
+                  "canvasSHA256": "ca4097f531755ede31b7c87c753a9dabb0021434c8e653db1befdcc9d4363212",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {}
+        },
+        "miami-miami": {
+          "coupled": [
+            {
+              "changed": 11,
+              "raw": [
+                127,
+                0,
+                127
+              ],
+              "before": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "127",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "12": {
+                  "role": "SOURCE MIAMI 12",
+                  "pots": "0",
+                  "normalized": "0.6535433070866141",
+                  "canvasSHA256": "365763e44c563e5082a2e5bfce0ce03bcd0ac9d7d091418a2958b334f4f2d924",
+                  "readout": "65 %"
+                },
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "0:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "365763e44c563e5082a2e5bfce0ce03bcd0ac9d7d091418a2958b334f4f2d924",
+                  "readout": "1/16"
+                }
+              }
+            },
+            {
+              "changed": 12,
+              "raw": [
+                83,
+                120,
+                83
+              ],
+              "before": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:83",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "ea0d4fae25aea8ccdf7ad6a291a6cac40601a9410a16d22a172bcc5f93cfb924",
+                  "readout": "1/16"
+                }
+              },
+              "after": {
+                "13": {
+                  "role": "SOURCE MIAMI 13",
+                  "pots": "127:120",
+                  "normalized": "0.4251968503937008",
+                  "canvasSHA256": "79f04e2a7d67a80e4e0ca403d686190151c90e0499a4f38474b73878ba1ea989",
+                  "readout": "1/16"
+                }
+              }
+            }
+          ],
+          "formatReadouts": {
+            "3": [
+              [
+                0,
+                "-12 st"
+              ],
+              [
+                64,
+                "0 st"
+              ],
+              [
+                127,
+                "+12 st"
+              ]
+            ],
+            "7": [
+              [
+                0,
+                "-50.0 %"
+              ],
+              [
+                64,
+                "0.0 %"
+              ],
+              [
+                127,
+                "+50.0 %"
+              ]
+            ],
+            "13": [
+              [
+                0,
+                "1/2"
+              ],
+              [
+                127,
+                "1/24"
+              ]
+            ]
+          }
+        }
+      },
+      "breakSlices": {
+        "source-sound/BREAK/-1|11:0:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "c8eaf19e25c79549ac7b89af20e9fab140e2c739171c97f5f6d710cf0d873752",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "e9576e53683c8dca2da54a14da0f3eed7eda3675ed2765bf340b4ca29bdb76b8",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "a2d5cd8520203b87afac55bb431f495ed1bde9519c1272c711f3ab2373bdca1d",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "944588c8248c3a71f9cc2a190a95f48de7a79aff8694524dab987756d6ef8809",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        },
+        "source-sound/BREAK/-1|11:1:0:0:-1": {
+          "default": {
+            "role": "BREAK SLICES",
+            "pots": null,
+            "normalized": "0.3333333333333333",
+            "canvasSHA256": "c8eaf19e25c79549ac7b89af20e9fab140e2c739171c97f5f6d710cf0d873752",
+            "readout": "8"
+          },
+          "edited": {
+            "0": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0",
+              "canvasSHA256": "e9576e53683c8dca2da54a14da0f3eed7eda3675ed2765bf340b4ca29bdb76b8",
+              "readout": "4"
+            },
+            "2": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "0.6666666666666666",
+              "canvasSHA256": "a2d5cd8520203b87afac55bb431f495ed1bde9519c1272c711f3ab2373bdca1d",
+              "readout": "16"
+            },
+            "3": {
+              "role": "BREAK SLICES",
+              "pots": null,
+              "normalized": "1",
+              "canvasSHA256": "944588c8248c3a71f9cc2a190a95f48de7a79aff8694524dab987756d6ef8809",
+              "readout": "32"
+            }
+          },
+          "reopenedRaw": 3
+        }
+      },
+      "masterMore": [
+        {
+          "identity": "6:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 25,
+            "top": 509.96875,
+            "right": 193,
+            "bottom": 601.15625,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.5039370078740157",
+            "canvasSHA256": "0107874a5e9964b61eab26696fc53ddbe5fc69a052a612dd67673bd55e54d925",
+            "readout": "-24dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:1",
+          "role": "MASTER MORE CHOICE 10",
+          "unitBounds": {
+            "left": 197,
+            "top": 187,
+            "right": 365,
+            "bottom": 278.15625,
+            "width": 168,
+            "height": 91.15625
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "0.4444444444444444",
+            "canvasSHA256": "1cbc88ce13229b93209031622e335f047d21bf153d24a3a9a8c48a6d76e774c5",
+            "readout": "4:1"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 10",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "c103b1a895f1ca35361c68959b7f1bb0eac1bad963dbad7092af605341afbbf7",
+            "readout": "INF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:2",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 25,
+            "top": 225.15625,
+            "right": 193,
+            "bottom": 316.34375,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "64a9dd75c93d4d8b391e201b37a7a2e31c7cd634fd28c26909f9e393f7bfdc63",
+            "readout": "10ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 197,
+            "top": 225.15625,
+            "right": 365,
+            "bottom": 316.34375,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.4566929133858268",
+            "canvasSHA256": "8eedaddf51c7339719b32deed47d463510a16c864ca8da4d2508d33f9ae3f1ce",
+            "readout": "99ms"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "1500ms"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:4",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 25,
+            "top": 320.34375,
+            "right": 193,
+            "bottom": 411.53125,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.6692913385826772",
+            "canvasSHA256": "64a9dd75c93d4d8b391e201b37a7a2e31c7cd634fd28c26909f9e393f7bfdc63",
+            "readout": "16.1dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "24.0dB"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:5",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 197,
+            "top": 320.34375,
+            "right": 365,
+            "bottom": 411.53125,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:7",
+          "role": "MASTER MORE CHOICE 3",
+          "unitBounds": {
+            "left": 25,
+            "top": 415.53125,
+            "right": 193,
+            "bottom": 506.71875,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "15091cdb80f3abc7285813cafd6762e139e60e814e4d8716676e4336e10e1db6",
+            "readout": "909"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 3",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "20f5dd32b4783d3c187197b0d327c8eb14f193c6bfab642b873b9b6891a77548",
+            "readout": "BOTH"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:10",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 197,
+            "top": 415.53125,
+            "right": 365,
+            "bottom": 506.71875,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.15748031496062992",
+            "canvasSHA256": "00eb012826852fa1ab89a588a6af556d4d73314bddf049710fd0770262b2a358",
+            "readout": "20"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "127"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "6:11",
+          "role": "MASTER MORE CHOICE 2",
+          "unitBounds": {
+            "left": 25,
+            "top": 510.71875,
+            "right": 193,
+            "bottom": 601.90625,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "3a651573ea9e0ba468e127fbf8e279e012f27e8f49ac293ef464cf5282224e7a",
+            "readout": "ON"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 2",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "c8107485bbcea2d31bcf745f2e46777dfbbe078287d2c3404df47970ae3bc59f",
+            "readout": "OFF"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:1",
+          "role": "MASTER MORE CHOICE 8",
+          "unitBounds": {
+            "left": 197,
+            "top": 510.71875,
+            "right": 365,
+            "bottom": 601.90625,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "9dbb54d785d83d2fcee57da6eea6865a469806d00a8a415f4d3b7c71fdeeff14",
+            "readout": "Off"
+          },
+          "edited": {
+            "role": "MASTER MORE CHOICE 8",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "7077be8ae95101690091c8ed1aae6c5bb1a3cc5b04599566012d3cbf9b1abb52",
+            "readout": "Crush"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:3",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 25,
+            "top": 605.90625,
+            "right": 193,
+            "bottom": 697.09375,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0",
+            "canvasSHA256": "f6a43ccf99e187a158c98d2387e7b9374ffe822bb9984354608861ccfb6f44ae",
+            "readout": "0%"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "100%"
+          },
+          "freshUndo": true
+        },
+        {
+          "identity": "4:0",
+          "role": "MASTER MORE AMOUNT",
+          "unitBounds": {
+            "left": 197,
+            "top": 605.90625,
+            "right": 365,
+            "bottom": 697.09375,
+            "width": 168,
+            "height": 91.1875
+          },
+          "default": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "0.3464566929133858",
+            "canvasSHA256": "490dd04a244a9062de254886f62178c5a0ca1ba65f5b3e9e84f7a11b291cb1d9",
+            "readout": "-9.2dB"
+          },
+          "edited": {
+            "role": "MASTER MORE AMOUNT",
+            "pots": null,
+            "normalized": "1",
+            "canvasSHA256": "1727862e896ee0197134d294e64f0e1391cb5bd16c1a79b84e0b8f9f4a317162",
+            "readout": "0.0dB"
+          },
+          "freshUndo": true
+        }
+      ],
+      "midiCalls": 0
+    }
+  },
+  "errors": [],
+  "baselineState": "NOT_RECOVERED (unapproved historical 32 proposal reference files)",
+  "builtRemoteSHA256": {
+    "FUNKYBEATS-MIT-NOTICE.md": "fa7db763a62dcc5ead1535692673d5a2b35270afe2c454e89d0ddb49fba67b80",
+    "SOURCE-PINS.json": "a0084bd01f70e6adb19fc4e78a3e2b9e860524ff19014822c0cd29b264fa536d",
+    "WORKSPACE-SOURCE-PINS.json": "23d640e39e20d5a32416b602a90fd7f09260c0e311aadeae8d6ced20c1863de4",
+    "aa-ease.mjs": "3206359dd72f6e551676f7cf8a81178b34e96b04ea2e64700c6abcb54a49e11d",
+    "app.mjs": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+    "assets/Barlow-OFL.txt": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+    "assets/BarlowSemiCondensed-Bold.ttf": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb",
+    "assets/BarlowSemiCondensed-Medium.ttf": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+    "break-chance.mjs": "9f0045cc91f5b3fb8161fd7242e4bf35e027a0a10e9198401671360c8b662dee",
+    "break-generator.mjs": "6995ece2dc203c9c7f77e2b1be02a8187f1a7c167493f4afb796975dfd692972",
+    "break-sequence.mjs": "93934ec00c03c1581d4c98e6ca40a9f403cbce604599d79a18dbfbd1b140080a",
+    "break-slice-glyph.mjs": "6b03df23dca5bba65fd615ff5597f09af6dac258d1ae72d12eb89dfc4a735686",
+    "catalog.json": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+    "catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "clap-draft.mjs": "347e0ee5a087f8dcd5f136c70c888da47187bb45f53cb31fec11db02e3a99acb",
+    "components.json": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+    "connection.mjs": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+    "device/app.mjs": "e2b87b25b03a1340958154b593692f254f94201b9bfb1e7096199089d351d8ae",
+    "device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "device/connection.mjs": "7aea9eb2db084653cf261fc75f3b437ec7c324299fb29cfd722cd4d1cc815977",
+    "device/index.html": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+    "device/page.mjs": "8ff67bf4d71dc2153aa91e25e66f7bf8e44da32497f8fdd599cb8c3d885b083b",
+    "device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+    "device/style.css": "70886214b7febfb46c74968500ad12d92d01184a6141ebaf887fb594345abfd1",
+    "device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+    "device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+    "device/view.mjs": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba",
+    "draft-file.mjs": "f03017d83214095240c64e59f54ca80a436afa5aebadb97bc40c490d89597d08",
+    "draft-identity.mjs": "46b03d40fd30b8e08de33e234d24c67fcbda7af9c8ed662f9eacb3974b206753",
+    "draft-ui.mjs": "6b1c5003dd6e88e18a53d2dcb7670e7f2ade6c0573e2607f953d805b942f91c1",
+    "drum-accent.mjs": "6d814dee3b196a307ced2cbb1b18115a82834ecde22bb61bfabec8178f19d2ea",
+    "drum-clap-stages.mjs": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61",
+    "drum-decay-times.mjs": "ed85dee39a40a1a3c32fa6b6811191d3066c9cf1d6bd5243fe164e6fa8d512d7",
+    "drum-format.mjs": "9c9a85676a3692f878e53b67c894d0505f2197137f42af7570c37f0bef836753",
+    "drum-strip.mjs": "a07f9cfefdb0de6c653c0e1f3e1e72189f2ac6eeb56d514da1d6ba869ba837ab",
+    "envelope-observations.mjs": "925d3648652b8cdb0aee639479f1f62c7b48323b654af56c2b5a79f16ff264bf",
+    "envelope-view.mjs": "bb0ea4fdb883caa0f22938ba78edd4f740a78b192a59e09f7411eee081ddcffd",
+    "firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "frame.mjs": "78b6d3d55944cd33c593485748a74c441aef46ba5c66c4024e83d7b895cc9f09",
+    "funkybeats-view.mjs": "059e60a0952ba412a5ec00649fbcdcf5decec41ac410423148b58051c9802e41",
+    "fx-format.json": "ed4cfc2f43ebdf2a191543cfa70f3660b824af10388ae13a2f4508d4784e09f1",
+    "glyph-live.mjs": "1d185ab47857dba725e709c8bacc3733dd63c7695614c4e299ab88fc9253edef",
+    "glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+    "glyph-render.mjs": "263631d0a7fe900f5ae43a1777de818455bde3ed4c7b284bd940129122449ccd",
+    "glyphs.mjs": "4dc717f77f1d6f3a2ae58411df4648753354bf33f7921be78c6da22d7246ae1e",
+    "grid.mjs": "042e178d7a996761501d6af11d72040d0e64f1cb5f2e4884fc0c3530068deb48",
+    "identity/app.mjs": "9eba18e1d701402c1eac4a329fc7cdb5411b5093c0c1b53b8babd8481b8dcfee",
+    "identity/index.html": "2e55cae2272c4a6c8ee3a793f5d370aa365450cb230c04451f5ade1365cdfdeb",
+    "identity/remote.mjs": "e070d1c419ad9cb1a52c2fa1b2f8a8fcf51a72bfd93d0d5e0fb7e2b90422d5e1",
+    "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "lane.mjs": "144af779aed9642acd7fdabc5a091f29f55413ffc9e3d682cb61e5d0f2855288",
+    "local-instrument.mjs": "6d75866785544da285c088d8cf9c274e8c24950e1e914db81342a9ec525d8b70",
+    "local-step-rows.mjs": "1396e5d26291c92eecfdb02edbf48b9d9a3d20cc2af799fd0ccd158774c4ae0f",
+    "master-draft.mjs": "ac8d2b5d28da72e2ad254c65e34a791783342062e41593fdb8b26d7e7e9de779",
+    "master-output.mjs": "627640f3c1d5a4230e8eefa9880aedef40fe866641be92b91f8e4a7d0f6877ff",
+    "master-source.mjs": "c438d05e6b298cc7d1f88c785fbe87ef6f3d7039f41c3f3db054ec333161f783",
+    "mix-aliases.mjs": "ce42742a4c3908e480d8511f52897ae7facbaf238662971671ca01523ef1a0c5",
+    "mix-workspace.mjs": "1ba2e99afbba3b3ba98e6eeef49b5431e89f987e8923468e4c2bbeb3f2c5cdf1",
+    "mixer-format.json": "8450ace83796652fdf59058c67b3342082c8a38f37e4e148734e04c97f59ec69",
+    "mixer-format.mjs": "051813e998c32ecc790d3ce16e98b38bac8a5d6a1134757565e9492a6db4d5ec",
+    "model.mjs": "f6773866a57f0bc23b96b6b94f42b0ebf782aa8bd7f5af186549ff5e65f8577c",
+    "motion.mjs": "f65eedc0c106b2259b9a64c2c29d22d52fb963742138d207f46ba086551f3eab",
+    "page.mjs": "19dc0169e109ce5e6b7619bca40f33001d4569ae1c0be7bfd320d9c72a1c4ac6",
+    "pan.mjs": "c07a75811fd0df011d5226963eda44b01acd28398018f85dcfb9c4ca78a536a6",
+    "parameter.mjs": "0cad6cffbc0f5ff58765eed37082303380045a9517dd9de02deb4c7d6d8b63d6",
+    "pattern-locks.mjs": "1814ccf9b253947c773c05225ecceaf7a010840c3b3cc3ab7afe2411f82e9aaf",
+    "project-preset.mjs": "5b990f5c7cc783aa51517bcaab51c17fc0c8967c4ff3862a44a506d5b0376957",
+    "remote.mjs": "adb9403995a8b728cc057ecddd7af29c66fdfd53f461e99a40d58727e0e9276f",
+    "roll.mjs": "7167c3c9c3c892244026dc2660176336b3b43d1dc4af2279b71c5a70c046bc3d",
+    "runtime-mix-map.mjs": "b3a7f44bb361f970340a4349ae8c3838262cf8306690c0e78be35c6e2b4a3ec2",
+    "runtime-mix-state.mjs": "684ff1192e27d2afacbdec08187d1884b1c1a1aaf9cd142f05c797c2446f3469",
+    "runtime-playing-state.mjs": "c41a6629933f007c176ada0811a4eb77d754318ddf75c1f3a554ddaa9046c4ab",
+    "runtime-sound-map.mjs": "44b1e6ec4dea9730bb7db3484bcbd1784d9d0f731cbfecbd2c294219d559df6d",
+    "runtime-sound-state.mjs": "54055bc5278e6fbb65756eb9fe6af356b10d75f07a12e4d5293911c2094e9ebd",
+    "sequence.mjs": "318ee8c81788af37ed1f836a18e302728dde36fb9ee2edfe2433c2ee6e1938f9",
+    "session.mjs": "7ccfbb84d1700a81dfd2c6a1ebbc433aefea6780177f33abefd5817a646ce521",
+    "song-view.mjs": "e409b54eaa1dc94d3daca05b9ff07ef29722d2d7aa69ce5524d02a5a60215200",
+    "sound.mjs": "b11ea2ba646a0e382ef64e77d6047f70ce081b145c823a973705dc9ef217c8d4",
+    "source-sound-glyphs.mjs": "6cb22e08490b4a1cfaae03a14408f1aced143630fba3778be59ee947aa557770",
+    "source-sounds.json": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+    "startup.mjs": "2adef9575b8914f420fa12dcdc1a2225aee88162602ec89615e89473c4cc13c6",
+    "step-lane.mjs": "68c67fac37e5110374e0a5f4b45009871e8b02ff46f6c2074be2788b99e9e01a",
+    "step-value-gesture.mjs": "909d6ffe9ee9ed61e1ecace101aac40ce4947b6c6de299f914476a54b986ab0c",
+    "style.css": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043",
+    "superj6-banks.mjs": "fae58489a87f4a181c9b4fd249b9a5761660d5c640cd4821a53353fea25a3cd5",
+    "superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5",
+    "synth-one-banks/BankA.json": "1486c2b1fcb922d145541c96f436e7e15d755dba72ff9a8030052ef22d224bed",
+    "synth-one-banks/Bonus.json": "e189a9782469bd851d97a2bd157cfdd43692621287de68eb2909e8aabbd4b996",
+    "synth-one-banks/Brice Beasley.json": "a42a515cc66fc392f8831efa4865145dc9e2c8a8d9bc2554d1fd8a1aed242d45",
+    "synth-one-banks/DJ Puzzle.json": "6263b4c08143d5f62192ad48c881129ae0c2df80256abd010dee89ede10b6506",
+    "synth-one-banks/Electronisounds.json": "94447bcafd93b8e534b99347ef1a2ab7f96006364c36e85c88825e2480a026e7",
+    "synth-one-banks/Francis Preve.json": "7e45e985951bcff09de2745d7223a8523c559f7ae30c032cfeed81c6bf317187",
+    "synth-one-banks/JEC.json": "9af56a4f52d050c98da8bfc6bc355ac872772cdd419def188bb644b0c9dff0c0",
+    "synth-one-banks/LICENSE": "71ac2b8af8849096ba2d0f3510972b8384204f17517e773bfa52fc755fb0fc49",
+    "synth-one-banks/MANIFEST.json": "806d92dae2ef75b073168e5b85ee2dc6055f2c3b10ceca3a0e40933514c37622",
+    "synth-one-banks/Red Sky Lullaby.json": "db813fe373ebd0c2434c8c0af376b245c331c35080b396bce83bc4d9f2fb0aac",
+    "synth-one-banks/Sound of Izrael 2.json": "edf48f200ed2510b03d4b5e9e4c92c0306af0e38776c0916794d90e79572d861",
+    "synth-one-banks/Sound of Izrael.json": "1f100f20227401a47e17f91bac5be44efc6d5fef8d97f7ed2a64a2a7e1426462",
+    "synth-one-banks/Spidericemidas.json": "1cb034e91677be3b7bc0cddca64d821ddbfc132d79f98e4211053867f76eec35",
+    "synth-one-banks/Starter Bank.json": "f4da92584505084e3b0277cf1e1f1911050837014a5fa7371cc6879421cbe908",
+    "synth-one-file-model.mjs": "e0c736d2e2a941983ad6e64a3b6045f15b7d15666f4f30d2daf811d7483b8d47",
+    "synth-one-files.css": "2100256691982be1db8932187540e517e85a462d681b21b89ff147d387db8061",
+    "synth-one-files.mjs": "dd8a7a6fe80058a9f292b6cfb8e37925fb0a2cc8e2357f7bfa15ff91c67bdaa2",
+    "synth-one-init-data.mjs": "6ffd2c5c0dc99722ef55bb85c75e8cdfe0bcc187f12cf7608ed38748d77d3107",
+    "synth-one-init.mjs": "7e0d7d4c05d605d5c0f66cf084ed81ff160163380677630ed2ece1ff8a5f7efd",
+    "synth-one-wave.mjs": "e8c3852f18364b01c191071aa0ff3ded8bb90a6415615b859fbf0269ec635061",
+    "timeline.mjs": "adc75e204a4f2f15af7b9be524c99e34c8b06684c587d5cf4bbadc82b8c59152",
+    "trace.json": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55",
+    "vendor/client.mjs": "0a9a11b4514fab1fdbb905f1385c1c5f54986acae924fd6de5f9f5ec71a3176c",
+    "vendor/codec.mjs": "c4836c6aff371cc21ae790b51804b9634d9118c2ef3d05da9d05b54388303d40",
+    "vendor/funkybeats-core.mjs": "36b2947334e951d31604ba3ebd7efa9ada5a5ed26939f324ce9160b51a25039c",
+    "view.mjs": "e058cd9c3869d5cedb3f5e851a7ebdf4c1b7e2b2ab64df1cf87f6cbb4ba59ff9",
+    "wave-display.mjs": "6287ea63be3f5f30620316a49ba190001bf164afe3e496440d2491438575621b",
+    "workspace.mjs": "2640ec7a2f8a7c436567fb30f1d5328d4ffc1b052b9df699b5b84f1cc24bba32"
+  },
+  "chromium": "151.0.7922.34",
+  "result": "PASS"
+}

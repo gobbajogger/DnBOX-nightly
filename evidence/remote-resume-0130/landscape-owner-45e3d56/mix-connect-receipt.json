@@ -1,0 +1,2284 @@
+{
+  "viewport": [
+    844,
+    390
+  ],
+  "normalSandbox": true,
+  "browser": "151.0.7922.34",
+  "before": {
+    "navigation": [
+      {
+        "label": "Draft",
+        "box": [
+          12,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Emulator",
+        "box": [
+          80,
+          96,
+          74,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": true
+      },
+      {
+        "label": "Levels",
+        "box": [
+          12,
+          144,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Pan",
+        "box": [
+          80,
+          144,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Sends",
+        "box": [
+          148,
+          144,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "FX",
+        "box": [
+          216,
+          144,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master / More",
+        "box": [
+          284,
+          144,
+          99,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "levelRanges": [
+      {
+        "label": "909",
+        "box": [
+          57.59375,
+          279.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "808",
+        "box": [
+          164.8125,
+          279.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BASS A",
+        "box": [
+          272.015625,
+          279.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BASS B",
+        "box": [
+          379.234375,
+          279.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BREAK",
+        "box": [
+          486.453125,
+          279.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "levels": [
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+        "raw": 75,
+        "label": "909",
+        "display": "-5dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+        "raw": 112,
+        "label": "808",
+        "display": "+2dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+        "raw": 100,
+        "label": "BASS A",
+        "display": "0dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+        "raw": 100,
+        "label": "BASS B",
+        "display": "0dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+        "raw": 120,
+        "label": "BREAK",
+        "display": "+3.2dB",
+        "accent": "rgb(255, 179, 55)"
+      }
+    ],
+    "masterCards": [
+      {
+        "label": "Master Drive 32%",
+        "box": [
+          579.0625,
+          223.796875,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master COMP 75%",
+        "box": [
+          705.03125,
+          223.796875,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master PUMP 4.0dB",
+        "box": [
+          579.0625,
+          326.984375,
+          117.96875,
+          95.1875
+        ],
+        "inside": false,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master FILTER OFF",
+        "box": [
+          705.03125,
+          326.984375,
+          117.96875,
+          95.1875
+        ],
+        "inside": false,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "parts": {
+      "pan": [
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:3",
+          "raw": 64,
+          "label": "PAN",
+          "display": "C",
+          "accent": "rgb(255, 179, 55)"
+        }
+      ],
+      "sends": [
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "raw": 25,
+          "label": "REV",
+          "display": "19%",
+          "accent": "rgb(255, 179, 55)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 179, 55)"
+        }
+      ],
+      "fx": [
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "raw": 25,
+          "label": "REV",
+          "display": "19%",
+          "accent": "rgb(214, 120, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(214, 120, 255)"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "label": "Export backup",
+        "box": [
+          27,
+          212.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Inspect restore",
+        "box": [
+          27,
+          264.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Open original",
+        "box": [
+          303.65625,
+          212.5625,
+          236.671875,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Inspect contents",
+        "box": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "inside": false,
+        "hit": false,
+        "disabled": true
+      },
+      {
+        "label": "Save a copy",
+        "box": [
+          303.65625,
+          264.5625,
+          236.671875,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": true
+      },
+      {
+        "label": "Choose range",
+        "box": [
+          580.328125,
+          212.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Export availability",
+        "box": [
+          580.328125,
+          264.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      }
+    ],
+    "compact": {
+      "drumHeading": "Sound \u00b7 909",
+      "nextDrumHeading": "Sound \u00b7 909",
+      "reviewPaint": {
+        "color": "rgb(221, 231, 222)",
+        "background": "rgb(16, 26, 31)"
+      },
+      "reviewTarget": {
+        "label": "Review draft",
+        "box": [
+          684,
+          346,
+          148,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      "drumBindings": [
+        {
+          "role": "active",
+          "label": "Tune",
+          "value": "13ms",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:0"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Attack",
+          "value": "10%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:1"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Decay",
+          "value": "1.0s",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:2"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Pitch depth",
+          "value": "0%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:4"
+          ]
+        },
+        {
+          "role": "summary",
+          "label": "Pitch",
+          "value": "+0.1st",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:5"
+          ]
+        },
+        {
+          "role": "summary",
+          "label": "Velocity",
+          "value": "100%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:11:1"
+          ]
+        }
+      ],
+      "drumTargets": [
+        {
+          "label": "Decrease Tune",
+          "box": [
+            31.21875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Tune",
+          "box": [
+            91.4375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Attack",
+          "box": [
+            165.875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Attack",
+          "box": [
+            226.09375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Decay",
+          "box": [
+            300.546875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Decay",
+          "box": [
+            360.765625,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Pitch depth",
+          "box": [
+            435.203125,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Pitch depth",
+          "box": [
+            495.421875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Pitch",
+          "box": [
+            569.875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Pitch",
+          "box": [
+            630.09375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Velocity",
+          "box": [
+            704.546875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Velocity",
+          "box": [
+            764.765625,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "patternTargets": [
+        {
+          "label": "Bass A P01, not loaded",
+          "box": [
+            23,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P02, not loaded",
+          "box": [
+            90.875,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P03, not loaded",
+          "box": [
+            158.75,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P04, not loaded",
+          "box": [
+            226.625,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P05, not loaded",
+          "box": [
+            294.5,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P06, not loaded",
+          "box": [
+            362.375,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P07, not loaded",
+          "box": [
+            430.25,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P08, not loaded",
+          "box": [
+            498.125,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P09, not loaded",
+          "box": [
+            23,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P10, not loaded",
+          "box": [
+            90.875,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P11, not loaded",
+          "box": [
+            158.75,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P12, not loaded",
+          "box": [
+            226.625,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P13, not loaded",
+          "box": [
+            294.5,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P14, not loaded",
+          "box": [
+            362.375,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P15, not loaded",
+          "box": [
+            430.25,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P16, not loaded",
+          "box": [
+            498.125,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P17, not loaded",
+          "box": [
+            23,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P18, not loaded",
+          "box": [
+            90.875,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P19, not loaded",
+          "box": [
+            158.75,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P20, not loaded",
+          "box": [
+            226.625,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P21, not loaded",
+          "box": [
+            294.5,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P22, not loaded",
+          "box": [
+            362.375,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P23, not loaded",
+          "box": [
+            430.25,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P24, not loaded",
+          "box": [
+            498.125,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P25, not loaded",
+          "box": [
+            23,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P26, not loaded",
+          "box": [
+            90.875,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P27, not loaded",
+          "box": [
+            158.75,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P28, not loaded",
+          "box": [
+            226.625,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P29, not loaded",
+          "box": [
+            294.5,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P30, not loaded",
+          "box": [
+            362.375,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P31, not loaded",
+          "box": [
+            430.25,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P32, not loaded",
+          "box": [
+            498.125,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "patternFont": [
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px",
+        "13px"
+      ],
+      "patternSelection": {
+        "text": "01",
+        "background": "rgb(255, 179, 55)",
+        "color": "rgb(5, 10, 13)"
+      }
+    },
+    "connect": {
+      "initial": "Not connected",
+      "open": "No reviewed firmware catalog. Apply stays off.",
+      "dismissed": "No reviewed firmware catalog. Apply stays off.",
+      "localDraftUnchanged": true,
+      "midiCalls": 0
+    },
+    "shots": {
+      "16-levels": "48ecbf9a77f654f86d1dd04c196e2dd9c10a7cb8541210e037a99f408421f913",
+      "18-bassdrum": "5e3006db644f4c880dc516d725949a040c3ccf6962120c9348812fc62cd1532c",
+      "19-patterns": "7876517af90a70bffd5d553e099821e950ecf897ae7924e82e0ce5f089f2475c",
+      "20-projects": "f54e4d95e9f26b4af6156d9383542bb1f2d76052de12668ee40e1cf6c3b10f30"
+    },
+    "served": {
+      "app.mjs": "da189a1feb47af15628465e15ea9b7d96ce6c5abdf7af66bbac18ef3899593c9",
+      "firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+      "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+      "style.css": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
+    }
+  },
+  "after": {
+    "navigation": [
+      {
+        "label": "Draft",
+        "box": [
+          12,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Emulator",
+        "box": [
+          80,
+          96,
+          74,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": true
+      },
+      {
+        "label": "Levels",
+        "box": [
+          162,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Pan",
+        "box": [
+          230,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Sends",
+        "box": [
+          298,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "FX",
+        "box": [
+          366,
+          96,
+          64,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master / More",
+        "box": [
+          434,
+          96,
+          99,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "levelRanges": [
+      {
+        "label": "909",
+        "box": [
+          57.59375,
+          231.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "808",
+        "box": [
+          164.8125,
+          231.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BASS A",
+        "box": [
+          272.015625,
+          231.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BASS B",
+        "box": [
+          379.234375,
+          231.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "BREAK",
+        "box": [
+          486.453125,
+          231.796875,
+          30,
+          86
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "levels": [
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+        "raw": 75,
+        "label": "909",
+        "display": "-5dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+        "raw": 112,
+        "label": "808",
+        "display": "+2dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+        "raw": 100,
+        "label": "BASS A",
+        "display": "0dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+        "raw": 100,
+        "label": "BASS B",
+        "display": "0dB",
+        "accent": "rgb(255, 179, 55)"
+      },
+      {
+        "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+        "raw": 120,
+        "label": "BREAK",
+        "display": "+3.2dB",
+        "accent": "rgb(255, 179, 55)"
+      }
+    ],
+    "masterCards": [
+      {
+        "label": "Master Drive 32%",
+        "box": [
+          579.0625,
+          175.796875,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master COMP 75%",
+        "box": [
+          705.03125,
+          175.796875,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master PUMP 4.0dB",
+        "box": [
+          579.0625,
+          278.984375,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Master FILTER OFF",
+        "box": [
+          705.03125,
+          278.984375,
+          117.96875,
+          95.1875
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      }
+    ],
+    "parts": {
+      "pan": [
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:3",
+          "raw": 64,
+          "label": "PAN",
+          "display": "C",
+          "accent": "rgb(255, 179, 55)"
+        }
+      ],
+      "sends": [
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "raw": 25,
+          "label": "REV",
+          "display": "19%",
+          "accent": "rgb(214, 120, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(214, 120, 255)"
+        }
+      ],
+      "fx": [
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 149, 41)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(255, 72, 65)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(130, 240, 90)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "raw": 0,
+          "label": "REV",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(70, 205, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "raw": 25,
+          "label": "REV",
+          "display": "19%",
+          "accent": "rgb(214, 120, 255)"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "raw": 0,
+          "label": "DLY",
+          "display": "0%",
+          "accent": "rgb(214, 120, 255)"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "label": "Export backup",
+        "box": [
+          27,
+          212.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Inspect restore",
+        "box": [
+          27,
+          264.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Open original",
+        "box": [
+          303.65625,
+          212.5625,
+          236.671875,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      {
+        "label": "Inspect contents",
+        "box": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "inside": false,
+        "hit": false,
+        "disabled": true
+      },
+      {
+        "label": "Save a copy",
+        "box": [
+          303.65625,
+          264.5625,
+          236.671875,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": true
+      },
+      {
+        "label": "Choose range",
+        "box": [
+          580.328125,
+          212.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      },
+      {
+        "label": "Export availability",
+        "box": [
+          580.328125,
+          264.5625,
+          236.65625,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": null
+      }
+    ],
+    "compact": {
+      "drumHeading": "Sound \u00b7 909 / Bass drum",
+      "nextDrumHeading": "Sound \u00b7 909 / Snare",
+      "reviewPaint": {
+        "color": "rgb(5, 10, 13)",
+        "background": "rgb(255, 179, 55)"
+      },
+      "reviewTarget": {
+        "label": "Review draft",
+        "box": [
+          684,
+          346,
+          148,
+          44
+        ],
+        "inside": true,
+        "hit": true,
+        "disabled": false
+      },
+      "drumBindings": [
+        {
+          "role": "active",
+          "label": "Tune",
+          "value": "13ms",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:0"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Attack",
+          "value": "10%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:1"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Decay",
+          "value": "1.0s",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:2"
+          ]
+        },
+        {
+          "role": "active",
+          "label": "Pitch depth",
+          "value": "0%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:4"
+          ]
+        },
+        {
+          "role": "summary",
+          "label": "Pitch",
+          "value": "+0.1st",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:0:5"
+          ]
+        },
+        {
+          "role": "summary",
+          "label": "Velocity",
+          "value": "100%",
+          "ids": [
+            "current-state-and-reference/909-voice-00.svg|1:0:11:1"
+          ]
+        }
+      ],
+      "drumTargets": [
+        {
+          "label": "Decrease Tune",
+          "box": [
+            31.21875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Tune",
+          "box": [
+            91.4375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Attack",
+          "box": [
+            165.875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Attack",
+          "box": [
+            226.09375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Decay",
+          "box": [
+            300.546875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Decay",
+          "box": [
+            360.765625,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Pitch depth",
+          "box": [
+            435.203125,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Pitch depth",
+          "box": [
+            495.421875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Pitch",
+          "box": [
+            569.875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Pitch",
+          "box": [
+            630.09375,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Decrease Velocity",
+          "box": [
+            704.546875,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Increase Velocity",
+          "box": [
+            764.765625,
+            292,
+            48,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "patternTargets": [
+        {
+          "label": "Bass A P01, not loaded",
+          "box": [
+            23,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P02, not loaded",
+          "box": [
+            90.875,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P03, not loaded",
+          "box": [
+            158.75,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P04, not loaded",
+          "box": [
+            226.625,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P05, not loaded",
+          "box": [
+            294.5,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P06, not loaded",
+          "box": [
+            362.375,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P07, not loaded",
+          "box": [
+            430.25,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P08, not loaded",
+          "box": [
+            498.125,
+            139,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P09, not loaded",
+          "box": [
+            23,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P10, not loaded",
+          "box": [
+            90.875,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P11, not loaded",
+          "box": [
+            158.75,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P12, not loaded",
+          "box": [
+            226.625,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P13, not loaded",
+          "box": [
+            294.5,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P14, not loaded",
+          "box": [
+            362.375,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P15, not loaded",
+          "box": [
+            430.25,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P16, not loaded",
+          "box": [
+            498.125,
+            187,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P17, not loaded",
+          "box": [
+            23,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P18, not loaded",
+          "box": [
+            90.875,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P19, not loaded",
+          "box": [
+            158.75,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P20, not loaded",
+          "box": [
+            226.625,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P21, not loaded",
+          "box": [
+            294.5,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P22, not loaded",
+          "box": [
+            362.375,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P23, not loaded",
+          "box": [
+            430.25,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P24, not loaded",
+          "box": [
+            498.125,
+            235,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P25, not loaded",
+          "box": [
+            23,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P26, not loaded",
+          "box": [
+            90.875,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P27, not loaded",
+          "box": [
+            158.75,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P28, not loaded",
+          "box": [
+            226.625,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P29, not loaded",
+          "box": [
+            294.5,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P30, not loaded",
+          "box": [
+            362.375,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P31, not loaded",
+          "box": [
+            430.25,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P32, not loaded",
+          "box": [
+            498.125,
+            283,
+            59.875,
+            44
+          ],
+          "inside": true,
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "patternFont": [
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px"
+      ],
+      "patternSelection": {
+        "text": "01",
+        "background": "rgb(255, 179, 55)",
+        "color": "rgb(5, 10, 13)"
+      }
+    },
+    "connect": {
+      "initial": "Not connected",
+      "open": "No reviewed firmware catalog. Apply stays off.",
+      "dismissed": "Not connected",
+      "localDraftUnchanged": true,
+      "midiCalls": 0
+    },
+    "shots": {
+      "16-levels": "c2ef6afc1ae02d2d7b75a2a4b1600348c425876e658f720083d6b0d796052094",
+      "18-bassdrum": "ffb6f09581abd09fb52e786486d934efd6399472b70bc7cee3136a4136c85b18",
+      "19-patterns": "8261842e7fc3388276dad2a175484a3329d9b107dac29d172029390fe31ef06d",
+      "20-projects": "d6b304ba946981cf64d06a33c1cddafb0d0f03b9e654b26cb09b117d9889b07c"
+    },
+    "served": {
+      "app.mjs": "9f5a91eb6874376941d3fbf0042e478a2a3e038aa565e9a99174b489745bdd32",
+      "firmware-link.mjs": "37a0901726f19966ab842b41f6bd6b12da870b6264e1a926e05cb96e67e32e34",
+      "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+      "style.css": "76323995b538cde5e80d1ef0758e537c186195fde7f9c4f43056ccd71ab691b2"
+    }
+  }
+}

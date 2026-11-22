@@ -1,0 +1,65 @@
+{
+  "head": "3c5a9142b5013ffc6d5178825a0e4fc10692be4e",
+  "playwright": "1.62.0",
+  "product": "HeadlessChrome/151.0.7922.34",
+  "revision": "@782af9cb30a53f54487e5d2e44738645a8ec457c",
+  "profile": "/workspace/scratch/857bb2409f82/remote-resume-0130/.cache/browser-recovery/verified-profile",
+  "tmpdir": "/workspace/scratch/857bb2409f82/remote-resume-0130/.cache/browser-recovery/tmp",
+  "probe": "local data page rendered",
+  "browser_processes": [
+    {
+      "pid": 18,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 21,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 22,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 24,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 40,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 46,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    },
+    {
+      "pid": 60,
+      "executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "type": "browser",
+      "NoNewPrivs": "1",
+      "Seccomp": "2"
+    }
+  ],
+  "status": "PASS",
+  "chromium_sandbox": true,
+  "sandbox_disabling_flags": [],
+  "launched_executable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+  "launcher_trace": "sandbox-smoke-launch.log"
+}

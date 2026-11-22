@@ -12,7 +12,11 @@ test('pending Tune, Depth and Pitch edits repaint the original Depth path and re
                querySelector(q){assert.equal(q,'path');pathLookups++;return path;}};
   const locator='[data-source-control="1:0:0:4"] [data-glyph-semantic="P.DPTH"]';
   const root={querySelectorAll(q){
-    assert.equal(q,'[data-drum-editor] '+locator+', [data-drum-sound-strip] '+locator);return [glyph];
+    const mounted='[data-drum-editor] '+locator+', [data-drum-sound-strip] '+locator;
+    if(q===mounted)return [glyph];
+    // This regression mounts Depth only; the same dependency update now also
+    // visits the source Tune and Pitch glyphs when those paths are mounted.
+    assert.match(q,/data-source-control="1:0:0:(0|5)"/);return [];
   }};
   paintKickDepth(root,keys[0],34,()=>undefined);
   assert.equal(pathLookups,0);

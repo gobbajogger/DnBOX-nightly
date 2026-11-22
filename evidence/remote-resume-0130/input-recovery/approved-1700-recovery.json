@@ -1,0 +1,184 @@
+{
+  "recoveredFiles": [
+    {
+      "filename": "DnBOX-firmware-R22-WIP-native-screens.zip",
+      "bytes": 162606,
+      "sha256": "8c3731daaa16c2a71aeb35af79f973faf3f38669db4f0848ac363b879bf952a8"
+    },
+    {
+      "filename": "REVIEW-1700.md",
+      "bytes": 3661,
+      "sha256": "e6453f83595e002c1ba2b6eaaec674cdc6da181b117bbbd2962f83a853c65c65"
+    },
+    {
+      "filename": "defects-909-fx-drone.png",
+      "bytes": 86982,
+      "sha256": "686acec96b05c2dd06c5c6d0bcac1218275c96c949382326c43e6651c29ae1c9"
+    },
+    {
+      "filename": "DnBOX-firmware-R22-WIP-contact.png",
+      "bytes": 252725,
+      "sha256": "141cdde5a9cdab0d9fec9f3939e7e4cd3da248e6e4b20f28e8b262d4dc82c26c"
+    },
+    {
+      "filename": "per-screen-scores.csv",
+      "bytes": 2572,
+      "sha256": "5a9c5f07751584faccd3008d9e070016a046d9e247d2f998cfe218bb19be0c43"
+    }
+  ],
+  "baseCommit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+  "sourceProfileSHA256": "f9a0bee4db6742ee35174146d17f8e978e8c1d54b97fb549af8638efb6e8d2f5",
+  "overlayContentSHA256": "dc021d120f42bc7fbb64002299f6e311d29c68cbaae5dc3fb3eb27bde94ceb82",
+  "packageStatus": "WIP_NOT_ACCEPTED_NOT_INSTALLABLE",
+  "approvedGlyphFamilies": [
+    "Juno",
+    "Chicago",
+    "Miami",
+    "FX"
+  ],
+  "approvedVisibleCarriers": [
+    "06-juno-oscillator.png",
+    "07-juno-filter.png",
+    "08-juno-envelope.png",
+    "09-juno-lfo-chorus.png",
+    "10-chicago-oscillator.png",
+    "11-chicago-envelope.png",
+    "12-miami-carrier.png",
+    "13-miami-wobble.png",
+    "16-fx-delay.png"
+  ],
+  "nativeFrames": [
+    {
+      "path": "01-909-kick-main.png",
+      "bytes": 173118,
+      "sha256": "934238ef684609a20f02a91f110ebf0215166affe6dc57bb3945c3a795486338",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "02-909-kick-pitch.png",
+      "bytes": 173118,
+      "sha256": "05370e569bcf7293c854a0405e13ccba0182cfc1005445408c3ceb127c400686",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "03-909-clap-two-controls.png",
+      "bytes": 173118,
+      "sha256": "5a58be9b76a0d932736b39754dfbceca834252d60ca37fd65cb6140dc2a9c28f",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "04-808-kick.png",
+      "bytes": 173118,
+      "sha256": "35fdfc2a2a23c184e0a5a8e8286d054f749c19acbc9eaf37e6f28dbd5880ddc7",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "05-808-cymbal.png",
+      "bytes": 173118,
+      "sha256": "6e4381b4152788f0f922b0d3c1bdbbc7ee0780ac90b974a3c0246760a6f14cfb",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "06-juno-oscillator.png",
+      "bytes": 173118,
+      "sha256": "bff53ec5f1d0e4392fdf8673d31a8a6a4b47d7e980606bc5ce16b9e64314ac02",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "07-juno-filter.png",
+      "bytes": 173118,
+      "sha256": "9290f4b7f6421aae952a4bff586d66e43f74470d37853ab5e4ff54fe7277b21a",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "08-juno-envelope.png",
+      "bytes": 173118,
+      "sha256": "0eb245e849ce94bb78a170110a83abceacae93e3a3772f414af14d0975aa1f2d",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "09-juno-lfo-chorus.png",
+      "bytes": 173118,
+      "sha256": "13b171b038fdc263695e1a8e3c191fe2039566ac62a05ced9fb41fa1194444f7",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "10-chicago-oscillator.png",
+      "bytes": 173118,
+      "sha256": "c27226403e97288b5eef07b21973d6ba2215f9391b6314b679e3b7124652f869",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "11-chicago-envelope.png",
+      "bytes": 173118,
+      "sha256": "df3034f31de7e614abf119bde340f8f4ceac6e5c65ba650b1544efca1a608b3c",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "12-miami-carrier.png",
+      "bytes": 173118,
+      "sha256": "3e24ba6c005bb2b56bc7c557f3428bc7f59927b72341a1592fe5602e2d70818c",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "13-miami-wobble.png",
+      "bytes": 173118,
+      "sha256": "9a1997669a61654758170b760841aeb695f2076dffcb352a745154920e2a7506",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "14-drone.png",
+      "bytes": 173118,
+      "sha256": "b0adb0421a0ae7930c98157d579c3017e5db62cfbb858fc2065388e7434296db",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "15-home.png",
+      "bytes": 173118,
+      "sha256": "6de51e2f158a30a49884471f68f5300fe99e1b448f31fc0c36e15bce9a065da0",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "16-fx-delay.png",
+      "bytes": 173118,
+      "sha256": "a21b725a4c3755852e8648a092074450d10b84c861d003d35c719363f51348b5",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "17-drum-mixer.png",
+      "bytes": 173118,
+      "sha256": "34feb7a71119513110b0f6f8bab317c01632618f5ef3fc8b53f767af9277961b",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "18-bass-sequencer.png",
+      "bytes": 173118,
+      "sha256": "f4ad4cfcc582566d38c0bdbf8685c60f028e7661b4ecb9b5d2e76318e18ceb5b",
+      "width": 240,
+      "height": 240
+    }
+  ],
+  "sourceDependency": "Original local unpublished19-file overlay on94197fc8. Raster package has no vector source or per-SVG mapping. Do not infer exact source identity from matching appearance.",
+  "reviewMessage": "Sentinel_adb75e536e008191977ef7c85b3cf13f",
+  "approvalMessage": "Sentinel_c923a58b991c8191a34e8cfb0771719c",
+  "deliveryMessage": "Sentinel_8574b19316f88191a79062187171c8f8",
+  "originalsLocation": "/workspace/scratch/857bb2409f82/remote-input-recovery/approved-1700",
+  "scope": "Exact original raster/review/score recovery, all18sourcePNG hashes and dimensions verified. Subset glyph approval is not whole-package acceptance or installable firmware qualification."
+}

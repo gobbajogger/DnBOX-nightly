@@ -11,6 +11,7 @@ spec=importlib.util.spec_from_file_location('native_base',Path(__file__).with_na
 spec=importlib.util.spec_from_file_location('sound_base',Path(__file__).with_name('native-sound-browser.py'));sound=importlib.util.module_from_spec(spec);spec.loader.exec_module(sound)
 SOURCE=json.loads((ROOT/'web/product-site/remote/master-source.mjs').read_text().split('export default ',1)[1].rsplit(';',1)[0])
 MORE=[(6,p) for p in [0,1,2,3,4,5,7,10,11]]+[(4,p) for p in [1,3,0]]
+NAMED_MORE={(6,1),(6,7),(6,11),(4,1)}
 PREFIX='source-master/'+SOURCE['source']+'/'
 def identity(t,p):return PREFIX+f'{t}/0/{p}'
 def selector(t,p):return f'[data-master-control="{t}:{p}"]'
@@ -148,7 +149,10 @@ async def cases(origin,evidence,capture_only=False):
       assert await field.get_attribute('min')=='0' and await field.get_attribute('max')==str(c['max'])
       for value in range(c['max']+1) if c['max']<13 else [0,c['max']]:
        await set_value(page,t,p,value);assert await unit.locator('output').inner_text()==c['displays'][value]
-       assert await unit.locator('[data-glyph-fn]').evaluate('(e,v)=>Math.abs(Number(e.dataset.glyphValue)-v)<1e-9',value/c['max'])
+       glyph=unit.locator('[data-glyph-fn]')
+       expected_role=f'MASTER MORE CHOICE {c["max"]+1}' if (t,p) in NAMED_MORE else 'MASTER MORE AMOUNT'
+       await expect(glyph).to_have_attribute('data-glyph-fn',expected_role)
+       assert await glyph.evaluate('(e,v)=>Math.abs(Number(e.dataset.glyphValue)-v)<1e-9',value/c['max'])
        assert raw(await draft(page),t,p)==value
       await page.locator('#undo').click();await page.locator('#redo').click();await set_value(page,t,p,c['default']);seen.append([t,p])
      assert seen==[list(v) for v in MORE]

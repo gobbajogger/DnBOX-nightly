@@ -1,0 +1,13 @@
+PASS only the owner of an archived scalar can restore its original bank
+PASS all104 original bass scalars reachable under both local slot/bank previews including restored legacy owners
+PASS same target/voice/parameter in different banks remain reversible independent drafts
+PASS bank change cancels active raw drag, does not commit or leak into next bank
+PASS BREAK unknown source loops stay unavailable and B chance needs a selected pattern
+PASS native observer renders only selected engine and clears on page teardown
+PASS two-layer original Draft edits use distinct part/field IDs and ordinary review, Undo and Redo
+PASS BREAK Pitch and Level keep native units through inspect, edit, reopen and Undo
+PASS Chicago Draft renders named selector positions for both bass owners
+PASS BREAK A/B slice counts keep native names at every raw position through Undo, reopen and Draft export
+PASS Miami original units survive edits, reopening and Undo for both owners
+PASS Chicago Peak redraw binds only its own current Cutoff through edit, reopen and Undo
+SOURCE_SOUND_APP_CASES 12; FAILURES 0; source-event stub, NOT DOM/touch

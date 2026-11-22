@@ -1,0 +1,18 @@
+PASS only the owner of an archived scalar can restore its original bank
+PASS all104 original bass scalars reachable under both local slot/bank previews including restored legacy owners
+PASS same target/voice/parameter in different banks remain reversible independent drafts
+PASS bank change cancels active raw drag, does not commit or leak into next bank
+PASS BREAK unknown source loops stay unavailable and B chance needs a selected pattern
+PASS native observer renders only selected engine and clears on page teardown
+PASS two-layer original Draft edits use distinct part/field IDs and ordinary review, Undo and Redo
+PASS BREAK Pitch and Level keep native units through inspect, edit, reopen and Undo
+PASS Chicago Draft renders named selector positions for both bass owners
+FAIL BREAK A/B slice counts keep native names at every raw position through Undo, reopen and Draft export
+AssertionError [ERR_ASSERTION]: A SLICES raw 0
+
+'0' !== '4'
+
+    at file:///workspace/scratch/857bb2409f82/break-slice-recovered/tests/product-workspace/app-sound-regression.mjs:175:12
+    at check (file:///workspace/scratch/857bb2409f82/break-slice-recovered/tests/product-workspace/app-sound-regression.mjs:34:53)
+    at async file:///workspace/scratch/857bb2409f82/break-slice-recovered/tests/product-workspace/app-sound-regression.mjs:161:1
+SOURCE_SOUND_APP_CASES 10; FAILURES 1; source-event stub, NOT DOM/touch

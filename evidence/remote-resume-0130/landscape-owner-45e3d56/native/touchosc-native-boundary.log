@@ -1,0 +1,2 @@
+PASS exact packed default emits zero frames
+PASS exact packed archived Lua rejects genuine native HELLO before OPEN, READ or SET

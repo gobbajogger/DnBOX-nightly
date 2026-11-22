@@ -1,0 +1,52 @@
+✖ nine Remote drum glyphs match all 1034 pinned native idle drawings (2.478461ms)
+✖ coupled redraw preserves the other kick pots and respects zero depth (2.714045ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 136.968966
+
+✖ failing tests:
+
+test at glyph-nightly/tests/product-remote/drum-dv-roles.test.mjs:30:1
+✖ nine Remote drum glyphs match all 1034 pinned native idle drawings (2.478461ms)
+  AssertionError [ERR_ASSERTION]: 1:0:0:0 raw 0
+  
+  0 !== 56
+  
+      at compare (file:///workspace/scratch/857bb2409f82/remote-input-recovery/sound-consistency/glyph-nightly/tests/product-remote/drum-dv-roles.test.mjs:34:10)
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-input-recovery/sound-consistency/glyph-nightly/tests/product-remote/drum-dv-roles.test.mjs:46:4)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 56,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at glyph-nightly/tests/product-remote/drum-dv-roles.test.mjs:62:1
+✖ coupled redraw preserves the other kick pots and respects zero depth (2.714045ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  undefined
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-input-recovery/sound-consistency/glyph-nightly/tests/product-remote/drum-dv-roles.test.mjs:74:57)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

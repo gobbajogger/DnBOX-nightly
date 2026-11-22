@@ -1,0 +1,75 @@
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (2.319221ms)
+▶ ambiguous Workspace MIDI ports send nothing and offer the Device chooser
+  ✔ 2 input / 2 output (6.744501ms)
+  ✔ 1 input / 2 output (1.011172ms)
+  ✔ 2 input / 1 output (0.743059ms)
+✔ ambiguous Workspace MIDI ports send nothing and offer the Device chooser (10.642419ms)
+▶ Workspace MIDI stays disabled when either connected endpoint is missing
+  ✔ 0 input / 1 output (0.693574ms)
+  ✔ 1 input / 0 output (0.473853ms)
+  ✔ 0 input / 0 output (0.579132ms)
+✔ Workspace MIDI stays disabled when either connected endpoint is missing (2.340313ms)
+✔ the C fixture handshake reads confirmed values and a conflicting Apply is refused (58.886025ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (12.154535ms)
+✔ Apply and instrument Undo require independent reads of the committed revision (34.245265ms)
+✔ Undo keeps a later firmware revision even when the parameter value matches (34.368462ms)
+✔ the C revision guard refuses a change between the Undo read and write (34.925039ms)
+✔ queued scalar Apply and inverse SET confirm the stored target at the acknowledged revision (35.765194ms)
+✔ queued confirmation uses the canonical float returned by firmware (34.119241ms)
+✔ a queued edit that changes another control refreshes both values and offers no scalar Undo (24.685186ms)
+▶ an inverse of a queued edit reports changes outside the addressed stored value
+  ✔ queued inverse (36.216523ms)
+  ✔ immediate inverse (33.877642ms)
+✔ an inverse of a queued edit reports changes outside the addressed stored value (71.099258ms)
+✔ a queued inverse whose prior value is not read back fails closed (34.331796ms)
+▶ unverifiable writes do not create an Undo action
+  ✔ queued not stored (23.935417ms)
+  ✔ queued with different revision (23.252008ms)
+  ✔ different revision (22.803179ms)
+  ✔ different stored value (23.803709ms)
+  ✔ ack and stored both differ from request (22.78438ms)
+✔ unverifiable writes do not create an Undo action (117.90484ms)
+✔ destroy during a pending readback retires the old connection and Undo (23.879984ms)
+✔ expired firmware lease rejects Undo even if a READ is still available (34.959466ms)
+✔ returning to a cached page requires a new handshake and drops the prior Undo (42.965016ms)
+✔ a fractional setting is compared to its transmitted float32 value (35.307374ms)
+✔ actual source aliases preserve16 native mixer controls and coherent raw values (1.425435ms)
+✔ one edit expands aliases, undo exactly restores presence and values (0.866204ms)
+✔ legacy coherent imports expand; conflicts reject atomically (0.906325ms)
+✔ conflicting source and out of range changes fail closed (3.874082ms)
+✔ sixteen step groups preserve chords and near-grid timestamps without collapsing notes (2.151488ms)
+✔ the last step edits an in-window pulse without touching the trace-end pulse (1.160837ms)
+✔ same-step velocity previews every note, commits once and undo restores exact chord (1.506037ms)
+✔ group pitch clamps as a whole, preserving intervals and event timing (0.541395ms)
+✔ second touch and cancellation roll back every member without history (0.463728ms)
+✔ drum pitch edits local pitch offset, never MIDI voice identity (0.355505ms)
+✔ empty steps are not synthesized and invalid group patches are atomic (0.565271ms)
+✔ render has sixteen distinct hit cells and explicitly identifies mixed chord values (1.132054ms)
+✔ keyboard step adjustment preserves mixed velocities and is one undo (0.501855ms)
+✔ unsupported chance is disabled without leaving a gesture owner (0.314203ms)
+✔ drum pitch cannot leak through clipboard into a bass track (0.42576ms)
+✔ rejected cross-surface owner is removed and cannot wedge later edits (0.43199ms)
+✔ paint-across interpolates skipped active steps as one atomic undo stroke (0.480574ms)
+✔ paint-across cancellation restores all touched steps and empty cells stay empty (0.364128ms)
+✔ shared drum pitch display uses the stored offset, never the MIDI voice (0.365631ms)
+✔ BREAK Chance exposes the stock editor domain once per step, including silent steps (0.589006ms)
+✔ BREAK stroke interpolates independent steps once and cancels without changing committed locks (0.557579ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1077.596422
+PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof
+PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem
+PASS Projects card clicks dispatch Save/Open/Review and round-trip edited draft; event doubles, not browser file-picker proof
+PASS draft zoom roundtrip retains narrow viewport geometry
+PASS actual app grouped step edits, one Undo, multi-touch rollback, capture cleanup and both drum lanes; event doubles, not browser proof
+PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available
+PASS Song row limit, global Undo/Redo and Draft save at capacity
+PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips
+PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled
+PASS real Remote source events preserve CLAP/MARAC Tune and Decay in Draft gestures, history, Review, Projects and files
+PASS actual Remote Draft keeps independent Tune, Decay, and Sound selectors for LT/LC, MT/MC, HT/HC, and Rim/Clave

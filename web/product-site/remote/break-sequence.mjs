@@ -59,7 +59,13 @@ export function mountBreakSequence(root, state, onEdit) {
       if (own !== serial) return;
       const editor = document.createElement('section'), previews = document.createElement('div');
       const panel = await mountBreakPanel(previews, {contractBytes: bytes, contractSha256: SAMPLE_CONTRACT_SHA256, initialSelectedIds: selectedIds,
-        onSelection: summary => { if (own === serial) selectedIds = summary.selectedIds; }, ...createStartingBreakPreview()});
+        onSelection: summary => {
+          if (own !== serial) return;
+          selectedIds = summary.selectedIds;
+          const total = previews.querySelectorAll('[data-asset]').length;
+          previews.querySelector('[data-action="all"]').setAttribute('aria-pressed', String(total > 0 && summary.count === total));
+          previews.querySelector('[data-action="none"]').setAttribute('aria-pressed', String(summary.count === 0));
+        }, ...createStartingBreakPreview()});
       if (own !== serial) {panel.destroy(); return;}
       picker = panel;
       const assets = JSON.parse(new TextDecoder().decode(bytes)).assets;

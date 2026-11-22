@@ -1,0 +1,31 @@
+{
+  "amountCases": 384,
+  "compCases": 163840,
+  "compMismatchedStates": 0,
+  "compMismatchedPoints": 0,
+  "firstCompMismatches": [],
+  "amountSha256": "6163d0e0e825116beffa910e00af9fcfc9729c31c8fa47ad260bd6f290e569e1",
+  "nativeCompSha256": "19e64614172ed2542c0e4fb479b9976a1306363e6d8a8a8ef051674c9128064a",
+  "remoteCompSha256": "19e64614172ed2542c0e4fb479b9976a1306363e6d8a8a8ef051674c9128064a",
+  "result": "PASS",
+  "softwareOnly": true,
+  "firmwareHead": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "remoteHead": "dfb03e0d5d3f9c2d4e2cd6e39c9145fb65ccb67c",
+  "remoteModuleHashes": {
+    "glyph-render.mjs": "9126904639975cd7bd48bba4c820a92a713de95dc1318e421b03e44af2c66d21",
+    "glyph-live.mjs": "b8983edc62046c103eb970b5963c61acb0cb5650f9bd84e9e4968af844d13110",
+    "master-draft.mjs": "5bda02c071087ee75a994e5e9881eef8231aea98726edcbce3c6b4f4001d9a8a"
+  },
+  "firmwareSourceHashes": {
+    "firmware/src/app/ui.c": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "firmware/src/dsp/fastmath.h": "c82737d5302d77b974d5071c9bc58915aca723a6e6f5f5185cbe43bad962189d"
+  },
+  "verifiedCBodyHashes": {
+    "drive_amount_glyph": "ff005550d4b5783f0fbc190c717ced2d40407acfe55c9a676898fd91137db105",
+    "all_glyph_semantics/reverb_decay": "5d1c48801e09979e165de3793d8669e681ef89a26d50ee1a48792952571ba5a7",
+    "perform_glyph/pump": "59ed987126c09cbceafb9ab3cb09f239e68e07735a789c782bc7505ec9b14008",
+    "comp_glyph_output": "44cce57988a67b982bb418a86cad7a483d52b0bbeb6ec7e90228e5b05b97c62c",
+    "semantic_amount_glyph/comp_transfer": "4c2768e94e6c7d1942d7c2db56ce0f357130797ec601f5bd394dba16f84cd8c6"
+  },
+  "scope": "Normalized stroke paths and guides from original C expressions. No live gain reduction, browser pixels or physical proof."
+}

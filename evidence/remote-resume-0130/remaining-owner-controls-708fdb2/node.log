@@ -1,0 +1,62 @@
+✔ preview failure never substitutes a generated tone or reports playing (6.800182ms)
+✔ Remote bulk-selection cues follow all, none, partial and remounted previews (11.188049ms)
+✔ all drum strip cells retain their own captured identity, role and artwork, with the firmware readout at the source raw value (3.247632ms)
+✔ 909 BD retains all six ordered source controls including both bank summaries (0.802977ms)
+✔ a missing local descriptor leaves the captured cell and its actions disabled (0.209495ms)
+✔ editable kit glyphs update their mounted source paths at every raw value (87.47779ms)
+✔ Song changes one part pattern and preserves other cells through Undo/Redo (1.78918ms)
+✔ Song moves a complete row once, keeps boundary no-ops out of history (0.304939ms)
+✔ Song removes middle, last and only rows without mutating saved snapshots (0.347022ms)
+✔ Song invalid operations are atomic for rows and history (0.610077ms)
+✔ five Song switches change only their own low bit and preserve repeats, references and neighbors (23.993898ms)
+✔ invalid Song masks, rows, part indexes and switch values leave both histories intact (1.177009ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 220.777949
+PASS selected pointer owns keyboard
+CORRECTED_POINTER_SELECTION_FOCUS {"selectedBefore":"<h2>G3 <small>· local draft</small>","focusAfter":"n5","selectedAfter":"<h2>G♯3 <small>· local draft</small>"}
+PASS undo repaints current drums
+CORRECTED_UNDO_DRUM_RENDER {"staleVelocity120":false,"statusAfterUndo":"Undo Notes · Draft · Not connected","refreshedVelocity88":true}
+PASS selected bass has only own controls
+CORRECTED_SELECTED_BASS_VOICE {"selectedPart":"Bass A Chicago","shownCards":20,"expectedBassACards":20,"WaveLabels":1}
+PASS actual-app aligned velocity 93→124, Undo93, cancel93
+PASS actual-app Drive raw41→53, Undo41, cancel41
+PASS actual-app five launch selections→song row→8 repeats
+PASS actual-app six motion points→Undo empty→Redo
+PASS actual-app explicit drum toggle→Undo
+PASS actual-app exact conditional1:2→Undo unset
+PASS actual-app Not set removes a condition
+PASS actual-app Undo clear restores condition
+PASS actual-app Redo clear restores unset
+PASS conditional chips do not map their ordinal to height
+PASS conditional lane is correctly announced
+PASS chance drag sets the percentage under the finger
+PASS chance drag is one undoable action
+PASS chance drag cancellation restores percentage
+PASS actual-app group pointer moves both onsets
+PASS actual-app group pointer is one Undo
+PASS part change clears hidden group membership
+PASS lane keyboard increments explicit percentage by5
+PASS lane keyboard repaint restores replacement-button focus
+PASS lane keyboard remains on the step instead of opening a selected-note panel
+PASS owner correction: Mix labels native controls without captured telemetry
+PASS all11 captured909voice contexts available
+PASS choosing909RD changes whole captured source context
+PASS same-target alias preserves actual touched occurrence name
+PASS no connection caption text in views (state shown only by Connect)
+PASS actual-app song header names the active workspace
+PASS actual-app song keeps selected engine and P01
+PASS actual-app files header names the active workspace
+PASS actual-app files keeps selected engine and P01
+PASS actual-app Mix Levels header names its destination
+PASS actual-app Mix Pan header names its destination
+PASS actual-app Mix Sends header names its destination
+PASS actual-app Mix FX header names its destination
+PASS actual-app Mix Master header names its destination
+PASS actual-app returning to Patterns preserves its Draft target
+PASS actual-app returning to Sequence restores MIAMI / P01

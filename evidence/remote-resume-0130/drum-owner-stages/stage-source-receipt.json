@@ -1,0 +1,43 @@
+{
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "sourceStage": "firmware/src/app/ui_drum_voice.inc",
+  "sourceUnits": "firmware/src/app/ui.c",
+  "cases": 512,
+  "charts": 768,
+  "points": 25600,
+  "maxAbsoluteError": 3.863574217888299e-06,
+  "witness": {
+    "selection": 1,
+    "parameter": 2,
+    "raw": 95,
+    "chart": "ad",
+    "i": 5,
+    "original": 10.2531013,
+    "remote": 10.253105163574219
+  },
+  "quantize16Matches": 768,
+  "nativeQuantized16Sha256": "7060c2b488ae4f61b1c7d6f2f42aa6ac7b88290e48f54651e5fc63e675f1e8b6",
+  "remoteQuantized16Sha256": "7060c2b488ae4f61b1c7d6f2f42aa6ac7b88290e48f54651e5fc63e675f1e8b6",
+  "remoteBase": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "plotInputs": "Each native Decay raw under both selections paired with Attack32. Each native Attack raw under both selections paired with factory owner Decay64/51.",
+  "sources": {
+    "firmware/src/app/ui_drum_voice.inc": "9fed48b3c5546014970ba7360f6b8ebb0ebca11a45dd7b379c0e7fd040256894",
+    "firmware/src/app/ui.c": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "firmware/src/dsp/drum808.c": "52f894bbcaf54a77aed1d9368ed6595cb3641dcf80d7fd7b8e74ed16cde73680",
+    "firmware/src/dsp/fastmath.h": "c82737d5302d77b974d5071c9bc58915aca723a6e6f5f5185cbe43bad962189d",
+    "firmware/src/dsp/envelope_snapshot.h": "76a2327177444bd317b63b30033cf309f5d5e5acaa07db2e6adada93158dd8e9"
+  },
+  "nativeEngineTrace": {
+    "sha256": "661eddba59640b3ba4ed90806ac1ff9b9f97741c56af7a88555d429fa12cbb26",
+    "bytes": 128431
+  },
+  "replayFiles": {
+    "clap-stage-oracle.c": "709154cc3a338ba953acf5f48f23ebb5ec8ade8afd5b64fd8870611372f695cc",
+    "compare-clap-oracle.mjs": "fb51099f24d733113523eabe73a54963df06ec77b8d50a3286ecda317f17b2f8"
+  },
+  "patchSha256": "5e626d2f908726a634078cd9ed7155ada6018e3420869f10687c739980bc0905",
+  "focusedTests": {
+    "count": 6,
+    "sha256": "99528401eeba8dee23ad7af7ee69907b1f09c0ba77a8982bc6367a0c07f26a24"
+  }
+}

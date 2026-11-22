@@ -1,0 +1,5623 @@
+{
+  "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+  "builtRemoteSHA256": {
+    "app.mjs": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+    "style.css": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043",
+    "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340"
+  },
+  "inventoryProbeSHA256": "be69e39e5af3121d239e51aa3ccc49e45770086f42df2efc0825056ec4c572b8",
+  "captureScriptSHA256": "b56090694dcd69ffaa977acf7830ca24a25e0a0ae672e7e72ac2f6fe28b6b543",
+  "originalInventorySHA256": "2eb5eb761db822fce73138178e59f54d9a362e24d930853e8b80cda11691c22d",
+  "states": {
+    "06-levels": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            16.09,
+            192,
+            28.8
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1312,
+            14.5,
+            108,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            180,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            340,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            500,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            660,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            244,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            356,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            468,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            20,
+            124,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1112,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1172,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1232,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1300,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1344,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            1388,
+            109,
+            32,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            167,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Emulator",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            167,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Levels",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Pan",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sends",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            156,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            224,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master / More",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            292,
+            215,
+            99,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 909 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            33,
+            298.8,
+            145.13,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+          "value": "-5dB",
+          "box": [
+            90.56,
+            350.8,
+            30,
+            150
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 808 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            190.13,
+            298.8,
+            145.13,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+          "value": "+2dB",
+          "box": [
+            247.69,
+            350.8,
+            30,
+            150
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS A sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            347.25,
+            298.8,
+            145.14,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+          "value": "0dB",
+          "box": [
+            404.81,
+            350.8,
+            30,
+            150
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS B sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            504.39,
+            298.8,
+            145.13,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+          "value": "0dB",
+          "box": [
+            561.95,
+            350.8,
+            30,
+            150
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BREAK sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            661.52,
+            298.8,
+            145.14,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+          "value": "+3.2dB",
+          "box": [
+            719.08,
+            350.8,
+            30,
+            150
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Drive 32%",
+          "id": "",
+          "role": "button",
+          "field": "Master Drive",
+          "value": "32%",
+          "box": [
+            33,
+            605.59,
+            187.41,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master COMP 75%",
+          "id": "",
+          "role": "button",
+          "field": "Master COMP",
+          "value": "75%",
+          "box": [
+            228.41,
+            605.59,
+            187.42,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master PUMP 4.0dB",
+          "id": "",
+          "role": "button",
+          "field": "Master PUMP",
+          "value": "4.0dB",
+          "box": [
+            423.83,
+            605.59,
+            187.41,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master FILTER OFF",
+          "id": "",
+          "role": "button",
+          "field": "Master FILTER",
+          "value": "OFF",
+          "box": [
+            619.23,
+            605.59,
+            187.42,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Threshold -24dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "value": "-24dB",
+          "box": [
+            840.66,
+            298.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Ratio 4:1",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "value": "4:1",
+          "box": [
+            1127.83,
+            298.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Attack 10ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "value": "10ms",
+          "box": [
+            840.66,
+            370.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Release 99ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "value": "99ms",
+          "box": [
+            1127.83,
+            370.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Makeup 16.1dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "value": "16.1dB",
+          "box": [
+            840.66,
+            442.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Mix 100%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "value": "100%",
+          "box": [
+            1127.83,
+            442.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Pump source 909",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "value": "909",
+          "box": [
+            840.66,
+            514.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Resonance 20",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "value": "20",
+          "box": [
+            1127.83,
+            514.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Limiter ON",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "value": "ON",
+          "box": [
+            840.66,
+            586.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Distortion Off",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "value": "Off",
+          "box": [
+            1127.83,
+            586.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Glue 0%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "value": "0%",
+          "box": [
+            840.66,
+            658.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Volume -9.2dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "value": "-9.2dB",
+          "box": [
+            1127.83,
+            658.8,
+            279.17,
+            64
+          ],
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 1440,
+      "fonts": "loaded",
+      "workspace": "mix",
+      "headings": [
+        "Parts",
+        "Master",
+        "More \u00b7 Draft"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Levels\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nParts\n909\nSound\n-5dB\n808\nSound\n+2dB\nBASS A\nSound\n0dB\nBASS B\nSound\n0dB\nBREAK\nSound\n+3.2dB\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected",
+      "pages": [
+        6
+      ],
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325735983,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "filename": "06-levels.png",
+      "screenshotSHA256": "d31058c34d79d8f2e0b3448cf3d1c1a916664a663d994a01445eff4f1889856c",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "630849f720038fbf91e19d8339153d17ad596097e8a2d020e2ce96ab6c6ade68",
+        "observed": {
+          "viewport": [
+            1440,
+            900
+          ],
+          "body": [
+            1440,
+            900
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "miami",
+          "pattern": "P01",
+          "view": "mix",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325379024,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Parts",
+          "Master",
+          "More \u00b7 Draft"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Levels\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nParts\n909\nSound\n-5dB\n808\nSound\n+2dB\nBASS A\nSound\n0dB\nBASS B\nSound\n0dB\nBREAK\nSound\n+3.2dB\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Bass A / CHICAGO selected; actual global Draft controls unchanged",
+      "sameGlobalControlValuesAcrossPartSwitch": [
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+          "current": "75",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+          "current": "112",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+          "current": "100",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+          "current": "100",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+          "current": "120",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:4:0:2",
+          "current": null,
+          "normalized": "0.3228346456692913",
+          "output": "32%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:12",
+          "current": null,
+          "normalized": "0.7480314960629921",
+          "output": "75%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:6",
+          "current": null,
+          "normalized": "0.16535433070866143",
+          "output": "4.0dB"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:13",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "OFF"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "-24dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "current": null,
+          "normalized": "0.4444444444444444",
+          "output": "4:1"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "10ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "current": null,
+          "normalized": "0.4566929133858268",
+          "output": "99ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "16.1dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "current": null,
+          "normalized": "1",
+          "output": "100%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "current": null,
+          "normalized": "0",
+          "output": "909"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "current": null,
+          "normalized": "0.15748031496062992",
+          "output": "20"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "current": null,
+          "normalized": "1",
+          "output": "ON"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "current": null,
+          "normalized": "0",
+          "output": "Off"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "current": null,
+          "normalized": "0",
+          "output": "0%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "current": null,
+          "normalized": "0.3464566929133858",
+          "output": "-9.2dB"
+        }
+      ]
+    },
+    "07-master": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            16.09,
+            192,
+            28.8
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1312,
+            14.5,
+            108,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            180,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            340,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            500,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            660,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            244,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            356,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            468,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            20,
+            124,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1112,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1172,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1232,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1300,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1344,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            1388,
+            109,
+            32,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            167,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Emulator",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            167,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Levels",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Pan",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sends",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            156,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            224,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master / More",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            292,
+            215,
+            99,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Drive 32%",
+          "id": "",
+          "role": "button",
+          "field": "Master Drive",
+          "value": "32%",
+          "box": [
+            33,
+            305.59,
+            196.8,
+            171
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master COMP 75%",
+          "id": "",
+          "role": "button",
+          "field": "Master COMP",
+          "value": "75%",
+          "box": [
+            237.8,
+            305.59,
+            196.8,
+            171
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master PUMP 4.0dB",
+          "id": "",
+          "role": "button",
+          "field": "Master PUMP",
+          "value": "4.0dB",
+          "box": [
+            442.59,
+            305.59,
+            196.8,
+            171
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master FILTER OFF",
+          "id": "",
+          "role": "button",
+          "field": "Master FILTER",
+          "value": "OFF",
+          "box": [
+            647.39,
+            305.59,
+            196.81,
+            171
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Threshold -24dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "value": "-24dB",
+          "box": [
+            882.2,
+            305.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Ratio 4:1",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "value": "4:1",
+          "box": [
+            1148.59,
+            305.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Attack 10ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "value": "10ms",
+          "box": [
+            882.2,
+            371.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Release 99ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "value": "99ms",
+          "box": [
+            1148.59,
+            371.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Makeup 16.1dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "value": "16.1dB",
+          "box": [
+            882.2,
+            437.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Mix 100%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "value": "100%",
+          "box": [
+            1148.59,
+            437.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Pump source 909",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "value": "909",
+          "box": [
+            882.2,
+            503.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Resonance 20",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "value": "20",
+          "box": [
+            1148.59,
+            503.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Limiter ON",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "value": "ON",
+          "box": [
+            882.2,
+            569.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Distortion Off",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "value": "Off",
+          "box": [
+            1148.59,
+            569.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Glue 0%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "value": "0%",
+          "box": [
+            882.2,
+            635.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Volume -9.2dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "value": "-9.2dB",
+          "box": [
+            1148.59,
+            635.59,
+            258.39,
+            58
+          ],
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 1440,
+      "fonts": "loaded",
+      "workspace": "mix",
+      "headings": [
+        "Master",
+        "More \u00b7 Draft"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Master\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected",
+      "pages": [
+        7
+      ],
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736373,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "filename": "07-master.png",
+      "screenshotSHA256": "9d802c450d21f3ae6d678abdef8045242e004b1f1c67d3054eb6ca7c6dd18224",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "7e8ce807a2ae9a2be7b9cb46c27c86ffbadeaf783f287b443fe2dca4d0ab7040",
+        "observed": {
+          "viewport": [
+            1440,
+            900
+          ],
+          "body": [
+            1440,
+            900
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "miami",
+          "pattern": "P01",
+          "view": "mix",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325379143,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Master",
+          "More \u00b7 Draft"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Master\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Bass A / CHICAGO selected; actual global Draft controls unchanged",
+      "sameGlobalControlValuesAcrossPartSwitch": [
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:4:0:2",
+          "current": null,
+          "normalized": "0.3228346456692913",
+          "output": "32%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:12",
+          "current": null,
+          "normalized": "0.7480314960629921",
+          "output": "75%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:6",
+          "current": null,
+          "normalized": "0.16535433070866143",
+          "output": "4.0dB"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:13",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "OFF"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "-24dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "current": null,
+          "normalized": "0.4444444444444444",
+          "output": "4:1"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "10ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "current": null,
+          "normalized": "0.4566929133858268",
+          "output": "99ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "16.1dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "current": null,
+          "normalized": "1",
+          "output": "100%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "current": null,
+          "normalized": "0",
+          "output": "909"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "current": null,
+          "normalized": "0.15748031496062992",
+          "output": "20"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "current": null,
+          "normalized": "1",
+          "output": "ON"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "current": null,
+          "normalized": "0",
+          "output": "Off"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "current": null,
+          "normalized": "0",
+          "output": "0%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "current": null,
+          "normalized": "0.3464566929133858",
+          "output": "-9.2dB"
+        }
+      ]
+    },
+    "08-fx": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            16.09,
+            192,
+            28.8
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1312,
+            14.5,
+            108,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            180,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            340,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            500,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            660,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            244,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            356,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            468,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            20,
+            124,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1112,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1172,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1232,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1300,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1344,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            1388,
+            109,
+            32,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            167,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Emulator",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            167,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Levels",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Pan",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sends",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            156,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            224,
+            215,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master / More",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            292,
+            215,
+            99,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Reverb DECAY 62%",
+          "id": "",
+          "role": "button",
+          "field": "Reverb DECAY",
+          "value": "62%",
+          "box": [
+            29,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Reverb TONE 45%",
+          "id": "",
+          "role": "button",
+          "field": "Reverb TONE",
+          "value": "45%",
+          "box": [
+            200.5,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Reverb REV LOW CUT 149Hz",
+          "id": "",
+          "role": "button",
+          "field": "Reverb REV LOW CUT",
+          "value": "149Hz",
+          "box": [
+            372,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Reverb REV RETURN -1.9dB",
+          "id": "",
+          "role": "button",
+          "field": "Reverb REV RETURN",
+          "value": "-1.9dB",
+          "box": [
+            543.5,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Delay TIME 1/8.",
+          "id": "",
+          "role": "button",
+          "field": "Delay TIME",
+          "value": "1/8.",
+          "box": [
+            733,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Delay FEEDBACK 35%",
+          "id": "",
+          "role": "button",
+          "field": "Delay FEEDBACK",
+          "value": "35%",
+          "box": [
+            904.5,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Delay TONE 40%",
+          "id": "",
+          "role": "button",
+          "field": "Delay TONE",
+          "value": "40%",
+          "box": [
+            1076,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Delay DLY RETURN -1.9dB",
+          "id": "",
+          "role": "button",
+          "field": "Delay DLY RETURN",
+          "value": "-1.9dB",
+          "box": [
+            1247.5,
+            294.8,
+            163.5,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 909 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            29,
+            543.59,
+            215.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REV",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "value": "0%",
+          "box": [
+            37,
+            632.78,
+            199.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "DLY",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "value": "0%",
+          "box": [
+            37,
+            751.97,
+            199.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 808 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            250.27,
+            543.59,
+            215.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REV",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "value": "0%",
+          "box": [
+            258.27,
+            632.78,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "DLY",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "value": "0%",
+          "box": [
+            258.27,
+            751.97,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS A sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            471.55,
+            543.59,
+            215.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REV",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "value": "0%",
+          "box": [
+            479.55,
+            632.78,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "DLY",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "value": "0%",
+          "box": [
+            479.55,
+            751.97,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS B sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            692.83,
+            543.59,
+            215.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REV",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "value": "0%",
+          "box": [
+            700.83,
+            632.78,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "DLY",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "value": "0%",
+          "box": [
+            700.83,
+            751.97,
+            199.28,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BREAK sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            914.11,
+            543.59,
+            215.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REV",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "value": "19%",
+          "box": [
+            922.11,
+            632.78,
+            199.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "DLY",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "value": "0%",
+          "box": [
+            922.11,
+            751.97,
+            199.27,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Delay type\nDIGI\nTAPE",
+          "id": "",
+          "role": "select",
+          "field": "",
+          "value": "1",
+          "box": [
+            1224.39,
+            553.59,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Tape Wear 50%",
+          "id": "",
+          "role": "button",
+          "field": "Tape Wear",
+          "value": "50%",
+          "box": [
+            1155.39,
+            607.59,
+            255.61,
+            200
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Drive 32%",
+          "id": "",
+          "role": "button",
+          "field": "Master Drive",
+          "value": "32%",
+          "box": [
+            29,
+            874.77,
+            108.5,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master COMP 75%",
+          "id": "",
+          "role": "button",
+          "field": "Master COMP",
+          "value": "75%",
+          "box": [
+            145.5,
+            874.77,
+            108.5,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master PUMP 4.0dB",
+          "id": "",
+          "role": "button",
+          "field": "Master PUMP",
+          "value": "4.0dB",
+          "box": [
+            262,
+            874.77,
+            108.5,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master FILTER OFF",
+          "id": "",
+          "role": "button",
+          "field": "Master FILTER",
+          "value": "OFF",
+          "box": [
+            378.5,
+            874.77,
+            108.5,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Threshold -24dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "value": "-24dB",
+          "box": [
+            495,
+            874.77,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Ratio 4:1",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "value": "4:1",
+          "box": [
+            726,
+            874.77,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Attack 10ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "value": "10ms",
+          "box": [
+            957,
+            874.77,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Release 99ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "value": "99ms",
+          "box": [
+            1188,
+            874.77,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Makeup 16.1dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "value": "16.1dB",
+          "box": [
+            495,
+            977.95,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Mix 100%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "value": "100%",
+          "box": [
+            726,
+            977.95,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Pump source 909",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "value": "909",
+          "box": [
+            957,
+            977.95,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Resonance 20",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "value": "20",
+          "box": [
+            1188,
+            977.95,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Limiter ON",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "value": "ON",
+          "box": [
+            495,
+            1081.14,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Distortion Off",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "value": "Off",
+          "box": [
+            726,
+            1081.14,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Glue 0%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "value": "0%",
+          "box": [
+            957,
+            1081.14,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Volume -9.2dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "value": "-9.2dB",
+          "box": [
+            1188,
+            1081.14,
+            223,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 1440,
+      "fonts": "loaded",
+      "workspace": "mix",
+      "headings": [
+        "Reverb",
+        "Delay",
+        "Part sends",
+        "Tape",
+        "Master",
+        "More \u00b7 Draft"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 FX\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nReverb\n62%\nDECAY\n45%\nTONE\n149Hz\nREV LOW CUT\n-1.9dB\nREV RETURN\nDelay\n1/8.\nTIME\n35%\nFEEDBACK\n40%\nTONE\n-1.9dB\nDLY RETURN\nPart sends\n909\nSound\nREV\n0%\nDLY\n0%\n808\nSound\nREV\n0%\nDLY\n0%\nBASS A\nSound\nREV\n0%\nDLY\n0%\nBASS B\nSound\nREV\n0%\nDLY\n0%\nBREAK\nSound\nREV\n19%\nDLY\n0%\nTape\nDelay type\nDIGI\nTAPE\n50%\nWear\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected",
+      "pages": [
+        8
+      ],
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736865,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "filename": "08-fx.png",
+      "screenshotSHA256": "99c4d726393e7d8e8c7addfbb1dff4f8f2fb31d7811f000ba15db6d23818c54a",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "2e13f9ac2de56911974617474606e5f6549fa5fd92ecebf2d1e3a62d4a762e13",
+        "observed": {
+          "viewport": [
+            1440,
+            900
+          ],
+          "body": [
+            1440,
+            900
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "miami",
+          "pattern": "P01",
+          "view": "mix",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325379274,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Reverb",
+          "Delay",
+          "Part sends",
+          "Tape",
+          "Master",
+          "More \u00b7 Draft"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 FX\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nReverb\n62%\nDECAY\n45%\nTONE\n149Hz\nREV LOW CUT\n-1.9dB\nREV RETURN\nDelay\n1/8.\nTIME\n35%\nFEEDBACK\n40%\nTONE\n-1.9dB\nDLY RETURN\nPart sends\n909\nSound\nREV\n0%\nDLY\n0%\n808\nSound\nREV\n0%\nDLY\n0%\nBASS A\nSound\nREV\n0%\nDLY\n0%\nBASS B\nSound\nREV\n0%\nDLY\n0%\nBREAK\nSound\nREV\n19%\nDLY\n0%\nTape\nDelay type\nDIGI\nTAPE\n50%\nWear\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Bass A / CHICAGO selected; actual global Draft controls unchanged",
+      "sameGlobalControlValuesAcrossPartSwitch": [
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:4:0:4",
+          "current": null,
+          "normalized": "0.5748031496062992",
+          "output": "62%"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:4:0:5",
+          "current": null,
+          "normalized": "0.44881889763779526",
+          "output": "45%"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:4:0:6",
+          "current": null,
+          "normalized": "0.4881889763779528",
+          "output": "149Hz"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:4:0:7",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "-1.9dB"
+        },
+        {
+          "id": "current-state-and-reference/fx-delay-direct.svg|1:4:0:8",
+          "current": null,
+          "normalized": "0.5833333333333334",
+          "output": "1/8."
+        },
+        {
+          "id": "current-state-and-reference/fx-delay-direct.svg|1:4:0:9",
+          "current": null,
+          "normalized": "0.4094488188976378",
+          "output": "35%"
+        },
+        {
+          "id": "current-state-and-reference/fx-delay-direct.svg|1:4:0:10",
+          "current": null,
+          "normalized": "0.4015748031496063",
+          "output": "40%"
+        },
+        {
+          "id": "current-state-and-reference/fx-delay-direct.svg|1:4:0:11",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "-1.9dB"
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:1",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:0:2",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:1",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:1:2",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:1",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:2:2",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:1",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:3:2",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:1",
+          "current": "25",
+          "normalized": "0.1968503937007874",
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/fx-reverb-direct.svg|1:5:4:2",
+          "current": "0",
+          "normalized": "0",
+          "output": null
+        },
+        {
+          "id": "catalog/1551",
+          "current": null,
+          "normalized": "0.5590551181102362",
+          "output": "50%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:4:0:2",
+          "current": null,
+          "normalized": "0.3228346456692913",
+          "output": "32%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:12",
+          "current": null,
+          "normalized": "0.7480314960629921",
+          "output": "75%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:6",
+          "current": null,
+          "normalized": "0.16535433070866143",
+          "output": "4.0dB"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:13",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "OFF"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "-24dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "current": null,
+          "normalized": "0.4444444444444444",
+          "output": "4:1"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "10ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "current": null,
+          "normalized": "0.4566929133858268",
+          "output": "99ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "16.1dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "current": null,
+          "normalized": "1",
+          "output": "100%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "current": null,
+          "normalized": "0",
+          "output": "909"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "current": null,
+          "normalized": "0.15748031496062992",
+          "output": "20"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "current": null,
+          "normalized": "1",
+          "output": "ON"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "current": null,
+          "normalized": "0",
+          "output": "Off"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "current": null,
+          "normalized": "0",
+          "output": "0%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "current": null,
+          "normalized": "0.3464566929133858",
+          "output": "-9.2dB"
+        }
+      ]
+    },
+    "09-patterns": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            16.09,
+            192,
+            28.8
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1312,
+            14.5,
+            108,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            180,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            340,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            500,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            660,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            244,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            356,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            468,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            20,
+            124,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1112,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1172,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1232,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1300,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1344,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            1388,
+            109,
+            32,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Selected part",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            417.06,
+            230.39,
+            96,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "All parts",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            517.06,
+            230.39,
+            71,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Review draft",
+          "id": "pattern-review",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            799.45,
+            230.39,
+            92,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P01, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            52.67,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P02, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            159.64,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P03, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            266.61,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P04, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            373.58,
+            297.78,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P05, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            480.56,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P06, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            587.53,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P07, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            694.5,
+            297.78,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P08, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            801.47,
+            297.78,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P09, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            52.67,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P10, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            159.64,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P11, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            266.61,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P12, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            373.58,
+            402.17,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P13, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            480.56,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P14, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            587.53,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P15, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            694.5,
+            402.17,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P16, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            801.47,
+            402.17,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P17, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            52.67,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P18, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            159.64,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P19, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            266.61,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P20, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            373.58,
+            506.56,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P21, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            480.56,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P22, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            587.53,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P23, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            694.5,
+            506.56,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P24, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            801.47,
+            506.56,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P25, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            52.67,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P26, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            159.64,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P27, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            266.61,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P28, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            373.58,
+            610.95,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P29, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            480.56,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P30, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            587.53,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P31, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            694.5,
+            610.95,
+            89.97,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Bass A P32, not loaded",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            801.47,
+            610.95,
+            89.98,
+            81
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Song arrangement",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            957.13,
+            294.38,
+            449.86,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 1440,
+      "fonts": "loaded",
+      "workspace": "patterns",
+      "headings": [
+        "Patterns \u00b7 Bass A \u00b7 Draft",
+        "32 PATTERNS",
+        "Bass A"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nBass A \u00b7 P01 \u00b7 Draft\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nPatterns \u00b7 Bass A \u00b7 Draft\n32 PATTERNS\nSelected part\nAll parts\nReview draft\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\nBass A\nP01\n\nDraft \u00b7 Not loaded\n\nSong arrangement\nBass A \u00b7 P1 selected \u00b7 Not loaded",
+      "pages": [
+        9
+      ],
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "patterns",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736983,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "Bass A \u00b7 P1 selected \u00b7 Not loaded",
+        "selectedPart": "chicago"
+      },
+      "filename": "09-patterns.png",
+      "screenshotSHA256": "faf7655cf2a798658615357da49f515a0c7d0e6ae3fc1219147b4636f7f0b36e",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "333fb4ae4027823bde68b154bee64ffc2e804cbec67ef445419f20fb451890fb",
+        "observed": {
+          "viewport": [
+            1440,
+            900
+          ],
+          "body": [
+            1440,
+            900
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "chicago",
+          "pattern": "P01",
+          "view": "patterns",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325379447,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Patterns \u00b7 Bass A \u00b7 Draft",
+          "32 PATTERNS",
+          "Bass A"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nBass A \u00b7 Not selected \u00b7 Draft\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nPatterns \u00b7 Bass A \u00b7 Draft\n32 PATTERNS\nSelected part\nAll parts\nReview draft\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\nBass A\nNot selected\n\nDraft \u00b7 Not loaded\n\nSong arrangement\n0 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Bass A P01 explicitly selected locally; remains Not loaded",
+      "localSelection": {
+        "part": "Bass A / CHICAGO",
+        "pattern": "P01",
+        "loaded": false,
+        "ariaPressed": "true",
+        "ariaLabel": "Bass A P01, not loaded"
+      },
+      "draftReadback": {
+        "launch": [
+          null,
+          null,
+          0,
+          null,
+          null
+        ],
+        "song": [],
+        "parameters": []
+      }
+    },
+    "12-projects": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            16.09,
+            192,
+            28.8
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1312,
+            14.5,
+            108,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            180,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            340,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            500,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            660,
+            67,
+            112,
+            26
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            244,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            356,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            468,
+            109,
+            96,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            20,
+            124,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1112,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1172,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1232,
+            109,
+            52,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1300,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1344,
+            109,
+            36,
+            32
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            1388,
+            109,
+            32,
+            32
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Export backup",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            951,
+            289.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Inspect restore",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            1170,
+            289.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open original",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            732,
+            494.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Inspect contents",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            951,
+            494.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Save a copy",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1170,
+            494.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Choose range",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            732,
+            699.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Export availability",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            951,
+            699.89,
+            207,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Samples",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            20,
+            806.39,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Manual",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            102,
+            806.39,
+            65,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open DAW guide",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            178,
+            806.39,
+            124.77,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Save draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1105.77,
+            810.39,
+            80,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1193.77,
+            810.39,
+            81,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Review changes",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            1282.77,
+            810.39,
+            108,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 1440,
+      "fonts": "loaded",
+      "workspace": "files",
+      "headings": [
+        "Projects",
+        "PROJECT BACKUP",
+        "ORIGINAL PRESETS",
+        "MIDI FOR A DAW",
+        "Current session"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nProject files\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nProjects\nPROJECT BACKUP\n\nPatterns, song, sounds, motion and sample references\n\nExport backup\nInspect restore\nORIGINAL PRESETS\n\nOpen an engine file. Edit a copy; preserve the original.\n\nOpen original\nInspect contents\nSave a copy\nMIDI FOR A DAW\n\nA finite range, aligned tracks and clips for a DAW.\n\nChoose range\nExport availability\nSamples\nManual\n \nOpen DAW guide\n \nCurrent session\n\n10 notes \u00b7 0 sound edits \u00b7 1 song rows\n\nSave draft\nOpen draft\nReview changes\n1 changes \u00b7 Draft \u00b7 Not connected",
+      "pages": [
+        12
+      ],
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "files",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325737497,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "filename": "12-projects.png",
+      "screenshotSHA256": "fa29dc089da63fd17f3ec07f02972a104281c65b52e3e5b6938e74b11c725df1",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "32aa270780151d68759b736e2c30c505838d0073760519f493992eb3b7e804b1",
+        "observed": {
+          "viewport": [
+            1440,
+            900
+          ],
+          "body": [
+            1440,
+            900
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "breaks",
+          "pattern": "P01",
+          "view": "files",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325380180,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Projects",
+          "PROJECT BACKUP",
+          "ORIGINAL PRESETS",
+          "MIDI FOR A DAW",
+          "Current session"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nProject files\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nProjects\nPROJECT BACKUP\n\nPatterns, song, sounds, motion and sample references\n\nExport backup\nInspect restore\nORIGINAL PRESETS\n\nOpen an engine file. Edit a copy; preserve the original.\n\nOpen original\nInspect contents\nSave a copy\nMIDI FOR A DAW\n\nA finite range, aligned tracks and clips for a DAW.\n\nChoose range\nExport availability\nSamples\nManual\n \nOpen DAW guide\n \nCurrent session\n\n10 notes \u00b7 0 sound edits \u00b7 1 song rows\n\nSave draft\nOpen draft\nReview changes\n1 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Bass A / CHICAGO selected with the same authored one-row local Draft",
+      "draftReadback": {
+        "launch": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "song": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ],
+        "parameters": []
+      }
+    },
+    "16-levels": {
+      "entries": [
+        {
+          "label": "DnBOX\nREMOTE",
+          "id": "",
+          "role": "a",
+          "field": "",
+          "value": "",
+          "box": [
+            12,
+            6.7,
+            89.2,
+            21.59
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Connect",
+          "id": "connect",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            724,
+            3.5,
+            108,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sequence",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            12,
+            36,
+            56,
+            24
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sound",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            88,
+            36,
+            35,
+            24
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Mix & FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            143,
+            36,
+            49,
+            24
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Patterns & Song",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            212,
+            36,
+            92,
+            24
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Projects",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            324,
+            36,
+            47,
+            24
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            12,
+            60,
+            43,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            67,
+            60,
+            43,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            122,
+            60,
+            62,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            196,
+            60,
+            61,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            269,
+            60,
+            58,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Part",
+          "id": "part",
+          "role": "select",
+          "field": "",
+          "value": "chicago",
+          "box": [
+            12,
+            73,
+            2,
+            2
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Play",
+          "id": "play",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            564,
+            60,
+            44,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Stop",
+          "id": "stop",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            616,
+            60,
+            44,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "REC",
+          "id": "rec",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            668,
+            60,
+            44,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Undo",
+          "id": "undo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            720,
+            60,
+            32,
+            28
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Redo",
+          "id": "redo",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            760,
+            60,
+            32,
+            28
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "More actions",
+          "id": "",
+          "role": "summary",
+          "field": "",
+          "value": "",
+          "box": [
+            800,
+            60,
+            32,
+            28
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Draft",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            12,
+            96,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Emulator",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            80,
+            96,
+            74,
+            44
+          ],
+          "hit": true,
+          "disabled": true
+        },
+        {
+          "label": "Levels",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            12,
+            144,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Pan",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            80,
+            144,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Sends",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            148,
+            144,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "FX",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            216,
+            144,
+            64,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master / More",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            284,
+            144,
+            99,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 909 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            25,
+            227.8,
+            95.2,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "909",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+          "value": "-5dB",
+          "box": [
+            57.59,
+            279.8,
+            30,
+            86
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open 808 sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            132.2,
+            227.8,
+            95.22,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "808",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+          "value": "+2dB",
+          "box": [
+            164.81,
+            279.8,
+            30,
+            86
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS A sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            239.42,
+            227.8,
+            95.2,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS A",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+          "value": "0dB",
+          "box": [
+            272.02,
+            279.8,
+            30,
+            86
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BASS B sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            346.63,
+            227.8,
+            95.22,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BASS B",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+          "value": "0dB",
+          "box": [
+            379.23,
+            279.8,
+            30,
+            86
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Open BREAK sound controls",
+          "id": "",
+          "role": "button",
+          "field": "",
+          "value": "",
+          "box": [
+            453.84,
+            227.8,
+            95.22,
+            44
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "BREAK",
+          "id": "",
+          "role": "input",
+          "field": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+          "value": "+3.2dB",
+          "box": [
+            486.45,
+            279.8,
+            30,
+            86
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Drive 32%",
+          "id": "",
+          "role": "button",
+          "field": "Master Drive",
+          "value": "32%",
+          "box": [
+            579.06,
+            223.8,
+            117.97,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master COMP 75%",
+          "id": "",
+          "role": "button",
+          "field": "Master COMP",
+          "value": "75%",
+          "box": [
+            705.03,
+            223.8,
+            117.97,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master PUMP 4.0dB",
+          "id": "",
+          "role": "button",
+          "field": "Master PUMP",
+          "value": "4.0dB",
+          "box": [
+            579.06,
+            326.98,
+            117.97,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master FILTER OFF",
+          "id": "",
+          "role": "button",
+          "field": "Master FILTER",
+          "value": "OFF",
+          "box": [
+            705.03,
+            326.98,
+            117.97,
+            95.19
+          ],
+          "hit": true,
+          "disabled": false
+        },
+        {
+          "label": "Master Threshold -24dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "value": "-24dB",
+          "box": [
+            579.06,
+            444.97,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Ratio 4:1",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "value": "4:1",
+          "box": [
+            705.03,
+            444.97,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Attack 10ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "value": "10ms",
+          "box": [
+            579.06,
+            548.16,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Release 99ms",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "value": "99ms",
+          "box": [
+            705.03,
+            548.16,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Makeup 16.1dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "value": "16.1dB",
+          "box": [
+            579.06,
+            651.34,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Mix 100%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "value": "100%",
+          "box": [
+            705.03,
+            651.34,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Pump source 909",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "value": "909",
+          "box": [
+            579.06,
+            754.53,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Resonance 20",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "value": "20",
+          "box": [
+            705.03,
+            754.53,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Limiter ON",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "value": "ON",
+          "box": [
+            579.06,
+            857.72,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Distortion Off",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "value": "Off",
+          "box": [
+            705.03,
+            857.72,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Glue 0%",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "value": "0%",
+          "box": [
+            579.06,
+            960.91,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        },
+        {
+          "label": "Master Volume -9.2dB",
+          "id": "",
+          "role": "button",
+          "field": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "value": "-9.2dB",
+          "box": [
+            705.03,
+            960.91,
+            117.97,
+            95.19
+          ],
+          "hit": false,
+          "disabled": false
+        }
+      ],
+      "bodyWidth": 844,
+      "fonts": "loaded",
+      "workspace": "mix",
+      "headings": [
+        "Parts",
+        "Master",
+        "More \u00b7 Draft"
+      ],
+      "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNot connected\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Levels\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nParts\n909\nSound\n-5dB\n808\nSound\n+2dB\nBASS A\nSound\n0dB\nBASS B\nSound\n0dB\nBREAK\nSound\n+3.2dB\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n0 changes \u00b7 Draft \u00b7 Not connected",
+      "pages": [
+        16
+      ],
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325738421,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "filename": "16-levels.png",
+      "screenshotSHA256": "2bf12907ffb586bbe9df8659b403be6e79e07773e0b9fb05296518cdc3140cec",
+      "previousRejectedFixture": {
+        "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+        "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+        "screenshotSHA256": "852577629bb7f0083a4d88b1a26480f4b0be03d68fa0fe1834a3f702fda39fd3",
+        "observed": {
+          "viewport": [
+            844,
+            390
+          ],
+          "body": [
+            844,
+            390
+          ],
+          "scroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "part": "drum909",
+          "pattern": "P01",
+          "view": "mix",
+          "lane": "velocity",
+          "tempo": "120 BPM",
+          "clockEpochMs": 1795325381097,
+          "midiCalls": 0
+        },
+        "headings": [
+          "Parts",
+          "Master",
+          "More \u00b7 Draft"
+        ],
+        "visibleText": "DnBOX\nREMOTE\nExample project\nP01\n120 BPM\nNo reviewed firmware catalog. Apply stays off.\nEmulator play: \u2014\nConnect\nSequence\nSound\nMix & FX\nPatterns & Song\nProjects\n909\n808\nBASS A\nBASS B\nBREAK\nMix \u00b7 Levels\nBass A\nBass B\n909\n808\nBREAK\nPlay\nStop\nREC\n\u2026\nDraft\nEmulator\nLevels\nPan\nSends\nFX\nMaster / More\nParts\n909\nSound\n-5dB\n808\nSound\n+2dB\nBASS A\nSound\n0dB\nBASS B\nSound\n0dB\nBREAK\nSound\n+3.2dB\nMaster\n32%\nDrive\n75%\nCOMP\n4.0dB\nPUMP\nOFF\nFILTER\nMore \u00b7 Draft\n-24dB\nThreshold\n4:1\nRatio\n10ms\nAttack\n99ms\nRelease\n16.1dB\nMakeup\n100%\nMix\n909\nPump source\n20\nResonance\nON\nLimiter\nOff\nDistortion\n0%\nGlue\n-9.2dB\nVolume\n1 changes \u00b7 Draft \u00b7 Not connected"
+      },
+      "correctedKnownState": "Fresh disconnected Bass A / CHICAGO Draft Levels; no inherited Connect warning",
+      "sameGlobalControlValuesAs06": [
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+          "current": "75",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+          "current": "112",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+          "current": "100",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+          "current": "100",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+          "current": "120",
+          "normalized": null,
+          "output": null
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:4:0:2",
+          "current": null,
+          "normalized": "0.3228346456692913",
+          "output": "32%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:12",
+          "current": null,
+          "normalized": "0.7480314960629921",
+          "output": "75%"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:6",
+          "current": null,
+          "normalized": "0.16535433070866143",
+          "output": "4.0dB"
+        },
+        {
+          "id": "current-state-and-reference/mix-master.svg|1:6:0:13",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "OFF"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/0",
+          "current": null,
+          "normalized": "0.5039370078740157",
+          "output": "-24dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/1",
+          "current": null,
+          "normalized": "0.4444444444444444",
+          "output": "4:1"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/2",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "10ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/3",
+          "current": null,
+          "normalized": "0.4566929133858268",
+          "output": "99ms"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/4",
+          "current": null,
+          "normalized": "0.6692913385826772",
+          "output": "16.1dB"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/5",
+          "current": null,
+          "normalized": "1",
+          "output": "100%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/7",
+          "current": null,
+          "normalized": "0",
+          "output": "909"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/10",
+          "current": null,
+          "normalized": "0.15748031496062992",
+          "output": "20"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/6/0/11",
+          "current": null,
+          "normalized": "1",
+          "output": "ON"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/1",
+          "current": null,
+          "normalized": "0",
+          "output": "Off"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/3",
+          "current": null,
+          "normalized": "0",
+          "output": "0%"
+        },
+        {
+          "id": "source-master/ffd31a735acc5721d1f90a30fc1ceb283aad6fc5/4/0/0",
+          "current": null,
+          "normalized": "0.3464566929133858",
+          "output": "-9.2dB"
+        }
+      ],
+      "draftReadback": {
+        "launch": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "song": [],
+        "parameters": []
+      }
+    }
+  },
+  "errors": [],
+  "captureProfile": {
+    "deviceScaleFactor": 1,
+    "hasTouch": true,
+    "clock": "unfrozen",
+    "animations": "disabled at screenshot",
+    "chromiumSandbox": true
+  },
+  "browser": "151.0.7922.34",
+  "result": "PASS"
+}

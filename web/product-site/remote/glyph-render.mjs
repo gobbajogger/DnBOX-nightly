@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {breakSliceGlyph} from './break-slice-glyph.mjs';
 // Live R22 readouts. One renderer per function. The shape is the current value
 // through that engine's transfer curve. Idle and zero-depth stay on one frame.
 // WAVE and WIDTH: Lead's ANIM-SPEC readout (102x26, peak-normalised, pad 2).
@@ -18,6 +19,7 @@
 // Animation is re-render after interpolating the parameter. No decorative motion.
 
 import {miamiWave} from './wave-display.mjs';
+import {originalSoundGlyphPaths} from './source-sound-glyphs.mjs';
 
 const MERGED={
  G023:'WAVE',G024:'WAVE',G025:'WAVE',G026:'WIDTH',G029:'WIDTH',
@@ -43,18 +45,22 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
  ['G069','COMP'],['G070','HPF'],['G071','DECAY'],['G072','PAN'],['G073','GATE'],['G074','GATE'],['G075','LEVEL'],['G076','GATE'],
  ['G077','LFO'],['G078','GATE'],['G079','GATE'],['G080','GLIDE'],['G081','LFO'],['G082','LFO']
 ]));
-const FX_GLYPHS=Object.freeze({'1:4:0:7':'G059','1:4:0:8':'G052','1:4:0:9':'G053','1:4:0:11':'G056'});
+const FX_GLYPHS=Object.freeze({
+ '1:4:0:2':'MASTER DRIVE','1:4:0:4':'REVERB DECAY','1:4:0:5':'FX TONE','1:4:0:6':'FX TONE',
+ '1:4:0:7':'G059','1:4:0:8':'G052','1:4:0:9':'G053','1:4:0:10':'FX TONE','1:4:0:11':'G056',
+ '1:6:0:6':'MASTER PUMP'
+});
 export function fxGlyphId(identity){return FX_GLYPHS[identity];}
 
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',MASTERFILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',
+ DECAY:'DECAY',REVERBDECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',FXTONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',MASTERMOREAMOUNT:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
- BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
+ BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',MASTERDRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
  TIME:'ECHO',FEEDBACK:'ECHO',REV:'ECHO',DLY:'ECHO',PINGPONG:'ECHO',RETURN:'LEVEL',SUSTAIN:'ADSR',RELEASE:'DECAY',
- COMP:'COMP',THRESH:'COMP',RATIO:'COMP',MAKEUP:'COMP',LIMIT:'COMP',GLUE:'COMP',PUMP:'COMP',
+ COMP:'COMP',MASTERCOMP:'COMP',MASTERPUMP:'COMP',THRESH:'COMP',RATIO:'COMP',MAKEUP:'COMP',LIMIT:'COMP',GLUE:'COMP',PUMP:'COMP',
  LINK:'GATE',TEMPO:'GATE',SWING:'GATE',LOCK:'GATE',NOTE:'GATE',GATE:'GATE',SLIDE:'GLIDE',SUB:'LEVEL',ACCENT:'LEVEL',MIX:'LEVEL',CHANCE:'LEVEL',VOICE:'VOICE',
  BD:'VOICE',SD:'VOICE',LT:'VOICE',MT:'VOICE',HT:'VOICE',RS:'VOICE',CP:'VOICE',CH:'VOICE',OH:'VOICE',CC:'VOICE',RC:'VOICE',CR:'VOICE',RD:'VOICE',CB:'VOICE',CY:'VOICE',COWBELL:'VOICE',DRUMBD:'VOICE'
 };
@@ -401,6 +407,98 @@ function sourcedFxPath(fnId,value,{delayType}){
  if(fnId==='G053'&&(delayType===0||delayType===1))return delayFeedbackPath(value,delayType);
  if(fnId==='G056'||fnId==='G059')return fxReturnPath(value,fnId==='G056');
 }
+// The original MASTER and REVERB encoders use source-specific amount schematics.
+// Keep Sound, Glue, Pump Source, and other uses of the same glyph families separate.
+const driveWave=[0,5690,11207,16383,21062,25101,28377,30791,32269,32767,32269,30791,28377,25101,21062,16384,11207,5690,0,-5690,-11207,-16384,-21062,-25101,-28377,-30791,-32269,-32767,-32269,-30791,-28377,-25101,-21062,-16383,-11207,-5690,0];
+function masterDrivePath(raw){
+ const gain=Math.floor(18161/(143-raw));
+ return path(driveWave.map((sample,index)=>{
+  const value=Math.max(-32767,Math.min(32767,Math.trunc(sample*gain/127)));
+  const height=Math.floor((Math.abs(value)*8+16383)/32767);
+  return [2+index,10+(value<0?height:-height)];
+ }));
+}
+
+const f32=Math.fround;
+function reverbDecayPath(raw){
+ const feedback=f32(f32(.2)+f32(f32(f32(.73)*raw)/127)),strokes=[];
+ let amount=18;
+ for(let tap=0;tap<7;tap++){
+  const height=Math.floor(f32(amount+.5)),x=2+tap*6;
+  if(height)strokes.push(path([[x,19-height],[x,19]]));
+  amount=f32(amount*feedback);
+ }
+ return strokes.join(' ');
+}
+function masterPumpPath(raw){
+ const depth=Math.floor(raw*14/127);
+ return path([[2,3],[11,3],[14,3+depth],[35,3],[38,3]]);
+}
+
+const compRatios=[1,1.5,2,3,4,6,8,12,20,1e6];
+const compGuide=path([[2,20],[38,0]]);
+function compOutput(input,over,slope,mix){
+ if(!mix||!slope)return input;
+ let reduction=0;
+ if(over>=3)reduction=f32(slope*over);
+ else if(over>-3){
+  const knee=f32(over+3);
+  reduction=f32(f32(f32(slope*knee)*knee)/12);
+ }
+ if(mix===127||!reduction)return f32(input-reduction);
+ const gain=f32(2**f32(-reduction*f32(.166096405)));
+ const blend=f32(1+f32(f32(f32(gain-1)*mix)/127));
+ return f32(input+f32(f32(6.0205999)*f32(Math.log2(blend))));
+}
+function masterCompPath({threshold,ratio,blend}){
+ const slope=f32(1-f32(1/compRatios[ratio])),t=f32(-48+f32(48*threshold/127));
+ const points=[[2,20]];
+ for(let i=1;i<=36;i++){
+  const input=f32(-48+f32(48*i/36));
+  const output=compOutput(input,f32(input-t),slope,blend);
+  points.push([2+i,20-Math.floor(f32(f32(f32(f32(output+48)*20)/48)+.5))]);
+ }
+ return path(points);
+}
+// f178 draw_list uses a neutral rounded 70×3 track for unnamed More values.
+function masterMoreAmount(raw){
+ const track={x:2,y:11,w:36,h:3,ink:'guide',radius:1};
+ const rects=[track];
+ if(raw)rects.push({...track,w:track.w*(3+Math.floor(raw*67/127))/70,ink:'primary'});
+ return {d:'',rects};
+}
+// f178 control_glyph uses this same path for both FX Tones and Reverb Low Cut.
+function fxTonePaths(raw){
+ const pivot=9+Math.floor(raw*20/127);
+ return {d:path([[2,4],[pivot,4],[38,18]]),guide:path([[2,19],[38,19]])};
+}
+
+// The native list shows just the named value. Remote cards use the stock
+// named-selector primitive from draw_knobs in the shared 40×24 glyph cell.
+const moreChoiceCounts=new Map([2,3,8,10].map(n=>['MASTER MORE CHOICE '+n,n]));
+function masterMoreChoice(count,value){
+ const selected=Math.round(value*(count-1));
+ const width=count>6?3:6,gap=2,span=count*(width+gap)-gap;
+ const left=20-Math.floor(span/2),scale=Math.min(1,36/span);
+ const radius=Math.min(2,Math.floor(width/2))*scale;
+ const rects=Array.from({length:count},(_,i)=>({
+  x:20+(left+(width+gap)*i-20)*scale,y:5,w:width*scale,h:9,
+  ink:i===selected?'primary':'guide',radius
+ }));
+ return {d:'',rects};
+}
+
+function mixAmountPaths(fnId,value,{masterComp}){
+ const raw=Math.round(value*127);
+ if(fnId==='MASTER MORE AMOUNT')return masterMoreAmount(raw);
+ const choices=moreChoiceCounts.get(fnId);
+ if(choices)return masterMoreChoice(choices,value);
+ if(fnId==='FX TONE')return fxTonePaths(raw);
+ if(fnId==='MASTER DRIVE')return {d:masterDrivePath(raw)};
+ if(fnId==='REVERB DECAY')return {d:reverbDecayPath(raw),guide:fxBaseline};
+ if(fnId==='MASTER PUMP')return {d:masterPumpPath(raw),guide:fxBaseline};
+ if(fnId==='MASTER COMP'&&masterComp)return {d:masterCompPath(masterComp),guide:compGuide};
+}
 function compPath(_e,value){const th=0.25+0.6*(1-unit(value)),r=1+unit(value)*7,pts=[];for(let i=0;i<=20;i++){const x=i/20,y=x<th?x:th+(x-th)/r;pts.push([x*40,22-y*20]);}return path(pts);}
 function gatePath(_e,value){const d=0.08+unit(value)*0.84;return path([[0,20],[2,20],[2,6],[2+d*36,6],[2+d*36,20],[40,20]]);}
 function voicePath(_e,value,state){const lvl=unit(state.level??value),dec=unit(state.decay??0.5),hit=Math.max(0,Math.min(1,state.hit??0)),h=4+lvl*14+hit*4,pts=[[2,20],[4,20-h]];for(let i=1;i<=16;i++){const t=i/16;pts.push([4+t*(8+dec*28),20-h*Math.exp(-t*4)]);}pts.push([40,20]);return path(pts);}
@@ -418,6 +516,10 @@ export function render(fnId, value, engineId='chicago', state={}){
  // State scalars (attack/cutoff/feedback etc.) are already normalized.
  value=unit(value,state.valueDomain??'normalized');
  const fn=fnOf(fnId);
+ if(typeof fnId==='string'&&fnId.startsWith('SOURCE ')&&(engineId==='chicago'||engineId==='miami')&&fnId.startsWith('SOURCE '+engineId.toUpperCase()+' ')){
+  const shape=originalSoundGlyphPaths(fnId,Math.round(value*(fnId==='SOURCE CHICAGO 17'?11:127)),state.sourceSoundPots);
+  if(shape)return {fn:fnId,engine:engineId,...shape,live:false,cell:null};
+ }
  if(engineId==='miami' && (fn==='WAVE'||fnId==='SHAPE')){
   const parameter=state.miamiParameter ?? (fnId==='SHAPE'?11:0);
   const wave=miamiWave(parameter,Math.round(value*127));
@@ -426,6 +528,8 @@ export function render(fnId, value, engineId='chicago', state={}){
  }
  if(fnId==='BREAK PITCH'&&engineId==='break')
   return {fn:'BREAK PITCH',engine:engineId,...breakPitchPaths(value),live:false,cell:null};
+ if(fnId==='BREAK SLICES'&&engineId==='break')
+  return {fn:'BREAK SLICES',engine:engineId,...breakSliceGlyph(Math.round(value*3)),live:false,cell:null};
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
  const depth=state.depth;
@@ -433,6 +537,8 @@ export function render(fnId, value, engineId='chicago', state={}){
  if(!live && state.age!=null) state={...state, age:0};
  if(fnId==='MASTER FILTER'&&state.masterFilter)
   return {fn,engine:engineId,...masterFilterPaths(state.masterFilter),live,cell:null};
+ const mixAmount=mixAmountPaths(fnId,value,state);
+ if(mixAmount)return {fn,engine:engineId,...mixAmount,live,cell:null};
  const d=sourcedFxPath(fnId,value,state)??draw(engineId,value,state);
  const proof=(fn==='WIDTH'||(fn==='WAVE'&&engineId!=='miami'));
  return {fn, engine:engineId, d, live, cell:proof?'102x26':null};
@@ -442,7 +548,8 @@ export function renderSvg(fnId, value, engineId, state={}){
  if(drawn.zero!==undefined)return `<svg class="glyph readout" data-fn="WAVE" viewBox="0 0 29 19" width="40" height="24" aria-hidden="true"><path d="M0.5 ${drawn.zero} H28.5" fill="none" stroke="currentColor" opacity=".1875"/><path d="${drawn.d}" fill="none" stroke="currentColor"/></svg>`;
  if(drawn.cell) return `<svg class="glyph readout readout-wave" data-fn="${drawn.fn}" viewBox="0 0 102 26" width="102" height="26" aria-hidden="true"><rect width="102" height="26" fill="#101a1f"/><path d="${drawn.d}" fill="none" stroke="#dde7de" stroke-width="1"/></svg>`;
  const guide=drawn.guide?`<path d="${drawn.guide}" fill="none" stroke="currentColor" opacity=".19"/>`:'';
- return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">${guide}<path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"${drawn.muted?' opacity=".4"':''}/></svg>`;
+ const rects=(drawn.rects??[]).map(rect=>`<rect x="${rect.x}" y="${rect.y}" width="${rect.w}" height="${rect.h}" rx="${rect.radius}" fill="currentColor"${rect.ink==='guide'?' opacity=".19"':drawn.muted?' opacity=".4"':''}/>`).join('');
+ return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">${guide}${rects}<path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"${drawn.muted?' opacity=".4"':''}/></svg>`;
 }
 // Proven WAVE and WIDTH re-render the nine MIDI steps. Other families still
 // interpolate until their proofs arrive. Idle and zero depth stay on one frame.

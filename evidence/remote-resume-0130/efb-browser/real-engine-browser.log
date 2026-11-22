@@ -1,0 +1,30 @@
+PASS no catalog sends no handshake
+PASS MIDI permission stays unrequested without a catalog
+PASS missing ports show an actionable message and keep Apply disabled
+PASS Return to draft dismisses connection details
+PASS loading the Remote sends no SysEx
+PASS READ returns the C scalar
+PASS READ returns the C float
+PASS connect does not SET
+PASS FX workspace selected before local Wear edit
+PASS BREAK assignments, slices and Wear edits send zero protocol frames
+PASS draft status retains confirmed simulator identity
+PASS Undo preserves simulator status
+PASS play reports the local transport and actual connection
+PASS stop reports the local transport and actual connection
+PASS rec reports the local transport and actual connection
+PASS draft history and transport buttons send zero protocol frames
+PASS offline edits do not arm native Apply
+PASS Apply stays disabled before an edit
+PASS an edit arms Apply and still sends nothing
+PASS editing does not SET
+PASS Apply writes the edited control once
+PASS Apply reads the committed catalog back
+PASS Undo checks the revision, writes once and rereads the catalog
+PASS Undo shows the fresh stored value
+PASS confirmed instrument Undo is consumed
+PASS a C revision conflict is shown and not treated as applied
+PASS Disconnect closes the C lease
+PASS the page raised no script errors
+{"test": "Chicago stored cutoff through Remote Apply and Undo", "source": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8", "control": 257, "browser": "151.0.7922.34", "wire": [[2, 0, 257, 1, 32], [3, 1, 257, 2, 33], [2, 0, 257, 2, 33], [2, 0, 257, 2, 33], [3, 1, 257, 3, 32], [2, 0, 257, 3, 32]]}
+{"test": "Coupled COMP uses explicit Apply in both directions; scalar Undo withheld", "THRESH": [[0, 64], [0, 60], [0, 61]], "MAKEUP": [[0, 85], [0, 85], [0, 84]], "COMP": [[0, 95], [0, 96], [0, 95]]}

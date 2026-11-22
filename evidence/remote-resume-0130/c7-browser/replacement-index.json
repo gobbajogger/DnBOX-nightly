@@ -1,0 +1,512 @@
+{
+  "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+  "branch": "lane/remote-resume-0130",
+  "result": "PASS12/12 captures and functional guards",
+  "supersedes": "Only the following 12 keys of the historical 124-state Sound set; previous captures remain historical evidence.",
+  "historicalIndex": "/workspace/scratch/857bb2409f82/remote-resume-0130/evidence/remote-resume-0130/sound-review/capture-index.json",
+  "historicalIndexSHA256": "d6ab1ebf7d54e910870e8dda2da912de46eb04b6e36f83c4a03063f61fd1621a",
+  "historicalSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "unchangedScope": "No other 112 historical keys are relabeled by this refresh. The separate afd61fdc eight-key SuperJ6 refresh remains separate. No owner-PDF or registered32 default key is replaced.",
+  "options": {
+    "route": "https://dnbox.test/remote/",
+    "hasTouch": "width<900",
+    "clockFreeze": false,
+    "settleMs": 80,
+    "fullPage": true,
+    "chromiumSandbox": true
+  },
+  "receiptSHA256": "78d9e42c2cd51d0412bdabb293feaa387b3854540ae5c6aa73aa8b149e011697",
+  "entries": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice01",
+      "historical": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "state": "drum909-voice01",
+        "path": "complete-captures/1440x900-drum909-voice01.png",
+        "imageSize": [
+          1440,
+          900
+        ],
+        "sha256": "cdacb65984795ffa3e0267396d8b13ae72ecbe5941243c0e5ec79538f58bf01e"
+      },
+      "replacement": {
+        "path": "1440x900-drum909-voice01.png",
+        "sha256": "6304137c6967bde3feb09b1127ed53d81b0a0b74184e1b29e9e805709e49c6d3",
+        "imageSize": [
+          1440,
+          900
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 68,
+        "initialReadout": "841ms",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice01",
+      "historical": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "state": "drum808-voice01",
+        "path": "complete-captures/1440x900-drum808-voice01.png",
+        "imageSize": [
+          1440,
+          900
+        ],
+        "sha256": "77d105a1299dc3704deddd7b128a580553401d9de71a87cc6d05e7610a667b86"
+      },
+      "replacement": {
+        "path": "1440x900-drum808-voice01.png",
+        "sha256": "74bf6ccb24ea0d893165dcda91fd5f9d1ed0b10daa8e4f4db04af8a012f2bf27",
+        "imageSize": [
+          1440,
+          900
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 64,
+        "initialReadout": "50%",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "breaks",
+      "historical": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "state": "breaks",
+        "path": "complete-captures/1440x900-breaks.png",
+        "imageSize": [
+          1440,
+          900
+        ],
+        "sha256": "b83d593e8258b452167dbfe1b8c16c43aa91b8b7aa6c8b16dc2c6b468188bef8"
+      },
+      "replacement": {
+        "path": "1440x900-breaks.png",
+        "sha256": "75919a2513f9d30651b538ba557650617dc0f65a97c19ef1cf2078e9b3917e92",
+        "imageSize": [
+          1440,
+          900
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 12,
+        "initialReadout": "0 st",
+        "sampleRaw": [
+          0,
+          12,
+          24
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice01",
+      "historical": {
+        "viewport": [
+          390,
+          844
+        ],
+        "state": "drum909-voice01",
+        "path": "complete-captures/390x844-drum909-voice01.png",
+        "imageSize": [
+          390,
+          844
+        ],
+        "sha256": "4e159404d0827a26f2415d845b18a56e835d660a766bc48f36b9a9af77f40080"
+      },
+      "replacement": {
+        "path": "390x844-drum909-voice01.png",
+        "sha256": "ed81d573322cc39827859ae274f466418b0a99ab8064ad344f03e2a4aecabf25",
+        "imageSize": [
+          390,
+          844
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 68,
+        "initialReadout": "841ms",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice01",
+      "historical": {
+        "viewport": [
+          390,
+          844
+        ],
+        "state": "drum808-voice01",
+        "path": "complete-captures/390x844-drum808-voice01.png",
+        "imageSize": [
+          390,
+          844
+        ],
+        "sha256": "da2216483a6a1b2a5c30ce867974dd231c1bac0f062874c7475bc897f00e1a56"
+      },
+      "replacement": {
+        "path": "390x844-drum808-voice01.png",
+        "sha256": "75466371052309062adcf821eb41d0325d5859fccc7030daf5001346d0ee9c64",
+        "imageSize": [
+          390,
+          844
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 64,
+        "initialReadout": "50%",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "breaks",
+      "historical": {
+        "viewport": [
+          390,
+          844
+        ],
+        "state": "breaks",
+        "path": "complete-captures/390x844-breaks.png",
+        "imageSize": [
+          390,
+          844
+        ],
+        "sha256": "b7fe322dcab0a5e730d5ab91a82ec246dd04b8f6418aca34551cc6339010ea0c"
+      },
+      "replacement": {
+        "path": "390x844-breaks.png",
+        "sha256": "cebc9bee8dae8e16c94427018d553cabe5eb381093cba022335236ea7222d3ce",
+        "imageSize": [
+          390,
+          844
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 12,
+        "initialReadout": "0 st",
+        "sampleRaw": [
+          0,
+          12,
+          24
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice01",
+      "historical": {
+        "viewport": [
+          844,
+          390
+        ],
+        "state": "drum909-voice01",
+        "path": "complete-captures/844x390-drum909-voice01.png",
+        "imageSize": [
+          844,
+          390
+        ],
+        "sha256": "4f582153d8e68a15bdecbef63846afd6957669865d8372027d397a3bbc611b32"
+      },
+      "replacement": {
+        "path": "844x390-drum909-voice01.png",
+        "sha256": "8292c447e77fb7803e1b32e0048b118f80ddce50f00f2345a85a1fd06754b9fb",
+        "imageSize": [
+          844,
+          390
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 68,
+        "initialReadout": "841ms",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true,
+        "openOriginal": {
+          "path": "current-state-and-reference/909-voice-01.svg",
+          "sourceSVGUnchanged": true,
+          "sourceBodySHA256": "95ec485401c60f7c9b5ba57e01b345965e02f7cbd8c868a6968e780a72eef242"
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice01",
+      "historical": {
+        "viewport": [
+          844,
+          390
+        ],
+        "state": "drum808-voice01",
+        "path": "complete-captures/844x390-drum808-voice01.png",
+        "imageSize": [
+          844,
+          390
+        ],
+        "sha256": "ef472e41e18e5a30c987eac849a9a14e534bb06b2dea69db97d8c26577ceea9c"
+      },
+      "replacement": {
+        "path": "844x390-drum808-voice01.png",
+        "sha256": "98135399ec5024d773086fcf9eeada07b02720ff0de8c9f31fe673a82b7c00de",
+        "imageSize": [
+          844,
+          390
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 64,
+        "initialReadout": "50%",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true,
+        "openOriginal": {
+          "path": "current-state-and-reference/808-voice-01.svg",
+          "sourceSVGUnchanged": true,
+          "sourceBodySHA256": "a522bc5f5a978e1a2de749f15d3dcc206baf01bf5f5d400306d2c4e55f5f4bb9"
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "breaks",
+      "historical": {
+        "viewport": [
+          844,
+          390
+        ],
+        "state": "breaks",
+        "path": "complete-captures/844x390-breaks.png",
+        "imageSize": [
+          844,
+          390
+        ],
+        "sha256": "2f3780e6f5d5fc3dc3192acdbcf53afad726c57bdb28e6c867f685f855f01a29"
+      },
+      "replacement": {
+        "path": "844x390-breaks.png",
+        "sha256": "8664d7cc82710c8bf3da8519546ff1c0d4bc3e05a196eae1d1c2559817576b22",
+        "imageSize": [
+          844,
+          390
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 12,
+        "initialReadout": "0 st",
+        "sampleRaw": [
+          0,
+          12,
+          24
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice01",
+      "historical": {
+        "viewport": [
+          1024,
+          640
+        ],
+        "state": "drum909-voice01",
+        "path": "complete-captures-fourth/1024x640-drum909-voice01.png",
+        "imageSize": [
+          1024,
+          640
+        ],
+        "sha256": "ab5de58e32be341d171c47e45fa02ca317953cad1cafe12578d74c660178d310"
+      },
+      "replacement": {
+        "path": "1024x640-drum909-voice01.png",
+        "sha256": "21d667183f87516bac114205b5d5ff8abac2bb7c162a2b4e0871f291e749cbd3",
+        "imageSize": [
+          1024,
+          640
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 68,
+        "initialReadout": "841ms",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice01",
+      "historical": {
+        "viewport": [
+          1024,
+          640
+        ],
+        "state": "drum808-voice01",
+        "path": "complete-captures-fourth/1024x640-drum808-voice01.png",
+        "imageSize": [
+          1024,
+          640
+        ],
+        "sha256": "91b16589f4f5562c0c0c9c09dd1500c097d013e241d6e37a6bd048f8a820ad30"
+      },
+      "replacement": {
+        "path": "1024x640-drum808-voice01.png",
+        "sha256": "13de0b4f3c51c6edb455212ac171db0386a84a15ebed2d2253aae70b85d75dfc",
+        "imageSize": [
+          1024,
+          640
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 64,
+        "initialReadout": "50%",
+        "sampleRaw": [
+          0,
+          64,
+          127
+        ],
+        "undoRestored": true
+      }
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "breaks",
+      "historical": {
+        "viewport": [
+          1024,
+          640
+        ],
+        "state": "breaks",
+        "path": "complete-captures-fourth/1024x640-breaks.png",
+        "imageSize": [
+          1024,
+          640
+        ],
+        "sha256": "680322bbd5c0d88c834d5007de7bad6d618c6002f2976d627760f5e4ed1afbeb"
+      },
+      "replacement": {
+        "path": "1024x640-breaks.png",
+        "sha256": "f6291c35ae72cabf561c2dc918ca2761d2b15fcc2ed03fbd856b43b5b827186f",
+        "imageSize": [
+          1024,
+          640
+        ]
+      },
+      "source": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+      "tree": "8a63da2ce797a420445cd31f8dd0a129f0282533",
+      "functional": {
+        "initialRaw": 12,
+        "initialReadout": "0 st",
+        "sampleRaw": [
+          0,
+          12,
+          24
+        ],
+        "undoRestored": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "result": "PASS",
+  "scope": "Exact packed Lua catalog rejection with real C host",
+  "softwareOnly": true,
+  "producerSHA256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881",
+  "driverSHA256": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012",
+  "extractorSHA256": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+  "native": {
+    "crc": "ecca5979",
+    "count": 1
+  },
+  "default": {
+    "crc": "00000000",
+    "count": 0
+  },
+  "archived": {
+    "crc": "eec38bc1",
+    "count": 326
+  },
+  "cases": [
+    {
+      "case": "closed",
+      "driverOutput": [
+        "PASS closed"
+      ],
+      "frames": [],
+      "layout": "dnbox-parameters-unavailable.tosc",
+      "packedSHA256": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04",
+      "extractedControllerSHA256": "9ffe0bfe0bc533148068fef125051293eab8dca957579106beb1af0418007cc4"
+    },
+    {
+      "case": "mismatch",
+      "driverOutput": [
+        "PASS mismatch"
+      ],
+      "frames": [
+        {
+          "command": "f07d444e0200000000006d7f5760000000000100000000000000000000000000000000000000000000000000000000000000f7",
+          "reply": "f07d444e02400000576848686d7f57600000000001000000010000000100793229660e7f0b0c020f4466080901086f192b05f7",
+          "op": "HELLO",
+          "count": 1,
+          "crc": 3972684153
+        }
+      ],
+      "layout": "dnbox-parameters-archived-host.tosc",
+      "packedSHA256": "83977fa73340823f259b7dc3f15504e00d3ea5d62f8f45d5e075a35f390b80a5",
+      "extractedControllerSHA256": "b6317d7dcbc0d06eb9afcc90336f8a2b33cd091d07f8568ea540b4b49ef202db"
+    }
+  ]
+}

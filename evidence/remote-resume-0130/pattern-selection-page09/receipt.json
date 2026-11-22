@@ -1,0 +1,933 @@
+{
+  "baselineSource": "ca5e7eebb7a258379c00fb5abcce2404c33334ec",
+  "retainedBuildSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "baseCaptureSHA256": "faf7655cf2a798658615357da49f515a0c7d0e6ae3fc1219147b4636f7f0b36e",
+  "candidateCSSGitBlob": "6f71578a38f7f652e9a69200ea8589e44e86d771",
+  "ownerPDFSHA256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+  "chromium": "151.0.7922.34",
+  "normalSandbox": true,
+  "retainedBuiltRemoteFilesVerified": 114,
+  "metrics": {
+    "exactChangedPixels": 6972,
+    "changedPixelsOutsideSelectedPad": 0,
+    "fullPageDiagnosticPercent": [
+      6.88534,
+      6.388272
+    ],
+    "selectedPadInterior": {
+      "crop": [
+        60,
+        305,
+        135,
+        323
+      ],
+      "diagnosticPercent": [
+        100.0,
+        0.0
+      ]
+    },
+    "ownerAcceptance": "INELIGIBLE_FULL_PAGE_PROVIDER_AND_LAYOUT_DIFFERENCES"
+  },
+  "baseline": {
+    "state": {
+      "part": "chicago",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "midiCalls": 0
+    },
+    "pads": [
+      {
+        "box": [
+          52.671875,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "true",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(255, 179, 55)",
+        "label": "Bass A P01, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P02, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P03, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          297.78125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P04, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P05, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P06, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P07, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          297.78125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P08, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P09, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P10, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P11, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          402.171875,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P12, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P13, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P14, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P15, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          402.171875,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P16, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P17, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P18, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P19, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          506.5625,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P20, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P21, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P22, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P23, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          506.5625,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P24, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P25, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P26, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P27, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          610.953125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P28, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P29, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P30, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P31, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          610.953125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P32, not loaded"
+      }
+    ],
+    "cssSHA256": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043",
+    "draftLaunch": [
+      null,
+      null,
+      0,
+      null,
+      null
+    ],
+    "pngSHA256": "faf7655cf2a798658615357da49f515a0c7d0e6ae3fc1219147b4636f7f0b36e",
+    "keyboardAndTouch": "PASS"
+  },
+  "candidate": {
+    "state": {
+      "part": "chicago",
+      "pattern": "P01",
+      "tempo": "120 BPM",
+      "connection": "Not connected",
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        1440,
+        900
+      ],
+      "scroll": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "midiCalls": 0
+    },
+    "pads": [
+      {
+        "box": [
+          52.671875,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "true",
+        "background": "rgb(255, 179, 55)",
+        "color": "rgb(5, 10, 13)",
+        "label": "Bass A P01, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P02, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P03, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          297.78125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P04, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P05, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P06, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          297.78125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P07, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          297.78125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P08, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P09, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P10, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P11, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          402.171875,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P12, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P13, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P14, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          402.171875,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P15, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          402.171875,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P16, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P17, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P18, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P19, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          506.5625,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P20, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P21, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P22, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          506.5625,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P23, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          506.5625,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P24, not loaded"
+      },
+      {
+        "box": [
+          52.671875,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P25, not loaded"
+      },
+      {
+        "box": [
+          159.640625,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P26, not loaded"
+      },
+      {
+        "box": [
+          266.609375,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P27, not loaded"
+      },
+      {
+        "box": [
+          373.578125,
+          610.953125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P28, not loaded"
+      },
+      {
+        "box": [
+          480.5625,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P29, not loaded"
+      },
+      {
+        "box": [
+          587.53125,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P30, not loaded"
+      },
+      {
+        "box": [
+          694.5,
+          610.953125,
+          89.96875,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P31, not loaded"
+      },
+      {
+        "box": [
+          801.46875,
+          610.953125,
+          89.984375,
+          81
+        ],
+        "hit": true,
+        "pressed": "false",
+        "background": "rgb(16, 26, 31)",
+        "color": "rgb(221, 231, 222)",
+        "label": "Bass A P32, not loaded"
+      }
+    ],
+    "cssSHA256": "a1c513ed013e95affabd12bff53335324a30b9d5887021633ddc451f42f2c077",
+    "draftLaunch": [
+      null,
+      null,
+      0,
+      null,
+      null
+    ],
+    "pngSHA256": "a77d89d56888be7c39158c1683b19278a3a28746df8a4c45b468f64a2be7c7c7",
+    "keyboardAndTouch": "PASS"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "scalarStates": 1024,
+  "namedStates": 23,
+  "readouts": 1047,
+  "fxToneStates": 384,
+  "sourceProjectionSha256": "058ca17ee62c42708eaa3e1c16d4ae2646042b993f786f44d5e0c07da322af9e",
+  "result": "PASS",
+  "softwareOnly": true,
+  "firmwareHead": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "remoteBase": "3c5a9142b5013ffc6d5178825a0e4fc10692be4e",
+  "testedRemoteHead": "3c5a9142b5013ffc6d5178825a0e4fc10692be4e",
+  "sources": {
+    "app/ui.c": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "dsp/master.c": "ff3486879de216c5447c2a301456abc6cf7cd46c4643d93e500d5e6890e966b7",
+    "dsp/master.h": "b4a216724544f1eb3e924a81cefa38cd68257fcccb908bc17a21d8eb9ffbcebd",
+    "dsp/fxbus.c": "e76e82082eb9618858b484fbe9956f204adca852b35be4c4bd931ac11757fd3b",
+    "dsp/fxbus.h": "492402f5570faa15b24241259c1e76011bfb3054fdee0d2e320b3e9171ca519c",
+    "dsp/drum909.c": "f150f594e07a0caef363629146c8a5cca901ea6240ad728a79c0115bc7e75c41",
+    "dsp/fastmath.h": "c82737d5302d77b974d5071c9bc58915aca723a6e6f5f5185cbe43bad962189d",
+    "dsp/x0x_param.h": "a9341e448f8e2e7c880734f6758df46c0e43669b4c6252b429f7070425b4c800",
+    "x0x_cold.h": "e95f4037d8f8e0dca5c32ba9253fb8aba7baf1d098407998f6a9c0d1857ba663"
+  },
+  "exactSections": {
+    "draw_list/bar": "ee4585ff40ace679daaa67f0e065a815feecae1822961de97137727ecc0011eb",
+    "draw_knobs/named_pips": "2f69af8304bb4bf8fa867f77a4783e4478dffce091a464d7259934889405b7cf",
+    "control_glyph/fx_tone": "0d078418975a12bb400d98ee887a00f48b7ec0d2d420183fed8c8265ae5ad15f",
+    "draw_list/descriptor_kind": "3efcdd9c22b50c09499b6048845ea6f5712db7efebc04faa2d735f10b52a15f2",
+    "fxbus_param_si": "8566d808275423c5d29d2ba422245b2a4cda2aa078bb8ba73bf366fa22325d8b",
+    "fxbus_descriptors": "d24015a6933e4c7883710b3c38cccc7d1c25aecafe55752eb7392998e446205e",
+    "named_distortion_modes": "d6d9528e9106fb33928825cfd24dc331c0a4f95dbda5411f1ac838ef94dbdd33",
+    "box_radius": "ae636c6071a3ec1d7f755f7ac96cb2f4cf0e93da24fae498c44986bd0f57ceab",
+    "box": "b7d3d72a8feb5cf677da77ed93a4ada528b5ff21a61c13a5c7279e1d07f57b62",
+    "put_s": "3b3c16ddd3b8d16ddab5ac8b91b1570fa10768a36f7fa620865314abccf05954",
+    "put_i": "08df8e0074d0d6e58729d8889b53ac847ed0ea3f8d549320d626efcbc5f98441",
+    "put_d1": "8dbbad7bdfb09f9894f5f788bf6766d5dd1add75b64407b85c5cbb773dedc10d",
+    "unit_value": "1adf3651aadf765dfea5231f37d5662723c1178526b66ca223f0c85af9ae9920"
+  },
+  "compiledCSha256": "8d0b329f99ef92d431c01b6fc991aff69367ce6c52be52661bae36e52bdc44bb",
+  "flags": [
+    "-std=c11",
+    "-O2",
+    "-DX0X_HOST",
+    "-ffp-contract=off"
+  ],
+  "nativeRowsSha256": "20969b233fe94b9dcc6ad38478577070a9c13363371b73f570944cbf302087be",
+  "scope": "Actual f178 More bar and formatter, native named selector pips projected into Remote card context, actual three FX lowpass roles. No browser or hardware proof."
+}

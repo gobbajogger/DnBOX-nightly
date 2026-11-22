@@ -1,0 +1,695 @@
+{
+  "browser": "151.0.7922.34",
+  "normalSandbox": true,
+  "viewport": [
+    844,
+    390
+  ],
+  "softwareOnly": true,
+  "transport": "browser MIDI adapter to actual C host stdio",
+  "producerSha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881",
+  "firmwareSourceEvidence": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+  "testOnlyBundle": {
+    "catalog": {
+      "crc": 3972684153,
+      "count": 1,
+      "admitted": true,
+      "testOnly": true,
+      "controls": [
+        {
+          "id": 1,
+          "kind": 1,
+          "min": 0,
+          "max": 127,
+          "label": "909 MIX Level"
+        }
+      ]
+    },
+    "admission": {
+      "catalogCrc": 3972684153,
+      "sourceSha": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+      "reviewSha": "3b18684ccadfd418675a75357806555c6c0ce9a1672ce8a5cabfba903dc2f608",
+      "testOnly": true
+    }
+  },
+  "shippingBundle": null,
+  "stockAdmitted": false,
+  "confirmed": {
+    "wire": [
+      {
+        "command": "f07d444e0200000000005b000000000000000100000000000000000000000000000000000000000000000000000000000000f7",
+        "reply": "f07d444e02400000576848685b0000000000000001000000010000000100793229660e7f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0201576848685b0000000000000002000000000000000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02410000576848685b000000010000000200000001000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0202576848685b0000000100000003000000010000000100000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02420001576848685b00000001000000030000000100000001004b000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0203576848685b000000010000000400000001000000010000004c000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02430101576848685b00000001000000040000000200000001004c000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0202576848685b0000000100000005000000020000000100000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02420001576848685b00000001000000050000000200000001004c000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0202576848685b0000000100000006000000020000000100000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02420001576848685b00000001000000060000000200000001004c000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0203576848685b000000010000000700000002000000010000004b000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02430101576848685b00000001000000070000000300000001004b000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0202576848685b0000000100000008000000030000000100000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02420001576848685b00000001000000080000000300000001004b000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0207576848685b0000000100000009000000030000000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02470000576848685b000000010000000900000003000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      }
+    ],
+    "decoded": [
+      {
+        "command": {
+          "version": 2,
+          "op": 0,
+          "unit": 0,
+          "unitHigh": [
+            0,
+            0,
+            0
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 1,
+          "revision": 0,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 0,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 1,
+          "revision": 1,
+          "control": 1,
+          "value": 3972684153
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 2,
+          "revision": 0,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 1,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 2,
+          "revision": 1,
+          "control": 0,
+          "value": 0
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 2,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 3,
+          "revision": 1,
+          "control": 1,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 2,
+          "status": 0,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 3,
+          "revision": 1,
+          "control": 1,
+          "value": 75
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 3,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 1,
+          "control": 1,
+          "token": 0,
+          "value": 76
+        },
+        "reply": {
+          "op": 3,
+          "status": 1,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 2,
+          "control": 1,
+          "value": 76
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 2,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 5,
+          "revision": 2,
+          "control": 1,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 2,
+          "status": 0,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 5,
+          "revision": 2,
+          "control": 1,
+          "value": 76
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 2,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 6,
+          "revision": 2,
+          "control": 1,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 2,
+          "status": 0,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 6,
+          "revision": 2,
+          "control": 1,
+          "value": 76
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 3,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 7,
+          "revision": 2,
+          "control": 1,
+          "token": 0,
+          "value": 75
+        },
+        "reply": {
+          "op": 3,
+          "status": 1,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 7,
+          "revision": 3,
+          "control": 1,
+          "value": 75
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 2,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 8,
+          "revision": 3,
+          "control": 1,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 2,
+          "status": 0,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 8,
+          "revision": 3,
+          "control": 1,
+          "value": 75
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 7,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 9,
+          "revision": 3,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 7,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 9,
+          "revision": 3,
+          "control": 0,
+          "value": 0
+        },
+        "delivered": true
+      }
+    ],
+    "addressed": [
+      [
+        2,
+        0,
+        1,
+        75
+      ],
+      [
+        3,
+        1,
+        2,
+        76
+      ],
+      [
+        2,
+        0,
+        2,
+        76
+      ],
+      [
+        2,
+        0,
+        2,
+        76
+      ],
+      [
+        3,
+        1,
+        3,
+        75
+      ],
+      [
+        2,
+        0,
+        3,
+        75
+      ]
+    ],
+    "dismissedHeader": "Not connected",
+    "framesAfterDismiss": 0
+  },
+  "unconfirmed": {
+    "wire": [
+      {
+        "command": "f07d444e0200000000005b000000000000000100000000000000000000000000000000000000000000000000000000000000f7",
+        "reply": "f07d444e02400000576848685b0000000000000001000000010000000100793229660e7f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0201576848685b0000000000000002000000000000000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02410000576848685b000000010000000200000001000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0202576848685b0000000100000003000000010000000100000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02420001576848685b00000001000000030000000100000001004b000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": true
+      },
+      {
+        "command": "f07d444e0207576848685b0000000100000004000000010000000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02470000576848685b000000010000000400000001000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": false
+      },
+      {
+        "command": "f07d444e0207576848685b0000000100000004000000010000000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "reply": "f07d444e02470000576848685b000000010000000400000001000000000000000000007f0b0c020f4466080901086f192b05f7",
+        "delivered": false
+      }
+    ],
+    "decoded": [
+      {
+        "command": {
+          "version": 2,
+          "op": 0,
+          "unit": 0,
+          "unitHigh": [
+            0,
+            0,
+            0
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 1,
+          "revision": 0,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 0,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 1,
+          "revision": 1,
+          "control": 1,
+          "value": 3972684153
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 0,
+          "request": 2,
+          "revision": 0,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 1,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 2,
+          "revision": 1,
+          "control": 0,
+          "value": 0
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 2,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 3,
+          "revision": 1,
+          "control": 1,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 2,
+          "status": 0,
+          "kind": 1,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 3,
+          "revision": 1,
+          "control": 1,
+          "value": 75
+        },
+        "delivered": true
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 7,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 1,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 7,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 1,
+          "control": 0,
+          "value": 0
+        },
+        "delivered": false
+      },
+      {
+        "command": {
+          "version": 2,
+          "op": 7,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 1,
+          "control": 0,
+          "token": 0,
+          "value": 0
+        },
+        "reply": {
+          "op": 7,
+          "status": 0,
+          "kind": 0,
+          "unit": 219296855,
+          "unitHigh": [
+            4030924287,
+            287454020,
+            1432778632
+          ],
+          "client": 91,
+          "epoch": 1,
+          "request": 4,
+          "revision": 1,
+          "control": 0,
+          "value": 0
+        },
+        "delivered": false
+      }
+    ],
+    "addressed": [
+      [
+        2,
+        0,
+        1,
+        75
+      ]
+    ],
+    "dismissedHeader": "Release was not confirmed.",
+    "framesAfterDismiss": 0
+  },
+  "served": {
+    "app.mjs": "9f5a91eb6874376941d3fbf0042e478a2a3e038aa565e9a99174b489745bdd32",
+    "firmware-link.mjs": "37a0901726f19966ab842b41f6bd6b12da870b6264e1a926e05cb96e67e32e34",
+    "device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+    "device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+    "device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2"
+  }
+}

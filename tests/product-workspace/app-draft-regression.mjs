@@ -1,3 +1,4 @@
+import{clapStageCharts}from'../../web/product-site/remote/drum-clap-stages.mjs';
 import{createMasterDraft}from'../../web/product-site/remote/master-draft.mjs';
 import fs from'node:fs';import assert from'node:assert/strict';import{pathToFileURL,fileURLToPath}from'node:url';import{resolve}from'node:path';
 const base=new URL('../../web/product-site/remote/',import.meta.url);let bootId=0;
@@ -10,14 +11,15 @@ class Node {
  setPointerCapture(p){this.captured.add(p)} hasPointerCapture(p){return this.captured.has(p)} releasePointerCapture(p){this.captured.delete(p)}
  getBoundingClientRect(){return{left:0,top:0,width:100,height:100}}
  closest(s){if(s==='button')return this;const m=s.match(/^\[data-(note|select|param|edge)\]$/);return m&&this.dataset[m[1]]!==undefined?this:null}
+ querySelectorAll(selector){return selector==='[data-clap-stages]'?(this.clapStages??[]):[]}
  querySelector(s){if(s==='span')return(this.span??=new Node());const m=s.match(/^\[data-(note|select)="([^"]+)"\]$/);if(m){const n=new Node();n.dataset[m[1]]=m[2];return n}return null}
  focus(){document.activeElement=this} showModal(){this.open=true} close(){this.open=false;this.onclose?.()}
 }
-async function boot(){
+async function boot({parameters=[],outputs=[]}={}){
 let downloaded=null;globalThis.URL.createObjectURL=b=>{downloaded=b;return'blob:source-event-double'};globalThis.URL.revokeObjectURL=()=>{};globalThis.setTimeout=()=>0;const nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,new Node(id));return nodes.get(id)};
 const views=['roll','drums','locks','sound','mix','patterns','song','files'].map(v=>Object.assign(new Node(),{dataset:{view:v}})),modes=['select','move','draw','length','pan'].map(v=>Object.assign(new Node(),{dataset:{mode:v}}));
 const documentListeners={};
-globalThis.document={createElement:()=>({click(){}}),activeElement:null,getElementById:get,querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new Node(),addEventListener(t,f){(documentListeners[t]??=[]).push(f)}};
+globalThis.document={createElement:()=>({click(){}}),activeElement:null,getElementById:get,querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:s==='[data-param]'?parameters:s==='[data-param-value]'?outputs:[],querySelector:()=>new Node(),addEventListener(t,f){(documentListeners[t]??=[]).push(f)}};
 const windowListeners={};globalThis.window={addEventListener(t,f){(windowListeners[t]??=[]).push(f)}};
 globalThis.fetch=async p=>({ok:true,text:async()=>fs.readFileSync(new URL(p,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(p,base),'utf8'))});
 get('zoom').value='1';get('lane-kind').value='velocity';get('part').value='chicago';get('part').selectedOptions=[{textContent:'Bass A Chicago'}];
@@ -271,3 +273,195 @@ async function sharedReviewReadouts() {
 }
 await sharedReviewReadouts();
 console.log('PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled');
+
+async function clapSoundOwnerDrafts() {
+ const outputs=[],parameters=[];
+ const app=await boot({parameters,outputs}),pane=app.get('other-view'),field=app.get('parameter-value');
+ const stageHost=new Node();pane.clapStages=[stageHost];
+ const assertStages=(selected,rawAttack,rawDecay)=>{
+  const charts=clapStageCharts(selected,rawAttack,rawDecay);
+  assert.equal((stageHost.innerHTML.match(/class="envelope-row"/g)??[]).length,charts.length);
+  for(const chart of charts){assert.ok(stageHost.innerHTML.includes(chart.title));assert.ok(stageHost.innerHTML.includes('d="'+chart.d+'"'));}
+ };
+ const screen=JSON.parse(fs.readFileSync(new URL('components.json',base))).screens.find(s=>s.path.endsWith('/808-voice-06.svg'));
+ const prefix=screen.path+'|1:1:6:',decay=prefix+2,tune=prefix+1,attack=prefix+3,sound=prefix+4;
+ const target=id=>Object.assign(new Node(),{dataset:{param:id,paramOccurrence:String(screen.controls.findIndex(c=>screen.path+'|'+c.identity===id))}});
+ const decayOutput=Object.assign(new Node(),{dataset:{paramValue:decay}});
+ const decayButton=target(decay);decayButton.dataset.drumLabel='Decay';
+ outputs.push(decayOutput);parameters.push(decayButton);
+ const key=(id,name)=>pane.emit('keydown',{target:target(id),key:name,preventDefault(){}});
+ const read=id=>{key(id,'Enter');return Number(field.value);};
+ const set=(id,value)=>{read(id);field.value=String(value);field.onchange();};
+ const choose=()=>{app.changePart('drum808','808');app.view('sound');pane.emit('change',{target:Object.assign(new Node('sound-voice'),{value:'6'})});};
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download());};
+ const stage=async doc=>{const text=JSON.stringify(doc);await app.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});};
+ const load=async doc=>{await stage(doc);assert.equal(app.get('draft-replace').disabled,false);app.press('draft-replace');};
+ const assertValues=(selected,expectedDecay,expectedTune)=>{
+  assert.deepEqual([read(sound),read(decay),read(tune)],[selected,expectedDecay,expectedTune]);
+ };
+ choose();
+ const fresh=await save();
+ assertValues(0,64,64);assertStages(0,32,64);
+ set(decay,88);set(tune,72);set(attack,42);assertStages(0,42,88);
+ const switchButton=target(sound);
+ pane.emit('pointerdown',event(switchButton,80));pane.emit('pointermove',event(switchButton,80,{clientX:144}));
+ assert.equal(decayOutput.textContent,'40%','Sound preview repaints the other owner before committing');assertStages(1,42,51);
+ pane.emit('pointercancel',event(switchButton,80));
+ assert.equal(decayOutput.textContent,'69%','Cancel restores previous Sound and its visible Decay');assertStages(0,42,88);
+ pane.emit('pointerdown',event(switchButton,84));pane.emit('pointermove',event(switchButton,84,{clientX:144}));
+ pane.emit('pointerdown',event(decayButton,85));
+ assert.equal(Number(field.value),88,'A second touch can only inspect the restored owner');
+ pane.emit('pointerup',event(decayButton,85));pane.emit('pointerup',event(switchButton,84));
+ assertValues(0,88,72);
+ key(sound,'ArrowRight');
+ assert.equal(decayOutput.textContent,'40%');
+ assert.equal(decayButton.attributes['aria-label'],'Decay, 40%, local draft');
+ assertValues(1,51,64);
+ assert.equal(read(attack),42,'Attack retains its one fixed Maracas owner');
+ const touch=target(decay);
+ pane.emit('pointerdown',event(touch,81));pane.emit('pointermove',event(touch,81,{clientX:24}));
+ assert.notEqual(Number(field.value),51,'Owner-specific value is previewed');assertStages(1,42,Number(field.value));
+ pane.emit('pointercancel',event(touch,81));
+ assertValues(1,51,64);
+ pane.emit('pointerdown',event(touch,82));pane.emit('pointermove',event(touch,82,{clientX:24}));
+ const edited=Number(field.value);
+ pane.emit('pointerup',event(touch,82));set(tune,49);key(sound,'ArrowLeft');
+ assertValues(0,88,72);
+ app.press('undo');assertValues(1,edited,49);assertStages(1,42,edited);
+ app.press('undo');assertValues(1,edited,64);
+ app.press('undo');assertValues(1,51,64);assertStages(1,42,51);
+ app.press('redo');assertValues(1,edited,64);
+ app.press('redo');assertValues(1,edited,49);
+ app.press('redo');assertValues(0,88,72);assertStages(0,42,88);
+ const report=review(app);
+ for(const owner of ['CLAP','MARAC'])for(const name of ['Decay','Tune'])assert.ok(report.includes('808 / '+owner+' · '+name+':'),report);
+ app.view('files');assert.match(pane.innerHTML,/5 sound edits/);
+ app.view('sound');
+ const dto=await save();
+ assert.equal(dto.parameters.length,6);
+ assert.deepEqual(dto.parameters.map(p=>p.value).sort((a,b)=>a-b),[0,42,49,edited,72,88].sort((a,b)=>a-b));
+ assert.ok(dto.parameters.every(p=>typeof p.value==='number'&&Object.keys(p).length===2));
+ await load(dto);assertValues(0,88,72);assert.equal(app.get('undo').disabled,true);
+ key(sound,'ArrowRight');assertValues(1,edited,49);
+ await load(dto);assert.deepEqual(await save(),dto);
+ // A keyboard switch cancels an in-flight owner preview before resolving its owner.
+ pane.emit('pointerdown',event(touch,83));pane.emit('pointermove',event(touch,83,{clientX:24}));
+ key(sound,'ArrowRight');pane.emit('pointerup',event(touch,83));assertValues(1,edited,49);
+ app.press('undo');assertValues(0,88,72);assert.equal(app.get('undo').disabled,true);
+ for(const {id} of dto.parameters.filter(p=>p.id.startsWith('source-drum/')))key(id,'ArrowRight');
+ assert.deepEqual(await save(),dto,'Local owner IDs are DTO references and cannot dispatch as control IDs');
+ app.press('review');app.press('review-discard');app.press('review-reset');
+ assertValues(0,64,64);assert.deepEqual((await save()).parameters,[]);
+ app.press('undo');assertValues(0,88,72);assert.deepEqual((await save()).parameters,dto.parameters);
+ app.press('redo');assertValues(0,64,64);
+ await load(dto);
+ // Legacy scalars carry no edit-time owner. Bind them to the saved selection.
+ for(const selected of [0,1]){
+  const old=structuredClone(fresh);
+  old.parameters=[{id:decay,value:92},{id:tune,value:53},...(selected?[{id:sound,value:selected}]:[])];
+  await load(old);assertValues(selected,92,53);
+  key(sound,selected?'ArrowLeft':'ArrowRight');assertValues(1-selected,selected?64:51,64);
+  const migrated=await save();
+  assert.ok(migrated.parameters.every(p=>p.id!==decay&&p.id!==tune));
+  await load(migrated);key(sound,selected?'ArrowRight':'ArrowLeft');assertValues(selected,92,53);
+ }
+ await load(dto);
+ // A mixed legacy/canonical entry cannot overwrite an explicit owner edit.
+ for(const invalid of [
+  {...dto,parameters:[...dto.parameters,{id:decay,value:92}]},
+  {...dto,parameters:[...dto.parameters,{id:'catalog/579',value:92}]},
+  {...dto,parameters:dto.parameters.map(p=>p.id.startsWith('source-drum/')?{...p,value:50.5}:p)},
+ ]){
+  await stage(invalid);assert.equal(app.get('draft-replace').disabled,true);
+ }
+ assert.deepEqual(await save(),dto,'Rejected imports do not change either owner');
+}
+await clapSoundOwnerDrafts();
+console.log('PASS real Remote source events preserve CLAP/MARAC Tune and Decay in Draft gestures, history, Review, Projects and files');
+
+async function switched808OwnerDrafts() {
+ const outputs=[];
+ const app=await boot({outputs}),pane=app.get('other-view'),field=app.get('parameter-value');
+ const screens=JSON.parse(fs.readFileSync(new URL('components.json',base))).screens;
+ const rows=[
+  [2,'LT',['LT / TOM','LT / CONGA'],[68,58],1],
+  [3,'MT',['MT / TOM','MT / CONGA'],[56,36],0],
+  [4,'HT',['HT / TOM','HT / CONGA'],[53,34],1],
+  [5,'RS',['RIM','CLAVE'],[40,64],0],
+ ].map(([voice,track,owners,defaults,selected])=>{
+  const screen=screens.find(s=>s.path.endsWith('/808-voice-0'+voice+'.svg'));
+  const prefix=screen.path+'|1:1:'+voice+':';
+  const decayOutput=Object.assign(new Node(),{dataset:{paramValue:prefix+2}});
+  outputs.push(decayOutput);
+  return {voice,track,owners,defaults,selected,screen,prefix,decayOutput,edits:[[23+voice,68+voice],[87+voice,38+voice]]};
+ });
+ const choose=row=>pane.emit('change',{target:Object.assign(new Node('sound-voice'),{value:String(row.voice)})});
+ const key=(row,parameter,name)=>{
+  const id=row.prefix+parameter;
+  const target=Object.assign(new Node(),{dataset:{param:id,paramOccurrence:String(row.screen.controls.findIndex(c=>row.screen.path+'|'+c.identity===id))}});
+  pane.emit('keydown',{target,key:name,preventDefault(){}});
+ };
+ const read=(row,parameter)=>{key(row,parameter,'Enter');return Number(field.value);};
+ const set=(row,parameter,value)=>{read(row,parameter);field.value=String(value);field.onchange();};
+ const assertValues=(row,selected,decay,tune)=>assert.deepEqual([read(row,3),read(row,2),read(row,1)],[selected,decay,tune],row.track);
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download());};
+ const load=async doc=>{
+  const text=JSON.stringify(doc);
+  await app.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});
+  assert.equal(app.get('draft-replace').disabled,false);app.press('draft-replace');
+ };
+ app.changePart('drum808','808');app.view('sound');
+ const fresh=await save();
+ for(const row of rows){
+  choose(row);
+  assertValues(row,0,row.defaults[0],64);
+  set(row,2,row.edits[0][0]);set(row,1,row.edits[0][1]);
+  const beforeSwitch=row.decayOutput.textContent;
+  key(row,3,'ArrowRight');
+  assert.notEqual(row.decayOutput.textContent,beforeSwitch,row.track+' Decay repaints with the alternate Sound');
+  assertValues(row,1,row.defaults[1],64);
+  set(row,2,row.edits[1][0]);set(row,1,row.edits[1][1]);
+  if(row.selected===0)key(row,3,'ArrowLeft');
+  assertValues(row,row.selected,...row.edits[row.selected]);
+ }
+ for(const row of rows){choose(row);assertValues(row,row.selected,...row.edits[row.selected]);}
+ const rim=rows.at(-1);
+ app.press('undo');assertValues(rim,1,...rim.edits[1]);
+ app.press('undo');assertValues(rim,1,rim.edits[1][0],64);
+ app.press('redo');assertValues(rim,1,...rim.edits[1]);
+ app.press('redo');assertValues(rim,0,...rim.edits[0]);
+ const report=review(app);
+ for(const row of rows)for(const owner of row.owners)for(const field of ['Decay','Tune']){
+  assert.ok(report.includes('808 / '+owner+' · '+field+':'),report);
+ }
+ app.view('files');assert.match(pane.innerHTML,/18 sound edits/);
+ app.view('sound');
+ const dto=await save();
+ assert.equal(dto.parameters.length,20);
+ assert.equal(new Set(dto.parameters.map(p=>p.id)).size,20);
+ assert.ok(dto.parameters.every(p=>Number.isInteger(p.value)));
+ await load(dto);
+ for(const row of rows){
+  choose(row);assertValues(row,row.selected,...row.edits[row.selected]);
+  key(row,3,row.selected?'ArrowLeft':'ArrowRight');assertValues(row,1-row.selected,...row.edits[1-row.selected]);
+  app.press('undo');assertValues(row,row.selected,...row.edits[row.selected]);
+ }
+ const old=structuredClone(fresh);
+ old.parameters=rows.flatMap(row=>[
+  {id:row.prefix+1,value:35+row.voice},
+  {id:row.prefix+2,value:50+row.voice},
+  ...(row.selected===1?[{id:row.prefix+3,value:row.selected}]:[]),
+ ]);
+ await load(old);
+ for(const row of rows){
+  choose(row);assertValues(row,row.selected,50+row.voice,35+row.voice);
+  key(row,3,row.selected?'ArrowLeft':'ArrowRight');assertValues(row,1-row.selected,row.defaults[1-row.selected],64);
+  app.press('undo');
+ }
+ const migrated=await save();
+ for(const row of rows)assert.ok(!migrated.parameters.some(p=>[row.prefix+1,row.prefix+2].includes(p.id)));
+ await load(migrated);
+ for(const row of rows){choose(row);assertValues(row,row.selected,50+row.voice,35+row.voice);}
+}
+await switched808OwnerDrafts();
+console.log('PASS actual Remote Draft keeps independent Tune, Decay, and Sound selectors for LT/LC, MT/MC, HT/HC, and Rim/Clave');

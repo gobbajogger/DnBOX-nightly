@@ -1,0 +1,1886 @@
+{
+  "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+  "comparisonInputsSHA256": "0a91591b9a486ed1a78f568bdfa702e2479e4e2963f8ab7a2e62865014c15fca",
+  "chromium": "151.0.7922.34",
+  "ownerPDFSHA256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+  "poppler": "pdftoppm version 26.05.0",
+  "historicalProposalComparison": "NOT_RECOVERED",
+  "registeredBaselineStatus": "NOBASE",
+  "newCapturedStates": {
+    "owner": 26,
+    "registered": 32
+  },
+  "archives": [
+    {
+      "filename": "lane-remote-resume-0130-133fe8f0f917-owner-pdf-pairs.tar.gz",
+      "bytes": 3178249,
+      "sha256": "c555f686b2a2badafce375f36ddd9708c6d4f2a9b6d7230ea92a1f4bc3d9086a"
+    },
+    {
+      "filename": "lane-remote-resume-0130-133fe8f0f917-registered-32.tar.gz",
+      "bytes": 1396322,
+      "sha256": "81e9b47f9e6abaa9852152e85d6f991d90eb942bcbdc452ac12ccbebfdcdfbb4"
+    },
+    {
+      "filename": "lane-remote-resume-0130-133fe8f0f917-sound-20.tar.gz",
+      "bytes": 848808,
+      "sha256": "d87589c2e474efec8263d600de7b83de00ca3a80b645b329b34552458059dba6"
+    }
+  ],
+  "sourceFiles": 273,
+  "builtFiles": 308,
+  "runtimeFilesVerified": 27,
+  "verifiedPNGMembers": 78,
+  "ownerWholeImagesWithin2Percent": 0,
+  "ownerPairSources": {
+    "01-notes": {
+      "page": 1,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "01-notes.png",
+      "originalSHA256": "d7d49ad09bfd940635f58375aea6575a5ef93056dae43a0f2c21d35a3e14ae3b",
+      "actualSHA256": "32ca617fb50b7f3a3417ea1f7e50fe9374250994d8fbd75018fd5038fb2019ec",
+      "pairSHA256": "b613bbd3566f917d5dfdc2857bf23757919524877a29f23172353ec68db43821",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 116358,
+      "exactDifferentPixels": 880289,
+      "tolerantDifferentPercent": 8.9782,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "SUPERSEDED_LAYOUT",
+        "reason": "The prior inspector and mode row were replaced by modeless gestures and one thin lane.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325375663,
+        "midiCalls": 0
+      }
+    },
+    "02-steps": {
+      "page": 2,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "02-steps.png",
+      "originalSHA256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+      "actualSHA256": "075604e1d9bdc6111a0b7a626e071db87ec2ef4f2feacf74e93f87f02861f147",
+      "pairSHA256": "6e2e04fb57afe01b4e95829b5265b5c75d2dbd31e22c656aca0aa91843a75514",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 84864,
+      "exactDifferentPixels": 362773,
+      "tolerantDifferentPercent": 6.5481,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIAGNOSTIC",
+        "reason": "Actual source and documented inputs are retained for independent approval."
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "drum909",
+        "pattern": "P01",
+        "view": "drums",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325375878,
+        "midiCalls": 0
+      }
+    },
+    "03-motion": {
+      "page": 3,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "03-motion.png",
+      "originalSHA256": "38ffba86907fea65e7cab8f48e655299dc0704a29704d77234e6b11a11074943",
+      "actualSHA256": "174a155b883dc3d8ec7506f7662891e667394186c548b421a0b678b35021402a",
+      "pairSHA256": "2fb14b7d38a027b8203f2834b6f4b072bcc0d8753a8881c9512602f58be49035",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 119728,
+      "exactDifferentPixels": 878357,
+      "tolerantDifferentPercent": 9.2383,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "KNOWN_CUTOFF_PARTIAL",
+        "pixelAcceptanceEligible": false,
+        "ownerVisibleState": "CHICAGO / Step 01, Cutoff / P01, selected override 72 on the highlighted first step",
+        "productState": "Bass A CHICAGO / P01, Cutoff lock 4098, step 1 raw 72 displayed as 57%, thin lane",
+        "reason": "The drawing has the superseded timing inspector and separate lock bank. Only the selected lock input is directly matched."
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "patternLock",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325378368,
+        "midiCalls": 0
+      }
+    },
+    "04-chicago": {
+      "page": 4,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "04-chicago.png",
+      "originalSHA256": "0c5b67ff902812be4174cac2230c3909477065092b51cdbb69b47889fe0cf05e",
+      "actualSHA256": "7f387fef31cc14d311dec9e1807043122bc5ffff62bb1ab8bcde02590209575d",
+      "pairSHA256": "503601e7854b8b7f64d19d45d06adb71394fa075744e719ce92684f083c73373",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 146321,
+      "exactDifferentPixels": 569498,
+      "tolerantDifferentPercent": 11.2902,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "SUPERSEDED_CONTROLS",
+        "reason": "The prior raw duplicated fields and percent WAVE were superseded by source units and discrete waves.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "sound",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325378611,
+        "midiCalls": 0
+      }
+    },
+    "05-miami": {
+      "page": 5,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "05-miami.png",
+      "originalSHA256": "6811c8f19ca2ef182d437350533bde9817d118ee297bc276135b0e7620d34a85",
+      "actualSHA256": "c14eab30c8f15d123d3e531e663deb2c0129ab335d530d36044f244db32ef082",
+      "pairSHA256": "7fdeacfd502bf3e151785f274c9c0939b9f2d57daeb3fe29a7ede0045888afe4",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 130264,
+      "exactDifferentPixels": 611024,
+      "tolerantDifferentPercent": 10.0512,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DUAL_ENGINE_REFERENCE",
+        "reason": "The reference combines Miami with an old generic Juno. The actual view selects one engine.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "miami",
+        "pattern": "P01",
+        "view": "sound",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325378766,
+        "midiCalls": 0
+      }
+    },
+    "05-superj6": {
+      "page": 5,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "05-superj6.png",
+      "originalSHA256": "6811c8f19ca2ef182d437350533bde9817d118ee297bc276135b0e7620d34a85",
+      "actualSHA256": "3952a8d388b29fcbc8b05a60e782dc16dd6c4e3443dc3388a209fd69842d5268",
+      "pairSHA256": "612182667a6064925c412a0393854445ba4a1c196fa63e131bf88d4cd69d5bab",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 143896,
+      "exactDifferentPixels": 672870,
+      "tolerantDifferentPercent": 11.1031,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DUAL_ENGINE_REFERENCE",
+        "reason": "The old generic Juno and Miami drawing differs from the selected real SuperJ6.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "miami",
+        "pattern": "P01",
+        "view": "sound",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325378838,
+        "midiCalls": 0
+      }
+    },
+    "06-levels": {
+      "page": 6,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "06-levels.png",
+      "originalSHA256": "d56412acdbbaae3ab3f0f5e82a7e9a2fad0913581e31de2d4d5b7aa93c3b2c61",
+      "actualSHA256": "d31058c34d79d8f2e0b3448cf3d1c1a916664a663d994a01445eff4f1889856c",
+      "pairSHA256": "812a3240a30c61e6376305bf82bdabfb1de8e070c94cd56cb20bd1fb0d7d8c81",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 94174,
+      "exactDifferentPixels": 391578,
+      "tolerantDifferentPercent": 7.2665,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325735983,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "630849f720038fbf91e19d8339153d17ad596097e8a2d020e2ce96ab6c6ade68",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Bass A matches. The original raw faders and native per-part peak/Mute/Solo remain unresolved.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "07-master": {
+      "page": 7,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "07-master.png",
+      "originalSHA256": "223f99f93784b51a6b5b6daf0b39cb649d389fb53331193ce7dffc3752b09f0a",
+      "actualSHA256": "9d802c450d21f3ae6d678abdef8045242e004b1f1c67d3054eb6ca7c6dd18224",
+      "pairSHA256": "20b3b4c9c3ca0417107fb27d51b6f1ab2ced92ed70bff812844cd45b3dc0c82e",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 79436,
+      "exactDifferentPixels": 417553,
+      "tolerantDifferentPercent": 6.1293,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736373,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "7e8ce807a2ae9a2be7b9cb46c27c86ffbadeaf783f287b443fe2dca4d0ab7040",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Bass A matches. The exact source role controls are used and owner raw master settings remain unspecified.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "08-fx": {
+      "page": 8,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "08-fx.png",
+      "originalSHA256": "52448fe6ee62793e9498fa781d79eb24fe6e9035cbe9839d9ff3e1b3cae57fc6",
+      "actualSHA256": "99c4d726393e7d8e8c7addfbb1dff4f8f2fb31d7811f000ba15db6d23818c54a",
+      "pairSHA256": "d12a889601c5577f7ef7cb6a85cf8103a3e2cce7698b4203a588bb480f50a9f2",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 120067,
+      "exactDifferentPixels": 300552,
+      "tolerantDifferentPercent": 9.2644,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736865,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "2e13f9ac2de56911974617474606e5f6549fa5fd92ecebf2d1e3a62d4a762e13",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Bass A matches. The exact source role controls are used and owner raw FX values/phase remain unspecified.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "09-patterns": {
+      "page": 9,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "09-patterns.png",
+      "originalSHA256": "aa18ca6e4b5727d666cb1f773218b0029e96993b32324bd47435da4a2b29f52a",
+      "actualSHA256": "faf7655cf2a798658615357da49f515a0c7d0e6ae3fc1219147b4636f7f0b36e",
+      "pairSHA256": "b80b6a2e0101b959b6cbd5a14d855f567c42563f7796399dbd404ac5f255ced0",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 89234,
+      "exactDifferentPixels": 441298,
+      "tolerantDifferentPercent": 6.8853,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "patterns",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325736983,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "Bass A \u00b7 P1 selected \u00b7 Not loaded",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "333fb4ae4027823bde68b154bee64ffc2e804cbec67ef445419f20fb451890fb",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Local Bass A P01 selection matches. The pictured native queue/copy/paste/clear/chain provider is open.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "10-song": {
+      "page": 10,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "10-song.png",
+      "originalSHA256": "f91cd729b35840991389f80f10615e1f3b594359f5fb0e5af6221846eff8cd0a",
+      "actualSHA256": "e335f58694534c989bceab5f7ac83ebfd2b10a5b1f161b5036a5aac7285e8f5b",
+      "pairSHA256": "16e941f5452be47ba306d156f810b384f5b8577c77511ff9d5116d3bb0539faa",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 106229,
+      "exactDifferentPixels": 862057,
+      "tolerantDifferentPercent": 8.1967,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIFFERENT_ROW_COUNT",
+        "reason": "One actual authored row versus the depicted one active row and four future empty rows.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "song",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325379816,
+        "midiCalls": 0
+      }
+    },
+    "11-generator": {
+      "page": 11,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "11-generator.png",
+      "originalSHA256": "98bb9b7365c65664f2c613c1f4c614df7619129ffb5cd686539379de3093605f",
+      "actualSHA256": "0aa4d0dcd09cdb918bce1c2361fa0a43a0d85df85406dbab8420d31909a0f667",
+      "pairSHA256": "4a7c0dedcefb8ec8ffb7c98c8393d9329f7cd8c3a4eaeadf98d34a65f3fff272",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 115019,
+      "exactDifferentPixels": 544955,
+      "tolerantDifferentPercent": 8.8749,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "NO_MATCHING_REFERENCE",
+        "reason": "The screenshot shows Generator. The PDF shows Slices with a Generator navigation action.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "breaks",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325380084,
+        "midiCalls": 0
+      }
+    },
+    "11-slices": {
+      "page": 11,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "11-slices.png",
+      "originalSHA256": "98bb9b7365c65664f2c613c1f4c614df7619129ffb5cd686539379de3093605f",
+      "actualSHA256": "6240b6450af46633e91f45730686ca80241925ddeafdb14ec91bb9fadc9b7027",
+      "pairSHA256": "009a18e41ca5a9678a0028a3d742ad5bbeea98aae6d55349cf49861e34b41ff8",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 119484,
+      "exactDifferentPixels": 601004,
+      "tolerantDifferentPercent": 9.2194,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIAGNOSTIC",
+        "reason": "Actual source and documented inputs are retained for independent approval."
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "breaks",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325379977,
+        "midiCalls": 0
+      }
+    },
+    "12-projects": {
+      "page": 12,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "12-projects.png",
+      "originalSHA256": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+      "actualSHA256": "fa29dc089da63fd17f3ec07f02972a104281c65b52e3e5b6938e74b11c725df1",
+      "pairSHA256": "b60d627044478945469acd87c527328fe85c030f2c5340fa235a12bb9451eb1c",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 84798,
+      "exactDifferentPixels": 257155,
+      "tolerantDifferentPercent": 6.5431,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "files",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325737497,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "32aa270780151d68759b736e2c30c505838d0073760519f493992eb3b7e804b1",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Bass A matches and the one authored Song row is preserved. The drawing does not specify the whole Draft.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "13-connect": {
+      "page": 13,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "13-connect.png",
+      "originalSHA256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "actualSHA256": "a6e83e23c9742a9ddd3b3164cdd5e4b1f9aacd2c2c23d26ce16a54e2ca410134",
+      "pairSHA256": "ce62affa40036c5d801060dbeec0618886df530dc1195c3180325f3ad92e6855",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 104554,
+      "exactDifferentPixels": 273995,
+      "tolerantDifferentPercent": 8.0674,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "COMBINED_REFERENCE",
+        "reason": "The PDF combines Connection with Draft Review and instrument state reads.",
+        "pixelAcceptanceEligible": false,
+        "knownSelectedPartDifference": "The combined drawing selects Bass A; the separate actual capture retains BREAK."
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "breaks",
+        "pattern": "P01",
+        "view": "files",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325380418,
+        "midiCalls": 0
+      }
+    },
+    "13-review": {
+      "page": 13,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "13-review.png",
+      "originalSHA256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "actualSHA256": "8b4888af8bc29602954cbcb7b6d56834fd242ca414baec670324fa8659687c01",
+      "pairSHA256": "62f63870c6f1cb37c79dab1552c94118afa9b577cd922357266c6dc2af212491",
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "tolerantDifferentPixels": 138350,
+      "exactDifferentPixels": 1201580,
+      "tolerantDifferentPercent": 10.6752,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "COMBINED_REFERENCE",
+        "reason": "The PDF review lists two Bass A note edits; the actual split workflow is separately captured.",
+        "pixelAcceptanceEligible": false,
+        "knownSelectedPartDifference": "The combined drawing selects Bass A; the separate actual capture retains BREAK."
+      },
+      "observed": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "body": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "breaks",
+        "pattern": "P01",
+        "view": "files",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325380293,
+        "midiCalls": 0
+      }
+    },
+    "14-notes": {
+      "page": 14,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "14-notes.png",
+      "originalSHA256": "3a45f9d6da0cfac191bfcb2fc72034ae925909c25832ec0e622444cbe2945fd5",
+      "actualSHA256": "130a7a8094f21cc521b0695ef392a8cf37318fbec727c72215f3696cd8e3dc04",
+      "pairSHA256": "9454d5fec7359f906ad5414683e19f8ca4e61d6501db43123830d23905ddc5b3",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 52740,
+      "exactDifferentPixels": 224445,
+      "tolerantDifferentPercent": 16.0226,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "SUPERSEDED_LAYOUT",
+        "reason": "The old inspector, tool mode and row height differ from the approved touch-first modeless behavior.",
+        "pixelAcceptanceEligible": false,
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325380711,
+        "midiCalls": 0
+      }
+    },
+    "15-steps": {
+      "page": 15,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "15-steps.png",
+      "originalSHA256": "0a847adfb02200d5d064d1d5eb2d6d2bcaff233b9f2a8b92a765a0648986c158",
+      "actualSHA256": "80ca31b1b0fc8f23fdc38c98f0cfdfd4bfffbccbe84d5c16b22590dbac591dea",
+      "pairSHA256": "ac0a35596959e7e607480ac456ef21ff39587f1e7137c5611d8d7ef7c239fb9a",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 51145,
+      "exactDifferentPixels": 134686,
+      "tolerantDifferentPercent": 15.538,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIAGNOSTIC",
+        "reason": "Actual source and documented inputs are retained for independent approval.",
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "drum909",
+        "pattern": "P01",
+        "view": "drums",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325380895,
+        "midiCalls": 0
+      }
+    },
+    "16-levels": {
+      "page": 16,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "16-levels.png",
+      "originalSHA256": "b68c2b0e78ef78aa9b5b570b925643005dbf6283758dd97f5d1b022a470c694b",
+      "actualSHA256": "2bf12907ffb586bbe9df8659b403be6e79e07773e0b9fb05296518cdc3140cec",
+      "pairSHA256": "36139a1a52d34c5a7758f6f9ffb5d185148c5d24b373a50883f6626c300de600",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 38974,
+      "exactDifferentPixels": 110358,
+      "tolerantDifferentPercent": 11.8404,
+      "atMostTwoPercentByMetric": false,
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325738421,
+        "midiCalls": 0,
+        "connection": "Not connected",
+        "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+        "selectedPart": "chicago"
+      },
+      "supersedesCaptureSHA256": "852577629bb7f0083a4d88b1a26480f4b0be03d68fa0fe1834a3f702fda39fd3",
+      "ownerComparison": {
+        "state": "KNOWN_SELECTION_MATCH_DIAGNOSTIC",
+        "reason": "Bass A and idle connection status match. Owner raw faders and native telemetry remain unresolved.",
+        "pixelAcceptanceEligible": false
+      }
+    },
+    "17-motion": {
+      "page": 17,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "17-motion.png",
+      "originalSHA256": "be872aa194e80d59cdc33054c477ee3f6ee0c08d8107d0a59957db5a3aaf98f7",
+      "actualSHA256": "61567a5fa7290ef4ecbb3e789eb76867808c8505dbcf741b8f45fb50b0f97f4f",
+      "pairSHA256": "d48038243e778133c6021536cddc3ccd72fcdcadb7ca4c021a61e447590db020",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 58474,
+      "exactDifferentPixels": 223165,
+      "tolerantDifferentPercent": 17.7646,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "UNKNOWN_STATE",
+        "pixelAcceptanceEligible": false,
+        "reason": "Page 17 has a superseded timing inspector and no selected lock target or raw lock value. The current Motion view is a different state.",
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "locks",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325381247,
+        "midiCalls": 0
+      }
+    },
+    "18-bassdrum": {
+      "page": 18,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "18-bassdrum.png",
+      "originalSHA256": "95009a75503c1fce4c92681c7a3e6c2a0f7e5f255eae8ea9de058fd1aa6ccf65",
+      "actualSHA256": "d708bfb0168da1675456d59e89ac5bcdf50390225ef62fe44ccbcbdd61c901cd",
+      "pairSHA256": "8dedd5f42c921e4d02471eaa57b9dc0c78d3fc8aa266443ae9ce9f240a19538d",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 39410,
+      "exactDifferentPixels": 76305,
+      "tolerantDifferentPercent": 11.9729,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DISTINCT_STOCK_PARAMETER",
+        "reason": "The pictured Accent gain and rendered kit Velocity use separate firmware identities.",
+        "pixelAcceptanceEligible": false,
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "drum909",
+        "pattern": "P01",
+        "view": "sound",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325381386,
+        "midiCalls": 0
+      }
+    },
+    "19-patterns": {
+      "page": 19,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "19-patterns.png",
+      "originalSHA256": "a01fa1b871a3b83b48a838581f241c41eef1407c5d9b0d4faf6e39cb85c94153",
+      "actualSHA256": "5bcb2e477bbd93a5a9ef6aacd3205e29b3f1bd9e3d8344d630f8ba2752ec9330",
+      "pairSHA256": "54fa58312a42501224f29a9315795d8de159db5e85b63e3921f4509328e9733e",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 49071,
+      "exactDifferentPixels": 104916,
+      "tolerantDifferentPercent": 14.9079,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIAGNOSTIC",
+        "reason": "Actual source and documented inputs are retained for independent approval.",
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "patterns",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325381586,
+        "midiCalls": 0
+      }
+    },
+    "20-projects": {
+      "page": 20,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "20-projects.png",
+      "originalSHA256": "e8d0b47fdf5315b00ef67b25423f17ada6e2a4db237f11f6fb9fa9f40eac833d",
+      "actualSHA256": "d314493e4214799e9c0f976a186b04e81d29065fb431743ce3772d3ddd52c175",
+      "pairSHA256": "10c6240ab6b85c3555bbf4406c0fedda7f664fd1f236879527f9344d7b6eb2ec",
+      "nativeSize": [
+        844,
+        390
+      ],
+      "tolerantDifferentPixels": 35399,
+      "exactDifferentPixels": 64487,
+      "tolerantDifferentPercent": 10.7543,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "DIAGNOSTIC",
+        "reason": "Actual source and documented inputs are retained for independent approval.",
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing.",
+        "pixelAcceptanceEligible": false
+      },
+      "observed": {
+        "viewport": [
+          844,
+          390
+        ],
+        "body": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "files",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325381665,
+        "midiCalls": 0
+      }
+    },
+    "21-notes": {
+      "page": 21,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "21-notes.png",
+      "originalSHA256": "2f1a8e8d4edf4a5614725884f5e9780014b1a9489b5fec2b49a501d90208c162",
+      "actualSHA256": "d964ae1d72c4d6f206526ae703603b3ff936f79ec233ac078e7a8360f6261d89",
+      "pairSHA256": "37b7223a8c2142aff5e74e79b2225b26f4216739c6e5bb23867ce189dcc76d82",
+      "nativeSize": [
+        390,
+        844
+      ],
+      "tolerantDifferentPixels": 53144,
+      "exactDifferentPixels": 187757,
+      "tolerantDifferentPercent": 16.1453,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "SUPERSEDED_LAYOUT",
+        "reason": "The old tool and selected-note inspector differ from the current one-lane layout.",
+        "pixelAcceptanceEligible": false,
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          390,
+          844
+        ],
+        "body": [
+          390,
+          844
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325381793,
+        "midiCalls": 0
+      }
+    },
+    "22-gate": {
+      "page": 22,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "22-gate.png",
+      "originalSHA256": "b2cd1958101c9eff33cf2164eea6084b501d92e4480020209ab3b5e70fedb7e2",
+      "actualSHA256": "f7245bf7826649a64a75f02cad04f453c94c722d48c9b4f931d4cc804169774a",
+      "pairSHA256": "3775eb73e57cde43d76499d2e2bd4429312a2ace595624544a6f099f02bc2a99",
+      "nativeSize": [
+        390,
+        844
+      ],
+      "tolerantDifferentPixels": 48159,
+      "exactDifferentPixels": 223250,
+      "tolerantDifferentPercent": 14.6309,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "SUPERSEDED_INSPECTOR",
+        "reason": "The old Step Inspector was removed by the written correction. The actual Gate lane is the current workflow.",
+        "pixelAcceptanceEligible": false,
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          390,
+          844
+        ],
+        "body": [
+          390,
+          844
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "roll",
+        "lane": "gate",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325382040,
+        "midiCalls": 0
+      }
+    },
+    "23-levels": {
+      "page": 23,
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "rawFilename": "23-levels.png",
+      "originalSHA256": "52fd07dac71aa73277178c8417de8f29613012e540903486398063d0644f350d",
+      "actualSHA256": "ee66f4771559cc52654e0cbb7a890ecb118c091294f70ef2b6ffa6b7cb0c8490",
+      "pairSHA256": "04e4672c629177ea00082932b0458006a621c5e5b8f7e8f38f72b1ff065ab5d6",
+      "nativeSize": [
+        390,
+        844
+      ],
+      "tolerantDifferentPixels": 42411,
+      "exactDifferentPixels": 103767,
+      "tolerantDifferentPercent": 12.8846,
+      "atMostTwoPercentByMetric": false,
+      "ownerComparison": {
+        "state": "REFERENCE_SELECTION_AND_PROVIDER_DIFFERENCE",
+        "reason": "The reference highlights Sequence on a Mix body. The actual Mix is selected; per-part telemetry/providers differ.",
+        "pixelAcceptanceEligible": false,
+        "knownConnectionStatusDifference": "Actual post-Connect catalog status differs from idle Not connected on the drawing."
+      },
+      "observed": {
+        "viewport": [
+          390,
+          844
+        ],
+        "body": [
+          390,
+          844
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "part": "chicago",
+        "pattern": "P01",
+        "view": "mix",
+        "lane": "velocity",
+        "tempo": "120 BPM",
+        "clockEpochMs": 1795325382192,
+        "midiCalls": 0
+      }
+    }
+  },
+  "registeredCaptureSources": {
+    "remote-sequence-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "de2df305ccb86fcabef92e6a08d7130695ca773ad0a68eba0dd162edd2824d72",
+      "filename": "remote-sequence-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sequence",
+      "observedLayoutView": null,
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-chance-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "27f6a9e9232826050a7f93f8ba593b7976fdc6102e2e122c978402474f2dc524",
+      "filename": "remote-lane-chance-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-chance",
+      "observedLayoutView": null,
+      "lane": "chance",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pitch-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "039c90807a362eeeb19a91a173211a46aba2e0adf1bda8d5d20a810b9ee25701",
+      "filename": "remote-lane-pitch-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pitch",
+      "observedLayoutView": null,
+      "lane": "pitch",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pan-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "177bb5ea8cc70e1d241135ff340f3decb94659869758be80ac5215b572e53929",
+      "filename": "remote-lane-pan-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pan",
+      "observedLayoutView": null,
+      "lane": "pan",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sound-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "0339be483953c83825517dcb7af6f9af31e1c0e51dbe8d0d81d89d734afdb9fb",
+      "filename": "remote-sound-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sound",
+      "observedLayoutView": "sound",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-mix-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "898f03f6f34510c375beaf02d41da232a58a204da22e4ad3c6eca18fc773d6e7",
+      "filename": "remote-mix-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "mix",
+      "observedLayoutView": "mix",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-patterns-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "0e1a0a5fda233eff5158211c57ede9923f33c980352388848153914ff5607652",
+      "filename": "remote-patterns-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "patterns",
+      "observedLayoutView": "patterns",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-files-1440x900": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0",
+      "filename": "remote-files-1440x900.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "files",
+      "observedLayoutView": "files",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sequence-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "d9260c9b44e34e7ac471211a991f84263c51058c1529bd330adf8a4a2318e974",
+      "filename": "remote-sequence-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sequence",
+      "observedLayoutView": null,
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-chance-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "e9e2018a4df434ce977894bfecb29c331e1c2aa3413745ebdd2b421a6a1b1bee",
+      "filename": "remote-lane-chance-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-chance",
+      "observedLayoutView": null,
+      "lane": "chance",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pitch-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "4a50ae0cdd132709ec24176dea4cdb87e827c3a8affa89d7596d9a630d1b82b2",
+      "filename": "remote-lane-pitch-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pitch",
+      "observedLayoutView": null,
+      "lane": "pitch",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pan-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "5ce3439770f8f2f15295ea68632c6658c70fad439ab587add50dc72c8f385e1c",
+      "filename": "remote-lane-pan-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pan",
+      "observedLayoutView": null,
+      "lane": "pan",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sound-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "ada6f72b7e86df956655db254ca28da1b073c4eb3e8b6c29e7784b977b81f4f5",
+      "filename": "remote-sound-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sound",
+      "observedLayoutView": "sound",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-mix-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "4b6637e2911b875be01860633070dc25d24b31be68608dd6cc7d46864e0016ee",
+      "filename": "remote-mix-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "mix",
+      "observedLayoutView": "mix",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-patterns-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb",
+      "filename": "remote-patterns-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "patterns",
+      "observedLayoutView": "patterns",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-files-1024x640": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "4a2234507d5f0c224d1238b86b6f25f2141bec56c2c5cb31346f6b37287d6562",
+      "filename": "remote-files-1024x640.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "files",
+      "observedLayoutView": "files",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sequence-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "567a77ab09baee680830aafac22f0e2ae0b399b7dda53757b20d6287d926b0b8",
+      "filename": "remote-sequence-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sequence",
+      "observedLayoutView": null,
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-chance-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "96bacca49f623319db76618adc81dbd235873f41ef7c294bcd180d6204f7607a",
+      "filename": "remote-lane-chance-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-chance",
+      "observedLayoutView": null,
+      "lane": "chance",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pitch-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "273233c6f4a43f2a0ad1abd332566a8b3782f8d62321b85e53ab40af43a9b6dc",
+      "filename": "remote-lane-pitch-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pitch",
+      "observedLayoutView": null,
+      "lane": "pitch",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pan-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "064d3170e8741ced1a490b9af9ce9aa40c3ed527dabb4b283933781afde8fbb1",
+      "filename": "remote-lane-pan-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pan",
+      "observedLayoutView": null,
+      "lane": "pan",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sound-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "ffefcbf4f78e1751fef24ba5eb02e55ecef587a8a5490769819cd7539734d354",
+      "filename": "remote-sound-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sound",
+      "observedLayoutView": "sound",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-mix-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "266aa2d172b355f685c6853a554637de65707aea3efecdb5a634a795956e68da",
+      "filename": "remote-mix-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "mix",
+      "observedLayoutView": "mix",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-patterns-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "85904d59bf231fcbeba420c25d8ca5ba52f0bd2ebd5fb18ef29e5b7eba918a6f",
+      "filename": "remote-patterns-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "patterns",
+      "observedLayoutView": "patterns",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-files-844x390": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "89c34a8d09e2ed6b745ef6229fa7ed81f18b8ea319003411bb563db6e1e31ddb",
+      "filename": "remote-files-844x390.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "files",
+      "observedLayoutView": "files",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sequence-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "19735a36293c5420d17b539520c529d114c8294ebf31d4a359749b135c36c3a8",
+      "filename": "remote-sequence-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sequence",
+      "observedLayoutView": null,
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-chance-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "5e87f2bff1682ac3d2fe8b200da53457296ab4ced6a7f298c6104f9b49beb6b6",
+      "filename": "remote-lane-chance-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-chance",
+      "observedLayoutView": null,
+      "lane": "chance",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pitch-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "bfe45195295d7168688e5e2848cc78ff9ffad7fe5d07f6f74da68bb34dfe3167",
+      "filename": "remote-lane-pitch-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pitch",
+      "observedLayoutView": null,
+      "lane": "pitch",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-lane-pan-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "45f2b9b83318ef860e36b0600ab767fe57a3e07ad9359d3996d5bc054dda1bb6",
+      "filename": "remote-lane-pan-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "lane-pan",
+      "observedLayoutView": null,
+      "lane": "pan",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-sound-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "71092334dd60ef3d92b3e2c9fc20641c48b51bb28775009a4e40a82494fd7ca2",
+      "filename": "remote-sound-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "sound",
+      "observedLayoutView": "sound",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-mix-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "d7fb2adfd799eb18aada72574266a99a0eb4d46d8adc75aa291521614c6622db",
+      "filename": "remote-mix-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "mix",
+      "observedLayoutView": "mix",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-patterns-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2",
+      "filename": "remote-patterns-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "patterns",
+      "observedLayoutView": "patterns",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    },
+    "remote-files-390x844": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "0a45e2c49dde40ded2194a2993cba42fd3b5b50fe31dd5bd7e707e31c199ad25",
+      "filename": "remote-files-390x844.png",
+      "comparison": "NOT_RECOVERED",
+      "requestedRoute": "files",
+      "observedLayoutView": "files",
+      "lane": "velocity",
+      "captureMethod": "Fresh registered candidate, frozen clock and random seed"
+    }
+  },
+  "changedSoundFrames": 20,
+  "soundCaptureSources": {
+    "1440x900-chicago-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "74f5bd4837b02e1be4faf8a857179a864e7e1e23b3139dc5f32e1a1bfe550cdd",
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1440x900-chicago-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "660c34b44a9c25a74cbf8d93cb1db2f0658867c50001f17a1f5f26fed69393ee",
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1440x900-miami-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "2aee1fbcdfb390226d3f07811ce705f4e6ec670bb94fb56f0c4616c91ef12058",
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1440x900-miami-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "b9bbe632163f7702a3f659d7fa2df5a7333a662089abf302cf8479336b403290",
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1440x900-breaks": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "f88398669f29a9cc1148db87161fa68215e3d4afe449ce1ebcb6c0684313e3df",
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "breaks",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1024x640-chicago-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "57a3a12d75a337c89048b9a5ea3e55703c290120db4f447a89785c94feeeccf2",
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1024x640-chicago-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "e65ae430c12b8ab53e6355272f8910eb45f604251832f15e02a21c5064facc8d",
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1024x640-miami-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "cee9bc93d3cd46cfd6253c705f8762dbfe0afc853022ff9fff3c165c3d345360",
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1024x640-miami-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "572cad0210df338c4e40dd3137f501ecff6068460586993a5918cde71a94afd9",
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "1024x640-breaks": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "6d25a9eb85b8b1a0a28dc5a89464604382cb46f26ea2967236cc8010c9be58ac",
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "breaks",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "844x390-chicago-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "8c3b02b05305ffbfd38867ccb1e953d13ce0e02a9cbca4cc58e496fdd3f9ae5f",
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "844x390-chicago-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "f32916aa453deb7cda786870a3ee9933e0bdd8a5445d9dc491f6b3911a638159",
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "844x390-miami-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "ca3ddb7cb21e4944611f4f923abc4ceb9fe27bc07b25fd500160b2da92826612",
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "844x390-miami-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "07e69494f4c385b6e68583e8b8ae48643cc2d44cde25819d06c12fd45bc1b011",
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "844x390-breaks": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "26c26e38be1e3f9bc30309232c607d034a1977c7f861d1ad34ebfc27e715ab27",
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "breaks",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "390x844-chicago-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "a7b8bee1e41251dd395826affbe155c0a59ac611219c01ed696452222be2e33e",
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "390x844-chicago-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "1690f6e39dda4d9bddbdde067cefb8ad51239a3690d7b96946ae95d06d333efa",
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "390x844-miami-chicago": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "ccbc3b090b714d8a44216f07a6ff1f4a13bec8980f98aedc00637f785647386d",
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-chicago",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "390x844-miami-miami": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "0ac4375e68cc1e0717b7909fceaa1beb2477b6b88d40eeb097bbad14141364f5",
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-miami",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    },
+    "390x844-breaks": {
+      "captureSource": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+      "sha256": "e7a95cb323cf42f3a28292e6354535c95c924c5bd11435493a5d2a3245005bdd",
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "breaks",
+      "captureMethod": "Fresh stopped Draft, built-in source bank, unfrozen clock, full viewport"
+    }
+  },
+  "ownerApproval": "PENDING_MATCHED_OWNER_REFERENCES",
+  "ownerMetricScope": "Unmasked pixel distance for diagnostic pairs. Inspect each ownerComparison classification for known context and eligibility.",
+  "targetedOwnerSelectionCorrections": [
+    "06-levels",
+    "07-master",
+    "08-fx",
+    "09-patterns",
+    "12-projects",
+    "16-levels"
+  ],
+  "archiveLocations": {
+    "owner": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/owner-final-assembly/qualified/lane-remote-resume-0130-133fe8f0f917-owner-pdf-pairs.tar.gz",
+    "registered": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/owner-final-assembly/final/lane-remote-resume-0130-133fe8f0f917-registered-32.tar.gz",
+    "sound": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/owner-final-assembly/qualified/lane-remote-resume-0130-133fe8f0f917-sound-20.tar.gz"
+  },
+  "targetedOwnerReceiptSHA256": "7a7197560316311511c50bc6f9d9fd1cff6a110d4e32b0618914b89d89e178dd"
+}
