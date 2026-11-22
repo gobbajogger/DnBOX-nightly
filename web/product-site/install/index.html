@@ -439,17 +439,17 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
 .channel-label{font:700 11px var(--mono);color:var(--dim);white-space:nowrap;border:1px solid var(--rule);padding:4px 7px;border-radius:3px}
 .release-notice{margin:0 0 20px;border-left:3px solid var(--busy);padding:12px 16px;background:var(--card);font-size:14px}.release-notice p{margin:4px 0 0;color:var(--dim)}
 @media(max-width:600px){.header-top{flex-wrap:wrap;gap:12px}.head-nav{order:4;flex-basis:100%;margin:0;gap:20px;padding-bottom:10px}.channel-label{font-size:10px}.lang{margin-left:auto}.release-notice{font-size:13px}}
+.site-head .hero{display:block;padding:0;min-height:0}
+.site-head:has(#samples-tab[aria-current]) .hero,.site-head:has(#projects-tab[aria-current]) .hero{display:none}
+.header-top .lang{margin-left:auto;flex:none;white-space:nowrap}
+.installer-starting-breaks>summary{min-height:44px;align-content:center;color:var(--dim);font-size:14px}
 </style>
 <link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
 <body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#workspace-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
-<a class="skip-link" href="#workspace-main">Skip to task</a>
-<main id="workspace-main"><p class="starting-link"><a href="../starting-breaks/">Choose starting breaks</a></p><section id="samples" aria-label="Starting breaks"><div id="sample-picker"></div><p id="samples-status" role="status" aria-live="polite"></p><button type="button" id="download-breaks" disabled>Download chosen breaks</button><p id="download-status" role="status" aria-live="polite"></p></section><script type="module" src="../install.mjs"></script>
-  <header class="site-head">
+<main id="workspace-main"><script type="module" src="../install.mjs"></script>
+  <div class="site-head">
     <div class="header-top">
-      <a class="home" href="../" aria-label="DnBOX home">DnBOX</a><span class="channel-label">SMK-37 · NIGHTLY</span>
-      <nav class="head-nav" aria-label="Site navigation">
-        <a href="../manual/" data-t="navmanual">Manual</a><a href="../new/">Changes</a><a href="https://github.com/gobbajogger/DnBOX-nightly">Source</a>
-      </nav>
+      <span class="channel-label">SMK-37 · NIGHTLY</span>
       <button class="lang" id="lang" type="button"></button>
     </div>
   <nav class="workspace-nav" aria-label="Choose a task"><a href="#firmware" id="firmware-tab" aria-current="page">Install firmware</a><a href="#samples" id="samples-tab">Import samples</a><a href="#projects" id="projects-tab">Songs &amp; projects</a></nav>
@@ -461,7 +461,7 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
       </div>
 
     </div>
-  </header>
+  </div>
 
 
   <p id="workspace-message" role="status" aria-live="polite"></p>
@@ -469,8 +469,8 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
 
 
 
-  <section id="samples-panel" aria-label="Sample workspace" hidden><iframe id="sample-frame" title="Import break loops, back up or restore sample slots" src="../breaks/?embedded=1" allow="midi"></iframe><p class="small"><a href="../breaks/">Open sample tools separately</a> if this panel does not load.</p></section>
-  <section id="projects-panel" aria-label="Songs and projects workspace" hidden><iframe id="project-frame" title="Import or export a whole song project; reset project while keeping samples" src="../projects/?embedded=1" allow="midi"></iframe><p class="small"><a href="../projects/">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>
+  <section id="samples-panel" aria-label="Sample workspace" hidden><iframe id="sample-frame" title="Import break loops, back up or restore sample slots" src="../breaks/index.html?embedded=1" allow="midi"></iframe><p class="small"><a href="../breaks/">Open sample tools separately</a> if this panel does not load.</p></section>
+  <section id="projects-panel" aria-label="Songs and projects workspace" hidden><iframe id="project-frame" title="Import or export a whole song project; reset project while keeping samples" src="../projects/index.html?embedded=1" allow="midi"></iframe><p class="small"><a href="../projects/">Open Songs &amp; projects separately</a> if this panel does not load.</p></section>
   <div id="firmware-panel">
   <aside class="release-notice" aria-label="Release status"><strong>DnBOX 0.0.26 is the latest release</strong><p>The owner verified startup and restart on a real SMK-37 Elite and SMK-37 Pro with build 94197fc8. Choose 0.0.25.1 for the fallback. The earlier 600b build remains withdrawn. <a href="../new/">Release status</a></p></aside>
 
@@ -587,6 +587,9 @@ p{max-width:76ch}h1,h2,h3{text-wrap:balance}button,a,input,select,summary{touch-
   <details class="connection-help"><summary>Connection &amp; recovery help</summary><p class="small" data-t="direct"></p><p class="small" data-t="helptext"></p><p class="small"><a href="../manual/" data-t="helpmanual">Open the manual</a></p>  <p class="small" id="recovery"><span data-t="brick"></span>
     <a href="https://github.com/gobbajogger/DnBOX/issues" style="color:inherit" data-t="bricklink"></a></p>
   <p class="small" data-t="back"></p></details>
+  <details class="installer-starting-breaks"><summary>Choose starting breaks</summary>
+    <section aria-label="Starting breaks"><div id="sample-picker"></div><p id="samples-status" role="status" aria-live="polite"></p><button type="button" id="download-breaks" disabled>Download chosen breaks</button><p id="download-status" role="status" aria-live="polite"></p></section>
+  </details>
   <section class="sample-prep" id="prepare-samples" aria-labelledby="prep-title">
     <div class="prep-head"><div><h2 id="prep-title">Prepare a sample</h2><p>Listen first. Connect when you’re ready.</p></div><label class="prep-file" for="prep-file"><span >Choose your audio</span><input id="prep-file" type="file" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg" aria-describedby="prep-status"></label></div>
     <div class="prep-workbench">

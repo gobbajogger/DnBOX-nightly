@@ -209,8 +209,8 @@
     },
     {
       "path": "components/break-panel/panel.mjs",
-      "bytes": 4516,
-      "sha256": "615c1257b15350023b6779a748a9878ac8de2eef2e7712bee8ac08059005a073"
+      "bytes": 4532,
+      "sha256": "cd39eee9c52d3d3890b8013706bd39b6a6b21dd90a3ee701105fe333d1dad5af"
     },
     {
       "path": "components/break-picker/picker.mjs",
@@ -259,8 +259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5428379,
-      "sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597"
+      "bytes": 5428335,
+      "sha256": "16566d3b86c0cdbe52e467db144fdf7e0b060db815611fc55051e93081a85f06"
     },
     {
       "path": "install-reports.mjs",
@@ -279,8 +279,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 647982,
-      "sha256": "b5048877d9dbca183f8bb4e43a36bdcd05487f9e63606d311bc509fb127b7097"
+      "bytes": 647996,
+      "sha256": "97935fd4d6ad30d5080516988825a24282fc7100d639c6c60779c45e1c2681f7"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -549,8 +549,8 @@
     },
     {
       "path": "manual/projects-guide.html",
-      "bytes": 16321,
-      "sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
+      "bytes": 16323,
+      "sha256": "b36a11cb8854af8c67d5500dab98d15aa0dbbcac71c7741c58209e3081eb45ee"
     },
     {
       "path": "manual/protocol.html",
@@ -659,8 +659,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 118085,
-      "sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+      "bytes": 118087,
+      "sha256": "4d62e7cb7c00b9151d7b97922ad1d907eb2fea0f851a25fb90929e8dfadd5b43"
     },
     {
       "path": "reference/current-ui.html",
@@ -1099,8 +1099,8 @@
     },
     {
       "path": "site.css",
-      "bytes": 12093,
-      "sha256": "99d33a7a03628c1a4ea32817a5f069a439a360b4d3ffd7315b9815f478fb8aab"
+      "bytes": 13187,
+      "sha256": "fe8093f3843b49d541c2c492303adf308e018b525f6f4597d8e73edca12ccdf7"
     },
     {
       "path": "starting-break-export.mjs",

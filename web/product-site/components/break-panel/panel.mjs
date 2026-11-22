@@ -13,7 +13,7 @@ export async function mountBreakPanel(root,options={}){
  let disposed=false;
  function sync(notify=true){
   const selected=new Set(picker.selectedIds());for(const input of inputs)input.checked=selected.has(input.dataset.asset);
-  status.textContent=selected.size===0?'None':`${selected.size}`;
+  status.textContent=selected.size + ' of ' + assets.length + ' breaks selected';
   const exp=root.querySelector('[data-selection-export]');if(exp) exp.textContent=picker.selectedIds().join(' ');
   const check=picker.assessCapacity(options.availableBytes);
   capacity.textContent=check.status==='insufficient-capacity'?`Insufficient capacity for this selection (${check.encodedPayloadBytes.toLocaleString()} sample bytes before package overhead).`:'';

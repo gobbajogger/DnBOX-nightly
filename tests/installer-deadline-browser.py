@@ -57,6 +57,9 @@ async def main(site):
     if mode=='normal':
      # The installer embeds its own picker. A link to the separate page
      # cannot complete a selection the visitor just made here.
+     assert await p.locator('header:visible').count() == 1
+     assert await p.locator('#sample-picker').is_hidden()
+     await p.get_by_text('Choose starting breaks', exact=True).click()
      picker=p.locator('#sample-picker')
      choices=picker.get_by_role('checkbox')
      await choices.first.wait_for()
@@ -65,6 +68,7 @@ async def main(site):
      button=p.get_by_role('button',name='Download chosen breaks',exact=True)
      assert await button.count()==1, 'Installer sample download control missing'
      assert await button.is_disabled()
+     assert '0 of 5 breaks selected' == await picker.locator('[data-selection-status]').inner_text()
      await choices.first.check()
      async with p.expect_download() as download_event:
       await button.click()

@@ -19,3 +19,16 @@
   .build-record { overflow-wrap: anywhere; }
   .tool-surface .site-head { display: block; }
 }
+
+.break-picker { max-width: 40rem; }
+.break-picker h2 { margin: 0 0 .5rem; }
+.break-actions { display: flex; gap: .5rem; }
+.break-rows { margin: .5rem 0; padding: 0; list-style: none; }
+.break-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: .5rem; padding: .25rem 0; }
+.break-rows label { display: flex; align-items: center; gap: .5rem; min-height: 44px; overflow-wrap: anywhere; }
+.break-rows label input[type="checkbox"] { width: 1.1rem; height: 1.1rem; flex: none; margin: 0; accent-color: var(--accent); }
+.break-rows .duration { color: var(--muted); white-space: nowrap; font-size: .875rem; }
+.break-picker button, #download-breaks { min-height: 44px; padding: .4rem .65rem; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg, var(--ink)); font: inherit; }
+#download-breaks:disabled { opacity: .55; }
+.break-picker audio { max-width: 100%; }
+.break-picker [data-audio-status]:empty, .break-picker [data-capacity]:empty, .break-picker [data-audio]:empty, #download-status:empty { display: none; }
