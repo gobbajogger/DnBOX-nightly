@@ -156,7 +156,44 @@ def sweep(page, origin, site):
     print(f'PASS {len(actual)} named screens, {observations} browser canvas frames, {len(actual)*57600:,} unique-state pixels')
 
 
-def check(site):
+
+def check_seq_sources(page, origin):
+    pins = [
+        ('view-08-part-00-voice-00-page-00', {
+            'shipping': '75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3',
+            'r22': 'aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527',
+        }),
+        ('view-08-part-01-voice-00-page-00', {
+            'shipping': '23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030',
+            'r22': '49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319',
+        }),
+    ]
+    native = dict(row.split('\t') for row in ORACLE.read_text().splitlines())
+    url = origin + '/reference/screens/#'
+    compare = page.locator('#compare')
+    lcd = page.locator('#lcd')
+    source = page.locator('#lcd-source')
+    for width, height in [(1440, 900), (390, 844), (844, 390)]:
+        page.set_viewport_size({'width': width, 'height': height})
+        for state, expected in pins:
+            page.goto(url + state)
+            for selected in ['current', 'shipping', 'r22', 'current']:
+                source.select_option(selected)
+                page.wait_for_selector(f'#lcd[data-state="{state}"][data-source="{selected}"]')
+                image = lcd.evaluate("canvas => canvas.toDataURL('image/png').split(',')[1]")
+                with Image.open(io.BytesIO(base64.b64decode(image))) as pixels:
+                    assert pixels.size == (240, 240)
+                    actual = hashlib.sha256(pixels.convert('RGB').tobytes()).hexdigest()
+                assert actual == (native[state] if selected == 'current' else expected[selected])
+                assert compare.is_visible() == (selected == 'current')
+            assert page.evaluate('document.documentElement.scrollWidth') == width
+    page.goto(url + 'home-playing')
+    page.wait_for_selector('#lcd[data-state="home-playing"][data-source="current"]')
+    assert not source.is_visible()
+    print('PASS two SEQ states, three sources, three viewport sizes, exact 240×240 RGB and native return')
+
+
+def check(site, seq_sources_only=False):
     errors = []
     with ThreadingHTTPServer(('127.0.0.1', 0), partial(Quiet, directory=site)) as server:
         thread = Thread(target=server.serve_forever, daemon=True)
@@ -167,7 +204,10 @@ def check(site):
                 try:
                     page = browser.new_page(device_scale_factor=1)
                     page.on('pageerror', lambda err: errors.append(str(err)))
-                    sweep(page, f'http://127.0.0.1:{server.server_port}', site)
+                    origin = f'http://127.0.0.1:{server.server_port}'
+                    check_seq_sources(page, origin)
+                    if not seq_sources_only:
+                        sweep(page, origin, site)
                     assert not errors, errors
                 finally:
                     browser.close()
@@ -179,12 +219,13 @@ def check(site):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--site', type=Path)
+    parser.add_argument('--seq-sources-only', action='store_true')
     args = parser.parse_args()
     if args.site:
-        check(args.site.resolve())
+        check(args.site.resolve(), args.seq_sources_only)
     else:
         output = ROOT / '.output'
         output.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='fwui-', dir=output) as run:
             subprocess.run(['node', 'scripts/build-product-site.mjs', '--output', run], cwd=ROOT, check=True)
-            check(Path(run))
+            check(Path(run), args.seq_sources_only)

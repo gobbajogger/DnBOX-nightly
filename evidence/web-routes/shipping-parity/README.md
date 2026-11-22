@@ -21,6 +21,16 @@ The [Web LCD](web-909-kick.png) also matches its own native oracle exactly. Its 
 
 ## Independent disposition
 
-The independent reviewer withheld parity approval. The accepted native Web fixture sweep is reusable for its pinned firmware. The archived SVG comparisons, same-role native comparisons, and Remote geometry checks do not establish the required matched cross-surface threshold, shared live phase, or identical envelopes and glyph motion. The next needed inputs are a source- and state-qualified Elite capture, an approved R22 reference for the same state, and a designated Remote comparison surface plus viewport and normalization contract. No product changes were made.
+The independent reviewer withheld parity approval. The accepted native Web fixture sweep is reusable for its pinned firmware. The archived SVG comparisons, same-role native comparisons, and Remote geometry checks do not establish the required matched cross-surface threshold, shared live phase, or identical envelopes and glyph motion. The owner confirmed software-only qualification. The source-pinned 0.0.26 render is the shipping comparator and no physical capture is required. Full comparison still needs the equivalent Remote state/control surface and the matching R22 fixture treatment. The firmware grid and LENGTH/RATE placement are drawn by `firmware/src/app/ui.c` in `draw_drum`, `draw_knobs` and the shared control glyph path. Web's RGB565 canvas already matches its producer, so the shared layout repair needs a scoped FWUI change and refreshed native RGB and WASM pins.
 
 The existing `d68eceb84` route-evidence ZIP was saved to LoopyX0X37 Project Sources and verified after reload by the coordinator. Its recorded SHA-256 is `74bba4c104e471f16345f83f1aa1b6237cf6861df4fa73a5aca7f5a57fd7e9db`.
+
+## Web reference correction
+
+The two SEQ selections expose Current native firmware, Shipping 0.0.26 and R22 directly in the existing LCD. Shipping and R22 draw their pinned software captures at native 240×240 resolution. Current still uses the shared WASM renderer and its native oracle. The source selector appears only for the two qualified views, and the native comparison is suppressed for archived sources. The new comparison view retains the measured layout differences above.
+
+The runtime-backed build produced 269 files. The focused test passed both states and all three sources at 1440×900, 390×844 and 844×390, including exact RGB and return to Current. All 14 product-content checks passed. The independent landscape browser also verified request ordering, reset to native on a non-SEQ state and the restored native comparison button. [Independent log](seq-source-independent.txt).
+
+```sh
+python3 tests/firmware-reference-browser.py --site .output/product-site --seq-sources-only
+```
