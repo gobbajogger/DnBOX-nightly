@@ -1,0 +1,30 @@
+{
+  "nightly_candidate": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "release_source": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+  "built_catalog_sha256": "39ad711aba505308d6dd1fcb1765edd2a8cff69ebcc26f1cd8a1f34b6fca5365",
+  "built_reports_sha256": "44cd5bb4ef55457a6a65a8aab9c36f32c1d5780040aa07899a2fb39a030c2384",
+  "reused_public_receipts_sha256": {
+    "stable": "4cb0ed7cf869bbe576fecb31f098805b8ff6027e9bb156a1805c40ca0dcedc06",
+    "nightly": "f5117e8dfb10e9bc15e0ae1b6901d87d60d7f54365abc822bda62ea7e0a7d709"
+  },
+  "production_pair_default": "closed in current exact Chromium and Lua receipt",
+  "new_hardware_qualification": "NOT_RUN by software-only scope",
+  "models": {
+    "elite": {
+      "product": "SMK-37 Elite_900",
+      "size": 651732,
+      "crc32": "a5953c62",
+      "sha256": "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6",
+      "public_nightly_asset": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc",
+      "public_release_asset": "https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc"
+    },
+    "pro": {
+      "product": "SMK-37 Pro_900",
+      "size": 651730,
+      "crc32": "d8957148",
+      "sha256": "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8",
+      "public_nightly_asset": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc",
+      "public_release_asset": "https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc"
+    }
+  }
+}

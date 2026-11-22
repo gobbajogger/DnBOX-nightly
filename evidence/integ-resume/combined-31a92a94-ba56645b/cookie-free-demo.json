@@ -1,0 +1,16 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "mode": "demo",
+  "scope": "focused exact local software only",
+  "testSha256": "8e659b6dbfec227963d887193015bcdb50a484bc62e54b8fb0832520012eb7e2",
+  "probeSha256": "5a9b54d5ec412bbc2e66bef1a119c38c2732be90bc9a86ad254372efeb809f35",
+  "chromium": "151.0.7922.34",
+  "demo": {
+    "archiveStatusBefore": "Ready.",
+    "playingStatus": "Hold C3.",
+    "resetStatus": "Ready.",
+    "cookies": 0
+  },
+  "result": "PASS",
+  "pageErrors": []
+}

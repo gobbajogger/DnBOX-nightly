@@ -1,5 +1,9 @@
 # Integration baseline
 
+## Exact combined software and render qualification — 2026-11-22 (WORKING)
+
+Nightly `31a92a94` retains consolidated `583f6229` without deleting a consolidated path. The unchanged Local gate failed on the duplicate mounted installer picker and the stale BREAK P2 test selector. The exact pair with firmware `ba56645b` passed Chromium and packed TouchOSC against the production host. The focused suite checked all 19 browser routes, file exchange and 13 native canvas comparisons. Original and Legacy Manual matched four phone baselines. Build History captured both orientations and failed both dimension comparisons. All 32 Remote outputs remain proposals after independent review. [Exact results and repro evidence](../../evidence/integ-resume/combined-31a92a94-ba56645b/README.md)
+
 ## Exact paired wet firmware transport — 2026-11-22 (WORKING)
 
 The [paired wet runtime replay](../../evidence/integ-resume/paired-wet-runtime-1c46c6fc/README.md) uses exact firmware source `1c46c6fc` and Nightly `b0af343`. The reviewed selected module passed actual software Apply, fresh readback, heartbeat, guarded Undo and CLOSE against the wet firmware host in Node and packed TouchOSC. The same two firmware packages passed the native emulated USB round trip. The exact latest Chromium replay is NOT_RUN because the recovered executor denies Chromium's required AF_UNIX socket and the pinned headless shell download returns HTTP 403. The previously reviewed branch-only opt-in remains pinned to its own package pair. Exact normal WIDE Pro timing also remains open.

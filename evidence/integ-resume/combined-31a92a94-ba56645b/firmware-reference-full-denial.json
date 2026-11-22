@@ -1,0 +1,9 @@
+{
+  "command": "timeout 420s python3 -B tests/firmware-reference-browser.py",
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "result": "NOT_RUN",
+  "operationStatus": "DENIED_BY_AUTOMATIC_APPROVAL_REVIEW",
+  "reason": "The requested firmware-reference browser suite is explicitly known to take screenshots, conflicting with the retained instruction not to duplicate visual captures; run a non-capturing parity check instead.",
+  "retry": false,
+  "distinctAlternative": "reference-canvas.json records a direct canvas RGB digest comparison without screenshots on 13 selected state/source pairs. It does not establish full sweep or browser compositor parity."
+}

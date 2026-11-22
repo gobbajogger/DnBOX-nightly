@@ -1,0 +1,76 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "chromium": "151.0.7922.34",
+  "result": "PASS",
+  "screenshots": 0,
+  "nativeOracleStatesEnumerated": 1838,
+  "directCanvasComparisons": [
+    {
+      "state": "01-main-pickup",
+      "source": "current",
+      "sha256": "9bf99fe8311275c9082a1630314134e7ab16ddfd9b39292d32b3c2fa9d883467"
+    },
+    {
+      "state": "boot-crash-diagnostics",
+      "source": "current",
+      "sha256": "36256d7d4697be3cfd338d10fd3d7d71339d595140b9bce36dc10e33a2c9b665"
+    },
+    {
+      "state": "chicago-wave-invalid-lock",
+      "source": "current",
+      "sha256": "a4ddb1ee33a4ae3c910ef64accafe76b213a063bc903c1769b27ad1b4d845a28"
+    },
+    {
+      "state": "boot-custom-picture",
+      "source": "current",
+      "sha256": "44fc1b45aa42eae9a7d5b7ca1b84ff8ef17c282337706c5614b7183ae3442cf4"
+    },
+    {
+      "state": "guard-elite-first-fault",
+      "source": "current",
+      "sha256": "f54e936bce711b86770c7fb014a58e9e60c313a3c46b695d45f56608c9e39caa"
+    },
+    {
+      "state": "bass-A-page-1-k0-overview",
+      "source": "current",
+      "sha256": "eab378fc6f2c4e858a80a07a55984bdb972587295eddb776dcd0d41756a959c0"
+    },
+    {
+      "state": "bass-a-attack",
+      "source": "current",
+      "sha256": "2f164bb558e43dea111b95ab1d59fad0fdac56a531df3e8036ca91c201ca862a"
+    },
+    {
+      "state": "view-08-part-00-voice-00-page-00",
+      "source": "shipping",
+      "sha256": "75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3"
+    },
+    {
+      "state": "view-08-part-00-voice-00-page-00",
+      "source": "r22",
+      "sha256": "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527"
+    },
+    {
+      "state": "view-08-part-00-voice-00-page-00",
+      "source": "current",
+      "sha256": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc"
+    },
+    {
+      "state": "view-08-part-01-voice-00-page-00",
+      "source": "shipping",
+      "sha256": "23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030"
+    },
+    {
+      "state": "view-08-part-01-voice-00-page-00",
+      "source": "r22",
+      "sha256": "49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319"
+    },
+    {
+      "state": "view-08-part-01-voice-00-page-00",
+      "source": "current",
+      "sha256": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf"
+    }
+  ],
+  "pageErrors": [],
+  "oracleSha256": "3dd2954b10030ee590d9389a4ce9485ed0a175b140b7fa946ecbe5b57ff4e0eb"
+}

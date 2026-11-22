@@ -1,0 +1,107 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "mode": "routes",
+  "scope": "focused exact local software only",
+  "testSha256": "8e659b6dbfec227963d887193015bcdb50a484bc62e54b8fb0832520012eb7e2",
+  "probeSha256": "5a9b54d5ec412bbc2e66bef1a119c38c2732be90bc9a86ad254372efeb809f35",
+  "chromium": "151.0.7922.34",
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "h1": "Your sound.\nIn your hands."
+    },
+    {
+      "path": "/breaks/",
+      "status": 200,
+      "h1": "Import samples"
+    },
+    {
+      "path": "/builds/",
+      "status": 200,
+      "h1": "Build history"
+    },
+    {
+      "path": "/help/",
+      "status": 200,
+      "h1": "Bring the rig together."
+    },
+    {
+      "path": "/install/",
+      "status": 200,
+      "h1": "Install firmware"
+    },
+    {
+      "path": "/manual/",
+      "status": 200,
+      "h1": "DnBOX manual"
+    },
+    {
+      "path": "/manual/legacy.html",
+      "status": 200,
+      "h1": "DnBOX"
+    },
+    {
+      "path": "/manual/original/",
+      "status": 200,
+      "h1": "Original FM-1 reference"
+    },
+    {
+      "path": "/manual/projects-guide.html",
+      "status": 200,
+      "h1": "DnBOX projects"
+    },
+    {
+      "path": "/manual/protocol.html",
+      "status": 200,
+      "h1": "DnBOX protocol identifiers (developer reference)"
+    },
+    {
+      "path": "/new/",
+      "status": 200,
+      "h1": "What\u2019s new"
+    },
+    {
+      "path": "/presets/",
+      "status": 200,
+      "h1": "Rename a sound. Keep the sound."
+    },
+    {
+      "path": "/presets/legacy/",
+      "status": 200,
+      "h1": "Earlier DnBOX preset files."
+    },
+    {
+      "path": "/projects/",
+      "status": 200,
+      "h1": "Songs & projects"
+    },
+    {
+      "path": "/remote/",
+      "status": 200,
+      "h1": "DnBOX Remote workspace \u2014 Sequence and Draft ready"
+    },
+    {
+      "path": "/remote/device/",
+      "status": 200,
+      "h1": "Your instrument.\nWithin reach."
+    },
+    {
+      "path": "/remote/identity/",
+      "status": 200,
+      "h1": "Your instrument.\nA wider view."
+    },
+    {
+      "path": "/starting-breaks/",
+      "status": 200,
+      "h1": "Make it your instrument."
+    },
+    {
+      "path": "/tools/",
+      "status": 200,
+      "h1": "Keep the session ready."
+    }
+  ],
+  "result": "PASS",
+  "pageErrors": []
+}

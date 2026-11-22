@@ -7,7 +7,7 @@ Broad unmerged work is retained at `backup/integ-before-start-split-20261116`, e
 
 ## Integration candidate ancestry — 22 November 2026
 
-Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly consolidated is `583f622961fc9975fac746592ce6c483073c4170`. The focused evidence snapshots `45ac00c6d1b99d0b3bcc9823f13ce1898d04f7f4` and `bb948cb9f64f490eac7333d21419f8b7e89388cf` contain those exact bases. The GitHub comparisons show 50 and 57 lane commits respectively, zero consolidated-only commits, and no deleted paths. See [the lane ledger](docs/lanes/integ.md) for current software-only results, the final combined fit dependency and access-dependent checks. The coordinator retains merges and release acceptance.
+Firmware candidate `ba56645b2142b134be3aeee2236406e1c95b2bde` contains consolidated `1d727e2ba118f0c85b20f3ed241ec133e4882d7e`. Nightly candidate `31a92a944c9303940d5409cd213dedba1d47c793` contains consolidated `583f622961fc9975fac746592ce6c483073c4170`. The exact pairs are 0 behind and 147/176 commits ahead, respectively, with no deleted consolidated paths. The [lane ledger](docs/lanes/integ.md) records the combined software results. The coordinator owns merges and release acceptance.
 
 ## Machine-readable roadmap state
 
@@ -22,7 +22,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "merge_sha": "",
       "owner": "integ",
       "dependencies": [],
-      "next_action": "Both focused harness repairs passed. Run the Local gates on the final combined sources and verify authenticated status posting."
+      "next_action": "Resolve the exact candidate Local gate failures and verify an available authenticated status-write path."
     },
     {
       "id": "M1",
@@ -34,7 +34,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Complete exact-head checks and integrate; no move completion asserted"
+      "next_action": "Retain the measured stock-WIDE timing recovery, and complete the remaining Synth One and SuperJ6 parity."
     },
     {
       "id": "M2",
@@ -46,7 +46,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "FWUI #975, #988 and #987 are recorded in firmware consolidated. Final combined screen and runtime evidence remains required."
+      "next_action": "Retain merged FWUI #990 and #991. Preserve #992's separate gate and host failures pending its exact passing gate."
     },
     {
       "id": "M3",
@@ -58,7 +58,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Fit the guarded Remote producer on the composed stock firmware, then verify addressed Apply and Undo, TouchOSC bindings, and changed screens."
+      "next_action": "Keep the stock Remote transport and reviewed branch capabilities. Resolve BREAK browser selection and complete the independent screen review."
     },
     {
       "id": "M4",
@@ -70,7 +70,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Resolve the Build History current-versus-archive copy conflict; qualify the changed references and final firmware display parity."
+      "next_action": "Retain the verified phone History fixes. Resolve the mounted installer picker duplication and complete the combined browser and visual checks."
     },
     {
       "id": "M5",
@@ -82,13 +82,13 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Reuse offline proof for the five bundled BREAK samples and the matching compact-program LeakSanitizer inputs. Verify owner-authenticated vote persistence and inbox refresh."
+      "next_action": "Retain the offline five-sample BREAK readback and untraced compact-program LeakSanitizer proof. Verify owner-authenticated vote persistence and inbox refresh."
     },
     {
       "id": "M6",
       "title": "Combined qualification and delivery",
       "move": "M6",
-      "status": "pending",
+      "status": "working",
       "merge_sha": "",
       "owner": "integ",
       "dependencies": [
@@ -98,7 +98,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
         "M4",
         "M5"
       ],
-      "next_action": "Run both final Local gates and strict ten-minute playback. Give the coordinator exact release prerequisites and stale-ref reachability with protected exclusions."
+      "next_action": "Close both exact Local gates and all-engine strict playback. Hand the coordinator release prerequisites and protected stale-ref reachability after the merges."
     }
   ]
 }

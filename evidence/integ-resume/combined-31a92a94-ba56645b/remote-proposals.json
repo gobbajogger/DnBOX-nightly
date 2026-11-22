@@ -1,0 +1,279 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "branch": "lane/integ-resume-0130",
+  "proposalOnly": true,
+  "approvedBaselinesChanged": false,
+  "disposableSnapshotsOnly": true,
+  "normalBundledChromium": "151.0.7922.34",
+  "runnerSha256": "1dff4bf91ba301b7a6d3212261a491a9b693013f3ac287af2b94517781b496ce",
+  "summarySha256": "cf51b9f76107a16879f985cfc71c5e9e6ce9388326fdf1d80b56390b39f5f04b",
+  "logSha256": "42916f8b43f9880513f865dade621f643c5c508a5620d11cc174ffaf88ca5836",
+  "filteredExit": 1,
+  "summary": {
+    "screens": 37,
+    "pass": 5,
+    "fail": 0,
+    "no_baseline": 0,
+    "baseline_written": 32,
+    "header_fail": 0,
+    "page_errors": 0
+  },
+  "files": [
+    {
+      "file": "remote-files-1024x640-actual.png",
+      "view": "files",
+      "width": 1024,
+      "height": 640,
+      "bytes": 50082,
+      "sha256": "4a2234507d5f0c224d1238b86b6f25f2141bec56c2c5cb31346f6b37287d6562"
+    },
+    {
+      "file": "remote-files-1440x900-actual.png",
+      "view": "files",
+      "width": 1440,
+      "height": 900,
+      "bytes": 91743,
+      "sha256": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0"
+    },
+    {
+      "file": "remote-files-390x844-actual.png",
+      "view": "files",
+      "width": 390,
+      "height": 844,
+      "bytes": 44883,
+      "sha256": "0a45e2c49dde40ded2194a2993cba42fd3b5b50fe31dd5bd7e707e31c199ad25"
+    },
+    {
+      "file": "remote-files-844x390-actual.png",
+      "view": "files",
+      "width": 844,
+      "height": 390,
+      "bytes": 40711,
+      "sha256": "3bab3dab91d9d5fd5f4a1e4c0df1f63b22027c573758dd1acf924258443ed5ba"
+    },
+    {
+      "file": "remote-lane-chance-1024x640-actual.png",
+      "view": "lane-chance",
+      "width": 1024,
+      "height": 640,
+      "bytes": 38854,
+      "sha256": "6c32e67ad983a071db265e83730adccabb8a312e80f87feb882266c07190cd6d"
+    },
+    {
+      "file": "remote-lane-chance-1440x900-actual.png",
+      "view": "lane-chance",
+      "width": 1440,
+      "height": 900,
+      "bytes": 43870,
+      "sha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6"
+    },
+    {
+      "file": "remote-lane-chance-390x844-actual.png",
+      "view": "lane-chance",
+      "width": 390,
+      "height": 844,
+      "bytes": 33522,
+      "sha256": "36590c181353457bf655cde78cf1d32ff69280637491c0bcb4bbf7693bd43909"
+    },
+    {
+      "file": "remote-lane-chance-844x390-actual.png",
+      "view": "lane-chance",
+      "width": 844,
+      "height": 390,
+      "bytes": 34258,
+      "sha256": "8ae552dfe3c2472b9ce04a76ea4d0c397f1d5f320a784655337d0f1c9fbd2617"
+    },
+    {
+      "file": "remote-lane-pan-1024x640-actual.png",
+      "view": "lane-pan",
+      "width": 1024,
+      "height": 640,
+      "bytes": 37533,
+      "sha256": "a3b9e655010bd53ff3574b118eb3ec0b3e1c318ef9e6cc153844900742a2e0b7"
+    },
+    {
+      "file": "remote-lane-pan-1440x900-actual.png",
+      "view": "lane-pan",
+      "width": 1440,
+      "height": 900,
+      "bytes": 42625,
+      "sha256": "79892356340bb915d71c7c0a4ea505735553c4f4b0bb1b97eda88880ee64b3bd"
+    },
+    {
+      "file": "remote-lane-pan-390x844-actual.png",
+      "view": "lane-pan",
+      "width": 390,
+      "height": 844,
+      "bytes": 32556,
+      "sha256": "04d0ca3310a09aa12c1ae551e912f0a1370a6977b10d18826fd9b68d5a8bc6f2"
+    },
+    {
+      "file": "remote-lane-pan-844x390-actual.png",
+      "view": "lane-pan",
+      "width": 844,
+      "height": 390,
+      "bytes": 33099,
+      "sha256": "ea3e7ebb9909532bfba84eaed0586027e60c0f16dcbc50e581fd3e7ea3c987d8"
+    },
+    {
+      "file": "remote-lane-pitch-1024x640-actual.png",
+      "view": "lane-pitch",
+      "width": 1024,
+      "height": 640,
+      "bytes": 38143,
+      "sha256": "32fedfdaef3c9d7cf67f76f6ba1e1629468f86912c6d1f20da86b6e64bbbdd4f"
+    },
+    {
+      "file": "remote-lane-pitch-1440x900-actual.png",
+      "view": "lane-pitch",
+      "width": 1440,
+      "height": 900,
+      "bytes": 43290,
+      "sha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99"
+    },
+    {
+      "file": "remote-lane-pitch-390x844-actual.png",
+      "view": "lane-pitch",
+      "width": 390,
+      "height": 844,
+      "bytes": 32873,
+      "sha256": "bfe45195295d7168688e5e2848cc78ff9ffad7fe5d07f6f74da68bb34dfe3167"
+    },
+    {
+      "file": "remote-lane-pitch-844x390-actual.png",
+      "view": "lane-pitch",
+      "width": 844,
+      "height": 390,
+      "bytes": 33712,
+      "sha256": "5a4188cf23005172c8a36b7719846dbb9184a25218162a1afcfec4cf37d60c67"
+    },
+    {
+      "file": "remote-mix-1024x640-actual.png",
+      "view": "mix",
+      "width": 1024,
+      "height": 640,
+      "bytes": 53523,
+      "sha256": "b75dc83e90b9a0cf0716b3e0959bc39f7d3c31bf34641c3d45f034eed6b195e5"
+    },
+    {
+      "file": "remote-mix-1440x900-actual.png",
+      "view": "mix",
+      "width": 1440,
+      "height": 900,
+      "bytes": 75704,
+      "sha256": "314c76dfc77b9de3f4bb23893156812cd52e71526dd35bcdfd0f18e78c833583"
+    },
+    {
+      "file": "remote-mix-390x844-actual.png",
+      "view": "mix",
+      "width": 390,
+      "height": 844,
+      "bytes": 44327,
+      "sha256": "9b4f08a1897c021193a46b4ec69a5f9959c09de8da74d4e6479d23d369336fb0"
+    },
+    {
+      "file": "remote-mix-844x390-actual.png",
+      "view": "mix",
+      "width": 844,
+      "height": 390,
+      "bytes": 43607,
+      "sha256": "d897445be8d80e53b0cd264089c9a71b0e85bd568f037078f6ffd8359c32c076"
+    },
+    {
+      "file": "remote-patterns-1024x640-actual.png",
+      "view": "patterns",
+      "width": 1024,
+      "height": 640,
+      "bytes": 53232,
+      "sha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb"
+    },
+    {
+      "file": "remote-patterns-1440x900-actual.png",
+      "view": "patterns",
+      "width": 1440,
+      "height": 900,
+      "bytes": 61492,
+      "sha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6"
+    },
+    {
+      "file": "remote-patterns-390x844-actual.png",
+      "view": "patterns",
+      "width": 390,
+      "height": 844,
+      "bytes": 50508,
+      "sha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2"
+    },
+    {
+      "file": "remote-patterns-844x390-actual.png",
+      "view": "patterns",
+      "width": 844,
+      "height": 390,
+      "bytes": 44981,
+      "sha256": "09f2fb86b9f6a2e13f2e9a67386be414768f2d8c9fd0526d99b5eac122e51258"
+    },
+    {
+      "file": "remote-sequence-1024x640-actual.png",
+      "view": "sequence",
+      "width": 1024,
+      "height": 640,
+      "bytes": 38226,
+      "sha256": "31955bfc6c4c01968e70adbd9dcd5f5caeae5165e90b62dea4d3ddeb9ecf1c14"
+    },
+    {
+      "file": "remote-sequence-1440x900-actual.png",
+      "view": "sequence",
+      "width": 1440,
+      "height": 900,
+      "bytes": 43342,
+      "sha256": "13fafd89c61b057d1b381e7eac8ef21642820b12388c5a078d92ceb5d5f764c6"
+    },
+    {
+      "file": "remote-sequence-390x844-actual.png",
+      "view": "sequence",
+      "width": 390,
+      "height": 844,
+      "bytes": 33636,
+      "sha256": "b171cac4bf21d863e000f7fc96b040b7ccf5267a2445da8c4bbda3c083004d4c"
+    },
+    {
+      "file": "remote-sequence-844x390-actual.png",
+      "view": "sequence",
+      "width": 844,
+      "height": 390,
+      "bytes": 33985,
+      "sha256": "0c7c5f7efbffdb46d31535671535486189839c0e4c1245a0b508ad9cf566bc41"
+    },
+    {
+      "file": "remote-sound-1024x640-actual.png",
+      "view": "sound",
+      "width": 1024,
+      "height": 640,
+      "bytes": 45802,
+      "sha256": "afbf2de0906c360d0f7a60815b4c3f24f1b7bced9fbc352b26df55931aa7998c"
+    },
+    {
+      "file": "remote-sound-1440x900-actual.png",
+      "view": "sound",
+      "width": 1440,
+      "height": 900,
+      "bytes": 75657,
+      "sha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a"
+    },
+    {
+      "file": "remote-sound-390x844-actual.png",
+      "view": "sound",
+      "width": 390,
+      "height": 844,
+      "bytes": 47669,
+      "sha256": "86b43032eb1aa0f520df27f7d031059273c514bb79013cde2df4ed2d1b95692f"
+    },
+    {
+      "file": "remote-sound-844x390-actual.png",
+      "view": "sound",
+      "width": 844,
+      "height": 390,
+      "bytes": 34828,
+      "sha256": "f1befe9b09e820de3033d7e81aafba728dfd4aacc2fe7daf2dc5e9aaa8ac9663"
+    }
+  ]
+}

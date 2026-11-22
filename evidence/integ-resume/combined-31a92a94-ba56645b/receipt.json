@@ -1,0 +1,87 @@
+{
+  "nightly_candidate": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "nightly_tree": "15e4509ef8621e6aafed2d40f0b4fe77586bf4fc",
+  "nightly_consolidated": "583f622961fc9975fac746592ce6c483073c4170",
+  "paired_firmware": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+  "paired_production_host_sha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881",
+  "software_only": true,
+  "canonical_gate": {
+    "exit": 1,
+    "terminal": "DNBOX-GATE RESULT FAIL sha=31a92a944c9303940d5409cd213dedba1d47c793 lane=integ log=build/dnbox-gate/31a92a94-20261122-1635.log",
+    "log_sha256": "09c6638c166b3c448f427794a8a05e587fbde0a49948bef57655ab74a4192143",
+    "stages": [
+      [
+        "PASS",
+        "clean-tree"
+      ],
+      [
+        "PASS",
+        "setup"
+      ],
+      [
+        "SKIP",
+        "fetch-base"
+      ],
+      [
+        "PASS",
+        "no-loss"
+      ],
+      [
+        "PASS",
+        "limits"
+      ],
+      [
+        "PASS",
+        "build"
+      ],
+      [
+        "FAIL",
+        "unit-tests"
+      ],
+      [
+        "FAIL",
+        "browser-tests"
+      ]
+    ],
+    "unit_blocker": "Mounted installer renders duplicate picker IDs; the module initializes the first picker inside the closed disclosure.",
+    "browser_blocker": "FunkyBeats BREAK test requests P2 while the accessible pattern label is P02."
+  },
+  "visuals": {
+    "remote_proposals": 32,
+    "remote_reported_page_errors": 0,
+    "remote_reported_header_failures": 0,
+    "remote_independent_review": "HOLD",
+    "history_captures_with_dimension_changes": 2,
+    "unchanged_manual_baseline_matches": 4,
+    "approved_baseline_writes": 0
+  },
+  "github": {
+    "identity": "gobbajogger (admin)",
+    "individual_exact_commit_statuses": 0,
+    "status_posting": "NOT_RUN, no write route in the available authenticated connector",
+    "owner_opening_post_vote": "NOT_RUN, no open enhancement or feature-title issue returned"
+  },
+  "retained_archive": {
+    "name": "lane-integ-resume-0130-31a92a94-ba56645b-nightly-visuals-and-logs.tar.gz",
+    "bytes": 32016244,
+    "sha256": "512ffa279316e5c9e6774d6546eedcaa6057586043b033fd8833930cee0c225f"
+  },
+  "evidence_sha256": {
+    "break-p02-probe.json": "e8393f669d63646393f9f7e5d6698a2658a48b13f959267013e48bd08929f954",
+    "cookie-free-demo.json": "fab42ca636dab2a29efb837e35bc91fc04266e9605e81a6c232bb8c4a4a7d477",
+    "emulator-lcd.log": "f226aa8a68809d1714d3e8576c6fba4393b752ad049392a2dfa20105255d9285",
+    "firmware-canvas-subset.json": "e3173f90607f18c3c3f8e5090f83f8a1087b23de29f5ed8f5bfd865cfa7548e0",
+    "firmware-reference-full-denial.json": "6e6def8f1ae2c4d3fc8792f78d1021a33c354f10637372d502dd8537cdf86e63",
+    "history-phones.json": "3f53892a8149e50c65b10363c1fed9c538ddc9909e1c2599acbb30af118ab70b",
+    "manual-phones.json": "15d497b8046f9aa295ea052118f6e5a5fea40149a6792f4da77b24f48dcf12cb",
+    "projects-file-exchange.json": "0fa9f1d432fdcc1bdbf994a968fadd1772ed82f4ec174df61dce272f0d0e357f",
+    "published-026-parity.json": "411303fb242e44414d4a1159142d414277bd7c7e0dd389267ca3cc27e931aee7",
+    "remote-chromium.json": "1c63ba4b29eaa29c4123f11d5873d6831c4d8372cb73ca609d5bc25d6dc24548",
+    "remote-pair-inputs.log": "bc842b8c28fb72b2dad1b4955310ee19697317a65bd8e8de29934e7fb4c45ea2",
+    "remote-proposals.json": "7a9ed254dc5c5edf9ada36389382d49b748eb346bd8bfd6e7eae08b153179a35",
+    "remote-touchosc.json": "dac3ea1065e1ebd87c80bc26d6c542109443ce9a984db8f2cfb21ce5650453e1",
+    "routes.json": "98b21a64f0eb2b851e3a8c65e9fe0e2591187e26bcbe392f98be48b854862f63",
+    "sample-file-exchange.log": "103c058a2372712c67ccf28e1f581e27b20eb6bea7bfc0f8748d0434d38a8f1f",
+    "scoped-index.json": "98cee0031a9c5c951f732515a01f0f7bac8456a0e4ff1e1af7c5b544944b4809"
+  }
+}

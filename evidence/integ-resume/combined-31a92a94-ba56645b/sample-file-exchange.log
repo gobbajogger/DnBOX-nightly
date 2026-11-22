@@ -1,0 +1,20 @@
+✔ space-saving selector is visible, defaults Off, and explains actual rate rather than stretch promise (3.047839ms)
+✔ cancel add or replace preview preserves loop list, original input and zero writes (211.980807ms)
+✔ accepted add shows exact data saving and retains original for Off and preview (108.401144ms)
+✔ failed recut is atomic and restores controls instead of leaving partial transformed loops (61.22715ms)
+✔ cancel send/escape performs no slot writes; confirmation sends actual prepared saved-rate image (54.735154ms)
+✔ rapid preview source changes and Stop cannot start stale audio after a suspended context resumes (48.850173ms)
+✔ workspace source switch stops a pending original preview before audio starts (64.437683ms)
+✔ repeated setting event while confirmation is open cannot apply mismatched control labels (50.722363ms)
+✔ A/B reference uses the same trim and bar cut, mono peak target, and leaves encoded preview exact (155.146452ms)
+✔ visible local file audition works before MIDI or Add and refreshes settings without device draft writes (90.160935ms)
+✔ local source decode epochs ignore a stale file after replacement or removal (51.21217ms)
+✔ workspace invalidation uses neutral status while retaining the draft and send guard (102.192701ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1084.298949

@@ -1,0 +1,135 @@
+{
+  "nightly": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "consolidated": "583f622961fc9975fac746592ce6c483073c4170",
+  "firmware": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+  "hostSha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881",
+  "terminalCanonicalGate": "DNBOX-GATE RESULT FAIL sha=31a92a944c9303940d5409cd213dedba1d47c793 lane=integ log=build/dnbox-gate/31a92a94-20261122-1635.log",
+  "canonicalGateExit": 1,
+  "failures": [
+    {
+      "stage": "unit-tests",
+      "line": "tests/feature-inbox-browser.py:82",
+      "finding": "Mounted Installer has two sample pickers with duplicate IDs. The module fills the hidden first picker."
+    },
+    {
+      "stage": "browser-tests",
+      "line": "tests/product-remote/funkybeats-browser.py:713",
+      "finding": "Expected BREAK P2, not loaded. The actual accessible label is BREAK P02, not loaded."
+    }
+  ],
+  "focusResults": {
+    "routes": "19 passed; 2 legacy redirects passed source checks",
+    "demo": "control playback/reset passed with zero cookies",
+    "fileExchange": "four Projects widths passed, twelve sample file tests passed",
+    "emulator": "26 logged parity checks passed",
+    "firmwareCanvas": "13 selected exact RGB digest comparisons, no screenshots",
+    "remoteProposals": "32 rendered, zero page/header findings; independent approval open",
+    "history": "two full phone renders; both inherited image extent comparisons failed; zero page/header findings",
+    "manual": "four registered phone comparisons pass at zero changed ratio",
+    "pairedClients": "Chromium and packed Lua passed on the selected opt-in bytes; shipping default stays closed"
+  },
+  "reviewLineage": {
+    "trackedOlderRemoteReview": "evidence/integ-resume/qualification-0130/nightly-938c6aa6-independent-review.md",
+    "priorIndependentRuntimeReview": "evidence/integ-resume/branch-scalar-54266973/runtime-review.json",
+    "priorRemoteProposalHead": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+    "priorRemoteProposalReuse": "16 Remote source paths and runner differ; not exact-head",
+    "currentChangedScreensApproval": "open"
+  },
+  "receipts": {
+    "canonicalGate": {
+      "path": "nightly-gate-31a92a94-evidence/canonical.log",
+      "bytes": 99236,
+      "sha256": "09c6638c166b3c448f427794a8a05e587fbde0a49948bef57655ab74a4192143"
+    },
+    "canonicalInputs": {
+      "path": "nightly-gate-31a92a94-evidence/inputs.log",
+      "bytes": 899,
+      "sha256": "4617b8b394a552bdec82d4c8c44612dec8fbed7f2a161d882fed134c383a7f63"
+    },
+    "breakDiagnostic": {
+      "path": "nightly-focused-31a92a94/break.json",
+      "bytes": 670,
+      "sha256": "e8393f669d63646393f9f7e5d6698a2658a48b13f959267013e48bd08929f954"
+    },
+    "routeSource": {
+      "path": "nightly-focused-31a92a94/product-route-source.log",
+      "bytes": 213,
+      "sha256": "9f9787f4ef6a74f6c4a90768880aa95635b78ac9efd9555bf18907a262597413"
+    },
+    "routeBrowser": {
+      "path": "nightly-focused-31a92a94/routes.json",
+      "bytes": 2331,
+      "sha256": "98b21a64f0eb2b851e3a8c65e9fe0e2591187e26bcbe392f98be48b854862f63"
+    },
+    "demoBrowser": {
+      "path": "nightly-focused-31a92a94/demo.json",
+      "bytes": 496,
+      "sha256": "fab42ca636dab2a29efb837e35bc91fc04266e9605e81a6c232bb8c4a4a7d477"
+    },
+    "projectFilesBrowser": {
+      "path": "nightly-focused-31a92a94/projects.json",
+      "bytes": 409,
+      "sha256": "0fa9f1d432fdcc1bdbf994a968fadd1772ed82f4ec174df61dce272f0d0e357f"
+    },
+    "projectFilesJourney": {
+      "path": "nightly-focused-31a92a94/projects.log",
+      "bytes": 1347,
+      "sha256": "f3fe3caa02852e6d32cc777ce9c81ddf313694e03fa8dcee086ce828bd487907"
+    },
+    "sampleFileExchange": {
+      "path": "nightly-focused-31a92a94/sample-file-exchange.log",
+      "bytes": 1406,
+      "sha256": "103c058a2372712c67ccf28e1f581e27b20eb6bea7bfc0f8748d0434d38a8f1f"
+    },
+    "emulatorLcdParity": {
+      "path": "nightly-focused-31a92a94/emulator-lcd.log",
+      "bytes": 3099,
+      "sha256": "f226aa8a68809d1714d3e8576c6fba4393b752ad049392a2dfa20105255d9285"
+    },
+    "canvasParity": {
+      "path": "nightly-focused-31a92a94/reference-canvas.json",
+      "bytes": 2482,
+      "sha256": "e3173f90607f18c3c3f8e5090f83f8a1087b23de29f5ed8f5bfd865cfa7548e0"
+    },
+    "fullFirmwareReferenceDenial": {
+      "path": "nightly-focused-31a92a94/firmware-reference-full-denial.json",
+      "bytes": 669,
+      "sha256": "6e6def8f1ae2c4d3fc8792f78d1021a33c354f10637372d502dd8537cdf86e63"
+    },
+    "remoteVisualProposals": {
+      "path": "remote-proposals-31a92a94/proposal-manifest.json",
+      "bytes": 8259,
+      "sha256": "7a9ed254dc5c5edf9ada36389382d49b748eb346bd8bfd6e7eae08b153179a35"
+    },
+    "phoneHistory": {
+      "path": "history-phone-31a92a94/manifest.json",
+      "bytes": 1162,
+      "sha256": "3f53892a8149e50c65b10363c1fed9c538ddc9909e1c2599acbb30af118ab70b"
+    },
+    "phoneManual": {
+      "path": "manual-phone-31a92a94/manifest.json",
+      "bytes": 2130,
+      "sha256": "15d497b8046f9aa295ea052118f6e5a5fea40149a6792f4da77b24f48dcf12cb"
+    },
+    "manualInputClosure": {
+      "path": "nightly-focused-31a92a94/manual-input-closure.json",
+      "bytes": 16703,
+      "sha256": "b9ef8fc3736f0f201a6ec7a1508d81d965dfd4d8c10ecdf678a4e61aed654721"
+    },
+    "pairedChromium": {
+      "path": "native-pair-31a92a94-ba56645b/staged-browser.json",
+      "bytes": 2649,
+      "sha256": "1c63ba4b29eaa29c4123f11d5873d6831c4d8372cb73ca609d5bc25d6dc24548"
+    },
+    "pairedLua": {
+      "path": "native-pair-31a92a94-ba56645b/staged-lua.json",
+      "bytes": 3030,
+      "sha256": "dac3ea1065e1ebd87c80bc26d6c542109443ce9a984db8f2cfb21ce5650453e1"
+    },
+    "pairedNativeInputs": {
+      "path": "native-pair-31a92a94-ba56645b/inputs.log",
+      "bytes": 2578,
+      "sha256": "bc842b8c28fb72b2dad1b4955310ee19697317a65bd8e8de29934e7fb4c45ea2"
+    }
+  }
+}

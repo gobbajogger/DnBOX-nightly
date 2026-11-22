@@ -1,0 +1,67 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "normalSandbox": true,
+  "filteredExit": 1,
+  "summary": {
+    "screens": 4,
+    "pass": 4,
+    "fail": 0,
+    "no_baseline": 0,
+    "baseline_written": 0,
+    "header_fail": 0,
+    "page_errors": 0
+  },
+  "files": [
+    {
+      "name": "site-manual-original-844x390",
+      "result": "PASS",
+      "size": [
+        844,
+        29993
+      ],
+      "changedPixelRatio": 0.0,
+      "file": "site-manual-original-844x390-render.png",
+      "sha256": "48427dd1933f255f8feb797301c5f6efe112157d54e4c65bb01c3e5dd313942e",
+      "baselineSha256": "7c734485bd62c7d28e811f28dc6f3f6726f18c5aca2a2dc6f0ad95fd3259d003"
+    },
+    {
+      "name": "site-manual-legacy-844x390",
+      "result": "PASS",
+      "size": [
+        844,
+        30429
+      ],
+      "changedPixelRatio": 0.0,
+      "file": "site-manual-legacy-844x390-render.png",
+      "sha256": "520c5735bc3e9b80448defefa37801988811fe3a543a461e0f00296d7daa81be",
+      "baselineSha256": "0db22303df1c258e0d4d333e5d4c7d6d2eb1309694153b08250bd30125b5b4fc"
+    },
+    {
+      "name": "site-manual-original-390x844",
+      "result": "PASS",
+      "size": [
+        390,
+        40703
+      ],
+      "changedPixelRatio": 0.0,
+      "file": "site-manual-original-390x844-render.png",
+      "sha256": "4f05fe3268e14dfe80eca168256878f319f3ea2b03d52999fb38f3291584d214",
+      "baselineSha256": "d04e75dc4896c1009af8769ce210b381d6d9a07a778f6e1e3218709ba225d199"
+    },
+    {
+      "name": "site-manual-legacy-390x844",
+      "result": "PASS",
+      "size": [
+        390,
+        45592
+      ],
+      "changedPixelRatio": 0.0,
+      "file": "site-manual-legacy-390x844-render.png",
+      "sha256": "38ddb3279083b5fde93de3900ce75dce0afc937b350141ce48f8158f8af71c51",
+      "baselineSha256": "38ddb3279083b5fde93de3900ce75dce0afc937b350141ce48f8158f8af71c51"
+    }
+  ],
+  "loadedInputsSha256": "b9ef8fc3736f0f201a6ec7a1508d81d965dfd4d8c10ecdf678a4e61aed654721",
+  "logSha256": "436748ab028dd16f69822f622d935bc710d298e0627e437a860aae923ffbc05e",
+  "wrapperSha256": "cd7cfe326f57ffaf74ae8eea9b0376369005a4bcf777d0bb9570950271c2b112"
+}

@@ -1,0 +1,17 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "mode": "break",
+  "scope": "focused exact local software only",
+  "testSha256": "8e659b6dbfec227963d887193015bcdb50a484bc62e54b8fb0832520012eb7e2",
+  "probeSha256": "1da89aad9a36551959a4716afe8974e0a44130c4c5200d8b5df03a34c9b2088f",
+  "chromium": "151.0.7922.34",
+  "selectedPart": "breaks",
+  "heading": "Patterns \u00b7 BREAK \u00b7 Draft",
+  "gridButtonCount": 32,
+  "obsoleteLabelMatches": 0,
+  "actualAccessibleLabel": "BREAK P02, not loaded",
+  "actualVisible": true,
+  "canonicalCaseSource": "break_and_tape; diagnostic substituted only the obsolete P2 locator",
+  "result": "PASS",
+  "pageErrors": []
+}

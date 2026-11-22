@@ -1,0 +1,43 @@
+{
+  "head": "31a92a944c9303940d5409cd213dedba1d47c793",
+  "normalSandbox": true,
+  "summary": {
+    "screens": 2,
+    "pass": 0,
+    "fail": 2,
+    "no_baseline": 0,
+    "baseline_written": 0,
+    "header_fail": 0,
+    "page_errors": 0
+  },
+  "files": [
+    {
+      "file": "site-builds-390x844-actual.png",
+      "extent": [
+        390,
+        104608
+      ],
+      "sha256": "a3766c892e12f2129b1d0f33b1f41289d48e285730a5be102617a93257aa07c7",
+      "priorBaselineExtent": [
+        390,
+        104451
+      ],
+      "priorBaselineSha256": "f621ec31e6cbd20fde1845fed3bb3cee2285e27052182599ea7fab403eb65a64"
+    },
+    {
+      "file": "site-builds-844x390-actual.png",
+      "extent": [
+        844,
+        73545
+      ],
+      "sha256": "f4ce7173fc8fb7a1b639596592b8d570c80fc79e8b24ab2902aa6da464552ab5",
+      "priorBaselineExtent": [
+        844,
+        73342
+      ],
+      "priorBaselineSha256": "0c480b01237c84ed9f4f183397af3924f6936f031755fb3cf7bbbee821819dfe"
+    }
+  ],
+  "historyHtmlSha256": "6972364b17fb122dcef47cb9b914931a6f469310a563e95400fca8fe80be6da0",
+  "runLogSha256": "3eace7ad175b08151a20c43a9c5bce99d26228561e081441f6a47ffa137980cc"
+}
