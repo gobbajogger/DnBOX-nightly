@@ -1,0 +1,163 @@
+{
+  "firmware": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8",
+  "binarySha256": "cd68b68e9e60b5216f308a57e7e4fae7b2eee4e9b8fe8479aa583fa0f11d7375",
+  "catalogSha256": "eee1004e1ceeaa329929812e79d95f68b9097630310b8a85337cfe6d080c6b0b",
+  "firmwareLinkSha256": "99907240de38b84cadc3151b2d49f2839254443651c07dda46063ce8b20eaa95",
+  "catalogCrc": 4005792705,
+  "catalogCount": 326,
+  "testOnly": true,
+  "physicalDevice": false,
+  "transport": "test-only MIDI/stdio bridge to archived real engine",
+  "edits": [
+    {
+      "id": 257,
+      "label": "CUTOFF",
+      "old": 32,
+      "value": 33,
+      "editRevision": 2,
+      "undoRevision": 3,
+      "changed": [
+        {
+          "id": 257,
+          "label": "CUTOFF",
+          "before": 32,
+          "after": 33
+        }
+      ],
+      "remaining": [],
+      "expectedMessage": "Restored stored value 32. Update queued.",
+      "addressed": [
+        {
+          "op": 2,
+          "status": 0,
+          "control": 257,
+          "revision": 1,
+          "value": 32
+        },
+        {
+          "op": 3,
+          "status": 1,
+          "control": 257,
+          "revision": 2,
+          "value": 33
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 257,
+          "revision": 2,
+          "value": 33
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 257,
+          "revision": 2,
+          "value": 33
+        },
+        {
+          "op": 3,
+          "status": 1,
+          "control": 257,
+          "revision": 3,
+          "value": 32
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 257,
+          "revision": 3,
+          "value": 32
+        }
+      ]
+    },
+    {
+      "id": 277,
+      "label": "CUTOFF",
+      "old": 32,
+      "value": 33,
+      "editRevision": 4,
+      "undoRevision": 5,
+      "changed": [
+        {
+          "id": 277,
+          "label": "CUTOFF",
+          "before": 32,
+          "after": 33
+        }
+      ],
+      "remaining": [],
+      "expectedMessage": "Restored stored value 32. Update queued.",
+      "addressed": [
+        {
+          "op": 2,
+          "status": 0,
+          "control": 277,
+          "revision": 3,
+          "value": 32
+        },
+        {
+          "op": 3,
+          "status": 1,
+          "control": 277,
+          "revision": 4,
+          "value": 33
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 277,
+          "revision": 4,
+          "value": 33
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 277,
+          "revision": 4,
+          "value": 33
+        },
+        {
+          "op": 3,
+          "status": 1,
+          "control": 277,
+          "revision": 5,
+          "value": 32
+        },
+        {
+          "op": 2,
+          "status": 0,
+          "control": 277,
+          "revision": 5,
+          "value": 32
+        }
+      ]
+    },
+    {
+      "id": 253,
+      "label": "COMP",
+      "old": 95,
+      "value": 96,
+      "editRevision": 6,
+      "changed": [
+        {
+          "id": 241,
+          "label": "THRESH",
+          "before": 64,
+          "after": 60
+        },
+        {
+          "id": 253,
+          "label": "COMP",
+          "before": 95,
+          "after": 96
+        }
+      ],
+      "undoOffered": false,
+      "editMessage": "Stored 96. Update queued. Other control values changed (THRESH)."
+    }
+  ],
+  "confirmed": 294,
+  "reads": 1958,
+  "writes": 5
+}

@@ -1,4 +1,5 @@
 import{renderSvg}from'./glyph-render.mjs';
+import{GLYPH_DRAW}from'./glyph-registry.mjs';
 import {drumAccent} from './drum-accent.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX adapter for the actual MIT FunkyBeats DOM builder. The upstream methods,
@@ -16,8 +17,11 @@ class Element{
  removeChild(n){this.children.splice(this.children.indexOf(n),1);}
  setAttribute(k,v){this.attrs[k]=String(v);}
 }
+// Voice identities use the same pinned R22 inventory as the other surfaces.
+const VOICE_GLYPH={BD:'G001',SD:'G002',LT:'G003',MT:'G004',HT:'G005',RS:'G006',CP:'G007',CH:'G008',OH:'G009',CR:'G010',RD:'G011',CY:'G010',CB:'G012'};
+class VoiceGlyph{constructor(name){this.id=VOICE_GLYPH[name];}}
 const css=k=>k.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());
-function serialize(n){if(typeof n==='string')return esc(n);const attrs={...n.attrs,...Object.fromEntries(Object.entries(n.dataset).map(([k,v])=>['data-'+css(k),v]))};const style=Object.entries(n.style).map(([k,v])=>css(k)+':'+v).join(';');if(style)attrs.style=style;return'<'+n.tag+Object.entries(attrs).map(([k,v])=>' '+k+'="'+esc(v)+'"').join('')+'>'+esc(n.textContent)+n.children.map(serialize).join('')+'</'+n.tag+'>';}
+function serialize(n){if(typeof n==='string')return esc(n);if(n instanceof VoiceGlyph){const g=GLYPH_DRAW[n.id];return '<svg class="drum-voice-glyph" data-r22-glyph="'+n.id+'" viewBox="0 0 '+g.w+' '+g.h+'" width="24" height="16" aria-hidden="true">'+g.svg+'</svg>';}const attrs={...n.attrs,...Object.fromEntries(Object.entries(n.dataset).map(([k,v])=>['data-'+css(k),v]))};const style=Object.entries(n.style).map(([k,v])=>css(k)+':'+v).join(';');if(style)attrs.style=style;return'<'+n.tag+Object.entries(attrs).map(([k,v])=>' '+k+'="'+esc(v)+'"').join('')+'>'+esc(n.textContent)+n.children.map(serialize).join('')+'</'+n.tag+'>';}
 export const DRUM_VOICES=Object.freeze({
  '909':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CH',42],['OH',46],['CR',49],['RD',51]]),
  '808':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CB',56],['CY',49],['OH',46],['CH',42]])
@@ -60,6 +64,9 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accent
  for(let ch=0;ch<voices.length;ch++){
   grid.children[ch].setAttribute('id','drum'+kit+'-voice-'+(ch+1));
   const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);
+  info.children=info.children.filter(n=>typeof n==='object'&&!n.className?.includes('seq-channel-name')&&!n.className?.includes('seq-channel-color'));
+  info.children.unshift(new VoiceGlyph(voices[ch][0]));
+  const name=new Element('span');name.className='seq-channel-name';name.textContent=voices[ch][0];info.appendChild(name);
   for(let s=0;s<steps;s++){
    const start=Math.round(s*endSample/steps),event=notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];
    const modelStep=state.getStep(ch,s);if(event)Object.assign(modelStep,{on:true,velocity:event.velocity/127,note:event.note});

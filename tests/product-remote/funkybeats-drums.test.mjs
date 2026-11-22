@@ -61,3 +61,17 @@ test('the final drum row carries kit-wide accents independent of velocity and hi
   assert.match(authored, /BD step 2 empty/);
  }
 });
+
+// Owner page 15 identifies each voice by the shared R22 instrument drawing.
+test('both kit rails retain all eleven distinct shared R22 voice identities',async()=>{
+ const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const {GLYPH_DRAW}=await import('../../web/product-site/remote/glyph-registry.mjs');
+ for(const kit of ['909','808']){
+  const html=renderFunkyBeatsDrums({kit,notes:[],endSample:88200});
+  const ids=[...html.matchAll(/data-r22-glyph="(G\d+)"/g)].map(m=>m[1]);
+  assert.equal(ids.length,11);assert.equal(new Set(ids).size,11);
+  assert.deepEqual(ids.slice(0,7),['G001','G002','G003','G004','G005','G006','G007']);
+  assert.deepEqual(ids.slice(7),kit==='909'?['G008','G009','G010','G011']:['G012','G010','G009','G008']);
+  for(const id of ids)assert.ok(html.includes(GLYPH_DRAW[id].svg),id);
+ }
+});

@@ -327,6 +327,7 @@ dialog::backdrop{background:#000a}
 .funkybeats-sequencer .seq-step .step-fill{position:absolute;inset:0;opacity:0;z-index:-1}
 .funkybeats-sequencer .seq-step .velocity-bar{position:absolute;bottom:0;left:3px;width:2px;background:var(--track);opacity:.7;z-index:-1}
 .funkybeats-sequencer .seq-channel-info{display:flex;align-items:center;gap:5px;padding:0 5px;font-size:13px;font-weight:700}
+.drum-voice-glyph{flex:none;color:var(--track);fill:none;stroke:currentColor;stroke-width:1.2}
 .funkybeats-sequencer .seq-channel-color{width:3px;height:18px}
 .funkybeats-sequencer .seq-numbers{min-height:24px;color:var(--muted);font-size:11px;text-align:center;align-items:center}
 .funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
@@ -555,14 +556,21 @@ dialog::backdrop{background:#000a}
 #other-view .drum-layout .seq-step{min-width:40px;min-height:40px}
 #other-view .drum-layout .sequencer-grid{flex:1;min-width:768px;overflow-x:hidden}
 .drum-layout .drum-step-lane{width:max(100%,768px)}
-/* Reserve 728px for sixteen 40px targets and the row labels, plus the 12px panel gap,
-   before expanding Sound beyond its tested 280px minimum. */
+/* Owner page 15 keeps the first six voices and sixteen steps beside Sound.
+   Compact only short landscape screens; the two banks and Accent remain scrollable. */
 @media (orientation:landscape) and (min-width:740px) and (max-height:500px){
  .drum-layout{grid-template-columns:minmax(0,1fr) clamp(280px,calc(100% - 740px),340px)}
- .drum-layout .seq-row{grid-template-columns:60px repeat(4,minmax(167px,1fr));width:max(100%,728px)}
- .drum-layout .seq-step-group{column-gap:1px;padding-inline:1px}
- #other-view .drum-layout .sequencer-grid{min-width:728px}
- .drum-layout .drum-step-lane{width:max(100%,728px)}
+ .drum-layout .seq-row{grid-template-columns:40px repeat(4,minmax(0,1fr));width:100%;min-height:26px;height:26px}
+ .drum-layout .seq-step-group{gap:2px;padding:1px;border-left-width:1px}
+ #other-view .drum-layout .seq-step{min-width:0;min-height:24px;height:24px;font-size:10px;padding:0}
+ #other-view .drum-layout .seq-step.hit{color:var(--bg)}
+ #other-view .drum-step-lane>button,#other-view .drum-step-lane .step-slider{min-height:0}
+ .drum-layout .seq-numbers{min-height:20px;height:20px;font-size:10px}
+ .drum-layout .seq-numbers .seq-step-group{padding-block:0}
+ #other-view .drum-layout .sequencer-grid{min-width:0}
+ .drum-layout .drum-step-lane{width:100%;grid-template-columns:40px minmax(0,1fr);height:32px}
+ .drum-layout .seq-channel-info{padding:0 2px;gap:2px;font-size:11px;justify-content:center}
+ .drum-layout .seq-channel-name{display:none}
 }
 .drum-accent-row{border-top:1px solid var(--line)}
 #other-view .drum-layout .drum-accent-step{min-height:44px;font-size:15px}

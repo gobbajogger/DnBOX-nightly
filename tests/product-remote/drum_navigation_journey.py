@@ -35,12 +35,12 @@ async def exercise(page, kit, save):
                 el.contains(document.elementFromPoint(r.left + r.width/2, r.top + r.height/2));
         }""")
         if index == 0 and page.viewport_size == {'width': 844, 'height': 390}:
-            # The first bank exposes eleven editable steps alongside Sound at this size.
+            # Owner page 15 exposes all sixteen steps in the first six voices beside Sound.
             steps = await cells.evaluate_all("""cells => {
                 const clip = cells[0].closest('.funkybeats-sequencer').getBoundingClientRect();
-                return cells.slice(0, 11).map(cell => {
+                return cells.slice(0, 96).map(cell => {
                     const r = cell.getBoundingClientRect();
-                    return r.width >= 40 && r.height >= 40 && r.left >= clip.left && r.right <= clip.right &&
+                    return r.width >= 24 && r.height >= 24 && r.left >= clip.left && r.right <= clip.right &&
                         cell.contains(document.elementFromPoint(r.left + r.width/2, r.top + r.height/2));
                 });
             }""")

@@ -74,7 +74,8 @@ const link = mountFirmwareLink({document, bundle, navigator: {requestMIDIAccess:
 const receipt = {
   firmware, binarySha256: hash(readFileSync(binary)), catalogSha256: hash(manifest),
   firmwareLinkSha256: hash(readFileSync(fileURLToPath(app))), catalogCrc: catalog.crc,
-  catalogCount: catalog.count, testOnly: true, edits: [],
+  catalogCount: catalog.count, testOnly: true, physicalDevice: false,
+  transport: 'test-only MIDI/stdio bridge to archived real engine', edits: [],
 };
 async function until(done, operation) {
   const deadline = Date.now() + 30000;
@@ -156,7 +157,17 @@ async function applyAndCheckUndo(descriptor, expectedDeltas, initial) {
   const remaining = changes(initial, restored);
   assert.deepEqual(remaining, []);
   assert.equal(nodes.get('fw-' + descriptor.id).value, String(old));
-  receipt.edits.push({id: descriptor.id, label: descriptor.label, old, value, editRevision: ack.revision, undoRevision: restore.revision, changed, remaining, expectedMessage});
+  // Keep the six addressed replies reviewable alongside the full-catalog assertions.
+  // This is stored-state simulator evidence, not a physical keyboard receipt.
+  const addressed = [
+    wire.slice(0, start).findLast(f => f.command.op === OP.READ && f.command.control === descriptor.id),
+    ...frames.filter(f => f.command.control === descriptor.id),
+    ...restoredFrames.filter(f => f.command.control === descriptor.id),
+  ].map(({response: r}) => ({op:r.op, status:r.status, control:r.control, revision:r.revision, value:r.value}));
+  assert.deepEqual(addressed.map(r => [r.op, r.status, r.value]),
+    [[OP.READ,STATUS.OK,old],[OP.SET,STATUS.QUEUED,value],[OP.READ,STATUS.OK,value],
+     [OP.READ,STATUS.OK,value],[OP.SET,STATUS.QUEUED,old],[OP.READ,STATUS.OK,old]]);
+  receipt.edits.push({id: descriptor.id, label: descriptor.label, old, value, editRevision: ack.revision, undoRevision: restore.revision, changed, remaining, expectedMessage, addressed});
   return restored;
 }
 try {

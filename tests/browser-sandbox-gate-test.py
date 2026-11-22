@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise gate control flow with shell stubs; never launches browsers."""
+"""Exercise the Local gate shell contracts without launching browsers."""
 import json
 import os
 import subprocess
@@ -72,6 +72,46 @@ class GateGuard(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         self.assertIn('AUDIT', result.stdout)
         self.assertIn('BROWSER', result.stdout)
+
+
+class GateArtifactLimits(unittest.TestCase):
+    def check_path(self, path):
+        source = (ROOT / 'scripts/dnbox-gate.sh').read_text()
+        limits = source[source.index('limits()'):source.index('build()')]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            def git(*args):
+                subprocess.run(['git', '-C', directory, *args], check=True, capture_output=True)
+
+            git('init', '-q')
+            git('-c', 'core.hooksPath=/dev/null', '-c', 'user.name=Gate Fixture',
+                '-c', 'user.email=gate@example.invalid', 'commit', '-q', '--allow-empty',
+                '-m', 'Initialize the Local gate fixture')
+            artifact = root / path
+            artifact.parent.mkdir(parents=True, exist_ok=True)
+            artifact.write_text('test fixture')
+            git('add', '--', path)
+            return subprocess.run(
+                ['bash', '-uo', 'pipefail', '-c',
+                 'LANE=fixture; BASE=HEAD; resolve_base() { :; }\n' + limits + '\nlimits'],
+                cwd=root, capture_output=True, text=True,
+            )
+
+    def test_gate_accepts_fwsc_and_sanitized_evidence(self):
+        for path in ['firmware/elite.fwsc', 'firmware/PRO.FWSC', 'evidence/render.png',
+                     'evidence/report.txt', 'release/synth.vst3-notes.txt']:
+            with self.subTest(path=path):
+                result = self.check_path(path)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_gate_rejects_prohibited_artifacts(self):
+        for path in ['ctl.img', 'disk.img', 'firmware/ELITE.IMG', 'synth.ipa', 'plugins/synth.component',
+                     'plugins/Synth.VST3', 'plugins/Synth.component/Contents/MacOS/Synth',
+                     'plugins/Synth.VST3/Contents/Resources/name.txt', 'odd\nname.img']:
+            with self.subTest(path=path):
+                result = self.check_path(path)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
 
 
 if __name__ == '__main__':
