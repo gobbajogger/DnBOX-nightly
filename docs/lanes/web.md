@@ -1,5 +1,9 @@
 # Web lane · PR #156
 
+## PR #177 W4 usability follow-up · 22 November 2026
+
+The [focused receipt](../../evidence/web-routes/lane-web-w4-focused.md) records the What’s New heading correction, Samples help edits, independent review and passing Chromium checks at 844×390. The current-source retired-name check passed with the existing exclusions. Integration’s final combined firmware runtime and matching native oracle remain a separate prerequisite.
+
 ## PR #177 parity follow-up · 22 November 2026
 
 The [shipping and R22 comparison](../../evidence/web-routes/shipping-parity/README.md) records the newly measured 909 and 808 sequencer renders, the 909 kick comparison and an independent disposition. Shipping/R22/Web parity remains open. The previous route evidence ZIP is verified in LoopyX0X37 Project Sources.
