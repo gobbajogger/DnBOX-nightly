@@ -1,5 +1,9 @@
 # Integration baseline
 
+## Reviewed exact stock Remote opt-in — 2026-11-22 (WORKING)
+
+The latest Remote continuation `21a32d8` is retained in combined Nightly `e3053cd7` without path loss. It builds 316 files and retains the Integration Device protections. The new branch-only selector independently qualifies the one-control stock catalog and reused packed TouchOSC layout with firmware `ba56645b`. The exact Chromium replay passed all eight cases and the 59 focused guard and layout tests passed. The previous canonical failure and screen holds retain their tested scopes. [Catalog, layout and exact review](../../evidence/integ-resume/stock-native-ba56645b-21a32d8/README.md)
+
 ## Exact combined software and render qualification — 2026-11-22 (WORKING)
 
 Nightly `31a92a94` retains consolidated `583f6229` without deleting a consolidated path. The unchanged Local gate failed on the duplicate mounted installer picker and the stale BREAK P2 test selector. The exact pair with firmware `ba56645b` passed Chromium and packed TouchOSC against the production host. The focused suite checked all 19 browser routes, file exchange and 13 native canvas comparisons. Original and Legacy Manual matched four phone baselines. Build History captured both orientations and failed both dimension comparisons. All 32 Remote outputs remain proposals after independent review. [Exact results and repro evidence](../../evidence/integ-resume/combined-31a92a94-ba56645b/README.md)

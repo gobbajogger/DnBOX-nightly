@@ -8,10 +8,13 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-EVIDENCE = ROOT / "evidence/integ-resume/branch-scalar-54266973"
-REVIEW_SHA256 = "0374fa7b916bf6515af8ebb8d8c15c31aa3dc7b8fb41035320659634359777ea"
-FIRMWARE = "54266973cf5f6893bbddae84920bea1db55e8f4a"
-ARTIFACTS = ("candidate-catalog.mjs", "reviewed-scalar-staging.tosc")
+EVIDENCE = ROOT / "evidence/integ-resume/stock-native-ba56645b-21a32d8"
+REVIEW_SHA256 = "0310a2104e3ede82f22bda2935e364e8dddd7d6be8b5f664e955bef1c3c07416"
+FIRMWARE = "ba56645b2142b134be3aeee2236406e1c95b2bde"
+ARTIFACTS = {
+    "candidate-catalog.mjs": EVIDENCE / "candidate-catalog.mjs",
+    "reviewed-scalar-staging.tosc": ROOT / "evidence/integ-resume/branch-scalar-54266973/reviewed-scalar-staging.tosc",
+}
 
 
 def pinned(path, expected):
@@ -52,8 +55,8 @@ def select(name):
         if site_path and rows[site_path.as_posix()]["bytes"] != len(data):
             raise ValueError(f"Merged source length differs: {site_path}")
 
-    artifacts = {artifact: pinned(EVIDENCE / artifact, reviewed["replayedArtifactsSha256"][artifact])
-                 for artifact in ARTIFACTS}
+    artifacts = {artifact: pinned(path, reviewed["replayedArtifactsSha256"][artifact])
+                 for artifact, path in ARTIFACTS.items()}
     base = ROOT / ".output"
     if base.is_symlink():
         raise ValueError("Refusing a symlink product output directory")

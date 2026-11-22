@@ -1,0 +1,74 @@
+{
+  "schema": "dnbox-independent-native-scalar-runtime-review/2",
+  "decision": "APPROVE_EXACT_BRANCH_ONLY_OPT_IN_ARTIFACT_SELECTION",
+  "catalogReviewSha256": "1faa10af98d09311c1046a1611ab49f83c342a3c6733be9fd1fa6329f3dbcf17",
+  "defaultRuntimeEnablement": "HOLD",
+  "publicReleaseAndPages": "HOLD",
+  "physicalApproval": false,
+  "firmware": {
+    "published": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+    "stockPackageAndUsbProofs": {
+      "remote-scalar-catalog.json": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+      "remote-21a32d8-native-browser-receipt.json": "26f4f5aa57fa948fd8937e86afaefb10e99908e52107654619a81bfeb5695732",
+      "packed-native-ba56645b.json": "dac3ea1065e1ebd87c80bc26d6c542109443ce9a984db8f2cfb21ce5650453e1",
+      "elite-native-usb.json": "dcf21a0d0fc76dd87a20b256cfed939039c55a95648cfdb048a7779c9597e4f8",
+      "pro-native-usb.json": "e745d88a0b66373b6ff66576b44d725c55b3ee210ac825e475fb33d787e1cc87"
+    },
+    "packageSha256": {
+      "elite-native-usb.json": "3291d76d6ee87891525be0338b58ca78acbb6050f74e1f6f4253953a9ece4053",
+      "pro-native-usb.json": "d63ffc362c105d8bcb3a38fce8219c756720602943b3e7ae5ceeef159a5b6c25"
+    },
+    "hostAdapterSha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881"
+  },
+  "nightly": {
+    "composedSourceCommit": "e3053cd718618c219918defeb78652de5992e380",
+    "composedSourceTree": "9f8845e31f20a2ac6caf95125f6c3d6add3d7612",
+    "remoteContinuation": "21a32d8fd26e102ede8a5c86638913beb058cee0",
+    "reviewedPatchedSourceSha256": {
+      "web/product-site/remote/app.mjs": "cea11dcc25d10ce2a2792d13da88cdec5194fa4b5f115f488315fd6af95eb24c",
+      "web/product-site/remote/firmware-link.mjs": "20a0f34d636cd9631556fc49658830d93fb89f9fb436d3354b8a2ed6c9fe3b35",
+      "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "web/product-site/remote/device/page.mjs": "f8b58c759d262c12d3f4768b31df184708260123c5e57ed5667f16a110a0aaca",
+      "web/product-site/remote/device/session.mjs": "2a0ace83d2a188cf06b6e40f4c5817d26f620bd3400490718ff58d0255ddea5b",
+      "web/product-site/remote/device/view.mjs": "5dccc60f603094f320548c4800de80d3724178e19fe516dffac6afa634ca570b",
+      "web/product-site/remote/device/vendor/client.mjs": "908442b9caa357a25057e737c39d9c9e4572f22c5aeb9074a23d7dcb1fb6b02f",
+      "web/product-site/remote/device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+      "web/product-site/SOURCE-MANIFEST.json": "bea9d7d7b4ceb4248d600ad356de4cf6393fe4a45177ff6b7800bc99c2369e69",
+      "tools/touchosc-parameters/pack.py": "67e79b70bc130a0eaa161f099407e7dd3e845b2bb9e817d599c237d063ffee92",
+      "tools/touchosc-parameters/controller.lua": "221e35340172ecf16c63fe20f19a45fc73a400c16e1300f3141b3d0c47d18c97",
+      "tools/touchosc-parameters/button.lua": "347db93b4e59eef2b4a189f2a672a4a1b81f48d13dfb8fc949bcdbad92c36068",
+      "tools/touchosc-parameters/production_scalar.py": "c1b3f852d660e19e8f9f788c774c07dbd81afbc5abcb49ca38f38247aa900444"
+    },
+    "replayedArtifactsSha256": {
+      "candidate-catalog.mjs": "77c46c43e8eb22b90008f2d9ace2411fc2c452f41c97cc22177056d9492a239e",
+      "reviewed-scalar-staging.tosc": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+      "composed-chromium.json": "934a0501083fb7002bfb340c82f2a2eac6cea3befeac02b32b4869059ebfec5a",
+      "test_composed_stock_browser.py": "ea19629fd847e8789f9375c4f325f064334f576a31c5b114d9667f1298fdaf06",
+      "composed-stock-browser.log": "e37e883d01415ed604e4721264b2454a3b19efd278be4dde45badb94cca605ee"
+    },
+    "focusedBrowserCases": [
+      "ambiguous",
+      "device",
+      "expiry",
+      "mismatch",
+      "missing",
+      "shipping",
+      "silent",
+      "workspace"
+    ],
+    "verifiedRemoteBuildPaths": 114
+  },
+  "layout": {
+    "path": "evidence/integ-resume/branch-scalar-54266973/reviewed-scalar-staging.tosc",
+    "sha256": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+    "rootId": "7233710e-9497-58b9-917e-9efc2a92241c",
+    "applyId": "5c31972e-010b-56b9-a537-d4bed6c0b758",
+    "undoId": "6e6066fb-6339-57cd-9c4c-3d7ced9e84a9"
+  },
+  "conditions": [
+    "Review binds exact branch-only opt-in for one source-owned 909 MIX Level control.",
+    "Default admits no catalog and Device remains read-only with explicit pair selection.",
+    "The unchanged packed layout and matching C host retain their prior exact native Lua proof.",
+    "Release, Pages, default activation, full firmware/web gates and physical use require separate acceptance."
+  ]
+}

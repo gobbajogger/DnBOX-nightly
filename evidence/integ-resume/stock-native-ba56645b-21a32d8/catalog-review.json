@@ -1,0 +1,52 @@
+{
+  "schema": "dnbox-independent-stock-scalar-declaration-review/1",
+  "decision": "APPROVE_EXACT_DECLARATION_AND_MATCHING_LAYOUT_FOR_BRANCH_ONLY_LOCAL_OPT_IN",
+  "source": {
+    "firmware": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+    "composedIndexedTree": "9f8845e31f20a2ac6caf95125f6c3d6add3d7612",
+    "remoteContinuation": "21a32d8fd26e102ede8a5c86638913beb058cee0",
+    "sourceCatalogSha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "hostSha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881"
+  },
+  "softwareOnly": true,
+  "defaultRuntimeEnablement": "HOLD",
+  "publicReleaseAndPages": "HOLD",
+  "catalog": {
+    "count": 1,
+    "crc32": "ecca5979",
+    "control": {
+      "id": 1,
+      "kind": 1,
+      "label": "909 MIX Level",
+      "max": 127,
+      "min": 0,
+      "owner": "909",
+      "parameter": "MX_LEVEL",
+      "target": "T_MIX"
+    }
+  },
+  "packageSha256": {
+    "elite-native-usb.json": "3291d76d6ee87891525be0338b58ca78acbb6050f74e1f6f4253953a9ece4053",
+    "pro-native-usb.json": "d63ffc362c105d8bcb3a38fce8219c756720602943b3e7ae5ceeef159a5b6c25"
+  },
+  "artifactProofs": {
+    "remote-scalar-catalog.json": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "remote-21a32d8-native-browser-receipt.json": "26f4f5aa57fa948fd8937e86afaefb10e99908e52107654619a81bfeb5695732",
+    "packed-native-ba56645b.json": "dac3ea1065e1ebd87c80bc26d6c542109443ce9a984db8f2cfb21ce5650453e1",
+    "elite-native-usb.json": "dcf21a0d0fc76dd87a20b256cfed939039c55a95648cfdb048a7779c9597e4f8",
+    "pro-native-usb.json": "e745d88a0b66373b6ff66576b44d725c55b3ee210ac825e475fb33d787e1cc87"
+  },
+  "layout": {
+    "path": "evidence/integ-resume/branch-scalar-54266973/reviewed-scalar-staging.tosc",
+    "sha256": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+    "rootId": "7233710e-9497-58b9-917e-9efc2a92241c",
+    "applyId": "5c31972e-010b-56b9-a537-d4bed6c0b758",
+    "undoId": "6e6066fb-6339-57cd-9c4c-3d7ced9e84a9"
+  },
+  "independentReviewBasis": [
+    "Exact stock package bytes, source catalog, identity, lease, nine USB responses per model and stale rejection.",
+    "Decoded packed LexML has one descriptor. Controller and all 13 buttons match the indexed source scripts.",
+    "Exact matching packed Lua replay and C host. Existing Remote Chromium replay is test injected and four served hashes differ in the composed client.",
+    "Compose and test the non-test selected artifact with guarded Device and fail-closed default before runtime selection."
+  ]
+}
