@@ -1,5 +1,14 @@
 # Integration baseline
 
+## Integration-resume reference checkpoint — 2026-11-22T00:44:00Z (WORKING)
+
+At exact Nightly starting head `ff96ffd6ef474d8fc06442024e4149ce22f97b18`, a direct GitHub read of the registered Chromium gate schedule and its snapshot tree found **84 registered PNGs of 116 required**. All **32 Remote Workspace references** are missing: eight scheduled states (Sequence, chance/pitch/pan lanes, Sound, Mix, Patterns and Files) at 1440×900, 1024×640, 844×390 and 390×844. Four site Device refs and twelve extra Manual refs are *present*, not thereby re-approved on this head. [Exact missing-name inventory](../../evidence/integ-resume/remote-reference-inventory.json) and [reusable non-browser inventory](../../tests/visual/check_reference_inventory.py); three independent synthetic schedule, missing-reference and viewport-change controls **PASS** (`python3 -m unittest discover -s tests/visual -p test_reference_inventory.py -v`). GitHub source and directory listing were read directly; no claimed production browser capture or owner PDF comparison.
+
+**Still NOT_RUN:** the actual 390×844 198-record Build History registered screenshot within 30 seconds and independent comparison; fresh Original and Legacy Manual phone captures and pixel comparisons; all 32 owner-approved Remote Workspace references (do not promote generated images as baselines); a signed-in feature-opening-post vote and production zero-to-one read-back; full Local gate at this latest head. Existing historical PNGs are not a substitute for fresh capture. The logged prior 30-second Build History failure and Catalog timeout remain valid outstanding results until a new exact-head browser and unit execution is recorded.
+
+**Next scoped action:** acquire a full runnable current Nightly checkout with pinned Playwright Chromium; run both affected phone captures before attempting any reference approval; compare the eight Remote states with the owner PDF in all four sizes and obtain a non-builder review; verify a real signed-in vote only with an owner-authorized UI session. Do not touch `gh-pages` or production, and do not mark C1/C3 or I6 PASS from fixtures.
+
+
 Target `integration/dnbox-consolidated` at `583f622961fc9975fac746592ce6c483073c4170`, the merge of owner-approved rules #175. Work continues on `lane/integ`. GitHub rejected creation of `lane/integ-baseline` (HTTP 422). The active branch-name ruleset reserves `lane/integ` for this lane. No other open integration PR existed when the work started.
 
 | Item | Evidence at this checkpoint |
