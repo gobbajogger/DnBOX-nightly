@@ -161,6 +161,12 @@ def check_seq_sources(page, origin):
     matrix = json.loads((ROOT / 'evidence/web-routes/shipping-parity/seq-state-matrix.json').read_text())
     pins = [(row['web_state'], row['rgb_sha256']) for row in matrix['states']]
     native = dict(row.split('\t') for row in ORACLE.read_text().splitlines())
+    intake = matrix['cross_surface_intake']
+    assert intake['web_reference_firmware'] == SHA
+    for receipt in intake['states']:
+        assert receipt['web_rgb_sha256'] == native[receipt['state']]
+    for retained in intake['retained_seq']:
+        assert retained['rgb_sha256'] == native[retained['state']]
     url = origin + '/reference/screens/#'
     compare = page.locator('#compare')
     lcd = page.locator('#lcd')
@@ -169,6 +175,7 @@ def check_seq_sources(page, origin):
         page.set_viewport_size({'width': width, 'height': height})
         for state, expected in pins:
             page.goto(url + state)
+            assert source.locator('option[value="current"]').inner_text() == 'Native firmware · ' + SHA[:8]
             for selected in ['current', 'shipping', 'r22', 'current']:
                 source.select_option(selected)
                 page.wait_for_selector(f'#lcd[data-state="{state}"][data-source="{selected}"]')

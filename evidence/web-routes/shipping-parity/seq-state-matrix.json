@@ -573,5 +573,233 @@
         "owner": "Remote"
       }
     ]
+  },
+  "cross_surface_intake": {
+    "web_reference_firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+    "remote_receipt_commit": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+    "remote_receipt": "evidence/remote-resume-0130/matched-native-states.json",
+    "remote_consistency": "evidence/remote-resume-0130/consistency/README.md",
+    "fwui_commit": "1ec2d61a825b88d7736371623cb12570e79da864",
+    "fwui_frames_page": "https://chatgpt.com/space/page_800ecfd4f2a08191884949bf6bbee920",
+    "fwui_refreshed_index": "docs/lanes/fwui/current/reference-026/qualification/spatial-line-stock/current-renderer-index.json",
+    "fwui_retained_index": "docs/lanes/fwui/current/reference-026/qualification/catalog-reuse-index.json",
+    "fwui_retained_producer": "199f0444a4cf27374112a5fdf48f82005b070bbc",
+    "fwui_renderer_blobs": {
+      "ui": "0f074943f75ac7808b6de0e84c5618b661bbd1dd",
+      "gfx": "d3fbb4c527a483d4db0f984a9fd90648f390fc3b"
+    },
+    "remote_paired_firmware": "f1786ebec2616477163b62b029c7e77405a9c3de",
+    "states": [
+      {
+        "state": "view-00-part-00-voice-00-page-00",
+        "web_rgb_sha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "7492ce3b07997ef8ca5efad34f603189009aca6bb9b12f9da7fe71bec479599e",
+          "gif": "comparisons/spatial-0f074943/roles/view-00-part-00-voice-00-page-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-00",
+        "web_rgb_sha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "1adfa906dc145e171248e633b541f648b1a6daf9a542788cf60135c603cb0a4d",
+          "gif": "comparisons/spatial-0f074943/roles/view-03-part-00-voice-00-page-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-01",
+        "web_rgb_sha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "d6f06d42b1c8fcc0f67de1dfea3c54427d77063c4e6f1d23bc07f5030f270dcc",
+          "gif": "comparisons/spatial-0f074943/roles/view-03-part-00-voice-00-page-01.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-00",
+        "web_rgb_sha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-04-part-00-voice-00-page-00/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-01",
+        "web_rgb_sha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "3433117217c3e93cf9d7192fef37d58c9b9f68cda9aa655732cd939f3f71f1c7",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-01.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-02",
+        "web_rgb_sha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-04-part-00-voice-00-page-02/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-03",
+        "web_rgb_sha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "908843835bb7e90b809ff3dda140ff597267b3a3ec9f93b9e156ba4b56faf0b6",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-03.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-04",
+        "web_rgb_sha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "2528d7b275ac9ec8bfc173c4482dab51610dde1505ab794b448411cd71e98e86",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-04.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-00",
+        "web_rgb_sha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-06-part-00-voice-00-page-00/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-01",
+        "web_rgb_sha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-06-part-00-voice-00-page-01/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "global-section--1-row-00",
+        "web_rgb_sha256": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "43f648766cb7a8f93e051e7a15825dc255a91d78457616d1651b26364ae004d6",
+          "gif": "comparisons/spatial-0f074943/roles/global-section--1-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "global-section-0-row-00",
+        "web_rgb_sha256": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "784757d77f78316ef07e6c00b58102aa822bd0bfafd0e4c07b9243d150130c19",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-0-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "global-section-3-row-00",
+        "web_rgb_sha256": "174401b00da703fc1a9cde26e8503dd8d1df01c4597942129c5fe7f46c712c93",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "c88943a544510d3fd53ca361dca9a6f85e5b52251b3b290a6498c838236f9dee",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-3-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "03-picked-fader",
+        "web_rgb_sha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+          "archive": "03-0.tar.xz",
+          "capture": "renders/03-picked-fader/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "04-delay-knob",
+        "web_rgb_sha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+          "archive": "04-0.tar.xz",
+          "capture": "renders/04-delay-knob/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "global-section-4-row-00",
+        "web_rgb_sha256": "9e365eb9d91fde2846ffb382c1a77164b3f5a24aeeed04e1e48b4af2c5ccb4df",
+        "remote_paired_f178": "NOT_RECORDED",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "c391b14b8bb07fccd344a72d21fbc604cf552bbf0c568993dd0e8a57fca93df9",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-4-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "list-view-04-part-00-voice-00-row-17",
+        "web_rgb_sha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+        "remote_paired_f178": "NOT_RECORDED",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+          "archive": "list-0.tar.xz",
+          "capture": "renders/list-view-04-part-00-voice-00-row-17/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      }
+    ],
+    "retained_seq": [
+      {
+        "state": "view-08-part-00-voice-00-page-00",
+        "qualification": "retained",
+        "rgb_sha256": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc",
+        "archive": "view-0.tar.xz",
+        "capture": "renders/view-08-part-00-voice-00-page-00/capture-00.png"
+      },
+      {
+        "state": "view-08-part-01-voice-00-page-00",
+        "qualification": "retained",
+        "rgb_sha256": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf",
+        "archive": "view-0.tar.xz",
+        "capture": "renders/view-08-part-01-voice-00-page-00/capture-00.png"
+      }
+    ]
   }
 }
