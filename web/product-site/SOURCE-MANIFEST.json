@@ -704,8 +704,8 @@
     },
     {
       "path": "reference/screens/page.mjs",
-      "bytes": 6670,
-      "sha256": "5c40cfbc912de48069339cae1694228f527891ffe75ed83de109f9a27779e179"
+      "bytes": 6702,
+      "sha256": "e808ac34b9c07797a5f559f7594878daf84854cbba494ef5f4852792e6d963e2"
     },
     {
       "path": "reference/screens/render.mjs",

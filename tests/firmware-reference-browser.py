@@ -158,16 +158,8 @@ def sweep(page, origin, site):
 
 
 def check_seq_sources(page, origin):
-    pins = [
-        ('view-08-part-00-voice-00-page-00', {
-            'shipping': '75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3',
-            'r22': 'aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527',
-        }),
-        ('view-08-part-01-voice-00-page-00', {
-            'shipping': '23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030',
-            'r22': '49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319',
-        }),
-    ]
+    matrix = json.loads((ROOT / 'evidence/web-routes/shipping-parity/seq-state-matrix.json').read_text())
+    pins = [(row['web_state'], row['rgb_sha256']) for row in matrix['states']]
     native = dict(row.split('\t') for row in ORACLE.read_text().splitlines())
     url = origin + '/reference/screens/#'
     compare = page.locator('#compare')
@@ -184,13 +176,45 @@ def check_seq_sources(page, origin):
                 with Image.open(io.BytesIO(base64.b64decode(image))) as pixels:
                     assert pixels.size == (240, 240)
                     actual = hashlib.sha256(pixels.convert('RGB').tobytes()).hexdigest()
-                assert actual == (native[state] if selected == 'current' else expected[selected])
+                assert expected['current'] == native[state]
+                assert actual == expected[selected]
                 assert compare.is_visible() == (selected == 'current')
             assert page.evaluate('document.documentElement.scrollWidth') == width
     page.goto(url + 'home-playing')
     page.wait_for_selector('#lcd[data-state="home-playing"][data-source="current"]')
     assert not source.is_visible()
     print('PASS two SEQ states, three sources, three viewport sizes, exact 240×240 RGB and native return')
+
+
+def check_late_worker_error(browser, origin):
+    page = browser.new_page()
+    try:
+        page.add_init_script('''const NativeWorker = window.Worker;
+            window.Worker = class extends NativeWorker {
+              constructor(...args) {
+                super(...args);
+                this.addEventListener('error', () => { window.nativeWorkerFailed = true; });
+              }
+            };''')
+        held = []
+        page.route('**/reference/screens/worker.mjs', lambda route: held.append(route))
+        url = origin + '/reference/screens/#view-08-part-00-voice-00-page-00'
+        with page.expect_request('**/reference/screens/worker.mjs'):
+            page.goto(url)
+        page.locator('#lcd-source').select_option('shipping')
+        archive = page.locator('#lcd[data-source="shipping"][data-state]')
+        archive.wait_for()
+        assert len(held) == 1
+        held[0].abort()
+        page.wait_for_function('window.nativeWorkerFailed === true')
+        assert archive.count() == 1
+        assert page.locator('#status').inner_text() == 'Shipping 0.0.26 · 94197fc8'
+        page.unroute('**/reference/screens/worker.mjs')
+        page.locator('#lcd-source').select_option('current')
+        page.locator('#lcd[data-source="current"][data-state]').wait_for()
+        print('PASS late native worker error leaves the archive visible and Current can recover')
+    finally:
+        page.close()
 
 
 def check(site, seq_sources_only=False):
@@ -206,6 +230,7 @@ def check(site, seq_sources_only=False):
                     page.on('pageerror', lambda err: errors.append(str(err)))
                     origin = f'http://127.0.0.1:{server.server_port}'
                     check_seq_sources(page, origin)
+                    check_late_worker_error(browser, origin)
                     if not seq_sources_only:
                         sweep(page, origin, site)
                     assert not errors, errors

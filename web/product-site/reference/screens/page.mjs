@@ -81,7 +81,7 @@ async function start() {
         pending = false;
         next.terminate();
         worker = null;
-        showError('The firmware renderer could not be started.');
+        if (source.value === 'current') showError('The firmware renderer could not be started.');
       };
       next.onmessage = ({data}) => {
         if (worker !== next || data.request !== request) return;

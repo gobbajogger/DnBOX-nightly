@@ -34,3 +34,11 @@ The runtime-backed build produced 269 files. The focused test passed both states
 ```sh
 python3 tests/firmware-reference-browser.py --site .output/product-site --seq-sources-only
 ```
+
+## Shared state matrix
+
+[The matrix](seq-state-matrix.json) is used directly by the focused Web browser test. It keeps the FWUI ledger pin, exact Web RGB expectations and the closest mounted Remote controls together. The prior verified Web triples are reused. Only the missing Remote states were captured. In [909 Remote](remote-seq-empty-909.png) and [808 Remote](remote-seq-empty-808.png), the stopped Draft shows P01, BD, 16 steps and an empty 176-cell grid. The header shows 120 BPM, and this surface exposes no explicit 1/16 control. These images qualify grid-role equivalence, with exact timing and rate remaining open. [Remote browser log](seq-remote-independent.txt).
+
+The [FWUI ledger](https://github.com/gobbajogger/DnBOX/blob/22a34d6ecef7b31e62ea6655fddc4920ab30f8e1/docs/lanes/fwui/current/reference-026/qualification/README.md) covers native routes and scoped F6 behavior. The recovered detached SEQ voice-rail candidate only changes the row glyphs and has no full-state parity or stock-space qualification receipt. Independent review decoded the existing triptychs and reproduced all six pixel counts. All exceed 576 differing pixels.
+
+The reviewer also identified a delayed native worker failure that erased a selected archive. The injected late abort reproduced the issue. The fix scopes error display to Current, and the browser test proves Shipping remains visible and the native worker can recover when selected again. The corrected build produced 269 files. Both focused tests passed, and independent review approved the guard and its regression. No layout or fixture pixels changed.
