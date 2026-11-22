@@ -1,5 +1,17 @@
 # Integration baseline
 
+## Combined Nightly browser evidence and independent review — 2026-11-22 (WORKING)
+
+- Source `938c6aa6f49564c59df58517f68c44eb97dfa84b` contains consolidated `583f622961fc9975fac746592ce6c483073c4170` with zero file deletions. Chromium 151.0.7922.34 ran with its normal sandbox.
+- The requested filtered update produced exactly 32 Remote Workspace proposals, including eight states at each of four sizes. Four grid checks and the header SSIM check passed, with zero page or header errors. The filtered run exits 1 by design. None of the proposals entered approved snapshots.
+- Independent review holds Remote approval for five inherited design gaps plus measured Chance label overlap at 390×844. The review includes the standalone reproduction and owner baseline references. Manual, Original and Legacy matched all six approved phone references pixel for pixel. Both phone Build History comparisons failed against the older 197-row references. All 198 current IDs remain in order. The separate Web owner has the current-versus-archive copy conflict to resolve.
+- Source and redirect tests passed 36/36. All 19 routes opened in landscape and Remote readiness passed on both phone sizes with and without the pinned native runtime. Installer, file exchange and emulator tests passed in their focused coverage. The emulator fixture matched 26 LCD frames. The exhaustive firmware-screen parity test and full browser chain did not complete after Chromium crashes. The full `npm test` terminated at desktop Legacy Manual capture with exit 1. An isolated retry matched that reference. Structural detector fixtures passed 9/9 and current-site structural checks reported defects before a browser crash.
+- Local 0.0.26 consistency checks passed 42/42. Both Elite and Pro deployed assets matched their GitHub release bytes, CRC32 and SHA-256 through the public Nightly and stable catalogs. Fifteen live BREAK preview endpoints matched their pinned WAV bytes.
+- Vote counting/refresh passed three node controls and five viewport browser fixtures. The live inbox has no open feature proposal target. The connected GitHub identity is the owner. A live opening-post vote and refresh remain open.
+- Project Sources upload did not reach file selection. The render and review archive is staged as `lane-integ-resume-0130-938c6aa6-nightly-renders-and-review.tar.gz` with SHA-256 `fc7e7d8acb8f702d08d73fd7dde0ac0ce137709885482992f1b8dd855eb32ef5`.
+
+[Qualification evidence](../../evidence/integ-resume/qualification-0130/nightly-938c6aa6-independent-review.md)
+
 ## Resume 0130 substantive checkpoint — 2026-11-22 01:36:50 UTC (WORKING)
 
 Assignment resumed from exact branch head `3af7f0ff8f6eabe8d81dd39daac14fbb4a9fca48` on `lane/integ-resume-0130`. Read current AGENTS, RULES, CHECKLISTS, lane state and consolidated ledger. Public Git transport is available in this executor (firmware consolidated currently `f1786ebec2616477163b62b029c7e77405a9c3de`); isolated full-history, partial-blob checkouts are being acquired so conflict resolution can preserve both parents. Earlier DNS failure is not carried forward as a current blocker. Library list/search currently return an unavailable-tool error; the DnBOX-cloud RDC inventory lists two offline devices. These are scoped capability findings, not evidence of a build or browser failure.

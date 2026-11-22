@@ -1,0 +1,32 @@
+{
+  "source_ref_observation_utc": "2026-11-22T01:46:00Z",
+  "results": [
+    {
+      "repo": "gobbajogger/DnBOX",
+      "branch": "lane/integ-resume-0130",
+      "published_source_sha": "e29c99ec2cc610e5af3de575e85771f666b239f4",
+      "local_execution_sha": "5b5cb2420077ef8c3559c8a0e0aa4a5d6e8e34d7",
+      "source_tree": "8609f75308f10874a7ba4aec1c1fb309023c100b",
+      "consolidated_sha": "f1786ebec2616477163b62b029c7e77405a9c3de",
+      "consolidated_is_ancestor": true,
+      "parents": [
+        "95624daf00fd73e373f4d8cd133de9016c8b7f7c",
+        "f1786ebec2616477163b62b029c7e77405a9c3de"
+      ],
+      "deleted_relative_to_consolidated": []
+    },
+    {
+      "repo": "gobbajogger/DnBOX-nightly",
+      "branch": "lane/integ-resume-0130",
+      "published_source_sha": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+      "local_execution_sha": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+      "source_tree": "6e1f914a5fc29ab7c299befcc612addbfc0a2300",
+      "consolidated_sha": "583f622961fc9975fac746592ce6c483073c4170",
+      "consolidated_is_ancestor": true,
+      "parents": [
+        "3af7f0ff8f6eabe8d81dd39daac14fbb4a9fca48"
+      ],
+      "deleted_relative_to_consolidated": []
+    }
+  ]
+}

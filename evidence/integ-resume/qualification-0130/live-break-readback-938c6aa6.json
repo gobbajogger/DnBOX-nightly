@@ -1,0 +1,152 @@
+{
+  "source_contract_git_blob": "21a2bc7766d06f4e55f70ef7cea0d53dc759958c",
+  "live_base": "https://gobbajogger.github.io/DnBOX-nightly/",
+  "results": [
+    {
+      "path": "assets/starting-breaks/personal-br1-zone1.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/assets/starting-breaks/personal-br1-zone1.wav",
+      "size": 69644,
+      "sha256": "06ee634369363b5019453f66c9178f781e24371675636e47c66875bdf662187a",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br1-zone1",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br1-zone1",
+      "size": 69644,
+      "sha256": "06ee634369363b5019453f66c9178f781e24371675636e47c66875bdf662187a",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br1-zone1.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br1-zone1.wav",
+      "size": 69644,
+      "sha256": "06ee634369363b5019453f66c9178f781e24371675636e47c66875bdf662187a",
+      "match": true
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone2.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/assets/starting-breaks/personal-br1-zone2.wav",
+      "size": 83620,
+      "sha256": "b0f072a149e2dafe6c4bfe58ddb036c82a1beb04a7e96f397ee405248fabc514",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br1-zone2",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br1-zone2",
+      "size": 83620,
+      "sha256": "b0f072a149e2dafe6c4bfe58ddb036c82a1beb04a7e96f397ee405248fabc514",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br1-zone2.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br1-zone2.wav",
+      "size": 83620,
+      "sha256": "b0f072a149e2dafe6c4bfe58ddb036c82a1beb04a7e96f397ee405248fabc514",
+      "match": true
+    },
+    {
+      "path": "assets/starting-breaks/personal-br1-zone3.wav",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 85768,
+        "sha256": "06d3cf354ce390e6656df07bee889ce8aff46c479a9edd2e3c752cdc6ea88845",
+        "match": true
+      }
+    },
+    {
+      "path": "private-audio/personal-br1-zone3",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 85768,
+        "sha256": "06d3cf354ce390e6656df07bee889ce8aff46c479a9edd2e3c752cdc6ea88845",
+        "match": true
+      }
+    },
+    {
+      "path": "private-audio/personal-br1-zone3.wav",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 85768,
+        "sha256": "06d3cf354ce390e6656df07bee889ce8aff46c479a9edd2e3c752cdc6ea88845",
+        "match": true
+      }
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone1.wav",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 92412,
+        "sha256": "acb6d13f270ac562b0be0819b3e3f56b31d406281c841fe08c18284432804661",
+        "match": true
+      }
+    },
+    {
+      "path": "private-audio/personal-br2-zone1",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 92412,
+        "sha256": "acb6d13f270ac562b0be0819b3e3f56b31d406281c841fe08c18284432804661",
+        "match": true
+      }
+    },
+    {
+      "path": "private-audio/personal-br2-zone1.wav",
+      "error": "<urlopen error timed out>",
+      "match": false,
+      "retry": {
+        "exit": 0,
+        "status": "200",
+        "size": 92412,
+        "sha256": "acb6d13f270ac562b0be0819b3e3f56b31d406281c841fe08c18284432804661",
+        "match": true
+      }
+    },
+    {
+      "path": "assets/starting-breaks/personal-br2-zone2.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/assets/starting-breaks/personal-br2-zone2.wav",
+      "size": 105870,
+      "sha256": "3ea78e9a407e1c8e0b45e8979d2ba43efaabc2de8e82098c901fd69e90ad2cf1",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br2-zone2",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br2-zone2",
+      "size": 105870,
+      "sha256": "3ea78e9a407e1c8e0b45e8979d2ba43efaabc2de8e82098c901fd69e90ad2cf1",
+      "match": true
+    },
+    {
+      "path": "private-audio/personal-br2-zone2.wav",
+      "status": 200,
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/private-audio/personal-br2-zone2.wav",
+      "size": 105870,
+      "sha256": "3ea78e9a407e1c8e0b45e8979d2ba43efaabc2de8e82098c901fd69e90ad2cf1",
+      "match": true
+    }
+  ],
+  "matching": 9,
+  "matching_after_retry": 15
+}

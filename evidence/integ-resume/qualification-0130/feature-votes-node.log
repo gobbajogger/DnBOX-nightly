@@ -1,0 +1,13 @@
+✔ count opening-post votes once per person and distinguish the owner (10.387871ms)
+✔ incomplete reads never become zero votes or another repository’s owner decision (1.477298ms)
+✔ read all reaction pages and omit pull requests and unrelated open issues (1.669516ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.53071
+
+EXIT 0

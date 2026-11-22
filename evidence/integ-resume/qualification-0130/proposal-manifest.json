@@ -1,0 +1,179 @@
+{
+  "commit": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "branch": "lane/integ-resume-0130",
+  "disposition": "unapproved proposal",
+  "visual_gate_exit": 1,
+  "inventory_exact": true,
+  "snapshots_absent_in_primary": true,
+  "summary": {
+    "screens": 37,
+    "pass": 5,
+    "fail": 0,
+    "no_baseline": 0,
+    "baseline_written": 32,
+    "header_fail": 0,
+    "page_errors": 0
+  },
+  "images": [
+    {
+      "filename": "remote-files-1024x640-actual.png",
+      "bytes": 47850,
+      "sha256": "cbfb5c772864a879460bd9e8f525b8a885c93b1941057fe66d3697a4cc030683"
+    },
+    {
+      "filename": "remote-files-1440x900-actual.png",
+      "bytes": 58841,
+      "sha256": "383d6588520ae50e552e0f75bd79ce29197c32e6b9e706f4ec4779ba2ede4fee"
+    },
+    {
+      "filename": "remote-files-390x844-actual.png",
+      "bytes": 46413,
+      "sha256": "07ad9c7671d76671719c707c5081d2147f503bd8df7d74bd7d2122a055e7e0ef"
+    },
+    {
+      "filename": "remote-files-844x390-actual.png",
+      "bytes": 32347,
+      "sha256": "3a2569b29eca8eb173234fce71902277b6f8e387fb03edabd2c30040c8e2f469"
+    },
+    {
+      "filename": "remote-lane-chance-1024x640-actual.png",
+      "bytes": 37586,
+      "sha256": "6a77986d794512240d69726a96844a542c61c6c4ad0d367ae275484e446fb515"
+    },
+    {
+      "filename": "remote-lane-chance-1440x900-actual.png",
+      "bytes": 42766,
+      "sha256": "8f62e45c3a064c2cac3f0b9168c413373bfe0f62cf32db449961c9f91ef77366"
+    },
+    {
+      "filename": "remote-lane-chance-390x844-actual.png",
+      "bytes": 32769,
+      "sha256": "f7b6dc0dcec0c37ac6ecbaa8c46fbbfe0747f380c2e46832a453dfe97ede09a7"
+    },
+    {
+      "filename": "remote-lane-chance-844x390-actual.png",
+      "bytes": 31228,
+      "sha256": "e44328ba65d4d54afcefe4295979c2df1e1d0da993e4c1f703d2d9eaac3510dc"
+    },
+    {
+      "filename": "remote-lane-pan-1024x640-actual.png",
+      "bytes": 36174,
+      "sha256": "498d6772cd9d26ab7ff1c771efa139004035e64e681c5fc46f4e1ebee15ab035"
+    },
+    {
+      "filename": "remote-lane-pan-1440x900-actual.png",
+      "bytes": 41176,
+      "sha256": "fb87d4a2d34689f3a9533271cd2721a3214f7fe8266cb7464e975390819f7a43"
+    },
+    {
+      "filename": "remote-lane-pan-390x844-actual.png",
+      "bytes": 31489,
+      "sha256": "9e7f6690d5c6614be05ad48b38e31ba0836b28cbdf5a783ddeba66c5df374297"
+    },
+    {
+      "filename": "remote-lane-pan-844x390-actual.png",
+      "bytes": 29912,
+      "sha256": "4e90c33db9e0546630c2ea68dafddcd97f5d85e148c05aa3b9daf6d43b84f415"
+    },
+    {
+      "filename": "remote-lane-pitch-1024x640-actual.png",
+      "bytes": 36779,
+      "sha256": "9521f18ef8c235548db64ab60c4469b6b2c9155ca5b04918936aa2d730e955ff"
+    },
+    {
+      "filename": "remote-lane-pitch-1440x900-actual.png",
+      "bytes": 41836,
+      "sha256": "b0112e5034ff408b2a0c874575ea88a99e9f50318ceafdde3151d0f603ff19a2"
+    },
+    {
+      "filename": "remote-lane-pitch-390x844-actual.png",
+      "bytes": 32090,
+      "sha256": "88fd91f7652af504cf96d8cbc56140f56b05869b00ebc09ae6480014c4867042"
+    },
+    {
+      "filename": "remote-lane-pitch-844x390-actual.png",
+      "bytes": 30533,
+      "sha256": "e6590102a2bfc1d0b364700f050fa9965be85e0ccab5bf26a90b5d2d3d80a31e"
+    },
+    {
+      "filename": "remote-mix-1024x640-actual.png",
+      "bytes": 47276,
+      "sha256": "68084bc84956ec91e9c01d4dad783a61fa9bb2f6bac1e2589f476234f79952ba"
+    },
+    {
+      "filename": "remote-mix-1440x900-actual.png",
+      "bytes": 51978,
+      "sha256": "a586990d061b3f7df2e5e3581ca4afe123027e33f5187a0d154eb19eb0ed3016"
+    },
+    {
+      "filename": "remote-mix-390x844-actual.png",
+      "bytes": 42265,
+      "sha256": "e2263f3ee6a0f07c56b68a80082e663a26a5bb0062c26aa72028d7f3c337e6e8"
+    },
+    {
+      "filename": "remote-mix-844x390-actual.png",
+      "bytes": 36177,
+      "sha256": "647ab77f3ef55a98fab045f10131f7e95236f4d0cb09c08c97720de9c73c0c3e"
+    },
+    {
+      "filename": "remote-patterns-1024x640-actual.png",
+      "bytes": 51797,
+      "sha256": "ca25ef53326f496328272c0d700c392150991de7209b5442cea5b3bb660eea37"
+    },
+    {
+      "filename": "remote-patterns-1440x900-actual.png",
+      "bytes": 72111,
+      "sha256": "795c19940f2abe13e84b925ab75170ef9dd1582d0721f1e405cb4a954dc23e0f"
+    },
+    {
+      "filename": "remote-patterns-390x844-actual.png",
+      "bytes": 46942,
+      "sha256": "76b6025e97ea7629a7f51024b369b1600c79d3f574f516145fad288035360570"
+    },
+    {
+      "filename": "remote-patterns-844x390-actual.png",
+      "bytes": 36415,
+      "sha256": "505898c53e7db2c8c2c61084b09ec863bf4cb0562fd0cd881e263b019e045dd8"
+    },
+    {
+      "filename": "remote-sequence-1024x640-actual.png",
+      "bytes": 37013,
+      "sha256": "60f6acb4de8783840da74c9904e53c029c1520fe703ee13cc95b78cc9ac8d141"
+    },
+    {
+      "filename": "remote-sequence-1440x900-actual.png",
+      "bytes": 42175,
+      "sha256": "3e918704fa23829439a1bf1547988d12930c43f4e748609505e6aa2a067c7194"
+    },
+    {
+      "filename": "remote-sequence-390x844-actual.png",
+      "bytes": 32497,
+      "sha256": "0252c676f65dd6ccd72d2fd6098e68a137f42a89e6bcff526eaaaace5143fd3e"
+    },
+    {
+      "filename": "remote-sequence-844x390-actual.png",
+      "bytes": 30962,
+      "sha256": "cff5bc9710cbc9c647cc782ff5ae1ce6fd0787928cac622024a08e15733eda92"
+    },
+    {
+      "filename": "remote-sound-1024x640-actual.png",
+      "bytes": 44727,
+      "sha256": "5610648339c941c969a82212af66182d6a1d97aad29bc8b1306436f585f60af1"
+    },
+    {
+      "filename": "remote-sound-1440x900-actual.png",
+      "bytes": 58736,
+      "sha256": "d9d087473262d836663efa909ea8d53df22d6b6ece6da2f99916052816378641"
+    },
+    {
+      "filename": "remote-sound-390x844-actual.png",
+      "bytes": 46767,
+      "sha256": "458cb71bb062671711a5bf08c8042bd8a26a7adafaf4f76ec6f983635cd9c1ce"
+    },
+    {
+      "filename": "remote-sound-844x390-actual.png",
+      "bytes": 32701,
+      "sha256": "00138304050fac70925e2593c64fa268b45b7c93ce27b8b9fc76b077e16bb7eb"
+    }
+  ]
+}

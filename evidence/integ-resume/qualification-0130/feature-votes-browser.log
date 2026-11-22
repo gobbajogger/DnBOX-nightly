@@ -1,0 +1,12 @@
+PASS 1440px mounted installer navigation and firmware heading
+PASS 1440x900: proposal title wraps and owner vote refreshes
+PASS 1024px mounted installer navigation and firmware heading
+PASS 1024x640: proposal title wraps and owner vote refreshes
+PASS 844px mounted installer navigation and firmware heading
+PASS 844x390: proposal title wraps and owner vote refreshes
+PASS 390px mounted installer navigation and firmware heading
+PASS 390x844: proposal title wraps and owner vote refreshes
+PASS 240px mounted installer navigation and firmware heading
+PASS 240x240: proposal title wraps and owner vote refreshes
+
+EXIT 0

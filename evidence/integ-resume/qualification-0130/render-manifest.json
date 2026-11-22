@@ -1,0 +1,218 @@
+{
+  "commit": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "branch": "lane/integ-resume-0130",
+  "chromium": "151.0.7922.34",
+  "chromium_sandbox": true,
+  "visual_gate_exit": 1,
+  "summary": {
+    "screens": 8,
+    "pass": 6,
+    "fail": 2,
+    "no_baseline": 0,
+    "baseline_written": 0,
+    "header_fail": 0,
+    "page_errors": 0
+  },
+  "renders": [
+    {
+      "name": "site-manual-844x390",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        844,
+        2045
+      ],
+      "baseline_dimensions": [
+        844,
+        2045
+      ],
+      "sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "baseline_sha256": "94ab41feb457a52bda8beb70e893e7021afd0723ef406a9ea4e48634db5fecd3",
+      "bytes": 209506,
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "scrollHeight": 2045,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 0.32
+    },
+    {
+      "name": "site-manual-original-844x390",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        844,
+        29993
+      ],
+      "baseline_dimensions": [
+        844,
+        29993
+      ],
+      "sha256": "7c734485bd62c7d28e811f28dc6f3f6726f18c5aca2a2dc6f0ad95fd3259d003",
+      "baseline_sha256": "7c734485bd62c7d28e811f28dc6f3f6726f18c5aca2a2dc6f0ad95fd3259d003",
+      "bytes": 4454370,
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "scrollHeight": 29993,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 4.081
+    },
+    {
+      "name": "site-manual-legacy-844x390",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        844,
+        30429
+      ],
+      "baseline_dimensions": [
+        844,
+        30429
+      ],
+      "sha256": "520c5735bc3e9b80448defefa37801988811fe3a543a461e0f00296d7daa81be",
+      "baseline_sha256": "0db22303df1c258e0d4d333e5d4c7d6d2eb1309694153b08250bd30125b5b4fc",
+      "bytes": 4217185,
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "scrollHeight": 30342,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 6.016
+    },
+    {
+      "name": "site-builds-844x390",
+      "result": "FAIL",
+      "changed_pixel_ratio": 1.0,
+      "dimensions": [
+        844,
+        73793
+      ],
+      "baseline_dimensions": [
+        844,
+        73342
+      ],
+      "sha256": "6cd2d80fd42d42709f636836573926e534100e80f7def96990027d7b2e2d6660",
+      "baseline_sha256": "0c480b01237c84ed9f4f183397af3924f6936f031755fb3cf7bbbee821819dfe",
+      "bytes": 8452313,
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "scrollHeight": 73793,
+      "records": 198,
+      "status": "198 of 198 records",
+      "capture_seconds": 7.455
+    },
+    {
+      "name": "site-manual-390x844",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        390,
+        2476
+      ],
+      "baseline_dimensions": [
+        390,
+        2476
+      ],
+      "sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "baseline_sha256": "00af483dece82495f0694087cbdc8dc57491ee1e5e30bd55a2ec1966fb384ba8",
+      "bytes": 198327,
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 2476,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 0.397
+    },
+    {
+      "name": "site-manual-original-390x844",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        390,
+        40703
+      ],
+      "baseline_dimensions": [
+        390,
+        40703
+      ],
+      "sha256": "d04e75dc4896c1009af8769ce210b381d6d9a07a778f6e1e3218709ba225d199",
+      "baseline_sha256": "d04e75dc4896c1009af8769ce210b381d6d9a07a778f6e1e3218709ba225d199",
+      "bytes": 4572609,
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 40703,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 1.642
+    },
+    {
+      "name": "site-manual-legacy-390x844",
+      "result": "PASS",
+      "changed_pixel_ratio": 0.0,
+      "dimensions": [
+        390,
+        45592
+      ],
+      "baseline_dimensions": [
+        390,
+        45592
+      ],
+      "sha256": "38ddb3279083b5fde93de3900ce75dce0afc937b350141ce48f8158f8af71c51",
+      "baseline_sha256": "38ddb3279083b5fde93de3900ce75dce0afc937b350141ce48f8158f8af71c51",
+      "bytes": 4023423,
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 45476,
+      "records": 0,
+      "status": null,
+      "capture_seconds": 2.937
+    },
+    {
+      "name": "site-builds-390x844",
+      "result": "FAIL",
+      "changed_pixel_ratio": 1.0,
+      "dimensions": [
+        390,
+        105158
+      ],
+      "baseline_dimensions": [
+        390,
+        104451
+      ],
+      "sha256": "4ac8a201bc271b56812ec933eba233f42b8603d45cac6e9255c3a35d90831956",
+      "baseline_sha256": "f621ec31e6cbd20fde1845fed3bb3cee2285e27052182599ea7fab403eb65a64",
+      "bytes": 8623489,
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "scrollHeight": 105157,
+      "records": 198,
+      "status": "198 of 198 records",
+      "capture_seconds": 9.983
+    }
+  ]
+}

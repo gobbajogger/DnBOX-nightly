@@ -1,0 +1,83 @@
+{
+  "checked_at_utc": "2026-11-22T01:53:33.771306+00:00",
+  "source": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+  "catalogs": {
+    "stable": {
+      "url": "https://gobbajogger.github.io/DnBOX/versions.json",
+      "bytes": [
+        11205,
+        "f213db62",
+        "6d3fcde6667bde15596f17896fd9565b6a728aa4d49fc7ecb1d1fd36e3a1deb4"
+      ],
+      "latest": "nightly-94197fc8-dev",
+      "matches_source_records": [
+        "nightly-94197fc8-dev"
+      ]
+    },
+    "nightly": {
+      "url": "https://gobbajogger.github.io/DnBOX-nightly/versions.json",
+      "bytes": [
+        87489,
+        "200a78c1",
+        "39ad711aba505308d6dd1fcb1765edd2a8cff69ebcc26f1cd8a1f34b6fca5365"
+      ],
+      "latest": "nightly-94197fc8-dev",
+      "matches_source_records": [
+        "nightly-94197fc8-dev"
+      ]
+    }
+  },
+  "model_results": [
+    {
+      "model": "elite",
+      "release_url": "https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-elite.fwsc",
+      "listed_pkg_url": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6/DnBOX-0.0.26-SMK37-Elite-94197fc8-hwtest.fwsc",
+      "release": [
+        651732,
+        "a5953c62",
+        "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6"
+      ],
+      "listed": [
+        651732,
+        "a5953c62",
+        "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6"
+      ],
+      "expected": [
+        651732,
+        "a5953c62",
+        "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6"
+      ],
+      "matches": true,
+      "record": "nightly-94197fc8-dev",
+      "catalog_expected_size": 651732,
+      "catalog_expected_sha256": "95b3195f4767ef5df33b365197b01203873e5eec3d7fa497c73e5e509484a4a6",
+      "catalog_matches": true
+    },
+    {
+      "model": "pro",
+      "release_url": "https://github.com/gobbajogger/DnBOX/releases/download/v0.0.26/dnbox-x0x37-0.0.26-pro.fwsc",
+      "listed_pkg_url": "https://gobbajogger.github.io/DnBOX-nightly/artifacts/nightly-dev/ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8/DnBOX-0.0.26-SMK37-Pro-94197fc8-hwtest.fwsc",
+      "release": [
+        651730,
+        "d8957148",
+        "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8"
+      ],
+      "listed": [
+        651730,
+        "d8957148",
+        "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8"
+      ],
+      "expected": [
+        651730,
+        "d8957148",
+        "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8"
+      ],
+      "matches": true,
+      "record": "nightly-94197fc8-dev",
+      "catalog_expected_size": 651730,
+      "catalog_expected_sha256": "ce67d560eebd03cb8b9087f7723b1e0b71fb7cca256184cdfdd55a8c27c708b8",
+      "catalog_matches": true
+    }
+  ],
+  "pass": true
+}

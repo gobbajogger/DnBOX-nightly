@@ -1,0 +1,5 @@
+{"site": ".output/product-site", "width": 844, "height": 390, "http": 200, "error_visible": false, "sequence_visible": true, "lane_visible": true, "scroll_width": 844, "lane_change": ["VELOCITY", "CHANCE"], "sound_selected": "page", "page_errors": [], "pass": true}
+{"site": ".output/product-site", "width": 390, "height": 844, "http": 200, "error_visible": false, "sequence_visible": true, "lane_visible": true, "scroll_width": 390, "lane_change": ["VELOCITY", "CHANCE"], "sound_selected": "page", "page_errors": [], "pass": true}
+{"site": ".output/qualified-runtime-site", "width": 844, "height": 390, "http": 200, "error_visible": false, "sequence_visible": true, "lane_visible": true, "scroll_width": 844, "lane_change": ["VELOCITY", "CHANCE"], "sound_selected": "page", "page_errors": [], "pass": true}
+{"site": ".output/qualified-runtime-site", "width": 390, "height": 844, "http": 200, "error_visible": false, "sequence_visible": true, "lane_visible": true, "scroll_width": 390, "lane_change": ["VELOCITY", "CHANCE"], "sound_selected": "page", "page_errors": [], "pass": true}
+{"checked": 4, "passed": 4}
