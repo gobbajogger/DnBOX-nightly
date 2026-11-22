@@ -215,12 +215,20 @@ def inspect(origin, site, output):
     errors = []
     failures = []
     with sync_playwright() as pw:
-        b = pw.chromium.launch(chromium_sandbox=True)
-        browser_version = b.version
-        ctx = b.new_context(viewport={'width': 844, 'height': 390}, device_scale_factor=1, has_touch=True, accept_downloads=True)
-        ctx.add_init_script(native_fixture['INSTRUMENT'])
-        page = ctx.new_page()
-        page.on('pageerror', lambda e: errors.append(str(e)))
+        b = ctx = page = None
+        browser_version = None
+
+        def fresh_browser():
+            nonlocal b, ctx, page, browser_version
+            if b is not None:
+                ctx.close()
+                b.close()
+            b = pw.chromium.launch(chromium_sandbox=True)
+            browser_version = b.version
+            ctx = b.new_context(viewport={'width': 844, 'height': 390}, device_scale_factor=1, has_touch=True, accept_downloads=True)
+            ctx.add_init_script(native_fixture['INSTRUMENT'])
+            page = ctx.new_page()
+            page.on('pageerror', lambda e: errors.append(str(e)))
 
         def snap(name, ref):
             page.evaluate('document.fonts.ready')
@@ -425,13 +433,19 @@ def inspect(origin, site, output):
             mixes(True)
             menu('#emulator-stop')
         try:
+            fresh_browser()
             page.goto(origin + '/remote/', wait_until='networkidle')
             for q in PARTS:
                 case(q, lambda q=q: inspect_part(q))
             case('mix', mixes)
             case('dialogs', dialogs)
             case('imported legacy basses', legacy_basses)
+            # These journeys already begin with fresh navigations and do not
+            # share a Draft. Release renderer, downloads and AudioWorklet
+            # resources between them without hiding a failing journey.
+            fresh_browser()
             case('native', native)
+            fresh_browser()
             for q in ('device', 'identity'):
                 page.goto(origin + '/remote/' + q + '/', wait_until='networkidle')
                 snap(q, [13])

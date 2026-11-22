@@ -811,9 +811,9 @@ async def project_files(page):
             'A finite range, aligned tracks and clips for a DAW.',
         ]
         for description in await descriptions.all():
-            if width == 1440:
+            if width in (1440, 844):
                 await expect(description).to_be_in_viewport(ratio=1)
-                await expect(description).to_have_css('font-size', '21px')
+                await expect(description).to_have_css('font-size', '21px' if width == 1440 else '13px')
             else:
                 await expect(description).to_be_hidden()
         assert await page.evaluate('document.documentElement.scrollWidth === innerWidth')
