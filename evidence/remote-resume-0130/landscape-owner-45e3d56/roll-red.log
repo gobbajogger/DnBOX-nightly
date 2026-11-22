@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/857bb2409f82/remote-resume-0130/evidence/remote-resume-0130/landscape-owner-45e3d56/roll-witness.py", line 188, in <module>
+    asyncio.run(run(parser.parse_args()))
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/857bb2409f82/remote-resume-0130/evidence/remote-resume-0130/landscape-owner-45e3d56/roll-witness.py", line 178, in run
+    qualify(receipt['after'] if args.after else receipt['before'])
+  File "/workspace/scratch/857bb2409f82/remote-resume-0130/evidence/remote-resume-0130/landscape-owner-45e3d56/roll-witness.py", line 139, in qualify
+    assert all(note['inside'] and note['hit'] for note in case['notes']), (path, case)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('selected', {'pane': [69, 103, 762, 257], 'notes': [{'id': 'n1', 'label': 'C3, velocity 93, 0 to 8268 samples', 'bounds': [69, 231, 69.421875, 16], 'inside': True, 'hit': True}, {'id': 'n5', 'label': 'G3, velocity 117, 22050 to 28444 samples', 'bounds': [259.5, 119, 53.234375, 16], 'inside': True, 'hit': True}, {'id': 'n6', 'label': 'A3, velocity 100, 27562 to 30318 samples', 'bounds': [307.109375, 87, 21.796875, 16], 'inside': False, 'hit': False}], 'clipped': [], 'part': 'chicago', 'row': 16, 'offsets': [0, 1136], 'rail': 1136, 'terminal': ['C3, velocity 93, 88200 to 88200 samples'], 'outer': [0, 0, 844, 390]})

@@ -1,0 +1,2 @@
+PASS actual 844×390 browser read75, keyboard stage and Apply76, fresh read76, guarded Undo75, fresh read75
+PASS confirmed CLOSE and idle dismissal, dropped CLOSE reply preserves unconfirmed release, zero extra traffic

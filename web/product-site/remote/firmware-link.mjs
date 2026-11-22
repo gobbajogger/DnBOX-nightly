@@ -24,13 +24,18 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
  const $ =id=>doc.getElementById(id);
  const connect=$('connect'),apply=$('apply'),state=$('conn-state'),safety=$('firmware-safety'),list=$('firmware-controls');
  if(!connect||!apply||!state)return {destroy(){}};
- let undoEdit=null,generation=0,disposed=false,closing=null;
+ let undoEdit=null,generation=0,disposed=false,closing=null,releaseUnconfirmed=false;
  let admitted=null,client=null,broker=null,confirmed=new Map(),pending=null,busy=false;
  apply.disabled=true;
  if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
  const result=$('connection-result'),message=$('connection-message'),chooser=$('choose-midi-ports');
  const say=(text,showChooser=false)=>{state.textContent=text;if(message)message.textContent=text;if(chooser)chooser.hidden=!showChooser;};
- $('close-connection')?.addEventListener('click',()=>{if(result)result.hidden=true;connect.focus?.();});
+ const idleText=state.textContent;
+ $('close-connection')?.addEventListener('click',()=>{
+  if(result)result.hidden=true;
+  if(!client&&!busy&&!releaseUnconfirmed)state.textContent=idleText;
+  connect.focus?.();
+ });
  function stage(descriptor,input){
   if(busy||disposed||state.dataset.session!=='ready'||$(input.id)!==input)return;
   const value=input.value===''?NaN:Number(input.value);
@@ -81,6 +86,7 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
   closing=Promise.resolve().then(async()=>{
    let released=true;
    try{if(current)released=(await current.close()).released===true;}catch{released=false;}
+   if(current)releaseUnconfirmed=!released;
    link?.dispose();
    connect.textContent='Connect';
    if(announce)say(released?'Disconnected':'Release was not confirmed.');

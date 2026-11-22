@@ -1,0 +1,4 @@
+PASS compact Bass drum title and Review cue, preserved bindings and hit boxes
+PASS all 32 compact pattern values use the shared size, preserving target geometry and P01 selection
+PASS one Mix navigation row, preserved 44px targets/levels/pan, identical Sends/FX bindings and colors
+PASS failed Connect diagnostic, idle Files header on return, exact one-row Draft preserved, zero MIDI

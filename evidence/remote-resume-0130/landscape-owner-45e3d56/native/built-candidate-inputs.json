@@ -1,0 +1,119 @@
+{
+  "nightlySource": "45e3d56b1de1d8c088e16dad79d7b837af156f18 plus uncommitted returned-idle-label consumer fix",
+  "firmwareSource": "ba56645b2142b134be3aeee2236406e1c95b2bde",
+  "consumerFiles": {
+    "web/product-site/remote/firmware-link.mjs": {
+      "sha256": "a2d9552a425e7429adf4411e5a597802e53bc9ffdef7f29a32fb5312a06a056d",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56/remote/firmware-link.mjs"
+    },
+    "web/product-site/remote/device/catalog.mjs": {
+      "sha256": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56/remote/device/catalog.mjs"
+    },
+    "web/product-site/remote/device/session.mjs": {
+      "sha256": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56/remote/device/session.mjs"
+    },
+    "web/product-site/remote/device/vendor/client.mjs": {
+      "sha256": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56/remote/device/vendor/client.mjs"
+    },
+    "web/product-site/remote/device/vendor/codec.mjs": {
+      "sha256": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56/remote/device/vendor/codec.mjs"
+    },
+    "tests/product-remote/tests/firmware-link-dom.mjs": {
+      "sha256": "574b27446ed803543e2861f1338c30e070a277d24e7d5b73cf4b583f6cde82a8",
+      "copiedExactFrom": "/workspace/scratch/857bb2409f82/remote-native-ecca-audit/consumer-45e3d56/tests/product-remote/tests/firmware-link-dom.mjs"
+    }
+  },
+  "firmwareFiles": {
+    "firmware/src/app/dnr2_scalar.h": {
+      "sha256": "d5a405d66bec04535b32dae0cf96e81f4e70f5808bb83cdaf60a2266a2c55f71",
+      "gitBlob": "6766fa23fe69407e4e7a284aae824bdff531db74"
+    },
+    "firmware/src/app/dnr2_scratch_binding.inc": {
+      "sha256": "3b18684ccadfd418675a75357806555c6c0ce9a1672ce8a5cabfba903dc2f608",
+      "gitBlob": "e8c80f929aac646653a432a7c4fd6849b95061e4"
+    },
+    "firmware/src/app/dnr2_native_catalog.h": {
+      "sha256": "499a5e180b3b155b6e58c19d465ee3a6d48178a77cfedf6c9373d4ae8097651f",
+      "gitBlob": "c4dc008ec6484964d23b797da66f289019339d26"
+    },
+    "firmware/src/app/editor.c": {
+      "sha256": "ca6ff6698330cf92c7e0800a821704120806eeec6c9adf563be469d694b58e78",
+      "gitBlob": "6ae44f1ecc19d5776960acfa18e8b262eecab427"
+    },
+    "firmware/src/app/engine.c": {
+      "sha256": "cdf514c6d08695f101df4592a4c907f41172edd2db7d7f5ba64a34fa35b320ca",
+      "gitBlob": "fc759e79ff6a8ac87e1853f9c4618c2cd446ba89"
+    },
+    "firmware/src/dsp/dnbx_core.c": {
+      "sha256": "539ed4b87626665b5e5cc887966199c48edf3ea64e2cbcbf7790c9f9bef31edc",
+      "gitBlob": "22a2ba07f23d0bea8e1e2db7dbd8ede82b312f7c"
+    },
+    "tests/host/dnr2_scalar_engine_test.c": {
+      "sha256": "7c391597ce6fefeb4bf6d6dd019c5ed67a93c48d21cb70c4ec3bd65fb392700a",
+      "gitBlob": "44a69e8bcd7412c905ca3c98970d9cb61aa22251"
+    },
+    "tests/host/dnr2_scalar_engine_fixture.c": {
+      "sha256": "46a078f7553355bfc2f60b93eb0eef30b8f8bc047e63251e1eea6e506d20c8e0",
+      "gitBlob": "3b6d108155b06b789281b88ac762ab02f0f8be49"
+    },
+    "host/x0x_host.c": {
+      "sha256": "b3bcf5a880c674db759a414a18680a9cbaba4e66d9ffcac0d66040bc243ba27e",
+      "gitBlob": "510b63af024fef68b31189029b0f1273d47b85f2"
+    },
+    "docs/remote-scalar-catalog.json": {
+      "sha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+      "gitBlob": "44bded47b96a17c66c8cfd1fcec1a0d7c1096e63"
+    }
+  },
+  "shippingCatalogAdmitted": false,
+  "testOnlyInjection": true,
+  "softwareOnly": true,
+  "transport": "stdio bytes into actual native C editor/project/engine; MIDI event adapter and DOM fixture, not browser/USB execution",
+  "producerBinary": {
+    "sourcePath": "/workspace/scratch/857bb2409f82/integ-recovered/firmware/build/host/dnr2-07a065c/engine",
+    "sha256": "4094e27b3e25a6436a3e7ac09a899f4a039b6d0076b6f3f8e4666ebe130c9881",
+    "bytes": 1023544,
+    "reusedNotRebuilt": true,
+    "sourceIdentityBasis": "Integration qualify-07a065c host proof; producer/core files match ba56645b; core hash matches integration-pin.json"
+  },
+  "nativeDefinition": {
+    "controls": [
+      {
+        "id": 1,
+        "kind": 1,
+        "label": "909 MIX Level",
+        "max": 127,
+        "min": 0,
+        "owner": "909",
+        "parameter": "MX_LEVEL",
+        "target": "T_MIX"
+      }
+    ],
+    "protocol": 2
+  },
+  "packageReceipts": [
+    {
+      "model": "elite",
+      "path": "/workspace/scratch/857bb2409f82/integ-recovered/firmware/evidence/integ-resume/combined-firmware-ba56645b/DnBOX-lane-integ-resume-0130-ba56645b-stock-elite.fwsc",
+      "sha256": "3291d76d6ee87891525be0338b58ca78acbb6050f74e1f6f4253953a9ece4053",
+      "usbReceiptSha256": "dcf21a0d0fc76dd87a20b256cfed939039c55a95648cfdb048a7779c9597e4f8",
+      "freshlyExecutedHere": false,
+      "priorTransport": "emulated USB MIDI"
+    },
+    {
+      "model": "pro",
+      "path": "/workspace/scratch/857bb2409f82/integ-recovered/firmware/evidence/integ-resume/combined-firmware-ba56645b/DnBOX-lane-integ-resume-0130-ba56645b-stock-pro.fwsc",
+      "sha256": "d63ffc362c105d8bcb3a38fce8219c756720602943b3e7ae5ceeef159a5b6c25",
+      "usbReceiptSha256": "e745d88a0b66373b6ff66576b44d725c55b3ee210ac825e475fb33d787e1cc87",
+      "freshlyExecutedHere": false,
+      "priorTransport": "emulated USB MIDI"
+    }
+  ],
+  "runnerBasisSha256": "4ab2961190b23e2fb20bed3317fdae195034531e842a9bc6887e374755397e27",
+  "runnerSha256": "589611dde29cca230af72b0146f541c0b1db890026d96943261718a5f65e3042",
+  "builtProduct": "/workspace/scratch/857bb2409f82/remote-resume-0130/.output/landscape-owner-45e3d56"
+}

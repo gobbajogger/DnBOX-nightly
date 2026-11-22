@@ -1,0 +1,987 @@
+{
+  "viewport": [
+    844,
+    390
+  ],
+  "normalSandbox": true,
+  "browser": "151.0.7922.34",
+  "before": {
+    "fresh": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            295,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            183,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            151,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1072
+      ],
+      "rail": 1072,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "selected": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            231,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            119,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            87,
+            21.796875,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1136
+      ],
+      "rail": 1136,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "panned": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            204,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            92,
+            53.234375,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            60,
+            21.796875,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        }
+      ],
+      "clipped": [
+        "D\u266f2",
+        "G3"
+      ],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1163
+      ],
+      "rail": 1163,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "returned": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            204,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            92,
+            53.234375,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            60,
+            21.796875,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        }
+      ],
+      "clipped": [
+        "D\u266f2",
+        "G3"
+      ],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1163
+      ],
+      "rail": 1163,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "changedPart": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            231,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            119,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            87,
+            21.796875,
+            16
+          ],
+          "inside": false,
+          "hit": false
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1136
+      ],
+      "rail": 1136,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "noteEdit": null,
+    "sequenceEndpoint": {
+      "disabled": false,
+      "label": "Step 16, 1 notes, velocity 93"
+    },
+    "drumEndpoint": {
+      "disabled": false,
+      "label": "Step 16, 1 notes, velocity 88",
+      "pad": "false"
+    },
+    "drumLastStep": {
+      "armed": "Step 16, 2 notes, velocity Mixed",
+      "edited": {
+        "id": "draft0",
+        "track": "drum909",
+        "note": 36,
+        "velocity": 101,
+        "channel": 9,
+        "start": 82688,
+        "end": 82688,
+        "sourceOrder": null,
+        "pulse": true
+      },
+      "afterLaneUndo": {
+        "id": "draft0",
+        "track": "drum909",
+        "note": 36,
+        "velocity": 100,
+        "channel": 9,
+        "start": 82688,
+        "end": 82688,
+        "sourceOrder": null,
+        "pulse": true
+      },
+      "sourceEndpointNotesUnchanged": false,
+      "notesAfterBothUndo": [
+        {
+          "id": "n0",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 0,
+          "end": 0,
+          "sourceOrder": 0,
+          "pulse": true
+        },
+        {
+          "id": "n1",
+          "track": "chicago",
+          "note": 48,
+          "velocity": 93,
+          "channel": 1,
+          "start": 0,
+          "end": 8268,
+          "sourceOrder": 2,
+          "pulse": false
+        },
+        {
+          "id": "n2",
+          "track": "drum808",
+          "note": 38,
+          "velocity": 88,
+          "channel": 10,
+          "start": 11025,
+          "end": 11025,
+          "sourceOrder": 4,
+          "pulse": true
+        },
+        {
+          "id": "n3",
+          "track": "miami",
+          "note": 60,
+          "velocity": 81,
+          "channel": 2,
+          "start": 11025,
+          "end": 13781,
+          "sourceOrder": 6,
+          "pulse": false
+        },
+        {
+          "id": "n4",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 22050,
+          "end": 22050,
+          "sourceOrder": 8,
+          "pulse": true
+        },
+        {
+          "id": "n5",
+          "track": "chicago",
+          "note": 55,
+          "velocity": 117,
+          "channel": 1,
+          "start": 22050,
+          "end": 28444,
+          "sourceOrder": 10,
+          "pulse": false
+        },
+        {
+          "id": "n6",
+          "track": "chicago",
+          "note": 57,
+          "velocity": 100,
+          "channel": 1,
+          "start": 27562,
+          "end": 30318,
+          "sourceOrder": 11,
+          "pulse": false
+        },
+        {
+          "id": "n7",
+          "track": "drum808",
+          "note": 38,
+          "velocity": 88,
+          "channel": 10,
+          "start": 33075,
+          "end": 33075,
+          "sourceOrder": 14,
+          "pulse": true
+        },
+        {
+          "id": "n8",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 88200,
+          "end": 88200,
+          "sourceOrder": 16,
+          "pulse": true
+        },
+        {
+          "id": "n9",
+          "track": "chicago",
+          "note": 48,
+          "velocity": 93,
+          "channel": 1,
+          "start": 88200,
+          "end": 88200,
+          "sourceOrder": 18,
+          "pulse": true
+        }
+      ]
+    },
+    "served": {
+      "app.mjs": "da189a1feb47af15628465e15ea9b7d96ce6c5abdf7af66bbac18ef3899593c9",
+      "step-lane.mjs": "68c67fac37e5110374e0a5f4b45009871e8b02ff46f6c2074be2788b99e9e01a",
+      "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+      "style.css": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
+    },
+    "screenshotSHA256": "3d8ec1eafd564394d118d9614879ee2a96d9e39cbf5370e7fd4cc8c3def56e8b"
+  },
+  "after": {
+    "fresh": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            295,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            183,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            151,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1072
+      ],
+      "rail": 1072,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "selected": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            295,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            183,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            151,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1072
+      ],
+      "rail": 1072,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "panned": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            268,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            156,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            124,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [
+        "G2",
+        "B3"
+      ],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1099
+      ],
+      "rail": 1099,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "returned": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            268,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            156,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            124,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [
+        "G2",
+        "B3"
+      ],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1099
+      ],
+      "rail": 1099,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "changedPart": {
+      "pane": [
+        69,
+        103,
+        762,
+        257
+      ],
+      "notes": [
+        {
+          "id": "n1",
+          "label": "C3, velocity 93, 0 to 8268 samples",
+          "bounds": [
+            69,
+            295,
+            69.421875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n5",
+          "label": "G3, velocity 117, 22050 to 28444 samples",
+          "bounds": [
+            259.5,
+            183,
+            53.234375,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        },
+        {
+          "id": "n6",
+          "label": "A3, velocity 100, 27562 to 30318 samples",
+          "bounds": [
+            307.109375,
+            151,
+            21.796875,
+            16
+          ],
+          "inside": true,
+          "hit": true
+        }
+      ],
+      "clipped": [],
+      "part": "chicago",
+      "row": 16,
+      "offsets": [
+        0,
+        1072
+      ],
+      "rail": 1072,
+      "terminal": [
+        "C3, velocity 93, 88200 to 88200 samples"
+      ],
+      "outer": [
+        0,
+        0,
+        844,
+        390
+      ]
+    },
+    "noteEdit": {
+      "edited": {
+        "id": "n6",
+        "track": "chicago",
+        "note": 58,
+        "velocity": 100,
+        "channel": 1,
+        "start": 27562,
+        "end": 30318,
+        "sourceOrder": 11,
+        "pulse": false
+      },
+      "afterUndo": {
+        "id": "n6",
+        "track": "chicago",
+        "note": 57,
+        "velocity": 100,
+        "channel": 1,
+        "start": 27562,
+        "end": 30318,
+        "sourceOrder": 11,
+        "pulse": false
+      }
+    },
+    "sequenceEndpoint": {
+      "disabled": true,
+      "label": "Step 16, 0 notes, velocity empty"
+    },
+    "drumEndpoint": {
+      "disabled": true,
+      "label": "Step 16, 0 notes, velocity empty",
+      "pad": "false"
+    },
+    "drumLastStep": {
+      "armed": "Step 16, 1 notes, velocity 100",
+      "edited": {
+        "id": "draft0",
+        "track": "drum909",
+        "note": 36,
+        "velocity": 101,
+        "channel": 9,
+        "start": 82688,
+        "end": 82688,
+        "sourceOrder": null,
+        "pulse": true
+      },
+      "afterLaneUndo": {
+        "id": "draft0",
+        "track": "drum909",
+        "note": 36,
+        "velocity": 100,
+        "channel": 9,
+        "start": 82688,
+        "end": 82688,
+        "sourceOrder": null,
+        "pulse": true
+      },
+      "sourceEndpointNotesUnchanged": true,
+      "notesAfterBothUndo": [
+        {
+          "id": "n0",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 0,
+          "end": 0,
+          "sourceOrder": 0,
+          "pulse": true
+        },
+        {
+          "id": "n1",
+          "track": "chicago",
+          "note": 48,
+          "velocity": 93,
+          "channel": 1,
+          "start": 0,
+          "end": 8268,
+          "sourceOrder": 2,
+          "pulse": false
+        },
+        {
+          "id": "n2",
+          "track": "drum808",
+          "note": 38,
+          "velocity": 88,
+          "channel": 10,
+          "start": 11025,
+          "end": 11025,
+          "sourceOrder": 4,
+          "pulse": true
+        },
+        {
+          "id": "n3",
+          "track": "miami",
+          "note": 60,
+          "velocity": 81,
+          "channel": 2,
+          "start": 11025,
+          "end": 13781,
+          "sourceOrder": 6,
+          "pulse": false
+        },
+        {
+          "id": "n4",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 22050,
+          "end": 22050,
+          "sourceOrder": 8,
+          "pulse": true
+        },
+        {
+          "id": "n5",
+          "track": "chicago",
+          "note": 55,
+          "velocity": 117,
+          "channel": 1,
+          "start": 22050,
+          "end": 28444,
+          "sourceOrder": 10,
+          "pulse": false
+        },
+        {
+          "id": "n6",
+          "track": "chicago",
+          "note": 57,
+          "velocity": 100,
+          "channel": 1,
+          "start": 27562,
+          "end": 30318,
+          "sourceOrder": 11,
+          "pulse": false
+        },
+        {
+          "id": "n7",
+          "track": "drum808",
+          "note": 38,
+          "velocity": 88,
+          "channel": 10,
+          "start": 33075,
+          "end": 33075,
+          "sourceOrder": 14,
+          "pulse": true
+        },
+        {
+          "id": "n8",
+          "track": "drum909",
+          "note": 36,
+          "velocity": 88,
+          "channel": 9,
+          "start": 88200,
+          "end": 88200,
+          "sourceOrder": 16,
+          "pulse": true
+        },
+        {
+          "id": "n9",
+          "track": "chicago",
+          "note": 48,
+          "velocity": 93,
+          "channel": 1,
+          "start": 88200,
+          "end": 88200,
+          "sourceOrder": 18,
+          "pulse": true
+        }
+      ]
+    },
+    "served": {
+      "app.mjs": "9f5a91eb6874376941d3fbf0042e478a2a3e038aa565e9a99174b489745bdd32",
+      "step-lane.mjs": "67657b938bee0deefe1531076c3a7508d0e51a3311dfcbbb1175ebd8f43fcb8f",
+      "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+      "style.css": "76323995b538cde5e80d1ef0758e537c186195fde7f9c4f43056ccd71ab691b2"
+    },
+    "screenshotSHA256": "f7854456de56f0172f3f1dfa833845a7eeae3c5688d59b796ec96a4ebb0875dc"
+  }
+}

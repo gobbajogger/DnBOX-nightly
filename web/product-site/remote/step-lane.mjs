@@ -6,7 +6,13 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function stepGroups(notes,endSample,steps=16){
  if(!Array.isArray(notes)||!Number.isInteger(endSample)||endSample<=0||!Number.isInteger(steps)||steps<1||steps>64)throw Error('Invalid step lane');
  const groups=Array.from({length:steps},(_,step)=>({step,notes:[]})),span=endSample/steps;
- for(const note of notes){const near=Math.round(note.start/span),index=Math.abs(note.start-Math.round(near*span))<2?near:Math.floor(note.start/span);groups[clamp(index,0,steps-1)].notes.push(note);}
+ for(const note of notes){
+  // Trace-end pulses are retained in Drafts but are outside the step window.
+  if(note.start>=endSample)continue;
+  const near=Math.round(note.start/span);
+  const index=Math.abs(note.start-Math.round(near*span))<2?near:Math.floor(note.start/span);
+  groups[clamp(index,0,steps-1)].notes.push(note);
+ }
  return groups;
 }
 const supports=(notes,kind)=>kind!=='chance'||notes.every(n=>['chicago','miami','drum909','drum808'].includes(n.track));
