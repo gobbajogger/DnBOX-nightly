@@ -22,6 +22,84 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def measure_roll_grid_paint(page, result):
+    """Observe the default Roll's visible CSS rails; never count the panel fill."""
+    from io import BytesIO
+    from itertools import groupby
+    from PIL import Image, ImageChops
+
+    panels = [p for p in result['panels'] if p['id'].startswith('div.roll-panel#')]
+    if len(panels) != 1:
+        return result
+    grid = page.evaluate("""() => {
+      const p=document.querySelector('#roll-scroll'), g=document.querySelector('#roll-grid');
+      if(!p || !g || p.dataset.visibleBars!=='1' || !p.contains(g)) return null;
+      const b=p.getBoundingClientRect(),r=g.getBoundingClientRect();
+      const x=Math.ceil(Math.max(0,b.x+p.clientLeft,r.left)), y=Math.ceil(Math.max(0,b.y+p.clientTop,r.top));
+      const right=Math.floor(Math.min(innerWidth,b.x+p.clientLeft+p.clientWidth,r.right));
+      const bottom=Math.floor(Math.min(innerHeight,b.y+p.clientTop+p.clientHeight,r.bottom));
+      if(right<=x || bottom<=y || document.documentElement.scrollWidth!==innerWidth)return null;
+      const own=[.15,.5,.85].every(fx=>[.15,.5,.85].every(fy=>{
+        const hit=document.elementFromPoint(x+(right-x)*fx,y+(bottom-y)*fy);
+        return hit && (hit===g || hit.closest('#roll-grid .note')!==null);
+      }));
+      return {box:[x,y,right,bottom],own,step:parseFloat(getComputedStyle(g).getPropertyValue('--step')),
+        row:parseFloat(getComputedStyle(g).getPropertyValue('--row')),
+        complete:Math.abs(right-x-p.clientWidth)<=2 && Math.abs(bottom-y-p.clientHeight)<=2};
+    }""")
+    if not grid or not grid['own'] or not grid['complete'] or not grid['step'] or not grid['row']:
+        return result
+    x, y, right, bottom = grid['box']
+
+    def screenshot(style=None):
+        shot = page.screenshot(animations='disabled', style=style)
+        with Image.open(BytesIO(shot)) as image:
+            if image.size != (page.viewport_size['width'], page.viewport_size['height']):
+                raise ValueError('Roll grid requires a unit-scale viewport')
+            return image.convert('RGB').crop((x,y,right,bottom))
+
+    baseline = screenshot()
+    axes = {'pitch': '#roll-grid{background-image:none!important}',
+            'time': '#roll-grid::after{background-image:none!important}'}
+    measured = {}
+    for axis, style in axes.items():
+        r, g, b = ImageChops.difference(baseline, screenshot(style=style)).split()
+        mask = ImageChops.lighter(ImageChops.lighter(r, g), b)
+        if axis == 'time':
+            mask = mask.transpose(Image.Transpose.TRANSPOSE)
+        rects, tracks = [], []
+        w, h = mask.size
+        # Time rails occlude isolated pitch pixels at every step boundary.
+        min_run = max(4, min(24, int(grid['step' if axis == 'pitch' else 'row'] / 2)))
+        for i, line in enumerate(zip(*(iter(mask.getdata()),)*w)):
+            j = 0
+            valid = False
+            for painted, pixels in groupby(line, key=bool):
+                n = sum(1 for _ in pixels)
+                if painted and n >= min_run:
+                    rects.append({'x':x+j,'y':y+i,'w':n,'h':1} if axis=='pitch'
+                                 else {'x':x+i,'y':y+j,'w':1,'h':n})
+                    valid = True
+                j += n
+            if valid:
+                tracks.append(i)
+        # Actual rails must repeat across the axis, not just cover a border.
+        if len(tracks) < 3 or tracks[-1]-tracks[0] < (h*0.5):
+            return result
+        measured[axis] = {'tracks':tracks, 'rects':rects}
+    if ImageChops.difference(baseline, screenshot()).getbbox():
+        return result
+    updated = {**panels[0], 'contentRects': [
+        *panels[0]['contentRects'], *(r for a in measured.values() for r in a['rects'])]}
+    panels = [updated if p['id']==updated['id'] else p for p in result['panels']]
+    corrected = gate.analyze_snapshot({**result,'panels':panels})
+    return {**result,'panels':panels,'checks':[
+        *result['checks'][:2], corrected['checks'][2], result['checks'][3]],
+        'accepted': corrected['accepted'], 'initialRollDensityCheck':result['checks'][2],
+        'rollGridPaintEvidence':{'viewportBox':grid['box'],'axes':measured,
+                                 'renderMethod':'normal RGB screen less one CSS rail layer at a time'}}
+
+
 def verify_miami_portrait_captions(page, result):
     """Complete the two known clipped observations through the user scroll path."""
     from playwright.sync_api import TimeoutError
@@ -124,6 +202,8 @@ def main():
                             page.locator('nav.tabs [data-view="'+view+'"]').click()
                             page.evaluate('document.fonts.ready')
                             result = gate.collect_structural(page)
+                            if label=='current' and view=='roll':
+                                result = measure_roll_grid_paint(page, result)
                             if label=='current' and (w,h)==(390,844) and part=='miami' and view=='sound':
                                 result = verify_miami_portrait_captions(page, result)
                             report['actualSources'].append({'source': label, 'status': 'RUN', 'viewport': [w, h], 'part': part, 'view': view, 'exit': 0 if result['accepted'] else 1, 'result': result})
