@@ -1,0 +1,28 @@
+{
+  "nightly_lane_input": "11154e5dea03fc294d681fd500be1dafa1ea463f",
+  "nightly_client": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "firmware_evidence_commit": "344fbfe34a1cf644683c2554b9a6c4629c0c2bb5",
+  "bound_scratch_tree": "c1274a2fa4c4075c623444268bad9bfc4a1ea5c7",
+  "backend": "same provisional guarded 909 MIX host binding compiled in the measured scratch firmware",
+  "exact_wire_transcript_sha256": "9bef5b31eec8b6e1fa82245da5133bdab4808862547fe6e7d68798cdfecdce92",
+  "result": {
+    "test_catalog_count": 1,
+    "read_apply_undo_values": [
+      75,
+      76,
+      75
+    ],
+    "revisions": [
+      1,
+      2,
+      3
+    ],
+    "production_admitted": false,
+    "stock_full_profile_links": "FAIL_XIP_BOTH"
+  },
+  "links": {
+    "wire": "https://github.com/gobbajogger/DnBOX/blob/344fbfe34a1cf644683c2554b9a6c4629c0c2bb5/evidence/integ-resume/stock-compose-7233317/bound-real-engine-nightly.log",
+    "host": "https://github.com/gobbajogger/DnBOX/blob/344fbfe34a1cf644683c2554b9a6c4629c0c2bb5/evidence/integ-resume/stock-compose-7233317/bound-engine.log",
+    "memory": "https://github.com/gobbajogger/DnBOX/blob/344fbfe34a1cf644683c2554b9a6c4629c0c2bb5/evidence/integ-resume/stock-compose-7233317/receipt.json"
+  }
+}

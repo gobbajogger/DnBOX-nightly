@@ -1,5 +1,9 @@
 # Integration baseline
 
+## Composed Remote real-engine wire proof — 2026-11-22 (WORKING)
+
+The exact Remote client at `995d5493` completed HELLO, addressed Apply, fresh read and guarded Undo through the composed firmware's actual editor and real host mixer/queue binding. The addressed values remained 75 → 76 → 75 at revisions 1 → 2 → 3. With the lossless boot table, the native scratch composition leaves 3,804 B pool margin but still misses the XIP floor by 1,496 B Elite and 1,484 B Pro. Stock activation and catalog admission remain held. Final combined TouchOSC, screen review and route/parity checks remain pending. [Cross-repo receipt](../../evidence/integ-resume/stock-compose-remote-receipt.json) · [Firmware evidence](https://github.com/gobbajogger/DnBOX/blob/344fbfe34a1cf644683c2554b9a6c4629c0c2bb5/evidence/integ-resume/stock-compose-7233317/README.md)
+
 ## Focused gate repair and addressed Remote trace — 2026-11-22 (WORKING)
 
 Nightly `570bb01253989e538b08983d92ae818109a0471f` retains consolidated `583f6229` with 56 lane commits and zero consolidated-only commits or deleted paths. With the archived-receipt scan fix, all 27 preset tests pass and a temporary retired Presets label fails the scan. The visual harness has 55 passing units and its sandbox check reports zero findings. The new status and vote run passed 397 build-history checks and three inbox tests, including opening-post vote counting, de-duplication and missing-read handling. These are software fixture results. An authenticated GitHub connector status read found no individual commit statuses. Live status posting and owner voting remain unverified. [Focused receipt](../../evidence/integ-resume/focused-status-vote-and-remote/receipt.json)
