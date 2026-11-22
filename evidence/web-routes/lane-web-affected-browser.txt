@@ -279,3 +279,9 @@ Call log:
   - navigating to "http://127.0.0.1:45253/reference/current-ui.html", waiting until "load"
 
 
+
+## historical-reference-retry
+PASS historical Voice: 57600/57600 RGB565 pixels match 4598281ebc12f00258150ef9ebbf9423fe084856be7ded263ed4d69fe95803a9
+PASS historical Pattern: 57600/57600 RGB565 pixels match a881889c7affb0db7242eba4cff416b98524afa9e3af8ad797095801749f4830
+PASS historical Miami: 57600/57600 RGB565 pixels match 8f7dbeaa7b08a40f46c77415dc17c7e1a7d9ab8cac03a403c52f86befde5a9a1
+PASS historical Juno: 57600/57600 RGB565 pixels match d8bd52ce312cfdb5eaf47e8a533d3acb3767d760ab5e09d82f7734719765de7a

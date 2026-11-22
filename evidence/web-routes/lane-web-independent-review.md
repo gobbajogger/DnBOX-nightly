@@ -6,7 +6,7 @@ Scores reflect clarity, layout and visible task access. The changed surfaces wer
 
 | Surface | Baseline | Revised | Observation |
 |---|---:|---:|---|
-| Home and engine previews | 8 | 9 | Musician-facing introduction and “Watch control demo” now describe the silent visual demonstration. |
+| Home and engine previews | 8 | 9 | Musician-facing introduction and “Watch control demo” describe the silent visual demonstration. The Chicago, Miami, SuperJ6 and Synth One names and archived envelope tab fit all three widths. |
 | Samples | 7 | 7 | Working document layout with native file control and dense support text. |
 | Build History | 5 | — | 198 records rendered at desktop height 71,935 px. Owner’s separate transport-failure check covers filtering. |
 | Help | 8 | 8 | Clear sections, dense device steps. |

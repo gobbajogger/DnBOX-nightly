@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withOfflineInstallerRouting, withOfflineTheme } from './preview-offline-theme.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (name) => readFileSync(join(root, name), 'utf8');
@@ -31,43 +32,8 @@ const projects = read('web/x0x_projects.html').replace(
   /^import .* from "\.\/x0x_projects.js";$/m, '/*LIB*/');
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');
-// File-open previews need the font inside the document, including when copied
-// without the rest of the site. Use the same font and tool palette as the site.
-const fonts = [
-  ['Medium', 400],
-  ['Bold', 700],
-].map(([name, weight]) => {
-  const font = readFileSync(join(root, `web/product-site/assets/BarlowSemiCondensed-${name}.ttf`));
-  return `@font-face{font-family:Barlow;font-weight:${weight};src:url(data:font/ttf;base64,${font.toString('base64')}) format('truetype')}`;
-}).join('\n');
-const barlowLicense = read('web/product-site/assets/Barlow-OFL.txt').replace(/[ \t]+$/gm, '');
-const offlineTheme = `<style>
-/*
-${barlowLicense}
-*/
-${fonts}
-:root.offline-tool:not([data-theme="light"]) {
-  color-scheme: dark;
-  --bg: #101715;
-  --card: #1b2b20;
-  --fg: #e7eee2;
-  --ink: #e7eee2;
-  --dim: #b6c7af;
-  --muted: #b6c7af;
-  --rule: #3c5140;
-  --line: #3c5140;
-  --accent: #c8dfa7;
-}
-.offline-tool body { font-family: Barlow, sans-serif; }
-</style>`;
-function withOfflineTheme(html) {
-  const styled = replaceOnce(html, '</head>', offlineTheme + '\n</head>', 'offline theme');
-  return replaceOnce(styled, '<script type="module">', `<script type="module">
-if (location.protocol === 'file:') document.documentElement.classList.add('offline-tool');`, 'offline theme toggle');
-}
-
 const outputs = {
-  'docs/install/index.html': withOfflineTheme(installer),
+  'docs/install/index.html': withOfflineTheme(withOfflineInstallerRouting(installer)),
   'docs/breaks/index.html': withOfflineTheme(sampleImporter),
   'docs/projects/index.html': withOfflineTheme(projectPage),
   'docs/versions.json': JSON.stringify(catalog, null, 2) + '\n',

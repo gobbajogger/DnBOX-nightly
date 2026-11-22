@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import { renderInstaller } from './render-qualified-nightly.mjs';
+import { withOfflineTheme } from './preview-offline-theme.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = path => readFileSync(join(root, path), 'utf8');
@@ -64,8 +65,8 @@ export function verifyPagesSourceParity(candidateDirectory, retainedCatalogPath)
     if (!catalog) throw new Error('cannot render installer without a readable candidate versions.json');
     return renderInstaller(catalog);
   });
-  check('breaks/index.html', renderBreaks);
-  check('projects/index.html', renderProjects);
+  check('breaks/index.html', () => withOfflineTheme(renderBreaks()));
+  check('projects/index.html', () => withOfflineTheme(renderProjects()));
   check('package-version-assignments.json', () => source('package-version-assignments.json'));
   check('build-status.json', () => source('build-status.json'));
 

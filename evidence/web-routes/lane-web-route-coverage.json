@@ -1,13 +1,13 @@
 {
   "baseline": "583f622961fc9975fac746592ce6c483073c4170",
   "accepted_product": "000e29102525a6ce5672a1cdfd7773492b3158b6",
-  "candidate_product_manifest_sha256": "3e14aa66f9d1f53d3904b0b9d8f729dc068741d179106bb2999cf1140dd3e981",
+  "candidate_product_manifest_sha256": "0f03d22d6ea7b27172e9629435317f69cbf44d2c7c2eb3e927f54f3e21129128",
   "browser": "Playwright Chromium 151.0.7922.34, normal sandbox",
   "all_routes": [
     {
       "route": "index.html",
       "baseline_html_sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597",
-      "candidate_html_sha256": "16566d3b86c0cdbe52e467db144fdf7e0b060db815611fc55051e93081a85f06",
+      "candidate_html_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
       "coverage": "changed behavior",
       "baseline_views": [
         {
@@ -142,192 +142,36 @@
       ],
       "candidate_views": [
         {
-          "route": "index.html",
-          "offline": false,
-          "viewport": [
+          "size": [
             1440,
             900
           ],
-          "title": "DnBOX \u00b7 Drums, synths, samples",
-          "width": 1440,
-          "height": 4575,
-          "heads": [
-            "Your sound.\nIn your hands."
-          ],
-          "nav": [
-            [
-              "",
-              0,
-              96,
-              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              27,
-              42,
-              "Sounds Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              2832,
-              254,
-              "Samples Prepare loops and keep slot backups. Install Choose your model and starting samples. Local workspace preview Build patterns and save local drafts in you"
-            ],
-            [
-              "",
-              4499,
-              22,
-              "Current installer Manual What\u2019s new Build history Tools Help Source and credits"
-            ]
-          ],
-          "fonts": [
-            [
-              "Barlow",
-              "loaded"
-            ],
-            [
-              "Barlow",
-              "loaded"
-            ]
-          ],
-          "control": [
-            "See a held-step edit",
-            "Chicago",
-            "Juno",
-            "Miami",
-            "Drum steps",
-            "Watch control demo",
-            "Reset"
-          ],
           "status": 200,
-          "screenshot": "index-1440x900.png",
-          "sha256": "51dc74e029697381b663685e5c2048eee953c18b0c53984ccace918a816d8866",
+          "png_sha256": "22df423322b36a35178a4612d1323f8ba2553421406c47f3856a07b1849e6e3f",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
           "errors": []
         },
         {
-          "route": "index.html",
-          "offline": false,
-          "viewport": [
+          "size": [
             390,
             844
           ],
-          "title": "DnBOX \u00b7 Drums, synths, samples",
-          "width": 390,
-          "height": 6715,
-          "heads": [
-            "Your sound.\nIn your hands."
-          ],
-          "nav": [
-            [
-              "",
-              0,
-              121,
-              "DnBOX INSTRUMENTS Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              36,
-              85,
-              "Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              3508,
-              544,
-              "Samples Prepare loops and keep slot backups. Install Choose your model and starting samples. Local workspace preview Build patterns and save local drafts in you"
-            ],
-            [
-              "",
-              6612,
-              58,
-              "Current installer Manual What\u2019s new Build history Tools Help Source and credits"
-            ]
-          ],
-          "fonts": [
-            [
-              "Barlow",
-              "loaded"
-            ],
-            [
-              "Barlow",
-              "loaded"
-            ]
-          ],
-          "control": [
-            "See a held-step edit",
-            "Chicago",
-            "Juno",
-            "Miami",
-            "Drum steps",
-            "Watch control demo",
-            "Reset"
-          ],
           "status": 200,
-          "screenshot": "index-390x844.png",
-          "sha256": "b88eb8b69b4d17dbf1e27c991715079cbf348d4f4adbf8182211c5b64274f2ff",
+          "png_sha256": "5e75ce842a5b812616d009f24af381416e77e3a2a9d53b909c59c366afaf982a",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
           "errors": []
         },
         {
-          "route": "index.html",
-          "offline": false,
-          "viewport": [
+          "size": [
             844,
             390
           ],
-          "title": "DnBOX \u00b7 Drums, synths, samples",
-          "width": 844,
-          "height": 4422,
-          "heads": [
-            "Your sound.\nIn your hands."
-          ],
-          "nav": [
-            [
-              "",
-              0,
-              96,
-              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              19,
-              58,
-              "Sounds Remote Samples Projects Presets Manual History Install nightly"
-            ],
-            [
-              "",
-              2620,
-              273,
-              "Samples Prepare loops and keep slot backups. Install Choose your model and starting samples. Local workspace preview Build patterns and save local drafts in you"
-            ],
-            [
-              "",
-              4346,
-              22,
-              "Current installer Manual What\u2019s new Build history Tools Help Source and credits"
-            ]
-          ],
-          "fonts": [
-            [
-              "Barlow",
-              "loaded"
-            ],
-            [
-              "Barlow",
-              "loaded"
-            ]
-          ],
-          "control": [
-            "See a held-step edit",
-            "Chicago",
-            "Juno",
-            "Miami",
-            "Drum steps",
-            "Watch control demo",
-            "Reset"
-          ],
           "status": 200,
-          "screenshot": "index-844x390.png",
-          "sha256": "07c831fbaf9e9d6e47894f6ffd102ff318d8d56da80998bcfbb08fa75ba1194b",
+          "png_sha256": "c8d34f8a912eca4b634be15e2e9c0217a6dd731ba840219c95654ff4054ef285",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
           "errors": []
         }
       ]

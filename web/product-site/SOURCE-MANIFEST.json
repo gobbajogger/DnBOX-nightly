@@ -259,8 +259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5428335,
-      "sha256": "16566d3b86c0cdbe52e467db144fdf7e0b060db815611fc55051e93081a85f06"
+      "bytes": 5428404,
+      "sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18"
     },
     {
       "path": "install-reports.mjs",

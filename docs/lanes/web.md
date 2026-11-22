@@ -14,6 +14,10 @@ The first candidate's explicit hosted child URLs broke workspace fixture instrum
 
 Integration should use this branch tree, the route coverage and independent scores, and the named Project Sources archive when available. The missing shipping/R22 cross-surface comparison still needs a matching Web and Remote screen/state inventory from the owners. Complete checkout-wide qualification remains measured separately.
 
+The homepage names the four engines in consolidated firmware `f1786ebe`. Its SuperJ6 and Synth One copy is scoped to development builds. Shipping 0.0.26 has the older engine names. The older source-derived envelope animation is labeled as archived. The hosted installer renderer is byte-identical to baseline. Offline styling and standalone routing are applied only by the preview renderer. The source-parity verifier and its fixtures use the same font and license inputs as the preview builder.
+
+The isolated historical reference replay completed after the browser crash, with four exact 57,600-pixel matches. The four recovered scalable archives each miss the 1% threshold against their own native companion PNGs. [Chromium parity receipt](../../evidence/web-routes/lane-web-historical-svg-parity.json) records 5,131–6,382 differing pixels. This does not measure current R22 or shipping cross-surface parity. Reuse the accepted 1,912 exact native FWUI frame checks and 79 playable observations only for their unchanged inputs. Shipping and Remote owners still need to align the matching screen/state map before the outstanding 1% comparison.
+
 ## Current Web delivery · 21 November 2026
 
 The [current gate, independent review and nightly publication ledger](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059684119) records the tested Web commit, the seven gate results, the reviewer’s disposition and the deployed tree and byte counts. Each result applies to the exact commit named there. Earlier sections below are dated checkpoints.
