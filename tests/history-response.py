@@ -77,6 +77,14 @@ async def product_history(browser, width, height):
         return route.fulfill(json=[{'id': 'release-v0.0.26-94197fc8', 'models': ['elite'], 'original': {}}])
     await page.route('**/data/history.json', reject_history_fetch)
     await page.goto(f'http://127.0.0.1:{server.server_port}/product/builds/index.html')
+    sounds = page.get_by_role('navigation', name='Main').get_by_role('link', name='Sounds', exact=True)
+    assert await sounds.is_visible()
+    assert await sounds.get_attribute('href') == '../index.html#sounds'
+    for identifier in ['main-versions-0', 'night-versions-0']:
+        archive = page.locator(f'[data-record-id="{identifier}"]')
+        release = archive.get_by_role('link', name='Published 0.0.26 release')
+        assert await release.get_attribute('href') == 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26'
+        assert 'Original archive record' in await archive.locator('summary').inner_text()
     records = page.locator('[data-record-id]')
     visible = page.locator('[data-record-id]:visible')
     total = await records.count()
