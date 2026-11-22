@@ -1,0 +1,14 @@
+{
+  "source": "133fe8f0f917eb8d390ca0788cd9710a076aee97",
+  "tree": "4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc",
+  "filename": "lane-remote-resume-0130-133fe8f0f917-final-software-delivery.zip",
+  "localPath": "/workspace/scratch/857bb2409f82/remote-final-delivery/lane-remote-resume-0130-133fe8f0f917-final-software-delivery.zip",
+  "bytes": 5678257,
+  "sha256": "dcca113dc21fccfbd503455cf3e4087033f5c6654b8a18fb4e612dc05f35a21c",
+  "files": 60,
+  "verification": "ZIP CRC and every member size/SHA256; all78containedPNGmemberdigests/native dimensions independently checked",
+  "upload": "NOT_ATTEMPTED_SIGN_IN_REQUIRED_LAST_CAPACITY_REJECTION_UNRESOLVED",
+  "destination": "https://chatgpt.com/g/g-p-ad9d6d4ab04c8191af6aa22fd752707e/project?tab=sources",
+  "baseline": "owner2%NOT_ACCEPTED; registeredNOBASE; proposalsNOT_RECOVERED",
+  "hardware": "NOT_REQUIRED_SOFTWARE_ONLY"
+}

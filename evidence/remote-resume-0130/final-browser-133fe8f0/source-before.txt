@@ -1,0 +1,12 @@
+source	133fe8f0f917eb8d390ca0788cd9710a076aee97
+tree	4a4835d7a9dfec983d0f3a94dcdbb6f4dd69a1cc
+branch	refs/remotes/origin/lane/remote-resume-0130
+checkout	/workspace/scratch/857bb2409f82/rt-133fe8f0
+build	/workspace/scratch/857bb2409f82/rt-133fe8f0/.output/site
+run	/workspace/scratch/857bb2409f82/remote-recapture-work/run-133fe8f0f917
+publicationCheck	local remote-tracking branch contains this commit
+TMPDIR	/workspace/scratch/857bb2409f82/rt-133fe8f0/.cache/p-Vfhe
+startUTC	2026-11-22T05:28:53Z
+bb95665a2faf84633ce87550dbcf94568dfc4c2c28436733f60efe18cd2568d1  /workspace/scratch/857bb2409f82/remote-recapture-work/capture.py
+af94c811f8ce1c342295446072527874a54fb43791ae306d40202edddf36e9ff  /workspace/scratch/857bb2409f82/remote-recapture-work/capture-owner.py
+c8c91e1377e551a60618037efd76f2feee5178b4eb650f251bb33088d53e7253  /workspace/scratch/857bb2409f82/remote-recapture-work/run-published.sh
