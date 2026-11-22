@@ -787,7 +787,7 @@ async def break_and_tape(page):
     assert await page.locator('#apply').is_disabled()
 
 async def project_files(page):
-    for width,height in [(1440,900),(390,844),(844,390)]:
+    for width,height in [(1440,900),(1024,640),(390,844),(844,390)]:
         await page.set_viewport_size({'width':width,'height':height})
         await page.goto(ORIGIN+'/remote/')
         await page.locator('[data-view="files"]').click()
@@ -804,6 +804,17 @@ async def project_files(page):
         ]
         cards = page.locator('.destinations>section')
         assert await cards.locator('h3').all_text_contents() == ['Project backup','Original presets','MIDI for a DAW']
+        assert await page.evaluate('document.documentElement.scrollWidth === innerWidth')
+        if width == 1440:
+            for card in await cards.all():
+                bounds = await card.bounding_box()
+                assert bounds['height'] >= 150, bounds
+                await expect(card.locator('h3')).to_have_css('font-size', '26px')
+            actions = page.locator('.destinations a, .destinations button, .project-tools a, .project-guide summary, .project-summary button')
+            for action in await actions.all():
+                await expect(action).to_be_in_viewport(ratio=1)
+                bounds = await action.bounding_box()
+                assert bounds['width'] >= 44 and bounds['height'] >= 44, bounds
         if width == 844:
             bounds = [await card.bounding_box() for card in await cards.all()]
             assert len({box['y'] for box in bounds}) == 1
@@ -1070,9 +1081,10 @@ async def browser_cases():
         await step_labels(page, draft_state, load_draft)
     cases = (discard_draft, bass_step_fields, pattern_lock_points, step_label_widths, roll, sequencer, drum_accent, mixer, fx_part_sends, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, thin_step_lanes, break_and_tape, chicago_sound_desktop, full_envelopes, project_files, motion_keyboard, project_sound_edit_count, kit_accent_across_voices, motion_context)
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(chromium_sandbox=True)
-        try:
-            for case in cases:
+        for case in cases:
+            # Release the Chromium process and its renderers after each journey.
+            browser = await pw.chromium.launch(chromium_sandbox=True)
+            try:
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -1085,8 +1097,8 @@ async def browser_cases():
                 assert not errors, errors
                 print(f'PASS FunkyBeats {case.__name__}', flush=True)
                 await context.close()
-        finally:
-            await browser.close()
+            finally:
+                await browser.close()
     print(f'FUNKYBEATS-BROWSER pages={len(cases)} failures=0')
 
 async def main():

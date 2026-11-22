@@ -1,0 +1,38 @@
+{
+  "head": "183207ed2b7dd7b346ca5871408b292df4fb0ae2",
+  "tree": "d8c4f0476a084078fc9f80f72c7bb25a60739abc",
+  "trackedDiff": [
+    "evidence/remote-resume-0130/engine-protocol/README.md",
+    "evidence/remote-resume-0130/engine-protocol/source-identity.json",
+    "package.json",
+    "tests/product-remote/funkybeats-browser.py",
+    "tests/product-remote/page15-density-browser.py",
+    "tests/product-workspace/grid-collapse-browser.py",
+    "web/product-site/remote/style.css"
+  ],
+  "files": {
+    "web/product-site/remote/style.css": "c81df9a0186c0a938e32baf398e1e3776854c3a5f687b4c51fa95d9f12a725b2",
+    "web/product-site/remote/app.mjs": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+    "web/product-site/remote/firmware-link.mjs": "99907240de38b84cadc3151b2d49f2839254443651c07dda46063ce8b20eaa95",
+    "web/product-site/remote/superj6.mjs": "e31989d53364a624273a4e1acdfd4f104fba1a7ac58cb66edbd28be211af1b11",
+    "tests/product-remote/native-sound-browser.py": "2a5b6faa117d1cf716a0ad7ed68d38e785dd9c110214f85e4b30daa572c7e1f6",
+    "tests/product-remote/drum-controls-browser.py": "88b9ffe1fdbcbc56d5f7171fab57eba7e1a4dd321e3cef4704ab7062d77f5e84",
+    "tests/product-remote/firmware-browser.py": "addf47052193a5815477a3c670875f23b12f2a248c8099296ede327b1cf1109f"
+  },
+  "note": "Before serialized retry; only parent authors source changes. Snapshot records pending unrelated browser/package CSS work.",
+  "endHead": "183207ed2b7dd7b346ca5871408b292df4fb0ae2",
+  "acceptanceScope": "SOFTWARE-ONLY",
+  "results": {
+    "parameterBrowser": "PASS actual archived engine plus C-negative fixture; exit0",
+    "nativeSound": "PASS3viewports,40controls,159owning-port requests perviewport; exit0",
+    "drumControls": "PASS66states/249Tab/180names/9994width occurrences/22voice footer; exit0"
+  },
+  "artifacts": {
+    "drum-controls-serial.log": "6a4454ed599babc0670c580a537737f57a889b54911bef7d94444f9fe6be9ea9",
+    "native-sound-serial/1440x900-proof.json": "389a56a476a88ea169b45b2bebb3b95f05e7a1f599eaf188557a4213f2254aa0",
+    "native-sound-serial/390x844-proof.json": "ead84c6b70e0cfa254ef617707804b4097f8d768f4c3ea354bbeec7c0ed268d4",
+    "native-sound-serial/844x390-proof.json": "fd701173d31a308266f6f0809cf58bd77e404ece7a8ba25e315b3332d6c59c29",
+    "native-sound-serial-summary.json": "0e98de1775eca11b0b03b21a725ade1a88bdfd2ffea989dad9b0cbf301e5a103",
+    "native-sound-serial.log": "ad8b12f439be0671de006d1975c87f639b8b73bba30cec1d82c2b1e67905083c"
+  }
+}

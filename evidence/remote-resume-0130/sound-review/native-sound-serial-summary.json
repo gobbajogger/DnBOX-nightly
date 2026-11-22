@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "viewports": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "kernel": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+      "controls": 40,
+      "pendingReadRetirements": [
+        "source",
+        "view",
+        "stop"
+      ],
+      "draftSoundUndoRedoSlots": [
+        0,
+        1
+      ],
+      "midiCalls": 0,
+      "requests": 159
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "kernel": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+      "controls": 40,
+      "pendingReadRetirements": [
+        "source",
+        "view",
+        "stop"
+      ],
+      "draftSoundUndoRedoSlots": [
+        0,
+        1
+      ],
+      "midiCalls": 0,
+      "requests": 159
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "kernel": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+      "controls": 40,
+      "pendingReadRetirements": [
+        "source",
+        "view",
+        "stop"
+      ],
+      "draftSoundUndoRedoSlots": [
+        0,
+        1
+      ],
+      "midiCalls": 0,
+      "requests": 159
+    }
+  ],
+  "firstFailedAttemptPreserved": "native-sound.log and native-sound-first-attempt/failure.json",
+  "scope": "Actual qualified firmware WASM/AudioWorklet functional proof; software-only acceptance"
+}

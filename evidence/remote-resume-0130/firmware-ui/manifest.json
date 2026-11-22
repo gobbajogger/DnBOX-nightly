@@ -1,0 +1,346 @@
+{
+  "archive": {
+    "name": "lane-remote-resume-0130-f1786ebec261-firmware-240x240.zip",
+    "bytes": 15626620,
+    "sha256": "dd084c2e7b5d34a051ec97e9d25e098e5e94259c67b4658e93db875a8ea377b0",
+    "files": 1737,
+    "delivery": "Staged in the recovery workspace. Project Sources upload unconfirmed."
+  },
+  "pairedFirmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "hostTree": {
+    "status": "VERIFIED",
+    "tree": "a4876790880cae769298f6701e8ab5db1d970b30",
+    "files": 6865,
+    "referenceSHA256": "e9421f4a5b08f94a1bf98b91b3a954281537ea7baaf155641d7c3579b7c646eb"
+  },
+  "host": {
+    "exit": 0,
+    "verifier": {
+      "status": "PASS",
+      "scope": "Saved-source/tree, complete legacy walk/audits, PNG/RGB/actual-state integrity and physical lane family coverage only; F1/R22 acceptance is external and extended final-text geometry requires separate producer.",
+      "reportSHA256": "8d9b64f42cd1eb15d42203882de45301f0d2b4bf5180b4d74afbc0febdd65a25",
+      "verifierSHA256": "a105b09705017235ab4039b8be739bdf1cc485682c25c207b8c71c59f981dc1d",
+      "productionTree": {
+        "status": "VERIFIED",
+        "tree": "a4876790880cae769298f6701e8ab5db1d970b30",
+        "files": 6865,
+        "referenceSHA256": "e9421f4a5b08f94a1bf98b91b3a954281537ea7baaf155641d7c3579b7c646eb"
+      },
+      "legacyWalkerFrames": 1538,
+      "legacyGeometry": {
+        "screens": 1538,
+        "texts": 44082,
+        "findings": 0
+      },
+      "actualSnapshots": 1700,
+      "stableStateIDs": 1700,
+      "physicalLaneFamilies": {
+        "0": [
+          "VELOCITY",
+          "CHANCE",
+          "PITCH",
+          "PAN"
+        ],
+        "1": [
+          "VELOCITY",
+          "CHANCE",
+          "PITCH",
+          "PAN"
+        ],
+        "2": [
+          "VELOCITY",
+          "CHANCE",
+          "PITCH",
+          "PAN"
+        ],
+        "3": [
+          "VELOCITY",
+          "CHANCE",
+          "PITCH",
+          "PAN"
+        ],
+        "4": [
+          "VELOCITY",
+          "CHANCE",
+          "PITCH",
+          "PAN"
+        ]
+      },
+      "F1": "UNREVIEWED",
+      "visualApproval": false
+    },
+    "sourceCoverage": {
+      "status": "PARTIAL",
+      "observedFunctions": 107,
+      "inventoriedFunctions": 127,
+      "unobservedFunctions": 20
+    },
+    "requiredContentChecks": {
+      "total": 19643,
+      "missing": 0
+    },
+    "glyphPixelChecks": {
+      "total": 249,
+      "missing": 0,
+      "damaged": 0
+    },
+    "configuration": {
+      "BOARD_SMK37": 1,
+      "X0X_DEV_PADCAL": 1,
+      "X0X_SYNTHONE_PATCH": 1,
+      "X0X_DEV_WOBBLE": 0
+    }
+  },
+  "linked": {
+    "receiptSha256": "c783102b2801ffb4e7c0cacc0778cba492befe35e89b033d35cad987f9b486e8",
+    "verifiedPairs": 6,
+    "models": {
+      "elite": {
+        "packageSha256": "3aaba53459442cdd1f652dedf2c438a30189e4f5d06859270e9b0da1bd9bfecd",
+        "exit": 0,
+        "samples": [
+          {
+            "screen": "startup",
+            "timeMs": 448,
+            "path": "elite/startup.png",
+            "rgbSha256": "d67e0514a072bef19007e7c70cab2b8f86a573b84285e969eac157bc28c1f68e",
+            "pngSha256": "cb42864635c37ddb56975f032796e138683e1c45a767ae011a204f1d118fa62d"
+          },
+          {
+            "screen": "ordinary",
+            "timeMs": 1408,
+            "path": "elite/ordinary.png",
+            "rgbSha256": "fd01441ea4e0ceddeed6531b8cb01337b4d9047a6db649015da4a4dbac9e69bf",
+            "pngSha256": "831cbba5148f834376f22ebae2abf7502938e98a41c711f3d249ed536376585c"
+          },
+          {
+            "screen": "drum-para",
+            "timeMs": 1792,
+            "path": "elite/drum-para.png",
+            "rgbSha256": "0a42bf402f3dfdf1c0d75e268aa0f25fc2c606655976d07c3b80d6e7befdc2c1",
+            "pngSha256": "f2d887e441af0454ae5527c366fcd8647df80b16ecb15dde81ea2c4a60a87c1e"
+          },
+          {
+            "screen": "fx-first",
+            "timeMs": 2176,
+            "path": "elite/fx-first.png",
+            "rgbSha256": "18a3d915da1ba5e41b862c9a82757e3ca33233fb310ebee46492ae252b17bbde",
+            "pngSha256": "d218db3497951b7b27f692ef16e4f185a2df3bd1b76d0329b854ffb515e2bdc2"
+          },
+          {
+            "screen": "fx-second",
+            "timeMs": 2560,
+            "path": "elite/fx-second.png",
+            "rgbSha256": "d1986b486a5a3c922fbfc0a54d759cc448afe3baed4642b2863cea1ef3933622",
+            "pngSha256": "d25d1e719f3718f9d146797e2cb1ae8799b3bafe480a646b1614e3708213ac9c"
+          },
+          {
+            "screen": "globe",
+            "timeMs": 2912,
+            "path": "elite/globe.png",
+            "rgbSha256": "a054075649630b272896fbfcc67a90cd10019e07cd4bed08631d8b7d22fd7735",
+            "pngSha256": "9dc3c8b26e99d0caea5c5491598e6c3a8a21af71d44407edff0612fd1100935f"
+          }
+        ]
+      },
+      "pro": {
+        "packageSha256": "8f399e350a3af8ded3bee7f05d60f4b01c966b785d7a336c90dcd371178cef92",
+        "exit": 0,
+        "samples": [
+          {
+            "screen": "startup",
+            "timeMs": 448,
+            "path": "pro/startup.png",
+            "rgbSha256": "d67e0514a072bef19007e7c70cab2b8f86a573b84285e969eac157bc28c1f68e",
+            "pngSha256": "cb42864635c37ddb56975f032796e138683e1c45a767ae011a204f1d118fa62d"
+          },
+          {
+            "screen": "ordinary",
+            "timeMs": 1408,
+            "path": "pro/ordinary.png",
+            "rgbSha256": "fd01441ea4e0ceddeed6531b8cb01337b4d9047a6db649015da4a4dbac9e69bf",
+            "pngSha256": "831cbba5148f834376f22ebae2abf7502938e98a41c711f3d249ed536376585c"
+          },
+          {
+            "screen": "drum-para",
+            "timeMs": 1792,
+            "path": "pro/drum-para.png",
+            "rgbSha256": "0a42bf402f3dfdf1c0d75e268aa0f25fc2c606655976d07c3b80d6e7befdc2c1",
+            "pngSha256": "f2d887e441af0454ae5527c366fcd8647df80b16ecb15dde81ea2c4a60a87c1e"
+          },
+          {
+            "screen": "fx-first",
+            "timeMs": 2176,
+            "path": "pro/fx-first.png",
+            "rgbSha256": "18a3d915da1ba5e41b862c9a82757e3ca33233fb310ebee46492ae252b17bbde",
+            "pngSha256": "d218db3497951b7b27f692ef16e4f185a2df3bd1b76d0329b854ffb515e2bdc2"
+          },
+          {
+            "screen": "fx-second",
+            "timeMs": 2560,
+            "path": "pro/fx-second.png",
+            "rgbSha256": "d1986b486a5a3c922fbfc0a54d759cc448afe3baed4642b2863cea1ef3933622",
+            "pngSha256": "d25d1e719f3718f9d146797e2cb1ae8799b3bafe480a646b1614e3708213ac9c"
+          },
+          {
+            "screen": "globe",
+            "timeMs": 2912,
+            "path": "pro/globe.png",
+            "rgbSha256": "a054075649630b272896fbfcc67a90cd10019e07cd4bed08631d8b7d22fd7735",
+            "pngSha256": "9dc3c8b26e99d0caea5c5491598e6c3a8a21af71d44407edff0612fd1100935f"
+          }
+        ]
+      }
+    },
+    "strictFirstAttempt": {
+      "fixture": "Elite, FM1_STRICT=1, 360 MHz, 2976 emulated ms, LCD film at 16 ms intervals",
+      "result": "TIMEOUT",
+      "deadlineSeconds": 240,
+      "partialFrameFiles": 163,
+      "scope": "Stopped before the paired capture completed. Timed LCD with JIT was used for the completed replay."
+    },
+    "optionalFinalPpmOutputError": "The first timed replay logged a missing work/lcd.ppm directory. All twelve recorded PNGs were valid and reproduced byte for byte on the clean replay.",
+    "hostBodyComparisons": [
+      {
+        "linkedSample": "drum-para",
+        "hostStateId": "view-01-part-00-voice-00-page-00",
+        "fullRgb565Differences": 4331,
+        "bodyRgb565Differences": 16
+      },
+      {
+        "linkedSample": "fx-first",
+        "hostStateId": "view-03-part-00-voice-00-page-00",
+        "fullRgb565Differences": 0,
+        "bodyRgb565Differences": 0
+      },
+      {
+        "linkedSample": "fx-second",
+        "hostStateId": "view-03-part-00-voice-00-page-01",
+        "fullRgb565Differences": 9,
+        "bodyRgb565Differences": 0
+      }
+    ],
+    "configuration": {
+      "machine": "SMK-37 simulator",
+      "clockMHz": 360,
+      "timedLcd": true,
+      "jit": true,
+      "physicalDevice": false,
+      "X0X_DEV_WOBBLE": 1
+    }
+  },
+  "website": {
+    "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+    "kernelSha256": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234",
+    "sourceReceiptSha256": "6199d9806484b2a46571675fbccc03e32bdf9257ba8d24f507a816f7c8ad7394",
+    "exactRgbMatches": 12,
+    "compared": 15,
+    "states": [
+      {
+        "state": "view-00-part-00-voice-00-page-00",
+        "hostRgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+        "websiteRgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+        "same": true
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-00",
+        "hostRgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+        "websiteRgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+        "same": true
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-01",
+        "hostRgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+        "websiteRgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+        "same": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-00",
+        "hostRgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+        "websiteRgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+        "same": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-01",
+        "hostRgbSha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003",
+        "websiteRgbSha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003",
+        "same": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-02",
+        "hostRgbSha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+        "websiteRgbSha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+        "same": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-03",
+        "hostRgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+        "websiteRgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+        "same": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-04",
+        "hostRgbSha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c",
+        "websiteRgbSha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c",
+        "same": true
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-00",
+        "hostRgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+        "websiteRgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+        "same": true
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-01",
+        "hostRgbSha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+        "websiteRgbSha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+        "same": true
+      },
+      {
+        "state": "global-section--1-row-00",
+        "hostRgbSha256": "855902c7e66420098c14ec04c7d29251b756e111ebe58dc51fa8b2ac3570a70e",
+        "websiteRgbSha256": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3",
+        "same": false
+      },
+      {
+        "state": "global-section-0-row-00",
+        "hostRgbSha256": "0022251c8fea4bd937678b07af0a08df8e478b13beecd432184e9a6b6f7cdc20",
+        "websiteRgbSha256": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da",
+        "same": false
+      },
+      {
+        "state": "global-section-3-row-00",
+        "hostRgbSha256": "d0dd240bc74bcefae1a674027f43d7c59e1ed26d42a9cdd596099ae39ca7291f",
+        "websiteRgbSha256": "174401b00da703fc1a9cde26e8503dd8d1df01c4597942129c5fe7f46c712c93",
+        "same": false
+      },
+      {
+        "state": "03-picked-fader",
+        "hostRgbSha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+        "websiteRgbSha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+        "same": true
+      },
+      {
+        "state": "04-delay-knob",
+        "hostRgbSha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+        "websiteRgbSha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+        "same": true
+      }
+    ]
+  },
+  "shipping": {
+    "firmwareCommit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+    "release": "0.0.26",
+    "uiSourceSha256": "b21c83aace675322c56ee84731cef430078f50307ccb86e12ffae5ebdf7a9f9b",
+    "tapeReel": "Rounded rectangles, rbox within all_glyph_semantics; phase tick driven by engine_tape_active every 80 ms."
+  },
+  "pairedUi": {
+    "uiSourceSha256": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "panelCornerRadius": 8,
+    "tapeReel": "Circular disc shapes; phase tick driven by engine_tape_active every 80 ms.",
+    "duplicateDisplayedValues": [
+      "Delay Feedback 35% in status and editor",
+      "Reverb Decay 62% in status and editor"
+    ]
+  }
+}

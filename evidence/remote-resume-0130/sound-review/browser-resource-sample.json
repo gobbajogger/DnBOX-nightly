@@ -1,0 +1,23 @@
+{
+  "timestampUTC": "2026-11-22T01:51:55Z",
+  "memory": {
+    "total": 10451427328,
+    "available": 1600274432,
+    "percent": 84.7,
+    "used": 8851152896,
+    "free": 809312256,
+    "active": 479121408,
+    "inactive": 7110590464,
+    "buffers": 76746752,
+    "cached": 2061312000,
+    "shared": 994988032,
+    "slab": 1083281408
+  },
+  "processGroups": {
+    "python3": {
+      "count": 1,
+      "rss": 11202560
+    }
+  },
+  "note": "After concurrent renderer crashes; memory pressure is a hypothesis, not a proven root cause."
+}

@@ -9,3 +9,9 @@ The voice rails now use the existing shared R22 instrument inventory (G001–G01
 `before.json` and `after.json` preserve measured rectangles and all first-viewport pad coordinates. Full-size before/after PNGs and logs are retained outside Git in `.cache/owner-review/` pending the requested Project Sources upload. Final exact-head rerun and independent review are recorded in the lane qualification ledger when available. This focused result is not2% whole-screen parity, physical hardware proof or a full lane PASS.
 
 Reproduce: `python3 tests/product-remote/page15-density-browser.py --output .output/page15-density-proof`.
+
+## Narrow hidden-scroll repair and final scope
+
+Independent review reproduced an additional root overflow at640×360: body scroll width665for909 and690forBassA despite documentElement reporting640. Clicking More shifted body.scrollLeft to25 and clipped the whole header. Putting engines on their own row below740px leaves title/transport/history/More on the second row. At640×360 and736×414, independent real clicks now keep both body dimensions equal and all four root scroll offsets zero for BassA/909/808. Inner drum scrolling remains available at those narrower sizes. The final product fixture adds both sizes (16kit/viewport states total) and checks actual body width and hidden offsets, not just documentElement. [Independent proof](../owner-review/narrow-c50255d-green.json).
+
+The full source gate retains unapproved candidate PNGs with NOBASE status; it creates no approval or baseline. One final registered32frame set will be reused for the handoff. The current scope is software-only. Host and emulator results establish only their recorded software behavior; physical testing is outside scope and is not a completion dependency.

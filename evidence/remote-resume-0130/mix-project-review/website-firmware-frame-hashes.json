@@ -1,0 +1,23 @@
+{
+  "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+  "kernelSha256": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234",
+  "frames": {
+    "view-00-part-00-voice-00-page-00": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+    "view-03-part-00-voice-00-page-00": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+    "view-03-part-00-voice-00-page-01": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+    "view-04-part-00-voice-00-page-00": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+    "view-04-part-00-voice-00-page-01": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003",
+    "view-04-part-00-voice-00-page-02": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+    "view-04-part-00-voice-00-page-03": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+    "view-04-part-00-voice-00-page-04": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c",
+    "view-06-part-00-voice-00-page-00": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+    "view-06-part-00-voice-00-page-01": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+    "global-section--1-row-00": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3",
+    "global-section-0-row-00": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da",
+    "global-section-3-row-00": "174401b00da703fc1a9cde26e8503dd8d1df01c4597942129c5fe7f46c712c93",
+    "03-picked-fader": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+    "04-delay-knob": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+    "global-section-4-row-00": "9e365eb9d91fde2846ffb382c1a77164b3f5a24aeeed04e1e48b4af2c5ccb4df",
+    "list-view-04-part-00-voice-00-row-17": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431"
+  }
+}

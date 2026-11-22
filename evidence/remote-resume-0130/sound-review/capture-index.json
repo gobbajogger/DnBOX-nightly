@@ -1,0 +1,1620 @@
+{
+  "candidate": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "tree": "721461c82f1d0580878fc117940563dbe2a36374",
+  "buildIdentity": "sound-review-capture-build-identity.json",
+  "scope": "31Draft Sound states at4registered viewports; original first93captures preserved; missingfourth31 captured separately. Original-design acceptance and physical proof not asserted.",
+  "entries": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "breaks",
+      "path": "complete-captures/1440x900-breaks.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "b83d593e8258b452167dbfe1b8c16c43aa91b8b7aa6c8b16dc2c6b468188bef8"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-chicago",
+      "path": "complete-captures/1440x900-chicago-chicago.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "8ae92118ba6079cf8a88651da8f8d7c222ab479939acc5f4a1674663f6a12a62"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-miami",
+      "path": "complete-captures/1440x900-chicago-miami.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "e20513115537b61f85a78e737c6d2258c2886dedc7c49ae0dbc31a4fd9c30d71"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-superj6",
+      "path": "complete-captures/1440x900-chicago-superj6.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "8198c92daaf8d594c6895676b98a1afb29460beca546ceaaa09b296c7e6c223b"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "chicago-synth-one",
+      "path": "complete-captures/1440x900-chicago-synth-one.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "96e582f011378606e6da6adea751659ff9ed01a8074f891463d0dade1cefde9c"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice00",
+      "path": "complete-captures/1440x900-drum808-voice00.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "1ffe4656cc038ac5a33f0c20404fe2d4d2b7ec97515dbb71f3d1aea5823ffdc8"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice01",
+      "path": "complete-captures/1440x900-drum808-voice01.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "77d105a1299dc3704deddd7b128a580553401d9de71a87cc6d05e7610a667b86"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice02",
+      "path": "complete-captures/1440x900-drum808-voice02.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "151949358059c9f6c3af878a795e7d4071a8251282dc6d639c709240fedda665"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice03",
+      "path": "complete-captures/1440x900-drum808-voice03.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "2b8e6923c5aef85c1055926085f11f2caa7079d3a4c3a8fad526ff09b5df9494"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice04",
+      "path": "complete-captures/1440x900-drum808-voice04.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "1a0a646cff0716fe81190b730cce1da62b0b63247634da8141d4730bc6f2df42"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice05",
+      "path": "complete-captures/1440x900-drum808-voice05.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "313d616a8742349a4ffa8cd7024477b7aaad05f2521bfb7ae419759b8301111f"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice06",
+      "path": "complete-captures/1440x900-drum808-voice06.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "c09ed4cc9734e40b6ec55bfa2642bfcad9e4785d9e38c56c90340e00f846f75e"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice07",
+      "path": "complete-captures/1440x900-drum808-voice07.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "2c68b89fa72fd2414bca1c294ac80c61dcbe6d4b792da2fc9e67d7fd807d5a2b"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice08",
+      "path": "complete-captures/1440x900-drum808-voice08.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "38f8a65d8c1e98fb8ec2f9293920d08f31084e349ff9f2bd1498b551082dcb50"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice09",
+      "path": "complete-captures/1440x900-drum808-voice09.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "c3176ae69efd2da3d55f4aa45a617d9586db252d9def065524239a7fa5c06ebb"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum808-voice10",
+      "path": "complete-captures/1440x900-drum808-voice10.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "f6880fc3387c05d893c34c6b7aa0115610d11acd3cc92ce74fedecf3b6b3164a"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice00",
+      "path": "complete-captures/1440x900-drum909-voice00.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "f030c76be7a9a6e1303017a12f2ea71a540b935d9f4863f39e43e9a58c4c51e0"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice01",
+      "path": "complete-captures/1440x900-drum909-voice01.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "cdacb65984795ffa3e0267396d8b13ae72ecbe5941243c0e5ec79538f58bf01e"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice02",
+      "path": "complete-captures/1440x900-drum909-voice02.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "92456ef1de79b7ef56c2b16d5456b83b4c3c72293be5fac91e815b8d5ce4283f"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice03",
+      "path": "complete-captures/1440x900-drum909-voice03.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "69a41b8a777064f170e7e0d164474d4818624b06e995856832697c27fdd62742"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice04",
+      "path": "complete-captures/1440x900-drum909-voice04.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "0f7234ca591873a6aa280b36f595179533ee082ae68fa8a18ff11552b46c567c"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice05",
+      "path": "complete-captures/1440x900-drum909-voice05.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "c8ea840fb00f772bb05e2fb0572011b522182e909a12da19d89879ed2a186442"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice06",
+      "path": "complete-captures/1440x900-drum909-voice06.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "b6811a9cbecfcc9eb28952e98e5c18dbbf3362760fbf56522d334827f71d2cb8"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice07",
+      "path": "complete-captures/1440x900-drum909-voice07.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "e5c60d35a9de8dfcaca98d9eece4e3ede28e09c3501e63c54b72b1650d64bc4f"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice08",
+      "path": "complete-captures/1440x900-drum909-voice08.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "eba9013ff9ead34127be2b796c3248fbe3b0f51ef13aea77a6ae4ec34a3771fc"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice09",
+      "path": "complete-captures/1440x900-drum909-voice09.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "c43214a7891a8f7fdc9e117802dcfb985da9f49abd9b15c61e1a65a98376432e"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "drum909-voice10",
+      "path": "complete-captures/1440x900-drum909-voice10.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "714c7ae4023a8125a36dd12020ad90808700cec3fbf9be0a1ae88f7f1747846e"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-chicago",
+      "path": "complete-captures/1440x900-miami-chicago.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "f2fb7091719627e0b69e15efe72c40dc0371ddae940ab003cbe93a9b8da486ac"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-miami",
+      "path": "complete-captures/1440x900-miami-miami.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "55339bb3c30ed82e1eaffcc73a7ed8ce4662f738e793ba7c93147fe46aa647df"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-superj6",
+      "path": "complete-captures/1440x900-miami-superj6.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "0c84bfe8b6762976a8278269b3272ffb25dee75c547f4e8010d2485f6ec91165"
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "miami-synth-one",
+      "path": "complete-captures/1440x900-miami-synth-one.png",
+      "imageSize": [
+        1440,
+        900
+      ],
+      "sha256": "5838a1a9084f33f7fc5c2ff142cbec4167c315136bc52cad727853c9e4320003"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "breaks",
+      "path": "complete-captures/390x844-breaks.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "b7fe322dcab0a5e730d5ab91a82ec246dd04b8f6418aca34551cc6339010ea0c"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-chicago",
+      "path": "complete-captures/390x844-chicago-chicago.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "6b9f54107286f5a1d3b06341dc0346af16250f95dd97a91ac2f6587fdce09193"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-miami",
+      "path": "complete-captures/390x844-chicago-miami.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "71d0c6e740dcb6a637b070a41111411bd28a3f3ed882aa756679c1298cef6809"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-superj6",
+      "path": "complete-captures/390x844-chicago-superj6.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "ff26e69d06612304885896df2fea31269fa22e2586549152c1419cd6105be129"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "chicago-synth-one",
+      "path": "complete-captures/390x844-chicago-synth-one.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "ec73b4b05de01c03afc8d86e63a74f62f927346bbe8366ae9f4c2ba6975e851f"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice00",
+      "path": "complete-captures/390x844-drum808-voice00.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "271c82e1d854ec9c4323b9c48378491cf7cb7e663b25baf0a981101240902499"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice01",
+      "path": "complete-captures/390x844-drum808-voice01.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "da2216483a6a1b2a5c30ce867974dd231c1bac0f062874c7475bc897f00e1a56"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice02",
+      "path": "complete-captures/390x844-drum808-voice02.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "7f13713fa3e7e77d35b88829f38569c69af8726a4c1e6e5cac2c6dacf6b7c09f"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice03",
+      "path": "complete-captures/390x844-drum808-voice03.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "f9d8e2a710985aaf5c93000f666e600bb6b36b1fe4df64854c89a84e1a9b535c"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice04",
+      "path": "complete-captures/390x844-drum808-voice04.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "42dcc8cf1a12d023a079ab69d4c393f2f7d929fb8d23297294f9d6ab99fdb0c9"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice05",
+      "path": "complete-captures/390x844-drum808-voice05.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "f85927a0c95f5f322216dc666b578b3071477c928a5b1370cf8d4a157ffa0766"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice06",
+      "path": "complete-captures/390x844-drum808-voice06.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "54f1471ddbc6704222314d6be817105561ada73124fa8f35c494a4f6184edcd1"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice07",
+      "path": "complete-captures/390x844-drum808-voice07.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "d71a9a5fc8868f80649dccf6ca108e53db1aec7599a48846afd8e9e00f8732f7"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice08",
+      "path": "complete-captures/390x844-drum808-voice08.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "c36c4000715b2e530b20cb3c44aff728cf78e5ac1e90cc023a9abd906235dde6"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice09",
+      "path": "complete-captures/390x844-drum808-voice09.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "e715eccf4950077e01bdffbfe570963cf75253c01e3117d43a823ccc204f17f8"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum808-voice10",
+      "path": "complete-captures/390x844-drum808-voice10.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "b95c03fed649d7eda89b8861a3d87b2702adefbe267f408c89c76190d3640883"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice00",
+      "path": "complete-captures/390x844-drum909-voice00.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "c4307357d3aadf1f95bb2993046f013ca2041fe1321571c9b1ca01e57f7134f7"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice01",
+      "path": "complete-captures/390x844-drum909-voice01.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "4e159404d0827a26f2415d845b18a56e835d660a766bc48f36b9a9af77f40080"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice02",
+      "path": "complete-captures/390x844-drum909-voice02.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "cba6f196b680df649254e9cf7d0e495cab15a782a43780b669517b375519d4fd"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice03",
+      "path": "complete-captures/390x844-drum909-voice03.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "360aacf1ffcef3deb237d3bf8885d785945fbe07b6d104703f214206152617b0"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice04",
+      "path": "complete-captures/390x844-drum909-voice04.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "42611d2bc5af3f4e524634bbb58a79e438defafb2773b41113974901e6528cd9"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice05",
+      "path": "complete-captures/390x844-drum909-voice05.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "d0a87e41e3dfa846f9f712c4f3eec904b7fd46c96753c6241116850ca315231f"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice06",
+      "path": "complete-captures/390x844-drum909-voice06.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "3d5bc532004da337ddfecb3d4652bfffc252b3558452f99d36188e28e75a2508"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice07",
+      "path": "complete-captures/390x844-drum909-voice07.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "637a8120f0393e1982f1254a2f67439157e613b581ffd935dd35e0db05b67a9f"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice08",
+      "path": "complete-captures/390x844-drum909-voice08.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "39af9573d99a68fe2673e2d1b9686bdce6a114131fc25f74297b698b4fab82e7"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice09",
+      "path": "complete-captures/390x844-drum909-voice09.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "6bbc49634f7a5a4033bbd1c5d9921c9e12019a728339a5772484f482ce5e7717"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "drum909-voice10",
+      "path": "complete-captures/390x844-drum909-voice10.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "61720c17e1c8a4ea4646530ee491702e6932f49d9c92123e90dc8381faa10e76"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-chicago",
+      "path": "complete-captures/390x844-miami-chicago.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "fd17e0e183d2451cc56e5feb1cc0b324db52bd3929b08adc332473b3610d3ae7"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-miami",
+      "path": "complete-captures/390x844-miami-miami.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "4e59c3c26483692178c1731a5a6bd9e06930782de1b276b4fee738a465dae7e7"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-superj6",
+      "path": "complete-captures/390x844-miami-superj6.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "238a9051356c400f2c95c79ac86953146ba8af506ff7627120f2bceb952696e3"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "miami-synth-one",
+      "path": "complete-captures/390x844-miami-synth-one.png",
+      "imageSize": [
+        390,
+        844
+      ],
+      "sha256": "a3a871ec93bdf8de3792993eceab294f955def43d748c73fe1f320e6252a5f60"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "breaks",
+      "path": "complete-captures/844x390-breaks.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "2f3780e6f5d5fc3dc3192acdbcf53afad726c57bdb28e6c867f685f855f01a29"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-chicago",
+      "path": "complete-captures/844x390-chicago-chicago.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "482676aacd66ba375a9af31c1531a65910b2a33abc5d0ed38fd17438222b1293"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-miami",
+      "path": "complete-captures/844x390-chicago-miami.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "9fafd4a369c2983ece586bdb52fcd59adc6f8a070b002a7e87f033444513781b"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-superj6",
+      "path": "complete-captures/844x390-chicago-superj6.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "6385c7ce4c19cf99c8bea2f9267ef59c2b837f01523089bd631d0beb2b329390"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "chicago-synth-one",
+      "path": "complete-captures/844x390-chicago-synth-one.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "8713cececa53603edbadbacca4c68dcb5837c01e7a650963c3cd5d6f84e68ec4"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice00",
+      "path": "complete-captures/844x390-drum808-voice00.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "2eaa09e7d221255c802e46095f041f6402fa5a2bd36f2d46d60ae92fdfcdae81"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice01",
+      "path": "complete-captures/844x390-drum808-voice01.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "ef472e41e18e5a30c987eac849a9a14e534bb06b2dea69db97d8c26577ceea9c"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice02",
+      "path": "complete-captures/844x390-drum808-voice02.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "c31d21d905f7bb3b550cdffeca7f2c00773d47c1a4a3463301ed7fbca1d09123"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice03",
+      "path": "complete-captures/844x390-drum808-voice03.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "ad5dc775dcb13bf6404f65a6ac050b18a375f5792bb3a20f20f33b32227241fe"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice04",
+      "path": "complete-captures/844x390-drum808-voice04.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "46393c22938f56d7d86df8d60cf3c74e98358e2e136cb47ed7d254d5c14b2a74"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice05",
+      "path": "complete-captures/844x390-drum808-voice05.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "db55ca03c33607eb8fae8877d4df7a261826c0ab0f185c7cfd6d1222cdae7ddc"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice06",
+      "path": "complete-captures/844x390-drum808-voice06.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "665f4d487ac38bdfd4a6f3d12f4c76f741a042284851f64a26954c5358e11aab"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice07",
+      "path": "complete-captures/844x390-drum808-voice07.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "41f27989fd1e5e166cf9d03b3cb46fbeab8a4406282af48805abfbe1264af850"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice08",
+      "path": "complete-captures/844x390-drum808-voice08.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "76c17af918a39cae2d7dbd4f4b99f43d3579495c03c39937f344d4d15084c79a"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice09",
+      "path": "complete-captures/844x390-drum808-voice09.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "950fc83fc778bb5678ea02c5b5b06a6bd07b2a8cf8cdc467efeced7230cd375c"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum808-voice10",
+      "path": "complete-captures/844x390-drum808-voice10.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "fd66c7e282e73ecffa8ed4f78b8a6a286f0bada4aa12d65c8635309bc85baab2"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice00",
+      "path": "complete-captures/844x390-drum909-voice00.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "808959ba1206bc8a6b98229f6039ed5a067fab71063ce3f6f39c0c1d072c3998"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice01",
+      "path": "complete-captures/844x390-drum909-voice01.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "4f582153d8e68a15bdecbef63846afd6957669865d8372027d397a3bbc611b32"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice02",
+      "path": "complete-captures/844x390-drum909-voice02.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "c8fecdbb441e94e51a1252be082cd813631e232c3b34addad541a53df1358ce4"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice03",
+      "path": "complete-captures/844x390-drum909-voice03.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "23f15bb3c4c994438995c5fbe34be1174ee6dddfbd669f3a10be21b0c1a422e4"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice04",
+      "path": "complete-captures/844x390-drum909-voice04.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "e717715c5412467c591557f75cd558712c25c6dde31eb22b8e6d5be9544118bb"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice05",
+      "path": "complete-captures/844x390-drum909-voice05.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "c56bf8ef3079c3cf713d4ecde5ad8d6eb1a0f8bd1f16cf1cff4a8b2f0f663333"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice06",
+      "path": "complete-captures/844x390-drum909-voice06.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "5f19cf37b997645b86b0aedb927b058b12f695ce2159c8f2df2c190d72ba3dff"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice07",
+      "path": "complete-captures/844x390-drum909-voice07.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "47140b5c80d9f0677d4b662428a00724310fd545a29666f7fdbd63df194ffc1c"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice08",
+      "path": "complete-captures/844x390-drum909-voice08.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "ff6d2773540f2cf5ba6d66d07d804e495b40e7757af06fbdac8d87733454b8d5"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice09",
+      "path": "complete-captures/844x390-drum909-voice09.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "c0e909aa7f26e6c20e0b99694347a928f1b02fc06414227a0e018ba247adf080"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "drum909-voice10",
+      "path": "complete-captures/844x390-drum909-voice10.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "a56b98c0858cca89ea892aceb40282c7061a7eaeb512fe431db1b6c2565d3c07"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-chicago",
+      "path": "complete-captures/844x390-miami-chicago.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "58bf8eb2906b6a933688b461833fd8715d7e5ed5a09a15548c1923ad1ea07acf"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-miami",
+      "path": "complete-captures/844x390-miami-miami.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "27db4f8946b2cef4953e09eb0fdc71c01f5c91e596f97dc91f97cc8263d2998f"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-superj6",
+      "path": "complete-captures/844x390-miami-superj6.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "84fd92bc5c474f57fbaad04fef0cec320351ffa37ec43ae458eac5ee89a9fe86"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "miami-synth-one",
+      "path": "complete-captures/844x390-miami-synth-one.png",
+      "imageSize": [
+        844,
+        390
+      ],
+      "sha256": "a4bd552724952d2f5f497aa9c5ad7ff6e90de6c95d495216162bb51056ecb54d"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "breaks",
+      "path": "complete-captures-fourth/1024x640-breaks.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "680322bbd5c0d88c834d5007de7bad6d618c6002f2976d627760f5e4ed1afbeb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-chicago",
+      "path": "complete-captures-fourth/1024x640-chicago-chicago.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "12699b4c0a1a799951ec5a6a6eceedbb78dd8c97cee06597aabce53a75349fc9"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-miami",
+      "path": "complete-captures-fourth/1024x640-chicago-miami.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "b8e62efc04ae57c7c862b42baf7d1c584a1aed87e68bac38872c06be79c40e48"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-superj6",
+      "path": "complete-captures-fourth/1024x640-chicago-superj6.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "7bc5c24ae247981cf637170bda56221e007257b6a6e71b07792d749258a7665e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "chicago-synth-one",
+      "path": "complete-captures-fourth/1024x640-chicago-synth-one.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "a289c0a707c0fb97a40ff251a456bd607b7e46e43e55979f29fceabf6829f48d"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice00",
+      "path": "complete-captures-fourth/1024x640-drum808-voice00.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "82b5b27d48237f2cdec2ec5607ba926d90f1ca0079d50023ebd156cdc0f5ff36"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice01",
+      "path": "complete-captures-fourth/1024x640-drum808-voice01.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "91b16589f4f5562c0c0c9c09dd1500c097d013e241d6e37a6bd048f8a820ad30"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice02",
+      "path": "complete-captures-fourth/1024x640-drum808-voice02.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "675478c6f7753ab137d5c64b20d02caf3a763633aa32e1117d4229e02eec17b0"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice03",
+      "path": "complete-captures-fourth/1024x640-drum808-voice03.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "bec77c03320c868a4e56aa79a7562c353bb1fa2eb118084e5c25df721241f1bb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice04",
+      "path": "complete-captures-fourth/1024x640-drum808-voice04.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "6d5ea2863053d7459f7ef0335e7e064d099e3ebe36f469e50f23dae11862e98e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice05",
+      "path": "complete-captures-fourth/1024x640-drum808-voice05.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "e04901af5e13df874b4ec0ad6977e14dc6f2aae3632db1862279d2b6e7500ec7"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice06",
+      "path": "complete-captures-fourth/1024x640-drum808-voice06.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "6da8024b41fb7f28d6afa49bbf2cf63b2be0e159d6c1a416a823c88e80b3244e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice07",
+      "path": "complete-captures-fourth/1024x640-drum808-voice07.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "adcb4feb4cfe335263d4a251906669cba319e28344a0a91b67399b68987d7a54"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice08",
+      "path": "complete-captures-fourth/1024x640-drum808-voice08.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "b11b9f042492aa7618e854147a7ed66539dcf87c27a64c3e20478de5a12881a8"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice09",
+      "path": "complete-captures-fourth/1024x640-drum808-voice09.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "b2985555dd85ecd69994d50ec4908612d86f056f6cdefcfd377b419379fb80d9"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum808-voice10",
+      "path": "complete-captures-fourth/1024x640-drum808-voice10.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "b9901afdbfcce51147fd1def6f90c5f4504f651ac2123da77077477f073ab1b4"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice00",
+      "path": "complete-captures-fourth/1024x640-drum909-voice00.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "1f1916efa791acf2b2c1e683ce9e9c97d9a14a794ffcb76b33244d4ceeffd248"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice01",
+      "path": "complete-captures-fourth/1024x640-drum909-voice01.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "ab5de58e32be341d171c47e45fa02ca317953cad1cafe12578d74c660178d310"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice02",
+      "path": "complete-captures-fourth/1024x640-drum909-voice02.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "1e11653a4d7f938765e98b6c1f76efcd7b55ab1820a6b117371406f9155c0afd"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice03",
+      "path": "complete-captures-fourth/1024x640-drum909-voice03.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "4dcc2f7554263c4fd852853702dd907bc4c5ebb6910efd9d86e33396a87c3682"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice04",
+      "path": "complete-captures-fourth/1024x640-drum909-voice04.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "97b3cd529714021d22f69d3e04ce63956f4515df35d362b127e998008b844fd0"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice05",
+      "path": "complete-captures-fourth/1024x640-drum909-voice05.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "2f6aefd0d195d9fce79a4c939b05a087aaaa2266c9bb17f776b8c8ea0976cbb3"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice06",
+      "path": "complete-captures-fourth/1024x640-drum909-voice06.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "ad76e64851dbc16076d9c96326529e06abcf30f55f064149a509642a2caa5d12"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice07",
+      "path": "complete-captures-fourth/1024x640-drum909-voice07.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "ad89911600396a408eac8fdb4278c06be4479b7587fc3ea7a3138a313c2a2811"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice08",
+      "path": "complete-captures-fourth/1024x640-drum909-voice08.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "4b6316af2fd1b55147c78b1e79397292ab48db8229940b27d3a76ca26145f05e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice09",
+      "path": "complete-captures-fourth/1024x640-drum909-voice09.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "97c5dd4065ee0542c27063726f1f14cbe54086961fc0995af3d8c6c3003e26cb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "drum909-voice10",
+      "path": "complete-captures-fourth/1024x640-drum909-voice10.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "ca21167b0aa01a28ec4212bbb1f65fc117f9ce1385026f81f160886857cd94b0"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-chicago",
+      "path": "complete-captures-fourth/1024x640-miami-chicago.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "64a1663123d6c29099456f3c965dd0b2afdb37510bf490ea2e14a84a34622e93"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-miami",
+      "path": "complete-captures-fourth/1024x640-miami-miami.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "3e0b5c9ec51440df4193a39ec3e87aa06415a6bc3ded42e14667660644d3732d"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-superj6",
+      "path": "complete-captures-fourth/1024x640-miami-superj6.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "6754bf0d9d1a480cdfbdb84c4f2edc01905168348e14dfbf95fc80376259ff48"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "state": "miami-synth-one",
+      "path": "complete-captures-fourth/1024x640-miami-synth-one.png",
+      "imageSize": [
+        1024,
+        640
+      ],
+      "sha256": "dc33fa51f738084c70ba5e57ea01b477bad828ecd4b7c485c5b23b3c9d41e0d5"
+    }
+  ]
+}

@@ -14,12 +14,12 @@ MEASURE='''() => {
    if(/auto|scroll|clip|hidden/.test(s.overflowY)){t=Math.max(t,q.top);b=Math.min(b,q.bottom)}}
   return r.width>0&&r.height>0&&r.left>=l-.1&&r.right<=z+.1&&r.top>=t-.1&&r.bottom<=b+.1&&e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2))}
  const visible=cells.map((e,i)=>whole(e)?[Math.floor(i/16),i%16]:null).filter(Boolean);
- return {viewport:[innerWidth,innerHeight],body:[document.documentElement.scrollWidth,document.documentElement.scrollHeight],
+ return {viewport:[innerWidth,innerHeight],body:[document.documentElement.scrollWidth,document.documentElement.scrollHeight],bodyWidth:[document.body.scrollWidth,document.body.clientWidth],hiddenScroll:[document.body.scrollLeft,document.body.scrollTop,scrollX,scrollY],
   mounted:cells.length,visible,first:cells[0].getBoundingClientRect().toJSON(),
   sound:document.querySelector('.drum-sound-panel').getBoundingClientRect().toJSON(),
   navigation:[...document.querySelectorAll('.drum-grid-navigation button')].map(e=>({name:e.textContent,whole:whole(e)}))};
 }'''
-async def run(out,observe):
+async def run(out,observe,viewport=None):
  async with async_playwright() as p:
   browser=await p.chromium.launch(chromium_sandbox=True)
   result={'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'browser':browser.version,'sourceSha256':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['web/product-site/remote/style.css','web/product-site/remote/funkybeats-view.mjs','web/product-site/remote/glyph-registry.mjs','tests/product-remote/page15-density-browser.py']},'states':[],'errors':[]}
@@ -27,7 +27,7 @@ async def run(out,observe):
    context=await browser.new_context(has_touch=True)
    await context.route('**/*',core.serve)
    page=await context.new_page();page.on('pageerror',lambda e:result['errors'].append(str(e)))
-   for width,height in [(844,390),(740,390),(900,390),(1080,390),(390,844),(1440,900)]:
+   for width,height in ([tuple(viewport)] if viewport else [(844,390),(740,390),(736,414),(640,360),(900,390),(1080,390),(390,844),(1440,900)]):
     await page.set_viewport_size({'width':width,'height':height})
     await page.goto(core.ORIGIN+'/remote/');await expect(page.locator('main')).to_have_attribute('aria-busy','false')
     for kit in ['909','808']:
@@ -38,6 +38,7 @@ async def run(out,observe):
      await page.screenshot(path=out/f'{kit}-{width}x{height}.png')
      (out/'measurements.json').write_text(json.dumps(result,indent=2))
      assert state['mounted']==176 and state['body'][0]<=width and state['body'][1]<=height,state
+     assert state['hiddenScroll']==[0,0,0,0] and state['bodyWidth'][0]<=state['bodyWidth'][1],state
      if width==844:
       print('PAGE15',kit,'visible',len(state['visible']),'first',state['first'],flush=True)
       if not observe:
@@ -68,7 +69,7 @@ async def run(out,observe):
    print(result['status'],len(result['states']),'complete product drum states',flush=True)
   finally:await browser.close()
 if __name__=='__main__':
- cli=argparse.ArgumentParser();cli.add_argument('--output',type=Path,default=ROOT/'.output/page15-density-proof');cli.add_argument('--observe',action='store_true');args=cli.parse_args()
+ cli=argparse.ArgumentParser();cli.add_argument('--output',type=Path,default=ROOT/'.output/page15-density-proof');cli.add_argument('--observe',action='store_true');cli.add_argument('--viewport',type=int,nargs=2);args=cli.parse_args()
  out=args.output.resolve();out.mkdir(parents=True,exist_ok=True);core.SOURCE=ROOT/'.output/page15-density'
  subprocess.run(['node','scripts/build-product-site.mjs','--output',str(core.SOURCE)],cwd=ROOT,check=True)
- asyncio.run(run(out,args.observe))
+ asyncio.run(run(out,args.observe,args.viewport))

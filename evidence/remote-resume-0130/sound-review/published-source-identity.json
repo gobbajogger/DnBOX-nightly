@@ -1,0 +1,21 @@
+{
+  "head": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "tree": "721461c82f1d0580878fc117940563dbe2a36374",
+  "trackedDiff": [],
+  "files": {
+    "web/product-site/remote/style.css": "f3ad5094b210c27192d8a90d58f6d3402a460d7f94b5357aff8318cc0c0a4cac",
+    "web/product-site/remote/funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7",
+    "web/product-site/remote/superj6.mjs": "e31989d53364a624273a4e1acdfd4f104fba1a7ac58cb66edbd28be211af1b11",
+    "tests/product-remote/source-banks-browser.py": "63748365672d2d5d329de0596d2c73209030b065332486a6234e0557ef8231e7",
+    "tests/product-remote/native-sound-browser.py": "2a5b6faa117d1cf716a0ad7ed68d38e785dd9c110214f85e4b30daa572c7e1f6",
+    "tests/product-remote/envelope-browser.py": "8580a52669ed922ce4d2c2900576575ae79ee0491a5bdc276115db833ff8aa1e",
+    "tests/product-remote/drum-controls-browser.py": "88b9ffe1fdbcbc56d5f7171fab57eba7e1a4dd321e3cef4704ab7062d77f5e84"
+  },
+  "failures": {
+    "native-sound": "Target crashed during parameter edit",
+    "drum-controls": "Target crashed entering landscape pitch edit after44voice states",
+    "complete-captures": "Target crashed in fourth1024 screenshot after93states",
+    "a160-protocol-browser": "Target crashed clicking FX after connect"
+  },
+  "scope": "SourceBank4viewport and envelope3viewport completed; partial screenshot and control tests are not whole-family acceptance"
+}

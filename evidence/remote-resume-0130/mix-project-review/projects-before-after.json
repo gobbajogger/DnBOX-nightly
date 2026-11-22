@@ -1,0 +1,1363 @@
+{
+  "chromium": "151.0.7922.34",
+  "1440x900": {
+    "before": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 20,
+            "y": 209.390625,
+            "width": 1400,
+            "height": 78,
+            "top": 209.390625,
+            "right": 1420,
+            "bottom": 287.390625,
+            "left": 20
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 20,
+            "y": 297.390625,
+            "width": 1400,
+            "height": 78,
+            "top": 297.390625,
+            "right": 1420,
+            "bottom": 375.390625,
+            "left": 20
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 20,
+            "y": 385.390625,
+            "width": 1400,
+            "height": 78,
+            "top": 385.390625,
+            "right": 1420,
+            "bottom": 463.390625,
+            "left": 20
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 102,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 106,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 94,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 112,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 89,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 98,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 121,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": true,
+          "fullyVisible": true
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "mainBounds": {
+        "x": 20,
+        "y": 159,
+        "width": 1400,
+        "height": 701,
+        "top": 159,
+        "right": 1420,
+        "bottom": 860,
+        "left": 20
+      },
+      "sha256": "124761315165ce74f086eac5a1e212ba4a882038a71f8113ba3e8769c829c5ef",
+      "pageErrors": []
+    },
+    "after": {
+      "cards": [
+        {
+          "title": "PROJECT BACKUP",
+          "font": "26px",
+          "rect": {
+            "x": 30,
+            "y": 209.390625,
+            "width": 1380,
+            "height": 185,
+            "top": 209.390625,
+            "right": 1410,
+            "bottom": 394.390625,
+            "left": 30
+          }
+        },
+        {
+          "title": "ORIGINAL PRESETS",
+          "font": "26px",
+          "rect": {
+            "x": 30,
+            "y": 414.390625,
+            "width": 1380,
+            "height": 185,
+            "top": 414.390625,
+            "right": 1410,
+            "bottom": 599.390625,
+            "left": 30
+          }
+        },
+        {
+          "title": "MIDI FOR A DAW",
+          "font": "26px",
+          "rect": {
+            "x": 30,
+            "y": 619.390625,
+            "width": 1380,
+            "height": 185,
+            "top": 619.390625,
+            "right": 1410,
+            "bottom": 804.390625,
+            "left": 30
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 207,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "mainBounds": {
+        "x": 20,
+        "y": 159,
+        "width": 1400,
+        "height": 701,
+        "top": 159,
+        "right": 1420,
+        "bottom": 860,
+        "left": 20
+      },
+      "sha256": "9fb996afb26a287bd68e11c21ee9aa44cc7bf8f8825ecc50e8685723a032dabb",
+      "pageErrors": []
+    },
+    "changed": {
+      "changedExact": 452997,
+      "changedTolerant": 65884,
+      "changedTolerantPercent": 5.083641975308642
+    },
+    "ownerPdf": {
+      "before": {
+        "changedExact": 491901,
+        "changedTolerant": 97395,
+        "changedTolerantPercent": 7.515046296296296
+      },
+      "after": {
+        "changedExact": 254412,
+        "changedTolerant": 83184,
+        "changedTolerantPercent": 6.418518518518518
+      }
+    }
+  },
+  "1024x640": {
+    "before": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 20,
+            "y": 209.390625,
+            "width": 321.328125,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 341.328125,
+            "bottom": 425.78125,
+            "left": 20
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 351.328125,
+            "y": 209.390625,
+            "width": 321.328125,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 672.65625,
+            "bottom": 425.78125,
+            "left": 351.328125
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 682.65625,
+            "y": 209.390625,
+            "width": 321.34375,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 1004,
+            "bottom": 425.78125,
+            "left": 682.65625
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 299.34375,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 299.34375,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "mainBounds": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "top": 159,
+        "right": 1004,
+        "bottom": 600,
+        "left": 20
+      },
+      "sha256": "56cf3edfb44f8dbec4c1e8bbba1c47f69660aa4e850c192664c4ffa80dc9f4a3",
+      "pageErrors": []
+    },
+    "after": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 20,
+            "y": 209.390625,
+            "width": 321.328125,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 341.328125,
+            "bottom": 425.78125,
+            "left": 20
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 351.328125,
+            "y": 209.390625,
+            "width": 321.328125,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 672.65625,
+            "bottom": 425.78125,
+            "left": 351.328125
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 682.65625,
+            "y": 209.390625,
+            "width": 321.34375,
+            "height": 216.390625,
+            "top": 209.390625,
+            "right": 1004,
+            "bottom": 425.78125,
+            "left": 682.65625
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 299.328125,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 299.34375,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 299.34375,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "mainBounds": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "top": 159,
+        "right": 1004,
+        "bottom": 600,
+        "left": 20
+      },
+      "sha256": "56cf3edfb44f8dbec4c1e8bbba1c47f69660aa4e850c192664c4ffa80dc9f4a3",
+      "pageErrors": []
+    },
+    "changed": {
+      "changedExact": 0,
+      "changedTolerant": 0,
+      "changedTolerantPercent": 0.0
+    }
+  },
+  "844x390": {
+    "before": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 125.59375,
+            "width": 266.65625,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 278.65625,
+            "bottom": 289.984375,
+            "left": 12
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 288.65625,
+            "y": 125.59375,
+            "width": 266.671875,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 555.328125,
+            "bottom": 289.984375,
+            "left": 288.65625
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 565.328125,
+            "y": 125.59375,
+            "width": 266.65625,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 831.984375,
+            "bottom": 289.984375,
+            "left": 565.328125
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 244.671875,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 244.671875,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": false
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 844,
+      "viewportWidth": 844,
+      "mainBounds": {
+        "x": 12,
+        "y": 88,
+        "width": 820,
+        "height": 302,
+        "top": 88,
+        "right": 832,
+        "bottom": 390,
+        "left": 12
+      },
+      "sha256": "24bf1e79d5a76654d4dc093cf4d8b5995d898bc2bc758b960618df918f03ecb5",
+      "pageErrors": []
+    },
+    "after": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 125.59375,
+            "width": 266.65625,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 278.65625,
+            "bottom": 289.984375,
+            "left": 12
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 288.65625,
+            "y": 125.59375,
+            "width": 266.671875,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 555.328125,
+            "bottom": 289.984375,
+            "left": 288.65625
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 565.328125,
+            "y": 125.59375,
+            "width": 266.65625,
+            "height": 164.390625,
+            "top": 125.59375,
+            "right": 831.984375,
+            "bottom": 289.984375,
+            "left": 565.328125
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 244.671875,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 244.671875,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 244.65625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": false
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 844,
+      "viewportWidth": 844,
+      "mainBounds": {
+        "x": 12,
+        "y": 88,
+        "width": 820,
+        "height": 302,
+        "top": 88,
+        "right": 832,
+        "bottom": 390,
+        "left": 12
+      },
+      "sha256": "24bf1e79d5a76654d4dc093cf4d8b5995d898bc2bc758b960618df918f03ecb5",
+      "pageErrors": []
+    },
+    "changed": {
+      "changedExact": 0,
+      "changedTolerant": 0,
+      "changedTolerantPercent": 0.0
+    }
+  },
+  "390x844": {
+    "before": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 237.390625,
+            "width": 366,
+            "height": 124.390625,
+            "top": 237.390625,
+            "right": 378,
+            "bottom": 361.78125,
+            "left": 12
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 371.78125,
+            "width": 366,
+            "height": 124.390625,
+            "top": 371.78125,
+            "right": 378,
+            "bottom": 496.171875,
+            "left": 12
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 506.171875,
+            "width": 366,
+            "height": 124.390625,
+            "top": 506.171875,
+            "right": 378,
+            "bottom": 630.5625,
+            "left": 12
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 102,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 106,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 94,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 112,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 89,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 98,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 121,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "mainBounds": {
+        "x": 12,
+        "y": 187,
+        "width": 366,
+        "height": 621,
+        "top": 187,
+        "right": 378,
+        "bottom": 808,
+        "left": 12
+      },
+      "sha256": "9d390721f6c5dc5de0d4a9bbf4c6c5c93a8b377ff308674019848ac1ec2a7ed1",
+      "pageErrors": []
+    },
+    "after": {
+      "cards": [
+        {
+          "title": "Project backup",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 237.390625,
+            "width": 366,
+            "height": 124.390625,
+            "top": 237.390625,
+            "right": 378,
+            "bottom": 361.78125,
+            "left": 12
+          }
+        },
+        {
+          "title": "Original presets",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 371.78125,
+            "width": 366,
+            "height": 124.390625,
+            "top": 371.78125,
+            "right": 378,
+            "bottom": 496.171875,
+            "left": 12
+          }
+        },
+        {
+          "title": "MIDI for a DAW",
+          "font": "12px",
+          "rect": {
+            "x": 12,
+            "y": 506.171875,
+            "width": 366,
+            "height": 124.390625,
+            "top": 506.171875,
+            "right": 378,
+            "bottom": 630.5625,
+            "left": 12
+          }
+        }
+      ],
+      "firstScreen": [
+        {
+          "name": "Export backup",
+          "disabled": false,
+          "width": 102,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect restore",
+          "disabled": false,
+          "width": 106,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open original",
+          "disabled": false,
+          "width": 94,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Inspect contents",
+          "disabled": true,
+          "width": 112,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save a copy",
+          "disabled": true,
+          "width": 89,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Choose range",
+          "disabled": false,
+          "width": 98,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Export availability",
+          "disabled": false,
+          "width": 121,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Samples",
+          "disabled": false,
+          "width": 74,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Manual",
+          "disabled": false,
+          "width": 65,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Open DAW guide",
+          "disabled": false,
+          "width": 124.765625,
+          "height": 44,
+          "hit": true,
+          "fullyVisible": true
+        },
+        {
+          "name": "Save draft",
+          "disabled": false,
+          "width": 80,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Open draft",
+          "disabled": false,
+          "width": 81,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        },
+        {
+          "name": "Review changes",
+          "disabled": false,
+          "width": 108,
+          "height": 40,
+          "hit": false,
+          "fullyVisible": false
+        }
+      ],
+      "blocked": [],
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "mainBounds": {
+        "x": 12,
+        "y": 187,
+        "width": 366,
+        "height": 621,
+        "top": 187,
+        "right": 378,
+        "bottom": 808,
+        "left": 12
+      },
+      "sha256": "9d390721f6c5dc5de0d4a9bbf4c6c5c93a8b377ff308674019848ac1ec2a7ed1",
+      "pageErrors": []
+    },
+    "changed": {
+      "changedExact": 0,
+      "changedTolerant": 0,
+      "changedTolerantPercent": 0.0
+    }
+  }
+}

@@ -231,6 +231,7 @@ class GateContract(unittest.TestCase):
         result = self.compare()
         self.assertEqual(result[0][1], 'NOBASE')
         self.assertFalse((gate.SNAP / 'screen.png').exists())
+        self.assertEqual((gate.OUT / 'screen-actual.png').read_bytes(), self.image)
         self.assertEqual(gate.exit_status(result, ['clipped control'], []), 1)
 
     def test_proposal_is_not_a_pass(self):

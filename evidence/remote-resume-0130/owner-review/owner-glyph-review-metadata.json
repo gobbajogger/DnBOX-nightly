@@ -1,0 +1,13 @@
+{
+  "reviewTimeUtc": "2026-11-16T07:12:59.178519Z",
+  "approvalTimeUtc": "2026-11-16T07:20:23.725047Z",
+  "approvedFamilies": [
+    "Juno",
+    "Chicago",
+    "Miami",
+    "FX"
+  ],
+  "unresolved": "Original attachment bytes and file-by-file glyph asset identities.",
+  "attachmentCount": 2,
+  "preciseTargets": "Preserved with the separate original-input recovery record."
+}

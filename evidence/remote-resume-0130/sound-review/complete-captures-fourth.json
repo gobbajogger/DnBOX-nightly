@@ -1,0 +1,3719 @@
+{
+  "scope": "Draft Sound complete current product; no physical or native admission inferred",
+  "states": [
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:0:0",
+          "label": "Tune, 13ms, local draft",
+          "box": {
+            "x": 66.75,
+            "y": 349.390625,
+            "width": 38.484375,
+            "height": 86.234375,
+            "right": 105.234375,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:0:1",
+          "label": "Attack, 10%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 243.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:0:2",
+          "label": "Decay, 1.0s, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 359.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:0:4",
+          "label": "Pitch depth, 0%, local draft",
+          "box": {
+            "x": 390,
+            "y": 355.390625,
+            "width": 85.25,
+            "height": 80.296875,
+            "right": 475.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:0:5",
+          "label": "Pitch, +0.1st, local draft",
+          "box": {
+            "x": 43.1875,
+            "y": 477.390625,
+            "width": 432.296875,
+            "height": 40,
+            "right": 475.484375,
+            "bottom": 517.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-00.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 549.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 589.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 7,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice00",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice00.png",
+      "sha256": "1f1916efa791acf2b2c1e683ce9e9c97d9a14a794ffcb76b33244d4ceeffd248",
+      "bottomCapture": "1024x640-drum909-voice00-scrolled-bottom.png",
+      "bottomSha256": "4ee179ae8bf38832906dace10d3298f2af2abc118a5f47a1bf762add1c8faccc"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-01.svg|1:0:1:0",
+          "label": "Tune, 205Hz, local draft",
+          "box": {
+            "x": 52.46875,
+            "y": 349.390625,
+            "width": 67.859375,
+            "height": 86.296875,
+            "right": 120.328125,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-01.svg|1:0:1:1",
+          "label": "Tone, 841ms, local draft",
+          "box": {
+            "x": 158,
+            "y": 355.390625,
+            "width": 85.25,
+            "height": 80,
+            "right": 243.25,
+            "bottom": 435.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-01.svg|1:0:1:3",
+          "label": "Decay, 340ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 359.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-01.svg|1:0:1:2",
+          "label": "Snappy, 50%, local draft",
+          "box": {
+            "x": 390,
+            "y": 352.375,
+            "width": 88,
+            "height": 83.296875,
+            "right": 478,
+            "bottom": 435.671875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-01.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 6,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice01",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice01.png",
+      "sha256": "ab5de58e32be341d171c47e45fa02ca317953cad1cafe12578d74c660178d310",
+      "bottomCapture": "1024x640-drum909-voice01-scrolled-bottom.png",
+      "bottomSha256": "566f29446c850d42c8ddb6b9d042afca4afbd12beff1097c082f94cab6d4c64b"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-02.svg|1:0:2:0",
+          "label": "Tune, 68Hz, local draft",
+          "box": {
+            "x": 59.765625,
+            "y": 349.390625,
+            "width": 53.5625,
+            "height": 86.234375,
+            "right": 113.328125,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-02.svg|1:0:2:3",
+          "label": "Attack, 18%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-02.svg|1:0:2:1",
+          "label": "Decay, 996ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-02.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice02",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice02.png",
+      "sha256": "1e11653a4d7f938765e98b6c1f76efcd7b55ab1820a6b117371406f9155c0afd",
+      "bottomCapture": "1024x640-drum909-voice02-scrolled-bottom.png",
+      "bottomSha256": "51f2b0205a5902ceb6a25a0260c33a0ec51b41244b7dbecf4af7f6e0a93b71fb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-03.svg|1:0:3:0",
+          "label": "Tune, 102Hz, local draft",
+          "box": {
+            "x": 53.1875,
+            "y": 349.390625,
+            "width": 67.140625,
+            "height": 86.296875,
+            "right": 120.328125,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-03.svg|1:0:3:3",
+          "label": "Attack, 18%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-03.svg|1:0:3:1",
+          "label": "Decay, 763ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-03.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice03",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice03.png",
+      "sha256": "4dcc2f7554263c4fd852853702dd907bc4c5ebb6910efd9d86e33396a87c3682",
+      "bottomCapture": "1024x640-drum909-voice03-scrolled-bottom.png",
+      "bottomSha256": "1a47abbd0ea393b1008534895afd20ddae44da05e58d06503e1c51cf5bea484f"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-04.svg|1:0:4:0",
+          "label": "Tune, 132Hz, local draft",
+          "box": {
+            "x": 53.1875,
+            "y": 349.390625,
+            "width": 67.140625,
+            "height": 86.234375,
+            "right": 120.328125,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-04.svg|1:0:4:3",
+          "label": "Attack, 18%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-04.svg|1:0:4:1",
+          "label": "Decay, 720ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 359.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-04.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice04",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice04.png",
+      "sha256": "97b3cd529714021d22f69d3e04ce63956f4515df35d362b127e998008b844fd0",
+      "bottomCapture": "1024x640-drum909-voice04-scrolled-bottom.png",
+      "bottomSha256": "ed7d7f2552be1729e1f1a85ecb86fdf2b4408ed30d3029628ea733c4bb364a5c"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-05.svg|1:0:5:1",
+          "label": "Tune, 210Hz, local draft",
+          "box": {
+            "x": 70.5,
+            "y": 349.390625,
+            "width": 404.828125,
+            "height": 40,
+            "right": 475.328125,
+            "bottom": 389.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-05.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 421.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 461.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 3,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice05",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice05.png",
+      "sha256": "2f6aefd0d195d9fce79a4c939b05a087aaaa2266c9bb17f776b8c8ea0976cbb3",
+      "bottomCapture": "1024x640-drum909-voice05-scrolled-bottom.png",
+      "bottomSha256": "83225dbf3d10d456a14d47c03287ff3f70e2bc8f6c6ef93a5626f1486a0e291e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-06.svg|1:0:6:1",
+          "label": "Tune, 951Hz, local draft",
+          "box": {
+            "x": 52.3125,
+            "y": 349.390625,
+            "width": 68.015625,
+            "height": 86.234375,
+            "right": 120.328125,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-06.svg|1:0:6:2",
+          "label": "Tail, 344ms, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-06.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice06",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice06.png",
+      "sha256": "ad76e64851dbc16076d9c96326529e06abcf30f55f064149a509642a2caa5d12",
+      "bottomCapture": "1024x640-drum909-voice06-scrolled-bottom.png",
+      "bottomSha256": "27154a457ac51a819d75ad17aed1bd0b08892620dd27d519c9db39035096006f"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-07.svg|1:0:7:2",
+          "label": "Tune, +0.2st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-07.svg|1:0:7:0",
+          "label": "Decay, 109ms, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 243.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-07.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice07",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice07.png",
+      "sha256": "ad89911600396a408eac8fdb4278c06be4479b7587fc3ea7a3138a313c2a2811",
+      "bottomCapture": "1024x640-drum909-voice07-scrolled-bottom.png",
+      "bottomSha256": "c85e87c5bdd49a1a97b143b802593fdd4397d1f941bbfe47a0543c2041425bf7"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-08.svg|1:0:8:2",
+          "label": "Tune, +0.2st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-08.svg|1:0:8:0",
+          "label": "Decay, 456ms, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-08.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice08",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice08.png",
+      "sha256": "4b6316af2fd1b55147c78b1e79397292ab48db8229940b27d3a76ca26145f05e",
+      "bottomCapture": "1024x640-drum909-voice08-scrolled-bottom.png",
+      "bottomSha256": "742e4bdacb65df08ecb8d0a6d10acaa124d60875d71246abe9e7d1d0de86994d"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-09.svg|1:0:9:0",
+          "label": "Tune, +0.2st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-09.svg|1:0:9:2",
+          "label": "Decay, 1.8s, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-09.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice09",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice09.png",
+      "sha256": "97c5dd4065ee0542c27063726f1f14cbe54086961fc0995af3d8c6c3003e26cb",
+      "bottomCapture": "1024x640-drum909-voice09-scrolled-bottom.png",
+      "bottomSha256": "4d9b083470c58f93adb6fd9f7b52a8baa81bd191dfbd363b18ff1ecb26444b98"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "909 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/909-voice-10.svg|1:0:10:0",
+          "label": "Tune, +0.2st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-10.svg|1:0:10:2",
+          "label": "Decay, 1.8s, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/909-voice-10.svg|1:0:11:1",
+          "label": "Velocity, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum909-voice10",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum909-voice10.png",
+      "sha256": "ca21167b0aa01a28ec4212bbb1f65fc117f9ce1385026f81f160886857cd94b0",
+      "bottomCapture": "1024x640-drum909-voice10-scrolled-bottom.png",
+      "bottomSha256": "3bd12ad0e32bbf7d7b3d9c47e2b8c4550795699fc4b53b0fe7a71f29429cf5b2"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-00.svg|1:1:0:3",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-00.svg|1:1:0:1",
+          "label": "Tone, 33%, local draft",
+          "box": {
+            "x": 158,
+            "y": 355.390625,
+            "width": 85.25,
+            "height": 80.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-00.svg|1:1:0:4",
+          "label": "Attack, 19%, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 359.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-00.svg|1:1:0:2",
+          "label": "Decay, 69%, local draft",
+          "box": {
+            "x": 392.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 475.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-00.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 6,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice00",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice00.png",
+      "sha256": "82b5b27d48237f2cdec2ec5607ba926d90f1ca0079d50023ebd156cdc0f5ff36",
+      "bottomCapture": "1024x640-drum808-voice00-scrolled-bottom.png",
+      "bottomSha256": "caaadb4933a5d6c5f5eef087ebcf919e8e4b8c92b300ee4ca71f721007f7192e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-01.svg|1:1:1:3",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-01.svg|1:1:1:1",
+          "label": "Tone, 50%, local draft",
+          "box": {
+            "x": 158,
+            "y": 355.390625,
+            "width": 85.25,
+            "height": 80.296875,
+            "right": 243.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-01.svg|1:1:1:4",
+          "label": "Decay, 85%, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 359.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-01.svg|1:1:1:2",
+          "label": "Snappy, 70%, local draft",
+          "box": {
+            "x": 390,
+            "y": 352.375,
+            "width": 88,
+            "height": 83.296875,
+            "right": 478,
+            "bottom": 435.671875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-01.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 6,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice01",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice01.png",
+      "sha256": "91b16589f4f5562c0c0c9c09dd1500c097d013e241d6e37a6bd048f8a820ad30",
+      "bottomCapture": "1024x640-drum808-voice01-scrolled-bottom.png",
+      "bottomSha256": "9fec28f5c5a779cbea8f23a1ec04d1b71364e893ef72ef69f54da2247e0e5d83"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-02.svg|1:1:2:1",
+          "label": "Tune, 0.0st, local draft",
+          "box": {
+            "x": 57.5,
+            "y": 349.390625,
+            "width": 57.078125,
+            "height": 86.296875,
+            "right": 114.578125,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-02.svg|1:1:2:3",
+          "label": "Sound, TOM, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-02.svg|1:1:2:2",
+          "label": "Decay, 392ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-02.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice02",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice02.png",
+      "sha256": "675478c6f7753ab137d5c64b20d02caf3a763633aa32e1117d4229e02eec17b0",
+      "bottomCapture": "1024x640-drum808-voice02-scrolled-bottom.png",
+      "bottomSha256": "187ccdc5bcc84fd71ace10603d6a5bd1d54e38f1f74b887ff30fb5621e000ba1"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-03.svg|1:1:3:1",
+          "label": "Tune, 0.0st, local draft",
+          "box": {
+            "x": 57.5,
+            "y": 349.390625,
+            "width": 57.078125,
+            "height": 86.296875,
+            "right": 114.578125,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-03.svg|1:1:3:3",
+          "label": "Sound, TOM, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-03.svg|1:1:3:2",
+          "label": "Decay, 282ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-03.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice03",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice03.png",
+      "sha256": "bec77c03320c868a4e56aa79a7562c353bb1fa2eb118084e5c25df721241f1bb",
+      "bottomCapture": "1024x640-drum808-voice03-scrolled-bottom.png",
+      "bottomSha256": "281386b3e59eaa9b3de7e6ba62202fe19c3d4e5fd4b6849842a41e8325d247a3"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-04.svg|1:1:4:1",
+          "label": "Tune, 0.0st, local draft",
+          "box": {
+            "x": 57.5,
+            "y": 349.390625,
+            "width": 57.078125,
+            "height": 86.296875,
+            "right": 114.578125,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-04.svg|1:1:4:3",
+          "label": "Sound, TOM, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.265625,
+            "right": 243.25,
+            "bottom": 435.65625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-04.svg|1:1:4:2",
+          "label": "Decay, 259ms, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-04.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice04",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice04.png",
+      "sha256": "6d5ea2863053d7459f7ef0335e7e064d099e3ebe36f469e50f23dae11862e98e",
+      "bottomCapture": "1024x640-drum808-voice04-scrolled-bottom.png",
+      "bottomSha256": "9ecf8f764fb314833403273e41636ce6d1935c009acd89ffc4fdf342103c9d99"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-05.svg|1:1:5:1",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-05.svg|1:1:5:3",
+          "label": "Sound, RIM, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86,
+            "right": 243.25,
+            "bottom": 435.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-05.svg|1:1:5:2",
+          "label": "Decay, 31%, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 359.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-05.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 5,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice05",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice05.png",
+      "sha256": "e04901af5e13df874b4ec0ad6977e14dc6f2aae3632db1862279d2b6e7500ec7",
+      "bottomCapture": "1024x640-drum808-voice05-scrolled-bottom.png",
+      "bottomSha256": "ec0653e71b5970edd2b8c861297bb0dafa753f6e022f8ec693615ce68004a17e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-06.svg|1:1:6:1",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-06.svg|1:1:6:3",
+          "label": "Attack, 6ms, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-06.svg|1:1:6:4",
+          "label": "Sound, CLAP, local draft",
+          "box": {
+            "x": 276.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 359.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-06.svg|1:1:6:2",
+          "label": "Decay, 50%, local draft",
+          "box": {
+            "x": 392.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 475.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-06.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 6,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice06",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice06.png",
+      "sha256": "6da8024b41fb7f28d6afa49bbf2cf63b2be0e159d6c1a416a823c88e80b3244e",
+      "bottomCapture": "1024x640-drum808-voice06-scrolled-bottom.png",
+      "bottomSha256": "f9f31981daaa657e98c80568add70162f8e1c3c7c920f64d57831b28ad0ae2cb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-07.svg|1:1:7:1",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-07.svg|1:1:7:2",
+          "label": "Decay, 49%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.234375,
+            "right": 243.25,
+            "bottom": 435.625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-07.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice07",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice07.png",
+      "sha256": "adcb4feb4cfe335263d4a251906669cba319e28344a0a91b67399b68987d7a54",
+      "bottomCapture": "1024x640-drum808-voice07-scrolled-bottom.png",
+      "bottomSha256": "2a1e88fd51e3114a8496e006bbcc2bc1b339cf17493af1d5d63bcaaf0aa1f3f2"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-08.svg|1:1:8:2",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-08.svg|1:1:8:1",
+          "label": "Decay, 55%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86.296875,
+            "right": 243.25,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-08.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice08",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice08.png",
+      "sha256": "b11b9f042492aa7618e854147a7ed66539dcf87c27a64c3e20478de5a12881a8",
+      "bottomCapture": "1024x640-drum808-voice08-scrolled-bottom.png",
+      "bottomSha256": "434b8b69d97ca0729fe202cfffbecdb7b0ed27a2b468b3636cef517ffed5630e"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-09.svg|1:1:9:2",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-09.svg|1:1:9:1",
+          "label": "Decay, 58%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86,
+            "right": 243.25,
+            "bottom": 435.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-09.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice09",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice09.png",
+      "sha256": "b2985555dd85ecd69994d50ec4908612d86f056f6cdefcfd377b419379fb80d9",
+      "bottomCapture": "1024x640-drum808-voice09-scrolled-bottom.png",
+      "bottomSha256": "e47d4d1cbf61eef012f0639c80a9310b3640bcca53f7b05a17c676e4a372c5ce"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "808 / P01",
+      "controls": [
+        {
+          "id": "current-state-and-reference/808-voice-10.svg|1:1:10:1",
+          "label": "Tune, +0.1st, local draft",
+          "box": {
+            "x": 49.953125,
+            "y": 349.390625,
+            "width": 71.609375,
+            "height": 86.296875,
+            "right": 121.5625,
+            "bottom": 435.6875
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-10.svg|1:1:10:2",
+          "label": "Decay, 37%, local draft",
+          "box": {
+            "x": 160.75,
+            "y": 349.390625,
+            "width": 82.5,
+            "height": 86,
+            "right": 243.25,
+            "bottom": 435.390625
+          },
+          "visible": true
+        },
+        {
+          "id": "current-state-and-reference/808-voice-10.svg|1:1:11:1",
+          "label": "ACCENT, 100%, local draft",
+          "box": {
+            "x": 42.4375,
+            "y": 477.390625,
+            "width": 433.28125,
+            "height": 40,
+            "right": 475.71875,
+            "bottom": 517.390625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 602
+        }
+      ],
+      "glyphs": 4,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "drum808-voice10",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-drum808-voice10.png",
+      "sha256": "b9901afdbfcce51147fd1def6f90c5f4504f651ac2123da77077477f073ab1b4",
+      "bottomCapture": "1024x640-drum808-voice10-scrolled-bottom.png",
+      "bottomSha256": "2bcdac90136f3844eb032da99640e89819426fb578fbf790661ec71d866c3821"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "CHICAGO / P01",
+      "controls": [
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:1:0",
+          "label": "BASS A / CHICAGO / OSCILLATOR \u00b7 GLIDE, 14 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 351.78125,
+            "width": 240,
+            "height": 153.1875,
+            "right": 508,
+            "bottom": 504.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:2:0",
+          "label": "BASS A / CHICAGO / FILTER 1 \u00b7 CUTOFF, 25 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:3:0",
+          "label": "BASS A / CHICAGO / FILTER 1 \u00b7 PEAK, 75 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:4:0",
+          "label": "BASS A / CHICAGO / FILTER 1 \u00b7 ENV, +56 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:5:0",
+          "label": "BASS A / CHICAGO / FILTER 2 \u00b7 BITE, 83 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 678.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 776.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:6:0",
+          "label": "BASS A / CHICAGO / FILTER 2 \u00b7 GNAW, 0 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 678.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 776.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:7:0",
+          "label": "ATTACK27%",
+          "box": {
+            "x": 20,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 260,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:8:0",
+          "label": "DECAY40%",
+          "box": {
+            "x": 268,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 508,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:9:0",
+          "label": "SUSTAIN57%",
+          "box": {
+            "x": 516,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 756,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:10:0",
+          "label": "RELEASE17%",
+          "box": {
+            "x": 764,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 1004,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:11:0",
+          "label": "BASS A / CHICAGO / AMPLIFIER \u00b7 ENV/GATE, GATE, local draft",
+          "box": {
+            "x": 20,
+            "y": 993.296875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1090.484375
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:12:0",
+          "label": "BASS A / CHICAGO / AMPLIFIER \u00b7 LEVEL, 80 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 993.296875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1090.484375
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:13:0",
+          "label": "BASS A / CHICAGO / ARPEGGIATOR \u00b7 ON, ON, local draft",
+          "box": {
+            "x": 20,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:15:0",
+          "label": "BASS A / CHICAGO / ARPEGGIATOR \u00b7 RANGE, 2 OCT, local draft",
+          "box": {
+            "x": 268,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:14:0",
+          "label": "BASS A / CHICAGO / ARPEGGIATOR \u00b7 MODE, UP, local draft",
+          "box": {
+            "x": 516,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:16:0",
+          "label": "BASS A / CHICAGO / ARPEGGIATOR \u00b7 SPEED, 1/16, local draft",
+          "box": {
+            "x": 764,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:17:0",
+          "label": "BASS A / CHICAGO / EFFECT \u00b7 TYPE, OFF, local draft",
+          "box": {
+            "x": 20,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:18:0",
+          "label": "BASS A / CHICAGO / EFFECT \u00b7 EDIT 1, 43 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/0|1:2:0:19:0",
+          "label": "BASS A / CHICAGO / EFFECT \u00b7 EDIT 2, 0 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 1307
+        }
+      ],
+      "glyphs": 33,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "chicago-chicago",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-chicago-chicago.png",
+      "sha256": "12699b4c0a1a799951ec5a6a6eceedbb78dd8c97cee06597aabce53a75349fc9",
+      "bottomCapture": "1024x640-chicago-chicago-scrolled-bottom.png",
+      "bottomSha256": "269f801fed2e1eab4f9e27ebf01f5b538307c01b048b526387905c6386c49d7b"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "MIAMI / P01",
+      "controls": [
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:0:1",
+          "label": "BASS A / MIAMI / CARRIER \u00b7 WAVE, SQR, local draft",
+          "box": {
+            "x": 20,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:1:1",
+          "label": "BASS A / MIAMI / CARRIER \u00b7 LEVEL, 91 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:2:1",
+          "label": "BASS A / MIAMI / CARRIER \u00b7 SUB, 100 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:3:1",
+          "label": "BASS A / MIAMI / CARRIER \u00b7 PITCH, 0 st, local draft",
+          "box": {
+            "x": 764,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:6:1",
+          "label": "BASS A / MIAMI / XMOD \u00b7 WAVE, SAW, local draft",
+          "box": {
+            "x": 20,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:5:1",
+          "label": "BASS A / MIAMI / XMOD \u00b7 LEVEL, 77 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:7:1",
+          "label": "BASS A / MIAMI / XMOD \u00b7 TUNE, +0.91, local draft",
+          "box": {
+            "x": 516,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:8:1",
+          "label": "BASS A / MIAMI / XMOD \u00b7 DEPTH, 55 %, local draft",
+          "box": {
+            "x": 764,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:9:1",
+          "label": "BASS A / MIAMI / FILTER \u00b7 CUTOFF, 60 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:10:1",
+          "label": "BASS A / MIAMI / FILTER \u00b7 CRUSH, 17 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:12:1",
+          "label": "BASS A / MIAMI / FILTER \u00b7 WOBBLE, 65 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:11:1",
+          "label": "BASS A / MIAMI / WOBBLE \u00b7 SHAPE, SQR, local draft",
+          "box": {
+            "x": 20,
+            "y": 758.515625,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 855.703125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:13:1",
+          "label": "BASS A / MIAMI / WOBBLE \u00b7 RATE, 1/16, local draft",
+          "box": {
+            "x": 268,
+            "y": 758.515625,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 855.703125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:4:1",
+          "label": "BASS A / MIAMI / OUTPUT \u00b7 GLIDE, 9 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 991.28125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:15:1",
+          "label": "BASS A / MIAMI / OUTPUT \u00b7 STEREO, 25 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 991.28125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/0|1:2:0:14:1",
+          "label": "BASS A / MIAMI / OUTPUT \u00b7 OUTPUT, 80 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 991.28125
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 936
+        }
+      ],
+      "glyphs": 32,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "chicago-miami",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-chicago-miami.png",
+      "sha256": "b8e62efc04ae57c7c862b42baf7d1c584a1aed87e68bac38872c06be79c40e48",
+      "bottomCapture": "1024x640-chicago-miami-scrolled-bottom.png",
+      "bottomSha256": "02862c946530561d74a66a3ef58ee1d5e56add8996b1548ca9aef56d744d72b0"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "Synth One / P01",
+      "controls": [
+        {
+          "id": "wave",
+          "label": "Oscillator 1Saw",
+          "box": {
+            "x": 20,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 177.328125,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "oscillator1Level",
+          "label": "Oscillator level100%",
+          "box": {
+            "x": 185.328125,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 342.65625,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "balance",
+          "label": "Oscillator mix50%",
+          "box": {
+            "x": 350.65625,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 507.984375,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "cutoffHz",
+          "label": "Cutoff2000 Hz",
+          "box": {
+            "x": 515.984375,
+            "y": 351.78125,
+            "width": 157.34375,
+            "height": 89.1875,
+            "right": 673.328125,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "resonance",
+          "label": "Resonance90%",
+          "box": {
+            "x": 681.328125,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 838.65625,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "filterDepth",
+          "label": "Envelope depth0%",
+          "box": {
+            "x": 846.65625,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 1003.984375,
+            "bottom": 440.96875
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [],
+      "glyphs": 8,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "chicago-synth-one",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-chicago-synth-one.png",
+      "sha256": "a289c0a707c0fb97a40ff251a456bd607b7e46e43e55979f29fceabf6829f48d"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "SuperJ6 / P01",
+      "controls": [
+        {
+          "id": "82",
+          "label": "Layer 1 Wave",
+          "box": {
+            "x": 29,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 126.546875,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "210",
+          "label": "Layer 1 PWM",
+          "box": {
+            "x": 132.546875,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 230.109375,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "78",
+          "label": "Layer 1 Width",
+          "box": {
+            "x": 236.109375,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 333.65625,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "83",
+          "label": "Layer 2 Wave",
+          "box": {
+            "x": 359.65625,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 457.203125,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "211",
+          "label": "Layer 2 PWM",
+          "box": {
+            "x": 463.203125,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 560.765625,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "79",
+          "label": "Layer 2 Width",
+          "box": {
+            "x": 566.765625,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 664.328125,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "202",
+          "label": "Sub Level",
+          "box": {
+            "x": 690.328125,
+            "y": 434.171875,
+            "width": 304.65625,
+            "height": 44,
+            "right": 994.984375,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "195",
+          "label": "LFO 1 Mode",
+          "box": {
+            "x": 29,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 178.328125,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "88",
+          "label": "LFO 1 Rate",
+          "box": {
+            "x": 184.328125,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 333.65625,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "196",
+          "label": "LFO 2 Mode",
+          "box": {
+            "x": 359.65625,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 508.984375,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "96",
+          "label": "LFO 2 Rate",
+          "box": {
+            "x": 514.984375,
+            "y": 581.359375,
+            "width": 149.34375,
+            "height": 44,
+            "right": 664.328125,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "197",
+          "label": "LFO 3 Mode",
+          "box": {
+            "x": 690.328125,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 839.65625,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "100",
+          "label": "LFO 3 Rate",
+          "box": {
+            "x": 845.65625,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 994.984375,
+            "bottom": 625.359375
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 543
+        }
+      ],
+      "glyphs": 13,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "chicago-superj6",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-chicago-superj6.png",
+      "sha256": "7bc5c24ae247981cf637170bda56221e007257b6a6e71b07792d749258a7665e",
+      "bottomCapture": "1024x640-chicago-superj6-scrolled-bottom.png",
+      "bottomSha256": "f6689bbee8def43540e3fd36ec77c807ca6936fd52af3a5bb2d372ad2728942b"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "CHICAGO / P01",
+      "controls": [
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:1:0",
+          "label": "BASS B / CHICAGO / OSCILLATOR \u00b7 GLIDE, 14 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 351.78125,
+            "width": 240,
+            "height": 153.1875,
+            "right": 508,
+            "bottom": 504.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:2:0",
+          "label": "BASS B / CHICAGO / FILTER 1 \u00b7 CUTOFF, 25 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:3:0",
+          "label": "BASS B / CHICAGO / FILTER 1 \u00b7 PEAK, 75 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:4:0",
+          "label": "BASS B / CHICAGO / FILTER 1 \u00b7 ENV, +56 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 543.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 640.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:5:0",
+          "label": "BASS B / CHICAGO / FILTER 2 \u00b7 BITE, 83 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 678.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 776.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:6:0",
+          "label": "BASS B / CHICAGO / FILTER 2 \u00b7 GNAW, 0 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 678.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 776.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:7:0",
+          "label": "ATTACK27%",
+          "box": {
+            "x": 20,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 260,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:8:0",
+          "label": "DECAY40%",
+          "box": {
+            "x": 268,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 508,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:9:0",
+          "label": "SUSTAIN57%",
+          "box": {
+            "x": 516,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 756,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:10:0",
+          "label": "RELEASE17%",
+          "box": {
+            "x": 764,
+            "y": 907.3125,
+            "width": 240,
+            "height": 47.59375,
+            "right": 1004,
+            "bottom": 954.90625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:11:0",
+          "label": "BASS B / CHICAGO / AMPLIFIER \u00b7 ENV/GATE, GATE, local draft",
+          "box": {
+            "x": 20,
+            "y": 993.296875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1090.484375
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:12:0",
+          "label": "BASS B / CHICAGO / AMPLIFIER \u00b7 LEVEL, 80 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 993.296875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1090.484375
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:13:0",
+          "label": "BASS B / CHICAGO / ARPEGGIATOR \u00b7 ON, ON, local draft",
+          "box": {
+            "x": 20,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:15:0",
+          "label": "BASS B / CHICAGO / ARPEGGIATOR \u00b7 RANGE, 2 OCT, local draft",
+          "box": {
+            "x": 268,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:14:0",
+          "label": "BASS B / CHICAGO / ARPEGGIATOR \u00b7 MODE, UP, local draft",
+          "box": {
+            "x": 516,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:16:0",
+          "label": "BASS B / CHICAGO / ARPEGGIATOR \u00b7 SPEED, 1/16, local draft",
+          "box": {
+            "x": 764,
+            "y": 1128.875,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 1226.0625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:17:0",
+          "label": "BASS B / CHICAGO / EFFECT \u00b7 TYPE, OFF, local draft",
+          "box": {
+            "x": 20,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:18:0",
+          "label": "BASS B / CHICAGO / EFFECT \u00b7 EDIT 1, 43 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/CHICAGO/1|1:2:1:19:0",
+          "label": "BASS B / CHICAGO / EFFECT \u00b7 EDIT 2, 0 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 1264.453125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 1361.640625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 1307
+        }
+      ],
+      "glyphs": 33,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "miami-chicago",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-miami-chicago.png",
+      "sha256": "64a1663123d6c29099456f3c965dd0b2afdb37510bf490ea2e14a84a34622e93",
+      "bottomCapture": "1024x640-miami-chicago-scrolled-bottom.png",
+      "bottomSha256": "08907d7ba38dc1ad5294d7e804f8bc56f9eee6df03471ebb50ff809ecbe1e875"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "MIAMI / P01",
+      "controls": [
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:0:1",
+          "label": "BASS B / MIAMI / CARRIER \u00b7 WAVE, SQR, local draft",
+          "box": {
+            "x": 20,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:1:1",
+          "label": "BASS B / MIAMI / CARRIER \u00b7 LEVEL, 91 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:2:1",
+          "label": "BASS B / MIAMI / CARRIER \u00b7 SUB, 100 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:3:1",
+          "label": "BASS B / MIAMI / CARRIER \u00b7 PITCH, 0 st, local draft",
+          "box": {
+            "x": 764,
+            "y": 351.78125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 448.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:6:1",
+          "label": "BASS B / MIAMI / XMOD \u00b7 WAVE, SAW, local draft",
+          "box": {
+            "x": 20,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:5:1",
+          "label": "BASS B / MIAMI / XMOD \u00b7 LEVEL, 77 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:7:1",
+          "label": "BASS B / MIAMI / XMOD \u00b7 TUNE, +0.91, local draft",
+          "box": {
+            "x": 516,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:8:1",
+          "label": "BASS B / MIAMI / XMOD \u00b7 DEPTH, 55 %, local draft",
+          "box": {
+            "x": 764,
+            "y": 487.359375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 584.546875
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:9:1",
+          "label": "BASS B / MIAMI / FILTER \u00b7 CUTOFF, 60 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:10:1",
+          "label": "BASS B / MIAMI / FILTER \u00b7 CRUSH, 17 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:12:1",
+          "label": "BASS B / MIAMI / FILTER \u00b7 WOBBLE, 65 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 622.9375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 720.125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:11:1",
+          "label": "BASS B / MIAMI / WOBBLE \u00b7 SHAPE, SQR, local draft",
+          "box": {
+            "x": 20,
+            "y": 758.515625,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 855.703125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:13:1",
+          "label": "BASS B / MIAMI / WOBBLE \u00b7 RATE, 1/16, local draft",
+          "box": {
+            "x": 268,
+            "y": 758.515625,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 855.703125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:4:1",
+          "label": "BASS B / MIAMI / OUTPUT \u00b7 GLIDE, 9 %, local draft",
+          "box": {
+            "x": 20,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 991.28125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:15:1",
+          "label": "BASS B / MIAMI / OUTPUT \u00b7 STEREO, 25 %, local draft",
+          "box": {
+            "x": 268,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 991.28125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/MIAMI/1|1:2:1:14:1",
+          "label": "BASS B / MIAMI / OUTPUT \u00b7 OUTPUT, 80 %, local draft",
+          "box": {
+            "x": 516,
+            "y": 894.09375,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 991.28125
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 936
+        }
+      ],
+      "glyphs": 32,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "miami-miami",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-miami-miami.png",
+      "sha256": "3e0b5c9ec51440df4193a39ec3e87aa06415a6bc3ded42e14667660644d3732d",
+      "bottomCapture": "1024x640-miami-miami-scrolled-bottom.png",
+      "bottomSha256": "d9872fbac0bb179100978fbc22bc3b6c867cba9414f8fe128b693bd364e20b16"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "Synth One / P01",
+      "controls": [
+        {
+          "id": "wave",
+          "label": "Oscillator 1Saw",
+          "box": {
+            "x": 20,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 177.328125,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "oscillator1Level",
+          "label": "Oscillator level100%",
+          "box": {
+            "x": 185.328125,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 342.65625,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "balance",
+          "label": "Oscillator mix50%",
+          "box": {
+            "x": 350.65625,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 507.984375,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "cutoffHz",
+          "label": "Cutoff2000 Hz",
+          "box": {
+            "x": 515.984375,
+            "y": 351.78125,
+            "width": 157.34375,
+            "height": 89.1875,
+            "right": 673.328125,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "resonance",
+          "label": "Resonance90%",
+          "box": {
+            "x": 681.328125,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 838.65625,
+            "bottom": 440.96875
+          },
+          "visible": true
+        },
+        {
+          "id": "filterDepth",
+          "label": "Envelope depth0%",
+          "box": {
+            "x": 846.65625,
+            "y": 351.78125,
+            "width": 157.328125,
+            "height": 89.1875,
+            "right": 1003.984375,
+            "bottom": 440.96875
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [],
+      "glyphs": 8,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "miami-synth-one",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-miami-synth-one.png",
+      "sha256": "dc33fa51f738084c70ba5e57ea01b477bad828ecd4b7c485c5b23b3c9d41e0d5"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "SuperJ6 / P01",
+      "controls": [
+        {
+          "id": "82",
+          "label": "Layer 1 Wave",
+          "box": {
+            "x": 29,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 126.546875,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "210",
+          "label": "Layer 1 PWM",
+          "box": {
+            "x": 132.546875,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 230.109375,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "78",
+          "label": "Layer 1 Width",
+          "box": {
+            "x": 236.109375,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 333.65625,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "83",
+          "label": "Layer 2 Wave",
+          "box": {
+            "x": 359.65625,
+            "y": 434.171875,
+            "width": 97.546875,
+            "height": 44,
+            "right": 457.203125,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "211",
+          "label": "Layer 2 PWM",
+          "box": {
+            "x": 463.203125,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 560.765625,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "79",
+          "label": "Layer 2 Width",
+          "box": {
+            "x": 566.765625,
+            "y": 434.171875,
+            "width": 97.5625,
+            "height": 44,
+            "right": 664.328125,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "202",
+          "label": "Sub Level",
+          "box": {
+            "x": 690.328125,
+            "y": 434.171875,
+            "width": 304.65625,
+            "height": 44,
+            "right": 994.984375,
+            "bottom": 478.171875
+          },
+          "visible": true
+        },
+        {
+          "id": "195",
+          "label": "LFO 1 Mode",
+          "box": {
+            "x": 29,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 178.328125,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "88",
+          "label": "LFO 1 Rate",
+          "box": {
+            "x": 184.328125,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 333.65625,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "196",
+          "label": "LFO 2 Mode",
+          "box": {
+            "x": 359.65625,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 508.984375,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "96",
+          "label": "LFO 2 Rate",
+          "box": {
+            "x": 514.984375,
+            "y": 581.359375,
+            "width": 149.34375,
+            "height": 44,
+            "right": 664.328125,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "197",
+          "label": "LFO 3 Mode",
+          "box": {
+            "x": 690.328125,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 839.65625,
+            "bottom": 625.359375
+          },
+          "visible": true
+        },
+        {
+          "id": "100",
+          "label": "LFO 3 Rate",
+          "box": {
+            "x": 845.65625,
+            "y": 581.359375,
+            "width": 149.328125,
+            "height": 44,
+            "right": 994.984375,
+            "bottom": 625.359375
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [
+        {
+          "tag": "SECTION",
+          "id": "other-view",
+          "class": "",
+          "height": 441,
+          "content": 543
+        }
+      ],
+      "glyphs": 13,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "miami-superj6",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-miami-superj6.png",
+      "sha256": "6754bf0d9d1a480cdfbdb84c4f2edc01905168348e14dfbf95fc80376259ff48",
+      "bottomCapture": "1024x640-miami-superj6-scrolled-bottom.png",
+      "bottomSha256": "7e1a7d91ec6db64a8069006fd5606099aaba86d561d2202ae0aa81d5799126cb"
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "panel": {
+        "x": 20,
+        "y": 159,
+        "width": 984,
+        "height": 441,
+        "right": 1004,
+        "bottom": 600
+      },
+      "title": "BREAK",
+      "controls": [
+        {
+          "id": "source-sound/BREAK/-1|1:3:0:1:-1",
+          "label": "BREAK \u00b7 Pitch, 0 st, local draft",
+          "box": {
+            "x": 764,
+            "y": 253.390625,
+            "width": 240,
+            "height": 97.1875,
+            "right": 1004,
+            "bottom": 350.578125
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/BREAK/-1|1:3:0:0:-1",
+          "label": "BREAK \u00b7 Level, 0.0 dB, local draft",
+          "box": {
+            "x": 20,
+            "y": 358.578125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 260,
+            "bottom": 455.765625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/BREAK/-1|11:0:0:0:-1",
+          "label": "BREAK \u00b7 A SLICES, 8, local draft",
+          "box": {
+            "x": 268,
+            "y": 358.578125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 508,
+            "bottom": 455.765625
+          },
+          "visible": true
+        },
+        {
+          "id": "source-sound/BREAK/-1|11:1:0:0:-1",
+          "label": "BREAK \u00b7 B SLICES, 8, local draft",
+          "box": {
+            "x": 516,
+            "y": 358.578125,
+            "width": 240,
+            "height": 97.1875,
+            "right": 756,
+            "bottom": 455.765625
+          },
+          "visible": true
+        }
+      ],
+      "scroll": [],
+      "glyphs": 8,
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "state": "breaks",
+      "errors": [],
+      "midiCalls": 0,
+      "capture": "1024x640-breaks.png",
+      "sha256": "680322bbd5c0d88c834d5007de7bad6d618c6002f2976d627760f5e4ed1afbeb"
+    }
+  ]
+}

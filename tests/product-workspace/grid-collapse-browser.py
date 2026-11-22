@@ -5,12 +5,13 @@ Optional: DNBOX_GRID_CAPTURE_DIR=/tmp/grid-captures to keep screenshots.
 """
 from __future__ import annotations
 import os
+import tempfile
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[2]
-OUT=Path(os.getenv('DNBOX_GRID_CAPTURE_DIR', '/tmp/dnbox-grid-captures'))
+OUT=Path(os.getenv('DNBOX_GRID_CAPTURE_DIR', Path(tempfile.gettempdir())/'dnbox-grid-captures'))
 
 def main():
     errors=[]
@@ -20,7 +21,7 @@ def main():
     html=html.replace("""<script type="module">\nimport {verticalGrid} from '../../web/product-site/remote/grid.mjs';""",
       '<script>\n'+module.replace('export function verticalGrid(','function verticalGrid('))
     with sync_playwright() as playwright:
-        browser=playwright.chromium.launch(headless=True,executable_path=os.getenv('DNBOX_CHROMIUM','/usr/bin/chromium'))
+        browser=playwright.chromium.launch(headless=True,chromium_sandbox=True)
         try:
             for width,height in [(844,390),(390,844)]:
                 page=browser.new_page(viewport={'width':width,'height':height},device_scale_factor=1)

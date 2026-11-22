@@ -1,0 +1,189 @@
+{
+  "branch": "lane/remote-resume-0130",
+  "commit": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "tree": "721461c82f1d0580878fc117940563dbe2a36374",
+  "integrationBase": "583f622961fc9975fac746592ce6c483073c4170",
+  "sourceCommandExits": {
+    "gate-focused": 0,
+    "gate-regression": 0,
+    "sandbox-contract": 0,
+    "gate-parser-selftest": 0,
+    "edge": 0,
+    "workspace": 0,
+    "remote": 0,
+    "qualified-catalog": 0,
+    "product": 0,
+    "sample-discovery": 0,
+    "presets": 0,
+    "origin": 0
+  },
+  "landscape844x390": {
+    "browser": "151.0.7922.34",
+    "count": 131,
+    "failures": [],
+    "pageErrors": [],
+    "enabledControlPresentations": 5873,
+    "reachablePresentations": 5873,
+    "manifestSha256": "2430e64e6dd3d07b73fe5968e84a830fe6fc6b206c89151fa1e55ed28c2faf9d",
+    "kernelSha256": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+    "verifiedPngCount": 131
+  },
+  "structuralFixtures": {
+    "browser": {
+      "status": "RUN",
+      "version": "151.0.7922.34",
+      "sandbox": true
+    },
+    "fixturesAccepted": true,
+    "productStatus": "NOT_RUN",
+    "cases": [
+      {
+        "file": "r3-909-distinct-fork.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "duplicate-ref-mutant.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "r3-808-sparse.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "r3-808-full-source.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "r3-cryptic-caption.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "missing-caption-mutant.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "positive-dense.html",
+        "expectationMatched": true,
+        "actualExit": 0
+      },
+      {
+        "file": "hidden-caption-mutant.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      },
+      {
+        "file": "aria-only-caption-mutant.html",
+        "expectationMatched": true,
+        "actualExit": 1
+      }
+    ]
+  },
+  "logSha256": {
+    "build.log": "4d7255f7eeddd2a52367e7094e743d98f8416767d2d3dae3c39c271a13560989",
+    "gate-focused.log": "dcada75a9a6343b3c57c978ebaf7f6b1be3b5217e89f3aa37cb6ed6848fb4637",
+    "gate-regression.log": "73d3ecb6ca061d2eeb512cf59cfb99418c5114a3b43af0fad31ddebc03793337",
+    "gate-parser-selftest.log": "9eb940545423d0c4152cba24634bd3817e213bb59403976ebcee0fde24050d57",
+    "sandbox-contract.log": "bf3c4879fde069ada2326bb940e3cc03cb10dd94a6a7023c6cef45f42255d191",
+    "edge.log": "4bf4b819be1782c6de69bc9fa26128206e088650af0a6855b8e54df5eb8b33f0",
+    "workspace.log": "8ba76f9b0eac444dc22348a37f729c04c0c4eba6d613e18e5461d6bf04017642",
+    "remote.log": "91a903a68a838186d496dcbfbe73c00752819c8350045e3bad56ea9224afdb15",
+    "qualified-catalog.log": "5c704c1a64e96ec35d33298ce3d4f473476bf61358a667bf8f19a9ef707eaa52",
+    "product.log": "62e21a29aabc490c19880aca5b2fc3502c101b90eead313af4c323d13b1222f4",
+    "sample-discovery.log": "77369906e3105baf83c6e3c767d0e3c98bda0ec289d856d7edbae7d03fb23717",
+    "presets.log": "1f6e118e3ab6795006a2862ef04b72c2202905a6ccd7d732b1f44c7f6c889ad2",
+    "origin.log": "7f7cafcb25c50a1fb466dc1202dc05472d5df98c2fbb5738f54b470ec19533eb",
+    "landscape.log": "6a4be927842b4786a0ed67d2b88a79c9c58991a0dc91b8808655fcb774c34a26",
+    "landscape/execution.json": "f6ce9cd5bc3b7301d8b599cf3416ea6c7fa97352c4ab7c570603b437d8dd7fae",
+    "landscape/states.json": "c01ace81bd97ad038f78434f162ebf96c5a7edff38065e8d758a86093bdb0fdc",
+    "web-structural.json": "e9f43cea91cf798f1fa27efffc886977c93fab79b59b92366297f7cc76894356",
+    "funkybeats-route.log": "2d7f6d6bd899d6d2cb405bb75fec374683b078fe2eb6907f4de754625041fea8",
+    "browser-results.txt": "dc185023acf9a0a6b3356333413f05a42195bf304e861403026b9d58130fa1a1",
+    "funkybeats.log": "6f9f6b0be004b5dd6233c218032b928137658d5e2d781b6cbe2228d49e7ffba8",
+    "grid-only.log": "199940a9a0284c73b0e703cbad83368b9f7e86e763596cba5681e621c0f2e012",
+    "grid-sandbox-contract.log": "83e7616c93d4c853d410f63ca9a85e2f629c49ecc80d1f7b5ba896a6efef73c3",
+    "funkybeats-serialized.log": "61f03480568fbff0db24cfc0ae169ec5cfe2681f6eab872267c39732c422f99a",
+    "funkybeats-lifecycle-contract.log": "143d5a517359c0ae58399403dc9c7c2e72f7381f35c0dce58d6a53c00f75355e",
+    "183207e-gate-with-committed-fwsc.log": "569afb6cb5215f1a80944126d0ba738043b74894bd2142a48a5acd1c7fc2caab"
+  },
+  "browserCommandExits": {
+    "structural": 0,
+    "landscape": 0,
+    "funkybeats-route": 0,
+    "funkybeats": 1,
+    "funkybeats-serialized": 0
+  },
+  "funkyBeatsFirstAttemptPassedCases": [
+    "discard_draft",
+    "bass_step_fields"
+  ],
+  "gridBrowserChange": {
+    "fixtureBlob": "245185ffd99ea15046056238fb34b5e8b6489232",
+    "packageBlob": "b424f516362404759bfcfcf5665c865bcba8a591",
+    "moduleBlob": "dbe162c5f2c7ce4ad8fa8ce7f93159b286e8d57d",
+    "viewportPasses": [
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "normalSandboxAuditLaunches": 36,
+    "normalSandboxAuditFindings": 0
+  },
+  "funkyBeatsLifecycleChange": {
+    "fixtureBlob": "b6730d30c68d109db430b5238bb1e5905a6d7491",
+    "preservedOriginalCases": 26,
+    "successClosuresInStub": 26,
+    "deliberateFailureCaseInStub": 10,
+    "stubLogSha256": "143d5a517359c0ae58399403dc9c7c2e72f7381f35c0dce58d6a53c00f75355e"
+  },
+  "actualFwscLimits": {
+    "commit": "183207ed2b7dd7b346ca5871408b292df4fb0ae2",
+    "tree": "d8c4f0476a084078fc9f80f72c7bb25a60739abc",
+    "trackedPackageCount": 2,
+    "exit": 0,
+    "logSha256": "569afb6cb5215f1a80944126d0ba738043b74894bd2142a48a5acd1c7fc2caab"
+  },
+  "funkyBeatsSerializedPassedCases": [
+    "discard_draft",
+    "bass_step_fields",
+    "pattern_lock_points",
+    "step_label_widths",
+    "roll",
+    "sequencer",
+    "drum_accent",
+    "mixer",
+    "fx_part_sends",
+    "launcher",
+    "synth",
+    "gesture_edits",
+    "gesture_delete",
+    "gesture_navigation",
+    "no_tool_row",
+    "step_roll",
+    "step_drums",
+    "thin_step_lanes",
+    "break_and_tape",
+    "chicago_sound_desktop",
+    "full_envelopes",
+    "project_files",
+    "motion_keyboard",
+    "project_sound_edit_count",
+    "kit_accent_across_voices",
+    "motion_context"
+  ],
+  "projectSourceArchive": {
+    "basename": "lane-remote-resume-0130-5ee28037-local-edge-browser.tar.gz",
+    "bytes": 4696205,
+    "sha256": "a38a2687344323581d76fbc4e8f00c6a8f0f089e798036bba47295091e925809"
+  }
+}

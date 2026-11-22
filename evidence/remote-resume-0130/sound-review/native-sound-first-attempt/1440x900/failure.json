@@ -1,0 +1,5 @@
+{
+  "exception": "Page.wait_for_function: Target crashed ",
+  "pageErrors": [],
+  "captureError": "Page.screenshot: Target crashed \nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n"
+}

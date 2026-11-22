@@ -214,7 +214,8 @@ def compare(name, png_bytes, results):
     if not base.exists():
         # No committed baseline: the page still had to render with no errors, header or overflow
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
-        tmp.unlink(missing_ok=True)
+        # Retain exact candidate bytes for independent review and artifact delivery.
+        # NOBASE remains an unperformed pixel comparison, never baseline approval.
         results.append((name, 'NOBASE', 0.0)); return
     a = np.asarray(Image.open(tmp).convert('RGB'), dtype=np.int16)
     b = np.asarray(Image.open(base).convert('RGB'), dtype=np.int16)
