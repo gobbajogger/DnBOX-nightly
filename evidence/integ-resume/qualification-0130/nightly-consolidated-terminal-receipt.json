@@ -1,0 +1,28 @@
+{
+  "commit": "583f622961fc9975fac746592ce6c483073c4170",
+  "lane": "integ",
+  "run_kind": "consolidated baseline, pinned native runtimes",
+  "checked_at_utc": "2026-11-22T02:20:57.165008+00:00",
+  "chromium_sandbox": true,
+  "stages": {
+    "clean-tree": "PASS",
+    "setup": "PASS",
+    "fetch-base": "SKIP",
+    "no-loss": "PASS",
+    "limits": "PASS",
+    "build": "PASS",
+    "unit-tests": "FAIL",
+    "browser-tests": "PASS"
+  },
+  "result": "FAIL",
+  "exit": 1,
+  "terminal": "DNBOX-GATE RESULT FAIL sha=583f622961fc9975fac746592ce6c483073c4170 lane=integ log=build/dnbox-gate/583f6229-20261122-1151.log",
+  "log_sha256": "814c7069339d2f043d63c9d6ca905a5f1595277931fd683ae4fdb1d782b80988",
+  "failures": {
+    "unit-tests": [
+      "\u2716 failing tests:",
+      "test at tests/product-presets/test-retired-name-scan.mjs:5:1",
+      "AssertionError [ERR_ASSERTION]: RULES.md:34:19. Pan reads L50 .. C .. R50 everywhere. Battery is the R22 level icon in every top bar, 4 levels, plus a percentage once calibrated. Synth One replaces Drone in the third synth slot everywhere (firmware, Remote and website); any leftover Drone or other former-engine label is a defect."
+    ]
+  }
+}

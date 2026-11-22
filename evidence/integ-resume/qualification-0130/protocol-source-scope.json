@@ -1,0 +1,37 @@
+{
+  "candidate": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "scope": "Software-only source comparison and receipt readback. No fresh protocol execution.",
+  "real_engine_host": {
+    "firmware": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8",
+    "remote_software_receipt_source": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+    "visible_browser_receipt_source": "183207ed2b7dd7b346ca5871408b292df4fb0ae2",
+    "observed": "294 active stored controls, fresh addressed read/edit/guarded Undo via the actual-engine stdio/MIDI test bridge."
+  },
+  "touchosc": {
+    "stock_firmware": "f1786ebec2616477163b62b029c7e77405a9c3de",
+    "packed_layout_sha256": "d56abf8cbfc005b35033403ca4371c1bbda2b1e43fe9d7bf765153ff05ad1124",
+    "current_firmware_for_binding_source_check": "5b5cb2420077ef8c3559c8a0e0aa4a5d6e8e34d7",
+    "binding_source_diff_paths": [],
+    "observed": "32 packed Lua note pairs and two feedback pairs at the compiled stock host callback boundary.",
+    "parameter_coverage": "NOT_RUN for the final combined candidate. The companion has note and arming bindings and lacks DNR2 parameter read/edit/guarded Undo transactions."
+  },
+  "stock_dispatcher": {
+    "reply_bytes": [
+      25,
+      0
+    ],
+    "observed": "Compiled stock host read-only probe INFO returned 25 bytes and DNR2 HELLO returned zero bytes."
+  },
+  "candidate_reference_test_scope": "Chromium uses the copied C reference fixture for transaction safety. Actual stock provider/catalog acceptance remains open.",
+  "supporting_files": {
+    "remote-resume-0130/evidence/remote-resume-0130/engine-protocol/5ee2803-real-host-remote-read-edit-undo.json": "e89a4e06bde784055756a2f97cedde184e16f4438ab791629ed37f7c364af6e2",
+    "remote-resume-0130/evidence/remote-resume-0130/engine-protocol/183207e-firmware-browser-serial.log": "2943a3b7f8863c1a4ccba5fca0bd33162185b1a0df9142813cd33ff4ffc64df1",
+    "remote-resume-0130/evidence/remote-resume-0130/engine-protocol/source-identity.json": "5a241042a19089e17a275518b35e2e48e7ff2f28d9cc042843adf91337007dc6",
+    "remote-resume-0130/evidence/remote-resume-0130/touchosc/packed-note-host.json": "838a66d6fa4ba11d890e0fb30ad2ad273ab00a90aa1ade2a1ce23aa66b47c606",
+    "remote-resume-0130/evidence/remote-resume-0130/touchosc/stock-dispatch.json": "0e567c948b1fd00d18dac75684bcce3b4a9f29d1b12cebfe8ed5c4f4bdc1800f",
+    "integ-resume-0130/nightly-capture/tests/product-remote/firmware-browser.py": "261f5d776131aa0b615fff1de0b0d688236470558afed9efbc7b3307e27eed2f",
+    "integ-resume-0130/nightly-capture/tests/product-remote/tests/c_fixture.c": "3921e4b17a7bf5f05212172d03e0165b49fc1461eef2b5e9d1dbc65e9fcfd780",
+    "integ-resume-0130/nightly-capture/tests/product-remote/tests/c-reference/remote_core.c": "4f7fae3087e3477d8bf8a65f77c3189dddddd3e1d34b8c264b3b1017578f97d4",
+    "integ-resume-0130/nightly-capture/tests/product-remote/tests/c-reference/remote_wire.c": "81b4a8729cab7af75bb8495f528d9979d0fc02abbedfba05aaac3f0dae659390"
+  }
+}

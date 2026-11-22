@@ -1,5 +1,13 @@
 # Integration baseline
 
+## Consolidated terminal result and Remote protocol coverage — 2026-11-22 (WORKING)
+
+Nightly Local gate at `583f622961fc9975fac746592ce6c483073c4170` finished **FAIL**, exit 1. The entire browser stage passed with the pinned native runtimes, including 1,838 named screens, 1,912 browser frames, 105,868,800 unique-state pixels and nine structural fixtures. The only failing stage was units. The retired-name test scanned the normative `RULES.md` sentence that the lane candidate's focused run already excludes. This verdict supersedes the earlier in-progress snapshot while preserving its measurements.
+
+The Remote software receipts show 294 stored controls exercised on actual engine host `246ea371` and 32 TouchOSC Lua note pairs plus two feedback pairs on stock host `f1786ebe`. The current stock dispatcher still returned no DNR2 HELLO bytes. Those receipts establish their original scopes. Combined stock DNR2 parameter transactions and TouchOSC parameter bindings remain open and have no physical hardware dependency.
+
+[Terminal Local gate receipt](../../evidence/integ-resume/qualification-0130/nightly-consolidated-terminal-receipt.json) · [Protocol scope and hashes](../../evidence/integ-resume/qualification-0130/protocol-source-scope.json)
+
 ## Consolidated Nightly Local gate and qualification scope — 2026-11-22 (WORKING)
 
 The Local gate at consolidated `583f622961fc9975fac746592ce6c483073c4170` passed clean tree, setup, ancestry, limits, and build. Its unit stage failed because the retired-name scan matched the normative sentence in `RULES.md`. The lane candidate passed that case and reached its visual sweep, which retained the failure explained below. The baseline browser suite was still running at this observation. Final combined source has to be pinned after the upstream lanes merge.

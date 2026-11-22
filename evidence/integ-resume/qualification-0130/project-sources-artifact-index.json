@@ -26,6 +26,12 @@
       "size": 8786220,
       "sha256": "08fe202ea7143c3fa2b99dce7c536eead788bd2a06257fa0a5803c75a5489ea8",
       "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-strict-emu360-bounded-raw.tar.gz"
+    },
+    {
+      "filename": "lane-integ-resume-0130-e29c99ec-938c6aa6-qualification-logs.tar.gz",
+      "size": 210299,
+      "sha256": "1635777ffd0a90fb155291e07d847fd9a7d8bb21a1437d947b624353ff03f09a",
+      "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-938c6aa6-qualification-logs.tar.gz"
     }
   ]
 }
