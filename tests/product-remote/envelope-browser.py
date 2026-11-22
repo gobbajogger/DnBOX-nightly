@@ -7,10 +7,13 @@ from pathlib import Path
 from playwright.async_api import async_playwright, expect
 ROOT=Path(__file__).resolve().parents[2]
 @contextmanager
-def server(site):
+def server(site, *, cache_control=None):
  class Handler(SimpleHTTPRequestHandler):
   def __init__(self,*a,**k):super().__init__(*a,directory=str(site),**k)
   def log_message(self,*a):pass
+  def end_headers(self):
+   if cache_control is not None:self.send_header('Cache-Control',cache_control)
+   super().end_headers()
  srv=ThreadingHTTPServer(('127.0.0.1',0),Handler);srv.daemon_threads=True
  thread=threading.Thread(target=srv.serve_forever,daemon=True);thread.start()
  try:yield f'http://127.0.0.1:{srv.server_port}'

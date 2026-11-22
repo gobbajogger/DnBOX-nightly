@@ -67,5 +67,7 @@ def main():
  output=ROOT/'.output';output.mkdir(exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='recovery-',dir=output) as tmp:
   subprocess.run(['node','scripts/build-product-site.mjs','--output',tmp],cwd=ROOT,check=True)
-  with core.server(tmp) as origin:asyncio.run(cases(origin))
+  # Recover from the injected source fault without the fixture server's
+  # conditional-cache replay of the preceding failed module load.
+  with core.server(tmp,cache_control='no-store') as origin:asyncio.run(cases(origin))
 if __name__=='__main__':main()
