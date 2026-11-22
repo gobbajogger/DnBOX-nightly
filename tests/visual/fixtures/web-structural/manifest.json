@@ -69,6 +69,14 @@
       "expected": {
         "4": "FAIL"
       }
+    },
+    {
+      "file": "source-bound-typed-controls.html",
+      "expected": {
+        "1": "PASS",
+        "2": "PASS",
+        "4": "PASS"
+      }
     }
   ]
 }

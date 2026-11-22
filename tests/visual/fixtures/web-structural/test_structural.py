@@ -57,6 +57,19 @@ class StructuralTests(unittest.TestCase):
         self.assertEqual(self.check(snapshot([control('source-sound/BREAK/-1|1:3:0:0:-1')]),1)['status'],'PASS')
         self.assertIsNone(gate.typed_ref('source-sound/CHICAGO/-1|1:2:0:0:0'))
 
+    def test_master_source_collapses_to_engine_identity_and_rejects_unknown_tokens(self):
+        route = f'source-master/{gate.MASTER_SOURCE}'
+        ref = f'{route}/6/0/0'
+        old = 'mix-master.svg|1:6:0:0'
+        self.assertEqual(gate.typed_ref(ref), gate.typed_ref(old))
+        for invalid in (f'{route}/9/0/0', f'{route}/6/1/0', f'{route}/6/0/14',
+                        f'{route}/4/0/4', f'{route}/6/0/00', f'source-master/{"0" * 40}/6/0/0'):
+            self.assertIsNone(gate.typed_ref(invalid), invalid)
+        data = snapshot(controls=[control(ref), control(old)], glyphs=[glyph(ref), glyph(old)])
+        self.assertEqual(self.check(data, 1)['failures'][0]['reason'], 'duplicate-engine-param')
+        self.assertEqual(self.check(data, 2)['failures'][0]['reason'], 'duplicate-glyph-binding')
+        self.assertNotEqual(gate.typed_ref(f'{route}/6/0/1'), gate.typed_ref(ref))
+
     def test_real_full_captions_are_not_cryptic_and_unknown_copy_is_pending(self):
         for caption in ('STEREO','REV LOW CUT','EDIT 1','SUB','ENV/GATE','909'):
             self.assertEqual(self.check(snapshot(glyphs=[glyph('a|1:0:0:0',caption)]),4)['status'],'PASS',caption)
