@@ -1,0 +1,1 @@
+PASS packed closed, checksum refusal, one-control native READ/Apply/Undo/fresh read/CLOSE

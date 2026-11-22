@@ -1,0 +1,126 @@
+{
+  "repository": "gobbajogger/DnBOX-nightly",
+  "pull_request": 177,
+  "commit": "78375df89d6628d439d6464fcbfdb043c285f75d",
+  "tree": "3a707ed2d132717dbb7fea1d684fbce088128385",
+  "historical_capture_recipe_archive": "d68eceb84d9650ac7cefd8c7cfcfb33852940c50",
+  "viewport": [
+    390,
+    844
+  ],
+  "device_scale_factor": 1,
+  "touch": true,
+  "locale": "en-US",
+  "reduced_motion": "reduce",
+  "timezone": "UTC",
+  "chromium_sandbox": true,
+  "route": "/builds/index.html",
+  "built_page_sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+  "built_site_css_sha256": "fe8093f3843b49d541c2c492303adf308e018b525f6f4597d8e73edca12ccdf7",
+  "captures": [
+    {
+      "file": "builds-index-390x844-light.png",
+      "sha256": "f64087e4841b98490467ed84d06ba6ac0ea8c0c17a988c9f907e510dd235d9a1",
+      "bytes": 8503077,
+      "dimensions": [
+        390,
+        103084
+      ],
+      "capture_seconds": 6.151,
+      "http_status": 200,
+      "page_errors": [],
+      "header_errors": [],
+      "console_errors": [],
+      "requests_failed": [],
+      "http_errors": [],
+      "state": {
+        "title": "Build history \u00b7 DnBOX",
+        "headings": [
+          "Build history"
+        ],
+        "headerCount": 1,
+        "mainNavCount": 1,
+        "visibleLinks": [
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "outOfViewportHeaderLinks": [],
+        "width": 390,
+        "height": 103084,
+        "status": "198 of 198 records",
+        "records": 198,
+        "preference": "light",
+        "effectiveColorScheme": "dark",
+        "background": "rgb(7, 16, 20)",
+        "fonts": [
+          [
+            "Barlow",
+            "loaded"
+          ],
+          [
+            "Barlow",
+            "loaded"
+          ]
+        ]
+      }
+    },
+    {
+      "file": "builds-index-390x844-dark.png",
+      "sha256": "f64087e4841b98490467ed84d06ba6ac0ea8c0c17a988c9f907e510dd235d9a1",
+      "bytes": 8503077,
+      "dimensions": [
+        390,
+        103084
+      ],
+      "capture_seconds": 5.216,
+      "http_status": 200,
+      "page_errors": [],
+      "header_errors": [],
+      "console_errors": [],
+      "requests_failed": [],
+      "http_errors": [],
+      "state": {
+        "title": "Build history \u00b7 DnBOX",
+        "headings": [
+          "Build history"
+        ],
+        "headerCount": 1,
+        "mainNavCount": 1,
+        "visibleLinks": [
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "outOfViewportHeaderLinks": [],
+        "width": 390,
+        "height": 103084,
+        "status": "198 of 198 records",
+        "records": 198,
+        "preference": "dark",
+        "effectiveColorScheme": "dark",
+        "background": "rgb(7, 16, 20)",
+        "fonts": [
+          [
+            "Barlow",
+            "loaded"
+          ],
+          [
+            "Barlow",
+            "loaded"
+          ]
+        ]
+      }
+    }
+  ],
+  "browser": "Chromium 151.0.7922.34",
+  "same_render_bytes": true
+}

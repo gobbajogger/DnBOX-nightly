@@ -1,0 +1,110 @@
+{
+  "nightly": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "catalog_crc": "ecca5979",
+  "control": {
+    "id": 1,
+    "kind": 1,
+    "label": "909 MIX Level",
+    "max": 127,
+    "min": 0,
+    "owner": "909",
+    "parameter": "MX_LEVEL",
+    "target": "T_MIX"
+  },
+  "test_only": true,
+  "cases": {
+    "closed": {
+      "packed_sha256": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04",
+      "trace": []
+    },
+    "mismatch": {
+      "packed_sha256": "dff6f3a340804850fcc942365b261859942e3f46d7f19e90b8d9c9e964955ea8",
+      "trace": [
+        [
+          "HELLO",
+          0,
+          1,
+          1,
+          3972684153
+        ]
+      ]
+    },
+    "native": {
+      "packed_sha256": "4655c32e419c73cf5d4064f5996e6478b4f86861555a463d6318dfee91201d62",
+      "trace": [
+        [
+          "HELLO",
+          0,
+          1,
+          1,
+          3972684153
+        ],
+        [
+          "OPEN",
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          "READ",
+          0,
+          1,
+          1,
+          75
+        ],
+        [
+          "SET",
+          1,
+          1,
+          2,
+          76
+        ],
+        [
+          "READ",
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          "READ",
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          "SET",
+          1,
+          1,
+          3,
+          75
+        ],
+        [
+          "READ",
+          0,
+          1,
+          3,
+          75
+        ],
+        [
+          "CLOSE",
+          0,
+          0,
+          3,
+          0
+        ]
+      ]
+    }
+  },
+  "sha256": {
+    "remote-glyph-c7b026c/tools/touchosc-parameters/pack.py": "086cc6d187ea30520986259285d479ab297ec2f7633064431a3456d7d733f6cf",
+    "remote-glyph-c7b026c/tests/product-remote/touchosc-parameters-host.py": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+    "remote-glyph-c7b026c/tests/product-remote/touchosc-parameters-host.lua": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012",
+    "integ-resume-0130/stock-compose-os/docs/remote-scalar-catalog.json": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "integ-resume-0130/stock-compose-os/firmware/src/app/dnr2_native_catalog.h": "499a5e180b3b155b6e58c19d465ee3a6d48178a77cfedf6c9373d4ae8097651f",
+    "integ-resume-0130/stock-compose-os/build/host/dnr2-scratch/engine-native": "c6279bcad53593d1ca29dc69ed3ef52e34eba496edafc8e2ab3b9e4bc201775f",
+    "integ-resume-0130/evidence/remote-client-audit/native-scalar/test_packed_scalar.py": "d98a8ec98fbf54e19f37b3ab4d6d66ebf64a434bbc6d750c07ca4fe43cc258b6"
+  }
+}

@@ -1,5 +1,10 @@
 # Integration baseline
 
+## Native scalar, verified TouchOSC and current phone review — 2026-11-22 (WORKING)
+
+The [exact software packet](../../evidence/integ-resume/native-remote-c7b026cf/README.md) pairs Remote `c7b026cf` with the reconciled firmware host. Actual Chromium and packed TouchOSC Lua completed the candidate 909 MIX Level Apply/Undo flow. The shipping catalog and ambiguous-port flow emitted zero write traffic. Both stock firmware packages passed the native emulated USB transaction. Web `78375df8` phone History renders captured all 198 records with zero page or header errors. Independent review held the view on the missing Sounds link and contradictory archive copy. Earlier Manual and Remote artifacts carry only for their verified source and capture inputs. Final combined screen, route and runtime gates remain open.
+
+
 ## Fitting bound firmware and addressed client proof — 2026-11-22 (WORKING)
 
 The unchanged Remote client at `995d5493` repeated addressed Apply, fresh read and guarded Undo through the actual producer and host mixer on the latest measured Composition `833a2ec8`. Each stored readback matched the expected value and revision. The native stock profiles retain 1,036/1,044 B free XIP and 3,804 B pool margin. Calibrated populated timing passed on Elite and Pro. Production catalog and incarnation admission, TouchOSC and final combined screen gates remain pending. [Firmware receipt](https://github.com/gobbajogger/DnBOX/blob/4fa5e29fec494c5344d9f3773fe928fc33cdbdd7/evidence/integ-resume/stock-size-344fbfe/receipt.json) · [Real-engine and wire output](https://github.com/gobbajogger/DnBOX/blob/4fa5e29fec494c5344d9f3773fe928fc33cdbdd7/evidence/integ-resume/stock-size-344fbfe/size-all-os-producer.log)

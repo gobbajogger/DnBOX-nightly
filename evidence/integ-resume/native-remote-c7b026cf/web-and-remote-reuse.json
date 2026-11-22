@@ -1,0 +1,141 @@
+{
+  "remote": {
+    "exact_head": "913120550b2634abae684390a05057cc9d9b3ee8",
+    "previous_candidate": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+    "previous_candidate_is_descendant_of_exact_head": true,
+    "revision_counts": "10\t0",
+    "previous_hashes": {
+      "web/product-site/remote/firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+      "tests/product-remote/tests/firmware-link-dom.mjs": "574b27446ed803543e2861f1338c30e070a277d24e7d5b73cf4b583f6cde82a8",
+      "web/product-site/remote/device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+      "web/product-site/remote/device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+      "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "web/product-site/remote/device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+      "web/product-site/remote/identity/remote.mjs": "e070d1c419ad9cb1a52c2fa1b2f8a8fcf51a72bfd93d0d5e0fb7e2b90422d5e1",
+      "tools/touchosc-parameters/pack.py": "086cc6d187ea30520986259285d479ab297ec2f7633064431a3456d7d733f6cf",
+      "tools/touchosc-parameters/controller.lua": "221e35340172ecf16c63fe20f19a45fc73a400c16e1300f3141b3d0c47d18c97",
+      "tools/touchosc-parameters/button.lua": "347db93b4e59eef2b4a189f2a672a4a1b81f48d13dfb8fc949bcdbad92c36068",
+      "tests/product-remote/touchosc-parameters-host.py": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+      "tests/product-remote/touchosc-parameters-host.lua": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012"
+    },
+    "exact_head_hashes": {
+      "web/product-site/remote/firmware-link.mjs": "99907240de38b84cadc3151b2d49f2839254443651c07dda46063ce8b20eaa95",
+      "tests/product-remote/tests/firmware-link-dom.mjs": "d28928610bb53eed3db0a23ec9fad8317c4bdf5a02359bf2ae98b1fbdef39cfb",
+      "web/product-site/remote/device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+      "web/product-site/remote/device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+      "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+      "web/product-site/remote/device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+      "web/product-site/remote/identity/remote.mjs": "e070d1c419ad9cb1a52c2fa1b2f8a8fcf51a72bfd93d0d5e0fb7e2b90422d5e1",
+      "tools/touchosc-parameters/pack.py": null,
+      "tools/touchosc-parameters/controller.lua": null,
+      "tools/touchosc-parameters/button.lua": null,
+      "tests/product-remote/touchosc-parameters-host.py": null,
+      "tests/product-remote/touchosc-parameters-host.lua": null
+    },
+    "engine_native_sha256": "c6279bcad53593d1ca29dc69ed3ef52e34eba496edafc8e2ab3b9e4bc201775f",
+    "one_pair_replay": {
+      "softwareOnly": true,
+      "testScalar": true,
+      "stockCatalogAdmitted": false,
+      "hello": {
+        "status": 0,
+        "count": 1,
+        "crc": 3972684153
+      },
+      "addressed": [
+        [
+          2,
+          0,
+          1,
+          75
+        ],
+        [
+          3,
+          1,
+          2,
+          76
+        ],
+        [
+          2,
+          0,
+          2,
+          76
+        ],
+        [
+          2,
+          0,
+          2,
+          76
+        ],
+        [
+          3,
+          1,
+          3,
+          75
+        ],
+        [
+          2,
+          0,
+          3,
+          75
+        ]
+      ],
+      "close": {
+        "status": 0
+      }
+    },
+    "ambiguous_pair_regression": {
+      "fixtureOnly": true,
+      "closedByDefault": true,
+      "expectedGuard": "no send without explicitly verified pair",
+      "regressionReproduced": true,
+      "events": [
+        [
+          "open",
+          "input",
+          "DnBOX A input"
+        ],
+        [
+          "open",
+          "output",
+          "Other Synth output"
+        ],
+        [
+          "send",
+          "Other Synth output",
+          0
+        ]
+      ],
+      "applyRemainsDisabled": true
+    },
+    "touchosc_scope": "Packed parameter sources and tests are present on the later descendant candidate and absent at the exact PR head. Existing one-control Lua proof remains tied to efb4c070 source."
+  },
+  "web": {
+    "exact_head": "78375df89d6628d439d6464fcbfdb043c285f75d",
+    "phone_capture_commit": "d68eceb84d9650ac7cefd8c7cfcfb33852940c50",
+    "verified_phone_pngs": {
+      "missing-phone/builds-index-390x844.png": "ee54133953541abe597e2bc814984a46d62f706401c8b462c85ee6855d7044d1",
+      "missing-phone/builds-index-844x390.png": "eb826270f184470d8c3685ad837c53b4e934d8af2306a6fc7bb01bccbe5a2fe0",
+      "missing-phone/manual-index-390x844.png": "b620201f913134db3d9cd83cef0e9962997a7fff3d7b3af1035d895b6b14d352",
+      "missing-phone/manual-index-844x390.png": "35f8cbffea899032e1c4aa49d0c098ce7e18ac3066a75e2da4c23d45865a8006",
+      "missing-phone/manual-legacy-390x844.png": "c99c7dd393fe59c684198d78dd0f8a6e5c5bcccc7e613997924e8a846f9422cf",
+      "missing-phone/manual-legacy-844x390.png": "ee14c478471411d528891d0acb978c8feee4bea8a50e42776b287d1592ca96c4",
+      "missing-phone/manual-original-index-390x844.png": "d0a57c386ec297f3028cc6ad5e8ccc6fd91afbb8b8b15156b5c610a09aff642a",
+      "missing-phone/manual-original-index-844x390.png": "c61fa426896c12916b6f328871cb586483decc0a484784552a4e4de70a04dc65",
+      "missing-phone/manual-projects-guide-390x844.png": "5d9216583876c9bf009884e629de791a85b7b002063360fa72d05ea2158e75cd",
+      "missing-phone/manual-projects-guide-844x390.png": "9d09dffd6ce952289708a204a4578ad688a0b1db8ac8970a62dd3e7da1e17476",
+      "missing-phone/manual-protocol-390x844.png": "60c4a3c61cedabf9b141f41b5da191fff4579e0902e9cf7f6d5c6ad03444cd34",
+      "missing-phone/manual-protocol-844x390.png": "2c77a1a64c095d0898e3ab81df123875fcc2e933842adfbf847c6f24ea4f6d3b"
+    },
+    "archive_sha256": "74bba4c104e471f16345f83f1aa1b6237cf6861df4fa73a5aca7f5a57fd7e9db",
+    "manual_scope": "10 Manual phone PNGs reusable as prior captured pixels due to identical route, style, asset, build, manifest entry and capture sources. This is not a fresh comparison or combined-head approval.",
+    "history_scope": "2 Build History PNGs are historical. Embedded route and styles match, but filtering script changed at ecb92ce; separately logged three-viewport functional checks at ecb92ce carry forward to unchanged History source/test closure. Exact-head comparison renders were not run.",
+    "history_followup_source": "ecb92ce09e1a5411302d0091f204a273ff12c2d4",
+    "history_source_hashes": {
+      "web/product-site/builds/index.html": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+      "web/product-site/builds/history.mjs": "f40e66fb4b5a428c50243264419afc1f17774ddee78a819a0cc34b37b95f654f",
+      "web/product-site/data/history.json": "d0a47bbd74110b0fb21d46f0c8e83b90718117944c9caeca830f8e18f4f8d517",
+      "tests/history-response.py": "0d96b61067481c0e4fd920592a4eeb8ad894f82aa162abfddae5979991e3c188"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "tip": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "prior": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+  "diff_counts": [
+    "0",
+    "1"
+  ],
+  "stable_source_and_representation_hashes": {
+    "web/product-site/remote/index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "web/product-site/remote/firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "web/product-site/remote/device/vendor/client.mjs": "6e71fb9674cc2eecbe48ad7ef12dbecd6fbaae1c82e90416f9e046b84fe2643b",
+    "web/product-site/remote/device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+    "web/product-site/remote/device/session.mjs": "e5917644216089c9d0e34700f3e04676529f1b2eb202f4b0d660f8f05bd394f2",
+    "web/product-site/remote/identity/remote.mjs": "e070d1c419ad9cb1a52c2fa1b2f8a8fcf51a72bfd93d0d5e0fb7e2b90422d5e1",
+    "web/product-site/remote/catalog.json": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+    "tools/touchosc-parameters/pack.py": "086cc6d187ea30520986259285d479ab297ec2f7633064431a3456d7d733f6cf",
+    "tools/touchosc-parameters/button.lua": "347db93b4e59eef2b4a189f2a672a4a1b81f48d13dfb8fc949bcdbad92c36068",
+    "tools/touchosc-parameters/controller.lua": "221e35340172ecf16c63fe20f19a45fc73a400c16e1300f3141b3d0c47d18c97",
+    "tests/product-remote/touchosc-parameters-host.lua": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012",
+    "tests/product-remote/touchosc-parameters-host.py": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+    "tests/product-remote/firmware-link.test.mjs": "d2b109d17bed15c4ea5c6f9a2badcf055a32502f161d045d966bf31a64ef3d0e",
+    "tests/product-remote/tests/firmware-link-dom.mjs": "574b27446ed803543e2861f1338c30e070a277d24e7d5b73cf4b583f6cde82a8",
+    "tests/visual/visual_gate.py": "e6bc199c69350f2d9f43225367ef96f34ccdfb2dc72e41ca2ef55fc6afe4f4eb",
+    "evidence/remote-resume-0130/touchosc-parameters/dnbox-parameters-archived-host.tosc": "83977fa73340823f259b7dc3f15504e00d3ea5d62f8f45d5e075a35f390b80a5",
+    "evidence/remote-resume-0130/touchosc-parameters/dnbox-parameters-unavailable.tosc": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04"
+  },
+  "capture_product_changes": {
+    "web/product-site/remote/app.mjs": {
+      "previous": "30aa2d966f2b2af02bc502392893062328e382f951bac3b9d06b0631d8d5607c",
+      "current": "e8d135c45ebda4f35f66b587a1fd7f34ca526ef0c215ff9891566fbbc3cbfcdf"
+    },
+    "web/product-site/remote/drum-strip.mjs": {
+      "previous": "4871ee008976a77d4b9f2e60a5c15069c7a7b7b2246fca8bf2149fd176984d1e",
+      "current": "0ec0e8c9eff82465e2a3e7d085f51fef7e53d55c75f108de5b80a93ab5a8eba3"
+    },
+    "web/product-site/remote/glyph-render.mjs": {
+      "previous": "1f71570e1de47f04ae7481439b67a1bf74de3b2461960f458a21c2b79bb519e0",
+      "current": "9706b8ee6a60e075c5d3503a4823a6230798d7753e67fab03e60d7690f77da90"
+    }
+  },
+  "routing_guard_retained": true,
+  "default_catalog_admission": null,
+  "scope": "The Remote application changes are confined to Sound glyph dispatch and data attributes. The transport, packed TouchOSC scripts and representations, and focused test harness sources are byte-identical.",
+  "candidate_gate_reuse": "Prior one-control mounted and packed-Lua outcomes carry to this client closure with the previously tested producer hash. Focused harness replay was unnecessary.",
+  "engine_native_prior_sha256": "a9b1f8510a48c57b650eb15fc6d5e6e79a292520be5254c80eddd391ce5edacc",
+  "engine_native_current_sha256": "c6279bcad53593d1ca29dc69ed3ef52e34eba496edafc8e2ab3b9e4bc201775f",
+  "engine_native_equals_prior": false,
+  "capture_reuse": "The runner is unchanged. Sound captures for 909 Snare Tone, 808 Snare Tone and BREAK Pitch have changed inputs. No fresh pixel or unchanged-output equivalence claim for full captures."
+}
