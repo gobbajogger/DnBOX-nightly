@@ -339,7 +339,7 @@ function onsetX(n){return n.start/trace.endSample*width;}
 function laneHtml(ns,span=width){return `<div class="lane-track" style="width:${typeof span==='number'?span+'px':span}">${renderStepSliders(stepGroups(ns,trace.endSample),{kind:laneKind(),base:laneBase,selected,breakChance:breakChanceMode()?breakChanceLane.values:null,activeStep:activeLaneStep,stepValue:laneSpec()?{spec:laneSpec(),values:stepValueLane.values,enabled:stepValueLane.enabled}:null})}</div>`;}
 function drumLaneNotes(){const kit=$('part').value==='drum808'?'808':'909';return model.notes.filter(n=>n.track==='drum'+kit&&n.note===DRUM_VOICES[kit][drumVoice][1]);}
 function drumsWithLane(kit){
- const grid=renderFunkyBeatsDrums({kit,notes:model.notes,endSample:trace.endSample,accents:stepLanes['drum'+kit]?.drumAccent}).replace(/<\/div>$/,drumLaneHtml()+'</div>');
+ const grid=renderFunkyBeatsDrums({kit,notes:model.notes,endSample:trace.endSample,accents:stepLanes['drum'+kit]?.drumAccent,selectedVoice:drumVoice}).replace(/<\/div>$/,drumLaneHtml()+'</div>');
  const navigation='<nav class="drum-grid-navigation" aria-label="'+kit+' step navigation">'+
   '<button type="button" data-drum-navigate aria-controls="drum'+kit+'-voice-1">Voices 1–6</button>'+
   '<button type="button" data-drum-navigate aria-controls="drum'+kit+'-voice-7">Voices 7–11</button>'+

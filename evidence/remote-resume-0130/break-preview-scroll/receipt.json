@@ -1,0 +1,488 @@
+{
+  "baseCommit": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "chromium": "151.0.7922.34",
+  "changedProductAssets": [
+    "remote/style.css"
+  ],
+  "registeredBrowserAssertionSha256": "12828e8bf4531f07fae16ce1433b06f3cc0f539bea6b356e2518364742242905",
+  "assertionTolerancePx": 0.2,
+  "reproduction": {
+    "base": {
+      "styleSha256": "c81df9a0186c0a938e32baf398e1e3776854c3a5f687b4c51fa95d9f12a725b2",
+      "viewport": [
+        390,
+        844
+      ],
+      "scenario": "through-song",
+      "documentWidth": 390,
+      "midiCalls": 0,
+      "pageErrors": [],
+      "previewControls": [
+        {
+          "row": 1,
+          "box": {
+            "x": 321,
+            "y": 700.765625,
+            "width": 48,
+            "height": 44,
+            "top": 700.765625,
+            "right": 369,
+            "bottom": 744.765625,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 0,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "auto",
+            "scrollPaddingBottom": "auto",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 2,
+          "box": {
+            "x": 321,
+            "y": 764.359375,
+            "width": 48,
+            "height": 44,
+            "top": 764.359375,
+            "right": 369,
+            "bottom": 808.359375,
+            "left": 321
+          },
+          "paintedHeight": 43.640625,
+          "failure": "('Control clipped by viewport/ancestor', {'box': {'x': 321, 'y': 764.359375, 'width': 48, 'height': 44, 'top': 764.359375, 'right': 369, 'bottom': 808.359375, 'left': 321}, 'width': 48, 'height': 43.640625})",
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 4,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "auto",
+            "scrollPaddingBottom": "auto",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 3,
+          "box": {
+            "x": 321,
+            "y": 588.953125,
+            "width": 48,
+            "height": 44,
+            "top": 588.953125,
+            "right": 369,
+            "bottom": 632.953125,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "auto",
+            "scrollPaddingBottom": "auto",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 4,
+          "box": {
+            "x": 321,
+            "y": 656.546875,
+            "width": 48,
+            "height": 44,
+            "top": 656.546875,
+            "right": 369,
+            "bottom": 700.546875,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "auto",
+            "scrollPaddingBottom": "auto",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 5,
+          "box": {
+            "x": 321,
+            "y": 724.140625,
+            "width": 48,
+            "height": 44,
+            "top": 724.140625,
+            "right": 369,
+            "bottom": 768.140625,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "auto",
+            "scrollPaddingBottom": "auto",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        }
+      ]
+    },
+    "candidate": {
+      "styleSha256": "7eede145dd96951a109b669f9c9db49d4eb81e73e984e6d576c59df57d2ef9ce",
+      "viewport": [
+        390,
+        844
+      ],
+      "scenario": "through-song",
+      "documentWidth": 390,
+      "midiCalls": 0,
+      "pageErrors": [],
+      "previewControls": [
+        {
+          "row": 1,
+          "box": {
+            "x": 321,
+            "y": 700.765625,
+            "width": 48,
+            "height": 44,
+            "top": 700.765625,
+            "right": 369,
+            "bottom": 744.765625,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 0,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "4px",
+            "scrollPaddingBottom": "4px",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 2,
+          "box": {
+            "x": 321,
+            "y": 760.359375,
+            "width": 48,
+            "height": 44,
+            "top": 760.359375,
+            "right": 369,
+            "bottom": 804.359375,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 8,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "4px",
+            "scrollPaddingBottom": "4px",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 3,
+          "box": {
+            "x": 321,
+            "y": 588.953125,
+            "width": 48,
+            "height": 44,
+            "top": 588.953125,
+            "right": 369,
+            "bottom": 632.953125,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "4px",
+            "scrollPaddingBottom": "4px",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 4,
+          "box": {
+            "x": 321,
+            "y": 656.546875,
+            "width": 48,
+            "height": 44,
+            "top": 656.546875,
+            "right": 369,
+            "bottom": 700.546875,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "4px",
+            "scrollPaddingBottom": "4px",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        },
+        {
+          "row": 5,
+          "box": {
+            "x": 321,
+            "y": 724.140625,
+            "width": 48,
+            "height": 44,
+            "top": 724.140625,
+            "right": 369,
+            "bottom": 768.140625,
+            "left": 321
+          },
+          "paintedHeight": 44,
+          "failure": null,
+          "scrollPane": {
+            "id": "break-sequence",
+            "className": "",
+            "scrollTop": 247,
+            "clientHeight": 529,
+            "scrollHeight": 776,
+            "overflowY": "auto",
+            "scrollPaddingTop": "4px",
+            "scrollPaddingBottom": "4px",
+            "box": {
+              "x": 12,
+              "y": 279,
+              "width": 366,
+              "height": 529,
+              "top": 279,
+              "right": 378,
+              "bottom": 808,
+              "left": 12
+            }
+          }
+        }
+      ]
+    }
+  },
+  "registeredCompositionRun": {
+    "outcome": "FAIL",
+    "passedDraftViewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "failedDraftViewport": [
+      844,
+      390
+    ],
+    "failedAssertion": "composition-browser.py:208 requires 39.9 px minimum dimensions for all drum cells",
+    "nativeObserverPhase": "NOT_RUN because the Draft suite exits at the landscape drum assertion"
+  },
+  "completeCompositionRun": {
+    "outcome": "PASS",
+    "candidateProductChanges": [
+      "remote/style.css"
+    ],
+    "landscapeTileContract": {
+      "viewport": [
+        844,
+        390
+      ],
+      "compactMinPx": 24,
+      "otherSizesMinPx": 40,
+      "wholeInitialPadsPerKit": 96,
+      "wheelReachablePadsPerKit": 176,
+      "horizontalScrollPx": 0,
+      "allTabTargetsPerKit": 176,
+      "shiftTabRange": [
+        174,
+        159
+      ],
+      "fullBoundsIdenticalToBase": true
+    },
+    "nativeObserverClipBeforeFix": {
+      "viewport": [
+        844,
+        390
+      ],
+      "selector": ".drum-sound-panel .source-hit",
+      "scrollPane": "#other-view",
+      "scrollPaneBottom": 390,
+      "scrollTop": 33,
+      "buttonBottom": 390.453125,
+      "actualHeight": 50.296875,
+      "visibleHeight": 49.84375,
+      "fix": "Existing R22 unit as block scroll padding on the active live-envelope drum scroller"
+    },
+    "viewsPassingDraft": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "viewsPassingObserver": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "nativeVoicesEverySize": [
+      0,
+      1
+    ],
+    "runtime": {
+      "firmware_source": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "kernel_source": "4758a9573e0a2a95e73cb054a74e0aad39d5741e",
+      "wasm_bytes": 1087987,
+      "wasm_sha256": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+      "device_control": false,
+      "full_physical_panel": false
+    },
+    "sha256": {
+      "tests/product-remote/composition-browser.py": "aa8483e58a38ebe75005b4be24189623b2c0f90bd889e89e0362e137b206ab13",
+      "tests/product-remote/page15-density-browser.py": "1e948e8b7e243aabfc14b06b062e65e0a201285432e37671cf6b7ed4113ab4a5",
+      "web/product-site/remote/style.css": "d8c7989613a03882d60f77075b86ad87a81923e959d274a0c17d3420ab292243"
+    }
+  }
+}

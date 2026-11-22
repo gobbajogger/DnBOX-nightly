@@ -1,0 +1,488 @@
+{
+  "source": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "sourceAppSHA256": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+  "referenceType": "unapproved historical Integration proposals",
+  "referenceCommit": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "pairs": {
+    "remote-sequence-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 9424,
+      "tolerantDifferentPixels": 9021,
+      "tolerantDifferentPercent": 0.6961,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "3e918704fa23829439a1bf1547988d12930c43f4e748609505e6aa2a067c7194",
+      "captureSha256": "ab8d606591ae19492c69e4c1bcdd4e5d5e60c41858e1b01ca01e106ac39b6b51",
+      "pairSha256": "210f171d1997706342ec0140cf21eb80adf00d6c4179c7f032938eee1747630d",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-lane-chance-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 9441,
+      "tolerantDifferentPixels": 9005,
+      "tolerantDifferentPercent": 0.6948,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "8f62e45c3a064c2cac3f0b9168c413373bfe0f62cf32db449961c9f91ef77366",
+      "captureSha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6",
+      "pairSha256": "fc1456d8f277c79653703c2f5f7083b041e996bcd4fc547074263d69e77e2daa",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-lane-pitch-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 9402,
+      "tolerantDifferentPixels": 9021,
+      "tolerantDifferentPercent": 0.6961,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "b0112e5034ff408b2a0c874575ea88a99e9f50318ceafdde3151d0f603ff19a2",
+      "captureSha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99",
+      "pairSha256": "3099eb15ba43b2b0340e137486a5693e8e28ff499906188dc3ec25cdc677e283",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-lane-pan-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 9402,
+      "tolerantDifferentPixels": 9025,
+      "tolerantDifferentPercent": 0.6964,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "fb87d4a2d34689f3a9533271cd2721a3214f7fe8266cb7464e975390819f7a43",
+      "captureSha256": "79892356340bb915d71c7c0a4ea505735553c4f4b0bb1b97eda88880ee64b3bd",
+      "pairSha256": "cb87b0db45ef5f6eba5b4ba7726ffaa1ca6d18472ff7e7f74b69a7a6ee893843",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-sound-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 299221,
+      "tolerantDifferentPixels": 27647,
+      "tolerantDifferentPercent": 2.1333,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "d9d087473262d836663efa909ea8d53df22d6b6ece6da2f99916052816378641",
+      "captureSha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a",
+      "pairSha256": "d3d7a02ecc247b0a8b2066c0dfff18760223e2c1e15d414ceec1c5027e617412",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-mix-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 268061,
+      "tolerantDifferentPixels": 35706,
+      "tolerantDifferentPercent": 2.7551,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "a586990d061b3f7df2e5e3581ca4afe123027e33f5187a0d154eb19eb0ed3016",
+      "captureSha256": "a7e7d2e4ecc1f96aa97ec754c2a3a89d18b9939efd35713f321c40b207ea0047",
+      "pairSha256": "9b3f42ca3456088aa651657603a3dd08efb00758006066a4c4ba5631235a0cc6",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-patterns-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 515983,
+      "tolerantDifferentPixels": 75978,
+      "tolerantDifferentPercent": 5.8625,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "795c19940f2abe13e84b925ab75170ef9dd1582d0721f1e405cb4a954dc23e0f",
+      "captureSha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6",
+      "pairSha256": "36a5790caf4f6897fa9453376f94419fe37a6ad030914f1b903a2e0ddf13e65d",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-files-1440x900": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 361816,
+      "tolerantDifferentPixels": 68028,
+      "tolerantDifferentPercent": 5.2491,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "383d6588520ae50e552e0f75bd79ce29197c32e6b9e706f4ec4779ba2ede4fee",
+      "captureSha256": "8899b5c9126eca369d686621d56e1a4b41b163b889fded1e6a5c19e94bdc838a",
+      "pairSha256": "dcd813ef10b9db838a67185edcff073160ae6ec7370a642789614380970f224b",
+      "captureMethod": "Initial Local gate"
+    },
+    "remote-sequence-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 5508,
+      "tolerantDifferentPixels": 5174,
+      "tolerantDifferentPercent": 0.7895,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "60f6acb4de8783840da74c9904e53c029c1520fe703ee13cc95b78cc9ac8d141",
+      "captureSha256": "31955bfc6c4c01968e70adbd9dcd5f5caeae5165e90b62dea4d3ddeb9ecf1c14",
+      "pairSha256": "90ec9fafba2df6f41046b4dec890361776de25781e699649833a125a90cfffba",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-chance-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 5508,
+      "tolerantDifferentPixels": 5158,
+      "tolerantDifferentPercent": 0.787,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "6a77986d794512240d69726a96844a542c61c6c4ad0d367ae275484e446fb515",
+      "captureSha256": "00b4e837acff65bf457d8431b1beaceed560e7eb6fa138d3e152fb24549f48b6",
+      "pairSha256": "bcfff9e86c705a5c51d77efd36cc99de4868520af86af7c95544d0207d13c99a",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pitch-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 5601,
+      "tolerantDifferentPixels": 5174,
+      "tolerantDifferentPercent": 0.7895,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "9521f18ef8c235548db64ab60c4469b6b2c9155ca5b04918936aa2d730e955ff",
+      "captureSha256": "7b25885c5df8846d6eba0ab8e2e3ccc24d55067d79520a168f9898ba539baf16",
+      "pairSha256": "0ab8067160537e64a3aa800df0f5a3bdbefedb38b5047d40b437ce9d76d868c9",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pan-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 5581,
+      "tolerantDifferentPixels": 5178,
+      "tolerantDifferentPercent": 0.7901,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "498d6772cd9d26ab7ff1c771efa139004035e64e681c5fc46f4e1ebee15ab035",
+      "captureSha256": "a3b9e655010bd53ff3574b118eb3ec0b3e1c318ef9e6cc153844900742a2e0b7",
+      "pairSha256": "5960b4532620ae65c96df4a77449c98f8848ec4babb36ba870008158090e6220",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-sound-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 1413,
+      "tolerantDifferentPixels": 1199,
+      "tolerantDifferentPercent": 0.183,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "5610648339c941c969a82212af66182d6a1d97aad29bc8b1306436f585f60af1",
+      "captureSha256": "afbf2de0906c360d0f7a60815b4c3f24f1b7bced9fbc352b26df55931aa7998c",
+      "pairSha256": "ae4c5c2ea68a9e21368aeb66213b8f91a642f31b6622c4aa7f12deb3c499a10c",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-mix-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 65658,
+      "tolerantDifferentPixels": 4254,
+      "tolerantDifferentPercent": 0.6491,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "68084bc84956ec91e9c01d4dad783a61fa9bb2f6bac1e2589f476234f79952ba",
+      "captureSha256": "805ab7870fdcd818e34ffb008830af3a563405af5638db9634ca4ac0ddc0c53a",
+      "pairSha256": "88c4dd1d23e288ee62a5dd43f30bc920c56bf746c7f5dfb8a029ca76d14af31f",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-patterns-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 237669,
+      "tolerantDifferentPixels": 44684,
+      "tolerantDifferentPercent": 6.8182,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "ca25ef53326f496328272c0d700c392150991de7209b5442cea5b3bb660eea37",
+      "captureSha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb",
+      "pairSha256": "db40f45d28f3f204eddc1b18cf45569c9d155a177afa44b90962e7677d1cd8e8",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-files-1024x640": {
+      "nativeSize": [
+        1024,
+        640
+      ],
+      "totalPixels": 655360,
+      "exactDifferentPixels": 138060,
+      "tolerantDifferentPixels": 27661,
+      "tolerantDifferentPercent": 4.2207,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "cbfb5c772864a879460bd9e8f525b8a885c93b1941057fe66d3697a4cc030683",
+      "captureSha256": "59210674bad443452a1f357b4a5bb39d62fc806153f4b9a4887be512de98ddef",
+      "pairSha256": "67183ee2d68130ee8e60e2fae8b4e7d5686b76b5a84f675d67e29123a854f0fd",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-sequence-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 206431,
+      "tolerantDifferentPixels": 33541,
+      "tolerantDifferentPercent": 10.1899,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "cff5bc9710cbc9c647cc782ff5ae1ce6fd0787928cac622024a08e15733eda92",
+      "captureSha256": "a47ccf4666041920a4960c64286e6823fd89bd889d09b4fa45abdd35ee402f84",
+      "pairSha256": "a4c66379955c0b738860e01205415010f3ecf1edb9c80ee988aaff40f963a158",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-chance-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 206418,
+      "tolerantDifferentPixels": 35475,
+      "tolerantDifferentPercent": 10.7774,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "e44328ba65d4d54afcefe4295979c2df1e1d0da993e4c1f703d2d9eaac3510dc",
+      "captureSha256": "8ae552dfe3c2472b9ce04a76ea4d0c397f1d5f320a784655337d0f1c9fbd2617",
+      "pairSha256": "2cf9a84a567d432c4096271dfc764caadee678d5c52a6d6b1b40a3594b7d8a43",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pitch-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 206418,
+      "tolerantDifferentPixels": 31281,
+      "tolerantDifferentPercent": 9.5033,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "e6590102a2bfc1d0b364700f050fa9965be85e0ccab5bf26a90b5d2d3d80a31e",
+      "captureSha256": "5a4188cf23005172c8a36b7719846dbb9184a25218162a1afcfec4cf37d60c67",
+      "pairSha256": "d0353c2a8cfb2ee4bfa98685b60429d375a742bd1b5f1a8d19588ce9e8a961c4",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pan-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 206418,
+      "tolerantDifferentPixels": 30911,
+      "tolerantDifferentPercent": 9.3909,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "4e90c33db9e0546630c2ea68dafddcd97f5d85e148c05aa3b9daf6d43b84f415",
+      "captureSha256": "ea3e7ebb9909532bfba84eaed0586027e60c0f16dcbc50e581fd3e7ea3c987d8",
+      "pairSha256": "050c26ab886454692d3c13dd7ac220b7f0746ab82f9ff215b12d004d36a94c07",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-sound-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 43133,
+      "tolerantDifferentPixels": 21762,
+      "tolerantDifferentPercent": 6.6114,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "00138304050fac70925e2593c64fa268b45b7c93ce27b8b9fc76b077e16bb7eb",
+      "captureSha256": "f1befe9b09e820de3033d7e81aafba728dfd4aacc2fe7daf2dc5e9aaa8ac9663",
+      "pairSha256": "9b928f4a0bb6b8f1be1ab63768ca855fbcbf632ff5e791833c151f5e513224b1",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-mix-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 76032,
+      "tolerantDifferentPixels": 24982,
+      "tolerantDifferentPercent": 7.5896,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "647ab77f3ef55a98fab045f10131f7e95236f4d0cb09c08c97720de9c73c0c3e",
+      "captureSha256": "29c9796bec6307c1e923d56bad2ca1423915f6e99e9de288f735cc4abe5113ac",
+      "pairSha256": "b360a323a39e8bd348def26489555222868388b3c8835cd6a6651481fd9b5e71",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-patterns-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 160576,
+      "tolerantDifferentPixels": 36228,
+      "tolerantDifferentPercent": 11.0062,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "505898c53e7db2c8c2c61084b09ec863bf4cb0562fd0cd881e263b019e045dd8",
+      "captureSha256": "ce1e54dd4233f255b83f0b89cac639adafbb17aca3a8edf9fbfcb5312918619b",
+      "pairSha256": "c34c56e399d563ed0244d06f76029378b8f588d97092e3e8198cf8b990904c04",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-files-844x390": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 91891,
+      "tolerantDifferentPixels": 26599,
+      "tolerantDifferentPercent": 8.0809,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "3a2569b29eca8eb173234fce71902277b6f8e387fb03edabd2c30040c8e2f469",
+      "captureSha256": "20816c6cce7b0b70de0179b1c19e6b27acb2a9138cfbcca3f76de5016d2166f1",
+      "pairSha256": "cfdf6745fb7fe0fcb07dc5f65cdd2bcd2e1221910a6c88a9ecfde37ed67d446e",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-sequence-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 3085,
+      "tolerantDifferentPixels": 2716,
+      "tolerantDifferentPercent": 0.8251,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "0252c676f65dd6ccd72d2fd6098e68a137f42a89e6bcff526eaaaace5143fd3e",
+      "captureSha256": "8c74729ee69787c129fe990c11c32f54c703f3647545870ecf910462119ca1b8",
+      "pairSha256": "b6cd3682223c637aaf355db63d064f782afa931aed8d761295f74755da5516c5",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-chance-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 3502,
+      "tolerantDifferentPixels": 3076,
+      "tolerantDifferentPercent": 0.9345,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "f7b6dc0dcec0c37ac6ecbaa8c46fbbfe0747f380c2e46832a453dfe97ede09a7",
+      "captureSha256": "cf2d71da14986c7eb4fbcf02080172a7129dd71b97f0301a150ab41b1f537739",
+      "pairSha256": "addf6658b1352bc7c055956fdefe93338df73f3742c96bf2502e3b46f231fcc6",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pitch-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 3379,
+      "tolerantDifferentPixels": 2933,
+      "tolerantDifferentPercent": 0.8911,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "88fd91f7652af504cf96d8cbc56140f56b05869b00ebc09ae6480014c4867042",
+      "captureSha256": "02dba1cde9142fa36d34cbacd6abad01dbfd5a3455e1131b64c794831314da74",
+      "pairSha256": "973f640c022f6b83008e0352fcbc68b83e689fd7b5b3d1f6a8acbed1e959f50f",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-lane-pan-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 3061,
+      "tolerantDifferentPixels": 2720,
+      "tolerantDifferentPercent": 0.8263,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "9e7f6690d5c6614be05ad48b38e31ba0836b28cbdf5a783ddeba66c5df374297",
+      "captureSha256": "04d0ca3310a09aa12c1ae551e912f0a1370a6977b10d18826fd9b68d5a8bc6f2",
+      "pairSha256": "8ea5e67350c2af27dd7c9d4757017f275675b7092f4ac41832c48f40bf255285",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-sound-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 1295,
+      "tolerantDifferentPixels": 1087,
+      "tolerantDifferentPercent": 0.3302,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "458cb71bb062671711a5bf08c8042bd8a26a7adafaf4f76ec6f983635cd9c1ce",
+      "captureSha256": "86b43032eb1aa0f520df27f7d031059273c514bb79013cde2df4ed2d1b95692f",
+      "pairSha256": "f4de4e16b7a69acd086f0baf6cacc578d8e3e06541dd0720e881801c51b9c54e",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-mix-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 7248,
+      "tolerantDifferentPixels": 2793,
+      "tolerantDifferentPercent": 0.8485,
+      "atMostTwoPercentByTolerantMetric": true,
+      "referenceSha256": "e2263f3ee6a0f07c56b68a80082e663a26a5bb0062c26aa72028d7f3c337e6e8",
+      "captureSha256": "caca7ae0b9790cf1028f20311a86b5ae01c262f19591ea4c29aa3a9b8278a7ee",
+      "pairSha256": "84aa494d9307804ab10bad574736a7fed09c33f84f83b54d9032c1998a3e6439",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-patterns-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 83624,
+      "tolerantDifferentPixels": 32831,
+      "tolerantDifferentPercent": 9.9742,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "76b6025e97ea7629a7f51024b369b1600c79d3f574f516145fad288035360570",
+      "captureSha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2",
+      "pairSha256": "2f12d14dd03b2197bb657c1a218f8aa1cf89bc1c981b0932163157dbfee42ad4",
+      "captureMethod": "Same-source visual retry"
+    },
+    "remote-files-390x844": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 73395,
+      "tolerantDifferentPixels": 21859,
+      "tolerantDifferentPercent": 6.6408,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "07ad9c7671d76671719c707c5081d2147f503bd8df7d74bd7d2122a055e7e0ef",
+      "captureSha256": "b288a11bfdfd8f5288e226a79341312da2ceabbb0d367a690d30c60dae30b333",
+      "pairSha256": "0fab014c7d7dbb2ad97716d4c876eaf23b01e12118669d6d4dabf3f99d104ed9",
+      "captureMethod": "Same-source visual retry"
+    }
+  }
+}

@@ -54,8 +54,8 @@ function appendAccentRow(grid, kit, steps, accents) {
  }
 }
 
-export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accents}){
- if(!DRUM_VOICES[kit]||!Array.isArray(notes)||!Number.isInteger(endSample)||endSample<=0||!Number.isInteger(steps)||steps<1||steps>64)throw Error('Invalid local drum viewport');
+export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accents,selectedVoice=0}){
+ if(!DRUM_VOICES[kit]||!Array.isArray(notes)||!Number.isInteger(endSample)||endSample<=0||!Number.isInteger(steps)||steps<1||steps>64||!Number.isInteger(selectedVoice)||selectedVoice<0||selectedVoice>=DRUM_VOICES[kit].length)throw Error('Invalid local drum viewport');
  const track=kit==='808'?'drum808':'drum909',color=kit==='808'?'#ff4841':'#ff9529',voices=DRUM_VOICES[kit],channels=voices.map(([name])=>({name,type:'drum',color}));
  const state=createSequencerState({channels,patternCount:1,defaultSteps:steps});
  const grid=new Element('div');grid.className='sequencer-grid';
@@ -63,7 +63,7 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accent
  const ui=createFunkyBeatsUI({document,channels,state});ui.buildSequencerGrid();
  for(let ch=0;ch<voices.length;ch++){
   grid.children[ch].setAttribute('id','drum'+kit+'-voice-'+(ch+1));
-  const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);
+  const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);info.setAttribute('aria-current',String(ch===selectedVoice));
   info.children=info.children.filter(n=>typeof n==='object'&&!n.className?.includes('seq-channel-name')&&!n.className?.includes('seq-channel-color'));
   info.children.unshift(new VoiceGlyph(voices[ch][0]));
   const name=new Element('span');name.className='seq-channel-name';name.textContent=voices[ch][0];info.appendChild(name);

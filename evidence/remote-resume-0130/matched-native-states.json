@@ -1,0 +1,744 @@
+{
+  "schema": "dnbox-software-matched-native-captures/1",
+  "nightlySource": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "scope": "One native240x240 Web/FWUI capture list; source identities are explicit. No renderer replay or stock rebuild. Different source revisions are not promoted to whole-product parity.",
+  "websiteOfficialMatches": 17,
+  "pairedCompared": 15,
+  "pairedExact": 12,
+  "states": [
+    {
+      "state": "view-00-part-00-voice-00-page-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-00-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9363,
+        "pngSha256": "94f9fe178599738a49aaec6a25d9732b4ea467c07a291635ce1335d95d01675f",
+        "rgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 0,
+          "part": 0,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0000-view-00-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9091,
+        "pngSha256": "8a33e144c0173394df7a6047764c1e4e18d37fb1dfd32263dc365275356cbef5",
+        "rgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30"
+      }
+    },
+    {
+      "state": "view-03-part-00-voice-00-page-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-03-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10190,
+        "pngSha256": "0c400b97f455029ddc927ae92e2557dab4899913682f557e7c793b8672d8fc27",
+        "rgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 3,
+          "part": 0,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0210-view-03-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10114,
+        "pngSha256": "e3aa11f15bba6ce40b21328c4dd9f3e0378f7f978592af7ad948f85390a4fe01",
+        "rgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc"
+      }
+    },
+    {
+      "state": "view-03-part-00-voice-00-page-01",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-03-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10315,
+        "pngSha256": "ace0100ebc82d9d4fdc467b269517040822bd3b688d94b20a93cd25e655f8968",
+        "rgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 3,
+          "part": 0,
+          "voice": 0,
+          "page": 1,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0213-view-03-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10254,
+        "pngSha256": "a20e0e38c548ecf181b20b26b695831bf33487c1429f8aa23b075e90d112e4be",
+        "rgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec"
+      }
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-04-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9875,
+        "pngSha256": "fc73a522bbcbbb7b7ea4521fc307c3ae0611138048ae0eb64515bb046f72dd88",
+        "rgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 4,
+          "part": 0,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0240-view-04-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9866,
+        "pngSha256": "876c3dc03bd120b683c57cf10df1a7b227bd315642e23f80ea79aa34508ab076",
+        "rgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed"
+      }
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-01",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-04-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7157,
+        "pngSha256": "9619e0f23012041903e055e281f8df30ec63db02e37ed2c868a3d835780609b2",
+        "rgbSha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 4,
+          "part": 0,
+          "voice": 0,
+          "page": 1,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0243-view-04-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7021,
+        "pngSha256": "9ce64c8e9d42359233ce5ea903dc7de7ddee8d441abf7ae543aa44bc6d4900af",
+        "rgbSha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003"
+      }
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-02",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-04-part-00-voice-00-page-02.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7005,
+        "pngSha256": "89a1e81bdaaebed7b66b0bba292ef6c907daa5f7d3a8dc227aab5384b8a4fc96",
+        "rgbSha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 4,
+          "part": 0,
+          "voice": 0,
+          "page": 2,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0246-view-04-part-00-voice-00-page-02.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 6810,
+        "pngSha256": "d7ef2744daca28fbd69ef190cb2c00712c4c04fd8d0cd378eece6f6de5419fca",
+        "rgbSha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5"
+      }
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-03",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-04-part-00-voice-00-page-03.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8355,
+        "pngSha256": "d4d4ad2ed230c4c5b2dfe1a2b109a7658d18e5cdd46a81ac6fe306a83049fadd",
+        "rgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 4,
+          "part": 0,
+          "voice": 0,
+          "page": 3,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0249-view-04-part-00-voice-00-page-03.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8282,
+        "pngSha256": "58a131710136c356987b472ad68067972205688a68da58283dac2c30478d98d2",
+        "rgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7"
+      }
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-04",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-04-part-00-voice-00-page-04.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8021,
+        "pngSha256": "beec79ae5596847c6889cfa3ee34261df81dd0195d6856480770bee7a4d775bd",
+        "rgbSha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 4,
+          "part": 0,
+          "voice": 0,
+          "page": 4,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0252-view-04-part-00-voice-00-page-04.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7987,
+        "pngSha256": "50cabd67b67dc47657ee330a0004477cf68836fba895ef34ffd00f9348c9bd24",
+        "rgbSha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c"
+      }
+    },
+    {
+      "state": "view-06-part-00-voice-00-page-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-06-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7637,
+        "pngSha256": "9a4a4811167d55bb15c824d052d9bcb4867e875202f91d24d611623387906dcd",
+        "rgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 6,
+          "part": 0,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0315-view-06-part-00-voice-00-page-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7320,
+        "pngSha256": "77a26b3e0a747190ec57f8cc433f8b31db0122a34d95d02ba7b584aa308563da",
+        "rgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37"
+      }
+    },
+    {
+      "state": "view-06-part-00-voice-00-page-01",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/view-06-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7895,
+        "pngSha256": "9a4630a929325f31d89cf97d86579e501521146e939ab151b954457e4dfac55a",
+        "rgbSha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 6,
+          "part": 0,
+          "voice": 0,
+          "page": 1,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0318-view-06-part-00-voice-00-page-01.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 7591,
+        "pngSha256": "10a3dec75a8b75d454efce0de634d52a51cba0b02aa842981cb0a6ee78036a6c",
+        "rgbSha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345"
+      }
+    },
+    {
+      "state": "global-section--1-row-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/global-section--1-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10988,
+        "pngSha256": "c9c3255c64231f69b8d42a1c53969e53dbfdb0b2c4a168f4c140052be1a79c5d",
+        "rgbSha256": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3"
+      },
+      "pairedComparison": "DIFFERENT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 5,
+          "part": 2,
+          "voice": 0,
+          "page": 0,
+          "overlay": 1,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0393-global-section--1-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10852,
+        "pngSha256": "bda6f380fd406ff89c951895f620a1879c52acdafee4e417ad1e90b2910048a5",
+        "rgbSha256": "855902c7e66420098c14ec04c7d29251b756e111ebe58dc51fa8b2ac3570a70e"
+      }
+    },
+    {
+      "state": "global-section-0-row-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/global-section-0-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 10839,
+        "pngSha256": "6183ba8c431614eefc414a12ebad3eecfbe0ebac72277870e10a589506580b3f",
+        "rgbSha256": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da"
+      },
+      "pairedComparison": "DIFFERENT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 5,
+          "part": 2,
+          "voice": 0,
+          "page": 0,
+          "overlay": 1,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0399-global-section-0-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 11094,
+        "pngSha256": "b78e80928d9fc6edded9a64a945fc0e54775e89cb5759755a201b3110ee9bf02",
+        "rgbSha256": "0022251c8fea4bd937678b07af0a08df8e478b13beecd432184e9a6b6f7cdc20"
+      }
+    },
+    {
+      "state": "global-section-3-row-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/global-section-3-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9740,
+        "pngSha256": "e5a01656cfec6ed82466503033901e997a9919712d88a2618501ce8e62fcd163",
+        "rgbSha256": "174401b00da703fc1a9cde26e8503dd8d1df01c4597942129c5fe7f46c712c93"
+      },
+      "pairedComparison": "DIFFERENT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 5,
+          "part": 2,
+          "voice": 0,
+          "page": 0,
+          "overlay": 1,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-0423-global-section-3-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9822,
+        "pngSha256": "c216a04b1285ec297569a5cab98b5cb969bb50596c01c03825f6e4c276e63fdf",
+        "rgbSha256": "d0dd240bc74bcefae1a674027f43d7c59e1ed26d42a9cdd596099ae39ca7291f"
+      }
+    },
+    {
+      "state": "03-picked-fader",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/03-picked-fader.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8669,
+        "pngSha256": "b2de8aec401136c6be6465ae31e6ecb867cd9170cce57f53021d771f988a2b17",
+        "rgbSha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 0,
+          "part": 2,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 0,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-1554-03-picked-fader.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8331,
+        "pngSha256": "54e91d26f4458920df4802397270b0e6a094d4d0df4965cd7723dee86c190bc3",
+        "rgbSha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d"
+      }
+    },
+    {
+      "state": "04-delay-knob",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/04-delay-knob.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9083,
+        "pngSha256": "d2a45ae053fb3ae28fd7b718a1a7d9aba80cd5e73360dee60862a04548df6744",
+        "rgbSha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee"
+      },
+      "pairedComparison": "EXACT_RGB",
+      "pairedHost": {
+        "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+        "state": {
+          "view": 0,
+          "part": 2,
+          "voice": 0,
+          "page": 0,
+          "overlay": 0,
+          "help": 0,
+          "lane": 0,
+          "battery": 3,
+          "playing": 0,
+          "smcKind": 1,
+          "smcPeek": 0
+        },
+        "path": "/workspace/scratch/857bb2409f82/remote-input-recovery/lane-remote-resume-0130-f1786ebec261/host-ui/renders/f1-1555-04-delay-knob.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 8793,
+        "pngSha256": "896318ca8a94a0bc1290222b28c343fd00fdc2fafc66ba54ceba1c3b66933232",
+        "rgbSha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee"
+      }
+    },
+    {
+      "state": "global-section-4-row-00",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/global-section-4-row-00.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 11430,
+        "pngSha256": "e20cdea90fc15c80d4145bd9fe902000796accd46d8449e476e237e51c8e1269",
+        "rgbSha256": "9e365eb9d91fde2846ffb382c1a77164b3f5a24aeeed04e1e48b4af2c5ccb4df"
+      },
+      "pairedComparison": "NOT_RECORDED"
+    },
+    {
+      "state": "list-view-04-part-00-voice-00-row-17",
+      "website": {
+        "firmwareCommit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+        "path": ".output/mix-project-review/website-618-captures/list-view-04-part-00-voice-00-row-17.png",
+        "size": [
+          240,
+          240
+        ],
+        "bytes": 9549,
+        "pngSha256": "c19da3e28952479f4941c07042d2916945aa2829222119c6d5573c78b16818ae",
+        "rgbSha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431"
+      },
+      "pairedComparison": "NOT_RECORDED"
+    }
+  ],
+  "eliteProLinkedSamples": {
+    "elite": {
+      "packageSha256": "3aaba53459442cdd1f652dedf2c438a30189e4f5d06859270e9b0da1bd9bfecd",
+      "exit": 0,
+      "samples": [
+        {
+          "screen": "startup",
+          "timeMs": 448,
+          "path": "elite/startup.png",
+          "rgbSha256": "d67e0514a072bef19007e7c70cab2b8f86a573b84285e969eac157bc28c1f68e",
+          "pngSha256": "cb42864635c37ddb56975f032796e138683e1c45a767ae011a204f1d118fa62d"
+        },
+        {
+          "screen": "ordinary",
+          "timeMs": 1408,
+          "path": "elite/ordinary.png",
+          "rgbSha256": "fd01441ea4e0ceddeed6531b8cb01337b4d9047a6db649015da4a4dbac9e69bf",
+          "pngSha256": "831cbba5148f834376f22ebae2abf7502938e98a41c711f3d249ed536376585c"
+        },
+        {
+          "screen": "drum-para",
+          "timeMs": 1792,
+          "path": "elite/drum-para.png",
+          "rgbSha256": "0a42bf402f3dfdf1c0d75e268aa0f25fc2c606655976d07c3b80d6e7befdc2c1",
+          "pngSha256": "f2d887e441af0454ae5527c366fcd8647df80b16ecb15dde81ea2c4a60a87c1e"
+        },
+        {
+          "screen": "fx-first",
+          "timeMs": 2176,
+          "path": "elite/fx-first.png",
+          "rgbSha256": "18a3d915da1ba5e41b862c9a82757e3ca33233fb310ebee46492ae252b17bbde",
+          "pngSha256": "d218db3497951b7b27f692ef16e4f185a2df3bd1b76d0329b854ffb515e2bdc2"
+        },
+        {
+          "screen": "fx-second",
+          "timeMs": 2560,
+          "path": "elite/fx-second.png",
+          "rgbSha256": "d1986b486a5a3c922fbfc0a54d759cc448afe3baed4642b2863cea1ef3933622",
+          "pngSha256": "d25d1e719f3718f9d146797e2cb1ae8799b3bafe480a646b1614e3708213ac9c"
+        },
+        {
+          "screen": "globe",
+          "timeMs": 2912,
+          "path": "elite/globe.png",
+          "rgbSha256": "a054075649630b272896fbfcc67a90cd10019e07cd4bed08631d8b7d22fd7735",
+          "pngSha256": "9dc3c8b26e99d0caea5c5491598e6c3a8a21af71d44407edff0612fd1100935f"
+        }
+      ]
+    },
+    "pro": {
+      "packageSha256": "8f399e350a3af8ded3bee7f05d60f4b01c966b785d7a336c90dcd371178cef92",
+      "exit": 0,
+      "samples": [
+        {
+          "screen": "startup",
+          "timeMs": 448,
+          "path": "pro/startup.png",
+          "rgbSha256": "d67e0514a072bef19007e7c70cab2b8f86a573b84285e969eac157bc28c1f68e",
+          "pngSha256": "cb42864635c37ddb56975f032796e138683e1c45a767ae011a204f1d118fa62d"
+        },
+        {
+          "screen": "ordinary",
+          "timeMs": 1408,
+          "path": "pro/ordinary.png",
+          "rgbSha256": "fd01441ea4e0ceddeed6531b8cb01337b4d9047a6db649015da4a4dbac9e69bf",
+          "pngSha256": "831cbba5148f834376f22ebae2abf7502938e98a41c711f3d249ed536376585c"
+        },
+        {
+          "screen": "drum-para",
+          "timeMs": 1792,
+          "path": "pro/drum-para.png",
+          "rgbSha256": "0a42bf402f3dfdf1c0d75e268aa0f25fc2c606655976d07c3b80d6e7befdc2c1",
+          "pngSha256": "f2d887e441af0454ae5527c366fcd8647df80b16ecb15dde81ea2c4a60a87c1e"
+        },
+        {
+          "screen": "fx-first",
+          "timeMs": 2176,
+          "path": "pro/fx-first.png",
+          "rgbSha256": "18a3d915da1ba5e41b862c9a82757e3ca33233fb310ebee46492ae252b17bbde",
+          "pngSha256": "d218db3497951b7b27f692ef16e4f185a2df3bd1b76d0329b854ffb515e2bdc2"
+        },
+        {
+          "screen": "fx-second",
+          "timeMs": 2560,
+          "path": "pro/fx-second.png",
+          "rgbSha256": "d1986b486a5a3c922fbfc0a54d759cc448afe3baed4642b2863cea1ef3933622",
+          "pngSha256": "d25d1e719f3718f9d146797e2cb1ae8799b3bafe480a646b1614e3708213ac9c"
+        },
+        {
+          "screen": "globe",
+          "timeMs": 2912,
+          "path": "pro/globe.png",
+          "rgbSha256": "a054075649630b272896fbfcc67a90cd10019e07cd4bed08631d8b7d22fd7735",
+          "pngSha256": "9dc3c8b26e99d0caea5c5491598e6c3a8a21af71d44407edff0612fd1100935f"
+        }
+      ]
+    }
+  },
+  "linkedHostBodyComparisons": [
+    {
+      "linkedSample": "drum-para",
+      "hostStateId": "view-01-part-00-voice-00-page-00",
+      "fullRgb565Differences": 4331,
+      "bodyRgb565Differences": 16
+    },
+    {
+      "linkedSample": "fx-first",
+      "hostStateId": "view-03-part-00-voice-00-page-00",
+      "fullRgb565Differences": 0,
+      "bodyRgb565Differences": 0
+    },
+    {
+      "linkedSample": "fx-second",
+      "hostStateId": "view-03-part-00-voice-00-page-01",
+      "fullRgb565Differences": 9,
+      "bodyRgb565Differences": 0
+    }
+  ],
+  "shipping026Panels": "mix-project-review/native-comparison-hashes.json"
+}

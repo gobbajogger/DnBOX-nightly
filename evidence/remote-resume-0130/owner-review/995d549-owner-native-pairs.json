@@ -1,0 +1,453 @@
+{
+  "sourceAppSHA256": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+  "browserVersion": "151.0.7922.34",
+  "referenceType": "owner PDF draft, same native drawing size",
+  "pairs": {
+    "01-notes": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 880289,
+      "tolerantDifferentPixels": 116358,
+      "tolerantDifferentPercent": 8.9782,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "d7d49ad09bfd940635f58375aea6575a5ef93056dae43a0f2c21d35a3e14ae3b",
+      "captureSha256": "32ca617fb50b7f3a3417ea1f7e50fe9374250994d8fbd75018fd5038fb2019ec",
+      "pairSha256": "b613bbd3566f917d5dfdc2857bf23757919524877a29f23172353ec68db43821",
+      "page": 1,
+      "documentWidth": 1440,
+      "mountedControls": 41
+    },
+    "02-steps": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 651405,
+      "tolerantDifferentPixels": 220789,
+      "tolerantDifferentPercent": 17.0362,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+      "captureSha256": "9899534ea23271368b274b06dc7fbff0c027c8d7bba0656a3b546c6986236167",
+      "pairSha256": "c9fd2e5e69b3047d3693601194e62303ea16ff77023831daf5f4ad59551792f4",
+      "page": 2,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Fresh changed desktop 909 Drum crosswalk capture"
+    },
+    "03-motion": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 915303,
+      "tolerantDifferentPixels": 135284,
+      "tolerantDifferentPercent": 10.4386,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "38ffba86907fea65e7cab8f48e655299dc0704a29704d77234e6b11a11074943",
+      "captureSha256": "cb295ad2d6e49c11f7695a56a98a970c6c0fb4e10067caeee33c8599151f9fd3",
+      "pairSha256": "7e83f9bb94fafaecd2479033596c06b2a1683ee2eed8e39edf7be94d0a602bf2",
+      "page": 3,
+      "documentWidth": 1440,
+      "mountedControls": 63
+    },
+    "04-chicago": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 567475,
+      "tolerantDifferentPixels": 144914,
+      "tolerantDifferentPercent": 11.1816,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "0c5b67ff902812be4174cac2230c3909477065092b51cdbb69b47889fe0cf05e",
+      "captureSha256": "8ae92118ba6079cf8a88651da8f8d7c222ab479939acc5f4a1674663f6a12a62",
+      "pairSha256": "b80329c205bbdf8f38390c3fa75820db72f82e94eaad60deba3ffe5bc9dc061f",
+      "page": 4,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Reused Chicago Sound family capture"
+    },
+    "05-miami": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 609504,
+      "tolerantDifferentPixels": 129620,
+      "tolerantDifferentPercent": 10.0015,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "6811c8f19ca2ef182d437350533bde9817d118ee297bc276135b0e7620d34a85",
+      "captureSha256": "55339bb3c30ed82e1eaffcc73a7ed8ce4662f738e793ba7c93147fe46aa647df",
+      "pairSha256": "dd93474e53de228a31a876ec482d3c86091ff916a213a07abef4c717febcc5af",
+      "page": 5,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Reused Miami Sound family capture"
+    },
+    "05-superj6": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 672908,
+      "tolerantDifferentPixels": 143937,
+      "tolerantDifferentPercent": 11.1062,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "6811c8f19ca2ef182d437350533bde9817d118ee297bc276135b0e7620d34a85",
+      "captureSha256": "0c84bfe8b6762976a8278269b3272ffb25dee75c547f4e8010d2485f6ec91165",
+      "pairSha256": "cb966f9cacedc683e27b47743ae2e2bf55c482513f4af5dc948629aa4e3faa7c",
+      "page": 5,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Reused SuperJ6 Sound family capture"
+    },
+    "06-levels": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 388066,
+      "tolerantDifferentPixels": 91669,
+      "tolerantDifferentPercent": 7.0732,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "d56412acdbbaae3ab3f0f5e82a7e9a2fad0913581e31de2d4d5b7aa93c3b2c61",
+      "captureSha256": "56d4809ca99c120ff5bc91e3053a9122d8fd41106c4a16009f32bbb4de44e2ac",
+      "pairSha256": "fdef96a180e5c64f3b9baa05b0ca1aaba87676da4b497877635f760be9c9c0f2",
+      "page": 6,
+      "documentWidth": 1440,
+      "mountedControls": 52
+    },
+    "07-master": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 413412,
+      "tolerantDifferentPixels": 77354,
+      "tolerantDifferentPercent": 5.9687,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "223f99f93784b51a6b5b6daf0b39cb649d389fb53331193ce7dffc3752b09f0a",
+      "captureSha256": "a8290d53b71a2b5ecb0a1f0f3672c0820102eea4a34c6f6f01e67be00b6310b0",
+      "pairSha256": "bfb40810916c63608206ec43b6e77e1db6f8701856324c26d451d4b40ccbfd65",
+      "page": 7,
+      "documentWidth": 1440,
+      "mountedControls": 42
+    },
+    "08-fx": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 300213,
+      "tolerantDifferentPixels": 120307,
+      "tolerantDifferentPercent": 9.2829,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "52448fe6ee62793e9498fa781d79eb24fe6e9035cbe9839d9ff3e1b3cae57fc6",
+      "captureSha256": "c6b8670ce01ee32053b444cea4008a12c329faa186b4e6b798cf1a0bb1b1e27c",
+      "pairSha256": "1ac8c81734031ca6bb141fcbc345de10362aebe2941a633344fac0d5f7895374",
+      "page": 8,
+      "documentWidth": 1440,
+      "mountedControls": 67
+    },
+    "09-patterns": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 439432,
+      "tolerantDifferentPixels": 87456,
+      "tolerantDifferentPercent": 6.7481,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "aa18ca6e4b5727d666cb1f773218b0029e96993b32324bd47435da4a2b29f52a",
+      "captureSha256": "9e1fa2366bf425718f278971e5c815e56c037f2f50279295b38500fc1535fbef",
+      "pairSha256": "1ee4dd3cf424011b40488521543f15637940eb7b62a72005011da383ba0df17b",
+      "page": 9,
+      "documentWidth": 1440,
+      "mountedControls": 55
+    },
+    "10-song": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 861912,
+      "tolerantDifferentPixels": 106061,
+      "tolerantDifferentPercent": 8.1837,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "f91cd729b35840991389f80f10615e1f3b594359f5fb0e5af6221846eff8cd0a",
+      "captureSha256": "41090c772596f25095982c96131298bc93c6067e372d7f26c84de1d06586087a",
+      "pairSha256": "56658758922752ce8e9fbe9ca3ff3d1b90697c8cff84bf95c8112340f7f4ecaa",
+      "page": 10,
+      "documentWidth": 1440,
+      "mountedControls": 38
+    },
+    "11-slices": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 601004,
+      "tolerantDifferentPixels": 119484,
+      "tolerantDifferentPercent": 9.2194,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "98bb9b7365c65664f2c613c1f4c614df7619129ffb5cd686539379de3093605f",
+      "captureSha256": "6643833d0fee70a5fc56516a31d69ee88d37e8857653806b14d3332075d4243e",
+      "pairSha256": "7bd1660b175007ac721da9723b5c8cae9f0d45904eabc28b12fbf3f1968040b8",
+      "page": 11,
+      "documentWidth": 1440,
+      "mountedControls": 55
+    },
+    "11-generator": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 544955,
+      "tolerantDifferentPixels": 115019,
+      "tolerantDifferentPercent": 8.8749,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "98bb9b7365c65664f2c613c1f4c614df7619129ffb5cd686539379de3093605f",
+      "captureSha256": "0aa4d0dcd09cdb918bce1c2361fa0a43a0d85df85406dbab8420d31909a0f667",
+      "pairSha256": "4a7c0dedcefb8ec8ffb7c98c8393d9329f7cd8c3a4eaeadf98d34a65f3fff272",
+      "page": 11,
+      "documentWidth": 1440,
+      "mountedControls": 35
+    },
+    "12-projects": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 254412,
+      "tolerantDifferentPixels": 83184,
+      "tolerantDifferentPercent": 6.4185,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+      "captureSha256": "9fb996afb26a287bd68e11c21ee9aa44cc7bf8f8825ecc50e8685723a032dabb",
+      "pairSha256": "bfcda2abfb864a09f172bd43e12eee5f6df49f0a14eac58bebef934881f9c5e1",
+      "page": 12,
+      "captureSource": "Projects v2 proof with CSS 8ebbe0ed9212e8153f47091e65f2b9a34c842c920289f99127530b82a078edfe",
+      "captureMethod": "Reused native 1440\u00d7900 desktop Projects proof. Product source matches final 995d549 except the inactive \u2264739px narrow landscape CSS."
+    },
+    "13-review": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 1201370,
+      "tolerantDifferentPixels": 309186,
+      "tolerantDifferentPercent": 23.8569,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "captureSha256": "7be4826b89129ff1e56e31fea897150358ccf003e5642b23d267ebb9dfcfc262",
+      "pairSha256": "393d7f52677b4595d42a02a921c849ea1b463fc149b3d52a784d235261f3c0c8",
+      "page": 13,
+      "documentWidth": 1440,
+      "mountedControls": 43
+    },
+    "13-connect": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 446125,
+      "tolerantDifferentPixels": 79317,
+      "tolerantDifferentPercent": 6.1201,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "captureSha256": "926d5f1838648854a87e245b1f8a0013183b7c7a1f04c34dae12d8001a450794",
+      "pairSha256": "ebe914dab718ecb0b160a23d0316b40118a0a266b090cbf37c4900dc4ea6cad2",
+      "page": 13,
+      "documentWidth": 1440,
+      "mountedControls": 33
+    },
+    "14-notes": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 224445,
+      "tolerantDifferentPixels": 52740,
+      "tolerantDifferentPercent": 16.0226,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "3a45f9d6da0cfac191bfcb2fc72034ae925909c25832ec0e622444cbe2945fd5",
+      "captureSha256": "130a7a8094f21cc521b0695ef392a8cf37318fbec727c72215f3696cd8e3dc04",
+      "pairSha256": "9454d5fec7359f906ad5414683e19f8ca4e61d6501db43123830d23905ddc5b3",
+      "page": 14,
+      "documentWidth": 844,
+      "mountedControls": 41
+    },
+    "15-steps": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 200805,
+      "tolerantDifferentPixels": 83888,
+      "tolerantDifferentPercent": 25.4855,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "0a847adfb02200d5d064d1d5eb2d6d2bcaff233b9f2a8b92a765a0648986c158",
+      "captureSha256": "79a64d19293f99415f54d25b17834cfcb40795511e8da03d4f21e497055f2e29",
+      "pairSha256": "a482ec51e5721cd1269c5a810b5be57bb563e66af0433196e98e0ce55fc7e1e0",
+      "page": 15,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Fresh changed landscape 909 Drum capture"
+    },
+    "16-levels": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 110703,
+      "tolerantDifferentPixels": 39604,
+      "tolerantDifferentPercent": 12.0318,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "b68c2b0e78ef78aa9b5b570b925643005dbf6283758dd97f5d1b022a470c694b",
+      "captureSha256": "f1705666b05ec4bc78967e9432059b0b73b9973688f87e236fb298d5940f47f7",
+      "pairSha256": "0b35122fc678a9d7631e71a8ba836e0f970557534573c34fecd98878c6942e25",
+      "page": 16,
+      "documentWidth": 844,
+      "mountedControls": 52
+    },
+    "17-motion": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 223165,
+      "tolerantDifferentPixels": 58474,
+      "tolerantDifferentPercent": 17.7646,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "be872aa194e80d59cdc33054c477ee3f6ee0c08d8107d0a59957db5a3aaf98f7",
+      "captureSha256": "61567a5fa7290ef4ecbb3e789eb76867808c8505dbcf741b8f45fb50b0f97f4f",
+      "pairSha256": "d48038243e778133c6021536cddc3ccd72fcdcadb7ca4c021a61e447590db020",
+      "page": 17,
+      "documentWidth": 844,
+      "mountedControls": 63
+    },
+    "18-bassdrum": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 75287,
+      "tolerantDifferentPixels": 38493,
+      "tolerantDifferentPercent": 11.6943,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "95009a75503c1fce4c92681c7a3e6c2a0f7e5f255eae8ea9de058fd1aa6ccf65",
+      "captureSha256": "8650d8b52cb9dc34be2e9aeb3ea3b7f771526367562f202d991490c8e1c14260",
+      "pairSha256": "d75a6c96f980d996d21d45d3db2fe0a5c14f3ca48d9d1e6e731e0a52da364778",
+      "page": 18,
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureMethod": "Reused closed Sound strip from independent Drum probe"
+    },
+    "19-patterns": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 152363,
+      "tolerantDifferentPixels": 53975,
+      "tolerantDifferentPercent": 16.3978,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "a01fa1b871a3b83b48a838581f241c41eef1407c5d9b0d4faf6e39cb85c94153",
+      "captureSha256": "78b8404e93fef461efe4b05047bc605ac834e745ea97772b444865d7f0355a09",
+      "pairSha256": "99efb3e5166d09508fb74a85e74d80ee981be2283fc2d2b4e9e5c0a962bf24d2",
+      "page": 19,
+      "documentWidth": 844,
+      "mountedControls": 55
+    },
+    "20-projects": {
+      "nativeSize": [
+        844,
+        390
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 97631,
+      "tolerantDifferentPixels": 35992,
+      "tolerantDifferentPercent": 10.9345,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "e8d0b47fdf5315b00ef67b25423f17ada6e2a4db237f11f6fb9fa9f40eac833d",
+      "captureSha256": "8aef30029448b25d5417900ebb7ab653214ffc5faf4baa6d83a86e61e675443b",
+      "pairSha256": "6b0ba3d069d6817c1fbe8a2a5d7ef523c2f46f01191b43a96a0aaf978a1bba57",
+      "page": 20,
+      "documentWidth": 844,
+      "mountedControls": 31
+    },
+    "21-notes": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 187757,
+      "tolerantDifferentPixels": 53144,
+      "tolerantDifferentPercent": 16.1453,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "2f1a8e8d4edf4a5614725884f5e9780014b1a9489b5fec2b49a501d90208c162",
+      "captureSha256": "d964ae1d72c4d6f206526ae703603b3ff936f79ec233ac078e7a8360f6261d89",
+      "pairSha256": "37b7223a8c2142aff5e74e79b2225b26f4216739c6e5bb23867ce189dcc76d82",
+      "page": 21,
+      "documentWidth": 390,
+      "mountedControls": 41
+    },
+    "22-gate": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 223250,
+      "tolerantDifferentPixels": 48159,
+      "tolerantDifferentPercent": 14.6309,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "b2cd1958101c9eff33cf2164eea6084b501d92e4480020209ab3b5e70fedb7e2",
+      "captureSha256": "f7245bf7826649a64a75f02cad04f453c94c722d48c9b4f931d4cc804169774a",
+      "pairSha256": "3775eb73e57cde43d76499d2e2bd4429312a2ace595624544a6f099f02bc2a99",
+      "page": 22,
+      "documentWidth": 390,
+      "mountedControls": 41
+    },
+    "23-levels": {
+      "nativeSize": [
+        390,
+        844
+      ],
+      "totalPixels": 329160,
+      "exactDifferentPixels": 103222,
+      "tolerantDifferentPixels": 42492,
+      "tolerantDifferentPercent": 12.9092,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "52fd07dac71aa73277178c8417de8f29613012e540903486398063d0644f350d",
+      "captureSha256": "41c90e1a985184bc9da8536a080ca39b19d5ce76d2ba9c852a68c0b5ce6bf586",
+      "pairSha256": "aaa55796136357322921f2dfc17ca8814f0188972489b609118be98912aaa4cc",
+      "page": 23,
+      "documentWidth": 390,
+      "mountedControls": 52
+    }
+  },
+  "startingSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+  "finalCandidateSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "finalCandidateTree": "88205ac762c43545e3935f07860b53b19a7e8039",
+  "strategy": "Reuse earlier actuals with explicit provenance. Page 2/15 were freshly captured at the previous corrected source. Page 12 reuses matching Projects v2 proof. No PDF at 1024\u00d7640."
+}

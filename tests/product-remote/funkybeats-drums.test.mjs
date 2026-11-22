@@ -75,3 +75,19 @@ test('both kit rails retain all eleven distinct shared R22 voice identities',asy
   for(const id of ids)assert.ok(html.includes(GLYPH_DRAW[id].svg),id);
  }
 });
+
+// The Sound voice selector owns the rail highlight; hits are independent of it.
+test('each kit marks exactly the selected Sound voice and rejects an unknown voice',async()=>{
+ const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ for(const kit of ['909','808']){
+  for(const selectedVoice of [0,5,10]){
+   const html=renderFunkyBeatsDrums({kit,notes:[],endSample:88200,selectedVoice});
+   assert.equal((html.match(/aria-current="true"/g)||[]).length,1);
+   const rows=html.split(/<div class="seq-row"/).slice(1,12);
+   assert.equal(rows.length,11);
+   rows.forEach((row,i)=>assert.equal(/aria-current="true"/.test(row),i===selectedVoice));
+   assert.equal((html.match(/data-r22-glyph=/g)||[]).length,11);
+  }
+  assert.throws(()=>renderFunkyBeatsDrums({kit,notes:[],endSample:88200,selectedVoice:11}),/Invalid/);
+ }
+});

@@ -1,5 +1,5 @@
 """Actual Draft composition and touch-sized controls; no native/cue/playback claims."""
-import asyncio,importlib.util,json,subprocess,tempfile
+import asyncio,importlib.util,json,runpy,subprocess,tempfile
 from pathlib import Path
 from playwright.async_api import async_playwright,expect
 from break_generator_journey import exercise as exercise_break_generator
@@ -166,6 +166,61 @@ async def check_break_playback(page, preview):
     assert await leaving.evaluate("s => s.leftWhilePlaying && !s.ended && s.audio.paused && !s.audio.hasAttribute('src')"), 'Sound must retire active audio before its natural end'
     await leaving.dispose()
 
+async def check_landscape_drum_banks(page, cells):
+    # Reuse the page-15 fixture's full bounds and center-hit measurement.
+    measure = runpy.run_path(str(Path(__file__).with_name('page15-density-browser.py')))['MEASURE']
+    rows = page.locator('.sequencer-grid')
+    viewport = await rows.bounding_box()
+    await page.mouse.move(viewport['x'] + viewport['width'] / 2, viewport['y'] + viewport['height'] / 2)
+    await page.mouse.wheel(0, -1200)
+    await page.wait_for_function("document.querySelector('.sequencer-grid').scrollTop === 0")
+    initial = await page.evaluate(measure)
+    first_six = {(voice, step) for voice in range(6) for step in range(16)}
+    assert first_six <= {tuple(cell) for cell in initial['visible']}, initial
+
+    async def horizontal_positions():
+        positions = await page.locator('.drum-grid-panel, .funkybeats-sequencer, .sequencer-grid').evaluate_all(
+            'panes => panes.map(pane => [pane.scrollLeft, pane.scrollWidth, pane.clientWidth])')
+        assert all(x == 0 and content <= viewport for x, content, viewport in positions), positions
+        return await cells.evaluate_all(
+            'buttons => buttons.slice(0, 96).map(button => {const r=button.getBoundingClientRect();return [r.left,r.right]})')
+
+    positions = await horizontal_positions()
+    for start in range(0, 96, 16):
+        row = positions[start:start + 16]
+        assert all(right <= next_left for (_, right), (next_left, _) in zip(row, row[1:])), row
+    for delta in (1200, -1200):
+        async with page.expect_event('console', predicate=lambda event: event.text == 'Drum horizontal wheel delivered'):
+            await rows.evaluate("""pane => pane.addEventListener('wheel', event => {
+                if (event.isTrusted && event.deltaX) console.debug('Drum horizontal wheel delivered');
+            }, {once:true})""")
+            await page.mouse.wheel(delta, 0)
+        await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+        assert await horizontal_positions() == positions
+    assert first_six <= {tuple(cell) for cell in (await page.evaluate(measure))['visible']}
+
+    await page.mouse.wheel(0, 78)
+    await page.wait_for_function("document.querySelector('.sequencer-grid').scrollTop > 0")
+    await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+    middle = await page.evaluate(measure)
+    await page.mouse.wheel(0, 1200)
+    await page.wait_for_function("""() => {
+        const rows = document.querySelector('.sequencer-grid');
+        return rows.scrollTop >= rows.scrollHeight - rows.clientHeight - 1;
+    }""")
+    bottom = await page.evaluate(measure)
+    await full_bounds(cells.last)
+    observed = {tuple(cell) for state in (initial, middle, bottom) for cell in state['visible']}
+    assert len(observed) == 176, sorted(observed)
+    bottom_scroll = await rows.evaluate('rows => rows.scrollTop')
+    assert await horizontal_positions() == positions
+    await page.mouse.wheel(0, -1200)
+    await page.wait_for_function("document.querySelector('.sequencer-grid').scrollTop === 0")
+    assert first_six <= {tuple(cell) for cell in (await page.evaluate(measure))['visible']}
+    await full_bounds(cells.first)
+    return {'rows': bottom_scroll, 'steps': 0, 'initialPads': 96, 'wheelReachablePads': len(observed)}
+
+
 async def cases(evidence=None):
  proof=[]
  async with async_playwright() as pw:
@@ -205,24 +260,18 @@ async def cases(evidence=None):
        assert grid['x']+grid['width']<=sound['x']+1 and abs(grid['y']-sound['y'])<=2,(w,grid,sound)
       else:assert grid['y']+grid['height']<=sound['y']+1,(w,grid,sound)
       cells=p.locator('[data-drum-note]');await expect(cells).to_have_count(176)
-      dimensions=await cells.evaluate_all('es=>es.map(e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))');assert all(d['width']>=39.9 and d['height']>=39.9 for d in dimensions)
+      minimum_cell = 24 if (w,h)==(844,390) else 40
+      dimensions = await cells.evaluate_all('buttons => buttons.map(b => {const r=b.getBoundingClientRect();return [r.width,r.height]})')
+      assert all(width>=minimum_cell-.1 and height>=minimum_cell-.1 for width,height in dimensions), (w,h,dimensions)
       await cells.first.focus()
       for index in range(176):
        await expect(cells.nth(index)).to_be_focused();await full_bounds(cells.nth(index))
        if index<175:await p.keyboard.press('Tab')
       for index in range(174,158,-1):
        await p.keyboard.press('Shift+Tab');await expect(cells.nth(index)).to_be_focused();await full_bounds(cells.nth(index))
-      for target in [cells.first,cells.last]:await reachable(target,40)
-      if w==844:
-       # Native diagonal wheel latches to one scroller. Prove both real axes separately.
-       await p.mouse.move(grid['x']+grid['width']/2,grid['y']+50);await p.mouse.wheel(0,-1200);await p.wait_for_function("document.querySelector('.sequencer-grid').scrollTop===0")
-       await p.mouse.move(grid['x']+grid['width']/2,grid['y']+12);await p.mouse.wheel(-1200,0);await p.wait_for_function("document.querySelector('.funkybeats-sequencer').scrollLeft===0")
-       await p.mouse.wheel(1200,0);await p.wait_for_function("document.querySelector('.funkybeats-sequencer').scrollLeft>0")
-       await p.mouse.move(grid['x']+grid['width']/2,grid['y']+50);await p.mouse.wheel(0,1200);await p.wait_for_function("document.querySelector('.sequencer-grid').scrollTop>0")
-       await full_bounds(cells.last)
-       scroll_samples.append({'kit':kit,'rows':await p.locator('.sequencer-grid').evaluate('e=>e.scrollTop'),'steps':await p.locator('.funkybeats-sequencer').evaluate('e=>e.scrollLeft')})
-       await p.mouse.wheel(0,-1200);await p.wait_for_function("document.querySelector('.sequencer-grid').scrollTop===0")
-       await p.mouse.move(grid['x']+grid['width']/2,grid['y']+12);await p.mouse.wheel(-1200,0);await p.wait_for_function("document.querySelector('.funkybeats-sequencer').scrollLeft===0");await full_bounds(cells.first)
+      for target in [cells.first,cells.last]:await reachable(target,minimum_cell)
+      if (w,h)==(844,390):
+       scroll_samples.append({'kit':kit,**await check_landscape_drum_banks(p,cells)})
       if w>600:assert await p.locator('#other-view').evaluate('e=>e.scrollTop')==0,'No-observer workspace displaced instead of inner scrolling'
       old=(await core.draft_state(p))['notes'];await p.locator('#sound-voice').select_option('10');await expect(p.locator('#sound-voice')).to_be_focused();await expect(p.locator('.drum-sound-panel .source-scene')).to_have_attribute('data-source-frame',__import__('re').compile('/'+kit+'-voice-10.svg$'));assert (await core.draft_state(p))['notes']==old
       cell=p.locator('[data-drum-note]').first;before=await cell.get_attribute('aria-pressed');await cell.click();await expect(cell).to_have_attribute('aria-pressed','false' if before=='true' else 'true');await p.locator('#undo').click();assert (await core.draft_state(p))['notes']==old
@@ -263,7 +312,7 @@ async def cases(evidence=None):
      await p.route('**/assets/starting-breaks/*.wav',refuse_preview);await plays.first.click();error=p.locator('#break-sequence [data-audio-status]');await expect(error).to_contain_text('Could not load this preview');await expect(plays.first).to_have_attribute('aria-pressed','false');await error.scroll_into_view_if_needed();await full_bounds(error);await screenshot('break-error');await p.unroute('**/assets/starting-breaks/*.wav',refuse_preview)
      await exercise_break_generator(p,core.draft_state,core.load_draft)
      assert await p.evaluate('document.documentElement.scrollWidth<=innerWidth');assert await p.evaluate('midiCalls')==0;assert not errors,errors
-     proof.append({'size':[w,h],'drumCellsPerKit':176,'drumMinimumHit':40,'patternsPerPart':32,'targets':targets,'previews':5,'previewBoxes':boxes,'midiCalls':0,'headerSamples':header_samples,'physicalScroll':scroll_samples,'realTabTargetsPerKit':176,'previewEnd':True,'previewStopOnLeave':True,'previewFetchError':True});print('COMPOSITION PASS',w,h,flush=True)
+     proof.append({'size':[w,h],'drumCellsPerKit':176,'drumMinimumHit':minimum_cell,'patternsPerPart':32,'targets':targets,'previews':5,'previewBoxes':boxes,'midiCalls':0,'headerSamples':header_samples,'physicalScroll':scroll_samples,'realTabTargetsPerKit':176,'previewEnd':True,'previewStopOnLeave':True,'previewFetchError':True});print('COMPOSITION PASS',w,h,flush=True)
     finally:await c.close()
   finally:await browser.close()
  if evidence:Path(evidence).write_text(json.dumps(proof,indent=2)+'\n')

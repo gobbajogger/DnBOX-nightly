@@ -335,7 +335,8 @@ dialog::backdrop{background:#000a}
 .funkybeats-sequencer .seq-step .step-fill{position:absolute;inset:0;opacity:0;z-index:-1}
 .funkybeats-sequencer .seq-step .velocity-bar{position:absolute;bottom:0;left:3px;width:2px;background:var(--track);opacity:.7;z-index:-1}
 .funkybeats-sequencer .seq-channel-info{display:flex;align-items:center;gap:5px;padding:0 5px;font-size:13px;font-weight:700}
-.drum-voice-glyph{flex:none;color:var(--track);fill:none;stroke:currentColor;stroke-width:1.2}
+.drum-voice-glyph{flex:none;color:inherit;fill:none;stroke:currentColor;stroke-width:1.2}
+.funkybeats-sequencer .seq-channel-info[aria-current="true"]{color:var(--track)}
 .funkybeats-sequencer .seq-channel-color{width:3px;height:18px}
 .funkybeats-sequencer .seq-numbers{min-height:24px;color:var(--muted);font-size:11px;text-align:center;align-items:center}
 .funkybeats-sequencer .seq-numbers .seq-step-group{border-color:transparent}
@@ -660,13 +661,14 @@ dialog::backdrop{background:#000a}
  .drum-sound-panel{width:100%;overflow:visible}
  .patterns-layout{display:flex;flex-direction:column}
  .patterns-grid-panel,.patterns-actions{width:100%}
+ #break-sequence{scroll-padding-block:var(--u)}
  #break-sequence .break-rows{grid-template-columns:1fr}
  #break-sequence .break-rows li{grid-template-columns:minmax(0,1fr) auto auto;min-height:56px;padding:4px 8px}
  #break-sequence .break-rows label{grid-column:auto}
 }
 /* A real observer strip needs its own height; keep the drum viewport usable below it. */
 @media(min-width:601px){
- #other-view:has(>.drum-layout):has(>#native-envelopes:not([hidden])){overflow-y:auto}
+ #other-view:has(>.drum-layout):has(>#native-envelopes:not([hidden])){overflow-y:auto;scroll-padding-block:var(--u)}
  #other-view:has(>.drum-layout)>#native-envelopes{flex:none}
  #other-view:has(>#native-envelopes:not([hidden]))>.drum-layout{flex:1 0 180px;min-height:180px}
 }
