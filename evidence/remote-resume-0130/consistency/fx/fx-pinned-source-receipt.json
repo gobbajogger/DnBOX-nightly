@@ -1,0 +1,19 @@
+{
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "sourcePath": "firmware/src/app/ui.c",
+  "sourceSha256": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+  "scope": "Exact normalized stroke geometry of compiled native expressions. Shared stroke rendering, canvas pixels and physical output are separate.",
+  "cases": {
+    "G052": 13,
+    "G053": 256,
+    "G059": 128,
+    "G056": 128
+  },
+  "hashes": {
+    "reverb-low-cut-glyph.patch": "3b3743a3103839c8a334fee3788654552b3428e1cf8a2926dbf967d04cb10532",
+    "fx-encoder-glyphs.patch": "9933adce93bdc9614eb5af266f62257f1dc0b2474e91c18b25059e00b4e99982",
+    "fx-glyph-green.tap": "d279f2d14fd6caba28480356d02b85eab94c57270ad802dd6f326dd35341e326",
+    "fx-pinned-source-probe.c": "3c01cde61e86c26c5d881af27eca6c586a77bc37ab22bf228f2ae95cc6f6a864",
+    "fx-pinned-source-paths.txt": "d3b1c2cdc4a48a7282c55e4c392d07449ef1f8b31db8cacdad2515cd5102db5b"
+  }
+}

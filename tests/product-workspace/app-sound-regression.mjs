@@ -122,4 +122,39 @@ await check('two-layer original Draft edits use distinct part/field IDs and ordi
  chooseBank(x,'MIAMI');change(1,202,0);assert.match(review(x),/10.8% → 25%/);assert.match(pane.innerHTML,/source-sound-list/);
  chooseBank(x,'Synth One');assert.ok(!pane.innerHTML.includes('data-sj6-field='));
 });
-if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 7; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
+const soundOutput=(x,id)=>x.get('other-view').innerHTML.split('data-param-value="'+id+'">')[1]?.split('</output>')[0];
+const entered=(x,raw)=>{x.get('parameter-value').value=String(raw);x.get('parameter-value').onchange();};
+await check('BREAK Pitch and Level keep native units through inspect, edit, reopen and Undo',async x=>{
+ x.changePart('breaks','BREAK');x.view('sound');
+ const group=soundData.contexts.find(g=>g.bank==='BREAK');
+ for(const [name,raw,before,after] of [['Pitch',13,'0 st','+1 st'],['Level',0,'0.0 dB','OFF']]){
+  const c=group.controls.find(c=>c.name===name),id=idOf(group,c);
+  assert.equal(soundOutput(x,id),before);
+  row(x,id);
+  assert.equal(x.get('parameter-readout').textContent,before);
+  entered(x,raw);
+  assert.equal(x.get('parameter-readout').textContent,after);
+  x.view('roll');x.view('sound');
+  assert.equal(soundOutput(x,id),after);
+  row(x,id);assert.equal(Number(x.get('parameter-value').value),raw);
+  x.press('undo');
+  assert.equal(soundOutput(x,id),before);
+  row(x,id);assert.equal(Number(x.get('parameter-value').value),c.raw);
+ }
+});
+await check('Chicago Draft renders named selector positions for both bass owners',async x=>{
+ for(const slot of [0,1]){
+  x.changePart(slot?'miami':'chicago',slot?'Bass B':'Bass A');x.view('sound');chooseBank(x,'CHICAGO');
+  const group=soundData.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===slot);
+  for(const [parameter,raw,before,after] of [[4,64,'+56 %','0 %'],[11,0,'GATE','ENV'],[13,0,'ON','OFF'],
+      [14,127,'UP','UP/DN'],[15,127,'2 OCT','FULL'],[16,0,'1/16','1/2'],[17,11,'OFF','GT REV']]){
+   const c=group.controls.find(c=>c.kind===1&&c.parameter===parameter),id=idOf(group,c);
+   assert.equal(soundOutput(x,id),before);
+   row(x,id);assert.equal(x.get('parameter-readout').textContent,before);
+   entered(x,raw);assert.equal(x.get('parameter-readout').textContent,after);
+   x.view('roll');x.view('sound');assert.equal(soundOutput(x,id),after);
+   x.press('undo');assert.equal(soundOutput(x,id),before);
+  }
+ }
+});
+if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 9; FAILURES '+failed+'; source-event stub, NOT DOM/touch');

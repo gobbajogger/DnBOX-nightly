@@ -1,0 +1,165 @@
+{
+  "remoteSourceAudited": "afd61fdc142ff683f9a8350043504648013ed5b6",
+  "remoteSourceTree": "9d7dbf53751eb6e5e7713af39f1f676f4a9f126a",
+  "registeredMatrix": "evidence/remote-resume-0130/matched-native-states.json",
+  "registeredMatrixSha256": "e2839b3f54e2a5517fc672bbdbe3cf41d95b151d0f6f8920a632cf1672b295c2",
+  "matrixRemoteSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "webNativeFirmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+  "pairedHostFirmware": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "identicalRgbPairs": [
+    {
+      "state": "view-03-part-00-voice-00-page-00",
+      "pairedState": {
+        "view": 3,
+        "part": 0,
+        "voice": 0,
+        "page": 0,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc"
+    },
+    {
+      "state": "view-03-part-00-voice-00-page-01",
+      "pairedState": {
+        "view": 3,
+        "part": 0,
+        "voice": 0,
+        "page": 1,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec"
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-00",
+      "pairedState": {
+        "view": 4,
+        "part": 0,
+        "voice": 0,
+        "page": 0,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed"
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-01",
+      "pairedState": {
+        "view": 4,
+        "part": 0,
+        "voice": 0,
+        "page": 1,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003"
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-02",
+      "pairedState": {
+        "view": 4,
+        "part": 0,
+        "voice": 0,
+        "page": 2,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5"
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-03",
+      "pairedState": {
+        "view": 4,
+        "part": 0,
+        "voice": 0,
+        "page": 3,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7"
+    },
+    {
+      "state": "view-04-part-00-voice-00-page-04",
+      "pairedState": {
+        "view": 4,
+        "part": 0,
+        "voice": 0,
+        "page": 4,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c"
+    },
+    {
+      "state": "03-picked-fader",
+      "pairedState": {
+        "view": 0,
+        "part": 2,
+        "voice": 0,
+        "page": 0,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 0,
+        "smcPeek": 0
+      },
+      "rgbSha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d"
+    },
+    {
+      "state": "04-delay-knob",
+      "pairedState": {
+        "view": 0,
+        "part": 2,
+        "voice": 0,
+        "page": 0,
+        "overlay": 0,
+        "help": 0,
+        "lane": 0,
+        "battery": 3,
+        "playing": 0,
+        "smcKind": 1,
+        "smcPeek": 0
+      },
+      "rgbSha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee"
+    }
+  ],
+  "scope": "Existing 240\u00d7240 captures rehashed. No replay, new frames, or proof of hardware operation."
+}

@@ -1,6 +1,7 @@
 import{renderSvg}from'./glyph-render.mjs';
 import{GLYPH_DRAW}from'./glyph-registry.mjs';
 import {drumAccent} from './drum-accent.mjs';
+import {patternLabel} from './workspace.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX adapter for the actual MIT FunkyBeats DOM builder. The upstream methods,
 // not a screenshot recreation, construct the tree. Typed captured DnBOX events
@@ -111,8 +112,8 @@ export function renderFunkyBeatsLauncher({parts,targets,patternCount=32,selected
  const grid=container.children.find(n=>n.className==='perform-grid');
  grid.children=grid.children.filter(n=>n.className!=='perform-header');
  for(let ch=0;ch<parts.length;ch++)for(let p=0;p<patternCount;p++){
-  const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent=String(p+1).padStart(2,'0');cell.setAttribute('type','button');
-  cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');
+  const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent=patternLabel(p).slice(1);cell.setAttribute('type','button');
+  cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' '+patternLabel(p)+', not loaded');
  }
  if(selectedPart!==null){const label=grid.children.filter(n=>n.className==='perform-row-label')[selectedPart];grid.children=[label,...ui.performCells[selectedPart]];}
  return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';

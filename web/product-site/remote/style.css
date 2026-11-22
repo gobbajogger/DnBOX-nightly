@@ -296,6 +296,10 @@ dialog::backdrop{background:#000a}
  .project-name{width:auto;margin-right:32px}
  .engine{gap:8px;padding-right:12px}
 }
+/* The fixed-width engine rail leaves less room for the global Song title. */
+@media (min-width:1000px) and (max-width:1099px) and (min-height:501px){
+ body:has(>main[data-layout-view="song"]) #part-title{margin-left:12px}
+}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 .encoder .glyph{width:100%;max-width:120px;height:32px}
 .glyph-canvas{display:block;width:100%;height:100%;border-radius:3px}

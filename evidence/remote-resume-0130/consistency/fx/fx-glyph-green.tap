@@ -1,0 +1,26 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.453421ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (3.657578ms)
+✔ live update declares its domain and stores normalized renderer input (0.349925ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (3.697679ms)
+✔ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (7.267945ms)
+✔ the sourced FX return encoders keep separate reverb and delay drawings (6.395036ms)
+✔ registry: all 82 ids map to a renderer family (1.318869ms)
+✔ registry: every glyph changes shape with its value (no static icons) (53.800634ms)
+✔ drum voice glyphs react to level, hit pulse and decay (1.032349ms)
+✔ tape wear matches the firmware digital threshold, two circular reels and wear range (1.886601ms)
+✔ mixer preserves native identities, domain and five part routes (9.824612ms)
+✔ wrong source, duplicate voice, wrong parameter and fractional domains reject (0.442554ms)
+✔ FX readouts use their firmware identities, units and raw domains (0.803116ms)
+✔ actual Mix family maps 29 native identities and preserves all presentation aliases (2.030157ms)
+✔ ambiguous catalog identity and wrong native range fail closed (3.222876ms)
+✔ missing rendered native control cannot silently become an unbound input (1.091037ms)
+✔ complete family refuses missing presentation screens and unique control coverage (17.335801ms)
+✔ same-count different identity cannot replace a required rendered control (2.338639ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 204.310334

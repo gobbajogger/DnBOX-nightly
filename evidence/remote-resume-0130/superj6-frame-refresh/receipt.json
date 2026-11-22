@@ -1,0 +1,1150 @@
+{
+  "source": "afd61fdc142ff683f9a8350043504648013ed5b6",
+  "sourceTree": "9d7dbf53751eb6e5e7713af39f1f676f4a9f126a",
+  "product": {
+    "app.mjs": "cd0eeef951f61dac356a2ba36c305876fa819fafa23ff5c9305fff90c5b87aa6",
+    "style.css": "50a311f357df9cc062be03a64e199d6396ff8e22011909b1f9ec04b8b171ce60",
+    "superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5"
+  },
+  "scope": "Only8changed defaultSuperJ6 Sound captures; stoppedDraft at120BPM, built-in IntroBank/PWMStringPad, no imported preset or original bank selection. Matches original31stateSound runner options, no clock/random override.",
+  "options": {
+    "hasTouch": "width<900",
+    "fullPage": true,
+    "clockFreeze": false,
+    "fontWait": "document.fonts.ready",
+    "settleMs": 80,
+    "chromiumSandbox": true
+  },
+  "states": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "document": [
+        1440,
+        900
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 0,
+      "part": "chicago",
+      "filename": "1440x900-chicago-superj6.png",
+      "sha256": "6992060613ff9e948080cebacc2eb3c9391f8282a7a941d4ee0f6ea0490e71a7",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "document": [
+        1440,
+        900
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 1,
+      "part": "miami",
+      "filename": "1440x900-miami-superj6.png",
+      "sha256": "7cd400f3916043e44254a74993d77521b348ac4e8e53d00b463cff1f57e03272",
+      "errors": [],
+      "ownerKey": "05-superj6"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "document": [
+        390,
+        844
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 0,
+      "part": "chicago",
+      "filename": "390x844-chicago-superj6.png",
+      "sha256": "4a4338b8aa6b428de92dfeb1b14c1c1c762e370f2a01c5e69a9c6777b764d3f0",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "document": [
+        390,
+        844
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 1,
+      "part": "miami",
+      "filename": "390x844-miami-superj6.png",
+      "sha256": "78541b69988f72bc0320909bbf7164624ab611a0512ce6ad6057a40a584952a9",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "document": [
+        844,
+        390
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 0,
+      "part": "chicago",
+      "filename": "844x390-chicago-superj6.png",
+      "sha256": "e4a6e859bfb86721b70f8228f6f73282958fee8ea606ac27823d55d093aa511a",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "document": [
+        844,
+        390
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 1,
+      "part": "miami",
+      "filename": "844x390-miami-superj6.png",
+      "sha256": "cd39ddbb9880dd852bd58e56b09bb47a1a1502ddb5e779e296b892b66b546aba",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/0/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 0,
+      "part": "chicago",
+      "filename": "1024x640-chicago-superj6.png",
+      "sha256": "3577894926898f005060c7d2dfafa83c21f3bd8c944a5accd4224e885786c009",
+      "errors": [],
+      "ownerKey": null
+    },
+    {
+      "viewport": [
+        1024,
+        640
+      ],
+      "document": [
+        1024,
+        640
+      ],
+      "title": "SuperJ6 / P01",
+      "status": "0 changes \u00b7 Draft \u00b7 Not connected",
+      "tempo": "120 BPM",
+      "midiCalls": 0,
+      "fields": [
+        {
+          "field": "82",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|82",
+          "value": "1"
+        },
+        {
+          "field": "210",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|210",
+          "value": "1"
+        },
+        {
+          "field": "78",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|78",
+          "value": "0.12632030248642"
+        },
+        {
+          "field": "83",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|83",
+          "value": "1"
+        },
+        {
+          "field": "211",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|211",
+          "value": "1"
+        },
+        {
+          "field": "79",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|79",
+          "value": "0.50431364774704"
+        },
+        {
+          "field": "202",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|202",
+          "value": "0.107990153133869"
+        },
+        {
+          "field": "195",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|195",
+          "value": "1"
+        },
+        {
+          "field": "88",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|88",
+          "value": "0.19909006357193"
+        },
+        {
+          "field": "196",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|196",
+          "value": "0"
+        },
+        {
+          "field": "96",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|96",
+          "value": "0.20779612660408"
+        },
+        {
+          "field": "197",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|197",
+          "value": "1"
+        },
+        {
+          "field": "100",
+          "id": "superj6/ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8/1/84B1A8EB-BA34-4B8B-B3BE-6FE8CADB40DA/4DBA5169-1A26-45B7-9A8C-BE968BB2EA36|100",
+          "value": "0.278623253107071"
+        }
+      ],
+      "readouts": [
+        {
+          "field": "82",
+          "text": "Square"
+        },
+        {
+          "field": "210",
+          "text": "On"
+        },
+        {
+          "field": "78",
+          "text": "44.06% duty"
+        },
+        {
+          "field": "83",
+          "text": "Square"
+        },
+        {
+          "field": "211",
+          "text": "On"
+        },
+        {
+          "field": "79",
+          "text": "26.3% duty"
+        },
+        {
+          "field": "202",
+          "text": "10.8%"
+        },
+        {
+          "field": "195",
+          "text": "Hz"
+        },
+        {
+          "field": "88",
+          "text": "0.074 Hz"
+        },
+        {
+          "field": "196",
+          "text": "Tempo"
+        },
+        {
+          "field": "96",
+          "text": "2 Bars"
+        },
+        {
+          "field": "197",
+          "text": "Hz"
+        },
+        {
+          "field": "100",
+          "text": "0.227 Hz"
+        }
+      ],
+      "slot": 1,
+      "part": "miami",
+      "filename": "1024x640-miami-superj6.png",
+      "sha256": "4b3546f54e76b7ff2b01d419289bf1b6183591a67406e5269aaa0bd85bbc4733",
+      "errors": [],
+      "ownerKey": null
+    }
+  ],
+  "chromium": "151.0.7922.34",
+  "result": "PASS8/8"
+}

@@ -38,6 +38,8 @@ def check_page(port, exchange):
         browser = playwright.chromium.launch(chromium_sandbox=True)
         try:
             page = browser.new_page()
+            page_errors = []
+            page.on("pageerror", lambda error: page_errors.append(str(error)))
             page.expose_function("stockHostSend", send)
             page.add_init_script("""(() => {
               const base = {state:'connected', open:async()=>{}, close:async()=>{}};
@@ -53,6 +55,22 @@ def check_page(port, exchange):
               }});
             })()""")
             page.goto(f"http://127.0.0.1:{port}/remote/identity/index.html")
+            styles = []
+            for width, height in ((1440, 900), (390, 844), (844, 390)):
+                page.set_viewport_size({"width": width, "height": height})
+                page.evaluate("document.fonts.ready")
+                controls = page.locator("main button").evaluate_all("""buttons => buttons.map(button => {
+                    const box = button.getBoundingClientRect(), style = getComputedStyle(button);
+                    return {id:button.id, shared:button.classList.contains('button'),
+                        width:box.width, height:box.height, font:style.fontFamily, radius:style.borderRadius};
+                })""")
+                assert len(controls) == 3 and all(row["shared"] and row["height"] >= 44 and
+                    row["width"] >= 44 and "Barlow" in row["font"] and row["radius"] == "7px"
+                    for row in controls), controls
+                assert page.evaluate("document.documentElement.scrollWidth === innerWidth")
+                styles.append({"viewport":[width,height],"controls":controls})
+            assert not page_errors, page_errors
+            page.set_viewport_size({"width":1440,"height":900})
             page.locator("#permission").click()
             page.locator("#connect").click()
             page.wait_for_function("!['Not connected','Checking firmware…'].includes(document.querySelector('#status').textContent)")
@@ -72,6 +90,6 @@ def check_page(port, exchange):
                 raise AssertionError(f"unexpected stock identity exchange: {frames}")
             if not frames[1]["editor_deferred"] or frames[1]["reply_hex"]:
                 raise AssertionError(f"stock DNR2 dispatch changed: {frames[1]}")
-            return {"chromium": browser.version, "status": status, "exchanges": frames}
+            return {"chromium": browser.version, "status": status, "exchanges": frames, "styles": styles, "pageErrors":page_errors}
         finally:
             browser.close()

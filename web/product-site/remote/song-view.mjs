@@ -1,9 +1,9 @@
 // Local arrangement references only; no playback, cue or native Song transaction.
 import {MAX_SONG_ROWS} from './sequence.mjs';
-import {PARTS} from './workspace.mjs';
+import {PARTS,patternLabel} from './workspace.mjs';
 function partCell(row,index,part,pattern){
  const label=`Song row ${index+1} ${PARTS[part]}`,on=!((row.muteMask??0)&(1<<part));
- const options=Array.from({length:32},(_,n)=>`<option value="${n}"${n===pattern?' selected':''}>P${String(n+1).padStart(2,'0')}</option>`).join('');
+ const options=Array.from({length:32},(_,n)=>`<option value="${n}"${n===pattern?' selected':''}>${patternLabel(n)}</option>`).join('');
  return `<td><div class="song-part-cell"><select data-song-pattern="${index}" data-song-part="${part}" aria-label="${label} pattern">${options}</select><button type="button" role="switch" aria-checked="${on}" aria-label="${label} on" data-song-on="${index}" data-song-part="${part}">${on?'On':'Off'}</button></div></td>`;
 }
 export function renderSong(rows,selected){

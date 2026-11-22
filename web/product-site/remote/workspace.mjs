@@ -1,4 +1,5 @@
 export const PARTS=Object.freeze(['909','808','Bass A','Bass B','BREAK']);
+export const patternLabel=pattern=>'P'+String(pattern+1).padStart(2,'0');
 export const DESTINATIONS=Object.freeze([['Projects','../projects/'],['Samples','../breaks/'],['Presets','../presets/'],['MIDI exchange','../projects/#project-exchange-root']]);
 export class LaunchSelection{
  constructor(){this.targets=Array(5).fill(null);}

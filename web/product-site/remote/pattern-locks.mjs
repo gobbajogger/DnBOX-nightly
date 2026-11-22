@@ -4,7 +4,7 @@ import {knobPercent,unipolarPercent} from './sound.mjs';
 // and motion.h (160 lanes). A lock is a stored parameter override on a part and pattern.
 // BREAK Level uses pot/127 gain. Stock unit_value shows tenths below 10 dB
 // of attenuation and rounds larger losses to whole decibels.
-function breakGain(raw) {
+export function breakGain(raw) {
   if (raw === 0) return 'OFF';
   const tenths = Math.round(-200 * Math.log10(raw / 127));
   const number = tenths >= 100 ? -Math.round(tenths / 10) : (-tenths / 10).toFixed(1);
@@ -29,7 +29,7 @@ function chicagoDomain(parameter) {
 }
 
 // Mirrors the original Chicago panel reported by web_sound_read in kernel 4758a957.
-function chicagoValue(parameter, value) {
+export function chicagoValue(parameter, value) {
   if (parameter===0) return value===0?'SAW':value===127?'PUL':'SAW/PUL';
   if (parameter===4) {
     const normalized=value<64 ? value/128 : 0.5+(value-64)/126;

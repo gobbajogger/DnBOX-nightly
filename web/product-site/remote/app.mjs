@@ -1,4 +1,4 @@
-import {patternLockSpecs,lockField,putPatternLock,nudgeLock} from './pattern-locks.mjs';
+import {patternLockSpecs,lockField,putPatternLock,nudgeLock,chicagoValue,breakGain} from './pattern-locks.mjs';
 import {stepField,viewStepFields,stepValueText,stepCanEdit,changeStepRow,replaceStepRows} from './local-step-rows.mjs';
 import {StepValueGesture} from './step-value-gesture.mjs';
 import {chicagoControlBindings} from './runtime-sound-map.mjs';
@@ -16,6 +16,7 @@ import{renderMixWorkspace}from'./mix-workspace.mjs';
 import{stepGroups,StepLaneGesture,renderStepSliders}from'./step-lane.mjs';
 import{DRUM_VOICES,renderFunkyBeatsDrums,renderFunkyBeatsLauncher,renderTypedFunkyBeatsParameter,renderTypedFunkyBeatsMixer}from'./funkybeats-view.mjs';
 import{mixerDisplay,fxDisplay}from'./mixer-format.mjs';
+import{fxGlyphId}from'./glyph-render.mjs';
 import{waveDisplay,miamiWave,miamiWaveParameter}from'./wave-display.mjs';
 import{verticalGrid}from'./grid.mjs';
 import{WorkspaceDraftFile,hasDraftChanges,installWorkspaceDraft}from'./draft-file.mjs';
@@ -35,10 +36,10 @@ import{renderSong}from'./song-view.mjs';
 import{MotionDraft}from'./motion.mjs';
 import{SequenceDraft,chanceDomain,chanceFromDrag,Arrangement,MAX_SONG_ROWS}from'./sequence.mjs';
 import{ParameterGesture}from'./parameter.mjs';
-import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs';
+import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers,patternLabel}from'./workspace.mjs';
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
 import{STEP_LANES,envelopeCurve,formatPan,formatParameterValue,glyphFor,isPanLabel,panCell}from'./glyphs.mjs';
-import{mountLiveGlyphs,setGlyphValue}from'./glyph-live.mjs';
+import{mountLiveGlyphs,setGlyphValue,setMasterFilterGlyph}from'./glyph-live.mjs';
 import{mountFirmwareLink}from'./firmware-link.mjs';
 import{LANE_KINDS,LANE_WORDS,chanceFromLane,panFromLane,velocityFromLane,pitchOffsetFromLane,laneFraction,laneText,laneP,RAIL_OFFSET,CHANCE_SPLIT}from'./lane.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -280,7 +281,7 @@ function selectedLaneText(kind,n){
  if(kind==='patternLock'){
   const pattern=lockPattern();if(!Number.isInteger(pattern))return 'Pick in Patterns';
   const raw=stepValueLane.values[activeLaneStep];
-  return 'P'+String(pattern+1).padStart(2,'0')+(activeLaneStep===null?'':' · '+(raw==null?'Unset':currentLock().text(raw)));
+  return patternLabel(pattern)+(activeLaneStep===null?'':' · '+(raw==null?'Unset':currentLock().text(raw)));
  }
  if(breakChanceMode()||stepField(kind)){
   const step=activeLaneStep??(n?stepGroups([n],trace.endSample).find(group=>group.notes.length).step:null);
@@ -463,7 +464,7 @@ const wearId = 'catalog/1551';
 if (wearControl) parameterBaseline.set(wearId, {value:64,label:'Wear',context:'Tape'});
 function wearGlyph(value) {
  if (!nativeMixMode && parameterDraft.get(delayTypeId) === 0) return 0;
- return (16 + value * 111 / 127) / 127;
+ return (16 + Math.floor(value * 111 / 127)) / 127;
 }
 const wearDisplay = value => Math.round(value * 100 / 127) + '%';
 function wearPanel() {
@@ -490,7 +491,7 @@ function changeLines(){
   const part=PARTS[launchParts.indexOf(track)]??track;
   return `Notes · ${part}${location}: ${changes.join(' · ')||previous+' → '+next}`;
  });
- const masterSeen=new Set(), kitsSeen=new Set();
+ const masterSeen=new Set(), kitsSeen=new Set(), mixSeen=new Set();
  for(const [id,value] of parameterDraft){
   if(id===legacyBreakChanceId){lines.push('BREAK · Unassigned B chance from file · '+value+'%');continue;}
   const kit=kitAccentById.get(id);
@@ -515,12 +516,27 @@ function changeLines(){
   }
   const base=parameterBaseline.get(id)??superJ6Banks.spec(id);
   if(!base||value===base.value)continue;
-  const identity=kit?{context:kit.label,label:kit.name}:parameterIdentity.get(id)??base;
+  let identity=kit?{context:kit.label,label:kit.name}:parameterIdentity.get(id)??base;
+  const mixGroup=mixAliasIndex.byId.get(id);
+  if(mixGroup){
+   if(mixSeen.has(mixGroup))continue;
+   mixSeen.add(mixGroup);
+   const [,,voice,parameter]=mixGroup.key.split(':').map(Number);
+   identity={context:'Mix / '+PARTS[voice],label:['Level','Reverb send','Delay send','Pan'][parameter]};
+  }
   const sj6=superJ6Spec(id)??superJ6Banks.spec(id);
-  const shown=v=>id===delayTypeId?delayTypeNames[v]:base.drumControl?drumValueText(base.drumControl,v):sj6?superJ6Text(sj6,v,v===base.value?new Map():parameterDraft,superJ6Banks.fieldsOf(id)):masterDraft.has(id)?masterDraft.display(id,v):isPanLabel(identity.label)?formatPan(v):v;
+  const sourceRow=sourceSounds.controlForId(id);
+  const shown=v=>{
+   if(id===delayTypeId)return delayTypeNames[v];
+   if(id===wearId)return wearDisplay(v);
+   if(base.drumControl)return drumValueText(base.drumControl,v);
+   if(sj6)return superJ6Text(sj6,v,v===base.value?new Map():parameterDraft,superJ6Banks.fieldsOf(id));
+   if(masterDraft.has(id))return masterDraft.display(id,v);
+   return mixerDisplay(id,v)??fxDisplay(id,v)??draftSoundDisplay(sourceRow,v)??formatParameterValue(identity.label,v);
+  };
   const before=shown(base.value),after=shown(value);
   let change=before+' → '+after;
-  if(base.drumControl&&before===after){
+  if(!sj6&&before===after&&Number.isInteger(value)&&Number.isInteger(base.value)){
    const steps=Math.abs(value-base.value);
    change=after+' ('+(value>base.value?'+':'−')+steps+(steps===1?' step)':' steps)');
   }
@@ -528,7 +544,7 @@ function changeLines(){
  }
  for(const slot of [0,1]){const program=superJ6Banks.view(slot);if(program)lines.push('SuperJ6 · Bass '+(slot?'B':'A')+' · '+program.bank+' / '+program.name);}
  for(const row of patternLocks){
-  const field=patternLockSpecs.find(s=>s.id===row.catalogId),pattern='P'+String(row.pattern+1).padStart(2,'0');
+  const field=patternLockSpecs.find(s=>s.id===row.catalogId),pattern=patternLabel(row.pattern);
   row.values.forEach((value,step)=>{if(value!==null)lines.push(`${field.owner}${field.part===4?'':' / '+field.bank} · ${pattern} · Step ${step+1} · ${field.label}: ${field.text(value)}`);});
  }
  for(const [part,rows] of Object.entries(stepLanes))for(const [kind,points] of Object.entries(rows)){
@@ -540,7 +556,7 @@ function changeLines(){
  if(JSON.stringify(sliceSequence)!==JSON.stringify(emptyBreakSequence()))lines.push('BREAK · '+breakSequence.rate+' · '+breakSequence.slices.filter(Boolean).length+' assigned slices · loops '+breakSequence.loops.map(id=>id??'None').join(' / '));
  breakChance?.forEach((value,step)=>{if(value!==null)lines.push(`BREAK · Step ${step+1} · Chance: ${breakChanceText(value)}`);});
  motion.values.forEach((value,i)=>{if(value!==null)lines.push(`Motion · MIAMI Wave · Step ${i+1}: unset → ${value} raw`);});
- arrangement.rows.forEach((r,i)=>lines.push(`Song row ${i+1}: ${r.patterns.map((p,part)=>'P'+(p+1)+((r.muteMask??0)&(1<<part)?' (off)':'')).join(' / ')} · ${r.repeats} repeats`));return lines;
+ arrangement.rows.forEach((r,i)=>lines.push(`Song row ${i+1}: ${r.patterns.map((p,part)=>patternLabel(p)+((r.muteMask??0)&(1<<part)?' (off)':'')).join(' / ')} · ${r.repeats} repeats`));return lines;
 }
 // Commands call each existing model's own undo/redo, not an intermediate after snapshot.
 const pushNotes=model.push.bind(model);model.push=before=>{const changed=pushNotes(before);if(changed)timeline.record({label:'Notes',undo:()=>model.undo(),redo:()=>model.redo()});return changed;};
@@ -635,6 +651,29 @@ function commitNativeInput(input){if(soundNativeId(input.dataset.nativeParam)){c
 const envelopeRows = row => row?.sourceSection === 'ENVELOPE';
 const valueOfSound = row => soundNativeId(row.id)?nativeSound()?.snapshot().values.get(soundKey(row.id)):parameterDraft.get(row.id) ?? row.raw;
 const envelopeValue = (row,value) => Math.round(100*(value-row.min)/(row.max-row.min))+'%';
+function draftSoundDisplay(row,raw) {
+ if (!row) return null;
+ if (envelopeRows(row)) return envelopeValue(row,raw);
+ if (qualifiedNativeFormat(row)) return typedSourceDisplay(row,raw);
+ const wave=miamiWave(miamiWaveParameter(row),raw);
+ if (wave) return wave.name;
+ const percent=sourcePercent(row,raw);
+ if (percent!==null) return percent;
+ if (raw===row.raw) return row.display;
+ if (row.kind!==1) return null;
+ if (row.target===2 && row.sourceBank===0) {
+  const display=chicagoValue(row.parameter,raw);
+  return row.unit==='%' ? display.replace(/%$/,' %') : display;
+ }
+ if (row.target===3 && row.voice===0 && row.sourceBank===-1) {
+  if (row.parameter===0) return breakGain(raw).replace(/dB$/,' dB');
+  if (row.parameter===1) {
+   const semitones=raw-12;
+   return (semitones>0?'+':'')+semitones+' st';
+  }
+ }
+ return null;
+}
 function envelopeGraph(bank,slot,rows) {
  const svg = envelopeCurve(rows,bank.toLowerCase(),valueOfSound);
  return svg ? `<div class="envelope-row" data-envelope-bank="${bank}" data-envelope-slot="${slot}">${svg}</div>` : '';
@@ -751,27 +790,49 @@ function soundControls(part){
   const open=heading||!section0?(section0++?closeGroup:'')+(chicago?'<section>':'')+heading+
    (envelopeRows(c)?'<div class="encoder-grid envelope-controls">':'<div class="encoder-grid">'):'';
   if(c.id===legacyBreakChanceId)return open+breakSoundChance(breakSequence.generators,launch.targets[4],parameterDraft.get(c.id));
+  const shown=draftSoundDisplay(c,value)??formatParameterValue(c.label,value);
   if(envelopeRows(c) && c.enabled) {
    const graph=heading?envelopeGraph(bank,slot,rows.filter(envelopeRows)):'';
-   return open+graph+`<button type="button" class="parameter envelope-stage" data-param="${id}"><span>${label}</span><output data-param-value="${id}">${envelopeValue(c,value)}</output></button>`;
+   return open+graph+`<button type="button" class="parameter envelope-stage" data-param="${id}"><span>${label}</span><output data-param-value="${id}">${esc(shown)}</output></button>`;
   }
   const waveParam=miamiWaveParameter(c),wave=miamiWave(waveParam,value);
-  const shown=wave?.name??sourcePercent(c,value)??(value===c.raw?c.display:formatParameterValue(c.label,value));
-  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:typedSourceDisplay(c,value),enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(c.label)+'"'+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
+  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:shown,enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(c.label)+'"'+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
  }).join('')+(section0?closeGroup:'')+'</div>';
 }
 function mixerSource(file,identity,label){const screen=components.screens.find(s=>s.path.endsWith('/'+file));if(!screen)return null;const occurrence=screen.controls.findIndex(c=>c.identity===identity);if(occurrence<0)return null;const id=screen.path+'|'+identity,s=findSpec(id,String(occurrence));return s?{...s,id,label:label??s.label,display:mixerDisplay(id,s.value),occurrence}:null;}
 function typedMixer(){const labels=['909','808','BASS A','BASS B','BREAK'],rows=labels.map((label,i)=>mixerSource('mix-parts-live.svg','1:5:'+i+':0',label));if(rows.some(c=>!c||c.display===null))return '';return renderTypedFunkyBeatsMixer({channels:rows});}
 function typedMixSends(mode){const labels=['909','808','BASS A','BASS B','BREAK'],colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];return '<div class="mix-strip-grid">'+labels.map((label,i)=>{const params=mode==='pan'?[3]:[1,2];return '<section class="mix-send-strip" style="--part-color:'+colors[i]+'"><button type="button" class="mix-part-route" data-mix-part="'+['drum909','drum808','chicago','miami','breaks'][i]+'" aria-label="Open '+label+' sound controls">'+label+'<small>Sound</small></button>'+params.map(p=>{const c=mixerSource(p===3?'mix-parts-live.svg':'fx-reverb-direct.svg','1:5:'+i+':'+p,p===3?'PAN':p===1?'REV':'DLY');return c?renderTypedFunkyBeatsParameter({...c,engine:'mixer'}):'<div class="mix-unread" aria-label="'+label+' pan not read">—</div>';}).join('')+'</section>';}).join('')+'</div>';}
-function mixControlPanel(file,title){const screen=components.screens.find(s=>s.path.endsWith('/'+file));if(!screen)return '';const rows=screen.controls.filter(c=>!file.startsWith('fx-')||c.identity.split(':')[1]!=='5');return '<section class="mix-panel"><h3>'+esc(title)+'</h3><div class="encoder-grid">'+rows.map(c=>{const id=screen.path+'|'+c.identity,value=runtimeMixValue(id,masterDraft.has(id)?masterDraft.read(id,parameterDraft):parameterDraft.has(id)?parameterDraft.get(id):Number(c.context.raw)),spec=findSpec(id),display=fxDisplay(id,value)??(!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):value===Number(c.context.raw)?c.context.display:formatParameterValue(c.context.name,value)),name=title+' '+c.context.name;return '<button type="button" class="parameter encoder" data-param="'+esc(id)+'" data-mix-param-label="'+esc(name)+'" aria-label="'+esc(name+' '+display)+'"><span class="glyph"'+(spec?' data-glyph-fn="'+esc(c.context.name)+'" data-glyph-engine="mixer" data-glyph-value="'+((value-spec.min)/(spec.max-spec.min||1))+'"':'')+'>'+glyphFor(c.context.name,'mixer',spec?(value-spec.min)/(spec.max-spec.min||1):0,{live:false})+'</span><output data-param-value="'+esc(id)+'">'+esc(display)+'</output><span>'+esc(c.context.name)+'</span></button>';}).join('')+'</div></section>';}
+function mixControlPanel(file,title){
+ const screen=components.screens.find(s=>s.path.endsWith('/'+file));
+ if(!screen)return '';
+ const rows=screen.controls.filter(c=>!file.startsWith('fx-')||c.identity.split(':')[1]!=='5');
+ return '<section class="mix-panel"><h3>'+esc(title)+'</h3><div class="encoder-grid">'+rows.map(c=>{
+  const id=screen.path+'|'+c.identity;
+  const stored=masterDraft.has(id)?masterDraft.read(id,parameterDraft):parameterDraft.get(id)??Number(c.context.raw);
+  const value=runtimeMixValue(id,stored),spec=findSpec(id);
+  const display=fxDisplay(id,value)??(!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):value===Number(c.context.raw)?c.context.display:formatParameterValue(c.context.name,value));
+  const masterFilter=c.identity==='1:6:0:13'&&!nativeMixMode?masterDraft.filterState(parameterDraft):undefined;
+  const name=title+' '+c.context.name,fn=masterFilter?'MASTER FILTER':fxGlyphId(c.identity)??c.context.name;
+  const normalized=spec?(value-spec.min)/(spec.max-spec.min||1):0;
+  const delayType=fn==='G053'&&!nativeMixMode&&delayTypeSpec?(parameterDraft.get(delayTypeId)??delayTypeSpec.value):undefined;
+  const delayAttr=delayType===undefined?'':' data-glyph-delay-type="'+delayType+'"';
+  const filterAttr=masterFilter?' data-glyph-master-filter="'+[masterFilter.mode,masterFilter.cutoff,masterFilter.resonance].join(':')+'"':'';
+  const glyphState=delayAttr+filterAttr;
+  const attributes=spec?' data-glyph-fn="'+esc(fn)+'" data-glyph-engine="mixer" data-glyph-value="'+normalized+'"'+glyphState:'';
+  return '<button type="button" class="parameter encoder" data-param="'+esc(id)+'" data-mix-param-label="'+esc(name)+'" aria-label="'+esc(name+' '+display)+'"><span class="glyph"'+attributes+'>'+glyphFor(fn,'mixer',normalized,{delayType,masterFilter,live:false})+'</span><output data-param-value="'+esc(id)+'">'+esc(display)+'</output><span>'+esc(c.context.name)+'</span></button>';
+ }).join('')+'</div></section>';
+}
 function masterMore(){if(nativeMixMode)return '';return '<section class="mix-panel master-more" aria-label="Master More Draft"><h3>More · Draft</h3><div class="encoder-grid">'+masterDraft.more.map(c=>{const value=masterDraft.read(c.id,parameterDraft),display=masterDraft.display(c.id,value);return '<button type="button" class="parameter encoder" data-param="'+c.id+'" data-master-control="'+c.target+':'+c.parameter+'" aria-label="Master '+esc(c.label)+' '+esc(display)+'"><span class="glyph" data-glyph-fn="'+c.glyph+'" data-glyph-engine="mixer" data-glyph-value="'+value/c.max+'">'+glyphFor(c.glyph,'mixer',value/c.max,{live:false})+'</span><output data-param-value="'+c.id+'">'+esc(display)+'</output><span>'+esc(c.label)+'</span></button>';}).join('')+'</div></section>';}
-function paintMasterValues(){if(view!=='mix'||nativeMixMode)return;for(const btn of document.querySelectorAll('[data-param]')){const id=btn.dataset.param;if(!masterDraft.has(id))continue;const c=masterDraft.spec(id),value=masterDraft.read(id,parameterDraft),display=masterDraft.display(id,value);btn.setAttribute('aria-label','Master '+c.label+' '+display);for(const out of btn.querySelectorAll?.('[data-param-value]')??[])out.textContent=display;for(const glyph of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(glyph,value/c.max);}}
+function paintMasterValues(){if(view!=='mix'||nativeMixMode)return;for(const btn of document.querySelectorAll('[data-param]')){const id=btn.dataset.param;if(!masterDraft.has(id))continue;const c=masterDraft.spec(id),value=masterDraft.read(id,parameterDraft),display=masterDraft.display(id,value);btn.setAttribute('aria-label','Master '+c.label+' '+display);for(const out of btn.querySelectorAll?.('[data-param-value]')??[])out.textContent=display;for(const glyph of btn.querySelectorAll?.('[data-glyph-fn]')??[]){
+ if(glyph.dataset.glyphMasterFilter!==undefined)setMasterFilterGlyph(glyph,masterDraft.filterState(parameterDraft));
+ setGlyphValue(glyph,value/c.max);
+}}}
 let projectPreset;
 function projectCards() {
  const soundEdits = new Set();
  for (const [id,value] of parameterDraft) {
   const baseline = parameterBaseline.get(id) ?? superJ6Banks.spec(id);
-  if (baseline && value !== baseline.value) soundEdits.add(kitAccentById.get(id) ?? (masterDraft.has(id) ? masterDraft.spec(id).id : id));
+  if (baseline && value !== baseline.value) soundEdits.add(kitAccentById.get(id) ?? mixAliasIndex.byId.get(id) ?? (masterDraft.has(id) ? masterDraft.spec(id).id : id));
  }
  const tools = Object.fromEntries(DESTINATIONS);
  const link = (label, href) => '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(label)+'</a>';
@@ -789,7 +850,7 @@ function projectCards() {
  </section>`;
 }
 const launchParts=['drum909','drum808','chicago','miami','breaks'];
-function patternScope(){const part=launchParts.indexOf($('part').value),index=part<0?2:part,target=launch.targets[index];return{index,name:PARTS[index],target,display:target===null?'Not selected':'P'+String(target+1).padStart(2,'0')};}
+function patternScope(){const part=launchParts.indexOf($('part').value),index=part<0?2:part,target=launch.targets[index];return{index,name:PARTS[index],target,display:target===null?'Not selected':patternLabel(target)};}
 let showAllPatternParts = false;
 const desktopPatterns = window.matchMedia?.('(min-width:1100px) and (min-height:650px)');
 desktopPatterns?.addEventListener?.('change', ({matches}) => {
@@ -848,7 +909,10 @@ function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const lan
   }
  }
  if(sj6Focus)$('other-view').querySelector('[data-sj6-id="'+sj6Focus+'"]')?.focus({preventScroll:true});if(laneFocus!==undefined)$('other-view').querySelector(`[data-lane-step="${laneFocus}"]`)?.focus({preventScroll:true});if(['sound','mix','drums'].includes(view)){(view==='drums'?$('other-view').querySelector('.drum-sound-panel')??$('other-view'):$('other-view')).insertAdjacentHTML?.('beforeend','<div id="parameter-inspector"><label><span></span><output id="parameter-readout"></output><input id="parameter-value" type="number" disabled></label><button id="parameter-undo" disabled>Undo</button></div>');paintLivePan();}mountLiveGlyphs($('other-view'));bindParameterFields();if(view==='locks')bindMotion();paintSoundPanel();nativeEnvelopeBinding?.render();markRuntimeMixControls();status();}
-function partTitle(){if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return knownBreakPattern(launch.targets[4])?'BREAK / '+breakPatternName(launch.targets[4]):'BREAK';return 'P01';}
+function partTitle(){
+ if(view==='song')return 'Song arrangement';
+ if(view==='files')return 'Project files';
+ if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return knownBreakPattern(launch.targets[4])?'BREAK / '+breakPatternName(launch.targets[4]):'BREAK';return 'P01';}
 function syncPartTitle(){const el=$('part-title');if(el)el.textContent=partTitle();}
 function syncEngines(){const part=$('part')?.value;document.querySelectorAll('[data-engine]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.engine===part)));syncPartTitle();}
 function paintSoundPanel(){const root=$('glyph-card');if(!root)return;syncPartTitle();const part=$('part').value,slot=part==='chicago'?0:part==='miami'?1:-1,bank=slot<0?'':view==='sound'&&nativeSoundMode?'CHICAGO':soundBanks[slot];if(view==='sound'&&nativeSoundMode&&!['ready','busy'].includes(nativeSound()?.snapshot().phase)){root.innerHTML='<strong>Sound · Emulator</strong><output>—</output>';return;}const n=current(),lane=STEP_LANES.find(l=>l.id===laneKind())||STEP_LANES[0],readout=n?String(laneFigure(n)||'—'):'—';const titles={OSCILLATOR:'OSC',ENVELOPE:'ENV'};let sections='';if(slot>=0&&!sourceOnlyBank(bank)){const rows=sourceSounds.controls(bank,slot).filter(c=>c.enabled);const order=bank==='CHICAGO'?['OSCILLATOR','FILTER 1','FILTER 2','ENVELOPE']:[...new Set(rows.map(c=>c.sourceSection))].filter(Boolean).slice(0,4);for(const section of order){const group=rows.filter(c=>c.sourceSection===section);if(!group.length)continue;const curve=section==='ENVELOPE'?envelopeGraph(bank,slot,group):'';sections+=`<div class="panel-section"><h3>${esc(titles[section]||section)}</h3><div class="panel-cells">${group.map(c=>`<div class="panel-cell">${curve?'':`<span class="glyph">${soundGlyph(c,bank,valueOfSound(c))}</span>`}<output>${esc(soundNativeId(c.id)?nativeSoundDisplay(c.id):curve?envelopeValue(c,valueOfSound(c)):miamiWave(miamiWaveParameter(c),valueOfSound(c))?.name??c.display)}</output><span>${esc(c.label)}</span></div>`).join('')}</div>${curve}</div>`;}}root.innerHTML=`<strong>${esc(slot<0?partTitle():bank+' '+(slot?'B':'A'))}</strong>${sections}<output class="panel-readout"><small>${esc(lane.label)}</small>${esc(readout)}</output>`;}
@@ -1002,9 +1066,9 @@ bindStepLane($('other-view'),()=>$('drum-lane'),drumLaneNotes);
 $('other-view').addEventListener('click',e=>{if(e.target.closest?.('[data-lane-cycle]')){$('lane-kind').value=cycleLane();cancelParameters();other();}});
 scroll.addEventListener('scroll',()=>{$('velocity').scrollLeft=scroll.scrollLeft;const rt=document.querySelector('.ruler-track');if(rt)rt.style.transform=`translateX(${-scroll.scrollLeft}px)`;const rail=$('pitch-rail');if(rail)rail.scrollTop=scroll.scrollTop;});$('velocity').addEventListener('scroll',()=>{if(Math.abs(scroll.scrollLeft-$('velocity').scrollLeft)>1)scroll.scrollLeft=$('velocity').scrollLeft;});
 const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);if(sj6)return{...sj6,value:parameterDraft.get(id)??sj6.value};if(masterDraft.has(id)&&!(view==='mix'&&nativeMixMode)){const c=masterDraft.spec(id);return{...c,id,value:masterDraft.read(id,parameterDraft)};}if(id.startsWith('source-master/'))return null;if(id===delayTypeId&&delayTypeSpec)return {...delayTypeSpec,value:parameterDraft.get(id)??delayTypeSpec.value};if(id===wearId&&wearControl)return {id,label:'Wear',context:'Tape',value:runtimeMixValue(id,parameterDraft.get(id)??64),min:wearControl.min,max:wearControl.max,step:1};if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);if(soundNativeId(id)){const value=nativeSound()?.snapshot().values.get(soundKey(id));return c&&Number.isFinite(value)?{...c,value}:null;}return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const group=mixAliasIndex.byId.get(id),kit=kitAccentById.get(id),value=runtimeMixValue(id,group?mixRead(group,parameterDraft):parameterDraft.get(id)??(kit?sharedKitAccent(kit,parameterDraft):undefined)??Number(c.context.raw));if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;return{id,label:sourceControlLabel(c),context:[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};};
-function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(!descriptor)return;if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;const wave=miamiWave(miamiWaveParameter(row),value);const drum=editableDrumControl(id),sourceDisplay=wave?.name??(soundNativeId(id)?null:sourcePercent(row,value));const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):envelopeRows(row)?envelopeValue(row,value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);if(drum)paintEditableDrumGlyph(drumSoundScreen($('part').value),drum,value,descriptor.max);refreshEnvelope(row);if(wave)paintSoundPanel();for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');if(sourceDisplay!==null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));}const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);paintLivePan();paintMasterValues();}
+function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(!descriptor)return;if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;const wave=miamiWave(miamiWaveParameter(row),value);const drum=editableDrumControl(id),sourceDisplay=soundNativeId(id)?null:draftSoundDisplay(row,value);const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);if(drum)paintEditableDrumGlyph(drumSoundScreen($('part').value),drum,value,descriptor.max);refreshEnvelope(row);if(wave)paintSoundPanel();for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');if(sourceDisplay!==null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));}const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);paintLivePan();paintMasterValues();}
 function paintLivePan(){for(const btn of document.querySelectorAll('[data-param]')){const s=findSpec(btn.dataset.param,btn.dataset.paramOccurrence);if(!s||!isPanLabel(s.label))continue;btn.dataset.live='pan';btn.textContent=formatPan(s.value);}}
-const parameterGesture=new ParameterGesture({onPreview:s=>{if(soundNativeId(s.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(s.id)){showParameter(s.id,s.value);return;}if(view==='mix'&&nativeMixMode)return;if(masterDraft.has(s.id)){const change=masterDraft.change(s.id,parameterDraft,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);status();return;}const group=mixAliasIndex.byId.get(s.id);const change=group?mixChange(group,parameterDraft,s.value):scalarDraftChange(s.id,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);const row=sourceSounds.controlForId(s.id),drum=editableDrumControl(s.id);status(`${s.label} · ${drum?drumValueText(drum,s.value):miamiWave(miamiWaveParameter(row),s.value)?.name??sourcePercent(row,s.value)??fxDisplay(s.id,s.value)??formatParameterValue(s.label,s.value)} · Draft`);},onCommit:c=>{recordParameter(c);showParameter(c.id,c.after);status();},onCancel:c=>{if(soundNativeId(c.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){showParameter(c.id,c.restore);return;}restoreMixPreview(c.id);if(c.restore!==null)showParameter(c.id,c.restore);}});
+const parameterGesture=new ParameterGesture({onPreview:s=>{if(soundNativeId(s.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(s.id)){showParameter(s.id,s.value);return;}if(view==='mix'&&nativeMixMode)return;if(masterDraft.has(s.id)){const change=masterDraft.change(s.id,parameterDraft,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);status();return;}const group=mixAliasIndex.byId.get(s.id);const change=group?mixChange(group,parameterDraft,s.value):scalarDraftChange(s.id,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);const row=sourceSounds.controlForId(s.id),drum=editableDrumControl(s.id);status(`${s.label} · ${drum?drumValueText(drum,s.value):draftSoundDisplay(row,s.value)??fxDisplay(s.id,s.value)??formatParameterValue(s.label,s.value)} · Draft`);},onCommit:c=>{recordParameter(c);showParameter(c.id,c.after);status();},onCancel:c=>{if(soundNativeId(c.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){showParameter(c.id,c.restore);return;}restoreMixPreview(c.id);if(c.restore!==null)showParameter(c.id,c.restore);}});
 function cancelNativeInputs(){for(const input of document.querySelectorAll('[data-native-param]'))soundInputIntent.delete(input);const entries=[...nativePreview];nativePreview.clear();for(const [input,value]of entries){input.value=String(value);previewNativeInput(input,false);}nativePreview.clear();}
 function cancelParameters(){cancelNativeInputs();motion.cancel();cancelStepLane();if(chanceDrag){model.cancelAll();chanceDrag=null;}parameterGesture.cancel();paramOwner=null;if(view==='locks')motionPaint();status();}
 function bindParameterFields(){const f=$('parameter-value'),u=$('parameter-undo');if(f)f.onchange=()=>{const s=findSpec(activeParameter),v=Number(f.value);if(!s||!Number.isFinite(v)||v<s.min||v>s.max||Math.abs((v-s.min)/s.step-Math.round((v-s.min)/s.step))>1e-6){if(s)showParameter(s.id,s.value);return;}recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v);status();};if(u)u.onclick=()=>performHistory();}
@@ -1031,7 +1095,7 @@ function showReviewConfirmation(confirm) {
 function openReview() {
  rollBinding.cancel();cancelParameters();
  const lines=changeLines(), choices=[];
- for(const [i,target] of launch.targets.entries())if(target!==null)choices.push(PARTS[i]+' pattern P'+String(target+1).padStart(2,'0'));
+ for(const [i,target] of launch.targets.entries())if(target!==null)choices.push(PARTS[i]+' pattern '+patternLabel(target));
  for(const [i,bank] of soundBanks.entries())if(bank!==startingDraft.soundBanks[i])choices.push(PARTS[i+2]+' engine '+bank);
  for(const bank of superJ6Banks.banks.values())choices.push('SuperJ6 bank '+bank.name);
  $('changes').textContent=lines.join('\n')||'No changes.';

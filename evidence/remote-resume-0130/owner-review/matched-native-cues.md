@@ -1,0 +1,17 @@
+# Shared Website and firmware cues
+
+The existing 17-state Website matrix has exact RGB identity to its official firmware `61827a714ca7b240c01a55ed347b5fd7b847c7c2` reference. Fifteen states have a corresponding paired host frame at `f1786ebec2616477163b62b029c7e77405a9c3de`. Twelve of those are exact. Global section 4 and FX list row 17 await corresponding paired host inputs. [Frame IDs, source commits and digests](../matched-native-states.json)
+
+I checked the three differing native 240×240 pairs at original size and verified the six PNG digests. The title and Perform footer match pixel-for-pixel in all three. The captured footer reads Tempo 125 bpm, Swing 50%, Filter Off and Pump 0.0 dB. Each differing body retains the same current selection, order, labels and values.
+
+| State | Exact RGB differences | Differences above 25.5 | Visible differences |
+| --- | ---: | ---: | --- |
+| Global root | 4,572 | 3,824 | Row placements move while current MIDI + Clock and the six section labels agree. |
+| MIDI + Clock | 4,342 | 3,583 | Row placements move while Clock Source Auto, Clock Out On, Notes Out Off and channels 10/11/4 agree. |
+| Keys + Screen | 21,277 | 9,328 | The paired host wraps values to a second line in taller cards. Lights On, Key Sound Stopped and Theme Amber agree. |
+
+The linked f178 development Elite and Pro outputs agree for all six sampled screens. In the existing linked-vs-host comparison, Reverb agrees for all 57,600 RGB565 pixels and Delay for all 52,800 body pixels. The 909 PARA bodies differ by 16 pixels and the startup notice differs in the header. The paired FX pages show Delay Feedback 35% and Reverb Decay 62% twice, once in status and once in the editable field. Those comparisons retain the individual software build identities. [Firmware capture notes](../firmware-ui/README.md)
+
+Shipping 0.0.26 Tape uses rounded rectangular reels. The paired f178 host and Remote Draft use round reels. The shipping and paired firmware implementations advance the animation on the live engine's activity signal. Remote Draft's Wear drawing is an authored state and the live Tape phase has no admitted remote binding. The sixth field on owner page 18 is labeled Accent 127. Current Remote 909 Bass Drum shows Velocity in that slot, which addresses kit voice 11 parameter 1. Accent gain uses its own parameter 0. Changing the label alone would assign the wrong control identity. [Shipping and paired Tape implementation](../firmware-ui/README.md) · [Owner page 18 control mapping](../../remote-owner-pages-20261121/owner-control-crosswalk/mappings.tsv)
+
+The earlier native-size shipping 0.0.26, paired f178 and Website comparison panels also expose presentation drift between software revisions. The shipping Mix labels its reduction status `COMP`, while paired and Website label that field `WET GR`. Shipping and the retained Remote Draft show Drive as `41` without a suffix. Paired and Website show a percent sign on the displayed Drive value. Paired and Website use `SCALE` as the Project key cue, while the shipping portable host shows `SEL`. Its Global menu omits Bluetooth under that selected portable configuration. Remote exposes no corresponding Global Settings destination. The stored Song rows, 120/125 bpm, Mix values and autosave state differ by fixture. Those values stay attached to their captured states. [Analogous cross-surface panels and inputs](../mix-project-review/native-comparison-hashes.json)

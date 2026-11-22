@@ -1,0 +1,17 @@
+✔ both bass slots match the native names, zero lines and 29 samples at all q127 values (29.651103ms)
+✔ XMOD pulse and wobble square use different canvas and SVG traces at the same raw value (1.974702ms)
+﹣ supplied pinned C source reproduces all 23,220 projections, including untouched cells (0.111267ms) # SKIP
+✔ both owners show the production INIT values and measured envelopes without write targets (4.829153ms)
+✔ both displayed traces use active samples through the final rendered frame and mark note-off (2.650936ms)
+✔ both slots expose all104 exact bank-qualified current bass scalars without aliasing banks (12.444206ms)
+✔ BREAK missing/invalid loops and native-only engine/preset roles are explicit, never silently clamped (3.936285ms)
+✔ descriptor matching includes sourceBank, exact bounds and source identity, never first-triple fallback (7.072099ms)
+✔ raw snapshots and returned control copies cannot corrupt baselines or enable native apply (4.622314ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 157.992118

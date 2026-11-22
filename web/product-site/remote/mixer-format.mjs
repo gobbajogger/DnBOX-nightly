@@ -10,5 +10,7 @@ import fxReadouts from './fx-format.json' with {type:'json'};
 export function fxDisplay(id, raw) {
   if (!Number.isInteger(raw) || typeof id !== 'string') return null;
   const identity = id.split('|').at(-1);
+  // Stock f1786ebe FX_DRIVE returns X0X_U_PCT for target 4, voice 0, slot 2.
+  if (identity === '1:4:0:2' && raw >= 0 && raw <= 127) return Math.round(raw * 100 / 127) + '%';
   return Object.hasOwn(fxReadouts, identity) ? fxReadouts[identity][raw] ?? null : null;
 }

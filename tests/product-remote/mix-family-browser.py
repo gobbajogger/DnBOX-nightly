@@ -79,7 +79,13 @@ async def check_delay_type(page):
     initial_wear = await wear.inner_text()
     glyph = wear.locator('..').locator('[data-glyph-fn="TAPE"]')
     initial_glyph = await glyph.get_attribute('data-glyph-value')
-    assert float(initial_glyph) * 127 >= 16
+    assert round(float(initial_glyph) * 127) == 71
+    assert initial_wear == '50%'
+    feedback = page.locator('[data-mix-param-label="Delay FEEDBACK"]')
+    feedback_glyph = feedback.locator('[data-glyph-fn="G053"]')
+    await expect(feedback_glyph).to_have_attribute('data-glyph-delay-type', '1')
+    feedback_art = await feedback_glyph.locator('canvas').evaluate('el => el.toDataURL()')
+    initial_feedback = await feedback.locator('output').inner_text()
     tape_art = await glyph.locator('canvas').evaluate('el => el.toDataURL()')
     await control.focus()
     await control.press('Home')
@@ -88,6 +94,9 @@ async def check_delay_type(page):
     await expect(glyph).to_have_attribute('data-glyph-value', '0')
     await expect(control).to_be_focused()
     assert await glyph.locator('canvas').evaluate('el => el.toDataURL()') != tape_art
+    await expect(feedback_glyph).to_have_attribute('data-glyph-delay-type', '0')
+    await expect(feedback.locator('output')).to_have_text(initial_feedback)
+    assert await feedback_glyph.locator('canvas').evaluate('el => el.toDataURL()') != feedback_art
     edited = await state(page)
     assert values(edited) == {**values(initial), 'catalog/1550': 0}
     review = page.locator('#review')
@@ -103,6 +112,8 @@ async def check_delay_type(page):
     await expect(control).to_have_value('1')
     await expect(glyph).to_have_attribute('data-glyph-value', initial_glyph)
     assert await glyph.locator('canvas').evaluate('el => el.toDataURL()') == tape_art
+    await expect(feedback_glyph).to_have_attribute('data-glyph-delay-type', '1')
+    assert await feedback_glyph.locator('canvas').evaluate('el => el.toDataURL()') == feedback_art
     assert (await state(page))['parameters'] == initial['parameters']
     await page.locator('#redo').click()
     await expect(control).to_have_value('0')

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Source-qualified local presentation/model only. Never native admission.
 import source from './master-source.mjs';
+import {fxDisplay} from './mixer-format.mjs';
 const names=['Threshold','Ratio','Attack','Release','Makeup','Mix','Pump','Pump source','Filter mode','Cutoff','Resonance','Limiter','COMP','FILTER'];
 const glyphs=['THRESH','RATIO','ATTACK','RELEASE','MAKEUP','MIX','PUMP','PUMP','FILTER','CUTOFF','RES','LIMIT','COMP','FILTER'];
 const moreKeys=['6:0','6:1','6:2','6:3','6:4','6:5','6:7','6:10','6:11','4:1','4:3','4:0'];
@@ -28,6 +29,11 @@ export function createMasterDraft(components,catalog){
   for(const row of groups.values())for(const alias of row.ids)next.set(alias,values.get(row.id));
   const install=rows=>{const current=new Map(edits),result=new Map();for(const[k,v]of rows){if(byId.has(k))result.set(k,v);else if(current.has(k))result.set(k,current.get(k));}for(const[k,v]of current)if(!byId.has(k)&&!result.has(k))result.set(k,v);edits.clear();for(const[k,v]of result)edits.set(k,v);};return{redo:()=>install(next),undo:()=>install(before)};
  };
+ const filterState=edits=>({
+  mode:read(id(6,8),edits),
+  cutoff:read(id(6,9),edits),
+  resonance:read(id(6,10),edits)
+ });
  const specs=[...groups.values()].map(g=>({...g,ids:[...g.ids]}));
- return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return g.displays[value];},normalize,change};
+ return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,filterState,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return fxDisplay(`1:${g.target}:0:${g.parameter}`,value)??g.displays[value];},normalize,change};
 }

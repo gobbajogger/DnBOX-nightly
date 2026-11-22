@@ -5,6 +5,15 @@ test('wrong source, duplicate voice, wrong parameter and fractional domains reje
 
 import {fxDisplay} from '../../web/product-site/remote/mixer-format.mjs';
 
+test('Master Drive uses the matched stock percentage at the same control address', () => {
+  const id = 'current-state-and-reference/mix-master.svg|1:4:0:2';
+  assert.equal(fxDisplay(id, 41), '32%');
+  assert.equal(fxDisplay(id, 53), '42%');
+  assert.equal(fxDisplay(id, 0), '0%');
+  assert.equal(fxDisplay(id, 127), '100%');
+  for (const invalid of [-1, 128, 0.5]) assert.equal(fxDisplay(id, invalid), null);
+});
+
 test('FX readouts use their firmware identities, units and raw domains', () => {
   const expected = [
     [4, 73, '62%'], [5, 57, '45%'], [6, 62, '149Hz'], [7, 85, '-1.9dB'],

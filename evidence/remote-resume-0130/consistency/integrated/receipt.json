@@ -1,0 +1,60 @@
+{
+  "base": "afd61fdc142ff683f9a8350043504648013ed5b6",
+  "scope": "Focused software-only integrated source; no combined gate, stock rebuild, physical action or broad capture sweep.",
+  "tests": {
+    "Remote": {
+      "pass": 256,
+      "fail": 0,
+      "skip": 0
+    },
+    "Workspace": {
+      "pass": 131,
+      "fail": 0,
+      "skip": 0,
+      "fourAppScripts": "PASS before final Master Filter renderer delta"
+    },
+    "MasterFilterAndGlyphs": {
+      "pass": 21,
+      "fail": 0,
+      "skip": 0
+    },
+    "IdentityStockInfo": {
+      "pass": true,
+      "viewports": [
+        [
+          1440,
+          900
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ]
+      ],
+      "buttonHeight": 48,
+      "font": "Barlow",
+      "radius": 7,
+      "INFOReplyBytes": 25,
+      "DNR2HelloReplyBytes": 0
+    }
+  },
+  "sourceSha256": {
+    "web/product-site/remote/app.mjs": "30aa2d966f2b2af02bc502392893062328e382f951bac3b9d06b0631d8d5607c",
+    "web/product-site/remote/glyph-render.mjs": "1f71570e1de47f04ae7481439b67a1bf74de3b2461960f458a21c2b79bb519e0",
+    "web/product-site/remote/glyph-live.mjs": "4abbd882949fe9316cc674bd4f2ca6291d77f412c5fbeafb08e5cf27d68450e0",
+    "web/product-site/remote/master-draft.mjs": "21cc3b655e5295fb97d60857cd4f76677ec68ef834d66ba0cdabb432ec461b65",
+    "web/product-site/remote/mixer-format.mjs": "051813e998c32ecc790d3ce16e98b38bac8a5d6a1134757565e9492a6db4d5ec",
+    "web/product-site/remote/style.css": "a348bb53fa4bfdd42b76cd4d5d8e39306619ded291259d6a0c2d536f73a90490",
+    "web/product-site/remote/identity/index.html": "2e55cae2272c4a6c8ee3a793f5d370aa365450cb230c04451f5ade1365cdfdeb",
+    "web/product-site/remote/workspace.mjs": "2640ec7a2f8a7c436567fb30f1d5328d4ffc1b052b9df699b5b84f1cc24bba32",
+    "web/product-site/remote/song-view.mjs": "e409b54eaa1dc94d3daca05b9ff07ef29722d2d7aa69ce5524d02a5a60215200"
+  },
+  "logSha256": {
+    "master-filter.log": "dc9a9dc19c468e134383d0891d1b0d1db817dc07555032e70c3f4a50a4d44b08",
+    "remote.log": "3054a183a879bd99ca5ee43cd64bad9e7cb28e2ac441b98e2b21906cfb006d6c",
+    "workspace.log": "89d821444d4a7608f893f480f016628b7b6a747cf65294d0f9de24146ae39d82"
+  }
+}

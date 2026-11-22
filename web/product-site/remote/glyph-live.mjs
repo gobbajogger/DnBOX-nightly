@@ -45,7 +45,10 @@ export function paintPixels(data,w,h,fn,value01,engine,state={}){
   const dim=FACE.map((c,i)=>Math.round(c+(INK[i]-c)*3/16));
   strokePoly(data,w,h,[[left+0.5*sx,y],[left+28.5*sx,y]],dim);
  }
- for(const line of polylines(r.d))strokePoly(data,w,h,line.map(([x,y])=>[left+x*sx,top+y*sy]),INK);
+ const paint=(d,ink)=>{for(const line of polylines(d))strokePoly(data,w,h,line.map(([x,y])=>[left+x*sx,top+y*sy]),ink);};
+ const dim=amount=>FACE.map((c,i)=>Math.round(c+(INK[i]-c)*amount));
+ if(r.guide)paint(r.guide,dim(3/16));
+ paint(r.d,r.muted?dim(.4):INK);
  return r.fn;
 }
 export class GlyphAnimator{
@@ -74,9 +77,24 @@ export function mountLiveGlyphs(root){
   if(live.has(el))continue;const fn=el.dataset.glyphFn,engine=el.dataset.glyphEngine||'chicago';
   const c=document.createElement('canvas');c.className='glyph-canvas';c.setAttribute('aria-hidden','true');el.replaceChildren(c);
   const state=el.dataset.miamiParameter===undefined?{}:{miamiParameter:Number(el.dataset.miamiParameter)};
+  if(el.dataset.glyphDelayType==='0'||el.dataset.glyphDelayType==='1')state.delayType=Number(el.dataset.glyphDelayType);
   // Discrete selectors jump directly to the new native shape and its matching name.
-  const a=new GlyphAnimator({raf:state.miamiParameter===undefined?undefined:null,value:unit(el.dataset.glyphValue,el.dataset.glyphDomain??'normalized'),draw:v=>drawGlyph(c,fn,v,engine,state)});live.set(el,a);el.glyphAnimator=a;n++;
+  const a=new GlyphAnimator({raf:state.miamiParameter===undefined?undefined:null,value:unit(el.dataset.glyphValue,el.dataset.glyphDomain??'normalized'),draw:v=>{
+   if(el.dataset.glyphMasterFilter!==undefined){
+    const [mode,cutoff,resonance]=el.dataset.glyphMasterFilter.split(':').map(Number);
+    state.masterFilter={mode,cutoff,resonance};
+   }
+   drawGlyph(c,fn,v,engine,state);
+  }});live.set(el,a);el.glyphAnimator=a;n++;
  }
  return n;
 }
 export function setGlyphValue(el,value,domain='normalized'){const normalized=unit(value,domain);el.dataset.glyphValue=String(normalized);el.dataset.glyphDomain='normalized';live.get(el)?.set(normalized);}
+
+export function setMasterFilterGlyph(el,{mode,cutoff,resonance}){
+ const encoded=mode+':'+cutoff+':'+resonance;
+ if(el.dataset.glyphMasterFilter===encoded)return;
+ el.dataset.glyphMasterFilter=encoded;
+ const animator=live.get(el);
+ animator?.draw(animator.value);
+}

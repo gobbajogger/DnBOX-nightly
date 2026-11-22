@@ -1,0 +1,127 @@
+{
+  "scope": "Exactly8SuperJ6frames supersede their corresponding entries in the124Sound index; no other state is recaptured or relabelled as new-source evidence.",
+  "source": "afd61fdc142ff683f9a8350043504648013ed5b6",
+  "sourceTree": "9d7dbf53751eb6e5e7713af39f1f676f4a9f126a",
+  "replacements": [
+    {
+      "state": "chicago-superj6",
+      "viewport": [
+        1440,
+        900
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/1440x900-chicago-superj6.png",
+      "previousSHA256": "8198c92daaf8d594c6895676b98a1afb29460beca546ceaaa09b296c7e6c223b",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "1440x900-chicago-superj6.png",
+      "replacementSHA256": "6992060613ff9e948080cebacc2eb3c9391f8282a7a941d4ee0f6ea0490e71a7",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "miami-superj6",
+      "viewport": [
+        1440,
+        900
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/1440x900-miami-superj6.png",
+      "previousSHA256": "0c84bfe8b6762976a8278269b3272ffb25dee75c547f4e8010d2485f6ec91165",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "1440x900-miami-superj6.png",
+      "replacementSHA256": "7cd400f3916043e44254a74993d77521b348ac4e8e53d00b463cff1f57e03272",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": "05-superj6"
+    },
+    {
+      "state": "chicago-superj6",
+      "viewport": [
+        390,
+        844
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/390x844-chicago-superj6.png",
+      "previousSHA256": "ff26e69d06612304885896df2fea31269fa22e2586549152c1419cd6105be129",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "390x844-chicago-superj6.png",
+      "replacementSHA256": "4a4338b8aa6b428de92dfeb1b14c1c1c762e370f2a01c5e69a9c6777b764d3f0",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "miami-superj6",
+      "viewport": [
+        390,
+        844
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/390x844-miami-superj6.png",
+      "previousSHA256": "238a9051356c400f2c95c79ac86953146ba8af506ff7627120f2bceb952696e3",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "390x844-miami-superj6.png",
+      "replacementSHA256": "78541b69988f72bc0320909bbf7164624ab611a0512ce6ad6057a40a584952a9",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "chicago-superj6",
+      "viewport": [
+        844,
+        390
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/844x390-chicago-superj6.png",
+      "previousSHA256": "6385c7ce4c19cf99c8bea2f9267ef59c2b837f01523089bd631d0beb2b329390",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "844x390-chicago-superj6.png",
+      "replacementSHA256": "e4a6e859bfb86721b70f8228f6f73282958fee8ea606ac27823d55d093aa511a",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "miami-superj6",
+      "viewport": [
+        844,
+        390
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures/844x390-miami-superj6.png",
+      "previousSHA256": "84fd92bc5c474f57fbaad04fef0cec320351ffa37ec43ae458eac5ee89a9fe86",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "844x390-miami-superj6.png",
+      "replacementSHA256": "cd39ddbb9880dd852bd58e56b09bb47a1a1502ddb5e779e296b892b66b546aba",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "chicago-superj6",
+      "viewport": [
+        1024,
+        640
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures-fourth/1024x640-chicago-superj6.png",
+      "previousSHA256": "7bc5c24ae247981cf637170bda56221e007257b6a6e71b07792d749258a7665e",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "1024x640-chicago-superj6.png",
+      "replacementSHA256": "3577894926898f005060c7d2dfafa83c21f3bd8c944a5accd4224e885786c009",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    },
+    {
+      "state": "miami-superj6",
+      "viewport": [
+        1024,
+        640
+      ],
+      "previousSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "previousCapture": "complete-captures-fourth/1024x640-miami-superj6.png",
+      "previousSHA256": "6754bf0d9d1a480cdfbdb84c4f2edc01905168348e14dfbf95fc80376259ff48",
+      "replacementSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "replacementCapture": "1024x640-miami-superj6.png",
+      "replacementSHA256": "4b3546f54e76b7ff2b01d419289bf1b6183591a67406e5269aaa0bd85bbc4733",
+      "reason": "Authenticated original literal LFO2 display changed from8 beats to2 Bars; default preset/raw words unchanged.",
+      "ownerKey": null
+    }
+  ]
+}

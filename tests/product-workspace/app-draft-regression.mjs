@@ -195,3 +195,79 @@ async function kitAccentDrafts(){
 }
 await kitAccentDrafts();
 console.log('PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips');
+
+async function sharedReviewReadouts() {
+ const app=await boot(),pane=app.get('other-view'),field=app.get('parameter-value'),readout=app.get('parameter-readout');
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download())};
+ const editButton=(id,rawBefore,rawAfter)=>{
+  const target=Object.assign(new Node(),{dataset:{param:id}});
+  pane.emit('keydown',event(target,1,{key:'Enter'}));
+  assert.equal(Number(field.value),rawBefore,id);
+  const before=readout.textContent;
+  field.value=String(rawAfter);field.onchange();
+  return [before,readout.textContent];
+ };
+ const editSlider=(id,rawAfter)=>{
+  const output=new Node();
+  const slider=Object.assign(new Node(),{value:String(rawAfter),dataset:{nativeParam:id}});
+  slider.closest=selector=>selector==='.funkybeats-typed-unit'?{querySelector:()=>output}:null;
+  pane.emit('input',{target:slider});
+  pane.emit('change',{target:slider});
+  return [output.textContent,slider.attributes['aria-valuetext']];
+ };
+ const component=(file,address)=>'current-state-and-reference/'+file+'.svg|'+address;
+ const drive=component('mix-master','1:4:0:2'),decay=component('fx-reverb-direct','1:4:0:4');
+ const feedback=component('fx-delay-direct','1:4:0:9'),level=component('mix-parts-live','1:5:0:0');
+ const send=component('fx-reverb-direct','1:5:0:1'),wear='catalog/1551';
+ const wave='source-sound/CHICAGO/0|1:2:0:0:0',cutoff='source-sound/CHICAGO/0|1:2:0:2:0';
+ const displays={};
+ app.view('mix');
+ displays.level=editSlider(level,76);
+ pane.emit('click',{target:Object.assign(new Node(),{dataset:{mixMode:'fx'}})});
+ displays.drive=editButton(drive,41,53);
+ displays.decay=editButton(decay,73,74);
+ displays.feedback=editButton(feedback,52,53);
+ displays.wear=editButton(wear,64,65);
+ displays.send=editSlider(send,127);
+ app.view('sound');
+ displays.wave=editSlider(wave,127);
+ displays.cutoff=editButton(cutoff,32,64);
+ const saved=await save(),summary=review(app);
+ assert.deepEqual(await save(),saved,'Review does not change the Draft DTO');
+ const stored=new Map(saved.parameters.map(entry=>[entry.id,entry.value]));
+ for(const [id,value] of [[drive,53],[decay,74],[feedback,53],[level,76],[send,127],[wear,65],[wave,127],[cutoff,64]])assert.equal(stored.get(id),value,id);
+ const aliases=[...stored.entries()].filter(([id])=>id.endsWith('|1:5:0:1'));
+ assert.equal(aliases.length,3,'All original mixer aliases stay in the serialized Draft');
+ assert.ok(aliases.every(([,value])=>value===127));
+
+ const mixed=summary.split('\n').filter(line=>line.includes('Mix / 909'));
+ const formats=Object.fromEntries(['Drive','DECAY','FEEDBACK','Wear','WAVE','CUTOFF'].map(label=>[label,
+  summary.split('\n').find(line=>line.includes(label+':'))?.split(label+': ').at(-1)]));
+ assert.deepEqual({displays,mixed,formats},{
+  displays:{level:['-4.8dB','-4.8dB'],drive:['32%','42%'],decay:['62%','63%'],
+   feedback:['35%','35%'],wear:['50%','51%'],send:['100%','100%'],wave:['SQR','SQR'],cutoff:['25 %','50 %']},
+  mixed:['Parameter · Mix / 909 · Level: -5dB → -4.8dB','Parameter · Mix / 909 · Reverb send: 0% → 100%'],
+  formats:{Drive:'32% → 42%',DECAY:'62% → 63%',FEEDBACK:'35% (+1 step)',Wear:'50% → 51%',WAVE:'SAW → SQR',CUTOFF:'25 % → 50 %'},
+ });
+ app.view('files');
+ assert.match(pane.innerHTML,/8 sound edits/,'Projects counts one sound edit per Mix alias group');
+
+ app.view('mix');
+ const beforeComp=await save();
+ const comp=component('mix-master','1:6:0:12');
+ const sourceData=filename=>JSON.parse(fs.readFileSync(new URL(filename,base)));
+ const master=createMasterDraft(sourceData('components.json'),sourceData('catalog.json'));
+ const oracle=new Map(beforeComp.parameters.map(entry=>[entry.id,entry.value]));
+ const edit=master.change(comp,oracle,96);edit.redo();
+ editButton(comp,95,96);
+ assert.deepEqual(new Map((await save()).parameters.map(entry=>[entry.id,entry.value])),oracle);
+ const withComp=review(app);
+ assert.match(withComp,/COMP:/);
+ assert.match(withComp,/Threshold:/);
+ app.press('undo');
+ assert.deepEqual((await save()).parameters,beforeComp.parameters,'One Undo restores the whole COMP gesture');
+ app.press('redo');
+ assert.equal(review(app),withComp,'Redo restores coupled detail readouts and the raw edit');
+}
+await sharedReviewReadouts();
+console.log('PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled');

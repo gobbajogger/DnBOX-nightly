@@ -1,0 +1,57 @@
+{
+  "publishedBase": "afd61fdc142ff683f9a8350043504648013ed5b6",
+  "gitTree": "9d7dbf53751eb6e5e7713af39f1f676f4a9f126a",
+  "sourceInventory": {
+    "sourceSnapshots": 26,
+    "capturedControlRows": 124,
+    "sourceSoundRows": 129,
+    "nativeMixGroups": 29,
+    "nativeChicagoGroups": 40,
+    "multiRowMixAliasGroups": 10
+  },
+  "matchedNativeFrameAudit": {
+    "website": 17,
+    "pairedFirmware": 15,
+    "exactRgb": 12,
+    "differentRgb": 3,
+    "driveMatchedState": "view-04-part-00-voice-00-page-03",
+    "driveRgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7"
+  },
+  "ownerSongInitialPair": {
+    "name": "owner-10-song.png",
+    "sha256": "56658758922752ce8e9fbe9ca3ff3d1b90697c8cff84bf95c8112340f7f4ecaa",
+    "bothInitialPatterns": [
+      "P01",
+      "P01",
+      "P01",
+      "P01",
+      "P01"
+    ]
+  },
+  "combinedSourceChecks": {
+    "mountedBuildFiles": 304,
+    "workspaceTests": 131,
+    "remoteTests": 252,
+    "scopedTests": 45,
+    "correctionCases": 9,
+    "soundAppCases": 9,
+    "newBrowserLaunch": false
+  },
+  "patchSha256": {
+    "shared-review-drive-afd61fd.patch": "6ac1178cf54b4b582365b80373240ef30de6797ab1da2a3adb66e9f34103b0d2",
+    "shared-pattern-labels-afd61fd.patch": "9cf91a2489e595b6f476ccbceaf599cb9e36e6fdf56452fe9a0cc5dccfb8ea58"
+  },
+  "logSha256": {
+    "shared-review-red.log": "db5993babff34b61640bf8a19b6f8afca914d2a76a34ddc08dd7756daaa07e69",
+    "shared-review-green.log": "383d0c93cd4d978fc46e22812ea124d67521eab3dc5e98d3233d08fca197123c",
+    "shared-pattern-red.log": "5290eaf1ebbc12aee72139d463022dd56245f917e297e8d192605c81db9cdc9c",
+    "shared-pattern-green.log": "b4494fd825785000d70e74698d1b978626d4bc1e8f54857af9a463f3f85a7ae7",
+    "source-sound-green.log": "669c8da65a1b0e556b89167d7383ac2e5ccfa0eaf97a04bc7f8d80fd918b0494",
+    "scoped-tests.log": "178545c93d79a48e5344f648b4326f766dc384556b359b49d8da40ef71327774",
+    "combined-exits.txt": "543214135ce3b073cad237bae31a6cb194da8bd5bbbe22672c7001759957e19a",
+    "combined-build.log": "e477ade30f451eece2daeea3cf3531913173062143cfe58a72207cf9a9629a0f",
+    "combined-build-check.log": "e477ade30f451eece2daeea3cf3531913173062143cfe58a72207cf9a9629a0f",
+    "combined-workspace.log": "c0ed3d37cf4aeef2b7fe2ae10876ccbf0808454eecedd1edb3cab2c62c3883cb",
+    "combined-remote.log": "f0cd8ffd86d0e8bbeaed04e5b653d0bb90269d721634e66065a2683c7e3c0302"
+  }
+}

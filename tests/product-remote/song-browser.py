@@ -49,7 +49,7 @@ async def cases(evidence=None):
      await p.locator('#song-redo').press('Space');await expect(switch(1,4)).not_to_be_checked();assert await song()==muted
      await p.locator('#song-up').click();assert await song()==[muted[1],muted[0],muted[2]]
      await p.locator('#song-undo').click();assert await song()==muted
-     await p.locator('#song-review').click();await expect(p.locator('#changes')).to_contain_text('P6 (off) / P7 (off) / P8 (off) / P9 (off) / P10 (off)')
+     await p.locator('#song-review').click();await expect(p.locator('#changes')).to_contain_text('P06 (off) / P07 (off) / P08 (off) / P09 (off) / P10 (off)')
      await p.locator('#review-dialog').get_by_role('button',name='Return').click()
      saved=await core.draft_state(p);await core.load_draft(p,saved);assert await song()==muted
      await screenshot('part-switches')
