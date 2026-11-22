@@ -62,6 +62,13 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/src="\.\.\/install\.mjs"/);
 });
 
+test('What’s New has one page heading and keeps the archived notes', () => {
+ const notes = read('new/index.html');
+ assert.equal((notes.match(/<h1(?:\s|>)/gi) ?? []).length, 1);
+ assert.match(notes, /<h1>What’s new<\/h1>/);
+ assert.match(notes, /<summary>Published project notes<\/summary>[\s\S]*<h2 id="s1">/);
+});
+
 test('release notices identify the two tested models, the withdrawal and the fallback', () => {
  const release = 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26';
  const fallback = release.replace('v0.0.26', 'v0.0.25.1');
