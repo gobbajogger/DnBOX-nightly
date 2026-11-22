@@ -1,0 +1,35 @@
+✔ Tools distinguishes original-format editor from earlier DNPR ZIP workflow (5.553215ms)
+✔ duplicate J6 parameter identifiers retain all ordered records and raw tokens, without applying (3.323078ms)
+✔ duplicate-bearing previews retain immutable copies and cancelled preview never changes kept bytes (1.760792ms)
+✔ empty identifiers and malformed duplicate records remain rejected (3.213563ms)
+✔ codec.mjs adopts engine-4 records as Synth One init (4.891462ms)
+✔ legacy/codec.mjs adopts engine-4 records as Synth One init (2.626672ms)
+✔ legacy target displays SuperJ6 and selects the existing juno token (0.916205ms)
+✔ legacy SuperJ6 records keep their engine ID, parameters and original export bytes (1.494694ms)
+✔ file change previews, keep required, name edit original bytes and filename retained (4.192082ms)
+✔ late file read cancelled and wrong profile fail closed (0.318658ms)
+✔ destroy is terminal and stale controls cannot read or download (0.449134ms)
+✔ oversized file is refused before allocating its arrayBuffer (0.53323ms)
+✔ duplicate-bearing J6 bank previews expose preservation warning and never enable apply (0.761523ms)
+✔ actual Document-shaped root can inspect a valid file (0.567472ms)
+✔ closing or refusing a file clears stale editable names but keeps the saved copy (0.421983ms)
+✔ an initial rejected file does not claim that a kept copy exists (1.364458ms)
+✔ a Document root creates populated preset options on import (0.37277ms)
+✔ tracked current sources have no retired engine name (49.104082ms)
+✔ codec.mjs: historical model hints remain guarded during init adoption (6.338333ms)
+✔ legacy/codec.mjs: historical model hints remain guarded during init adoption (2.214063ms)
+✔ original bytes and unknown number lexemes survive a known edit (2.53833ms)
+✔ cross format, duplicates, invalid sequence, unsafe edits rejected (0.802655ms)
+✔ preview then keep, cancellation and original immutability (0.60622ms)
+✔ J6 wrapper and parameter arrays preserved (0.860451ms)
+✔ unsupported engine never guessed from JSON (0.235233ms)
+✔ bounded strict JSON rejects malformed values and mutable inputs cannot alter originals (0.85295ms)
+✔ unknown keys matching Object prototype are preserved rather than treated as source fields (1.889425ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 216.375778

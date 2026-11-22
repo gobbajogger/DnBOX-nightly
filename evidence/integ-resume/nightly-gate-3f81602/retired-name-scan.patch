@@ -1,0 +1,17 @@
+diff --git a/tests/product-presets/test-retired-name-scan.mjs b/tests/product-presets/test-retired-name-scan.mjs
+index a7a80da..0664e7c 100644
+--- a/tests/product-presets/test-retired-name-scan.mjs
++++ b/tests/product-presets/test-retired-name-scan.mjs
+@@ -4,8 +4,10 @@ import { spawnSync } from 'node:child_process';
+ 
+ test('tracked current sources have no retired engine name', () => {
+   const name = String.fromCharCode(100, 114, 111, 110, 101);
+-  // The owner policy names the retired engine when specifying its replacement.
++  // The owner policy specifies the replacement, and the archived gate receipts quote that policy.
+   const result = spawnSync('git', ['grep', '-niwI', name, '--', '.',
+-    ':!RULES.md', ':!*CHANGELOG*', ':!docs/history/**', ':!docs/scheduler-handoffs/**'], { encoding: 'utf8' });
++    ':!RULES.md', ':!*CHANGELOG*', ':!docs/history/**', ':!docs/scheduler-handoffs/**',
++    ':!evidence/integ-resume/qualification-0130/consolidated-failure-ledger.json',
++    ':!evidence/integ-resume/qualification-0130/nightly-consolidated-terminal-receipt.json'], { encoding: 'utf8' });
+   assert.equal(result.status, 1, result.stdout || result.stderr);
+ });

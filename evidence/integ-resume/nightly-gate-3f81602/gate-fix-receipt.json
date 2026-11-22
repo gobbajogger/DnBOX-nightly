@@ -1,0 +1,41 @@
+{
+  "lane_source": "3f81602fe498a400244c2d71c3ef46812de2d1aa",
+  "consolidated_source": "583f622961fc9975fac746592ce6c483073c4170",
+  "ancestry_counts": [
+    0,
+    55
+  ],
+  "no_deleted_paths": true,
+  "visual_product_source_unchanged_since": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "focused": {
+    "patched_presets_exit": 0,
+    "patched_presets_passed": 27,
+    "product_label_mutation_exit": 1,
+    "visual_units_exit": 0,
+    "visual_unit_passed": 55,
+    "sandbox_launch_sites": 27,
+    "sandbox_negative_controls": 10,
+    "sandbox_findings": 0,
+    "unpatched_presets_exit": 1,
+    "unpatched_presets_passed": 26
+  },
+  "retired_name_regression_paths": [
+    "evidence/integ-resume/qualification-0130/consolidated-failure-ledger.json",
+    "evidence/integ-resume/qualification-0130/nightly-consolidated-terminal-receipt.json"
+  ],
+  "final_gate_prerequisites": [
+    "Pin exact source after upstream lanes are integrated and refresh consolidated ancestry and no-loss.",
+    "Use the pinned native emulator and firmware-reference runtimes, external temporary storage and normally sandboxed Playwright Chromium.",
+    "Run the full gate on the exact combined tree where required. Candidate isolated repeats cannot replace the prior full-run failure.",
+    "Resolve changed-screen review and phone Build History reference differences. Preserve the 32 unapproved Remote proposals separately.",
+    "Use owner-authenticated access for live voting. Keep software-only Remote and TouchOSC protocol acceptance within the supported endpoint and binding coverage."
+  ],
+  "artifacts_sha256": {
+    "presets.log": "607e12398ff0e05acf020b28d3001899912fca9927e5bb1272a696a65f43836d",
+    "presets-patched.log": "12ed7ffe9264c131a635cf8c8d86f5266d3dfd09d5980c276aada4567acd41ab",
+    "retired-name-product-negative.log": "4b38dcf110fdd71e4347170bf51146244b2b8dad4325cd25e57158817f220534",
+    "visual-units.log": "b4c6575a34dda6725c3279609f93489a0a7a4110ba8d2c70b242ec031b023235",
+    "sandbox-contract.log": "df84e535a8bc45cc753a43aadb06d27e5aaebaa6635493ca68688681a1a67752",
+    "retired-name-scan.patch": "6becb1696099219ef489bf3b4cfba2324a31d4bebb7a39818d6acb6b576a1ed8"
+  }
+}

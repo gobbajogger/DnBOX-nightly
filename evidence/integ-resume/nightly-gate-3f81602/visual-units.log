@@ -1,0 +1,136 @@
+FAIL screen: 1.00000 of pixels differ -> /tmp/tmpnfidu2wl/out/screen-diff.png
+FAIL screen: 0.00150 of pixels differ -> /tmp/tmpupm98of6/actual/screen-diff.png
+FAIL screen: 1.00000 of pixels differ -> /tmp/tmpena1sgl6/actual/screen-diff.png
+FAIL screen: size (30, 31, 3) != baseline (30, 30, 3)
+Capturing remote-sequence-1440x900
+Capturing remote-lane-chance-1440x900
+Capturing remote-lane-pitch-1440x900
+Capturing remote-lane-pan-1440x900
+Capturing remote-sound-1440x900
+Capturing remote-mix-1440x900
+Capturing remote-patterns-1440x900
+Capturing remote-files-1440x900
+Capturing site-index-1440x900
+Capturing site-install-1440x900
+Capturing site-breaks-1440x900
+Capturing site-starting-breaks-1440x900
+Capturing site-projects-1440x900
+Capturing site-presets-1440x900
+Capturing site-presets-legacy-1440x900
+Capturing site-manual-1440x900
+Capturing site-manual-original-1440x900
+Capturing site-manual-legacy-1440x900
+Capturing site-manual-projects-guide-1440x900
+Capturing site-manual-protocol-1440x900
+Capturing site-builds-1440x900
+Capturing site-tools-1440x900
+Capturing site-help-1440x900
+Capturing site-new-1440x900
+Capturing site-remote-identity-1440x900
+Capturing site-remote-device-1440x900
+Capturing offline-x0x_installer-1440x900
+Capturing offline-x0x_breaks-1440x900
+Capturing offline-x0x_projects-1440x900
+header SSIM vs page-01 = 1.0000 (gate >= 0.90)
+Capturing remote-sequence-1024x640
+Capturing remote-lane-chance-1024x640
+Capturing remote-lane-pitch-1024x640
+Capturing remote-lane-pan-1024x640
+Capturing remote-sound-1024x640
+Capturing remote-mix-1024x640
+Capturing remote-patterns-1024x640
+Capturing remote-files-1024x640
+Capturing site-index-1024x640
+Capturing site-install-1024x640
+Capturing site-breaks-1024x640
+Capturing site-starting-breaks-1024x640
+Capturing site-projects-1024x640
+Capturing site-presets-1024x640
+Capturing site-presets-legacy-1024x640
+Capturing site-manual-1024x640
+Capturing site-manual-original-1024x640
+Capturing site-manual-legacy-1024x640
+Capturing site-manual-projects-guide-1024x640
+Capturing site-manual-protocol-1024x640
+Capturing site-builds-1024x640
+Capturing site-tools-1024x640
+Capturing site-help-1024x640
+Capturing site-new-1024x640
+Capturing site-remote-identity-1024x640
+Capturing site-remote-device-1024x640
+Capturing offline-x0x_installer-1024x640
+Capturing offline-x0x_breaks-1024x640
+Capturing offline-x0x_projects-1024x640
+Capturing remote-sequence-844x390
+Capturing remote-lane-chance-844x390
+Capturing remote-lane-pitch-844x390
+Capturing remote-lane-pan-844x390
+Capturing remote-sound-844x390
+Capturing remote-mix-844x390
+Capturing remote-patterns-844x390
+Capturing remote-files-844x390
+Capturing site-index-844x390
+Capturing site-install-844x390
+Capturing site-breaks-844x390
+Capturing site-starting-breaks-844x390
+Capturing site-projects-844x390
+Capturing site-presets-844x390
+Capturing site-presets-legacy-844x390
+Capturing site-manual-844x390
+Capturing site-manual-original-844x390
+Capturing site-manual-legacy-844x390
+Capturing site-manual-projects-guide-844x390
+Capturing site-manual-protocol-844x390
+Capturing site-builds-844x390
+Capturing site-tools-844x390
+Capturing site-help-844x390
+Capturing site-new-844x390
+Capturing site-remote-identity-844x390
+Capturing site-remote-device-844x390
+Capturing offline-x0x_installer-844x390
+Capturing offline-x0x_breaks-844x390
+Capturing offline-x0x_projects-844x390
+Capturing remote-sequence-390x844
+Capturing remote-lane-chance-390x844
+Capturing remote-lane-pitch-390x844
+Capturing remote-lane-pan-390x844
+Capturing remote-sound-390x844
+Capturing remote-mix-390x844
+Capturing remote-patterns-390x844
+Capturing remote-files-390x844
+Capturing site-index-390x844
+Capturing site-install-390x844
+Capturing site-breaks-390x844
+Capturing site-starting-breaks-390x844
+Capturing site-projects-390x844
+Capturing site-presets-390x844
+Capturing site-presets-legacy-390x844
+Capturing site-manual-390x844
+Capturing site-manual-original-390x844
+Capturing site-manual-legacy-390x844
+Capturing site-manual-projects-guide-390x844
+Capturing site-manual-protocol-390x844
+Capturing site-builds-390x844
+Capturing site-tools-390x844
+Capturing site-help-390x844
+Capturing site-new-390x844
+Capturing site-remote-identity-390x844
+Capturing site-remote-device-390x844
+Capturing offline-x0x_installer-390x844
+Capturing offline-x0x_breaks-390x844
+Capturing offline-x0x_projects-390x844
+VISUAL {"screens": 121, "pass": 121, "fail": 0, "no_baseline": 0, "baseline_written": 0, "header_fail": 0, "page_errors": 0}
+Capturing remote-sequence-1440x900
+.................127.0.0.1 - - [21/Nov/2026 21:48:44] "GET /product-site/package-version-assignments.json?v=1 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2026 21:48:44] "GET /product-site/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2026 21:48:44] code 404, message File not found
+127.0.0.1 - - [21/Nov/2026 21:48:44] "GET /package-version-assignments.json HTTP/1.1" 404 -
+127.0.0.1 - - [21/Nov/2026 21:48:44] code 404, message File not found
+127.0.0.1 - - [21/Nov/2026 21:48:44] "GET /product-site/private.txt HTTP/1.1" 404 -
+127.0.0.1 - - [21/Nov/2026 21:48:45] code 404, message File not found
+127.0.0.1 - - [21/Nov/2026 21:48:45] "GET /product-site/package-version-assignments.json/extra HTTP/1.1" 404 -
+......................................
+----------------------------------------------------------------------
+Ran 55 tests in 0.371s
+
+OK

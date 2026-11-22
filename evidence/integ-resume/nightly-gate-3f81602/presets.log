@@ -1,0 +1,58 @@
+✔ Tools distinguishes original-format editor from earlier DNPR ZIP workflow (2.330157ms)
+✔ duplicate J6 parameter identifiers retain all ordered records and raw tokens, without applying (3.449428ms)
+✔ duplicate-bearing previews retain immutable copies and cancelled preview never changes kept bytes (0.781603ms)
+✔ empty identifiers and malformed duplicate records remain rejected (0.926ms)
+✔ codec.mjs adopts engine-4 records as Synth One init (4.698112ms)
+✔ legacy/codec.mjs adopts engine-4 records as Synth One init (2.754144ms)
+✔ legacy target displays SuperJ6 and selects the existing juno token (1.485609ms)
+✔ legacy SuperJ6 records keep their engine ID, parameters and original export bytes (2.075545ms)
+✔ file change previews, keep required, name edit original bytes and filename retained (4.252002ms)
+✔ late file read cancelled and wrong profile fail closed (0.299029ms)
+✔ destroy is terminal and stale controls cannot read or download (0.331217ms)
+✔ oversized file is refused before allocating its arrayBuffer (0.210316ms)
+✔ duplicate-bearing J6 bank previews expose preservation warning and never enable apply (0.476355ms)
+✔ actual Document-shaped root can inspect a valid file (0.295744ms)
+✔ closing or refusing a file clears stale editable names but keeps the saved copy (0.880011ms)
+✔ an initial rejected file does not claim that a kept copy exists (1.675475ms)
+✔ a Document root creates populated preset options on import (1.089445ms)
+✖ tracked current sources have no retired engine name (79.427466ms)
+✔ codec.mjs: historical model hints remain guarded during init adoption (6.422279ms)
+✔ legacy/codec.mjs: historical model hints remain guarded during init adoption (3.008095ms)
+✔ original bytes and unknown number lexemes survive a known edit (2.696938ms)
+✔ cross format, duplicates, invalid sequence, unsafe edits rejected (0.774743ms)
+✔ preview then keep, cancellation and original immutability (0.807722ms)
+✔ J6 wrapper and parameter arrays preserved (0.632279ms)
+✔ unsupported engine never guessed from JSON (0.268844ms)
+✔ bounded strict JSON rejects malformed values and mutable inputs cannot alter originals (0.641193ms)
+✔ unknown keys matching Object prototype are preserved rather than treated as source fields (1.960152ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 26
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 233.235899
+
+✖ failing tests:
+
+test at tests/product-presets/test-retired-name-scan.mjs:5:1
+✖ tracked current sources have no retired engine name (79.427466ms)
+  AssertionError [ERR_ASSERTION]: evidence/integ-resume/qualification-0130/consolidated-failure-ledger.json:355:    "unit_failure": "test-retired-name-scan.mjs matches normative Rule 19 use of Drone in RULES.md",
+  evidence/integ-resume/qualification-0130/nightly-consolidated-terminal-receipt.json:25:      "AssertionError [ERR_ASSERTION]: RULES.md:34:19. Pan reads L50 .. C .. R50 everywhere. Battery is the R22 level icon in every top bar, 4 levels, plus a percentage once calibrated. Synth One replaces Drone in the third synth slot everywhere (firmware, Remote and website); any leftover Drone or other former-engine label is a defect."
+  
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/integ-resume-0130/gate-nightly/tests/product-presets/test-retired-name-scan.mjs:10:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
