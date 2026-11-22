@@ -4,7 +4,8 @@ const base=new URL('../../web/product-site/remote/',import.meta.url);
 // Deterministic source-event shim only. No DOM engine, browser, server or rendering.
 class E{constructor(id=''){this.id=id;this.handlers={};this.dataset={};this.style={setProperty(){}};this.innerHTML='';this.textContent='';this.value='';this.scrollLeft=0;this.scrollTop=0;this.clientHeight=300;this.captures=new Set();this.classList={toggle:()=>false};this.attrs={};}addEventListener(k,f){const prior=this.handlers[k];this.handlers[k]=prior?e=>{prior(e);f(e)}:f;}removeEventListener(k){delete this.handlers[k];}setPointerCapture(id){this.captures.add(id);}hasPointerCapture(id){return this.captures.has(id);}releasePointerCapture(id){this.captures.delete(id);}setAttribute(k,v){this.attrs[k]=v;}removeAttribute(k){delete this.attrs[k];}getBoundingClientRect(){return{left:0,top:0,width:100,height:100};}closest(s){if(s==='button')return this;return (s==='[data-note]'&&this.dataset.note)||(s==='[data-select]'&&this.dataset.select)||(s==='[data-lane-step]'&&this.dataset.laneStep!==undefined)||(s==='[data-param]'&&this.dataset.param)?this:null;}focus(){document.activeElement=this;}showModal(){}querySelector(s){const match=s.match(/data-(note|select)="([^"]+)"/);if(match){const n=new E();n.dataset[match[1]]=match[2];return n;}if(s==='span')return(this.span??=new E());return null;}}
 const nodes=new Map(),views=['roll','drums','locks','sound','mix','patterns','song','files'].map(view=>{const e=new E();e.dataset.view=view;return e;}),modes=['select','move','draw','length','pan'].map(mode=>{const e=new E();e.dataset.mode=mode;return e;});
-globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new E(),addEventListener(){}};globalThis.window={addEventListener(){}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
+const engines = ['drum909','drum808','chicago','miami','breaks'].map(engine => {const button = new E(); button.dataset.engine = engine; return button;});
+globalThis.document={activeElement:null,getElementById:id=>{if(!nodes.has(id))nodes.set(id,new E(id));return nodes.get(id);},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:s==='[data-engine]'?engines:[],querySelector:()=>new E(),addEventListener(){}};globalThis.window={addEventListener(){}};globalThis.fetch=async path=>({ok:true,text:async()=>fs.readFileSync(new URL(path,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(path,base),'utf8'))});
 const $=document.getElementById;$('zoom').value='1';$('lane-kind').value='velocity';$('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];await import(new URL('app.mjs',base));
 // Repro 1: existing focus A, pointer selects B, repaint restores A, keyboard edits A.
 const a=new E();a.dataset.note='n1';document.activeElement=a;const b=new E();b.dataset.note='n5';const down={button:0,pointerId:1,clientX:0,clientY:0,target:b,preventDefault(){}};$('roll-scroll').handlers.pointerdown(down);$('roll-scroll').handlers.pointerup(down);
@@ -31,7 +32,9 @@ views.find(e=>e.dataset.view==='mix').onclick();const surface=new E();surface.da
 $('other-view').handlers.pointerdown(paramDown);$('other-view').handlers.pointermove({...paramDown,clientX:14});$('other-view').handlers.pointerup(paramDown);assert.equal($('parameter-value').value,53);$('parameter-undo').onclick();assert.equal($('parameter-value').value,41);
 $('other-view').handlers.pointerdown(paramDown);$('other-view').handlers.pointermove({...paramDown,clientY:30});$('other-view').handlers.pointercancel(paramDown);assert.equal($('parameter-value').value,41);console.log('PASS actual-app Drive raw41→53, Undo41, cancel41');
 
-views.find(e=>e.dataset.view==='patterns').onclick();for(let i=0;i<5;i++){const b=new E();b.dataset={launchPart:String(i),pattern:String(i)};$('other-view').handlers.click({target:b});}views.find(e=>e.dataset.view==='song').onclick();const add=new E('song-add');$('other-view').handlers.click({target:add});assert.match($('other-view').innerHTML,/<td>P5<\/td>/);$('other-view').handlers.change({target:{dataset:{songRow:'0'},value:'8'}});assert.match($('other-view').innerHTML,/value="8"/);console.log('PASS actual-app five launch selections→song row→8 repeats');
+// The row now uses editable selects. Check each selected value, not an obsolete text cell or an unselected option.
+function songRowValues(html){return [...html.matchAll(/<select[^>]*data-song-pattern="0"[^>]*data-song-part="(\d+)"[^>]*>([\s\S]*?)<\/select>/g)].map(m=>{const selected=[...m[2].matchAll(/<option value="(\d+)" selected>(P\d{2})<\/option>/g)];assert.equal(selected.length,1);return [Number(m[1]),Number(selected[0][1]),selected[0][2]];});}
+views.find(e=>e.dataset.view==='patterns').onclick();for(let i=0;i<5;i++){const b=new E();b.dataset={launchPart:String(i),pattern:String(i)};$('other-view').handlers.click({target:b});}views.find(e=>e.dataset.view==='song').onclick();const add=new E('song-add');$('other-view').handlers.click({target:add});const expectedSong=[[0,0,'P01'],[1,1,'P02'],[2,2,'P03'],[3,3,'P04'],[4,4,'P05']];assert.deepEqual(songRowValues($('other-view').innerHTML),expectedSong);$('other-view').handlers.change({target:{dataset:{songRow:'0'},value:'8'}});assert.match($('other-view').innerHTML.match(/<input[^>]*data-song-row="0"[^>]*>/)?.[0]??'',/\bvalue="8"/);assert.deepEqual(songRowValues($('other-view').innerHTML),expectedSong);console.log('PASS actual-app five launch selections→song row→8 repeats');
 views.find(e=>e.dataset.view==='locks').onclick();const mg=$('motion-grid'),me={button:0,pointerId:9,clientX:1,clientY:100,preventDefault(){}};mg.onpointerdown(me);for(let i=1;i<6;i++)mg.onpointermove({...me,clientX:i*6.25+1,clientY:100-i*15});mg.onpointerup(me);assert.match(mg.innerHTML,/Step 6, 95/);$('motion-undo').onclick();assert.doesNotMatch(mg.innerHTML,/Step 6, 95/);$('motion-redo').onclick();assert.match(mg.innerHTML,/Step 6, 95/);console.log('PASS actual-app six motion points→Undo empty→Redo');
 $('part').value='drum909';$('part').selectedOptions=[{textContent:'909'}];views.find(e=>e.dataset.view==='drums').onclick();const toggle=new E('drum-edit');$('other-view').handlers.click({target:toggle});const hit=new E();hit.dataset={drumNote:'36',drumStart:'0',drumTrack:'drum909'};$('other-view').handlers.click({target:hit});assert.doesNotMatch($('other-view').innerHTML,/BD step 1 velocity/);$('undo').onclick();assert.match($('other-view').innerHTML,/BD step 1 velocity 88/);console.log('PASS actual-app explicit drum toggle→Undo');
 $('part').value='chicago';$('part').selectedOptions=[{textContent:'Bass A Chicago'}];$('part').onchange();views.find(e=>e.dataset.view==='roll').onclick();$('inspector').handlers.change({target:{id:'chance-value',value:'1:2',dataset:{}}});assert.match($('inspector').innerHTML,/option selected>1:2/);$('undo').onclick();assert.doesNotMatch($('inspector').innerHTML,/option selected>1:2/);console.log('PASS actual-app exact conditional1:2→Undo unset');
@@ -88,3 +91,32 @@ assert.equal(failures,0);
 views.find(e=>e.dataset.view==='mix').onclick();const aliasSurface=new E();aliasSurface.dataset={param:'current-state-and-reference/mix-parts-live.svg|1:5:0:0',paramOccurrence:'5'};const aliasDown={button:0,pointerId:119,clientX:0,clientY:50,target:aliasSurface,preventDefault(){}};$('other-view').handlers.pointerdown(aliasDown);$('other-view').handlers.pointerup(aliasDown);check('same-target alias preserves actual touched occurrence name',()=>assert.match($('parameter-inspector').querySelector('span').textContent,/LEVEL/));assert.equal(failures,0);
 
 views.find(e=>e.dataset.view==='mix').onclick();check('no connection caption text in views (state shown only by Connect)',()=>assert.equal(($('other-view').innerHTML.match(/class="source-caption"/g)||[]).length,0));assert.equal(failures,0);
+
+// Global destinations describe their own workspace while preserving the selected part and Draft scope.
+const navigate = view => views.find(button => button.dataset.view === view).onclick();
+const engine = name => engines.find(button => button.dataset.engine === name);
+const patternReadout = $('pattern-no');
+patternReadout.textContent = fs.readFileSync(new URL('index.html', base), 'utf8').match(/id="pattern-no">([^<]+)/)[1];
+const workspaceContext = () => [$('part').value, engine('miami').attrs['aria-pressed'], patternReadout.textContent];
+$('part').selectedOptions = [{textContent:'Bass B Miami'}];
+engine('miami').onclick();
+navigate('roll');
+const sequenceTitle = $('part-title').textContent;
+assert.equal(sequenceTitle, 'MIAMI / P01');
+assert.deepEqual(workspaceContext(), ['miami','true','P01']);
+navigate('patterns');
+const draftTarget = new E();
+draftTarget.dataset = {launchPart:'3',pattern:'6'};
+$('other-view').handlers.click({target:draftTarget});
+const patternTitle = $('part-title').textContent;
+assert.equal(patternTitle, 'Bass B · P07 · Draft');
+for (const [view,title] of [['song','Song arrangement'],['files','Project files']]) {
+ navigate(view);
+ check(`actual-app ${view} header names the active workspace`, () => assert.equal($('part-title').textContent, title));
+ check(`actual-app ${view} keeps selected engine and P01`, () => assert.deepEqual(workspaceContext(), ['miami','true','P01']));
+}
+navigate('patterns');
+check('actual-app returning to Patterns preserves its Draft target', () => assert.equal($('part-title').textContent, patternTitle));
+navigate('roll');
+check('actual-app returning to Sequence restores MIAMI / P01', () => assert.equal($('part-title').textContent, sequenceTitle));
+assert.equal(failures,0);

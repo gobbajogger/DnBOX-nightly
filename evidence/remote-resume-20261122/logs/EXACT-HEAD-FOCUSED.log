@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: zoomed-out time grid paints each physical pixel at most once
+ok 1 - zoomed-out time grid paints each physical pixel at most once
+  ---
+  duration_ms: 5.167637
+  type: 'test'
+  ...
+# Subtest: normal viewport bar/beat/subdivision hierarchy is unchanged
+ok 2 - normal viewport bar/beat/subdivision hierarchy is unchanged
+  ---
+  duration_ms: 1.863536
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 79.095435

@@ -1,0 +1,13 @@
+{"id": "view-08-part-00-voice-00-page-00", "mode": "current", "rgb": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc", "compare_enabled": true}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "shipping", "rgb": "75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3", "compare_enabled": false}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "r22", "rgb": "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527", "compare_enabled": false}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "current", "rgb": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc", "compare_enabled": true}
+{"id": "view-08-part-01-voice-00-page-00", "mode": "current", "rgb": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf", "compare_enabled": true}
+{"id": "view-08-part-01-voice-00-page-00", "mode": "shipping", "rgb": "23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030", "compare_enabled": false}
+{"id": "view-08-part-01-voice-00-page-00", "mode": "r22", "rgb": "49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319", "compare_enabled": false}
+{"id": "view-08-part-01-voice-00-page-00", "mode": "current", "rgb": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf", "compare_enabled": true}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "current", "rgb": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc", "compare_enabled": true}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "r22", "rgb": "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527", "compare_enabled": false}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "r22", "rgb": "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527", "compare_enabled": false}
+{"id": "view-08-part-00-voice-00-page-00", "mode": "shipping", "rgb": "75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3", "compare_enabled": false}
+PASS late shipping response discarded; non-SEQ hides selector and restores current Compare; no page errors

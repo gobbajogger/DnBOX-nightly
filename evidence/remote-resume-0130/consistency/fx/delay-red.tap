@@ -1,0 +1,47 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.071477ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (2.617586ms)
+✔ live update declares its domain and stores normalized renderer input (0.162614ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (0.959389ms)
+✖ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (1.433259ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 104.877522
+
+✖ failing tests:
+
+test at tests/product-remote/glyph-domain.test.mjs:29:1
+✖ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (1.433259ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - [
+  -   [
+  -     2,
+  -     1
+  -   ],
+  -   [
+  -     2,
+  -     19
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-resume-0130/.output/mix-shared-role-review/source/tests/product-remote/glyph-domain.test.mjs:38:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ [ 2, 1 ], [ 2, 19 ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

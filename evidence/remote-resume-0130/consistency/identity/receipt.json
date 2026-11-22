@@ -1,0 +1,115 @@
+{
+  "chromium": "151.0.7922.34",
+  "status": "Firmware replied: X0X DEV",
+  "exchanges": [
+    {
+      "request_hex": "f07d464c01f7",
+      "editor_deferred": false,
+      "reply_hex": "f07d464c0158305820444556000000004000005853470130f7"
+    },
+    {
+      "request_hex": "f07d444e0200000000005b000000000000000100000000000000000000000000000000000000000000000000000000000000f7",
+      "editor_deferred": true,
+      "reply_hex": ""
+    }
+  ],
+  "styles": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "controls": [
+        {
+          "id": "permission",
+          "shared": true,
+          "width": 151,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "connect",
+          "shared": true,
+          "width": 155,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "disconnect",
+          "shared": true,
+          "width": 111,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        }
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "controls": [
+        {
+          "id": "permission",
+          "shared": true,
+          "width": 151,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "connect",
+          "shared": true,
+          "width": 155,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "disconnect",
+          "shared": true,
+          "width": 111,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        }
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "controls": [
+        {
+          "id": "permission",
+          "shared": true,
+          "width": 151,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "connect",
+          "shared": true,
+          "width": 155,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        },
+        {
+          "id": "disconnect",
+          "shared": true,
+          "width": 111,
+          "height": 48,
+          "font": "Barlow, sans-serif",
+          "radius": "7px"
+        }
+      ]
+    }
+  ],
+  "pageErrors": []
+}

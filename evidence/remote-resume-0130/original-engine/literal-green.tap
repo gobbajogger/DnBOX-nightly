@@ -1,0 +1,20 @@
+✔ locally opened bank preserves zero, absent fields, escaped names and source-qualified identities (12.298631ms)
+✔ an imported tempo-synced rate uses its own mode and keeps the original float on copy (3.023208ms)
+✔ malformed and ambiguous banks fail before the active bank or owner changes (7.772075ms)
+✔ copies edit only the selected bass and bank’s existing value tokens across programs (5.575369ms)
+✔ 12 original bank files open and all 640 programs retain the recorded field presence and binary32 words (973.004812ms)
+✔ the two Draft owners retain all 13 measured original float words and stable preset/field identities (1.508274ms)
+✔ original waveform stops, independent PWM, continuous SUB and all three clock modes (4.236168ms)
+✔ unsupported field values and legacy identity aliases are rejected (0.36676ms)
+✔ Hz readouts use the frequency returned by the build-9 Conductor (3.401285ms)
+✔ all three synced LFOs on both basses select the original binary32 tempo ranges (2.721144ms)
+✔ both Draft owners reproduce the original thirteen binary32 control values (142.012689ms)
+✔ all three LFOs on both owners match original build9 literal strings at128positions and transition neighbors (1.395675ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1196.860411

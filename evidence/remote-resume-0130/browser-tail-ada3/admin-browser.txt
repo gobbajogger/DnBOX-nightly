@@ -1,0 +1,1 @@
+PASS admin browser: pinned CSP, two catalogs, public count, ephemeral owner login, stale controller rejection, ledger-only PUT, mocked notes update, disconnect and narrow layout

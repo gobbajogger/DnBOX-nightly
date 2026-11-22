@@ -1,0 +1,44 @@
+{
+  "baseline": {
+    "source": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+    "sourceCaptureSha256": "be374130f07686a2bb35b5594ea65106c44f3656454b9f3fa7c7ff96e7ec8ea9",
+    "ink": [
+      255,
+      179,
+      55
+    ],
+    "background": [
+      203,
+      122,
+      38
+    ],
+    "sampleBox": [
+      88,
+      164,
+      103,
+      181
+    ],
+    "relativeLuminanceContrast": 1.8508920225069136
+  },
+  "candidate": {
+    "source": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+    "sourceCaptureSha256": "79a64d19293f99415f54d25b17834cfcb40795511e8da03d4f21e497055f2e29",
+    "ink": [
+      5,
+      10,
+      13
+    ],
+    "background": [
+      203,
+      122,
+      38
+    ],
+    "sampleBox": [
+      62,
+      153,
+      76,
+      166
+    ],
+    "relativeLuminanceContrast": 6.016119006151473
+  }
+}

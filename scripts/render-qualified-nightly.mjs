@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { inlineStandaloneFonts, standaloneFontInputs } from './standalone-fonts.mjs';
 import { productOf, logicalImage, controllerOf } from '../web/fm1pkg.js';
+import { offlineThemeInputs } from './preview-offline-theme.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const legacyControllers = JSON.parse(readFileSync(join(root, 'scripts/legacy-controller-packages.json'), 'utf8'));
@@ -26,7 +27,8 @@ export const requiredGates = ['package-integrity', 'model-controller',
 const gateNames = ['native-build', ...requiredGates, ...retiredLicenseGates];
 
 export function installerFingerprint() {
-  return sha256(JSON.stringify([...inputs, ...standaloneFontInputs, 'scripts/standalone-fonts.mjs', 'web/x0x_breaks.html', 'web/x0x_projects.html', 'web/x0x_projects.js', 'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs', 'scripts/legacy-controller-packages.json', 'package-version-assignments.json', 'web/product-site/hardware-tests.json', 'web/product-site/hardware-tests.mjs']
+  return sha256(JSON.stringify([...inputs, ...standaloneFontInputs, 'scripts/standalone-fonts.mjs', 'web/x0x_breaks.html', 'web/x0x_projects.html', 'web/x0x_projects.js', 'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs', 'scripts/legacy-controller-packages.json', 'package-version-assignments.json', 'web/product-site/hardware-tests.json', 'web/product-site/hardware-tests.mjs',
+    'scripts/preview-offline-theme.mjs', ...offlineThemeInputs]
     .map(p => [p, sha256(readFileSync(join(root, p)))])));
 }
 

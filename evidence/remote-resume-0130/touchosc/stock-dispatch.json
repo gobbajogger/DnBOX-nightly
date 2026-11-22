@@ -1,0 +1,21 @@
+{
+  "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "nightlySourceCommit": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "probeSha256": "74b51ab4828f4b5fe35802a0636fa238927f86c8303ec7326fb80ecef7c34574",
+  "physicalDevice": false,
+  "scope": "Production C dispatcher called through read-only host fixture; no USB/BLE/TouchOSC app was opened.",
+  "exchanges": [
+    {
+      "requestHex": "f07d464c01f7",
+      "editor_deferred": false,
+      "reply_hex": "f07d464c0158305820444556000000004000005853470130f7",
+      "replyBytes": 25
+    },
+    {
+      "requestHex": "f07d444e0200000000005b000000000000000100000000000000000000000000000000000000000000000000000000000000f7",
+      "editor_deferred": true,
+      "reply_hex": "",
+      "replyBytes": 0
+    }
+  ]
+}

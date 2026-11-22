@@ -1,0 +1,5 @@
+# Preserve verbatim forensic test logs, including original whitespace.
+evidence/remote-resume-0130/**/*.log -text -whitespace
+
+# Preserve the exact Node RED/GREEN diagnostic output.
+evidence/remote-resume-0130/consistency/**/*.tap -text -whitespace

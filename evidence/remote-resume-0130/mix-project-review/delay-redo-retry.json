@@ -1,0 +1,598 @@
+{
+  "testedGitCommit": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "viewport": [
+    1440,
+    900
+  ],
+  "assets": {
+    "SOURCE-TRACE.json": "cce08a32135e11d6b8a5f1cb80d4c79e494325e814e4e0d65814a425334a6a21",
+    "remote/app.mjs": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+    "remote/style.css": "f3ad5094b210c27192d8a90d58f6d3402a460d7f94b5357aff8318cc0c0a4cac"
+  },
+  "pageErrors": [],
+  "chromium": "151.0.7922.34",
+  "result": "pass",
+  "historyTrace": [
+    {
+      "phase": "before",
+      "target": "undo",
+      "active": "undo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": false,
+          "hit": false,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
+      ],
+      "mode": "levels",
+      "value": null,
+      "scope": "mix",
+      "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "microtask",
+      "target": "undo",
+      "active": "undo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": false,
+          "hit": false,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
+      ],
+      "mode": "levels",
+      "value": null,
+      "scope": "mix",
+      "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "frame",
+      "target": "undo",
+      "active": "",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 267,
+            "y": 766.796875,
+            "width": 53,
+            "height": 40,
+            "top": 766.796875,
+            "right": 320,
+            "bottom": 806.796875,
+            "left": 267
+          }
+        }
+      ],
+      "mode": "levels",
+      "value": null,
+      "scope": "mix",
+      "status": "Undo Master Attack \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "before",
+      "target": "undo",
+      "active": "undo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": false,
+          "hit": false,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "0",
+      "scope": "mix",
+      "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "microtask",
+      "target": "undo",
+      "active": "undo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": false,
+          "hit": false,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "0",
+      "scope": "mix",
+      "status": "1 changes \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "frame",
+      "target": "undo",
+      "active": "",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": true,
+          "hit": false,
+          "box": {
+            "x": 267,
+            "y": 1216.328125,
+            "width": 53,
+            "height": 40,
+            "top": 1216.328125,
+            "right": 320,
+            "bottom": 1256.328125,
+            "left": 267
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "1",
+      "scope": "mix",
+      "status": "Undo Delay \u00b7 Delay type \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "before",
+      "target": "redo",
+      "active": "redo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": true,
+          "hit": false,
+          "box": {
+            "x": 267,
+            "y": 1216.328125,
+            "width": 53,
+            "height": 40,
+            "top": 1216.328125,
+            "right": 320,
+            "bottom": 1256.328125,
+            "left": 267
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "1",
+      "scope": "mix",
+      "status": "Download requested. Keep the local draft file and reopen it to verify. Not a native project; not applied.",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "microtask",
+      "target": "redo",
+      "active": "redo",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": true,
+          "hit": false,
+          "box": {
+            "x": 267,
+            "y": 1216.328125,
+            "width": 53,
+            "height": 40,
+            "top": 1216.328125,
+            "right": 320,
+            "bottom": 1256.328125,
+            "left": 267
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "1",
+      "scope": "mix",
+      "status": "Download requested. Keep the local draft file and reopen it to verify. Not a native project; not applied.",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "frame",
+      "target": "redo",
+      "active": "",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": false,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": false,
+          "hit": false,
+          "box": {
+            "x": 267,
+            "y": 1216.328125,
+            "width": 53,
+            "height": 40,
+            "top": 1216.328125,
+            "right": 320,
+            "bottom": 1256.328125,
+            "left": 267
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "0",
+      "scope": "mix",
+      "status": "Redo Delay \u00b7 Delay type \u00b7 Draft \u00b7 Not connected",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "phase": "end",
+      "target": null,
+      "active": "",
+      "controls": [
+        {
+          "id": "undo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1300,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1336,
+            "bottom": 141,
+            "left": 1300
+          }
+        },
+        {
+          "id": "redo",
+          "disabled": true,
+          "hit": true,
+          "box": {
+            "x": 1344,
+            "y": 109,
+            "width": 36,
+            "height": 32,
+            "top": 109,
+            "right": 1380,
+            "bottom": 141,
+            "left": 1344
+          }
+        },
+        {
+          "id": "parameter-undo",
+          "disabled": true,
+          "hit": false,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        }
+      ],
+      "mode": "fx",
+      "value": "1",
+      "scope": "mix",
+      "status": "Download requested. Keep the local draft file and reopen it to verify. Not a native project; not applied.",
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "midiCalls": 0
+}

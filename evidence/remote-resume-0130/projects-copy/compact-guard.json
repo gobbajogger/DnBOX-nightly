@@ -1,0 +1,3436 @@
+{
+  "baselineCommit": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "ownerPage": 12,
+  "ownerPngSHA256": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+  "baselineAssetsSHA256": {
+    "app.mjs": "a2d23b33028063e3b56b7d0828023343a89ba474ee2b2b31b1afc699d8bd44ec",
+    "style.css": "24e54024253f2404a876e50fd5330e31a15a7480a5760b31f3fb5a2d51608d29"
+  },
+  "candidateAssetsSHA256": {
+    "app.mjs": "cd0eeef951f61dac356a2ba36c305876fa819fafa23ff5c9305fff90c5b87aa6",
+    "style.css": "5ee11c550b7cfabac7e5d14f796f6846a86fa4d89cce13a048c1d26545f9e77e"
+  },
+  "candidatePatchSHA256": "3d73989de5a8eeb4e718cb3a7a197930f2fa642b684d4ad1e29728a94b004c08",
+  "sizes": {
+    "1440x900": {
+      "before": {
+        "cards": [
+          {
+            "box": {
+              "x": 30,
+              "y": 209.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 209.390625,
+              "right": 1410,
+              "bottom": 394.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 246.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 246.390625,
+              "right": 696,
+              "bottom": 277.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 414.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 414.390625,
+              "right": 1410,
+              "bottom": 599.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 451.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 451.390625,
+              "right": 696,
+              "bottom": 482.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 619.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 619.390625,
+              "right": 1410,
+              "bottom": 804.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 656.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 656.390625,
+              "right": 696,
+              "bottom": 687.578125,
+              "left": 51
+            }
+          }
+        ],
+        "descriptions": [],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 289.890625,
+              "width": 207,
+              "height": 44,
+              "top": 289.890625,
+              "right": 1158,
+              "bottom": 333.890625,
+              "left": 951
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 1170,
+              "y": 289.890625,
+              "width": 207,
+              "height": 44,
+              "top": 289.890625,
+              "right": 1377,
+              "bottom": 333.890625,
+              "left": 1170
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 732,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 939,
+              "bottom": 538.890625,
+              "left": 732
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 1158,
+              "bottom": 538.890625,
+              "left": 951
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 1170,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 1377,
+              "bottom": 538.890625,
+              "left": 1170
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 732,
+              "y": 699.890625,
+              "width": 207,
+              "height": 44,
+              "top": 699.890625,
+              "right": 939,
+              "bottom": 743.890625,
+              "left": 732
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 699.890625,
+              "width": 207,
+              "height": 44,
+              "top": 699.890625,
+              "right": 1158,
+              "bottom": 743.890625,
+              "left": 951
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 806.390625,
+              "width": 73.40625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 93.40625,
+              "bottom": 850.390625,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 806.390625,
+              "width": 65.765625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 167.171875,
+              "bottom": 850.390625,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 177.78125,
+              "y": 806.390625,
+              "width": 126.140625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 303.921875,
+              "bottom": 850.390625,
+              "left": 177.78125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 1103.703125,
+              "y": 810.390625,
+              "width": 79.9375,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1183.640625,
+              "bottom": 854.390625,
+              "left": 1103.703125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 1191.640625,
+              "y": 810.390625,
+              "width": 81.328125,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1272.96875,
+              "bottom": 854.390625,
+              "left": 1191.640625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 1280.96875,
+              "y": 810.390625,
+              "width": 110.5625,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1391.53125,
+              "bottom": 854.390625,
+              "left": 1280.96875
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 1400,
+          "height": 701,
+          "top": 159,
+          "right": 1420,
+          "bottom": 860,
+          "left": 20
+        },
+        "document": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "cards": [
+          {
+            "box": {
+              "x": 30,
+              "y": 209.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 209.390625,
+              "right": 1410,
+              "bottom": 394.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 246.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 246.390625,
+              "right": 696,
+              "bottom": 277.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 414.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 414.390625,
+              "right": 1410,
+              "bottom": 599.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 451.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 451.390625,
+              "right": 696,
+              "bottom": 482.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 619.390625,
+              "width": 1380,
+              "height": 185,
+              "top": 619.390625,
+              "right": 1410,
+              "bottom": 804.390625,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 656.390625,
+              "width": 645,
+              "height": 31.1875,
+              "top": 656.390625,
+              "right": 696,
+              "bottom": 687.578125,
+              "left": 51
+            }
+          }
+        ],
+        "descriptions": [
+          {
+            "label": "Patterns, song, sounds, motion and sample references",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 291.578125,
+              "width": 645,
+              "height": 29.390625,
+              "top": 291.578125,
+              "right": 696,
+              "bottom": 320.96875,
+              "left": 51
+            }
+          },
+          {
+            "label": "Open an engine file. Edit a copy; preserve the original.",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 496.578125,
+              "width": 645,
+              "height": 29.390625,
+              "top": 496.578125,
+              "right": 696,
+              "bottom": 525.96875,
+              "left": 51
+            }
+          },
+          {
+            "label": "A finite range, aligned tracks and clips for a DAW.",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 701.578125,
+              "width": 645,
+              "height": 29.390625,
+              "top": 701.578125,
+              "right": 696,
+              "bottom": 730.96875,
+              "left": 51
+            }
+          }
+        ],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 289.890625,
+              "width": 207,
+              "height": 44,
+              "top": 289.890625,
+              "right": 1158,
+              "bottom": 333.890625,
+              "left": 951
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 1170,
+              "y": 289.890625,
+              "width": 207,
+              "height": 44,
+              "top": 289.890625,
+              "right": 1377,
+              "bottom": 333.890625,
+              "left": 1170
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 732,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 939,
+              "bottom": 538.890625,
+              "left": 732
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 1158,
+              "bottom": 538.890625,
+              "left": 951
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 1170,
+              "y": 494.890625,
+              "width": 207,
+              "height": 44,
+              "top": 494.890625,
+              "right": 1377,
+              "bottom": 538.890625,
+              "left": 1170
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 732,
+              "y": 699.890625,
+              "width": 207,
+              "height": 44,
+              "top": 699.890625,
+              "right": 939,
+              "bottom": 743.890625,
+              "left": 732
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 951,
+              "y": 699.890625,
+              "width": 207,
+              "height": 44,
+              "top": 699.890625,
+              "right": 1158,
+              "bottom": 743.890625,
+              "left": 951
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 806.390625,
+              "width": 73.40625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 93.40625,
+              "bottom": 850.390625,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 806.390625,
+              "width": 65.765625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 167.171875,
+              "bottom": 850.390625,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 177.78125,
+              "y": 806.390625,
+              "width": 126.140625,
+              "height": 44,
+              "top": 806.390625,
+              "right": 303.921875,
+              "bottom": 850.390625,
+              "left": 177.78125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 1103.703125,
+              "y": 810.390625,
+              "width": 79.9375,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1183.640625,
+              "bottom": 854.390625,
+              "left": 1103.703125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 1191.640625,
+              "y": 810.390625,
+              "width": 81.328125,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1272.96875,
+              "bottom": 854.390625,
+              "left": 1191.640625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 1280.96875,
+              "y": 810.390625,
+              "width": 110.5625,
+              "height": 44,
+              "top": 810.390625,
+              "right": 1391.53125,
+              "bottom": 854.390625,
+              "left": 1280.96875
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 1400,
+          "height": 701,
+          "top": 159,
+          "right": 1420,
+          "bottom": 860,
+          "left": 20
+        },
+        "document": [
+          1440,
+          900
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "beforeAfterPixels": {
+        "changedExact": 9317,
+        "changedTolerant": 8146,
+        "tolerantPercent": 0.6285493827160494,
+        "maxChannelDelta": 144
+      },
+      "ownerPixels": {
+        "before": {
+          "changedExact": 254671,
+          "changedTolerant": 83362,
+          "tolerantPercent": 6.432253086419753,
+          "maxChannelDelta": 250
+        },
+        "after": {
+          "changedExact": 258131,
+          "changedTolerant": 86002,
+          "tolerantPercent": 6.635956790123457,
+          "maxChannelDelta": 250
+        }
+      },
+      "candidatePngSHA256": "3e92161f9e7b497a28cfa78712294dab14755baf4a17062441b9fbb98d62ea7f"
+    },
+    "1024x640": {
+      "before": {
+        "cards": [
+          {
+            "box": {
+              "x": 20,
+              "y": 209.390625,
+              "width": 321.328125,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 341.328125,
+              "bottom": 425.78125,
+              "left": 20
+            },
+            "title": {
+              "x": 31,
+              "y": 236.390625,
+              "width": 299.328125,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 330.328125,
+              "bottom": 250.78125,
+              "left": 31
+            }
+          },
+          {
+            "box": {
+              "x": 351.328125,
+              "y": 209.390625,
+              "width": 321.328125,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 672.65625,
+              "bottom": 425.78125,
+              "left": 351.328125
+            },
+            "title": {
+              "x": 362.328125,
+              "y": 236.390625,
+              "width": 299.328125,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 661.65625,
+              "bottom": 250.78125,
+              "left": 362.328125
+            }
+          },
+          {
+            "box": {
+              "x": 682.65625,
+              "y": 209.390625,
+              "width": 321.34375,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 1004,
+              "bottom": 425.78125,
+              "left": 682.65625
+            },
+            "title": {
+              "x": 693.65625,
+              "y": 236.390625,
+              "width": 299.34375,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 993,
+              "bottom": 250.78125,
+              "left": 693.65625
+            }
+          }
+        ],
+        "descriptions": [],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 31,
+              "y": 266.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 266.78125,
+              "right": 330.328125,
+              "bottom": 310.78125,
+              "left": 31
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 31,
+              "y": 318.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 318.78125,
+              "right": 330.328125,
+              "bottom": 362.78125,
+              "left": 31
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 266.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 266.78125,
+              "right": 661.65625,
+              "bottom": 310.78125,
+              "left": 362.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 318.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 318.78125,
+              "right": 661.65625,
+              "bottom": 362.78125,
+              "left": 362.328125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 370.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 370.78125,
+              "right": 661.65625,
+              "bottom": 414.78125,
+              "left": 362.328125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 693.65625,
+              "y": 266.78125,
+              "width": 299.34375,
+              "height": 44,
+              "top": 266.78125,
+              "right": 993,
+              "bottom": 310.78125,
+              "left": 693.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 693.65625,
+              "y": 318.78125,
+              "width": 299.34375,
+              "height": 44,
+              "top": 318.78125,
+              "right": 993,
+              "bottom": 362.78125,
+              "left": 693.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 433.78125,
+              "width": 73.40625,
+              "height": 44,
+              "top": 433.78125,
+              "right": 93.40625,
+              "bottom": 477.78125,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 433.78125,
+              "width": 65.765625,
+              "height": 44,
+              "top": 433.78125,
+              "right": 167.171875,
+              "bottom": 477.78125,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 487.78125,
+              "width": 126.140625,
+              "height": 44,
+              "top": 487.78125,
+              "right": 146.140625,
+              "bottom": 531.78125,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 37,
+              "y": 633.359375,
+              "width": 79.9375,
+              "height": 40,
+              "top": 633.359375,
+              "right": 116.9375,
+              "bottom": 673.359375,
+              "left": 37
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 124.9375,
+              "y": 633.359375,
+              "width": 81.328125,
+              "height": 40,
+              "top": 633.359375,
+              "right": 206.265625,
+              "bottom": 673.359375,
+              "left": 124.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 214.265625,
+              "y": 633.359375,
+              "width": 110.5625,
+              "height": 40,
+              "top": 633.359375,
+              "right": 324.828125,
+              "bottom": 673.359375,
+              "left": 214.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 984,
+          "height": 441,
+          "top": 159,
+          "right": 1004,
+          "bottom": 600,
+          "left": 20
+        },
+        "document": [
+          1024,
+          640
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "cards": [
+          {
+            "box": {
+              "x": 20,
+              "y": 209.390625,
+              "width": 321.328125,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 341.328125,
+              "bottom": 425.78125,
+              "left": 20
+            },
+            "title": {
+              "x": 31,
+              "y": 236.390625,
+              "width": 299.328125,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 330.328125,
+              "bottom": 250.78125,
+              "left": 31
+            }
+          },
+          {
+            "box": {
+              "x": 351.328125,
+              "y": 209.390625,
+              "width": 321.328125,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 672.65625,
+              "bottom": 425.78125,
+              "left": 351.328125
+            },
+            "title": {
+              "x": 362.328125,
+              "y": 236.390625,
+              "width": 299.328125,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 661.65625,
+              "bottom": 250.78125,
+              "left": 362.328125
+            }
+          },
+          {
+            "box": {
+              "x": 682.65625,
+              "y": 209.390625,
+              "width": 321.34375,
+              "height": 216.390625,
+              "top": 209.390625,
+              "right": 1004,
+              "bottom": 425.78125,
+              "left": 682.65625
+            },
+            "title": {
+              "x": 693.65625,
+              "y": 236.390625,
+              "width": 299.34375,
+              "height": 14.390625,
+              "top": 236.390625,
+              "right": 993,
+              "bottom": 250.78125,
+              "left": 693.65625
+            }
+          }
+        ],
+        "descriptions": [
+          {
+            "label": "Patterns, song, sounds, motion and sample references",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "Open an engine file. Edit a copy; preserve the original.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "A finite range, aligned tracks and clips for a DAW.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 31,
+              "y": 266.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 266.78125,
+              "right": 330.328125,
+              "bottom": 310.78125,
+              "left": 31
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 31,
+              "y": 318.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 318.78125,
+              "right": 330.328125,
+              "bottom": 362.78125,
+              "left": 31
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 266.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 266.78125,
+              "right": 661.65625,
+              "bottom": 310.78125,
+              "left": 362.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 318.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 318.78125,
+              "right": 661.65625,
+              "bottom": 362.78125,
+              "left": 362.328125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 362.328125,
+              "y": 370.78125,
+              "width": 299.328125,
+              "height": 44,
+              "top": 370.78125,
+              "right": 661.65625,
+              "bottom": 414.78125,
+              "left": 362.328125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 693.65625,
+              "y": 266.78125,
+              "width": 299.34375,
+              "height": 44,
+              "top": 266.78125,
+              "right": 993,
+              "bottom": 310.78125,
+              "left": 693.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 693.65625,
+              "y": 318.78125,
+              "width": 299.34375,
+              "height": 44,
+              "top": 318.78125,
+              "right": 993,
+              "bottom": 362.78125,
+              "left": 693.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 433.78125,
+              "width": 73.40625,
+              "height": 44,
+              "top": 433.78125,
+              "right": 93.40625,
+              "bottom": 477.78125,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 433.78125,
+              "width": 65.765625,
+              "height": 44,
+              "top": 433.78125,
+              "right": 167.171875,
+              "bottom": 477.78125,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 487.78125,
+              "width": 126.140625,
+              "height": 44,
+              "top": 487.78125,
+              "right": 146.140625,
+              "bottom": 531.78125,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 37,
+              "y": 633.359375,
+              "width": 79.9375,
+              "height": 40,
+              "top": 633.359375,
+              "right": 116.9375,
+              "bottom": 673.359375,
+              "left": 37
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 124.9375,
+              "y": 633.359375,
+              "width": 81.328125,
+              "height": 40,
+              "top": 633.359375,
+              "right": 206.265625,
+              "bottom": 673.359375,
+              "left": 124.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 214.265625,
+              "y": 633.359375,
+              "width": 110.5625,
+              "height": 40,
+              "top": 633.359375,
+              "right": 324.828125,
+              "bottom": 673.359375,
+              "left": 214.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 984,
+          "height": 441,
+          "top": 159,
+          "right": 1004,
+          "bottom": 600,
+          "left": 20
+        },
+        "document": [
+          1024,
+          640
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "844x390": {
+      "before": {
+        "cards": [
+          {
+            "box": {
+              "x": 12,
+              "y": 125.59375,
+              "width": 266.65625,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 278.65625,
+              "bottom": 289.984375,
+              "left": 12
+            },
+            "title": {
+              "x": 23,
+              "y": 152.59375,
+              "width": 244.65625,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 267.65625,
+              "bottom": 166.984375,
+              "left": 23
+            }
+          },
+          {
+            "box": {
+              "x": 288.65625,
+              "y": 125.59375,
+              "width": 266.671875,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 555.328125,
+              "bottom": 289.984375,
+              "left": 288.65625
+            },
+            "title": {
+              "x": 299.65625,
+              "y": 152.59375,
+              "width": 244.671875,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 544.328125,
+              "bottom": 166.984375,
+              "left": 299.65625
+            }
+          },
+          {
+            "box": {
+              "x": 565.328125,
+              "y": 125.59375,
+              "width": 266.65625,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 831.984375,
+              "bottom": 289.984375,
+              "left": 565.328125
+            },
+            "title": {
+              "x": 576.328125,
+              "y": 152.59375,
+              "width": 244.65625,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 820.984375,
+              "bottom": 166.984375,
+              "left": 576.328125
+            }
+          }
+        ],
+        "descriptions": [],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 23,
+              "y": 182.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 182.984375,
+              "right": 267.65625,
+              "bottom": 226.984375,
+              "left": 23
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 23,
+              "y": 234.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 234.984375,
+              "right": 267.65625,
+              "bottom": 278.984375,
+              "left": 23
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 299.65625,
+              "y": 182.984375,
+              "width": 244.671875,
+              "height": 44,
+              "top": 182.984375,
+              "right": 544.328125,
+              "bottom": 226.984375,
+              "left": 299.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": false,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "disabled": true,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 299.65625,
+              "y": 234.984375,
+              "width": 244.671875,
+              "height": 44,
+              "top": 234.984375,
+              "right": 544.328125,
+              "bottom": 278.984375,
+              "left": 299.65625
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 576.328125,
+              "y": 182.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 182.984375,
+              "right": 820.984375,
+              "bottom": 226.984375,
+              "left": 576.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 576.328125,
+              "y": 234.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 234.984375,
+              "right": 820.984375,
+              "bottom": 278.984375,
+              "left": 576.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 297.984375,
+              "width": 73.40625,
+              "height": 44,
+              "top": 297.984375,
+              "right": 85.40625,
+              "bottom": 341.984375,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 93.40625,
+              "y": 297.984375,
+              "width": 65.765625,
+              "height": 44,
+              "top": 297.984375,
+              "right": 159.171875,
+              "bottom": 341.984375,
+              "left": 93.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 351.984375,
+              "width": 126.140625,
+              "height": 44,
+              "top": 351.984375,
+              "right": 138.140625,
+              "bottom": 395.984375,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 497.5625,
+              "width": 79.9375,
+              "height": 40,
+              "top": 497.5625,
+              "right": 108.9375,
+              "bottom": 537.5625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 116.9375,
+              "y": 497.5625,
+              "width": 81.328125,
+              "height": 40,
+              "top": 497.5625,
+              "right": 198.265625,
+              "bottom": 537.5625,
+              "left": 116.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 206.265625,
+              "y": 497.5625,
+              "width": 110.5625,
+              "height": 40,
+              "top": 497.5625,
+              "right": 316.828125,
+              "bottom": 537.5625,
+              "left": 206.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 12,
+          "y": 88,
+          "width": 820,
+          "height": 302,
+          "top": 88,
+          "right": 832,
+          "bottom": 390,
+          "left": 12
+        },
+        "document": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "cards": [
+          {
+            "box": {
+              "x": 12,
+              "y": 125.59375,
+              "width": 266.65625,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 278.65625,
+              "bottom": 289.984375,
+              "left": 12
+            },
+            "title": {
+              "x": 23,
+              "y": 152.59375,
+              "width": 244.65625,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 267.65625,
+              "bottom": 166.984375,
+              "left": 23
+            }
+          },
+          {
+            "box": {
+              "x": 288.65625,
+              "y": 125.59375,
+              "width": 266.671875,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 555.328125,
+              "bottom": 289.984375,
+              "left": 288.65625
+            },
+            "title": {
+              "x": 299.65625,
+              "y": 152.59375,
+              "width": 244.671875,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 544.328125,
+              "bottom": 166.984375,
+              "left": 299.65625
+            }
+          },
+          {
+            "box": {
+              "x": 565.328125,
+              "y": 125.59375,
+              "width": 266.65625,
+              "height": 164.390625,
+              "top": 125.59375,
+              "right": 831.984375,
+              "bottom": 289.984375,
+              "left": 565.328125
+            },
+            "title": {
+              "x": 576.328125,
+              "y": 152.59375,
+              "width": 244.65625,
+              "height": 14.390625,
+              "top": 152.59375,
+              "right": 820.984375,
+              "bottom": 166.984375,
+              "left": 576.328125
+            }
+          }
+        ],
+        "descriptions": [
+          {
+            "label": "Patterns, song, sounds, motion and sample references",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "Open an engine file. Edit a copy; preserve the original.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "A finite range, aligned tracks and clips for a DAW.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 23,
+              "y": 182.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 182.984375,
+              "right": 267.65625,
+              "bottom": 226.984375,
+              "left": 23
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 23,
+              "y": 234.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 234.984375,
+              "right": 267.65625,
+              "bottom": 278.984375,
+              "left": 23
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 299.65625,
+              "y": 182.984375,
+              "width": 244.671875,
+              "height": 44,
+              "top": 182.984375,
+              "right": 544.328125,
+              "bottom": 226.984375,
+              "left": 299.65625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": false,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "disabled": true,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 299.65625,
+              "y": 234.984375,
+              "width": 244.671875,
+              "height": 44,
+              "top": 234.984375,
+              "right": 544.328125,
+              "bottom": 278.984375,
+              "left": 299.65625
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 576.328125,
+              "y": 182.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 182.984375,
+              "right": 820.984375,
+              "bottom": 226.984375,
+              "left": 576.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 576.328125,
+              "y": 234.984375,
+              "width": 244.65625,
+              "height": 44,
+              "top": 234.984375,
+              "right": 820.984375,
+              "bottom": 278.984375,
+              "left": 576.328125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 297.984375,
+              "width": 73.40625,
+              "height": 44,
+              "top": 297.984375,
+              "right": 85.40625,
+              "bottom": 341.984375,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 93.40625,
+              "y": 297.984375,
+              "width": 65.765625,
+              "height": 44,
+              "top": 297.984375,
+              "right": 159.171875,
+              "bottom": 341.984375,
+              "left": 93.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 351.984375,
+              "width": 126.140625,
+              "height": 44,
+              "top": 351.984375,
+              "right": 138.140625,
+              "bottom": 395.984375,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 497.5625,
+              "width": 79.9375,
+              "height": 40,
+              "top": 497.5625,
+              "right": 108.9375,
+              "bottom": 537.5625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 116.9375,
+              "y": 497.5625,
+              "width": 81.328125,
+              "height": 40,
+              "top": 497.5625,
+              "right": 198.265625,
+              "bottom": 537.5625,
+              "left": 116.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 206.265625,
+              "y": 497.5625,
+              "width": 110.5625,
+              "height": 40,
+              "top": 497.5625,
+              "right": 316.828125,
+              "bottom": 537.5625,
+              "left": 206.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 12,
+          "y": 88,
+          "width": 820,
+          "height": 302,
+          "top": 88,
+          "right": 832,
+          "bottom": 390,
+          "left": 12
+        },
+        "document": [
+          844,
+          390
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "390x844": {
+      "before": {
+        "cards": [
+          {
+            "box": {
+              "x": 12,
+              "y": 237.390625,
+              "width": 366,
+              "height": 124.390625,
+              "top": 237.390625,
+              "right": 378,
+              "bottom": 361.78125,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 270.390625,
+              "width": 332,
+              "height": 14.390625,
+              "top": 270.390625,
+              "right": 361,
+              "bottom": 284.78125,
+              "left": 29
+            }
+          },
+          {
+            "box": {
+              "x": 12,
+              "y": 371.78125,
+              "width": 366,
+              "height": 124.390625,
+              "top": 371.78125,
+              "right": 378,
+              "bottom": 496.171875,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 404.78125,
+              "width": 332,
+              "height": 14.390625,
+              "top": 404.78125,
+              "right": 361,
+              "bottom": 419.171875,
+              "left": 29
+            }
+          },
+          {
+            "box": {
+              "x": 12,
+              "y": 506.171875,
+              "width": 366,
+              "height": 124.390625,
+              "top": 506.171875,
+              "right": 378,
+              "bottom": 630.5625,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 539.171875,
+              "width": 332,
+              "height": 14.390625,
+              "top": 539.171875,
+              "right": 361,
+              "bottom": 553.5625,
+              "left": 29
+            }
+          }
+        ],
+        "descriptions": [],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 300.78125,
+              "width": 104.09375,
+              "height": 44,
+              "top": 300.78125,
+              "right": 133.09375,
+              "bottom": 344.78125,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 141.09375,
+              "y": 300.78125,
+              "width": 107.859375,
+              "height": 44,
+              "top": 300.78125,
+              "right": 248.953125,
+              "bottom": 344.78125,
+              "left": 141.09375
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 435.171875,
+              "width": 94.703125,
+              "height": 44,
+              "top": 435.171875,
+              "right": 123.703125,
+              "bottom": 479.171875,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 131.703125,
+              "y": 435.171875,
+              "width": 114.5625,
+              "height": 44,
+              "top": 435.171875,
+              "right": 246.265625,
+              "bottom": 479.171875,
+              "left": 131.703125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 254.265625,
+              "y": 435.171875,
+              "width": 87.953125,
+              "height": 44,
+              "top": 435.171875,
+              "right": 342.21875,
+              "bottom": 479.171875,
+              "left": 254.265625
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 569.5625,
+              "width": 99.765625,
+              "height": 44,
+              "top": 569.5625,
+              "right": 128.765625,
+              "bottom": 613.5625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 136.765625,
+              "y": 569.5625,
+              "width": 121.3125,
+              "height": 44,
+              "top": 569.5625,
+              "right": 258.078125,
+              "bottom": 613.5625,
+              "left": 136.765625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 638.5625,
+              "width": 73.40625,
+              "height": 44,
+              "top": 638.5625,
+              "right": 85.40625,
+              "bottom": 682.5625,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 93.40625,
+              "y": 638.5625,
+              "width": 65.765625,
+              "height": 44,
+              "top": 638.5625,
+              "right": 159.171875,
+              "bottom": 682.5625,
+              "left": 93.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 692.5625,
+              "width": 126.140625,
+              "height": 44,
+              "top": 692.5625,
+              "right": 138.140625,
+              "bottom": 736.5625,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 838.140625,
+              "width": 79.9375,
+              "height": 40,
+              "top": 838.140625,
+              "right": 108.9375,
+              "bottom": 878.140625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 116.9375,
+              "y": 838.140625,
+              "width": 81.328125,
+              "height": 40,
+              "top": 838.140625,
+              "right": 198.265625,
+              "bottom": 878.140625,
+              "left": 116.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 206.265625,
+              "y": 838.140625,
+              "width": 110.5625,
+              "height": 40,
+              "top": 838.140625,
+              "right": 316.828125,
+              "bottom": 878.140625,
+              "left": 206.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 12,
+          "y": 187,
+          "width": 366,
+          "height": 621,
+          "top": 187,
+          "right": 378,
+          "bottom": 808,
+          "left": 12
+        },
+        "document": [
+          390,
+          844
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "cards": [
+          {
+            "box": {
+              "x": 12,
+              "y": 237.390625,
+              "width": 366,
+              "height": 124.390625,
+              "top": 237.390625,
+              "right": 378,
+              "bottom": 361.78125,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 270.390625,
+              "width": 332,
+              "height": 14.390625,
+              "top": 270.390625,
+              "right": 361,
+              "bottom": 284.78125,
+              "left": 29
+            }
+          },
+          {
+            "box": {
+              "x": 12,
+              "y": 371.78125,
+              "width": 366,
+              "height": 124.390625,
+              "top": 371.78125,
+              "right": 378,
+              "bottom": 496.171875,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 404.78125,
+              "width": 332,
+              "height": 14.390625,
+              "top": 404.78125,
+              "right": 361,
+              "bottom": 419.171875,
+              "left": 29
+            }
+          },
+          {
+            "box": {
+              "x": 12,
+              "y": 506.171875,
+              "width": 366,
+              "height": 124.390625,
+              "top": 506.171875,
+              "right": 378,
+              "bottom": 630.5625,
+              "left": 12
+            },
+            "title": {
+              "x": 29,
+              "y": 539.171875,
+              "width": 332,
+              "height": 14.390625,
+              "top": 539.171875,
+              "right": 361,
+              "bottom": 553.5625,
+              "left": 29
+            }
+          }
+        ],
+        "descriptions": [
+          {
+            "label": "Patterns, song, sounds, motion and sample references",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "Open an engine file. Edit a copy; preserve the original.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          {
+            "label": "A finite range, aligned tracks and clips for a DAW.",
+            "display": "none",
+            "font": "13px",
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        ],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 300.78125,
+              "width": 104.09375,
+              "height": 44,
+              "top": 300.78125,
+              "right": 133.09375,
+              "bottom": 344.78125,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 141.09375,
+              "y": 300.78125,
+              "width": 107.859375,
+              "height": 44,
+              "top": 300.78125,
+              "right": 248.953125,
+              "bottom": 344.78125,
+              "left": 141.09375
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 435.171875,
+              "width": 94.703125,
+              "height": 44,
+              "top": 435.171875,
+              "right": 123.703125,
+              "bottom": 479.171875,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 131.703125,
+              "y": 435.171875,
+              "width": 114.5625,
+              "height": 44,
+              "top": 435.171875,
+              "right": 246.265625,
+              "bottom": 479.171875,
+              "left": 131.703125
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 254.265625,
+              "y": 435.171875,
+              "width": 87.953125,
+              "height": 44,
+              "top": 435.171875,
+              "right": 342.21875,
+              "bottom": 479.171875,
+              "left": 254.265625
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 569.5625,
+              "width": 99.765625,
+              "height": 44,
+              "top": 569.5625,
+              "right": 128.765625,
+              "bottom": 613.5625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 136.765625,
+              "y": 569.5625,
+              "width": 121.3125,
+              "height": 44,
+              "top": 569.5625,
+              "right": 258.078125,
+              "bottom": 613.5625,
+              "left": 136.765625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 638.5625,
+              "width": 73.40625,
+              "height": 44,
+              "top": 638.5625,
+              "right": 85.40625,
+              "bottom": 682.5625,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 93.40625,
+              "y": 638.5625,
+              "width": 65.765625,
+              "height": 44,
+              "top": 638.5625,
+              "right": 159.171875,
+              "bottom": 682.5625,
+              "left": 93.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 12,
+              "y": 692.5625,
+              "width": 126.140625,
+              "height": 44,
+              "top": 692.5625,
+              "right": 138.140625,
+              "bottom": 736.5625,
+              "left": 12
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 29,
+              "y": 838.140625,
+              "width": 79.9375,
+              "height": 40,
+              "top": 838.140625,
+              "right": 108.9375,
+              "bottom": 878.140625,
+              "left": 29
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 116.9375,
+              "y": 838.140625,
+              "width": 81.328125,
+              "height": 40,
+              "top": 838.140625,
+              "right": 198.265625,
+              "bottom": 878.140625,
+              "left": 116.9375
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 206.265625,
+              "y": 838.140625,
+              "width": 110.5625,
+              "height": 40,
+              "top": 838.140625,
+              "right": 316.828125,
+              "bottom": 878.140625,
+              "left": 206.265625
+            },
+            "disabled": false,
+            "inside": false,
+            "hit": false
+          }
+        ],
+        "view": {
+          "x": 12,
+          "y": 187,
+          "width": 366,
+          "height": 621,
+          "top": 187,
+          "right": 378,
+          "bottom": 808,
+          "left": 12
+        },
+        "document": [
+          390,
+          844
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "1200x820": {
+      "before": {
+        "cards": [
+          {
+            "box": {
+              "x": 30,
+              "y": 209.390625,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 209.390625,
+              "right": 1170,
+              "bottom": 367.71875,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 246.390625,
+              "width": 525,
+              "height": 31.1875,
+              "top": 246.390625,
+              "right": 576,
+              "bottom": 277.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 387.71875,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 387.71875,
+              "right": 1170,
+              "bottom": 546.046875,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 424.71875,
+              "width": 525,
+              "height": 31.1875,
+              "top": 424.71875,
+              "right": 576,
+              "bottom": 455.90625,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 566.046875,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 566.046875,
+              "right": 1170,
+              "bottom": 724.375,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 603.046875,
+              "width": 525,
+              "height": 31.1875,
+              "top": 603.046875,
+              "right": 576,
+              "bottom": 634.234375,
+              "left": 51
+            }
+          }
+        ],
+        "descriptions": [],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 276.546875,
+              "width": 167,
+              "height": 44,
+              "top": 276.546875,
+              "right": 958,
+              "bottom": 320.546875,
+              "left": 791
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 970,
+              "y": 276.546875,
+              "width": 167,
+              "height": 44,
+              "top": 276.546875,
+              "right": 1137,
+              "bottom": 320.546875,
+              "left": 970
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 612,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 779,
+              "bottom": 498.875,
+              "left": 612
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 958,
+              "bottom": 498.875,
+              "left": 791
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 970,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 1137,
+              "bottom": 498.875,
+              "left": 970
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 612,
+              "y": 633.203125,
+              "width": 167,
+              "height": 44,
+              "top": 633.203125,
+              "right": 779,
+              "bottom": 677.203125,
+              "left": 612
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 633.203125,
+              "width": 167,
+              "height": 44,
+              "top": 633.203125,
+              "right": 958,
+              "bottom": 677.203125,
+              "left": 791
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 726.375,
+              "width": 73.40625,
+              "height": 44,
+              "top": 726.375,
+              "right": 93.40625,
+              "bottom": 770.375,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 726.375,
+              "width": 65.765625,
+              "height": 44,
+              "top": 726.375,
+              "right": 167.171875,
+              "bottom": 770.375,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 177.78125,
+              "y": 726.375,
+              "width": 126.140625,
+              "height": 44,
+              "top": 726.375,
+              "right": 303.921875,
+              "bottom": 770.375,
+              "left": 177.78125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 863.703125,
+              "y": 730.375,
+              "width": 79.9375,
+              "height": 44,
+              "top": 730.375,
+              "right": 943.640625,
+              "bottom": 774.375,
+              "left": 863.703125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 951.640625,
+              "y": 730.375,
+              "width": 81.328125,
+              "height": 44,
+              "top": 730.375,
+              "right": 1032.96875,
+              "bottom": 774.375,
+              "left": 951.640625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 1040.96875,
+              "y": 730.375,
+              "width": 110.5625,
+              "height": 44,
+              "top": 730.375,
+              "right": 1151.53125,
+              "bottom": 774.375,
+              "left": 1040.96875
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 1160,
+          "height": 621,
+          "top": 159,
+          "right": 1180,
+          "bottom": 780,
+          "left": 20
+        },
+        "document": [
+          1200,
+          820
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "cards": [
+          {
+            "box": {
+              "x": 30,
+              "y": 209.390625,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 209.390625,
+              "right": 1170,
+              "bottom": 367.71875,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 246.390625,
+              "width": 525,
+              "height": 31.1875,
+              "top": 246.390625,
+              "right": 576,
+              "bottom": 277.578125,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 387.71875,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 387.71875,
+              "right": 1170,
+              "bottom": 546.046875,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 424.71875,
+              "width": 525,
+              "height": 31.1875,
+              "top": 424.71875,
+              "right": 576,
+              "bottom": 455.90625,
+              "left": 51
+            }
+          },
+          {
+            "box": {
+              "x": 30,
+              "y": 566.046875,
+              "width": 1140,
+              "height": 158.328125,
+              "top": 566.046875,
+              "right": 1170,
+              "bottom": 724.375,
+              "left": 30
+            },
+            "title": {
+              "x": 51,
+              "y": 603.046875,
+              "width": 525,
+              "height": 31.1875,
+              "top": 603.046875,
+              "right": 576,
+              "bottom": 634.234375,
+              "left": 51
+            }
+          }
+        ],
+        "descriptions": [
+          {
+            "label": "Patterns, song, sounds, motion and sample references",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 291.578125,
+              "width": 525,
+              "height": 29.390625,
+              "top": 291.578125,
+              "right": 576,
+              "bottom": 320.96875,
+              "left": 51
+            }
+          },
+          {
+            "label": "Open an engine file. Edit a copy; preserve the original.",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 469.90625,
+              "width": 525,
+              "height": 29.390625,
+              "top": 469.90625,
+              "right": 576,
+              "bottom": 499.296875,
+              "left": 51
+            }
+          },
+          {
+            "label": "A finite range, aligned tracks and clips for a DAW.",
+            "display": "block",
+            "font": "21px",
+            "box": {
+              "x": 51,
+              "y": 648.234375,
+              "width": 525,
+              "height": 29.390625,
+              "top": 648.234375,
+              "right": 576,
+              "bottom": 677.625,
+              "left": 51
+            }
+          }
+        ],
+        "actions": [
+          {
+            "label": "Export backup",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 276.546875,
+              "width": 167,
+              "height": 44,
+              "top": 276.546875,
+              "right": 958,
+              "bottom": 320.546875,
+              "left": 791
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect restore",
+            "visible": true,
+            "box": {
+              "x": 970,
+              "y": 276.546875,
+              "width": 167,
+              "height": 44,
+              "top": 276.546875,
+              "right": 1137,
+              "bottom": 320.546875,
+              "left": 970
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open original",
+            "visible": true,
+            "box": {
+              "x": 612,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 779,
+              "bottom": 498.875,
+              "left": 612
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Inspect contents",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 958,
+              "bottom": 498.875,
+              "left": 791
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save a copy",
+            "visible": true,
+            "box": {
+              "x": 970,
+              "y": 454.875,
+              "width": 167,
+              "height": 44,
+              "top": 454.875,
+              "right": 1137,
+              "bottom": 498.875,
+              "left": 970
+            },
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Choose range",
+            "visible": true,
+            "box": {
+              "x": 612,
+              "y": 633.203125,
+              "width": 167,
+              "height": 44,
+              "top": 633.203125,
+              "right": 779,
+              "bottom": 677.203125,
+              "left": 612
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Export availability",
+            "visible": true,
+            "box": {
+              "x": 791,
+              "y": 633.203125,
+              "width": 167,
+              "height": 44,
+              "top": 633.203125,
+              "right": 958,
+              "bottom": 677.203125,
+              "left": 791
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Samples",
+            "visible": true,
+            "box": {
+              "x": 20,
+              "y": 726.375,
+              "width": 73.40625,
+              "height": 44,
+              "top": 726.375,
+              "right": 93.40625,
+              "bottom": 770.375,
+              "left": 20
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Manual",
+            "visible": true,
+            "box": {
+              "x": 101.40625,
+              "y": 726.375,
+              "width": 65.765625,
+              "height": 44,
+              "top": 726.375,
+              "right": 167.171875,
+              "bottom": 770.375,
+              "left": 101.40625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open DAW guide",
+            "visible": true,
+            "box": {
+              "x": 177.78125,
+              "y": 726.375,
+              "width": 126.140625,
+              "height": 44,
+              "top": 726.375,
+              "right": 303.921875,
+              "bottom": 770.375,
+              "left": 177.78125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Save draft",
+            "visible": true,
+            "box": {
+              "x": 863.703125,
+              "y": 730.375,
+              "width": 79.9375,
+              "height": 44,
+              "top": 730.375,
+              "right": 943.640625,
+              "bottom": 774.375,
+              "left": 863.703125
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Open draft",
+            "visible": true,
+            "box": {
+              "x": 951.640625,
+              "y": 730.375,
+              "width": 81.328125,
+              "height": 44,
+              "top": 730.375,
+              "right": 1032.96875,
+              "bottom": 774.375,
+              "left": 951.640625
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "label": "Review changes",
+            "visible": true,
+            "box": {
+              "x": 1040.96875,
+              "y": 730.375,
+              "width": 110.5625,
+              "height": 44,
+              "top": 730.375,
+              "right": 1151.53125,
+              "bottom": 774.375,
+              "left": 1040.96875
+            },
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        "view": {
+          "x": 20,
+          "y": 159,
+          "width": 1160,
+          "height": 621,
+          "top": 159,
+          "right": 1180,
+          "bottom": 780,
+          "left": 20
+        },
+        "document": [
+          1200,
+          820
+        ],
+        "scroll": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "browser": "151.0.7922.34"
+}

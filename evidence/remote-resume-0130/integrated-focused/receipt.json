@@ -1,0 +1,49 @@
+{
+  "base": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "scope": "Integrated candidate source, before publication; software-only focused suites, not a combined final gate.",
+  "results": {
+    "remote": {
+      "exit": 0,
+      "tests": 251,
+      "failed": 0,
+      "skipped": 0
+    },
+    "workspace": {
+      "exit": 0,
+      "tests": 131,
+      "failed": 0,
+      "skipped": 0,
+      "fourAppScripts": "PASS"
+    },
+    "midiPairingFocused": {
+      "exit": 0,
+      "tests": 38,
+      "failed": 0
+    },
+    "originalLfoDrums": {
+      "exit": 0,
+      "tests": 18,
+      "failed": 0,
+      "actualOriginalBank": true
+    },
+    "touchoscPackedLuaRealC": {
+      "exit": 0,
+      "cases": 5
+    }
+  },
+  "sourceSha256": {
+    "web/product-site/remote/app.mjs": "cd0eeef951f61dac356a2ba36c305876fa819fafa23ff5c9305fff90c5b87aa6",
+    "web/product-site/remote/style.css": "50a311f357df9cc062be03a64e199d6396ff8e22011909b1f9ec04b8b171ce60",
+    "web/product-site/remote/superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5",
+    "web/product-site/remote/funkybeats-view.mjs": "ffbc3bbe1b71049d0dbcfae7be50fcfe314401f622b72857c256386adb96f713",
+    "web/product-site/remote/firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "web/product-site/remote/index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "tools/touchosc-parameters/controller.lua": "221e35340172ecf16c63fe20f19a45fc73a400c16e1300f3141b3d0c47d18c97",
+    "tools/touchosc-parameters/pack.py": "086cc6d187ea30520986259285d479ab297ec2f7633064431a3456d7d733f6cf"
+  },
+  "logSha256": {
+    "touchosc-root.json": "eb1593a19b979573cfdbe0e3e5b9b8f8885f895300f4f5e67c03f3e4fb7d6a56",
+    "remote.log": "9f5b983e80dedc413425f7212eedb50529daea29d3c6bd3282a9ee6e7c93310c",
+    "workspace.log": "b838e1bd8adebd78f06960156cc293dc1b844ed3f06be41507599b0d01ac2f02"
+  }
+}

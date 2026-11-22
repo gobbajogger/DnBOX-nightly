@@ -1,0 +1,8 @@
+ACCEPTED normal output
+ACCEPTED approved root
+ACCEPTED approved descendant
+ACCEPTED directory symlink to approved root
+ACCEPTED ordinary directory symlink
+ACCEPTED PNG symlink into approved root
+ACCEPTED inventory symlink into approved root
+Synthetic approved directory unchanged: False

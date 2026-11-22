@@ -1,0 +1,374 @@
+{
+  "sources": {
+    "release": "0.0.26 portable host, firmware release commit 94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+    "elite": "RAM-only paired SMK Elite host fixture at f1786ebec2616477163b62b029c7e77405a9c3de",
+    "website": "Pinned website firmware reference UI compiled from 61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+    "remote": "Unified existing owner review viewport. Projects uses the final isolated CSS candidate on 183207e."
+  },
+  "notes": "These are analogous routes with source-specific selected values and layouts. Each framebuffer and Remote viewport keeps its native pixels.",
+  "panels": {
+    "06-mix-levels": {
+      "panelSha256": "be7056f15750ad64f9caf47f274865910388abdaca45303a27ecae5b8a22e396",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-06-levels.png": {
+          "rgbSha256": "5cc4625168d4c822f72446d9240e839633f37e8ec8b4d29dc47890bad7c40180",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "06-levels.png": {
+          "rgbSha256": "1ffda4588d43be2391f14fc508323f8659e038363ddd13e875a846c35facd6f2",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0240-view-04-part-00-voice-00-page-00.png": {
+          "rgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-04-part-00-voice-00-page-00.png": {
+          "rgbSha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "07-master": {
+      "panelSha256": "75227844c8a1766c8ab1219337ad2d7d0a93a3ceaf89d8f75eb6a5b3bae8ab21",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-07-master.png": {
+          "rgbSha256": "e3a0f5becb9ebcda02dd97c13e8fff6dd6aee0255391cc9da3a4569b88dca9f3",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "07-master.png": {
+          "rgbSha256": "8c706c235b91307180fad3d9c574fb4dcad69e58f9dec14196be0abd8093d7ac",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0249-view-04-part-00-voice-00-page-03.png": {
+          "rgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-04-part-00-voice-00-page-03.png": {
+          "rgbSha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "07-master-more": {
+      "panelSha256": "b6b45948f2ccb29f0685de2ce56c0e9cb54ae7561f5f86082697e343ed7679e7",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-07-master.png": {
+          "rgbSha256": "e3a0f5becb9ebcda02dd97c13e8fff6dd6aee0255391cc9da3a4569b88dca9f3",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "07-master-more.png": {
+          "rgbSha256": "8a1dbd24d8d364ad3b6ea2f6d75e98d63a6aea943b1ea8761488a1469eebc5cc",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0723-list-view-04-part-00-voice-00-row-17.png": {
+          "rgbSha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "list-view-04-part-00-voice-00-row-17.png": {
+          "rgbSha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "08-fx-reverb": {
+      "panelSha256": "028208fa0d828ade54b012161c531ff3a6e37f0b39b48fe8822931d1bd2c860e",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-08-fx.png": {
+          "rgbSha256": "ca227d4ef0335aab1eb9cb28bd9f06d6dab425347ab68ca096720d7baaacd57c",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "08-reverb.png": {
+          "rgbSha256": "5fd6223b4aa06a620e62cdcb637b52beb5f0beee3a1eb64905279072a645243d",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0210-view-03-part-00-voice-00-page-00.png": {
+          "rgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-03-part-00-voice-00-page-00.png": {
+          "rgbSha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "08-fx-tape": {
+      "panelSha256": "b6eb514d3847fea2acaf24302772217be109b8fe6e09002f480448cdb25d4928",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-08-fx.png": {
+          "rgbSha256": "ca227d4ef0335aab1eb9cb28bd9f06d6dab425347ab68ca096720d7baaacd57c",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "08-tape-idle.png": {
+          "rgbSha256": "5dc19b1ea6fcbafd6ba151db0b584bbe13d43f4a16540051539e1a43dbc40d86",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0213-view-03-part-00-voice-00-page-01.png": {
+          "rgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-03-part-00-voice-00-page-01.png": {
+          "rgbSha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "09-patterns": {
+      "panelSha256": "af66157f566831e46d8c5174e302b0f9439229483d4ceb1020387199b50274e6",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-09-patterns.png": {
+          "rgbSha256": "80902dcc3e42e90e738bd968500fc49660042bd232decd3d029c17874856678b",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "09-patterns.png": {
+          "rgbSha256": "c0c1b1e9339647a89ac6e551fea0992cdbf659e0e3f6e19950d1f395e616f657",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0000-view-00-part-00-voice-00-page-00.png": {
+          "rgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-00-part-00-voice-00-page-00.png": {
+          "rgbSha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "10-song": {
+      "panelSha256": "6930f7cd14f80109d1634eb5e91cdf5ee77cb6eac5727a19937aab4710807afb",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-10-song.png": {
+          "rgbSha256": "ff5de657e0891a64eac6fcf8bff9abb0f84f70b98babf45b74440164a1076dbe",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "10-song.png": {
+          "rgbSha256": "591e84ca35ca72ed31341148f4bdbf3e7a5c63eb5ab77dfa457c08ce5b2d67fc",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0315-view-06-part-00-voice-00-page-00.png": {
+          "rgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "view-06-part-00-voice-00-page-00.png": {
+          "rgbSha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "12-projects": {
+      "panelSha256": "8d6d15b45de22a3d979a184e18d791d19f9f3be358f7efdf37978f4583a0e9f0",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "after-1440x900.png": {
+          "rgbSha256": "bb22e476e0eba39ae9dde44d2404a9687b1e831c5e84f52341ffa662c2ead8cb",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "12-project.png": {
+          "rgbSha256": "6c74f775ba2b8bd4d4cbe0f7c07073272c82c5bb438893d90ce4e62ead4a6b95",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0426-global-section-4-row-00.png": {
+          "rgbSha256": "c7c11919a5d9286081b5977f6828598462dd68ccd1d863f497ad2e14cff20106",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "global-section-4-row-00.png": {
+          "rgbSha256": "9e365eb9d91fde2846ffb382c1a77164b3f5a24aeeed04e1e48b4af2c5ccb4df",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "13-connect": {
+      "panelSha256": "71309b92aba9ae9d202f6a2f0662ad06409f9ca23a2f69f08c44016a7485c726",
+      "size": [
+        2160,
+        924
+      ],
+      "inputFrames": {
+        "owner-13-connect.png": {
+          "rgbSha256": "9823e08a6f1cd2ddbea6cdc1048a7f3f42bf97530740a85646328dcde52de1a7",
+          "size": [
+            1440,
+            900
+          ]
+        },
+        "settings-midi.png": {
+          "rgbSha256": "de896c8fbd3729d0627f729e3936c4b6a2cb5579036a749ddb3dabf0bd169bf5",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0399-global-section-0-row-00.png": {
+          "rgbSha256": "0022251c8fea4bd937678b07af0a08df8e478b13beecd432184e9a6b6f7cdc20",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "global-section-0-row-00.png": {
+          "rgbSha256": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    },
+    "settings": {
+      "panelSha256": "0eeecb7c081c193a947d5d9743070ed896e19bf01c8ca7f70837dba028dd0312",
+      "size": [
+        720,
+        264
+      ],
+      "inputFrames": {
+        "settings-global.png": {
+          "rgbSha256": "a69273fc5bd7eda48ce32e5574e95d5757fcddab0b803a73b62fdba21f5369c8",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "f1-0393-global-section--1-row-00.png": {
+          "rgbSha256": "855902c7e66420098c14ec04c7d29251b756e111ebe58dc51fa8b2ac3570a70e",
+          "size": [
+            240,
+            240
+          ]
+        },
+        "global-section--1-row-00.png": {
+          "rgbSha256": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3",
+          "size": [
+            240,
+            240
+          ]
+        }
+      }
+    }
+  }
+}

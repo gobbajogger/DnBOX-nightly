@@ -1,0 +1,237 @@
+{
+  "source": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "tree": "721461c82f1d0580878fc117940563dbe2a36374",
+  "GLYPH_SOURCE": "r22",
+  "sourceFiles": {
+    "web/product-site/reference/r22.html": "722d701c4404f57e3ef3d5e5cd79c6c41bd78abb426cb85ec8758b0bb1402986",
+    "web/product-site/remote/glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+    "web/product-site/remote/funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7"
+  },
+  "ownerApproval": "Exact 2026-11-16 17:00 batch membership remains unresolved",
+  "kits": {
+    "808": [
+      {
+        "row": 1,
+        "voice": "BD",
+        "padNote": 36,
+        "id": "G001",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "0c7d5d3bb9e2db4726f26e1574ad10607d399258914eee9126b13a4b33b5c662"
+      },
+      {
+        "row": 2,
+        "voice": "SD",
+        "padNote": 38,
+        "id": "G002",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "3e57fdff419af67fa90bb01c26a4b9ff61bdcdc320429948ccd87cdfd5d996fe"
+      },
+      {
+        "row": 3,
+        "voice": "LT",
+        "padNote": 41,
+        "id": "G003",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "90303231d09f03bf12d87ffe8ff762e4faff1e90ba23babdc1c005ace88b8820"
+      },
+      {
+        "row": 4,
+        "voice": "MT",
+        "padNote": 45,
+        "id": "G004",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "a5c9d9a5932c28e0b78d832c63201bd903591707eda19d61403e68edde5ab26f"
+      },
+      {
+        "row": 5,
+        "voice": "HT",
+        "padNote": 50,
+        "id": "G005",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "058c7216c5fc14ae111c0ceb356c6433e46f3c5aca61e47dbfe44d5dc505c36e"
+      },
+      {
+        "row": 6,
+        "voice": "RS",
+        "padNote": 37,
+        "id": "G006",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "8e305e2aa29ecef3f8adad2991246d1f4b44ee854543fed578104a6625a1fa47"
+      },
+      {
+        "row": 7,
+        "voice": "CP",
+        "padNote": 39,
+        "id": "G007",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "899551c0261f07605febbeb571690df84987aa4b2c25bae7a8e8ad41f06add1e"
+      },
+      {
+        "row": 8,
+        "voice": "CB",
+        "padNote": 56,
+        "id": "G012",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "8a1b34e0cfacb97ce89a2bd520fa51c59b27475dafb87b63a405020e65ddc428"
+      },
+      {
+        "row": 9,
+        "voice": "CY",
+        "padNote": 49,
+        "id": "G010",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "d96d2c74a387f276b47497e4b77cd7fd95cceaed8eb420156dd8d1fcce7448e2"
+      },
+      {
+        "row": 10,
+        "voice": "OH",
+        "padNote": 46,
+        "id": "G009",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "00d5a9e42a981a973a76b7ed7f48fc409cbc7dbf64787f21a1df1cdf1c25018f"
+      },
+      {
+        "row": 11,
+        "voice": "CH",
+        "padNote": 42,
+        "id": "G008",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "d39ce2c100f542772ec055dc53dedbf57edecdc03c76b0ddaef3aa1033fe9e69"
+      }
+    ],
+    "909": [
+      {
+        "row": 1,
+        "voice": "BD",
+        "padNote": 36,
+        "id": "G001",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "0c7d5d3bb9e2db4726f26e1574ad10607d399258914eee9126b13a4b33b5c662"
+      },
+      {
+        "row": 2,
+        "voice": "SD",
+        "padNote": 38,
+        "id": "G002",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "3e57fdff419af67fa90bb01c26a4b9ff61bdcdc320429948ccd87cdfd5d996fe"
+      },
+      {
+        "row": 3,
+        "voice": "LT",
+        "padNote": 41,
+        "id": "G003",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "90303231d09f03bf12d87ffe8ff762e4faff1e90ba23babdc1c005ace88b8820"
+      },
+      {
+        "row": 4,
+        "voice": "MT",
+        "padNote": 45,
+        "id": "G004",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "a5c9d9a5932c28e0b78d832c63201bd903591707eda19d61403e68edde5ab26f"
+      },
+      {
+        "row": 5,
+        "voice": "HT",
+        "padNote": 50,
+        "id": "G005",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "058c7216c5fc14ae111c0ceb356c6433e46f3c5aca61e47dbfe44d5dc505c36e"
+      },
+      {
+        "row": 6,
+        "voice": "RS",
+        "padNote": 37,
+        "id": "G006",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "8e305e2aa29ecef3f8adad2991246d1f4b44ee854543fed578104a6625a1fa47"
+      },
+      {
+        "row": 7,
+        "voice": "CP",
+        "padNote": 39,
+        "id": "G007",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "899551c0261f07605febbeb571690df84987aa4b2c25bae7a8e8ad41f06add1e"
+      },
+      {
+        "row": 8,
+        "voice": "CH",
+        "padNote": 42,
+        "id": "G008",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "d39ce2c100f542772ec055dc53dedbf57edecdc03c76b0ddaef3aa1033fe9e69"
+      },
+      {
+        "row": 9,
+        "voice": "OH",
+        "padNote": 46,
+        "id": "G009",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "00d5a9e42a981a973a76b7ed7f48fc409cbc7dbf64787f21a1df1cdf1c25018f"
+      },
+      {
+        "row": 10,
+        "voice": "CR",
+        "padNote": 49,
+        "id": "G010",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "d96d2c74a387f276b47497e4b77cd7fd95cceaed8eb420156dd8d1fcce7448e2"
+      },
+      {
+        "row": 11,
+        "voice": "RD",
+        "padNote": 51,
+        "id": "G011",
+        "width": 24,
+        "height": 16,
+        "exactRegistryBytes": true,
+        "svgSha256": "95d9fddc4fe89085f388e55c2caea302549bf26e4a7df84b141c5939646b6d01"
+      }
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "nightly_base": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "patched_source_sha256": {
+    "web/product-site/remote/app.mjs": "f02fd9bc4210f1852b5933befde2bbf5270444ff149d18e0822d9c52b25a4c13",
+    "web/product-site/remote/firmware-link.mjs": "43bece9ffd5cf8fb161b753d7ee12dc84551bc9b36bb4cf64383580f31ada878",
+    "web/product-site/remote/device/page.mjs": "f8b58c759d262c12d3f4768b31df184708260123c5e57ed5667f16a110a0aaca",
+    "web/product-site/remote/device/session.mjs": "2a0ace83d2a188cf06b6e40f4c5817d26f620bd3400490718ff58d0255ddea5b",
+    "web/product-site/remote/device/view.mjs": "5dccc60f603094f320548c4800de80d3724178e19fe516dffac6afa634ca570b",
+    "web/product-site/remote/device/vendor/client.mjs": "908442b9caa357a25057e737c39d9c9e4572f22c5aeb9074a23d7dcb1fb6b02f",
+    "web/product-site/SOURCE-MANIFEST.json": "c4371d217fecba59a581c0fb166b18612d93c9c3f74f6be1e5cbacfa4846d610",
+    "tools/touchosc-parameters/pack.py": "67e79b70bc130a0eaa161f099407e7dd3e845b2bb9e817d599c237d063ffee92",
+    "tools/touchosc-parameters/production_scalar.py": "c1b3f852d660e19e8f9f788c774c07dbd81afbc5abcb49ca38f38247aa900444",
+    "tests/product-remote/page.test.mjs": "8d41a85a29e27975aed315012f402b17d454e7eb7a1a2ad331d792af791a4781"
+  },
+  "patch_sha256": "e6670f6bb38ac83617880237c610d8bd937888cd26d7befc22a7a4d0052edc05",
+  "firmware_measured_source": "23df413621b7ce1b8a8cbf71b3e07775fcfe727d",
+  "firmware_observed_head": "1a9199c1fb3bb0f60da555a9cab6ad9d20452aba",
+  "evidence_only_differences_since_measurement": [
+    "evidence/integ-resume/stock-wide-1d727e2b/elite-build.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/leak-sanitizer-guest.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/leak-sanitizer-inputs.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/native-identity-host.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/native-identity-host.sha256",
+    "evidence/integ-resume/stock-wide-1d727e2b/package-flashmap.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/pro-build.log",
+    "evidence/integ-resume/stock-wide-1d727e2b/wide-host.log"
+  ],
+  "host_sha256": "5dccda64220867a87a770ba1a669b251fff140d719b35d32de42b3084cb05793",
+  "firmware_catalog_sha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+  "crc32": "ecca5979",
+  "control_count": 1,
+  "emulated_usb": {
+    "elite": {
+      "receipt_sha256": "672aa7a0123f00f53a272b83ba4093a0bd5ee8a5a0bb595aae8505d7f7600706",
+      "package_sha256": "a3d0e93310502621ffc6d0281d3884e27d88a5f24a507adf2d71780a8775451a",
+      "operations": [
+        [
+          0,
+          0,
+          1,
+          1,
+          3972684153
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          1,
+          75
+        ],
+        [
+          3,
+          1,
+          1,
+          2,
+          76
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          3,
+          1,
+          1,
+          3,
+          75
+        ],
+        [
+          2,
+          0,
+          1,
+          3,
+          75
+        ],
+        [
+          7,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          3,
+          4,
+          1,
+          3,
+          0
+        ]
+      ]
+    },
+    "pro": {
+      "receipt_sha256": "a3e605ed1daa3a5a452faac04c01de96aee97a16ec77166c9876783b1df9da48",
+      "package_sha256": "7fa87c5e93949785ac41798286208aafdd625fc5a609660cce1f8a186358e5b8",
+      "operations": [
+        [
+          0,
+          0,
+          1,
+          1,
+          3972684153
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          1,
+          75
+        ],
+        [
+          3,
+          1,
+          1,
+          2,
+          76
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          3,
+          1,
+          1,
+          3,
+          75
+        ],
+        [
+          2,
+          0,
+          1,
+          3,
+          75
+        ],
+        [
+          7,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          3,
+          4,
+          1,
+          3,
+          0
+        ]
+      ]
+    }
+  },
+  "chromium_cases": [
+    "ambiguous",
+    "device",
+    "expiry",
+    "mismatch",
+    "missing",
+    "shipping",
+    "silent",
+    "workspace"
+  ],
+  "packed_lua_cases": [
+    "closed",
+    "mismatch",
+    "native"
+  ],
+  "runtime_admission": "HOLD",
+  "release_and_pages_activation": false,
+  "artifacts_sha256": {
+    "candidate-catalog.mjs": "e703230b78c9615f66b0ab8f4c682f9a9722d32690da911cad198c60ec203269",
+    "reviewed-scalar-staging.tosc": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+    "staged-browser.json": "d29c22ef85561cc6700935412e356396fa11687037affe5e51d7b9c331ad6656",
+    "staged-browser.log": "e37e883d01415ed604e4721264b2454a3b19efd278be4dde45badb94cca605ee",
+    "staged-lua.json": "1f3dffd5403012a50813d750808647dc743a78e56f2227c7952b3f2d126a8f93",
+    "staged-lua.log": "95d8383bbc499dcf30425a1ba7b481438dab6505ea71e96694c783a469689afe",
+    "test_staging_browser.py": "29efbd0806e96d2379fb07bd3373dcfc81feea390f6b27875b3d4ec6bf9afee4",
+    "test_staging_lua.py": "d79684d780b2e719ca0cb878fd978d2749c863fc5f0cfa6e0b62b363f632eeb4"
+  }
+}

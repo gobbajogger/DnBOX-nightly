@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Owned pages, real WAV parsing and DOM; simulated slot/MIDI boundaries, no hardware."""
+import sys
 import asyncio, json, os, threading, struct, math
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -30,16 +31,22 @@ async def check_downloaded_tools(browser):
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('request', lambda request: network.append(request.url)
                 if request.url.startswith(('http:', 'https:')) else None)
-        for tab, panel, filename, title in (
-            ('samples', 'samples', 'breaks', 'Import samples'),
-            ('projects', 'projects', 'projects', 'Songs & projects'),
+        installer = (ROOT / 'docs/install/index.html').as_uri()
+        firmware = installer + '#firmware'
+        for task, filename, title in (
+            ('samples', 'breaks', 'Import samples'),
+            ('projects', 'projects', 'Songs & projects'),
         ):
-            await page.goto((ROOT / 'docs/install/index.html').as_uri() + '#' + tab)
-            link = page.locator('#' + panel + '-panel a')
-            await link.wait_for(state='visible')
-            assert await page.locator('#' + panel + '-panel iframe').is_hidden()
-            await link.click()
-            assert page.url == (ROOT / 'docs' / filename / 'index.html').as_uri()
+            await page.goto(installer)
+            relative = f'../{filename}/index.html'
+            panel = page.locator(f'#{task}-panel')
+            tab = page.locator(f'#{task}-tab')
+            assert await tab.get_attribute('href') == relative
+            assert await panel.locator('a').get_attribute('href') == relative
+            frame = panel.locator('iframe')
+            assert await frame.is_hidden() and await frame.get_attribute('src') is None
+            await tab.click()
+            await page.wait_for_url((ROOT / 'docs' / filename / 'index.html').as_uri())
             assert await page.locator('h1').inner_text() == title
             await page.evaluate('document.fonts.ready')
             weights = await page.evaluate("""[...document.fonts]
@@ -47,10 +54,16 @@ async def check_downloaded_tools(browser):
                 .map(face => face.weight).sort()""")
             assert weights == ['500', '700'], (filename, weights)
             home = page.locator('a.home')
+            assert await home.evaluate('(link) => link.href') == firmware, filename
             await home.focus()
             await page.keyboard.press('Enter')
-            await page.wait_for_url((ROOT / 'docs/install/index.html').as_uri())
+            await page.wait_for_url(firmware)
+            assert await home.evaluate('(link) => link.href') == firmware
+            await home.click()
+            await page.wait_for_url(firmware)
+            assert await page.locator('#firmware-panel').is_visible()
         assert not errors and not network, (errors, network)
+        print('PASS file-open installer round trips to Samples and Projects with local fonts and home links', flush=True)
     finally:
         await context.close()
 
@@ -122,4 +135,12 @@ async def main():
   await check_downloaded_tools(browser)
   await browser.close()
  srv.shutdown();print(json.dumps({'checks':len(checks),'failures':[x for x,v in checks if not v]}));assert all(v for _,v in checks)
-asyncio.run(main())
+async def local_home_only():
+ async with async_playwright() as pw:
+  browser=await pw.chromium.launch(chromium_sandbox=True)
+  try:
+   await check_downloaded_tools(browser)
+  finally:
+   await browser.close()
+
+asyncio.run(local_home_only() if '--local-home-only' in sys.argv else main())

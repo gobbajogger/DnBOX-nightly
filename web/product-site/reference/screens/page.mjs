@@ -3,6 +3,12 @@ import {paintFrame} from './render.mjs';
 const group = document.querySelector('#group');
 const state = document.querySelector('#state');
 const scope = document.querySelector('#scope');
+const sources = document.querySelector('#seq-sources');
+const source = document.querySelector('#lcd-source');
+const sequencers = new Map([
+  ['view-08-part-00-voice-00-page-00', '909'],
+  ['view-08-part-01-voice-00-page-00', '808'],
+]);
 const status = document.querySelector('#status');
 const compare = document.querySelector('#compare');
 const comparison = document.querySelector('#comparison');
@@ -20,7 +26,7 @@ async function nativeHashes() {
 async function compareFrame() {
   const selected = request;
   const name = lcd.dataset.state;
-  if (!name) return;
+  if (!name || source.value !== 'current') return;
   compare.disabled = true;
   comparison.textContent = 'Comparing pixels…';
   try {
@@ -75,7 +81,7 @@ async function start() {
         pending = false;
         next.terminate();
         worker = null;
-        showError('The firmware renderer could not be started.');
+        if (source.value === 'current') showError('The firmware renderer could not be started.');
       };
       next.onmessage = ({data}) => {
         if (worker !== next || data.request !== request) return;
@@ -83,6 +89,7 @@ async function start() {
         if (data.error) { showError(data.error); return; }
         paintFrame(context, data.frame);
         lcd.dataset.state = data.state;
+        lcd.dataset.source = 'current';
         compare.disabled = false;
         lcd.setAttribute('aria-label', 'Firmware LCD for ' + data.state);
         status.textContent = data.state;
@@ -91,16 +98,47 @@ async function start() {
     pending = true;
     return worker;
   }
+  async function drawReference(engine, selectedSource, selected) {
+    const image = new Image();
+    image.src = new URL(engine + '-seq-' + selectedSource + '.png', import.meta.url);
+    try {
+      await image.decode();
+      if (selected !== request) return;
+      if (image.naturalWidth !== lcd.width || image.naturalHeight !== lcd.height) {
+        throw new Error('Invalid reference frame size');
+      }
+      context.drawImage(image, 0, 0);
+      const label = selectedSource === 'shipping' ? 'Shipping 0.0.26 · 94197fc8'
+        : 'R22 · source-frame-' + (engine === '909' ? '066' : '068');
+      lcd.dataset.state = state.value;
+      lcd.dataset.source = selectedSource;
+      lcd.setAttribute('aria-label', engine + ' SEQ — ' + label);
+      status.textContent = label;
+    } catch {
+      if (selected === request) showError('The selected LCD reference could not be loaded.');
+    }
+  }
   function render() {
     const [id, , kind, module, family] = byName.get(state.value);
-    scope.textContent = kinds[kind];
+    const engine = sequencers.get(id);
+    sources.hidden = !engine;
+    if (!engine) source.value = 'current';
+    const selectedSource = source.value;
+    scope.textContent = selectedSource === 'current' ? kinds[kind] : 'Captured 240 × 240 reference';
+    compare.hidden = selectedSource !== 'current';
     status.textContent = 'Rendering ' + id + '…';
     compare.disabled = true;
     comparison.textContent = '';
     lcd.removeAttribute('data-state');
+    lcd.removeAttribute('data-source');
     context.clearRect(0, 0, 240, 240);
     history.replaceState(null, '', '#' + id);
-    renderer().postMessage({state: id, file: modules[module], family, request: ++request});
+    const selected = ++request;
+    if (selectedSource !== 'current') {
+      void drawReference(engine, selectedSource, selected);
+      return;
+    }
+    renderer().postMessage({state: id, file: modules[module], family, request: selected});
   }
   function fillGroup(preferred) {
     const options = states.filter(row => row[1] === Number(group.value))
@@ -117,6 +155,7 @@ async function start() {
   }
   group.addEventListener('change', () => fillGroup());
   state.addEventListener('change', render);
+  source.addEventListener('change', render);
   compare.addEventListener('click', compareFrame);
   window.addEventListener('hashchange', openHash);
   group.disabled = state.disabled = false;

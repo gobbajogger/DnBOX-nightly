@@ -1,0 +1,17 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.201212ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (7.35479ms)
+✔ live update declares its domain and stores normalized renderer input (0.254512ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (14.973255ms)
+✔ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (1.883484ms)
+✔ registry: all 82 ids map to a renderer family (0.906209ms)
+✔ registry: every glyph changes shape with its value (no static icons) (75.858901ms)
+✔ drum voice glyphs react to level, hit pulse and decay (0.927971ms)
+✔ tape wear matches the firmware digital threshold, two circular reels and wear range (5.778395ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 393.67288

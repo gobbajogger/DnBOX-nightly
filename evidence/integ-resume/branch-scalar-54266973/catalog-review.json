@@ -1,0 +1,85 @@
+{
+  "schema": "dnbox-independent-native-scalar-admission-review/1",
+  "decision": "APPROVE_EXACT_ONE_CONTROL_CATALOG_FOR_SOFTWARE_STAGING",
+  "runtime_enablement": "HOLD_PENDING_EXACT_NON_TEST_CLIENT_DIFF_REVIEW",
+  "release_or_gh_pages_approval": false,
+  "scope": "Software-only, opt-in stock candidate. Trusted local paired USB, idle transport. No physical authorizations.",
+  "catalog": {
+    "protocol": 2,
+    "count": 1,
+    "crc32_canonical_compact_json": "ecca5979",
+    "source_json_sha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "controls": [
+      {
+        "id": 1,
+        "kind": 1,
+        "label": "909 MIX Level",
+        "max": 127,
+        "min": 0,
+        "owner": "909",
+        "parameter": "MX_LEVEL",
+        "target": "T_MIX"
+      }
+    ]
+  },
+  "source": {
+    "linked_firmware": "4eff776499ca70164e241cdf4faeecca352fc508",
+    "firmware_evidence": "d63620b9253fc3656c5a9200be3f4936ddb83bc1",
+    "nightly_client": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+    "nightly_evidence": "59ec3121b008fd853c8fdf6665c22ca3bf98606a",
+    "host_adapter_sha256": "c6279bcad53593d1ca29dc69ed3ef52e34eba496edafc8e2ab3b9e4bc201775f"
+  },
+  "native_emulated_usb": {
+    "elite": {
+      "fwsc_sha256": "e69fbe4a9b9aa2333fa4c3e59610e3a0dff1e7e4580afbf02e4b10991890b107",
+      "elf_sha256": "093de0fbaa3042a1f7eba017121ca15f5b3fed375a1ec956565f9a2b777f1fc6",
+      "usb_receipt_sha256": "a799dbe839fdace07f6fdac5bb68b9598239d62866112d55db438b65627356f3",
+      "xip_free_bytes": 1368,
+      "pool_margin_bytes": 732
+    },
+    "pro": {
+      "fwsc_sha256": "23bd1b79c0647323b0e574ba42aec53e30e4565de07f2c8228be8a8f05b8a88e",
+      "elf_sha256": "7622e97773216e2adfe80a1b0d0231416b043447eef179ce73ae57e034c8bcf5",
+      "usb_receipt_sha256": "59cf810974d5cdc9b28ca7a0f4a7593cfe94c6549a5482456b2c9bc53e065676",
+      "xip_free_bytes": 1380,
+      "pool_margin_bytes": 732
+    }
+  },
+  "chromium_fixture": {
+    "receipt_sha256": "66aa5e7ab67d847c0d90177f8a09b5c042328d7b7f07222adee30641b247d32f",
+    "viewport": [
+      390,
+      844
+    ],
+    "shipping_default_closed": true,
+    "ambiguous_ports_closed": true,
+    "candidate_bundle_test_only": true
+  },
+  "packed_touchosc_fixture": {
+    "receipt_sha256": "c99bbf93fa5eaea9ea4812ec354c0f907ce74d176a6a050b87634e2ae6ab8e6e",
+    "closed_default": true,
+    "checksum_mismatch_hello_only": true,
+    "candidate_layout_test_only": true
+  },
+  "reviewed_protections": [
+    "Canonical one-row catalog and exact source pins",
+    "Lease and revision checks, queue-capacity rejection before mirror mutation",
+    "Explicit Apply and guarded Undo in the tested UI and Lua paths",
+    "Unknown IDs, held actions, wrong boot address and stale writes refused",
+    "Panel ABA and project-adoption stale-revision refusal",
+    "Maintenance, project and boot-flash guards",
+    "Stuck-entropy silence and different-address rejection with host-injected boot entropy"
+  ],
+  "conditions_before_runtime_enablement": [
+    "Stage only ID 1 with the exact CRC, range, type and linked firmware source. Keep the 395-control catalog and hold/touch/routes out of scope.",
+    "Review the actual non-test diff. The tested Workspace route currently mounts only testOnly bundles, bypasses normal heartbeat in that fixture, and uses a fixed client number. For Workspace staging use a fresh client number and preserve explicit Apply and fresh-read guarded Undo.",
+    "The separate Device route currently loads a null bundle and stages SET on numeric change without the proven Workspace Apply/Undo sequence. Do not enable it by replacing only the bundle.",
+    "The current TouchOSC CLI emits a closed default or archived test-only layout. Any real one-row pack must be regenerated and exercised through its supported actual entry point.",
+    "Test the exact staged non-test client and layout against the pinned producer with checksum mismatch, ambiguous or disconnected ports, heartbeat/expiry, CLOSE, and no unintended writes."
+  ],
+  "remaining_release_gates": [
+    "Combined Local gates, populated strict ten-minute timing and independent exact changed-screen review",
+    "Full original Sound reference and genuine LeakSanitizer runner controls",
+    "Native emulator launches use deterministic entropy; host rotation tests are software evidence and establish no physical entropy or hardware qualification"
+  ]
+}

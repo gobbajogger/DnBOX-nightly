@@ -52,7 +52,7 @@ def verify_png(png):
         size, kind = struct.unpack_from('>I4s', data, offset)
         end = offset + 8 + size
         if end + 4 > len(data) or zlib.crc32(data[offset + 4:end]) != struct.unpack_from('>I', data, end)[0]:
-            raise ValueError('Invalid PNG screenshot chunk')
+            raise ValueError('Invalid PNG screenshot chunk checksum or extent')
         offset = end + 4
         if kind == b'IEND':
             if size == 0 and offset == len(data):
@@ -113,8 +113,12 @@ def capture_full_page(page, route, name):
                 return capture_bands(page, painted, deadline, band_rows=rows)
             return capture_bands(page, painted, deadline, first_band=first_paint if painted == geometry else None)
         data = page.screenshot(full_page=True, timeout=remaining_ms(deadline))
+        if route == 'builds/index.html' and not data.startswith(b'\x89PNG\r\n\x1a\n'):
+            raise ValueError(f'Expected full Builds PNG {width}x{height}')
         verify_png(data)
         with Image.open(BytesIO(data), formats=['PNG']) as image:
+            if route == 'builds/index.html' and geometry[-1] == 1 and image.size != (width, height):
+                raise ValueError(f'Expected full Builds PNG {width}x{height}, got {image.size}')
             image.load()
         remaining_ms(deadline)
         return data

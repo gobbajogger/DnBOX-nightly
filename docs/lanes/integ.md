@@ -1,5 +1,10 @@
 # Integration baseline
 
+## Combined Remote and Web source with reviewed branch runtime — 2026-11-22 (WORKING)
+
+The [reviewed branch runtime](../../evidence/integ-resume/branch-scalar-54266973/README.md) combines exact Remote `c7b026cf` and Web `c36ac458` while retaining each input path. The one source-owned 909 MIX Level production candidate is explicitly selectable for the stock firmware `54266973` software pair. The default catalog stays closed. Exact Chromium and packed TouchOSC receipts cover Apply, guarded Undo, lease cleanup and catalog mismatch, with Device read-only. Both Web History phone defects pass focused checks in the current composition. Installer parity, offline Samples and Projects navigation, 19 route source checks and the unchanged archived record data are verified. Final integrated visual, emulator, active WIDE timing and aggregate gates remain open.
+
+
 ## Native scalar, verified TouchOSC and current phone review — 2026-11-22 (WORKING)
 
 The [exact software packet](../../evidence/integ-resume/native-remote-c7b026cf/README.md) pairs Remote `c7b026cf` with the reconciled firmware host. Actual Chromium and packed TouchOSC Lua completed the candidate 909 MIX Level Apply/Undo flow. The shipping catalog and ambiguous-port flow emitted zero write traffic. Both stock firmware packages passed the native emulated USB transaction. Web `78375df8` phone History renders captured all 198 records with zero page or header errors. Independent review held the view on the missing Sounds link and contradictory archive copy. Earlier Manual and Remote artifacts carry only for their verified source and capture inputs. Final combined screen, route and runtime gates remain open.

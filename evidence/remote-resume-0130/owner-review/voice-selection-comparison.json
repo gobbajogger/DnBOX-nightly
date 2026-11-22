@@ -1,0 +1,700 @@
+{
+  "source": "worktree-css-c15a19e2e5bf",
+  "files": {
+    "app.mjs": "a2d23b33028063e3b56b7d0828023343a89ba474ee2b2b31b1afc699d8bd44ec",
+    "style.css": "c15a19e2e5bf81edbb0b690dfc0588a9985f18f851239eb33572089693730b21",
+    "funkybeats-view.mjs": "eb3c5b85a48637f95acd14641a93fed43cd0b9abc7927a9847b96edff98a9a17",
+    "glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e"
+  },
+  "states": {
+    "909-1440x900": {
+      "initialGlyphs": [
+        {
+          "label": "BD",
+          "current": "true",
+          "rgb": "rgb(255, 149, 41)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CR",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "RD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G011"
+        }
+      ],
+      "selectedGlyphs": [
+        {
+          "label": "BD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "true",
+          "rgb": "rgb(255, 149, 41)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CR",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "RD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G011"
+        }
+      ],
+      "changedRows": [
+        1,
+        2
+      ],
+      "gridTargets": 176,
+      "draftSelectionOnly": true,
+      "undoAndRedoExactNoteState": true,
+      "images": {
+        "909-1440x900-initial.png": "a609bfc40ce1dcdbfda7245c4485d764068d788c08a9c2144cb6e4791c5e20cc",
+        "909-1440x900-selected.png": "5f679cf59710e95f97d4cb5043d0592ad36dfbab5e1c8fcb561f788d7fbfd05f"
+      }
+    },
+    "808-1440x900": {
+      "initialGlyphs": [
+        {
+          "label": "BD",
+          "current": "true",
+          "rgb": "rgb(255, 72, 65)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CB",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G012"
+        },
+        {
+          "label": "CY",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        }
+      ],
+      "selectedGlyphs": [
+        {
+          "label": "BD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "true",
+          "rgb": "rgb(255, 72, 65)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CB",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G012"
+        },
+        {
+          "label": "CY",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        }
+      ],
+      "changedRows": [
+        1,
+        2
+      ],
+      "gridTargets": 176,
+      "draftSelectionOnly": true,
+      "undoAndRedoExactNoteState": true,
+      "images": {
+        "808-1440x900-initial.png": "7b5993a455194e57b95bad8393e1ddf583e55b00387cc421e07f4f882ec4ec3c",
+        "808-1440x900-selected.png": "c3d6d285a6b147100f845985a4b0f7fa11c70ede59c417ee98afd977121d0aff"
+      }
+    },
+    "909-844x390": {
+      "initialGlyphs": [
+        {
+          "label": "BD",
+          "current": "true",
+          "rgb": "rgb(255, 149, 41)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CR",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "RD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G011"
+        }
+      ],
+      "selectedGlyphs": [
+        {
+          "label": "BD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "true",
+          "rgb": "rgb(255, 149, 41)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CR",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "RD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G011"
+        }
+      ],
+      "changedRows": [
+        1,
+        2
+      ],
+      "gridTargets": 176,
+      "draftSelectionOnly": true,
+      "undoAndRedoExactNoteState": true,
+      "images": {
+        "909-844x390-initial.png": "fcfae9ab0d2fce98b5b655f728e54dcdca2e41d3b0cde80e582ff4b6e954f4dd",
+        "909-844x390-selected.png": "251b508d4c678cb55ab6a111d44c34879700c693f32dca3270c84467ce387087"
+      }
+    },
+    "808-844x390": {
+      "initialGlyphs": [
+        {
+          "label": "BD",
+          "current": "true",
+          "rgb": "rgb(255, 72, 65)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CB",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G012"
+        },
+        {
+          "label": "CY",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        }
+      ],
+      "selectedGlyphs": [
+        {
+          "label": "BD",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G001"
+        },
+        {
+          "label": "SD",
+          "current": "true",
+          "rgb": "rgb(255, 72, 65)",
+          "id": "G002"
+        },
+        {
+          "label": "LT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G003"
+        },
+        {
+          "label": "MT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G004"
+        },
+        {
+          "label": "HT",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G005"
+        },
+        {
+          "label": "RS",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G006"
+        },
+        {
+          "label": "CP",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G007"
+        },
+        {
+          "label": "CB",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G012"
+        },
+        {
+          "label": "CY",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G010"
+        },
+        {
+          "label": "OH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G009"
+        },
+        {
+          "label": "CH",
+          "current": "false",
+          "rgb": "rgb(221, 231, 222)",
+          "id": "G008"
+        }
+      ],
+      "changedRows": [
+        1,
+        2
+      ],
+      "gridTargets": 176,
+      "draftSelectionOnly": true,
+      "undoAndRedoExactNoteState": true,
+      "images": {
+        "808-844x390-initial.png": "cde2bf4b0de1443c012287f6587a91f81182308b094b9237a66bd832d9d75d5c",
+        "808-844x390-selected.png": "b4f5a791e909f57eb047294e7f3da2bbbcb5120eaf942c6e779cd654ba84a322"
+      }
+    }
+  },
+  "errors": [],
+  "browser": "151.0.7922.34",
+  "ownerPDF": {
+    "source": "docs/design/OWNER-BASELINE-1836.pdf",
+    "sha256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+    "idleInkScope": "Page 15 and upper drum rows of page 2 use pale idle drawings. Later rows in page 2 contain dark-only marks."
+  },
+  "ownerNativeComparisons": {
+    "2": {
+      "before": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 651405,
+        "tolerantDifferentPixels": 220789,
+        "tolerantDifferentPercent": 17.0362,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+        "captureSha256": "9899534ea23271368b274b06dc7fbff0c027c8d7bba0656a3b546c6986236167",
+        "pairSha256": "c9fd2e5e69b3047d3693601194e62303ea16ff77023831daf5f4ad59551792f4"
+      },
+      "after": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 651405,
+        "tolerantDifferentPixels": 220775,
+        "tolerantDifferentPercent": 17.0351,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+        "captureSha256": "a609bfc40ce1dcdbfda7245c4485d764068d788c08a9c2144cb6e4791c5e20cc",
+        "pairSha256": "6fb3f3bfe6850595023474c9c8bab565556300da3b234db4c15b23fcc8d0e3bf"
+      },
+      "nativeRenderDelta": {
+        "exact": 1249,
+        "tolerant": 1057,
+        "railRight": 85,
+        "tolerantInsideRailColumns": 1057,
+        "tolerantChangedBoundsInclusive": [
+          26,
+          252,
+          67,
+          719
+        ]
+      }
+    },
+    "15": {
+      "before": {
+        "nativeSize": [
+          844,
+          390
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 200805,
+        "tolerantDifferentPixels": 83888,
+        "tolerantDifferentPercent": 25.4855,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "0a847adfb02200d5d064d1d5eb2d6d2bcaff233b9f2a8b92a765a0648986c158",
+        "captureSha256": "79a64d19293f99415f54d25b17834cfcb40795511e8da03d4f21e497055f2e29",
+        "pairSha256": "a482ec51e5721cd1269c5a810b5be57bb563e66af0433196e98e0ce55fc7e1e0"
+      },
+      "after": {
+        "nativeSize": [
+          844,
+          390
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 200798,
+        "tolerantDifferentPixels": 83864,
+        "tolerantDifferentPercent": 25.4782,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "0a847adfb02200d5d064d1d5eb2d6d2bcaff233b9f2a8b92a765a0648986c158",
+        "captureSha256": "fcfae9ab0d2fce98b5b655f728e54dcdca2e41d3b0cde80e582ff4b6e954f4dd",
+        "pairSha256": "6cd1d4925f0f41253d5e777f8d29a80b8ac806ebf25d2b48fc16b31b8d958a58"
+      },
+      "nativeRenderDelta": {
+        "exact": 549,
+        "tolerant": 460,
+        "railRight": 54,
+        "tolerantInsideRailColumns": 460,
+        "tolerantChangedBoundsInclusive": [
+          23,
+          177,
+          38,
+          291
+        ]
+      }
+    }
+  }
+}

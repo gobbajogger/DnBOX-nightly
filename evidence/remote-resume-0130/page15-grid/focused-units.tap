@@ -1,0 +1,34 @@
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (48.786201ms)
+✔ shipped app binds every typed step without a tool mode and edits remain undoable (3.768556ms)
+✔ near-grid hit toggles the displayed event rather than adding a duplicate (12.902726ms)
+✔ the final drum row carries kit-wide accents independent of velocity and hits (25.615706ms)
+✔ both kit rails retain all eleven distinct shared R22 voice identities (59.775835ms)
+✔ each kit marks exactly the selected Sound voice and rejects an unknown voice (22.396574ms)
+✔ actual FunkyBeats state and duration/velocity port is installed, not only a notice (15.776903ms)
+✔ current Remote explicitly consumes source port and drum cells toggle without a mode (2.798911ms)
+✔ ported upstream sequencer renders all typed drum cells with safe, stable identities (35.345788ms)
+✔ actual upstream launcher renders all five local rows without fake playback (5.759534ms)
+✔ FunkyBeats retains the MIT permission notice (1.278669ms)
+✔ actual synth slider builder retains explicit native domains and escaped values (2.71208ms)
+✔ upstream mixer projection retains typed faders, not fabricated meters or controls (4.539172ms)
+✔ mixer values reproduce exact production formatter table without inferred units (8.751065ms)
+✔ two-finger pan cancels pending draw and never creates a note (4.473094ms)
+✔ pinch from two bars to one preserves the starting centroid and all notes (0.830947ms)
+✔ double tap deletes exactly touched note and undo restores it (0.697898ms)
+✔ cancel after second finger never commits draw on remaining release (0.518108ms)
+✔ pinch selects only 1, 2, 4 or 8 bars and saturates at the endpoints (0.478278ms)
+✔ panning from an imported quarter-step zoom retains its original scale (1.974524ms)
+✔ lifecycle cancel clears viewport owners before next draw (1.029865ms)
+✔ modeless note body moves rather than resizing end (0.964948ms)
+✔ wheel pan and bounded ctrl-wheel zoom alter viewport only (0.716676ms)
+✔ double tap never deletes a moved note, and a third pointer cannot commit a draw (0.823065ms)
+✔ double tap can delete narrow notes whose resize handles cover the body (0.508813ms)
+✔ Command-wheel anchors zoom and Shift-wheel pans time without changing pitch (0.652129ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 378.467115

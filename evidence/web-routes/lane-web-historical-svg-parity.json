@@ -1,0 +1,65 @@
+{
+  "scope": "Recovered archival vectors against their companion native PNGs",
+  "viewBox": [
+    0,
+    0,
+    240,
+    240
+  ],
+  "threshold_pixels": 576,
+  "all_checks_passed": false,
+  "screens": [
+    {
+      "screen": "home",
+      "chromium": "151.0.7922.34",
+      "native_sha256": "bed528235341197ab8cbb0640eef46cdce53ad74e6eb232d809414d410199ee5",
+      "svg_sha256": "b478f2c18def0b7fc6a43470785af2656add7ee3700360b8a630803e3025cced",
+      "pair_sha256": "ab1401f6076e93dff89bd1a95959cb2f70500883513442e53f7ede5e2e10d704",
+      "width": 240,
+      "height": 240,
+      "different_pixels": 6382,
+      "total_pixels": 57600,
+      "fraction": 0.11079861111111111,
+      "passes_one_percent": false
+    },
+    {
+      "screen": "mixer",
+      "chromium": "151.0.7922.34",
+      "native_sha256": "1768d2ba62beeb4dee6a2bc412134fd928f7fe2524ac7cf8eb55a3fcb563a627",
+      "svg_sha256": "c955b6f38f8518b2e8d0bc2a1769b1f3c8823299b759b5380e1710f57a5e8e1d",
+      "pair_sha256": "c62d35476a57f306572b211243cd0d7c2d9c860c48c8612ebd33a34d9dbc7895",
+      "width": 240,
+      "height": 240,
+      "different_pixels": 5131,
+      "total_pixels": 57600,
+      "fraction": 0.08907986111111112,
+      "passes_one_percent": false
+    },
+    {
+      "screen": "smc-historical",
+      "chromium": "151.0.7922.34",
+      "native_sha256": "dba686ffcd4b586927ee07497fe72058cfb0ddd18cdabbfc79288e43b878e98f",
+      "svg_sha256": "61779a88a3c16f8d85cc034197087c58ec0782aba107f15965297fde254c6b6b",
+      "pair_sha256": "6681039548eaa95b9644c2a5a09813a73986968049a7a42380168e0484799236",
+      "width": 240,
+      "height": 240,
+      "different_pixels": 6369,
+      "total_pixels": 57600,
+      "fraction": 0.11057291666666667,
+      "passes_one_percent": false
+    },
+    {
+      "screen": "smc-pr168",
+      "chromium": "151.0.7922.34",
+      "native_sha256": "0a2f3c58743c07fdad5e5320fd9efbd899d5035282585d94ec4d161a01ef60aa",
+      "svg_sha256": "df9c985974a91c205f7d7c8c37fe98abf9ebaea4580c19f117270a7a67108774",
+      "pair_sha256": "07987b86e917d467e8f94c3f4abd505ea62010ac29fa7fd60f0eb3e6e0f3ceee",
+      "width": 240,
+      "height": 240,
+      "different_pixels": 5163,
+      "total_pixels": 57600,
+      "fraction": 0.08963541666666666,
+      "passes_one_percent": false
+    }
+  ]
+}

@@ -7,7 +7,7 @@ test('source admission remains explicit, no original-format or remote capability
 
 test('R16 composed source names exact workspace and contains safe local editing endpoints only',()=>{const t=JSON.parse(read('SOURCE-TRACE.json'));assert.match(t.remote,/R16/);assert.equal(t.candidatePins.workspaceManifest,'0013f29a990fbc2305a3269f4da1f87182ec3a29b7e3b35ca760281c132e2186');assert.equal(t.retainedHistoricalSources.count,10);assert.equal(t.deployed,false);assert.equal(t.browserProvider,null);assert.match(read('remote/sequence.mjs'),/beginSelectionGesture/);assert.match(read('remote/roll.mjs'),/g.edge==='start'/);assert.match(read('remote/device/catalog.mjs'),/null/)});
 
-test('R21 captured presentation and v6 port identity remain explicit without admission',()=>{const t=JSON.parse(read('SOURCE-TRACE.json'));assert.equal(t.candidatePins.remoteEndpointManifest,'36e54ac2ca5f6c0524f7f8e4615839a7333b10e6bf9738bece022b8d315f8847');assert.ok(read('remote/frame.mjs').includes('runtime_admitted'));const c=JSON.parse(read('remote/components.json'));assert.equal(c.screens.length,26);assert.equal(c.screens.reduce((n,s)=>n+s.controls.length,0),124);assert.match(read('remote/device/page.mjs'),/p.id/);assert.ok(JSON.parse(read('remote/WORKSPACE-SOURCE-PINS.json')));});
+test('R21 captured presentation and v6 port identity remain explicit without admission',()=>{const t=JSON.parse(read('SOURCE-TRACE.json'));assert.equal(t.candidatePins.remoteEndpointManifest,'36e54ac2ca5f6c0524f7f8e4615839a7333b10e6bf9738bece022b8d315f8847');assert.ok(read('remote/frame.mjs').includes('runtime_admitted'));const c=JSON.parse(read('remote/components.json'));assert.equal(c.screens.length,26);assert.equal(c.screens.reduce((n,s)=>n+s.controls.length,0),124);assert.match(read('remote/device/page.mjs'),/\bport\.id\b/);assert.ok(JSON.parse(read('remote/WORKSPACE-SOURCE-PINS.json')));});
 
 test('entry availability distinguishes drafts, separate browser audio and unavailable device providers',()=>{assert.match(read('index.html'),/Local workspace preview/);const tools=read('tools/index.html');assert.match(tools,/Sketch notes and save a draft/);assert.match(tools,/separate browser instrument/);assert.match(tools,/This does not control a connected device/);assert.match(tools,/your draft stays untouched/);assert.match(tools,/If the emulator is unavailable, keep working in Draft/);assert.doesNotMatch(tools,/No connected control or playback in this preview/);assert.match(read('projects/index.html'),/Browser MIDI export is unavailable/);assert.match(read('starting-breaks/index.html'),/Download chosen breaks/);assert.match(read('starting-breaks/index.html'),/Downloading does not change your keyboard/);assert.match(read('starting-breaks/index.html'),/Restore replaces slot 1, and slot 2/);assert.match(read('remote/index.html'),/Download draft/);assert.equal(JSON.parse(read('SOURCE-MANIFEST.json')).publicationQualified,false);});
 
@@ -50,12 +50,14 @@ test('all nineteen musician routes and both legacy entry redirects survive the b
 
 test('starting-breaks publication navigation uses existing live destinations without unrelated route rollout',()=>{
  const html=read('starting-breaks/index.html');
- const allowed=new Set(['#content','../index.html','../breaks/','../projects/','../manual/','../builds/','../install/','../install/#samples','../new/']);
+ const allowed=new Set(['#content','../index.html','../breaks/','../projects/','../manual/','../builds/','../install/','../install/#samples','../new/','../index.html#sounds','../remote/','../presets/','../help/']);
  for(const [,href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)){
   if(/^https:\/\//.test(href))continue;
   assert.ok(allowed.has(href),'unpublished starting-break destination: '+href);
  }
- assert.match(html,/>Home<\/a>/);
+ const header = page => page.match(/<header>[\s\S]*?<\/header>/)?.[0];
+ assert.equal(header(html), header(read('tools/index.html')));
+ assert.match(html,/<a href="\.\.\/help\/">Setup &amp; help<\/a>/);
  assert.match(html,/class="starting-breaks-page"/);
  assert.match(html,/\.starting-breaks-page header\{[^}]*flex-wrap:wrap/);
  assert.match(html,/Restore replaces slot 1, and slot 2 when two groups are selected/);
@@ -81,7 +83,14 @@ test('release notices identify the two tested models, the withdrawal and the fal
  }
  const historical = records.filter(row => row.id !== published.id);
  assert.equal(historical.length, 197);
- assert.equal(historical.find(row => row.id === 'night-versions-0').original.hardware_tested, false);
+ const archived = historical.find(row => row.id === 'night-versions-0').original;
+ assert.equal(archived.hardware_tested, false);
+ assert.equal(archived.source_commit, published.original.source_commit);
+ for (const model of published.models) {
+  assert.equal(archived.models[model].sha256, published.original.models[model].sha256);
+ }
+ const previous = historical.find(row => row.id === 'main-versions-0').original;
+ assert.notEqual(previous.source_commit, published.original.source_commit);
 });
 
 test('published release records, backup workflows and history bookmarks survive site composition',()=>{
@@ -143,7 +152,7 @@ test('homepage separates the current Chicago waveform and SuperJ6 name from arch
  assert.match(sound, /Chicago, Miami and SuperJ6/);
  assert.match(sound, /<span>SuperJ6<\/span>/);
  assert.doesNotMatch(sound, /\bJuno\b/);
- assert.match(home, /data-demo="juno"[^>]*>Juno \(archived\)<\/button>/);
+ assert.match(home, /data-demo="juno"[^>]*>Archived Juno envelope<\/button>/);
  const frames = JSON.parse(home.match(/<script id="replay-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
  assert.equal(frames.juno.length, 7);
  assert.ok(frames.juno.every(frame => frame.text.startsWith('JUNO ')));

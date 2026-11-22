@@ -1,0 +1,406 @@
+{
+  "publishedCommit": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+  "checkedLocalCommit": "a160e7d56732e3111702e567a81b54353a721327",
+  "commonTree": "721461c82f1d0580878fc117940563dbe2a36374",
+  "productFiles": 304,
+  "siteTraceSha256": "cce08a32135e11d6b8a5f1cb80d4c79e494325e814e4e0d65814a425334a6a21",
+  "ownerPdfSha256": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+  "registeredViewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      1024,
+      640
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "ownerComparison": {
+    "method": "Same-size owner review comparisons, with a pixel counted if any RGB channel differs by more than 25.5.",
+    "referencePairs": {
+      "06-levels": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 388066,
+        "tolerantDifferentPixels": 91669,
+        "tolerantDifferentPercent": 7.0732,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "d56412acdbbaae3ab3f0f5e82a7e9a2fad0913581e31de2d4d5b7aa93c3b2c61",
+        "captureSha256": "56d4809ca99c120ff5bc91e3053a9122d8fd41106c4a16009f32bbb4de44e2ac",
+        "pairSha256": "fdef96a180e5c64f3b9baa05b0ca1aaba87676da4b497877635f760be9c9c0f2",
+        "page": 6,
+        "documentWidth": 1440,
+        "mountedControls": 52
+      },
+      "07-master": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 413412,
+        "tolerantDifferentPixels": 77354,
+        "tolerantDifferentPercent": 5.9687,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "223f99f93784b51a6b5b6daf0b39cb649d389fb53331193ce7dffc3752b09f0a",
+        "captureSha256": "a8290d53b71a2b5ecb0a1f0f3672c0820102eea4a34c6f6f01e67be00b6310b0",
+        "pairSha256": "bfb40810916c63608206ec43b6e77e1db6f8701856324c26d451d4b40ccbfd65",
+        "page": 7,
+        "documentWidth": 1440,
+        "mountedControls": 42
+      },
+      "08-fx": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 300213,
+        "tolerantDifferentPixels": 120307,
+        "tolerantDifferentPercent": 9.2829,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "52448fe6ee62793e9498fa781d79eb24fe6e9035cbe9839d9ff3e1b3cae57fc6",
+        "captureSha256": "c6b8670ce01ee32053b444cea4008a12c329faa186b4e6b798cf1a0bb1b1e27c",
+        "pairSha256": "1ac8c81734031ca6bb141fcbc345de10362aebe2941a633344fac0d5f7895374",
+        "page": 8,
+        "documentWidth": 1440,
+        "mountedControls": 67
+      },
+      "09-patterns": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 439432,
+        "tolerantDifferentPixels": 87456,
+        "tolerantDifferentPercent": 6.7481,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "aa18ca6e4b5727d666cb1f773218b0029e96993b32324bd47435da4a2b29f52a",
+        "captureSha256": "9e1fa2366bf425718f278971e5c815e56c037f2f50279295b38500fc1535fbef",
+        "pairSha256": "1ee4dd3cf424011b40488521543f15637940eb7b62a72005011da383ba0df17b",
+        "page": 9,
+        "documentWidth": 1440,
+        "mountedControls": 55
+      },
+      "10-song": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 861912,
+        "tolerantDifferentPixels": 106061,
+        "tolerantDifferentPercent": 8.1837,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "f91cd729b35840991389f80f10615e1f3b594359f5fb0e5af6221846eff8cd0a",
+        "captureSha256": "41090c772596f25095982c96131298bc93c6067e372d7f26c84de1d06586087a",
+        "pairSha256": "56658758922752ce8e9fbe9ca3ff3d1b90697c8cff84bf95c8112340f7f4ecaa",
+        "page": 10,
+        "documentWidth": 1440,
+        "mountedControls": 38
+      },
+      "12-projects": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 491797,
+        "tolerantDifferentPixels": 97319,
+        "tolerantDifferentPercent": 7.5092,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+        "captureSha256": "1e885e194612c6e8ead41a2ed64bb859259d6e3b75a9c92fc551e56e62712bc7",
+        "pairSha256": "b0bdb88c8bcb1529c93af49eb510f0aa14ac2b6dff228cbb8c16a4b9069ba925",
+        "page": 12,
+        "documentWidth": 1440,
+        "mountedControls": 32
+      },
+      "13-review": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 1201370,
+        "tolerantDifferentPixels": 309186,
+        "tolerantDifferentPercent": 23.8569,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+        "captureSha256": "7be4826b89129ff1e56e31fea897150358ccf003e5642b23d267ebb9dfcfc262",
+        "pairSha256": "393d7f52677b4595d42a02a921c849ea1b463fc149b3d52a784d235261f3c0c8",
+        "page": 13,
+        "documentWidth": 1440,
+        "mountedControls": 43
+      },
+      "13-connect": {
+        "nativeSize": [
+          1440,
+          900
+        ],
+        "totalPixels": 1296000,
+        "exactDifferentPixels": 446125,
+        "tolerantDifferentPixels": 79317,
+        "tolerantDifferentPercent": 6.1201,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+        "captureSha256": "926d5f1838648854a87e245b1f8a0013183b7c7a1f04c34dae12d8001a450794",
+        "pairSha256": "ebe914dab718ecb0b160a23d0316b40118a0a266b090cbf37c4900dc4ea6cad2",
+        "page": 13,
+        "documentWidth": 1440,
+        "mountedControls": 33
+      },
+      "16-levels": {
+        "nativeSize": [
+          844,
+          390
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 110703,
+        "tolerantDifferentPixels": 39604,
+        "tolerantDifferentPercent": 12.0318,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "b68c2b0e78ef78aa9b5b570b925643005dbf6283758dd97f5d1b022a470c694b",
+        "captureSha256": "f1705666b05ec4bc78967e9432059b0b73b9973688f87e236fb298d5940f47f7",
+        "pairSha256": "0b35122fc678a9d7631e71a8ba836e0f970557534573c34fecd98878c6942e25",
+        "page": 16,
+        "documentWidth": 844,
+        "mountedControls": 52
+      },
+      "19-patterns": {
+        "nativeSize": [
+          844,
+          390
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 152363,
+        "tolerantDifferentPixels": 53975,
+        "tolerantDifferentPercent": 16.3978,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "a01fa1b871a3b83b48a838581f241c41eef1407c5d9b0d4faf6e39cb85c94153",
+        "captureSha256": "78b8404e93fef461efe4b05047bc605ac834e745ea97772b444865d7f0355a09",
+        "pairSha256": "99efb3e5166d09508fb74a85e74d80ee981be2283fc2d2b4e9e5c0a962bf24d2",
+        "page": 19,
+        "documentWidth": 844,
+        "mountedControls": 55
+      },
+      "20-projects": {
+        "nativeSize": [
+          844,
+          390
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 97631,
+        "tolerantDifferentPixels": 35992,
+        "tolerantDifferentPercent": 10.9345,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "e8d0b47fdf5315b00ef67b25423f17ada6e2a4db237f11f6fb9fa9f40eac833d",
+        "captureSha256": "8aef30029448b25d5417900ebb7ab653214ffc5faf4baa6d83a86e61e675443b",
+        "pairSha256": "6b0ba3d069d6817c1fbe8a2a5d7ef523c2f46f01191b43a96a0aaf978a1bba57",
+        "page": 20,
+        "documentWidth": 844,
+        "mountedControls": 31
+      },
+      "23-levels": {
+        "nativeSize": [
+          390,
+          844
+        ],
+        "totalPixels": 329160,
+        "exactDifferentPixels": 103222,
+        "tolerantDifferentPixels": 42492,
+        "tolerantDifferentPercent": 12.9092,
+        "atMostTwoPercentByTolerantMetric": false,
+        "referenceSha256": "52fd07dac71aa73277178c8417de8f29613012e540903486398063d0644f350d",
+        "captureSha256": "41c90e1a985184bc9da8536a080ca39b19d5ce76d2ba9c852a68c0b5ce6bf586",
+        "pairSha256": "aaa55796136357322921f2dfc17ca8814f0188972489b609118be98912aaa4cc",
+        "page": 23,
+        "documentWidth": 390,
+        "mountedControls": 52
+      }
+    }
+  },
+  "firstBrowserAttempt": {
+    "outcome": "FAIL",
+    "suite": "tests/product-remote/mix-family-browser.py",
+    "viewportReached": [
+      1440,
+      900
+    ],
+    "failure": "Delay-type combobox did not resolve for the DIGI value assertion after clicking Redo, line 108. Native screenshots through FX and the earlier TAPE\u2192DIGI\u2192Undo checks were reached."
+  },
+  "focusedUnitTests": {
+    "passed": 56,
+    "failed": 0
+  },
+  "shippingFirmware": {
+    "commit": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+    "tree": "72d28fbc741244d18fa3d18495da16ab0fcb1d24",
+    "hostObservation": "Portable host build of exact shipping firmware; host-specific control captions and simulation-only audio and panel I/O.",
+    "unsupportedBuild": "The exact source host build with BOARD_SMK37=1 failed to link unresolved SMK-only board/controller callbacks. The portable host branch linked and ran.",
+    "frameRgbSha256": {
+      "06-kit808.png": "e4befe420e3d7215aaf4e7e195e4761fc0c7df7103d503c9eb00363ed05b21ad",
+      "06-kit909.png": "48a990d7fadc6635d002c360def71a08da5aad07af679e83681ff642b66cb68e",
+      "06-levels.png": "1ffda4588d43be2391f14fc508323f8659e038363ddd13e875a846c35facd6f2",
+      "06-sends.png": "8509a77efd2c32f3946daace70cef0e300729cedb9fc0463ba6e8c08d7841b36",
+      "07-master-more.png": "8a1dbd24d8d364ad3b6ea2f6d75e98d63a6aea943b1ea8761488a1469eebc5cc",
+      "07-master-return.png": "7a3ce22a39fa367a3af97a9d916d0e5709f2fefbbabf2f6d0fd0a24cafa87136",
+      "07-master.png": "8c706c235b91307180fad3d9c574fb4dcad69e58f9dec14196be0abd8093d7ac",
+      "07-wave.png": "2b797370c8417ce9cf09e9e2bddb7864f922d50cd12d7a464dd48e02b8160b8b",
+      "08-reverb.png": "5fd6223b4aa06a620e62cdcb637b52beb5f0beee3a1eb64905279072a645243d",
+      "08-tape-idle-later.png": "5dc19b1ea6fcbafd6ba151db0b584bbe13d43f4a16540051539e1a43dbc40d86",
+      "08-tape-idle.png": "5dc19b1ea6fcbafd6ba151db0b584bbe13d43f4a16540051539e1a43dbc40d86",
+      "08-tape-live-a.png": "188c6d1381ce5f847daa51956d6ffe8c8c56654c4f179f728ba5cd6e995e7ed5",
+      "08-tape-live-b.png": "e44be9c40d2e8a865da29a1b6713c013021f5b72340f780610f39a48b721657e",
+      "08-tape-live-c.png": "798c3f7365d3b966a03ad0a3a7f5fee700324a79683be2faf91768c796b1e20c",
+      "09-patterns.png": "c0c1b1e9339647a89ac6e551fea0992cdbf659e0e3f6e19950d1f395e616f657",
+      "10-song.png": "591e84ca35ca72ed31341148f4bdbf3e7a5c63eb5ab77dfa457c08ce5b2d67fc",
+      "12-project.png": "6c74f775ba2b8bd4d4cbe0f7c07073272c82c5bb438893d90ce4e62ead4a6b95",
+      "settings-global.png": "a69273fc5bd7eda48ce32e5574e95d5757fcddab0b803a73b62fdba21f5369c8",
+      "settings-midi.png": "de896c8fbd3729d0627f729e3936c4b6a2cb5579036a749ddb3dabf0bd169bf5"
+    },
+    "tapeFrameRegion": [
+      193,
+      186,
+      232,
+      202
+    ],
+    "tapeChangedRgbPixels": {
+      "twoIdleFrames": 0,
+      "firstTwoLiveFrames": 10,
+      "secondAndThirdLiveFrames": 10
+    },
+    "hostScenarioSha256": "51a56919165c0b5d036af35c3c99178f9a318a366c246425845e30ea3f003428"
+  },
+  "websiteReference": {
+    "commit": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+    "verifiedNativeFrames": 17,
+    "wasmSha256": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234"
+  },
+  "projectsRepair": {
+    "baseCommit": "183207ed2b7dd7b346ca5871408b292df4fb0ae2",
+    "scope": "Projects CSS at width \u22651200 and height \u2265820; desktop buttons, typography and card sizes",
+    "browser": "151.0.7922.34",
+    "viewportResults": {
+      "1440x900": {
+        "beforeHeights": [
+          78,
+          78,
+          78
+        ],
+        "afterHeights": [
+          185,
+          185,
+          185
+        ],
+        "actions": 13,
+        "firstViewActions": 13,
+        "blocked": [],
+        "pageErrors": [],
+        "afterSha256": "9fb996afb26a287bd68e11c21ee9aa44cc7bf8f8825ecc50e8685723a032dabb",
+        "beforeAfterChangedPixels": 452997
+      },
+      "1024x640": {
+        "beforeHeights": [
+          216.390625,
+          216.390625,
+          216.390625
+        ],
+        "afterHeights": [
+          216.390625,
+          216.390625,
+          216.390625
+        ],
+        "actions": 13,
+        "firstViewActions": 10,
+        "blocked": [],
+        "pageErrors": [],
+        "afterSha256": "56cf3edfb44f8dbec4c1e8bbba1c47f69660aa4e850c192664c4ffa80dc9f4a3",
+        "beforeAfterChangedPixels": 0
+      },
+      "844x390": {
+        "beforeHeights": [
+          164.390625,
+          164.390625,
+          164.390625
+        ],
+        "afterHeights": [
+          164.390625,
+          164.390625,
+          164.390625
+        ],
+        "actions": 12,
+        "firstViewActions": 8,
+        "blocked": [],
+        "pageErrors": [],
+        "afterSha256": "24bf1e79d5a76654d4dc093cf4d8b5995d898bc2bc758b960618df918f03ecb5",
+        "beforeAfterChangedPixels": 0
+      },
+      "390x844": {
+        "beforeHeights": [
+          124.390625,
+          124.390625,
+          124.390625
+        ],
+        "afterHeights": [
+          124.390625,
+          124.390625,
+          124.390625
+        ],
+        "actions": 13,
+        "firstViewActions": 10,
+        "blocked": [],
+        "pageErrors": [],
+        "afterSha256": "9d390721f6c5dc5de0d4a9bbf4c6c5c93a8b377ff308674019848ac1ec2a7ed1",
+        "beforeAfterChangedPixels": 0
+      }
+    },
+    "ownerPage12": {
+      "before": {
+        "changedExact": 491901,
+        "changedTolerant": 97395,
+        "changedTolerantPercent": 7.515046296296296
+      },
+      "after": {
+        "changedExact": 254412,
+        "changedTolerant": 83184,
+        "changedTolerantPercent": 6.418518518518518
+      }
+    },
+    "earlierPrototypeOwnerPage12": {
+      "before": {
+        "changedExact": 491901,
+        "changedTolerant": 97395,
+        "changedTolerantPercent": 7.515046296296296
+      },
+      "after": {
+        "changedExact": 359630,
+        "changedTolerant": 113256,
+        "changedTolerantPercent": 8.738888888888889
+      }
+    }
+  },
+  "serializedBrowserRetry": {
+    "outcome": "pass",
+    "test": "unchanged check_master_destination and check_delay_type",
+    "viewport": [
+      1440,
+      900
+    ],
+    "browser": "151.0.7922.34",
+    "pageErrors": [],
+    "midiCalls": 0
+  }
+}

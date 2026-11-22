@@ -1,0 +1,2 @@
+{"files":304,"output":"/workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/fwui-j0105bg6","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS 1838 named screens, 1912 browser canvas frames, 105,868,800 unique-state pixels

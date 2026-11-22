@@ -156,7 +156,75 @@ def sweep(page, origin, site):
     print(f'PASS {len(actual)} named screens, {observations} browser canvas frames, {len(actual)*57600:,} unique-state pixels')
 
 
-def check(site):
+
+def check_seq_sources(page, origin):
+    matrix = json.loads((ROOT / 'evidence/web-routes/shipping-parity/seq-state-matrix.json').read_text())
+    pins = [(row['web_state'], row['rgb_sha256']) for row in matrix['states']]
+    native = dict(row.split('\t') for row in ORACLE.read_text().splitlines())
+    intake = matrix['cross_surface_intake']
+    assert intake['web_reference_firmware'] == SHA
+    for receipt in intake['states']:
+        assert receipt['web_rgb_sha256'] == native[receipt['state']]
+    for retained in intake['retained_seq']:
+        assert retained['rgb_sha256'] == native[retained['state']]
+    url = origin + '/reference/screens/#'
+    compare = page.locator('#compare')
+    lcd = page.locator('#lcd')
+    source = page.locator('#lcd-source')
+    for width, height in [(1440, 900), (390, 844), (844, 390)]:
+        page.set_viewport_size({'width': width, 'height': height})
+        for state, expected in pins:
+            page.goto(url + state)
+            assert source.locator('option[value="current"]').inner_text() == 'Native firmware · ' + SHA[:8]
+            for selected in ['current', 'shipping', 'r22', 'current']:
+                source.select_option(selected)
+                page.wait_for_selector(f'#lcd[data-state="{state}"][data-source="{selected}"]')
+                image = lcd.evaluate("canvas => canvas.toDataURL('image/png').split(',')[1]")
+                with Image.open(io.BytesIO(base64.b64decode(image))) as pixels:
+                    assert pixels.size == (240, 240)
+                    actual = hashlib.sha256(pixels.convert('RGB').tobytes()).hexdigest()
+                assert expected['current'] == native[state]
+                assert actual == expected[selected]
+                assert compare.is_visible() == (selected == 'current')
+            assert page.evaluate('document.documentElement.scrollWidth') == width
+    page.goto(url + 'home-playing')
+    page.wait_for_selector('#lcd[data-state="home-playing"][data-source="current"]')
+    assert not source.is_visible()
+    print('PASS two SEQ states, three sources, three viewport sizes, exact 240×240 RGB and native return')
+
+
+def check_late_worker_error(browser, origin):
+    page = browser.new_page()
+    try:
+        page.add_init_script('''const NativeWorker = window.Worker;
+            window.Worker = class extends NativeWorker {
+              constructor(...args) {
+                super(...args);
+                this.addEventListener('error', () => { window.nativeWorkerFailed = true; });
+              }
+            };''')
+        held = []
+        page.route('**/reference/screens/worker.mjs', lambda route: held.append(route))
+        url = origin + '/reference/screens/#view-08-part-00-voice-00-page-00'
+        with page.expect_request('**/reference/screens/worker.mjs'):
+            page.goto(url)
+        page.locator('#lcd-source').select_option('shipping')
+        archive = page.locator('#lcd[data-source="shipping"][data-state]')
+        archive.wait_for()
+        assert len(held) == 1
+        held[0].abort()
+        page.wait_for_function('window.nativeWorkerFailed === true')
+        assert archive.count() == 1
+        assert page.locator('#status').inner_text() == 'Shipping 0.0.26 · 94197fc8'
+        page.unroute('**/reference/screens/worker.mjs')
+        page.locator('#lcd-source').select_option('current')
+        page.locator('#lcd[data-source="current"][data-state]').wait_for()
+        print('PASS late native worker error leaves the archive visible and Current can recover')
+    finally:
+        page.close()
+
+
+def check(site, seq_sources_only=False):
     errors = []
     with ThreadingHTTPServer(('127.0.0.1', 0), partial(Quiet, directory=site)) as server:
         thread = Thread(target=server.serve_forever, daemon=True)
@@ -167,7 +235,11 @@ def check(site):
                 try:
                     page = browser.new_page(device_scale_factor=1)
                     page.on('pageerror', lambda err: errors.append(str(err)))
-                    sweep(page, f'http://127.0.0.1:{server.server_port}', site)
+                    origin = f'http://127.0.0.1:{server.server_port}'
+                    check_seq_sources(page, origin)
+                    check_late_worker_error(browser, origin)
+                    if not seq_sources_only:
+                        sweep(page, origin, site)
                     assert not errors, errors
                 finally:
                     browser.close()
@@ -179,12 +251,13 @@ def check(site):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--site', type=Path)
+    parser.add_argument('--seq-sources-only', action='store_true')
     args = parser.parse_args()
     if args.site:
-        check(args.site.resolve())
+        check(args.site.resolve(), args.seq_sources_only)
     else:
         output = ROOT / '.output'
         output.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='fwui-', dir=output) as run:
             subprocess.run(['node', 'scripts/build-product-site.mjs', '--output', run], cwd=ROOT, check=True)
-            check(Path(run))
+            check(Path(run), args.seq_sources_only)

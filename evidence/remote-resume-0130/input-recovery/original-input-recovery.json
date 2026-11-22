@@ -1,0 +1,72 @@
+{
+  "branch": "lane/remote-resume-0130",
+  "pairedFirmwareSource": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "originalInputs": [
+    {
+      "name": "SuperJ6-AU-original-extension.private.zip",
+      "sha256": "abe2f2e089306770489fb30c8870f608dc2f2e0804541f624337523679638a28",
+      "evidence": "Two exact AU extension parts, checksums and reassembly instructions attached to the 2026-11-16T02:35:30.160859Z project-room message.",
+      "messageId": "Sentinel_fd63ce91eb9c819187f9e501a8c518c6",
+      "attachmentTargets": [
+        "CalpicoFile_0be21c0495dc8191bb48de0b434e75e7",
+        "CalpicoFile_18faeb875c488191a4c54366db8bff5e",
+        "CalpicoFile_51eb6bbbad708191b69fa6926653dfa8",
+        "CalpicoFile_e8e39876dc3c81918b11d0eae64fc72e"
+      ],
+      "recovery": "Materialize the two byte-exact parts and checksums through an authenticated file surface. Concatenate in the attachment instructions' order and verify the archive SHA-256. Keep the source private.",
+      "libraryFileId": "libfile_fde3_f-dbfdf52305a4819196715dea559db8da_2021479872048191acbfdca1f870a539"
+    },
+    {
+      "name": "Original SuperJ6 AU ARM64 executable",
+      "sha256": "a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1",
+      "evidence": "The extracted binary was attached at 2026-11-16T02:33:23.242119Z.",
+      "messageId": "Sentinel_0893b9e237d88191bdcf32be2aef0efa",
+      "attachmentTargets": [
+        "CalpicoFile_8694b4fcdc348191a361d293c0da52e3"
+      ],
+      "recovery": "Verify the exact executable and run the original formatter on a compatible host. Capture all three LFOs, every division and both adjacent raw positions at every transition."
+    },
+    {
+      "name": "J6presets.zip",
+      "bytes": 451262,
+      "sha256": "ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8",
+      "evidence": "The 12-bank 640-program archive was attached at 2026-11-16T02:32:02.683837Z.",
+      "messageId": "Sentinel_f8ad8b3b0e208191b50a23e1d0ad1323",
+      "attachmentTargets": [
+        "CalpicoFile_fad3a62ac1ec819189a8741f89d48d89"
+      ],
+      "libraryFileId": "libfile_fde3_f-6ff4bb216f9c8191bb54bd7c912e4624_2021479872048191acbfdca1f870a539"
+    }
+  ],
+  "ownerGlyphEvidence": {
+    "reviewMessageId": "Sentinel_adb75e536e008191977ef7c85b3cf13f",
+    "reviewTimeUtc": "2026-11-16T07:12:59.178519Z",
+    "reviewAttachmentTargets": [
+      "CalpicoFile_ecb899122fa0819180e43edc5d413711",
+      "CalpicoFile_477b6725d9748191847043647dc08cc2"
+    ],
+    "approvalMessageId": "Sentinel_c923a58b991c8191a34e8cfb0771719c",
+    "approvalTimeUtc": "2026-11-16T07:20:23.725047Z",
+    "approvedFamilies": [
+      "Juno",
+      "Chicago",
+      "Miami",
+      "FX"
+    ],
+    "unresolved": "Original attachment bytes and file-by-file glyph asset identities."
+  },
+  "priorAccessAttempts": {
+    "mountedOriginals": "No matching installer, executable attachment or original bank archive recovered.",
+    "history": "Partial file metadata. Attachment targets observed, no byte transfer provided.",
+    "library": "Advertised list, search and prepare_materialize calls returned Unknown tool; no original bytes transferred.",
+    "projectSources": "The existing native Project Sources renderer crashed with error code 9 after a scoped refresh. Cloud fallback navigation timed out.",
+    "physicalDevice": "Outside the current software-only qualification scope; no device actions attempted."
+  },
+  "currentAccess": {
+    "originals": "Authenticated Library browser downloads recovered the exact AU build9 and12-bank640-program archive; ZIP CRCs and pinnedSHA256 values pass. Private bytes stay outside Git.",
+    "receipt": "original-input-browser-verification.json",
+    "projectSources": "Recovered after one renderer reload; five branch/source-named evidence archives uploaded and confirmed complete. All33visible named sources inspected; no identifiable17:00glyph batch.",
+    "ownerGlyphs": "The two original review attachment bytes and file-by-file selection remain unresolved.",
+    "physicalDevice": "Outside software-only qualification scope; no device actions attempted."
+  }
+}

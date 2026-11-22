@@ -1,0 +1,71 @@
+{
+  "source": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "tree": "88205ac762c43545e3935f07860b53b19a7e8039",
+  "servedRoute": "/product-site/remote/index.html (tracked web source)",
+  "viewport": [
+    [
+      1440,
+      900
+    ],
+    [
+      1024,
+      640
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "workspaceStates": [
+    "sequence",
+    "lane-chance",
+    "lane-pitch",
+    "lane-pan",
+    "sound",
+    "mix",
+    "patterns",
+    "files"
+  ],
+  "freeze": {
+    "javascriptSHA256": "4247f208e21f7ecb1cf4e3c1c4e774a065d6db1f63bd22d5929ed83d7b74c420",
+    "cssSHA256": "fe1841a22c3db8a1c5d52f612ec29e9c90c3e823a2988e41bb85739ff199ed5a",
+    "clockEpochMs": 1794790800000,
+    "randomSeed": 42,
+    "locale": "en-US",
+    "timezone": "UTC",
+    "colorProfile": "srgb",
+    "deviceScaleFactor": 1,
+    "hasTouch": "width < 900",
+    "motion": "reduce",
+    "fontRenderFlags": [
+      "--font-render-hinting=none",
+      "--disable-lcd-text"
+    ],
+    "chromiumSandbox": true
+  },
+  "sourceClosure": {
+    "files": 269,
+    "sortedManifestSHA256": "a64abc7d776ba817e02e4c13e4cecd0e6fc1b87e057fc0027e2f5f831642896c"
+  },
+  "selectedAssets": {
+    "tests/visual/visual_gate.py": "e6bc199c69350f2d9f43225367ef96f34ccdfb2dc72e41ca2ef55fc6afe4f4eb",
+    "tests/visual/fixtures/page-01.png": "c9f6c4fc91543ac8f3659fd6a48956234a36ee48c781532e2b2623b1fe0a6a72",
+    "web/product-site/SOURCE-MANIFEST.json": "2430e64e6dd3d07b73fe5968e84a830fe6fc6b206c89151fa1e55ed28c2faf9d",
+    "web/product-site/remote/index.html": "6c12d15feee50792824ea5b2c3526aa7d711b5a896f376dee48e04a57d81d16e",
+    "web/product-site/remote/app.mjs": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+    "web/product-site/remote/style.css": "c81df9a0186c0a938e32baf398e1e3776854c3a5f687b4c51fa95d9f12a725b2",
+    "web/product-site/remote/trace.json": "67e1e9e48264a79c1e47dd760e1e0e898b65796041a1489b88d724789e5e3a55",
+    "web/product-site/remote/catalog.json": "5852d63f7f634b3d430082c0f8f3d8cd8451dc4ec31302baf00000cd5b0028c0",
+    "web/product-site/remote/components.json": "2882a2af257df5f3c4ddfe261e839da7304203522d7905d00b74dd0d74b5d507",
+    "web/product-site/remote/source-sounds.json": "a15c137f94b3a2e722ec80f6c720ee988da08d86b78cfe90de7a142e0985dfb7",
+    "web/product-site/remote/glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+    "web/product-site/remote/funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7",
+    "web/product-site/remote/assets/BarlowSemiCondensed-Medium.ttf": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+    "web/product-site/remote/assets/BarlowSemiCondensed-Bold.ttf": "5bd6757e459a110da81b44532f0f43058e2dab2401688abca84f2fdbde193cbb"
+  },
+  "approvedSnapshotCount": 0
+}

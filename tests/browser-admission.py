@@ -6,6 +6,7 @@ Run --source /path/to/before-installer.html for the identical RED assertions.
 import os
 import argparse, asyncio, hashlib, json, re, subprocess, threading
 from pathlib import Path
+from urllib.parse import urlsplit
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.async_api import async_playwright
 ROOT=Path(__file__).resolve().parents[1]
@@ -108,11 +109,51 @@ async def state(p):return await p.evaluate('qa.state()')
 async def reply(p,model='pro',data=None,status=200,index=0,reject=False):
     await p.evaluate('''a=>{const q=pending.splice(a.index,1)[0];if(!q)throw Error('no pending fetch');if(a.reject)q.reject(Error('synthetic network interruption'));else q.resolve(new Response(new Uint8Array(a.bytes),{status:a.status}));}''',{'index':index,'reject':reject,'status':status,'bytes':list(RAW[model] if data is None else data)})
     await p.wait_for_timeout(25)
+def readiness_route(url):
+    if url == 'about:blank':
+        return 'about:blank'
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return 'other'
+    if parts.scheme == 'http' and parts.netloc == f'127.0.0.1:{srv.server_port}':
+        if parts.path in ('/install/', '/empty/', '/breaks/', '/projects/', '/builds/', '/build-status.json'):
+            return parts.path
+    return 'other'
+
+
 async def fresh(browser,width=390,language='en'):
     p=await browser.new_page(viewport={'width':width,'height':900},accept_downloads=True)
-    errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
-    await p.add_init_script(INIT);await p.goto(f'http://127.0.0.1:{srv.server_port}/install/',wait_until='domcontentloaded')
-    await p.wait_for_function('window.qa && pending.length===1');await p.evaluate('(l)=>qa.language(l)',language)
+    errors, error_types = [], []
+    def on_error(error):
+        errors.append(str(error))
+        error_type = type(error).__name__
+        if len(error_types) < 8 and error_type not in error_types:
+            error_types.append(error_type)
+    p.on('pageerror', on_error)
+    await p.add_init_script(INIT)
+    try:
+        await p.goto(f'http://127.0.0.1:{srv.server_port}/install/',wait_until='domcontentloaded')
+        await p.wait_for_function('window.qa && pending.length===1')
+    except Exception:
+        try:
+            children = p.main_frame.child_frames
+            state = {'topPath': readiness_route(p.url), 'directFrameCount': len(children),
+                     'framePaths': [readiness_route(f.url) for f in children[:8]],
+                     'pageErrorTypes': error_types, 'topState': None}
+            if not p.is_closed():
+                try:
+                    state['topState'] = await asyncio.wait_for(p.evaluate("""() => ({
+                        hasReadyHook: Boolean(window.qa),
+                        pendingLength: Array.isArray(window.pending) ? window.pending.length : null
+                    })"""), timeout=0.65)
+                except Exception:
+                    pass
+            print('Installer readiness context', json.dumps(state), flush=True)
+        except Exception:
+            pass  # Preserve the original navigation or readiness exception.
+        raise
+    await p.evaluate('(l)=>qa.language(l)',language)
     return p,errors
 async def ready(browser,width=390,language='en',model='pro'):
     p,e=await fresh(browser,width,language)

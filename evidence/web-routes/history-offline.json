@@ -1,0 +1,46 @@
+{
+  "base": "583f622961fc9975fac746592ce6c483073c4170",
+  "command": "python3 tests/history-response.py",
+  "browser": "Chromium 151.0.7922.34",
+  "sandbox": true,
+  "counts": {
+    "checks": 37,
+    "passed": 37,
+    "failed": 0
+  },
+  "cases": [
+    {
+      "case": "product-offline-1440x900",
+      "pass": true,
+      "total": 198,
+      "matches": [
+        "release-v0.0.26-94197fc8",
+        "main-versions-0"
+      ],
+      "restored": 198,
+      "page_errors": []
+    },
+    {
+      "case": "product-offline-390x844",
+      "pass": true,
+      "total": 198,
+      "matches": [
+        "release-v0.0.26-94197fc8",
+        "main-versions-0"
+      ],
+      "restored": 198,
+      "page_errors": []
+    },
+    {
+      "case": "product-offline-844x390",
+      "pass": true,
+      "total": 198,
+      "matches": [
+        "release-v0.0.26-94197fc8",
+        "main-versions-0"
+      ],
+      "restored": 198,
+      "page_errors": []
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # DnBOX Local gate (nightly repo: website + Remote). One command:  scripts/dnbox-gate.sh [<lane>]
 # Last line "DNBOX-GATE RESULT PASS|FAIL|VOID sha=<40>"; exit 0/1/2. NOT_RUN counts as FAIL.
-# Browser tests use Playwright's bundled Chromium with its normal sandbox and a profile dir inside the workspace.
+# Browser tests use Playwright's bundled Chromium with its normal sandbox and a gate-owned temp directory.
 # Offline is the default: no git fetch, clone or ls-remote, and no npm ci when node_modules exists.
 # Set DNBOX_GATE_ONLINE=1 to allow network Git and npm ci. A skipped network step prints [SKIP].
 set -uo pipefail
@@ -10,7 +10,7 @@ LANE="${1:-unknown}"; SHA=$(git rev-parse HEAD); BASE=origin/integration/dnbox-c
 TS=$(TZ=Asia/Vladivostok date +%Y%m%d-%H%M); OUT=build/dnbox-gate; mkdir -p "$OUT"
 LOG="$OUT/${SHA:0:8}-$TS.log"; exec > >(tee "$LOG") 2>&1
 # Temp files and browser profile go OUTSIDE the checkout (some tests require output outside the repo) but in a folder we own.
-export TMPDIR="${HOME}/.cache/dnbox-gate/tmp"; mkdir -p "$TMPDIR"
+export TMPDIR="${DNBOX_GATE_TMPDIR:-${HOME}/.cache/dnbox-gate/tmp}"
 # Launchers use only Playwright's bundled Chromium; external executable overrides are forbidden.
 echo "browser: Playwright bundled Chromium (normal sandbox)"
 fail=0; void=0
@@ -32,7 +32,10 @@ step() {
 }
 echo "DNBOX-GATE repo=nightly lane=$LANE sha=$SHA started=$TS (UTC+10)"
 clean()   { git diff --quiet && git diff --cached --quiet; }
-setup()   { command -v node >/dev/null && command -v python3 >/dev/null || return 2
+setup()   { mkdir -p -- "$TMPDIR" && [ -w "$TMPDIR" ] || { echo "Set DNBOX_GATE_TMPDIR to a writable directory outside the checkout"; return 2; }
+            # Chromium can cancel a completed Blob download when TMPDIR contains a parent segment.
+            TMPDIR=$(CDPATH= cd -P -- "$TMPDIR" && pwd -P) || return 2
+            command -v node >/dev/null && command -v python3 >/dev/null || return 2
             if [ -f package-lock.json ]; then
               if [ "${DNBOX_GATE_ONLINE:-0}" = "1" ]; then
                 npm ci --no-audit --no-fund >/dev/null || return 2
@@ -66,7 +69,18 @@ limits()  { resolve_base || return 1
             local bad=0
             git diff --name-only "$BASE" HEAD | grep -E '^\.github/workflows/' && bad=1
             git grep -nIE '(ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}' -- . ':!*.md' && bad=1
-            git ls-files | grep -iE '\.ipa$|\.fwsc$|ctl\.img$' && bad=1
+            # Rule 13 allows .fwsc and prohibits these artifacts, including plug-in bundles.
+            git ls-files -z | (
+              local forbidden=0 path
+              shopt -s nocasematch
+              while IFS= read -r -d '' path; do
+                if [[ "$path" =~ \.(ipa|img|component|vst3)($|/) ]]; then
+                  printf 'Prohibited tracked artifact: %q\n' "$path"
+                  forbidden=1
+                fi
+              done
+              exit "$forbidden"
+            ) || bad=1
             [ "$LANE" != remote ] || grep -rqi 'funkybeats' LICENSES web 2>/dev/null || { echo "FunkyBeats MIT notice missing"; bad=1; }
             return $bad; }
 build()   { npm run build; }

@@ -1,0 +1,805 @@
+{
+  "schema": 1,
+  "display_pixels": [
+    240,
+    240
+  ],
+  "max_different_pixels": 576,
+  "visible_state": {
+    "route": "SEQ",
+    "pattern": 1,
+    "bpm": 125,
+    "voice": "BD",
+    "grid": "empty",
+    "length_steps": 16,
+    "rate": "1/16"
+  },
+  "sources": {
+    "shipping": {
+      "firmware": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+      "producer": "Edition 2 v2 native software still"
+    },
+    "r22": {
+      "producer": "approved static grid and voice-glyph anchor"
+    },
+    "current": {
+      "firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+      "producer": "Web WASM and native FWUI RGB oracle"
+    },
+    "remote": {
+      "entry_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+      "producer": "mounted disconnected Remote Draft",
+      "bpm": 120,
+      "explicit_rate": null,
+      "canvas_comparison": "not_applicable_to_responsive_dom",
+      "component_timing": {
+        "sample_rate": 44100,
+        "bpm": 125,
+        "beats": 4,
+        "bar_samples": 84672,
+        "step_samples": 5292,
+        "scope": "renderFunkyBeatsDrums and SequenceDraft input; mounted trace unchanged"
+      }
+    }
+  },
+  "states": [
+    {
+      "engine": "909",
+      "web_state": "view-08-part-00-voice-00-page-00",
+      "r22_frame": "source-frame-066",
+      "png_sha256": {
+        "shipping": "e233d90e293d1a1e6a2f84a27f03e11bd31a70670edcf5fe88dc62427bd07226",
+        "r22": "b49b99869101ef9cbc4aae3ec996309edb9b32f8fc40fce67d4d0b9d69caeb18",
+        "current": "5f6c5250f0e67a470ed3c2d98731d9d4bf708451e7f6f3eca6b220a734c0e398"
+      },
+      "rgb_sha256": {
+        "shipping": "75553d69d97c1cb689b86c8a046bb39820d5d2a0f9fc0897b5848fdeebb960d3",
+        "r22": "aa2b1ea4226f5ba97a7b92cd22d603cb4311471b94a04eb3c0c046925f980527",
+        "current": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc"
+      },
+      "different_pixels": {
+        "shipping_vs_r22": 13267,
+        "shipping_vs_current": 11166,
+        "r22_vs_current": 19770
+      },
+      "contact_sheet_sha256": "c8740ce370e7985858db823bdadc4110ec3da0daea8e52e87d6f9666c477bf95",
+      "remote": {
+        "png": "remote-seq-empty-909.png",
+        "png_sha256": "3e3663b14e4c15630f90350586a4b5f6fbef94bbfdfd2df9a4d26f45225fd14f",
+        "pattern": "P01",
+        "voice": "BD",
+        "grid_cells": 176,
+        "step_cells": 16,
+        "grid": "empty",
+        "page_errors": [],
+        "role_match": true,
+        "exact_state_match": false
+      }
+    },
+    {
+      "engine": "808",
+      "web_state": "view-08-part-01-voice-00-page-00",
+      "r22_frame": "source-frame-068",
+      "png_sha256": {
+        "shipping": "8711775b8ec10de0a44e57e5893eecab9604ff51491ad92f093eeca4d14e581d",
+        "r22": "baa1ee7962cf55ad8f092dfb4236de2f67147afc22e839c3210c1c12fe0ab00d",
+        "current": "591a16125b8a87cafd422303866bfb515002189f2c7cf5c01b3edad329a35f4d"
+      },
+      "rgb_sha256": {
+        "shipping": "23e6da548135989f50912f7680b4626b2ec57b0f65236469dffaa6bbf1d82030",
+        "r22": "49f14c8cc75812a683514679b472a281f8d106713e90a1bcde0b49fc3a760319",
+        "current": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf"
+      },
+      "different_pixels": {
+        "shipping_vs_r22": 13249,
+        "shipping_vs_current": 11159,
+        "r22_vs_current": 19752
+      },
+      "contact_sheet_sha256": "09d0aca8571b28a3e1dafa761002611b2170f23cc740d9dd35c980529a2cc616",
+      "remote": {
+        "png": "remote-seq-empty-808.png",
+        "png_sha256": "59b97e90878a8fc92a27d6d8c6cd42f35ebbeccafc9d71070db10eb8b1a408b1",
+        "pattern": "P01",
+        "voice": "BD",
+        "grid_cells": 176,
+        "step_cells": 16,
+        "grid": "empty",
+        "page_errors": [],
+        "role_match": true,
+        "exact_state_match": false
+      }
+    }
+  ],
+  "fwui_ledger": {
+    "repository": "gobbajogger/DnBOX",
+    "commit": "22a34d6ecef7b31e62ea6655fddc4920ab30f8e1",
+    "status": "physical route and scoped F6 evidence available; R22 F1 remains open"
+  },
+  "web_shared_components": {
+    "audit_base": "ecb92ce09e1a5411302d0091f204a273ff12c2d4",
+    "prior_capture_index": "../lane-web-route-coverage.json",
+    "routes": [
+      {
+        "route": "index.html",
+        "source_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+        "header": "shared Web header",
+        "footer": "shared navigation with route-specific links",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Current installer",
+          "Manual",
+          "What’s new",
+          "Build history",
+          "Tools",
+          "Help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "breaks/index.html",
+        "source_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "builds/index.html",
+        "source_sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "help/index.html",
+        "source_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "install/index.html",
+        "source_sha256": "38a1f1ba149ab7b2251bed73bdc463a250be96ccd89aa50114904b470ec2ccc8",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "manual/index.html",
+        "source_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/legacy.html",
+        "source_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/original/index.html",
+        "source_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/projects-guide.html",
+        "source_sha256": "b36a11cb8854af8c67d5500dab98d15aa0dbbcac71c7741c58209e3081eb45ee",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/protocol.html",
+        "source_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "new/index.html",
+        "source_sha256": "3926400808343dccaf7aea47d49f679c1ebc14910ddf318da1b7e07bd93b5822",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "presets/index.html",
+        "source_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "presets/legacy/index.html",
+        "source_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "projects/index.html",
+        "source_sha256": "4d62e7cb7c00b9151d7b97922ad1d907eb2fea0f851a25fb90929e8dfadd5b43",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "remote/index.html",
+        "source_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+        "header": "Remote workspace shell",
+        "footer": "workspace-specific",
+        "header_links": [
+          "DnBOX  REMOTE"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "remote/device/index.html",
+        "source_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "remote/identity/index.html",
+        "source_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+        "header": "Remote identity shell",
+        "footer": "workspace-specific",
+        "header_links": [
+          "DnBOX"
+        ],
+        "footer_links": [
+          "Manual ↗"
+        ]
+      },
+      {
+        "route": "starting-breaks/index.html",
+        "source_sha256": "4ec7c8145714c7c3fcdb7d146aa3a2998804e532d8e2d0702c6eb94417063bc4",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup &amp; help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "tools/index.html",
+        "source_sha256": "60551425427fab441fc74385a04209615a937680bdbedb4ad71c9b1ee1fe6177",
+        "header": "shared Web header",
+        "footer": "shared navigation with route-specific links",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits",
+          "Owner administration"
+        ]
+      }
+    ],
+    "repairs": {
+      "starting_breaks": "same shared heading/navigation and Setup & help footer; selection/export preserved",
+      "file_pickers": "44px minimum and shared file button styling on hosted, embedded and direct-file Samples and Projects"
+    },
+    "cross_lane_references": {
+      "fwui": {
+        "repo": "gobbajogger/DnBOX",
+        "ledger_head": "48651ff773b72ef1fdbb097376dc1b0d90ab3f52",
+        "scope": "R22 drum mixer cues; not a replacement for the SEQ state pins"
+      },
+      "remote": {
+        "repo": "gobbajogger/DnBOX-nightly",
+        "ledger_head": "afd61fdc142ff683f9a8350043504648013ed5b6",
+        "scope": "owner route qualification and paired LCD receipts; mounted SEQ timing still separate"
+      }
+    },
+    "independent_findings": [
+      {
+        "route": "remote/identity/index.html",
+        "control": "active identity button",
+        "observation": "34px, 0-radius browser-default next to themed 44px selects",
+        "owner": "Remote"
+      }
+    ]
+  },
+  "cross_surface_intake": {
+    "web_reference_firmware": "61827a714ca7b240c01a55ed347b5fd7b847c7c2",
+    "remote_receipt_commit": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+    "remote_receipt": "evidence/remote-resume-0130/matched-native-states.json",
+    "remote_consistency": "evidence/remote-resume-0130/consistency/README.md",
+    "fwui_commit": "1ec2d61a825b88d7736371623cb12570e79da864",
+    "fwui_frames_page": "https://chatgpt.com/space/page_800ecfd4f2a08191884949bf6bbee920",
+    "fwui_refreshed_index": "docs/lanes/fwui/current/reference-026/qualification/spatial-line-stock/current-renderer-index.json",
+    "fwui_retained_index": "docs/lanes/fwui/current/reference-026/qualification/catalog-reuse-index.json",
+    "fwui_retained_producer": "199f0444a4cf27374112a5fdf48f82005b070bbc",
+    "fwui_renderer_blobs": {
+      "ui": "0f074943f75ac7808b6de0e84c5618b661bbd1dd",
+      "gfx": "d3fbb4c527a483d4db0f984a9fd90648f390fc3b"
+    },
+    "remote_paired_firmware": "f1786ebec2616477163b62b029c7e77405a9c3de",
+    "states": [
+      {
+        "state": "view-00-part-00-voice-00-page-00",
+        "web_rgb_sha256": "a1cfad4c72ec57487c959e997d1cc3ab5d3079b1db4e78de918e366ab98d9f30",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "7492ce3b07997ef8ca5efad34f603189009aca6bb9b12f9da7fe71bec479599e",
+          "gif": "comparisons/spatial-0f074943/roles/view-00-part-00-voice-00-page-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-00",
+        "web_rgb_sha256": "8b4c9bf872afc22c6930201425a032d333ebd69ad13dcd9736494e4e31ff33cc",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "1adfa906dc145e171248e633b541f648b1a6daf9a542788cf60135c603cb0a4d",
+          "gif": "comparisons/spatial-0f074943/roles/view-03-part-00-voice-00-page-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-03-part-00-voice-00-page-01",
+        "web_rgb_sha256": "5b22d1f2bdc0cbf75ea01c07b99935d5cd41c95f12ade0d1e20b22c54bf915ec",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "d6f06d42b1c8fcc0f67de1dfea3c54427d77063c4e6f1d23bc07f5030f270dcc",
+          "gif": "comparisons/spatial-0f074943/roles/view-03-part-00-voice-00-page-01.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-00",
+        "web_rgb_sha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0fd674cf6d2f64312813623b3492fb99cf326b676f4983a41fdb7d9e33ee37ed",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-04-part-00-voice-00-page-00/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-01",
+        "web_rgb_sha256": "fe68cb6df405e73b69863fe0ef3d96d18ce2881b2545f4b014f323b8716d1003",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "3433117217c3e93cf9d7192fef37d58c9b9f68cda9aa655732cd939f3f71f1c7",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-01.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-02",
+        "web_rgb_sha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0fe86c9db5dec86efe87d8f9ba50adcbdacd68530f4c6b10aec540656938c7d5",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-04-part-00-voice-00-page-02/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-03",
+        "web_rgb_sha256": "5f4f072327186e443751f55f144f98bf781bfa66b9238133798fac2d7b0ea6b7",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "908843835bb7e90b809ff3dda140ff597267b3a3ec9f93b9e156ba4b56faf0b6",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-03.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-04-part-00-voice-00-page-04",
+        "web_rgb_sha256": "f29bfd629f251c6e142d7dbb2b28c39797ebbff6d5ce7af9174ce75caf170a4c",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "2528d7b275ac9ec8bfc173c4482dab51610dde1505ab794b448411cd71e98e86",
+          "gif": "comparisons/spatial-0f074943/roles/view-04-part-00-voice-00-page-04.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-00",
+        "web_rgb_sha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "b87726d6d17b4216ea53b5e95bd26955854237186e05447f7368b7459a79ce37",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-06-part-00-voice-00-page-00/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "view-06-part-00-voice-00-page-01",
+        "web_rgb_sha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "0aa4b756a372418cc0b31a1aaae4b48fcda57c19b6a5c9687f6578674567c345",
+          "archive": "view-0.tar.xz",
+          "capture": "renders/view-06-part-00-voice-00-page-01/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "global-section--1-row-00",
+        "web_rgb_sha256": "e5efea6ef9a3fb4a0e1f813e7cc8e39802a5fa37c46c583cdf49e7ff3b7f6bc3",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "43f648766cb7a8f93e051e7a15825dc255a91d78457616d1651b26364ae004d6",
+          "gif": "comparisons/spatial-0f074943/roles/global-section--1-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "global-section-0-row-00",
+        "web_rgb_sha256": "c759ed20a9be6a27c8ed8677d2a61556103bb26a15c2378cbd1c798c682897da",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "784757d77f78316ef07e6c00b58102aa822bd0bfafd0e4c07b9243d150130c19",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-0-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "global-section-3-row-00",
+        "web_rgb_sha256": "174401b00da703fc1a9cde26e8503dd8d1df01c4597942129c5fe7f46c712c93",
+        "remote_paired_f178": "DIFFERENT_RGB",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "c88943a544510d3fd53ca361dca9a6f85e5b52251b3b290a6498c838236f9dee",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-3-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "03-picked-fader",
+        "web_rgb_sha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "50e4c1d494b75c36f131ac7137aa0019419a4522239efcadd7d4ff3ccd97036d",
+          "archive": "03-0.tar.xz",
+          "capture": "renders/03-picked-fader/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "04-delay-knob",
+        "web_rgb_sha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+        "remote_paired_f178": "EXACT_RGB",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "735567ec43aa2ac46a074079b4cc07ffa5a1bbb7cf2a043916a824ca3a8fa1ee",
+          "archive": "04-0.tar.xz",
+          "capture": "renders/04-delay-knob/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      },
+      {
+        "state": "global-section-4-row-00",
+        "web_rgb_sha256": "9e365eb9d91fde2846ffb382c1a77164b3f5a24aeeed04e1e48b4af2c5ccb4df",
+        "remote_paired_f178": "NOT_RECORDED",
+        "fwui": {
+          "qualification": "refreshed",
+          "rgb_sha256": "c391b14b8bb07fccd344a72d21fbc604cf552bbf0c568993dd0e8a57fca93df9",
+          "gif": "comparisons/spatial-0f074943/roles/global-section-4-row-00.gif"
+        },
+        "web_rgb_matches_index": false
+      },
+      {
+        "state": "list-view-04-part-00-voice-00-row-17",
+        "web_rgb_sha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+        "remote_paired_f178": "NOT_RECORDED",
+        "fwui": {
+          "qualification": "retained",
+          "rgb_sha256": "b757c90dc0b1dabee7c967d6345e5006ef4d4af3cd81e99604866db67a12d431",
+          "archive": "list-0.tar.xz",
+          "capture": "renders/list-view-04-part-00-voice-00-row-17/capture-00.png"
+        },
+        "web_rgb_matches_index": true
+      }
+    ],
+    "retained_seq": [
+      {
+        "state": "view-08-part-00-voice-00-page-00",
+        "qualification": "retained",
+        "rgb_sha256": "4f9674bf823d7edaba8c1f1a4770d2f9332eeeaae99ac741192e7cbf384916cc",
+        "archive": "view-0.tar.xz",
+        "capture": "renders/view-08-part-00-voice-00-page-00/capture-00.png"
+      },
+      {
+        "state": "view-08-part-01-voice-00-page-00",
+        "qualification": "retained",
+        "rgb_sha256": "afdadb9782bd5df8a94f758713c6b146a7cd5e42430bfd2213ae9980492188cf",
+        "archive": "view-0.tar.xz",
+        "capture": "renders/view-08-part-01-voice-00-page-00/capture-00.png"
+      }
+    ]
+  }
+}

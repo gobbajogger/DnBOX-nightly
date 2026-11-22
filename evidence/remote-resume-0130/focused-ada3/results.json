@@ -1,0 +1,105 @@
+{
+  "source": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "tree": "cb9fd2e54aa89ad4545647773b5474e7f18137e6",
+  "commands": {
+    "build": 0,
+    "build-check": 0,
+    "sandbox-contract": 0,
+    "remote": 0,
+    "workspace": 0,
+    "edge": 0
+  },
+  "sourceTotals": {
+    "buildFiles": 304,
+    "remotePassed": 242,
+    "workspacePassed": 128,
+    "edgePassed": 564,
+    "sandboxLaunchSites": 36
+  },
+  "registeredProvenance": {
+    "donorSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+    "donorClosure": {
+      "files": 269,
+      "sortedManifestSHA256": "a64abc7d776ba817e02e4c13e4cecd0e6fc1b87e057fc0027e2f5f831642896c"
+    },
+    "originalMislabeledFrames": 8,
+    "validatedOriginalFrames": 32,
+    "rejectedNegativeCases": 5,
+    "updatedHelperBlob": "dac6b731de5dee5d58022cc59252d6e663073f10"
+  },
+  "workspaceMidiRouting": {
+    "beforePatchPass": 27,
+    "beforePatchFail": 4,
+    "patchedFocusedPass": 42,
+    "patchedFocusedFail": 0
+  },
+  "patchSha256": {
+    "registered-capture-provenance.patch": "31ed0bf9ce55fdb326285ef7400ecb5332d6bb298fa14af09fe57632911cb9f1",
+    "workspace-midi-pairing.patch": "6ac6fa9d1da3ec8ec8cc2abce08d0a0f9fcda0ff14601c36123ed8c4ca0c7ae3"
+  },
+  "logSha256": {
+    "build.log": "efcbb738a6aaa88dc45d38eaad150046a4a7ec94c67ed53bfb0cdb152514a1db",
+    "build-check.log": "f007db36ef71300b0759e8eaeb89a38a4a6053355994632a48a8a071ffcf6334",
+    "sandbox-contract.log": "83e7616c93d4c853d410f63ca9a85e2f629c49ecc80d1f7b5ba896a6efef73c3",
+    "remote.log": "20bb59033d6f541356922d07ae856e05a2708dd305e2126a373250b51b80f5ee",
+    "workspace.log": "3eed8d97561663c7e2f1cd3e1f228a7100d121d255b54411752c93fbb1fdf7ee",
+    "edge.log": "b6d74cdc9ee372f9ac898427f887cea2630beb6ecf408693d76bb5b454567f90",
+    "registered-red.log": "15687140b49c0eed153cdab1a42d70172521f8d7df3234ecb3ab0f276a70e4a2",
+    "registered-missing-receipt.log": "5e86100362e20973dc186f5cdf3efa7e0ba52331b8c62f8e03e54c3b757a055f",
+    "registered-stale-donor.log": "c7359dcf9d59b6e385f88b0ceea6f638ffeab9629247851086f2feb9a1c4cc9d",
+    "registered-new-source-labeled-old.log": "daf43e4485f2f8dbac496858fea716cfec087fd122c47e0817e43718541ca903",
+    "registered-stale-closure.log": "2a9f632c7d1064b0e6f309e3f7da69f06b6c62a223b1cab40c76200e3eaf05a6",
+    "registered-green.log": "febdca8e1ef1b34ebde86b651c8e9525f82b1d1d13c9bd3b302fa9e112ffa139",
+    "registered-wrong-hash.log": "8d23f902df61cceabacd4f258b087237d9445e6c55efc8939ee787540bd10289",
+    "ambiguous-midi-route.log": "7fb938e0a3456fe8dd72f136ad3c4039e45eb5cda734c8d981368a8ff7f4a755",
+    "midi-pairing-red.log": "3082b8cfb5a4696520ec5915d62a23df3e6f93cff9a14a80683c2fb1504e607f",
+    "midi-pairing-green.log": "42238114b55cc9106ae3f50ad61f6e87facb749ee391866bd6afbe759ce0b116",
+    "patched-exits.txt": "e368781d82b6c4209b9f6b8541136f2cc05e16480cf9e93c2e7b18d0c845b83f",
+    "patched-build.log": "efcbb738a6aaa88dc45d38eaad150046a4a7ec94c67ed53bfb0cdb152514a1db",
+    "patched-build-check.log": "f007db36ef71300b0759e8eaeb89a38a4a6053355994632a48a8a071ffcf6334",
+    "patched-sandbox-contract.log": "83e7616c93d4c853d410f63ca9a85e2f629c49ecc80d1f7b5ba896a6efef73c3",
+    "patched-remote.log": "adfa9da5f964e68c218f04adc81873e9686d0975b2b0be17a6e9a8a9f082dfcd",
+    "patched-workspace.log": "4c72e8041ab0357527d5142c3559baec6e36e1f21b50af9dd467a4de974e78e1",
+    "patched-edge.log": "b56f15ac89bdf3661fc9b1cf861b5fad8bbca6579d0bfcfdf3f513d6a314ed45",
+    "registered-green-all.log": "b8f0ccf49851e08df2d4559a83054838dbb1c8ae76e97f820982464b39863f61",
+    "registered-green-all/inventory.json": "693568e65ce0d4978d66afe7fa0d499d451ca14860b7ad4005cff74f342efd75"
+  },
+  "patchCombination": {
+    "base": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+    "commands": {
+      "build": 0,
+      "build-check": 0,
+      "sandbox-contract": 0,
+      "remote": 0,
+      "workspace": 0,
+      "edge": 0
+    },
+    "buildFiles": 304,
+    "remotePassed": 251,
+    "workspacePassed": 128,
+    "edgePassed": 564,
+    "sandboxLaunchSites": 36
+  },
+  "localRawArchive": {
+    "name": "lane-remote-resume-0130-ada3fef-focused-source.tar.gz",
+    "bytes": 77789,
+    "sha256": "1d63d5d9a3dbc15f05cd9e15da40bec493cf1ee59a0c8add8d139a7a47e8b973"
+  },
+  "finalHelperFollowup": {
+    "blob": "e22eaf0af9d515b9463bc1a9ae6ec76eccbace7b",
+    "oldCliRejectionCreatedSyntheticChild": true,
+    "integratedCliRejectionCreatedSyntheticParent": false,
+    "integratedCliRejectionCreatedSyntheticChild": false,
+    "integratedCliNormalFreshCaptureCount": 8,
+    "guardedDestinations": 6,
+    "syntheticApprovedSentinelsByteIdentical": true,
+    "receiptsSha256": {
+      "capture-path-red.txt": "6f26d0610ca2601bb7b6db3ee33e463ea377033032f055f4ee597fa03e8681a0",
+      "capture-path-green.txt": "494b46d05b893eca253e74027c31c55bffb383299e7518c6ae1f745301040f3e",
+      "capture-path-integrated-cli.txt": "dde147e430c321f913e89ebf30fd6e001df22b52ec68ca9b53d681e2d4aadcca",
+      "lfo-independent-probe.txt": "b9c3494834df1837d2d55ce67db9adf3dfe7ebf7dd93b64902f7d390a1f82dc9",
+      "lfo-independent-node.txt": "57eb67f64092b53cd53d45388adcaca5e7ac96991940b5033a1c774805db4998",
+      "lfo-independent.json": "984ab5cd8e6ad62059f4534b1a83993137b35d1fcd8e66f8652658258a9897f3"
+    }
+  }
+}

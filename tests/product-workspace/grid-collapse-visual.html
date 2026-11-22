@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DnBOX Remote grid pixel-coalescing test fixture</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,Arial,sans-serif;background:#101a1f;color:#e6f0f1}
+*{box-sizing:border-box}
+body{margin:0;padding:12px;max-width:100vw;overflow-x:hidden}
+h1{font-size:16px;margin:0 0 5px}p{font-size:12px;margin:0 0 12px;color:#aac0c5}
+#grid-tests{display:grid;grid-template-columns:minmax(0,1fr);gap:7px}
+section{width:100%;min-width:0;border:1px solid #33474b;border-radius:6px;padding:4px 8px}
+header{font-size:11px;display:flex;justify-content:space-between;gap:6px;margin:0 0 5px}
+.grid{height:25px;width:min(100%,760px);border:1px solid #2a4146;overflow:hidden;background-color:#15252a;background-size:auto 100%;background-repeat:repeat-x}
+.grid .cell{float:left;width:6.25%;height:24px;border-right:1px solid #182b2f}
+@media(min-width:600px){#grid-tests{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<h1>Remote time-grid pixel-coalescing fixture</h1><p>Focused grid-renderer check only. This is not a screenshot of the complete Remote or owner PDF.</p>
+<div id="grid-tests"></div>
+<script type="module">
+import {verticalGrid} from '../../web/product-site/remote/grid.mjs';
+const widths=[0.1,0.49,1,2,8,15,16,316,762];
+const root=document.querySelector('#grid-tests');
+for(const width of widths){
+ const section=document.createElement('section');
+ section.innerHTML=`<header><strong>Grid source width: ${width} px</strong><small>bar / beat / step</small></header><div class="grid">${Array.from({length:16},()=>'<span class="cell"></span>').join('')}</div>`;
+ section.querySelector('.grid').style.backgroundImage=verticalGrid(width);
+ root.appendChild(section);
+}
+window.__ready=true;
+</script>
+</html>

@@ -1,0 +1,69 @@
+# Shipping 0.0.26's panel UI on the native host with SMK-37 labels.
+wait 300
+tapkey b0
+tapkey w0
+tapkey w4
+tapkey w8
+tapkey w12
+press HOME
+turn SELECT -5
+release HOME
+expect tempo 120
+wait 1200
+tap HOME
+expect view 0
+shot 09-patterns.png
+tap HOME
+expect view 6
+tapkey w0
+tapkey w1
+tapkey w0
+expect songlen 3
+shot 10-song.png
+tap LFO
+expect view 4
+shot 06-levels.png
+tapkey b0
+turn K4 65
+shot 06-sends.png
+tap LFO
+shot 06-kit909.png
+tap LFO
+shot 06-kit808.png
+tap LFO
+shot 07-master.png
+tap SEL
+turn SELECT 16
+wait 16
+shot 07-master-more.png
+tap HOME
+tap LFO
+shot 07-master-return.png
+tap LFO
+shot 07-wave.png
+tap FX
+expect view 3
+shot 08-reverb.png
+tap FX
+shot 08-tape-idle.png
+wait 150
+shot 08-tape-idle-later.png
+tap PLAY
+expect playing 1
+wait 2000
+shot 08-tape-live-a.png
+wait 90
+shot 08-tape-live-b.png
+wait 90
+shot 08-tape-live-c.png
+tap PLAY
+expect playing 0
+tap GLO
+expect view 5
+shot settings-global.png
+tap SEL
+shot settings-midi.png
+tap HOME
+turn SELECT 3
+tap SEL
+shot 12-project.png

@@ -1,0 +1,1 @@
+PASS sandboxed Chromium: shipping closed, missing/ambiguous no send, HELLO-only negatives, Workspace heartbeat/Apply/Undo/CLOSE, Device explicit pair read-only, revoked lease stale on next heartbeat

@@ -1,0 +1,78 @@
+{"files":276,"output":"/workspace/scratch/857bb2409f82/remote-resume-0130/.output/sound-review-drums-sur6_fg_","emulator":false,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-00.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-01.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-02.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-03.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-04.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-05.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-06.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-07.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-08.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-09.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/909-voice-10.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-00.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-01.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-02.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-03.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-04.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-05.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-06.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-07.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-08.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-09.svg PASS
+DRUM_CONTROLS 1440 900 current-state-and-reference/808-voice-10.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-00.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-01.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-02.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-03.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-04.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-05.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-06.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-07.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-08.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-09.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/909-voice-10.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-00.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-01.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-02.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-03.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-04.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-05.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-06.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-07.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-08.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-09.svg PASS
+DRUM_CONTROLS 390 844 current-state-and-reference/808-voice-10.svg PASS
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/857bb2409f82/remote-resume-0130/tests/product-remote/drum-controls-browser.py", line 364, in cases
+    await kick_depth_dependencies(page)
+  File "/workspace/scratch/857bb2409f82/remote-resume-0130/tests/product-remote/drum-controls-browser.py", line 139, in kick_depth_dependencies
+    await page.locator(scope+f' [data-param$="|1:0:0:{param}"]').press('Enter')
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/async_api/_generated.py", line 19739, in press
+    await self._impl_obj.press(
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_locator.py", line 566, in press
+    return await self._frame.press(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 895, in press
+    await self._channel.send("press", self._timeout, locals_to_params(locals()))
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: Locator.press: Target crashed 
+Call log:
+  - waiting for locator(":is([data-drum-editor],[data-drum-sound-strip]) [data-param$=\"|1:0:0:5\"]")
+    - locator resolved to <button type="button" data-param-occurrence="4" class="drum-strip-control" data-source-control="1:0:0:5" data-param="current-state-and-reference/909-voice-00.svg|1:0:0:5">…</button>
+  - elementHandle.press("Enter")
+

@@ -1,0 +1,361 @@
+{
+  "states": {
+    "remote-sequence-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "ab8d606591ae19492c69e4c1bcdd4e5d5e60c41858e1b01ca01e106ac39b6b51",
+      "capture": "Initial Local gate"
+    },
+    "remote-lane-chance-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6",
+      "capture": "Initial Local gate"
+    },
+    "remote-lane-pitch-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99",
+      "capture": "Initial Local gate"
+    },
+    "remote-lane-pan-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "79892356340bb915d71c7c0a4ea505735553c4f4b0bb1b97eda88880ee64b3bd",
+      "capture": "Initial Local gate"
+    },
+    "remote-sound-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a",
+      "capture": "Initial Local gate"
+    },
+    "remote-mix-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "a7e7d2e4ecc1f96aa97ec754c2a3a89d18b9939efd35713f321c40b207ea0047",
+      "capture": "Initial Local gate"
+    },
+    "remote-patterns-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6",
+      "capture": "Initial Local gate"
+    },
+    "remote-files-1440x900": {
+      "viewport": [
+        1440,
+        900
+      ],
+      "sha256": "8899b5c9126eca369d686621d56e1a4b41b163b889fded1e6a5c19e94bdc838a",
+      "capture": "Initial Local gate"
+    },
+    "remote-sequence-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "31955bfc6c4c01968e70adbd9dcd5f5caeae5165e90b62dea4d3ddeb9ecf1c14",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-chance-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "00b4e837acff65bf457d8431b1beaceed560e7eb6fa138d3e152fb24549f48b6",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pitch-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "7b25885c5df8846d6eba0ab8e2e3ccc24d55067d79520a168f9898ba539baf16",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pan-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "a3b9e655010bd53ff3574b118eb3ec0b3e1c318ef9e6cc153844900742a2e0b7",
+      "capture": "Same-source visual retry"
+    },
+    "remote-sound-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "afbf2de0906c360d0f7a60815b4c3f24f1b7bced9fbc352b26df55931aa7998c",
+      "capture": "Same-source visual retry"
+    },
+    "remote-mix-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "805ab7870fdcd818e34ffb008830af3a563405af5638db9634ca4ac0ddc0c53a",
+      "capture": "Same-source visual retry"
+    },
+    "remote-patterns-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb",
+      "capture": "Same-source visual retry"
+    },
+    "remote-files-1024x640": {
+      "viewport": [
+        1024,
+        640
+      ],
+      "sha256": "59210674bad443452a1f357b4a5bb39d62fc806153f4b9a4887be512de98ddef",
+      "capture": "Same-source visual retry"
+    },
+    "remote-sequence-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "a47ccf4666041920a4960c64286e6823fd89bd889d09b4fa45abdd35ee402f84",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-chance-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "8ae552dfe3c2472b9ce04a76ea4d0c397f1d5f320a784655337d0f1c9fbd2617",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pitch-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "5a4188cf23005172c8a36b7719846dbb9184a25218162a1afcfec4cf37d60c67",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pan-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "ea3e7ebb9909532bfba84eaed0586027e60c0f16dcbc50e581fd3e7ea3c987d8",
+      "capture": "Same-source visual retry"
+    },
+    "remote-sound-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "f1befe9b09e820de3033d7e81aafba728dfd4aacc2fe7daf2dc5e9aaa8ac9663",
+      "capture": "Same-source visual retry"
+    },
+    "remote-mix-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "29c9796bec6307c1e923d56bad2ca1423915f6e99e9de288f735cc4abe5113ac",
+      "capture": "Same-source visual retry"
+    },
+    "remote-patterns-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "ce1e54dd4233f255b83f0b89cac639adafbb17aca3a8edf9fbfcb5312918619b",
+      "capture": "Same-source visual retry"
+    },
+    "remote-files-844x390": {
+      "viewport": [
+        844,
+        390
+      ],
+      "sha256": "20816c6cce7b0b70de0179b1c19e6b27acb2a9138cfbcca3f76de5016d2166f1",
+      "capture": "Same-source visual retry"
+    },
+    "remote-sequence-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "8c74729ee69787c129fe990c11c32f54c703f3647545870ecf910462119ca1b8",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-chance-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "cf2d71da14986c7eb4fbcf02080172a7129dd71b97f0301a150ab41b1f537739",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pitch-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "02dba1cde9142fa36d34cbacd6abad01dbfd5a3455e1131b64c794831314da74",
+      "capture": "Same-source visual retry"
+    },
+    "remote-lane-pan-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "04d0ca3310a09aa12c1ae551e912f0a1370a6977b10d18826fd9b68d5a8bc6f2",
+      "capture": "Same-source visual retry"
+    },
+    "remote-sound-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "86b43032eb1aa0f520df27f7d031059273c514bb79013cde2df4ed2d1b95692f",
+      "capture": "Same-source visual retry"
+    },
+    "remote-mix-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "caca7ae0b9790cf1028f20311a86b5ae01c262f19591ea4c29aa3a9b8278a7ee",
+      "capture": "Same-source visual retry"
+    },
+    "remote-patterns-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2",
+      "capture": "Same-source visual retry"
+    },
+    "remote-files-390x844": {
+      "viewport": [
+        390,
+        844
+      ],
+      "sha256": "b288a11bfdfd8f5288e226a79341312da2ceabbb0d367a690d30c60dae30b333",
+      "capture": "Same-source visual retry"
+    }
+  },
+  "errors": [],
+  "source": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "productAppSHA256": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+  "productStyleSHA256": "c81df9a0186c0a938e32baf398e1e3776854c3a5f687b4c51fa95d9f12a725b2",
+  "expected": [
+    "remote-sequence-1440x900",
+    "remote-lane-chance-1440x900",
+    "remote-lane-pitch-1440x900",
+    "remote-lane-pan-1440x900",
+    "remote-sound-1440x900",
+    "remote-mix-1440x900",
+    "remote-patterns-1440x900",
+    "remote-files-1440x900",
+    "remote-sequence-1024x640",
+    "remote-lane-chance-1024x640",
+    "remote-lane-pitch-1024x640",
+    "remote-lane-pan-1024x640",
+    "remote-sound-1024x640",
+    "remote-mix-1024x640",
+    "remote-patterns-1024x640",
+    "remote-files-1024x640",
+    "remote-sequence-844x390",
+    "remote-lane-chance-844x390",
+    "remote-lane-pitch-844x390",
+    "remote-lane-pan-844x390",
+    "remote-sound-844x390",
+    "remote-mix-844x390",
+    "remote-patterns-844x390",
+    "remote-files-844x390",
+    "remote-sequence-390x844",
+    "remote-lane-chance-390x844",
+    "remote-lane-pitch-390x844",
+    "remote-lane-pan-390x844",
+    "remote-sound-390x844",
+    "remote-mix-390x844",
+    "remote-patterns-390x844",
+    "remote-files-390x844"
+  ],
+  "sourceTree": "88205ac762c43545e3935f07860b53b19a7e8039",
+  "browser": "Chromium 151.0.7922.34",
+  "approvedBaselineCount": 0,
+  "state": "unapproved candidates",
+  "repeated1440Captures": {
+    "remote-sequence-1440x900": {
+      "firstSha256": "ab8d606591ae19492c69e4c1bcdd4e5d5e60c41858e1b01ca01e106ac39b6b51",
+      "retrySha256": "9511526abcda864773fdac908c518b55fa8484546d7b858fd0a25f06347104d2",
+      "exactDifferentPixels": 71,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 1
+    },
+    "remote-lane-chance-1440x900": {
+      "firstSha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6",
+      "retrySha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    "remote-lane-pitch-1440x900": {
+      "firstSha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99",
+      "retrySha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    "remote-lane-pan-1440x900": {
+      "firstSha256": "79892356340bb915d71c7c0a4ea505735553c4f4b0bb1b97eda88880ee64b3bd",
+      "retrySha256": "34bfaf8bbcbf78917f5950ca9aec6a2f735d6ebfced77328fb83483b3e1703b0",
+      "exactDifferentPixels": 7,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 2
+    },
+    "remote-sound-1440x900": {
+      "firstSha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a",
+      "retrySha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    "remote-mix-1440x900": {
+      "firstSha256": "a7e7d2e4ecc1f96aa97ec754c2a3a89d18b9939efd35713f321c40b207ea0047",
+      "retrySha256": "a7e7d2e4ecc1f96aa97ec754c2a3a89d18b9939efd35713f321c40b207ea0047",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    "remote-patterns-1440x900": {
+      "firstSha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6",
+      "retrySha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    "remote-files-1440x900": {
+      "firstSha256": "8899b5c9126eca369d686621d56e1a4b41b163b889fded1e6a5c19e94bdc838a",
+      "retrySha256": "8899b5c9126eca369d686621d56e1a4b41b163b889fded1e6a5c19e94bdc838a",
+      "exactDifferentPixels": 0,
+      "tolerantDifferentPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  },
+  "sourceInputsManifest": "995d549-reference-capture-inputs.json"
+}

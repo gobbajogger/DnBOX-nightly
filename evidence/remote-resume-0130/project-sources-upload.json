@@ -1,0 +1,32 @@
+{
+  "destination": "LoopyX0X37 Project Sources",
+  "verifiedUTC": "2026-11-22T03:02:00Z",
+  "method": "authenticated project Sources upload, completed rows and zero progressbars observed",
+  "files": [
+    {
+      "name": "lane-remote-resume-0130-5ee28037-local-edge-browser.tar.gz",
+      "bytes": 4696205,
+      "sha256": "a38a2687344323581d76fbc4e8f00c6a8f0f089e798036bba47295091e925809"
+    },
+    {
+      "name": "lane-remote-resume-0130-183207ed-sound-protocol-evidence.tar.gz",
+      "bytes": 10594740,
+      "sha256": "0a839f7a9d57c1205d0169325af204437a95442b9d27fd805a909a4b2d46f010"
+    },
+    {
+      "name": "lane-remote-resume-0130-f1786ebec261-firmware-240x240.zip",
+      "bytes": 15626620,
+      "sha256": "dd084c2e7b5d34a051ec97e9d25e098e5e94259c67b4658e93db875a8ea377b0"
+    },
+    {
+      "name": "lane-remote-resume-0130-995d5493386f-owner-pdf-pairs.tar.gz",
+      "bytes": 3057076,
+      "sha256": "52c891e8ba34ff6cf3b5cef170fb8b6e6653be415133bae1e6b9d67700c62fa6"
+    },
+    {
+      "name": "lane-remote-resume-0130-995d5493386f-registered-32.tar.gz",
+      "bytes": 3206072,
+      "sha256": "bc4c88ceb88555e71451f13d1e7add1a621a100a24d512993be560be75d88dca"
+    }
+  ]
+}

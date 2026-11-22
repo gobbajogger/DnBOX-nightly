@@ -1,0 +1,3 @@
+PASS grid-only 844x390 rows=9 document=844x390 viewport=844x390 overflow=0 pageerrors=0 capture=/mnt/data/remote-focus/evidence/browser/grid-only-844x390.png
+PASS grid-only 390x844 rows=9 document=390x844 viewport=390x844 overflow=0 pageerrors=0 capture=/mnt/data/remote-focus/evidence/browser/grid-only-390x844.png
+PASS 2/2 grid-only browser viewports (not complete Remote page acceptance)

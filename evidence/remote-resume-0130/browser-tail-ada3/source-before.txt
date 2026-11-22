@@ -1,0 +1,22 @@
+2026-11-22T03:01:34Z
+head=ada3fef20de13b2603f959a3412cf777dbcf0f07
+tree=cb9fd2e54aa89ad4545647773b5474e7f18137e6
+subject=Fix Remote scroll landing and selected drum voice ink
+## HEAD (no branch)
+v24.22.3
+11.19.1
+Python 3.12.14
+Version 1.62.0
+a86cbe7d2ac6767a5c3ba5b84f3714a33ba08b6e84e7c328d01398333ef00452  package.json
+a2d23b33028063e3b56b7d0828023343a89ba474ee2b2b31b1afc699d8bd44ec  web/product-site/remote/app.mjs
+24e54024253f2404a876e50fd5330e31a15a7480a5760b31f3fb5a2d51608d29  web/product-site/remote/style.css
+6c12d15feee50792824ea5b2c3526aa7d711b5a896f376dee48e04a57d81d16e  web/product-site/remote/index.html
+aa8483e58a38ebe75005b4be24189623b2c0f90bd889e89e0362e137b206ab13  tests/product-remote/composition-browser.py
+73bd96ebf286a7c454ab587720278e19e2d3176cc8c7eee7f7465c270f87efe3  tests/product-remote/master-more-browser.py
+50e7bf57e6a8b3bff78e36fd1b79357f63c5f2ea9e75421e1f4f42b282069755  tests/product-remote/navigation-state-browser.py
+63748365672d2d5d329de0596d2c73209030b065332486a6234e0557ef8231e7  tests/product-remote/source-banks-browser.py
+edf38d91627b21ac32d1fb8249658814a49bbd77d170b51d37fd4ba46bf60bca  tests/product-remote/landscape-browser.py
+09f8cacb89461f7ab5d271bf6277756fc594c50dd75e65b802b70d62576dde7e  tests/emulator-lcd-browser.py
+650617307f6559055b1d4eaf8fd864308386b78fa45906e2b2a0f2959df98ff8  tests/admin-browser.py
+6af4d97c82185ced1d17b1bbdc8a17ca2423ab6eca75141d8c67b5fa8367da09  tests/firmware-reference-browser.py
+9278e60069867557823e358dd1c01af8b1249005744dbd2d7acec8548f3b098e  tests/visual/fixtures/web-structural/browser_fixtures.py

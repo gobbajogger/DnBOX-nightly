@@ -17,6 +17,8 @@
 //   firmware/src/app/ui.c:8084-8108 snappy noise and level meter
 // Animation is re-render after interpolating the parameter. No decorative motion.
 
+import {miamiWave} from './wave-display.mjs';
+
 const MERGED={
  G023:'WAVE',G024:'WAVE',G025:'WAVE',G026:'WIDTH',G029:'WIDTH',
  G037:'ADSR',G038:'ADSR',G049:'ADSR',
@@ -41,10 +43,13 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
  ['G069','COMP'],['G070','HPF'],['G071','DECAY'],['G072','PAN'],['G073','GATE'],['G074','GATE'],['G075','LEVEL'],['G076','GATE'],
  ['G077','LFO'],['G078','GATE'],['G079','GATE'],['G080','GLIDE'],['G081','LFO'],['G082','LFO']
 ]));
+const FX_GLYPHS=Object.freeze({'1:4:0:7':'G059','1:4:0:8':'G052','1:4:0:9':'G053','1:4:0:11':'G056'});
+export function fxGlyphId(identity){return FX_GLYPHS[identity];}
+
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
- FILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',LEVEL:'LEVEL',
+ FILTER:'FILTER',MASTERFILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
+ DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
  BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
@@ -165,8 +170,9 @@ export function proofSamples(kind,midi){
 // Chicago WAVE samples for a MIDI value, in firmware plot units / 16384.
 export function chicagoWaveSamples(midi){return chicagoWaveZ(56,Math.max(0,Math.min(127,Number(midi)||0))/127).map(z=>z/16384);}
 // Readout rows for a function at a MIDI value. Exactly the golden fixture for WAVE and WIDTH.
-export function readoutYs(fn,engine,midi){
+export function readoutYs(fn,engine,midi,miamiParameter){
  const m=Math.max(0,Math.min(127,Math.round(Number(midi)||0)));
+ if(engine==='miami' && (fn==='WAVE'||fn==='SHAPE'))return miamiWave(miamiParameter??(fn==='SHAPE'?11:0),m)?.rows.slice()??[];
  if(fn==='WIDTH') return readoutRows(proofSamples('juno_width',m)).ys;
  return readoutRows(proofSamples(engine==='juno'?'juno_wave':'chicago_wave',m)).ys;
 }
@@ -176,11 +182,6 @@ function waveSamples(engine,value){
  return chicagoWaveZ(56,x).map(z=>z/16384);
 }
 function wavePath(engine,value){
- if(engine==='miami'){
-  const u=unit(value), duty=0.10+0.8*Math.min(.99,Math.max(.01,u)), pts=[];
-  for(let i=0;i<29;i++) pts.push([i*40/28, i/28<duty?4:20]);
-  return path(pts);
- }
  return stroke(readoutRows(waveSamples(engine,value)));
 }
 function widthPath(_engine,value){
@@ -273,6 +274,17 @@ function filterPath(value, state){
  const pts=[[0,8],[knee,8],[knee,8-peak],[knee+6,18],[40,20]];
  return path(pts);
 }
+// Applied Master Filter detail pots, f1786ebe firmware/src/app/ui.c:7963.
+function masterFilterPaths({mode,cutoff,resonance}){
+ const left=1,right=39,pass=8,floor=18;
+ const pivot=left+7+Math.floor(cutoff*24/127),peak=pass-Math.floor(resonance*7/127);
+ let points;
+ if(mode===0)points=[[left,10],[right,10]];
+ else if(mode===1)points=[[left,pass],[pivot-4,pass],[pivot,peak],[pivot+6,floor],[right,floor]];
+ else if(mode===3)points=[[left,floor],[pivot-6,floor],[pivot,peak],[pivot+4,pass],[right,pass]];
+ else points=[[left,floor],[pivot-6,floor],[pivot,peak],[pivot+6,floor],[right,floor]];
+ return {d:path(points),guide:path([[left,floor],[right,floor]]),muted:mode===0};
+}
 function decayPath(value){
  const u=Math.max(0.05,unit(value));
  const pts=[];
@@ -329,6 +341,17 @@ function glidePath(value){
 }
 // Pan: track with a centre tick and a marker that follows the clipped value
 // (value is the L50..R50 fraction from pan.mjs, 0 = L50, 1 = R50).
+// T_BRK parameter 1, f1786ebe control_glyph. Use the native raster's pixel
+// centers in the 40 x 24 Remote cell, shifted up by 28 native pixels.
+function breakPitchPaths(value){
+ const raw=Math.round(value*24);
+ const q=Math.floor((raw*127+12)/24);
+ const at=2+Math.floor(q*36/127);
+ const guide=path([[2.5,10.5],[38.5,10.5]])+path([[20.5,4.5],[20.5,16.5]])+
+  path([[2.5,7.5],[2.5,13.5]])+path([[38.5,7.5],[38.5,13.5]]);
+ const d=[at-0.5,at+0.5,at+1.5].map(x=>path([[x,6.5],[x,14.5]])).join('');
+ return {d,guide};
+}
 function panPath(value){
  const x=(2+unit(value)*36).toFixed(1);
  return 'M2 12 L38 12 M20 10 L20 14 M'+x+' 5 L'+x+' 19';
@@ -339,6 +362,45 @@ function panPath(value){
 function drivePath(_e,value){const k=0.5+unit(value)*7,pts=[];for(let i=0;i<=24;i++){const x=i/24*2-1;pts.push([i*40/24,12-10*Math.tanh(k*x)/Math.tanh(k)]);}return path(pts);}
 function hpfPath(_e,value,state){const cut=unit(state.cutoff??value),knee=6+cut*28;return path([[0,20],[Math.max(0,knee-8),20],[knee,8],[40,8]]);}
 function echoPath(_e,value,state){const fb=unit(state.feedback??value),pts=[];let a=16;for(let t=0;t<6;t++){const x=2+t*7;pts.push([x,20],[x,20-a],[x+1,20-a],[x+1,20]);a*=0.25+fb*0.7;}pts.push([40,20]);return path(pts);}
+// R22 G052/G053/G056/G059, from f1786ebe firmware/src/app/ui.c.
+// Translate native x=left..left+36 and y=29..50 into the shared 40×24 cell.
+const delayTapGaps=[2,3,4,4,5,5,6,6,7,8,8,9,10];
+const fxBaseline=path([[2,20],[38,20]]);
+function delayTimePath(value){
+ const gap=delayTapGaps[Math.round(value*12)];
+ const strokes=[fxBaseline,path([[2,1],[2,19]])];
+ for(let x=2+gap;x<=38;x+=gap)strokes.push(path([[x,7],[x,19]]));
+ strokes.push(path([[2,22],[2+gap,22]]));
+ return strokes.join(' ');
+}
+function delayFeedbackPath(value,delayType){
+ const amount=Math.round(value*127);
+ const feedback=(delayType===1?1.15:0.85)*amount/127;
+ const strokes=[fxBaseline];
+ let amp=10;
+ for(let tap=0;tap<4;tap++){
+  const height=Math.round(amp),x=5+tap*10;
+  if(height)strokes.push(path([[x,19-height],[x,19]]));
+  amp*=feedback;
+ }
+ return strokes.join(' ');
+}
+function fxReturnPath(value,delay){
+ const amount=Math.round(value*127),strokes=[fxBaseline];
+ for(let tap=0;tap<(delay?4:7);tap++){
+  const height=Math.ceil((delay?16-tap*3:2+tap*2)*amount/127);
+  if(!height)continue;
+  const x=delay?5+tap*10:2+tap*6;
+  const y=delay?19-height:10-Math.floor(height/2);
+  strokes.push(path([[x,y],[x,y+height]]));
+ }
+ return strokes.join(' ');
+}
+function sourcedFxPath(fnId,value,{delayType}){
+ if(fnId==='G052')return delayTimePath(value);
+ if(fnId==='G053'&&(delayType===0||delayType===1))return delayFeedbackPath(value,delayType);
+ if(fnId==='G056'||fnId==='G059')return fxReturnPath(value,fnId==='G056');
+}
 function compPath(_e,value){const th=0.25+0.6*(1-unit(value)),r=1+unit(value)*7,pts=[];for(let i=0;i<=20;i++){const x=i/20,y=x<th?x:th+(x-th)/r;pts.push([x*40,22-y*20]);}return path(pts);}
 function gatePath(_e,value){const d=0.08+unit(value)*0.84;return path([[0,20],[2,20],[2,6],[2+d*36,6],[2+d*36,20],[40,20]]);}
 function voicePath(_e,value,state){const lvl=unit(state.level??value),dec=unit(state.decay??0.5),hit=Math.max(0,Math.min(1,state.hit??0)),h=4+lvl*14+hit*4,pts=[[2,20],[4,20-h]];for(let i=1;i<=16;i++){const t=i/16;pts.push([4+t*(8+dec*28),20-h*Math.exp(-t*4)]);}pts.push([40,20]);return path(pts);}
@@ -356,19 +418,31 @@ export function render(fnId, value, engineId='chicago', state={}){
  // State scalars (attack/cutoff/feedback etc.) are already normalized.
  value=unit(value,state.valueDomain??'normalized');
  const fn=fnOf(fnId);
+ if(engineId==='miami' && (fn==='WAVE'||fnId==='SHAPE')){
+  const parameter=state.miamiParameter ?? (fnId==='SHAPE'?11:0);
+  const wave=miamiWave(parameter,Math.round(value*127));
+  if(wave)return {fn:'WAVE',engine:engineId,live:false,cell:null,zero:wave.zero+0.5,
+   d:path(wave.rows.map((y,x)=>[x+0.5,y+0.5]))};
+ }
+ if(fnId==='BREAK PITCH'&&engineId==='break')
+  return {fn:'BREAK PITCH',engine:engineId,...breakPitchPaths(value),live:false,cell:null};
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
  const depth=state.depth;
  if(fn==='LFO' && depth===0) return {fn,d:lfoPath(value,{depth:0}),live:false};
  if(!live && state.age!=null) state={...state, age:0};
- const d=draw(engineId, value, state);
+ if(fnId==='MASTER FILTER'&&state.masterFilter)
+  return {fn,engine:engineId,...masterFilterPaths(state.masterFilter),live,cell:null};
+ const d=sourcedFxPath(fnId,value,state)??draw(engineId,value,state);
  const proof=(fn==='WIDTH'||(fn==='WAVE'&&engineId!=='miami'));
  return {fn, engine:engineId, d, live, cell:proof?'102x26':null};
 }
 export function renderSvg(fnId, value, engineId, state={}){
  const drawn=render(fnId,value,engineId,state);
+ if(drawn.zero!==undefined)return `<svg class="glyph readout" data-fn="WAVE" viewBox="0 0 29 19" width="40" height="24" aria-hidden="true"><path d="M0.5 ${drawn.zero} H28.5" fill="none" stroke="currentColor" opacity=".1875"/><path d="${drawn.d}" fill="none" stroke="currentColor"/></svg>`;
  if(drawn.cell) return `<svg class="glyph readout readout-wave" data-fn="${drawn.fn}" viewBox="0 0 102 26" width="102" height="26" aria-hidden="true"><rect width="102" height="26" fill="#101a1f"/><path d="${drawn.d}" fill="none" stroke="#dde7de" stroke-width="1"/></svg>`;
- return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true"><path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+ const guide=drawn.guide?`<path d="${drawn.guide}" fill="none" stroke="currentColor" opacity=".19"/>`:'';
+ return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">${guide}<path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"${drawn.muted?' opacity=".4"':''}/></svg>`;
 }
 // Proven WAVE and WIDTH re-render the nine MIDI steps. Other families still
 // interpolate until their proofs arrive. Idle and zero depth stay on one frame.
@@ -379,4 +453,45 @@ export function morphFrames(fnId, from, to, engineId, state={}){
  const samples=[0,8,16,24,40,60,90,120,160,220,300,420,580,800,1100,1500,2000,2600];
  const span=samples[samples.length-1];
  return samples.map(ms=>render(fnId, from+(to-from)*(ms/span), engineId, state));
+}
+
+// BREAK knob strip, pinned FWUI 9dd6f2df: ui_break_layout_controls.h and
+// gfinal/ui_chance_exact.c. Coordinates below are in original firmware pixels.
+export function breakGlyphShapes(setting, value, phrase) {
+ const shapes = [];
+ const rect = (x, y, w, h, ink, radius = 0) => shapes.push({x,y,w,h,ink,radius});
+ const strength = Math.floor((value * 16 + 50) / 100) / 16;
+ if (setting === 2 || (setting >= 4 && setting <= 7) || setting === 9) {
+  const count = Math.floor((value * 3 + 25) / 50) - Number(value === 75);
+  // The native 26×19 die is centered in the shared 48×19 strip.
+  rect(18,3,11,1,1); rect(18,15,11,1,1); rect(17,4,1,11,1); rect(29,4,1,11,1);
+  for (const x of [17,29]) for (const y of [3,15]) rect(x,y,1,1,15/16);
+  for (const [x,y,on] of [[11,8,count%2],[8,5,count>=2],[14,11,count>=2],
+                          [14,5,count>=4],[8,11,count>=4],[8,8,count===6],[14,8,count===6]]) {
+   rect(x+11,y,2,2,on ? 1 : 0);
+  }
+  return shapes;
+ }
+ if (setting === 8 || setting === 10 || setting === 11) {
+  const count = setting === 8 ? 5 : 6;
+  const left = 24 - Math.floor((count * 8 - 2) / 2);
+  for (let i=0; i<count; i++) rect(left+i*8,5,6,9,i===value ? 1 : 0,2);
+  return shapes;
+ }
+ for (let i=0; i<8; i++) {
+  const x = 6 + i * 5;
+  if (setting === 0) {
+   rect(x,15,3,3,1);
+   rect(x,3+(i%2)*4,3,3,strength);
+  } else if (setting === 1) {
+   rect(x,10,3,3,0);
+   if (i%4 === 0) rect(x,4,3,12,strength);
+  } else if (setting === 3) {
+   const step = 6 + i*4 + (i>=4 ? 4 : 0);
+   rect(step,15,3,3,phrase ? 1 : 0);
+   if (i>=4) rect(step,4,3,4,phrase ? strength : 0);
+  }
+ }
+ if (setting === 3) rect(23,4,1,14,0);
+ return shapes;
 }

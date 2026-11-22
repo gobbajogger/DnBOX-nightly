@@ -1,5 +1,27 @@
 # Web lane · PR #156
 
+## PR #177 parity follow-up · 22 November 2026
+
+The [shipping and R22 comparison](../../evidence/web-routes/shipping-parity/README.md) records the newly measured 909 and 808 sequencer renders, the 909 kick comparison and an independent disposition. Shipping/R22/Web parity remains open. The previous route evidence ZIP is verified in LoopyX0X37 Project Sources.
+
+## Lane requalification · 22 November 2026
+
+The lane started from `583f6229`, whose product and test sources carry the accepted `000e2910` tree. An unavailable history data request left search inert. Build History now filters the records embedded in the page when the request fails. The online data source is unchanged. [Chromium receipt](../../evidence/web-routes/history-offline.json) records the search and reset over all 198 records at desktop, portrait and landscape widths.
+
+The requested scalable Web/Remote comparison with R22 and shipping 0.0.26 remains open. The prior native-renderer parity receipt covers its own FWUI pin. Inkscape smoke measurements of the four historical vectors against their companion PNGs found 9.06%–11.26% exact RGB differences. Complete Chromium comparisons of matching screens and independent per-page scores remain required. The separate shipping firmware source is `94197fc839b00aff47b98ca02f3c6396e4a6eabf`. Final combined qualification belongs to Integration.
+
+The candidate compacts the installer to one navigation header, keeps language and task controls, and moves the styled Starting Breaks picker into a disclosure after the primary install controls. The standalone picker uses the same styles and gives a labeled selection count. The homepage explains the musical tasks and identifies the visual-only demo. Project entry titles use DnBOX. The three standalone file builds embed the site's Barlow fonts and license with shared colors. File-open installer tasks open standalone sample and project files because local frames cannot share hosted workspace state.
+
+The exact baseline's retired-name unit check was failing on the rule text defining the retired name. The scan now excludes that policy file only. Independent review reproduced and accepted the scope. The baseline's earlier accepted screenshots remain applicable to unchanged views. The [19-route and offline coverage receipt](../../evidence/web-routes/lane-web-route-coverage.json) carries route hashes, tested sizes and capture digests. The [independent review](../../evidence/web-routes/lane-web-independent-review.md) records per-page scores. The full gate and Integration handoff are tracked separately.
+
+The first candidate's explicit hosted child URLs broke workspace fixture instrumentation. The compatibility correction preserves the hosted directory URLs and embedded workspace behavior. Direct-file mode applies its own theme and navigates to standalone tools. The sample workspace passed 29 checks and the project workspace passed 63 checks after the correction. The three installer deadline scenarios passed, along with 37 history transport checks. The affected logs are in the [browser receipt](../../evidence/web-routes/lane-web-affected-browser.txt). A fresh emulator run matched the mounted native frames it reached, then Chromium crashed opening the unchanged historical reference page. The accepted #156 renderer/runtime, R22 assets and native comparators have unchanged inputs. That earlier exact-parity claim is limited to its own FWUI source and does not qualify shipping 0.0.26 against Web and Remote.
+
+Integration should use this branch tree, the route coverage and independent scores, and the named Project Sources archive when available. The missing shipping/R22 cross-surface comparison still needs a matching Web and Remote screen/state inventory from the owners. Complete checkout-wide qualification remains measured separately.
+
+The homepage names the four engines in consolidated firmware `f1786ebe`. Its SuperJ6 and Synth One copy is scoped to development builds. Shipping 0.0.26 has the older engine names. The older source-derived envelope animation is labeled as archived. The hosted installer renderer is byte-identical to baseline. Offline styling and standalone routing are applied only by the preview renderer. The source-parity verifier and its fixtures use the same font and license inputs as the preview builder.
+
+The isolated historical reference replay completed after the browser crash, with four exact 57,600-pixel matches. The four recovered scalable archives each miss the 1% threshold against their own native companion PNGs. [Chromium parity receipt](../../evidence/web-routes/lane-web-historical-svg-parity.json) records 5,131–6,382 differing pixels. This does not measure current R22 or shipping cross-surface parity. Reuse the accepted 1,912 exact native FWUI frame checks and 79 playable observations only for their unchanged inputs. Shipping and Remote owners still need to align the matching screen/state map before the outstanding 1% comparison.
+
 ## Current Web delivery · 21 November 2026
 
 The [current gate, independent review and nightly publication ledger](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059684119) records the tested Web commit, the seven gate results, the reviewer’s disposition and the deployed tree and byte counts. Each result applies to the exact commit named there. Earlier sections below are dated checkpoints.

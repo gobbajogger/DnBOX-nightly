@@ -1,0 +1,94 @@
+{
+  "schema": "dnbox-independent-native-scalar-runtime-review/2",
+  "decision": "APPROVE_EXACT_BRANCH_ONLY_OPT_IN_ARTIFACT_SELECTION",
+  "defaultRuntimeEnablement": "HOLD",
+  "publicReleaseAndPages": "HOLD",
+  "physicalApproval": false,
+  "priorRuntimeReviewSha256": "305634c0485dbb99fbd02f9e5d918d362699a51e46e196c9830cdab5f693d83d",
+  "replayReceiptSha256": "43e33b47285c41149ae31bb96865098924d828bebbed32a4b894642d7a8ea60e",
+  "catalog": {
+    "protocol": 2,
+    "count": 1,
+    "crc32": "ecca5979",
+    "id": 1,
+    "type": "U32",
+    "min": 0,
+    "max": 127,
+    "label": "909 MIX Level",
+    "sourceSha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5"
+  },
+  "firmware": {
+    "published": "54266973cf5f6893bbddae84920bea1db55e8f4a",
+    "publishedTreePrefix": "887ea9e8",
+    "measured": "23df413621b7ce1b8a8cbf71b3e07775fcfe727d",
+    "observedReplayHead": "1a9199c1fb3bb0f60da555a9cab6ad9d20452aba",
+    "hostAdapterSha256": "5dccda64220867a87a770ba1a669b251fff140d719b35d32de42b3084cb05793",
+    "packageHashListGitBlob": "8bec08fb7ff5033d19e99094503dd825ac2dac04",
+    "hostHashListGitBlob": "546b3f4b878c7f263ec63fd8c318f56a4143c17f",
+    "elite": {
+      "fwscSha256": "a3d0e93310502621ffc6d0281d3884e27d88a5f24a507adf2d71780a8775451a",
+      "elfSha256": "700a0b80aab2302fdfd23c9683d60fd769d915bcb0ffe92dbe9ae75938d05b8c",
+      "usbReceiptSha256": "672aa7a0123f00f53a272b83ba4093a0bd5ee8a5a0bb595aae8505d7f7600706",
+      "publishedUsbGitBlob": "7c594b9065f87cc6e33d6912972f614be66e6e97",
+      "xipFreeBytes": 1032,
+      "poolMarginBytes": 732
+    },
+    "pro": {
+      "fwscSha256": "7fa87c5e93949785ac41798286208aafdd625fc5a609660cce1f8a186358e5b8",
+      "elfSha256": "61f23d4b0d4daa9f1ff49c4849502164a4a5d904b73362445a45914c05529906",
+      "usbReceiptSha256": "a3e605ed1daa3a5a452faac04c01de96aee97a16ec77166c9876783b1df9da48",
+      "publishedUsbGitBlob": "9e4fe92e803d1eda35981249188dfa15be631c2d",
+      "xipFreeBytes": 1040,
+      "poolMarginBytes": 732
+    },
+    "basis": "Published package hashes, host digest and SHA-256 of both raw published USB receipt bytes match the replay record. Both linked stock packages completed HELLO/OPEN/READ/Apply/READ/Undo/READ/CLOSE and rejected the old lease."
+  },
+  "nightly": {
+    "reviewedBase": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+    "patchSha256": "e6670f6bb38ac83617880237c610d8bd937888cd26d7befc22a7a4d0052edc05",
+    "reviewedPatchedSourceSha256": {
+      "web/product-site/remote/app.mjs": "f02fd9bc4210f1852b5933befde2bbf5270444ff149d18e0822d9c52b25a4c13",
+      "web/product-site/remote/firmware-link.mjs": "43bece9ffd5cf8fb161b753d7ee12dc84551bc9b36bb4cf64383580f31ada878",
+      "web/product-site/remote/device/page.mjs": "f8b58c759d262c12d3f4768b31df184708260123c5e57ed5667f16a110a0aaca",
+      "web/product-site/remote/device/session.mjs": "2a0ace83d2a188cf06b6e40f4c5817d26f620bd3400490718ff58d0255ddea5b",
+      "web/product-site/remote/device/view.mjs": "5dccc60f603094f320548c4800de80d3724178e19fe516dffac6afa634ca570b",
+      "web/product-site/remote/device/vendor/client.mjs": "908442b9caa357a25057e737c39d9c9e4572f22c5aeb9074a23d7dcb1fb6b02f",
+      "web/product-site/SOURCE-MANIFEST.json": "c4371d217fecba59a581c0fb166b18612d93c9c3f74f6be1e5cbacfa4846d610",
+      "tools/touchosc-parameters/pack.py": "67e79b70bc130a0eaa161f099407e7dd3e845b2bb9e817d599c237d063ffee92",
+      "tools/touchosc-parameters/production_scalar.py": "c1b3f852d660e19e8f9f788c774c07dbd81afbc5abcb49ca38f38247aa900444",
+      "tests/product-remote/page.test.mjs": "8d41a85a29e27975aed315012f402b17d454e7eb7a1a2ad331d792af791a4781"
+    },
+    "replayedArtifactsSha256": {
+      "candidate-catalog.mjs": "e703230b78c9615f66b0ab8f4c682f9a9722d32690da911cad198c60ec203269",
+      "reviewed-scalar-staging.tosc": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+      "staged-browser.json": "d29c22ef85561cc6700935412e356396fa11687037affe5e51d7b9c331ad6656",
+      "staged-browser.log": "e37e883d01415ed604e4721264b2454a3b19efd278be4dde45badb94cca605ee",
+      "staged-lua.json": "1f3dffd5403012a50813d750808647dc743a78e56f2227c7952b3f2d126a8f93",
+      "staged-lua.log": "95d8383bbc499dcf30425a1ba7b481438dab6505ea71e96694c783a469689afe",
+      "test_staging_browser.py": "29efbd0806e96d2379fb07bd3373dcfc81feea390f6b27875b3d4ec6bf9afee4",
+      "test_staging_lua.py": "d79684d780b2e719ca0cb878fd978d2749c863fc5f0cfa6e0b62b363f632eeb4"
+    },
+    "chromiumCases": [
+      "ambiguous",
+      "device",
+      "expiry",
+      "mismatch",
+      "missing",
+      "shipping",
+      "silent",
+      "workspace"
+    ],
+    "packedLuaCases": [
+      "closed",
+      "mismatch",
+      "native"
+    ]
+  },
+  "conditions": [
+    "Selection applies to an explicit branch-only generated artifact with the reviewed runtime behavior and exact catalog/TouchOSC bytes. Verify applicable runtime code stays identical at final assembly or independently establish equivalence before using this receipt for a combined tree.",
+    "Workspace explicit Apply and guarded Undo with current paired identity, checksum and lease. Device permits HELLO and READ/Refresh only. Keep the staged TouchOSC scope confined to this catalog.",
+    "Repository default, Pages, public release, physical hardware and authenticated transport are outside admission. No extra or historical controls.",
+    "Final integrated visual reviews and exact WIDE wet/timing/release checks remain separate."
+  ],
+  "method": "Independent verification of existing replay and published artifacts. No test rerun or deployment."
+}

@@ -1,0 +1,25 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.151969ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (2.779101ms)
+✔ live update declares its domain and stores normalized renderer input (0.194762ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (1.306761ms)
+✔ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (5.140565ms)
+✔ the sourced FX return encoders keep separate reverb and delay drawings (3.57219ms)
+✖ Master Filter picture follows its Draft detail state instead of the macro pot (4.927134ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 169.681688
+
+✖ failing tests:
+
+test at tests/product-remote/glyph-domain.test.mjs:87:1
+✖ Master Filter picture follows its Draft detail state instead of the macro pot (4.927134ms)
+  TypeError [Error]: m.filterState is not a function
+      at draw (file:///workspace/scratch/857bb2409f82/remote-resume-0130/.output/mix-shared-role-review/master-filter-source/tests/product-remote/glyph-domain.test.mjs:91:93)
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-resume-0130/.output/mix-shared-role-review/master-filter-source/tests/product-remote/glyph-domain.test.mjs:92:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

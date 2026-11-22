@@ -1,0 +1,95 @@
+{
+  "schema": "dnbox-independent-native-scalar-runtime-review/1",
+  "decision": "APPROVE_EXACT_ONE_CONTROL_RUNTIME",
+  "scope": "Exact opt-in software staging only. Workspace explicit Apply and guarded Undo. Device read-only. TouchOSC staged layout only.",
+  "defaultRuntimeEnablement": "HOLD",
+  "releaseOrGhPagesApproval": false,
+  "physicalApproval": false,
+  "catalogReviewSha256": "5ba03e8ab5923f4bb4d8ca479f137f3c118964108216298d1b4298328e92ad41",
+  "catalog": {
+    "protocol": 2,
+    "count": 1,
+    "crc32_canonical_compact_json": "ecca5979",
+    "source_json_sha256": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "controls": [
+      {
+        "id": 1,
+        "kind": 1,
+        "label": "909 MIX Level",
+        "max": 127,
+        "min": 0,
+        "owner": "909",
+        "parameter": "MX_LEVEL",
+        "target": "T_MIX"
+      }
+    ]
+  },
+  "firmware": {
+    "linkedSource": "4eff776499ca70164e241cdf4faeecca352fc508",
+    "evidenceSource": "d63620b9253fc3656c5a9200be3f4936ddb83bc1",
+    "hostAdapterSha256": "c6279bcad53593d1ca29dc69ed3ef52e34eba496edafc8e2ab3b9e4bc201775f",
+    "packages": {
+      "elite": {
+        "fwsc_sha256": "e69fbe4a9b9aa2333fa4c3e59610e3a0dff1e7e4580afbf02e4b10991890b107",
+        "elf_sha256": "093de0fbaa3042a1f7eba017121ca15f5b3fed375a1ec956565f9a2b777f1fc6",
+        "usb_receipt_sha256": "a799dbe839fdace07f6fdac5bb68b9598239d62866112d55db438b65627356f3",
+        "xip_free_bytes": 1368,
+        "pool_margin_bytes": 732
+      },
+      "pro": {
+        "fwsc_sha256": "23bd1b79c0647323b0e574ba42aec53e30e4565de07f2c8228be8a8f05b8a88e",
+        "elf_sha256": "7622e97773216e2adfe80a1b0d0231416b043447eef179ce73ae57e034c8bcf5",
+        "usb_receipt_sha256": "59cf810974d5cdc9b28ca7a0f4a7593cfe94c6549a5482456b2c9bc53e065676",
+        "xip_free_bytes": 1380,
+        "pool_margin_bytes": 732
+      }
+    }
+  },
+  "nightly": {
+    "base": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+    "evidenceBase": "59ec3121b008fd853c8fdf6665c22ca3bf98606a",
+    "patchSha256": "e6670f6bb38ac83617880237c610d8bd937888cd26d7befc22a7a4d0052edc05",
+    "workingTreeReverseCheckPassed": true,
+    "baseApplicationCheckPassed": true
+  },
+  "contentSha256": {
+    "nightly-one-scalar-production-staging.patch": "e6670f6bb38ac83617880237c610d8bd937888cd26d7befc22a7a4d0052edc05",
+    "staged-browser.json": "3422f9b9a1144295d6f8f17720a5f3f2c8e2a1ac68c1e60139f4431304b50329",
+    "staged-lua.json": "8ac339b88f8d285e2ec6ad8a70dbeb18509c210d375fb6e8d08f4db379760ccf",
+    "test_staging_browser.py": "74e722fa070b29c152ced0567db0df469f1bdc0484d467e9d478f0f911f49efd",
+    "test_staging_lua.py": "d79684d780b2e719ca0cb878fd978d2749c863fc5f0cfa6e0b62b363f632eeb4",
+    "candidate-catalog.mjs": "e703230b78c9615f66b0ab8f4c682f9a9722d32690da911cad198c60ec203269",
+    "reviewed-scalar-staging.tosc": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+    "closed.tosc": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04",
+    "archived.tosc": "83977fa73340823f259b7dc3f15504e00d3ea5d62f8f45d5e075a35f390b80a5",
+    "product-build.log": "213fc327d6a472d68d67e7dba401853661e8ec1150e4653e766082a5a3d66ed9",
+    "focused-node-final.log": "91ed6f20f0be38caeacfd48890122d006a47f95b50b9992416ba693e184406e8",
+    "runtime-hold-js.log": "8ecd02de49e45e1f4017648040269bcccdd28cdcc60da1d806e04beaeeb8dabb",
+    "runtime-hold-lua.log": "f534446155e81c0171db4b7282935f2b234ccc1f482075e82b6a7f503a80e3ef"
+  },
+  "validation": {
+    "chromium": "Pinned sandboxed 151.0.7922.34, actual routes over the firmware host adapter",
+    "cases": [
+      "shipping",
+      "missing",
+      "ambiguous",
+      "mismatch",
+      "silent",
+      "workspace",
+      "device",
+      "expiry"
+    ],
+    "staleLease": "Host receives an injected CLOSE for the existing simulated lease before its next normal heartbeat. Actual stale heartbeat and stale cleanup responses disable writes. This probes client reaction; firmware timeout coverage remains in prior host tests.",
+    "touchosc": "Generator-emitted packed software-staging layout, stocked catalog only. Closed default, checksum refusal, heartbeat and Apply/Undo/CLOSE passed against the real host adapter.",
+    "focusedNodeCases": 47,
+    "builtProductFiles": 276,
+    "shippingDefault": "Closed. Both ordinary bundle generation paths refused admission."
+  },
+  "conditions": [
+    "Keep the committed default catalog and default TouchOSC layout closed until a separately authorized shipping decision.",
+    "Do not use this receipt for another firmware/ELF/FWSC hash set; later WIDE or merged candidates need matching native and cross-repo evidence.",
+    "If preparing a future non-staging artifact, keep catalog-review provenance separate and cite the actual runtime-review digest.",
+    "No legacy catalog, held controls, Device writes, hardware or authenticated transport claims.",
+    "Final integrated gates, strict combined timing, Sound reference and exact changed-screen review remain separate from this software staging approval."
+  ]
+}

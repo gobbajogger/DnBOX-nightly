@@ -1,0 +1,44 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.236361ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (3.340861ms)
+✔ live update declares its domain and stores normalized renderer input (0.201722ms)
+✖ the sourced Reverb Low Cut uses the shared firmware Tone drawing (1.471653ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 148.494795
+
+✖ failing tests:
+
+test at tests/product-remote/glyph-domain.test.mjs:20:1
+✖ the sourced Reverb Low Cut uses the shared firmware Tone drawing (1.471653ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      cell: null,
+  +   d: 'M2.0 20.0 L8.0 20.0 L14.0 20.0 L20.0 20.0 L26.0 20.0 L32.0 20.0',
+  -   d: 'M0.0 8.0 L6.0 8.0 L16.0 20.0 L40.0 20.0',
+      engine: 'mixer',
+  +   fn: 'LEVEL',
+  -   fn: 'TONE',
+      live: false
+    }
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-resume-0130/.output/mix-shared-role-review/source/tests/product-remote/glyph-domain.test.mjs:25:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { fn: 'LEVEL', engine: 'mixer', d: 'M2.0 20.0 L8.0 20.0 L14.0 20.0 L20.0 20.0 L26.0 20.0 L32.0 20.0', live: false, cell: null },
+    expected: { fn: 'TONE', engine: 'mixer', d: 'M0.0 8.0 L6.0 8.0 L16.0 20.0 L40.0 20.0', live: false, cell: null },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

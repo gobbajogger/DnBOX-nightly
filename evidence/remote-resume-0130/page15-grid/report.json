@@ -1,0 +1,710 @@
+{
+  "baseCommit": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "views": {
+    "base": {
+      "styleSha256": "24e54024253f2404a876e50fd5330e31a15a7480a5760b31f3fb5a2d51608d29",
+      "sizes": {
+        "844x390": {
+          "909": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 54,
+                "y": 146.59375,
+                "width": 28.25,
+                "height": 24,
+                "top": 146.59375,
+                "right": 82.25,
+                "bottom": 170.59375,
+                "left": 54
+              },
+              "minPadWidth": 28.25,
+              "minPadHeight": 24,
+              "gap": 2,
+              "groupGap": 3,
+              "rail": 40,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 528,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 540,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgba(0, 0, 0, 0)",
+              "panelRadius": "0px",
+              "inactiveFill": "rgb(16, 26, 31)",
+              "reviewFill": "rgb(16, 26, 31)",
+              "laneOffsets": [
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125
+              ],
+              "sound": {
+                "x": 552,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 832,
+                "bottom": 382,
+                "left": 552
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          },
+          "808": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 54,
+                "y": 146.59375,
+                "width": 28.25,
+                "height": 24,
+                "top": 146.59375,
+                "right": 82.25,
+                "bottom": 170.59375,
+                "left": 54
+              },
+              "minPadWidth": 28.25,
+              "minPadHeight": 24,
+              "gap": 2,
+              "groupGap": 3,
+              "rail": 40,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 528,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 540,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgba(0, 0, 0, 0)",
+              "panelRadius": "0px",
+              "inactiveFill": "rgb(16, 26, 31)",
+              "reviewFill": "rgb(16, 26, 31)",
+              "laneOffsets": [
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125
+              ],
+              "sound": {
+                "x": 552,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 832,
+                "bottom": 382,
+                "left": 552
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "candidate": {
+      "styleSha256": "40ebd2f5af108588056eae7185b83c254a794ac1baab0124431efcd3050daa19",
+      "sizes": {
+        "844x390": {
+          "909": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 66,
+                "y": 146.59375,
+                "width": 25.75,
+                "height": 24,
+                "top": 146.59375,
+                "right": 91.75,
+                "bottom": 170.59375,
+                "left": 66
+              },
+              "minPadWidth": 25.75,
+              "minPadHeight": 24,
+              "gap": 4,
+              "groupGap": 4,
+              "rail": 52,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 528,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 540,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "sound": {
+                "x": 552,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 832,
+                "bottom": 382,
+                "left": 552
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ],
+            "wheel": {
+              "rows": 177,
+              "steps": 0,
+              "initialPads": 96,
+              "wheelReachablePads": 176
+            }
+          },
+          "808": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 66,
+                "y": 146.59375,
+                "width": 25.75,
+                "height": 24,
+                "top": 146.59375,
+                "right": 91.75,
+                "bottom": 170.59375,
+                "left": 66
+              },
+              "minPadWidth": 25.75,
+              "minPadHeight": 24,
+              "gap": 4,
+              "groupGap": 4,
+              "rail": 52,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 528,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 540,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "sound": {
+                "x": 552,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 832,
+                "bottom": 382,
+                "left": 552
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ],
+            "wheel": {
+              "rows": 177,
+              "steps": 0,
+              "initialPads": 96,
+              "wheelReachablePads": 176
+            }
+          }
+        },
+        "820x390": {
+          "909": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 66,
+                "y": 146.59375,
+                "width": 24.25,
+                "height": 24,
+                "top": 146.59375,
+                "right": 90.25,
+                "bottom": 170.59375,
+                "left": 66
+              },
+              "minPadWidth": 24.25,
+              "minPadHeight": 24,
+              "gap": 4,
+              "groupGap": 4,
+              "rail": 52,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 504,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 516,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "sound": {
+                "x": 528,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 808,
+                "bottom": 382,
+                "left": 528
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          },
+          "808": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 66,
+                "y": 146.59375,
+                "width": 24.25,
+                "height": 24,
+                "top": 146.59375,
+                "right": 90.25,
+                "bottom": 170.59375,
+                "left": 66
+              },
+              "minPadWidth": 24.25,
+              "minPadHeight": 24,
+              "gap": 4,
+              "groupGap": 4,
+              "rail": 52,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 504,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 516,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "sound": {
+                "x": 528,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 808,
+                "bottom": 382,
+                "left": 528
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          }
+        },
+        "740x390": {
+          "909": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 54,
+                "y": 146.59375,
+                "width": 21.75,
+                "height": 24,
+                "top": 146.59375,
+                "right": 75.75,
+                "bottom": 170.59375,
+                "left": 54
+              },
+              "minPadWidth": 21.75,
+              "minPadHeight": 24,
+              "gap": 2,
+              "groupGap": 3,
+              "rail": 40,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 424,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 436,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125
+              ],
+              "sound": {
+                "x": 448,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 728,
+                "bottom": 382,
+                "left": 448
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          },
+          "808": {
+            "initialPads": 96,
+            "mounted": 176,
+            "css": {
+              "pad": {
+                "x": 54,
+                "y": 146.59375,
+                "width": 21.75,
+                "height": 24,
+                "top": 146.59375,
+                "right": 75.75,
+                "bottom": 170.59375,
+                "left": 54
+              },
+              "minPadWidth": 21.75,
+              "minPadHeight": 24,
+              "gap": 2,
+              "groupGap": 3,
+              "rail": 40,
+              "panel": {
+                "x": 12,
+                "y": 125.59375,
+                "width": 424,
+                "height": 208.40625,
+                "top": 125.59375,
+                "right": 436,
+                "bottom": 334,
+                "left": 12
+              },
+              "panelBackground": "rgb(16, 26, 31)",
+              "panelRadius": "7px",
+              "inactiveFill": "rgb(41, 61, 67)",
+              "reviewFill": "rgb(255, 179, 55)",
+              "laneOffsets": [
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125,
+                -0.875,
+                -0.625,
+                -0.375,
+                -0.125
+              ],
+              "sound": {
+                "x": 448,
+                "y": 125.59375,
+                "width": 280,
+                "height": 256.40625,
+                "top": 125.59375,
+                "right": 728,
+                "bottom": 382,
+                "left": 448
+              }
+            },
+            "navigation": [
+              {
+                "name": "Voices 1\u20136",
+                "whole": true
+              },
+              {
+                "name": "Voices 7\u201311",
+                "whole": true
+              },
+              {
+                "name": "Accent lane",
+                "whole": true
+              },
+              {
+                "name": "Review draft",
+                "whole": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "pixelComparison": {
+    "base": {
+      "fullPage": {
+        "differentExact": 200798,
+        "differentTolerant": 83864,
+        "differentTolerantPercent": 25.478186899987847
+      },
+      "gridRegion": {
+        "differentExact": 99958,
+        "differentTolerant": 52966,
+        "differentTolerantPercent": 42.64195602643888
+      }
+    },
+    "candidate": {
+      "fullPage": {
+        "differentExact": 147894,
+        "differentTolerant": 63084,
+        "differentTolerantPercent": 19.165147648559973
+      },
+      "gridRegion": {
+        "differentExact": 49530,
+        "differentTolerant": 33722,
+        "differentTolerantPercent": 27.148964262424425
+      }
+    }
+  },
+  "chromium": "151.0.7922.34"
+}

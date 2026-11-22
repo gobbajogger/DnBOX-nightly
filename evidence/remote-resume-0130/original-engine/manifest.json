@@ -1,0 +1,82 @@
+{
+  "baseSource": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "acceptanceScope": "SOFTWARE-ONLY",
+  "originalAUArchive": {
+    "bytes": 24716801,
+    "sha256": "abe2f2e089306770489fb30c8870f608dc2f2e0804541f624337523679638a28"
+  },
+  "originalExecutable": {
+    "version": "0.999.8",
+    "build": "9",
+    "bytes": 9282464,
+    "sha256": "a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1"
+  },
+  "originalBanks": {
+    "bytes": 451262,
+    "sha256": "ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8",
+    "banks": 12,
+    "programs": 640,
+    "mappedPresentWords": 5860,
+    "complete13FieldPrograms": 25,
+    "browserBank": "The GarageBand Guide.superj6.bank.json",
+    "browserBankPrograms": 26,
+    "fixtureFallback": false
+  },
+  "nativeFormatter": {
+    "originalARM64": true,
+    "unicorn": "2.1.4",
+    "literalLabels": 18,
+    "positions": 128,
+    "transitionBoundaries": 17,
+    "samples": 179,
+    "rateFields": [
+      88,
+      96,
+      100
+    ],
+    "originalFieldSampleExecutions": 537,
+    "remoteOwnerComparisons": 1074,
+    "fullAppleUIExecuted": false
+  },
+  "results": {
+    "before": "FAIL expected8 Bars,actual32 beats",
+    "focused": "PASS12/12",
+    "soundApp": "PASS7/7",
+    "browser": "PASS4/4 viewports; exit0"
+  },
+  "browserViewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      1024,
+      640
+    ]
+  ],
+  "sourceFiles": {
+    "web/product-site/remote/superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5",
+    "tests/product-workspace/superj6.test.mjs": "a4f7eef99b00b9b6faf99e7f26d16faf41382b73c80781cd29fe79fb86c5d4ba",
+    "tests/product-workspace/superj6-banks.test.mjs": "da5c135a9424be2687ef8299dc193d92034167bce4b0c869db45c01e951ca294",
+    "tests/product-workspace/app-sound-regression.mjs": "7f507696ebef659fa06889bdf5d3fd0c05b26af168847efd24290e87ac533175",
+    "tests/product-remote/source-banks-browser.py": "a01d2fb3a77202553f4f650593cfb1e37ebc6cce3a66d66aaec6912c4f28e2a9",
+    "tools/probe-superj6-original-lfo.py": "0a3f3bc34d2e99737b6ede5b2ef2c5beb723e52a9e0e1ac91eb715d32db8621a",
+    "tests/product-workspace/fixtures/superj6-build9-lfo.json": "8e6abc6fa903fe83b84097014373db210432cc85f3a54a07fdd362301e364e84"
+  },
+  "evidenceFiles": {
+    "literal-red.tap": "9aa1e4c2970820845c800ee58b7f9ede0672c3fb42b0eab94fbe3542b5c655d9",
+    "app-sound-green.log": "3cf674b4f0fbd4b8c7b0572d7bbab1e0e07d388adada87949b53ba2faaf5b52d",
+    "literal-green.tap": "9a6861d29b7ed484b4c246f38e06840a40ca9fcb9e1af4c6d0f3f6055b6b5c81",
+    "original-banks-browser.log": "36afa853cb204b21138f4319b614d7dd0930ee797ff3ca97966fe11de603026f",
+    "original-native-probe.log": "b9c3494834df1837d2d55ce67db9adf3dfe7ebf7dd93b64902f7d390a1f82dc9",
+    "README.md": "e8a5059871cffae69a8adb320c1fe6e6268500ff81a39d3ba3012a9035a8bd33"
+  }
+}

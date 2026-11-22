@@ -1,0 +1,19 @@
+{
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "sources": {
+    "firmware/src/app/ui.c": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "firmware/src/dsp/master.c": "ff3486879de216c5447c2a301456abc6cf7cd46c4643d93e500d5e6890e966b7"
+  },
+  "scope": "Exact normalized stroke geometry and semantic dim/ink class from compiled native expressions. Values are the local Draft detail state; native applied values are unavailable over current Mix provider.",
+  "cases": {
+    "macro": 384,
+    "details": 36
+  },
+  "hashes": {
+    "master-filter.patch": "145cbbe25c38bfe4b7429f57ba144e30c40d9cf3d73d36651c62ef3143bffbc7",
+    "master-filter-green.tap": "9bf2e4e7826e0a43a3932ba00679df226ea56851c0b0dfefba8d186bbfd2caba",
+    "master-filter-red.tap": "036bdf09800d4e996791617571d45a05e909f947e4d2cdc7e5bbd22b0184ca28",
+    "master-filter-pinned-probe.c": "09887116d53b592bfd0bd30c833f651e7a25ba823d80ab033991d5468983ed42",
+    "master-filter-pinned-paths.txt": "bf43b1b1685b7c6e89afee4b9199a49024e10de4c4d5f23b1a9b9e27bd05244e"
+  }
+}

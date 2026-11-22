@@ -1,0 +1,1 @@
+{"exit": 0, "accepted": false, "browser": {"status": "RUN", "version": "151.0.7922.34", "sandbox": true}, "fixturesObserved": 9, "report": "/workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/web-structural.json"}

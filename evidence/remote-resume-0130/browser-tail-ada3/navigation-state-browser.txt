@@ -1,0 +1,28 @@
+{"files":304,"output":"/workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/navigation-state-u_mdjeh4","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+STEP_DRUM_CONTROL 909 velocity
+STEP_DRUM_CONTROL 909 chance
+STEP_DRUM_CONTROL 909 pitch
+STEP_DRUM_CONTROL 909 pan
+STEP_DRUM_CONTROL 808 velocity
+STEP_DRUM_CONTROL 808 chance
+STEP_DRUM_CONTROL 808 pitch
+STEP_DRUM_CONTROL 808 pan
+PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums 1440x900
+STEP_DRUM_CONTROL 909 velocity
+STEP_DRUM_CONTROL 909 chance
+STEP_DRUM_CONTROL 909 pitch
+STEP_DRUM_CONTROL 909 pan
+STEP_DRUM_CONTROL 808 velocity
+STEP_DRUM_CONTROL 808 chance
+STEP_DRUM_CONTROL 808 pitch
+STEP_DRUM_CONTROL 808 pan
+PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums 390x844
+STEP_DRUM_CONTROL 909 velocity
+STEP_DRUM_CONTROL 909 chance
+STEP_DRUM_CONTROL 909 pitch
+STEP_DRUM_CONTROL 909 pan
+STEP_DRUM_CONTROL 808 velocity
+STEP_DRUM_CONTROL 808 chance
+STEP_DRUM_CONTROL 808 pitch
+STEP_DRUM_CONTROL 808 pan
+PASS navigation action uniqueness/repeated current/Motion + unchanged step_drums 844x390

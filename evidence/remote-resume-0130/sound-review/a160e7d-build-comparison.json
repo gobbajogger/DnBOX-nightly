@@ -1,0 +1,49 @@
+{
+  "sound-review-capture-build-identity.json": {
+    "files": 304,
+    "changed": [],
+    "newFiles": []
+  },
+  "native-sound-build-identity.json": {
+    "files": 304,
+    "changed": [],
+    "newFiles": []
+  },
+  "sound-review-drums-build-identity.json": {
+    "files": 276,
+    "changed": [
+      "reference/index.html",
+      "tools/index.html"
+    ],
+    "newFiles": [
+      "emu/wasi.mjs",
+      "emu/kernel.wasm",
+      "emu/session-codec.mjs",
+      "emu/observer.mjs",
+      "emu/index.html",
+      "emu/page.mjs",
+      "emu/style.css",
+      "emu/worklet.mjs",
+      "emu/native-session.mjs",
+      "emu/runtime.json",
+      "emu/previous/wasi.mjs",
+      "emu/previous/kernel.wasm",
+      "emu/previous/session-codec.mjs",
+      "emu/previous/observer.mjs",
+      "emu/previous/index.html",
+      "emu/previous/page.mjs",
+      "emu/previous/style.css",
+      "emu/previous/worklet.mjs",
+      "emu/previous/native-session.mjs",
+      "emu/previous/runtime.json",
+      "reference/screens/guard.wasm",
+      "reference/screens/synthone-frame.wasm",
+      "reference/screens/fwui.wasm",
+      "reference/screens/wave.wasm",
+      "reference/screens/routes.wasm",
+      "reference/screens/synthone-patch.wasm",
+      "reference/screens/native-rgb.tsv",
+      "reference/screens/normal.wasm"
+    ]
+  }
+}

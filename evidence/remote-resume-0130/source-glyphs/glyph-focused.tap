@@ -1,0 +1,24 @@
+✔ 20 retained falling-tail donors follow the original idle curves at all 128 settings (61.375609ms)
+✔ only 10 separately owned drum occurrences retain static donors (2.059609ms)
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.358618ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (3.117455ms)
+✔ live update declares its domain and stores normalized renderer input (0.199058ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (1.597586ms)
+✔ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (7.563983ms)
+✔ the sourced FX return encoders keep separate reverb and delay drawings (4.226309ms)
+✔ Master Filter picture follows its Draft detail state instead of the macro pot (7.176432ms)
+✔ 909 Snare Tone draws the source noise decay for all 128 positions (12.53649ms)
+✔ 808 Snare Tone balances the two source shell peaks across all 128 positions (5.979397ms)
+✔ BREAK Pitch centers the marker at zero and follows all 25 source positions (4.222082ms)
+✔ all drum strip cells retain their own captured identity, role and artwork, with the firmware readout at the source raw value (3.920709ms)
+✔ 909 BD retains all six ordered source controls including both bank summaries (1.643264ms)
+✔ a missing local descriptor leaves the captured cell and its actions disabled (0.726139ms)
+✔ editable kit glyphs update their mounted source paths at every raw value (92.925973ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 225.107799

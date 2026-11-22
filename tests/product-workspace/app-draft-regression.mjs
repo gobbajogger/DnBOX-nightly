@@ -1,3 +1,4 @@
+import{createMasterDraft}from'../../web/product-site/remote/master-draft.mjs';
 import fs from'node:fs';import assert from'node:assert/strict';import{pathToFileURL,fileURLToPath}from'node:url';import{resolve}from'node:path';
 const base=new URL('../../web/product-site/remote/',import.meta.url);let bootId=0;
 class Node {
@@ -39,7 +40,7 @@ const bank=Object.assign(new Node('sound-bank'),{value:'MIAMI'});x.get('other-vi
 assert.match(x.get('other-view').innerHTML,/Sound · Bass A \/ MIAMI/);assert.match(x.get('other-view').innerHTML,/<h3>CARRIER<\/h3>/);assert.match(x.get('other-view').innerHTML,/<h3>XMOD<\/h3>/);
 const sound=JSON.parse(fs.readFileSync(new URL('source-sounds.json',base))).contexts.find(c=>c.bank==='MIAMI'&&c.bassSlot===0).controls.find(c=>c.kind===1&&c.sourceSection==='XMOD'&&c.name==='WAVE'),id='source-sound/MIAMI/0|'+[sound.kind,sound.target,sound.voice,sound.parameter,sound.sourceBank].join(':');
 const t=Object.assign(new Node(),{dataset:{param:id}});x.get('other-view').emit('pointerdown',event(t,71));x.get('other-view').emit('pointerup',event(t,71));x.get('parameter-value').value=String(sound.raw===127?126:sound.raw+1);x.get('parameter-value').onchange();assert.match(review(x),/MIAMI \/ XMOD.*WAVE/);
-x.press('draft-save');const text=await x.download();assert.ok(text);const doc=JSON.parse(text);assert.equal(doc.parameters.length,2);assert.equal(doc.song.length,1);assert.ok(doc.motion.values.some(v=>v!==null));assert.equal(doc.soundBanks[0],'MIAMI');assert.match(x.get('status').textContent,/Download requested/);assert.equal(doc.context.view,'sound');const before=review(x);
+x.press('draft-save');const text=await x.download();assert.ok(text);const doc=JSON.parse(text);const master=createMasterDraft(JSON.parse(fs.readFileSync(new URL('components.json',base))),JSON.parse(fs.readFileSync(new URL('catalog.json',base))));const expectedMasterIDs=new Set(master.specs.flatMap(c=>c.ids));assert.equal(expectedMasterIDs.size,22);assert.equal(doc.parameters.length,23);assert.deepEqual(new Set(doc.parameters.filter(p=>master.has(p.id)).map(p=>p.id)),expectedMasterIDs);assert.equal(doc.parameters.filter(p=>!master.has(p.id)).length,1);assert.equal(doc.song.length,1);assert.ok(doc.motion.values.some(v=>v!==null));assert.equal(doc.soundBanks[0],'MIAMI');assert.match(x.get('status').textContent,/Download requested/);assert.equal(doc.context.view,'sound');const before=review(x);
 x.press('undo');assert.notEqual(review(x),before);x.press('undo');assert.notEqual(review(x),before);
 await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});assert.equal(x.get('draft-dialog').open,true);assert.notEqual(review(x),before);x.press('draft-replace');assert.equal(review(x),before);assert.equal(x.get('undo').disabled,true);assert.equal(x.get('redo').disabled,true);assert.equal(x.get('part').value,'chicago');assert.match(x.get('other-view').innerHTML,/Sound · Bass A \/ MIAMI/);
 // New edits after restore participate in a fresh timeline and Undo returns to restored local data.
@@ -96,3 +97,177 @@ for(const rollFirst of[true,false]){
  velocity.emit('pointerdown',event(stepTarget,303,{clientY:10}));velocity.emit('pointerup',event(stepTarget,303));assert.notDeepEqual((await snapshot()).notes,crossBefore);laneApp.press('undo');assert.deepEqual((await snapshot()).notes,crossBefore);
 }
 console.log('PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available');
+
+const capacityApp = await boot();
+capacityApp.press('draft-save');
+const capacityDraft = JSON.parse(await capacityApp.download());
+const patterns = [0, 1, 15, 30, 31];
+capacityDraft.song = Array.from({length: 1023}, () => ({patterns, repeats: 8, muteMask: 10}));
+capacityDraft.launch = patterns;
+capacityDraft.context.view = 'song';
+const capacityText = JSON.stringify(capacityDraft);
+await capacityApp.get('draft-file').onchange({target: {files: [{
+ size: Buffer.byteLength(capacityText), text: async () => capacityText,
+}]}});
+capacityApp.press('draft-replace');
+const songPanel = capacityApp.get('other-view');
+const addDisabled = () => songPanel.innerHTML.includes('id="song-add" disabled');
+const addRow = () => songPanel.emit('click', {target: new Node('song-add')});
+async function savedRows() {
+ capacityApp.press('draft-save');
+ return JSON.parse(await capacityApp.download()).song.length;
+}
+assert.equal(addDisabled(), false);
+addRow();
+assert.equal(addDisabled(), true);
+assert.equal(await savedRows(), 1024);
+addRow(); // Exercise the delegated handler even with a synthetic click on a full Song.
+capacityApp.press('undo');
+assert.equal(await savedRows(), 1023);
+assert.equal(addDisabled(), false);
+assert.equal(capacityApp.get('undo').disabled, true);
+capacityApp.press('redo');
+assert.equal(await savedRows(), 1024);
+assert.equal(addDisabled(), true);
+console.log('PASS Song row limit, global Undo/Redo and Draft save at capacity');
+
+async function kitAccentDrafts(){
+ const app=await boot(),screens=JSON.parse(fs.readFileSync(new URL('components.json',base))).screens;
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download());};
+ const load=async doc=>{
+  const text=JSON.stringify(doc);
+  await app.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});
+  app.press('draft-replace');
+ };
+ const fresh=await save();
+ const catalog=JSON.parse(fs.readFileSync(new URL('catalog.json',base))).controls;
+ const field=app.get('parameter-value');
+ for(const [target,kit] of ['909','808'].entries()){
+  const entries=screens.filter(s=>s.successor?.sourceVoice?.kit===target);
+  const address='1:'+target+':11:1';
+  const keys=entries.map(s=>s.path+'|'+address);
+  assert.equal(keys.length,11);
+  const descriptor=catalog.find(c=>c.target===target&&c.voice===11&&c.parameter===1&&c.kind==='U32');
+  assert.deepEqual([descriptor.id,descriptor.voiceLabel,descriptor.label,descriptor.min,descriptor.max],
+   [target===0?354:738,'KIT',target===0?'Veloc':'Accent',0,127]);
+  assert.ok(entries.every(screen=>screen.successor.sourceVoice.pages.some(page=>page.title==='KIT'&&page.controls.some(c=>c.kind===1&&c.a===target&&c.b===11&&c.id===1))));
+  const open=voice=>{
+   app.changePart('drum'+kit,kit);app.view('sound');
+   app.get('other-view').emit('change',{target:Object.assign(new Node('sound-voice'),{value:String(voice)})});
+   const index=entries[voice].controls.findIndex(c=>c.identity===address);
+   const hit=Object.assign(new Node(),{dataset:{param:keys[voice],paramOccurrence:String(index)}});
+   app.get('other-view').emit('pointerdown',event(hit));app.get('other-view').emit('pointerup',event(hit));
+   return Number(field.value);
+  };
+  const edit=value=>{field.value=String(value);field.onchange();};
+  await load(fresh);
+  assert.equal(open(0),127);edit(100);
+  assert.deepEqual(keys.map((_,i)=>open(i)),Array(11).fill(100));
+  app.view('files');assert.match(app.get('other-view').innerHTML,/1 sound edits/);
+  assert.equal(review(app),'Parameter · '+kit+' / KIT · '+(target===0?'Velocity':'Accent')+': 100% → 79%');
+  app.press('undo');assert.equal(review(app),'No changes.');app.press('redo');
+  const edited=await save();
+  assert.deepEqual(edited.parameters.filter(p=>keys.includes(p.id)).map(p=>p.value),Array(11).fill(100));
+  assert.deepEqual(edited.stepLanes,fresh.stepLanes);
+  const imported=structuredClone(fresh);
+  imported.parameters.push({id:keys[1],value:100});
+  await load(imported);assert.equal(open(7),100);
+  assert.deepEqual((await save()).parameters,imported.parameters);
+  imported.parameters.unshift({id:keys[0],value:127});
+  await load(imported);
+  assert.equal(open(0),127);assert.equal(open(1),100);assert.equal(open(7),127);
+  assert.match(review(app),/conflicting saved values · BD 100% \(127\/127\), SD 79% \(100\/127\)/);
+  // Editing a third voice resolves the historical ambiguity. Undo restores the
+  // original explicit values, their order, and the absence of other entries.
+  open(7);
+  const index=entries[7].controls.findIndex(c=>c.identity===address);
+  const hit=Object.assign(new Node(),{dataset:{param:keys[7],paramOccurrence:String(index)}});
+  app.get('other-view').emit('pointerdown',event(hit,92));
+  app.get('other-view').emit('pointermove',event(hit,92,{clientX:-32}));
+  assert.notEqual(Number(field.value),127);
+  app.get('other-view').emit('pointercancel',event(hit,92));
+  assert.deepEqual((await save()).parameters,imported.parameters);
+  edit(90);assert.equal(open(0),90);assert.equal(open(1),90);
+  app.press('undo');assert.deepEqual((await save()).parameters,imported.parameters);
+  app.press('redo');assert.deepEqual((await save()).parameters.filter(p=>keys.includes(p.id)).map(p=>p.value),Array(11).fill(90));
+  await load(edited);assert.deepEqual(keys.map((_,i)=>open(i)),Array(11).fill(100));
+ }
+}
+await kitAccentDrafts();
+console.log('PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips');
+
+async function sharedReviewReadouts() {
+ const app=await boot(),pane=app.get('other-view'),field=app.get('parameter-value'),readout=app.get('parameter-readout');
+ const save=async()=>{app.press('draft-save');return JSON.parse(await app.download())};
+ const editButton=(id,rawBefore,rawAfter)=>{
+  const target=Object.assign(new Node(),{dataset:{param:id}});
+  pane.emit('keydown',event(target,1,{key:'Enter'}));
+  assert.equal(Number(field.value),rawBefore,id);
+  const before=readout.textContent;
+  field.value=String(rawAfter);field.onchange();
+  return [before,readout.textContent];
+ };
+ const editSlider=(id,rawAfter)=>{
+  const output=new Node();
+  const slider=Object.assign(new Node(),{value:String(rawAfter),dataset:{nativeParam:id}});
+  slider.closest=selector=>selector==='.funkybeats-typed-unit'?{querySelector:()=>output}:null;
+  pane.emit('input',{target:slider});
+  pane.emit('change',{target:slider});
+  return [output.textContent,slider.attributes['aria-valuetext']];
+ };
+ const component=(file,address)=>'current-state-and-reference/'+file+'.svg|'+address;
+ const drive=component('mix-master','1:4:0:2'),decay=component('fx-reverb-direct','1:4:0:4');
+ const feedback=component('fx-delay-direct','1:4:0:9'),level=component('mix-parts-live','1:5:0:0');
+ const send=component('fx-reverb-direct','1:5:0:1'),wear='catalog/1551';
+ const wave='source-sound/CHICAGO/0|1:2:0:0:0',cutoff='source-sound/CHICAGO/0|1:2:0:2:0';
+ const displays={};
+ app.view('mix');
+ displays.level=editSlider(level,76);
+ pane.emit('click',{target:Object.assign(new Node(),{dataset:{mixMode:'fx'}})});
+ displays.drive=editButton(drive,41,53);
+ displays.decay=editButton(decay,73,74);
+ displays.feedback=editButton(feedback,52,53);
+ displays.wear=editButton(wear,64,65);
+ displays.send=editSlider(send,127);
+ app.view('sound');
+ displays.wave=editSlider(wave,127);
+ displays.cutoff=editButton(cutoff,32,64);
+ const saved=await save(),summary=review(app);
+ assert.deepEqual(await save(),saved,'Review does not change the Draft DTO');
+ const stored=new Map(saved.parameters.map(entry=>[entry.id,entry.value]));
+ for(const [id,value] of [[drive,53],[decay,74],[feedback,53],[level,76],[send,127],[wear,65],[wave,127],[cutoff,64]])assert.equal(stored.get(id),value,id);
+ const aliases=[...stored.entries()].filter(([id])=>id.endsWith('|1:5:0:1'));
+ assert.equal(aliases.length,3,'All original mixer aliases stay in the serialized Draft');
+ assert.ok(aliases.every(([,value])=>value===127));
+
+ const mixed=summary.split('\n').filter(line=>line.includes('Mix / 909'));
+ const formats=Object.fromEntries(['Drive','DECAY','FEEDBACK','Wear','WAVE','CUTOFF'].map(label=>[label,
+  summary.split('\n').find(line=>line.includes(label+':'))?.split(label+': ').at(-1)]));
+ assert.deepEqual({displays,mixed,formats},{
+  displays:{level:['-4.8dB','-4.8dB'],drive:['32%','42%'],decay:['62%','63%'],
+   feedback:['35%','35%'],wear:['50%','51%'],send:['100%','100%'],wave:['SQR','SQR'],cutoff:['25 %','50 %']},
+  mixed:['Parameter · Mix / 909 · Level: -5dB → -4.8dB','Parameter · Mix / 909 · Reverb send: 0% → 100%'],
+  formats:{Drive:'32% → 42%',DECAY:'62% → 63%',FEEDBACK:'35% (+1 step)',Wear:'50% → 51%',WAVE:'SAW → SQR',CUTOFF:'25 % → 50 %'},
+ });
+ app.view('files');
+ assert.match(pane.innerHTML,/8 sound edits/,'Projects counts one sound edit per Mix alias group');
+
+ app.view('mix');
+ const beforeComp=await save();
+ const comp=component('mix-master','1:6:0:12');
+ const sourceData=filename=>JSON.parse(fs.readFileSync(new URL(filename,base)));
+ const master=createMasterDraft(sourceData('components.json'),sourceData('catalog.json'));
+ const oracle=new Map(beforeComp.parameters.map(entry=>[entry.id,entry.value]));
+ const edit=master.change(comp,oracle,96);edit.redo();
+ editButton(comp,95,96);
+ assert.deepEqual(new Map((await save()).parameters.map(entry=>[entry.id,entry.value])),oracle);
+ const withComp=review(app);
+ assert.match(withComp,/COMP:/);
+ assert.match(withComp,/Threshold:/);
+ app.press('undo');
+ assert.deepEqual((await save()).parameters,beforeComp.parameters,'One Undo restores the whole COMP gesture');
+ app.press('redo');
+ assert.equal(review(app),withComp,'Redo restores coupled detail readouts and the raw edit');
+}
+await sharedReviewReadouts();
+console.log('PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled');

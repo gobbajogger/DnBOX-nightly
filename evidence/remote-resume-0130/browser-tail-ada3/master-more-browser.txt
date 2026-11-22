@@ -1,0 +1,5 @@
+{"files":304,"output":"/workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/master-more-z2jts4ao","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+MASTER_MORE_EVIDENCE /workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/master-more-evidence/20261122T030242-636
+MASTER_MORE PASS 1440 900 12 complete units/ancestors/hit/Tab/ShiftTab/detail/touch, observed scalar+macro cancel, exact legacy imports/history, source boundary
+MASTER_MORE PASS 390 844 12 complete units/ancestors/hit/Tab/ShiftTab/detail/touch, observed scalar+macro cancel, exact legacy imports/history, source boundary
+MASTER_MORE PASS 844 390 12 complete units/ancestors/hit/Tab/ShiftTab/detail/touch, observed scalar+macro cancel, exact legacy imports/history, source boundary

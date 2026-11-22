@@ -1,0 +1,10 @@
+  ok tempo == 120
+  ok view == 0
+  ok view == 6
+  ok songlen == 3
+  ok view == 4
+  ok view == 3
+  ok playing == 1
+  ok playing == 0
+  ok view == 5
+host: 13220 ms simulated, 1850 blits, render 3.4% of real time (host CPU)

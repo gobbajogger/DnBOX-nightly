@@ -1,0 +1,343 @@
+{
+  "source": "d7da044586fb0df3a2748950b60a3afdada3470a",
+  "tree": "d56f73184b8417c8bf8a9dab777ff3890cf20a53",
+  "chromium": "151.0.7922.34 (bundled, sandboxed)",
+  "scope": "All 30 independent package.json test:browser suites following the FunkyBeats journey. This is a supplemental run, not a passing unfiltered gate.",
+  "nativeInputs": {
+    "releasePackages": "Public official Pro + Elite at v0.0.26 and v0.0.25.1, verified SHA-256/size against the committed installer catalog.",
+    "emulator": "Pinned Linux browser runtime with original SHA-verified WASM, no device.",
+    "remoteHost": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8",
+    "landscapeOriginalBank": "Original external SuperJ6 archive unavailable; built-in fixture for import layout."
+  },
+  "initialOutcomes": {
+    "wrapper-interrupted": 3,
+    "pass": 23,
+    "failed": 4
+  },
+  "runs": [
+    {
+      "path": "tests/product-remote/mix-family-browser.py",
+      "exit": 124,
+      "outcome": "wrapper-interrupted",
+      "announcedUtc": "2026-11-21T15:43:37.317496+00:00",
+      "launcherSeconds": 240.1,
+      "log": "logs/mix-family-browser.log",
+      "logSha256": "acac0c7eefe16c7a55e49a1da03788b9331bc869bc6c1fa29b8c969504b81f0e",
+      "followup": {
+        "kind": "superseding official gate pass",
+        "sha": "7c59dad5df087994c0d344ffb190be4121cc76d4",
+        "evidence": "All three viewport interaction journeys completed."
+      }
+    },
+    {
+      "path": "tests/browser-admission.py",
+      "exit": 124,
+      "outcome": "wrapper-interrupted",
+      "announcedUtc": "2026-11-21T15:47:37.418850+00:00",
+      "launcherSeconds": 240.3,
+      "log": "logs/browser-admission.log",
+      "logSha256": "37d47fd33489eb355b17cc398db6e99689cd74426056f9684fac4d70c8805d7f",
+      "followup": {
+        "kind": "superseding official gate pass",
+        "sha": "7c59dad5df087994c0d344ffb190be4121cc76d4",
+        "evidence": "680/680 checks"
+      }
+    },
+    {
+      "path": "tests/history-response.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T15:51:37.793021+00:00",
+      "launcherSeconds": 50.6,
+      "log": "logs/history-response.log",
+      "logSha256": "c33f5a39098be4a7f7872be6b8390f14c10fc934db99c5fd80a7d4ec9145205b"
+    },
+    {
+      "path": "tests/bundled-browser.py",
+      "exit": 124,
+      "outcome": "wrapper-interrupted",
+      "announcedUtc": "2026-11-21T15:52:28.348637+00:00",
+      "launcherSeconds": 180.0,
+      "log": "logs/bundled-browser.log",
+      "logSha256": "49dbb4662c6501b81a8d1e4a8ff0771fb208ac17cdb6dd93a5bca931ec8114f9",
+      "followup": {
+        "kind": "superseding official gate pass",
+        "sha": "7c59dad5df087994c0d344ffb190be4121cc76d4",
+        "evidence": "61/61 checks"
+      }
+    },
+    {
+      "path": "tests/workspace-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T15:55:28.749918+00:00",
+      "launcherSeconds": 28.9,
+      "log": "logs/workspace-browser.log",
+      "logSha256": "859c1111b979e36233736ff430c08395da21464ef7ad814c2be3560047362d3b"
+    },
+    {
+      "path": "tests/presentation-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T15:55:57.627803+00:00",
+      "launcherSeconds": 89.8,
+      "log": "logs/presentation-browser.log",
+      "logSha256": "c6df4363e10246de19f4cc3029d5c96b9cb8222701c31584f4ea8214a5dc7af7"
+    },
+    {
+      "path": "tests/project-workspace-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T15:57:27.421118+00:00",
+      "launcherSeconds": 50.6,
+      "log": "logs/project-workspace-browser.log",
+      "logSha256": "0fc99167516e410730ea3dbce630306001f1addba0b5b1b592b86b62a50b570f"
+    },
+    {
+      "path": "tests/product-remote/firmware-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T15:58:17.986502+00:00",
+      "launcherSeconds": 151.1,
+      "log": "logs/firmware-browser.log",
+      "logSha256": "2943a3b7f8863c1a4ccba5fca0bd33162185b1a0df9142813cd33ff4ffc64df1"
+    },
+    {
+      "path": "tests/product-remote/envelope-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:00:49.106727+00:00",
+      "launcherSeconds": 152.0,
+      "log": "logs/envelope-browser.log",
+      "logSha256": "f68d3c1b4efa70c3caacef2dd04961800712e68891315aecb7323cff9e429df2"
+    },
+    {
+      "path": "tests/product-remote/native-mix-browser.py",
+      "exit": 1,
+      "outcome": "failed",
+      "announcedUtc": "2026-11-21T16:03:21.092421+00:00",
+      "launcherSeconds": 123.6,
+      "log": "logs/native-mix-browser.log",
+      "logSha256": "7a0821c0639ec5edc9f8eaab35810391c1c0da4119b68c78f5db762126780ec6",
+      "followup": {
+        "kind": "corrected test and full suite pass",
+        "sha": "7c59dad5df087994c0d344ffb190be4121cc76d4",
+        "evidence": "Delay feedback raw 52 and 53 both display 35%, raw 54 displays 36%. Corrected all 29 controls and Undo on three sizes.",
+        "receiptBlob": "0b757b2494a56e828b1bf3f64c857dc9fb7c5a0e"
+      }
+    },
+    {
+      "path": "tests/product-remote/native-master-output.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:05:24.801184+00:00",
+      "launcherSeconds": 84.3,
+      "log": "logs/native-master-output.log",
+      "logSha256": "f2f4b7b84c25c8dd565a784b0822eb1bd3d218190584c6fada1f349823e3871b"
+    },
+    {
+      "path": "tests/product-remote/glyph-domain-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:06:49.136314+00:00",
+      "launcherSeconds": 53.1,
+      "log": "logs/glyph-domain-browser.log",
+      "logSha256": "ebe22930b3f37b640884093c89c5d5de612be55d9de3d0832a26990972c3c892"
+    },
+    {
+      "path": "tests/installer-deadline-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:07:42.194110+00:00",
+      "launcherSeconds": 29.9,
+      "log": "logs/installer-deadline-browser.log",
+      "logSha256": "510fdd0b53e18c2849b73d263338d8895b21a721a0b621311d0a83e13309ea66"
+    },
+    {
+      "path": "tests/presets-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:08:12.079972+00:00",
+      "launcherSeconds": 159.6,
+      "log": "logs/presets-browser.log",
+      "logSha256": "08dc4c680f6c4adfc1a7d45838e991dd44065bb327f8cf7b85f3951c30e39ec0"
+    },
+    {
+      "path": "tests/manual-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:10:51.689938+00:00",
+      "launcherSeconds": 78.2,
+      "log": "logs/manual-browser.log",
+      "logSha256": "5375df575ab51531bb6a7c93a03ba6b497b499932fa21689733c5b08a8c38a29"
+    },
+    {
+      "path": "tests/product-workspace/recovery-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:12:09.918598+00:00",
+      "launcherSeconds": 122.9,
+      "log": "logs/recovery-browser.log",
+      "logSha256": "f8a5533b5e2d5addd1843d4447e3896a3dfab96f555ed8fcd090ae6ad9cac78b"
+    },
+    {
+      "path": "tests/product-remote/native-sound-browser.py",
+      "exit": 1,
+      "outcome": "failed",
+      "announcedUtc": "2026-11-21T16:14:12.887081+00:00",
+      "launcherSeconds": 1481.5,
+      "log": "logs/native-sound-browser.log",
+      "logSha256": "79f1f84dd518e37c10b4f185a9a31ed2806f73d3c486d80788b13a05527cea0e",
+      "followup": {
+        "kind": "published correction with focused source-equivalent pass",
+        "sha": "6a0cac5bb197fc478d89f0441e3098ee798d1aec",
+        "evidence": "Actual startup digest delay reproduced input delivery before draft-file onchange binding. The same original file passes validation and round-trips after main[aria-busy=false]. Normal coded rejection opens an error modal.",
+        "receiptBlob": "602f6056d60027edf15fdab3504f416eeac2925a"
+      },
+      "scheduledBrowserPause": {
+        "suite": "tests/product-remote/native-sound-browser.py",
+        "launcherAnnouncedUtc": "2026-11-21T16:14:12.887081+00:00",
+        "releasedUtc": "2026-11-21T16:38:02Z",
+        "nextSuiteStartedUtc": "2026-11-21T16:38:54.755037+00:00",
+        "durationExplanation": "The launcher collected time before acquiring its log; results.json elapsed includes the deliberate quiet window. Chromium ran roughly 53 seconds, including the original 30-second click timeout.",
+        "failureCapture": "checkout/test-results/native-sound/1440x900/failure.json"
+      }
+    },
+    {
+      "path": "tests/product-remote/r22-panels-browser.py",
+      "exit": 1,
+      "outcome": "failed",
+      "announcedUtc": "2026-11-21T16:38:54.755037+00:00",
+      "launcherSeconds": 42.8,
+      "log": "logs/r22-panels-browser.log",
+      "logSha256": "80da52b819349423634924e2a69cafc63765f0af1f4739e7ac9fd45da14cb9d6",
+      "followup": {
+        "kind": "unchanged rerun pass",
+        "sha": "d7da044586fb0df3a2748950b60a3afdada3470a",
+        "evidence": "First run passed desktop and exceeded its existing 5s readiness assertion on phone. Unchanged isolated 303-file build passed all three viewports.",
+        "log": "r22-full-replay.log"
+      }
+    },
+    {
+      "path": "tests/product-remote/drum-controls-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:39:37.659711+00:00",
+      "launcherSeconds": 579.3,
+      "log": "logs/drum-controls-browser.log",
+      "logSha256": "458ce1e83b2e921d8f88d179b7e71dd591410fbdd87ceeaaf80bb312e99e88f9"
+    },
+    {
+      "path": "tests/product-remote/song-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:49:17.045343+00:00",
+      "launcherSeconds": 317.1,
+      "log": "logs/song-browser.log",
+      "logSha256": "105deebb1541a080a8b2eead7b11b9eacf791443ae3b53826be6b133562db0a0"
+    },
+    {
+      "path": "tests/product-remote/playing-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:54:34.900976+00:00",
+      "launcherSeconds": 189.4,
+      "log": "logs/playing-browser.log",
+      "logSha256": "b016c42c9ca149480dd50cea519c661cc85403e449f3a9aa9f6695d166efae4f"
+    },
+    {
+      "path": "tests/product-remote/motion-composition-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T16:57:44.654578+00:00",
+      "launcherSeconds": 289.7,
+      "log": "logs/motion-composition-browser.log",
+      "logSha256": "0cdf3c792c0b9b8d27d976a50a2f517a41b8d7d33ed26021712ba62384277962"
+    },
+    {
+      "path": "tests/product-remote/composition-browser.py",
+      "exit": 1,
+      "outcome": "failed",
+      "announcedUtc": "2026-11-21T17:02:34.982598+00:00",
+      "launcherSeconds": 231.1,
+      "log": "logs/composition-browser.log",
+      "logSha256": "97963138909f1e0215ad13165c72eae2a5508dde1f145c16d0b32b158ef77fb5",
+      "followup": {
+        "kind": "published test correction with focused source-equivalent pass",
+        "sha": "a394baac787491c7a8401ec122f8a00840fd1b29",
+        "evidence": "The 1.578 s first break legitimately finishes before later polling. Actual media, Stop/Play, trusted Sound keyboard activation during a longer genuine sample, retirement before natural end and 503 refusal passed on 3 sizes.",
+        "receiptBlob": "ba5cf4ea3c4d5e9af8d345ef8529ea74f9b609e0"
+      }
+    },
+    {
+      "path": "tests/product-remote/master-more-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:06:26.102457+00:00",
+      "launcherSeconds": 1069.9,
+      "log": "logs/master-more-browser.log",
+      "logSha256": "1e54ac6fcf170a112dba6ff498864373a8649b371f66bc359e6e05f9107008ff"
+    },
+    {
+      "path": "tests/product-remote/navigation-state-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:24:16.027198+00:00",
+      "launcherSeconds": 234.0,
+      "log": "logs/navigation-state-browser.log",
+      "logSha256": "911d3cee6fd397f5aa92a962a4e1d25e93c489e3659f5b3138e7e82515aa4edc",
+      "scheduledBrowserPause": {
+        "suite": "tests/product-remote/navigation-state-browser.py",
+        "launcherAnnouncedUtc": "2026-11-21T17:24:16.027198+00:00",
+        "releasedUtc": "2026-11-21T17:26:48.019646+00:00",
+        "nextSuiteStartedUtc": "2026-11-21T17:28:10.009450+00:00",
+        "reason": "The launcher was held before child startup so independent R22 and the trusted-keyboard preview could run in sequence."
+      }
+    },
+    {
+      "path": "tests/product-remote/source-banks-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:28:10.009450+00:00",
+      "launcherSeconds": 72.6,
+      "log": "logs/source-banks-browser.log",
+      "logSha256": "13eb19b202b45c1f78545e01361aac780fdecafb95d7a2611cafd334ccf84f57"
+    },
+    {
+      "path": "tests/product-remote/landscape-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:29:22.662144+00:00",
+      "launcherSeconds": 76.8,
+      "log": "logs/landscape-browser.log",
+      "logSha256": "dccf6c242eb3c4a04c20543927894983c08bb070e09595f49ea7f8f98bbdf5e1"
+    },
+    {
+      "path": "tests/emulator-lcd-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:30:39.512927+00:00",
+      "launcherSeconds": 44.5,
+      "log": "logs/emulator-lcd-browser.log",
+      "logSha256": "9c828b590f24af1b7b2f10a52deb4897d9deb4fcafca16cd00ce5d61efdd0ef9"
+    },
+    {
+      "path": "tests/admin-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:31:24.036084+00:00",
+      "launcherSeconds": 4.4,
+      "log": "logs/admin-browser.log",
+      "logSha256": "438d78c85a5cf69cb2ce87e1d2a8330380912f65c2bb07e65b4fff1804e5a9ea"
+    },
+    {
+      "path": "tests/firmware-reference-browser.py",
+      "exit": 0,
+      "outcome": "pass",
+      "announcedUtc": "2026-11-21T17:31:28.473027+00:00",
+      "launcherSeconds": 160.9,
+      "log": "logs/firmware-reference-browser.log",
+      "logSha256": "62d78bbe40e055d3cc40c4c554194f19833fb1ad296eea1e65c2bd43933e0775"
+    }
+  ]
+}

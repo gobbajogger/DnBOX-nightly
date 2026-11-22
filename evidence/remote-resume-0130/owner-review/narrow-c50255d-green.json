@@ -1,0 +1,1587 @@
+{
+  "source": "narrow-style-c50255d2e522",
+  "product": {
+    "app.mjs": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+    "style.css": "c50255d2e522565e6cb51e3e76e4061ff4b2c4aa9878e9a004104ad38546ef3d",
+    "funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7",
+    "drum-strip.mjs": "4871ee008976a77d4b9f2e60a5c15069c7a7b7b2246fca8bf2149fd176984d1e"
+  },
+  "pdf": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+  "states": {
+    "640x360-909-grid": {
+      "body": [
+        640,
+        360
+      ],
+      "workspace": [
+        12,
+        138,
+        616,
+        190
+      ],
+      "grid": [
+        12,
+        199.59375,
+        768,
+        72.40625
+      ],
+      "sound": [
+        288,
+        175.59375,
+        340,
+        144.40625
+      ],
+      "pngSha256": "fff5dbe29689b38ad73e6e921113ce9c4569060aa97fa75769837d7ace5fe7cf",
+      "initialFullBankPads": 4
+    },
+    "640x360-909-sound": {
+      "body": [
+        640,
+        360
+      ],
+      "workspace": [
+        12,
+        138,
+        616,
+        190
+      ],
+      "grid": null,
+      "sound": null,
+      "pngSha256": "e7a75761862dfe9a21b8b1855ddbdab152a5b7a744c3f4b800b2a0ef08e4132f",
+      "initialFullBankPads": 0
+    },
+    "640x360-808-grid": {
+      "body": [
+        640,
+        360
+      ],
+      "workspace": [
+        12,
+        138,
+        616,
+        190
+      ],
+      "grid": [
+        12,
+        199.59375,
+        768,
+        72.40625
+      ],
+      "sound": [
+        288,
+        175.59375,
+        340,
+        144.40625
+      ],
+      "pngSha256": "8c516e1d4d14daee6448ea886865ce12a53a8d6212c69e35bf8e5128d633be26",
+      "initialFullBankPads": 4
+    },
+    "640x360-808-sound": {
+      "body": [
+        640,
+        360
+      ],
+      "workspace": [
+        12,
+        138,
+        616,
+        190
+      ],
+      "grid": null,
+      "sound": null,
+      "pngSha256": "395d89f58b6694d77b9e19e5d7ede75c4cb0fc43f573fbf8321dcb691e40e0d7",
+      "initialFullBankPads": 0
+    },
+    "736x414-909-grid": {
+      "body": [
+        736,
+        414
+      ],
+      "workspace": [
+        12,
+        138,
+        712,
+        244
+      ],
+      "grid": [
+        12,
+        199.59375,
+        768,
+        126.40625
+      ],
+      "sound": [
+        384,
+        175.59375,
+        340,
+        198.40625
+      ],
+      "pngSha256": "6cece01c00688aa113d577d4a3e86befb08458738fb9437901190ff6ea99e502",
+      "initialFullBankPads": 12
+    },
+    "736x414-909-sound": {
+      "body": [
+        736,
+        414
+      ],
+      "workspace": [
+        12,
+        138,
+        712,
+        244
+      ],
+      "grid": null,
+      "sound": null,
+      "pngSha256": "99a7aaf9e3544108fe63662bae3e605bcf968c2fa7cd0907a987608d4f46b619",
+      "initialFullBankPads": 0
+    },
+    "736x414-808-grid": {
+      "body": [
+        736,
+        414
+      ],
+      "workspace": [
+        12,
+        138,
+        712,
+        244
+      ],
+      "grid": [
+        12,
+        199.59375,
+        768,
+        126.40625
+      ],
+      "sound": [
+        384,
+        175.59375,
+        340,
+        198.40625
+      ],
+      "pngSha256": "63eac13dd5dd02150b547ed7b082f94963b69cb1940408cf4da9145d863efcb4",
+      "initialFullBankPads": 12
+    },
+    "736x414-808-sound": {
+      "body": [
+        736,
+        414
+      ],
+      "workspace": [
+        12,
+        138,
+        712,
+        244
+      ],
+      "grid": null,
+      "sound": null,
+      "pngSha256": "710a594512a8a70d5da94474c291f397a53b835510ffcd2e00b1426725605f8b",
+      "initialFullBankPads": 0
+    }
+  },
+  "actions": {},
+  "navigation": {
+    "640x360-default": {
+      "before": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            91
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      },
+      "after": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            91
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      }
+    },
+    "640x360-909": {
+      "engineSelected": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      },
+      "overflowOpened": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      },
+      "drumsOpened": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      }
+    },
+    "640x360-808": {
+      "engineSelected": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      },
+      "overflowOpened": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      },
+      "drumsOpened": {
+        "viewport": [
+          640,
+          360,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          },
+          {
+            "scrollLeft": 0,
+            "width": 640,
+            "client": 640
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            640
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            628
+          ],
+          ".engines": [
+            12,
+            628
+          ],
+          ".engine-list": [
+            12,
+            628
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            360,
+            508
+          ],
+          ".history": [
+            516,
+            588
+          ],
+          ".overflow summary": [
+            596,
+            628
+          ],
+          "#workspace-main": [
+            0,
+            640
+          ]
+        }
+      }
+    },
+    "736x414-default": {
+      "before": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            91
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      },
+      "after": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            91
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      }
+    },
+    "736x414-909": {
+      "engineSelected": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      },
+      "overflowOpened": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      },
+      "drumsOpened": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      }
+    },
+    "736x414-808": {
+      "engineSelected": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      },
+      "overflowOpened": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      },
+      "drumsOpened": {
+        "viewport": [
+          736,
+          414,
+          0,
+          0
+        ],
+        "scrolling": [
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          },
+          {
+            "scrollLeft": 0,
+            "width": 736,
+            "client": 736
+          }
+        ],
+        "boxes": {
+          ".top": [
+            0,
+            736
+          ],
+          ".brand": [
+            12,
+            101.203125
+          ],
+          ".tabs": [
+            12,
+            724
+          ],
+          ".engines": [
+            12,
+            724
+          ],
+          ".engine-list": [
+            12,
+            724
+          ],
+          "#part-title": [
+            12,
+            66
+          ],
+          ".transport": [
+            456,
+            604
+          ],
+          ".history": [
+            612,
+            684
+          ],
+          ".overflow summary": [
+            692,
+            724
+          ],
+          "#workspace-main": [
+            0,
+            736
+          ]
+        }
+      }
+    }
+  },
+  "errors": [],
+  "chromium": "151.0.7922.34",
+  "scannedViewports": [
+    [
+      640,
+      360
+    ],
+    [
+      736,
+      414
+    ]
+  ],
+  "productFixture": {
+    "640": {
+      "browser": "151.0.7922.34",
+      "sourceSha256": {
+        "web/product-site/remote/style.css": "c50255d2e522565e6cb51e3e76e4061ff4b2c4aa9878e9a004104ad38546ef3d",
+        "web/product-site/remote/funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7",
+        "web/product-site/remote/glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+        "tests/product-remote/page15-density-browser.py": "7ecebfe5b8ea442db90e2cd1ccaeeccb53b1f36fdd270ce312482617a7053cc3"
+      },
+      "states": [
+        {
+          "viewport": [
+            640,
+            360
+          ],
+          "body": [
+            640,
+            360
+          ],
+          "hiddenScroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "mounted": 176,
+          "visible": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "first": {
+            "x": 77,
+            "y": 202.59375,
+            "width": 40,
+            "height": 40,
+            "top": 202.59375,
+            "right": 117,
+            "bottom": 242.59375,
+            "left": 77
+          },
+          "sound": {
+            "x": 288,
+            "y": 175.59375,
+            "width": 340,
+            "height": 144.40625,
+            "top": 175.59375,
+            "right": 628,
+            "bottom": 320,
+            "left": 288
+          },
+          "navigation": [
+            {
+              "name": "Voices 1\u20136",
+              "whole": false
+            },
+            {
+              "name": "Voices 7\u201311",
+              "whole": false
+            },
+            {
+              "name": "Accent lane",
+              "whole": false
+            },
+            {
+              "name": "Review draft",
+              "whole": false
+            }
+          ],
+          "kit": "909"
+        },
+        {
+          "viewport": [
+            640,
+            360
+          ],
+          "body": [
+            640,
+            360
+          ],
+          "hiddenScroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "mounted": 176,
+          "visible": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "first": {
+            "x": 77,
+            "y": 202.59375,
+            "width": 40,
+            "height": 40,
+            "top": 202.59375,
+            "right": 117,
+            "bottom": 242.59375,
+            "left": 77
+          },
+          "sound": {
+            "x": 288,
+            "y": 175.59375,
+            "width": 340,
+            "height": 144.40625,
+            "top": 175.59375,
+            "right": 628,
+            "bottom": 320,
+            "left": 288
+          },
+          "navigation": [
+            {
+              "name": "Voices 1\u20136",
+              "whole": false
+            },
+            {
+              "name": "Voices 7\u201311",
+              "whole": false
+            },
+            {
+              "name": "Accent lane",
+              "whole": false
+            },
+            {
+              "name": "Review draft",
+              "whole": false
+            }
+          ],
+          "kit": "808"
+        }
+      ],
+      "errors": [],
+      "status": "PASS"
+    },
+    "736": {
+      "browser": "151.0.7922.34",
+      "sourceSha256": {
+        "web/product-site/remote/style.css": "c50255d2e522565e6cb51e3e76e4061ff4b2c4aa9878e9a004104ad38546ef3d",
+        "web/product-site/remote/funkybeats-view.mjs": "a355a3e17f0f7bf176183e495c975a418cf8bb139e7f75531292456216542ad7",
+        "web/product-site/remote/glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+        "tests/product-remote/page15-density-browser.py": "7ecebfe5b8ea442db90e2cd1ccaeeccb53b1f36fdd270ce312482617a7053cc3"
+      },
+      "states": [
+        {
+          "viewport": [
+            736,
+            414
+          ],
+          "body": [
+            736,
+            414
+          ],
+          "hiddenScroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "mounted": 176,
+          "visible": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ]
+          ],
+          "first": {
+            "x": 77,
+            "y": 202.59375,
+            "width": 40,
+            "height": 40,
+            "top": 202.59375,
+            "right": 117,
+            "bottom": 242.59375,
+            "left": 77
+          },
+          "sound": {
+            "x": 384,
+            "y": 175.59375,
+            "width": 340,
+            "height": 198.40625,
+            "top": 175.59375,
+            "right": 724,
+            "bottom": 374,
+            "left": 384
+          },
+          "navigation": [
+            {
+              "name": "Voices 1\u20136",
+              "whole": false
+            },
+            {
+              "name": "Voices 7\u201311",
+              "whole": false
+            },
+            {
+              "name": "Accent lane",
+              "whole": false
+            },
+            {
+              "name": "Review draft",
+              "whole": false
+            }
+          ],
+          "kit": "909"
+        },
+        {
+          "viewport": [
+            736,
+            414
+          ],
+          "body": [
+            736,
+            414
+          ],
+          "hiddenScroll": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "mounted": 176,
+          "visible": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ]
+          ],
+          "first": {
+            "x": 77,
+            "y": 202.59375,
+            "width": 40,
+            "height": 40,
+            "top": 202.59375,
+            "right": 117,
+            "bottom": 242.59375,
+            "left": 77
+          },
+          "sound": {
+            "x": 384,
+            "y": 175.59375,
+            "width": 340,
+            "height": 198.40625,
+            "top": 175.59375,
+            "right": 724,
+            "bottom": 374,
+            "left": 384
+          },
+          "navigation": [
+            {
+              "name": "Voices 1\u20136",
+              "whole": false
+            },
+            {
+              "name": "Voices 7\u201311",
+              "whole": false
+            },
+            {
+              "name": "Accent lane",
+              "whole": false
+            },
+            {
+              "name": "Review draft",
+              "whole": false
+            }
+          ],
+          "kit": "808"
+        }
+      ],
+      "errors": [],
+      "status": "PASS"
+    }
+  }
+}

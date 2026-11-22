@@ -1,0 +1,15 @@
+{
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "nativeRows": 281,
+  "domains": {
+    "909SnareTone": 128,
+    "808SnareTone": 128,
+    "BreakPitch": 25
+  },
+  "fixture": "tests/product-remote/fixtures/f178-source-glyphs.txt",
+  "sha256": "62f8db3c917acf3aa4a96cd895d0ad3ed905148b92ec2ff985513b70ca9a7717",
+  "affectedDefaultCaptures": 12,
+  "ownerDefaultReplacements": 0,
+  "registeredDefaultReplacements": 0,
+  "scope": "Actual source branch geometry adapted inside existing R22 containers; Original donor drawings untouched; does not claim recovery or selection of the 17:00 asset batch."
+}

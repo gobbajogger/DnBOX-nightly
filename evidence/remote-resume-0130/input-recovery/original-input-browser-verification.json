@@ -1,0 +1,33 @@
+{
+  "originalExtension": {
+    "filename": "SuperJ6-AU-original-extension.private.zip",
+    "bytes": 24716801,
+    "sha256": "abe2f2e089306770489fb30c8870f608dc2f2e0804541f624337523679638a28",
+    "zipCrc": "PASS",
+    "bundle": {
+      "CFBundleShortVersionString": "0.999.8",
+      "CFBundleVersion": "9",
+      "CFBundleIdentifier": "com.audiokitpro.superj6.superj6AU"
+    },
+    "executable": {
+      "member": "SuperJ6 AU.appex/SuperJ6 AU",
+      "bytes": 9282464,
+      "sha256": "a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1"
+    }
+  },
+  "originalPresets": {
+    "filename": "J6presets.zip",
+    "bytes": 451262,
+    "sha256": "ab702e00b4cc425c9406b9b2b44e68ba0f40e1125d591fcaa422cc6a8c6272b8",
+    "zipCrc": "PASS",
+    "banks": 12,
+    "presets": 640,
+    "uniquePresetIds": 640
+  },
+  "source": "Two authenticated Library downloads from the pinned source identities cited in the paired firmware original-input ledger.",
+  "projectSources": {
+    "visibleNamedSources": 33,
+    "approved1700GlyphFilenameMatches": 0
+  },
+  "scope": "Original-file and preset inventory recovery, including build identity, ZIP checks and content fingerprints. Original rendering and tempo label observations remain separate."
+}

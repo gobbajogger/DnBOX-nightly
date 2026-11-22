@@ -1,0 +1,25 @@
+{
+  "archiveSha256": "abe2f2e089306770489fb30c8870f608dc2f2e0804541f624337523679638a28",
+  "originalExecutableSha256": "a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1",
+  "version": "0.999.8",
+  "build": "9",
+  "unicorn": "2.1.4",
+  "literalLabels": 18,
+  "binary32Samples": 179,
+  "rateFields": [
+    88,
+    96,
+    100
+  ],
+  "nativeFieldExecutions": 537,
+  "oracleSha256": "8e6abc6fa903fe83b84097014373db210432cc85f3a54a07fdd362301e364e84",
+  "repositoryOracleByteIdentical": true,
+  "actualOriginalBankNodeResult": {
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0
+  },
+  "sourceManifestHashesMatched": 7,
+  "evidenceManifestHashesMatched": 6,
+  "browserLaunched": false
+}

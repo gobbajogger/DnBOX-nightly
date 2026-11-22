@@ -1,0 +1,226 @@
+{
+  "source": "183207ed2b7dd7b346ca5871408b292df4fb0ae2 plus current Projects and narrow CSS",
+  "appSHA256": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c",
+  "cssSHA256": {
+    "before": "c81df9a0186c0a938e32baf398e1e3776854c3a5f687b4c51fa95d9f12a725b2",
+    "after": "9384cd38391b3a4e12d4f277e44427511b81be0c935e6d5d36bd97c340b95991"
+  },
+  "browser": "151.0.7922.34",
+  "errors": [],
+  "images": {
+    "sequence": {
+      "before": {
+        "whole": {
+          "exact": 830463,
+          "tolerantPercent": 9.151543209876543
+        },
+        "top200": {
+          "exact": 66807,
+          "tolerantPercent": 9.564930555555556
+        },
+        "top140": {
+          "exact": 33578,
+          "tolerantPercent": 10.107142857142858
+        },
+        "approvedTop200": {
+          "exact": 84113,
+          "tolerantPercent": 10.599305555555555
+        }
+      },
+      "after": {
+        "whole": {
+          "exact": 792218,
+          "tolerantPercent": 8.428858024691358
+        },
+        "top200": {
+          "exact": 26147,
+          "tolerantPercent": 5.566666666666667
+        },
+        "top140": {
+          "exact": 13175,
+          "tolerantPercent": 5.059523809523809
+        },
+        "approvedTop200": {
+          "exact": 47831,
+          "tolerantPercent": 6.5204861111111105
+        }
+      }
+    },
+    "projects": {
+      "before": {
+        "whole": {
+          "exact": 254671,
+          "tolerantPercent": 6.432253086419753
+        },
+        "top200": {
+          "exact": 48112,
+          "tolerantPercent": 9.032638888888888
+        },
+        "top140": {
+          "exact": 33573,
+          "tolerantPercent": 10.094246031746032
+        },
+        "approvedTop200": {
+          "exact": 67280,
+          "tolerantPercent": 9.987847222222221
+        }
+      },
+      "after": {
+        "whole": {
+          "exact": 340482,
+          "tolerantPercent": 7.641203703703704
+        },
+        "top200": {
+          "exact": 26244,
+          "tolerantPercent": 5.60625
+        },
+        "top140": {
+          "exact": 13178,
+          "tolerantPercent": 5.060515873015873
+        },
+        "approvedTop200": {
+          "exact": 47995,
+          "tolerantPercent": 6.699305555555555
+        }
+      }
+    },
+    "1024x640": {
+      "exact": 17,
+      "tolerantPercent": 0.0
+    },
+    "844x390": {
+      "exact": 0,
+      "tolerantPercent": 0.0
+    },
+    "390x844": {
+      "exact": 17,
+      "tolerantPercent": 0.0
+    }
+  },
+  "indexSHA256": "6c12d15feee50792824ea5b2c3526aa7d711b5a896f376dee48e04a57d81d16e",
+  "referenceSHA256": {
+    "ownerPdf": "db826c9cbeb84971f2d030c847043a21749ad4172e30739773494df0c9acca17",
+    "approvedPage01": "c9f6c4fc91543ac8f3659fd6a48956234a36ee48c781532e2b2623b1fe0a6a72"
+  },
+  "lockedPdfVsApprovedBands": {
+    "0..88": 1.5664457070707072,
+    "88..145": 1.0989278752436649,
+    "145..200": 1.3560606060606062
+  },
+  "observedStages": {
+    "before": {
+      "caseCount": 48,
+      "geometryFailures": {},
+      "representativeTitles": [
+        "808 \u00b7 Not selected \u00b7 Draft",
+        "909 \u00b7 Not selected \u00b7 Draft",
+        "BREAK \u00b7 Not selected \u00b7 Draft",
+        "Bass A \u00b7 Not selected \u00b7 Draft",
+        "Bass B \u00b7 Not selected \u00b7 Draft",
+        "CHICAGO / P01",
+        "MIAMI Wave"
+      ],
+      "desktopProjectsActions": {
+        "1440x900-projects": {
+          "all": 13,
+          "initialViewport": 13,
+          "belowInitialViewport": []
+        },
+        "1340x820-projects": {
+          "all": 13,
+          "initialViewport": 13,
+          "belowInitialViewport": []
+        },
+        "1379x820-projects": {
+          "all": 13,
+          "initialViewport": 13,
+          "belowInitialViewport": []
+        },
+        "1339x820-projects": {
+          "all": 13,
+          "initialViewport": 13,
+          "belowInitialViewport": []
+        },
+        "1440x819-projects": {
+          "all": 13,
+          "initialViewport": 10,
+          "belowInitialViewport": [
+            "Save draft",
+            "Open draft",
+            "Review changes"
+          ]
+        }
+      },
+      "desktopHeaderBottom": 147,
+      "projectsMainHeight": 721
+    },
+    "after": {
+      "caseCount": 48,
+      "geometryFailures": {},
+      "representativeTitles": [
+        "808 \u00b7 Not selected \u00b7 Draft",
+        "909 \u00b7 Not selected \u00b7 Draft",
+        "BREAK \u00b7 Not selected \u00b7 Draft",
+        "Bass A \u00b7 Not selected \u00b7 Draft",
+        "Bass B \u00b7 Not selected \u00b7 Draft",
+        "CHICAGO / P01",
+        "MIAMI Wave"
+      ],
+      "desktopProjectsActions": {
+        "1440x900-projects": {
+          "all": 13,
+          "initialViewport": 7,
+          "belowInitialViewport": [
+            "Samples",
+            "Manual",
+            "Open DAW guide",
+            "Save draft",
+            "Open draft",
+            "Review changes"
+          ]
+        },
+        "1340x820-projects": {
+          "all": 13,
+          "initialViewport": 7,
+          "belowInitialViewport": [
+            "Samples",
+            "Manual",
+            "Open DAW guide",
+            "Save draft",
+            "Open draft",
+            "Review changes"
+          ]
+        },
+        "1379x820-projects": {
+          "all": 13,
+          "initialViewport": 7,
+          "belowInitialViewport": [
+            "Samples",
+            "Manual",
+            "Open DAW guide",
+            "Save draft",
+            "Open draft",
+            "Review changes"
+          ]
+        },
+        "1339x820-projects": {
+          "all": 13,
+          "initialViewport": 13,
+          "belowInitialViewport": []
+        },
+        "1440x819-projects": {
+          "all": 13,
+          "initialViewport": 10,
+          "belowInitialViewport": [
+            "Save draft",
+            "Open draft",
+            "Review changes"
+          ]
+        }
+      },
+      "desktopHeaderBottom": 201,
+      "projectsMainHeight": 667
+    }
+  },
+  "disposition": "Prototype discarded. Projects whole drawing drift and initial viewport controls regressed."
+}

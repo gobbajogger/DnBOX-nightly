@@ -1,0 +1,9 @@
+# Stock dispatcher and TouchOSC boundary
+
+The unchanged `touchosc-host.py` was run against stock firmware `f1786ebec2616477163b62b029c7e77405a9c3de`, using texlua and a freshly compiled audio host. The packed companion SHA-256 is `d56abf8cbfc005b35033403ca4371c1bbda2b1e43fe9d7bf765153ff05ad1124`. All32 note pairs passed (12each on channels2/3 and4each on10/11), including release/disarm/original-channel guards and audible host output. Unassigned channel16 stayed silent; two returned kick NoteOn/Off pairs updated feedback without echo. [Numeric receipt](packed-note-host.json).
+
+A separate freshly compiled read-only probe called the stock production C editor/OTA dispatchers: INFO returned25 bytes; the production Remote encoder's DNR2 HELLO returned zero bytes. The probe aborts every flash operation and accepts only those two read-only commands. [Actual request/reply bytes](stock-dispatch.json).
+
+**This does not close stock parameter coverage.** The existing companion is a20-button note/arming layout. It exposes no DNR2 parameter read/edit/guardedUndo transaction. The successful note host test is not a replacement keyboard deliverable, not a native TouchOSC application test, and not physical USB/BLE/audio acceptance. The requested zero-unbound Browser Remote/TouchOSC parameter coverage cannot be asserted while the stock endpoint returns no HELLO response and the packed companion has no parameter bindings. Qualification is software-only; physical USB/BLE/native-app testing is outside the current scope and is not a completion blocker. Unsupported production controls were not enabled or assigned fake values.
+
+Reproduce with `python3 tests/product-remote/touchosc-host.py /path/to/firmware --firmware-ref f1786ebec2616477163b62b029c7e77405a9c3de --json result.json`. The full build/host log is retained in `.cache/touchosc/stock-f1786ebe.log` for the final external archive; no physical device writes were attempted.

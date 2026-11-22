@@ -1,0 +1,31 @@
+✔ full-file comparisons release scratch files, including after a rejected change (62.53816ms)
+✔ full rendered installer vs live gh-pages differs only by allowlisted hunks (28.079092ms)
+✔ the standalone review rejects font, route and permission changes (80.445336ms)
+✔ release notice comparison rejects a different tag or hardware claim (63.428405ms)
+✔ exact Restore allowance rejects lost padding, forced full headers and unrelated changes (102.367528ms)
+✔ approved release diff rejects drift in the restart handshake and report bindings (49.890067ms)
+✔ publicCatalog keeps display_version so 0.0.25.1 stays 0.0.25.1 (10.541841ms)
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+BUILD PASS — self-contained nightly installer, samples, projects and empty catalog; no firmware files
+✔ current source-generated pages retain all nine published versions and pass read-only parity (183.889889ms)
+✔ sample preparation moved above the installer is refused even with current libraries and catalog (108.943657ms)
+✔ stale generated docs cannot hide changed Breaks and Projects source (104.488291ms)
+✔ self-consistent empty preview pages cannot replace a retained catalog (258.807509ms)
+✔ coherently altered package metadata still fails retained-catalog comparison (343.739063ms)
+✔ renumbered assignments and stale history are reported by their exact paths (78.494748ms)
+✔ a missing staged page is a failing path instead of a partial pass (60.918108ms)
+✔ standalone tool fonts are bundled and changes invalidate earlier generated pages (66.544403ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1808.977192

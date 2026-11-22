@@ -1,0 +1,2581 @@
+{
+  "baseline": "583f622961fc9975fac746592ce6c483073c4170",
+  "accepted_product": "000e29102525a6ce5672a1cdfd7773492b3158b6",
+  "candidate_product_manifest_sha256": "0f03d22d6ea7b27172e9629435317f69cbf44d2c7c2eb3e927f54f3e21129128",
+  "browser": "Playwright Chromium 151.0.7922.34, normal sandbox",
+  "all_routes": [
+    {
+      "route": "index.html",
+      "baseline_html_sha256": "8ebcbd8339b81be3a2a325664155d159f9df827389f672c9be1e94e707cb7597",
+      "candidate_html_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "DnBOX \u00b7 Drums, synths, samples",
+          "width": 1440,
+          "height": 4575,
+          "heads": [
+            "Your sound.\nIn your hands."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "index-1440x900.png",
+          "sha256": "06974218eac0fcd1ae66498ae22556c4bba5b0e2addb952a3f3a7bbcdcf49071",
+          "errors": []
+        },
+        {
+          "route": "index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "DnBOX \u00b7 Drums, synths, samples",
+          "width": 390,
+          "height": 6799,
+          "heads": [
+            "Your sound.\nIn your hands."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "path",
+              "",
+              ""
+            ]
+          ],
+          "status": 200,
+          "screenshot": "index-390x844.png",
+          "sha256": "2d71321282d6f01c9037f8d9e2134b3b77c24106baeeec9926c1e25b73701682",
+          "errors": []
+        },
+        {
+          "route": "index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "DnBOX \u00b7 Drums, synths, samples",
+          "width": 844,
+          "height": 4473,
+          "heads": [
+            "Your sound.\nIn your hands."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "g",
+              "",
+              ""
+            ],
+            [
+              "path",
+              "",
+              ""
+            ]
+          ],
+          "status": 200,
+          "screenshot": "index-844x390.png",
+          "sha256": "b5e68ca02cabfd63303125ca7e2ebaf1be97493fb7bd840e9e0f6c9e21ad3c30",
+          "errors": []
+        }
+      ],
+      "candidate_views": [
+        {
+          "size": [
+            1440,
+            900
+          ],
+          "status": 200,
+          "png_sha256": "22df423322b36a35178a4612d1323f8ba2553421406c47f3856a07b1849e6e3f",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
+          "errors": []
+        },
+        {
+          "size": [
+            390,
+            844
+          ],
+          "status": 200,
+          "png_sha256": "5e75ce842a5b812616d009f24af381416e77e3a2a9d53b909c59c366afaf982a",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
+          "errors": []
+        },
+        {
+          "size": [
+            844,
+            390
+          ],
+          "status": 200,
+          "png_sha256": "c8d34f8a912eca4b634be15e2e9c0217a6dd731ba840219c95654ff4054ef285",
+          "page_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+          "control": "Archived envelope",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "route": "breaks/index.html",
+      "baseline_html_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265",
+      "candidate_html_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "breaks/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "DnBOX break loops",
+          "width": 1440,
+          "height": 1195,
+          "heads": [
+            "Import samples"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "breaks-index-1440x900.png",
+          "sha256": "cf91f01326cf15c7066b04dfec964275709746e4e81d07a066c0db1445074025",
+          "errors": []
+        },
+        {
+          "route": "breaks/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "DnBOX break loops",
+          "width": 390,
+          "height": 1590,
+          "heads": [
+            "Import samples"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "breaks-index-390x844.png",
+          "sha256": "2229e1512b09fb8e0789fa61f3026b8b6bcebde4545dfdbc2aae47794893020f",
+          "errors": []
+        },
+        {
+          "route": "breaks/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "DnBOX break loops",
+          "width": 844,
+          "height": 1232,
+          "heads": [
+            "Import samples"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "breaks-index-844x390.png",
+          "sha256": "e9a75cc46b631d9269ec7dfcdb9fc8b9a2b1744dbf980b8ab3fb74c4bfb5d4e9",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "builds/index.html",
+      "baseline_html_sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+      "candidate_html_sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "builds/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Build history \u00b7 DnBOX",
+          "width": 1440,
+          "height": 71935,
+          "heads": [
+            "Build history"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "failure": "builds-index-1440x900 full-page capture failed: Page.screenshot: Timeout 826ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n",
+          "errors": []
+        },
+        {
+          "route": "builds/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Build history \u00b7 DnBOX",
+          "width": 390,
+          "height": 102781,
+          "heads": [
+            "Build history"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "builds-index-390x844.png",
+          "sha256": "ee54133953541abe597e2bc814984a46d62f706401c8b462c85ee6855d7044d1",
+          "errors": []
+        },
+        {
+          "route": "builds/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Build history \u00b7 DnBOX",
+          "width": 844,
+          "height": 73078,
+          "heads": [
+            "Build history"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "builds-index-844x390.png",
+          "sha256": "eb826270f184470d8c3685ad837c53b4e934d8af2306a6fc7bb01bccbe5a2fe0",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "help/index.html",
+      "baseline_html_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1",
+      "candidate_html_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "help/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Setup and help \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1475,
+          "heads": [
+            "Bring the rig together."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "help-index-1440x900.png",
+          "sha256": "3ef753a70297cd75344411b3d3dda7cd9f6e0fd5cbf46d3d9cad9d4580399d4c",
+          "errors": []
+        },
+        {
+          "route": "help/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Setup and help \u00b7 DnBOX",
+          "width": 390,
+          "height": 1881,
+          "heads": [
+            "Bring the rig together."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "help-index-390x844.png",
+          "sha256": "188207e27b49ebfa2d1266a8108335633ad6583a7afac1b6da4b76bd4f5b43db",
+          "errors": []
+        },
+        {
+          "route": "help/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Setup and help \u00b7 DnBOX",
+          "width": 844,
+          "height": 1460,
+          "heads": [
+            "Bring the rig together."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "help-index-844x390.png",
+          "sha256": "ae29dfc7d1955e6be1977cc4d9e74e411247df1d4f2b4a9040e531c22ec7cd26",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "install/index.html",
+      "baseline_html_sha256": "b5048877d9dbca183f8bb4e43a36bdcd05487f9e63606d311bc509fb127b7097",
+      "candidate_html_sha256": "38a1f1ba149ab7b2251bed73bdc463a250be96ccd89aa50114904b470ec2ccc8",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 1440,
+          "height": 3857,
+          "heads": [
+            "Install firmware"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "install-index-1440x900.png",
+          "sha256": "87b5369fd61282573e488155f963eb4b26656b9fd55a1974d69cf109b718d910",
+          "errors": []
+        },
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 390,
+          "height": 4643,
+          "heads": [
+            "Install firmware"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "install-index-390x844.png",
+          "sha256": "4160028de54b6fa3d544d5305f6cd22a9dd4ac6b0a20e155c3ab4acf4a44db75",
+          "errors": []
+        },
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 844,
+          "height": 4160,
+          "heads": [
+            "Install firmware"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "install-index-844x390.png",
+          "sha256": "42989d30093ba6cc3993fd77b7a93ceba134c338d14c87ecded330b522994ddf",
+          "errors": []
+        }
+      ],
+      "candidate_views": [
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 1440,
+          "height": 2913,
+          "heads": [
+            "Install firmware"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              88,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              23,
+              42,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "workspace-nav",
+              147,
+              44,
+              "Install firmware Import samples Songs & projects"
+            ],
+            [
+              "resource-links",
+              1343,
+              44,
+              "What's new"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "\u65e5\u672c\u8a9e",
+            "Connect USB",
+            "INSTALL FIRMWARE",
+            "\u25b6 Reference",
+            "\u25b6 Processed",
+            "\u25a0 Stop"
+          ],
+          "status": 200,
+          "screenshot": "install-index-1440x900.png",
+          "sha256": "064d00896f12eae07ad92e085c8d4490098d861d4fc512e96dcf5647bb329397",
+          "errors": []
+        },
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 390,
+          "height": 3856,
+          "heads": [
+            "Install firmware"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              109,
+              "DnBOX INSTRUMENTS Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              20,
+              68,
+              "Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "workspace-nav",
+              168,
+              48,
+              "Install firmware Import samples Songs & projects"
+            ],
+            [
+              "resource-links",
+              1502,
+              44,
+              "What's new"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "\u65e5\u672c\u8a9e",
+            "Connect USB",
+            "INSTALL FIRMWARE",
+            "\u25b6 Reference",
+            "\u25b6 Processed",
+            "\u25a0 Stop"
+          ],
+          "status": 200,
+          "screenshot": "install-index-390x844.png",
+          "sha256": "7d45ff7aaa60fd5c5ba8534461c5a7a386fd394266983785b54686ad4efe611b",
+          "errors": []
+        },
+        {
+          "route": "install/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Firmware & samples \u00b7 DnBOX NIGHTLY",
+          "width": 844,
+          "height": 3152,
+          "heads": [
+            "Install firmware"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              88,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              23,
+              42,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "workspace-nav",
+              147,
+              44,
+              "Install firmware Import samples Songs & projects"
+            ],
+            [
+              "resource-links",
+              1321,
+              44,
+              "What's new"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "\u65e5\u672c\u8a9e",
+            "Connect USB",
+            "INSTALL FIRMWARE",
+            "\u25b6 Reference",
+            "\u25b6 Processed",
+            "\u25a0 Stop"
+          ],
+          "status": 200,
+          "screenshot": "install-index-844x390.png",
+          "sha256": "e23aec5eccc4b5627c11c84b6dd4df0481a9f23761ffa2eceec07fd1ef105af0",
+          "errors": []
+        }
+      ],
+      "candidate_view_image_note": "Visual observations precede the compatibility correction to restore the hosted child URL spelling. The hosted task behaviors were reverified."
+    },
+    {
+      "route": "manual/index.html",
+      "baseline_html_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+      "candidate_html_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "manual/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 1440,
+          "height": 2046,
+          "heads": [
+            "DnBOX manual"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-index-1440x900.png",
+          "sha256": "3286fb5ddede702d54aa5913eb5fe5682bf3d597a46983670f55e3e3b76f155e",
+          "errors": []
+        },
+        {
+          "route": "manual/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 390,
+          "height": 2476,
+          "heads": [
+            "DnBOX manual"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-index-390x844.png",
+          "sha256": "b620201f913134db3d9cd83cef0e9962997a7fff3d7b3af1035d895b6b14d352",
+          "errors": []
+        },
+        {
+          "route": "manual/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 844,
+          "height": 2012,
+          "heads": [
+            "DnBOX manual"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-index-844x390.png",
+          "sha256": "35f8cbffea899032e1c4aa49d0c098ce7e18ac3066a75e2da4c23d45865a8006",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "manual/legacy.html",
+      "baseline_html_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+      "candidate_html_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "manual/legacy.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 1440,
+          "height": 29709,
+          "heads": [
+            "DnBOX"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-legacy-1440x900.png",
+          "sha256": "5ba95c88af59622d3d1bf113d3b5bcb28dfa7ad02fbfa0816a925d4904c4eaf3",
+          "errors": []
+        },
+        {
+          "route": "manual/legacy.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 390,
+          "height": 45295,
+          "heads": [
+            "DnBOX"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-legacy-390x844.png",
+          "sha256": "c99c7dd393fe59c684198d78dd0f8a6e5c5bcccc7e613997924e8a846f9422cf",
+          "errors": []
+        },
+        {
+          "route": "manual/legacy.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Manual \u00b7 DnBOX",
+          "width": 844,
+          "height": 30033,
+          "heads": [
+            "DnBOX"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-legacy-844x390.png",
+          "sha256": "ee14c478471411d528891d0acb978c8feee4bea8a50e42776b287d1592ca96c4",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "manual/original/index.html",
+      "baseline_html_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101",
+      "candidate_html_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "manual/original/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Original FM-1 reference \u00b7 DnBOX",
+          "width": 1440,
+          "height": 23563,
+          "heads": [
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "failure": "manual-original-index-1440x900 full-page capture failed: Page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n",
+          "errors": []
+        },
+        {
+          "route": "manual/original/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Original FM-1 reference \u00b7 DnBOX",
+          "width": 390,
+          "height": 35804,
+          "heads": [
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-original-index-390x844.png",
+          "sha256": "d0a57c386ec297f3028cc6ad5e8ccc6fd91afbb8b8b15156b5c610a09aff642a",
+          "errors": []
+        },
+        {
+          "route": "manual/original/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Original FM-1 reference \u00b7 DnBOX",
+          "width": 844,
+          "height": 23421,
+          "heads": [
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-original-index-844x390.png",
+          "sha256": "c61fa426896c12916b6f328871cb586483decc0a484784552a4e4de70a04dc65",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "manual/projects-guide.html",
+      "baseline_html_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92",
+      "candidate_html_sha256": "b36a11cb8854af8c67d5500dab98d15aa0dbbcac71c7741c58209e3081eb45ee",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 1440,
+          "height": 2662,
+          "heads": [
+            "X0X projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-1440x900.png",
+          "sha256": "db429c29935a527e204ab66d5b5d08d008ebcf6e4a9101834174a13d39e86944",
+          "errors": []
+        },
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 390,
+          "height": 4565,
+          "heads": [
+            "X0X projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-390x844.png",
+          "sha256": "5d9216583876c9bf009884e629de791a85b7b002063360fa72d05ea2158e75cd",
+          "errors": []
+        },
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 844,
+          "height": 2647,
+          "heads": [
+            "X0X projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-844x390.png",
+          "sha256": "9d09dffd6ce952289708a204a4578ad688a0b1db8ac8970a62dd3e7da1e17476",
+          "errors": []
+        }
+      ],
+      "candidate_views": [
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 1440,
+          "height": 2662,
+          "heads": [
+            "DnBOX projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              96,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              27,
+              42,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              2586,
+              22,
+              "Manual Build history What\u2019s new Setup & help Source and credits"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-1440x900.png",
+          "sha256": "c4e210893257cc089a21ad94a814dc0a66e60ea7c667cd991737588ca501c3d1",
+          "errors": []
+        },
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 390,
+          "height": 4565,
+          "heads": [
+            "DnBOX projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              121,
+              "DnBOX INSTRUMENTS Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              36,
+              85,
+              "Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              4463,
+              58,
+              "Manual Build history What\u2019s new Setup & help Source and credits"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-390x844.png",
+          "sha256": "aef1d8ef0b0c0ee6f1b224c07aba047881bdb45a91e99a5e4f7bb40c2d2fdd07",
+          "errors": []
+        },
+        {
+          "route": "manual/projects-guide.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Project files \u00b7 DnBOX",
+          "width": 844,
+          "height": 2647,
+          "heads": [
+            "DnBOX projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              96,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              19,
+              58,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              2571,
+              22,
+              "Manual Build history What\u2019s new Setup & help Source and credits"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [],
+          "status": 200,
+          "screenshot": "manual-projects-guide-844x390.png",
+          "sha256": "5fb7661e57d427536e2573d9b136489d544c131652c92cebe12ce0a6165155d3",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "route": "manual/protocol.html",
+      "baseline_html_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4",
+      "candidate_html_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "manual/protocol.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Protocol identifiers \u00b7 DnBOX",
+          "width": 1440,
+          "height": 2136,
+          "heads": [
+            "DnBOX protocol identifiers (developer reference)"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-protocol-1440x900.png",
+          "sha256": "cb467c4b28962ef6e4c01cdcfabe4a40c24272c598cb9cb141e14c0bb16d95b3",
+          "errors": []
+        },
+        {
+          "route": "manual/protocol.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Protocol identifiers \u00b7 DnBOX",
+          "width": 390,
+          "height": 3714,
+          "heads": [
+            "DnBOX protocol identifiers (developer reference)"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-protocol-390x844.png",
+          "sha256": "60c4a3c61cedabf9b141f41b5da191fff4579e0902e9cf7f6d5c6ad03444cd34",
+          "errors": []
+        },
+        {
+          "route": "manual/protocol.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Protocol identifiers \u00b7 DnBOX",
+          "width": 844,
+          "height": 2297,
+          "heads": [
+            "DnBOX protocol identifiers (developer reference)"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "manual-protocol-844x390.png",
+          "sha256": "2c77a1a64c095d0898e3ab81df123875fcc2e933842adfbf847c6f24ea4f6d3b",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "new/index.html",
+      "baseline_html_sha256": "3926400808343dccaf7aea47d49f679c1ebc14910ddf318da1b7e07bd93b5822",
+      "candidate_html_sha256": "3926400808343dccaf7aea47d49f679c1ebc14910ddf318da1b7e07bd93b5822",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "new/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "What\u2019s new \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1752,
+          "heads": [
+            "What\u2019s new",
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "new-index-1440x900.png",
+          "sha256": "363725ce5a58f07b4523efe1cd967b8f17f7864bc1ccec3e171f27d77ceefda4",
+          "errors": []
+        },
+        {
+          "route": "new/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "What\u2019s new \u00b7 DnBOX",
+          "width": 390,
+          "height": 2287,
+          "heads": [
+            "What\u2019s new",
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "new-index-390x844.png",
+          "sha256": "06690bc811c9cf69f685a7b06fb0c5f2221cb4d2d454a639de4003dd173e1c70",
+          "errors": []
+        },
+        {
+          "route": "new/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "What\u2019s new \u00b7 DnBOX",
+          "width": 844,
+          "height": 1737,
+          "heads": [
+            "What\u2019s new",
+            ""
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "new-index-844x390.png",
+          "sha256": "9d94c85919dfa0299032037420bce1b7c74bc24c17b964b922b2b13bd94e3946",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "presets/index.html",
+      "baseline_html_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+      "candidate_html_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "presets/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Rename preset files \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1381,
+          "heads": [
+            "Rename a sound.\nKeep the sound."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-index-1440x900.png",
+          "sha256": "7e760234f685f86a010261639138df861d34be464ffcab11943dadeb606256af",
+          "errors": []
+        },
+        {
+          "route": "presets/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Rename preset files \u00b7 DnBOX",
+          "width": 390,
+          "height": 1847,
+          "heads": [
+            "Rename a sound.\nKeep the sound."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-index-390x844.png",
+          "sha256": "8a6715f396b8b34f4d77de587f6d03afb253f3cf4354e39c60430036aec46ddd",
+          "errors": []
+        },
+        {
+          "route": "presets/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Rename preset files \u00b7 DnBOX",
+          "width": 844,
+          "height": 1194,
+          "heads": [
+            "Rename a sound. Keep the sound."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-index-844x390.png",
+          "sha256": "af2a53a14b2d6bbeb2ffc8bb5d291f35564b26de6ece312fbcfcf781ec79c89e",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "presets/legacy/index.html",
+      "baseline_html_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85",
+      "candidate_html_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "presets/legacy/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Earlier preset files \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1574,
+          "heads": [
+            "Earlier DnBOX preset files."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-legacy-index-1440x900.png",
+          "sha256": "bde46b1d422d58dcc73ccb73f7a8d7f6c6af1943011df3a1a068dfbc026c05da",
+          "errors": []
+        },
+        {
+          "route": "presets/legacy/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Earlier preset files \u00b7 DnBOX",
+          "width": 390,
+          "height": 2160,
+          "heads": [
+            "Earlier DnBOX preset files."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-legacy-index-390x844.png",
+          "sha256": "2b164a46a71c4379ac9f0f774a4004ad0a6a6f1f78a57ec31e6626b30cf93c82",
+          "errors": []
+        },
+        {
+          "route": "presets/legacy/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Earlier preset files \u00b7 DnBOX",
+          "width": 844,
+          "height": 1653,
+          "heads": [
+            "Earlier DnBOX preset files."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "presets-legacy-index-844x390.png",
+          "sha256": "c2e136ad3ea41a6ed9c265b4633b1de55130959d79f3021c62962e98f95bc993",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "projects/index.html",
+      "baseline_html_sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321",
+      "candidate_html_sha256": "4d62e7cb7c00b9151d7b97922ad1d907eb2fea0f851a25fb90929e8dfadd5b43",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "X0X songs & projects",
+          "width": 1440,
+          "height": 1977,
+          "heads": [
+            "Songs & projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "projects-index-1440x900.png",
+          "sha256": "da0ad79c8a3caaa7d77e81c69869db2a496ccd0fc9a4029d662516442b817816",
+          "errors": []
+        },
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "X0X songs & projects",
+          "width": 390,
+          "height": 2299,
+          "heads": [
+            "Songs & projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "projects-index-390x844.png",
+          "sha256": "6dad1c1ed776a74c5f0fb1027c7e0ffd4bb6d7d87f14dc355b9d6c604c95f2f7",
+          "errors": []
+        },
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "X0X songs & projects",
+          "width": 844,
+          "height": 1863,
+          "heads": [
+            "Songs & projects"
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "projects-index-844x390.png",
+          "sha256": "3abb2c0ac3d348aea8c17e7119e1b9712e99c106966b0c9c50281ae6a04ff68a",
+          "errors": []
+        }
+      ],
+      "candidate_views": [
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "DnBOX songs & projects",
+          "width": 1440,
+          "height": 1977,
+          "heads": [
+            "Songs & projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              88,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              13,
+              42,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              89,
+              21,
+              "Install firmware Import samples"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "Find USB MIDI keyboard",
+            "Prepare import",
+            "Export project + samples",
+            "Save on keyboard",
+            "Load saved project",
+            "Reset project \u00b7 keep samples",
+            "Prepare MIDI export"
+          ],
+          "status": 200,
+          "screenshot": "projects-index-1440x900.png",
+          "sha256": "da0ad79c8a3caaa7d77e81c69869db2a496ccd0fc9a4029d662516442b817816",
+          "errors": []
+        },
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "DnBOX songs & projects",
+          "width": 390,
+          "height": 2299,
+          "heads": [
+            "Songs & projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              124,
+              "DnBOX INSTRUMENTS Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              18,
+              68,
+              "Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              125,
+              21,
+              "Install firmware Import samples"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "Find USB MIDI keyboard",
+            "Prepare import",
+            "Export project + samples",
+            "Save on keyboard",
+            "Load saved project",
+            "Reset project \u00b7 keep samples",
+            "Prepare MIDI export"
+          ],
+          "status": 200,
+          "screenshot": "projects-index-390x844.png",
+          "sha256": "6dad1c1ed776a74c5f0fb1027c7e0ffd4bb6d7d87f14dc355b9d6c604c95f2f7",
+          "errors": []
+        },
+        {
+          "route": "projects/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "DnBOX songs & projects",
+          "width": 844,
+          "height": 1863,
+          "heads": [
+            "Songs & projects"
+          ],
+          "nav": [
+            [
+              "",
+              0,
+              88,
+              "DnBOX INSTRUMENTS Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              13,
+              42,
+              "Sounds Remote Samples Projects Presets Manual History Install nightly"
+            ],
+            [
+              "",
+              89,
+              21,
+              "Install firmware Import samples"
+            ]
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "control": [
+            "Find USB MIDI keyboard",
+            "Prepare import",
+            "Export project + samples",
+            "Save on keyboard",
+            "Load saved project",
+            "Reset project \u00b7 keep samples",
+            "Prepare MIDI export"
+          ],
+          "status": 200,
+          "screenshot": "projects-index-844x390.png",
+          "sha256": "3abb2c0ac3d348aea8c17e7119e1b9712e99c106966b0c9c50281ae6a04ff68a",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "route": "remote/index.html",
+      "baseline_html_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+      "candidate_html_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "remote/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "DnBOX Remote",
+          "width": 1440,
+          "height": 900,
+          "heads": [],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-index-1440x900.png",
+          "sha256": "4d848f6d97fc84c1041f0a645d7ac7db0b583a7d6ab36dbd8e9b0e72b4bcd136",
+          "errors": []
+        },
+        {
+          "route": "remote/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "DnBOX Remote",
+          "width": 390,
+          "height": 844,
+          "heads": [],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-index-390x844.png",
+          "sha256": "eed9869c86688fde2c1dcd4701094d753f7ceaa505b57c256dbfd63032190641",
+          "errors": []
+        },
+        {
+          "route": "remote/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "DnBOX Remote",
+          "width": 844,
+          "height": 390,
+          "heads": [],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-index-844x390.png",
+          "sha256": "29a3e37a00d4776bc47112c4ba737f1f5a6283947c8b3c649056828936a85c8c",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "remote/device/index.html",
+      "baseline_html_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+      "candidate_html_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "remote/device/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Remote connection \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1055,
+          "heads": [
+            "Your instrument.\nWithin reach."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-device-index-1440x900.png",
+          "sha256": "9b693196505cd0b9a7c6c62e51274c842c4df375a092ed189c94f250c6a4f3c4",
+          "errors": []
+        },
+        {
+          "route": "remote/device/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Remote connection \u00b7 DnBOX",
+          "width": 390,
+          "height": 1381,
+          "heads": [
+            "Your instrument.\nWithin reach."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-device-index-390x844.png",
+          "sha256": "6adaee41c43e28f8a7b5b2aec731655d2c671697ccee60b367195dd8d7bf1a33",
+          "errors": []
+        },
+        {
+          "route": "remote/device/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Remote connection \u00b7 DnBOX",
+          "width": 844,
+          "height": 1141,
+          "heads": [
+            "Your instrument.\nWithin reach."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-device-index-844x390.png",
+          "sha256": "2bb3421fedd78fea6c503a796a4b630b71fc7c526a9a310e3a12cffb9b086071",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "remote/identity/index.html",
+      "baseline_html_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+      "candidate_html_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "remote/identity/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "DnBOX Remote",
+          "width": 1440,
+          "height": 900,
+          "heads": [
+            "Your instrument.\nA wider view."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-identity-index-1440x900.png",
+          "sha256": "7cec2102c418f92b3804b7f979cc1157a1963858fda717e871edba1373369e1a",
+          "errors": []
+        },
+        {
+          "route": "remote/identity/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "DnBOX Remote",
+          "width": 390,
+          "height": 889,
+          "heads": [
+            "Your instrument.\nA wider view."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-identity-index-390x844.png",
+          "sha256": "895daba3d58e2b5533e38b9d9fa5ee963b0ba6ada5726f286d99ca6cfea28f32",
+          "errors": []
+        },
+        {
+          "route": "remote/identity/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "DnBOX Remote",
+          "width": 844,
+          "height": 749,
+          "heads": [
+            "Your instrument.\nA wider view."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "remote-identity-index-844x390.png",
+          "sha256": "b90e8ac42a1786068341210a1a6243d56dc5e7477d979d395fa0c89575c4ce87",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "starting-breaks/index.html",
+      "baseline_html_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348",
+      "candidate_html_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348",
+      "coverage": "changed behavior",
+      "baseline_views": [
+        {
+          "route": "starting-breaks/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Starting breaks \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1153,
+          "heads": [
+            "Make it your instrument."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "starting-breaks-index-1440x900.png",
+          "sha256": "36560565e86e7d6e98a11f06dd7d3d28b0664c31dbaeeb8b3e74f06fb87e9f56",
+          "errors": []
+        },
+        {
+          "route": "starting-breaks/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Starting breaks \u00b7 DnBOX",
+          "width": 390,
+          "height": 2058,
+          "heads": [
+            "Make it your instrument."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "starting-breaks-index-390x844.png",
+          "sha256": "18aed21b36ca9f71a1a81004fd334871011579898176de32e5116ff0524fcf1b",
+          "errors": []
+        },
+        {
+          "route": "starting-breaks/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Starting breaks \u00b7 DnBOX",
+          "width": 844,
+          "height": 1773,
+          "heads": [
+            "Make it your instrument."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "starting-breaks-index-844x390.png",
+          "sha256": "402a388ee0f1b63bb60cc553bceb38d0ccb10aa310bd36fc58b5bf10685ec9f4",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    },
+    {
+      "route": "tools/index.html",
+      "baseline_html_sha256": "9723b274ee7f7665b6c38fba7ba9a640438959aa665946c2e0920db27000678b",
+      "candidate_html_sha256": "9723b274ee7f7665b6c38fba7ba9a640438959aa665946c2e0920db27000678b",
+      "coverage": "prior exact viewport and this baseline",
+      "baseline_views": [
+        {
+          "route": "tools/index.html",
+          "offline": false,
+          "viewport": [
+            1440,
+            900
+          ],
+          "title": "Tools \u00b7 DnBOX",
+          "width": 1440,
+          "height": 1160,
+          "heads": [
+            "Keep the session ready."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "tools-index-1440x900.png",
+          "sha256": "bc97b24ef9b86c885d10dd4eceb42bab5908460850f62c1cb2c35a108b9e06f6",
+          "errors": []
+        },
+        {
+          "route": "tools/index.html",
+          "offline": false,
+          "viewport": [
+            390,
+            844
+          ],
+          "title": "Tools \u00b7 DnBOX",
+          "width": 390,
+          "height": 1787,
+          "heads": [
+            "Keep the session ready."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "tools-index-390x844.png",
+          "sha256": "f267b9903be30469403d56a4db02ab189b9a145d57ddadbbcabfc5b615f517bd",
+          "errors": []
+        },
+        {
+          "route": "tools/index.html",
+          "offline": false,
+          "viewport": [
+            844,
+            390
+          ],
+          "title": "Tools \u00b7 DnBOX",
+          "width": 844,
+          "height": 1196,
+          "heads": [
+            "Keep the session ready."
+          ],
+          "fonts": [
+            [
+              "Barlow",
+              "loaded"
+            ],
+            [
+              "Barlow",
+              "loaded"
+            ]
+          ],
+          "overflow": [],
+          "status": 200,
+          "screenshot": "tools-index-844x390.png",
+          "sha256": "55b9779bc6cfa4d1029044fff5990a69fde72b6a73319c5f1d5ec1d507aeeb97",
+          "errors": []
+        }
+      ],
+      "candidate_views": []
+    }
+  ],
+  "devices_are_simulated": true,
+  "final_starting_breaks_views": [
+    {
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "document_width": 1440,
+      "filename": "DnBOX-starting-breaks.x0xslots",
+      "download_bytes": 110844,
+      "png_sha256": "a9956c6bf9ca8a6d65b976a103b5b1e8446f2758a3e3345d093b0242b28edd73",
+      "page_errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "document_width": 390,
+      "filename": "DnBOX-starting-breaks.x0xslots",
+      "download_bytes": 110844,
+      "png_sha256": "11a7efed6bd74a83d7bc72324a532c0deff1445b457c812c6c517823164b3a4d",
+      "page_errors": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "status": 200,
+      "document_width": 844,
+      "filename": "DnBOX-starting-breaks.x0xslots",
+      "download_bytes": 110844,
+      "png_sha256": "6be9888f8e6d019d787caabbb0a474d30d63ca8aa34df2954d8b00930c0f7902",
+      "page_errors": []
+    }
+  ],
+  "offline_appearance_views": [
+    {
+      "route": "install",
+      "size": [
+        1440,
+        900
+      ],
+      "png_sha256": "8850942006178ce2676855805a9d42e5290e84a006c0722ff69101ce143e91ff",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
+    },
+    {
+      "route": "breaks",
+      "size": [
+        1440,
+        900
+      ],
+      "png_sha256": "28c6e842a48ecd2e63bb785e96147df181ad8000cae846ce6c287f5a8fe171a4",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
+    },
+    {
+      "route": "projects",
+      "size": [
+        1440,
+        900
+      ],
+      "png_sha256": "0d41bd9865e1e2cd9537ac4d4ff1f7acd8fda296962440b4124603d4f02e5b31",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
+    },
+    {
+      "route": "install",
+      "size": [
+        390,
+        844
+      ],
+      "png_sha256": "6244c0e3a8cb3beb3639d5fd10235fc32709bfd017c9d0409ab2a6ada29f5560",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
+    },
+    {
+      "route": "breaks",
+      "size": [
+        390,
+        844
+      ],
+      "png_sha256": "5ff964f56ec23ae118843f481df6bcd54b5d17d47f4e35d43872147b1d1f457b",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
+    },
+    {
+      "route": "projects",
+      "size": [
+        390,
+        844
+      ],
+      "png_sha256": "b12419455a86e3c8177152b48422325dbf58eeac88c6a12141026af24c76460f",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
+    },
+    {
+      "route": "install",
+      "size": [
+        844,
+        390
+      ],
+      "png_sha256": "3cb8a88ce1b1f0ed911d0e8b4d44f2937a9a46acdfc32598581065e75b0e8bc9",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
+    },
+    {
+      "route": "breaks",
+      "size": [
+        844,
+        390
+      ],
+      "png_sha256": "75251caf382b39175554f74e0102f0fd53acdf35fd00b43858304ed26e2c7e91",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
+    },
+    {
+      "route": "projects",
+      "size": [
+        844,
+        390
+      ],
+      "png_sha256": "4987e5ffd99c1d3152391a3d3d26444a3dde0526505ac06c491b9ecf51f17eb1",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
+      ],
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
+    }
+  ]
+}

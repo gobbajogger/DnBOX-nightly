@@ -1,0 +1,42 @@
+✔ a page with no reviewed catalog sends nothing and leaves Apply disabled (13.840507ms)
+✔ the C fixture handshake reads confirmed values and a conflicting Apply is refused (134.15473ms)
+✔ an unsupported C control stays unconfirmed and cannot be applied (40.064098ms)
+✔ Apply and instrument Undo require independent reads of the committed revision (71.238327ms)
+✔ Undo keeps a later firmware revision even when the parameter value matches (48.329266ms)
+✔ the C revision guard refuses a change between the Undo read and write (67.342788ms)
+✔ queued scalar Apply and inverse SET confirm the stored target at the acknowledged revision (77.33102ms)
+✔ queued confirmation uses the canonical float returned by firmware (86.061687ms)
+✔ a queued edit that changes another control refreshes both values and offers no scalar Undo (52.09434ms)
+▶ an inverse of a queued edit reports changes outside the addressed stored value
+  ✔ queued inverse (99.700903ms)
+  ✔ immediate inverse (357.093403ms)
+✔ an inverse of a queued edit reports changes outside the addressed stored value (458.118751ms)
+✔ a queued inverse whose prior value is not read back fails closed (64.78352ms)
+▶ unverifiable writes do not create an Undo action
+  ✔ queued not stored (71.322082ms)
+  ✔ queued with different revision (71.788933ms)
+  ✔ different revision (50.895037ms)
+  ✔ different stored value (65.575668ms)
+  ✔ ack and stored both differ from request (58.804174ms)
+✔ unverifiable writes do not create an Undo action (319.912212ms)
+✔ destroy during a pending readback retires the old connection and Undo (40.681874ms)
+✔ expired firmware lease rejects Undo even if a READ is still available (91.315419ms)
+✔ returning to a cached page requires a new handshake and drops the prior Undo (121.97711ms)
+✔ a fractional setting is compared to its transmitted float32 value (82.609636ms)
+✔ locally opened bank preserves zero, absent fields, escaped names and source-qualified identities (298.298693ms)
+✔ an imported tempo-synced rate uses its own mode and keeps the original float on copy (19.74617ms)
+✔ malformed and ambiguous banks fail before the active bank or owner changes (64.09626ms)
+✔ copies edit only the selected bass and bank’s existing value tokens across programs (47.590499ms)
+✔ the two Draft owners retain all 13 measured original float words and stable preset/field identities (17.486292ms)
+✔ original waveform stops, independent PWM, continuous SUB and all three clock modes (14.316622ms)
+✔ unsupported field values and legacy identity aliases are rejected (167.077521ms)
+✔ Hz readouts use the frequency returned by the build-9 Conductor (116.476821ms)
+✔ all three synced LFOs on both basses select the original binary32 tempo ranges (20.294643ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3786.937244

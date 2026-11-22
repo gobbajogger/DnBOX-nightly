@@ -17,7 +17,8 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from grid_continuity import assert_grid_continuity
-from full_page_capture import capture_full_page
+from full_page_capture import capture_full_page as capture_web_page
+from manual_capture import capture_original_manual
 from installer_package import installer_responses as make_installer_responses, wait_for_admission
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -48,6 +49,92 @@ FREEZE_CSS = "*,*::before,*::after{animation:none!important;transition:none!impo
 
 def port():
     s = socket.socket(); s.bind(('127.0.0.1', 0)); p = s.getsockname()[1]; s.close(); return p
+
+def wait_for_home_capture(page):
+    # The homepage statically declares its artwork, fonts and replay. Only these
+    # rendered assets determine the full-page screenshot.
+    page.evaluate("""async () => {
+        await document.fonts.ready;
+        const require = (ok, message) => { if (!ok) throw Error('Homepage capture: ' + message); };
+        require(document.readyState === 'complete', 'document has not loaded');
+        const sheet = [...document.styleSheets].find(s => s.href === new URL('site.css',location.href).href);
+        require(sheet?.cssRules.length, 'site.css did not load');
+        for (const weight of ['normal','700']) {
+            require([...document.fonts].some(f => f.family === 'Barlow' && (f.weight === weight || (weight === 'normal' && f.weight === '400')) && f.status === 'loaded'),
+                    'Barlow ' + weight + ' did not load');
+        }
+        for (const image of document.images) {
+            await image.decode();
+            require(image.naturalWidth && image.naturalHeight, 'empty image ' + image.currentSrc);
+        }
+        const stage = document.querySelector('#replay-display'), play = document.querySelector('#demo-play');
+        const stop = document.querySelector('#demo-stop'), initial = document.querySelector('#frame-voice-0');
+        require(stage?.firstElementChild?.isEqualNode(initial?.content.firstElementChild),
+                'initial voice frame is missing or differs from source');
+        require(play?.textContent === 'Next control' && document.querySelector('.demo-tabs [data-demo=voice]')?.getAttribute('aria-pressed') === 'true',
+                'reduced-motion replay is not initialized');
+        require([stage,play,stop].every(el => el?.checkVisibility() && el.getBoundingClientRect().width > 0),
+                'replay display or controls are hidden');
+    }""")
+    wait_for_stable_layout(page, ['body','header','#replay-display','#demo-play','#demo-stop','footer'])
+
+
+def wait_for_breaks_capture(page):
+    # This local tool has two stylesheets, two fonts and an inline module. Its
+    # idle state can be checked directly without opening MIDI or reading a file.
+    page.wait_for_function("document.fonts.status === 'loaded'")
+    page.evaluate("""() => {
+        const require = (ok, message) => { if (!ok) throw Error('Breaks capture: ' + message); };
+        require(document.readyState === 'complete', 'document has not loaded');
+        for (const path of ['../site.css', '../tool-theme.css']) {
+            const url = new URL(path, location.href).href;
+            const sheet = [...document.styleSheets].find(s => s.href === url);
+            let count;
+            try {
+                count = sheet?.cssRules.length;
+            } catch (error) {
+                if (error.name !== 'SecurityError') throw error;
+            }
+            require(count > 0, path + ' did not load');
+        }
+        for (const weight of ['normal', '700']) {
+            require([...document.fonts].some(f => f.family === 'Barlow' && (f.weight === weight || (weight === 'normal' && f.weight === '400')) && f.status === 'loaded'),
+                    'Barlow ' + weight + ' did not load');
+        }
+        require(window.sampleWorkspace?.busy() === false, 'sample workspace did not initialize');
+        const connect = document.querySelector('#connect'), slots = document.querySelector('#list .empty');
+        require(connect?.checkVisibility() && connect.getBoundingClientRect().width > 0 && !connect.disabled && typeof connect.onclick === 'function',
+                'Connect is not ready');
+        require(slots?.checkVisibility() && slots.getBoundingClientRect().width > 0 &&
+                slots.textContent.trim() === 'Connect to read your keyboard’s sample slots.',
+                'disconnected slot list is missing');
+        require(['add', 'send', 'backup', 'restore'].every(id => document.getElementById(id)?.disabled === true),
+                'initial device actions are not disabled');
+    }""")
+    wait_for_stable_layout(page, ['body', 'header', 'main', '#connect', '#list', '#send'])
+
+
+def wait_for_stable_layout(page, selectors):
+    frames = page.evaluate_handle("sels => ({selectors: sels, previous: null, stable: 0})", selectors)
+    try:
+        page.wait_for_function("""state => {
+            const boxes = state.selectors.flatMap(s => {
+                const r=document.querySelector(s).getBoundingClientRect(); return [r.x,r.y,r.width,r.height];
+            });
+            const now = JSON.stringify(boxes);
+            state.stable = now === state.previous ? state.stable + 1 : 0;
+            state.previous = now;
+            return state.stable >= 2;
+        }""", arg=frames, polling='raf')
+    finally:
+        frames.dispose()
+
+
+def capture_full_page(page, route, name):
+    if route == 'manual/original/index.html':
+        return capture_original_manual(page)
+    return capture_web_page(page, route, name)
+
 
 def remote_states():
     def lane(n):
@@ -132,7 +219,10 @@ def compare(name, png_bytes, results):
     if not base.exists():
         # No committed baseline: the page still had to render with no errors, header or overflow
         # findings; only the pixel comparison is skipped and reported. Never written automatically.
-        tmp.unlink(missing_ok=True)
+        # A filtered proposal sweep retains exact candidate bytes for review.
+        # A normal gate clears transient captures for pages without a baseline.
+        if not ONLY:
+            tmp.unlink(missing_ok=True)
         results.append((name, 'NOBASE', 0.0)); return
     reference_bytes = base.read_bytes()
     if reference_bytes == png_bytes:
@@ -360,12 +450,15 @@ def main():
                         pg.on('response', check_response)
                         pg.on('requestfailed', lambda request: errors.append(
                             f'{name} request failed: {request.url} ({request.failure})'))
+                    print(f'Loading {name}: {url}', flush=True)
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
                     if homepage:
                         wait_for_homepage(pg)
+                        wait_for_home_capture(pg)
                     elif mounted_samples:
                         wait_for_mounted_samples(pg)
+                        wait_for_breaks_capture(pg)
                     elif offline_installer:
                         wait_for_offline_installer(pg)
                     else:
@@ -393,11 +486,14 @@ def main():
                             # x 0..720; connection status and Connect are asserted structurally on the right.
                             # Undo/Redo live in the engine row, not an overflow menu.
                             from PIL import ImageFilter
-                            shot = Image.open(__import__('io').BytesIO(pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148}))).convert('L')
+                            shot_png = pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148})
+                            shot = Image.open(__import__('io').BytesIO(shot_png)).convert('L')
                             ref = Image.open(FIX).convert('L'); s = ref.width / 1024
                             ref = ref.crop((0, 0, ref.width, round(148 * s))).resize((1024, 148), Image.LANCZOS)
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
+                            if results[-1][1] == 'FAIL':
+                                write_actual_output('header-ssim-1024x640-actual.png', shot_png)
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     try:
                         if act: act(pg); pg.wait_for_timeout(150)

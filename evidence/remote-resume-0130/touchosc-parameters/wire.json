@@ -1,0 +1,553 @@
+{
+  "stockFirmware": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "archivedFirmware": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8",
+  "stockClosedSha256": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04",
+  "archivedLayoutSha256": "83977fa73340823f259b7dc3f15504e00d3ea5d62f8f45d5e075a35f390b80a5",
+  "cases": [
+    {
+      "case": "closed",
+      "counts": {},
+      "diagnostic": [],
+      "frames": []
+    },
+    {
+      "case": "stock",
+      "counts": {
+        "HELLO": 1
+      },
+      "diagnostic": [],
+      "frames": [
+        {
+          "op": "HELLO",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 1
+        }
+      ]
+    },
+    {
+      "case": "mismatch",
+      "counts": {
+        "HELLO": 1
+      },
+      "diagnostic": [],
+      "frames": [
+        {
+          "op": "HELLO",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 1,
+          "reply": {
+            "status": 0,
+            "id": 326,
+            "revision": 1,
+            "value": 4005792705
+          }
+        }
+      ]
+    },
+    {
+      "case": "happy",
+      "counts": {
+        "HELLO": 1,
+        "OPEN": 1,
+        "KEEPALIVE": 1,
+        "READ": 1632,
+        "SET": 3,
+        "CLOSE": 1
+      },
+      "diagnostic": [
+        {
+          "command": "advance",
+          "value": 700,
+          "revision": 1
+        },
+        {
+          "command": "external",
+          "value": 26,
+          "revision": 6
+        }
+      ],
+      "frames": [
+        {
+          "op": "HELLO",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 1,
+          "reply": {
+            "status": 0,
+            "id": 326,
+            "revision": 1,
+            "value": 4005792705
+          }
+        },
+        {
+          "op": "OPEN",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 2,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 1,
+            "value": 0
+          }
+        },
+        {
+          "op": "KEEPALIVE",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 3,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 1,
+            "value": 0
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 244,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 1,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 248,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 1,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 260,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 1,
+            "value": 32
+          }
+        },
+        {
+          "op": "SET",
+          "id": 257,
+          "revision": 1,
+          "value": 33,
+          "request": 330,
+          "reply": {
+            "status": 1,
+            "id": 257,
+            "revision": 2,
+            "value": 33
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 571,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 2,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 575,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 2,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 587,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 2,
+            "value": 33
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 657,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 2,
+            "value": 33
+          }
+        },
+        {
+          "op": "SET",
+          "id": 257,
+          "revision": 2,
+          "value": 32,
+          "request": 658,
+          "reply": {
+            "status": 1,
+            "id": 257,
+            "revision": 3,
+            "value": 32
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 899,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 3,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 903,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 3,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 915,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 3,
+            "value": 32
+          }
+        },
+        {
+          "op": "SET",
+          "id": 257,
+          "revision": 3,
+          "value": 33,
+          "request": 985,
+          "reply": {
+            "status": 1,
+            "id": 257,
+            "revision": 4,
+            "value": 33
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 1226,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 4,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 1230,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 4,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 1242,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 4,
+            "value": 33
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 1312,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 6,
+            "value": 33
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 1553,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 6,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 1557,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 6,
+            "value": 26
+          }
+        },
+        {
+          "op": "READ",
+          "id": 257,
+          "revision": 0,
+          "value": 0,
+          "request": 1569,
+          "reply": {
+            "status": 0,
+            "id": 257,
+            "revision": 6,
+            "value": 33
+          }
+        },
+        {
+          "op": "CLOSE",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 1639,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 6,
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "case": "coupled",
+      "counts": {
+        "HELLO": 1,
+        "OPEN": 1,
+        "KEEPALIVE": 1,
+        "READ": 652,
+        "SET": 1,
+        "CLOSE": 1
+      },
+      "diagnostic": [
+        {
+          "command": "advance",
+          "value": 700,
+          "revision": 1
+        }
+      ],
+      "frames": [
+        {
+          "op": "HELLO",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 1,
+          "reply": {
+            "status": 0,
+            "id": 326,
+            "revision": 1,
+            "value": 4005792705
+          }
+        },
+        {
+          "op": "OPEN",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 2,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 1,
+            "value": 0
+          }
+        },
+        {
+          "op": "KEEPALIVE",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 3,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 1,
+            "value": 0
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 244,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 1,
+            "value": 64
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 248,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 1,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 253,
+          "revision": 0,
+          "value": 0,
+          "request": 256,
+          "reply": {
+            "status": 0,
+            "id": 253,
+            "revision": 1,
+            "value": 95
+          }
+        },
+        {
+          "op": "SET",
+          "id": 253,
+          "revision": 1,
+          "value": 96,
+          "request": 330,
+          "reply": {
+            "status": 1,
+            "id": 253,
+            "revision": 2,
+            "value": 96
+          }
+        },
+        {
+          "op": "READ",
+          "id": 241,
+          "revision": 0,
+          "value": 0,
+          "request": 571,
+          "reply": {
+            "status": 0,
+            "id": 241,
+            "revision": 2,
+            "value": 60
+          }
+        },
+        {
+          "op": "READ",
+          "id": 245,
+          "revision": 0,
+          "value": 0,
+          "request": 575,
+          "reply": {
+            "status": 0,
+            "id": 245,
+            "revision": 2,
+            "value": 85
+          }
+        },
+        {
+          "op": "READ",
+          "id": 253,
+          "revision": 0,
+          "value": 0,
+          "request": 583,
+          "reply": {
+            "status": 0,
+            "id": 253,
+            "revision": 2,
+            "value": 96
+          }
+        },
+        {
+          "op": "CLOSE",
+          "id": 0,
+          "revision": 0,
+          "value": 0,
+          "request": 657,
+          "reply": {
+            "status": 0,
+            "id": 0,
+            "revision": 2,
+            "value": 0
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Actual packed Lua callbacks and archived real C pilot over stdio. Stock C dispatcher checks HELLO only. No native TouchOSC or physical keyboard execution."
+}

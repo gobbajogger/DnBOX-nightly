@@ -1,0 +1,7 @@
+# Exact browser follow-up at ada3fef
+
+The detached worktree used published commit `ada3fef20de13b2603f959a3412cf777dbcf0f07`, tree `cb9fd2e54aa89ad4545647773b5474e7f18137e6`. The run used bundled Chromium 151.0.7922.34 with its normal sandbox, the existing pinned emulator and firmware-reference inputs, and an owned temp directory outside the checkout. The source hashes and clean worktree status agree before and after. [Source before](source-before.txt) · [Source after](source-after.txt)
+
+Composition passed at 1440×900, 390×844 and 844×390, including the previously clipped BREAK preview Play action. Its actual emulator observer also passed for 909 kick and snare at all three sizes. Master More, navigation state, Source Banks, landscape, emulator LCD, admin, firmware reference and structural fixtures each exited 0. Landscape recorded 131 states and 5,873 reachable of 5,873 enabled control presentations with zero page errors. The structural command covers nine detector fixtures. The software qualification used no physical instrument. [Exact command exits](results.tsv) · [Machine-readable receipt](receipt.json)
+
+The combined gate was not rerun at this intermediate commit. The original `995d5493` combined-gate result remains FAIL. The attached archive contains the surviving landscape, navigation and Master More captures, raw term receipts and complete structural fixture report. [Archive inventory](archive-contents.txt)

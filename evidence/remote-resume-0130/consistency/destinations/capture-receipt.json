@@ -1,0 +1,77 @@
+{
+  "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6+isolated-title-and-Song-compact-patches",
+  "sourceFilesSHA256": {
+    "app.mjs": "536665f9305b3b380cfa4e9b33fc7369641f6c52a754a54b011488a9883bf276",
+    "style.css": "a348bb53fa4bfdd42b76cd4d5d8e39306619ded291259d6a0c2d536f73a90490",
+    "index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "song-view.mjs": "f635f81419be7ade91854197ef6a7d4bfb8e144fcecbe5b4c83aed26c3d22ca2",
+    "funkybeats-view.mjs": "ffbc3bbe1b71049d0dbcfae7be50fcfe314401f622b72857c256386adb96f713"
+  },
+  "captureInventorySHA256": "68e0bde9f1909d530cf9b35e906ce1ed5d561d4bd3d6ff4c4928ec3bb321ddc2",
+  "pageErrors": [],
+  "capturedStates": 8,
+  "compactPatchSHA256": "84d5e7f3a502537f3350d066da34dc85417965c9d2a46b7ff969bc4718b94d61",
+  "sourcePatchSHA256": "52f89c6e5f99358e13e5e71fe3122c480e9c0f36bf912cc5194b90792bc7410b",
+  "unclippedSongHeaderSizes": [
+    "1440x900",
+    "1024x640",
+    "844x390",
+    "390x844",
+    "1000x640",
+    "1099x640",
+    "740x390",
+    "736x414"
+  ],
+  "initialOverflowAt": [
+    "1000x640",
+    "1024x640"
+  ],
+  "actualOwnerPixels": {
+    "10-song": {
+      "ownerPage": 10,
+      "beforeTolerantPercent": 8.18371913580247,
+      "afterTolerantPercent": 8.196682098765432,
+      "afterPNG": "dfc4e8a5a28a9b593d6f255d9f4ab1dcd8ba568417ee44f72c7df3ac31b9afc8",
+      "referencePNG": "f91cd729b35840991389f80f10615e1f3b594359f5fb0e5af6221846eff8cd0a",
+      "beforeSource": "retained owner matrix frame; see owner donor metadata",
+      "comparisonScope": "Existing same-workflow reference and new scoped capture. The earlier capture retains its own source and layout."
+    },
+    "remote-files-1440x900": {
+      "ownerPage": 12,
+      "beforeTolerantPercent": 6.319521604938272,
+      "afterTolerantPercent": 6.314506172839505,
+      "afterPNG": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0",
+      "referencePNG": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+      "beforeSource": "Projects copy patched candidate",
+      "comparisonScope": "Existing same-workflow reference and new scoped capture. The earlier capture retains its own source and layout."
+    },
+    "13-review": {
+      "ownerPage": 13,
+      "beforeTolerantPercent": 23.856944444444444,
+      "afterTolerantPercent": 10.659722222222221,
+      "afterPNG": "984bf39d19d11b3924a06a42cc63f87882c991e415474d8638e5a8995c59620b",
+      "referencePNG": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "beforeSource": "retained owner matrix frame; see owner donor metadata",
+      "comparisonScope": "Existing same-workflow reference and new scoped capture. The earlier capture retains its own source and layout."
+    },
+    "13-connect": {
+      "ownerPage": 13,
+      "beforeTolerantPercent": 6.120138888888889,
+      "afterTolerantPercent": 8.067438271604939,
+      "afterPNG": "a6e83e23c9742a9ddd3b3164cdd5e4b1f9aacd2c2c23d26ce16a54e2ca410134",
+      "referencePNG": "10dec898ec45b383c762dafb0656dde087fb78e6fad1df58984d78e4d0c61a74",
+      "beforeSource": "retained owner matrix frame; see owner donor metadata",
+      "comparisonScope": "Existing same-workflow reference and new scoped capture. The earlier capture retains its own source and layout."
+    },
+    "20-projects": {
+      "ownerPage": 20,
+      "beforeTolerantPercent": 10.934499939239275,
+      "afterTolerantPercent": 10.90715761331875,
+      "afterPNG": "bd14c0eac856252faf771a5aec65b8be3a18c2434f9e2313acfa72df55138ddf",
+      "referencePNG": "e8d0b47fdf5315b00ef67b25423f17ada6e2a4db237f11f6fb9fa9f40eac833d",
+      "beforeSource": "retained owner matrix frame; see owner donor metadata",
+      "comparisonScope": "Existing same-workflow reference and new scoped capture. The earlier capture retains its own source and layout."
+    }
+  }
+}

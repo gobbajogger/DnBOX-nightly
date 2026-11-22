@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withOfflineInstallerRouting, withOfflineTheme } from './preview-offline-theme.mjs';
 
 import { inlineStandaloneFonts } from './standalone-fonts.mjs';
 
@@ -34,9 +35,9 @@ const projects = inlineStandaloneFonts(read('web/x0x_projects.html')).replace(
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');
 const outputs = {
-  'docs/install/index.html': installer,
-  'docs/breaks/index.html': sampleImporter,
-  'docs/projects/index.html': projectPage,
+  'docs/install/index.html': withOfflineTheme(withOfflineInstallerRouting(installer)),
+  'docs/breaks/index.html': withOfflineTheme(sampleImporter),
+  'docs/projects/index.html': withOfflineTheme(projectPage),
   'docs/versions.json': JSON.stringify(catalog, null, 2) + '\n',
 };
 const check = process.argv.includes('--check');

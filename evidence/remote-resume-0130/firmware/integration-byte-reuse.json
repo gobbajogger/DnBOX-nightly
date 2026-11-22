@@ -1,0 +1,24 @@
+{
+  "firmwareSource": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "scope": "Read-only comparison of existing compiled application bytes; no rebuild or device operation. Reuse these application/package receipts for matching configurations.",
+  "models": [
+    {
+      "model": "elite",
+      "bytes": 551444,
+      "applicationSha256": "650b8dced69b28dea1f549fb87fc0610e5afc3b9aec66c85bd5cedc56f246f45",
+      "integrationApplicationSha256": "650b8dced69b28dea1f549fb87fc0610e5afc3b9aec66c85bd5cedc56f246f45",
+      "byteIdentical": true,
+      "remoteInput": "/workspace/scratch/857bb2409f82/remote-input-recovery/firmware/build/smk37-elite/x0x.bin",
+      "integrationInput": "/workspace/scratch/857bb2409f82/integ-resume-0130/firmware/build/smk37-elite/x0x.bin"
+    },
+    {
+      "model": "pro",
+      "bytes": 551436,
+      "applicationSha256": "9713b37ed8cf4c712de66bbab7c7cdcbd9a5324f2784b7f806eba53f279614ce",
+      "integrationApplicationSha256": "9713b37ed8cf4c712de66bbab7c7cdcbd9a5324f2784b7f806eba53f279614ce",
+      "byteIdentical": true,
+      "remoteInput": "/workspace/scratch/857bb2409f82/remote-input-recovery/firmware/build/smk37/x0x.bin",
+      "integrationInput": "/workspace/scratch/857bb2409f82/integ-resume-0130/firmware/build/smk37/x0x.bin"
+    }
+  ]
+}
