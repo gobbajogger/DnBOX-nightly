@@ -22,6 +22,59 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def verify_miami_portrait_captions(page, result):
+    """Complete the two known clipped observations through the user scroll path."""
+    from playwright.sync_api import TimeoutError
+
+    glyphs = {f'source-sound/MIAMI/1|1:2:1:{i}:1': text for i, text in
+              ((11, 'SHAPE'), (13, 'RATE'))}
+    missing = [row['glyph'] for row in result['checks'][3]['failures']
+               if row['reason'] == 'missing-unpainted-or-cryptic-caption'
+               and row['glyph'].get('param') in glyphs and not row['glyph']['captionPainted']]
+    if not missing:
+        return result
+    pane = page.locator('#other-view')
+    box = pane.bounding_box()
+    before = pane.evaluate('e=>({top:e.scrollTop,hasUserScroll:["auto","scroll"].includes(getComputedStyle(e).overflowY)&&e.scrollHeight>e.clientHeight})')
+    if not box or not before['hasUserScroll']:
+        return result
+    try:
+        page.mouse.move(box['x'] + box['width'] / 2, box['y'] + box['height'] * .75)
+        page.mouse.wheel(0, 520)
+        page.wait_for_function('top=>document.querySelector("#other-view").scrollTop>top', arg=before['top'], timeout=1500)
+        revealed = gate.collect_structural(page)
+        post = {g['param']: g for g in revealed['glyphs'] if g.get('param') in glyphs}
+        changes = {}
+        for original in missing:
+            param = original['param']
+            row = post.get(param)
+            if not row or row['type'] != original['type'] or not row['captionPainted'] or row['caption'] != glyphs[param]:
+                continue
+            unit = page.locator(f'#other-view button[data-param="{param}"]')
+            if unit.count() != 1 or not unit.evaluate("""e=>{
+              const r=e.getBoundingClientRect(),b=e.closest('#other-view').getBoundingClientRect();
+              return r.left>=b.left && r.right<=b.right && r.top>=b.top && r.bottom<=b.bottom
+                && !e.disabled && e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));
+            }"""):
+                continue
+            changes[original['id']] = {'initial': original, 'revealed': row}
+        if not changes or revealed['collectionErrors']:
+            return result
+        evidence = [{'scrollTop':pane.evaluate('e=>e.scrollTop'), **item} for item in changes.values()]
+        merged = [{**g, **{name:changes[g['id']]['revealed'][name]
+                          for name in ('caption','captionPainted','captionRects')}}
+                  if g['id'] in changes else g for g in result['glyphs']]
+        observed = gate.analyze_snapshot({**result, 'glyphs':merged})
+        return {**result, 'glyphs':merged,
+                'checks':[*result['checks'][:3],observed['checks'][3]],
+                'accepted':observed['accepted'], 'captionRevealEvidence':evidence,
+                'initialCaptionCheck':result['checks'][3]}
+    except TimeoutError:
+        return result
+    finally:
+        pane.evaluate('(e,top)=>{e.scrollTop=top}', before['top'])
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fixtures-only',action='store_true',help='Explicit fixture contract mode; never product acceptance')
@@ -71,6 +124,8 @@ def main():
                             page.locator('nav.tabs [data-view="'+view+'"]').click()
                             page.evaluate('document.fonts.ready')
                             result = gate.collect_structural(page)
+                            if label=='current' and (w,h)==(390,844) and part=='miami' and view=='sound':
+                                result = verify_miami_portrait_captions(page, result)
                             report['actualSources'].append({'source': label, 'status': 'RUN', 'viewport': [w, h], 'part': part, 'view': view, 'exit': 0 if result['accepted'] else 1, 'result': result})
                     page.close()
             browser.close()
