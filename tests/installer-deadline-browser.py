@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Actual built installer + real browser fetch deadline. Synthetic package only; no device writes."""
-import asyncio,hashlib,json,mimetypes,re,subprocess,tempfile
+import asyncio,hashlib,json,mimetypes,re,subprocess,sys,tempfile
 from pathlib import Path
 from urllib.parse import urlparse,unquote
 from playwright.async_api import async_playwright
@@ -12,7 +12,36 @@ def raw(name):
 RAW={k:raw(n) for k,n in [('pro','Pro'),('elite','Elite')]}
 CAT={'schema':1,'latest':'test','history':[],'versions':[{'version':'test','status':'dev-checked','config':'dev','hardware_tested':False,'models':{k:{'product':'SMK-37 '+n+'_900','size':1024,'sha256':hashlib.sha256(RAW[k]).hexdigest(),'controller_sha256':hashlib.sha256(b'123').hexdigest(),'pkg':'https://packages.test/'+hashlib.sha256(RAW[k]).hexdigest()+'/'+k+'.fwsc'} for k,n in [('pro','Pro'),('elite','Elite')]}}]}
 PROBE='''window.deadlineState=()=>({image:!!image,href:$("download").getAttribute("href"),disabled:$("go").disabled,status:$("status").textContent});window.deadlineSelect=m=>{chosenModel=m;refreshModelUi();loadSelectedPackage();};'''
-async def main(site):
+async def check_starting_break_picker(page):
+ for picker_id in ('sample-picker','samples-status','download-breaks','download-status'):
+  assert await page.locator(f'[id="{picker_id}"]').count()==1, f'Expected one #{picker_id}'
+ picker=page.locator('#sample-picker')
+ disclosure=page.locator('details.installer-starting-breaks > summary')
+ if await disclosure.count():
+  assert await picker.is_hidden()
+  await disclosure.click()
+ choices=picker.get_by_role('checkbox')
+ await choices.first.wait_for()
+ assert await choices.count()==5
+ for choice in await choices.all():
+  await choice.uncheck()
+ button=page.locator('#download-breaks')
+ assert await button.is_visible() and await button.is_disabled()
+ assert '0 of 5 breaks selected' == await picker.locator('[data-selection-status]').inner_text()
+ await choices.first.check()
+ assert '1 of 5 breaks selected' == await picker.locator('[data-selection-status]').inner_text()
+ async with page.expect_download() as download_event:
+  await button.click()
+ download=await download_event.value
+ assert download.suggested_filename=='DnBOX-starting-breaks.x0xslots'
+ assert (await download.path()).stat().st_size>512
+ assert 'File prepared' in await page.locator('#download-status').inner_text()
+async def check_starting_break_presentations(page):
+ await check_starting_break_picker(page)
+ await page.goto('https://dnbox.test/starting-breaks/',wait_until='domcontentloaded')
+ await check_starting_break_picker(page)
+ print('PASS starting break picker on installer and standalone page',flush=True)
+async def main(site,picker_only):
  html=(site/'install/index.html').read_text()
  html,n=re.subn(r'^const catalog = .*?;$','const catalog = '+json.dumps(CAT)+';',html,count=1,flags=re.M);assert n==1
  html=html.replace('(async () => {',PROBE+'\n(async () => {',1)
@@ -37,6 +66,10 @@ async def main(site):
    await c.route('**/*',route)
    try:
     await p.goto('https://dnbox.test/install/',wait_until='domcontentloaded')
+    if picker_only:
+     await check_starting_break_presentations(p)
+     assert await p.evaluate('midiRequests')==0;assert not errors,errors
+     return
     if mode=='timeout':
      await asyncio.wait_for(started.wait(),5)
      await p.wait_for_function("deadlineState().status.includes('too long')",timeout=24000)
@@ -55,35 +88,16 @@ async def main(site):
     got=await p.evaluate("async()=>Array.from(new Uint8Array(await(await fetch(deadlineState().href)).arrayBuffer()))")
     assert bytes(got)==RAW[expected]
     if mode=='normal':
-     # The installer embeds its own picker. A link to the separate page
-     # cannot complete a selection the visitor just made here.
      assert await p.locator('header:visible').count() == 1
-     assert await p.locator('#sample-picker').is_hidden()
-     await p.get_by_text('Choose starting breaks', exact=True).click()
-     picker=p.locator('#sample-picker')
-     choices=picker.get_by_role('checkbox')
-     await choices.first.wait_for()
-     for choice in await choices.all():
-      await choice.uncheck()
-     button=p.get_by_role('button',name='Download chosen breaks',exact=True)
-     assert await button.count()==1, 'Installer sample download control missing'
-     assert await button.is_disabled()
-     assert '0 of 5 breaks selected' == await picker.locator('[data-selection-status]').inner_text()
-     await choices.first.check()
-     async with p.expect_download() as download_event:
-      await button.click()
-     download=await download_event.value
-     assert download.suggested_filename=='DnBOX-starting-breaks.x0xslots'
-     assert (await download.path()).stat().st_size>512
-     assert 'File prepared' in await p.locator('#download-status').inner_text()
+     await check_starting_break_presentations(p)
 
     assert await p.evaluate('midiRequests')==0;assert not errors,errors
     print('PASS installer deadline',mode,'verified retry/selection, MIDI0',flush=True)
    finally:release.set();await c.close()
   try:
    # Concurrent network waits are one bounded browser job, not concurrent builds.
-   await asyncio.gather(*(scenario(m) for m in ['timeout','normal','new-selection']))
+   await asyncio.gather(*(scenario(m) for m in (['normal'] if picker_only else ['timeout','normal','new-selection'])))
   finally:await browser.close()
 (ROOT/'.output').mkdir(exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='installer-deadline-',dir=ROOT/'.output') as tmp:
- site=Path(tmp)/'site';subprocess.run(['node','scripts/build-product-site.mjs','--output',str(site)],cwd=ROOT,check=True);asyncio.run(main(site))
+ site=Path(tmp)/'site';subprocess.run(['node','scripts/build-product-site.mjs','--output',str(site)],cwd=ROOT,check=True);asyncio.run(main(site,sys.argv[1:]==['--picker-only']))

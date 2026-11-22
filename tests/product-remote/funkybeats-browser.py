@@ -710,7 +710,7 @@ async def break_step_chance(page, previous):
     await expect(silent).to_have_attribute('aria-pressed','true')
     await load_draft(page,stroke)
     await page.locator('[data-view="patterns"]').click()
-    await page.get_by_role('button',name='BREAK P2, not loaded',exact=True).click()
+    await page.get_by_role('button',name='BREAK P02, not loaded',exact=True).click()
     selected=await draft_state(page)
     assert selected['launch'][4]==1 and selected['breakSequence']==stroke['breakSequence']
     await load_draft(page,previous)
@@ -814,6 +814,9 @@ async def project_files(page):
             if width == 1440:
                 await expect(description).to_be_in_viewport(ratio=1)
                 await expect(description).to_have_css('font-size', '21px')
+            elif width == 844:
+                await expect(description).to_be_visible()
+                await expect(description).to_have_css('font-size', '13px')
             else:
                 await expect(description).to_be_hidden()
         assert await page.evaluate('document.documentElement.scrollWidth === innerWidth')

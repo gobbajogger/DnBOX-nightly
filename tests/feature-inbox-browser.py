@@ -79,7 +79,11 @@ def check_mounted_installer(page, origin, width):
     expect(page.locator("#go")).to_be_disabled()
     expect(page.locator("#download")).to_be_hidden()
     page.unroute(packages)
-    page.locator("#sample-picker input[type=checkbox]").first.wait_for()
+    picker = page.locator("#sample-picker")
+    expect(picker).to_have_count(1)
+    expect(picker).to_be_hidden()
+    page.locator("details.installer-starting-breaks > summary").click()
+    expect(picker.locator("input[type=checkbox]").first).to_be_visible()
     navigation = page.evaluate("""() => {
         const links = selector => [...document.querySelectorAll(selector)];
         const global = links('#dnbox-global-header nav a');
