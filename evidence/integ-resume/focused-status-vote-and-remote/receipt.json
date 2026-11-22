@@ -1,0 +1,35 @@
+{
+  "software_only": true,
+  "input_nightly": "570bb01253989e538b08983d92ae818109a0471f",
+  "consolidated_nightly": "583f622961fc9975fac746592ce6c483073c4170",
+  "ancestry": {
+    "status": "ahead",
+    "ahead_by": 56,
+    "behind_by": 0,
+    "merge_base": "583f622961fc9975fac746592ce6c483073c4170",
+    "changed": 234,
+    "removed": []
+  },
+  "test_results": {
+    "build_status_cases": 397,
+    "edge_vote_tests": 3,
+    "node_exit": 0
+  },
+  "sha256": {
+    "status_vote_log": "df9be9876a8ea9d3a97144478f3a23af9b97eddac19aa9e04ffba9139752143f",
+    "remote_addressed_trace": "9bef5b31eec8b6e1fa82245da5133bdab4808862547fe6e7d68798cdfecdce92"
+  },
+  "status": {
+    "combined_status_read": "authorized GitHub connector, zero individual statuses",
+    "commit_status_write": "NOT_RUN; gh has no authenticated GitHub session and the connected tool exposes status reads",
+    "live_owner_vote": "NOT_RUN; owner-authenticated voting session unavailable"
+  },
+  "remote": {
+    "firmware_producer": "45ac00c6d1b99d0b3bcc9823f13ce1898d04f7f4",
+    "client_source": "995d5493386fad889ca8106758567c9fe80a47d5",
+    "client_blob": "04fec008cc323a6af8a05effd9ff3bfef1e1b00c",
+    "integration_client_blob": "ccad63f29c321e6b1a257cd2465babd48f42da9b",
+    "production_admitted": false,
+    "final_touchosc": "NOT_RUN on final producer"
+  }
+}

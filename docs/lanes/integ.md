@@ -1,5 +1,13 @@
 # Integration baseline
 
+## Focused gate repair and addressed Remote trace — 2026-11-22 (WORKING)
+
+Nightly `570bb01253989e538b08983d92ae818109a0471f` retains consolidated `583f6229` with 56 lane commits and zero consolidated-only commits or deleted paths. With the archived-receipt scan fix, all 27 preset tests pass and a temporary retired Presets label fails the scan. The visual harness has 55 passing units and its sandbox check reports zero findings. The new status and vote run passed 397 build-history checks and three inbox tests, including opening-post vote counting, de-duplication and missing-read handling. These are software fixture results. An authenticated GitHub connector status read found no individual commit statuses. Live status posting and owner voting remain unverified. [Focused receipt](../../evidence/integ-resume/focused-status-vote-and-remote/receipt.json)
+
+The Remote candidate at `995d5493` exercises HELLO and addressed Apply/Undo through the firmware scalar fixture and the production Nightly client module. The stored value returns from 75 to 76 to 75, with the fresh guarded reads at revisions 1, 2 and 3. The current Integration client predates the candidate Undo code. Production firmware still has the DNR2 seam unbound. The cached Elite link leaves 204 B free with the scalar core, 820 B below the 1,024 B floor before the adapter. [Addressed trace](../../evidence/integ-resume/focused-status-vote-and-remote/remote-addressed.json) · [Firmware proof](https://github.com/gobbajogger/DnBOX/blob/45ac00c6d1b99d0b3bcc9823f13ce1898d04f7f4/evidence/integ-resume/dnr2-scalar/README.md)
+
+Reuse the matching 32 proposal renders separately from approved baselines. Final changed-screen review, route/parity checks and TouchOSC exercise remain scoped to the exact combined Nightly candidate.
+
 ## Consolidated terminal result and Remote protocol coverage — 2026-11-22 (WORKING)
 
 Nightly Local gate at `583f622961fc9975fac746592ce6c483073c4170` finished **FAIL**, exit 1. The entire browser stage passed with the pinned native runtimes, including 1,838 named screens, 1,912 browser frames, 105,868,800 unique-state pixels and nine structural fixtures. The only failing stage was units. The retired-name test scanned the normative `RULES.md` sentence that the lane candidate's focused run already excludes. This verdict supersedes the earlier in-progress snapshot while preserving its measurements.
