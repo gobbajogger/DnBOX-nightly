@@ -1,0 +1,82 @@
+{
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "sourceStage": "firmware/src/app/ui_drum_voice.inc",
+  "sourceUnits": "firmware/src/app/ui.c",
+  "cases": 512,
+  "charts": 768,
+  "points": 25600,
+  "maxAbsoluteError": 3.863574217888299e-06,
+  "witness": {
+    "selection": 1,
+    "parameter": 2,
+    "raw": 95,
+    "chart": "ad",
+    "i": 5,
+    "original": 10.2531013,
+    "remote": 10.253105163574219
+  },
+  "quantize16Matches": 768,
+  "nativeQuantized16Sha256": "7060c2b488ae4f61b1c7d6f2f42aa6ac7b88290e48f54651e5fc63e675f1e8b6",
+  "remoteQuantized16Sha256": "7060c2b488ae4f61b1c7d6f2f42aa6ac7b88290e48f54651e5fc63e675f1e8b6",
+  "result": "PASS",
+  "softwareOnly": true,
+  "remoteHead": "dfb03e0d5d3f9c2d4e2cd6e39c9145fb65ccb67c",
+  "remoteModule": {
+    "path": "web/product-site/remote/drum-clap-stages.mjs",
+    "sha256": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61",
+    "status": "?? web/product-site/remote/drum-clap-stages.mjs"
+  },
+  "ownerTraceSha256": "661eddba59640b3ba4ed90806ac1ff9b9f97741c56af7a88555d429fa12cbb26",
+  "oracleStdinSha256": "3f3f915461fce8347aeb088b530b7ca155ae84b46ce34aa9a91000a2f8dbc500",
+  "nativeRowsSha256": "4858a2e24d0aa25a4ad162ddc52a3fdff535a88f216dfc4c2d473423715e4071",
+  "compiledProbeSha256": "33eeaeac305d83f8b984a2c6a9d8ad472b765aee6d96b342bf93963f82e9cdc0",
+  "compilerFlags": [
+    "-std=c11",
+    "-O2",
+    "-ffp-contract=off",
+    "-DX0X_HOST"
+  ],
+  "sourceFiles": {
+    "firmware/src/app/ui.c": "8f9b86dcbe801297cd0a60427c0e942f0536b03a9c7a3f40c99bf9b51cc24629",
+    "firmware/src/app/ui_drum_voice.inc": "9fed48b3c5546014970ba7360f6b8ebb0ebca11a45dd7b379c0e7fd040256894",
+    "firmware/src/dsp/drum808.c": "52f894bbcaf54a77aed1d9368ed6595cb3641dcf80d7fd7b8e74ed16cde73680",
+    "firmware/src/dsp/fastmath.h": "c82737d5302d77b974d5071c9bc58915aca723a6e6f5f5185cbe43bad962189d",
+    "firmware/src/dsp/envelope_snapshot.h": "76a2327177444bd317b63b30033cf309f5d5e5acaa07db2e6adada93158dd8e9",
+    "firmware/src/dsp/x0x_param.h": "a9341e448f8e2e7c880734f6758df46c0e43669b4c6252b429f7070425b4c800"
+  },
+  "compiledOriginalFunctions": {
+    "put_s": {
+      "sha256": "3b3c16ddd3b8d16ddab5ac8b91b1570fa10768a36f7fa620865314abccf05954",
+      "bytes": 108
+    },
+    "put_i": {
+      "sha256": "08df8e0074d0d6e58729d8889b53ac847ed0ea3f8d549320d626efcbc5f98441",
+      "bytes": 305
+    },
+    "put_d1": {
+      "sha256": "8dbbad7bdfb09f9894f5f788bf6766d5dd1add75b64407b85c5cbb773dedc10d",
+      "bytes": 318
+    },
+    "unit_value": {
+      "sha256": "1adf3651aadf765dfea5231f37d5662723c1178526b66ca223f0c85af9ae9920",
+      "bytes": 1002
+    },
+    "physical_stage_label": {
+      "sha256": "65c946c934903b93df7bb2138436a45b76853c305490229f728b93a6f4e848c1",
+      "bytes": 227
+    },
+    "dv_curve_level": {
+      "sha256": "8f0c421173c818dafbdf83430ec0599c1fd51bc6ca72bb800d9ce9541de4db0c",
+      "bytes": 395
+    },
+    "dv_bound_stage": {
+      "sha256": "bcdca5ab1015233b95597db5873b0da62d377460a3e154388ca48bf9bd3e11f4",
+      "bytes": 1308
+    },
+    "dv_nominal_stage_time": {
+      "sha256": "e6d6206661ac9908ba772b8485bb9cd882e63a2deb428cd54270a7d50946de2c",
+      "bytes": 171
+    }
+  },
+  "scope": "The eight compiled function bodies are copied byte-for-byte from the pinned Git objects. The host adapter supplies page role routing and output sinks. This compares idle coordinates and readouts."
+}

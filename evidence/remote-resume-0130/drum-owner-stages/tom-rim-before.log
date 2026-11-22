@@ -1,0 +1,37 @@
+PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof
+PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem
+PASS Projects card clicks dispatch Save/Open/Review and round-trip edited draft; event doubles, not browser file-picker proof
+PASS draft zoom roundtrip retains narrow viewport geometry
+PASS actual app grouped step edits, one Undo, multi-touch rollback, capture cleanup and both drum lanes; event doubles, not browser proof
+PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available
+PASS Song row limit, global Undo/Redo and Draft save at capacity
+PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips
+PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled
+PASS real Remote source events preserve CLAP/MARAC Tune and Decay in Draft gestures, history, Review, Projects and files
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: LT
++ actual - expected
+
+  [
+    1,
++   25,
++   70
+-   58,
+-   64
+  ]
+
+    at assertValues (file:///tmp/dnbox-remote-808-owner-dfb03e0/tests/product-workspace/app-draft-regression.mjs:406:55)
+    at switched808OwnerDrafts (file:///tmp/dnbox-remote-808-owner-dfb03e0/tests/product-workspace/app-draft-regression.mjs:421:3)
+    at async file:///tmp/dnbox-remote-808-owner-dfb03e0/tests/product-workspace/app-draft-regression.mjs:466:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [ 1, 25, 70 ],
+  expected: [ 1, 58, 64 ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.3

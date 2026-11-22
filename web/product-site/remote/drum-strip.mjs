@@ -4,6 +4,7 @@ import {drumDisplay} from './drum-format.mjs';
 import {decayCurves,decayMilliseconds} from './drum-decay-times.mjs';
 import {GlyphAnimator} from './glyph-live.mjs';
 import {sourceControlLabel} from './frame.mjs';
+import {clapStageCharts,clapStageReadout} from './drum-clap-stages.mjs';
 
 const escape = value => String(value).replace(/[&<>"']/g,
   c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
@@ -183,6 +184,31 @@ export function paintKickDepth(root, changed, preview, read) {
   }
 }
 
+// PARA uses the full CP stage page rather than a native small Decay drawing.
+// Affinely project that actual chart into the retained R22 cell; no new donor.
+const clapStages=new WeakMap();
+export function paintClapStageGlyph(root,{selection,attack,decay}){
+ if(!root?.querySelectorAll||!clapStageCharts(selection,attack,decay).length)return;
+ const selector='[data-source-control="1:1:6:2"] [data-glyph-semantic="DECAY"]';
+ for(const glyph of root.querySelectorAll('[data-drum-editor] '+selector+', [data-drum-sound-strip] '+selector)){
+  let state=clapStages.get(glyph);
+  if(!state||state.selection!==selection){
+   const path=glyph.querySelector('path');if(!path)continue;
+   state={selection,attack,decay};clapStages.set(glyph,state);
+   state.draw=()=>{
+    if(clapStages.get(glyph)!==state)return;
+    const pot=(animator,fallback)=>Math.max(0,Math.min(127,Math.round(127*(animator?.value??fallback/127))));
+    const chart=clapStageCharts(state.selection,pot(state.a,state.attack),pot(state.d,state.decay)).at(-1);
+    path.setAttribute('d',xyPath(chart.points.map(([x,y])=>[1+30*x/chart.width,12*y/chart.height])));
+   };
+   state.a=new GlyphAnimator({value:attack/127,draw:state.draw});
+   state.d=new GlyphAnimator({value:decay/127,draw:state.draw});
+   glyph.setAttribute('data-glyph-origin','firmware dv_cp_stage_page affine projection');
+   state.draw();
+  }else{state.attack=attack;state.decay=decay;state.a.set(attack/127);state.d.set(decay/127);}
+ }
+}
+
 const snappyIds=new Set(['1:0:1:2','1:1:1:2']);
 const drumSoundIds=new Set(['1:1:2:3','1:1:3:3','1:1:4:3','1:1:5:3','1:1:6:4']);
 // The PARA Sound switch uses dv_glyph's value-scaled fallback.
@@ -228,7 +254,8 @@ export function paintDrumGlyph(root,control,raw,max) {
 }
 
 export function drumValueText(control, value) {
-  return drumDisplay(control.identity, value) ?? 'Raw '+value;
+  const parameter=control.identity==='1:1:6:2'?2:control.identity==='1:1:6:3'?3:null;
+  return (parameter===null?null:clapStageReadout(parameter,value,0)?.display)??drumDisplay(control.identity, value)??'Raw '+value;
 }
 
 // Keep the source frame intact. Its active column centres, summary right edges

@@ -1,0 +1,3 @@
+# Remaining drum glyph role regressions
+
+The mandatory `drum-dv-roles.test.mjs` compares all1,034source-generated native drawings and55,812coordinate values, including dependent Kick projections, without an optional external runtime. `tools/probe-drum-dv-glyphs.py` regenerates the committed compressed fixture from clean pinned f178source. The C7baseline reproduces both new regressions; the integrated source passes. All83retained drum occurrences now respond through their appropriate parameter/owner paths. Clap is verified in the separate owner/stage proof; its compact slot is explicitly an affine native-stage adaptation. No live engine level is invented.

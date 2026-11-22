@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
-import {paintDrumGlyph,paintKickDepth} from '../../web/product-site/remote/drum-strip.mjs';
+import {paintDrumGlyph,paintKickDepth,paintClapStageGlyph} from '../../web/product-site/remote/drum-strip.mjs';
 
 const {screens}=JSON.parse(readFileSync(new URL('../../web/product-site/remote/components.json',import.meta.url)));
 const controls=screens.filter(s=>s.path.includes('-voice-')).flatMap(s=>s.controls);
@@ -36,8 +36,8 @@ test('20 retained falling-tail donors follow the original idle curves at all 128
 });
 
 
-test('only owner-bound Clap Decay retains a static donor',()=>{
-  const staticIds=new Set(['1:1:6:2']);
+test('all 83 drum occurrences respond through their supported value and owner paths',()=>{
+  const staticIds=new Set();
   assert.equal(controls.length,83);
   let unchanged=0;
   for(const c of controls){
@@ -49,6 +49,7 @@ test('only owner-bound Clap Decay retains a static donor',()=>{
     const paint=value=>{
       paintDrumGlyph(root,c,value,maximum);
       paintKickDepth(root,c.identity,value,id=>({'1:0:0:0':34,'1:0:0:4':64,'1:0:0:5':45})[id]);
+      if(c.identity==='1:1:6:2')paintClapStageGlyph(root,{selection:0,attack:32,decay:value});
     };
     paint(0);
     const low=drawing;
@@ -56,5 +57,5 @@ test('only owner-bound Clap Decay retains a static donor',()=>{
     assert.equal(drawing===low,staticIds.has(c.identity),c.identity);
     if(drawing===low)unchanged++;
   }
-  assert.equal(unchanged,1);
+  assert.equal(unchanged,0);
 });

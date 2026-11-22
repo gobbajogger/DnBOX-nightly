@@ -30,7 +30,9 @@ import{SourceSounds,sourcePercent}from'./sound.mjs';
 import{WorkspaceTimeline}from'./timeline.mjs';
 import{sourceFrame,sourceControlLabel}from'./frame.mjs';
 import {kitAccentAliases,sharedKitAccent} from './drum-accent.mjs';
-import{renderDrumStrip,drumValueText,mountDrumReadouts,paintDrumGlyph,paintKickDepth}from'./drum-strip.mjs';
+import{renderDrumStrip,drumValueText,mountDrumReadouts,paintDrumGlyph,paintKickDepth,paintClapStageGlyph}from'./drum-strip.mjs';
+import{clapSoundId,clapSelection,drum808OwnerComponents,drum808OwnerSpecs,drum808OwnerSpec,isDrum808OwnerControl,normalizeDrum808OwnerEdits}from'./clap-draft.mjs';
+import{clapStageCharts,clapStageReadout}from'./drum-clap-stages.mjs';
 import {mountProjectPreset} from './project-preset.mjs';
 import{renderSong}from'./song-view.mjs';
 import{MotionDraft}from'./motion.mjs';
@@ -39,7 +41,7 @@ import{ParameterGesture}from'./parameter.mjs';
 import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers,patternLabel}from'./workspace.mjs';
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
 import{STEP_LANES,envelopeCurve,formatPan,formatParameterValue,glyphFor,isPanLabel,panCell}from'./glyphs.mjs';
-import{mountLiveGlyphs,setGlyphValue,setMasterFilterGlyph}from'./glyph-live.mjs';
+import{mountLiveGlyphs,setGlyphValue,setMasterFilterGlyph,setMasterCompGlyph}from'./glyph-live.mjs';
 import{mountFirmwareLink}from'./firmware-link.mjs';
 import{LANE_KINDS,LANE_WORDS,chanceFromLane,panFromLane,velocityFromLane,pitchOffsetFromLane,laneFraction,laneText,laneP,RAIL_OFFSET,CHANCE_SPLIT}from'./lane.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -429,6 +431,10 @@ const parameterBaseline=new Map(components.screens.flatMap(screen=>screen.contro
  screen.path+'|'+control.identity,
  {value:Number(control.context.raw),label:sourceControlLabel(control),drumControl:control.markers?.['drum-control']?control:null}
 ])));
+for(const spec of drum808OwnerSpecs){
+ const component=parameterBaseline.get(spec.componentId);
+ if(component?.drumControl)parameterBaseline.set(spec.id,{...spec,drumControl:component.drumControl});
+}
 for(const spec of superJ6Specs)parameterBaseline.set(spec.id,spec);
 for(const c of sourceSounds.entries())if(c.enabled)parameterBaseline.set(c.id,{value:c.raw,label:c.label,context:c.context});
 for(const spec of masterDraft.specs)for(const id of spec.ids)parameterBaseline.set(id,{value:spec.value,label:spec.label,context:spec.context});
@@ -566,14 +572,20 @@ motion.end=owner=>{const count=motion.history.length;endMotion(owner);if(motion.
 motion.clear=step=>{if(!Number.isInteger(step)||step<0||step>=16)throw Error('Invalid step');motion.cancel();if(motion.values[step]===null)return;clearMotion(step);recordMotion();};
 function scalarDraftChange(id, after) {
  const kit=kitAccentById.get(id);
- const ids=kit?Array.from(kit.voices.keys()):[id];
+ const ids=kit?Array.from(kit.voices.keys()):[drum808OwnerSpec(id,parameterDraft)?.id??id];
  const before=ids.map(key=>parameterDraft.get(key));
  return {
   redo(){for(const key of ids)parameterDraft.set(key,after);},
   undo(){ids.forEach((key,i)=>before[i]===undefined?parameterDraft.delete(key):parameterDraft.set(key,before[i]));}
  };
 }
-function recordParameter(c){if(view==='sound'&&nativeSoundMode){const key=soundKey(c.id),state=nativeSound()?.snapshot();if(key&&state?.phase==='ready'&&c.after!==state.values.get(key))runSoundAction({kind:'change',key,value:c.after});return;}if(view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){if(nativeMix.snapshot().phase==='ready'&&c.after!==nativeMix.snapshot().values.get(runtimeMixKey(c.id)))nativeMixAction(nativeMix.change(runtimeMixKey(c.id),c.after),'Emulator edit not confirmed');return;}if(view==='mix'&&nativeMixMode)return;restoreMixPreview(c.id);if(c.before===c.after)return;if(masterDraft.has(c.id)){const edit=masterDraft.change(c.id,parameterDraft,c.after);edit.redo();timeline.record({label:'Master '+masterDraft.spec(c.id).label,undo:edit.undo,redo:edit.redo});return;}const group=mixAliasIndex.byId.get(c.id);if(group){const edit=mixChange(group,parameterDraft,c.after);edit.redo();timeline.record({label:c.label||'Mix',undo:edit.undo,redo:edit.redo});return;}const source=findSpec(c.id),identity={label:c.label||source.label,context:c.context||source.context};parameterIdentity.set(c.id,identity);const edit=scalarDraftChange(c.id,c.after);edit.redo();timeline.record({label:[identity.context,identity.label].filter(Boolean).join(' · '),undo:edit.undo,redo:edit.redo});}
+function recordParameter(c){if(view==='sound'&&nativeSoundMode){const key=soundKey(c.id),state=nativeSound()?.snapshot();if(key&&state?.phase==='ready'&&c.after!==state.values.get(key))runSoundAction({kind:'change',key,value:c.after});return;}if(view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){if(nativeMix.snapshot().phase==='ready'&&c.after!==nativeMix.snapshot().values.get(runtimeMixKey(c.id)))nativeMixAction(nativeMix.change(runtimeMixKey(c.id),c.after),'Emulator edit not confirmed');return;}if(view==='mix'&&nativeMixMode)return;restoreMixPreview(c.id);if(c.before===c.after)return;if(masterDraft.has(c.id)){const edit=masterDraft.change(c.id,parameterDraft,c.after);edit.redo();timeline.record({label:'Master '+masterDraft.spec(c.id).label,undo:edit.undo,redo:edit.redo});return;}const group=mixAliasIndex.byId.get(c.id);if(group){const edit=mixChange(group,parameterDraft,c.after);edit.redo();timeline.record({label:c.label||'Mix',undo:edit.undo,redo:edit.redo});return;}const owner=drum808OwnerSpec(c.id,parameterDraft);
+ const source=findSpec(c.id),identity={label:c.label||source.label,context:owner?.context||c.context||source.context};
+ parameterIdentity.set(owner?.id??c.id,identity);
+ const edit=scalarDraftChange(c.id,c.after);
+ edit.redo();
+ timeline.record({label:[identity.context,identity.label].filter(Boolean).join(' · '),undo:edit.undo,redo:edit.redo});
+}
 function performHistory(redo=false){rollBinding.cancel();cancelParameters();if(view==='sound'&&nativeSoundMode){if(!redo&&nativeSound()?.snapshot().canUndo)runSoundAction({kind:'undo'});return;}if(view==='mix'&&nativeMixMode){if(!redo&&nativeMix.snapshot().canUndo)nativeMixAction(nativeMix.undo(),'Emulator Undo not confirmed');return;}const label=redo?timeline.redo():timeline.undo();paintNotes();if(view!=='roll')other();if(['mix','sound','drums'].includes(view)&&activeParameter&&$('other-view').innerHTML.includes('data-param="'+esc(activeParameter)+'"')){const c=findSpec(activeParameter);if(c)showParameter(c.id,c.value);}status(label?`${redo?'Redo':'Undo'} ${label} · Draft · ${connectionLabel()}`:undefined);}
 function cards(list){return'<div class="source-controls">'+list.map(c=>`<div class="parameter"><span>${esc(c.voiceLabel?c.voiceLabel+' · '+c.label:c.label)}</span><output aria-label="${esc(c.label)}, not connected">—</output></div>`).join('')+'</div>';}
 const drumLandscape=window.matchMedia?.('(orientation:landscape) and (min-width:640px) and (max-width:900px) and (max-height:500px)');
@@ -593,12 +605,32 @@ function paintEditableDrumGlyph(screen,control,value,maximum){
  const root=$('other-view');
  paintDrumGlyph(root,control,value,maximum);
  paintKickDepth(root,control.identity,value,id=>findSpec(screen.path+'|'+id)?.value);
+ if(screen.path+'|1:1:6:4'===clapSoundId){
+  const read=parameter=>findSpec(screen.path+'|1:1:6:'+parameter)?.value;
+  paintClapStageGlyph(root,{selection:clapSelection(parameterDraft),attack:read(3),decay:read(2)});
+ }
+}
+function clapStageContent(){
+ const selection=clapSelection(parameterDraft),prefix=clapSoundId.slice(0,-1);
+ const attack=findSpec(prefix+'3')?.value,decay=findSpec(prefix+'2')?.value;
+ return clapStageCharts(selection,attack,decay).map(chart=>{
+  const readout=clapStageReadout(chart.kind==='attack'?3:2,chart.kind==='attack'?attack:decay,selection);
+  return '<div class="envelope-row"><div class="envelope-observed-heading"><span>'+chart.title+'</span><output>'+readout.display+'</output></div>'+
+   '<svg class="envelope-graph" role="img" aria-label="'+chart.title+', '+chart.windowMs+' milliseconds" viewBox="0 0 '+chart.width+' '+chart.height+'" preserveAspectRatio="none"><path d="'+chart.d+'" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>'+
+   '<div class="clap-stage-axis"><span>0ms</span><span>'+chart.windowMs+'ms</span></div></div>';
+ }).join('');
+}
+function clapStagePanel(){
+ return $('part').value==='drum808'&&drumVoice===6&&!drumOriginal&&!nativeSoundMode?'<section class="clap-stages" data-clap-stages aria-label="Clap and Maracas draft envelopes">'+clapStageContent()+'</section>':'';
+}
+function paintClapStages(){
+ for(const host of $('other-view').querySelectorAll('[data-clap-stages]'))host.innerHTML=clapStageContent();
 }
 function compactDrumSound(part) {
  const kit=part==='drum808'?'808':'909',screen=drumSoundScreen(part);
  const toolbar='<div class="drum-sound-toolbar"><h2>Sound · '+kit+'</h2>'+soundSourceBar()+voiceSelector(kit)+'</div>';
  if(drumOriginal)return toolbar+'<button type="button" data-drum-return>Return to Sound</button>'+sourceFrame(screen);
- return toolbar+renderDrumStrip(screen,findSpec)+
+ return toolbar+renderDrumStrip(screen,findSpec)+clapStagePanel()+
   '<div class="drum-sound-actions"><button type="button" data-drum-original>Open original</button>'+
   '<button type="button" data-project-action="save">Save a copy</button>'+
   '<select id="drum-kit-page" aria-label="Engine / page"><option value="" disabled selected>Engine / page</option>'+
@@ -627,6 +659,7 @@ function setDrumOriginal(original) {
  $('other-view').querySelector(original?'[data-drum-return]':'[data-drum-original]')?.focus();
 }
 function nudgeDrum(id,delta) {
+ cancel808OwnerGesture(id);
  const c=findSpec(id);
  if(!editableDrumControl(id)||!c)return;
  const value=Math.max(c.min,Math.min(c.max,c.value+delta*c.step));
@@ -813,19 +846,23 @@ function mixControlPanel(file,title){
   const value=runtimeMixValue(id,stored),spec=findSpec(id);
   const display=fxDisplay(id,value)??(!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):value===Number(c.context.raw)?c.context.display:formatParameterValue(c.context.name,value));
   const masterFilter=c.identity==='1:6:0:13'&&!nativeMixMode?masterDraft.filterState(parameterDraft):undefined;
-  const name=title+' '+c.context.name,fn=masterFilter?'MASTER FILTER':fxGlyphId(c.identity)??c.context.name;
+  const masterComp=c.identity==='1:6:0:12'&&!nativeMixMode?masterDraft.compState(parameterDraft):undefined;
+  const name=title+' '+c.context.name;
+  const fn=masterFilter?'MASTER FILTER':masterComp?'MASTER COMP':fxGlyphId(c.identity)??c.context.name;
   const normalized=spec?(value-spec.min)/(spec.max-spec.min||1):0;
   const delayType=fn==='G053'&&!nativeMixMode&&delayTypeSpec?(parameterDraft.get(delayTypeId)??delayTypeSpec.value):undefined;
   const delayAttr=delayType===undefined?'':' data-glyph-delay-type="'+delayType+'"';
   const filterAttr=masterFilter?' data-glyph-master-filter="'+[masterFilter.mode,masterFilter.cutoff,masterFilter.resonance].join(':')+'"':'';
-  const glyphState=delayAttr+filterAttr;
+  const compAttr=masterComp?' data-glyph-master-comp="'+[masterComp.threshold,masterComp.ratio,masterComp.blend].join(':')+'"':'';
+  const glyphState=delayAttr+filterAttr+compAttr;
   const attributes=spec?' data-glyph-fn="'+esc(fn)+'" data-glyph-engine="mixer" data-glyph-value="'+normalized+'"'+glyphState:'';
-  return '<button type="button" class="parameter encoder" data-param="'+esc(id)+'" data-mix-param-label="'+esc(name)+'" aria-label="'+esc(name+' '+display)+'"><span class="glyph"'+attributes+'>'+glyphFor(fn,'mixer',normalized,{delayType,masterFilter,live:false})+'</span><output data-param-value="'+esc(id)+'">'+esc(display)+'</output><span>'+esc(c.context.name)+'</span></button>';
+  return '<button type="button" class="parameter encoder" data-param="'+esc(id)+'" data-mix-param-label="'+esc(name)+'" aria-label="'+esc(name+' '+display)+'"><span class="glyph"'+attributes+'>'+glyphFor(fn,'mixer',normalized,{delayType,masterFilter,masterComp,live:false})+'</span><output data-param-value="'+esc(id)+'">'+esc(display)+'</output><span>'+esc(c.context.name)+'</span></button>';
  }).join('')+'</div></section>';
 }
 function masterMore(){if(nativeMixMode)return '';return '<section class="mix-panel master-more" aria-label="Master More Draft"><h3>More · Draft</h3><div class="encoder-grid">'+masterDraft.more.map(c=>{const value=masterDraft.read(c.id,parameterDraft),display=masterDraft.display(c.id,value);return '<button type="button" class="parameter encoder" data-param="'+c.id+'" data-master-control="'+c.target+':'+c.parameter+'" aria-label="Master '+esc(c.label)+' '+esc(display)+'"><span class="glyph" data-glyph-fn="'+c.glyph+'" data-glyph-engine="mixer" data-glyph-value="'+value/c.max+'">'+glyphFor(c.glyph,'mixer',value/c.max,{live:false})+'</span><output data-param-value="'+c.id+'">'+esc(display)+'</output><span>'+esc(c.label)+'</span></button>';}).join('')+'</div></section>';}
 function paintMasterValues(){if(view!=='mix'||nativeMixMode)return;for(const btn of document.querySelectorAll('[data-param]')){const id=btn.dataset.param;if(!masterDraft.has(id))continue;const c=masterDraft.spec(id),value=masterDraft.read(id,parameterDraft),display=masterDraft.display(id,value);btn.setAttribute('aria-label','Master '+c.label+' '+display);for(const out of btn.querySelectorAll?.('[data-param-value]')??[])out.textContent=display;for(const glyph of btn.querySelectorAll?.('[data-glyph-fn]')??[]){
  if(glyph.dataset.glyphMasterFilter!==undefined)setMasterFilterGlyph(glyph,masterDraft.filterState(parameterDraft));
+ if(glyph.dataset.glyphMasterComp!==undefined)setMasterCompGlyph(glyph,masterDraft.compState(parameterDraft));
  setGlyphValue(glyph,value/c.max);
 }}}
 let projectPreset;
@@ -890,10 +927,10 @@ function selectPatternScope(button) {
  document.querySelector('[data-pattern-scope="'+button.dataset.patternScope+'"]').focus();
 }
 
-function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const laneFocus=document.activeElement?.closest?.('[data-lane-step]')?.dataset.laneStep;const part=$('part').value;let html='';if(view==='drums'){const kit=part==='drum808'?'808':'909';html='<h2>'+kit+' · Draft</h2><div class="drum-layout"><section class="drum-grid-panel" aria-label="'+kit+' step grid">'+drumsWithLane(kit)+'</section><aside class="drum-sound-panel" aria-label="Selected voice sound"><h3>Sound · '+esc(DRUM_VOICES[kit][drumVoice][0])+'</h3>'+voiceSelector(kit)+sourceFrame(drumSoundScreen(part),true)+'</aside></div>';}
+function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const laneFocus=document.activeElement?.closest?.('[data-lane-step]')?.dataset.laneStep;const part=$('part').value;let html='';if(view==='drums'){const kit=part==='drum808'?'808':'909';html='<h2>'+kit+' · Draft</h2><div class="drum-layout"><section class="drum-grid-panel" aria-label="'+kit+' step grid">'+drumsWithLane(kit)+'</section><aside class="drum-sound-panel" aria-label="Selected voice sound"><h3>Sound · '+esc(DRUM_VOICES[kit][drumVoice][0])+'</h3>'+voiceSelector(kit)+sourceFrame(drumSoundScreen(part),true)+clapStagePanel()+'</aside></div>';}
  if(view==='locks')html='<section class="motion-editor" aria-label="MIAMI Wave Motion draft"><h2>Motion · MIAMI Wave</h2><div id="motion-grid" tabindex="0" aria-label="MIAMI Wave"></div><div class="motion-fields"><label>Step <input id="motion-step" type="number" min="1" max="16" value="'+(motionSelected+1)+'"></label><label>Value <input id="motion-value" aria-label="Value" type="number" min="0" max="127" value="'+(motion.values[motionSelected]??'')+'"></label></div><div class="motion-actions"><button id="motion-clear">Clear point</button><button id="motion-undo">Undo</button><button id="motion-redo">Redo</button></div></section>';
  if(view==='sound'&&nativeSoundMode){html=soundSourceBar()+nativeSoundControls();}
- if(view==='sound'&&!nativeSoundMode){html=isDrumPart(part)&&drumLandscape?.matches?compactDrumSound(part):soundSourceBar()+`<h2>Sound · ${esc($('part').selectedOptions[0].textContent)}${part==='chicago'||part==='miami'?' / '+soundBanks[part==='chicago'?0:1]:''}</h2>`+(['drum909','drum808'].includes(part)?voiceSelector(part==='drum909'?'909':'808')+sourceFrame(drumSoundScreen(part),true):soundControls(part));}
+ if(view==='sound'&&!nativeSoundMode){html=isDrumPart(part)&&drumLandscape?.matches?compactDrumSound(part):soundSourceBar()+`<h2>Sound · ${esc($('part').selectedOptions[0].textContent)}${part==='chicago'||part==='miami'?' / '+soundBanks[part==='chicago'?0:1]:''}</h2>`+(['drum909','drum808'].includes(part)?voiceSelector(part==='drum909'?'909':'808')+sourceFrame(drumSoundScreen(part),true)+clapStagePanel():soundControls(part));}
  if(view==='mix'){html=mixSourceBar()+(nativeMixMode&&!['ready','busy'].includes(nativeMix.snapshot().phase)?'<p role="status">Emulator controls unavailable</p>':renderMixWorkspace({mode:mixMode,parts:mixMode==='levels'?typedMixer():typedMixSends(mixMode),master:mixControlPanel('mix-master.svg','Master')+masterMore(),fx:mixControlPanel('fx-reverb-direct.svg','Reverb')+mixControlPanel('fx-delay-direct.svg','Delay'),tape:wearPanel()}));}
  if(view==='patterns')html=patternsWorkspace();
  if(view==='song'){songSelected=arrangement.rows.length?Math.min(songSelected??0,arrangement.rows.length-1):null;html=renderSong(arrangement.rows,songSelected);}
@@ -911,6 +948,7 @@ function other(){const sj6Focus=document.activeElement?.dataset?.sj6Id;const lan
  }
  if(sj6Focus)$('other-view').querySelector('[data-sj6-id="'+sj6Focus+'"]')?.focus({preventScroll:true});if(laneFocus!==undefined)$('other-view').querySelector(`[data-lane-step="${laneFocus}"]`)?.focus({preventScroll:true});if(['sound','mix','drums'].includes(view)){(view==='drums'?$('other-view').querySelector('.drum-sound-panel')??$('other-view'):$('other-view')).insertAdjacentHTML?.('beforeend','<div id="parameter-inspector"><label><span></span><output id="parameter-readout"></output><input id="parameter-value" type="number" disabled></label><button id="parameter-undo" disabled>Undo</button></div>');paintLivePan();}mountLiveGlyphs($('other-view'));bindParameterFields();if(view==='locks')bindMotion();paintSoundPanel();nativeEnvelopeBinding?.render();markRuntimeMixControls();status();}
 function partTitle(){
+ if(view==='mix')return 'Mix · '+({levels:'Levels',pan:'Pan',sends:'Sends',fx:'FX',master:'Master'}[mixMode]??'Levels');
  if(view==='song')return 'Song arrangement';
  if(view==='files')return 'Project files';
  if(view==='patterns'){if(showAllPatternParts)return 'All parts · Draft';const scope=patternScope();return scope.name+' · '+scope.display+' · Draft';}if(view==='locks')return 'MIAMI Wave';const part=$('part')?.value;if(view==='sound'&&nativeSoundMode)return (nativeSound()?.snapshot().engine??'Sound')+' / Emulator';if(part==='chicago')return soundBanks[0]+' / P01';if(part==='miami')return soundBanks[1]+' / P01';if(part==='drum909')return '909 / P01';if(part==='drum808')return '808 / P01';if(part==='breaks')return knownBreakPattern(launch.targets[4])?'BREAK / '+breakPatternName(launch.targets[4]):'BREAK';return 'P01';}
@@ -1066,14 +1104,71 @@ bindStepLane($('velocity'),()=>$('velocity'),notes);
 bindStepLane($('other-view'),()=>$('drum-lane'),drumLaneNotes);
 $('other-view').addEventListener('click',e=>{if(e.target.closest?.('[data-lane-cycle]')){$('lane-kind').value=cycleLane();cancelParameters();other();}});
 scroll.addEventListener('scroll',()=>{$('velocity').scrollLeft=scroll.scrollLeft;const rt=document.querySelector('.ruler-track');if(rt)rt.style.transform=`translateX(${-scroll.scrollLeft}px)`;const rail=$('pitch-rail');if(rail)rail.scrollTop=scroll.scrollTop;});$('velocity').addEventListener('scroll',()=>{if(Math.abs(scroll.scrollLeft-$('velocity').scrollLeft)>1)scroll.scrollLeft=$('velocity').scrollLeft;});
-const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);if(sj6)return{...sj6,value:parameterDraft.get(id)??sj6.value};if(masterDraft.has(id)&&!(view==='mix'&&nativeMixMode)){const c=masterDraft.spec(id);return{...c,id,value:masterDraft.read(id,parameterDraft)};}if(id.startsWith('source-master/'))return null;if(id===delayTypeId&&delayTypeSpec)return {...delayTypeSpec,value:parameterDraft.get(id)??delayTypeSpec.value};if(id===wearId&&wearControl)return {id,label:'Wear',context:'Tape',value:runtimeMixValue(id,parameterDraft.get(id)??64),min:wearControl.min,max:wearControl.max,step:1};if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);if(soundNativeId(id)){const value=nativeSound()?.snapshot().values.get(soundKey(id));return c&&Number.isFinite(value)?{...c,value}:null;}return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const group=mixAliasIndex.byId.get(id),kit=kitAccentById.get(id),value=runtimeMixValue(id,group?mixRead(group,parameterDraft):parameterDraft.get(id)??(kit?sharedKitAccent(kit,parameterDraft):undefined)??Number(c.context.raw));if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;return{id,label:sourceControlLabel(c),context:[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};};
-function showParameter(id,value,presentation){activeParameter=id;const descriptor=findSpec(id);if(!descriptor)return;if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;if(presentation?.label&&presentation?.context)activePresentation={id,label:presentation.label,context:presentation.context};else if(activePresentation?.id!==id)activePresentation={id,label:descriptor.label,context:descriptor.context};const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;const wave=miamiWave(miamiWaveParameter(row),value);const drum=editableDrumControl(id),sourceDisplay=soundNativeId(id)?null:draftSoundDisplay(row,value);const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);if(drum)paintEditableDrumGlyph(drumSoundScreen($('part').value),drum,value,descriptor.max);refreshEnvelope(row);if(wave)paintSoundPanel();for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');if(sourceDisplay!==null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));}const field=$('parameter-value');if(field){const s=findSpec(id);field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';field.min=s.min;field.max=s.max;field.step=s.step;field.value=value;$('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;const readout=$('parameter-readout');if(readout)readout.textContent=shown;}$('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);paintLivePan();paintMasterValues();}
+const findSpec=(id,occurrence)=>{if(typeof id!=='string')return null;const sj6=superJ6Spec(id)??superJ6Banks.spec(id);if(sj6)return{...sj6,value:parameterDraft.get(id)??sj6.value};if(masterDraft.has(id)&&!(view==='mix'&&nativeMixMode)){const c=masterDraft.spec(id);return{...c,id,value:masterDraft.read(id,parameterDraft)};}if(id.startsWith('source-master/'))return null;if(id===delayTypeId&&delayTypeSpec)return {...delayTypeSpec,value:parameterDraft.get(id)??delayTypeSpec.value};if(id===wearId&&wearControl)return {id,label:'Wear',context:'Tape',value:runtimeMixValue(id,parameterDraft.get(id)??64),min:wearControl.min,max:wearControl.max,step:1};if(id.startsWith('source-sound/')){const c=sourceSounds.spec(id);if(soundNativeId(id)){const value=nativeSound()?.snapshot().values.get(soundKey(id));return c&&Number.isFinite(value)?{...c,value}:null;}return c?{...c,value:parameterDraft.has(id)?parameterDraft.get(id):c.value}:null;}const[path,identity]=id.split('|'),screen=components.screens.find(s=>s.path===path),ordinal=Number(occurrence);if(occurrence!==undefined&&(!Number.isInteger(ordinal)||ordinal<0))return null;const c=occurrence===undefined?screen?.controls.find(c=>c.identity===identity):screen?.controls[ordinal];if(!c||c.identity!==identity)return null;const[k,target,voice,param]=identity.split(':').map(Number),d=catalog.controls.find(d=>d.target===target&&d.voice===voice&&d.parameter===param&&d.kind!=='HELD');const group=mixAliasIndex.byId.get(id),kit=kitAccentById.get(id),owner=drum808OwnerSpec(id,parameterDraft);
+ const fallback=owner?parameterDraft.get(owner.id)??owner.value:parameterDraft.get(id)??(kit?sharedKitAccent(kit,parameterDraft):undefined)??Number(c.context.raw);
+ const value=runtimeMixValue(id,group?mixRead(group,parameterDraft):fallback);
+ if(k!==1||!d||!Number.isFinite(value)||value<d.min||value>d.max)return null;
+ return{id,label:sourceControlLabel(c),context:owner?.context??[d.targetLabel,d.voiceLabel,d.bankLabel].filter(Boolean).join(' / '),value,min:d.min,max:d.max,step:d.kind==='U32'?1:.001};
+};
+function paintParameterReadout(id,value,shown,{descriptor,drum,sourceDisplay,row}){
+ if(drum)paintEditableDrumGlyph(drumSoundScreen($('part').value),drum,value,descriptor.max);
+ for(const out of document.querySelectorAll('[data-param-value]'))if(out.dataset.paramValue===id)out.textContent=shown;
+ for(const btn of document.querySelectorAll('[data-param]'))if(btn.dataset.param===id){
+  if(drum&&btn.dataset.drumLabel)btn.setAttribute('aria-label',btn.dataset.drumLabel+', '+shown+', local draft');
+  if(sourceDisplay!=null)btn.setAttribute('aria-label',row.context+' · '+row.label+', '+shown+', local draft');
+  if(btn.dataset.mixParamLabel)btn.setAttribute('aria-label',btn.dataset.mixParamLabel+' '+shown);
+  for(const g of btn.querySelectorAll?.('[data-glyph-fn]')??[])setGlyphValue(g,id===wearId?wearGlyph(value):(value-descriptor.min)/(descriptor.max-descriptor.min||1));
+ }
+}
+function paint808OwnerReadouts(soundId){
+ for(const id of drum808OwnerComponents(soundId)){
+  const descriptor=findSpec(id),drum=editableDrumControl(id);
+  if(descriptor&&drum)paintParameterReadout(id,descriptor.value,drumValueText(drum,descriptor.value),{descriptor,drum});
+ }
+}
+function showParameter(id,value,presentation){
+ activeParameter=id;
+ const descriptor=findSpec(id);
+ if(!descriptor)return;
+ if(soundNativeId(id)||view==='mix'&&nativeMixMode&&runtimeMixKey(id))value=descriptor.value;
+ const presented=!isDrum808OwnerControl(id)&&presentation?.label&&presentation?.context?presentation:null;
+ if(isDrum808OwnerControl(id)||presented||activePresentation?.id!==id){
+  const {label,context}=presented??descriptor;
+  activePresentation={id,label,context};
+ }
+ const row=id.startsWith('source-sound/')?sourceSounds.controlForId(id):null;
+ const wave=miamiWave(miamiWaveParameter(row),value);
+ const drum=editableDrumControl(id),sourceDisplay=soundNativeId(id)?null:draftSoundDisplay(row,value);
+ const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);
+ refreshEnvelope(row);
+ if(wave)paintSoundPanel();
+ paintParameterReadout(id,value,shown,{descriptor,drum,sourceDisplay,row});
+ if(drum)paint808OwnerReadouts(id);
+ if(drum&&id.startsWith(clapSoundId.slice(0,-1)))paintClapStages();
+ const field=$('parameter-value');
+ if(field){
+  field.disabled=nativeEditing()&&nativeEditState()?.phase!=='ready';
+  field.min=descriptor.min;field.max=descriptor.max;field.step=descriptor.step;field.value=value;
+  $('parameter-inspector').querySelector('span').textContent=activePresentation.context+' · '+activePresentation.label;
+  const readout=$('parameter-readout');if(readout)readout.textContent=shown;
+ }
+ $('parameter-undo')&&($('parameter-undo').disabled=nativeEditing()?!nativeEditState()?.canUndo:!timeline.canUndo);
+ paintLivePan();paintMasterValues();
+}
 function paintLivePan(){for(const btn of document.querySelectorAll('[data-param]')){const s=findSpec(btn.dataset.param,btn.dataset.paramOccurrence);if(!s||!isPanLabel(s.label))continue;btn.dataset.live='pan';btn.textContent=formatPan(s.value);}}
 const parameterGesture=new ParameterGesture({onPreview:s=>{if(soundNativeId(s.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(s.id)){showParameter(s.id,s.value);return;}if(view==='mix'&&nativeMixMode)return;if(masterDraft.has(s.id)){const change=masterDraft.change(s.id,parameterDraft,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);status();return;}const group=mixAliasIndex.byId.get(s.id);const change=group?mixChange(group,parameterDraft,s.value):scalarDraftChange(s.id,s.value);if(!mixGesturePreviews.has(s.id))mixGesturePreviews.set(s.id,change.undo);change.redo();showParameter(s.id,s.value);const row=sourceSounds.controlForId(s.id),drum=editableDrumControl(s.id);status(`${s.label} · ${drum?drumValueText(drum,s.value):draftSoundDisplay(row,s.value)??fxDisplay(s.id,s.value)??formatParameterValue(s.label,s.value)} · Draft`);},onCommit:c=>{recordParameter(c);showParameter(c.id,c.after);status();},onCancel:c=>{if(soundNativeId(c.id)||view==='mix'&&nativeMixMode&&runtimeMixKey(c.id)){showParameter(c.id,c.restore);return;}restoreMixPreview(c.id);if(c.restore!==null)showParameter(c.id,c.restore);}});
+function cancel808OwnerGesture(id){
+ const active=parameterGesture.current?.target.id;
+ if(isDrum808OwnerControl(id)&&isDrum808OwnerControl(active))parameterGesture.cancel('808-owner-interrupt');
+}
 function cancelNativeInputs(){for(const input of document.querySelectorAll('[data-native-param]'))soundInputIntent.delete(input);const entries=[...nativePreview];nativePreview.clear();for(const [input,value]of entries){input.value=String(value);previewNativeInput(input,false);}nativePreview.clear();}
 function cancelParameters(){cancelNativeInputs();motion.cancel();cancelStepLane();if(chanceDrag){model.cancelAll();chanceDrag=null;}parameterGesture.cancel();paramOwner=null;if(view==='locks')motionPaint();status();}
-function bindParameterFields(){const f=$('parameter-value'),u=$('parameter-undo');if(f)f.onchange=()=>{const s=findSpec(activeParameter),v=Number(f.value);if(!s||!Number.isFinite(v)||v<s.min||v>s.max||Math.abs((v-s.min)/s.step-Math.round((v-s.min)/s.step))>1e-6){if(s)showParameter(s.id,s.value);return;}recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v);status();};if(u)u.onclick=()=>performHistory();}
-$('other-view').addEventListener('pointerdown',e=>{const t=e.target.closest('[data-param]');if(!t||t.dataset.nativeParam||e.button!==0)return;const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;if(t.dataset.drumLabel)t.focus({preventScroll:true});paramOwner=e.pointerId;$('other-view').setPointerCapture(e.pointerId);parameterGesture.begin(e.pointerId,s,lanePoint(e));showParameter(s.id,s.value,s);e.preventDefault();});$('other-view').addEventListener('pointermove',e=>parameterGesture.move(e.pointerId,lanePoint(e)));$('other-view').addEventListener('pointerup',e=>{if(e.target.dataset.nativeParam&&(nativePreview.has(e.target)||soundInputIntent.has(e.target)))commitNativeInput(e.target);parameterGesture.end(e.pointerId);if(!parameterGesture.current)for(const id of [...mixGesturePreviews.keys()])restoreMixPreview(id);});for(const event of['pointercancel','lostpointercapture'])$('other-view').addEventListener(event,()=>{cancelNativeInputs();parameterGesture.cancel();});$('other-view').addEventListener('keydown',e=>{const input=e.target.closest('[data-native-param]');if(input&&soundNativeId(input.dataset.nativeParam)&&['ArrowUp','ArrowRight','ArrowDown','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const spec=findSpec(input.dataset.nativeParam);if(spec&&nativeSound().snapshot().phase==='ready'){const value=e.key==='Home'?spec.min:e.key==='End'?spec.max:Math.max(spec.min,Math.min(spec.max,spec.value+(['ArrowUp','ArrowRight'].includes(e.key)?1:-1)));recordParameter({id:spec.id,after:value});}return;}if(parameterGesture.current&&masterDraft.has(parameterGesture.current.target.id)&&e.key!=='Escape')parameterGesture.cancel('keyboard-interrupt');const t=e.target.closest('[data-param]');if(e.key==='Escape'){cancelNativeInputs();parameterGesture.cancel();return;}if(!t||t.dataset.nativeParam)return;const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;if(['Enter',' '].includes(e.key)){showParameter(s.id,s.value,s);$('parameter-value')?.focus();e.preventDefault();}if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key)){e.preventDefault();const v=Math.max(s.min,Math.min(s.max,s.value+(['ArrowUp','ArrowRight'].includes(e.key)?s.step:-s.step)));recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v,s);status();}});
+function bindParameterFields(){const f=$('parameter-value'),u=$('parameter-undo');if(f)f.onchange=()=>{const id=activeParameter,v=Number(f.value);cancel808OwnerGesture(id);const s=findSpec(id);if(!s||!Number.isFinite(v)||v<s.min||v>s.max||Math.abs((v-s.min)/s.step-Math.round((v-s.min)/s.step))>1e-6){if(s)showParameter(s.id,s.value);return;}recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v);status();};if(u)u.onclick=()=>performHistory();}
+$('other-view').addEventListener('pointerdown',e=>{const t=e.target.closest('[data-param]');if(!t||t.dataset.nativeParam||e.button!==0)return;const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;if(t.dataset.drumLabel)t.focus({preventScroll:true});paramOwner=e.pointerId;$('other-view').setPointerCapture(e.pointerId);const begun=parameterGesture.begin(e.pointerId,s,lanePoint(e));
+ // A second touch can cancel a Sound preview before the owner is shown.
+ const shown=!begun&&isDrum808OwnerControl(s.id)?findSpec(s.id,t.dataset.paramOccurrence):s;
+ if(shown)showParameter(shown.id,shown.value,shown);
+ e.preventDefault();});$('other-view').addEventListener('pointermove',e=>parameterGesture.move(e.pointerId,lanePoint(e)));$('other-view').addEventListener('pointerup',e=>{if(e.target.dataset.nativeParam&&(nativePreview.has(e.target)||soundInputIntent.has(e.target)))commitNativeInput(e.target);parameterGesture.end(e.pointerId);if(!parameterGesture.current)for(const id of [...mixGesturePreviews.keys()])restoreMixPreview(id);});for(const event of['pointercancel','lostpointercapture'])$('other-view').addEventListener(event,()=>{cancelNativeInputs();parameterGesture.cancel();});$('other-view').addEventListener('keydown',e=>{const input=e.target.closest('[data-native-param]');if(input&&soundNativeId(input.dataset.nativeParam)&&['ArrowUp','ArrowRight','ArrowDown','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const spec=findSpec(input.dataset.nativeParam);if(spec&&nativeSound().snapshot().phase==='ready'){const value=e.key==='Home'?spec.min:e.key==='End'?spec.max:Math.max(spec.min,Math.min(spec.max,spec.value+(['ArrowUp','ArrowRight'].includes(e.key)?1:-1)));recordParameter({id:spec.id,after:value});}return;}if(parameterGesture.current&&masterDraft.has(parameterGesture.current.target.id)&&e.key!=='Escape')parameterGesture.cancel('keyboard-interrupt');const t=e.target.closest('[data-param]');if(e.key==='Escape'){cancelNativeInputs();parameterGesture.cancel();return;}if(!t||t.dataset.nativeParam)return;if(['Enter',' ','ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key))cancel808OwnerGesture(t.dataset.param);const s=findSpec(t.dataset.param,t.dataset.paramOccurrence);if(!s)return;if(['Enter',' '].includes(e.key)){showParameter(s.id,s.value,s);$('parameter-value')?.focus();e.preventDefault();}if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key)){e.preventDefault();const v=Math.max(s.min,Math.min(s.max,s.value+(['ArrowUp','ArrowRight'].includes(e.key)?s.step:-s.step)));recordParameter({id:s.id,label:s.label,before:s.value,after:v});showParameter(s.id,v,s);status();}});
 function motionPaint(){const el=$('motion-grid');if(!el)return;el.innerHTML=motion.values.map((v,i)=>`<button data-motion-step="${i}" style="left:${i/16*100}%;height:${v===null?6:Math.max(6,v/127*100)}%" aria-label="Step ${i+1}, ${v===null?'unset':v}" aria-pressed="${motionSelected===i}">${v??'—'}</button>`).join('');$('motion-step').value=motionSelected+1;$('motion-value').value=motion.values[motionSelected]??'';status();}
 function bindMotion(){motionPaint();const el=$('motion-grid'),point=e=>{const r=el.getBoundingClientRect();return{step:Math.max(0,Math.min(15,Math.floor((e.clientX-r.left)/r.width*16))),value:Math.max(0,Math.min(127,Math.round((1-(e.clientY-r.top)/r.height)*127)))}};el.onpointerdown=e=>{if(e.button!==0)return;if(rollBinding.active()||laneCaptures.size){rollBinding.cancel();cancelStepLane();motion.cancel();motionPaint();e.preventDefault();return;}el.setPointerCapture(e.pointerId);motion.begin(e.pointerId);const p=point(e);motionSelected=p.step;motion.draw(e.pointerId,p.step,p.value);motionPaint();e.preventDefault();};el.onpointermove=e=>{if(!motion.gesture)return;const p=point(e);motionSelected=p.step;motion.draw(e.pointerId,p.step,p.value);motionPaint();};el.onpointerup=e=>{motion.end(e.pointerId);motionPaint();};el.onpointercancel=el.onlostpointercapture=()=>{motion.cancel();motionPaint();};el.onclick=e=>{if(e.detail!==0)return;const button=e.target.closest('[data-motion-step]');if(!button)return;motionSelected=Number(button.dataset.motionStep);motionPaint();el.querySelector('[data-motion-step="'+motionSelected+'"]')?.focus({preventScroll:true});};$('motion-step').onchange=()=>{motionSelected=Math.max(0,Math.min(15,Number($('motion-step').value)-1));motionPaint();};$('motion-value').onchange=()=>{const v=Number($('motion-value').value);try{motion.begin(-1);motion.draw(-1,motionSelected,v);motion.end(-1);}catch{motion.cancel();}motionPaint();};$('motion-clear').onclick=()=>{motion.clear(motionSelected);motionPaint();};$('motion-undo').onclick=()=>performHistory();$('motion-redo').onclick=()=>performHistory(true);}
 $('multi').onclick=()=>{multi=!multi;$('multi').setAttribute('aria-pressed',String(multi));if(!multi&&selected)model.selectIds([selected]);paintNotes();};$('copy').onclick=()=>{try{if(!model.selection.size&&selected)model.selectIds([selected]);status(model.copy()+' notes copied');}catch{status('Select notes first.');}};$('paste').onclick=()=>{try{const n=current();const ids=model.paste({track:$('part').value,start:n?.start??0,note:n?.note??60});selected=ids[0];paintNotes();}catch{status('The whole pasted group must fit.');}};$('delete').onclick=()=>{rollBinding.cancel();if(!model.selection.size&&selected)model.selectIds([selected]);model.deleteSelected();selected=null;paintNotes();};$('lane-kind').onchange=()=>{cancelParameters();paintNotes();syncLaneLabel();};if($('lane-param'))$('lane-param').onclick=()=>{$('lane-kind').value=cycleLane();$('lane-kind').onchange();};if($('open-sound'))$('open-sound').onclick=()=>document.querySelector('[data-view="sound"]')?.click();if($('zoom-step'))$('zoom-step').onclick=()=>{const steps=[1,1.5,2,3,4],cur=Number($('zoom').value)||1,next=steps.find(s=>s>cur+0.01)||steps[0];$('zoom').value=String(next);$('zoom').oninput?.();if($('zoom-step'))$('zoom-step').textContent='Zoom '+Math.round(next*100)+'%';};if($('snap'))$('snap').onclick=()=>$('snap').setAttribute('aria-pressed',$('snap').getAttribute('aria-pressed')==='true'?'false':'true');$('other-view').addEventListener('input',e=>{if(superJ6Input(e.target,false))return;if(e.target.dataset.nativeParam)previewNativeInput(e.target);});$('other-view').addEventListener('change',e=>{if(superJ6Input(e.target,true)||superJ6BankChange(e.target))return;if(e.target.dataset.nativeParam){commitNativeInput(e.target);return;}if(e.target.id==='sound-bank'){selectDraftBank(e.target.value);return;}if(e.target.id==='drum-kit-page'){chooseDrumKitPage(e.target);return;}if(e.target.id==='sound-voice'){const value=Number(e.target.value);if(Number.isInteger(value)&&value>=0&&value<11){cancelParameters();drumVoice=value;drumOriginal=false;other();if(view==='drums'||drumLandscape?.matches)$('sound-voice')?.focus();}return;}if(e.target.dataset.songSelect!==undefined){songSelected=Number(e.target.dataset.songSelect);songFocus(`[data-song-select="${songSelected}"]`);return;}
@@ -1083,8 +1178,15 @@ window.addEventListener('blur',()=>{rollBinding.cancel();cancelParameters();});d
 
 // Explicit local draft recovery. Every source hash and typed ref is validated before replacement.
 const draftState={patternLocks,stepLanes,stepValueLane,superJ6Banks,breakSequence,breakChanceLane,model,motion,arrangement,launch,parameterDraft,parameterIdentity,timeline,soundBanks};
-class MixWorkspaceDraftFile extends WorkspaceDraftFile{validate(document){const checked=super.validate(document);return super.validate({...checked,parameters:masterDraft.normalize(normalizeMixEdits(checked.parameters,mixAliasIndex))});}}
-const draftCodec=new MixWorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean)});
+class RemoteWorkspaceDraftFile extends WorkspaceDraftFile{
+ validate(document){
+  const checked=super.validate(document);
+  const parameters=masterDraft.normalize(normalizeMixEdits(normalizeDrum808OwnerEdits(checked.parameters),mixAliasIndex));
+  return super.validate({...checked,parameters});
+ }
+}
+const parameterSpecs=[...parameterBaseline.keys()].map(id=>findSpec(id)).filter(Boolean);
+const draftCodec=new RemoteWorkspaceDraftFile({trace,identity:sourceIdentity,parameters:[...parameterSpecs,...drum808OwnerSpecs.filter(spec=>parameterBaseline.has(spec.id))]});
 const draftContext=()=>({part:$('part').value,view,...(view==='roll'&&$('part').value==='breaks'&&breakView!=='slices'?{breakView}:{}),mode,lane:laneKind(),...(laneKind()==='patternLock'&&currentLock()?.id!==lockField($('part').value,soundBanks,view)?.id?{lockTarget:currentLock().id}:{}),zoom:Number($('zoom').value),selected:model.notes.some(n=>n.id===selected)?selected:null,selection:[...model.selection].filter(id=>model.notes.some(n=>n.id===id)),drumVoice,motionSelected,multi,drumEdit});
 const startingDraft=draftCodec.capture(draftState,draftContext());
 

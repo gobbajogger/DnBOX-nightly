@@ -1,0 +1,32 @@
+{
+  "scope": "Integrated exact working inputs after all-five owner model; software-only host tests, not browser or combined gate",
+  "base": "dfb03e0d5d3f9c2d4e2cd6e39c9145fb65ccb67c",
+  "remote": {
+    "tests": 266,
+    "pass": 266,
+    "fail": 0,
+    "skip": 0
+  },
+  "workspace": {
+    "tests": 131,
+    "pass": 131,
+    "fail": 0,
+    "skip": 0,
+    "appScripts": 4,
+    "draftAppJourneys": 11
+  },
+  "logs": {
+    "root-remote-green.log": {
+      "bytes": 24966,
+      "sha256": "250ae6482e65b16b8223b117473557bf9cc98797a58a0109a01c6aaaa68a2ff0"
+    },
+    "root-workspace-green.log": {
+      "bytes": 18511,
+      "sha256": "89194d9c52ffcafd71eb6d3dc1ad2161f77bb452ad9d1860e34edce5a5c3713c"
+    }
+  },
+  "rootActualOwnerTraceSha256": "661eddba59640b3ba4ed90806ac1ff9b9f97741c56af7a88555d429fa12cbb26",
+  "rootActualAllOwnerTraceSha256": "51070ec1aafe7634f7021cddf394ec646fcc6f28d97ebac183c6d0c23ed8a407",
+  "ownerModelModuleSha256": "347e0ee5a087f8dcd5f136c70c888da47187bb45f53cb31fec11db02e3a99acb",
+  "stageModuleSha256": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61"
+}

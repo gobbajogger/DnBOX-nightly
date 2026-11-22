@@ -1,0 +1,38 @@
+✔ raw127 and normalized domains never infer meaning from numeric magnitude (1.51888ms)
+✔ raw low values share the normalized renderer, without raw1 jumping to max (4.275377ms)
+✔ live update declares its domain and stores normalized renderer input (0.34658ms)
+✔ the sourced Reverb Low Cut uses the shared firmware Tone drawing (1.829035ms)
+✔ R22 Delay Time keeps its ordinal pips and Feedback uses the known delay type (9.853258ms)
+✔ the sourced FX return encoders keep separate reverb and delay drawings (6.528388ms)
+✔ Master Filter picture follows its Draft detail state instead of the macro pot (7.441388ms)
+✔ registry: all 82 ids map to a renderer family (1.254533ms)
+✔ registry: every glyph changes shape with its value (no static icons) (67.746963ms)
+✔ drum voice glyphs react to level, hit pulse and decay (1.616526ms)
+✔ tape wear matches the firmware digital threshold, two circular reels and wear range (1.506681ms)
+✔ source-qualified Master More module exists (1.227182ms)
+✔ exact pinned source admits12 More controls without enlarging native domain; formatter endpoints/enums match original C (6.272644ms)
+✔ COMP and FILTER use all128 actual C macro maps, aliases and one reversible change; direct detail leaves macro pot alone (27.175366ms)
+✔ legacy alias-only imports derive macro mirrors; explicit source-qualified complete snapshots preserve detail overrides; conflicts fail atomically (2.634363ms)
+✔ captured alias raw drift, catalog range drift and duplicate identity reject; unrelated domains untouched (11.998098ms)
+✔ all1691 displays and128 macro maps reproduce with original C binary32 inputs (331.829663ms)
+✔ Master undo/cancel preserves concurrent non-Master Map values and new keys (1.291689ms)
+✔ Master data cannot be paired with a catalog from another source identity (0.728964ms)
+✔ baseline-equal legacy COMP95 and FILTER64 preserve exact factory detail baselines (0.959791ms)
+✔ every nonbaseline legacy macro value derives exact source maps while equal baselines retain factory mirrors (9.169041ms)
+✔ only the sourced Mix control identities select the native amount drawings (2.661595ms)
+✔ Master COMP responds to independent threshold, ratio and blend values (4.452713ms)
+✔ Master and Reverb role drawings reproduce compiled f178 amount positions (28.596629ms)
+✔ all thresholds and ratios reproduce pinned COMP paths at four exact blend values (102.393787ms)
+✔ actual Mix family maps 29 native identities and preserves all presentation aliases (7.052455ms)
+✔ ambiguous catalog identity and wrong native range fail closed (3.732862ms)
+✔ missing rendered native control cannot silently become an unbound input (0.953301ms)
+✔ complete family refuses missing presentation screens and unique control coverage (73.694743ms)
+✔ same-count different identity cannot replace a required rendered control (6.82293ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 535.631722

@@ -43,18 +43,21 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
  ['G069','COMP'],['G070','HPF'],['G071','DECAY'],['G072','PAN'],['G073','GATE'],['G074','GATE'],['G075','LEVEL'],['G076','GATE'],
  ['G077','LFO'],['G078','GATE'],['G079','GATE'],['G080','GLIDE'],['G081','LFO'],['G082','LFO']
 ]));
-const FX_GLYPHS=Object.freeze({'1:4:0:7':'G059','1:4:0:8':'G052','1:4:0:9':'G053','1:4:0:11':'G056'});
+const FX_GLYPHS=Object.freeze({
+ '1:4:0:2':'MASTER DRIVE','1:4:0:4':'REVERB DECAY','1:4:0:7':'G059','1:4:0:8':'G052',
+ '1:4:0:9':'G053','1:4:0:11':'G056','1:6:0:6':'MASTER PUMP'
+});
 export function fxGlyphId(identity){return FX_GLYPHS[identity];}
 
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',MASTERFILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',
+ DECAY:'DECAY',REVERBDECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
- BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
+ BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',MASTERDRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
  TIME:'ECHO',FEEDBACK:'ECHO',REV:'ECHO',DLY:'ECHO',PINGPONG:'ECHO',RETURN:'LEVEL',SUSTAIN:'ADSR',RELEASE:'DECAY',
- COMP:'COMP',THRESH:'COMP',RATIO:'COMP',MAKEUP:'COMP',LIMIT:'COMP',GLUE:'COMP',PUMP:'COMP',
+ COMP:'COMP',MASTERCOMP:'COMP',MASTERPUMP:'COMP',THRESH:'COMP',RATIO:'COMP',MAKEUP:'COMP',LIMIT:'COMP',GLUE:'COMP',PUMP:'COMP',
  LINK:'GATE',TEMPO:'GATE',SWING:'GATE',LOCK:'GATE',NOTE:'GATE',GATE:'GATE',SLIDE:'GLIDE',SUB:'LEVEL',ACCENT:'LEVEL',MIX:'LEVEL',CHANCE:'LEVEL',VOICE:'VOICE',
  BD:'VOICE',SD:'VOICE',LT:'VOICE',MT:'VOICE',HT:'VOICE',RS:'VOICE',CP:'VOICE',CH:'VOICE',OH:'VOICE',CC:'VOICE',RC:'VOICE',CR:'VOICE',RD:'VOICE',CB:'VOICE',CY:'VOICE',COWBELL:'VOICE',DRUMBD:'VOICE'
 };
@@ -401,6 +404,66 @@ function sourcedFxPath(fnId,value,{delayType}){
  if(fnId==='G053'&&(delayType===0||delayType===1))return delayFeedbackPath(value,delayType);
  if(fnId==='G056'||fnId==='G059')return fxReturnPath(value,fnId==='G056');
 }
+// The original MASTER and REVERB encoders use source-specific amount schematics.
+// Keep Sound, Glue, Pump Source, and other uses of the same glyph families separate.
+const driveWave=[0,5690,11207,16383,21062,25101,28377,30791,32269,32767,32269,30791,28377,25101,21062,16384,11207,5690,0,-5690,-11207,-16384,-21062,-25101,-28377,-30791,-32269,-32767,-32269,-30791,-28377,-25101,-21062,-16383,-11207,-5690,0];
+function masterDrivePath(raw){
+ const gain=Math.floor(18161/(143-raw));
+ return path(driveWave.map((sample,index)=>{
+  const value=Math.max(-32767,Math.min(32767,Math.trunc(sample*gain/127)));
+  const height=Math.floor((Math.abs(value)*8+16383)/32767);
+  return [2+index,10+(value<0?height:-height)];
+ }));
+}
+
+const f32=Math.fround;
+function reverbDecayPath(raw){
+ const feedback=f32(f32(.2)+f32(f32(f32(.73)*raw)/127)),strokes=[];
+ let amount=18;
+ for(let tap=0;tap<7;tap++){
+  const height=Math.floor(f32(amount+.5)),x=2+tap*6;
+  if(height)strokes.push(path([[x,19-height],[x,19]]));
+  amount=f32(amount*feedback);
+ }
+ return strokes.join(' ');
+}
+function masterPumpPath(raw){
+ const depth=Math.floor(raw*14/127);
+ return path([[2,3],[11,3],[14,3+depth],[35,3],[38,3]]);
+}
+
+const compRatios=[1,1.5,2,3,4,6,8,12,20,1e6];
+const compGuide=path([[2,20],[38,0]]);
+function compOutput(input,over,slope,mix){
+ if(!mix||!slope)return input;
+ let reduction=0;
+ if(over>=3)reduction=f32(slope*over);
+ else if(over>-3){
+  const knee=f32(over+3);
+  reduction=f32(f32(f32(slope*knee)*knee)/12);
+ }
+ if(mix===127||!reduction)return f32(input-reduction);
+ const gain=f32(2**f32(-reduction*f32(.166096405)));
+ const blend=f32(1+f32(f32(f32(gain-1)*mix)/127));
+ return f32(input+f32(f32(6.0205999)*f32(Math.log2(blend))));
+}
+function masterCompPath({threshold,ratio,blend}){
+ const slope=f32(1-f32(1/compRatios[ratio])),t=f32(-48+f32(48*threshold/127));
+ const points=[[2,20]];
+ for(let i=1;i<=36;i++){
+  const input=f32(-48+f32(48*i/36));
+  const output=compOutput(input,f32(input-t),slope,blend);
+  points.push([2+i,20-Math.floor(f32(f32(f32(f32(output+48)*20)/48)+.5))]);
+ }
+ return path(points);
+}
+function mixAmountPaths(fnId,value,{masterComp}){
+ const raw=Math.round(value*127);
+ if(fnId==='MASTER DRIVE')return {d:masterDrivePath(raw)};
+ if(fnId==='REVERB DECAY')return {d:reverbDecayPath(raw),guide:fxBaseline};
+ if(fnId==='MASTER PUMP')return {d:masterPumpPath(raw),guide:fxBaseline};
+ if(fnId==='MASTER COMP'&&masterComp)return {d:masterCompPath(masterComp),guide:compGuide};
+}
 function compPath(_e,value){const th=0.25+0.6*(1-unit(value)),r=1+unit(value)*7,pts=[];for(let i=0;i<=20;i++){const x=i/20,y=x<th?x:th+(x-th)/r;pts.push([x*40,22-y*20]);}return path(pts);}
 function gatePath(_e,value){const d=0.08+unit(value)*0.84;return path([[0,20],[2,20],[2,6],[2+d*36,6],[2+d*36,20],[40,20]]);}
 function voicePath(_e,value,state){const lvl=unit(state.level??value),dec=unit(state.decay??0.5),hit=Math.max(0,Math.min(1,state.hit??0)),h=4+lvl*14+hit*4,pts=[[2,20],[4,20-h]];for(let i=1;i<=16;i++){const t=i/16;pts.push([4+t*(8+dec*28),20-h*Math.exp(-t*4)]);}pts.push([40,20]);return path(pts);}
@@ -433,6 +496,8 @@ export function render(fnId, value, engineId='chicago', state={}){
  if(!live && state.age!=null) state={...state, age:0};
  if(fnId==='MASTER FILTER'&&state.masterFilter)
   return {fn,engine:engineId,...masterFilterPaths(state.masterFilter),live,cell:null};
+ const mixAmount=mixAmountPaths(fnId,value,state);
+ if(mixAmount)return {fn,engine:engineId,...mixAmount,live,cell:null};
  const d=sourcedFxPath(fnId,value,state)??draw(engineId,value,state);
  const proof=(fn==='WIDTH'||(fn==='WAVE'&&engineId!=='miami'));
  return {fn, engine:engineId, d, live, cell:proof?'102x26':null};

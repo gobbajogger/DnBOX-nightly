@@ -115,6 +115,12 @@ for (const [view,title] of [['song','Song arrangement'],['files','Project files'
  check(`actual-app ${view} header names the active workspace`, () => assert.equal($('part-title').textContent, title));
  check(`actual-app ${view} keeps selected engine and P01`, () => assert.deepEqual(workspaceContext(), ['miami','true','P01']));
 }
+navigate('mix');
+for(const [mixMode,label]of Object.entries({levels:'Levels',pan:'Pan',sends:'Sends',fx:'FX',master:'Master'})){
+ const button=new E();button.dataset={mixMode};$('other-view').handlers.click({target:button});
+ check('actual-app Mix '+label+' header names its destination',()=>assert.equal($('part-title').textContent,'Mix · '+label));
+ assert.deepEqual(workspaceContext(),['miami','true','P01']);
+}
 navigate('patterns');
 check('actual-app returning to Patterns preserves its Draft target', () => assert.equal($('part-title').textContent, patternTitle));
 navigate('roll');

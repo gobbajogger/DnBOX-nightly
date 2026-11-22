@@ -1331,6 +1331,16 @@
       "path": "remote/project-preset.mjs",
       "bytes": 3688,
       "sha256": "5b990f5c7cc783aa51517bcaab51c17fc0c8967c4ff3862a44a506d5b0376957"
+    },
+    {
+      "path": "remote/clap-draft.mjs",
+      "bytes": 2719,
+      "sha256": "347e0ee5a087f8dcd5f136c70c888da47187bb45f53cb31fec11db02e3a99acb"
+    },
+    {
+      "path": "remote/drum-clap-stages.mjs",
+      "bytes": 4089,
+      "sha256": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61"
     }
   ],
   "notClaimed": [

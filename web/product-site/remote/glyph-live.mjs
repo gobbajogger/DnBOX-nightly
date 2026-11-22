@@ -84,6 +84,10 @@ export function mountLiveGlyphs(root){
     const [mode,cutoff,resonance]=el.dataset.glyphMasterFilter.split(':').map(Number);
     state.masterFilter={mode,cutoff,resonance};
    }
+   if(el.dataset.glyphMasterComp!==undefined){
+    const [threshold,ratio,blend]=el.dataset.glyphMasterComp.split(':').map(Number);
+    state.masterComp={threshold,ratio,blend};
+   }
    drawGlyph(c,fn,v,engine,state);
   }});live.set(el,a);el.glyphAnimator=a;n++;
  }
@@ -91,10 +95,16 @@ export function mountLiveGlyphs(root){
 }
 export function setGlyphValue(el,value,domain='normalized'){const normalized=unit(value,domain);el.dataset.glyphValue=String(normalized);el.dataset.glyphDomain='normalized';live.get(el)?.set(normalized);}
 
-export function setMasterFilterGlyph(el,{mode,cutoff,resonance}){
- const encoded=mode+':'+cutoff+':'+resonance;
- if(el.dataset.glyphMasterFilter===encoded)return;
- el.dataset.glyphMasterFilter=encoded;
+function setMasterGlyphState(el,key,pots){
+ const encoded=pots.join(':');
+ if(el.dataset[key]===encoded)return;
+ el.dataset[key]=encoded;
  const animator=live.get(el);
  animator?.draw(animator.value);
+}
+export function setMasterFilterGlyph(el,{mode,cutoff,resonance}){
+ setMasterGlyphState(el,'glyphMasterFilter',[mode,cutoff,resonance]);
+}
+export function setMasterCompGlyph(el,{threshold,ratio,blend}){
+ setMasterGlyphState(el,'glyphMasterComp',[threshold,ratio,blend]);
 }

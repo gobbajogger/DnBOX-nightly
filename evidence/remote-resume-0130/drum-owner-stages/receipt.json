@@ -1,0 +1,157 @@
+{
+  "result": "PASS",
+  "softwareOnly": true,
+  "source": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "sourceCheckout": "/workspace/scratch/857bb2409f82/remote-input-recovery/firmware",
+  "sourceTree": "a4876790880cae769298f6701e8ab5db1d970b30",
+  "sourceFiles": {
+    "firmware/src/dsp/drum808.c": {
+      "sha256": "52f894bbcaf54a77aed1d9368ed6595cb3641dcf80d7fd7b8e74ed16cde73680",
+      "bytes": 102339,
+      "gitBlob": "231cce32270d85b95a941eaf9736d68266603553",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/dsp/drum808.h": {
+      "sha256": "334857c95308c4a212d4dada3777f2424711bb5aa4e3328e034c50d5d52eae63",
+      "bytes": 10544,
+      "gitBlob": "c31846f429aadafa8af61249f02b1d6b1ac1a5de",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/dsp/x0x_param.c": {
+      "sha256": "2b64d6929fa0fbe79772365a0436fbd2d838e5a9d3ad1e254b93f890ad340058",
+      "bytes": 943,
+      "gitBlob": "b84beeda87fa4d3eb8fda1c572b96d38cd8bb17f",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/dsp/x0x_param.h": {
+      "sha256": "a9341e448f8e2e7c880734f6758df46c0e43669b4c6252b429f7070425b4c800",
+      "bytes": 1761,
+      "gitBlob": "79d0f38d30190eceeda1226f58e631921e29d06f",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/dsp/fastmath.h": {
+      "sha256": "c82737d5302d77b974d5071c9bc58915aca723a6e6f5f5185cbe43bad962189d",
+      "bytes": 8325,
+      "gitBlob": "946bf78b91a21839c5394c1fc6a7a537635ee468",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/dsp/envelope_snapshot.h": {
+      "sha256": "76a2327177444bd317b63b30033cf309f5d5e5acaa07db2e6adada93158dd8e9",
+      "bytes": 971,
+      "gitBlob": "96441667903ead24b47b023eca58fdb6a24d6a2a",
+      "equalCommittedBytes": true
+    },
+    "firmware/src/x0x_cold.h": {
+      "sha256": "e95f4037d8f8e0dca5c32ba9253fb8aba7baf1d098407998f6a9c0d1857ba663",
+      "bytes": 428,
+      "gitBlob": "089256ed4b45ceb220aa713a9dfa023efe9b85ad",
+      "equalCommittedBytes": true
+    }
+  },
+  "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+  "flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-ffp-contract=off"
+  ],
+  "actualCalls": [
+    "drum808_init",
+    "drum808_get",
+    "drum808_set",
+    "drum808_param_si",
+    "drum808_param_curve",
+    "drum808_param_curve_preview"
+  ],
+  "ownerEnum": {
+    "0": "BD",
+    "1": "SD",
+    "2": "LT",
+    "3": "MT",
+    "4": "HT",
+    "5": "LC",
+    "6": "MC",
+    "7": "HC",
+    "8": "RS",
+    "9": "CL",
+    "10": "MA",
+    "11": "CP",
+    "12": "CB",
+    "13": "CH",
+    "14": "OH",
+    "15": "CY"
+  },
+  "potEnum": {
+    "0": "Level",
+    "1": "Tune",
+    "2": "Decay",
+    "3": "Drive",
+    "4": "Distortion",
+    "5": "Reverb",
+    "6": "Delay",
+    "7": "X1",
+    "8": "X2"
+  },
+  "identity": {
+    "engine": 1,
+    "bank": 1,
+    "voice": 6,
+    "decayParam": 2,
+    "attackParam": 3,
+    "soundParam": 4,
+    "soundLabels": [
+      "CLAP",
+      "MARAC"
+    ],
+    "curveOwnerReturn": "sound enum + 1; CP=12, MA=11"
+  },
+  "factory": {
+    "CLAP": {
+      "owner": 11,
+      "Decay": 64,
+      "AttackOwnedByMARAC": 32
+    },
+    "MARAC": {
+      "owner": 10,
+      "Decay": 51,
+      "Attack": 32
+    },
+    "tomDecay": [
+      68,
+      56,
+      53
+    ],
+    "congaDecay": [
+      58,
+      36,
+      34
+    ]
+  },
+  "proof": {
+    "sequenceEvents": 14,
+    "allRawPreviews": 512,
+    "previewStateUnchanged": true,
+    "assertions": "PASS actual init/get/set; independent owner retention; fixed attack; independent tom switches/pots; all512 previews nonmutating and correct owner"
+  },
+  "files": {
+    "oracle.c": {
+      "sha256": "5df504974561c1ed4cd353bc582a5815a8248681e94c214f41fc13db2b4f9d46",
+      "bytes": 4389
+    },
+    "run.sh": {
+      "sha256": "ba2e8e92eab619993e2ca732eabe9aa05b726ec664d69305e622b472613b230c",
+      "bytes": 733
+    },
+    "trace.json": {
+      "sha256": "661eddba59640b3ba4ed90806ac1ff9b9f97741c56af7a88555d429fa12cbb26",
+      "bytes": 128431
+    },
+    "oracle": {
+      "sha256": "1240c8c6bbfa7de38515b328cf75dc471b029116e882987411612ebd5728fd2b",
+      "bytes": 69704
+    }
+  },
+  "scope": "Actual original C engine ownership/storage/defaults and pure curve/unit API; no UI/browser, audio rendering, native TouchOSC app, device or firmware build claim. Does not change engine or shared repo."
+}

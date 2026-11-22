@@ -34,6 +34,11 @@ export function createMasterDraft(components,catalog){
   cutoff:read(id(6,9),edits),
   resonance:read(id(6,10),edits)
  });
+ const compState=edits=>({
+  threshold:read(id(6,0),edits),
+  ratio:read(id(6,1),edits),
+  blend:read(id(6,5),edits)
+ });
  const specs=[...groups.values()].map(g=>({...g,ids:[...g.ids]}));
- return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,filterState,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return fxDisplay(`1:${g.target}:0:${g.parameter}`,value)??g.displays[value];},normalize,change};
+ return{runtime_admitted:false,id,specs,more:moreKeys.map(k=>groups.get(k)),macros:source.macros.map(r=>[...r]),has:key=>byId.has(key),spec:key=>{const g=byId.get(key);return g?{...g,ids:[...g.ids]}:null;},aliases:key=>[...group(key).ids],read,filterState,compState,display:(key,value)=>{const g=group(key);if(!valid(g,value))throw Error('Invalid Master formatter input');return fxDisplay(`1:${g.target}:0:${g.parameter}`,value)??g.displays[value];},normalize,change};
 }

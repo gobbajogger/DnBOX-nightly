@@ -1,0 +1,16 @@
+✔ 20 retained falling-tail donors follow the original idle curves at all 128 settings (86.227424ms)
+✔ only owner-bound Clap Decay retains a static donor (5.490861ms)
+✔ nine Remote drum glyphs match all 1034 pinned native idle drawings (208.604979ms)
+✔ coupled redraw preserves the other kick pots and respects zero depth (1.426261ms)
+✔ all drum strip cells retain their own captured identity, role and artwork, with the firmware readout at the source raw value (8.494819ms)
+✔ 909 BD retains all six ordered source controls including both bank summaries (1.794784ms)
+✔ a missing local descriptor leaves the captured cell and its actions disabled (0.723677ms)
+✔ editable kit glyphs update their mounted source paths at every raw value (180.466482ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 356.789706

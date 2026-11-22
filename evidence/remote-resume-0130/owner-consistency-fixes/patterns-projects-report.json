@@ -1,0 +1,872 @@
+{
+  "errors": [],
+  "states": {
+    "base": {
+      "(844, 390)": {
+        "patterns": {
+          "body": [
+            844,
+            390
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 32,
+          "padWhole": 32,
+          "selected": "01",
+          "paint": "rgb(16, 26, 31)",
+          "textInk": "rgb(255, 179, 55)",
+          "scope": [
+            [
+              "Selected part",
+              true
+            ],
+            [
+              "All parts",
+              true
+            ],
+            [
+              "Review draft",
+              true
+            ]
+          ],
+          "subtitles": [],
+          "actions": [],
+          "cards": []
+        },
+        "projects": {
+          "body": [
+            844,
+            390
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              false,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              40
+            ],
+            [
+              "Open draft",
+              false,
+              40
+            ],
+            [
+              "Review changes",
+              false,
+              40
+            ]
+          ],
+          "cards": [
+            164.390625,
+            164.390625,
+            164.390625
+          ]
+        }
+      },
+      "(1440, 900)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            1440,
+            900
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [
+            "Patterns, song, sounds, motion and sample references",
+            "Open an engine file. Edit a copy; preserve the original.",
+            "A finite range, aligned tracks and clips for a DAW."
+          ],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              true,
+              44
+            ],
+            [
+              "Open draft",
+              true,
+              44
+            ],
+            [
+              "Review changes",
+              true,
+              44
+            ]
+          ],
+          "cards": [
+            185,
+            185,
+            185
+          ],
+          "rasterSHA256": "d032b14969c9dad1197d78b79972a41b84ecf98499452536be9d04fe7979e638"
+        }
+      },
+      "(1024, 640)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            1024,
+            640
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              40
+            ],
+            [
+              "Open draft",
+              false,
+              40
+            ],
+            [
+              "Review changes",
+              false,
+              40
+            ]
+          ],
+          "cards": [
+            216.390625,
+            216.390625,
+            216.390625
+          ],
+          "rasterSHA256": "df9aebc335aa4a17cee9f70d5c336d38e718a2cf23b1dca0d5b90fdaebea7352"
+        }
+      },
+      "(390, 844)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            390,
+            844
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              40
+            ],
+            [
+              "Open draft",
+              false,
+              40
+            ],
+            [
+              "Review changes",
+              false,
+              40
+            ]
+          ],
+          "cards": [
+            124.390625,
+            124.390625,
+            124.390625
+          ],
+          "rasterSHA256": "c9682cbb6a2e30cc1c1eaf419f0483ffce0f5b3a21b11e9b1ec5078fffe72740"
+        }
+      }
+    },
+    "candidate": {
+      "(844, 390)": {
+        "patterns": {
+          "body": [
+            844,
+            390
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 32,
+          "padWhole": 32,
+          "selected": "01",
+          "paint": "rgb(255, 179, 55)",
+          "textInk": "rgb(5, 10, 13)",
+          "scope": [
+            [
+              "Selected part",
+              true
+            ],
+            [
+              "All parts",
+              true
+            ],
+            [
+              "Review draft",
+              true
+            ]
+          ],
+          "subtitles": [],
+          "actions": [],
+          "cards": []
+        },
+        "projects": {
+          "body": [
+            844,
+            390
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [
+            "Patterns, song, sounds, motion and sample references",
+            "Open an engine file. Edit a copy; preserve the original.",
+            "A finite range, aligned tracks and clips for a DAW."
+          ],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              false,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              44
+            ],
+            [
+              "Open draft",
+              false,
+              44
+            ],
+            [
+              "Review changes",
+              false,
+              44
+            ]
+          ],
+          "cards": [
+            208,
+            208,
+            208
+          ]
+        }
+      },
+      "(1440, 900)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            1440,
+            900
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [
+            "Patterns, song, sounds, motion and sample references",
+            "Open an engine file. Edit a copy; preserve the original.",
+            "A finite range, aligned tracks and clips for a DAW."
+          ],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              true,
+              44
+            ],
+            [
+              "Open draft",
+              true,
+              44
+            ],
+            [
+              "Review changes",
+              true,
+              44
+            ]
+          ],
+          "cards": [
+            185,
+            185,
+            185
+          ],
+          "rasterSHA256": "d032b14969c9dad1197d78b79972a41b84ecf98499452536be9d04fe7979e638"
+        }
+      },
+      "(1024, 640)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            1024,
+            640
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              40
+            ],
+            [
+              "Open draft",
+              false,
+              40
+            ],
+            [
+              "Review changes",
+              false,
+              40
+            ]
+          ],
+          "cards": [
+            216.390625,
+            216.390625,
+            216.390625
+          ],
+          "rasterSHA256": "df9aebc335aa4a17cee9f70d5c336d38e718a2cf23b1dca0d5b90fdaebea7352"
+        }
+      },
+      "(390, 844)": {
+        "patterns": null,
+        "projects": {
+          "body": [
+            390,
+            844
+          ],
+          "offsets": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "midiCalls": 0,
+          "pads": 0,
+          "padWhole": 0,
+          "selected": null,
+          "paint": null,
+          "textInk": null,
+          "scope": [],
+          "subtitles": [],
+          "actions": [
+            [
+              "Export backup",
+              true,
+              44
+            ],
+            [
+              "Inspect restore",
+              true,
+              44
+            ],
+            [
+              "Open original",
+              true,
+              44
+            ],
+            [
+              "Inspect contents",
+              true,
+              44
+            ],
+            [
+              "Save a copy",
+              true,
+              44
+            ],
+            [
+              "Choose range",
+              true,
+              44
+            ],
+            [
+              "Export availability",
+              true,
+              44
+            ],
+            [
+              "Samples",
+              true,
+              44
+            ],
+            [
+              "Manual",
+              true,
+              44
+            ],
+            [
+              "Open DAW guide",
+              true,
+              44
+            ],
+            [
+              "Save draft",
+              false,
+              40
+            ],
+            [
+              "Open draft",
+              false,
+              40
+            ],
+            [
+              "Review changes",
+              false,
+              40
+            ]
+          ],
+          "cards": [
+            124.390625,
+            124.390625,
+            124.390625
+          ],
+          "rasterSHA256": "c9682cbb6a2e30cc1c1eaf419f0483ffce0f5b3a21b11e9b1ec5078fffe72740"
+        }
+      }
+    }
+  },
+  "pixels": {
+    "19": {
+      "base": {
+        "tolerantPercent": 16.1812,
+        "tolerantPixels": 53262,
+        "sha256": "8d95e134f95ade2c75e959bba19381ba0d304d66d309d0dea14208a2e6d45180"
+      },
+      "candidate": {
+        "tolerantPercent": 14.6913,
+        "tolerantPixels": 48358,
+        "sha256": "f57eedaa5acc25da022e5dc1b6e1a04ba4be87e3945f36054c9750db2ce1254a"
+      }
+    },
+    "20": {
+      "base": {
+        "tolerantPercent": 10.6905,
+        "tolerantPixels": 35189,
+        "sha256": "037d46f132fa4534c8e68a4e317ec5728aa59698e9334d488d033ddfde2733f1"
+      },
+      "candidate": {
+        "tolerantPercent": 10.5377,
+        "tolerantPixels": 34686,
+        "sha256": "e7c61323e9bd20a9c1b61cb4072eafa5cda6f56c11971efd708651902f847052"
+      }
+    }
+  },
+  "browser": "151.0.7922.34"
+}

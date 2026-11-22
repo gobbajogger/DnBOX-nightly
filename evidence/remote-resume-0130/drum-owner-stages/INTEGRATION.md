@@ -1,0 +1,9 @@
+# Switchable 808 ownership and source stage projection
+
+Actual f178 C has independent Tune/Decay pots for all five selectable voices. The Remote now stores both owners with canonical numeric DTO entries, keeps each track selector independent, keeps Attack Maracas-owned and Accent kit-global, binds legacy shared scalars to the saved selector, and rejects ambiguous owner collisions atomically. No catalog/wire admission is added. Root independently rebuilt the C oracle; both resulting traces matched the agent outputs byte for byte.
+
+The original stage functions were independently extracted and compiled again against the fresh C trace:512readouts,768charts,25,600xy pairs, exact1/16pixel digest. The Remote mounts the same idle charts and affinely projects their selected Decay/AD topology into the retained R22 slot. It does not invent elapsed activity or level. Full app event tests inspect paths across preview/cancel and Undo/Redo; queued old-owner animation callbacks cannot overwrite a newly selected owner. Open Original stays unchanged.
+
+Run the owner oracle from a copied directory in temporary storage (`sh run.sh <clean-f178-checkout>`). Replay the projection using `python3 stage-replay/run.py trace.json <clean-f178-checkout> <Remote-checkout>`. The replay compiles eight source-pinned Git bodies. Actual source and consumer module hashes are recorded.
+
+The first integrated Remote suite was red only because the existing Depth-only fake rejected the newly supported sibling Tune/Pitch query before reaching its original independent Depth oracle. The test now explicitly mounts only Depth and ignores those recognized unmounted siblings; all original expected coordinate values remain. Its failure log is retained. Browser verification follows the published candidate and is recorded separately. All evidence is software-only.

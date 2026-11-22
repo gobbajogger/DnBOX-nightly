@@ -1,0 +1,10 @@
+{
+  "amountCases": 384,
+  "compCases": 163840,
+  "compMismatchedStates": 0,
+  "compMismatchedPoints": 0,
+  "firstCompMismatches": [],
+  "amountSha256": "6163d0e0e825116beffa910e00af9fcfc9729c31c8fa47ad260bd6f290e569e1",
+  "nativeCompSha256": "19e64614172ed2542c0e4fb479b9976a1306363e6d8a8a8ef051674c9128064a",
+  "remoteCompSha256": "19e64614172ed2542c0e4fb479b9976a1306363e6d8a8a8ef051674c9128064a"
+}

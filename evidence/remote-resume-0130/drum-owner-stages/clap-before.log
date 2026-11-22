@@ -1,0 +1,36 @@
+PASS actual shipped app deferred-file pagehide cancellation and new selection after pageshow; source event doubles, NOT browser/BFCache proof
+PASS shipped app multi-domain draft download/open/replace, context, history reset and new Undo/Redo; event doubles only, NOT DOM/browser/touch/download filesystem
+PASS Projects card clicks dispatch Save/Open/Review and round-trip edited draft; event doubles, not browser file-picker proof
+PASS draft zoom roundtrip retains narrow viewport geometry
+PASS actual app grouped step edits, one Undo, multi-touch rollback, capture cleanup and both drum lanes; event doubles, not browser proof
+PASS actual app cross-surface roll/lane touches cancel both ways and next edit/Undo remains available
+PASS Song row limit, global Undo/Redo and Draft save at capacity
+PASS both kit Accent addresses share 11 voice controls, one Review entry, Undo/Redo and legacy Draft round trips
+PASS shared control readouts match Draft Review; Mix aliases retain original numeric serialization and COMP remains coupled
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    1,
++   88,
++   72
+-   51,
+-   64
+  ]
+
+    at assertValues (file:///tmp/dnbox-remote-clap-c7b026c/tests/product-workspace/app-draft-regression.mjs:288:10)
+    at clapSoundOwnerDrafts (file:///tmp/dnbox-remote-clap-c7b026c/tests/product-workspace/app-draft-regression.mjs:295:2)
+    at async file:///tmp/dnbox-remote-clap-c7b026c/tests/product-workspace/app-draft-regression.mjs:337:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [ 1, 88, 72 ],
+  expected: [ 1, 51, 64 ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.3
