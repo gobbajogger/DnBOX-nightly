@@ -201,6 +201,31 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   --accent: #c8dfa7;
 }
 .offline-tool body { font-family: Barlow, sans-serif; }
+/* Shared file pickers for hosted and file-open sample and project tools. */
+:is(.tool-surface, .offline-tool) :is(#auditionFile, #file)[type="file"] {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 44px;
+  font: inherit;
+  color: var(--fg);
+}
+
+:is(.tool-surface, .offline-tool) :is(#auditionFile, #file)[type="file"]::file-selector-button {
+  min-height: 44px;
+  margin-inline-end: .65rem;
+  padding: .45rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+:is(.tool-surface, .offline-tool) :is(#auditionFile, #file)[type="file"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 </style>
 </head>
 <body>

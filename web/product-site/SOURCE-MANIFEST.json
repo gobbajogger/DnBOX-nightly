@@ -1134,13 +1134,18 @@
     },
     {
       "path": "starting-breaks/index.html",
-      "bytes": 3363,
-      "sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348"
+      "bytes": 3475,
+      "sha256": "4ec7c8145714c7c3fcdb7d146aa3a2998804e532d8e2d0702c6eb94417063bc4"
+    },
+    {
+      "path": "tool-file-controls.css",
+      "bytes": 720,
+      "sha256": "9e9d93b59eb98ff366661b9ac292d177e0e074d81088c7101db0dc4ef958c5f7"
     },
     {
       "path": "tool-theme.css",
-      "bytes": 994,
-      "sha256": "9459e3df9382498f06a9967948278a92752c1f5ff14aefafe7c3e449fa9a515a"
+      "bytes": 1036,
+      "sha256": "15aec841afea84e602d9af9891a4532bff67aaefab0be6799e9c6cc443254c06"
     },
     {
       "path": "tools/index.html",

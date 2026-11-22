@@ -114,5 +114,464 @@
     "repository": "gobbajogger/DnBOX",
     "commit": "22a34d6ecef7b31e62ea6655fddc4920ab30f8e1",
     "status": "physical route and scoped F6 evidence available; R22 F1 remains open"
+  },
+  "web_shared_components": {
+    "audit_base": "ecb92ce09e1a5411302d0091f204a273ff12c2d4",
+    "prior_capture_index": "../lane-web-route-coverage.json",
+    "routes": [
+      {
+        "route": "index.html",
+        "source_sha256": "855284e66ca28d90b4d44df6a8f5337160b5d17af1a604a00e760d9074300c18",
+        "header": "shared Web header",
+        "footer": "shared navigation with route-specific links",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Current installer",
+          "Manual",
+          "What’s new",
+          "Build history",
+          "Tools",
+          "Help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "breaks/index.html",
+        "source_sha256": "cd2098df8dd52a973b4e3587b087b5af7245faa7209a4d56635b6fafbf269265",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "builds/index.html",
+        "source_sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "help/index.html",
+        "source_sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "install/index.html",
+        "source_sha256": "38a1f1ba149ab7b2251bed73bdc463a250be96ccd89aa50114904b470ec2ccc8",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "manual/index.html",
+        "source_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/legacy.html",
+        "source_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/original/index.html",
+        "source_sha256": "80e9d7dea43ddbc8aee108c0b80b2bab9a72188e1a8d1e49e0ecdf4ff8103101",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/projects-guide.html",
+        "source_sha256": "b36a11cb8854af8c67d5500dab98d15aa0dbbcac71c7741c58209e3081eb45ee",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "manual/protocol.html",
+        "source_sha256": "822d9f27989ada79a41bffcef0d96a2729feaa2b4fa13389a1f47af5aa833ea4",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "new/index.html",
+        "source_sha256": "3926400808343dccaf7aea47d49f679c1ebc14910ddf318da1b7e07bd93b5822",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "presets/index.html",
+        "source_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "presets/legacy/index.html",
+        "source_sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "projects/index.html",
+        "source_sha256": "4d62e7cb7c00b9151d7b97922ad1d907eb2fea0f851a25fb90929e8dfadd5b43",
+        "header": "shared Web header",
+        "footer": "workspace without footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "remote/index.html",
+        "source_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+        "header": "Remote workspace shell",
+        "footer": "workspace-specific",
+        "header_links": [
+          "DnBOX  REMOTE"
+        ],
+        "footer_links": []
+      },
+      {
+        "route": "remote/device/index.html",
+        "source_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "remote/identity/index.html",
+        "source_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+        "header": "Remote identity shell",
+        "footer": "workspace-specific",
+        "header_links": [
+          "DnBOX"
+        ],
+        "footer_links": [
+          "Manual ↗"
+        ]
+      },
+      {
+        "route": "starting-breaks/index.html",
+        "source_sha256": "4ec7c8145714c7c3fcdb7d146aa3a2998804e532d8e2d0702c6eb94417063bc4",
+        "header": "shared Web header",
+        "footer": "shared footer",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup &amp; help",
+          "Source and credits"
+        ]
+      },
+      {
+        "route": "tools/index.html",
+        "source_sha256": "60551425427fab441fc74385a04209615a937680bdbedb4ad71c9b1ee1fe6177",
+        "header": "shared Web header",
+        "footer": "shared navigation with route-specific links",
+        "header_links": [
+          "DnBOX  INSTRUMENTS",
+          "Sounds",
+          "Remote",
+          "Samples",
+          "Projects",
+          "Presets",
+          "Manual",
+          "History",
+          "Install nightly"
+        ],
+        "footer_links": [
+          "DnBOX",
+          "Manual",
+          "Build history",
+          "What’s new",
+          "Setup & help",
+          "Source and credits",
+          "Owner administration"
+        ]
+      }
+    ],
+    "repairs": {
+      "starting_breaks": "same shared heading/navigation and Setup & help footer; selection/export preserved",
+      "file_pickers": "44px minimum and shared file button styling on hosted, embedded and direct-file Samples and Projects"
+    },
+    "cross_lane_references": {
+      "fwui": {
+        "repo": "gobbajogger/DnBOX",
+        "ledger_head": "48651ff773b72ef1fdbb097376dc1b0d90ab3f52",
+        "scope": "R22 drum mixer cues; not a replacement for the SEQ state pins"
+      },
+      "remote": {
+        "repo": "gobbajogger/DnBOX-nightly",
+        "ledger_head": "afd61fdc142ff683f9a8350043504648013ed5b6",
+        "scope": "owner route qualification and paired LCD receipts; mounted SEQ timing still separate"
+      }
+    },
+    "independent_findings": [
+      {
+        "route": "remote/identity/index.html",
+        "control": "active identity button",
+        "observation": "34px, 0-radius browser-default next to themed 44px selects",
+        "owner": "Remote"
+      }
+    ]
   }
 }

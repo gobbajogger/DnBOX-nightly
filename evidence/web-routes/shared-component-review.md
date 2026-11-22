@@ -1,0 +1,16 @@
+# Shared Web components
+
+Audited all nineteen routes against baseline `ecb92ce09e1a5411302d0091f204a273ff12c2d4` using the existing capture inventory. The [shared design and state matrix](shipping-parity/seq-state-matrix.json) records each route's header and footer and the FWUI and Remote ledger pins. Seventeen routes share the standard header after the fix. The Remote workspace and Identity retain their owned shells.
+
+Starting Breaks now has the standard navigation and Setup & help footer link. The independent Chromium reviewer checked the normalized destinations, one header and footer, no overflow and no page errors at 1440×900, 390×844 and 844×390. All and None worked and each export was 110,844 bytes.
+
+Samples and Projects reuse the same file picker style in hosted, installer-embedded and file-open modes. The independent Chromium reviewer checked both controls in all three modes and all three sizes. All 18 cases measured 44px, used Barlow and a 7px button radius, retained enabled controls, and had zero horizontal overflow. The 270-file local build, 21 focused unit/source parity checks, preview regeneration check and diff whitespace check passed.
+
+The Remote Identity button's 34px browser-default style is recorded for its owner. No changes were made to FWUI or Remote product sources. The earlier exact software state results and Project Sources evidence are carried forward.
+
+```text
+{"size": [1440, 900], "status": 200, "document_width": 1440, "header": [["Sounds", "/index.html#sounds"], ["Remote", "/remote/"], ["Samples", "/breaks/"], ["Projects", "/projects/"], ["Presets", "/presets/"], ["Manual", "/manual/"], ["History", "/builds/"], ["Install nightly", "/install/"]], "footer": [["Manual", "/manual/"], ["Build history", "/builds/"], ["What\u2019s new", "/new/"], ["Setup & help", "/help/"], ["Source and credits", "/gobbajogger/DnBOX"]], "download": "DnBOX-starting-breaks.x0xslots", "download_bytes": 110844, "screenshot_sha256": "d9b54e4d57cbfe5cce8f47a5dc9db8956337e7f6bdac10474037076f1c58c785", "page_errors": []}
+{"size": [390, 844], "status": 200, "document_width": 390, "header": [["Sounds", "/index.html#sounds"], ["Remote", "/remote/"], ["Samples", "/breaks/"], ["Projects", "/projects/"], ["Presets", "/presets/"], ["Manual", "/manual/"], ["History", "/builds/"], ["Install nightly", "/install/"]], "footer": [["Manual", "/manual/"], ["Build history", "/builds/"], ["What\u2019s new", "/new/"], ["Setup & help", "/help/"], ["Source and credits", "/gobbajogger/DnBOX"]], "download": "DnBOX-starting-breaks.x0xslots", "download_bytes": 110844, "screenshot_sha256": "c1625478fbed8b89ce10829ca120d783328ec70bc0f41903f7895a22ec3227d3", "page_errors": []}
+{"size": [844, 390], "status": 200, "document_width": 844, "header": [["Sounds", "/index.html#sounds"], ["Remote", "/remote/"], ["Samples", "/breaks/"], ["Projects", "/projects/"], ["Presets", "/presets/"], ["Manual", "/manual/"], ["History", "/builds/"], ["Install nightly", "/install/"]], "footer": [["Manual", "/manual/"], ["Build history", "/builds/"], ["What\u2019s new", "/new/"], ["Setup & help", "/help/"], ["Source and credits", "/gobbajogger/DnBOX"]], "download": "DnBOX-starting-breaks.x0xslots", "download_bytes": 110844, "screenshot_sha256": "be4077f53940452ea89df294838de554eef59c42d9a32a289ff0bfd72719e5c5", "page_errors": []}
+
+```

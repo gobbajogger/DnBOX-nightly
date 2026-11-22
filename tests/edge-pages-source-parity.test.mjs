@@ -15,6 +15,7 @@ const relativeInputs = [
   'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs', 'scripts/preview-offline-theme.mjs',
   'web/product-site/assets/BarlowSemiCondensed-Medium.ttf',
   'web/product-site/assets/BarlowSemiCondensed-Bold.ttf', 'web/product-site/assets/Barlow-OFL.txt',
+  'web/product-site/tool-file-controls.css',
   'scripts/verify-pages-source-parity.mjs', 'scripts/legacy-controller-packages.json',
   'web/x0x_installer.html', 'web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.html',
   'web/x0x_breaks.js', 'web/x0x_projects.html', 'web/x0x_projects.js',

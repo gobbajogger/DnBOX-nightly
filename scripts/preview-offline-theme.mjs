@@ -8,6 +8,7 @@ export const offlineThemeInputs = [
   assets + 'BarlowSemiCondensed-Medium.ttf',
   assets + 'BarlowSemiCondensed-Bold.ttf',
   assets + 'Barlow-OFL.txt',
+  'web/product-site/tool-file-controls.css',
 ];
 function replaceOnce(source, marker, replacement) {
   if (source.split(marker).length !== 2) throw new Error('Offline theme expected one ' + marker);
@@ -21,6 +22,7 @@ export function withOfflineTheme(html) {
     return `@font-face{font-family:Barlow;font-weight:${weight};src:url(data:font/ttf;base64,${font.toString('base64')}) format('truetype')}`;
   }).join('\n');
   const barlowLicense = readFileSync(new URL('../' + offlineThemeInputs[2], import.meta.url), 'utf8').replace(/[ \t]+$/gm, '');
+  const fileControls = readFileSync(new URL('../' + offlineThemeInputs[3], import.meta.url), 'utf8');
   const offlineTheme = `<style>
 /*
 ${barlowLicense}
@@ -39,7 +41,7 @@ ${fonts}
   --accent: #c8dfa7;
 }
 .offline-tool body { font-family: Barlow, sans-serif; }
-</style>`;
+${fileControls}</style>`;
   const styled = replaceOnce(html, '</head>', offlineTheme + '\n</head>');
   return replaceOnce(styled, '<script type="module">', `<script type="module">
 if (location.protocol === 'file:') {
