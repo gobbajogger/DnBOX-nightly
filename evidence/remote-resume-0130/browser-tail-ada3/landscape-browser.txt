@@ -1,0 +1,134 @@
+Landscape evidence: /workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/landscape-evidence-hi91dt3m
+{"files":304,"output":"/workspace/scratch/857bb2409f82/remote-browser-tail-ada3fef2/tree/.output/landscape-site-o1k7g6z7","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+roll-chicago 25 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+bass-chicago-gate 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+bass-chicago-slide 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+bass-chicago-accent 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+bass-chicago-release 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+sound-chicago-CHICAGO 38 0 [844, 844, 390] None
+sound-chicago-MIAMI 34 0 [844, 844, 390] None
+sound-chicago-Synth One 19 0 [844, 844, 390] None
+sound-chicago-SuperJ6 33 0 [844, 844, 390] None
+patterns-chicago 52 0 [844, 844, 390] None
+locks-chicago 44 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+drums-chicago 217 0 [844, 844, 390] None
+roll-miami 19 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+bass-miami-gate 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+bass-miami-slide 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+bass-miami-accent 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+bass-miami-release 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+sound-miami-CHICAGO 38 0 [844, 844, 390] None
+sound-miami-MIAMI 34 0 [844, 844, 390] None
+sound-miami-Synth One 19 0 [844, 844, 390] None
+sound-miami-SuperJ6 33 0 [844, 844, 390] None
+patterns-miami 52 0 [844, 844, 390] None
+locks-miami 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+drums-miami 217 0 [844, 844, 390] None
+roll-drum909 23 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 83, 'lastRow': 98}
+sound-drum909-0 40 0 [844, 844, 390] None
+original-drum909-0 19 0 [844, 844, 390] None
+sound-drum909-1 37 0 [844, 844, 390] None
+original-drum909-1 19 0 [844, 844, 390] None
+sound-drum909-2 34 0 [844, 844, 390] None
+original-drum909-2 19 0 [844, 844, 390] None
+sound-drum909-3 34 0 [844, 844, 390] None
+original-drum909-3 19 0 [844, 844, 390] None
+sound-drum909-4 34 0 [844, 844, 390] None
+original-drum909-4 19 0 [844, 844, 390] None
+sound-drum909-5 28 0 [844, 844, 390] None
+original-drum909-5 19 0 [844, 844, 390] None
+sound-drum909-6 31 0 [844, 844, 390] None
+original-drum909-6 19 0 [844, 844, 390] None
+sound-drum909-7 31 0 [844, 844, 390] None
+original-drum909-7 19 0 [844, 844, 390] None
+sound-drum909-8 31 0 [844, 844, 390] None
+original-drum909-8 19 0 [844, 844, 390] None
+sound-drum909-9 31 0 [844, 844, 390] None
+original-drum909-9 19 0 [844, 844, 390] None
+sound-drum909-10 31 0 [844, 844, 390] None
+original-drum909-10 19 0 [844, 844, 390] None
+patterns-drum909 52 0 [844, 844, 390] None
+locks-drum909 42 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 83, 'lastRow': 98}
+drums-drum909 214 0 [844, 844, 390] None
+drums-voices-7-11-drum909 214 0 [844, 844, 390] None
+drums-accent-drum909 215 0 [844, 844, 390] None
+roll-drum808 22 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 81, 'lastRow': 96}
+sound-drum808-0 38 0 [844, 844, 390] None
+original-drum808-0 20 0 [844, 844, 390] None
+sound-drum808-1 38 0 [844, 844, 390] None
+original-drum808-1 20 0 [844, 844, 390] None
+sound-drum808-2 35 0 [844, 844, 390] None
+original-drum808-2 20 0 [844, 844, 390] None
+sound-drum808-3 35 0 [844, 844, 390] None
+original-drum808-3 20 0 [844, 844, 390] None
+sound-drum808-4 35 0 [844, 844, 390] None
+original-drum808-4 20 0 [844, 844, 390] None
+sound-drum808-5 35 0 [844, 844, 390] None
+original-drum808-5 20 0 [844, 844, 390] None
+sound-drum808-6 38 0 [844, 844, 390] None
+original-drum808-6 20 0 [844, 844, 390] None
+sound-drum808-7 32 0 [844, 844, 390] None
+original-drum808-7 20 0 [844, 844, 390] None
+sound-drum808-8 32 0 [844, 844, 390] None
+original-drum808-8 20 0 [844, 844, 390] None
+sound-drum808-9 32 0 [844, 844, 390] None
+original-drum808-9 20 0 [844, 844, 390] None
+sound-drum808-10 32 0 [844, 844, 390] None
+original-drum808-10 20 0 [844, 844, 390] None
+patterns-drum808 53 0 [844, 844, 390] None
+locks-drum808 42 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 81, 'lastRow': 96}
+drums-drum808 215 0 [844, 844, 390] None
+drums-voices-7-11-drum808 215 0 [844, 844, 390] None
+drums-accent-drum808 215 0 [844, 844, 390] None
+roll-breaks 51 0 [844, 844, 390] None
+break-notes 21 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 54, 'lastRow': 69}
+sound-breaks 22 0 [844, 844, 390] None
+patterns-breaks 53 0 [844, 844, 390] None
+locks-breaks 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+drums-breaks 218 0 [844, 844, 390] None
+draft-mix-levels 49 0 [844, 844, 390] None
+draft-mix-pan 45 0 [844, 844, 390] None
+draft-mix-sends 54 0 [844, 844, 390] None
+draft-mix-fx 64 0 [844, 844, 390] None
+draft-mix-master 39 0 [844, 844, 390] None
+projects 28 0 [844, 844, 390] None
+projects-original-empty 3 0 [844, 844, 390] None
+projects-original-invalid 3 0 [844, 844, 390] None
+projects-original-editor 6 0 [844, 844, 390] None
+projects-original-kept 29 0 [844, 844, 390] None
+song-empty 20 0 [844, 844, 390] None
+all-part-patterns 181 0 [844, 844, 390] None
+song-row 33 0 [844, 844, 390] None
+review-dialog 2 0 [844, 844, 390] None
+review-discard-confirm 2 0 [844, 844, 390] None
+more-menu 181 0 [844, 844, 390] None
+connect-feedback 1 0 [844, 844, 390] None
+draft-invalid 1 0 [844, 844, 390] None
+draft-import 2 0 [844, 844, 390] None
+sound-chicago-JUNO 34 0 [844, 844, 390] None
+sound-miami-JUNO 34 0 [844, 844, 390] None
+native-sound-miami 38 0 [844, 844, 390] None
+native-sound-choice-unavailable 18 0 [844, 844, 390] None
+native-sound-chicago 38 0 [844, 844, 390] None
+native-mix-levels 37 0 [844, 844, 390] None
+native-mix-pan 33 0 [844, 844, 390] None
+native-mix-sends 42 0 [844, 844, 390] None
+native-mix-fx 51 0 [844, 844, 390] None
+native-mix-master 27 0 [844, 844, 390] None
+device 17 0 [844, 844, 1024] None
+identity 3 0 [844, 844, 749] None
+break-chance-authored 37 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 45, 'lastRow': 60}
+pattern-lock-bass-a-cutoff 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+pattern-lock-bass-a-fx-type 38 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 71, 'lastRow': 86}
+pattern-lock-bass-b-cutoff 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+pattern-lock-bass-b-arp 35 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 59, 'lastRow': 74}
+pattern-lock-break-level 39 0 [844, 844, 390] {'completeRows': 16, 'clippedLabels': [], 'row': 16, 'paneHeight': 257, 'firstRow': 39, 'lastRow': 54}
+break-generator 33 0 [844, 844, 390] None
+break-sound-pattern-chance 23 0 [844, 844, 390] None
+sound-chicago-synth-one-file 28 0 [844, 844, 390] None
+sound-chicago-superj6-import-complete 36 0 [844, 844, 390] None
+sound-chicago-superj6-import-partial 25 0 [844, 844, 390] None
+sound-miami-synth-one-file 28 0 [844, 844, 390] None
+sound-miami-superj6-import-complete 36 0 [844, 844, 390] None
+sound-miami-superj6-import-partial 25 0 [844, 844, 390] None
+844×390 landscape {"browser": "151.0.7922.34", "count": 131, "failures": [], "pageErrors": [], "enabledControlPresentations": 5873, "reachablePresentations": 5873, "manifestSha256": "2430e64e6dd3d07b73fe5968e84a830fe6fc6b206c89151fa1e55ed28c2faf9d", "kernelSha256": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0"}

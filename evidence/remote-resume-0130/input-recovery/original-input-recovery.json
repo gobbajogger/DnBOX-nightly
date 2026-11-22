@@ -55,11 +55,18 @@
     ],
     "unresolved": "Original attachment bytes and file-by-file glyph asset identities."
   },
-  "currentAccess": {
+  "priorAccessAttempts": {
     "mountedOriginals": "No matching installer, executable attachment or original bank archive recovered.",
     "history": "Partial file metadata. Attachment targets observed, no byte transfer provided.",
     "library": "Advertised list, search and prepare_materialize calls returned Unknown tool; no original bytes transferred.",
     "projectSources": "The existing native Project Sources renderer crashed with error code 9 after a scoped refresh. Cloud fallback navigation timed out.",
     "physicalDevice": "Outside the current software-only qualification scope; no device actions attempted."
+  },
+  "currentAccess": {
+    "originals": "Authenticated Library browser downloads recovered the exact AU build9 and12-bank640-program archive; ZIP CRCs and pinnedSHA256 values pass. Private bytes stay outside Git.",
+    "receipt": "original-input-browser-verification.json",
+    "projectSources": "Recovered after one renderer reload; five branch/source-named evidence archives uploaded and confirmed complete. All33visible named sources inspected; no identifiable17:00glyph batch.",
+    "ownerGlyphs": "The two original review attachment bytes and file-by-file selection remain unresolved.",
+    "physicalDevice": "Outside software-only qualification scope; no device actions attempted."
   }
 }

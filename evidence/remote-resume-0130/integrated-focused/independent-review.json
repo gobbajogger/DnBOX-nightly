@@ -1,0 +1,36 @@
+{
+  "review": "Independent port routing, TouchOSC scalar binding/session guards, Projects wrapper review",
+  "baseHead": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "verdict": "NO_BLOCKING_FINDINGS",
+  "findings": [],
+  "reviewedFiles": {
+    "web/product-site/remote/firmware-link.mjs": "181e2dfde3b552365e232e21aee839d7815e32b9c86bad0c2e907ad5a8aa3a4c",
+    "web/product-site/remote/index.html": "af0a7e91f80f559e2d1a19ab0f245a8a1c57e1c6cbf1012dc15a6ac1ac3a3340",
+    "web/product-site/remote/device/app.mjs": "e2b87b25b03a1340958154b593692f254f94201b9bfb1e7096199089d351d8ae",
+    "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "web/product-site/remote/app.mjs": "cd0eeef951f61dac356a2ba36c305876fa819fafa23ff5c9305fff90c5b87aa6",
+    "web/product-site/remote/style.css": "50a311f357df9cc062be03a64e199d6396ff8e22011909b1f9ec04b8b171ce60",
+    "tools/touchosc-parameters/controller.lua": "221e35340172ecf16c63fe20f19a45fc73a400c16e1300f3141b3d0c47d18c97",
+    "tools/touchosc-parameters/pack.py": "086cc6d187ea30520986259285d479ab297ec2f7633064431a3456d7d733f6cf",
+    "tools/touchosc-parameters/button.lua": "347db93b4e59eef2b4a189f2a672a4a1b81f48d13dfb8fc949bcdbad92c36068",
+    "tests/product-remote/touchosc-parameters-host.py": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+    "tests/product-remote/touchosc-parameters-host.lua": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012",
+    "tests/product-remote/firmware-link.test.mjs": "d2b109d17bed15c4ea5c6f9a2badcf055a32502f161d045d966bf31a64ef3d0e",
+    "tests/product-remote/page.test.mjs": "7291f1795c62c539438d6545e8c290e902505c5dd3b9dbb2649171f8b0551b2d"
+  },
+  "scope": [
+    "Ambiguous/missing MIDI pairs: no opens or frames; chooser link reset/availability",
+    "Generated archived descriptor roles and pinned schema/count/CRC/identity validation; default0descriptor layout emits nothing",
+    "Packed actual Lua button forwarding, wire canonical integer fields and response correlation",
+    "HELLO/OPEN admission, serialized revision-consistent snapshots, lease heartbeat/timeout fail-closed paths",
+    "SET then fresh fullcatalog readback; Undo READ/value/revision guard and C SET concurrency guard; coupled macro Undo withholding",
+    "Projects source header wrapper/CSS direct-child compatibility, text escaping and unchanged action selectors/URLs"
+  ],
+  "validation": "Read production source and the focused Node/Lua/C tests. Parent reports38pairedC/port and5actualLua/C cases PASS; no duplicate test or Chromium run performed in this review.",
+  "coverageLimits": [
+    "No self-review of the LFO formatter patch authored by this worker. Parent reviewed that source chain separately.",
+    "No native TouchOSC Apple/UI process execution; current acceptance is software-only.",
+    "Actual-C Lua cases cover closed,stock,mismatched catalog,scalar Undo/concurrent change,andcoupled macro; not an exhaustive transport fault-injection sweep.",
+    "Stock f178 DNR2 parameter dispatcher remains unsupported and no stock production admission is claimed."
+  ]
+}

@@ -17,9 +17,23 @@ class Element{
  removeChild(n){this.children.splice(this.children.indexOf(n),1);}
  setAttribute(k,v){this.attrs[k]=String(v);}
 }
-// Voice identities use the same pinned R22 inventory as the other surfaces.
-const VOICE_GLYPH={BD:'G001',SD:'G002',LT:'G003',MT:'G004',HT:'G005',RS:'G006',CP:'G007',CH:'G008',OH:'G009',CR:'G010',RD:'G011',CY:'G010',CB:'G012'};
-class VoiceGlyph{constructor(name){this.id=VOICE_GLYPH[name];}}
+// Use the same R22 instrument drawings and the owner page 2 voice names.
+const VOICE_PRESENTATION={
+ BD:['G001','Bass drum'],
+ SD:['G002','Snare'],
+ LT:['G003','Low tom'],
+ MT:['G004','Mid tom'],
+ HT:['G005','High tom'],
+ RS:['G006','Rim shot'],
+ CP:['G007','Clap'],
+ CH:['G008','Closed hat'],
+ OH:['G009','Open hat'],
+ CR:['G010','Crash'],
+ RD:['G011','Ride'],
+ CY:['G010','Cymbal'],
+ CB:['G012','Cowbell'],
+};
+class VoiceGlyph{constructor(id){this.id=id;}}
 const css=k=>k.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());
 function serialize(n){if(typeof n==='string')return esc(n);if(n instanceof VoiceGlyph){const g=GLYPH_DRAW[n.id];return '<svg class="drum-voice-glyph" data-r22-glyph="'+n.id+'" viewBox="0 0 '+g.w+' '+g.h+'" width="24" height="16" aria-hidden="true">'+g.svg+'</svg>';}const attrs={...n.attrs,...Object.fromEntries(Object.entries(n.dataset).map(([k,v])=>['data-'+css(k),v]))};const style=Object.entries(n.style).map(([k,v])=>css(k)+':'+v).join(';');if(style)attrs.style=style;return'<'+n.tag+Object.entries(attrs).map(([k,v])=>' '+k+'="'+esc(v)+'"').join('')+'>'+esc(n.textContent)+n.children.map(serialize).join('')+'</'+n.tag+'>';}
 export const DRUM_VOICES=Object.freeze({
@@ -65,8 +79,10 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accent
   grid.children[ch].setAttribute('id','drum'+kit+'-voice-'+(ch+1));
   const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);info.setAttribute('aria-current',String(ch===selectedVoice));
   info.children=info.children.filter(n=>typeof n==='object'&&!n.className?.includes('seq-channel-name')&&!n.className?.includes('seq-channel-color'));
-  info.children.unshift(new VoiceGlyph(voices[ch][0]));
+  const [glyph,label]=VOICE_PRESENTATION[voices[ch][0]];
+  info.children.unshift(new VoiceGlyph(glyph));
   const name=new Element('span');name.className='seq-channel-name';name.textContent=voices[ch][0];info.appendChild(name);
+  const fullName=new Element('span');fullName.className='seq-channel-full-name';fullName.textContent=label;info.appendChild(fullName);
   for(let s=0;s<steps;s++){
    const start=Math.round(s*endSample/steps),event=notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];
    const modelStep=state.getStep(ch,s);if(event)Object.assign(modelStep,{on:true,velocity:event.velocity/127,note:event.note});

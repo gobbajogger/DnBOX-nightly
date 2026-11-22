@@ -1,0 +1,97 @@
+{
+  "baselineCommit": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "ownerPage": 12,
+  "ownerPngSHA256": "a2eac99ebfba22a9ef0f93aadc999f7d2d72a55636d87ad924c6900d1e6e05fa",
+  "baselineAssetsSHA256": {
+    "app.mjs": "a2d23b33028063e3b56b7d0828023343a89ba474ee2b2b31b1afc699d8bd44ec",
+    "style.css": "24e54024253f2404a876e50fd5330e31a15a7480a5760b31f3fb5a2d51608d29"
+  },
+  "candidateAssetsSHA256": {
+    "app.mjs": "cd0eeef951f61dac356a2ba36c305876fa819fafa23ff5c9305fff90c5b87aa6",
+    "style.css": "8fc80c793129baaf4f202e4d092ea85fb6d5ee29daf42349c3a412b1ad49ffa8"
+  },
+  "candidatePatchSHA256": "bb012968f5753f3e4687a21e6c553ae77d49692ec8b24748c6b9fa46bde95bd7",
+  "compactGuardCSS": "5ee11c550b7cfabac7e5d14f796f6846a86fa4d89cce13a048c1d26545f9e77e",
+  "compactReuse": "Only the >=1200px wide and >=820px tall paragraph margin changed after the compact guards.",
+  "browser": "151.0.7922.34",
+  "existingProjectFilesJourney": "PASS at all four registered sizes",
+  "sizes": {
+    "1024x640": {
+      "actions": 13,
+      "allInitiallyInView": false,
+      "cardsAndActionsGeometryIdentical": true,
+      "bodyOverflow": false,
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "844x390": {
+      "actions": 13,
+      "allInitiallyInView": false,
+      "cardsAndActionsGeometryIdentical": true,
+      "bodyOverflow": false,
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "390x844": {
+      "actions": 13,
+      "allInitiallyInView": false,
+      "cardsAndActionsGeometryIdentical": true,
+      "bodyOverflow": false,
+      "beforeAfterPixels": {
+        "changedExact": 0,
+        "changedTolerant": 0,
+        "tolerantPercent": 0.0,
+        "maxChannelDelta": 0
+      }
+    },
+    "1440x900": {
+      "actions": 13,
+      "allInitiallyInView": true,
+      "cardsAndActionsGeometryIdentical": true,
+      "bodyOverflow": false,
+      "beforeAfterPixels": {
+        "changedExact": 9317,
+        "changedTolerant": 8146,
+        "tolerantPercent": 0.6285493827160494,
+        "maxChannelDelta": 144
+      },
+      "ownerPixels": {
+        "before": {
+          "changedExact": 254671,
+          "changedTolerant": 83362,
+          "tolerantPercent": 6.432253086419753,
+          "maxChannelDelta": 250
+        },
+        "after": {
+          "changedExact": 255133,
+          "changedTolerant": 81901,
+          "tolerantPercent": 6.319521604938272,
+          "maxChannelDelta": 250
+        }
+      },
+      "candidatePngSHA256": "839f3eb661539db6d6aaa0be9b94a712b15d9aa93ed5673f25965cad693c0da6"
+    },
+    "1200x820": {
+      "actions": 13,
+      "allInitiallyInView": true,
+      "cardsAndActionsGeometryIdentical": true,
+      "bodyOverflow": false
+    }
+  },
+  "ownerP12PairSHA256": "913ae6c59e22c286526e4f799468c1cefb0d3e966eddf4437b91c101dc7409ec",
+  "workspaceTests": {
+    "tests": 128,
+    "passed": 128,
+    "appIntegrationScriptsExit0": 4
+  },
+  "browserLogSHA256": "9f14b71ae665f31d6209f3ae850dda46d2622d2bc8bb84bda90bcd837267d62d",
+  "utc": "2026-11-22"
+}

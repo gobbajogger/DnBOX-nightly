@@ -28,8 +28,8 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
  let admitted=null,client=null,broker=null,confirmed=new Map(),pending=null,busy=false;
  apply.disabled=true;
  if(safety)safety.textContent=bundle?SAFETY_ON:SAFETY_OFF;
- const result=$('connection-result'),message=$('connection-message');
- const say=text=>{state.textContent=text;if(message)message.textContent=text;};
+ const result=$('connection-result'),message=$('connection-message'),chooser=$('choose-midi-ports');
+ const say=(text,showChooser=false)=>{state.textContent=text;if(message)message.textContent=text;if(chooser)chooser.hidden=!showChooser;};
  $('close-connection')?.addEventListener('click',()=>{if(result)result.hidden=true;connect.focus?.();});
  function stage(descriptor,input){
   if(busy||disposed||state.dataset.session!=='ready'||$(input.id)!==input)return;
@@ -99,9 +99,11 @@ export function mountFirmwareLink({document:doc=globalThis.document,navigator:na
    if(typeof request!=='function')throw Error('MIDI access is unavailable in this browser.');
    const access=await request.call(nav,{sysex:true});
    if(own!==generation)return;
-   const input=[...access.inputs.values()].find(port=>port.state==='connected');
-   const output=[...access.outputs.values()].find(port=>port.state==='connected');
-   if(!input||!output){say('No MIDI input and output pair is connected. Connect your instrument and try again.');return;}
+   const inputs=[...access.inputs.values()].filter(port=>port.state==='connected');
+   const outputs=[...access.outputs.values()].filter(port=>port.state==='connected');
+   if(!inputs.length||!outputs.length){say('No MIDI input and output pair is connected. Connect your instrument and try again.');return;}
+   if(inputs.length!==1||outputs.length!==1){say('Multiple MIDI ports. Choose a pair.',true);return;}
+   const [input]=inputs,[output]=outputs;
    await input.open?.();if(own!==generation)return;
    await output.open?.();if(own!==generation)return;
    const timeoutMs=Number.isFinite(globalThis.__DNBOX_MIDI_TIMEOUT)?globalThis.__DNBOX_MIDI_TIMEOUT:400;

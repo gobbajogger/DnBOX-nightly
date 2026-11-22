@@ -804,6 +804,18 @@ async def project_files(page):
         ]
         cards = page.locator('.destinations>section')
         assert await cards.locator('h3').all_text_contents() == ['Project backup','Original presets','MIDI for a DAW']
+        descriptions = cards.locator('header > p')
+        assert await descriptions.all_text_contents() == [
+            'Patterns, song, sounds, motion and sample references',
+            'Open an engine file. Edit a copy; preserve the original.',
+            'A finite range, aligned tracks and clips for a DAW.',
+        ]
+        for description in await descriptions.all():
+            if width == 1440:
+                await expect(description).to_be_in_viewport(ratio=1)
+                await expect(description).to_have_css('font-size', '21px')
+            else:
+                await expect(description).to_be_hidden()
         assert await page.evaluate('document.documentElement.scrollWidth === innerWidth')
         if width == 1440:
             for card in await cards.all():

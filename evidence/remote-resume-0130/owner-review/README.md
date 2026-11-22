@@ -30,7 +30,7 @@ The unfiltered Local gate supplied eight desktop Remote PNGs before its installe
 
 All 32 Integration proposal reference files from `938c6aa6` verified against their native dimensions and recorded byte hashes. Against these unapproved proposals, the current product is within 2% for four of eight 1440×900 states, six of eight 1024×640 states, zero of eight 844×390 states and six of eight 390×844 states. The largest change, 11.01% on landscape Patterns, includes the new selected-part grid and adjacent action panel. The compact landscape roll and thinner lane also differ from the historical pictures. These numerical comparisons describe source changes. They do not supply approved baseline comparisons. [Per-state proposal measurements](995d549-proposal-pixels.json)
 
-The two full-size archives are staged locally for Project Sources delivery. Upload is unconfirmed.
+Both full-size archives were uploaded to LoopyX0X37 Project Sources. The authenticated Sources listing showed both completed rows and zero pending upload progress bars. See [upload receipt](../project-sources-upload.json).
 
 | Archive | SHA-256 |
 |---|---|

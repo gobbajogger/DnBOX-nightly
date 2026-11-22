@@ -38,8 +38,56 @@ async function until(read,label){const start=Date.now();let value;while(Date.now
 
 test('a page with no reviewed catalog sends nothing and leaves Apply disabled',async()=>{const {document,nodes}=dom();let calls=0;mountFirmwareLink({document,navigator:{requestMIDIAccess(){calls++;throw Error('should not be called');}},bundle:null});assert.equal(nodes.get('firmware-safety').textContent,'No reviewed firmware catalog. Apply stays off.');await nodes.get('connect').click();assert.equal(calls,0);assert.match(nodes.get('conn-state').textContent,/Apply stays off/);assert.equal(nodes.get('apply').disabled,true);});
 
+function routedPorts(inputNames, outputNames, events){
+ const connected=(names,type)=>new Map(names.map((name,index)=>[String(index),{
+  name,type,state:'connected',
+  async open(){events.push(['open',type,name]);},
+  addEventListener(){},removeEventListener(){},
+  send(bytes){events.push(['send',name,decodeCommand(bytes).op]);},
+ }]));
+ return {inputs:connected(inputNames,'input'),outputs:connected(outputNames,'output')};
+}
+
+test('ambiguous Workspace MIDI ports send nothing and offer the Device chooser',async t=>{
+ const instruments=['DnBOX A','Other Synth'];
+ const reversed=[...instruments].reverse();
+ for(const [inputs,outputs] of [[instruments,reversed],[instruments.slice(0,1),reversed],[instruments,reversed.slice(1)]]){
+  await t.test(inputs.length+' input / '+outputs.length+' output',async sub=>{
+   const events=[],access=routedPorts(inputs,outputs,events);
+   const {document,nodes}=dom();
+   const link=mountFirmwareLink({document,bundle:bundle(controls),navigator:{requestMIDIAccess:async()=>access}});
+   sub.after(()=>link.destroy());
+   await nodes.get('connect').click();
+   await until(()=>events.length||nodes.get('conn-state').textContent.startsWith('Multiple MIDI ports'),'routing decision');
+   assert.deepEqual(events,[]);
+   assert.equal(nodes.get('apply').disabled,true);
+   assert.equal(nodes.get('choose-midi-ports').hidden,false);
+  });
+ }
+ const html=readFileSync(new URL('../../web/product-site/remote/index.html',import.meta.url),'utf8');
+ assert.match(html,/<a[^>]+id="choose-midi-ports" href="device\/"[^>]+hidden/);
+});
+
+test('Workspace MIDI stays disabled when either connected endpoint is missing',async t=>{
+ for(const [inputs,outputs] of [[[],['DnBOX A']],[['DnBOX A'],[]],[[],[]]]){
+  await t.test(inputs.length+' input / '+outputs.length+' output',async sub=>{
+   const events=[],access=routedPorts(inputs,outputs,events);
+   const {document,nodes}=dom();
+   const link=mountFirmwareLink({document,bundle:bundle(controls),navigator:{requestMIDIAccess:async()=>access}});
+   sub.after(()=>link.destroy());
+   await nodes.get('connect').click();
+   await until(()=>nodes.get('conn-state').textContent.startsWith('No MIDI input and output pair'),'missing ports');
+   assert.deepEqual(events,[]);
+   assert.equal(nodes.get('apply').disabled,true);
+  });
+ }
+});
+
 test('the C fixture handshake reads confirmed values and a conflicting Apply is refused',async()=>{
  const fixture=host(),ops=[],replies=[];const {document,nodes}=dom();const ports=midi(fixture,ops,replies);
+ const parked={state:'disconnected',open(){assert.fail('Disconnected port was opened');}};
+ ports.access.inputs=new Map([['parked-input',parked],...ports.access.inputs]);
+ ports.access.outputs=new Map([['parked-output',parked],...ports.access.outputs]);
  mountFirmwareLink({document,navigator:{requestMIDIAccess:async()=>ports.access},bundle:bundle(controls)});
  try{
   await nodes.get('connect').click();

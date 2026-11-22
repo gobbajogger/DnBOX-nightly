@@ -1,0 +1,7 @@
+# Projects descriptions against owner page 12
+
+The isolated patch starts from `ada3fef20de13b2603f959a3412cf777dbcf0f07`. It restores the three owner descriptions in semantic card headers at viewport widths of at least 1200 px and heights of at least 820 px. The descriptions use the existing muted ink and Barlow, with 21 px type. They preserve the existing accessible headings, action destinations and original file operations. The header and action grid bounds are equal before and after.
+
+Chromium 151.0.7922.34 verified all 13 actions fully in the starting workspace at 1440×900 and 1200×820. The 1024×640, 844×390 and 390×844 controls and renders matched exactly. Those compact comparisons predate one paragraph margin refinement inside the wide and tall media query. The complete Projects browser journey then passed all four registered sizes with the final candidate. The Workspace run passed 128 tests and four app integration scripts.
+
+The full-size owner page 12 comparison uses Poppler at 72 DPI, native 1440×900 Chromium, and the existing 25.5-channel tolerance. The first desktop placement increased the rate from 6.432% to 6.636%. A single shared paragraph margin aligned the 21 px captions more closely to the owner drawing and the final rate is 6.320%, a decrease of 1,461 pixels above threshold from the baseline. The overall 2% target remains open. The candidate replaces only the registered Projects desktop frame. [Patch](projects-copy.patch) · [Receipt](summary.json) · [Complete side-by-side](owner-12-projects.png)

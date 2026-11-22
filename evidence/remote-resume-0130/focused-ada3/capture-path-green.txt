@@ -1,0 +1,8 @@
+ACCEPTED normal output
+DENIED approved root Capture output must be outside the approved snapshot directory
+DENIED approved descendant Capture output must be outside the approved snapshot directory
+DENIED directory symlink to approved root Capture output must be outside the approved snapshot directory
+DENIED ordinary directory symlink Capture output must not contain symlinks
+DENIED PNG symlink into approved root Capture output must be outside the approved snapshot directory
+DENIED inventory symlink into approved root Capture output must be outside the approved snapshot directory
+Synthetic approved directory unchanged: True

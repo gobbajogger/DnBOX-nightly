@@ -1,0 +1,39 @@
+✔ the two Draft owners retain all 13 measured original float words and stable preset/field identities (1.530197ms)
+✔ original waveform stops, independent PWM, continuous SUB and all three clock modes (2.853402ms)
+✔ unsupported field values and legacy identity aliases are rejected (0.176976ms)
+✔ Hz readouts use the frequency returned by the build-9 Conductor (1.889355ms)
+✔ all three synced LFOs on both basses select the original binary32 tempo ranges (2.104538ms)
+✖ all three LFOs on both owners match original build9 literal strings at128positions and transition neighbors (2.087723ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 109.245551
+
+✖ failing tests:
+
+test at tests/product-workspace/superj6.test.mjs:110:1
+✖ all three LFOs on both owners match original build9 literal strings at128positions and transition neighbors (2.087723ms)
+  AssertionError [ERR_ASSERTION]: slot0 field88 word0x0
+  + actual - expected
+
+  + '32 beats'
+  - '8 Bars'
+
+      at TestContext.<anonymous> (file:///workspace/scratch/857bb2409f82/remote-original-lfo-fix/tests/product-workspace/superj6.test.mjs:122:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '32 beats',
+    expected: '8 Bars',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

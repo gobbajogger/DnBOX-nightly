@@ -1,0 +1,111 @@
+{
+  "branch": "lane/remote-resume-0130",
+  "commit": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "tree": "cb9fd2e54aa89ad4545647773b5474e7f18137e6",
+  "browser": {
+    "status": "RUN",
+    "version": "151.0.7922.34",
+    "sandbox": true
+  },
+  "aggregateExit": 0,
+  "checks": [
+    {
+      "script": "tests/product-remote/composition-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:01:35Z",
+      "finishedUTC": "2026-11-22T03:02:42Z",
+      "log": "composition-browser.txt",
+      "logSha256": "2c9c6db693dde99109cb05009d36860fca35f30b259e4adb3effc7abade9f59e"
+    },
+    {
+      "script": "tests/product-remote/master-more-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:02:42Z",
+      "finishedUTC": "2026-11-22T03:03:52Z",
+      "log": "master-more-browser.txt",
+      "logSha256": "15188048ad6ca1b45d2e779bec84041b5fcd7cf4caa2ff384613486b2f09fc71"
+    },
+    {
+      "script": "tests/product-remote/navigation-state-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:03:52Z",
+      "finishedUTC": "2026-11-22T03:04:25Z",
+      "log": "navigation-state-browser.txt",
+      "logSha256": "b3174f9fd69263e28ece8b90760e188a1f6cc124ccab993906bd8223815d6267"
+    },
+    {
+      "script": "tests/product-remote/source-banks-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:04:25Z",
+      "finishedUTC": "2026-11-22T03:04:47Z",
+      "log": "source-banks-browser.txt",
+      "logSha256": "e220dbed47052364528b18368b9513416b4562b562c711b33d7cae696dd5cc4e"
+    },
+    {
+      "script": "tests/product-remote/landscape-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:04:47Z",
+      "finishedUTC": "2026-11-22T03:05:30Z",
+      "log": "landscape-browser.txt",
+      "logSha256": "5bf0e26ff2c0f2562f755accdd3daa831c1ca7155826ecc0f227e8aa1203db40"
+    },
+    {
+      "script": "tests/emulator-lcd-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:05:30Z",
+      "finishedUTC": "2026-11-22T03:06:13Z",
+      "log": "emulator-lcd-browser.txt",
+      "logSha256": "b825e5d2c8062d9823c55ec9c8e56569a3384ba9b8a87c7df9cfdff918fdcc19"
+    },
+    {
+      "script": "tests/admin-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:06:13Z",
+      "finishedUTC": "2026-11-22T03:06:14Z",
+      "log": "admin-browser.txt",
+      "logSha256": "438d78c85a5cf69cb2ce87e1d2a8330380912f65c2bb07e65b4fff1804e5a9ea"
+    },
+    {
+      "script": "tests/firmware-reference-browser.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:06:14Z",
+      "finishedUTC": "2026-11-22T03:07:08Z",
+      "log": "firmware-reference-browser.txt",
+      "logSha256": "946633ba69f3c1847b17ce4e8b2ccdc332e801373995052875278bc07dc296ad"
+    },
+    {
+      "script": "tests/visual/fixtures/web-structural/browser_fixtures.py",
+      "exit": 0,
+      "startedUTC": "2026-11-22T03:07:08Z",
+      "finishedUTC": "2026-11-22T03:07:09Z",
+      "log": "browser_fixtures.txt",
+      "logSha256": "c35b32bbf30bb1ef20cab2f85bdf10004d5579320c2290fe9ec8571653d1b04b"
+    }
+  ],
+  "cleanDetachedSourceBeforeAfter": true,
+  "coverage": {
+    "landscape": {
+      "browser": "151.0.7922.34",
+      "count": 131,
+      "failures": [],
+      "pageErrors": [],
+      "enabledControlPresentations": 5873,
+      "reachablePresentations": 5873,
+      "manifestSha256": "2430e64e6dd3d07b73fe5968e84a830fe6fc6b206c89151fa1e55ed28c2faf9d",
+      "kernelSha256": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0"
+    },
+    "lcdExactFrameChecks": 26,
+    "firmwareReference": "PASS 1838 named screens, 1912 browser canvas frames, 105,868,800 unique-state pixels",
+    "structuralFixtures": 9,
+    "structuralProductStatus": "NOT_RUN"
+  },
+  "fullCombinedGate": {
+    "status": "NOT_RUN",
+    "historical995d549": "FAIL"
+  },
+  "archive": {
+    "name": "lane-remote-resume-0130-ada3fef20de13b2603f959a3412cf777dbcf0f07-browser-tail-evidence.tar.gz",
+    "size": 11799385,
+    "sha256": "2ffc56e08d305fc492208cc604d8a67db23ffeef9f3528e2d365a19d17affcd2"
+  }
+}

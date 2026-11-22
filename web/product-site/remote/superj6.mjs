@@ -14,19 +14,17 @@ export const sourceOnlyBank=bank=>bank==='SuperJ6'||bank==='Synth One';
 export const WAVE_STOPS=Object.freeze([0,Math.fround(1/3),Math.fround(2/3),1]);
 const waveNames=['Sine','Triangle','Saw','Square'];
 
-// Durations in quarter-note beats per LFO cycle. Original Conductor build 9
-// scales BPM/60 by factor/4. Its two truncated factors .3333 and .1667
-// produce approximately 12 and 24 beats. Labels describe those durations.
-// DnBOX 74b50bdfe2e1d9ac7f22445cdf5ab3726bb85272,
-// experiments/superj6-conductor-source-20261115/lfo_laws.cpp, lfo_rate.
-const tempoPeriods = [
-  '1/16 beat','1/12 beat','1/8 beat','1/6 beat','1/4 beat','1/3 beat',
-  '1/2 beat','2/3 beat','1 beat','4/3 beats','2 beats','8/3 beats',
-  '4 beats','8 beats','≈12 beats','16 beats','≈24 beats','32 beats',
+// Literal names returned by the authenticated SuperJ6 0.999.8/build9 AU.
+// tools/probe-superj6-original-lfo.py executes its original ARM64 formatter
+// (binary SHA256 a5243e50bda6bd44f463c6e63ea3137802142f55f3c1ea25a5a6e046acba81a1).
+// Preserve the original D spelling and bar names; frequency laws are unchanged.
+const tempoNames = [
+  '1/64','1/64 D','1/32','1/32 D','1/16','1/16 D','1/8','1/8 D',
+  '1/4','1/4 D','1/2','1/2 D','1 Bar','2 Bars','3 Bars','4 Bars','6 Bars','8 Bars',
 ];
 function tempoIndex(value) {
   // The source subtracts and multiplies separately in binary32, then rounds
-  // a positive half upward. For example exactly .5 still selects 4/3 beats.
+  // a positive half upward. For example exactly .5 still selects index9 (1/4 D).
   return Math.round(Math.fround(Math.fround(1-value)*17));
 }
 // The Conductor returns a binary32 frequency after evaluating the Hz curve.
@@ -83,7 +81,7 @@ export function superJ6Text(spec,value,edits,fields=slots[spec.slot]) {
     case 'rate':{
       const mode=read(fields,{88:195,96:196,100:197}[spec.field],edits);
       if(mode===undefined)return decimal(100*value,2)+'% position';
-      return mode ? decimal(lfoHz(value),3)+' Hz' : tempoPeriods[tempoIndex(value)];
+      return mode ? decimal(lfoHz(value),3)+' Hz' : tempoNames[tempoIndex(value)];
     }
   }
 }

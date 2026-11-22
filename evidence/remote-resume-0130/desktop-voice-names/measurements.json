@@ -1,0 +1,173 @@
+{
+  "sourceBase": "ada3fef20de13b2603f959a3412cf777dbcf0f07",
+  "sourceSha256": {
+    "app.mjs": "a2d23b33028063e3b56b7d0828023343a89ba474ee2b2b31b1afc699d8bd44ec",
+    "style.css": "9275a327a1d2d3ed99a2c51bab8f86051fe00ed14771772ca9a42b5d221c43bd",
+    "funkybeats-view.mjs": "ffbc3bbe1b71049d0dbcfae7be50fcfe314401f622b72857c256386adb96f713",
+    "glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e"
+  },
+  "errors": [],
+  "browser": "151.0.7922.34",
+  "page2PngSHA256": "4d8da564f4064c9fce69c3abbfea8ea11c7c8f0168baf92b390d5493ac8438f9",
+  "states": {
+    "909-1440x900": {
+      "rail": 176,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fullNamesVisible": 11,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 176,
+      "minPadWidth": 50.25,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "808-1440x900": {
+      "rail": 176,
+      "viewport": [
+        1440,
+        900
+      ],
+      "fullNamesVisible": 11,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 176,
+      "minPadWidth": 50.25,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "909-1280x800": {
+      "rail": 176,
+      "viewport": [
+        1280,
+        800
+      ],
+      "fullNamesVisible": 11,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 160,
+      "minPadWidth": 40.25,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "808-1280x800": {
+      "rail": 176,
+      "viewport": [
+        1280,
+        800
+      ],
+      "fullNamesVisible": 11,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 160,
+      "minPadWidth": 40.25,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "909-844x390": {
+      "rail": 40,
+      "viewport": [
+        844,
+        390
+      ],
+      "fullNamesVisible": 0,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 96,
+      "minPadWidth": 28.25,
+      "minPadHeight": 24,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "808-844x390": {
+      "rail": 40,
+      "viewport": [
+        844,
+        390
+      ],
+      "fullNamesVisible": 0,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 176,
+      "initialCenterHits": 96,
+      "minPadWidth": 28.25,
+      "minPadHeight": 24,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "909-390x844": {
+      "rail": 60,
+      "viewport": [
+        390,
+        844
+      ],
+      "fullNamesVisible": 0,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 66,
+      "initialCenterHits": 42,
+      "minPadWidth": 40,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    },
+    "808-390x844": {
+      "rail": 60,
+      "viewport": [
+        390,
+        844
+      ],
+      "fullNamesVisible": 0,
+      "mountedVoiceTargets": 176,
+      "wholeHorizontalTargets": 66,
+      "initialCenterHits": 42,
+      "minPadWidth": 40,
+      "minPadHeight": 40,
+      "minAccentHeight": 44,
+      "tapUndoRedo": true
+    }
+  },
+  "ownerPage2": {
+    "before": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 651405,
+      "tolerantDifferentPixels": 220775,
+      "tolerantDifferentPercent": 17.0351,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+      "captureSha256": "a609bfc40ce1dcdbfda7245c4485d764068d788c08a9c2144cb6e4791c5e20cc",
+      "pairSha256": "6fb3f3bfe6850595023474c9c8bab565556300da3b234db4c15b23fcc8d0e3bf"
+    },
+    "after": {
+      "nativeSize": [
+        1440,
+        900
+      ],
+      "totalPixels": 1296000,
+      "exactDifferentPixels": 703067,
+      "tolerantDifferentPixels": 217861,
+      "tolerantDifferentPercent": 16.8103,
+      "atMostTwoPercentByTolerantMetric": false,
+      "referenceSha256": "12f77e353dfece57f0af7a5cd82b8501bcfca0fd88183ba8f380a26b5a16b9a6",
+      "captureSha256": "4d8da564f4064c9fce69c3abbfea8ea11c7c8f0168baf92b390d5493ac8438f9",
+      "pairSha256": "dcbac939aa966e47f05081a7f46b55ec01fd13d291994a61752bcedb462e0d8d"
+    }
+  },
+  "acceptedStylesheetSHA256": "c72b71671910a2028b4ba0e95fb3f28e305a1d4efee7bca1c13f62a1332bc57f",
+  "acceptedScope": {
+    "minimumDesktopWidth": 1340,
+    "minimumDesktopHeight": 700,
+    "desktop1440RenderEquivalent": true,
+    "unchangedCompactMedia": true,
+    "prototype1280": "Full name rail shrank Accent width to 40.25px. The accepted breakpoint leaves the 1280px viewport on its previous 60px abbreviated rail.",
+    "scopeProof": "The accepted patch changes only the prototype desktop media threshold from 1280 to 1340. The block is active at 1440 and inactive at 844 and 390 in both versions."
+  }
+}

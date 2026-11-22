@@ -1,0 +1,15 @@
+ValueError: Capture output must be outside the approved snapshot directory
+RED prior CLI created the forbidden synthetic child before rejecting it
+ValueError: Capture output must be outside the approved snapshot directory
+GREEN integrated CLI created neither the forbidden synthetic child nor its snapshot parent
+Registered 8 of 8
+GREEN integrated CLI created a normal new directory and adopted eight verified donor PNGs
+ACCEPTED normal output
+DENIED approved root Capture output must be outside the approved snapshot directory
+DENIED approved descendant Capture output must be outside the approved snapshot directory
+DENIED directory symlink to approved root Capture output must be outside the approved snapshot directory
+DENIED ordinary directory symlink Capture output must not contain symlinks
+DENIED PNG symlink into approved root Capture output must be outside the approved snapshot directory
+DENIED inventory symlink into approved root Capture output must be outside the approved snapshot directory
+Synthetic approved directory unchanged: True
+Integrated helper blob e22eaf0af9d515b9463bc1a9ae6ec76eccbace7b

@@ -49,7 +49,7 @@ test('an imported tempo-synced rate uses its own mode and keeps the original flo
   library.choose(1,[original.bank.digest,first],original.bank);
   library.retainOriginal(1,original);
   const edits=new Map(),fields=library.view(1).fields;
-  assert.match(renderSuperJ6(1,edits,library),/data-sj6-display="88">4\/3 beats</);
+  assert.match(renderSuperJ6(1,edits,library),/data-sj6-display="88">1\/4 D</);
   edits.set(fields.get(195).id,1);
   assert.match(renderSuperJ6(1,edits,library),/data-sj6-display="88">1\.591 Hz</);
   edits.clear();

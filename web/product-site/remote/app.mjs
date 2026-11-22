@@ -777,9 +777,9 @@ function projectCards() {
  const link = (label, href) => '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(label)+'</a>';
  const guide = esc(midiExchangeGuide.trim().replace(/^DnBOX MIDI exchange\s*/, ''));
  return `<div class="destinations">
-  <section><h3>Project backup</h3><div>${link('Export backup',tools.Projects+'#export-title')}${link('Inspect restore',tools.Projects+'#import-title')}</div></section>
-  <section><h3>Original presets</h3><div><button type="button" data-project-preset-open>Open original</button><button type="button" data-project-preset-inspect ${projectPreset?.canInspect() ? '' : 'disabled'}>Inspect contents</button><button type="button" data-project-preset-save ${projectPreset?.canSave() ? '' : 'disabled'}>Save a copy</button></div></section>
-  <section><h3>MIDI for a DAW</h3><div>${link('Choose range',tools['MIDI exchange'])}${link('Export availability',tools.Projects+'#project-exchange-availability')}</div></section>
+  <section><header><h3>Project backup</h3><p>Patterns, song, sounds, motion and sample references</p></header><div>${link('Export backup',tools.Projects+'#export-title')}${link('Inspect restore',tools.Projects+'#import-title')}</div></section>
+  <section><header><h3>Original presets</h3><p>Open an engine file. Edit a copy; preserve the original.</p></header><div><button type="button" data-project-preset-open>Open original</button><button type="button" data-project-preset-inspect ${projectPreset?.canInspect() ? '' : 'disabled'}>Inspect contents</button><button type="button" data-project-preset-save ${projectPreset?.canSave() ? '' : 'disabled'}>Save a copy</button></div></section>
+  <section><header><h3>MIDI for a DAW</h3><p>A finite range, aligned tracks and clips for a DAW.</p></header><div>${link('Choose range',tools['MIDI exchange'])}${link('Export availability',tools.Projects+'#project-exchange-availability')}</div></section>
  </div>
  <nav class="project-tools" aria-label="Project resources">${link('Samples',tools.Samples)}${link('Manual','../manual/')}</nav>
  <details class="project-guide"><summary>Open DAW guide</summary><p>${guide}</p></details>

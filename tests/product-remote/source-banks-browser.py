@@ -101,7 +101,7 @@ async def at_size(browser, size, output):
             assert set(await panel.locator("[data-sj6-field]").evaluate_all("es=>es.map(e=>Number(e.dataset.sj6Field))")) == FIELDS
             await expect(panel.locator('[data-sj6-display="82"]')).to_have_text("Square")
             await expect(panel.locator('[data-sj6-display="83"]')).to_have_text("Square")
-            await expect(panel.locator('[data-sj6-display="96"]')).to_have_text("8 beats")
+            await expect(panel.locator('[data-sj6-display="96"]')).to_have_text("2 Bars")
             await expect(panel.locator('[data-sj6-display="88"]')).to_contain_text("Hz")
             await expect(page.locator('[data-sound-source="emulator"]')).to_be_disabled()
             file_actions = await panel.locator('[data-sj6-open],[data-sj6-save]').evaluate_all(

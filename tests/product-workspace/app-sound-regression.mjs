@@ -113,7 +113,7 @@ await check('two-layer original Draft edits use distinct part/field IDs and ordi
  change(0,78,.75);change(0,83,0);change(0,196,1);change(0,96,.5);
  let details=review(x);
  assert.match(details,/Bass A \/ SuperJ6 \/ PWM String Pad \/ Layer 1 · Width: 44.06% duty → 14.75% duty/);
- assert.match(details,/Layer 2 · Wave: Square → Sine/);assert.match(details,/LFO 2 · Rate: 8 beats → 1.591 Hz/);
+ assert.match(details,/Layer 2 · Wave: Square → Sine/);assert.match(details,/LFO 2 · Rate: 2 Bars → 1.591 Hz/);
  x.press('undo');assert.ok(!review(x).includes('LFO 2 · Rate'));x.press('redo');assert.match(review(x),/1\.591 Hz/);
  x.changePart('miami','Bass B');chooseBank(x,'SuperJ6');change(0,202,.5);
  assert.ok(!review(x).includes('Sub · Level'));

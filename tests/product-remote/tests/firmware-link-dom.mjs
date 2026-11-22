@@ -12,6 +12,6 @@ class El{
 export function dom(){
  const nodes=new Map();
  const document={defaultView:new EventTarget(),createElement(tag){const el=new El(tag);el.owner={nodes};return el;},getElementById(id){return nodes.get(id)??null;}};
- for(const id of ['connect','apply','conn-state','firmware-safety','firmware-controls']){const el=new El('node');el.owner={nodes};el.id=id;el.textContent=id==='connect'?'Connect':'';}
+ for(const id of ['connect','apply','conn-state','firmware-safety','firmware-controls','choose-midi-ports']){const el=new El('node');el.owner={nodes};el.id=id;el.textContent=id==='connect'?'Connect':'';}
  return {document,nodes};
 }

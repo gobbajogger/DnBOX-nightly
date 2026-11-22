@@ -27,4 +27,22 @@ test('late permission result after final departure cannot attach listeners',asyn
 test('cached return requires fresh manual connection and obtains new firmware epoch',async()=>{const a=access(),x=env(async()=>a);await x.node('permission').onclick();await x.node('connect').onclick();x.window.fire('pagehide',{persisted:true});await x.app.close();x.window.fire('pageshow',{persisted:true});assert.equal(a.commands.filter(c=>c.op===OP.OPEN).length,1);await x.node('connect').onclick();assert.equal(a.commands.filter(c=>c.op===OP.OPEN).length,2);await x.app.destroy();});
 
 test('same-name ports remain visibly distinct through stable source IDs',async()=>{const a=access(),otherInput=new E();Object.assign(otherInput,{id:'i2',name:a.input.name,type:'input',state:'connected',open:async()=>{},close:async()=>{}});a.inputs.set('i2',otherInput);const x=env(async()=>a);try{await x.node('permission').onclick();assert.deepEqual(x.node('input').options.map(o=>o.value),['i','i2']);assert.notEqual(x.node('input').options[0].textContent,x.node('input').options[1].textContent);assert.match(x.node('input').options[0].textContent,/\[i\]/);assert.match(x.node('input').options[1].textContent,/\[i2\]/);}finally{await x.app.destroy()}});
+test('Device chooser sends only through the explicitly selected pair after reversed enumeration',async t=>{
+ const chosen=access(),other=access();
+ other.input.id='other-in';other.output.id='other-out';
+ chosen.inputs.set(other.input.id,other.input);
+ chosen.outputs=new Map([[other.output.id,other.output],[chosen.output.id,chosen.output]]);
+ const x=env(async()=>chosen);
+ t.after(()=>x.app.destroy());
+ await x.node('permission').onclick();
+ assert.deepEqual(x.node('input').options.map(option=>option.value),['i','other-in']);
+ assert.deepEqual(x.node('output').options.map(option=>option.value),['other-out','o']);
+ x.node('input').value=chosen.input.id;
+ x.node('output').value=chosen.output.id;
+ x.node('output').onchange();
+ await x.node('connect').onclick();
+ assert.match(x.node('status').textContent,/Synthetic test fixture connected/);
+ assert.deepEqual(chosen.commands.map(command=>command.op),[OP.HELLO,OP.OPEN,OP.READ,OP.READ]);
+ assert.deepEqual(other.commands,[]);
+});
 test('pending port open immediately locks the displayed pair and allows explicit cancel',async()=>{const a=access();let finish;a.input.open=()=>new Promise(r=>finish=r);const x=env(async()=>a);await x.node('permission').onclick();const pending=x.node('connect').onclick();await turn();try{assert.equal(x.node('input').disabled,true);assert.equal(x.node('output').disabled,true);assert.equal(x.node('disconnect').disabled,false);assert.match(x.node('status').textContent,/Connecting/);}finally{const closing=x.app.close();finish();await closing;await pending;await x.app.destroy()}assert.equal(a.commands.length,0);});
