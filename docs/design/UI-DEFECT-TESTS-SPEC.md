@@ -13,13 +13,15 @@ Use exact input and source pins. Combine automated checks with native-size revie
 5. **Glyph style.** Check comparable glyphs within a page and across related pages: compatible stroke weight, native curved/diagonal edge treatment, alignment and legibility. Separate full envelopes, mini curves and status markers. Do not require blur on pixel-aligned rails or equal size across different roles.
 6. **Glyph behavior.** Exercise real controls through the relevant initial, intermediate, extreme and settled states. Check actual continuous movement or wrap, discrete detents, hit, hold, lock and playback feedback as applicable. No universal monotonic or 15% pixel-delta threshold. Measure live renderer timing independently of GIF sampling. Replay matched 0.0.26 input for existing behavior and record explicitly approved deltas.
 
+For the [TUNE worked example](UI-SOURCE-OF-TRUTH.md#worked-component-808909-tune), capture a settled idle frame, a real tuning edit with logical value readback, and a separate pad hit at the unchanged value through recovery. A turning-only GIF cannot pass the hit case. Check unrelated controls and the settled tuning readout for unintended changes.
+
 ## B. Remote tests
 
 Run affected page and interaction checks locally at 1440×900, 390×844 and 844×390.
 
 1. Grid lines align at identical x across all black and white rows; bar > beat > subdivision contrast. Playhead is visible while playing. In portrait, preserve the six-pixel minimum visual note height; in landscape, check at least 16 visible note rows and unclipped labels. Check usable interaction targets separately from painted note size, including adjacent and overlapping notes.
 2. The thin slider lane remains aligned under roll and drums; label tap changes velocity/chance/pitch/pan. Unselected bars stay dim. No persistent tool row or selected-note panel.
-3. Check the specified gesture paths (pinch 1/2/4/8 bars, two-finger pan, Ctrl/Cmd+wheel zoom, Shift+wheel time scrolling, mode-free edits). Check usable keyboard and non-drag or single-pointer alternatives for essential actions, plus focus, cancellation, Undo and retained draft state.
+3. Check the specified gesture paths (pinch 1/2/4/8 bars, two-finger pan, Ctrl/Cmd+wheel zoom, Shift+wheel time scrolling, mode-free edits). For the same essential action, prove [keyboard-only operation](https://www.w3.org/TR/WCAG22/#keyboard) and [click/tap-only operation without dragging](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements) separately. Use one pointer and no keyboard for the latter; apply the gesture exception only where the movement itself is essential. Compare the resulting edit or view state, and check focus, cancellation, Undo and retained draft state.
 4. Compare the approved header with the same part, transport and layout. Check reviewed musician-facing copy and portrait/landscape usability without clipping or horizontal overflow.
 
 ## C. Native render and evidence
