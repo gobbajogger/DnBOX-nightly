@@ -780,3 +780,11 @@ Remaining acceptance requirements are explicit: R1whole-owner2%and current-workf
 ## Desktop Patterns selection witness — 2026-11-22 05:55 UTC
 
 Owner page 9 and the corrected browser fixture agree on Bass A P01 as the selected local target. The existing short-landscape amber fill and dark label now also apply to the desktop selected-part grid. The 1440×900 replay changes only P01 pixels. All 32 hit boxes, touch and keyboard selection, and fresh Draft launch readback remain exact. The common pad fill crop matches, while the full-page diagnostic remains 6.388272% and ineligible for 2% acceptance because its provider actions and panel arrangement differ. The full capture set and verified delivery ZIP retain their original identities. [Focused browser and independent review](../../evidence/remote-resume-0130/pattern-selection-page09/README.md).
+
+## Focused owner control reconciliation — 2026-11-22 06:07 UTC
+
+The accumulated patch restores the Roll pitch seams, full drum Sound heading names, the existing Song and Patterns action hierarchy, the local P07 label, BREAK All/None selection cues and the R22 Levels cap and rail. The same-state component checks use the current controls and keep the modeless gestures, note and pad geometry, fader input travel, independent Song part controls and Draft readback. The earlier P01 witness and 32 registered captures remain reusable.
+
+Twelve focused host cases, the Workspace application runner and four Chromium witness groups passed. The browser receipt compares exact candidate modules against the retained 133fe8f0 product build. Independent review verified the artifact hashes, action bounds, raw level touch edits and Undo, and Song and BREAK Draft results. [Focused replay, logs and source hashes](../../evidence/remote-resume-0130/remaining-owner-controls-708fdb2/README.md).
+
+The full 2% owner result remains open. Superseded tool rows and inspectors, unknown input states and unavailable Instrument providers limit which references can be compared. The reviewed stock runtime and final combined gate remain with Integration. The existing private delivery ZIP remains byte-verified and undelivered. This checkpoint preserves the ZIP and its delivery scope. Lane remains WORKING.

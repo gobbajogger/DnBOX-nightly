@@ -42,6 +42,11 @@ export const DRUM_VOICES=Object.freeze({
  '909':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CH',42],['OH',46],['CR',49],['RD',51]]),
  '808':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CB',56],['CY',49],['OH',46],['CH',42]])
 });
+
+export function drumVoiceName(kit, voice) {
+ return VOICE_PRESENTATION[DRUM_VOICES[kit][voice][0]][1];
+}
+
 function appendAccentRow(grid, kit, steps, accents) {
  const row = grid.appendChild(new Element('div'));
  row.className = 'seq-row drum-accent-row';

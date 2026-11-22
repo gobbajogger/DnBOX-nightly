@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 125992,
-      "sha256": "25bf137eb767487c85efc62ffe258e3b1149a96c1cbd9e43423c12a935e385c6"
+      "bytes": 126173,
+      "sha256": "da189a1feb47af15628465e15ea9b7d96ce6c5abdf7af66bbac18ef3899593c9"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/break-sequence.mjs",
-      "bytes": 5018,
-      "sha256": "93934ec00c03c1581d4c98e6ca40a9f403cbce604599d79a18dbfbd1b140080a"
+      "bytes": 5376,
+      "sha256": "846ddb2747e1d8f36f41ba4453dda09046671e5b264c0f0db3531297500e9895"
     },
     {
       "path": "remote/catalog.json",
@@ -874,8 +874,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 13321,
-      "sha256": "059e60a0952ba412a5ec00649fbcdcf5decec41ac410423148b58051c9802e41"
+      "bytes": 13428,
+      "sha256": "742dececa6dc23f2c2c017a77747bd48bb837216fc281d4f3d26ec3ff78e5e88"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -1049,8 +1049,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 68406,
-      "sha256": "a22bb2b3f282b40a8bb2ecd952522149eaddc3563d74a1a23e396956e70d61be"
+      "bytes": 77429,
+      "sha256": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1164,8 +1164,8 @@
     },
     {
       "path": "remote/song-view.mjs",
-      "bytes": 2166,
-      "sha256": "f635f81419be7ade91854197ef6a7d4bfb8e144fcecbe5b4c83aed26c3d22ca2"
+      "bytes": 2215,
+      "sha256": "eff80f3db335ef69d9f5028d0000f1c0b25e58382ad0808801f4f7505f29bbb1"
     },
     {
       "path": "remote/master-draft.mjs",

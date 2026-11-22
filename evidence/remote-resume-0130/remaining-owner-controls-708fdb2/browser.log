@@ -1,0 +1,4 @@
+PASS Levels faders preserve input geometry, raw values, keyboard/touch and Undo at 3 sizes
+PASS BREAK preview all/none/partial, unchanged Draft and action bounds
+PASS Roll pitch seams and 909/808 voice titles with unchanged note bounds and pad geometry
+PASS Song and Patterns hierarchy, padded local status, unchanged action boxes and Draft operations at 3 sizes

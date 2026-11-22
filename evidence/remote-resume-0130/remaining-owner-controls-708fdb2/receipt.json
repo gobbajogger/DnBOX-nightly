@@ -1,0 +1,5946 @@
+{
+  "baseline": {
+    "songAndPatterns": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "actions": [
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              957.125,
+              294.375,
+              449.859375,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              799.453125,
+              230.390625,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              139.4375,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              362.640625,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              585.84375,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              809.046875,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              1032.25,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(16, 26, 31)",
+          "color": "rgb(221, 231, 222)",
+          "border": "rgb(41, 61, 67)",
+          "box": [
+            527,
+            209.390625,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P7 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "actions": [
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              594,
+              208.984375,
+              225,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              477,
+              335,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              81.953125,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              212.6875,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              343.421875,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              474.15625,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              604.890625,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(16, 26, 31)",
+          "color": "rgb(221, 231, 222)",
+          "border": "rgb(41, 61, 67)",
+          "box": [
+            519,
+            125.59375,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P7 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "actions": [
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              25,
+              813.375,
+              340,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(16, 26, 31)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(41, 61, 67)",
+            "box": [
+              286,
+              672.390625,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              75.125,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              193.109375,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              311.09375,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              429.078125,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(221, 231, 222)",
+            "border": "rgb(221, 231, 222)",
+            "box": [
+              547.0625,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(16, 26, 31)",
+          "color": "rgb(221, 231, 222)",
+          "border": "rgb(41, 61, 67)",
+          "box": [
+            159,
+            285.390625,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P7 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      }
+    ],
+    "rollAndDrums": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "rollSeams": [
+          {
+            "xy": [
+              83,
+              735
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              83,
+              655
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              83,
+              575
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              83,
+              455
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              83,
+              375
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              83,
+              255
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          }
+        ],
+        "noteBounds": [
+          {
+            "id": "n1",
+            "box": {
+              "x": 77,
+              "y": 497,
+              "width": 123.796875,
+              "height": 32,
+              "top": 497,
+              "right": 200.796875,
+              "bottom": 529,
+              "left": 77
+            }
+          },
+          {
+            "id": "n5",
+            "box": {
+              "x": 412.5,
+              "y": 217,
+              "width": 95.28125,
+              "height": 32,
+              "top": 217,
+              "right": 507.78125,
+              "bottom": 249,
+              "left": 412.5
+            }
+          },
+          {
+            "id": "n6",
+            "box": {
+              "x": 496.359375,
+              "y": 137,
+              "width": 39.921875,
+              "height": 32,
+              "top": 137,
+              "right": 536.28125,
+              "bottom": 169,
+              "left": 496.359375
+            }
+          },
+          {
+            "id": "n9",
+            "box": {
+              "x": 1419,
+              "y": 497,
+              "width": 8,
+              "height": 32,
+              "top": 497,
+              "right": 1427,
+              "bottom": 529,
+              "left": 1419
+            }
+          }
+        ],
+        "drumHeading": {
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 179, 55)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            1050,
+            209.390625,
+            360,
+            14.390625
+          ],
+          "label": "Sound \u00b7 BD"
+        },
+        "drumShapes": [
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          }
+        ],
+        "808Heading": "Sound \u00b7 CB"
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "rollSeams": [
+          {
+            "xy": [
+              75,
+              327
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              75,
+              295
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              75,
+              263
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              75,
+              215
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              75,
+              183
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          },
+          {
+            "xy": [
+              75,
+              135
+            ],
+            "rgb": [
+              10,
+              18,
+              22
+            ]
+          }
+        ],
+        "noteBounds": [
+          {
+            "id": "n1",
+            "box": {
+              "x": 69,
+              "y": 231,
+              "width": 69.421875,
+              "height": 16,
+              "top": 231,
+              "right": 138.421875,
+              "bottom": 247,
+              "left": 69
+            }
+          },
+          {
+            "id": "n5",
+            "box": {
+              "x": 259.5,
+              "y": 119,
+              "width": 53.234375,
+              "height": 16,
+              "top": 119,
+              "right": 312.734375,
+              "bottom": 135,
+              "left": 259.5
+            }
+          },
+          {
+            "id": "n6",
+            "box": {
+              "x": 307.109375,
+              "y": 87,
+              "width": 21.796875,
+              "height": 16,
+              "top": 87,
+              "right": 328.90625,
+              "bottom": 103,
+              "left": 307.109375
+            }
+          },
+          {
+            "id": "n9",
+            "box": {
+              "x": 831,
+              "y": 231,
+              "width": 8,
+              "height": 16,
+              "top": 231,
+              "right": 839,
+              "bottom": 247,
+              "left": 831
+            }
+          }
+        ],
+        "drumHeading": {
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 179, 55)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            581,
+            121.59375,
+            251,
+            14.390625
+          ],
+          "label": "Sound \u00b7 BD"
+        },
+        "drumShapes": [
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          }
+        ],
+        "808Heading": "Sound \u00b7 CB"
+      }
+    ],
+    "breaks": [
+      {
+        "checked": 5,
+        "pressed": [
+          null,
+          null
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 0,
+        "pressed": [
+          null,
+          null
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 1,
+        "pressed": [
+          null,
+          null
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 5,
+        "pressed": [
+          null,
+          null
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      }
+    ]
+  },
+  "candidate": {
+    "songAndPatterns": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "actions": [
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              957.125,
+              294.375,
+              449.859375,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              799.453125,
+              230.390625,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 149, 41)",
+            "border": "rgb(255, 149, 41)",
+            "box": [
+              139.4375,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 72, 65)",
+            "border": "rgb(255, 72, 65)",
+            "box": [
+              362.640625,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(130, 240, 90)",
+            "border": "rgb(130, 240, 90)",
+            "box": [
+              585.84375,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(70, 205, 255)",
+            "border": "rgb(70, 205, 255)",
+            "box": [
+              809.046875,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(214, 120, 255)",
+            "border": "rgb(214, 120, 255)",
+            "box": [
+              1032.25,
+              261.390625,
+              223.203125,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(255, 179, 55)",
+          "color": "rgb(5, 10, 13)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            527,
+            209.390625,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P07 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "actions": [
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              594,
+              208.984375,
+              225,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              477,
+              335,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 149, 41)",
+            "border": "rgb(255, 149, 41)",
+            "box": [
+              81.953125,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 72, 65)",
+            "border": "rgb(255, 72, 65)",
+            "box": [
+              212.6875,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(130, 240, 90)",
+            "border": "rgb(130, 240, 90)",
+            "box": [
+              343.421875,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(70, 205, 255)",
+            "border": "rgb(70, 205, 255)",
+            "box": [
+              474.15625,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(214, 120, 255)",
+            "border": "rgb(214, 120, 255)",
+            "box": [
+              604.890625,
+              177.59375,
+              130.734375,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(255, 179, 55)",
+          "color": "rgb(5, 10, 13)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            519,
+            125.59375,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P07 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "actions": [
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              25,
+              813.375,
+              340,
+              44
+            ],
+            "label": "Song arrangement"
+          },
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              286,
+              672.390625,
+              92,
+              44
+            ],
+            "label": "Review draft"
+          }
+        ],
+        "headers": [
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 149, 41)",
+            "border": "rgb(255, 149, 41)",
+            "box": [
+              75.125,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "909"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(255, 72, 65)",
+            "border": "rgb(255, 72, 65)",
+            "box": [
+              193.109375,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "808"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(130, 240, 90)",
+            "border": "rgb(130, 240, 90)",
+            "box": [
+              311.09375,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "Bass A"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(70, 205, 255)",
+            "border": "rgb(70, 205, 255)",
+            "box": [
+              429.078125,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "Bass B"
+          },
+          {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(214, 120, 255)",
+            "border": "rgb(214, 120, 255)",
+            "box": [
+              547.0625,
+              337.390625,
+              117.984375,
+              24.09375
+            ],
+            "label": "BREAK"
+          }
+        ],
+        "songReview": {
+          "background": "rgb(255, 179, 55)",
+          "color": "rgb(5, 10, 13)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            159,
+            285.390625,
+            92,
+            40
+          ],
+          "label": "Review draft"
+        },
+        "status": "Bass A \u00b7 P07 selected \u00b7 Not loaded",
+        "row": [
+          {
+            "patterns": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "repeats": 1
+          }
+        ]
+      }
+    ],
+    "rollAndDrums": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "rollSeams": [
+          {
+            "xy": [
+              83,
+              735
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              83,
+              655
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              83,
+              575
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              83,
+              455
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              83,
+              375
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              83,
+              255
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          }
+        ],
+        "noteBounds": [
+          {
+            "id": "n1",
+            "box": {
+              "x": 77,
+              "y": 497,
+              "width": 123.796875,
+              "height": 32,
+              "top": 497,
+              "right": 200.796875,
+              "bottom": 529,
+              "left": 77
+            }
+          },
+          {
+            "id": "n5",
+            "box": {
+              "x": 412.5,
+              "y": 217,
+              "width": 95.28125,
+              "height": 32,
+              "top": 217,
+              "right": 507.78125,
+              "bottom": 249,
+              "left": 412.5
+            }
+          },
+          {
+            "id": "n6",
+            "box": {
+              "x": 496.359375,
+              "y": 137,
+              "width": 39.921875,
+              "height": 32,
+              "top": 137,
+              "right": 536.28125,
+              "bottom": 169,
+              "left": 496.359375
+            }
+          },
+          {
+            "id": "n9",
+            "box": {
+              "x": 1419,
+              "y": 497,
+              "width": 8,
+              "height": 32,
+              "top": 497,
+              "right": 1427,
+              "bottom": 529,
+              "left": 1419
+            }
+          }
+        ],
+        "drumHeading": {
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 179, 55)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            1050,
+            209.390625,
+            360,
+            14.390625
+          ],
+          "label": "Sound \u00b7 Bass drum"
+        },
+        "drumShapes": [
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          },
+          {
+            "width": 45.375,
+            "height": 40,
+            "hit": true
+          }
+        ],
+        "808Heading": "Sound \u00b7 Cowbell"
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "rollSeams": [
+          {
+            "xy": [
+              75,
+              327
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              75,
+              295
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              75,
+              263
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              75,
+              215
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              75,
+              183
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          },
+          {
+            "xy": [
+              75,
+              135
+            ],
+            "rgb": [
+              25,
+              38,
+              43
+            ]
+          }
+        ],
+        "noteBounds": [
+          {
+            "id": "n1",
+            "box": {
+              "x": 69,
+              "y": 231,
+              "width": 69.421875,
+              "height": 16,
+              "top": 231,
+              "right": 138.421875,
+              "bottom": 247,
+              "left": 69
+            }
+          },
+          {
+            "id": "n5",
+            "box": {
+              "x": 259.5,
+              "y": 119,
+              "width": 53.234375,
+              "height": 16,
+              "top": 119,
+              "right": 312.734375,
+              "bottom": 135,
+              "left": 259.5
+            }
+          },
+          {
+            "id": "n6",
+            "box": {
+              "x": 307.109375,
+              "y": 87,
+              "width": 21.796875,
+              "height": 16,
+              "top": 87,
+              "right": 328.90625,
+              "bottom": 103,
+              "left": 307.109375
+            }
+          },
+          {
+            "id": "n9",
+            "box": {
+              "x": 831,
+              "y": 231,
+              "width": 8,
+              "height": 16,
+              "top": 231,
+              "right": 839,
+              "bottom": 247,
+              "left": 831
+            }
+          }
+        ],
+        "drumHeading": {
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 179, 55)",
+          "border": "rgb(255, 179, 55)",
+          "box": [
+            581,
+            121.59375,
+            251,
+            14.390625
+          ],
+          "label": "Sound \u00b7 Bass drum"
+        },
+        "drumShapes": [
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": true
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          },
+          {
+            "width": 26.1875,
+            "height": 24,
+            "hit": false
+          }
+        ],
+        "808Heading": "Sound \u00b7 Cowbell"
+      }
+    ],
+    "breaks": [
+      {
+        "checked": 5,
+        "pressed": [
+          "true",
+          "false"
+        ],
+        "buttons": [
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 0,
+        "pressed": [
+          "false",
+          "true"
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 1,
+        "pressed": [
+          "false",
+          "false"
+        ],
+        "buttons": [
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "checked": 5,
+        "pressed": [
+          "true",
+          "false"
+        ],
+        "buttons": [
+          {
+            "background": "rgb(255, 179, 55)",
+            "color": "rgb(5, 10, 13)",
+            "border": "rgb(255, 179, 55)",
+            "box": [
+              144,
+              501.1875,
+              44,
+              44
+            ],
+            "label": "All"
+          },
+          {
+            "background": "rgb(22, 36, 43)",
+            "color": "rgb(231, 238, 229)",
+            "border": "rgb(65, 80, 82)",
+            "box": [
+              196,
+              501.1875,
+              52,
+              44
+            ],
+            "label": "None"
+          }
+        ]
+      }
+    ]
+  },
+  "levels": {
+    "1440x900": {
+      "before": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            1440,
+            900
+          ],
+          "document": [
+            1440,
+            900
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              90.5625,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              247.6875,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              404.8125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              561.953125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              719.078125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "line": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "accent": {
+            "pixels": 600,
+            "bounds": [
+              9,
+              57,
+              22,
+              147
+            ]
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 100,
+        "touchUndo": "PASS",
+        "cssSHA256": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043"
+      },
+      "after": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            1440,
+            900
+          ],
+          "document": [
+            1440,
+            900
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              90.5625,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              247.6875,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              404.8125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              561.953125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              719.078125,
+              350.796875,
+              30,
+              150
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 420,
+            "bounds": [
+              2,
+              56,
+              29,
+              71
+            ]
+          },
+          "line": {
+            "pixels": 696,
+            "bounds": [
+              13,
+              10,
+              18,
+              141
+            ]
+          },
+          "accent": {
+            "pixels": 0,
+            "bounds": null
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 100,
+        "touchUndo": "PASS",
+        "cssSHA256": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
+      }
+    },
+    "844x390": {
+      "before": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            844,
+            390
+          ],
+          "document": [
+            844,
+            390
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              57.59375,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              164.8125,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              272.015625,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              379.234375,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              486.453125,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "line": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "accent": {
+            "pixels": 372,
+            "bounds": [
+              9,
+              31,
+              22,
+              83
+            ]
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 104,
+        "touchUndo": "PASS",
+        "cssSHA256": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043"
+      },
+      "after": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            844,
+            390
+          ],
+          "document": [
+            844,
+            390
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              57.59375,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              164.8125,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              272.015625,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              379.234375,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              486.453125,
+              279.796875,
+              30,
+              86
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 372,
+            "bounds": [
+              3,
+              30,
+              27,
+              45
+            ]
+          },
+          "line": {
+            "pixels": 208,
+            "bounds": [
+              14,
+              10,
+              17,
+              77
+            ]
+          },
+          "accent": {
+            "pixels": 0,
+            "bounds": null
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 104,
+        "touchUndo": "PASS",
+        "cssSHA256": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
+      }
+    },
+    "390x844": {
+      "before": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            390,
+            844
+          ],
+          "document": [
+            390,
+            844
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              39.1875,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              109.59375,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              179.984375,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              250.390625,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              320.796875,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "auto"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "line": {
+            "pixels": 0,
+            "bounds": null
+          },
+          "accent": {
+            "pixels": 708,
+            "bounds": [
+              8,
+              69,
+              21,
+              177
+            ]
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 99,
+        "touchUndo": "PASS",
+        "cssSHA256": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043"
+      },
+      "after": {
+        "state": {
+          "part": "chicago",
+          "pattern": "P01",
+          "tempo": "120 BPM",
+          "status": "Not connected",
+          "viewport": [
+            390,
+            844
+          ],
+          "document": [
+            390,
+            844
+          ]
+        },
+        "controls": [
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:0:0",
+            "raw": 75,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "909",
+            "valueText": "-5dB",
+            "box": [
+              39.1875,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:1:0",
+            "raw": 112,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "808",
+            "valueText": "+2dB",
+            "box": [
+              109.59375,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:2:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS A",
+            "valueText": "0dB",
+            "box": [
+              179.984375,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:3:0",
+            "raw": 100,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BASS B",
+            "valueText": "0dB",
+            "box": [
+              250.390625,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          },
+          {
+            "id": "current-state-and-reference/mix-parts-live.svg|1:5:4:0",
+            "raw": 120,
+            "min": 0,
+            "max": 127,
+            "step": 1,
+            "label": "BREAK",
+            "valueText": "+3.2dB",
+            "box": [
+              320.796875,
+              378.796875,
+              30,
+              180
+            ],
+            "hit": true,
+            "writingMode": "vertical-lr",
+            "direction": "rtl",
+            "appearance": "none"
+          }
+        ],
+        "pixels": {
+          "muted": {
+            "pixels": 292,
+            "bounds": [
+              5,
+              68,
+              24,
+              83
+            ]
+          },
+          "line": {
+            "pixels": 584,
+            "bounds": [
+              13,
+              10,
+              16,
+              171
+            ]
+          },
+          "accent": {
+            "pixels": 0,
+            "bounds": null
+          }
+        },
+        "keyboardUndo": "PASS",
+        "touchReadback": 99,
+        "touchUndo": "PASS",
+        "cssSHA256": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021"
+      }
+    }
+  },
+  "chromium": "151.0.7922.34",
+  "normalSandbox": true,
+  "result": "PASS",
+  "served": {
+    "baseline": {
+      "app.mjs": "934d907c5e4360c54a6a83ead0d3f4adae83e207207ad473e02407bb4296b81f",
+      "style.css": "6d73a80a164405a4111dbadf1ecf1d739fa204fe6fe1790d68305a85e7378043",
+      "song-view.mjs": "e409b54eaa1dc94d3daca05b9ff07ef29722d2d7aa69ce5524d02a5a60215200",
+      "funkybeats-view.mjs": "059e60a0952ba412a5ec00649fbcdcf5decec41ac410423148b58051c9802e41",
+      "break-sequence.mjs": "93934ec00c03c1581d4c98e6ca40a9f403cbce604599d79a18dbfbd1b140080a"
+    },
+    "candidate": {
+      "app.mjs": "da189a1feb47af15628465e15ea9b7d96ce6c5abdf7af66bbac18ef3899593c9",
+      "style.css": "6fd3684cfe0aee8d109e9540cdf64d1b5a9eb156a3af42f2e8a82939cb0c7021",
+      "song-view.mjs": "eff80f3db335ef69d9f5028d0000f1c0b25e58382ad0808801f4f7505f29bbb1",
+      "funkybeats-view.mjs": "742dececa6dc23f2c2c017a77747bd48bb837216fc281d4f3d26ec3ff78e5e88",
+      "break-sequence.mjs": "846ddb2747e1d8f36f41ba4453dda09046671e5b264c0f0db3531297500e9895"
+    }
+  }
+}

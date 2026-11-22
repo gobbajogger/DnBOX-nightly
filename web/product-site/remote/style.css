@@ -539,6 +539,25 @@ dialog::backdrop{background:#000a}
 @media(max-height:500px) and (orientation:landscape){.mix-parts-panel .mixer-fader-container{height:86px}.mix-master-panel .encoder{min-height:76px!important}.mix-workspace{gap:8px}}
 #other-view .mix-modes button,#other-view .mix-parts-panel .mixer-channel-name{min-height:44px}
 .mix-parts-panel .mixer-fader{height:100%;min-height:0!important}
+/* The native Level range keeps its full touch target under the R22 rail and cap. */
+#other-view [data-mix-view="levels"] .mixer-fader {
+ --mix-cap-width:clamp(20px,3vw,28px);
+ appearance:none;
+ border-color:transparent;
+ background:linear-gradient(var(--line),var(--line)) center / clamp(4px,.45vw,6px) calc(100% - 16px) no-repeat;
+}
+#other-view [data-mix-view="levels"] .mixer-fader::-webkit-slider-runnable-track {
+ width:100%;height:100%;background:transparent;
+}
+#other-view [data-mix-view="levels"] .mixer-fader::-webkit-slider-thumb {
+ appearance:none;width:var(--mix-cap-width);height:16px;margin-left:calc((28px - var(--mix-cap-width)) / 2);border:0;border-radius:var(--r-note);background:var(--muted);
+}
+#other-view [data-mix-view="levels"] .mixer-fader::-moz-range-track,
+#other-view [data-mix-view="levels"] .mixer-fader::-moz-range-progress {background:transparent}
+#other-view [data-mix-view="levels"] .mixer-fader::-moz-range-thumb {
+ width:var(--mix-cap-width);height:16px;border:0;border-radius:var(--r-note);background:var(--muted);
+}
+
 .mix-parts-panel .funkybeats-mixer{max-width:none;margin:0}
 #other-view .mix-send-strip input{min-height:44px}
 #other-view .mix-workspace h3{margin:0 0 6px;font-size:14px;letter-spacing:0;color:var(--fg)}
@@ -555,6 +574,14 @@ dialog::backdrop{background:#000a}
 .song-scroll{max-width:100%;overflow:auto}
 .song-table{width:100%;min-width:740px;border-collapse:collapse;text-align:left}
 .song-table th,.song-table td{padding:4px;border-bottom:1px solid var(--line)}
+.song-table [data-song-part-heading="0"]{color:#ff9529}
+.song-table [data-song-part-heading="1"]{color:#ff4841}
+.song-table [data-song-part-heading="2"]{color:var(--bass-a)}
+.song-table [data-song-part-heading="3"]{color:#46cdff}
+.song-table [data-song-part-heading="4"]{color:#d678ff}
+#other-view :is(#song-review,#pattern-review,[data-pattern-action="song"]){
+ background:var(--accent);border-color:var(--accent);color:var(--accent-ink)
+}
 .song-part-cell{display:flex;align-items:center;gap:4px}
 #other-view .song-part-cell select{width:100%;min-width:58px;padding:0 3px}
 #other-view .song-part-cell [role=switch]{flex:none;width:44px;min-height:44px;padding:0}
@@ -724,6 +751,9 @@ dialog::backdrop{background:#000a}
 #break-sequence .break-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;min-height:112px;padding:8px;border:1px solid var(--line);border-radius:var(--r-panel)}
 #break-sequence .break-rows label{grid-column:1/-1;min-width:0;min-height:44px;gap:8px}
 #break-sequence .break-picker button{min-height:44px;min-width:44px;padding:8px 12px;background:var(--control);border-color:var(--line-strong);border-radius:var(--r-control)}
+#break-sequence .break-actions button[aria-pressed=true]{
+ background:var(--accent);border-color:var(--accent);color:var(--accent-ink)
+}
 #break-sequence .break-picker p{margin:4px 0}
 @media(max-width:600px) and (orientation:portrait){
  #other-view:has(>.drum-layout){display:block;overflow:auto}
