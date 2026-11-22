@@ -1,0 +1,9 @@
+# Desktop Patterns selection on owner page 9
+
+Page 9 and the corrected retained browser fixture both show Bass A P01 selected. The owner drawing fills the pad amber. Desktop Remote used the idle panel fill with an amber outline, while short landscape already used the filled selection. The desktop Patterns layout now uses that same fill and dark label for the selected part. The existing compact selector and declarations are preserved.
+
+The focused 1440×900 browser run replayed the retained corrected fixture pixel for pixel. It reused the 133fe8 build, verified the 114 retained Remote file hashes and served only the candidate CSS in the second run. Both runs selected P01 by touch, moved selection to P02 by keyboard, returned to P01 by touch and read the saved launch array `[null,null,0,null,null]`. Each of the 32 pads retained its exact box and center hit. P01 stayed 89.96875×81 px. The page produced zero errors, MIDI calls or outer overflow. The prior four-size browser receipt still applies to its recorded source, and the new run is confined to this desktop selection.
+
+All 6,972 changed pixels are in the selected pad. In the common interior crop used to isolate the fill, the existing pixel-difference metric moves from 100% to 0%. The full-page diagnostic moves from 6.885340% to 6.388272%. The crop does not qualify page parity. The full page still has unavailable instrument actions and a different panel arrangement, so it remains ineligible for the 2% acceptance criterion. The thresholds and reference raster are unchanged.
+
+An independent read-only review verified the retained image, hash identities, changed-pixel bounds, unchanged hit targets and the compact rule's preserved media condition. See [the exact receipt](receipt.json) and [the one-state runner](witness.py). The existing final delivery ZIP remains byte-identical at SHA256 `dcca113dc21fccfbd503455cf3e4087033f5c6654b8a18fb4e612dc05f35a21c`.

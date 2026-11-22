@@ -1,0 +1,21 @@
+{
+  "exactChangedPixels": 6972,
+  "changedPixelsOutsideSelectedPad": 0,
+  "fullPageDiagnosticPercent": [
+    6.88534,
+    6.388272
+  ],
+  "selectedPadInterior": {
+    "crop": [
+      60,
+      305,
+      135,
+      323
+    ],
+    "diagnosticPercent": [
+      100.0,
+      0.0
+    ]
+  },
+  "ownerAcceptance": "INELIGIBLE_FULL_PAGE_PROVIDER_AND_LAYOUT_DIFFERENCES"
+}
