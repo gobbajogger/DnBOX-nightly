@@ -9,6 +9,7 @@ class Node {
  setPointerCapture(p){this.captured.add(p)} hasPointerCapture(p){return this.captured.has(p)} releasePointerCapture(p){this.captured.delete(p)}
  getBoundingClientRect(){return{left:0,top:0,width:100,height:100}}
  closest(s){if(s==='button')return this;const m=s.match(/^\[data-(note|select|param|edge)\]$/);return m&&this.dataset[m[1]]!==undefined?this:null}
+ querySelectorAll(s){return s==='[data-glyph-sound-id]'?(this.glyphs??[]):[]}
  querySelector(s){if(s==='span')return(this.span??=new Node());const m=s.match(/^\[data-(note|select)="([^"]+)"\]$/);if(m){const n=new Node();n.dataset[m[1]]=m[2];return n}return null}
  focus(){document.activeElement=this} showModal(){this.open=true} close(){this.open=false;this.onclose?.()}
 }
@@ -158,4 +159,77 @@ await check('Chicago Draft renders named selector positions for both bass owners
   }
  }
 });
-if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 9; FAILURES '+failed+'; source-event stub, NOT DOM/touch');
+await check('BREAK A/B slice counts keep native names at every raw position through Undo, reopen and Draft export',async x=>{
+ x.changePart('breaks','BREAK');x.view('sound');
+ const group=soundData.contexts.find(g=>g.bank==='BREAK');
+ let downloaded;
+ const originalCreate=URL.createObjectURL,originalRevoke=URL.revokeObjectURL,originalElement=document.createElement,originalTimeout=globalThis.setTimeout;
+ URL.createObjectURL=blob=>{downloaded=blob;return 'blob:break-slice-source-event';};
+ URL.revokeObjectURL=()=>{};document.createElement=()=>({click(){}});globalThis.setTimeout=()=>0;
+ try{
+  for(const name of ['A SLICES','B SLICES']){
+   const control=group.controls.find(c=>c.name===name),id=idOf(group,control);
+   let previous=1;
+   for(const [raw,expected] of ['4','8','16','32'].entries()){
+    row(x,id);assert.equal(Number(x.get('parameter-value').value),previous);
+    entered(x,raw);
+    assert.equal(x.get('parameter-readout').textContent,expected,name+' raw '+raw);
+    x.view('roll');x.view('sound');assert.equal(soundOutput(x,id),expected);
+    row(x,id);assert.equal(Number(x.get('parameter-value').value),raw);
+    x.press('draft-save');assert.ok(downloaded);
+    const dto=JSON.parse(await downloaded.text()),entry=dto.parameters.find(p=>p.id===id);
+    assert.deepEqual(entry,{id,value:raw},'Draft keeps raw selector, not displayed slice count');
+    x.press('undo');assert.equal(soundOutput(x,id),String(4*2**previous));
+    row(x,id);assert.equal(Number(x.get('parameter-value').value),previous);
+    x.press('redo');assert.equal(soundOutput(x,id),expected);
+    const text=JSON.stringify(dto);
+    await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});
+    assert.equal(x.get('draft-replace').disabled,false);x.press('draft-replace');
+    assert.equal(soundOutput(x,id),expected);
+    row(x,id);assert.equal(Number(x.get('parameter-value').value),raw);
+    assert.equal(x.get('undo').disabled,true,'Opening a Draft starts a fresh history');
+    previous=raw;
+   }
+  }
+  const html=x.get('other-view').innerHTML;
+  for(const name of ['A SLICES','B SLICES']){
+   const control=group.controls.find(c=>c.name===name),id=idOf(group,control);
+   assert.ok(html.includes('data-param="'+id+'"'));
+  }
+  assert.equal((html.match(/data-glyph-fn="BREAK SLICES"/g)||[]).length,2);
+ }finally{
+  URL.createObjectURL=originalCreate;URL.revokeObjectURL=originalRevoke;document.createElement=originalElement;globalThis.setTimeout=originalTimeout;
+ }
+});
+await check('Miami original units survive edits, reopening and Undo for both owners',async x=>{
+ for(const slot of [0,1]){
+  x.changePart(slot?'miami':'chicago',slot?'Bass B':'Bass A');x.view('sound');chooseBank(x,'MIAMI');
+  const group=soundData.contexts.find(g=>g.bank==='MIAMI'&&g.bassSlot===slot);
+  for(const [parameter,raw,expected]of [[3,127,'+12 st'],[7,127,'+50.0 %'],[13,127,'1/24']]){
+   const control=group.controls.find(c=>c.kind===1&&c.parameter===parameter),id=idOf(group,control);
+   const before=soundOutput(x,id);row(x,id);entered(x,raw);
+   assert.equal(x.get('parameter-readout').textContent,expected);
+   x.view('roll');x.view('sound');assert.equal(soundOutput(x,id),expected);
+   row(x,id);assert.equal(Number(x.get('parameter-value').value),raw);
+   x.press('undo');assert.equal(soundOutput(x,id),before);
+   row(x,id);assert.equal(Number(x.get('parameter-value').value),control.raw);
+  }
+ }
+});
+await check('Chicago Peak redraw binds only its own current Cutoff through edit, reopen and Undo',async x=>{
+ for(const slot of [0,1]){
+  x.changePart(slot?'miami':'chicago',slot?'Bass B':'Bass A');x.view('sound');chooseBank(x,'CHICAGO');
+  const group=soundData.contexts.find(g=>g.bank==='CHICAGO'&&g.bassSlot===slot);
+  const cutoff=group.controls.find(c=>c.kind===1&&c.parameter===2),peak=group.controls.find(c=>c.kind===1&&c.parameter===3);
+  const id=idOf(group,cutoff),peakId=idOf(group,peak),pane=x.get('other-view');
+  const glyph=Object.assign(new Node(),{dataset:{glyphSoundId:peakId,glyphSoundPots:String(cutoff.raw)}});
+  pane.glyphs=[glyph];row(x,id);entered(x,80);
+  assert.equal(glyph.dataset.glyphSoundPots,'80');
+  x.view('roll');x.view('sound');
+  assert.ok(pane.innerHTML.includes('data-glyph-sound-id="'+peakId+'" data-glyph-sound-pots="80"'));
+  x.press('undo');
+  assert.ok(pane.innerHTML.includes('data-glyph-sound-id="'+peakId+'" data-glyph-sound-pots="'+cutoff.raw+'"'));
+  row(x,id);assert.equal(Number(x.get('parameter-value').value),cutoff.raw);
+ }
+});
+if(failed)process.exitCode=1;console.log('SOURCE_SOUND_APP_CASES 12; FAILURES '+failed+'; source-event stub, NOT DOM/touch');

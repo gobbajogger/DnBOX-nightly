@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {breakSliceGlyph} from './break-slice-glyph.mjs';
 // Live R22 readouts. One renderer per function. The shape is the current value
 // through that engine's transfer curve. Idle and zero-depth stay on one frame.
 // WAVE and WIDTH: Lead's ANIM-SPEC readout (102x26, peak-normalised, pad 2).
@@ -18,6 +19,7 @@
 // Animation is re-render after interpolating the parameter. No decorative motion.
 
 import {miamiWave} from './wave-display.mjs';
+import {originalSoundGlyphPaths} from './source-sound-glyphs.mjs';
 
 const MERGED={
  G023:'WAVE',G024:'WAVE',G025:'WAVE',G026:'WIDTH',G029:'WIDTH',
@@ -44,15 +46,16 @@ export const ID_FAMILY=Object.freeze(Object.fromEntries([
  ['G077','LFO'],['G078','GATE'],['G079','GATE'],['G080','GLIDE'],['G081','LFO'],['G082','LFO']
 ]));
 const FX_GLYPHS=Object.freeze({
- '1:4:0:2':'MASTER DRIVE','1:4:0:4':'REVERB DECAY','1:4:0:7':'G059','1:4:0:8':'G052',
- '1:4:0:9':'G053','1:4:0:11':'G056','1:6:0:6':'MASTER PUMP'
+ '1:4:0:2':'MASTER DRIVE','1:4:0:4':'REVERB DECAY','1:4:0:5':'FX TONE','1:4:0:6':'FX TONE',
+ '1:4:0:7':'G059','1:4:0:8':'G052','1:4:0:9':'G053','1:4:0:10':'FX TONE','1:4:0:11':'G056',
+ '1:6:0:6':'MASTER PUMP'
 });
 export function fxGlyphId(identity){return FX_GLYPHS[identity];}
 
 const NAMES={
  WAVE:'WAVE',WIDTH:'WIDTH',PWM:'WIDTH',PULSE:'WIDTH',ENV:'ENV',ADSR:'ADSR',LFO:'LFO',
  FILTER:'FILTER',MASTERFILTER:'FILTER',CUTOFF:'FILTER',RES:'FILTER',TUNE:'TUNE',PITCH:'TUNE',
- DECAY:'DECAY',REVERBDECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',
+ DECAY:'DECAY',REVERBDECAY:'DECAY',ATTACK:'ATTACK',TAPE:'TAPE',WEAR:'TAPE',TONE:'TONE',FXTONE:'TONE',REVLOWCUT:'TONE',LEVEL:'LEVEL',MASTERMOREAMOUNT:'LEVEL',
  GLIDE:'GLIDE',PAN:'PAN',HPF:'HPF',LOWCUT:'HPF',PEAK:'FILTER',BALANCE:'PAN',
  BITE:'DRIVE',GNAW:'DRIVE',CRUSH:'DRIVE',DRIVE:'DRIVE',MASTERDRIVE:'DRIVE',DIST:'DRIVE',SNAPPY:'DECAY',PDEPTH:'TUNE',
  CHORUS:'LFO',CARRIER:'LFO',XMOD:'LFO',WOBBLE:'LFO',FM:'LFO',MORPH:'LFO',AUTOPAN:'LFO',PHASER:'LFO',MOTION:'LFO',
@@ -457,8 +460,40 @@ function masterCompPath({threshold,ratio,blend}){
  }
  return path(points);
 }
+// f178 draw_list uses a neutral rounded 70×3 track for unnamed More values.
+function masterMoreAmount(raw){
+ const track={x:2,y:11,w:36,h:3,ink:'guide',radius:1};
+ const rects=[track];
+ if(raw)rects.push({...track,w:track.w*(3+Math.floor(raw*67/127))/70,ink:'primary'});
+ return {d:'',rects};
+}
+// f178 control_glyph uses this same path for both FX Tones and Reverb Low Cut.
+function fxTonePaths(raw){
+ const pivot=9+Math.floor(raw*20/127);
+ return {d:path([[2,4],[pivot,4],[38,18]]),guide:path([[2,19],[38,19]])};
+}
+
+// The native list shows just the named value. Remote cards use the stock
+// named-selector primitive from draw_knobs in the shared 40×24 glyph cell.
+const moreChoiceCounts=new Map([2,3,8,10].map(n=>['MASTER MORE CHOICE '+n,n]));
+function masterMoreChoice(count,value){
+ const selected=Math.round(value*(count-1));
+ const width=count>6?3:6,gap=2,span=count*(width+gap)-gap;
+ const left=20-Math.floor(span/2),scale=Math.min(1,36/span);
+ const radius=Math.min(2,Math.floor(width/2))*scale;
+ const rects=Array.from({length:count},(_,i)=>({
+  x:20+(left+(width+gap)*i-20)*scale,y:5,w:width*scale,h:9,
+  ink:i===selected?'primary':'guide',radius
+ }));
+ return {d:'',rects};
+}
+
 function mixAmountPaths(fnId,value,{masterComp}){
  const raw=Math.round(value*127);
+ if(fnId==='MASTER MORE AMOUNT')return masterMoreAmount(raw);
+ const choices=moreChoiceCounts.get(fnId);
+ if(choices)return masterMoreChoice(choices,value);
+ if(fnId==='FX TONE')return fxTonePaths(raw);
  if(fnId==='MASTER DRIVE')return {d:masterDrivePath(raw)};
  if(fnId==='REVERB DECAY')return {d:reverbDecayPath(raw),guide:fxBaseline};
  if(fnId==='MASTER PUMP')return {d:masterPumpPath(raw),guide:fxBaseline};
@@ -481,6 +516,10 @@ export function render(fnId, value, engineId='chicago', state={}){
  // State scalars (attack/cutoff/feedback etc.) are already normalized.
  value=unit(value,state.valueDomain??'normalized');
  const fn=fnOf(fnId);
+ if(typeof fnId==='string'&&fnId.startsWith('SOURCE ')&&(engineId==='chicago'||engineId==='miami')&&fnId.startsWith('SOURCE '+engineId.toUpperCase()+' ')){
+  const shape=originalSoundGlyphPaths(fnId,Math.round(value*(fnId==='SOURCE CHICAGO 17'?11:127)),state.sourceSoundPots);
+  if(shape)return {fn:fnId,engine:engineId,...shape,live:false,cell:null};
+ }
  if(engineId==='miami' && (fn==='WAVE'||fnId==='SHAPE')){
   const parameter=state.miamiParameter ?? (fnId==='SHAPE'?11:0);
   const wave=miamiWave(parameter,Math.round(value*127));
@@ -489,6 +528,8 @@ export function render(fnId, value, engineId='chicago', state={}){
  }
  if(fnId==='BREAK PITCH'&&engineId==='break')
   return {fn:'BREAK PITCH',engine:engineId,...breakPitchPaths(value),live:false,cell:null};
+ if(fnId==='BREAK SLICES'&&engineId==='break')
+  return {fn:'BREAK SLICES',engine:engineId,...breakSliceGlyph(Math.round(value*3)),live:false,cell:null};
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
  const depth=state.depth;
@@ -507,7 +548,8 @@ export function renderSvg(fnId, value, engineId, state={}){
  if(drawn.zero!==undefined)return `<svg class="glyph readout" data-fn="WAVE" viewBox="0 0 29 19" width="40" height="24" aria-hidden="true"><path d="M0.5 ${drawn.zero} H28.5" fill="none" stroke="currentColor" opacity=".1875"/><path d="${drawn.d}" fill="none" stroke="currentColor"/></svg>`;
  if(drawn.cell) return `<svg class="glyph readout readout-wave" data-fn="${drawn.fn}" viewBox="0 0 102 26" width="102" height="26" aria-hidden="true"><rect width="102" height="26" fill="#101a1f"/><path d="${drawn.d}" fill="none" stroke="#dde7de" stroke-width="1"/></svg>`;
  const guide=drawn.guide?`<path d="${drawn.guide}" fill="none" stroke="currentColor" opacity=".19"/>`:'';
- return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">${guide}<path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"${drawn.muted?' opacity=".4"':''}/></svg>`;
+ const rects=(drawn.rects??[]).map(rect=>`<rect x="${rect.x}" y="${rect.y}" width="${rect.w}" height="${rect.h}" rx="${rect.radius}" fill="currentColor"${rect.ink==='guide'?' opacity=".19"':drawn.muted?' opacity=".4"':''}/>`).join('');
+ return `<svg class="glyph readout" data-fn="${drawn.fn}" viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">${guide}${rects}<path d="${drawn.d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"${drawn.muted?' opacity=".4"':''}/></svg>`;
 }
 // Proven WAVE and WIDTH re-render the nine MIDI steps. Other families still
 // interpolate until their proofs arrive. Idle and zero depth stay on one frame.

@@ -1,0 +1,7 @@
+# Workspace replacement and durable evidence
+
+The selected environment disconnected and returned an older filesystem snapshot during the final Sound audit. The published3c5a9142source, code and committedCproofs remain intact. Exact nightly3c5and firmwaref178were restored from Git; the27immutablePages runtime files and normal Playwright1.62 Chromium151.0.7922.34 were recovered by digest. NoSDK, stock firmware or unchanged application image was rebuilt.
+
+The previously verified49changedC5frames and provisional full visual archives were only on the prior local filesystem. Those bytes are currently unreachable. Their exact targeted-archive receipt is retained without claiming an upload or accessible deliverable. The original five earlier successful Project Sources uploads remain the durable donor location. Library search currently returnsUnknown tool and the replacement browser has a ChatGPT sign-in wall. Recovery of those files awaits that account session. The earlier normal upload's project-capacity rejection is separate; it was not bypassed or retried.
+
+The original ownerPDF is committed and recoverable. One new32-view candidate set and full26owner-state pairs can be rendered from the new source because the old raw files are missing. This is not a second Web/FWUI suite or a regeneration of unapproved historical proposal images. Any absent proposal comparison stays NOT_RECOVERED/NOBASE; no baseline approval is created. All proof is software-only.

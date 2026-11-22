@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 117930,
-      "sha256": "786a9733da780044fad02156db81dfb5aeec20f40f51490793c736356300b36c"
+      "bytes": 125992,
+      "sha256": "25bf137eb767487c85efc62ffe258e3b1149a96c1cbd9e43423c12a935e385c6"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -874,13 +874,13 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 11583,
-      "sha256": "246d96ed404e977c1d540c15ac8e9077df93e331d7c6180096a6e7114914b030"
+      "bytes": 13321,
+      "sha256": "059e60a0952ba412a5ec00649fbcdcf5decec41ac410423148b58051c9802e41"
     },
     {
       "path": "remote/glyph-live.mjs",
-      "bytes": 5507,
-      "sha256": "7eea540c787c503227f2b219b7181e1451dcb60c356b493d912f822cef2eb363"
+      "bytes": 8250,
+      "sha256": "1d185ab47857dba725e709c8bacc3733dd63c7695614c4e299ab88fc9253edef"
     },
     {
       "path": "remote/glyph-registry.mjs",
@@ -889,8 +889,8 @@
     },
     {
       "path": "remote/glyph-render.mjs",
-      "bytes": 21298,
-      "sha256": "084625abb6623ea3d86a3d4d87505f9760b730b9880778891415233432532a39"
+      "bytes": 28080,
+      "sha256": "1a98b004b541391f341ac9eb5b6560a1c5d035ecad9acfb6ab388f6e2d4e2713"
     },
     {
       "path": "remote/glyphs.mjs",
@@ -1026,6 +1026,11 @@
       "path": "remote/sound.mjs",
       "bytes": 4691,
       "sha256": "b11ea2ba646a0e382ef64e77d6047f70ce081b145c823a973705dc9ef217c8d4"
+    },
+    {
+      "path": "remote/source-sound-glyphs.mjs",
+      "bytes": 68105,
+      "sha256": "6cb22e08490b4a1cfaae03a14408f1aced143630fba3778be59ee947aa557770"
     },
     {
       "path": "remote/source-sounds.json",
@@ -1341,6 +1346,11 @@
       "path": "remote/drum-clap-stages.mjs",
       "bytes": 4089,
       "sha256": "4f519557da2dbe424320cc9f681b88d5c9fa6e8868df1fd767c547bacb7e1b61"
+    },
+    {
+      "path": "remote/break-slice-glyph.mjs",
+      "bytes": 928,
+      "sha256": "6b03df23dca5bba65fd615ff5597f09af6dac258d1ae72d12eb89dfc4a735686"
     }
   ],
   "notClaimed": [

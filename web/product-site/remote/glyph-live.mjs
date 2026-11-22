@@ -30,6 +30,25 @@ export function polylines(d){
  }
  return out;
 }
+// Area coverage at the current canvas resolution. Round corners use the
+// same radius as SVG; rows at fractional edges stay antialiased.
+function paintRect(data,w,h,rect,left,top,sx,sy,ink){
+ const x=left+rect.x*sx,y=top+rect.y*sy,right=x+rect.w*sx,bottom=y+rect.h*sy;
+ const rx=rect.radius*sx,ry=rect.radius*sy;
+ for(let py=Math.max(0,Math.floor(y));py<Math.min(h,Math.ceil(bottom));py++){
+  for(let px=Math.max(0,Math.floor(x));px<Math.min(w,Math.ceil(right));px++){
+   let coverage=Math.min(px+1,right)-Math.max(px,x);
+   coverage*=Math.min(py+1,bottom)-Math.max(py,y);
+   if(rx>0&&ry>0){
+    const nx=Math.max(x+rx-(px+.5),px+.5-(right-rx),0)/rx;
+    const ny=Math.max(y+ry-(py+.5),py+.5-(bottom-ry),0)/ry;
+    if(nx>0&&ny>0)coverage*=Math.max(0,Math.min(1,.5+(1-Math.hypot(nx,ny))*Math.min(rx,ry)));
+   }
+   const at=(py*w+px)*4;
+   for(let channel=0;channel<3;channel++)data[at+channel]=Math.round(data[at+channel]+(ink[channel]-data[at+channel])*coverage);
+  }
+ }
+}
 // Paint one glyph into RGBA pixels (w x h device px). value01 is 0..1.
 export function paintPixels(data,w,h,fn,value01,engine,state={}){
  for(let i=0;i<data.length;i+=4){data[i]=FACE[0];data[i+1]=FACE[1];data[i+2]=FACE[2];data[i+3]=255;}
@@ -48,6 +67,7 @@ export function paintPixels(data,w,h,fn,value01,engine,state={}){
  const paint=(d,ink)=>{for(const line of polylines(d))strokePoly(data,w,h,line.map(([x,y])=>[left+x*sx,top+y*sy]),ink);};
  const dim=amount=>FACE.map((c,i)=>Math.round(c+(INK[i]-c)*amount));
  if(r.guide)paint(r.guide,dim(3/16));
+ for(const rect of r.rects??[])paintRect(data,w,h,rect,left,top,sx,sy,rect.ink==='guide'?dim(3/16):r.muted?dim(.4):INK);
  paint(r.d,r.muted?dim(.4):INK);
  return r.fn;
 }
@@ -88,6 +108,7 @@ export function mountLiveGlyphs(root){
     const [threshold,ratio,blend]=el.dataset.glyphMasterComp.split(':').map(Number);
     state.masterComp={threshold,ratio,blend};
    }
+   if(el.dataset.glyphSoundPots!==undefined)state.sourceSoundPots=el.dataset.glyphSoundPots.split(':').map(value=>value==='?'?null:Number(value));
    drawGlyph(c,fn,v,engine,state);
   }});live.set(el,a);el.glyphAnimator=a;n++;
  }
@@ -107,4 +128,13 @@ export function setMasterFilterGlyph(el,{mode,cutoff,resonance}){
 }
 export function setMasterCompGlyph(el,{threshold,ratio,blend}){
  setMasterGlyphState(el,'glyphMasterComp',[threshold,ratio,blend]);
+}
+
+export const encodeSourceSoundPots=values=>values.map(value=>Number.isInteger(value)?String(value):'?').join(':');
+export function setSourceSoundGlyphPots(el,pots){
+ const encoded=encodeSourceSoundPots(pots);
+ if(el.dataset.glyphSoundPots===encoded)return;
+ el.dataset.glyphSoundPots=encoded;
+ const animator=live.get(el);
+ animator?.draw(animator.value);
 }

@@ -1,0 +1,15 @@
+{
+  "base": "3c5a9142b5013ffc6d5178825a0e4fc10692be4e",
+  "nativeSource": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "result": "PASS10 app cases,3 focused tests,8 original C selector captures reproducible",
+  "genericRectangleRendererIntegratedHere": false,
+  "files": {
+    "web/product-site/remote/app.mjs": "308cf12d9e46396554d801c0dedfef7defd9baf48dbbb664d3739f13116e0075",
+    "web/product-site/remote/glyph-render.mjs": "21eb80e6ee9fe91be1f3faa4067049fcd824986872e49baf9f031466db6e801f",
+    "web/product-site/remote/break-slice-glyph.mjs": "6b03df23dca5bba65fd615ff5597f09af6dac258d1ae72d12eb89dfc4a735686",
+    "tests/product-workspace/app-sound-regression.mjs": "64f9f188716419e54acb3415a6a8c91eb09a07a7fadc467297705c73592f890b",
+    "tests/product-remote/break-slice-glyph.test.mjs": "e05287f7da9b19a028ecf29c969a620b9289b7608b03c8f2785c0a8f7e3bd6b9",
+    "tests/product-remote/fixtures/break-slice-native-f178.json": "596c34c641dc6a8f00a8b72b1e95bc8e1e4f00a895173f36c7c439ca293b00ca",
+    "tools/probe-break-slice-glyph.py": "ea275baf19179cd57d24b647cbf97d3ee5d6b4dfee9a5035590e1711d962b33a"
+  }
+}

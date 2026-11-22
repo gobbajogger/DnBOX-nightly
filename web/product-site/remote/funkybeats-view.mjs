@@ -1,4 +1,5 @@
 import{renderSvg}from'./glyph-render.mjs';
+import{encodeSourceSoundPots}from'./glyph-live.mjs';
 import{GLYPH_DRAW}from'./glyph-registry.mjs';
 import {drumAccent} from './drum-accent.mjs';
 import {patternLabel} from './workspace.mjs';
@@ -119,7 +120,7 @@ export function renderFunkyBeatsLauncher({parts,targets,patternCount=32,selected
  return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';
 }
 // Native source domains are supplied explicitly; no upstream percent defaults.
-export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,display,enabled=true,engine='chicago',occurrence}){
+export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,display,enabled=true,engine='chicago',occurrence,glyphRole=label,glyphPots=[],glyphSourceId}){
  if(typeof id!=='string'||typeof label!=='string'||typeof display!=='string'||![value,min,max,step].every(Number.isFinite)||min>max||step<=0||value<min||value>max)throw Error('Typed source parameter required');
  const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s)};
  const ui=createFunkyBeatsUI({document,channels:[],state:null});
@@ -130,7 +131,8 @@ export function renderTypedFunkyBeatsParameter({id,label,value,min,max,step=1,di
  if(!enabled)input.setAttribute('disabled','disabled');
  group.children[2].dataset.paramValue=id;
  const glyphValue=(value-min)/(max-min||1);
- const glyph='<span class="glyph" data-glyph-fn="'+esc(label)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-domain="normalized" data-glyph-value="'+glyphValue+'">'+renderSvg(label,glyphValue,engine,{live:false,valueDomain:'normalized'})+'</span>';
+ const glyphState=glyphPots.length?' data-glyph-sound-id="'+esc(glyphSourceId)+'" data-glyph-sound-pots="'+encodeSourceSoundPots(glyphPots)+'"':'';
+ const glyph='<span class="glyph" data-glyph-fn="'+esc(glyphRole)+'" data-glyph-engine="'+esc(engine)+'" data-glyph-domain="normalized" data-glyph-value="'+glyphValue+'"'+glyphState+'>'+renderSvg(glyphRole,glyphValue,engine,{sourceSoundPots:glyphPots,live:false,valueDomain:'normalized'})+'</span>';
  return '<div class="funkybeats-typed-unit encoder">'+glyph+serialize(group)+'</div>';
 }
 

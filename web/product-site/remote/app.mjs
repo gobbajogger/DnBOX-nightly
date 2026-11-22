@@ -27,6 +27,8 @@ import {GUIDE as midiExchangeGuide} from '../projects/exchange/adapter.mjs';
 import {renderSynthOneInit} from './synth-one-init.mjs';
 import {openSynthOneFiles} from './synth-one-files.mjs';
 import{SourceSounds,sourcePercent}from'./sound.mjs';
+import{breakSliceRole,breakSliceText}from'./break-slice-glyph.mjs';
+import{originalSoundGlyphRole,originalSoundGlyphDependencies,miamiDraftDisplay}from'./source-sound-glyphs.mjs';
 import{WorkspaceTimeline}from'./timeline.mjs';
 import{sourceFrame,sourceControlLabel}from'./frame.mjs';
 import {kitAccentAliases,sharedKitAccent} from './drum-accent.mjs';
@@ -41,7 +43,7 @@ import{ParameterGesture}from'./parameter.mjs';
 import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers,patternLabel}from'./workspace.mjs';
 import{groupsFromCatalog}from'./model.mjs';import{RollDraft,RollGesture,pointAt}from'./roll.mjs';
 import{STEP_LANES,envelopeCurve,formatPan,formatParameterValue,glyphFor,isPanLabel,panCell}from'./glyphs.mjs';
-import{mountLiveGlyphs,setGlyphValue,setMasterFilterGlyph,setMasterCompGlyph}from'./glyph-live.mjs';
+import{mountLiveGlyphs,setGlyphValue,setMasterFilterGlyph,setMasterCompGlyph,encodeSourceSoundPots,setSourceSoundGlyphPots}from'./glyph-live.mjs';
 import{mountFirmwareLink}from'./firmware-link.mjs';
 import{LANE_KINDS,LANE_WORDS,chanceFromLane,panFromLane,velocityFromLane,pitchOffsetFromLane,laneFraction,laneText,laneP,RAIL_OFFSET,CHANCE_SPLIT}from'./lane.mjs';
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -414,7 +416,7 @@ function nativeSoundDisplay(id){const row=nativeSound()?.snapshot().displays.get
 function soundSourceBar(){return '<nav class="mix-modes" aria-label="Sound source"><button type="button" data-sound-source="draft" aria-pressed="'+!nativeSoundMode+'">Draft</button><button type="button" data-sound-source="emulator" aria-pressed="'+nativeSoundMode+'" '+(localInstrumentPhase==='running'&&soundSlot()>=0&&!sourceOnlyBank(soundBanks[soundSlot()])?'':'disabled')+'>Emulator</button></nav>';}
 async function chooseSoundSource(source){cancelParameters();retireNativeSound();if(source==='draft'||sourceOnlyBank(soundBanks[soundSlot()])){other();return;}const endpoint=localInstrument.controlEndpoint(),voice=soundSlot();nativeSoundMode=true;const generation=nativeSoundGeneration;if(!endpoint||voice<0||typeof nativeSoundFactory!=='function'){other();return;}try{await nativeSounds[voice].connect(nativeSoundFactory({...endpoint,voice}));}catch{if(generation===nativeSoundGeneration&&view==='sound'&&nativeSoundMode)status('Emulator Sound controls unavailable');}}
 function runSoundAction(operation){const generation=nativeSoundGeneration,state=nativeSound();nativeSoundRetry=null;const action=operation.kind==='undo'?state.undo():state.change(operation.key,operation.value);void action.catch(error=>{if(generation!==nativeSoundGeneration||view!=='sound'||!nativeSoundMode||nativeSound()!==state)return;if(error?.code==='busy'&&error.noWrite===true){nativeSoundRetry=operation;other();status('Emulator busy · Retry '+(operation.kind==='undo'?'Undo':'edit'));}else status('Emulator Sound controls unavailable');});}
-function nativeSoundControls(){const state=nativeSound()?.snapshot();if(!state||!['ready','busy'].includes(state.phase))return '<p role="status">Emulator Sound controls unavailable</p>';const slot=soundSlot(),rows=sourceSounds.controls('CHICAGO',slot).filter(c=>soundKey(c.id));let section='';return '<h2>CHICAGO · '+(slot?'B':'A')+' · Emulator</h2>'+(nativeSoundRetry?'<button type="button" data-sound-retry>Retry '+(nativeSoundRetry.kind==='undo'?'Undo':'edit')+'</button>':'')+'<div class="source-sound-list">'+rows.map(c=>{const heading=c.sourceSection!==section?'<h3>'+esc(c.sourceSection)+'</h3>'+(envelopeRows(c)?envelopeGraph('CHICAGO',slot,rows.filter(envelopeRows)):''):'';section=c.sourceSection;const value=state.values.get(soundKey(c.id));return heading+renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:1,display:nativeSoundDisplay(c.id),enabled:state.phase==='ready',engine:'chicago'});}).join('')+'</div>';}
+function nativeSoundControls(){const state=nativeSound()?.snapshot();if(!state||!['ready','busy'].includes(state.phase))return '<p role="status">Emulator Sound controls unavailable</p>';const slot=soundSlot(),rows=sourceSounds.controls('CHICAGO',slot).filter(c=>soundKey(c.id));let section='';return '<h2>CHICAGO · '+(slot?'B':'A')+' · Emulator</h2>'+(nativeSoundRetry?'<button type="button" data-sound-retry>Retry '+(nativeSoundRetry.kind==='undo'?'Undo':'edit')+'</button>':'')+'<div class="source-sound-list">'+rows.map(c=>{const heading=c.sourceSection!==section?'<h3>'+esc(c.sourceSection)+'</h3>'+(envelopeRows(c)?envelopeGraph('CHICAGO',slot,rows.filter(envelopeRows)):''):'';section=c.sourceSection;const value=state.values.get(soundKey(c.id));return heading+renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:1,display:nativeSoundDisplay(c.id),enabled:state.phase==='ready',engine:'chicago',glyphRole:soundGlyphRole(c),glyphSourceId:c.id,glyphPots:soundGlyphPots(c)});}).join('')+'</div>';}
 const runtimeMixKey=id=>runtimeMixBindings.byId.get(id)?.key;
 function runtimeMixValue(id,fallback){return nativeMixMode&&view==='mix'&&runtimeMixKey(id)?nativeMix.snapshot().values.get(runtimeMixKey(id)):fallback;}
 function mixSourceBar(){return '<nav class="mix-modes" aria-label="Mix source"><button type="button" data-mix-source="draft" aria-pressed="'+!nativeMixMode+'">Draft</button><button type="button" data-mix-source="emulator" aria-pressed="'+nativeMixMode+'" '+(localInstrumentPhase==='running'?'':'disabled')+'>Emulator</button></nav>';}
@@ -686,10 +688,14 @@ const valueOfSound = row => soundNativeId(row.id)?nativeSound()?.snapshot().valu
 const envelopeValue = (row,value) => Math.round(100*(value-row.min)/(row.max-row.min))+'%';
 function draftSoundDisplay(row,raw) {
  if (!row) return null;
+ const slice=breakSliceText(row,raw);
+ if(slice!==null)return slice;
  if (envelopeRows(row)) return envelopeValue(row,raw);
  if (qualifiedNativeFormat(row)) return typedSourceDisplay(row,raw);
  const wave=miamiWave(miamiWaveParameter(row),raw);
  if (wave) return wave.name;
+ const miamiDisplay=row.kind===1&&row.target===2&&row.sourceBank===1?miamiDraftDisplay(row.parameter,raw):null;
+ if(miamiDisplay!==null)return miamiDisplay;
  const percent=sourcePercent(row,raw);
  if (percent!==null) return percent;
  if (raw===row.raw) return row.display;
@@ -718,9 +724,23 @@ function refreshEnvelope(row) {
   if (group.some(c=>c.id===row.id)) host.innerHTML=envelopeCurve(group,bank.toLowerCase(),valueOfSound);
  }
 }
-const soundGlyphRole = c => c.id==='source-sound/BREAK/-1|1:3:0:1:-1'?'BREAK PITCH':c.label;
+const soundGlyphRole = c => breakSliceRole(c)??originalSoundGlyphRole(c)??(c.id==='source-sound/BREAK/-1|1:3:0:1:-1'?'BREAK PITCH':c.label);
+function soundGlyphPots(row){
+ return originalSoundGlyphDependencies(row).map(parameter=>{
+  const id=row.id.split('|')[0]+'|1:2:'+row.voice+':'+parameter+':'+row.sourceBank;
+  const dependency=sourceSounds.controlForId(id);
+  return dependency?valueOfSound(dependency):null;
+ });
+}
+function refreshSoundGlyphDependencies(){
+ if(view!=='sound')return;
+ for(const glyph of $('other-view').querySelectorAll?.('[data-glyph-sound-id]')??[]){
+  const row=sourceSounds.controlForId(glyph.dataset.glyphSoundId);
+  if(row)setSourceSoundGlyphPots(glyph,soundGlyphPots(row));
+ }
+}
 function soundGlyph(c,bank,value){
- return glyphFor(soundGlyphRole(c),bank.toLowerCase(),(value-c.min)/(c.max-c.min||1),{live:false,miamiParameter:miamiWaveParameter(c)});
+ return glyphFor(soundGlyphRole(c),bank.toLowerCase(),(value-c.min)/(c.max-c.min||1),{live:false,miamiParameter:miamiWaveParameter(c),sourceSoundPots:soundGlyphPots(c)});
 }
 function superJ6Input(input,commit) {
  if(!input?.dataset.sj6Id)return false;
@@ -830,7 +850,9 @@ function soundControls(part){
    return open+graph+`<button type="button" class="parameter envelope-stage" data-param="${id}"><span>${label}</span><output data-param-value="${id}">${esc(shown)}</output></button>`;
   }
   const waveParam=miamiWaveParameter(c),wave=miamiWave(waveParam,value);
-  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:shown,enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(soundGlyphRole(c))+'"'+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
+  const pots=soundGlyphPots(c);
+  const glyphState=pots.length?' data-glyph-sound-id="'+id+'" data-glyph-sound-pots="'+encodeSourceSoundPots(pots)+'"':'';
+  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:shown,enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(soundGlyphRole(c))+'"'+glyphState+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
  }).join('')+(section0?closeGroup:'')+'</div>';
 }
 function mixerSource(file,identity,label){const screen=components.screens.find(s=>s.path.endsWith('/'+file));if(!screen)return null;const occurrence=screen.controls.findIndex(c=>c.identity===identity);if(occurrence<0)return null;const id=screen.path+'|'+identity,s=findSpec(id,String(occurrence));return s?{...s,id,label:label??s.label,display:mixerDisplay(id,s.value),occurrence}:null;}
@@ -1141,6 +1163,7 @@ function showParameter(id,value,presentation){
  const drum=editableDrumControl(id),sourceDisplay=soundNativeId(id)?null:draftSoundDisplay(row,value);
  const shown=drum?drumValueText(drum,value):soundNativeId(id)?nativeSoundDisplay(id):!nativeMixMode&&masterDraft.has(id)?masterDraft.display(id,value):id===wearId?wearDisplay(value):sourceDisplay??fxDisplay(id,value)??formatParameterValue(activePresentation.label,value);
  refreshEnvelope(row);
+ if(row)refreshSoundGlyphDependencies();
  if(wave)paintSoundPanel();
  paintParameterReadout(id,value,shown,{descriptor,drum,sourceDisplay,row});
  if(drum)paint808OwnerReadouts(id);

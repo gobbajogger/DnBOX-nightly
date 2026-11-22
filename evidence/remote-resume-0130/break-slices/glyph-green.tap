@@ -1,0 +1,11 @@
+✔ BREAK A/B Slices use the four named native selector positions (5.00453ms)
+✔ BREAK selector role stays scoped away from other engines and unknown labels (1.027472ms)
+✔ BREAK role and native names require the exact qualified slice identities (1.436381ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 188.337736
