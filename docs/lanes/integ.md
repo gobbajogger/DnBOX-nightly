@@ -1,5 +1,9 @@
 # Integration baseline
 
+## Fitting bound firmware and addressed client proof — 2026-11-22 (WORKING)
+
+The unchanged Remote client at `995d5493` repeated addressed Apply, fresh read and guarded Undo through the actual producer and host mixer on the latest measured Composition `833a2ec8`. Each stored readback matched the expected value and revision. The native stock profiles retain 1,036/1,044 B free XIP and 3,804 B pool margin. Calibrated populated timing passed on Elite and Pro. Production catalog and incarnation admission, TouchOSC and final combined screen gates remain pending. [Firmware receipt](https://github.com/gobbajogger/DnBOX/blob/4fa5e29fec494c5344d9f3773fe928fc33cdbdd7/evidence/integ-resume/stock-size-344fbfe/receipt.json) · [Real-engine and wire output](https://github.com/gobbajogger/DnBOX/blob/4fa5e29fec494c5344d9f3773fe928fc33cdbdd7/evidence/integ-resume/stock-size-344fbfe/size-all-os-producer.log)
+
 ## Composed Remote real-engine wire proof — 2026-11-22 (WORKING)
 
 The exact Remote client at `995d5493` completed HELLO, addressed Apply, fresh read and guarded Undo through the composed firmware's actual editor and real host mixer/queue binding. The addressed values remained 75 → 76 → 75 at revisions 1 → 2 → 3. With the lossless boot table, the native scratch composition leaves 3,804 B pool margin but still misses the XIP floor by 1,496 B Elite and 1,484 B Pro. Stock activation and catalog admission remain held. Final combined TouchOSC, screen review and route/parity checks remain pending. [Cross-repo receipt](../../evidence/integ-resume/stock-compose-remote-receipt.json) · [Firmware evidence](https://github.com/gobbajogger/DnBOX/blob/344fbfe34a1cf644683c2554b9a6c4629c0c2bb5/evidence/integ-resume/stock-compose-7233317/README.md)

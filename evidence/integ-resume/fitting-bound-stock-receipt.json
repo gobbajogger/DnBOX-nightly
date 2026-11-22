@@ -1,0 +1,31 @@
+{
+  "nightly_source": "995d5493386fad889ca8106758567c9fe80a47d5",
+  "firmware_receipt": "4fa5e29fec494c5344d9f3773fe928fc33cdbdd7",
+  "measured_tree": "833a2ec86081efd0b89070b434026a9e0289688b",
+  "addressed_values": [
+    75,
+    76,
+    75
+  ],
+  "revisions": [
+    1,
+    2,
+    3
+  ],
+  "xip_free": {
+    "elite": 1036,
+    "pro": 1044
+  },
+  "pool_margin": {
+    "elite": 3804,
+    "pro": 3804
+  },
+  "populated_bounded_max_us": {
+    "elite": 7013,
+    "pro": 7841
+  },
+  "lates": 0,
+  "xruns": 0,
+  "production_catalog_admitted": false,
+  "source": "https://github.com/gobbajogger/DnBOX/blob/4fa5e29fec494c5344d9f3773fe928fc33cdbdd7/evidence/integ-resume/stock-size-344fbfe/receipt.json"
+}
