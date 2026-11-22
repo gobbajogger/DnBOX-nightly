@@ -685,8 +685,9 @@ function refreshEnvelope(row) {
   if (group.some(c=>c.id===row.id)) host.innerHTML=envelopeCurve(group,bank.toLowerCase(),valueOfSound);
  }
 }
+const soundGlyphRole = c => c.id==='source-sound/BREAK/-1|1:3:0:1:-1'?'BREAK PITCH':c.label;
 function soundGlyph(c,bank,value){
- return glyphFor(c.label,bank.toLowerCase(),(value-c.min)/(c.max-c.min||1),{live:false,miamiParameter:miamiWaveParameter(c)});
+ return glyphFor(soundGlyphRole(c),bank.toLowerCase(),(value-c.min)/(c.max-c.min||1),{live:false,miamiParameter:miamiWaveParameter(c)});
 }
 function superJ6Input(input,commit) {
  if(!input?.dataset.sj6Id)return false;
@@ -796,7 +797,7 @@ function soundControls(part){
    return open+graph+`<button type="button" class="parameter envelope-stage" data-param="${id}"><span>${label}</span><output data-param-value="${id}">${esc(shown)}</output></button>`;
   }
   const waveParam=miamiWaveParameter(c),wave=miamiWave(waveParam,value);
-  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:shown,enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(c.label)+'"'+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
+  return open+(c.enabled?(qualifiedNativeFormat(c)?renderTypedFunkyBeatsParameter({id:c.id,label:c.label,value,min:c.min,max:c.max,step:c.step,display:shown,enabled:qualifiedNativeFormat(c),engine:bank.toLowerCase()}):'<button type="button" class="parameter encoder" data-param="'+id+'" aria-label="'+esc(c.context+' · '+c.label+', '+shown+', local draft')+'"><span class="glyph" data-glyph-fn="'+esc(soundGlyphRole(c))+'"'+(wave?' data-miami-parameter="'+waveParam+'"':'')+' data-glyph-engine="'+esc(bank.toLowerCase())+'" data-glyph-domain="normalized" data-glyph-value="'+((value-c.min)/(c.max-c.min||1))+'">'+soundGlyph(c,bank,value)+'</span><output data-param-value="'+id+'">'+esc(shown)+'</output><span>'+label+'</span></button>'):'<div class="encoder unavailable" aria-disabled="true" title="'+esc(c.reason||'')+'" aria-label="'+esc(label+', '+display+(c.reason?', '+c.reason:''))+'"><span>'+label+'</span><output>'+display+'</output></div>');
  }).join('')+(section0?closeGroup:'')+'</div>';
 }
 function mixerSource(file,identity,label){const screen=components.screens.find(s=>s.path.endsWith('/'+file));if(!screen)return null;const occurrence=screen.controls.findIndex(c=>c.identity===identity);if(occurrence<0)return null;const id=screen.path+'|'+identity,s=findSpec(id,String(occurrence));return s?{...s,id,label:label??s.label,display:mixerDisplay(id,s.value),occurrence}:null;}

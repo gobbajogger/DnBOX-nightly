@@ -341,6 +341,17 @@ function glidePath(value){
 }
 // Pan: track with a centre tick and a marker that follows the clipped value
 // (value is the L50..R50 fraction from pan.mjs, 0 = L50, 1 = R50).
+// T_BRK parameter 1, f1786ebe control_glyph. Use the native raster's pixel
+// centers in the 40 x 24 Remote cell, shifted up by 28 native pixels.
+function breakPitchPaths(value){
+ const raw=Math.round(value*24);
+ const q=Math.floor((raw*127+12)/24);
+ const at=2+Math.floor(q*36/127);
+ const guide=path([[2.5,10.5],[38.5,10.5]])+path([[20.5,4.5],[20.5,16.5]])+
+  path([[2.5,7.5],[2.5,13.5]])+path([[38.5,7.5],[38.5,13.5]]);
+ const d=[at-0.5,at+0.5,at+1.5].map(x=>path([[x,6.5],[x,14.5]])).join('');
+ return {d,guide};
+}
 function panPath(value){
  const x=(2+unit(value)*36).toFixed(1);
  return 'M2 12 L38 12 M20 10 L20 14 M'+x+' 5 L'+x+' 19';
@@ -413,6 +424,8 @@ export function render(fnId, value, engineId='chicago', state={}){
   if(wave)return {fn:'WAVE',engine:engineId,live:false,cell:null,zero:wave.zero+0.5,
    d:path(wave.rows.map((y,x)=>[x+0.5,y+0.5]))};
  }
+ if(fnId==='BREAK PITCH'&&engineId==='break')
+  return {fn:'BREAK PITCH',engine:engineId,...breakPitchPaths(value),live:false,cell:null};
  const draw=DRAW[fn]||DRAW.LEVEL;
  const live=!!state.live;
  const depth=state.depth;

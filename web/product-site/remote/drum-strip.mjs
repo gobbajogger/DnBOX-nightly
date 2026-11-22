@@ -34,6 +34,25 @@ function glyphsFor(screen) {
 // DnBOX firmware #975 at 9dd6f2df, ui_drum_voice.inc, dv_glyph.
 // These are the idle control curves in its 32 x 18 slot coordinates.
 const coordinate = n => Number(n.toFixed(4));
+// f1786ebe drum909_param_si supplies the 909 snare's unrounded noise decay in ms.
+const snareNoiseMilliseconds = [
+  210, 214.327087, 218.743347, 223.25061, 227.850723, 232.545639, 237.337296, 242.227676,
+  247.218857, 252.312851, 257.51181, 262.817902, 268.233307, 273.760315, 279.401215, 285.158325,
+  291.034088, 297.030914, 303.151306, 309.397797, 315.77298, 322.279572, 328.920227, 335.697693,
+  342.614807, 349.674469, 356.879608, 364.233185, 371.738281, 379.39798, 387.215607, 395.194244,
+  403.337311, 411.648193, 420.130249, 428.78717, 437.622437, 446.63974, 455.842865, 465.235565,
+  474.821869, 484.605682, 494.591064, 504.782227, 515.18335, 525.798828, 536.633057, 547.690491,
+  558.975769, 570.493591, 582.248718, 594.246094, 606.490662, 618.987549, 631.741943, 644.759094,
+  658.044495, 671.603699, 685.4422, 699.565796, 713.980652, 728.692322, 743.707153, 759.031494,
+  774.671387, 790.633667, 806.924927, 823.551697, 840.52124, 857.840271, 875.516296, 893.556458,
+  911.968567, 930.759888, 949.938354, 969.512024, 989.489014, 1009.87762, 1030.6864, 1051.92383,
+  1073.599, 1095.72083, 1118.29834, 1141.34106, 1164.85864, 1188.86072, 1213.35754, 1238.35901,
+  1263.87585, 1289.91821, 1316.49731, 1343.62402, 1371.30969, 1399.56592, 1428.40417, 1457.83667,
+  1487.87573, 1518.53381, 1549.82336, 1581.75793, 1614.35034, 1647.61438, 1681.56384, 1716.21289,
+  1751.57605, 1787.66748, 1824.50293, 1862.09717, 1900.46594, 1939.62549, 1979.59192, 2020.38184,
+  2062.01221, 2104.50049, 2147.86401, 2192.12134, 2237.29028, 2283.39014, 2330.43994, 2378.45923,
+  2427.46826, 2477.48682, 2528.53564, 2580.63672, 2633.81128, 2688.08154, 2743.46997, 2800,
+];
 const attackEdge = q => 'M1 12L'+coordinate(1+30*q)+' 0L31 0';
 // dv_glyph draws these four ticks for kit summaries. A selected 808 KIT
 // slot can use a separate two-peak drawing.
@@ -65,18 +84,26 @@ function tuneFork(q) {
 
 // The 909 uses a fixed two-second axis. The 808 uses the native duration
 // when calibrated, or the eased pot position for the seven raw fallback controls.
-function decayTail(q, curve, kit909) {
-  const ms=curve===null ? 4000*q : Math.fround(decayMilliseconds[curve][Math.round(127*q)]);
-  const reach=8+23*Math.sqrt(ms/4000);
+function decayTail(q, duration, kit909, hold=0) {
+  const ms=duration===null ? 4000*q : Math.fround(duration[Math.round(127*q)]);
+  const reach=8+23*Math.sqrt((ms+hold)/4000);
   const points=[];
   for(let i=0;i<=16;i++){
     const t=i/16;
     const x=1+t*(kit909?30:reach);
-    const y=kit909 ? 12*(1-2**(-16.60964047*2000*t/(ms||1)))
+    const y=kit909 ? 12*(1-2**(-16.60964047*Math.max(0,2000*t-hold)/(ms||1)))
       : i===16 ? 12 : 12*(1-2**(-t*(2.2+3*(1-q))));
     points.push((i?'L':'M')+coordinate(x)+' '+coordinate(y));
   }
   return points.join('');
+}
+
+// f1786ebe dv_glyph draws the 808 snare's two shell resonators at equal power.
+function snareShells(q) {
+  const raw=127*q;
+  const angle=(raw<=64 ? raw/128 : 0.5+(raw-64)*0.5/63)*1.5708;
+  return 'M7 12L11 '+coordinate(12-12*Math.cos(angle))+'L15 12'+
+    'M17 12L21 '+coordinate(12-12*Math.sin(angle))+'L25 12';
 }
 
 function kickTone(q) {
@@ -150,9 +177,11 @@ function drumShape(control) {
   const curve=decayCurves[control.identity];
   if (curve!==undefined && control.markers?.['visual-role']==='active glyph/value control' &&
       (control.context.name==='Decay' || control.context.name==='Tail'))
-    return q=>decayTail(q,curve,control.identity.startsWith('1:0:'));
+    return q=>decayTail(q,curve===null?null:decayMilliseconds[curve],control.identity.startsWith('1:0:'));
   if (control.context.name==='Attack') return attackEdge;
   if (control.identity==='1:1:0:1') return kickTone;
+  if (control.identity==='1:0:1:1') return q=>decayTail(q,snareNoiseMilliseconds,true,24);
+  if (control.identity==='1:1:1:1') return snareShells;
   if ((control.identity==='1:0:11:1' || control.identity==='1:1:11:1') &&
       control.markers?.['visual-role']==='inactive bank parameter summary') return kitSummaryTicks;
   // The 909 kick uses DG_BDSWEEP, whose curve also depends on Pitch and Depth.

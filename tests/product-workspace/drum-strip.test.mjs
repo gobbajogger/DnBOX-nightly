@@ -85,7 +85,7 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     const firstCurve=attributes.get('d');
     const fork=control.context.name==='Tune' && control.identity!=='1:0:0:0';
     const summary=control.context.name==='ACCENT' && control.markers['visual-role']==='inactive bank parameter summary';
-    const decay=['Decay','Tail'].includes(control.context.name) && control.identity!=='1:1:6:2';
+    const decay=(['Decay','Tail'].includes(control.context.name) && control.identity!=='1:1:6:2') || control.identity==='1:0:1:1';
     if(decay)fallingTails++;
     else if(fork)tuneForks++;
     else if(summary)kitSummaries++;
@@ -102,6 +102,8 @@ test('editable kit glyphs update their mounted source paths at every raw value',
         assert.equal(curve.match(/[ML]/g).join(''),'M'+'L'.repeat(18)+'ML');
       }else if(summary){
         assert.match(curve,/^(?:M\d+ 12V[\d.]+){4}$/);
+      }else if(control.identity==='1:1:1:1'){
+        assert.match(curve,/^M7 12L11 -?[\d.]+L15 12M17 12L21 -?[\d.]+L25 12$/);
       }else if(control.identity==='1:1:0:1'){
         const ys=[...curve.matchAll(/[ML]([\d.]+) ([\d.]+)/g)].map(match=>Number(match[2]));
         assert.equal(ys.length,25);
@@ -116,6 +118,6 @@ test('editable kit glyphs update their mounted source paths at every raw value',
     assert.notEqual(attributes.get('d'),firstCurve,control.identity);
     assert.equal(pathLookups,1,'updates reuse the mounted glyph path');
   }
-  assert.equal(tuneForks,21);assert.equal(kitSummaries,22);assert.equal(fallingTails,20);
-  assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:6:3']);
+  assert.equal(tuneForks,21);assert.equal(kitSummaries,22);assert.equal(fallingTails,21);
+  assert.deepEqual(envelopeControls.sort(),['1:0:0:1','1:0:2:3','1:0:3:3','1:0:4:3','1:1:0:1','1:1:0:4','1:1:1:1','1:1:6:3']);
 });

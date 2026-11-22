@@ -127,6 +127,7 @@ const entered=(x,raw)=>{x.get('parameter-value').value=String(raw);x.get('parame
 await check('BREAK Pitch and Level keep native units through inspect, edit, reopen and Undo',async x=>{
  x.changePart('breaks','BREAK');x.view('sound');
  const group=soundData.contexts.find(g=>g.bank==='BREAK');
+ assert.match(x.get('other-view').innerHTML,/data-glyph-fn="BREAK PITCH" data-glyph-engine="break"/);
  for(const [name,raw,before,after] of [['Pitch',13,'0 st','+1 st'],['Level',0,'0.0 dB','OFF']]){
   const c=group.controls.find(c=>c.name===name),id=idOf(group,c);
   assert.equal(soundOutput(x,id),before);

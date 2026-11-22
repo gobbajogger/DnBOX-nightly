@@ -36,9 +36,9 @@ test('20 retained falling-tail donors follow the original idle curves at all 128
 });
 
 
-test('only 12 separately owned drum occurrences retain static donors',()=>{
+test('only 10 separately owned drum occurrences retain static donors',()=>{
   const staticIds=new Set([
-    '1:0:0:0','1:0:0:5','1:0:1:1','1:0:1:2','1:1:1:1','1:1:1:2',
+    '1:0:0:0','1:0:0:5','1:0:1:2','1:1:1:2',
     '1:1:2:3','1:1:3:3','1:1:4:3','1:1:5:3','1:1:6:4','1:1:6:2',
   ]);
   assert.equal(controls.length,83);
@@ -59,5 +59,5 @@ test('only 12 separately owned drum occurrences retain static donors',()=>{
     assert.equal(drawing===low,staticIds.has(c.identity),c.identity);
     if(drawing===low)unchanged++;
   }
-  assert.equal(unchanged,12);
+  assert.equal(unchanged,10);
 });
