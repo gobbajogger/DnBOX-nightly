@@ -1,0 +1,327 @@
+{
+  "firmware": {
+    "source_commit": "e29c99ec2cc610e5af3de575e85771f666b239f4",
+    "status": "IN_PROGRESS",
+    "counts": {
+      "ok": 242,
+      "FAIL": 19,
+      "not-run": 2
+    },
+    "failures_and_skips": [
+      {
+        "registration": "0013",
+        "state": "FAIL",
+        "name": "panic-clear (see build/host/panic-clear.log)",
+        "log_sha256": "560a12bd8f065cc813bcafbc131b8050a223cb14b993b91545cf6d08c99af8d5",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0020",
+        "state": "FAIL",
+        "name": "composed-midi-epoch (see build/host/composed-midi-epoch.log)",
+        "log_sha256": "bd7a1aa5504779b1a97927bccae3c1fa281ef33e1f6ff1686bfa5ff815a8e448",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0061",
+        "state": "FAIL",
+        "name": "chicago-fx2-inserts (see build/host/chicago-fx2-inserts.log)",
+        "log_sha256": "0124fbe53f936aa959398c263bf0679e5ae4e1b10493ee728860fc1457943840",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0062",
+        "state": "FAIL",
+        "name": "original-sound-cell (see build/host/original-sound-cell.log)",
+        "log_sha256": "ade6e170001bf18d13f483f34dff31a3074abdceaac2618dceb7de6db67526a6",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0070",
+        "state": "FAIL",
+        "name": "sound-reset (see build/host/sound-reset.log)",
+        "log_sha256": "376b08bb4e91cc405debe10ed4b07b61debc3c481380d7dc1cd3df23b71081f7",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0074",
+        "state": "FAIL",
+        "name": "panic-notes (see build/host/panic-notes.log)",
+        "log_sha256": "ddef8606d06b1ea71b580ee95c31049052d9fa20cae014d4de849cac81241da3",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0075",
+        "state": "FAIL",
+        "name": "drum-fill (see build/host/drum-fill.log)",
+        "log_sha256": "dd57f742d8ddf2579a5cd657d1963e4e2ed8a2563bc1fa56802e5bbfaf6ca1bb",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0076",
+        "state": "FAIL",
+        "name": "cq-reclaim (see build/host/cq-reclaim.log)",
+        "log_sha256": "bf29d496b54846da718c2b8410f77c738e6963e9c6feed1a9d3a8d32aafc2aa0",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0085",
+        "state": "FAIL",
+        "name": "optimization-equivalence (see build/host/optimization-equivalence.log)",
+        "log_sha256": "310d6ac8448a23192c96d17721378204a077b219fc3315a39d60ac1f33019846",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0157",
+        "state": "FAIL",
+        "name": "ble-midi-receive (see build/host/ble-midi-receive.log)",
+        "log_sha256": "a56681789d7f8f6fe12f9b5915e45e09a30915a2757063e79991603eae03a035",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0158",
+        "state": "FAIL",
+        "name": "ble-capture-replay (see build/host/ble-capture-replay.log)",
+        "log_sha256": "24b8a707e3269fd161f8776cfda07ce62e70b85e0e610454c07eae5d541071ce",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0180",
+        "state": "FAIL",
+        "name": "ble-device-setting-flow (see build/host/ble-device-setting-flow.log)",
+        "log_sha256": "a92510f2d062e132e4fc0fd6bbc66411af7bd83667470baf129f41c03980481d",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0181",
+        "state": "FAIL",
+        "name": "ble-toggle-persistence-gate (see build/host/ble-toggle-persistence-gate.log)",
+        "log_sha256": "cfd3103937a93670a07d8680c31e5edf82b21144e08461bce1c67e04d3ccc814",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0234",
+        "state": "not-run",
+        "name": "drum909 (../schwung-9W9/src/dsp/er99_engine.c)"
+      },
+      {
+        "registration": "0235",
+        "state": "not-run",
+        "name": "drum808 (../schwung-8W8/src/dsp/sc808_engine.cpp)"
+      },
+      {
+        "registration": "0274",
+        "state": "FAIL",
+        "name": "host-setup (see build/host/host-setup.log)",
+        "log_sha256": "1d4adc74d94c6635fec5c3ab87d1262a89fb6e5cffaa3b4bfdcd8e188fa60816",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0329",
+        "state": "FAIL",
+        "name": "ble-role-switch (see build/host/ble-role-switch.log)",
+        "log_sha256": "8b261929cc6db70dd2dae264d15d58697c3f44b88b5490897e09c306a48e9188",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0361",
+        "state": "FAIL",
+        "name": "compact-programs (see build/host/compact-programs.log)",
+        "log_sha256": "f2a69f62ea53e98e9ca070a8c5b3ff133be308ed37e7d4a8c415065ff986b18a",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0362",
+        "state": "FAIL",
+        "name": "offline-browser-safety (see build/host/offline-browser-safety.log)",
+        "log_sha256": "3e15c523718898c6a4b221540da629126050e0c0427c8f813997a7b7a0ea1c5e",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0363",
+        "state": "FAIL",
+        "name": "offline-sequencer-browser (see build/host/offline-sequencer-browser.log)",
+        "log_sha256": "268dbaafc70c967f6e59c8821034dc4ad6a565771f22c151d71924a5948ae1af",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0366",
+        "state": "FAIL",
+        "name": "offline-touchosc-lua (see build/host/offline-touchosc-lua.log)",
+        "log_sha256": "7c0272dca5c840f474584acdf11de3b17c190da208baf0831fdfcb159366ba12",
+        "lsan_runtime_failure": false
+      }
+    ]
+  },
+  "consolidated": {
+    "source_commit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+    "status": "IN_PROGRESS",
+    "counts": {
+      "ok": 242,
+      "FAIL": 19,
+      "not-run": 2
+    },
+    "failures_and_skips": [
+      {
+        "registration": "0020",
+        "state": "FAIL",
+        "name": "composed-midi-epoch (see build/host/composed-midi-epoch.log)",
+        "log_sha256": "bd7a1aa5504779b1a97927bccae3c1fa281ef33e1f6ff1686bfa5ff815a8e448",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0061",
+        "state": "FAIL",
+        "name": "chicago-fx2-inserts (see build/host/chicago-fx2-inserts.log)",
+        "log_sha256": "6b89b363d3bf7a9a3f5247a535565d59c546e9f1892d8c81f9dd14cb7d8121b1",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0062",
+        "state": "FAIL",
+        "name": "original-sound-cell (see build/host/original-sound-cell.log)",
+        "log_sha256": "49daf9da7130f1a81e216d9a6fb0b018085b022ccb4dd3514d14c6d3defde153",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0070",
+        "state": "FAIL",
+        "name": "sound-reset (see build/host/sound-reset.log)",
+        "log_sha256": "ac16b292aa0186a296d456e69ae03ce6be0f43ffbd5be61f1a58497926a030eb",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0074",
+        "state": "FAIL",
+        "name": "panic-notes (see build/host/panic-notes.log)",
+        "log_sha256": "8b0e796cafcd85e85eb7e52aca85e3715d1633d7e490f65ba9665d3d3078c6fa",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0075",
+        "state": "FAIL",
+        "name": "drum-fill (see build/host/drum-fill.log)",
+        "log_sha256": "bc46c50880b8a0da07f448840aebdac69c0cfd6b8ccd1d876e245fc8f4cab68f",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0076",
+        "state": "FAIL",
+        "name": "cq-reclaim (see build/host/cq-reclaim.log)",
+        "log_sha256": "71a6d14abd995d2e8dee5b9f080ad52451aa94a7c6f564395d93cf73b9167383",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0085",
+        "state": "FAIL",
+        "name": "optimization-equivalence (see build/host/optimization-equivalence.log)",
+        "log_sha256": "d9eb3f26b1e7c6b3f9a87c4222817a021e4bcff8991cb2c5c366c66927503da3",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0096",
+        "state": "FAIL",
+        "name": "ui-theme (see build/host/ui-theme.log)",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0157",
+        "state": "FAIL",
+        "name": "ble-midi-receive (see build/host/ble-midi-receive.log)",
+        "log_sha256": "d90580fb2d728b05b7194a7a6c69616e6b46c25b981afe6e00619f7c4bf3d26f",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0158",
+        "state": "FAIL",
+        "name": "ble-capture-replay (see build/host/ble-capture-replay.log)",
+        "log_sha256": "fc3e4c5fbb92a6b53f7964119c8371f796706c9e9bb614c3ad4120a5d8b087f2",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0180",
+        "state": "FAIL",
+        "name": "ble-device-setting-flow (see build/host/ble-device-setting-flow.log)",
+        "log_sha256": "ecb6e0b12d8ffcd7f3923692c398278b35109685ea19c174cf1cdec1b04e89fc",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0181",
+        "state": "FAIL",
+        "name": "ble-toggle-persistence-gate (see build/host/ble-toggle-persistence-gate.log)",
+        "log_sha256": "e4c797c67d0b5ffb9fe0aeb66b445d235d5d693b1418bc92989850d08e9e7e6d",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0234",
+        "state": "not-run",
+        "name": "drum909 (../schwung-9W9/src/dsp/er99_engine.c)"
+      },
+      {
+        "registration": "0235",
+        "state": "not-run",
+        "name": "drum808 (../schwung-8W8/src/dsp/sc808_engine.cpp)"
+      },
+      {
+        "registration": "0274",
+        "state": "FAIL",
+        "name": "host-setup (see build/host/host-setup.log)",
+        "log_sha256": "9d9ffa9e25806c1b713df7ed986182ed24128046846b9dcceadac490106b0210",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0329",
+        "state": "FAIL",
+        "name": "ble-role-switch (see build/host/ble-role-switch.log)",
+        "log_sha256": "5671eeeec09b5175eecc1d692f4ea828f268803062538d13021816af1c31c39e",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0354",
+        "state": "FAIL",
+        "name": "compact-programs (see build/host/compact-programs.log)",
+        "log_sha256": "2115ba645e8276e6c9da36c48ff9da4a544462d8590e4a1e82e601531e2cdd52",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0355",
+        "state": "FAIL",
+        "name": "offline-browser-safety (see build/host/offline-browser-safety.log)",
+        "log_sha256": "e1c3caca91b8ef6cdef9a60b5d52cb0f538942457db0701b9c2684548141a384",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0356",
+        "state": "FAIL",
+        "name": "offline-sequencer-browser (see build/host/offline-sequencer-browser.log)",
+        "log_sha256": "bb16a9a79f46e6a00a4c0eecfb527461f04c6914db62e4b24accfd2ede9b8b32",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0359",
+        "state": "FAIL",
+        "name": "offline-touchosc-lua (see build/host/offline-touchosc-lua.log)",
+        "log_sha256": "7c0272dca5c840f474584acdf11de3b17c190da208baf0831fdfcb159366ba12",
+        "lsan_runtime_failure": false
+      }
+    ]
+  },
+  "nightly_consolidated": {
+    "source_commit": "583f622961fc9975fac746592ce6c483073c4170",
+    "status": "IN_PROGRESS",
+    "unit_status": "FAIL",
+    "unit_failure": "test-retired-name-scan.mjs matches normative Rule 19 use of Drone in RULES.md",
+    "observed_gate_lines": [
+      "[PASS] clean-tree",
+      "[PASS] setup",
+      "[SKIP] fetch-base",
+      "[PASS] no-loss",
+      "[PASS] limits",
+      "[PASS] build",
+      "[FAIL] unit-tests"
+    ],
+    "terminal_line": null,
+    "status_note": "No completed overall result when this snapshot was collected."
+  }
+}

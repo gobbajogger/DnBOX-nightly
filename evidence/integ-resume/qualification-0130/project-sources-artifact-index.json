@@ -20,6 +20,12 @@
       "size": 643072,
       "sha256": "146a600fa27644e204061c7f05040afe882606b3f74f690e07dea63c7594399c",
       "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-stock-pro-package-flash.img"
+    },
+    {
+      "filename": "lane-integ-resume-0130-e29c99ec-strict-emu360-bounded-raw.tar.gz",
+      "size": 8786220,
+      "sha256": "08fe202ea7143c3fa2b99dce7c536eead788bd2a06257fa0a5803c75a5489ea8",
+      "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-strict-emu360-bounded-raw.tar.gz"
     }
   ]
 }

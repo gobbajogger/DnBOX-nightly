@@ -1,5 +1,15 @@
 # Integration baseline
 
+## Consolidated Nightly Local gate and qualification scope — 2026-11-22 (WORKING)
+
+The Local gate at consolidated `583f622961fc9975fac746592ce6c483073c4170` passed clean tree, setup, ancestry, limits, and build. Its unit stage failed because the retired-name scan matched the normative sentence in `RULES.md`. The lane candidate passed that case and reached its visual sweep, which retained the failure explained below. The baseline browser suite was still running at this observation. Final combined source has to be pinned after the upstream lanes merge.
+
+The software-only acceptance path for Remote requires the real firmware protocol in the host or emulator and exercised TouchOSC bindings. The local fixture, capture and renderer evidence here covers its stated browser scopes. It does not establish final protocol or combined-source parity. The 32 Remote images remain proposals and the independent review still holds approval.
+
+The status parser and six exact status-transport fixture cases passed locally. The owner-authenticated GitHub connector returned an empty status list on the consolidated head and has no write route for commit statuses. The CLI has no active authentication. Live vote testing likewise has no open proposal target or authenticated issue-body reaction route.
+
+[Consolidated failure ledger](../../evidence/integ-resume/qualification-0130/consolidated-failure-ledger.json) · [Status transport fixture](../../evidence/integ-resume/qualification-0130/gate-status-transport.json)
+
 ## Scoped browser closure and synchronized roadmap — 2026-11-22 (WORKING)
 
 The [candidate evidence index](../../evidence/integ-resume/qualification-0130/candidate-focused-checks.json) records actual commands and log digests at `938c6aa6`. Both phone orientations exercised the Remote workspace. The product build with the two pinned native runtimes produced 268 files. The unchanged firmware renderer matched 1,838 unique native oracle states over 1,912 browser canvas captures against firmware `61827a71`. The interactive reference test remains open after a thirty-second state-selection timeout. This is scoped renderer proof at the pinned firmware source. The isolated Mix Family retry passed at all three reviewed sizes. Independent Remote and Build History approval remain on hold.

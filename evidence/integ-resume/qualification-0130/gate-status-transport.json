@@ -1,0 +1,143 @@
+{
+  "scope": "Existing post_status function with a local gh stub; no external mutation",
+  "results": [
+    {
+      "repo": "gobbajogger/DnBOX",
+      "sha": "f1786ebec2616477163b62b029c7e77405a9c3de",
+      "state": "success",
+      "simulated_api_exit": 0,
+      "wrapper_exit": 0,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX/statuses/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "state=success",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX/commit/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    },
+    {
+      "repo": "gobbajogger/DnBOX",
+      "sha": "f1786ebec2616477163b62b029c7e77405a9c3de",
+      "state": "failure",
+      "simulated_api_exit": 0,
+      "wrapper_exit": 0,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX/statuses/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "state=failure",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX/commit/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    },
+    {
+      "repo": "gobbajogger/DnBOX",
+      "sha": "f1786ebec2616477163b62b029c7e77405a9c3de",
+      "state": "error",
+      "simulated_api_exit": 1,
+      "wrapper_exit": 2,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX/statuses/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "state=error",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST f1786ebec2616477163b62b029c7e77405a9c3de",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX/commit/f1786ebec2616477163b62b029c7e77405a9c3de",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    },
+    {
+      "repo": "gobbajogger/DnBOX-nightly",
+      "sha": "583f622961fc9975fac746592ce6c483073c4170",
+      "state": "success",
+      "simulated_api_exit": 0,
+      "wrapper_exit": 0,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX-nightly/statuses/583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "state=success",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST 583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX-nightly/commit/583f622961fc9975fac746592ce6c483073c4170",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    },
+    {
+      "repo": "gobbajogger/DnBOX-nightly",
+      "sha": "583f622961fc9975fac746592ce6c483073c4170",
+      "state": "failure",
+      "simulated_api_exit": 0,
+      "wrapper_exit": 0,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX-nightly/statuses/583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "state=failure",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST 583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX-nightly/commit/583f622961fc9975fac746592ce6c483073c4170",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    },
+    {
+      "repo": "gobbajogger/DnBOX-nightly",
+      "sha": "583f622961fc9975fac746592ce6c483073c4170",
+      "state": "error",
+      "simulated_api_exit": 1,
+      "wrapper_exit": 2,
+      "request": [
+        "api",
+        "--method",
+        "POST",
+        "repos/gobbajogger/DnBOX-nightly/statuses/583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "state=error",
+        "-f",
+        "context=dnbox-gate",
+        "-f",
+        "description=DNBOX-GATE: TEST 583f622961fc9975fac746592ce6c483073c4170",
+        "-f",
+        "target_url=https://github.com/gobbajogger/DnBOX-nightly/commit/583f622961fc9975fac746592ce6c483073c4170",
+        "--jq",
+        "\"posted dnbox-gate \" + .state + \" on \" + .sha"
+      ]
+    }
+  ]
+}
