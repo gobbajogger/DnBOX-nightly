@@ -7,7 +7,7 @@ Broad unmerged work is retained at `backup/integ-before-start-split-20261116`, e
 
 ## Integration candidate ancestry — 22 November 2026
 
-Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly consolidated is `583f622961fc9975fac746592ce6c483073c4170`. The respective integration candidate source commits `e29c99ec2cc610e5af3de575e85771f666b239f4` and `938c6aa6f49564c59df58517f68c44eb97dfa84b` contain those exact bases. Each has zero deleted paths relative to its base. See [the lane ledger](docs/lanes/integ.md) for focused tests and blockers. Final gates, merges and release acceptance remain with the coordinator.
+Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly consolidated is `583f622961fc9975fac746592ce6c483073c4170`. The focused evidence snapshots `45ac00c6d1b99d0b3bcc9823f13ce1898d04f7f4` and `bb948cb9f64f490eac7333d21419f8b7e89388cf` contain those exact bases. The GitHub comparisons show 50 and 57 lane commits respectively, zero consolidated-only commits, and no deleted paths. See [the lane ledger](docs/lanes/integ.md) for current software-only results, the final combined fit dependency and access-dependent checks. The coordinator retains merges and release acceptance.
 
 ## Machine-readable roadmap state
 
@@ -22,7 +22,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "merge_sha": "",
       "owner": "integ",
       "dependencies": [],
-      "next_action": "Use the pinned Local gate receipts at firmware f1786ebe and Nightly 583f6229 to reconcile failures and verify authenticated status reporting."
+      "next_action": "Both focused harness repairs passed. Run the Local gates on the final combined sources and verify authenticated status posting."
     },
     {
       "id": "M1",
@@ -58,7 +58,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Resolve the independent Remote owner-baseline findings, then qualify the changed screens and runtime on the combined Nightly source."
+      "next_action": "Fit the guarded Remote producer on the composed stock firmware, then verify addressed Apply and Undo, TouchOSC bindings, and changed screens."
     },
     {
       "id": "M4",
@@ -82,7 +82,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
       "dependencies": [
         "M0"
       ],
-      "next_action": "Co-deliver the five original BREAK samples with the stock model packages and verify standard import and readback. Verify compact-program LeakSanitizer and live owner vote persistence."
+      "next_action": "Reuse offline proof for the five bundled BREAK samples and the matching compact-program LeakSanitizer inputs. Verify owner-authenticated vote persistence and inbox refresh."
     },
     {
       "id": "M6",
@@ -98,7 +98,7 @@ Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly 
         "M4",
         "M5"
       ],
-      "next_action": "After the lane merges, run both Local gates and strict ten-minute playback on the combined source; hand off exact evidence and safe cleanup reachability to the coordinator."
+      "next_action": "Run both final Local gates and strict ten-minute playback. Give the coordinator exact release prerequisites and stale-ref reachability with protected exclusions."
     }
   ]
 }
