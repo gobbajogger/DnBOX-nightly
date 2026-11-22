@@ -1,5 +1,11 @@
 # Web lane · PR #156
 
+## Lane requalification · 22 November 2026
+
+The lane started from `583f6229`, whose product and test sources carry the accepted `000e2910` tree. An unavailable history data request left search inert. Build History now filters the records embedded in the page when the request fails. The online data source is unchanged. [Chromium receipt](../../evidence/web-routes/history-offline.json) records the search and reset over all 198 records at desktop, portrait and landscape widths.
+
+The requested scalable Web/Remote comparison with R22 and shipping 0.0.26 remains open. The prior native-renderer parity receipt covers its own FWUI pin. Inkscape smoke measurements of the four historical vectors against their companion PNGs found 9.06%–11.26% exact RGB differences. Complete Chromium comparisons of matching screens and independent per-page scores remain required. The separate shipping firmware source is `94197fc839b00aff47b98ca02f3c6396e4a6eabf`. Final combined qualification belongs to Integration.
+
 ## Current Web delivery · 21 November 2026
 
 The [current gate, independent review and nightly publication ledger](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059684119) records the tested Web commit, the seven gate results, the reviewer’s disposition and the deployed tree and byte counts. Each result applies to the exact commit named there. Earlier sections below are dated checkpoints.

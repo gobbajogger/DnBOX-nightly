@@ -16,6 +16,11 @@ args = ap.parse_args()
 HTML = Path(args.source).read_bytes() if args.source else (ROOT/'docs/builds/index.html').read_bytes()
 DATA = json.loads((ROOT/'docs/build-status.json').read_text())
 class Handler(SimpleHTTPRequestHandler):
+    def translate_path(self, path):
+        if path.startswith('/product/'):
+            relative = Path(super().translate_path(path)).relative_to(ROOT / 'docs' / 'product')
+            return str(ROOT / 'web' / 'product-site' / relative)
+        return super().translate_path(path)
     def do_GET(self):
         if self.path.split('?')[0] == '/builds/':
             self.send_response(200)
@@ -61,6 +66,33 @@ async def case(browser, name, payload, width=375, negative=True, transport='json
     results.append({'case': name, 'pass': ok, 'state': state, 'page_errors': errors})
     print(json.dumps(results[-1]), flush=True)
     await page.close()
+async def product_history(browser, width, height):
+    page = await browser.new_page(viewport={'width': width, 'height': height})
+    errors = []
+    page.on('pageerror', lambda error: errors.append(str(error)))
+    await page.route('**/data/history.json', lambda route: route.abort())
+    await page.goto(f'http://127.0.0.1:{server.server_port}/product/builds/index.html')
+    records = page.locator('[data-record-id]')
+    visible = page.locator('[data-record-id]:visible')
+    total = await records.count()
+    await page.wait_for_function(
+        "(total) => document.querySelector('#history-status').textContent === total + ' of ' + total + ' records'",
+        arg=total
+    )
+    await page.select_option('#channel', 'main')
+    await page.select_option('#model', 'pro')
+    await page.fill('#history-search', '94197fc8')
+    matches = await visible.evaluate_all("(nodes) => nodes.map(node => node.dataset.recordId)")
+    await page.fill('#history-search', '')
+    await page.select_option('#model', 'all')
+    await page.select_option('#channel', 'all')
+    restored = await visible.count()
+    ok = total > 0 and restored == total and 'release-v0.0.26-94197fc8' in matches and not errors
+    results.append({'case': f'product-offline-{width}x{height}', 'pass': ok,
+                    'total': total, 'matches': matches, 'restored': restored, 'page_errors': errors})
+    print(json.dumps(results[-1]), flush=True)
+    await page.close()
+
 async def main():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
@@ -115,6 +147,8 @@ async def main():
         inert = copy.deepcopy(DATA)
         inert['history'][0]['title'] = '<img src=x onerror="window.injected=true">'
         await case(browser, 'inert-title-text', inert, negative=False)
+        for width, height in [(1440, 900), (390, 844), (844, 390)]:
+            await product_history(browser, width, height)
         await browser.close()
     server.shutdown()
     failed = sum(not r['pass'] for r in results)
