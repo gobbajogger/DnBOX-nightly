@@ -1,10 +1,10 @@
 {
   "firmware": {
     "source_commit": "e29c99ec2cc610e5af3de575e85771f666b239f4",
-    "status": "IN_PROGRESS",
+    "status": "INTERRUPTED_NO_TERMINAL_RESULT",
     "counts": {
-      "ok": 242,
-      "FAIL": 19,
+      "ok": 245,
+      "FAIL": 22,
       "not-run": 2
     },
     "failures_and_skips": [
@@ -20,6 +20,13 @@
         "state": "FAIL",
         "name": "composed-midi-epoch (see build/host/composed-midi-epoch.log)",
         "log_sha256": "bd7a1aa5504779b1a97927bccae3c1fa281ef33e1f6ff1686bfa5ff815a8e448",
+        "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0060",
+        "state": "FAIL",
+        "name": "original-release-integration (see build/host/original-release-integration.log)",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "lsan_runtime_failure": false
       },
       {
@@ -150,15 +157,32 @@
         "name": "offline-touchosc-lua (see build/host/offline-touchosc-lua.log)",
         "log_sha256": "7c0272dca5c840f474584acdf11de3b17c190da208baf0831fdfcb159366ba12",
         "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0413",
+        "state": "FAIL",
+        "name": "chicago-span-hold (see build/host/chicago-span-hold.log)",
+        "log_sha256": "94013ea6f4a1ad4158054b1250a3c598a7e942c220b471e0b87ecadd06039549",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0414",
+        "state": "FAIL",
+        "name": "fma-exact-identity (see build/host/fma-exact-identity.log)",
+        "log_sha256": "85cc19e6533dc5f5d1ba2bff21d810c69284ce466df9f5ab8e67f275cc2c0d58",
+        "lsan_runtime_failure": true
       }
-    ]
+    ],
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "terminal_line": null,
+    "status_note": "The agent-owned executor process session was no longer available. No terminal gate record."
   },
   "consolidated": {
     "source_commit": "f1786ebec2616477163b62b029c7e77405a9c3de",
-    "status": "IN_PROGRESS",
+    "status": "INTERRUPTED_NO_TERMINAL_RESULT",
     "counts": {
-      "ok": 242,
-      "FAIL": 19,
+      "ok": 244,
+      "FAIL": 21,
       "not-run": 2
     },
     "failures_and_skips": [
@@ -304,12 +328,29 @@
         "name": "offline-touchosc-lua (see build/host/offline-touchosc-lua.log)",
         "log_sha256": "7c0272dca5c840f474584acdf11de3b17c190da208baf0831fdfcb159366ba12",
         "lsan_runtime_failure": false
+      },
+      {
+        "registration": "0406",
+        "state": "FAIL",
+        "name": "chicago-span-hold (see build/host/chicago-span-hold.log)",
+        "log_sha256": "8aa737b061cc94f7a9556b75d09ef5621f9de94a4f8a94620cb33c1d8d5472c6",
+        "lsan_runtime_failure": true
+      },
+      {
+        "registration": "0407",
+        "state": "FAIL",
+        "name": "fma-exact-identity (see build/host/fma-exact-identity.log)",
+        "log_sha256": "23dd68e2b7110bc721f230b0f755c1f664a59c14b11aecb4a571781c062a3564",
+        "lsan_runtime_failure": true
       }
-    ]
+    ],
+    "log_sha256": "04f3e37a55976f47f61eddb25096996a92295dd0d87904cbaf9c14fb3b50aa82",
+    "terminal_line": null,
+    "status_note": "The agent-owned executor process session was no longer available. No terminal gate record."
   },
   "nightly_consolidated": {
     "source_commit": "583f622961fc9975fac746592ce6c483073c4170",
-    "status": "IN_PROGRESS",
+    "status": "TERMINAL_FAIL",
     "unit_status": "FAIL",
     "unit_failure": "test-retired-name-scan.mjs matches normative Rule 19 use of Drone in RULES.md",
     "observed_gate_lines": [
@@ -321,7 +362,10 @@
       "[PASS] build",
       "[FAIL] unit-tests"
     ],
-    "terminal_line": null,
-    "status_note": "No completed overall result when this snapshot was collected."
+    "terminal_line": "DNBOX-GATE RESULT FAIL sha=583f622961fc9975fac746592ce6c483073c4170 lane=integ log=build/dnbox-gate/583f6229-20261122-1151.log",
+    "status_note": "Terminal exact consolidated Local gate result observed",
+    "exit": 1,
+    "browser_status": "PASS",
+    "log_sha256": "814c7069339d2f043d63c9d6ca905a5f1595277931fd683ae4fdb1d782b80988"
   }
 }
