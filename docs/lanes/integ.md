@@ -1,5 +1,11 @@
 # Integration baseline
 
+## Scoped browser closure and synchronized roadmap — 2026-11-22 (WORKING)
+
+The [candidate evidence index](../../evidence/integ-resume/qualification-0130/candidate-focused-checks.json) records actual commands and log digests at `938c6aa6`. Both phone orientations exercised the Remote workspace. The product build with the two pinned native runtimes produced 268 files. The unchanged firmware renderer matched 1,838 unique native oracle states over 1,912 browser canvas captures against firmware `61827a71`. The interactive reference test remains open after a thirty-second state-selection timeout. This is scoped renderer proof at the pinned firmware source. The isolated Mix Family retry passed at all three reviewed sizes. Independent Remote and Build History approval remain on hold.
+
+The synchronized M0–M6 state block and all three regenerated views match the firmware repo. Current consolidated ancestry is recorded in [the source ledger](../../CONSOLIDATED-STATE.md). The captured archive and stock image checksums are in [the Project Sources delivery index](../../evidence/integ-resume/qualification-0130/project-sources-artifact-index.json).
+
 ## Combined Nightly browser evidence and independent review — 2026-11-22 (WORKING)
 
 - Source `938c6aa6f49564c59df58517f68c44eb97dfa84b` contains consolidated `583f622961fc9975fac746592ce6c483073c4170` with zero file deletions. Chromium 151.0.7922.34 ran with its normal sandbox.

@@ -1,0 +1,4 @@
+Running the unchanged pinned renderer/canvas comparison body independently. Full UI interaction remains covered by the separate failing gate.
+PASS pinned renderer only: 1838 unique states, 1912 browser canvas frames, 105,868,800 unique-state pixels
+
+EXIT 0

@@ -1,0 +1,25 @@
+{
+  "destination": "LoopyX0X37 Project Sources",
+  "upload_status": "NOT_SUBMITTED",
+  "reason": "Browser timed out before file chooser selection. No artifact upload receipt.",
+  "files": [
+    {
+      "filename": "lane-integ-resume-0130-938c6aa6-nightly-renders-and-review.tar.gz",
+      "size": 49652134,
+      "sha256": "fc7e7d8acb8f702d08d73fd7dde0ac0ce137709885482992f1b8dd855eb32ef5",
+      "local_path": "project-delivery/lane-integ-resume-0130-938c6aa6-nightly-renders-and-review.tar.gz"
+    },
+    {
+      "filename": "lane-integ-resume-0130-e29c99ec-stock-elite-package-flash.img",
+      "size": 643072,
+      "sha256": "cd027a30231a06241db83d6583dba6f97d1bd0ca60c4d9a4ba96135512075e57",
+      "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-stock-elite-package-flash.img"
+    },
+    {
+      "filename": "lane-integ-resume-0130-e29c99ec-stock-pro-package-flash.img",
+      "size": 643072,
+      "sha256": "146a600fa27644e204061c7f05040afe882606b3f74f690e07dea63c7594399c",
+      "local_path": "project-delivery/lane-integ-resume-0130-e29c99ec-stock-pro-package-flash.img"
+    }
+  ]
+}

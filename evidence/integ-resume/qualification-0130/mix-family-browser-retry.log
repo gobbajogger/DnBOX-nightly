@@ -1,0 +1,7 @@
+{"files":240,"output":"/workspace/scratch/857bb2409f82/integ-resume-0130/nightly-capture/.output/mix-family-ujkamwak/site","emulator":false,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+MIX_FAMILY 1440 900 PASS
+MIX_FAMILY 390 844 PASS
+MIX_FAMILY 844 390 PASS
+MIX_FAMILY PASS actual shipped build,3sizes,all10sends,5levels,cancel,Undo,5Soundroutes; no device
+
+EXIT 0

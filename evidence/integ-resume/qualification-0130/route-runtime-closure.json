@@ -1,0 +1,139 @@
+{
+  "commit": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "routes": {
+    "/": {
+      "source_html_sha256": "1c5cee4ad91584002d6f0deba47e452ddb7a1d1791e872ed1f23dd8f09c5029b",
+      "native_html_sha256": "1c5cee4ad91584002d6f0deba47e452ddb7a1d1791e872ed1f23dd8f09c5029b",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/breaks/": {
+      "source_html_sha256": "e32b0bf3d9d2ad629a2b2b405204059b0ec2f1d0ee504f8648e62b2be79e578e",
+      "native_html_sha256": "e32b0bf3d9d2ad629a2b2b405204059b0ec2f1d0ee504f8648e62b2be79e578e",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/builds/": {
+      "source_html_sha256": "924046cff3c0f337ab5dd849f1dec1d6ba1a7f9c44e964aee92cf083415d5a22",
+      "native_html_sha256": "924046cff3c0f337ab5dd849f1dec1d6ba1a7f9c44e964aee92cf083415d5a22",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/help/": {
+      "source_html_sha256": "abc1a5f5e8cceee622a0d08a726b72d46117be2474d3fdd7637db34a10d029e8",
+      "native_html_sha256": "abc1a5f5e8cceee622a0d08a726b72d46117be2474d3fdd7637db34a10d029e8",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/install/": {
+      "source_html_sha256": "c9f4fa7db64bb1ecb3b027a880e1a2a2daf323a763bcf9c3f943dc28517fbc62",
+      "native_html_sha256": "c9f4fa7db64bb1ecb3b027a880e1a2a2daf323a763bcf9c3f943dc28517fbc62",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/manual/": {
+      "source_html_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+      "native_html_sha256": "141b5eebaa0e69e546f47e05ffad0564a7b117344251a12aa374d98314aa35d7",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/manual/legacy.html": {
+      "source_html_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+      "native_html_sha256": "7e8695168cd1c56680dab325ba86803d18694c2f6fc041399ff4f3357f94872f",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/manual/original/": {
+      "source_html_sha256": "43bf4bd4e36c2fbb7efe7b24c38318f2574dac979b9f24f3544489579b97b925",
+      "native_html_sha256": "43bf4bd4e36c2fbb7efe7b24c38318f2574dac979b9f24f3544489579b97b925",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/manual/projects-guide.html": {
+      "source_html_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92",
+      "native_html_sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/manual/protocol.html": {
+      "source_html_sha256": "74636d3a25ef271bb80813cd1e296090e3e9c0cbf190575ed5822b9a5b8e9b24",
+      "native_html_sha256": "74636d3a25ef271bb80813cd1e296090e3e9c0cbf190575ed5822b9a5b8e9b24",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/new/": {
+      "source_html_sha256": "aace66e7c66035356fbd4f5427780ba4b1fba53fd8126ea6bf6f74702aea04cb",
+      "native_html_sha256": "aace66e7c66035356fbd4f5427780ba4b1fba53fd8126ea6bf6f74702aea04cb",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/presets/": {
+      "source_html_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+      "native_html_sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/presets/legacy/": {
+      "source_html_sha256": "5b4456c26f1c74fc6da46ceca45bcfab516f71f4c68eb9992e2be15c114e887c",
+      "native_html_sha256": "5b4456c26f1c74fc6da46ceca45bcfab516f71f4c68eb9992e2be15c114e887c",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/projects/": {
+      "source_html_sha256": "bc1933bbdbda3f5b1ed215806998c5122b30508fbdb4c1736284659ed54e6a76",
+      "native_html_sha256": "bc1933bbdbda3f5b1ed215806998c5122b30508fbdb4c1736284659ed54e6a76",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/remote/": {
+      "source_html_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+      "native_html_sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/remote/device/": {
+      "source_html_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+      "native_html_sha256": "d1acd2401e1c1f6b27680cc99d6009e648fdafb9f5b6e6025ae289c312e60a4d",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/remote/identity/": {
+      "source_html_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+      "native_html_sha256": "af6c4c0f407473962038e05843a68cfe29f4b4f9c3f9eaa002c2dd29451ae26f",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/starting-breaks/": {
+      "source_html_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348",
+      "native_html_sha256": "82b75f08325c91f5ea011b5fc96753ab3fca26af283ef08b3671f0d95a09d348",
+      "byte_equal": true,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    },
+    "/tools/": {
+      "source_html_sha256": "60551425427fab441fc74385a04209615a937680bdbedb4ad71c9b1ee1fe6177",
+      "native_html_sha256": "9723b274ee7f7665b6c38fba7ba9a640438959aa665946c2e0920db27000678b",
+      "byte_equal": false,
+      "local_http": 200,
+      "landscape_scroll_width": 844
+    }
+  },
+  "scope": "static closure and runtime-variant route HTML; local 844x390 smoke; dedicated installer/Remote/emulator behavior receipts separate"
+}

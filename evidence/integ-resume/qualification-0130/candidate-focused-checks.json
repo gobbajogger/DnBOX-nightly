@@ -1,0 +1,148 @@
+{
+  "commit": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "branch": "lane/integ-resume-0130",
+  "chromium": "151.0.7922.34",
+  "normal_sandbox": true,
+  "evidence": [
+    {
+      "log": "routes-source.log",
+      "status": "PASS",
+      "scope": "36 tests covering source, mounted build and 19 routes plus two compatibility redirects",
+      "sha256": "fb72a669428d3d5779d8ca845d79fcfb1621bca12b9fcb6584ff13c0ed3cf863"
+    },
+    {
+      "log": "routes-landscape-browser.log",
+      "status": "PASS",
+      "scope": "19 HTTP and viewport checks at 844\u00d7390",
+      "sha256": "0d688d740e25dbc177b9025b199722ac960f13feaeb2c3a63a6e3a845e869072"
+    },
+    {
+      "log": "remote-workspace-readiness.log",
+      "status": "PASS",
+      "scope": "4 active Remote interactions on two build variants and two phone orientations",
+      "sha256": "0dda149f61438f15f66dc75311dd60f7b101f77c1bab29d05d0523c53d6e45b8"
+    },
+    {
+      "log": "release-version-consistency.log",
+      "status": "PASS",
+      "scope": "42 release, variant identity, parser and site checks",
+      "sha256": "e78c22139e0823f13250ff8d356186a76e973e2c88f906cef2016e35a2da70c0"
+    },
+    {
+      "log": "installer-exchange-emulator.log",
+      "status": "PASS",
+      "scope": "142 installer, file-exchange, emulator and BREAK tests",
+      "sha256": "792b3468fef8faa555bc5c9ec4ad3dc7b1868309242dbe097aca9000e0ba1775"
+    },
+    {
+      "log": "workspace-unit.log",
+      "status": "PASS",
+      "scope": "92 workspace unit tests and direct draft-app regressions",
+      "sha256": "860bbeaf181f61e751506c3bb8f3c200a129f1fb0ea792cd72eb4a0cefb35b03"
+    },
+    {
+      "log": "remote-unit.log",
+      "status": "PASS",
+      "scope": "151 Remote tests",
+      "sha256": "ea810f23eae71aacdf2c3020db2d416c116dd6e1281b51ba4af28f3ece6ac7f4"
+    },
+    {
+      "log": "feature-votes-node.log",
+      "status": "PASS",
+      "scope": "Three fixture-backed reader tests",
+      "sha256": "da81134ac321353f894df046b2a4e1ce38067f8de8942db068718f412b71ea31"
+    },
+    {
+      "log": "feature-votes-browser.log",
+      "status": "PASS",
+      "scope": "Fixture-backed zero-to-one owner count refresh at five viewports",
+      "sha256": "f72bde13f54d41e9a18d63b6c6136cb7ad1b748d44625acf3009522416c3d45e"
+    },
+    {
+      "log": "visual-units.log",
+      "status": "PASS",
+      "scope": "55 visual-runner tests",
+      "sha256": "1c799529704fd757cf1b84a6749096ca91fac045d2cbe11b43d18e8604a50988"
+    },
+    {
+      "log": "installer-browser.log",
+      "status": "PASS",
+      "scope": "61 simulated bundled installer checks",
+      "sha256": "4b6a2dabdcefe3fb03160bd6159ce7f13eef7fcd937efa56f1e3958668374d13"
+    },
+    {
+      "log": "file-exchange-browser.log",
+      "status": "PASS",
+      "scope": "63 project-workspace browser checks",
+      "sha256": "597289d469c76879c29e0e0dd7b5f80964c081fc10a8faa7c5fbaea03fc753c6"
+    },
+    {
+      "log": "native-runtime-build.log",
+      "status": "PASS",
+      "scope": "268 generated files with both pinned native runtimes",
+      "sha256": "8e8a4cd3a6ad74d4f56a0d5814594fc14851f41504f1d75142a82387c048dd79"
+    },
+    {
+      "log": "native-emulator-browser.log",
+      "status": "PASS",
+      "scope": "26 matching RGB565 fixture frames",
+      "sha256": "1243e92b05f6a9f523604b8b52f8bc3ee4fcee887a02c6cdd8362a4e0d823c97"
+    },
+    {
+      "log": "native-firmware-renderer-parity.log",
+      "status": "PASS",
+      "scope": "1,838 native-oracle states and 1,912 browser-canvas captures at pinned firmware 61827a71",
+      "sha256": "8760f08f4bdc383a3baa835e1c1d06fb2903d31c9b3f102ff1a97bc5824f8315"
+    },
+    {
+      "log": "native-firmware-reference-retry.log",
+      "status": "FAIL",
+      "scope": "30-second timeout at state selection in altered-oracle interactive test",
+      "sha256": "3564060ff69cbf4d0b6d79a26aa4770b3533bba941af125b4fe1645b10dc5f76"
+    },
+    {
+      "log": "mix-family-browser-retry.log",
+      "status": "PASS",
+      "scope": "All three viewports, 10 sends, five levels and five Sound routes",
+      "sha256": "00acdda711c71f8582bde6e18fbae8088d558706b34446b69feffb4d9e053ffd"
+    },
+    {
+      "log": "structure-fixtures-only.log",
+      "status": "PASS",
+      "scope": "Nine structural browser fixture contracts",
+      "sha256": "33e08b5b3014ec1a6f44be2b8c94cd5a5f9961cb4572795b0426f6b30b0da99a"
+    },
+    {
+      "log": "structure-current-browser.log",
+      "status": "VOID",
+      "scope": "27 product cases recorded before a renderer crash. Product findings retained separately",
+      "sha256": "45f5f6a645c724c62c05b1ec8edd62c6715c2026e94a0947fe7a2c5020da759a"
+    },
+    {
+      "log": "legacy-desktop-retry.log",
+      "status": "PASS_SCOPED",
+      "scope": "Desktop Legacy Manual matched approved baseline. Filtered gate returned 1 by contract",
+      "sha256": "454a7a8783a14f7bd495615840b639b8153749446b4e9089d3413e2876ed617e"
+    },
+    {
+      "log": "npm-test.log",
+      "status": "FAIL",
+      "scope": "Reached the unfiltered visual sweep and exited 1 after a Chromium crash on desktop Legacy Manual",
+      "sha256": "b92e35187eb5bda2a10079844007a17dd33cfc995826cbe93f6b5865231b783e"
+    },
+    {
+      "log": "browser-suite.log",
+      "status": "FAIL",
+      "scope": "Initial source-only browser chain stopped after a Chromium crash on Mix Family",
+      "sha256": "65145669b306c5ac723d298f48615f7e6971aefaac8c59d51b10d499a5b98a83"
+    }
+  ],
+  "live_package_equality": [
+    "live-0.0.26-checksums.json",
+    "live-0.0.26-stable-checksums.json"
+  ],
+  "live_owner_voting": "NOT_RUN. Owner-authenticated access was not verified.",
+  "phone_manifest": "../phone-938c6aa6/render-manifest.json",
+  "proposal_manifest": "../remote-938c6aa6/proposal-manifest.json",
+  "candidate_review_status": "Phone Build History outputs differ from inherited references. Remote proposals remain unapproved."
+}

@@ -1,0 +1,203 @@
+{
+  "firmware": {
+    "ref_sha256": "986800e6f32285b44f4d2da9d652f49deb4e77070745e58e5108b11d9fe6c6fc",
+    "heads": 28,
+    "archive_tags": 1179,
+    "protected_prs": [
+      951,
+      869,
+      944,
+      947,
+      948,
+      887
+    ],
+    "excluded_or_active": [
+      {
+        "branch": "backup/dot-20261116",
+        "sha": "b92e29bd668d10224a0bea925db151b02342f7fb"
+      },
+      {
+        "branch": "backup/integ-before-start-split-20261116",
+        "sha": "246ea3718c6c72ba80bbd1aafcd5356f871c78c8"
+      },
+      {
+        "branch": "backup/main-installer-0026-20261121",
+        "sha": "b31d6fdb2f82eab4708a9a1f526604bed5b6d933"
+      },
+      {
+        "branch": "backup/release-0.0.26",
+        "sha": "94197fc839b00aff47b98ca02f3c6396e4a6eabf"
+      },
+      {
+        "branch": "gh-pages",
+        "sha": "c656bb5434fd1246f6a69fe4890ab81570228076"
+      },
+      {
+        "branch": "integration/dnbox-consolidated",
+        "sha": "f1786ebec2616477163b62b029c7e77405a9c3de"
+      },
+      {
+        "branch": "lane/fwui-verified-regressions",
+        "sha": "f1786ebec2616477163b62b029c7e77405a9c3de"
+      },
+      {
+        "branch": "lane/fwui-verified-regressions-resume",
+        "sha": "b995fb7374275e83a345fee45b7afc22d8206970"
+      },
+      {
+        "branch": "lane/fwui-verified-regressions-resume-0115",
+        "sha": "b995fb7374275e83a345fee45b7afc22d8206970"
+      },
+      {
+        "branch": "lane/fwui-verified-regressions-resume-0130",
+        "sha": "b995fb7374275e83a345fee45b7afc22d8206970"
+      },
+      {
+        "branch": "lane/fwui-verified-regressions-resume-work",
+        "sha": "4ad986e47377f276f500299570af75d1057a9b5c"
+      },
+      {
+        "branch": "lane/integ",
+        "sha": "d89d26666e6a22eabec8f01c8399e78db864a991"
+      },
+      {
+        "branch": "lane/integ-resume",
+        "sha": "8505f4e483c306246a443366a0845b0a0dbbc68d"
+      },
+      {
+        "branch": "lane/integ-resume-0115",
+        "sha": "9e77ea871dbb0cf1b8b76e6a653350ef364c5abb"
+      },
+      {
+        "branch": "lane/integ-resume-0130",
+        "sha": "9314e33560af1bdf0dcc6137a3564df682f2e193"
+      },
+      {
+        "branch": "lane/prep-exact-inputs-20261122-0100",
+        "sha": "7e2ea75cf46b55187116d6261b975e86554bc6e8"
+      },
+      {
+        "branch": "lane/prep-shared-inputs",
+        "sha": "3e06faac0aaba6569055b28b2cdee51d4f3bfe31"
+      },
+      {
+        "branch": "lane/prep-shared-inputs-delivery",
+        "sha": "6f6d1ba272fb553085b45879154623eb6cf66233"
+      },
+      {
+        "branch": "lane/prep-shared-inputs-restore",
+        "sha": "7e47aadaf95051a7e93f2e46b2005b2be06574b4"
+      },
+      {
+        "branch": "lane/sound",
+        "sha": "f013ecc653f2b9f0006e976a1097250e9356ce14"
+      },
+      {
+        "branch": "lane/sound-engine-qualification",
+        "sha": "230a73e4ac075f3752926b3a65130181de5c723a"
+      },
+      {
+        "branch": "lane/sound-engine-qualification-resume",
+        "sha": "49ba51f13f76d0e709d7b6c32d12f31972c1d985"
+      },
+      {
+        "branch": "lane/sound-engine-qualification-resume-0115",
+        "sha": "49ba51f13f76d0e709d7b6c32d12f31972c1d985"
+      },
+      {
+        "branch": "lane/sound-engine-qualification-resume-0130",
+        "sha": "49ba51f13f76d0e709d7b6c32d12f31972c1d985"
+      },
+      {
+        "branch": "lane/sound-engine-qualification-resume-work",
+        "sha": "6e3055e52d4cfc70c5af472d0727eb82b4efa882"
+      },
+      {
+        "branch": "main",
+        "sha": "f76b6c6c87230d8e61d0ae697739efcd7ce8fe61"
+      },
+      {
+        "branch": "nightly",
+        "sha": "2dd06b46ff037f858765ddf40275d8da02a9066c"
+      }
+    ],
+    "exact_named_archive": [],
+    "requires_recheck_after_lane_merges": [
+      {
+        "branch": "release/0.0.26",
+        "sha": "94197fc839b00aff47b98ca02f3c6396e4a6eabf",
+        "archive_tag": "archive/release/0.0.26",
+        "tag_head": null
+      }
+    ]
+  },
+  "nightly": {
+    "ref_sha256": "d4077d08d8108328cde58c4877bf9256607f04ea86b677229d1e9297a7a00ebe",
+    "heads": 14,
+    "archive_tags": 159,
+    "protected_prs": [
+      132,
+      131
+    ],
+    "excluded_or_active": [
+      {
+        "branch": "backup/dot-20261116",
+        "sha": "3c6ec2d6c09912a9b7a182667752690e3a9742de"
+      },
+      {
+        "branch": "backup/integ-before-start-split-20261116",
+        "sha": "b39e99c4197544037896fd4ed463a338a5d423c3"
+      },
+      {
+        "branch": "gh-pages",
+        "sha": "8fcef4a0a4383b449f6e6c558fb34166c69e3ca7"
+      },
+      {
+        "branch": "integration/dnbox-consolidated",
+        "sha": "583f622961fc9975fac746592ce6c483073c4170"
+      },
+      {
+        "branch": "lane/integ",
+        "sha": "ff96ffd6ef474d8fc06442024e4149ce22f97b18"
+      },
+      {
+        "branch": "lane/integ-resume",
+        "sha": "3af7f0ff8f6eabe8d81dd39daac14fbb4a9fca48"
+      },
+      {
+        "branch": "lane/integ-resume-0115",
+        "sha": "3af7f0ff8f6eabe8d81dd39daac14fbb4a9fca48"
+      },
+      {
+        "branch": "lane/integ-resume-0130",
+        "sha": "924a2ec616b41a0462f81371ec091159306a5ed9"
+      },
+      {
+        "branch": "lane/remote",
+        "sha": "913120550b2634abae684390a05057cc9d9b3ee8"
+      },
+      {
+        "branch": "lane/remote-resume",
+        "sha": "e9586b0afee025a9f9230af8e4f570cf34326681"
+      },
+      {
+        "branch": "lane/remote-resume-0115",
+        "sha": "e9586b0afee025a9f9230af8e4f570cf34326681"
+      },
+      {
+        "branch": "lane/remote-resume-0130",
+        "sha": "183207ed2b7dd7b346ca5871408b292df4fb0ae2"
+      },
+      {
+        "branch": "lane/web",
+        "sha": "436309f93ecf9a4116933ef8de4eaf2743b11553"
+      },
+      {
+        "branch": "main",
+        "sha": "30d6d5caa6f60d1fa8847fb840055d41a7eeba20"
+      }
+    ],
+    "exact_named_archive": [],
+    "requires_recheck_after_lane_merges": []
+  }
+}

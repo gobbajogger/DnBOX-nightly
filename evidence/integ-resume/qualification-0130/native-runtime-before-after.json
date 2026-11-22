@@ -1,0 +1,46 @@
+{
+  "baseline": "583f622961fc9975fac746592ce6c483073c4170",
+  "candidate": "938c6aa6f49564c59df58517f68c44eb97dfa84b",
+  "byte_equal": true,
+  "files": {
+    "reference/screens": {
+      "fwui.wasm": "af05d8062d0e9cb639f79fc225f4ec6734f52cee1266a5837b619d2597c07234",
+      "guard.wasm": "36c6e241220c75362d8f03a50aeb8e2bfc81b7ce7a30a145df796ce6cf528d03",
+      "index.html": "22765df7f10bf1dab499ca51cffc99171444800dda8e5c02da749d6166d7b2c9",
+      "native-rgb.tsv": "3dd2954b10030ee590d9389a4ce9485ed0a175b140b7fa946ecbe5b57ff4e0eb",
+      "normal.wasm": "d79cef27e61b48f1389eb7210b45ae8459bdef15735ed6aed74969050ba83444",
+      "page.mjs": "bfe8d590771e05d7fa0bebc910fb411f38309d0305f3a804026301ae53ed7f85",
+      "render.mjs": "d8754d43ed880dff3be421dcbe0f131087fa7c16178be097023e87dcc96aa2ee",
+      "routes.wasm": "14933fa20648bb5af6512f9d6c2396a00c13f3227ca87522078584fff872661f",
+      "runner.mjs": "81ff280d01b197caca705b10ddcfbf8ceffc2da97ede470531208e57f48cdfbb",
+      "screens.css": "78917f7be974b06acd74ab081143df65079f33fbb72dd1bf907add803fc35a1c",
+      "states.json": "91e1dfdcf14e6987aaebc17a00ce8b5aa74da63d93d44c4c6c869819f3874f9f",
+      "synthone-frame.wasm": "cb2a8cc390d579433cdca1de2c25c9e89f3dd0ba1997fc1ed21dbf54fe909d33",
+      "synthone-patch.wasm": "6109bf9b0a05f9ea6b7a9f684a86fa05b1d3284f7fa177e7d816bd5008bd5aec",
+      "wave.wasm": "49101296f3df51140b0806bccfd9f95fc202b89058354795305f15eb68760e98",
+      "worker.mjs": "122327199ad871f4e9d092cd0a1c39d5dc4fe215320bb3f18c6f5e8041a4274a"
+    },
+    "emu": {
+      "index.html": "f71232cecb99b66ef3ae8512f047e27bde4ff4a7a70c40c49614db0b7d6861df",
+      "kernel.wasm": "9ad1ab9c533ccda4b506a0b0cc281de50af3dcd57370ffa916a5174277cbdbd0",
+      "native-session.mjs": "077161f1641a927df241112b71bfa46e25023d3808d08469851838dd9c876360",
+      "observer.mjs": "525c2437315760e448e4f631ca9ba1a9e2311d216b18ef93852969d09098b2d3",
+      "page.mjs": "f4348ebcbedc94495c60f6bcf93848567fc6a0d3d9961f08c81c613fab5d9966",
+      "previous/index.html": "010718d268ec15e83da8c641eb82ec30588d3d001bd4cf07fb15a182bd82fc0b",
+      "previous/kernel.wasm": "09d6be238be42c540a202aa962f3848d0a0bff79c4a02fc6e7c8aa76bdaaf30b",
+      "previous/native-session.mjs": "077161f1641a927df241112b71bfa46e25023d3808d08469851838dd9c876360",
+      "previous/observer.mjs": "525c2437315760e448e4f631ca9ba1a9e2311d216b18ef93852969d09098b2d3",
+      "previous/page.mjs": "f4348ebcbedc94495c60f6bcf93848567fc6a0d3d9961f08c81c613fab5d9966",
+      "previous/runtime.json": "f11271f85ad61c9c5bc5f3959f8b5ffa2e3a8c8cbab90f4b43c7aeb94676b4e0",
+      "previous/session-codec.mjs": "5924c689e512fc1c4e14718e0d267dce7ef287ec51183d1902e3d7902134845d",
+      "previous/style.css": "f9d8c09ebe689442f027b038482488a6e02db255db7553127b92b907b68cd5b8",
+      "previous/wasi.mjs": "76221f9d11ff8be10d9844f0ecc696ddc0bafb694775a12a6b665c4d77a78f18",
+      "previous/worklet.mjs": "3841c8754053df804e103dc80ea31ab3dc0c4063112aa20b45f3b1421adbd034",
+      "runtime.json": "80db4099164c3a09625e6ec35f9010d9158dcac2996a180f2fc2ef98c8ab252c",
+      "session-codec.mjs": "5924c689e512fc1c4e14718e0d267dce7ef287ec51183d1902e3d7902134845d",
+      "style.css": "f9d8c09ebe689442f027b038482488a6e02db255db7553127b92b907b68cd5b8",
+      "wasi.mjs": "a1fdc47f5b2abd23374101bdac49067c1fb5d60ac397cd19e2780e3d6d6c0dc1",
+      "worklet.mjs": "3841c8754053df804e103dc80ea31ab3dc0c4063112aa20b45f3b1421adbd034"
+    }
+  }
+}

@@ -5,6 +5,105 @@ This tree contains the supplied RULES.md v2 start-file/removal payload for PR #1
 
 Broad unmerged work is retained at `backup/integ-before-start-split-20261116`, exact tip `b39e99c4197544037896fd4ed463a338a5d423c3`. Gate/environment corrections move to an independent follow-up; other product work remains in the backup and its original lane branches. No unique history is deleted.
 
+## Integration candidate ancestry — 22 November 2026
+
+Firmware consolidated is `f1786ebec2616477163b62b029c7e77405a9c3de` and Nightly consolidated is `583f622961fc9975fac746592ce6c483073c4170`. The respective integration candidate source commits `e29c99ec2cc610e5af3de575e85771f666b239f4` and `938c6aa6f49564c59df58517f68c44eb97dfa84b` contain those exact bases. Each has zero deleted paths relative to its base. See [the lane ledger](docs/lanes/integ.md) for focused tests and blockers. Final gates, merges and release acceptance remain with the coordinator.
+
+## Machine-readable roadmap state
+
+```json
+{
+  "items": [
+    {
+      "id": "M0",
+      "title": "Start files and green gates",
+      "move": "M0",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "integ",
+      "dependencies": [],
+      "next_action": "Use the pinned Local gate receipts at firmware f1786ebe and Nightly 583f6229 to reconcile failures and verify authenticated status reporting."
+    },
+    {
+      "id": "M1",
+      "title": "Sound engines",
+      "move": "M1",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "sound",
+      "dependencies": [
+        "M0"
+      ],
+      "next_action": "Complete exact-head checks and integrate; no move completion asserted"
+    },
+    {
+      "id": "M2",
+      "title": "Firmware UI",
+      "move": "M2",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "fwui",
+      "dependencies": [
+        "M0"
+      ],
+      "next_action": "FWUI #975, #988 and #987 are recorded in firmware consolidated. Final combined screen and runtime evidence remains required."
+    },
+    {
+      "id": "M3",
+      "title": "Remote",
+      "move": "M3",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "remote",
+      "dependencies": [
+        "M0"
+      ],
+      "next_action": "Resolve the independent Remote owner-baseline findings, then qualify the changed screens and runtime on the combined Nightly source."
+    },
+    {
+      "id": "M4",
+      "title": "Website",
+      "move": "M4",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "web",
+      "dependencies": [
+        "M0"
+      ],
+      "next_action": "Resolve the Build History current-versus-archive copy conflict; qualify the changed references and final firmware display parity."
+    },
+    {
+      "id": "M5",
+      "title": "BREAK samples, LSan and roadmap",
+      "move": "M5",
+      "status": "working",
+      "merge_sha": "",
+      "owner": "integ",
+      "dependencies": [
+        "M0"
+      ],
+      "next_action": "Co-deliver the five original BREAK samples with the stock model packages and verify standard import and readback. Verify compact-program LeakSanitizer and live owner vote persistence."
+    },
+    {
+      "id": "M6",
+      "title": "Combined qualification and delivery",
+      "move": "M6",
+      "status": "pending",
+      "merge_sha": "",
+      "owner": "integ",
+      "dependencies": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5"
+      ],
+      "next_action": "After the lane merges, run both Local gates and strict ten-minute playback on the combined source; hand off exact evidence and safe cleanup reachability to the coordinator."
+    }
+  ]
+}
+```
+
 ## Merged pull requests through `914d68e8ed50698ea77c9d18c221c404629b9332`
 
 GitHub reports these PRs merged into `integration/dnbox-consolidated`. Each merge commit is reachable from this snapshot. The PR head is included for squash merges and deleted branches. Lane acceptance is tracked in `docs/lanes/integ.md`.
