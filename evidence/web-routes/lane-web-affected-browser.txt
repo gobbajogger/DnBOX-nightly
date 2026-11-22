@@ -1,0 +1,281 @@
+Candidate browser receipts. Tests use sandboxed Chromium and simulated devices.
+
+## history-response
+Chromium 151.0.7922.34
+{"case": "positive-one-build-320", "pass": true, "state": {"error": false, "builds": 1, "history": 148, "width": 320, "scrollWidth": 320, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "positive-one-build-375", "pass": true, "state": {"error": false, "builds": 1, "history": 148, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "null-history-last", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "null-history-first", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "null-pro-model", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "schema-999", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "forged-device-verified", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "null-build", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "object-history", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "array-models", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "string-model-size", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "object-product", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "bad-model-hash", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "model-physical-claim", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "build-physical-claim", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "build-installable-claim", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "unsupported-build-status", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "object-history-description", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "history-installable-claim", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "history-physical-claim", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "bad-history-source", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "duplicate-history-id", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "actual-two-builds-schema-999", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "network", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "404", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "invalid-json", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "detached-render-error", "pass": true, "state": {"error": true, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "actual-full-history-320", "pass": true, "state": {"error": false, "builds": 2, "history": 148, "width": 320, "scrollWidth": 320, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "actual-full-history-375", "pass": true, "state": {"error": false, "builds": 2, "history": 148, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "actual-full-history-768", "pass": true, "state": {"error": false, "builds": 2, "history": 148, "width": 768, "scrollWidth": 768, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "actual-full-history-1280", "pass": true, "state": {"error": false, "builds": 2, "history": 148, "width": 1280, "scrollWidth": 1280, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "valid-empty-history", "pass": true, "state": {"error": false, "builds": 0, "history": 0, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "valid-future-append", "pass": true, "state": {"error": false, "builds": 2, "history": 149, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "inert-title-text", "pass": true, "state": {"error": false, "builds": 2, "history": 148, "width": 375, "scrollWidth": 375, "overflow": 0, "executed": false, "injectedElements": 0, "forged": false, "downloads": 0}, "page_errors": []}
+{"case": "product-offline-1440x900", "pass": true, "total": 198, "matches": ["release-v0.0.26-94197fc8", "main-versions-0"], "restored": 198, "page_errors": []}
+{"case": "product-offline-390x844", "pass": true, "total": 198, "matches": ["release-v0.0.26-94197fc8", "main-versions-0"], "restored": 198, "page_errors": []}
+{"case": "product-offline-844x390", "pass": true, "total": 198, "matches": ["release-v0.0.26-94197fc8", "main-versions-0"], "restored": 198, "page_errors": []}
+{"checks": 37, "passed": 37, "failed": 0}
+
+## final-workspace-browser
+PASS empty preview cannot install
+PASS no invented connection
+PASS one action panel visible
+PASS embedded panel has no duplicate home control
+PASS embedded sample panel matches workspace theme
+PASS samples require real read before writing
+PASS real WAV parsing stages one loop
+PASS file replace retains count
+PASS chooser cancel retains draft
+PASS pending audio decode prevents firmware operation
+PASS invalid backup reports an error without device writes
+PASS task switches retain draft and same frame
+PASS browser back restores firmware task
+PASS browser forward restores sample task
+PASS sample operation prevents competing firmware operation
+PASS firmware operation prevents sample navigation
+PASS firmware invalidation preserves draft but denies stale write
+PASS cancel reread preserves prepared sample
+PASS repeated connect coalesces while permission pending
+PASS permission failure shown and retry enabled
+PASS malformed local package denied
+PASS cancelled firmware file chooser stays denied
+PASS 320px no horizontal overflow
+PASS 320px sample panel has no horizontal overflow
+PASS 390px no horizontal overflow
+PASS 390px sample panel has no horizontal overflow
+PASS 1280px no horizontal overflow
+PASS 1280px sample panel has no horizontal overflow
+PASS no page script errors: []
+{"checks": 29, "failures": []}
+
+## final-project-workspace-browser
+PASS 320 top install/sample tasks
+PASS 320 projects entry first viewport
+PASS 320 installer no overflow
+PASS 320 one panel visible
+PASS 320 project no overflow
+PASS 320 embedded no duplicate navigation
+PASS 320 writes denied without connection
+PASS 320 whole-project/reset scope explicit
+PASS 320 autosave risk explained
+PASS 320 corrupt file cannot import
+PASS 320 transfer blocks task switch
+PASS 320 projects relinquishes ownership
+PASS 320 dirty name/options retained
+PASS 320 chosen file retained
+PASS 320 back/forward restores project task
+PASS 390 top install/sample tasks
+PASS 390 projects entry first viewport
+PASS 390 installer no overflow
+PASS 390 one panel visible
+PASS 390 project no overflow
+PASS 390 embedded no duplicate navigation
+PASS 390 writes denied without connection
+PASS 390 whole-project/reset scope explicit
+PASS 390 autosave risk explained
+PASS 390 corrupt file cannot import
+PASS 390 transfer blocks task switch
+PASS 390 projects relinquishes ownership
+PASS 390 dirty name/options retained
+PASS 390 chosen file retained
+PASS 390 back/forward restores project task
+PASS 768 top install/sample tasks
+PASS 768 projects entry first viewport
+PASS 768 installer no overflow
+PASS 768 one panel visible
+PASS 768 project no overflow
+PASS 768 embedded no duplicate navigation
+PASS 768 writes denied without connection
+PASS 768 whole-project/reset scope explicit
+PASS 768 autosave risk explained
+PASS 768 corrupt file cannot import
+PASS 768 transfer blocks task switch
+PASS 768 projects relinquishes ownership
+PASS 768 dirty name/options retained
+PASS 768 chosen file retained
+PASS 768 back/forward restores project task
+PASS 1280 top install/sample tasks
+PASS 1280 projects entry first viewport
+PASS 1280 installer no overflow
+PASS 1280 one panel visible
+PASS 1280 project no overflow
+PASS 1280 embedded no duplicate navigation
+PASS 1280 writes denied without connection
+PASS 1280 whole-project/reset scope explicit
+PASS 1280 autosave risk explained
+PASS 1280 corrupt file cannot import
+PASS 1280 transfer blocks task switch
+PASS 1280 projects relinquishes ownership
+PASS 1280 dirty name/options retained
+PASS 1280 chosen file retained
+PASS 1280 back/forward restores project task
+PASS standalone projects route renders
+PASS standalone navigation available
+PASS no JavaScript errors
+63 project workspace browser checks PASS
+
+## final-installer-deadline-browser
+{"files":265,"output":"[checkout]/.output/installer-deadline-8o43isvm/site","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS installer deadline new-selection verified retry/selection, MIDI0
+PASS installer deadline normal verified retry/selection, MIDI0
+PASS installer deadline timeout verified retry/selection, MIDI0
+
+## bundled-browser
+Chromium 151.0.7922.34
+PASS elite bundled package needs no separate file
+PASS elite verified download available while DEV consent blocks install
+PASS elite bundled bytes install with no ctl.img and stale local input ignored
+PASS elite actual install boundary receives unchanged complete package image
+PASS elite page has no script exceptions
+PASS elite/blank denies package before download or MIDI
+PASS elite/blank refusal reports without script exception
+PASS elite/app-crc denies package before download or MIDI
+PASS elite/app-crc refusal reports without script exception
+PASS elite/outer-crc denies package before download or MIDI
+PASS elite/outer-crc refusal reports without script exception
+PASS elite/tail denies package before download or MIDI
+PASS elite/tail refusal reports without script exception
+PASS elite/abi denies package before download or MIDI
+PASS elite/abi refusal reports without script exception
+PASS elite/ctl-crc denies package before download or MIDI
+PASS elite/ctl-crc refusal reports without script exception
+PASS elite/no-map denies package before download or MIDI
+PASS elite/no-map refusal reports without script exception
+PASS elite/controller_sha256 mismatch rejected despite correct package SHA
+PASS elite/controller_size mismatch rejected despite correct package SHA
+PASS elite malformed controller strategy None denied
+PASS elite malformed controller strategy False denied
+PASS elite malformed controller strategy hosted denied
+PASS elite malformed controller strategy {} denied
+PASS elite malformed controller strategy  denied
+PASS elite wrong model package rejected despite correct downloaded hash
+PASS elite legacy metadata retains local controller input
+PASS elite missing legacy controller refuses before MIDI
+PASS elite matching local controller preserves legacy install path
+PASS pro bundled package needs no separate file
+PASS pro verified download available while DEV consent blocks install
+PASS pro bundled bytes install with no ctl.img and stale local input ignored
+PASS pro actual install boundary receives unchanged complete package image
+PASS pro page has no script exceptions
+PASS pro/blank denies package before download or MIDI
+PASS pro/blank refusal reports without script exception
+PASS pro/app-crc denies package before download or MIDI
+PASS pro/app-crc refusal reports without script exception
+PASS pro/outer-crc denies package before download or MIDI
+PASS pro/outer-crc refusal reports without script exception
+PASS pro/tail denies package before download or MIDI
+PASS pro/tail refusal reports without script exception
+PASS pro/abi denies package before download or MIDI
+PASS pro/abi refusal reports without script exception
+PASS pro/ctl-crc denies package before download or MIDI
+PASS pro/ctl-crc refusal reports without script exception
+PASS pro/no-map denies package before download or MIDI
+PASS pro/no-map refusal reports without script exception
+PASS pro/controller_sha256 mismatch rejected despite correct package SHA
+PASS pro/controller_size mismatch rejected despite correct package SHA
+PASS pro malformed controller strategy None denied
+PASS pro malformed controller strategy False denied
+PASS pro malformed controller strategy hosted denied
+PASS pro malformed controller strategy {} denied
+PASS pro malformed controller strategy  denied
+PASS pro wrong model package rejected despite correct downloaded hash
+PASS pro legacy metadata retains local controller input
+PASS pro missing legacy controller refuses before MIDI
+PASS pro matching local controller preserves legacy install path
+PASS model change during embedded hash refuses stale install before MIDI
+{"checks": 61, "failed": 0, "failures": []}
+
+## presets-browser
+{"files":265,"output":"[checkout]/.output/presets-journey-868d6eyh/site","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS request detector rejects handled-midi after navigation; no pageerror or hardware access
+PASS request detector rejects emu-first-load after navigation; no pageerror or hardware access
+PASS request detector rejects emu-preset-phase after navigation; no pageerror or hardware access
+PASS actual presets3formats+DNPR/ZIP original/rename/invalid-retention/discovery/keyboard/expanded/empty/error/fit/journey-MIDI0/emu0 1440 900
+PASS actual presets3formats+DNPR/ZIP original/rename/invalid-retention/discovery/keyboard/expanded/empty/error/fit/journey-MIDI0/emu0 390 844
+PASS actual presets3formats+DNPR/ZIP original/rename/invalid-retention/discovery/keyboard/expanded/empty/error/fit/journey-MIDI0/emu0 844 390
+
+## manual-browser
+{"files":265,"output":"[checkout]/.output/manual-journey-pwdkohqv/site","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+manual print appearance True {"background": "rgb(255, 255, 255)", "minimumTextContrast": 9.739769120526205, "steps": [{"step": "1", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "2", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "3", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "4", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "5", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "6", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "7", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "8", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "9", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "10", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "11", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "12", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "13", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "14", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "15", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "16", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}]}
+manual print appearance False {"background": "rgb(255, 255, 255)", "minimumTextContrast": 9.739769120526205, "steps": [{"step": "1", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "2", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "3", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "4", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "5", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "6", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "7", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "8", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "9", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "10", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "11", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "12", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "13", "hit": true, "width": 2, "style": "solid", "color": "rgb(17, 17, 17)"}, {"step": "14", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "15", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}, {"step": "16", "hit": false, "width": 1, "style": "solid", "color": "rgb(102, 102, 102)"}]}
+PASS manual keyboard/hash/print/legacy/fit 1440 900
+PASS manual keyboard/hash/print/legacy/fit 390 844
+PASS manual keyboard/hash/print/legacy/fit 844 390
+
+## emulator-lcd-browser
+{"files":265,"output":"[checkout]/.output/lcd-fmwb_jip/site","emulator":true,"published":false,"firmwareWrites":false,"catalogMutations":[]}
+PASS boot: 57600/57600 RGB565 pixels match fea68b14ad5a085ebb63340cd24e05f2fecdda9ddcee79872ceceb51dd11f688
+PASS fx: 57600/57600 RGB565 pixels match 352be0736139e990c838f42b39c7852daa65663fa205ed38cbeb9195f958ad61
+PASS save: 57600/57600 RGB565 pixels match ec3e1f27f5a3d6198f61a480ec46deaadb70937d4ccfc06d8325d4f75171c8d3
+PASS home: 57600/57600 RGB565 pixels match e9025ae9c0a6727f1b15233ad7a255100d7d2daa5027e4e681718e2e57f3f207
+PASS mix: 57600/57600 RGB565 pixels match 6533051651f3c0ffa781a4f3bcf832a12e764cd642fbd4a2a14458c0635a683f
+PASS mix-level: 57600/57600 RGB565 pixels match d25e18c5ceb21463ec3e4a63994957ef87ae1e3af9c97fdc75d1cfdabf38574c
+PASS kick-909: 57600/57600 RGB565 pixels match 99a55d0ce51b44aec2ed32131f875b6e4b43d05e412321c2ff431a469cacfdb8
+PASS kick-808: 57600/57600 RGB565 pixels match 3194b4647348237d39f7ad098d165549077c1c0ed9dfbb2705491956cdef2f4d
+PASS seq-808: 57600/57600 RGB565 pixels match 424ca63bd4edd9f72f6135dab43388df96d59638e0a236e49cc9890ce36cd8d4
+PASS global: 57600/57600 RGB565 pixels match 3c1627db613edc6888d05e3952b07bc59c8350f1d930fcb1b1432802110d895c
+PASS midi-clock: 57600/57600 RGB565 pixels match ad4399b3e521d630b180daf30d4f21a611d7d2cd6c1ecd2b69a5033bec5d72f6
+PASS boot: 57600/57600 RGB565 pixels match 082b461c91e04412db282cb71dff34046d9520c1df43fc86a80d34c51a08d43a
+PASS fx: 57600/57600 RGB565 pixels match ab4b450ec94901c1646262e61ed6137abdbf3686cc50f3126b8031c060ce6e84
+PASS save: 57600/57600 RGB565 pixels match 0b2604bd806fef08195e7c4e46eda25060388a6b6b4c167418efe977dbf35fd9
+PASS home: 57600/57600 RGB565 pixels match 5a03027210f9ec41748916e50bbbfb50fd1052992d50b44498941a4463a1243c
+PASS mix: 57600/57600 RGB565 pixels match 29d632c0f9df00ffa8a22e8b6b61d57c1f7c94c6db39464b14bde2b785bc7cc0
+PASS mix-level: 57600/57600 RGB565 pixels match 27b736bea93ba17b46f113ed479d5a6f27d1c12d53b8aedb653adcc282bd6a07
+PASS kick-909: 57600/57600 RGB565 pixels match e6c7ff3149f76a4da2d00462fe3fc36149655d1998be0c721d0c4d09040019d6
+PASS kick-808: 57600/57600 RGB565 pixels match 3194b4647348237d39f7ad098d165549077c1c0ed9dfbb2705491956cdef2f4d
+PASS seq-808: 57600/57600 RGB565 pixels match b7873bb7cd1c837f49470c8d7e444992b03513edc6b88660bb223e3d232b6303
+PASS global: 57600/57600 RGB565 pixels match 8be66af10fb509e4af78f465bbce9c9f8be68e19758bd95c9a2b44817722d057
+PASS midi-clock: 57600/57600 RGB565 pixels match 59ed5da159a987c38cb56aa87735867e4e78cd806dbaced00826796382aebcb0
+Traceback (most recent call last):
+  File "[checkout]/tests/emulator-lcd-browser.py", line 164, in <module>
+    main()
+  File "[checkout]/tests/emulator-lcd-browser.py", line 154, in main
+    check_historical_reference(page, origin, presentation)
+  File "[checkout]/tests/emulator-lcd-browser.py", line 93, in check_historical_reference
+    response = page.goto(f"{origin}/reference/current-ui.html")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9875, in goto
+    self._sync(
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_page.py", line 560, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 156, in goto
+    await self._channel.send(
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: Page.goto: Page crashed
+Call log:
+  - navigating to "http://127.0.0.1:45253/reference/current-ui.html", waiting until "load"
+
+

@@ -46,7 +46,7 @@ const offlineTheme = `<style>
 ${barlowLicense}
 */
 ${fonts}
-:root:not([data-theme="light"]) {
+:root.offline-tool:not([data-theme="light"]) {
   color-scheme: dark;
   --bg: #101715;
   --card: #1b2b20;
@@ -58,9 +58,13 @@ ${fonts}
   --line: #3c5140;
   --accent: #c8dfa7;
 }
-body { font-family: Barlow, sans-serif; }
+.offline-tool body { font-family: Barlow, sans-serif; }
 </style>`;
-const withOfflineTheme = (html) => replaceOnce(html, '</head>', offlineTheme + '\n</head>', 'offline theme');
+function withOfflineTheme(html) {
+  const styled = replaceOnce(html, '</head>', offlineTheme + '\n</head>', 'offline theme');
+  return replaceOnce(styled, '<script type="module">', `<script type="module">
+if (location.protocol === 'file:') document.documentElement.classList.add('offline-tool');`, 'offline theme toggle');
+}
 
 const outputs = {
   'docs/install/index.html': withOfflineTheme(installer),

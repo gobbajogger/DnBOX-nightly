@@ -1,7 +1,7 @@
 {
   "baseline": "583f622961fc9975fac746592ce6c483073c4170",
   "accepted_product": "000e29102525a6ce5672a1cdfd7773492b3158b6",
-  "candidate_product_manifest_sha256": "b98e8d6540aa1047feae40ca7c8d3ba08697a7fe0a65c9d331d5a587e54ce9b0",
+  "candidate_product_manifest_sha256": "3e14aa66f9d1f53d3904b0b9d8f729dc068741d179106bb2999cf1140dd3e981",
   "browser": "Playwright Chromium 151.0.7922.34, normal sandbox",
   "all_routes": [
     {
@@ -622,7 +622,7 @@
     {
       "route": "install/index.html",
       "baseline_html_sha256": "b5048877d9dbca183f8bb4e43a36bdcd05487f9e63606d311bc509fb127b7097",
-      "candidate_html_sha256": "97935fd4d6ad30d5080516988825a24282fc7100d639c6c60779c45e1c2681f7",
+      "candidate_html_sha256": "38a1f1ba149ab7b2251bed73bdc463a250be96ccd89aa50114904b470ec2ccc8",
       "coverage": "changed behavior",
       "baseline_views": [
         {
@@ -900,7 +900,8 @@
           "sha256": "e23aec5eccc4b5627c11c84b6dd4df0481a9f23761ffa2eceec07fd1ef105af0",
           "errors": []
         }
-      ]
+      ],
+      "candidate_view_image_note": "Visual observations precede the compatibility correction to restore the hosted child URL spelling. The hosted task behaviors were reverified."
     },
     {
       "route": "manual/index.html",
@@ -2598,274 +2599,139 @@
   ],
   "offline_appearance_views": [
     {
-      "version": "151.0.7922.34",
       "route": "install",
-      "viewport": [
+      "size": [
         1440,
         900
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "0e1783ac1644f68b977c78825ea1ac16256b3cbea3582f075caedee4eb7f5102",
-      "image_sha256": "8850942006178ce2676855805a9d42e5290e84a006c0722ff69101ce143e91ff",
-      "width": 1440,
-      "height": 2383,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "8850942006178ce2676855805a9d42e5290e84a006c0722ff69101ce143e91ff",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": [
-        "../breaks/index.html?embedded=1",
-        "../projects/index.html?embedded=1"
-      ]
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
     },
     {
-      "version": "151.0.7922.34",
       "route": "breaks",
-      "viewport": [
+      "size": [
         1440,
         900
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "a06fe4f0f9581627d1d4b63e7bef95caac0964299aaf7d1c1e3f7423dcee23e7",
-      "image_sha256": "fd9a7c211d9193bb9923d1d433f46c348490e0c9fcc9d310247ed745674d06d3",
-      "width": 1440,
-      "height": 1216,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "28c6e842a48ecd2e63bb785e96147df181ad8000cae846ce6c287f5a8fe171a4",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
     },
     {
-      "version": "151.0.7922.34",
       "route": "projects",
-      "viewport": [
+      "size": [
         1440,
         900
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "918f08e1b521f470c7b87df1e13801a0a26a11037f163e3354eff76eb81725e1",
-      "image_sha256": "0d41bd9865e1e2cd9537ac4d4ff1f7acd8fda296962440b4124603d4f02e5b31",
-      "width": 1440,
-      "height": 1216,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "0d41bd9865e1e2cd9537ac4d4ff1f7acd8fda296962440b4124603d4f02e5b31",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 1440
     },
     {
-      "version": "151.0.7922.34",
       "route": "install",
-      "viewport": [
+      "size": [
         390,
         844
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "0e1783ac1644f68b977c78825ea1ac16256b3cbea3582f075caedee4eb7f5102",
-      "image_sha256": "6244c0e3a8cb3beb3639d5fd10235fc32709bfd017c9d0409ab2a6ada29f5560",
-      "width": 390,
-      "height": 3299,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "6244c0e3a8cb3beb3639d5fd10235fc32709bfd017c9d0409ab2a6ada29f5560",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": [
-        "../breaks/index.html?embedded=1",
-        "../projects/index.html?embedded=1"
-      ]
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
     },
     {
-      "version": "151.0.7922.34",
       "route": "breaks",
-      "viewport": [
+      "size": [
         390,
         844
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "a06fe4f0f9581627d1d4b63e7bef95caac0964299aaf7d1c1e3f7423dcee23e7",
-      "image_sha256": "28b846d124030d0c097e019d72e2f40e810c8a154c0d993d6b01fead581b28f9",
-      "width": 390,
-      "height": 1429,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "5ff964f56ec23ae118843f481df6bcd54b5d17d47f4e35d43872147b1d1f457b",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
     },
     {
-      "version": "151.0.7922.34",
       "route": "projects",
-      "viewport": [
+      "size": [
         390,
         844
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "918f08e1b521f470c7b87df1e13801a0a26a11037f163e3354eff76eb81725e1",
-      "image_sha256": "b12419455a86e3c8177152b48422325dbf58eeac88c6a12141026af24c76460f",
-      "width": 390,
-      "height": 1300,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "b12419455a86e3c8177152b48422325dbf58eeac88c6a12141026af24c76460f",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 390
     },
     {
-      "version": "151.0.7922.34",
       "route": "install",
-      "viewport": [
+      "size": [
         844,
         390
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "0e1783ac1644f68b977c78825ea1ac16256b3cbea3582f075caedee4eb7f5102",
-      "image_sha256": "3cb8a88ce1b1f0ed911d0e8b4d44f2937a9a46acdfc32598581065e75b0e8bc9",
-      "width": 844,
-      "height": 2631,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "3cb8a88ce1b1f0ed911d0e8b4d44f2937a9a46acdfc32598581065e75b0e8bc9",
+      "source_sha256": "d53b5d86dae84a7f0a0fe16273ac797d65235590878919b98c343d2154ef0048",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": [
-        "../breaks/index.html?embedded=1",
-        "../projects/index.html?embedded=1"
-      ]
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
     },
     {
-      "version": "151.0.7922.34",
       "route": "breaks",
-      "viewport": [
+      "size": [
         844,
         390
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "a06fe4f0f9581627d1d4b63e7bef95caac0964299aaf7d1c1e3f7423dcee23e7",
-      "image_sha256": "30e2b81364697240f856a37d585c01d8b17bf1c29db2ea90f2b7101da321a979",
-      "width": 844,
-      "height": 1216,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "75251caf382b39175554f74e0102f0fd53acdf35fd00b43858304ed26e2c7e91",
+      "source_sha256": "f7efd0eafc8cb8aadb7d254e6d23157a72c499b570a84c500568cce67bc18b69",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
     },
     {
-      "version": "151.0.7922.34",
       "route": "projects",
-      "viewport": [
+      "size": [
         844,
         390
       ],
-      "status": 200,
-      "errors": [],
-      "source_sha256": "918f08e1b521f470c7b87df1e13801a0a26a11037f163e3354eff76eb81725e1",
-      "image_sha256": "4987e5ffd99c1d3152391a3d3d26444a3dde0526505ac06c491b9ecf51f17eb1",
-      "width": 844,
-      "height": 1216,
-      "fonts": [
-        [
-          "Barlow",
-          "400",
-          "loaded"
-        ],
-        [
-          "Barlow",
-          "700",
-          "loaded"
-        ]
+      "png_sha256": "4987e5ffd99c1d3152391a3d3d26444a3dde0526505ac06c491b9ecf51f17eb1",
+      "source_sha256": "d45707a4be7e2a504d92525e14e03d1b8edff901460a5a4bfbbd12181d0ff343",
+      "font": [
+        "400",
+        "700"
       ],
-      "bodyFont": "Barlow, sans-serif",
-      "bodyBg": "rgb(16, 23, 21)",
-      "frameDocs": []
+      "theme": "rgb(16, 23, 21)",
+      "width": 844
     }
   ]
 }
