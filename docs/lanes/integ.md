@@ -1,5 +1,10 @@
 # Integration baseline
 
+## Shared build-input recovery — limited verification (WORKING)
+
+The personal Library has the exact-name archive `fw-AC79_AIoT_SDK-AC79NN_SDK_V1.2.14_2026-10-13.zip` (309,800,121 B), but this runtime explicitly **denied raw-byte materialization**, so neither its original SHA-256 nor its three SDK build pins was re-verified here. The Library's `LoopyX0X37-shared-inputs-delivery-f1786ebe-583f6229-inputs-only.zip` **is** accessible (49,461,313 B; SHA-256 `0dc74706f2ac6d254d57941a296ab5b47dddb0f90afe76f7e2d4ed5ae410307b`). Local extraction, all eight SHA256SUMS records and `scripts/verify.py` **PASS**, including the JieLi toolchain pin. Its manifest explicitly says `PARTIAL_INPUTS_ONLY_NOT_OFFLINE_COMPLETE`, with **neither source tree nor SDK embedded**, so it is not a build-ready restore. [Exact recovered-inputs receipt](../../evidence/integ-resume/shared-input-recovery.json). Complete source checkout, current build and browser results remain **NOT_RUN**, not inherited from the historical manifest.
+
+
 ## Integration-resume reference checkpoint — 2026-11-22T00:44:00Z (WORKING)
 
 At exact Nightly starting head `ff96ffd6ef474d8fc06442024e4149ce22f97b18`, a direct GitHub read of the registered Chromium gate schedule and its snapshot tree found **84 registered PNGs of 116 required**. All **32 Remote Workspace references** are missing: eight scheduled states (Sequence, chance/pitch/pan lanes, Sound, Mix, Patterns and Files) at 1440×900, 1024×640, 844×390 and 390×844. Four site Device refs and twelve extra Manual refs are *present*, not thereby re-approved on this head. [Exact missing-name inventory](../../evidence/integ-resume/remote-reference-inventory.json) and [reusable non-browser inventory](../../tests/visual/check_reference_inventory.py); three independent synthetic schedule, missing-reference and viewport-change controls **PASS** (`python3 -m unittest discover -s tests/visual -p test_reference_inventory.py -v`). GitHub source and directory listing were read directly; no claimed production browser capture or owner PDF comparison.

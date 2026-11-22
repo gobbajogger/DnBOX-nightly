@@ -1,0 +1,46 @@
+{
+  "type": "shared-input-recovery-limited",
+  "source_branch": "integration/dnbox-consolidated",
+  "source_commits": {
+    "DnBOX": "f1786ebec2616477163b62b029c7e77405a9c3de",
+    "DnBOX_nightly": "583f622961fc9975fac746592ce6c483073c4170"
+  },
+  "library_folder": "/LoopyX0X37/Project Sources",
+  "input_bundle": "LoopyX0X37-shared-inputs-delivery-f1786ebe-583f6229-inputs-only.zip",
+  "bundle_bytes": 49461313,
+  "bundle_sha256": "0dc74706f2ac6d254d57941a296ab5b47dddb0f90afe76f7e2d4ed5ae410307b",
+  "input_manifest_status": "PARTIAL_INPUTS_ONLY_NOT_OFFLINE_COMPLETE",
+  "source_trees_embedded": false,
+  "sdk_embedded": false,
+  "toolchain_member": "toolchain/jieli-linux-toolchains-20260730.1.zip",
+  "toolchain_member_sha256": "ed379c483468c44f10cf3be7db32356b9623e16320a021cf2a4e06ec96ab5f19",
+  "sdk_library_archive_name": "fw-AC79_AIoT_SDK-AC79NN_SDK_V1.2.14_2026-10-13.zip",
+  "sdk_library_archive_bytes": 309800121,
+  "sdk_archive_expected_sha256": "929ec0b652c1e246aa066c5ff4bc6068e1fd145501adce30187b8497b93276b6",
+  "sdk_raw_materialization": "DENIED_THIS_RUNTIME",
+  "verification": {
+    "zip_bundle_hash": "PASS_local_sha256sum",
+    "input_SHA256SUMS": "PASS_all_8_files",
+    "verify_py": "PASS_toolchain_hash",
+    "sdk_digest_from_raw_bytes": "NOT_RUN",
+    "pinned_firmware_source_restore": "NOT_RUN",
+    "pinned_nightly_source_restore": "NOT_RUN",
+    "native_firmware_build": "NOT_RUN",
+    "current_browser_capture": "NOT_RUN"
+  },
+  "stdout": [
+    "README.md: OK",
+    "bundle-manifest.json: OK",
+    "manifest.json: OK",
+    "scripts/restore.sh: OK",
+    "scripts/verify.py: OK",
+    "scripts/verify_sdk.py: OK",
+    "sdk-verification-note.txt: OK",
+    "toolchain/jieli-linux-toolchains-20260730.1.zip: OK",
+    "PASS: embedded input toolchain/jieli-linux-toolchains-20260730.1.zip ed379c483468c44f10cf3be7db32356b9623e16320a021cf2a4e06ec96ab5f19"
+  ],
+  "next": "Acquire exact source trees and authorized SDK bytes, verify SHA-256s against manifest, then run actual target/build/browser checks. Never treat this inputs-only ZIP as a source checkout.",
+  "branch": "lane/integ-resume",
+  "repo": "gobbajogger/DnBOX-nightly",
+  "source_head_before_receipt": "bb1dfd7d1b2d2a0b3f3b90eefd39b3fa97249d08"
+}
