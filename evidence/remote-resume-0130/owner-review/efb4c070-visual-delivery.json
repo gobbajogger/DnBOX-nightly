@@ -1,0 +1,390 @@
+{
+  "integrationCandidate": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+  "integrationCandidateTree": "b43d63c9699fdf65f4afaffdbf09090c92fcb694",
+  "integrationCandidateFilesSHA256": {
+    "app.mjs": "30aa2d966f2b2af02bc502392893062328e382f951bac3b9d06b0631d8d5607c",
+    "style.css": "a348bb53fa4bfdd42b76cd4d5d8e39306619ded291259d6a0c2d536f73a90490",
+    "funkybeats-view.mjs": "761e5b569f45b4cb6ecc63075dba41a83365cf3150dce7c6750cd5201546ac26",
+    "glyph-registry.mjs": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e",
+    "superj6.mjs": "72de0b2748ab78898d86d6547df679ccaa464cb5678c1ac56f25d78e98faedd5"
+  },
+  "ownerPairs": 26,
+  "ownerReused": 13,
+  "ownerAtMostTwoPercent": 0,
+  "registeredCandidates": 32,
+  "registeredReused": 24,
+  "registeredApprovedBaselines": 0,
+  "registeredAtMostTwoPercentAgainstHistoricalProposals": 16,
+  "pngMembersVerified": 90,
+  "archives": [
+    {
+      "filename": "lane-remote-resume-0130-efb4c070a81d-owner-pdf-pairs.tar.gz",
+      "sha256": "d0064d2129df0be34e9ea887a1a944441036bdeb3f7d3ddebf54759ecb0470c0",
+      "bytes": 3175871
+    },
+    {
+      "filename": "lane-remote-resume-0130-efb4c070a81d-registered-32.tar.gz",
+      "sha256": "0fc9387adbc5d341fef18acb3c272859d7152e15487beca43a4307c4a18dce28",
+      "bytes": 3313509
+    }
+  ],
+  "inputs": {
+    "filename": "efb4c070a81d-reference-capture-inputs.json",
+    "sha256": "93dafb78aec0c9dba305f2b700b0dc3e7ea0e7385988498dfcf6919b54d0bceb",
+    "sourceFiles": 269,
+    "sourceManifestSHA256": "a5395327d1272c638eaf378c48d56a08fc9a30531d20163614469c541a979543",
+    "verifiedRuntimeFiles": 27
+  },
+  "ownerPairSources": {
+    "01-notes": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "32ca617fb50b7f3a3417ea1f7e50fe9374250994d8fbd75018fd5038fb2019ec",
+      "pairSha256": "b613bbd3566f917d5dfdc2857bf23757919524877a29f23172353ec68db43821",
+      "tolerantDifferentPercent": 8.9782
+    },
+    "02-steps": {
+      "captureSource": "ada3fef20de13b2603f959a3412cf777dbcf0f07 plus measured desktop voice-name prototype",
+      "captureSha256": "4d8da564f4064c9fce69c3abbfea8ea11c7c8f0168baf92b390d5493ac8438f9",
+      "pairSha256": "dcbac939aa966e47f05081a7f46b55ec01fd13d291994a61752bcedb462e0d8d",
+      "tolerantDifferentPercent": 16.8103
+    },
+    "03-motion": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "cb295ad2d6e49c11f7695a56a98a970c6c0fb4e10067caeee33c8599151f9fd3",
+      "pairSha256": "7e83f9bb94fafaecd2479033596c06b2a1683ee2eed8e39edf7be94d0a602bf2",
+      "tolerantDifferentPercent": 10.4386
+    },
+    "04-chicago": {
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureSha256": "8ae92118ba6079cf8a88651da8f8d7c222ab479939acc5f4a1674663f6a12a62",
+      "pairSha256": "b80329c205bbdf8f38390c3fa75820db72f82e94eaad60deba3ffe5bc9dc061f",
+      "tolerantDifferentPercent": 11.1816
+    },
+    "05-miami": {
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureSha256": "55339bb3c30ed82e1eaffcc73a7ed8ce4662f738e793ba7c93147fe46aa647df",
+      "pairSha256": "dd93474e53de228a31a876ec482d3c86091ff916a213a07abef4c717febcc5af",
+      "tolerantDifferentPercent": 10.0015
+    },
+    "05-superj6": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6",
+      "captureSha256": "7cd400f3916043e44254a74993d77521b348ac4e8e53d00b463cff1f57e03272",
+      "pairSha256": "2519dfb2b2d720628c1f283e7eb68b34ee27ada9a600b009cc23e763a4eb69d2",
+      "tolerantDifferentPercent": 11.1031
+    },
+    "06-levels": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "5e58730a945561edee469a8f5ab538b8cea89c562d0f8d6d82238afd843aae47",
+      "pairSha256": "73ba439b5ed84abcbfbc1d298636a3314e15ef6dfe6ff4b893cf836595afc02f",
+      "tolerantDifferentPercent": 7.0761
+    },
+    "07-master": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "b69dd56e2cfc38258760329a0156815e12789721a2a4fa7aafa741260c84e0d8",
+      "pairSha256": "bd6df42008742df0c6fb8ba4951d4edc73b1b7c394b8594ebb08a0ff0a9daa2a",
+      "tolerantDifferentPercent": 5.9795
+    },
+    "08-fx": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "c337f03c7b7dff9aa023ba5f949798826a62c5c8a0c6c02a467573f2b0d1f871",
+      "pairSha256": "4d75851c2ef8b6c145c3c9dba9d766f0fe3af9e250261cd0395203d742984820",
+      "tolerantDifferentPercent": 9.2948
+    },
+    "09-patterns": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "9e1fa2366bf425718f278971e5c815e56c037f2f50279295b38500fc1535fbef",
+      "pairSha256": "1ee4dd3cf424011b40488521543f15637940eb7b62a72005011da383ba0df17b",
+      "tolerantDifferentPercent": 6.7481
+    },
+    "10-song": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "dfc4e8a5a28a9b593d6f255d9f4ab1dcd8ba568417ee44f72c7df3ac31b9afc8",
+      "pairSha256": "740332a3647edf9fe7501ca52b54f2fa0ec67a228a2bea0b30f6b288fa1f21cb",
+      "tolerantDifferentPercent": 8.1967
+    },
+    "11-slices": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "6643833d0fee70a5fc56516a31d69ee88d37e8857653806b14d3332075d4243e",
+      "pairSha256": "7bd1660b175007ac721da9723b5c8cae9f0d45904eabc28b12fbf3f1968040b8",
+      "tolerantDifferentPercent": 9.2194
+    },
+    "11-generator": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "0aa4d0dcd09cdb918bce1c2361fa0a43a0d85df85406dbab8420d31909a0f667",
+      "pairSha256": "4a7c0dedcefb8ec8ffb7c98c8393d9329f7cd8c3a4eaeadf98d34a65f3fff272",
+      "tolerantDifferentPercent": 8.8749
+    },
+    "12-projects": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0",
+      "pairSha256": "035d4e5ef95da936b5191a25e66e34cd10b9bc81cf06dea92b9a5b993168f135",
+      "tolerantDifferentPercent": 6.3145
+    },
+    "13-review": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "8b4888af8bc29602954cbcb7b6d56834fd242ca414baec670324fa8659687c01",
+      "pairSha256": "62f63870c6f1cb37c79dab1552c94118afa9b577cd922357266c6dc2af212491",
+      "tolerantDifferentPercent": 10.6752
+    },
+    "13-connect": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "a6e83e23c9742a9ddd3b3164cdd5e4b1f9aacd2c2c23d26ce16a54e2ca410134",
+      "pairSha256": "ce62affa40036c5d801060dbeec0618886df530dc1195c3180325f3ad92e6855",
+      "tolerantDifferentPercent": 8.0674
+    },
+    "14-notes": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "130a7a8094f21cc521b0695ef392a8cf37318fbec727c72215f3696cd8e3dc04",
+      "pairSha256": "9454d5fec7359f906ad5414683e19f8ca4e61d6501db43123830d23905ddc5b3",
+      "tolerantDifferentPercent": 16.0226
+    },
+    "15-steps": {
+      "captureSource": "ada3fef20de13b2603f959a3412cf777dbcf0f07 plus measured page 15 grid geometry patch",
+      "captureSha256": "3905aad46053d4a64f3426f2098cef218ee1dd1829e464ce266260ca40f93b78",
+      "pairSha256": "0d248b56a69f21f8d1556acdfd6acb265456c1601793ca90b2b4e155d7bc8351",
+      "tolerantDifferentPercent": 19.1651
+    },
+    "16-levels": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "3edabde30b09c8908947dd62733247346d5d1efdf856450d52584660a526f6c2",
+      "pairSha256": "202ec31f5e4172efa2810d49eb486784f0be7b7ba329c7e443562a3a7e39d5de",
+      "tolerantDifferentPercent": 12.0291
+    },
+    "17-motion": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "61567a5fa7290ef4ecbb3e789eb76867808c8505dbcf741b8f45fb50b0f97f4f",
+      "pairSha256": "d48038243e778133c6021536cddc3ccd72fcdcadb7ca4c021a61e447590db020",
+      "tolerantDifferentPercent": 17.7646
+    },
+    "18-bassdrum": {
+      "captureSource": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a",
+      "captureSha256": "8650d8b52cb9dc34be2e9aeb3ea3b7f771526367562f202d991490c8e1c14260",
+      "pairSha256": "d75a6c96f980d996d21d45d3db2fe0a5c14f3ca48d9d1e6e731e0a52da364778",
+      "tolerantDifferentPercent": 11.6943
+    },
+    "19-patterns": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "78b8404e93fef461efe4b05047bc605ac834e745ea97772b444865d7f0355a09",
+      "pairSha256": "99efb3e5166d09508fb74a85e74d80ee981be2283fc2d2b4e9e5c0a962bf24d2",
+      "tolerantDifferentPercent": 16.3978
+    },
+    "20-projects": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "bd14c0eac856252faf771a5aec65b8be3a18c2434f9e2313acfa72df55138ddf",
+      "pairSha256": "55ab433e23911a74f75498696d41792b19bf04c404317ad7a769c2a4cd7cd14e",
+      "tolerantDifferentPercent": 10.9072
+    },
+    "21-notes": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "d964ae1d72c4d6f206526ae703603b3ff936f79ec233ac078e7a8360f6261d89",
+      "pairSha256": "37b7223a8c2142aff5e74e79b2225b26f4216739c6e5bb23867ce189dcc76d82",
+      "tolerantDifferentPercent": 16.1453
+    },
+    "22-gate": {
+      "captureSource": "cd54ee5d27be20d706ebf68d1a3c959319c35a57",
+      "captureSha256": "f7245bf7826649a64a75f02cad04f453c94c722d48c9b4f931d4cc804169774a",
+      "pairSha256": "3775eb73e57cde43d76499d2e2bd4429312a2ace595624544a6f099f02bc2a99",
+      "tolerantDifferentPercent": 14.6309
+    },
+    "23-levels": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "d3e8b545f7f4bf28f79ec4848dd207516079e73fc58f12fe0b7da7acb344eb03",
+      "pairSha256": "2706f61f159f01b09915f5476ab6f5fa3e062c03931c171a3dda3cd3e84f8ff2",
+      "tolerantDifferentPercent": 12.9056
+    }
+  },
+  "registeredPairSources": {
+    "remote-sequence-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "ab8d606591ae19492c69e4c1bcdd4e5d5e60c41858e1b01ca01e106ac39b6b51",
+      "pairSha256": "210f171d1997706342ec0140cf21eb80adf00d6c4179c7f032938eee1747630d",
+      "tolerantDifferentPercent": 0.6961
+    },
+    "remote-lane-chance-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "45c69c9d6640e27e5ae5299b2bf69c3224d0db08d52afb5c48830f177f59c0c6",
+      "pairSha256": "fc1456d8f277c79653703c2f5f7083b041e996bcd4fc547074263d69e77e2daa",
+      "tolerantDifferentPercent": 0.6948
+    },
+    "remote-lane-pitch-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "0846d0f2d115f90cd67f28ac89ea382479bfec236d9418016d26af59aff11a99",
+      "pairSha256": "3099eb15ba43b2b0340e137486a5693e8e28ff499906188dc3ec25cdc677e283",
+      "tolerantDifferentPercent": 0.6961
+    },
+    "remote-lane-pan-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "79892356340bb915d71c7c0a4ea505735553c4f4b0bb1b97eda88880ee64b3bd",
+      "pairSha256": "cb87b0db45ef5f6eba5b4ba7726ffaa1ca6d18472ff7e7f74b69a7a6ee893843",
+      "tolerantDifferentPercent": 0.6964
+    },
+    "remote-sound-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "f92c639274ac0bf49cb2285ca9df0e03a0da5d00227c9277b0171b2c2011d42a",
+      "pairSha256": "d3d7a02ecc247b0a8b2066c0dfff18760223e2c1e15d414ceec1c5027e617412",
+      "tolerantDifferentPercent": 2.1333
+    },
+    "remote-mix-1440x900": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "314c76dfc77b9de3f4bb23893156812cd52e71526dd35bcdfd0f18e78c833583",
+      "pairSha256": "1c412ef8e458b3a671f628544067bc3402e60b620d2beb601605fe68cd5589ea",
+      "tolerantDifferentPercent": 2.778
+    },
+    "remote-patterns-1440x900": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "008282834421aba88c9a2fda11c2a6cec1379a677647a7dbe15dfd716514bbe6",
+      "pairSha256": "36a5790caf4f6897fa9453376f94419fe37a6ad030914f1b903a2e0ddf13e65d",
+      "tolerantDifferentPercent": 5.8625
+    },
+    "remote-files-1440x900": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "e23aae0dee18533a11be849fc3155bc87239db657d5a8f41e7bb5543e21c24a0",
+      "pairSha256": "28787084d967fa8bde35abafbd5e312866a19368f401ba29f6d1b3482ae647f0",
+      "tolerantDifferentPercent": 5.9321
+    },
+    "remote-sequence-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "31955bfc6c4c01968e70adbd9dcd5f5caeae5165e90b62dea4d3ddeb9ecf1c14",
+      "pairSha256": "90ec9fafba2df6f41046b4dec890361776de25781e699649833a125a90cfffba",
+      "tolerantDifferentPercent": 0.7895
+    },
+    "remote-lane-chance-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "00b4e837acff65bf457d8431b1beaceed560e7eb6fa138d3e152fb24549f48b6",
+      "pairSha256": "bcfff9e86c705a5c51d77efd36cc99de4868520af86af7c95544d0207d13c99a",
+      "tolerantDifferentPercent": 0.787
+    },
+    "remote-lane-pitch-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "7b25885c5df8846d6eba0ab8e2e3ccc24d55067d79520a168f9898ba539baf16",
+      "pairSha256": "0ab8067160537e64a3aa800df0f5a3bdbefedb38b5047d40b437ce9d76d868c9",
+      "tolerantDifferentPercent": 0.7895
+    },
+    "remote-lane-pan-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "a3b9e655010bd53ff3574b118eb3ec0b3e1c318ef9e6cc153844900742a2e0b7",
+      "pairSha256": "5960b4532620ae65c96df4a77449c98f8848ec4babb36ba870008158090e6220",
+      "tolerantDifferentPercent": 0.7901
+    },
+    "remote-sound-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "afbf2de0906c360d0f7a60815b4c3f24f1b7bced9fbc352b26df55931aa7998c",
+      "pairSha256": "ae4c5c2ea68a9e21368aeb66213b8f91a642f31b6622c4aa7f12deb3c499a10c",
+      "tolerantDifferentPercent": 0.183
+    },
+    "remote-mix-1024x640": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "b75dc83e90b9a0cf0716b3e0959bc39f7d3c31bf34641c3d45f034eed6b195e5",
+      "pairSha256": "46d9c026e8db4f555d1bec5cfaf3b661e009c4c72d00219f3b305a76e59a28a0",
+      "tolerantDifferentPercent": 0.7256
+    },
+    "remote-patterns-1024x640": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "9c13eecf9f4a38ec5590a9f7ecd39987bb6e4d375c9757477e1455360c1394fb",
+      "pairSha256": "db40f45d28f3f204eddc1b18cf45569c9d155a177afa44b90962e7677d1cd8e8",
+      "tolerantDifferentPercent": 6.8182
+    },
+    "remote-files-1024x640": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "4a2234507d5f0c224d1238b86b6f25f2141bec56c2c5cb31346f6b37287d6562",
+      "pairSha256": "7ba74cfc863109943bb56e8b0d170bee5e81a425f33c1a33825ba430c1daa1d1",
+      "tolerantDifferentPercent": 4.5998
+    },
+    "remote-sequence-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "a47ccf4666041920a4960c64286e6823fd89bd889d09b4fa45abdd35ee402f84",
+      "pairSha256": "a4c66379955c0b738860e01205415010f3ecf1edb9c80ee988aaff40f963a158",
+      "tolerantDifferentPercent": 10.1899
+    },
+    "remote-lane-chance-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "8ae552dfe3c2472b9ce04a76ea4d0c397f1d5f320a784655337d0f1c9fbd2617",
+      "pairSha256": "2cf9a84a567d432c4096271dfc764caadee678d5c52a6d6b1b40a3594b7d8a43",
+      "tolerantDifferentPercent": 10.7774
+    },
+    "remote-lane-pitch-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "5a4188cf23005172c8a36b7719846dbb9184a25218162a1afcfec4cf37d60c67",
+      "pairSha256": "d0353c2a8cfb2ee4bfa98685b60429d375a742bd1b5f1a8d19588ce9e8a961c4",
+      "tolerantDifferentPercent": 9.5033
+    },
+    "remote-lane-pan-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "ea3e7ebb9909532bfba84eaed0586027e60c0f16dcbc50e581fd3e7ea3c987d8",
+      "pairSha256": "050c26ab886454692d3c13dd7ac220b7f0746ab82f9ff215b12d004d36a94c07",
+      "tolerantDifferentPercent": 9.3909
+    },
+    "remote-sound-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "f1befe9b09e820de3033d7e81aafba728dfd4aacc2fe7daf2dc5e9aaa8ac9663",
+      "pairSha256": "9b928f4a0bb6b8f1be1ab63768ca855fbcbf632ff5e791833c151f5e513224b1",
+      "tolerantDifferentPercent": 6.6114
+    },
+    "remote-mix-844x390": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "d897445be8d80e53b0cd264089c9a71b0e85bd568f037078f6ffd8359c32c076",
+      "pairSha256": "232591358d8b524ffbecb3edb945e7ff24aa333fcb0c121d73dd73cf3338f312",
+      "tolerantDifferentPercent": 7.6091
+    },
+    "remote-patterns-844x390": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "ce1e54dd4233f255b83f0b89cac639adafbb17aca3a8edf9fbfcb5312918619b",
+      "pairSha256": "c34c56e399d563ed0244d06f76029378b8f588d97092e3e8198cf8b990904c04",
+      "tolerantDifferentPercent": 11.0062
+    },
+    "remote-files-844x390": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "3bab3dab91d9d5fd5f4a1e4c0df1f63b22027c573758dd1acf924258443ed5ba",
+      "pairSha256": "c70e12bffc2b7dccaac4246d6b5e98da61a32c7ffbb0d28617a0d1cf1554ff18",
+      "tolerantDifferentPercent": 8.055
+    },
+    "remote-sequence-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "8c74729ee69787c129fe990c11c32f54c703f3647545870ecf910462119ca1b8",
+      "pairSha256": "b6cd3682223c637aaf355db63d064f782afa931aed8d761295f74755da5516c5",
+      "tolerantDifferentPercent": 0.8251
+    },
+    "remote-lane-chance-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "cf2d71da14986c7eb4fbcf02080172a7129dd71b97f0301a150ab41b1f537739",
+      "pairSha256": "addf6658b1352bc7c055956fdefe93338df73f3742c96bf2502e3b46f231fcc6",
+      "tolerantDifferentPercent": 0.9345
+    },
+    "remote-lane-pitch-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "02dba1cde9142fa36d34cbacd6abad01dbfd5a3455e1131b64c794831314da74",
+      "pairSha256": "973f640c022f6b83008e0352fcbc68b83e689fd7b5b3d1f6a8acbed1e959f50f",
+      "tolerantDifferentPercent": 0.8911
+    },
+    "remote-lane-pan-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "04d0ca3310a09aa12c1ae551e912f0a1370a6977b10d18826fd9b68d5a8bc6f2",
+      "pairSha256": "8ea5e67350c2af27dd7c9d4757017f275675b7092f4ac41832c48f40bf255285",
+      "tolerantDifferentPercent": 0.8263
+    },
+    "remote-sound-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "86b43032eb1aa0f520df27f7d031059273c514bb79013cde2df4ed2d1b95692f",
+      "pairSha256": "f4de4e16b7a69acd086f0baf6cacc578d8e3e06541dd0720e881801c51b9c54e",
+      "tolerantDifferentPercent": 0.3302
+    },
+    "remote-mix-390x844": {
+      "captureSource": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+      "captureSha256": "9b4f08a1897c021193a46b4ec69a5f9959c09de8da74d4e6479d23d369336fb0",
+      "pairSha256": "0df60d4733b7652dd92d9baf6172b8c37f08d41a7935cea3a9f16623daaa93ad",
+      "tolerantDifferentPercent": 1.0029
+    },
+    "remote-patterns-390x844": {
+      "captureSource": "995d5493386fad889ca8106758567c9fe80a47d5",
+      "captureSha256": "7b4314b283994d6fafc2a0f67da7bf119f8576b822e1f8bdd2731e678ec7f3d2",
+      "pairSha256": "2f12d14dd03b2197bb657c1a218f8aa1cf89bc1c981b0932163157dbfee42ad4",
+      "tolerantDifferentPercent": 9.9742
+    },
+    "remote-files-390x844": {
+      "captureSource": "afd61fdc142ff683f9a8350043504648013ed5b6 plus Global destination patch SHA256 cd1d405a71e7d43c77bf59843e8ab5b04d37877d45f16e2afe990f1ae83e9796 (includes compact Song margin)",
+      "captureSha256": "0a45e2c49dde40ded2194a2993cba42fd3b5b50fe31dd5bd7e707e31c199ad25",
+      "pairSha256": "1a29ef36e6987fcd27aa3466eaab51329e38d1a4a40f3d9598985f37227a654d",
+      "tolerantDifferentPercent": 6.8052
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "filename": "lane-remote-resume-0130-efb4c070a81d-software-evidence.zip",
+  "bytes": 21773755,
+  "sha256": "7711920d8e4043ee371f57eb5a2596c05393bb407da89cead81da134dd21743a",
+  "files": 92,
+  "source": "efb4c070a81d486be7d6111c540da23cff59bcbd",
+  "verified": "ZIP CRC and every content size/SHA256",
+  "originalInstallersIncluded": false,
+  "alreadyUploadedFiveIncluded": false,
+  "upload": "BLOCKED_PROJECT_CAPACITY",
+  "siteMessage": "Remove a source to make room, then retry",
+  "attemptedFilename": "lane-remote-resume-0130-efb4c070a81d-software-evidence.zip",
+  "destination": "Private LoopyX0X37 Project Sources",
+  "destinationURL": "https://chatgpt.com/g/g-p-ad9d6d4ab04c8191af6aa22fd752707e/project?tab=sources",
+  "standingAuthorization": "Owner expressly authorized requested DnBOX artifacts, including nonpublic firmware visuals, renders, logs and images, to this private destination; original installers excluded.",
+  "outcome": "Upload attempt reached failed Sources row, not a completed File/date row. No source was deleted. No alternate route or unchanged retry attempted. Prior five successful uploads remain visible.",
+  "requiredNextAction": "Free capacity in the existing project, then retry this exact file through the normal upload.",
+  "verifiedUTC": "2026-11-22T03:57:00Z"
+}

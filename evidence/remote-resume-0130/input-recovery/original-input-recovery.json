@@ -53,7 +53,8 @@
       "Miami",
       "FX"
     ],
-    "unresolved": "Original attachment bytes and file-by-file glyph asset identities."
+    "unresolved": "Exact original unpublished19-file overlay and per-vector asset mapping. The original18native frames, review, scores and contact sheet are now recovered and hash-verified.",
+    "recoveredRasterReceipt": "approved-1700-recovery.json"
   },
   "priorAccessAttempts": {
     "mountedOriginals": "No matching installer, executable attachment or original bank archive recovered.",
@@ -66,7 +67,7 @@
     "originals": "Authenticated Library browser downloads recovered the exact AU build9 and12-bank640-program archive; ZIP CRCs and pinnedSHA256 values pass. Private bytes stay outside Git.",
     "receipt": "original-input-browser-verification.json",
     "projectSources": "Recovered after one renderer reload; five branch/source-named evidence archives uploaded and confirmed complete. All33visible named sources inspected; no identifiable17:00glyph batch.",
-    "ownerGlyphs": "The two original review attachment bytes and file-by-file selection remain unresolved.",
+    "ownerGlyphs": "Original exact raster batch/review/defect/contact/scores recovered through signed-in original delivery. Exact19-file overlay remains unpublished and absent from delivered ZIP.",
     "physicalDevice": "Outside software-only qualification scope; no device actions attempted."
   }
 }

@@ -120,57 +120,74 @@ function kickTone(q) {
   return points.join('');
 }
 
-// 9dd6f2df drum909_bd_hz and dv_glyph's P.Dpth branch. Tune and Pitch
-// have different original drawings; their Draft knobs only feed this trace.
+// f1786ebe dv_glyph. Tune, Depth and Pitch have distinct projections of
+// the same kick sweep. During easing only the plotted control interpolates.
 const kickTune='1:0:0:0', kickDepth='1:0:0:4', kickPitch='1:0:0:5';
 const sweeps=new WeakMap();
-function kickDepthPath(tune,depth,pitch) {
+function kickFrequency(tune,depth,pitch) {
   const pot=raw=>Math.fround(raw/127);
   const tau=6+26*pot(tune), amount=pot(depth);
   const lo=Math.fround(.43),ratio=Math.fround(Math.fround(4.7)/lo);
   const multiplier=Math.fround(lo*Math.fround(ratio**pot(pitch)));
   const base=49*(1+amount*(multiplier-1)),drop=4.6*tau*(1+1.2*amount);
-  const points=[];
-  for(let i=0;i<=24;i++){
-    const t=100*i/24;
-    const hz=base+drop*Math.exp(-Math.max(0,t-16)/tau);
-    const level=Math.max(0,Math.min(1,Math.log2(hz/40)/3.32));
-    points.push((i?'L':'M')+coordinate(31*i/24)+' '+coordinate(12*(1-level)));
-  }
-  return points.join('');
+  return ms=>base+drop*Math.exp(-Math.max(0,ms-16)/tau);
 }
+const kickLevel=hz=>Math.max(0,Math.min(1,Math.log2(hz/40)/3.32));
+const xyPath=points=>points.map(([x,y],i)=>(i?'L':'M')+coordinate(x)+' '+coordinate(y)).join('');
+function kickDepthPath(hz) {
+  return xyPath(Array.from({length:25},(_,i)=>[31*i/24,12*(1-kickLevel(hz(100*i/24)))]));
+}
+function kickTunePath(hz) {
+  // Centre the native 26 x 19 raster in its retained R22 slot transform.
+  const x=i=>(9+i)/1.375, y=row=>(4+row)/1.5;
+  const trace=Array.from({length:26},(_,i)=>[x(i),y(17-Math.round(16*kickLevel(hz(4*i))))]);
+  return xyPath([[x(0),y(18)],[x(25),y(18)]])+xyPath(trace);
+}
+function kickPitchPath(hz) {
+  const settled=hz(100);
+  return xyPath(Array.from({length:33},(_,i)=>[1+30*i/32,6-5*Math.sin(6.28318531*settled*.04*i/32)]));
+}
+const kickGlyphs=[
+  [kickTune,'TUNE',kickTunePath],
+  [kickDepth,'P.DPTH',kickDepthPath],
+  [kickPitch,'PITCH',kickPitchPath],
+];
 
-// The native renderer eases Depth alone and reads the other two knobs at their
-// current editable values. Either dependency must repaint the existing Depth path.
 export function paintKickDepth(root, changed, preview, read) {
-  if(!root?.querySelectorAll || ![kickTune,kickDepth,kickPitch].includes(changed))return;
-  const value=id=>id===changed?preview:read(id);
-  const tune=value(kickTune),depth=value(kickDepth),pitch=value(kickPitch);
-  if(![tune,depth,pitch].every(v=>Number.isInteger(v)&&v>=0&&v<=127))return;
-  const selector='[data-source-control="'+kickDepth+'"] [data-glyph-semantic="P.DPTH"]';
-  for(const glyph of root.querySelectorAll('[data-drum-editor] '+selector+', [data-drum-sound-strip] '+selector)){
-    let state=sweeps.get(glyph);
-    if(!state){
-      const path=glyph.querySelector('path');
-      if(!path)continue;
-      state={tune,pitch};
-      state.draw=q=>{
-        // dv_glyph rounds its eased binary32 pot position before engine_param_si.
-        const rawDepth=Math.trunc(Math.fround(Math.fround(127*q)+.5));
-        path.setAttribute('d',kickDepthPath(state.tune,rawDepth,state.pitch));
-      };
-      state.animator=new GlyphAnimator({value:depth/127,draw:state.draw});
-      glyph.setAttribute('data-glyph-origin','firmware dv_glyph');
-      sweeps.set(glyph,state);
-    }else{
-      if(state.tune!==tune || state.pitch!==pitch){
-        state.tune=tune;state.pitch=pitch;
-        state.draw(state.animator.value);
+  if(!root?.querySelectorAll || !kickGlyphs.some(([id])=>id===changed))return;
+  const values=kickGlyphs.map(([id])=>id===changed?preview:read(id));
+  if(!values.every(v=>Number.isInteger(v)&&v>=0&&v<=127))return;
+  for(const [index,[id,semantic,shape]] of kickGlyphs.entries()){
+    const selector='[data-source-control="'+id+'"] [data-glyph-semantic="'+semantic+'"]';
+    for(const glyph of root.querySelectorAll('[data-drum-editor] '+selector+', [data-drum-sound-strip] '+selector)){
+      let state=sweeps.get(glyph);
+      if(!state){
+        const path=glyph.querySelector('path');
+        if(!path)continue;
+        state={values};
+        state.draw=q=>{
+          const pots=state.values.slice();
+          pots[index]=Math.trunc(Math.fround(Math.fround(127*q)+.5));
+          path.setAttribute('d',shape(kickFrequency(...pots)));
+        };
+        state.animator=new GlyphAnimator({value:values[index]/127,draw:state.draw});
+        glyph.setAttribute('data-glyph-origin','firmware dv_glyph');
+        sweeps.set(glyph,state);
+      }else{
+        const dependencyChanged=state.values.some((v,i)=>i!==index&&v!==values[i]);
+        state.values=values;
+        if(dependencyChanged)state.draw(state.animator.value);
+        state.animator.set(values[index]/127);
       }
-      state.animator.set(depth/127);
     }
   }
 }
+
+const snappyIds=new Set(['1:0:1:2','1:1:1:2']);
+const drumSoundIds=new Set(['1:1:2:3','1:1:3:3','1:1:4:3','1:1:5:3','1:1:6:4']);
+// The PARA Sound switch uses dv_glyph's value-scaled fallback.
+const snappyBurst=q=>xyPath(Array.from({length:17},(_,i)=>[1+30*i/16,12-12*q*2**(-3.5*i/16)]));
+const soundArc=q=>xyPath(Array.from({length:13},(_,i)=>[1+30*i/12,12-12*q*Math.sin(3.1416*i/12)]));
 
 const animators = new WeakMap();
 function drumShape(control) {
@@ -179,6 +196,8 @@ function drumShape(control) {
       (control.context.name==='Decay' || control.context.name==='Tail'))
     return q=>decayTail(q,curve===null?null:decayMilliseconds[curve],control.identity.startsWith('1:0:'));
   if (control.context.name==='Attack') return attackEdge;
+  if (snappyIds.has(control.identity)) return snappyBurst;
+  if (drumSoundIds.has(control.identity)) return soundArc;
   if (control.identity==='1:1:0:1') return kickTone;
   if (control.identity==='1:0:1:1') return q=>decayTail(q,snareNoiseMilliseconds,true,24);
   if (control.identity==='1:1:1:1') return snareShells;
