@@ -1,0 +1,88 @@
+{
+  "nightlyBranch": "lane/remote-resume-0130",
+  "firmwareRepo": "gobbajogger/DnBOX",
+  "firmwareRef": "refs/heads/integration/dnbox-consolidated",
+  "firmwareCommit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "firmwareTree": "a4876790880cae769298f6701e8ab5db1d970b30",
+  "build": {
+    "command": "bash build.sh",
+    "env": {
+      "BOARD": "smk37 (build.sh default)",
+      "MODEL": [
+        "elite",
+        "pro"
+      ],
+      "X0X_DEV_PADCAL": "1"
+    },
+    "release": false,
+    "deviceTested": false
+  },
+  "providers": {
+    "toolchain": {
+      "filename": "jieli-linux-toolchains-20260730.1.tar.xz",
+      "sha256": "a1545cddbc451a06bac43eb5cd96d831470c42a97c5c0b1f98879a20fc7647bd",
+      "version": "JieLi clang 4.0.1"
+    },
+    "sdk": {
+      "filename": "fw-AC79_AIoT_SDK-AC79NN_SDK_V1.2.14_2026-10-13.zip",
+      "bytes": 309800121,
+      "sha256": "929ec0b652c1e246aa066c5ff4bc6068e1fd145501adce30187b8497b93276b6",
+      "memberSha256": {
+        "cpu/wl82/tools/uboot.boot": "64ccc63e4df3238046fadb200f1b134311d8fe6ec6e3ccb8c8b81379231b867e",
+        "cpu/wl82/tools/cfg_tool.bin": "276579954f076886a6a7694f65dc71c034a63a2c204b76749065c0ac7b010d1b",
+        "cpu/wl82/tools/cfg/eq_cfg_hw.bin": "179ac9f4501d2cf8c3bdbc06fcda1e46228b7ace7e339342c767bb6568de57d8"
+      }
+    }
+  },
+  "qualification": {
+    "sdkPinTest": "PASS",
+    "flashMap": "PASS",
+    "packageCrcAndLoaderMarker": "PASS for both models",
+    "byteExactRepack": "PASS for both models",
+    "sampleSlotMap": "PASS for both models",
+    "physicalDevice": "NOT_RUN"
+  },
+  "packages": [
+    {
+      "filename": "lane-remote-resume-0130-f1786ebec261-elite-dev.fwsc",
+      "bytes": 651732,
+      "crc32": "4f0ac8ea",
+      "sha256": "3aaba53459442cdd1f652dedf2c438a30189e4f5d06859270e9b0da1bd9bfecd",
+      "model": "elite",
+      "identity": "SMK-37 Elite_900",
+      "xipFreeBytes": 1228,
+      "poolMarginBytes": 832
+    },
+    {
+      "filename": "lane-remote-resume-0130-f1786ebec261-pro-dev.fwsc",
+      "bytes": 651730,
+      "crc32": "29443b7e",
+      "sha256": "8f399e350a3af8ded3bee7f05d60f4b01c966b785d7a336c90dcd371178cef92",
+      "model": "pro",
+      "identity": "SMK-37 Pro_900",
+      "xipFreeBytes": 1236,
+      "poolMarginBytes": 832
+    }
+  ],
+  "logs": [
+    {
+      "filename": "lane-remote-resume-0130-f1786ebec261-elite-build.log",
+      "bytes": 2583,
+      "crc32": "80fff2c2",
+      "sha256": "a1e0b7ef7a8efa884a41395063e8d2a02536e6dafe9c9b89695d2302f9e2588d"
+    },
+    {
+      "filename": "lane-remote-resume-0130-f1786ebec261-package-verification.log",
+      "bytes": 2146,
+      "crc32": "574ea2a6",
+      "sha256": "5212029a65d0a5c4befc489b896ba32fed3916162e5cbe034c38b74ba975858b"
+    },
+    {
+      "filename": "lane-remote-resume-0130-f1786ebec261-pro-build.log",
+      "bytes": 1898,
+      "crc32": "7f4283d5",
+      "sha256": "bd3757e9e54f556fe7dfd0370b7193da580845bb89cc3946af242a69c529b73b"
+    }
+  ],
+  "nightlySourceCommit": "5ee28037ebc55bad744f0c7d1f69eab22bb49f6a"
+}

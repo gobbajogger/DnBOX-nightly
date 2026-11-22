@@ -1,0 +1,50 @@
+source f1786ebec2616477163b62b029c7e77405a9c3de
+tree a4876790880cae769298f6701e8ab5db1d970b30
+PASS SDK tag is V1.2.14
+PASS SDK pins are the V1.2.14 hashes
+PASS a wrong SDK file stops the build: build: SDK uboot.boot sha256 5cb4069ee6d6db16be731e43499086dd377667abd37d877227450c8b453aa263 does not match pinned AC79NN_SDK_V1.2.14_2026-10-13 (64ccc63e4df3238046fadb200f1b134311d8fe6ec6e3ccb8c8b81379231b867e)
+PASS AC79_SDK /workspace/scratch/857bb2409f82/dnbox-fwui-sdk matches the pins
+  0x000000-0x003fff   16 KiB  head
+  0x004120-0x08afff  539 KiB  app code
+  0x08b000-0x09afff   64 KiB  Bluetooth block
+  0x09b000-0x09cfff    8 KiB  app slot end and cfg
+  0x09d000-0x0affff   76 KiB  store
+  0x0b0000-0x0bafff   44 KiB  VM spare
+  0x0bb000-0x0bffff   20 KiB  OTA
+  0x0c0000-0x0c1fff    8 KiB  BTIF and USRTRIM
+  0x0c2000-0x0f3fff  200 KiB  slots 1 and 2
+  0x0f4000-0x0fdfff   40 KiB  USR
+  0x0ff000-0x0fffff    4 KiB  key_mac
+owner tag (ST_OWNER_SECTOR): 0xaf000
+VM spare: 0xb0000-0xbafff, 44 KiB
+flashmap: PASS
+{
+  "firmware_version": null,
+  "release_display": null,
+  "version_label": "Unversioned legacy DEV",
+  "build_id": "gf1786ebec261-h3aaba5345944",
+  "display_label": "X0X37 Unversioned legacy DEV \u00b7 SMK-37 Elite \u00b7 DEV \u00b7 DEVICE NOT TESTED",
+  "model": "elite",
+  "product": "SMK-37 Elite_900",
+  "source_commit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "package_sha256": "3aaba53459442cdd1f652dedf2c438a30189e4f5d06859270e9b0da1bd9bfecd",
+  "package_bytes": 651732,
+  "status": "package-inspected",
+  "device_tested": false,
+  "installable": false
+}
+{
+  "firmware_version": null,
+  "release_display": null,
+  "version_label": "Unversioned legacy DEV",
+  "build_id": "gf1786ebec261-h8f399e350a3a",
+  "display_label": "X0X37 Unversioned legacy DEV \u00b7 SMK-37 Pro \u00b7 DEV \u00b7 DEVICE NOT TESTED",
+  "model": "pro",
+  "product": "SMK-37 Pro_900",
+  "source_commit": "f1786ebec2616477163b62b029c7e77405a9c3de",
+  "package_sha256": "8f399e350a3af8ded3bee7f05d60f4b01c966b785d7a336c90dcd371178cef92",
+  "package_bytes": 651730,
+  "status": "package-inspected",
+  "device_tested": false,
+  "installable": false
+}
