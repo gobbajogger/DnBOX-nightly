@@ -11,6 +11,10 @@ import re
 
 MIN_CONTENT_COVERAGE = .70
 MAX_EMPTY_SCREEN_FRACTION = .12
+# Local Draft identities emitted by master-draft.mjs from the pinned C catalog.
+# Decode them to the same key as their older screen aliases.
+MASTER_SOURCE = 'ffd31a735acc5721d1f90a30fc1ceb283aad6fc5'
+
 # An explicit, deliberately narrow reviewed vocabulary. Unknown captions fail.
 # These abbreviations are approved ONLY for this test's syntax policy, not an
 # owner approval of the UI. Expand through reviewed test changes, never guessing.
@@ -24,7 +28,17 @@ def typed_ref(param):
     Mirrors display.mjs's kind,a,b,c,bank tuple and source-sound slot-derived
     part. The display path cannot hide two bindings to the same engine field.
     """
-    if not isinstance(param, str) or param.count('|') != 1:
+    if not isinstance(param, str):
+        return None
+    if param.startswith('source-master/'):
+        match = re.fullmatch(r'source-master/' + MASTER_SOURCE + r'/([46])/0/(0|[1-9][0-9]?)', param)
+        if not match:
+            return None
+        target, control = map(int, match.groups())
+        if control > (3 if target == 4 else 13):
+            return None
+        return (1, target, 0, control, -1, -1)
+    if param.count('|') != 1:
         return None
     context, key = param.split('|')
     if not re.fullmatch(r'\d+:\d+:\d+:\d+(?::-?\d+)?', key):
@@ -194,7 +208,20 @@ DOM_SNAPSHOT = r'''() => {
   for(const s of root.querySelectorAll('svg path,svg line,svg polyline,svg polygon,svg circle,svg ellipse,svg text,[data-glyph-fn] svg rect'))out.push(...svgPaint(s));
   for(const e of root.querySelectorAll('img'))if(visible(e))out.push(clipped(e));return out.filter(area)};
  const controls=[...document.querySelectorAll('[data-param]')].filter(visible).map((e,i)=>({id:id(e)+'#'+i,param:e.getAttribute('data-param'),occurrence:e.getAttribute('data-param-occurrence'),rect:clipped(e)}));
- const glyphs=[...document.querySelectorAll('[data-glyph-fn]')].filter(visible).map((g,i)=>{let owner=g.closest('[data-param]'),label=owner?.querySelector('.parameter-caption');if(!label&&owner){label=[...owner.children].filter(e=>e!==g&&!e.matches('output,input,svg,canvas')&&!e.contains(g)&&!e.matches('[data-param-value]')).at(-1);}
+ const glyphs=[...document.querySelectorAll('[data-glyph-fn]')].filter(visible).map((g,i)=>{
+  let owner=g.closest('[data-param]'),label=owner?.querySelector('.parameter-caption');
+  if(!label&&owner){label=[...owner.children].filter(e=>e!==g&&!e.matches('output,input,svg,canvas')&&!e.contains(g)&&!e.matches('[data-param-value]')).at(-1);}
+  // The FunkyBeats slider puts its independent glyph beside the input group.
+  // Resolve only that concrete layout; orphaned/mismatched glyphs still fail.
+  if(!owner&&g.parentElement?.matches('.funkybeats-typed-unit')){
+    const inputs=g.parentElement.querySelectorAll(':scope > .synth-param-group > input[type=range][data-param][data-native-param]');
+    const input=inputs.length===1?inputs[0]:null;
+    if(input&&visible(input)&&input.dataset.param===input.dataset.nativeParam){
+      owner=input;
+      const labels=input.parentElement.querySelectorAll(':scope > label');
+      if(labels.length===1)label=labels[0];
+    }
+  }
   const ts=label?texts(label):[],paint=graphicRects(g);return{id:id(g)+'#'+i,param:owner?.getAttribute('data-param')??null,type:g.getAttribute('data-glyph-fn'),rect:clipped(g),paintRects:paint,caption:ts.map(t=>t.text).join(' ').trim(),captionPainted:ts.length>0,captionRects:ts.map(t=>t.rect)}});
  const panels=[...document.querySelectorAll('[data-structural-panel],.controls-screen,.source-sound-list,.encoder-grid,.sound-panel,.roll-panel,.source-scene')].filter(visible).map((p,i)=>({id:id(p)+'#'+i,rect:box(p.getBoundingClientRect()),visibleRect:clipped(p),contentRects:[...texts(p).map(t=>t.rect),...graphicRects(p)]}));
  return {screen:{id:(document.body.dataset.view||document.title)+'/'+(document.querySelector('#part')?.value||''),rect:viewport},controls,glyphs,panels,collectionErrors:errors,
