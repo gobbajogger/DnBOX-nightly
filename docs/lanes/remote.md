@@ -644,3 +644,9 @@ At unchanged grid source head `4d12b644a4c13723c512cdc5f45b200d77aed27d`, the ex
 ## Exact-source-head evidence and limitations
 
 The separate [Remote resume verification ledger](../../evidence/remote-resume-20261122/VERIFICATION-LEDGER.md) records GitHub ancestry, SHA-identical passing isolated Node and grid-only Chromium checks, captured log blob IDs, output archive paths, the unresolved owner page 15 6×16 mismatch, original SuperJ6 literal labels, and the hardware/SDK/checkout blockers. Historical passing slices are not promoted into an exact final Local/edge/browser gate; the entire Remote lane remains **WORKING**.
+
+## Remote resume 0130 — active checkpoint (2026-11-22 01:36 UTC)
+
+Resumed `lane/remote-resume-0130` from exact head `e9586b0afee025a9f9230af8e4f570cf34326681`. The prior grid-only witnesses do not close complete-page acceptance. Next: inspect owner page 15 against the current clip launcher, reproduce density/glyph and narrow/landscape defects on the complete product, and run focused Local/edge/browser checks on the resulting exact head. Audit original SuperJ6 labels and the supported parameter read/edit/guarded-Undo/fresh-read path separately; only real keyboard receipts can establish physical proof.
+
+Current environment discovery: the selected workspace is now available, but its root contains historical firmware workspaces rather than a verified current nightly checkout. Both devices on the DnBOX cloud Desktop Commander account are offline. Recover a fresh branch checkout and shared inputs before declaring those dependencies blocked. No device writes, public deployment, or promotion to main are part of this task. Firmware `.fwsc` delivery requires a matching source/build identity; large renders/logs/`.img` belong in LoopyX0X37 Project Sources with branch and commit names. Status remains WORKING.
