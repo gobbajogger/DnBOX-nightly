@@ -710,7 +710,7 @@ async def break_step_chance(page, previous):
     await expect(silent).to_have_attribute('aria-pressed','true')
     await load_draft(page,stroke)
     await page.locator('[data-view="patterns"]').click()
-    await page.get_by_role('button',name='BREAK P2, not loaded',exact=True).click()
+    await page.get_by_role('button',name='BREAK P02, not loaded',exact=True).click()
     selected=await draft_state(page)
     assert selected['launch'][4]==1 and selected['breakSequence']==stroke['breakSequence']
     await load_draft(page,previous)
