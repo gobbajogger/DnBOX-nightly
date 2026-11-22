@@ -44,3 +44,28 @@ test('near-grid hit toggles the displayed event rather than adding a duplicate',
   model.undo();assert.equal(model.notes[0].start,1);
  }
 });
+
+test('both drum grids use the shared SEQ matrix timing at 125 BPM', async () => {
+ const {renderFunkyBeatsDrums} = await import('../../web/product-site/remote/funkybeats-view.mjs');
+ const matrix = JSON.parse(readFileSync(new URL('../../evidence/web-routes/shipping-parity/seq-state-matrix.json', import.meta.url)));
+ const {sample_rate: sampleRate, bpm, beats, bar_samples: endSample, step_samples: stepSamples} = matrix.sources.remote.component_timing;
+ const steps = matrix.visible_state.length_steps;
+ assert.equal(bpm, matrix.visible_state.bpm);
+ assert.equal(endSample, sampleRate * 60 * beats / bpm);
+ assert.equal(stepSamples, endSample / steps);
+ const tags = html => [...html.matchAll(/<button\b[^>]*\bdata-drum-note="[^"]+"[^>]*>/g)].map(match => match[0]);
+ const starts = cells => cells.map(cell => Number(cell.match(/data-drum-start="(\d+)"/)[1]));
+ for (const {engine: kit} of matrix.states) {
+  const draft = new SequenceDraft({trace: {sampleRate, endSample, events: []}});
+  const cells = () => tags(renderFunkyBeatsDrums({kit, notes: draft.notes, endSample, steps}));
+  const empty = cells();
+  assert.equal(empty.length, 11 * steps);
+  assert.ok(empty.every(cell => cell.includes('aria-pressed="false"')));
+  assert.deepEqual(starts(empty.filter(cell => cell.includes('data-drum-note="36"'))),
+   Array.from({length: steps}, (_, step) => step * stepSamples));
+  const hitSteps = [0, 1, 4, steps - 1];
+  for (const step of hitSteps) draft.toggleHit('drum' + kit, 36, step * stepSamples);
+  assert.deepEqual(starts(cells().filter(cell => cell.includes('aria-pressed="true"'))),
+   hitSteps.map(step => step * stepSamples));
+ }
+});

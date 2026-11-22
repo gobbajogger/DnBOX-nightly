@@ -276,7 +276,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <a href="https://github.com/gobbajogger/DnBOX" style="color:inherit">github.com/gobbajogger/DnBOX</a></p>
 </main>
 <script type="module">
-if (location.protocol === 'file:') document.documentElement.classList.add('offline-tool');
+if (location.protocol === 'file:') {
+  document.documentElement.classList.add('offline-tool');
+  const home = document.querySelector('a.home[href="../"]');
+  if (home) home.href = '../install/index.html#firmware';
+}
 // SPDX-License-Identifier: GPL-3.0-only
 // X0X break loops in the browser: tools/upload_breaks.py and its helpers (tools/sampleio.py,
 // Felucca's encoder; tools/import_breaks.py's bar guess) as plain functions, so the page

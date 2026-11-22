@@ -740,7 +740,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   </div>
 </main>
 <script type="module">
-if (location.protocol === 'file:') document.documentElement.classList.add('offline-tool');
+if (location.protocol === 'file:') {
+  document.documentElement.classList.add('offline-tool');
+  const home = document.querySelector('a.home[href="../"]');
+  if (home) home.href = '../install/index.html#firmware';
+}
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments
 //

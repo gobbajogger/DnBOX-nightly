@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Owned pages, real WAV parsing and DOM; simulated slot/MIDI boundaries, no hardware."""
+import sys
 import asyncio, json, os, threading, struct, math
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -87,6 +88,33 @@ async def main():
    check(await page.frames[1].evaluate('document.documentElement.scrollWidth<=innerWidth'),f'{width}px sample panel has no horizontal overflow')
    await page.locator('#firmware-tab').click()
   check(not errors,'no page script errors: '+str(errors))
+  await local_home(browser)
   await browser.close()
  srv.shutdown();print(json.dumps({'checks':len(checks),'failures':[x for x,v in checks if not v]}));assert all(v for _,v in checks)
-asyncio.run(main())
+async def local_home(browser):
+ page=await browser.new_page(offline=True)
+ errors=[]
+ page.on('pageerror',lambda error:errors.append(str(error)))
+ installer=(ROOT/'docs/install/index.html').as_uri()
+ samples=(ROOT/'docs/breaks/index.html').as_uri()
+ await page.goto(installer)
+ await page.locator('#samples-tab').click()
+ await page.wait_for_url(samples)
+ await page.locator('a.home').click()
+ await page.wait_for_url(installer+'#firmware')
+ await page.locator('a.home').click()
+ await page.wait_for_url(installer+'#firmware')
+ assert await page.locator('#firmware-panel').is_visible()
+ assert not errors,errors
+ print('PASS file-open installer → Samples → installer, including local home links',flush=True)
+ await page.close()
+
+async def local_home_only():
+ async with async_playwright() as pw:
+  browser=await pw.chromium.launch(chromium_sandbox=True)
+  try:
+   await local_home(browser)
+  finally:
+   await browser.close()
+
+asyncio.run(local_home_only() if '--local-home-only' in sys.argv else main())

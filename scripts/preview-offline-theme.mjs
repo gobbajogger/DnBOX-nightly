@@ -42,7 +42,11 @@ ${fonts}
 </style>`;
   const styled = replaceOnce(html, '</head>', offlineTheme + '\n</head>');
   return replaceOnce(styled, '<script type="module">', `<script type="module">
-if (location.protocol === 'file:') document.documentElement.classList.add('offline-tool');`);
+if (location.protocol === 'file:') {
+  document.documentElement.classList.add('offline-tool');
+  const home = document.querySelector('a.home[href="../"]');
+  if (home) home.href = '../install/index.html#firmware';
+}`);
 }
 
 export function withOfflineInstallerRouting(html) {

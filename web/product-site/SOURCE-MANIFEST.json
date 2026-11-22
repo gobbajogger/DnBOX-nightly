@@ -184,8 +184,8 @@
     },
     {
       "path": "builds/history.mjs",
-      "bytes": 1283,
-      "sha256": "58db56d9716531d8089235f8a67743aca9f45ca86d51e1beae7bc7b40fdab596"
+      "bytes": 1071,
+      "sha256": "f40e66fb4b5a428c50243264419afc1f17774ddee78a819a0cc34b37b95f654f"
     },
     {
       "path": "builds/index.html",

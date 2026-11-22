@@ -31,7 +31,15 @@
       "producer": "mounted disconnected Remote Draft",
       "bpm": 120,
       "explicit_rate": null,
-      "canvas_comparison": "not_applicable_to_responsive_dom"
+      "canvas_comparison": "not_applicable_to_responsive_dom",
+      "component_timing": {
+        "sample_rate": 44100,
+        "bpm": 125,
+        "beats": 4,
+        "bar_samples": 84672,
+        "step_samples": 5292,
+        "scope": "renderFunkyBeatsDrums and SequenceDraft input; mounted trace unchanged"
+      }
     }
   },
   "states": [

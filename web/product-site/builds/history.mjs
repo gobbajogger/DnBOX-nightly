@@ -9,14 +9,7 @@ const nodes = new Map(
   [...document.querySelectorAll('[data-record-id]')].map(node => [node.dataset.recordId, node])
 );
 
-let records;
-try {
-  const response = await fetch('../data/history.json', {cache: 'no-store'});
-  if (response.ok) records = await response.json();
-} catch {
-  // The complete history is also embedded in the page.
-}
-records ??= [...nodes].map(([id, node]) => ({
+const records = [...nodes].map(([id, node]) => ({
   id,
   channel: node.dataset.channel,
   models: node.dataset.models.split(/\s+/).filter(Boolean),
