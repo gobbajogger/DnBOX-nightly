@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "chromium": "NOT_RUN",
+  "browserEquivalent": false,
+  "softwareOnly": true,
+  "liveDefaultCatalogAdmitted": false,
+  "defaultMidiRequests": 0,
+  "node": "v24.22.3",
+  "nightlyHead": "b0af34316dad63815fadee07863318b5310f140e",
+  "firmwareHead": "1c46c6fc8d7a550b3308515a3415ea63d86e7486",
+  "binarySha256": "18acaea9d1247d613daaea1f0910b173366b8d09e7e097947b0cf9197b110d9e",
+  "catalogSha256": "e703230b78c9615f66b0ab8f4c682f9a9722d32690da911cad198c60ec203269",
+  "runtimeFileSha256": {
+    "web/product-site/remote/app.mjs": "f02fd9bc4210f1852b5933befde2bbf5270444ff149d18e0822d9c52b25a4c13",
+    "web/product-site/remote/firmware-link.mjs": "43bece9ffd5cf8fb161b753d7ee12dc84551bc9b36bb4cf64383580f31ada878",
+    "web/product-site/remote/device/catalog.mjs": "855de076fd76ea4c6ccd508f8a6d55e0996657e937dd08952266256af6c58ee0",
+    "web/product-site/remote/device/session.mjs": "2a0ace83d2a188cf06b6e40f4c5817d26f620bd3400490718ff58d0255ddea5b",
+    "web/product-site/remote/device/vendor/client.mjs": "908442b9caa357a25057e737c39d9c9e4572f22c5aeb9074a23d7dcb1fb6b02f",
+    "web/product-site/remote/device/vendor/codec.mjs": "2ba77fa371114c978dc00d25f2205ff69593a9ab4f24a3a406c262426bdf50d2",
+    "tests/product-remote/tests/firmware-link-dom.mjs": "574b27446ed803543e2861f1338c30e070a277d24e7d5b73cf4b583f6cde82a8"
+  },
+  "nodeHarnessSha256": "82ebcb3860b3a299a51e1030b470a15e9ed8bfd4164dae76d78c6bd5cef7ea21",
+  "transport": "Node DOM fixture and stdio bridge to the real wet firmware host",
+  "hello": {
+    "status": 0,
+    "count": 1,
+    "crc": 3972684153
+  },
+  "addressed": [
+    [
+      2,
+      0,
+      1,
+      75
+    ],
+    [
+      3,
+      1,
+      2,
+      76
+    ],
+    [
+      2,
+      0,
+      2,
+      76
+    ],
+    [
+      2,
+      0,
+      2,
+      76
+    ],
+    [
+      3,
+      1,
+      3,
+      75
+    ],
+    [
+      2,
+      0,
+      3,
+      75
+    ]
+  ],
+  "wire": [
+    {
+      "op": 0,
+      "status": 0,
+      "control": 1,
+      "revision": 1,
+      "value": 3972684153,
+      "request": 1,
+      "guardedRevision": 0
+    },
+    {
+      "op": 1,
+      "status": 0,
+      "control": 0,
+      "revision": 1,
+      "value": 0,
+      "request": 2,
+      "guardedRevision": 0
+    },
+    {
+      "op": 2,
+      "status": 0,
+      "control": 1,
+      "revision": 1,
+      "value": 75,
+      "request": 3,
+      "guardedRevision": 1
+    },
+    {
+      "op": 6,
+      "status": 0,
+      "control": 0,
+      "revision": 1,
+      "value": 0,
+      "request": 4,
+      "guardedRevision": 1
+    },
+    {
+      "op": 3,
+      "status": 1,
+      "control": 1,
+      "revision": 2,
+      "value": 76,
+      "request": 5,
+      "guardedRevision": 1
+    },
+    {
+      "op": 2,
+      "status": 0,
+      "control": 1,
+      "revision": 2,
+      "value": 76,
+      "request": 6,
+      "guardedRevision": 2
+    },
+    {
+      "op": 2,
+      "status": 0,
+      "control": 1,
+      "revision": 2,
+      "value": 76,
+      "request": 7,
+      "guardedRevision": 2
+    },
+    {
+      "op": 3,
+      "status": 1,
+      "control": 1,
+      "revision": 3,
+      "value": 75,
+      "request": 8,
+      "guardedRevision": 2
+    },
+    {
+      "op": 2,
+      "status": 0,
+      "control": 1,
+      "revision": 3,
+      "value": 75,
+      "request": 9,
+      "guardedRevision": 3
+    },
+    {
+      "op": 7,
+      "status": 0,
+      "control": 0,
+      "revision": 3,
+      "value": 0,
+      "request": 10,
+      "guardedRevision": 3
+    }
+  ],
+  "close": {
+    "status": 0
+  }
+}

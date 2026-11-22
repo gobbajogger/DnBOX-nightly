@@ -1,0 +1,117 @@
+{
+  "nightly": "c7b026cf86b3e153dcb3c564ced8fce25b9b3880",
+  "catalog_crc": "ecca5979",
+  "control": {
+    "id": 1,
+    "kind": 1,
+    "label": "909 MIX Level",
+    "max": 127,
+    "min": 0,
+    "owner": "909",
+    "parameter": "MX_LEVEL",
+    "target": "T_MIX"
+  },
+  "test_only": true,
+  "cases": {
+    "closed": {
+      "packed_sha256": "ee8581b6b8043f9afdbe41f43f3b12785edf23548f59050d4cab1de25bd4ec04",
+      "trace": []
+    },
+    "mismatch": {
+      "packed_sha256": "dff6f3a340804850fcc942365b261859942e3f46d7f19e90b8d9c9e964955ea8",
+      "trace": [
+        [
+          "HELLO",
+          0,
+          1,
+          1,
+          3972684153
+        ]
+      ]
+    },
+    "native": {
+      "packed_sha256": "67aad0ea99e961452db1971689e805e992d2e5bc8dd220ac583411ebc4a476c0",
+      "trace": [
+        [
+          "HELLO",
+          0,
+          1,
+          1,
+          3972684153
+        ],
+        [
+          "OPEN",
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          "READ",
+          0,
+          1,
+          1,
+          75
+        ],
+        [
+          "KEEPALIVE",
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          "SET",
+          1,
+          1,
+          2,
+          76
+        ],
+        [
+          "READ",
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          "READ",
+          0,
+          1,
+          2,
+          76
+        ],
+        [
+          "SET",
+          1,
+          1,
+          3,
+          75
+        ],
+        [
+          "READ",
+          0,
+          1,
+          3,
+          75
+        ],
+        [
+          "CLOSE",
+          0,
+          0,
+          3,
+          0
+        ]
+      ]
+    }
+  },
+  "sha256": {
+    "/workspace/scratch/857bb2409f82/integ-recovered/nightly/tools/touchosc-parameters/pack.py": "67e79b70bc130a0eaa161f099407e7dd3e845b2bb9e817d599c237d063ffee92",
+    "/workspace/scratch/857bb2409f82/integ-recovered/nightly/tests/product-remote/touchosc-parameters-host.py": "775ee72e57aed0fd47f1473ee1b84a489ad3f1fce413eeebf2d3870c09b1aa28",
+    "/workspace/scratch/857bb2409f82/integ-recovered/nightly/tests/product-remote/touchosc-parameters-host.lua": "aa335e1eba7b3f3fd66b669451ed53acf93655003b6abe1e357f8622d40aa012",
+    "/workspace/scratch/857bb2409f82/integ-recovered/firmware/docs/remote-scalar-catalog.json": "4239d4ccfe7e1af267d176f439393e8c1a6164ccd89e94b9dc5550b7b4ae9cb5",
+    "/workspace/scratch/857bb2409f82/integ-recovered/firmware/firmware/src/app/dnr2_native_catalog.h": "499a5e180b3b155b6e58c19d465ee3a6d48178a77cfedf6c9373d4ae8097651f",
+    "/workspace/scratch/857bb2409f82/integ-recovered/firmware/build/host/dnr2-wet/engine-native-wet": "18acaea9d1247d613daaea1f0910b173366b8d09e7e097947b0cf9197b110d9e",
+    "/workspace/scratch/857bb2409f82/integ-recovered/nightly/evidence/integ-resume/branch-scalar-54266973/test_staging_lua.py": "d79684d780b2e719ca0cb878fd978d2749c863fc5f0cfa6e0b62b363f632eeb4"
+  }
+}

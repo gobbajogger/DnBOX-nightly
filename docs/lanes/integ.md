@@ -1,5 +1,10 @@
 # Integration baseline
 
+## Exact paired wet firmware transport — 2026-11-22 (WORKING)
+
+The [paired wet runtime replay](../../evidence/integ-resume/paired-wet-runtime-1c46c6fc/README.md) uses exact firmware source `1c46c6fc` and Nightly `b0af343`. The reviewed selected module passed actual software Apply, fresh readback, heartbeat, guarded Undo and CLOSE against the wet firmware host in Node and packed TouchOSC. The same two firmware packages passed the native emulated USB round trip. The exact latest Chromium replay is NOT_RUN because the recovered executor denies Chromium's required AF_UNIX socket and the pinned headless shell download returns HTTP 403. The previously reviewed branch-only opt-in remains pinned to its own package pair. Exact normal WIDE Pro timing also remains open.
+
+
 ## Combined Remote and Web source with reviewed branch runtime — 2026-11-22 (WORKING)
 
 The [reviewed branch runtime](../../evidence/integ-resume/branch-scalar-54266973/README.md) combines exact Remote `c7b026cf` and Web `c36ac458` while retaining each input path. The one source-owned 909 MIX Level production candidate is explicitly selectable for the stock firmware `54266973` software pair. The default catalog stays closed. Exact Chromium and packed TouchOSC receipts cover Apply, guarded Undo, lease cleanup and catalog mismatch, with Device read-only. Both Web History phone defects pass focused checks in the current composition. Installer parity, offline Samples and Projects navigation, 19 route source checks and the unchanged archived record data are verified. Final integrated visual, emulator, active WIDE timing and aggregate gates remain open.
