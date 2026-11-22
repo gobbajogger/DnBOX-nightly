@@ -54,7 +54,7 @@
       "FX"
     ],
     "unresolved": "Exact original unpublished19-file overlay and per-vector asset mapping. The original18native frames, review, scores and contact sheet are now recovered and hash-verified.",
-    "recoveredRasterReceipt": "approved-1700-recovery.json"
+    "recoveredRasterReceipt": "../../../docs/history/remote-resume-0130/input-recovery/approved-1700-recovery.json"
   },
   "priorAccessAttempts": {
     "mountedOriginals": "No matching installer, executable attachment or original bank archive recovered.",
