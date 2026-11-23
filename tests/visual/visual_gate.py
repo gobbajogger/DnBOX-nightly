@@ -269,6 +269,35 @@ def installer_responses():
     return attach
 
 SETTLE_MS = 120_000
+QUIET_SECONDS = 0.5
+
+
+def network_tracker(pg):
+    """Count this page's in-flight requests from Playwright's own request events."""
+    state = {'inflight': set(), 'changed': time.monotonic()}
+    def start(request):
+        state['inflight'].add(request); state['changed'] = time.monotonic()
+    def end(request):
+        state['inflight'].discard(request); state['changed'] = time.monotonic()
+    pg.on('request', start); pg.on('requestfinished', end); pg.on('requestfailed', end)
+    return state
+
+
+def wait_network_quiet(pg, state, budget=SETTLE_MS / 1000):
+    """Same rule as Playwright's networkidle (no request for 500 ms), measured here.
+
+    Under heavy shared-box load Playwright's networkidle lifecycle event was seen
+    never to fire although no request was pending, so the quiet window is
+    checked directly from request events instead."""
+    deadline = time.monotonic() + budget
+    while True:
+        now = time.monotonic()
+        if not state['inflight'] and now - state['changed'] >= QUIET_SECONDS:
+            return
+        if now > deadline:
+            raise TimeoutError(f'network not quiet after {budget:.0f} s; pending: '
+                               + ', '.join(r.url for r in list(state['inflight'])[:5]))
+        pg.wait_for_timeout(100)
 
 
 def viewport_contexts(pw):
@@ -299,9 +328,10 @@ def main():
             attach_installer_responses = installer_responses()
             def settle(pg, url, name):
                 try:
+                    inflight = network_tracker(pg)
                     pg.goto(url)
                     pg.add_style_tag(content=FREEZE_CSS)
-                    pg.evaluate('document.fonts.ready'); pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(250)
+                    pg.evaluate('document.fonts.ready'); wait_network_quiet(pg, inflight); pg.wait_for_timeout(250)
                 except Exception as error:
                     raise RuntimeError(f'{name} failed to settle at {url}: {error}') from error
             for w, h, c in viewports:

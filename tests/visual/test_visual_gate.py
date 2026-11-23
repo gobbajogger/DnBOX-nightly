@@ -20,6 +20,25 @@ def png(color):
     return out.getvalue()
 
 class GateContract(unittest.TestCase):
+    def test_network_quiet_waits_for_pending_requests_and_a_quiet_window(self):
+        clock = [0.0]
+        handlers = {}
+        class Page:
+            def on(self, name, fn): handlers[name] = fn
+            def wait_for_timeout(self, ms):
+                clock[0] += ms / 1000
+                if abs(clock[0] - 0.3) < 1e-9: handlers['requestfinished'](request)
+        request = Mock(url='http://127.0.0.1/slow.json')
+        page = Page()
+        with patch.object(gate.time, 'monotonic', side_effect=lambda: clock[0]):
+            state = gate.network_tracker(page)
+            handlers['request'](request)
+            gate.wait_network_quiet(page, state)
+            self.assertGreaterEqual(clock[0], 0.3 + gate.QUIET_SECONDS - 1e-9)
+            handlers['request'](Mock(url='http://127.0.0.1/never'))
+            with self.assertRaisesRegex(TimeoutError, 'never'):
+                gate.wait_network_quiet(page, state, budget=2)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
