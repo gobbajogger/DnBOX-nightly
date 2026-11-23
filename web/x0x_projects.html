@@ -145,6 +145,10 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
 </main>
 <script type="module">
 import { PROJECT_MAX_FILE, ProjectDevice, ProjectMidiLink, readProjectFile, makeProjectFile, readProjectSnapshot, prepareProjectImport, applyProjectImport } from "./x0x_projects.js";
+if (typeof location !== 'undefined' && location.protocol === 'file:') {
+  document.querySelector('nav a[href="../install/#firmware"]').href = '../install/index.html#firmware';
+  document.querySelector('nav a[href="../install/#samples"]').href = '../breaks/index.html';
+}
 
 const $ = (id) => document.getElementById(id);
 let midi = null, link = null, device = null, selected = null, prepared = null, busy = false, downloaded = false, previewStale = false;

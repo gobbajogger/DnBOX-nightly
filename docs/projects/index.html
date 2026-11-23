@@ -1774,6 +1774,10 @@ class ProjectMidiLink {
   }
 }
 
+if (typeof location !== 'undefined' && location.protocol === 'file:') {
+  document.querySelector('nav a[href="../install/#firmware"]').href = '../install/index.html#firmware';
+  document.querySelector('nav a[href="../install/#samples"]').href = '../breaks/index.html';
+}
 
 const $ = (id) => document.getElementById(id);
 let midi = null, link = null, device = null, selected = null, prepared = null, busy = false, downloaded = false, previewStale = false;

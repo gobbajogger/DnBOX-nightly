@@ -163,6 +163,7 @@
     <a href="https://github.com/gobbajogger/DnBOX" style="color:inherit">github.com/gobbajogger/DnBOX</a></p>
 </main>
 <script type="module">
+if (typeof location !== 'undefined' && location.protocol === 'file:') document.querySelector('a.home').href = '../install/index.html#firmware';
 /*LIB*/
 const $ = (id) => document.getElementById(id);
 const HDR = [0x7D, 0x46, 0x4C];
