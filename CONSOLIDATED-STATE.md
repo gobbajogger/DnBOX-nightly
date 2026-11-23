@@ -97,6 +97,16 @@ Generated views: `docs/roadmap/{Complete,Working,Pending}.md` via `python3 tools
       "next_action": "None"
     },
     {
+      "id": "M5-C2",
+      "title": "Evidence-only files removed from Git",
+      "move": "M5",
+      "status": "merged",
+      "merge_sha": "6d3d746b2007290eca67c417a4da2e5ee19e9157",
+      "owner": "integ",
+      "dependencies": [],
+      "next_action": "None; .gitignore keeps evidence/ and docs/*evidence* out"
+    },
+    {
       "id": "M6",
       "title": "Combined qualification and delivery",
       "move": "M6",
