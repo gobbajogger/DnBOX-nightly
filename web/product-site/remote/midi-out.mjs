@@ -5,7 +5,8 @@
 //   app/engine.c   L1866-1925 note routing: break channel owns its notes, then kit channels
 //                            (GM_DRUM match), then 303 channels; SMK clip mode eats notes < 40
 //                            on non-break channels; brk_note_slice = (note - 12) mod count
-//   seq/sequencer.c L1172    FA/FB/FC/F8 are ignored under internal clock
+//   seq/sequencer.c L1172    FA/FB/FC/F8 are ignored only when CLOCK SOURCE is INT (1);
+//                            AUTO (0, the default) and EXT (2) take them (sequencer.h L96-98)
 // Program Change clip launch needs the drain() change FW Core adds; it is sent only when
 // HELLO reports caps bit PC_CLIP. Pure functions: nothing here touches Web MIDI.
 import {CAP} from './dnr3.mjs';
@@ -19,7 +20,7 @@ export const GM_DRUM = Object.freeze({
 export const DEFAULT_CH = Object.freeze([9, 10, 1, 2, 3]);
 export const CH_OFF = 127;              // STATE reports SEQ_CH_OFF (0xFF) as 127
 export const CLIP_NOTES = 40;           // SMK_APC40_CLIP_COUNT
-export const CLK_INTERNAL = 0;
+export const CLK_AUTO = 0, CLK_INTERNAL = 1, CLK_EXTERNAL = 2;   // seq.clk_src
 export const BREAK_SLICE_BASE = 12;
 export const PC_CANCEL = 127;
 
@@ -28,7 +29,7 @@ export const PC_CANCEL = 127;
 export function firmwareState(state) {
   const s = state ?? {};
   const ch = Array.isArray(s.ch) && s.ch.length === 5 ? s.ch.slice() : DEFAULT_CH.slice();
-  return {ch, clkSrc: s.clkSrc ?? CLK_INTERNAL, clipMode: !!s.clipMode, caps: s.caps ?? 0, known: !!state && Array.isArray(s.ch)};
+  return {ch, clkSrc: s.clkSrc ?? CLK_AUTO, clipMode: !!s.clipMode, caps: s.caps ?? 0, known: !!state && Array.isArray(s.ch)};
 }
 
 // Which channel reaches the part, or why notes would not reach it.
@@ -68,7 +69,7 @@ export function transport(action, state) {
   const s = firmwareState(state);
   if (![0, 1, 2].includes(action)) return {ok: false, reason: 'range'};
   if (s.clkSrc === CLK_INTERNAL) return {ok: true, via: 'dnr3', action};
-  return {ok: true, via: 'midi', bytes: [[0xFC, 0xFA, 0xFB][action]]};
+  return {ok: true, via: 'midi', assumed: !s.known, bytes: [[0xFC, 0xFA, 0xFB][action]]};
 }
 
 // pat 0..31, or null to cancel the cue.

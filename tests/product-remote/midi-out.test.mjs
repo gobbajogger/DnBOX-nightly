@@ -7,12 +7,15 @@ import {CAP} from '../../web/product-site/remote/dnr3.mjs';
 
 const fw = process.env.DNBOX_FIRMWARE_CHECKOUT;
 const known = {ch: [9, 10, 1, 2, 3], clkSrc: 0, clipMode: 0, caps: 0x1FF};
+const internal = {...known, clkSrc: 1};
 
 test('note maps and default channels match firmware sequencer.c when a checkout is given', {skip: !fw || !existsSync(`${fw}/firmware/src/seq/sequencer.c`)}, () => {
   const src = readFileSync(`${fw}/firmware/src/seq/sequencer.c`, 'utf8');
   const rows = [...src.matchAll(/\{([0-9, ]+)\},\s*\/\* (909|808):/g)].map(x => [x[2], x[1].split(',').map(Number)]);
   assert.deepEqual(rows, [['909', [...m.GM_DRUM.drum909]], ['808', [...m.GM_DRUM.drum808]]]);
   assert.match(src, /SEQ_CH_DEFAULT\[NTRACKS\] = \{9, 10, 1, 2, 3\}/);
+  const h = readFileSync(`${fw}/firmware/src/seq/sequencer.h`, 'utf8');
+  for (const [k, v] of [['AUTO', m.CLK_AUTO], ['INT', m.CLK_INTERNAL], ['EXT', m.CLK_EXTERNAL]]) assert.match(h, new RegExp(`#define SEQ_CLK_${k} ${v}u`));
 });
 
 test('pads become note on/off on the part channel', () => {
@@ -38,12 +41,12 @@ test('routing follows the firmware ownership order', () => {
   assert.equal(m.route('drum909', known).assumed, false);
 });
 
-test('transport uses realtime bytes only under external clock', () => {
-  assert.deepEqual(m.transport(1, known), {ok: true, via: 'dnr3', action: 1});
-  assert.deepEqual(m.transport(0, null), {ok: true, via: 'dnr3', action: 0});
-  const ext = {...known, clkSrc: 1};
-  assert.deepEqual([0, 1, 2].map(a => m.transport(a, ext).bytes), [[0xFC], [0xFA], [0xFB]]);
-  assert.equal(m.transport(3, ext).reason, 'range');
+test('transport is realtime MIDI unless CLOCK SOURCE is INT', () => {
+  assert.deepEqual(m.transport(1, internal), {ok: true, via: 'dnr3', action: 1});
+  assert.deepEqual([0, 1, 2].map(a => m.transport(a, known).bytes), [[0xFC], [0xFA], [0xFB]]);
+  assert.deepEqual(m.transport(1, {...known, clkSrc: 2}).bytes, [0xFA]);
+  assert.equal(m.transport(1, null).assumed, true, 'firmware default AUTO assumed until STATE');
+  assert.equal(m.transport(3, known).reason, 'range');
 });
 
 test('clip launch is Program Change, only when the firmware reports PC_CLIP', () => {

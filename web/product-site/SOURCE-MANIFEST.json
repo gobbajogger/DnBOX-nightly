@@ -848,6 +848,11 @@
       "sha256": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba"
     },
     {
+      "path": "remote/dnr3-client.mjs",
+      "bytes": 9112,
+      "sha256": "2e11dc1647af29c1851e4950473142e7f6404e857d1e951757eac3e4f028a70b"
+    },
+    {
       "path": "remote/dnr3.mjs",
       "bytes": 14509,
       "sha256": "df6ce82318ca178ad4d8f5f2cd800fd41f157406501a3886b192ead604c88c84"
@@ -949,8 +954,8 @@
     },
     {
       "path": "remote/midi-out.mjs",
-      "bytes": 4628,
-      "sha256": "ca7d532499b1117c650b49522fa612beb8866139bc7158724a2919f44983a850"
+      "bytes": 4801,
+      "sha256": "94eda658c153787f1f7a621969b6bfddd300f21aafa9406fbad018ee683a4bd5"
     },
     {
       "path": "remote/mix-aliases.mjs",
