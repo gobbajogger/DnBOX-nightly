@@ -11,7 +11,7 @@ class EntryDisclosure(unittest.TestCase):
   self.assertIn('your draft stays untouched',tools)
   self.assertIn('If the emulator is unavailable, keep working in Draft.',tools)
   self.assertNotIn('No connected control or playback in this preview.',tools)
-  self.assertIn('Browser MIDI export is unavailable',project);self.assertIn('source-executed browser provider',project)
+  self.assertIn('Browser MIDI export is unavailable',project);self.assertIn('You can still check a project file or back up and restore full projects.',project);self.assertIn('A Remote draft is not a project file and cannot be exported as MIDI.',project);self.assertNotIn('source-executed browser provider',project)
   self.assertIn('Download chosen breaks',starting)
   self.assertIn('Downloading does not change your keyboard',starting)
   self.assertIn('Restore replaces slot 1, and slot 2',starting)

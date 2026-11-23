@@ -619,18 +619,18 @@
     },
     {
       "path": "projects/exchange/adapter.mjs",
-      "bytes": 4471,
-      "sha256": "914a68c9a5db673ea520f6cba204cafd8ef35c8a906a45179729fa6074488c56"
+      "bytes": 4578,
+      "sha256": "c7b1601b684534318d07ddc183e4a7d673134c4ba8317c357e566b5c4fa3110c"
     },
     {
       "path": "projects/exchange/app.mjs",
-      "bytes": 749,
-      "sha256": "04e96d14c2298f97bc097fcdd27de8c26b68f22eb3da6bee87cfeec5b0f13c1e"
+      "bytes": 825,
+      "sha256": "7f06362c7b5431a00732ead5975c531930e5ecbc9a08a679b3ee35cfb4c3de59"
     },
     {
       "path": "projects/exchange/panel.mjs",
-      "bytes": 2202,
-      "sha256": "dee45550a751671b4a0b7dbde1ab4430accfcf488f133c96ff1c09d56631148d"
+      "bytes": 2552,
+      "sha256": "ae2e91fbb3689b61850b2a1c18e83f5f6ca397c89c82ab3cf113aed931ea21d8"
     },
     {
       "path": "projects/exchange/provider.mjs",
@@ -659,8 +659,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 118085,
-      "sha256": "c789361a3a49aa3773ec7d04a9783b96305cc8f0f5a07f6f44dbd7cfd73f5321"
+      "bytes": 118004,
+      "sha256": "a358dfa5ba5bbc9074ab3d817f775bd2578b1556038ec438be45915e5123385e"
     },
     {
       "path": "reference/current-ui.html",
