@@ -1,0 +1,107 @@
+--- a/scripts/firmware-emulator/transaction-engine.c
++++ b/scripts/firmware-emulator/transaction-engine.c
+@@ -25,3 +25,14 @@
+  if(!original_sound_restore_chicago(&expected,cell))return 0;
+  return !memcmp(expected.macro,original_bass[v].dsp.chicago.program.macro,20*sizeof(float));
+ }
++int web_engine_miami_carrier_matches(const uint8_t *cell){
++ const original_miami_backend *b=&original_bass[0].dsp.miami;
++ if (!cell || original_bass[0].kind!=ORIGINAL_SOUND_MIAMI || original_bass[0].status!=ORIGINAL_RUNTIME_OK) return 0;
++ const original_miami_program *applied=original_miami_backend_program(b);
++ original_miami_program expected;
++ original_miami_voice_controls compiled;
++ return applied && original_sound_restore_miami(&expected,cell) &&
++        !memcmp(&applied->macro[0],&expected.macro[0],sizeof(float)) &&
++        original_miami_voice_compile(&compiled,&expected) &&
++        b->controls.shape[0]==compiled.shape[0];
++}
+--- a/scripts/firmware-emulator/sound-transaction.h
++++ b/scripts/firmware-emulator/sound-transaction.h
+@@ -70,3 +70,87 @@
+ EXPORT unsigned web_sound_choice(void){return web_sound_current.choice;}
+ EXPORT int web_sound_set_voice(unsigned slot,unsigned revision,unsigned parameter,int expected,int value){if(slot>=NBASS||web_sound_current.slot!=slot)return -2;return web_sound_set(revision,parameter,expected,value);}
+ EXPORT int web_sound_undo_voice(unsigned slot,unsigned token){if(slot>=NBASS||!token||web_sound_history[(token-1)%WEB_SOUND_HISTORY].after.slot!=slot)return -2;return web_sound_undo(token);}
++extern int web_engine_miami_carrier_matches(const uint8_t *);
++EXPORT int web_pilot_miami_carrier_read(unsigned slot,unsigned param,unsigned bank){
++ if(slot!=0||param!=0||bank!=ORIGINAL_SOUND_MIAMI||!started||failed||
++    engine_bass_bank(slot)!=bank||engine_bass_requested_bank(slot)!=bank||
++    engine_bass_sound_bank(&proj.sound,slot)!=bank||engine_bass_preset_pending(slot)) return -1;
++ unsigned serial=engine_bass_choice_serial();
++ if(web_engine_queue_free()!=1024u||!web_engine_miami_carrier_matches(proj.sound.v[T_303][slot])) return -2;
++ pref_t ref=PR(R_ENG,T_303,slot,param);
++ const x0x_param_t *d=pref_desc(ref);
++ if(!d||d->max!=127||pref_read_only(ref)||serial!=engine_bass_choice_serial()) return -3;
++ return pref_get(ref);
++}
++static web_sound_snapshot pilot_before,pilot_after;
++static unsigned pilot_ticket,pilot_state;
++static int pilot_same(const web_sound_snapshot *s){
++ return s->choice==engine_bass_choice_serial()&&
++ !memcmp(s->cell,proj.sound.v[T_303][0],sizeof s->cell)&&
++ !memcmp(&s->tag,&proj.sound.bass[0],sizeof s->tag);
++}
++EXPORT int web_pilot_miami_set(unsigned slot,unsigned param,unsigned bank,int expected,int value){
++ if(slot||param||bank!=ORIGINAL_SOUND_MIAMI||value<0||value>127||expected<0||expected>127||value==expected||pilot_state||
++    web_pilot_miami_carrier_read(slot,param,bank)!=expected) return -1;
++ web_sound_capture(&pilot_before,0);
++ pref_set_impl(PR(R_ENG,T_303,0,0),value,0);
++ pilot_ticket=web_engine_queue_ticket();web_sound_capture(&pilot_after,0);pilot_state=1;return 0;
++}
++EXPORT int web_pilot_miami_edit_status(void){
++ if(pilot_state!=1)return -1;
++ if(!web_engine_queue_done(pilot_ticket))return 0;
++ if(!pilot_same(&pilot_after)||web_pilot_miami_carrier_read(0,0,ORIGINAL_SOUND_MIAMI)!=pilot_after.cell[0]||
++    !web_engine_param_received(T_303,0,0,pilot_after.cell[0],pilot_ticket))return -2;
++ pilot_state=2;return 1;
++}
++EXPORT int web_pilot_miami_undo(unsigned slot,unsigned param,unsigned bank){
++ if(slot||param||bank!=ORIGINAL_SOUND_MIAMI||pilot_state!=2||!pilot_same(&pilot_after)||
++    web_pilot_miami_carrier_read(slot,param,bank)!=pilot_after.cell[0])return -1;
++ bass_base_state_t target;
++ memcpy(target.cell,proj.sound.v[T_303],sizeof target.cell);memcpy(target.tag,proj.sound.bass,sizeof target.tag);
++ memcpy(target.cell[0],pilot_before.cell,sizeof pilot_before.cell);target.tag[0]=pilot_before.tag;
++ engine_bass_edit_hold(1);engine_project_hold(1);
++ if(engine_bass_base_ready(1,&target)){engine_project_hold(0);engine_bass_edit_hold(0);return -2;}
++ memcpy(proj.sound.v[T_303][0],pilot_before.cell,sizeof pilot_before.cell);proj.sound.bass[0]=pilot_before.tag;
++ engine_bass_base_restore(1);engine_project_hold(0);engine_bass_edit_hold(0);mark_dirty();pilot_state=3;
++ return web_pilot_miami_carrier_read(slot,param,bank)==pilot_before.cell[0]?0:-3;
++}
++EXPORT int web_pilot_probe_cell(unsigned slot,unsigned param){
++ return slot<NBASS&&param<NPARAMS_MAX?proj.sound.v[T_303][slot][param]:-1;
++}
++/* Pilot-only owner-scoped bridge; the app still must bind the verified module. */
++static struct {char number[64],unit[32];} pilot_text;
++static web_sound_snapshot pilot_snapshot;
++static unsigned pilot_serial,pilot_revision,pilot_undo_token;
++EXPORT const void *web_pilot_miami_text(void){return &pilot_text;}
++EXPORT unsigned web_pilot_miami_revision(void){return pilot_revision;}
++EXPORT unsigned web_pilot_miami_choice(void){return pilot_snapshot.choice;}
++EXPORT unsigned web_pilot_miami_token(void){return pilot_undo_token;}
++EXPORT int web_pilot_miami_read_snapshot(unsigned slot,unsigned param,unsigned bank){
++ int value=web_pilot_miami_carrier_read(slot,param,bank);
++ if(value<0)return value;
++ if(pilot_serial==UINT32_MAX)return -3;
++ web_sound_capture(&pilot_snapshot,slot);
++ memset(&pilot_text,0,sizeof pilot_text);
++ pref_value(PR(R_ENG,T_303,slot,param),pilot_text.number,pilot_text.unit);
++ if(!pilot_same(&pilot_snapshot))return -3;
++ pilot_revision=++pilot_serial;return value;
++}
++EXPORT int web_pilot_miami_set_checked(unsigned slot,unsigned param,unsigned bank,unsigned revision,int expected,int value){
++ if(!revision||revision!=pilot_revision||!pilot_same(&pilot_snapshot))return -1;
++ int rc=web_pilot_miami_set(slot,param,bank,expected,value);
++ if(rc==0)pilot_revision=0;
++ return rc;
++}
++EXPORT int web_pilot_miami_confirm(void){
++ if(pilot_serial==UINT32_MAX)return -3;
++ int rc=web_pilot_miami_edit_status();
++ if(rc==1)pilot_undo_token=++pilot_serial;
++ return rc;
++}
++EXPORT int web_pilot_miami_undo_checked(unsigned slot,unsigned param,unsigned bank,unsigned token){
++ if(!token||token!=pilot_undo_token)return -1;
++ int rc=web_pilot_miami_undo(slot,param,bank);
++ if(rc==0)pilot_undo_token=pilot_revision=0;
++ return rc;
++}

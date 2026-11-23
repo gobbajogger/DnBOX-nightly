@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {pathToFileURL} from 'node:url';import {createHash} from 'node:crypto';
+const [d,p]=process.argv.slice(2);const bytes=fs.readFileSync(d+'/admission-pilot.wasm');
+assert.equal(createHash('sha256').update(bytes).digest('hex'),'db1d79bc8bfb5ab3fa9a8fdb78518e42abf99674253b1cb16a602da1e2e28f4e','Unreviewed local Miami binary');
+const {createKernelWasi}=await import(pathToFileURL(p));let n;
+const m=new WebAssembly.Module(bytes);n=new WebAssembly.Instance(m,{wasi_snapshot_preview1:createKernelWasi(()=>n.memory)}).exports;n._initialize();
+const f=s=>n['web_pilot_miami_'+s], addr=[0,0,1], read=()=>{const raw=f('read_snapshot')(...addr),text=Buffer.from(n.memory.buffer,f('text')(),96);return{raw,display:text.subarray(0,64).toString().split('\0')[0],unit:text.subarray(64).toString().split('\0')[0],revision:f('revision')(),choice:f('choice')()};};
+assert.equal(n.web_boot(),0);for(let i=0;i<600;i++)assert.equal(n.web_render(128),0);
+assert.equal(n.web_sound_read(0),-1);
+const prev=read(),base=read();assert.equal(f('set_checked')(...addr,prev.revision,127,0),-1);assert.equal(f('set_checked')(1,0,1,base.revision,127,0),-1);
+assert.equal(f('set_checked')(...addr,base.revision,127,0),0);let rc=0;for(let i=0;i<100&&rc===0;i++){assert.equal(n.web_render(128),0);rc=f('confirm')();}assert.equal(rc,1);const token=f('token')(),edited=read();assert.equal(f('undo_checked')(...addr,token+1),-1);assert.equal(f('undo_checked')(...addr,token),0);assert.equal(f('undo_checked')(...addr,token),-1);const restored=read();assert.equal(base.raw,127);assert.equal(edited.raw,0);assert.equal(restored.raw,127);assert.notEqual(base.display,edited.display);assert.equal(restored.display,base.display);assert.equal(n.web_sound_read(1),20);console.log(JSON.stringify({base,edited,restored,token,staleRevisionRefused:true,foreignOwnerRefused:true,wrongAndReusedTokenRefused:true,peerChicagoCount:20},null,2));
