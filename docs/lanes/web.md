@@ -1,5 +1,7 @@
 # Web lane · PR #156
 
+Merged [#189](https://github.com/gobbajogger/DnBOX-nightly/pull/189) as `42d47424`: Projects can check a file when browser MIDI export is unavailable ([Rule 9 proof](https://github.com/gobbajogger/DnBOX-nightly/pull/189#issuecomment-7089227917)).
+
 ## Current Web delivery · 21 November 2026
 
 The [current gate, independent review and nightly publication ledger](https://github.com/gobbajogger/DnBOX-nightly/pull/156#issuecomment-7059684119) records the tested Web commit, the seven gate results, the reviewer’s disposition and the deployed tree and byte counts. Each result applies to the exact commit named there. Earlier sections below are dated checkpoints.
