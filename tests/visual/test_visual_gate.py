@@ -20,6 +20,25 @@ def png(color):
     return out.getvalue()
 
 class GateContract(unittest.TestCase):
+    def test_network_quiet_waits_for_pending_requests_and_a_quiet_window(self):
+        clock = [0.0]
+        handlers = {}
+        class Page:
+            def on(self, name, fn): handlers[name] = fn
+            def wait_for_timeout(self, ms):
+                clock[0] += ms / 1000
+                if abs(clock[0] - 0.3) < 1e-9: handlers['requestfinished'](request)
+        request = Mock(url='http://127.0.0.1/slow.json')
+        page = Page()
+        with patch.object(gate.time, 'monotonic', side_effect=lambda: clock[0]):
+            state = gate.network_tracker(page)
+            handlers['request'](request)
+            gate.wait_network_quiet(page, state)
+            self.assertGreaterEqual(clock[0], 0.3 + gate.QUIET_SECONDS - 1e-9)
+            handlers['request'](Mock(url='http://127.0.0.1/never'))
+            with self.assertRaisesRegex(TimeoutError, 'never'):
+                gate.wait_network_quiet(page, state, budget=2)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -54,7 +73,7 @@ class GateContract(unittest.TestCase):
             page.evaluate.return_value = [3, 7, 0, 0, 3, 2, 1]
             def clipped_png(full_page, clip, timeout):
                 self.assertTrue(full_page)
-                self.assertTrue(0 < timeout <= 30_000)
+                self.assertTrue(0 < timeout <= capture.CAPTURE_SECONDS * 1_000)
                 y = clip['y']
                 band = expected.crop((0, y, 3, y + clip['height']))
                 if mutate and y > 0:
@@ -86,7 +105,8 @@ class GateContract(unittest.TestCase):
             image.save(data, format='PNG')
             return data.getvalue()
         page.screenshot.side_effect = capture_band
-        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15):
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15), \
+                patch.object(capture, 'CAPTURE_SECONDS', 30):
             with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
                 with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
                     capture.capture_full_page(page, 'builds/index.html', 'build-history')

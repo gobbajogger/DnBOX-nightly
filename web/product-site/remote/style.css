@@ -325,7 +325,10 @@ dialog::backdrop{background:#000a}
 .funkybeats-launcher .perform-row-label{grid-column:1/-1;position:static;padding:8px 2px}
 .funkybeats-launcher .perform-cell{min-width:0;width:100%;padding:0 4px;text-align:center}
 /* Keep the first bar gridline visible beside the playhead. */
-.roll-playhead{position:absolute;left:1px;top:0;bottom:0;width:1px;background:var(--accent);z-index:3;pointer-events:none}
+.roll-playhead{position:absolute;left:1px;top:0;bottom:0;width:1px;background:var(--accent);z-index:3;pointer-events:none;will-change:transform}
+.roll-playhead.on-beat{width:2px}
+.beat-ruler .ruler-bar{color:var(--fg);font-weight:700}
+.beat-ruler .current{color:var(--accent)}
 #roll-grid .note{overflow:visible}
 .note-name{display:inline-block;min-width:24px;pointer-events:none;background:inherit;border-radius:var(--r-note);padding-right:2px}
 #lane-param{padding:6px 2px;align-items:center;text-align:center}

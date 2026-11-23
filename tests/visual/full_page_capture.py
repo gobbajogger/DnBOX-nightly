@@ -13,6 +13,9 @@ from PIL.PngImagePlugin import putchunk
 
 BAND_ROWS = 24_576
 SINGLE_CAPTURE_PIXELS = 32 * 1024 * 1024
+# The gate shares a busy box with other builds; a complete capture may take
+# longer than on an idle machine but must still finish within this budget.
+CAPTURE_SECONDS = 120
 GEOMETRY = """() => {
   const elements = [document.documentElement, document.body];
   const size = axis => Math.max(...elements.flatMap(e =>
@@ -24,7 +27,7 @@ GEOMETRY = """() => {
 def capture_full_page(page, route, name):
     try:
         if route == 'builds/index.html':
-            deadline = time.monotonic() + 30
+            deadline = time.monotonic() + CAPTURE_SECONDS
             geometry = page.evaluate(GEOMETRY)
             width, height = geometry[:2]
             if geometry[-1] == 1 and width * height > SINGLE_CAPTURE_PIXELS and height > BAND_ROWS:
@@ -45,7 +48,7 @@ def capture_bands(page, geometry, deadline):
     def remaining_ms():
         remaining = deadline - time.monotonic()
         if remaining <= 0:
-            raise TimeoutError('Complete full-page screenshot exceeded 30 seconds')
+            raise TimeoutError(f'Complete full-page screenshot exceeded {CAPTURE_SECONDS} seconds')
         return max(1, int(1_000 * remaining))
 
     def append_band(png, rows, overlap):

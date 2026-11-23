@@ -574,8 +574,8 @@
     },
     {
       "path": "presets/index.html",
-      "bytes": 7218,
-      "sha256": "fa3bb944b9c9edca50a9d2fb65206a199b53cec88c96dc033fb5a2c9129c68a2"
+      "bytes": 7228,
+      "sha256": "9e67f71d4d04544eb2301a37daf9835f5f352e0bb84c6aeb99f51e020f597719"
     },
     {
       "path": "presets/interchange.mjs",
@@ -594,8 +594,8 @@
     },
     {
       "path": "presets/legacy/index.html",
-      "bytes": 9943,
-      "sha256": "065ffbf610e122dbe2daa7c70bcb9dc6e2818a614a70299fb2ac295ed9aa7d85"
+      "bytes": 9920,
+      "sha256": "0af5bcd9c145dad10629c6bee97b89c4c60957712f849607840d1b2ca2f8bd31"
     },
     {
       "path": "presets/legacy/zip.mjs",
@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 66872,
-      "sha256": "f676483212df69a7f531b2e505f237ae5ddf1eac95925f423bf1aa51a16a672b"
+      "bytes": 68088,
+      "sha256": "426bc57d43d3d85b3351055bf0f525aa34f0541e61403f49267b06d71432456b"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -844,8 +844,8 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2749,
-      "sha256": "dcaa288664e960e8828078033c9f47f872933de646cd71eca83477c715ac6b21"
+      "bytes": 2909,
+      "sha256": "a3021f3e3f995dd8c1d5917329a39ccaa77b057d2be2f11b66a252f66d2c7cbc"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -973,6 +973,11 @@
       "sha256": "0cad6cffbc0f5ff58765eed37082303380045a9517dd9de02deb4c7d6d8b63d6"
     },
     {
+      "path": "remote/playhead.mjs",
+      "bytes": 1414,
+      "sha256": "d2672234fc66bccbacda67cf40cad68e33e99371980e150fb18f685f2c6676a0"
+    },
+    {
       "path": "remote/remote.mjs",
       "bytes": 4547,
       "sha256": "edc5331481e0d6047fbdfdbe4845f07b4b623b3a852ae11af01875e164934dab"
@@ -1034,8 +1039,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 34800,
-      "sha256": "b00eff87e9b86714b77198ed8f69f347114b79ccee88a9938ef77ac99d8650b1"
+      "bytes": 34954,
+      "sha256": "cfb447d07fd3adf8f038ae5e3698154513731bd1fc95c897d8dec5730533be20"
     },
     {
       "path": "remote/timeline.mjs",
