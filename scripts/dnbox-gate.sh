@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # DnBOX Local gate (nightly repo: website + Remote). One command:  scripts/dnbox-gate.sh [<lane>]
 # Last line "DNBOX-GATE RESULT PASS|FAIL|VOID sha=<40>"; exit 0/1/2. NOT_RUN counts as FAIL.
-# Browser tests use Playwright's bundled Chromium with its normal sandbox and a profile dir inside the workspace.
+# Browser tests use Playwright's bundled Chromium with its normal sandbox and a profile dir outside the checkout.
 # Offline is the default: no git fetch, clone or ls-remote, and no npm ci when node_modules exists.
 # Set DNBOX_GATE_ONLINE=1 to allow network Git and npm ci. A skipped network step prints [SKIP].
 set -uo pipefail
@@ -10,7 +10,18 @@ LANE="${1:-unknown}"; SHA=$(git rev-parse HEAD); BASE=origin/integration/dnbox-c
 TS=$(TZ=Asia/Vladivostok date +%Y%m%d-%H%M); OUT=build/dnbox-gate; mkdir -p "$OUT"
 LOG="$OUT/${SHA:0:8}-$TS.log"; exec > >(tee "$LOG") 2>&1
 # Temp files and browser profile go OUTSIDE the checkout (some tests require output outside the repo) but in a folder we own.
-export TMPDIR="${HOME}/.cache/dnbox-gate/tmp"; mkdir -p "$TMPDIR"
+repo_root=$(pwd -P)
+tmp_home=$(cd -- "${HOME}" 2>/dev/null && pwd -P) || tmp_home=
+TMPDIR="$tmp_home/.cache/dnbox-gate/tmp"
+# The default home can be read-only on a provisioned runner.
+if [[ -z "$tmp_home" || "$tmp_home/" == "$repo_root/"* ]] || ! mkdir -p "$TMPDIR" 2>/dev/null ||
+   [ ! -O "$TMPDIR" ] || [ ! -w "$TMPDIR" ] ||
+   ! TMPDIR=$(cd -- "$TMPDIR" && pwd -P) || [[ "$TMPDIR/" == "$repo_root/"* ]]; then
+  TMPDIR=$(mktemp -d /tmp/dnbox-gate.XXXXXX) || { echo "browser setup: no writable temporary directory"; exit 2; }
+  TMPDIR=$(cd -- "$TMPDIR" && pwd -P) || exit 2
+  [[ "$TMPDIR/" != "$repo_root/"* ]] || { echo "browser setup: temporary directory is inside the checkout"; exit 2; }
+fi
+export TMPDIR
 # Launchers use only Playwright's bundled Chromium; external executable overrides are forbidden.
 echo "browser: Playwright bundled Chromium (normal sandbox)"
 fail=0; void=0
