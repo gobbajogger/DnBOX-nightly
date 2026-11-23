@@ -62,6 +62,13 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/src="\.\.\/install\.mjs"/);
 });
 
+test('What’s New has one page heading and keeps the archived notes', () => {
+ const notes = read('new/index.html');
+ assert.equal((notes.match(/<h1(?:\s|>)/gi) ?? []).length, 1);
+ assert.match(notes, /<h1>What’s new<\/h1>/);
+ assert.match(notes, /<summary>Published project notes<\/summary>[\s\S]*<h2 id="s1">/);
+});
+
 test('release notices identify the two tested models, the withdrawal and the fallback', () => {
  const release = 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26';
  const fallback = release.replace('v0.0.26', 'v0.0.25.1');
@@ -81,7 +88,14 @@ test('release notices identify the two tested models, the withdrawal and the fal
  }
  const historical = records.filter(row => row.id !== published.id);
  assert.equal(historical.length, 197);
- assert.equal(historical.find(row => row.id === 'night-versions-0').original.hardware_tested, false);
+ const archived = historical.find(row => row.id === 'night-versions-0').original;
+ assert.equal(archived.hardware_tested, false);
+ assert.equal(archived.source_commit, published.original.source_commit);
+ for (const model of published.models) {
+  assert.equal(archived.models[model].sha256, published.original.models[model].sha256);
+ }
+ const previous = historical.find(row => row.id === 'main-versions-0').original;
+ assert.notEqual(previous.source_commit, published.original.source_commit);
 });
 
 test('published release records, backup workflows and history bookmarks survive site composition',()=>{
