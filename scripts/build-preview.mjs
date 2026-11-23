@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withOfflineInstallerRouting, withOfflineTheme } from './preview-offline-theme.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (name) => readFileSync(join(root, name), 'utf8');
@@ -16,33 +17,6 @@ function replaceOnce(source, marker, replacement, where) {
 }
 function stripModule(source) {
   return source.replace(/^export\s+/gm, '').replace(/^import .*?;\r?\n/gm, '');
-}
-// Standalone previews opened from disk do not have the hosted workspaces'
-// shared origin. Route those copies to actual files; served previews retain
-// the existing embedded workspaces and their single-owner guards.
-function withStandaloneInstaller(html) {
-  for (const path of ['breaks', 'projects']) {
-    const target = `../${path}/?embedded=1`;
-    html = replaceOnce(html, `src="${target}"`, `data-src="${target}"`, 'installer');
-  }
-  html = replaceOnce(html, '<script type="module">', `<script type="module">
-if (location.protocol === 'file:') document.querySelector('a.home').href = 'index.html#firmware';`, 'installer');
-  html = replaceOnce(html, 'function navigateWorkspace() {', `const standaloneTasks = location.protocol === 'file:' ? {
-  samples: '../breaks/index.html',
-  projects: '../projects/index.html'
-} : null;
-if (!standaloneTasks) {
-  for (const id of ['sample-frame', 'project-frame']) {
-    const frame = $(id);
-    frame.src = frame.dataset.src;
-  }
-}
-function navigateWorkspace() {`, 'installer');
-  return replaceOnce(html, '  // Release the current MIDI owner before activating another workspace.', `  if (standaloneTasks && task !== "firmware") {
-    location.replace(standaloneTasks[task]);
-    return;
-  }
-  // Release the current MIDI owner before activating another workspace.`, 'installer');
 }
 const installerLibraries = ['web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js', 'web/product-site/install-reports.mjs']
   .map((name) => stripModule(read(name))).join('\n');
@@ -58,10 +32,13 @@ const projects = read('web/x0x_projects.html').replace(
   /^import .* from "\.\/x0x_projects.js";$/m, '/*LIB*/');
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');
+// Keep the unthemed sample and project render available to the staged-host
+// parity test; shipping/qualified standalone code is deliberately unchanged.
+export const unthemedWorkspaces = { breaks: sampleImporter, projects: projectPage };
 const outputs = {
-  'docs/install/index.html': withStandaloneInstaller(installer),
-  'docs/breaks/index.html': sampleImporter,
-  'docs/projects/index.html': projectPage,
+  'docs/install/index.html': withOfflineTheme(withOfflineInstallerRouting(installer)),
+  'docs/breaks/index.html': withOfflineTheme(sampleImporter),
+  'docs/projects/index.html': withOfflineTheme(projectPage),
   'docs/versions.json': JSON.stringify(catalog, null, 2) + '\n',
 };
 const check = process.argv.includes('--check');

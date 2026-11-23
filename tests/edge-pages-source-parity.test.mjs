@@ -12,7 +12,9 @@ import { spawnSync } from 'node:child_process';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const relativeInputs = [
   'package.json', 'preview-catalog.json', 'package-version-assignments.json', 'build-status.json',
-  'scripts/build-preview.mjs', 'scripts/render-qualified-nightly.mjs',
+  'scripts/build-preview.mjs', 'scripts/preview-offline-theme.mjs', 'scripts/render-qualified-nightly.mjs',
+  'web/product-site/assets/BarlowSemiCondensed-Medium.ttf',
+  'web/product-site/assets/BarlowSemiCondensed-Bold.ttf', 'web/product-site/assets/Barlow-OFL.txt',
   'scripts/verify-pages-source-parity.mjs', 'scripts/legacy-controller-packages.json',
   'web/x0x_installer.html', 'web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.html',
   'web/x0x_breaks.js', 'web/x0x_projects.html', 'web/x0x_projects.js',
@@ -28,7 +30,7 @@ async function fixture(t) {
   }
   // Run the actual generator in this isolated source tree. No child-process
   // permission is needed and production source/generated files are untouched.
-  await import(pathToFileURL(join(dir, 'scripts/build-preview.mjs')));
+  const { unthemedWorkspaces } = await import(pathToFileURL(join(dir, 'scripts/build-preview.mjs')));
   const retained = join(dir, 'retained-catalog.json');
   cpSync(join(root, 'tests/fixtures/published-dev-catalog-c7503b19.json'), retained);
   const catalog = JSON.parse(readFileSync(retained, 'utf8'));
@@ -38,12 +40,12 @@ async function fixture(t) {
   const { renderInstaller } = await import(pathToFileURL(join(dir, 'scripts/render-qualified-nightly.mjs')));
   writeFileSync(join(candidate, 'install/index.html'), renderInstaller(catalog));
   for (const page of ['breaks', 'projects'])
-    cpSync(join(dir, 'docs', page, 'index.html'), join(candidate, page, 'index.html'));
+    writeFileSync(join(candidate, page, 'index.html'), unthemedWorkspaces[page]);
   cpSync(retained, join(candidate, 'versions.json'));
   for (const path of ['package-version-assignments.json', 'build-status.json'])
     cpSync(join(dir, path), join(candidate, path));
   const { verifyPagesSourceParity } = await import(pathToFileURL(join(dir, 'scripts/verify-pages-source-parity.mjs')));
-  return { dir, candidate, retained, catalog, renderInstaller,
+  return { dir, candidate, retained, catalog, renderInstaller, unthemedWorkspaces,
     verify: () => verifyPagesSourceParity(candidate, retained) };
 }
 
@@ -77,16 +79,26 @@ test('sample preparation moved above the installer is refused even with current 
 
 test('stale generated docs cannot hide changed Breaks and Projects source', async t => {
   const f = await fixture(t);
-  // The candidate still matches docs exactly, but both production modules moved.
+  // The candidate still matches the earlier unthemed render, but both modules moved.
   // A verifier that trusts docs instead of expanding web sources would pass.
   for (const path of ['web/x0x_breaks.js', 'web/x0x_projects.js'])
     writeFileSync(join(f.dir, path), readFileSync(join(f.dir, path), 'utf8') + '\n// New source revision: old generated runtime must be refused.\n');
   for (const page of ['breaks', 'projects'])
     assert.equal(readFileSync(join(f.candidate, page, 'index.html'), 'utf8'),
-      readFileSync(join(f.dir, 'docs', page, 'index.html'), 'utf8'));
+      f.unthemedWorkspaces[page]);
   const result = f.verify();
   assert.equal(result.ok, false);
   assert.deepEqual(paths(result), ['breaks/index.html', 'install/index.html', 'projects/index.html']);
+});
+
+test('file-open styling does not enter the qualified hosted pages', async t => {
+  const f = await fixture(t);
+  for (const page of ['breaks', 'projects']) {
+    const preview = join(f.dir, 'docs', page, 'index.html');
+    assert.match(readFileSync(preview, 'utf8'), /offline-tool/);
+    cpSync(preview, join(f.candidate, page, 'index.html'));
+  }
+  assert.deepEqual(paths(f.verify()), ['breaks/index.html', 'projects/index.html']);
 });
 
 test('self-consistent empty preview pages cannot replace a retained catalog', async t => {

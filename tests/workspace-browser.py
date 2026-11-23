@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Owned pages, real WAV parsing and DOM; simulated slot/MIDI boundaries, no hardware."""
+import sys
 import asyncio, json, os, threading, struct, math
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -87,6 +88,52 @@ async def main():
    check(await page.frames[1].evaluate('document.documentElement.scrollWidth<=innerWidth'),f'{width}px sample panel has no horizontal overflow')
    await page.locator('#firmware-tab').click()
   check(not errors,'no page script errors: '+str(errors))
+  assert await page.locator('#samples-tab').get_attribute('href') == '#samples'
+  assert await page.locator('#projects-tab').get_attribute('href') == '#projects'
+  assert not await page.evaluate("document.documentElement.classList.contains('offline-tool')")
+  await local_home(browser)
   await browser.close()
  srv.shutdown();print(json.dumps({'checks':len(checks),'failures':[x for x,v in checks if not v]}));assert all(v for _,v in checks)
-asyncio.run(main())
+async def local_home(browser):
+ page=await browser.new_page(offline=True)
+ errors=[]
+ page.on('pageerror',lambda error:errors.append(str(error)))
+ installer=(ROOT/'docs/install/index.html').as_uri()
+ samples=(ROOT/'docs/breaks/index.html').as_uri()
+ projects=(ROOT/'docs/projects/index.html').as_uri()
+ async def assert_local_theme():
+  await page.evaluate('document.fonts.ready')
+  assert await page.evaluate("document.documentElement.classList.contains('offline-tool') && document.fonts.check('400 16px Barlow') && getComputedStyle(document.body).fontFamily.includes('Barlow')")
+
+ await page.goto(installer)
+ await assert_local_theme()
+ assert await page.locator('#samples-tab').get_attribute('href')=='../breaks/index.html'
+ assert await page.locator('#projects-tab').get_attribute('href')=='../projects/index.html'
+ await page.locator('#samples-tab').click()
+ await page.wait_for_url(samples)
+ await assert_local_theme()
+ await page.locator('a.home').click()
+ await page.wait_for_url(installer+'#firmware')
+ await page.locator('a.home').click()
+ await page.wait_for_url(installer+'#firmware')
+ assert await page.locator('#firmware-panel').is_visible()
+ await page.locator('#projects-tab').click()
+ await page.wait_for_url(projects)
+ await assert_local_theme()
+ assert await page.locator('nav a[href="../breaks/index.html"]').count()==1
+ await page.locator('nav a[href="../install/index.html#firmware"]').click()
+ await page.wait_for_url(installer+'#firmware')
+ assert await page.locator('#firmware-panel').is_visible()
+ assert not errors,errors
+ print('PASS file-open Installer ↔ Samples/Projects: standalone anchors, home links and embedded Barlow',flush=True)
+ await page.close()
+
+async def local_home_only():
+ async with async_playwright() as pw:
+  browser=await pw.chromium.launch(chromium_sandbox=True)
+  try:
+   await local_home(browser)
+  finally:
+   await browser.close()
+
+asyncio.run(local_home_only() if '--local-home-only' in sys.argv else main())
