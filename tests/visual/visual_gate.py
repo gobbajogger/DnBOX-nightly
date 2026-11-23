@@ -268,6 +268,9 @@ def installer_responses():
 
     return attach
 
+SETTLE_MS = 120_000
+
+
 def viewport_contexts(pw):
     # Reclaim Chromium's compositor and caches along with the context after each viewport.
     for w, h in SIZES:
@@ -276,6 +279,8 @@ def viewport_contexts(pw):
                                      has_touch=w < 900, reduced_motion='reduce', locale='en-US',
                                      timezone_id='UTC') as context:
                 context.add_init_script(FREEZE_JS)
+                # Shared-box load: allow slow settles and screenshots without changing what is compared.
+                context.set_default_timeout(SETTLE_MS)
                 yield w, h, context
 
 

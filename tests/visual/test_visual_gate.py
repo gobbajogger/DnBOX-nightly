@@ -54,7 +54,7 @@ class GateContract(unittest.TestCase):
             page.evaluate.return_value = [3, 7, 0, 0, 3, 2, 1]
             def clipped_png(full_page, clip, timeout):
                 self.assertTrue(full_page)
-                self.assertTrue(0 < timeout <= 30_000)
+                self.assertTrue(0 < timeout <= capture.CAPTURE_SECONDS * 1_000)
                 y = clip['y']
                 band = expected.crop((0, y, 3, y + clip['height']))
                 if mutate and y > 0:
@@ -86,7 +86,8 @@ class GateContract(unittest.TestCase):
             image.save(data, format='PNG')
             return data.getvalue()
         page.screenshot.side_effect = capture_band
-        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15):
+        with patch.object(capture, 'SINGLE_CAPTURE_PIXELS', 1), patch.object(capture, 'BAND_ROWS', 15), \
+                patch.object(capture, 'CAPTURE_SECONDS', 30):
             with patch.object(capture.time, 'monotonic', side_effect=lambda: elapsed[0]):
                 with self.assertRaisesRegex(RuntimeError, 'build-history.*exceeded 30 seconds'):
                     capture.capture_full_page(page, 'builds/index.html', 'build-history')
