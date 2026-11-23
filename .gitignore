@@ -20,3 +20,7 @@ build/
 *.fwsc
 *.img
 *.log
+
+# Evidence-only files stay out of Git (kept in history and the Library)
+/evidence/
+/docs/*evidence*
