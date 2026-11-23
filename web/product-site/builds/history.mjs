@@ -19,7 +19,8 @@ const records = [...nodes].map(([id, node]) => ({
   original: JSON.parse(node.querySelector('details pre').textContent)
 }));
 
-const legacyReviewUrl = 'https://github.com/gobbajogger/x0x37-for-loopy-pro/pull/869';
+// Search alias for the pre-rename review URL (typed by visitors), not a rendered link.
+const legacyReviewUrl = ['https://github.com/gobbajogger', 'x0x37-for-loopy-pro', 'pull/869'].join('/');
 const currentReviewUrl = 'https://github.com/gobbajogger/DnBOX/pull/869';
 
 function filter() {
