@@ -268,15 +268,19 @@ async def shift_wheel_pan(page):
         await page.keyboard.up('Shift')
     await page.wait_for_function(
         'x=>document.getElementById("roll-scroll").scrollLeft===x', arg=left+48,
-        timeout=3000)
+        timeout=10000)
     assert await position() == [left+48, top]
     await viewport.dispatch_event('wheel', dict(shiftKey=True, deltaX=29, deltaY=29,
                                                 bubbles=True, cancelable=True))
+    # The gate run saw this read race the scroll update; wait for it, then assert exactly.
+    await page.wait_for_function(
+        'x=>document.getElementById("roll-scroll").scrollLeft===x', arg=left+77,
+        timeout=10000)
     assert await position() == [left+77, top]
     await page.mouse.wheel(0, 24)
     await page.wait_for_function(
         'y=>document.getElementById("roll-scroll").scrollTop===y', arg=top+24,
-        timeout=3000)
+        timeout=10000)
     assert await position() == [left+77, top+24]
     await expect(zoom).to_have_value('3')
     assert await notes.evaluate_all(
