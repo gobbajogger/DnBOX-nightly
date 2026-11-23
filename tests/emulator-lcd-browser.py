@@ -17,7 +17,7 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURES = ROOT / "tests/fixtures/emulator-lcd-61827a"
+FIXTURES = ROOT / "tests/fixtures/emulator-lcd-8f97fe"
 PREVIOUS = ROOT / "tests/fixtures/emulator-lcd-06bd40"
 # Each state names its native frame, accessible control and minimum simulated delay.
 # Capture SAVE while its banner is up. Wait for it to expire on HOME.
