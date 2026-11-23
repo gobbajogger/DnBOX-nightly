@@ -17,6 +17,33 @@ function replaceOnce(source, marker, replacement, where) {
 function stripModule(source) {
   return source.replace(/^export\s+/gm, '').replace(/^import .*?;\r?\n/gm, '');
 }
+// Standalone previews opened from disk do not have the hosted workspaces'
+// shared origin. Route those copies to actual files; served previews retain
+// the existing embedded workspaces and their single-owner guards.
+function withStandaloneInstaller(html) {
+  for (const path of ['breaks', 'projects']) {
+    const target = `../${path}/?embedded=1`;
+    html = replaceOnce(html, `src="${target}"`, `data-src="${target}"`, 'installer');
+  }
+  html = replaceOnce(html, '<script type="module">', `<script type="module">
+if (location.protocol === 'file:') document.querySelector('a.home').href = 'index.html#firmware';`, 'installer');
+  html = replaceOnce(html, 'function navigateWorkspace() {', `const standaloneTasks = location.protocol === 'file:' ? {
+  samples: '../breaks/index.html',
+  projects: '../projects/index.html'
+} : null;
+if (!standaloneTasks) {
+  for (const id of ['sample-frame', 'project-frame']) {
+    const frame = $(id);
+    frame.src = frame.dataset.src;
+  }
+}
+function navigateWorkspace() {`, 'installer');
+  return replaceOnce(html, '  // Release the current MIDI owner before activating another workspace.', `  if (standaloneTasks && task !== "firmware") {
+    location.replace(standaloneTasks[task]);
+    return;
+  }
+  // Release the current MIDI owner before activating another workspace.`, 'installer');
+}
 const installerLibraries = ['web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js', 'web/product-site/install-reports.mjs']
   .map((name) => stripModule(read(name))).join('\n');
 let installer = replaceOnce(read('web/x0x_installer.html'), '/*LIB*/', installerLibraries, 'installer');
@@ -32,7 +59,7 @@ const projects = read('web/x0x_projects.html').replace(
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');
 const outputs = {
-  'docs/install/index.html': installer,
+  'docs/install/index.html': withStandaloneInstaller(installer),
   'docs/breaks/index.html': sampleImporter,
   'docs/projects/index.html': projectPage,
   'docs/versions.json': JSON.stringify(catalog, null, 2) + '\n',
