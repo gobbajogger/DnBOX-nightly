@@ -8,6 +8,9 @@ checkout=$(realpath "${1:?Firmware checkout required}")
 previous=$(realpath "${2:?Previous runtime directory required}")
 output=$(realpath -m "${3:?New output directory required}")
 zig=${ZIG:-zig}
+# The adapter sources must be committed: the runtime records their tree id.
+git -C "$here" diff --quiet HEAD -- . && test -z "$(git -C "$here" ls-files --others --exclude-standard -- .)"
+kernel_tree=$(git -C "$here" rev-parse HEAD:scripts/firmware-emulator)
 test "$("$zig" version)" = 0.14.1
 test ! -e "$output"
 tmp=$(mktemp -d)
@@ -54,22 +57,26 @@ for (const [name,expected] of Object.entries(pin.files)) {
 }
 const old=new WebAssembly.Module(fs.readFileSync(path.join(previous,'kernel.wasm')));
 const exports=WebAssembly.Module.exports(old).filter(e=>e.name.startsWith('web_'));
-fs.writeFileSync('exports.txt',exports.map(e=>'-Wl,--export='+e.name).join('\n')+'\n');
+// New Remote hooks (REMOTE-FW-PROTOCOL.md section 6) are added explicitly.
+const added=['web_remote_caps','web_sysex_buffer','web_sysex_out','web_sysex_dropped_count','web_sysex_in','web_sysex_out_take'];
+const names=[...new Set([...exports.map(e=>e.name),...added])];
+fs.writeFileSync('exports.txt',names.map(n=>'-Wl,--export='+n).join('\n')+'\n');
 JS
 mapfile -t exports < exports.txt
 "$zig" cc -target wasm32-wasi -mcpu=baseline -mexec-model=reactor -O2 -g0 -std=c99 \
     -DX0X_HOST -DX0X_WEB -D_POSIX_C_SOURCE=200809L $ORIGINAL_FLAGS \
     -Ifirmware/src -Ifirmware/src/dsp -Ibuild/gen web/emu/kernel.c $sources "${exports[@]}" \
     -Wl,-z,stack-size=1048576 -Wl,--initial-memory=33554432 -Wl,--strip-all -lm -o "$tmp/output/kernel.wasm"
-cp "$here"/{index.html,wasi.mjs} "$tmp/output/"
-python3 - "$tmp/output" "$fw" <<'PY'
+cp "$here"/{index.html,wasi.mjs,worklet.mjs} "$tmp/output/"
+python3 - "$tmp/output" "$fw" "$kernel_tree" <<'PY'
 import hashlib,json,sys
 from pathlib import Path
 out=Path(sys.argv[1])
 meta=json.loads((out/'previous/runtime.json').read_bytes())
 wasm=(out/'kernel.wasm').read_bytes()
-# kernel_source identifies the original adapter. firmware_source identifies its firmware.
-meta.update(firmware_source=sys.argv[2],wasm_bytes=len(wasm),wasm_sha256=hashlib.sha256(wasm).hexdigest())
+# kernel_source = git tree id of scripts/firmware-emulator (content address, survives squash merges).
+# firmware_source identifies its firmware.
+meta.update(firmware_source=sys.argv[2],kernel_source=sys.argv[3],wasm_bytes=len(wasm),wasm_sha256=hashlib.sha256(wasm).hexdigest())
 (out/'runtime.json').write_text(json.dumps(meta, separators=(',',':'))+'\n')
 PY
 mkdir -p "$(dirname "$output")"

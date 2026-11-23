@@ -16,6 +16,24 @@ static void web_audio(const int32_t *, uint32_t);
 #endif
 #undef __attribute__
 #define EXPORT __attribute__((used, visibility("default")))
+/* DNR3 SysEx state (see web_sysex_in below). */
+#define WEB_SYSEX_CAP 256u
+#define WEB_SYSEX_RING 16u
+static uint8_t web_sysex_in_buf[WEB_SYSEX_CAP],web_sysex_out_buf[WEB_SYSEX_CAP];
+static uint8_t web_sysex_ring[WEB_SYSEX_RING][WEB_SYSEX_CAP];
+static uint16_t web_sysex_ring_len[WEB_SYSEX_RING];
+static uint32_t web_sysex_w,web_sysex_r,web_sysex_dropped;
+#if __has_include("app/remote_dnr3.h")
+#include "app/remote_dnr3.h"
+#define WEB_DNR3 1
+/* Platform hook called by the firmware for every reply/NOTIFY frame (F0..F7). */
+void remote_dnr3_out(const uint8_t *frame,uint32_t n){
+ if(n<2||n>WEB_SYSEX_CAP||web_sysex_w-web_sysex_r>=WEB_SYSEX_RING){web_sysex_dropped++;return;}
+ memcpy(web_sysex_ring[web_sysex_w%WEB_SYSEX_RING],frame,n);web_sysex_ring_len[web_sysex_w%WEB_SYSEX_RING]=(uint16_t)n;web_sysex_w++;
+}
+#else
+#define WEB_DNR3 0
+#endif
 #define RING 4096u
 static int32_t audio_ring[RING*2], output[2048];
 static uint32_t write_at,read_at,started,failed;
@@ -39,7 +57,11 @@ EXPORT int web_render(uint32_t count){
  if(web_smk_output_failed){failed=1;return -3;}
 #endif
  unsigned limit=64;
- while(write_at-read_at<count){if(!limit--){failed=1;return -2;}run_ms(1);}
+ while(write_at-read_at<count){if(!limit--){failed=1;return -2;}run_ms(1);
+#if WEB_DNR3
+  remote_dnr3_tick(now_ms);
+#endif
+ }
 #ifdef X0X_WEB_SMK
  /* A controller frame can fill the output queue during run_ms. Do not expose
   * this render as successful when its event stream was truncated. */
@@ -94,10 +116,42 @@ EXPORT int web_turn(int role,int delta){
  if(pending < -1024 || pending > 1024)return -2; /* explicit caller backpressure */
  enc_acc[role]=(int32_t)pending;return 0;
 }
+/* One MIDI message from the page, as the USB MIDI input would deliver it (source 0).
+ * Channel messages and the realtime/song-position bytes the sequencer reads
+ * (seq_clk_take/seq_midi_rt). SysEx goes through web_sysex_in. */
 EXPORT int web_midi(uint32_t status,uint32_t first,uint32_t second){
- if(!started||failed||status<0x80||status>=0xF0||first>127||second>127)return -1;
+ if(!started||failed||status<0x80||status>0xFF||first>127||second>127)return -1;
+ uint32_t cin=status>>4;
+ if(status>=0xF0){
+  if(status==0xF2)cin=0x3;
+  else if(status==0xF8||status==0xFA||status==0xFB||status==0xFC){if(first||second)return -1;cin=0xF;}
+  else return -1;
+ }
  if(mi_w-mi_r>=MQ)return -2; /* leave every unread event, including note-off, intact */
- host_midi_put((status>>4)|(status<<8)|(first<<16)|(second<<24));return 0;
+ host_midi_put(cin|(status<<8)|(first<<16)|(second<<24));return 0;
+}
+
+/* DNR3 SysEx (REMOTE-FW-PROTOCOL.md sections 3 and 6). The handler is firmware code
+ * (app/remote_dnr3.c, FW Core). Without it this build answers -3 and reports no
+ * DNR3 capability: the page must not pretend a firmware path exists. */
+/* bit 0: realtime MIDI accepted, bit 1: DNR3 handler linked. */
+EXPORT uint32_t web_remote_caps(void){return 1u|(WEB_DNR3?2u:0u);}
+EXPORT uint8_t *web_sysex_buffer(void){return web_sysex_in_buf;}
+EXPORT uint8_t *web_sysex_out(void){return web_sysex_out_buf;}
+EXPORT uint32_t web_sysex_dropped_count(void){return web_sysex_dropped;}
+EXPORT int web_sysex_in(uint32_t len){
+ if(!started||failed||len<2||len>WEB_SYSEX_CAP||web_sysex_in_buf[0]!=0xF0||web_sysex_in_buf[len-1]!=0xF7)return -1;
+ for(uint32_t i=1;i+1<len;i++)if(web_sysex_in_buf[i]&0x80u)return -1;
+#if WEB_DNR3
+ return remote_dnr3_frame(web_sysex_in_buf+1,len-2);
+#else
+ return -3;
+#endif
+}
+EXPORT int web_sysex_out_take(void){
+ if(web_sysex_r==web_sysex_w)return 0;
+ uint32_t at=web_sysex_r++%WEB_SYSEX_RING,n=web_sysex_ring_len[at];
+ memcpy(web_sysex_out_buf,web_sysex_ring[at],n);return (int)n;
 }
 
 /* Local emulator store envelope, not a hardware project/slot file. Imports are
