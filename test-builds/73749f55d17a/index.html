@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DnBOX 0.0.27 test build</title>
+<style>
+body{font:1rem/1.55 system-ui,sans-serif;max-width:42rem;margin:3rem auto;padding:0 1.25rem;color:#171717;background:#fafafa}
+h1{line-height:1.12}li{margin:1rem 0}code{overflow-wrap:anywhere}a{color:#1b54a5}
+@media(prefers-color-scheme:dark){body{color:#eee;background:#171717}a{color:#9ec6ff}}
+</style>
+</head>
+<body><main>
+<h1>DnBOX 0.0.27 test build</h1>
+<p><strong>For testing only. Not hardware-tested.</strong> Synth One factory programs, SuperJ6, and the shared arpeggiator and step sequencer are enabled on both models.</p>
+<h2>Downloads</h2>
+<ul><li><a href="../../artifacts/nightly-dev/3cd2e16cc7119bf82e6274c3f46d2caad0dd576c0818dc43f9ab817a9dd1eee2/DnBOX-0.0.27-SMK37-elite-73749f55-test.fwsc" download>SMK-37 Elite (.fwsc)</a><br><code>3cd2e16cc7119bf82e6274c3f46d2caad0dd576c0818dc43f9ab817a9dd1eee2</code></li>
+<li><a href="../../artifacts/nightly-dev/e62b1dfe4a03c32abc57660dd228fe40ce575d0dd1f2b7cf8920cce82029c785/DnBOX-0.0.27-SMK37-pro-73749f55-test.fwsc" download>SMK-37 Pro (.fwsc)</a><br><code>e62b1dfe4a03c32abc57660dd228fe40ce575d0dd1f2b7cf8920cce82029c785</code></li></ul>
+<h2>Known issue: render timing</h2>
+<p>The source lane's full qualification gate did not pass. One Chicago/Miami block in the host render-timing test took 9,149&nbsp;µs against a 3,870&nbsp;µs limit. Both native images fit; this test build is published as an exception, and the timing failure remains open.</p>
+<p>Choose the file for your keyboard. This build reserves part of sample slot 2 for the factory bank. Back up and verify your samples before installing. Use the <a href="https://github.com/gobbajogger/DnBOX/blob/73749f55d17a0643f1ddd072114172d29eecc2ae/tools/fm1_install.py">matching firmware installer</a> with its <code>--backup</code> option; do not use an older installer or skip the sample checks.</p>
+<p><a href="https://github.com/gobbajogger/DnBOX/pull/1017">Source integration</a> · <a href="https://github.com/gobbajogger/DnBOX/commit/73749f55d17a0643f1ddd072114172d29eecc2ae">73749f55d17a</a>.</p>
+</main></body></html>
