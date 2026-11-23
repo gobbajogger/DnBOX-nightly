@@ -1,4 +1,5 @@
 import {matchesRecord} from './history-filter.mjs';
+import {SITE_ORIGIN, LEGACY_FIRMWARE_REPO, githubRepo} from '../site-origin.mjs';
 
 const byId = id => document.getElementById(id);
 const channel = byId('channel');
@@ -19,8 +20,8 @@ const records = [...nodes].map(([id, node]) => ({
   original: JSON.parse(node.querySelector('details pre').textContent)
 }));
 
-const legacyReviewUrl = 'https://github.com/gobbajogger/x0x37-for-loopy-pro/pull/869';
-const currentReviewUrl = 'https://github.com/gobbajogger/DnBOX/pull/869';
+const legacyReviewUrl = githubRepo(LEGACY_FIRMWARE_REPO, 'pull/869').toLowerCase();
+const currentReviewUrl = githubRepo(SITE_ORIGIN.firmwareRepo, 'pull/869');
 
 function filter() {
   const term = search.value.trim();

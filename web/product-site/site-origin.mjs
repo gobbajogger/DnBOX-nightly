@@ -11,6 +11,9 @@ export const SITE_ORIGIN=Object.freeze({
  firmwareRepo:'DnBOX',
  nightlyRepo:'DnBOX-nightly'
 });
+// The firmware repo's name before the DnBOX rename. Only used to recognise old
+// links people paste into Build History search; never rendered as a link.
+export const LEGACY_FIRMWARE_REPO='x0x37-for-loopy-pro';
 export function githubRepo(repo,suffix=''){
  const path=suffix?(suffix.startsWith('/')?suffix:'/'+suffix):'';
  return `https://github.com/${SITE_ORIGIN.owner}/${repo}${path}`;
