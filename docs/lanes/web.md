@@ -25,7 +25,7 @@ All five Web checks passed on [`000e2910`](https://github.com/gobbajogger/DnBOX-
 
 Web implementation, independent review and nightly publication are complete on the product recorded above. C6 remains with Integ until the [PR](https://github.com/gobbajogger/DnBOX-nightly/pull/156) records its merge.
 
-To reproduce W3, run `scripts/firmware-emulator/build.sh` with the firmware checkout, the pinned previous runtime and an empty output destination. Run `python3 tests/firmware-reference/build-reference.py --help` for the selector producer. Supply both outputs through `DNBOX_EMULATOR_RUNTIME` and `DNBOX_FWUI_RUNTIME`, respectively, when running `bash scripts/gate.sh web`. CSS pixels are compared at device scale one. The [PNG fixtures](../../tests/fixtures/emulator-lcd-61827a/frames.json) pin the public panel and the [native RGB inventory](../../tests/firmware-reference/native-rgb.tsv) pins the selector.
+To reproduce W3, run `scripts/firmware-emulator/build.sh` with the firmware checkout, the pinned previous runtime and an empty output destination. Run `python3 tests/firmware-reference/build-reference.py --help` for the selector producer. Supply both outputs through `DNBOX_EMULATOR_RUNTIME` and `DNBOX_FWUI_RUNTIME`, respectively, when running `bash scripts/gate.sh web`. CSS pixels are compared at device scale one. The [PNG fixtures](../../tests/fixtures/emulator-lcd-8f97fe/frames.json) pin the public panel and the [native RGB inventory](../../tests/firmware-reference/native-rgb.tsv) pins the selector.
 
 <details>
 <summary>Earlier Web qualification and delivery records</summary>

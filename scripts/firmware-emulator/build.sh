@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 # build.sh FIRMWARE_CHECKOUT PREVIOUS_RUNTIME OUTPUT_DIRECTORY
 set -euo pipefail
-fw=61827a714ca7b240c01a55ed347b5fd7b847c7c2
+fw=8f97fe7d2bbf4f878cd0061c657c13c6f4322ea6
 here=$(cd "$(dirname "$0")" && pwd)
 checkout=$(realpath "${1:?Firmware checkout required}")
 previous=$(realpath "${2:?Previous runtime directory required}")
