@@ -1,0 +1,1130 @@
+{
+ "format": "dnbox-dnr3-vectors",
+ "version": 1,
+ "spec": "REMOTE-FW-PROTOCOL.md v3.0 sections 3-5",
+ "notes": [
+  "frame_hex is the complete SysEx F0..F7. payload_hex is the wire payload (each byte < 0x80).",
+  "Integers are 7-bit groups low first; crc = zlib CRC-32 of op..payload wire bytes as u32 (5 groups).",
+  "Reply op = request op | 0x40. Replies with status other than OK/QUEUED carry only status and rev.",
+  "NOTIFY op 0x7F, seq 0, payload rev u28, kind u7, fields. Kinds: 0 PARAM 1 STEP 2 CUE 3 TRANSPORT 4 MUTE 5 VOICE 6 POSITION 7 PATTERN.",
+  "Strings are printable ASCII followed by one 0 byte. PATTERN_DUMP reply carries count u7 before the ed_put7 bytes."
+ ],
+ "crc32": [
+  {
+   "input_hex": "",
+   "crc32": "00000000"
+  },
+  {
+   "input_hex": "313233343536373839",
+   "crc32": "cbf43926"
+  },
+  {
+   "input_hex": "444e5233",
+   "crc32": "786bee7c"
+  }
+ ],
+ "pack7": [
+  {
+   "raw_hex": "",
+   "packed_hex": ""
+  },
+  {
+   "raw_hex": "80",
+   "packed_hex": "0100"
+  },
+  {
+   "raw_hex": "ff00817f",
+   "packed_hex": "057f00017f"
+  },
+  {
+   "raw_hex": "ffffffffffffff",
+   "packed_hex": "7f7f7f7f7f7f7f7f"
+  },
+  {
+   "raw_hex": "8081828384858687",
+   "packed_hex": "7f000102030405060107"
+  },
+  {
+   "raw_hex": "000d1a2734414e5b6875828f9ca9b6c3d0ddeaf7",
+   "packed_hex": "00000d1a2734414e785b6875020f1c293f3643505d6a77"
+  }
+ ],
+ "requests": [
+  {
+   "name": "hello",
+   "op": 0,
+   "seq": 1,
+   "fields": {
+    "client_proto": 3
+   },
+   "payload_hex": "03",
+   "frame_hex": "f07d444e030001000100031e67262301f7"
+  },
+  {
+   "name": "open",
+   "op": 1,
+   "seq": 2,
+   "fields": {
+    "client_id": 11259375
+   },
+   "payload_hex": "6f1b2f05",
+   "frame_hex": "f07d444e0301020004006f1b2f052045184c03f7"
+  },
+  {
+   "name": "keepalive",
+   "op": 6,
+   "seq": 3,
+   "fields": {
+    "epoch": 268435455
+   },
+   "payload_hex": "7f7f7f7f",
+   "frame_hex": "f07d444e0306030004007f7f7f7f627d062708f7"
+  },
+  {
+   "name": "close",
+   "op": 7,
+   "seq": 4,
+   "fields": {
+    "epoch": 1
+   },
+   "payload_hex": "01000000",
+   "frame_hex": "f07d444e030704000400010000006e253d2802f7"
+  },
+  {
+   "name": "watch-all",
+   "op": 8,
+   "seq": 5,
+   "fields": {
+    "epoch": 1,
+    "mask": 127
+   },
+   "payload_hex": "010000007f000000",
+   "frame_hex": "f07d444e030805000800010000007f0000005f24540f02f7"
+  },
+  {
+   "name": "describe-909-bd-tune",
+   "op": 16,
+   "seq": 6,
+   "fields": {
+    "kind": 1,
+    "a": 0,
+    "b": 0,
+    "c": 3
+   },
+   "payload_hex": "01000003",
+   "frame_hex": "f07d444e031006000400010000031157083403f7"
+  },
+  {
+   "name": "param-get-two",
+   "op": 17,
+   "seq": 7,
+   "fields": {
+    "params": [
+     {
+      "kind": 1,
+      "a": 0,
+      "b": 0,
+      "c": 3
+     },
+     {
+      "kind": 2,
+      "a": 0,
+      "b": 0,
+      "c": 0
+     }
+    ]
+   },
+   "payload_hex": "020100000302000000",
+   "frame_hex": "f07d444e031107000900020100000302000000430c341e02f7"
+  },
+  {
+   "name": "param-set-nocheck",
+   "op": 18,
+   "seq": 8,
+   "fields": {
+    "epoch": 1,
+    "kind": 1,
+    "a": 2,
+    "b": 0,
+    "c": 1,
+    "expect": 16383,
+    "value": 100
+   },
+   "payload_hex": "01000000010200017f7f6400",
+   "frame_hex": "f07d444e031208000c0001000000010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "param-set-expect",
+   "op": 18,
+   "seq": 9,
+   "fields": {
+    "epoch": 1,
+    "kind": 1,
+    "a": 2,
+    "b": 0,
+    "c": 1,
+    "expect": 100,
+    "value": 16382
+   },
+   "payload_hex": "010000000102000164007e7f",
+   "frame_hex": "f07d444e031209000c00010000000102000164007e7f1d16792d0cf7"
+  },
+  {
+   "name": "step-get",
+   "op": 32,
+   "seq": 10,
+   "fields": {
+    "part": 2,
+    "pat": 31,
+    "step": 63
+   },
+   "payload_hex": "021f3f",
+   "frame_hex": "f07d444e03200a000300021f3f6c5e713900f7"
+  },
+  {
+   "name": "step-set-drum-accent-row",
+   "op": 33,
+   "seq": 11,
+   "fields": {
+    "epoch": 1,
+    "part": 0,
+    "pat": 0,
+    "step": 15,
+    "expect_crc": 16383,
+    "record": {
+     "track": 11,
+     "on": 1,
+     "vel": 127
+    }
+   },
+   "payload_hex": "0100000000000f7f7f0b017f",
+   "frame_hex": "f07d444e03210b000c000100000000000f7f7f0b017f777374380ef7"
+  },
+  {
+   "name": "step-set-303",
+   "op": 33,
+   "seq": 12,
+   "fields": {
+    "epoch": 1,
+    "part": 3,
+    "pat": 5,
+    "step": 7,
+    "expect_crc": 4660,
+    "record": {
+     "note": 36,
+     "gate": 1,
+     "accent": 1,
+     "slide": 0,
+     "velocity": 0,
+     "end": 15
+    }
+   },
+   "payload_hex": "01000000030507342424010100000f",
+   "frame_hex": "f07d444e03210c000f0001000000030507342424010100000f7a387e3b04f7"
+  },
+  {
+   "name": "step-set-break",
+   "op": 33,
+   "seq": 13,
+   "fields": {
+    "epoch": 1,
+    "part": 4,
+    "pat": 2,
+    "step": 3,
+    "expect_crc": 7,
+    "record": {
+     "on": 1,
+     "slice": 32
+    }
+   },
+   "payload_hex": "0100000004020307000120",
+   "frame_hex": "f07d444e03210d000b0001000000040203070001202e4a01710cf7"
+  },
+  {
+   "name": "part-set-len",
+   "op": 34,
+   "seq": 14,
+   "fields": {
+    "epoch": 1,
+    "part": 1,
+    "pat": 0,
+    "field": 0,
+    "value": 64
+   },
+   "payload_hex": "010000000100004000",
+   "frame_hex": "f07d444e03220e000900010000000100004000710a62330af7"
+  },
+  {
+   "name": "pattern-dump",
+   "op": 35,
+   "seq": 15,
+   "fields": {
+    "pat": 31,
+    "offset": 560,
+    "count": 112
+   },
+   "payload_hex": "1f300470",
+   "frame_hex": "f07d444e03230f0004001f3004701358733d00f7"
+  },
+  {
+   "name": "cue-all-cancel",
+   "op": 36,
+   "seq": 16,
+   "fields": {
+    "epoch": 1,
+    "part": 127,
+    "pat": 127
+   },
+   "payload_hex": "010000007f7f",
+   "frame_hex": "f07d444e032410000600010000007f7f673f087a01f7"
+  },
+  {
+   "name": "transport-play",
+   "op": 38,
+   "seq": 17,
+   "fields": {
+    "epoch": 1,
+    "action": 1
+   },
+   "payload_hex": "0100000001",
+   "frame_hex": "f07d444e03261100050001000000015276351100f7"
+  },
+  {
+   "name": "tempo",
+   "op": 39,
+   "seq": 18,
+   "fields": {
+    "epoch": 1,
+    "bpm_x10": 3000
+   },
+   "payload_hex": "010000003817",
+   "frame_hex": "f07d444e0327120006000100000038177332127007f7"
+  },
+  {
+   "name": "mute-queued",
+   "op": 40,
+   "seq": 19,
+   "fields": {
+    "epoch": 1,
+    "bit": 20,
+    "on": 1,
+    "queued": 1
+   },
+   "payload_hex": "01000000140101",
+   "frame_hex": "f07d444e03281300070001000000140101254b662e0ef7"
+  },
+  {
+   "name": "state",
+   "op": 48,
+   "seq": 20,
+   "fields": {},
+   "payload_hex": "",
+   "frame_hex": "f07d444e033014000000531e62430bf7"
+  },
+  {
+   "name": "seq-wrap",
+   "op": 48,
+   "seq": 16383,
+   "fields": {},
+   "payload_hex": "",
+   "frame_hex": "f07d444e03307f7f00003c204b5f00f7"
+  }
+ ],
+ "replies": [
+  {
+   "name": "hello",
+   "op": 0,
+   "reply_op": 64,
+   "seq": 1,
+   "status": 0,
+   "rev": 0,
+   "fields": {
+    "proto": 3,
+    "minor": 0,
+    "fw_commit": [
+     143,
+     154,
+     228,
+     90,
+     30,
+     206,
+     217,
+     165,
+     21,
+     95,
+     13,
+     24,
+     98,
+     212,
+     156,
+     76,
+     71,
+     35,
+     151,
+     221
+    ],
+    "board": 3,
+    "caps": 511,
+    "npat": 32,
+    "nsteps": 64,
+    "ntracks": 11,
+    "ndrum": 2,
+    "clip_mode": 0,
+    "clk_src": 0,
+    "watch_max_hz": 50
+   },
+   "payload_hex": "00000000000300670f1a645a1e4e594125155f0d186254311c4c4723175d037f03000020400b02000032",
+   "frame_hex": "f07d444e034001002a0000000000000300670f1a645a1e4e594125155f0d186254311c4c4723175d037f03000020400b020000321e6409320af7"
+  },
+  {
+   "name": "open",
+   "op": 1,
+   "reply_op": 65,
+   "seq": 2,
+   "status": 0,
+   "rev": 0,
+   "fields": {
+    "epoch": 19088743,
+    "lease_ms": 2000
+   },
+   "payload_hex": "0000000000670a0d09500f",
+   "frame_hex": "f07d444e034102000b000000000000670a0d09500f584d72580af7"
+  },
+  {
+   "name": "keepalive",
+   "op": 6,
+   "reply_op": 70,
+   "seq": 3,
+   "status": 0,
+   "rev": 9,
+   "fields": {},
+   "payload_hex": "0009000000",
+   "frame_hex": "f07d444e034603000500000900000079064d3406f7"
+  },
+  {
+   "name": "close",
+   "op": 7,
+   "reply_op": 71,
+   "seq": 4,
+   "status": 0,
+   "rev": 9,
+   "fields": {},
+   "payload_hex": "0009000000",
+   "frame_hex": "f07d444e03470400050000090000000e0b41690ef7"
+  },
+  {
+   "name": "watch",
+   "op": 8,
+   "reply_op": 72,
+   "seq": 5,
+   "status": 0,
+   "rev": 9,
+   "fields": {
+    "mask": 127
+   },
+   "payload_hex": "00090000007f000000",
+   "frame_hex": "f07d444e03480500090000090000007f000000776c2a490ef7"
+  },
+  {
+   "name": "describe-switch",
+   "op": 16,
+   "reply_op": 80,
+   "seq": 6,
+   "status": 0,
+   "rev": 9,
+   "fields": {
+    "name": "RATE",
+    "max": 3,
+    "def": 0,
+    "unit": 0,
+    "names": [
+     "1/16",
+     "1/8T",
+     "1/32",
+     ""
+    ]
+   },
+   "payload_hex": "00090000005241544500030000000004312f313600312f385400312f33320000",
+   "frame_hex": "f07d444e03500600200000090000005241544500030000000004312f313600312f385400312f333200000d21414403f7"
+  },
+  {
+   "name": "param-get",
+   "op": 17,
+   "reply_op": 81,
+   "seq": 7,
+   "status": 0,
+   "rev": 9,
+   "fields": {
+    "params": [
+     {
+      "kind": 1,
+      "a": 0,
+      "b": 0,
+      "c": 3,
+      "value": 64,
+      "max": 127
+     },
+     {
+      "kind": 2,
+      "a": 0,
+      "b": 0,
+      "c": 0,
+      "value": 50,
+      "max": 100
+     }
+    ]
+   },
+   "payload_hex": "0009000000020100000340007f000200000032006400",
+   "frame_hex": "f07d444e0351070016000009000000020100000340007f000200000032006400181154650cf7"
+  },
+  {
+   "name": "param-set-clamped",
+   "op": 18,
+   "reply_op": 82,
+   "seq": 8,
+   "status": 0,
+   "rev": 10,
+   "fields": {
+    "kind": 1,
+    "a": 2,
+    "b": 0,
+    "c": 1,
+    "value": 127
+   },
+   "payload_hex": "000a000000010200017f00",
+   "frame_hex": "f07d444e035208000b00000a000000010200017f007414672608f7"
+  },
+  {
+   "name": "param-set-queued",
+   "op": 18,
+   "reply_op": 82,
+   "seq": 8,
+   "status": 1,
+   "rev": 10,
+   "fields": {
+    "kind": 1,
+    "a": 2,
+    "b": 0,
+    "c": 1,
+    "value": 100
+   },
+   "payload_hex": "010a000000010200016400",
+   "frame_hex": "f07d444e035208000b00010a0000000102000164002e3c07630ef7"
+  },
+  {
+   "name": "param-set-conflict",
+   "op": 18,
+   "reply_op": 82,
+   "seq": 9,
+   "status": 5,
+   "rev": 10,
+   "fields": {},
+   "payload_hex": "050a000000",
+   "frame_hex": "f07d444e035209000500050a0000006b11373d00f7"
+  },
+  {
+   "name": "step-get-303",
+   "op": 32,
+   "reply_op": 96,
+   "seq": 10,
+   "status": 0,
+   "rev": 10,
+   "fields": {
+    "part": 2,
+    "pat": 31,
+    "step": 63,
+    "record": {
+     "note": 127,
+     "gate": 2,
+     "accent": 0,
+     "slide": 1,
+     "velocity": 100,
+     "end": 0
+    }
+   },
+   "payload_hex": "000a000000021f3f7f0200016400",
+   "frame_hex": "f07d444e03600a000e00000a000000021f3f7f02000164000b6077630ef7"
+  },
+  {
+   "name": "step-set-drum",
+   "op": 33,
+   "reply_op": 97,
+   "seq": 11,
+   "status": 0,
+   "rev": 11,
+   "fields": {
+    "part": 0,
+    "pat": 0,
+    "step": 15,
+    "record": {
+     "track": 11,
+     "on": 1,
+     "vel": 127
+    },
+    "pattern_crc": 16382
+   },
+   "payload_hex": "000b00000000000f0b017f7e7f",
+   "frame_hex": "f07d444e03610b000d00000b00000000000f0b017f7e7f7d01163804f7"
+  },
+  {
+   "name": "part-set",
+   "op": 34,
+   "reply_op": 98,
+   "seq": 14,
+   "status": 0,
+   "rev": 12,
+   "fields": {
+    "part": 1,
+    "pat": 0,
+    "field": 0,
+    "value": 64
+   },
+   "payload_hex": "000c0000000100004000",
+   "frame_hex": "f07d444e03620e000a00000c0000000100004000553f2b3f03f7"
+  },
+  {
+   "name": "pattern-dump-full",
+   "op": 35,
+   "reply_op": 99,
+   "seq": 15,
+   "status": 0,
+   "rev": 12,
+   "fields": {
+    "pat": 31,
+    "offset": 560,
+    "total": 1234,
+    "bytes": [
+     0,
+     165,
+     74,
+     239,
+     148,
+     57,
+     222,
+     131,
+     40,
+     205,
+     114,
+     23,
+     188,
+     97,
+     6,
+     171,
+     80,
+     245,
+     154,
+     63,
+     228,
+     137,
+     46,
+     211,
+     120,
+     29,
+     194,
+     103,
+     12,
+     177,
+     86,
+     251,
+     160,
+     69,
+     234,
+     143,
+     52,
+     217,
+     126,
+     35,
+     200,
+     109,
+     18,
+     183,
+     92,
+     1,
+     166,
+     75,
+     240,
+     149,
+     58,
+     223,
+     132,
+     41,
+     206,
+     115,
+     24,
+     189,
+     98,
+     7,
+     172,
+     81,
+     246,
+     155,
+     64,
+     229,
+     138,
+     47,
+     212,
+     121,
+     30,
+     195,
+     104,
+     13,
+     178,
+     87,
+     252,
+     161,
+     70,
+     235,
+     144,
+     53,
+     218,
+     127,
+     36,
+     201,
+     110,
+     19,
+     184,
+     93,
+     2,
+     167,
+     76,
+     241,
+     150,
+     59,
+     224,
+     133,
+     42,
+     207,
+     116,
+     25,
+     190,
+     99,
+     8,
+     173,
+     82,
+     247,
+     156,
+     65,
+     230,
+     139
+    ],
+    "pattern_crc": 15584
+   },
+   "payload_hex": "000c0000001f30045209705a00254a6f14395e2503284d72173c615a062b50751a3f6425092e53781d42675a0c31567b20456a250f34597e23486d5212375c01264b702d153a5f04294e7352183d62072c51762d1b40650a2f5479521e43680d32577c2d21466b10355a7f1224496e13385d026d274c71163b6005122a4f74193e63086d2d52771c41660b6079",
+   "frame_hex": "f07d444e03630f000d01000c0000001f30045209705a00254a6f14395e2503284d72173c615a062b50751a3f6425092e53781d42675a0c31567b20456a250f34597e23486d5212375c01264b702d153a5f04294e7352183d62072c51762d1b40650a2f5479521e43680d32577c2d21466b10355a7f1224496e13385d026d274c71163b6005122a4f74193e63086d2d52771c41660b6079474d491d03f7"
+  },
+  {
+   "name": "pattern-dump-empty",
+   "op": 35,
+   "reply_op": 99,
+   "seq": 15,
+   "status": 0,
+   "rev": 12,
+   "fields": {
+    "pat": 0,
+    "offset": 1234,
+    "total": 1234,
+    "bytes": [],
+    "pattern_crc": 0
+   },
+   "payload_hex": "000c0000000052095209000000",
+   "frame_hex": "f07d444e03630f000d00000c000000005209520900000050583a4a0ff7"
+  },
+  {
+   "name": "cue",
+   "op": 36,
+   "reply_op": 100,
+   "seq": 16,
+   "status": 0,
+   "rev": 13,
+   "fields": {
+    "part": 1,
+    "pat": 4,
+    "ppat": [
+     0,
+     1,
+     2,
+     3,
+     31
+    ],
+    "pcue": [
+     127,
+     4,
+     127,
+     127,
+     0
+    ]
+   },
+   "payload_hex": "000d0000000104000102031f7f047f7f00",
+   "frame_hex": "f07d444e036410001100000d0000000104000102031f7f047f7f001e285d7708f7"
+  },
+  {
+   "name": "transport",
+   "op": 38,
+   "reply_op": 102,
+   "seq": 17,
+   "status": 0,
+   "rev": 14,
+   "fields": {
+    "playing": 1
+   },
+   "payload_hex": "000e00000001",
+   "frame_hex": "f07d444e036611000600000e0000000131004a2e01f7"
+  },
+  {
+   "name": "transport-external-clock",
+   "op": 38,
+   "reply_op": 102,
+   "seq": 17,
+   "status": 8,
+   "rev": 14,
+   "fields": {},
+   "payload_hex": "080e000000",
+   "frame_hex": "f07d444e036611000500080e00000026327d3200f7"
+  },
+  {
+   "name": "tempo",
+   "op": 39,
+   "reply_op": 103,
+   "seq": 18,
+   "status": 0,
+   "rev": 15,
+   "fields": {
+    "bpm_x10": 1205
+   },
+   "payload_hex": "000f0000003509",
+   "frame_hex": "f07d444e036712000700000f00000035096c377e7a09f7"
+  },
+  {
+   "name": "mute-u32-max",
+   "op": 40,
+   "reply_op": 104,
+   "seq": 19,
+   "status": 0,
+   "rev": 268435455,
+   "fields": {
+    "mute": 4294967295,
+    "vmute": 2147483649
+   },
+   "payload_hex": "007f7f7f7f7f7f7f7f0f0100000008",
+   "frame_hex": "f07d444e036813000f00007f7f7f7f7f7f7f7f0f01000000085e0e0b2005f7"
+  },
+  {
+   "name": "state",
+   "op": 48,
+   "reply_op": 112,
+   "seq": 20,
+   "status": 0,
+   "rev": 16,
+   "fields": {
+    "playing": 1,
+    "clk_src": 0,
+    "clip_mode": 0,
+    "send_notes": 1,
+    "bpm_x10": 1200,
+    "ppat": [
+     0,
+     1,
+     2,
+     3,
+     31
+    ],
+    "pcue": [
+     127,
+     4,
+     127,
+     127,
+     0
+    ],
+    "mute": 1048576,
+    "vmute": 0,
+    "part_off": 0,
+    "song_on": 0,
+    "song_pos": 0,
+    "ch": [
+     9,
+     10,
+     1,
+     2,
+     3
+    ],
+    "step_pos": [
+     0,
+     15,
+     127,
+     127,
+     3
+    ],
+    "pattern_crc": [
+     7,
+     1038,
+     2069,
+     3100,
+     4131,
+     5162,
+     6193,
+     7224,
+     8255,
+     9286,
+     10317,
+     11348,
+     12379,
+     13410,
+     14441,
+     15472,
+     119,
+     1150,
+     2181,
+     3212,
+     4243,
+     5274,
+     6305,
+     7336,
+     8367,
+     9398,
+     10429,
+     11460,
+     12491,
+     13522,
+     14553,
+     15584
+    ]
+   },
+   "payload_hex": "0010000000010000013009000102031f7f047f7f000000400000000000000000000000090a010203000f7f7f0307000e0815101c1823202a28313038383f4046484d5054585b6062686970707877007e0805110c1913211a29213128392f4136493d5144594b61526959716079",
+   "frame_hex": "f07d444e037014006d000010000000010000013009000102031f7f047f7f000000400000000000000000000000090a010203000f7f7f0307000e0815101c1823202a28313038383f4046484d5054585b6062686970707877007e0805110c1913211a29213128392f4136493d5144594b6152695971607956074f5203f7"
+  },
+  {
+   "name": "busy",
+   "op": 48,
+   "reply_op": 112,
+   "seq": 21,
+   "status": 3,
+   "rev": 16,
+   "fields": {},
+   "payload_hex": "0310000000",
+   "frame_hex": "f07d444e0370150005000310000000385057300bf7"
+  },
+  {
+   "name": "stale",
+   "op": 6,
+   "reply_op": 70,
+   "seq": 22,
+   "status": 4,
+   "rev": 16,
+   "fields": {},
+   "payload_hex": "0410000000",
+   "frame_hex": "f07d444e03461600050004100000001275574205f7"
+  },
+  {
+   "name": "unsupported",
+   "op": 18,
+   "reply_op": 82,
+   "seq": 23,
+   "status": 6,
+   "rev": 16,
+   "fields": {},
+   "payload_hex": "0610000000",
+   "frame_hex": "f07d444e035217000500061000000023382e5d01f7"
+  },
+  {
+   "name": "bad",
+   "op": 17,
+   "reply_op": 81,
+   "seq": 24,
+   "status": 2,
+   "rev": 16,
+   "fields": {},
+   "payload_hex": "0210000000",
+   "frame_hex": "f07d444e0351180005000210000000311c15550df7"
+  },
+  {
+   "name": "full",
+   "op": 36,
+   "reply_op": 100,
+   "seq": 25,
+   "status": 7,
+   "rev": 16,
+   "fields": {},
+   "payload_hex": "0710000000",
+   "frame_hex": "f07d444e03641900050007100000007e38125f08f7"
+  }
+ ],
+ "notifies": [
+  {
+   "name": "param",
+   "rev": 20,
+   "kind": 0,
+   "fields": {
+    "kind": 1,
+    "a": 0,
+    "b": 0,
+    "c": 3,
+    "value": 64
+   },
+   "payload_hex": "1400000000010000034000",
+   "frame_hex": "f07d444e037f00000b001400000000010000034000656a4a6d07f7"
+  },
+  {
+   "name": "step",
+   "rev": 21,
+   "kind": 1,
+   "fields": {
+    "part": 0,
+    "pat": 1,
+    "step": 2,
+    "pattern_crc": 10922
+   },
+   "payload_hex": "15000000010001022a55",
+   "frame_hex": "f07d444e037f00000a0015000000010001022a55666366550af7"
+  },
+  {
+   "name": "cue",
+   "rev": 22,
+   "kind": 2,
+   "fields": {
+    "ppat": [
+     0,
+     1,
+     2,
+     3,
+     31
+    ],
+    "pcue": [
+     127,
+     4,
+     127,
+     127,
+     0
+    ]
+   },
+   "payload_hex": "1600000002000102031f7f047f7f00",
+   "frame_hex": "f07d444e037f00000f001600000002000102031f7f047f7f004d4509090df7"
+  },
+  {
+   "name": "pattern",
+   "rev": 23,
+   "kind": 7,
+   "fields": {
+    "ppat": [
+     0,
+     1,
+     2,
+     3,
+     31
+    ],
+    "pcue": [
+     127,
+     127,
+     127,
+     127,
+     127
+    ]
+   },
+   "payload_hex": "1700000007000102031f7f7f7f7f7f",
+   "frame_hex": "f07d444e037f00000f001700000007000102031f7f7f7f7f7f573c292806f7"
+  },
+  {
+   "name": "transport",
+   "rev": 24,
+   "kind": 3,
+   "fields": {
+    "playing": 0,
+    "bpm_x10": 1200,
+    "clk_src": 0
+   },
+   "payload_hex": "180000000300300900",
+   "frame_hex": "f07d444e037f00000900180000000300300900110972180bf7"
+  },
+  {
+   "name": "mute",
+   "rev": 25,
+   "kind": 4,
+   "fields": {
+    "mute": 3,
+    "vmute": 0,
+    "part_off": 16
+   },
+   "payload_hex": "19000000040300000000000000000010",
+   "frame_hex": "f07d444e037f00001000190000000403000000000000000000102222403b0bf7"
+  },
+  {
+   "name": "voice",
+   "rev": 26,
+   "kind": 5,
+   "fields": {
+    "part": 0,
+    "note": 36,
+    "velocity": 127
+   },
+   "payload_hex": "1a0000000500247f",
+   "frame_hex": "f07d444e037f000008001a0000000500247f1d7e435606f7"
+  },
+  {
+   "name": "position",
+   "rev": 27,
+   "kind": 6,
+   "fields": {
+    "step_pos": [
+     0,
+     0,
+     8,
+     8,
+     127
+    ]
+   },
+   "payload_hex": "1b00000006000008087f",
+   "frame_hex": "f07d444e037f00000a001b00000006000008087f28395f0206f7"
+  }
+ ],
+ "max_frame": {
+  "payload_len": 240,
+  "frame_len": 256,
+  "frame_hex": "f07d444e0370010070015555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555554e7f6b4006f7"
+ },
+ "invalid": [
+  {
+   "name": "crc-flipped",
+   "error": "crc",
+   "frame_hex": "f07d444e031208000c0001000000010200017f7f64000966521f0df7"
+  },
+  {
+   "name": "payload-flipped",
+   "error": "crc",
+   "frame_hex": "f07d444e031208000c0001000100010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "wrong-major",
+   "error": "header",
+   "frame_hex": "f07d444e021208000c0001000000010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "wrong-manufacturer",
+   "error": "header",
+   "frame_hex": "f07e444e031208000c0001000000010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "no-f7",
+   "error": "header",
+   "frame_hex": "f07d444e031208000c0001000000010200017f7f64000966521f0c7f"
+  },
+  {
+   "name": "high-bit-in-body",
+   "error": "range",
+   "frame_hex": "f07d444e031208000c0001008000010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "length-too-long",
+   "error": "length",
+   "frame_hex": "f07d444e031208000d0001000000010200017f7f64000966521f0cf7"
+  },
+  {
+   "name": "too-short",
+   "error": "length",
+   "frame_hex": "f07d444e031208000c000100000001"
+  },
+  {
+   "name": "over-256",
+   "error": "length",
+   "frame_hex": "f07d444e037001007101555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555550000000000f7"
+  }
+ ]
+}
