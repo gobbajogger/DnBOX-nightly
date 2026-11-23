@@ -459,3 +459,9 @@ Rule: no evidence-only files in Git. These receipts, evidence JSON, logs and pro
 - `evidence/web-routes/reference-results.json` — evidence-only; retained in Git history.
 - `evidence/web-routes/visual-viewport-isolation.json` — evidence-only; retained in Git history.
 - `evidence/web-routes/web-route-review.md` — evidence-only; retained in Git history.
+
+## Scheduler-handoff evidence receipts removed (cleanup, 2026-11-23 22:10 UTC+10)
+Not read by any script, test or page (verify-build-status.mjs reads only catalog-sync-20261024.json). Retained in Git history.
+
+- `docs/scheduler-handoffs/catalog-sync-20261024-r27-evidence-commit-guard.json` — evidence-only receipt; retained in Git history.
+- `docs/scheduler-handoffs/catalog-sync-20261024-r28-evidence-url-ref-guard.json` — evidence-only receipt; retained in Git history.
