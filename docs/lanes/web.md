@@ -234,3 +234,5 @@ Recovered the four published SMK release-status sections from Pages 42d4027, inc
 - 2026-11-23 UTC: [#182](https://github.com/gobbajogger/DnBOX-nightly/pull/182) clarified Samples audition, comparison and import guidance; head `e046fdd4`, merged `2ef66701`; 41/41 focused Node tests, three sandboxed viewports.
 - 2026-11-23 UTC: [#184](https://github.com/gobbajogger/DnBOX-nightly/pull/184) isolated Workspace Reload’s injected failure from fixture caching; head `688f4440`, merged `6ebda900`; all seven sandboxed recovery cases passed, with no production changes.
 - 2026-11-23 UTC: [#186](https://github.com/gobbajogger/DnBOX-nightly/pull/186) restored file-open Installer links to Samples and Projects while preserving hosted workspaces; head `74a2db85`, merged `8e5af820`; offline browser workflow, 130/130 focused Node tests, three hosted deadline controls and 237/237 hosted product byte matches passed.
+
+- 2026-11-23: #190 merged as `dc212587`; [exact-head proof](https://github.com/gobbajogger/DnBOX-nightly/pull/190#issuecomment-7090737396) qualifies the offline Installer, Samples and Projects theme/navigation fix.

@@ -39,7 +39,7 @@ import {readFirmwareReference} from './firmware-reference-runtime.mjs';
 import {adminAssets} from './build-admin.mjs';
 import {readEmulatorRuntime,readEmulatorPin} from './emulator-runtime.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,firmwareReferenceRuntime,pagesBase}={}){
+export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/product-site'),check=false,emulatorRuntime,firmwareReferenceRuntime,firmwareReferenceRevision,pagesBase}={}){
  function noLinks(path,base){let at=base;if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');for(const part of relative(base,path).split(sep).filter(Boolean)){at=join(at,part);if(existsSync(at)&&lstatSync(at).isSymbolicLink())throw Error('Build symlink refused');}}
  const source=join(repoRoot,'web/product-site'),target=resolve(output),manifestPath=join(source,'SOURCE-MANIFEST.json');
  noLinks(manifestPath,repoRoot);
@@ -77,19 +77,37 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
   const panelLink = '<a class="button" href="../emu/">Play the browser instrument</a>';
   derived.set('tools/index.html', Buffer.from(toolsPage.replace('<!-- playable-panel-link -->', panelLink)));
  }
- if (derived.has('reference/screens/index.html') && (emulatorRuntime || firmwareReferenceRuntime)) {
-  const oraclePath = join(repoRoot, 'tests/firmware-reference/native-rgb.tsv');
-  const oracleName = 'reference/screens/native-rgb.tsv';
-  noLinks(oraclePath, repoRoot);
-  if (seen.has(oracleName) || !lstatSync(oraclePath).isFile()) throw Error('Expected canonical native frame hashes');
-  derived.set(oracleName, readFileSync(oraclePath));
-  seen.add(oracleName);
+ const screens = 'reference/screens/';
+ const explicitReference = firmwareReferenceRevision !== undefined;
+ if (explicitReference && !derived.has(screens+'index.html')) throw Error('Firmware screen source missing');
+ if (derived.has(screens+'index.html') && (emulatorRuntime || firmwareReferenceRuntime || explicitReference)) {
+  const files = readFirmwareReference(repoRoot, firmwareReferenceRuntime, firmwareReferenceRevision);
+  const oracleName = screens+'native-rgb.tsv';
+  if (explicitReference) {
+   // Replace only the historical selector and its revision label.
+   const index = screens+'index.html', selector = screens+'states.json';
+   const previous = JSON.parse(derived.get(selector)).firmware;
+   const html = derived.get(index).toString('utf8');
+   if (!/^[a-f0-9]{40}$/.test(previous ?? '') ||
+       !html.includes(previous) || !html.includes('>'+previous.slice(0,8)+'</a>')) {
+    throw Error('Historical firmware screen revision label missing');
+   }
+   derived.set(index, Buffer.from(html.replaceAll(previous, firmwareReferenceRevision)
+      .replace('>'+previous.slice(0,8)+'</a>', '>'+firmwareReferenceRevision.slice(0,8)+'</a>')));
+   if (!seen.delete(selector)) throw Error('Historical firmware screen selector missing');
+  } else {
+   const oraclePath = join(repoRoot, 'tests/firmware-reference/native-rgb.tsv');
+   noLinks(oraclePath, repoRoot);
+   if (seen.has(oracleName) || !lstatSync(oraclePath).isFile()) throw Error('Expected canonical native frame hashes');
+   derived.set(oracleName, readFileSync(oraclePath));
+   seen.add(oracleName);
+  }
   if (derived.has('reference/index.html')) {
    const referencePage = derived.get('reference/index.html').toString('utf8');
    const screenLink = '<p><a class="button" href="screens/">Explore the firmware screen reference</a></p>';
    derived.set('reference/index.html', Buffer.from(referencePage.replace('<!-- firmware-screen-link -->', screenLink)));
   }
-  for (const [name, data] of readFirmwareReference(repoRoot, firmwareReferenceRuntime)) {
+  for (const [name, data] of files) {
    if (seen.has(name)) throw Error('Firmware reference output collision');
    derived.set(name, data); seen.add(name);
   }
@@ -154,5 +172,5 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),i=args.indexOf('--output');if(i!==-1&&!args[i+1])throw Error('--output requires a local directory');
  const p=args.indexOf('--pages-base');if(p!==-1&&!args[p+1])throw Error('--pages-base requires a local Pages tree');
- console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),firmwareReferenceRuntime:process.env.DNBOX_FWUI_RUNTIME,emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
+ console.log(JSON.stringify(buildProductSite({pagesBase:p===-1?undefined:args[p+1],output:i===-1?undefined:resolve(args[i+1]),check:args.includes('--check'),firmwareReferenceRuntime:process.env.DNBOX_FWUI_RUNTIME,firmwareReferenceRevision:process.env.DNBOX_FWUI_REVISION,emulatorRuntime:process.env.DNBOX_EMULATOR_RUNTIME})));
 }
