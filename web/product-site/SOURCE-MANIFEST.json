@@ -739,8 +739,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 67916,
-      "sha256": "f98572fa23a3558b99bc3d289b2a8f38f8c06658ea18d0d626f2faf9c179a5b3"
+      "bytes": 68088,
+      "sha256": "426bc57d43d3d85b3351055bf0f525aa34f0541e61403f49267b06d71432456b"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
