@@ -848,6 +848,11 @@
       "sha256": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba"
     },
     {
+      "path": "remote/dnr3.mjs",
+      "bytes": 14509,
+      "sha256": "df6ce82318ca178ad4d8f5f2cd800fd41f157406501a3886b192ead604c88c84"
+    },
+    {
       "path": "remote/draft-file.mjs",
       "bytes": 10024,
       "sha256": "d7ddb5626840b315c42961b9220a3ecef784dff643a7c454b77888eae06c7416"
