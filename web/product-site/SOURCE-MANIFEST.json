@@ -1029,8 +1029,8 @@
     },
     {
       "path": "remote/step-lane.mjs",
-      "bytes": 5553,
-      "sha256": "5b3c95bad10b017461d3ca6e6dedf9c93e9955707a0ef9f3476deb7ca6637ed4"
+      "bytes": 5685,
+      "sha256": "161cc08b2648486bafc4582e93e90a54b1c2c72ece57d6ec30df8ecb21a0a473"
     },
     {
       "path": "remote/style.css",
