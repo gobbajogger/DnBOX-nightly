@@ -18,3 +18,6 @@ Against the previous `61827a71` frames, boot, kick-808, mix, mix-level and
 seq-808 are unchanged; fx, save, home, kick-909, global and midi-clock differ
 (124 to 17,510 pixels). `frames.json` pins the RGB565 hash of each frame and the
 runtime built by `scripts/firmware-emulator/build.sh` at the same firmware.
+
+The runtime pin moved to kernel tree `8f03c63d` (Remote MIDI/SysEx hooks, wasm `17f7c116…`). The firmware and these
+native frames are unchanged; the browser test checks the new WASM still draws them.
