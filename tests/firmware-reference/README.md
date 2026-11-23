@@ -28,3 +28,30 @@ python3 tests/firmware-reference-browser.py
 ```
 
 The browser test checks all 1,838 selectable state IDs and 1,912 capture events. It compares the decoded canvas PNG with the native RGB hash. It separately uses the public group and state controls, captures the displayed LCD at three viewport sizes, checks rapid reselection, and restores the selected URL fragment after reload. The “Compare with native frame” button hashes the displayed canvas and checks the selected state against the same staged native hashes. Browser tests exercise a match, an intentionally incorrect hash and a selection change during comparison.
+
+### Qualify an explicitly chosen revision for a local product build
+
+The historical renderer remains the default. For a different firmware revision,
+supply the existing seven browser WASM modules, a `states.json` selector naming
+the exact firmware commit, and a `native-rgb.tsv` generated independently from
+native captures of the corresponding named states (lowercase SHA-256 of the
+decoded 240 × 240 RGB pixels, one tab-separated row per selector state). Produce
+the selector and both render closures from the same named source and input
+states; review their provenance and bytes before adding
+`scripts/firmware-reference-pins/<full-commit>.json`. This source-side pin uses
+the existing `{firmware, files: {name: {bytes, sha256}}}` format and lists all
+nine files. Do not use the browser WASM to generate its own oracle.
+
+Run the existing local product producer with both settings:
+
+```sh
+DNBOX_FWUI_REVISION="$FULL_FIRMWARE_COMMIT" DNBOX_FWUI_RUNTIME="$ARTIFACT_DIRECTORY" npm run build:product
+```
+
+Before writing output, it verifies the pin, exact file digests, selector/oracle
+state agreement, and the model-specific Elite and Pro guard states. It then
+runs the browser dispatcher once per module/family and checks the first displayed
+frame for each state against the native pixel hash. This verifies supplied
+artifacts; it does not generate or qualify new firmware or publish anything.
+The reproducible historical artifact builder and the separate `/emu/` runtime
+are unchanged.
