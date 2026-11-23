@@ -40,7 +40,10 @@ export function bindRollPointers(viewport,{gesture,mode,point,paint,getScale,set
   },
   pointercancel(e){tap=lastTap=null;navigation=null;blocked=true;gesture.cancelPointer(e);release(e);},
   lostpointercapture(e){if(pointers.has(e.pointerId)){tap=lastTap=null;navigation=null;blocked=true;gesture.cancelPointer(e);pointers.delete(e.pointerId);if(!pointers.size)blocked=false;}},
-  wheel(e){if(!getScale)return;gesture.cancel();tap=lastTap=null;e.preventDefault();if(e.ctrlKey){const r=viewport.getBoundingClientRect(),x=e.clientX-r.left,before=getScale(),after=boundedScale(before+(e.deltaY<0?.25:e.deltaY>0?-.25:0)),anchor=(viewport.scrollLeft+x)/before;setScale(after);viewport.scrollLeft=anchor*after-x;}else{viewport.scrollLeft+=e.deltaX;viewport.scrollTop+=e.deltaY;}}
+  wheel(e){if(!getScale)return;gesture.cancel();tap=lastTap=null;e.preventDefault();if(e.ctrlKey){const r=viewport.getBoundingClientRect(),x=e.clientX-r.left,before=getScale(),after=boundedScale(before+(e.deltaY<0?.25:e.deltaY>0?-.25:0)),anchor=(viewport.scrollLeft+x)/before;setScale(after);viewport.scrollLeft=anchor*after-x;}else if(e.shiftKey){
+   // Some browsers already remap the shifted wheel to deltaX.
+   viewport.scrollLeft+=e.deltaX||e.deltaY;
+  }else{viewport.scrollLeft+=e.deltaX;viewport.scrollTop+=e.deltaY;}}
  };
  for(const[k,fn]of Object.entries(handlers))viewport.addEventListener(k,fn,k==='wheel'?{passive:false}:undefined);
  const cancel=()=>{gesture.cancel();tap=lastTap=null;navigation=null;blocked=false;const ids=[...pointers.keys()];pointers.clear();for(const id of ids)if(viewport.hasPointerCapture(id))viewport.releasePointerCapture(id);};

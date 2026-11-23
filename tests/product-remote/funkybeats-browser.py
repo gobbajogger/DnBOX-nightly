@@ -246,6 +246,43 @@ async def gesture_navigation(page):
     await page.locator('#draft-replace').click()
     assert await page.locator('#roll-grid').evaluate('(e)=>e.offsetWidth') == zoomed_width
 
+async def shift_wheel_pan(page):
+    viewport = page.locator('#roll-scroll')
+    notes = page.locator('#roll-grid [data-note]')
+    before_notes = await notes.evaluate_all(
+        'items=>items.map(n=>[n.dataset.note,n.getAttribute("aria-label")])')
+    zoom = page.locator('#zoom')
+    await zoom.evaluate('el=>{el.value="3";el.dispatchEvent(new Event("input"))}')
+    box = await viewport.bounding_box()
+    await page.mouse.move(box['x'] + box['width']/2, box['y'] + box['height']/2)
+
+    async def position():
+        return await viewport.evaluate('el=>[el.scrollLeft,el.scrollTop]')
+
+    left, top = await position()
+    # Use the browser gesture, then cover engines that deliver translated deltaX.
+    await page.keyboard.down('Shift')
+    try:
+        await page.mouse.wheel(0, 48)
+    finally:
+        await page.keyboard.up('Shift')
+    await page.wait_for_function(
+        'x=>document.getElementById("roll-scroll").scrollLeft===x', arg=left+48,
+        timeout=3000)
+    assert await position() == [left+48, top]
+    await viewport.dispatch_event('wheel', dict(shiftKey=True, deltaX=29, deltaY=29,
+                                                bubbles=True, cancelable=True))
+    assert await position() == [left+77, top]
+    await page.mouse.wheel(0, 24)
+    await page.wait_for_function(
+        'y=>document.getElementById("roll-scroll").scrollTop===y', arg=top+24,
+        timeout=3000)
+    assert await position() == [left+77, top+24]
+    await expect(zoom).to_have_value('3')
+    assert await notes.evaluate_all(
+        'items=>items.map(n=>[n.dataset.note,n.getAttribute("aria-label")])') == before_notes
+
+
 async def no_tool_row(page):
     screenshots = ROOT / 'build/remote-gestures'
     screenshots.mkdir(parents=True, exist_ok=True)
@@ -518,7 +555,7 @@ async def browser_cases():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         try:
-            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, no_tool_row, step_roll, step_drums, step_window_boundary, thin_step_lanes, break_and_tape, full_envelopes):
+            for case in (roll, sequencer, mixer, launcher, synth, gesture_edits, gesture_delete, gesture_navigation, shift_wheel_pan, no_tool_row, step_roll, step_drums, step_window_boundary, thin_step_lanes, break_and_tape, full_envelopes):
                 context = await browser.new_context(viewport={'width': 844, 'height': 390}, has_touch=True)
                 await context.route('**/*', serve)
                 page = await context.new_page()
@@ -533,7 +570,7 @@ async def browser_cases():
                 await context.close()
         finally:
             await browser.close()
-    print('FUNKYBEATS-BROWSER pages=15 failures=0')
+    print('FUNKYBEATS-BROWSER pages=16 failures=0')
 
 async def main():
     global SOURCE

@@ -1074,8 +1074,8 @@
     },
     {
       "path": "remote/workspace.mjs",
-      "bytes": 4268,
-      "sha256": "802a7d2f24bdbc3857cc41bd3bf5ea662ba35c95aef153d5c61145c44b137b50"
+      "bytes": 4399,
+      "sha256": "76463f7c72f99c7db06233260eaad590eea23df7b635d1fc8ee502ea60cd12bc"
     },
     {
       "path": "replay.mjs",
