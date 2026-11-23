@@ -844,8 +844,8 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2749,
-      "sha256": "dcaa288664e960e8828078033c9f47f872933de646cd71eca83477c715ac6b21"
+      "bytes": 2909,
+      "sha256": "a3021f3e3f995dd8c1d5917329a39ccaa77b057d2be2f11b66a252f66d2c7cbc"
     },
     {
       "path": "remote/envelope-observations.mjs",
