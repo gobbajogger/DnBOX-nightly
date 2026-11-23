@@ -166,6 +166,10 @@ def check(site):
                 browser = pw.chromium.launch(chromium_sandbox=True)
                 try:
                     page = browser.new_page(device_scale_factor=1)
+                    # Each new frame boots the firmware renderer in a worker; on a shared,
+                    # heavily loaded box that took 47 s, so allow 120 s per wait. The
+                    # assertions themselves are unchanged.
+                    page.set_default_timeout(120_000)
                     page.on('pageerror', lambda err: errors.append(str(err)))
                     sweep(page, f'http://127.0.0.1:{server.server_port}', site)
                     assert not errors, errors
