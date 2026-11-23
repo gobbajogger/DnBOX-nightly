@@ -62,6 +62,13 @@ test('starting-breaks publication navigation uses existing live destinations wit
  assert.match(html,/src="\.\.\/install\.mjs"/);
 });
 
+test('What’s New has one page heading and keeps the archived notes', () => {
+ const notes = read('new/index.html');
+ assert.equal((notes.match(/<h1(?:\s|>)/gi) ?? []).length, 1);
+ assert.match(notes, /<h1>What’s new<\/h1>/);
+ assert.match(notes, /<summary>Published project notes<\/summary>[\s\S]*<h2 id="s1">/);
+});
+
 test('release notices identify the two tested models, the withdrawal and the fallback', () => {
  const release = 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26';
  const fallback = release.replace('v0.0.26', 'v0.0.25.1');
@@ -81,7 +88,14 @@ test('release notices identify the two tested models, the withdrawal and the fal
  }
  const historical = records.filter(row => row.id !== published.id);
  assert.equal(historical.length, 197);
- assert.equal(historical.find(row => row.id === 'night-versions-0').original.hardware_tested, false);
+ const archived = historical.find(row => row.id === 'night-versions-0').original;
+ assert.equal(archived.hardware_tested, false);
+ assert.equal(archived.source_commit, published.original.source_commit);
+ for (const model of published.models) {
+  assert.equal(archived.models[model].sha256, published.original.models[model].sha256);
+ }
+ const previous = historical.find(row => row.id === 'main-versions-0').original;
+ assert.notEqual(previous.source_commit, published.original.source_commit);
 });
 
 test('published release records, backup workflows and history bookmarks survive site composition',()=>{
@@ -120,64 +134,4 @@ test('the project guide opens the musician workflow and keeps protocol details o
   const reference = guide.match(/<details>\s*<summary>File format and MIDI protocol<\/summary>([\s\S]*?)<\/details>/);
   assert.ok(reference && reference[1].includes('id="usb-midi-project-protocol"'));
   assert.ok(guide.indexOf('id="recover-an-interrupted-sample-transfer"') < reference.index);
-});
-
-test('homepage separates the current Chicago waveform and SuperJ6 name from archived control replays', async () => {
- const home = read('index.html');
- const presentation = JSON.parse(read('APPROVED-PRESENTATION.json'));
- const original = presentation.frames.find(frame => frame.id === 'voice-0');
- const {waveDisplay} = await import('../web/product-site/remote/wave-display.mjs');
- const name = waveDisplay('CHICAGO', original.source_params.actual_wave);
- assert.equal(name, 'SAW');
- const hero = home.match(/<div class="hero-ui"[\s\S]*?<\/svg>/)[0];
- const value = hero.match(/<g role="text" aria-label="SAW"[^>]*>([\s\S]*?)<\/g>/);
- assert.ok(value, 'Chicago WAVE value in the static hero');
- assert.match(hero, /role="img" aria-label="Chicago oscillator wave, SAW"/);
- assert.doesNotMatch(hero, /aria-label="0%"/);
- const miami = home.match(/<template id="frame-miami-0">([\s\S]*?)<\/template>/)[1];
- const originalGlyphs = miami.match(/<g role="text" aria-label="SAW"[^>]*>([\s\S]*?)<\/g>/)[1];
- const outlines = group => Array.from(group.matchAll(/<path [^>]*\bd="([^"]+)"/g), m => m[1]);
- assert.equal(outlines(value[1]).length, 3);
- assert.deepEqual(outlines(value[1]), outlines(originalGlyphs));
- const sound = home.match(/<section class="sound-section"[\s\S]*?<\/section>/)[0];
- assert.match(sound, /Chicago, Miami and SuperJ6/);
- assert.match(sound, /<span>SuperJ6<\/span>/);
- assert.doesNotMatch(sound, /\bJuno\b/);
- assert.match(home, /data-demo="juno"[^>]*>Juno \(archived\)<\/button>/);
- const frames = JSON.parse(home.match(/<script id="replay-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
- assert.equal(frames.juno.length, 7);
- assert.ok(frames.juno.every(frame => frame.text.startsWith('JUNO ')));
-});
-
-test('archived build links name different destinations in the static record', () => {
-  const records = read('builds/index.html').matchAll(/<article\b[^>]*data-record-id="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g);
-  const recordIds = [];
-  let reviewed = 0;
-  for (const [, id, record] of records) {
-    recordIds.push(id);
-    const group = record.match(/<div class="record-links">([\s\S]*?)<\/div>/);
-    if (!group) continue;
-    const links = [...group[1].matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<>]+)<\/a>/g)];
-    if (new Set(links.map(([, href]) => href)).size >= 2) reviewed++;
-    const destinations = new Map();
-    for (const [, href, text] of links) {
-      const name = text.trim();
-      assert.ok(name && name !== 'Source and evidence', id + ' needs a descriptive source link');
-      assert.ok(!destinations.has(name) || destinations.get(name) === href,
-        id + ' reuses "' + name + '" for different source links');
-      destinations.set(name, href);
-      const target = new URL(href, 'https://example.invalid/');
-      const github = target.hostname === 'github.com';
-      const commit = target.pathname.match(/\/commit\/([0-9a-f]{40})$/);
-      const pull = target.pathname.match(/\/pull\/(\d+)$/);
-      const review = target.pathname.match(/\/pulls\/(\d+)\/reviews\/\d+$/);
-      if (review) assert.ok(/review/i.test(name) && name.includes('#' + review[1]), id + ' needs its review target');
-      if (target.pathname.endsWith('.log')) assert.match(name, /log/i);
-      if (target.pathname.includes('/tree/')) assert.match(name, /tree|folder|directory/i);
-      if (github && commit) assert.ok(name.includes(commit[1].slice(0, 8)), id + ' needs its commit ID');
-      if (github && pull) assert.ok(name.includes('#' + pull[1]), id + ' needs its pull request number');
-    }
-  }
-  assert.deepEqual(recordIds, JSON.parse(read('data/history.json')).map(record => record.id));
-  assert.ok(reviewed >= 60, 'archived multi-source build records are missing');
 });

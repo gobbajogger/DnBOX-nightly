@@ -226,3 +226,7 @@ Recovered the four published SMK release-status sections from Pages 42d4027, inc
 </details>
 
 </details>
+
+- 2026-11-22 UTC: [#180](https://github.com/gobbajogger/DnBOX-nightly/pull/180) fixed What’s New archive heading and phone reflow; head `5151398c`, merged `e09ff5a9`; 15/15 content tests, three sandboxed viewports, independent 10/10.
+- 2026-11-23 UTC: [#181](https://github.com/gobbajogger/DnBOX-nightly/pull/181) made Build History searchable by displayed archive label and legacy/current PR links, including when history JSON is unavailable; head `a84e4f9d`, merged `aba566cc`; 37/37 browser tests, 15/15 content tests, independent 10/10.
+- 2026-11-23 UTC: [#182](https://github.com/gobbajogger/DnBOX-nightly/pull/182) clarified Samples audition, comparison and import guidance; head `e046fdd4`, merged `2ef66701`; 41/41 focused Node tests, three sandboxed viewports.

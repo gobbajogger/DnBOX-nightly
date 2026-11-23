@@ -6,6 +6,23 @@ const setup=()=>{const m=new SequenceDraft({trace:{sampleRate:44100,endSample:16
 test('sixteen step groups preserve chords and near-grid timestamps without collapsing notes',()=>{
  const m=setup(),notes=m.notes,groups=stepGroups(notes,16000);assert.equal(groups.length,16);assert.equal(groups[1].notes.length,3);assert.equal(groups[2].notes.length,1);assert.deepEqual(groups.flatMap(g=>g.notes),notes);assert.deepEqual(m.notes,notes);
 });
+test('the last step edits an in-window pulse without touching the trace-end pulse',()=>{
+ const track='drum909',note=36,channel=9,endSample=16000;
+ const m=new SequenceDraft({trace:{sampleRate:44100,endSample,events:[
+  {type:'noteOn',track,note,channel,sample:endSample,order:0,velocity:88},
+  {type:'noteOff',track,note,channel,sample:endSample,order:1},
+ ]}});
+ const terminal=m.notes[0],g=new StepLaneGesture(m);
+ assert.deepEqual(stepGroups(m.notes,endSample)[15].notes,[]);
+ const last=m.toggleHit(track,note,15000);
+ const before=m.notes,group=stepGroups(before,endSample)[15];
+ assert.deepEqual(group.notes.map(n=>n.id),[last]);
+ assert.ok(g.nudge(group,'velocity',1));
+ assert.deepEqual(m.notes.find(n=>n.id===terminal.id),terminal);
+ assert.equal(m.notes.find(n=>n.id===last).velocity,101);
+ m.undo();
+ assert.deepEqual(m.notes,before);
+});
 test('same-step velocity previews every note, commits once and undo restores exact chord',()=>{
  const m=setup(),before=m.notes,count=m.history.length,g=new StepLaneGesture(m);assert.ok(g.begin(1,stepGroups(before,16000)[1],'velocity'));g.preview(1,1);g.preview(1,.5);assert.deepEqual(m.notes.slice(0,3).map(n=>n.velocity),[64,64,64]);assert.equal(m.notes[3].velocity,100);g.end(1);assert.equal(m.history.length,count+1);m.undo();assert.deepEqual(m.notes,before);m.redo();assert.equal(m.notes[1].velocity,64);
 });

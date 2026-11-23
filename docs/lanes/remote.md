@@ -68,3 +68,5 @@ Current owner handoff supersedes older Dot/Codex execution guidance and preserve
 - 2026-11-18: #165 accessibility squash d1812209e61d; exact bceeebf0 full remote gate PASS, current encoder values and stable slider names; first visual timeout retained as unresolved external-load diagnosis.
 
 - 2026-11-18: #166 glyph-domain correction squash cd2926dc7892; exact f8892ae7 full remote gate PASS with raw0/1/2/127 browser checks at all three sizes; initial ENOSPC failure retained.
+- 2026-11-23: #183 merged as 46acab30bb5a5d51f8431be0797d3be7ff5e7576; [exact focused proof](https://github.com/gobbajogger/DnBOX-nightly/pull/183#issuecomment-7088175751) passed both Chicago slots (40 native edit/readback/Undo checks plus touch); scoped landscape review passed, whole-page owner parity remains open.
+- 2026-11-23: #185 merged as 9951781f9153932068b38aff77984fba2fa8dbb8; [exact focused proof](https://github.com/gobbajogger/DnBOX-nightly/pull/185#issuecomment-7088266364) at head 0fc68bbd verified step 16 edits only the in-window hit, keeps the terminal pulse, and restores the exact Draft on Undo.

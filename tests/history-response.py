@@ -12,10 +12,16 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parents[1]
 ap = argparse.ArgumentParser()
 ap.add_argument('--source')
+ap.add_argument('--product-only', action='store_true')
 args = ap.parse_args()
 HTML = Path(args.source).read_bytes() if args.source else (ROOT/'docs/builds/index.html').read_bytes()
 DATA = json.loads((ROOT/'docs/build-status.json').read_text())
 class Handler(SimpleHTTPRequestHandler):
+    def translate_path(self, path):
+        if path.startswith('/product/'):
+            relative = Path(super().translate_path(path)).relative_to(ROOT / 'docs' / 'product')
+            return str(ROOT / 'web' / 'product-site' / relative)
+        return super().translate_path(path)
     def do_GET(self):
         if self.path.split('?')[0] == '/builds/':
             self.send_response(200)
@@ -61,60 +67,133 @@ async def case(browser, name, payload, width=375, negative=True, transport='json
     results.append({'case': name, 'pass': ok, 'state': state, 'page_errors': errors})
     print(json.dumps(results[-1]), flush=True)
     await page.close()
+async def product_history(browser, width, height):
+    page = await browser.new_page(viewport={'width': width, 'height': height})
+    errors = []
+    page.on('pageerror', lambda error: errors.append(str(error)))
+    history_requests = []
+    def reject_history_fetch(route):
+        history_requests.append(route.request.url)
+        return route.fulfill(json=[{'id': 'release-v0.0.26-94197fc8', 'models': ['elite'], 'original': {}}])
+    await page.route('**/data/history.json', reject_history_fetch)
+    await page.goto(f'http://127.0.0.1:{server.server_port}/product/builds/index.html')
+    sounds = page.get_by_role('navigation', name='Main').get_by_role('link', name='Sounds', exact=True)
+    assert await sounds.is_visible()
+    assert await sounds.get_attribute('href') == '../index.html#sounds'
+    for identifier in ['main-versions-0', 'night-versions-0']:
+        archive = page.locator(f'[data-record-id="{identifier}"]')
+        release = archive.get_by_role('link', name='Published 0.0.26 release')
+        assert await release.get_attribute('href') == 'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26'
+        assert 'Original archive record' in await archive.locator('summary').inner_text()
+    records = page.locator('[data-record-id]')
+    visible = page.locator('[data-record-id]:visible')
+    total = await records.count()
+    await page.wait_for_function(
+        "(total) => document.querySelector('#history-status').textContent === total + ' of ' + total + ' records'",
+        arg=total
+    )
+    cases = {
+        'archived nightly test entry': 'night-versions-0',
+        'https://github.com/gobbajogger/DnBOX/pull/869': 'night-versions-0',
+        'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/869': 'night-versions-0',
+        'https://github.com/gobbajogger/X0X37-for-Loopy-Pro/pull/8690': None,
+        'https://github.com/unrelated/X0X37-for-Loopy-Pro/pull/869': None,
+        'https://github.com/gobbajogger/DnBOX/releases/tag/v0.0.26': 'night-versions-0',
+        'https://github.com/gobbajogger/DnBOX/pull/869-no-match': None,
+    }
+    query_results = {}
+    for query, expected in cases.items():
+        await page.fill('#history-search', query)
+        ids = await visible.evaluate_all("(nodes) => nodes.map(node => node.dataset.recordId)")
+        query_results[query] = (expected in ids) if expected else not ids
+    await page.fill('#history-search', '')
+    groups = page.locator('[data-record-id="release-v0.0.26-94197fc8"] .record-links, [data-record-id="main-versions-0"] .record-links, [data-record-id="night-versions-0"] .record-links')
+    geometry = await groups.evaluate_all("""groups => groups.map(group => {
+        const box = group.getBoundingClientRect();
+        const links = [...group.querySelectorAll('a')].map(link => link.getBoundingClientRect());
+        return {
+            separator: [...group.childNodes].some(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()),
+            fits: links.every(link => link.left >= box.left - 0.5 && link.right <= box.right + 0.5),
+            wrapped: links[1].top > links[0].top
+        };
+    })""")
+    assert len(geometry) == 3
+    layout_ok = all(not item['separator'] and item['fits'] for item in geometry)
+    if width == 390:
+        layout_ok = layout_ok and geometry[0]['wrapped']
+    print(json.dumps({'history_queries': query_results, 'width': width, 'geometry': geometry}), flush=True)
+    assert all(query_results.values()) and layout_ok, (query_results, geometry)
+    await page.select_option('#channel', 'main')
+    await page.select_option('#model', 'pro')
+    await page.fill('#history-search', '94197fc8')
+    matches = await visible.evaluate_all("(nodes) => nodes.map(node => node.dataset.recordId)")
+    await page.fill('#history-search', '')
+    await page.select_option('#model', 'all')
+    await page.select_option('#channel', 'all')
+    restored = await visible.count()
+    ok = total == 198 and restored == total and 'release-v0.0.26-94197fc8' in matches and not errors and not history_requests
+    results.append({'case': f'product-embedded-{width}x{height}', 'pass': ok,
+                    'total': total, 'matches': matches, 'restored': restored, 'page_errors': errors, 'history_requests': history_requests})
+    print(json.dumps(results[-1]), flush=True)
+    await page.close()
+
 async def main():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(chromium_sandbox=True)
         print('Chromium '+browser.version, flush=True)
-        base = copy.deepcopy(DATA)
-        base['builds'] = base['builds'][:1]  # Same positive cardinality as independent evidence.
-        for width in [320, 375]:
-            await case(browser, f'positive-one-build-{width}', base, width, False)
-        mutations = [
-            ('null-history-last', lambda c: c['history'].__setitem__(-1, None)),
-            ('null-history-first', lambda c: c['history'].__setitem__(0, None)),
-            ('null-pro-model', lambda c: c['builds'][0]['models'].__setitem__('pro', None)),
-            ('schema-999', lambda c: c.__setitem__('schema', 999)),
-            ('forged-device-verified', lambda c: c['history'][0].__setitem__('status', 'DEVICE VERIFIED')),
-            ('null-build', lambda c: c['builds'].__setitem__(0, None)),
-            ('object-history', lambda c: c.__setitem__('history', {})),
-            ('array-models', lambda c: c['builds'][0].__setitem__('models', [])),
-            ('string-model-size', lambda c: c['builds'][0]['models']['pro'].__setitem__('size', '651392')),
-            ('object-product', lambda c: c['builds'][0]['models']['pro'].__setitem__('product', {})),
-            ('bad-model-hash', lambda c: c['builds'][0]['models']['pro'].__setitem__('sha256', 'bad')),
-            ('model-physical-claim', lambda c: c['builds'][0]['models']['pro'].__setitem__('device_verified', True)),
-            ('build-physical-claim', lambda c: c['builds'][0].__setitem__('hardware_tested', True)),
-            ('build-installable-claim', lambda c: c['builds'][0].__setitem__('installable_from_nightly_status', True)),
-            ('unsupported-build-status', lambda c: c['builds'][0].__setitem__('status', 'DEVICE VERIFIED')),
-            ('object-history-description', lambda c: c['history'][0].__setitem__('description', {'status':'DEVICE VERIFIED'})),
-            ('history-installable-claim', lambda c: c['history'][0].__setitem__('installable', True)),
-            ('history-physical-claim', lambda c: c['history'][0].__setitem__('device_verified', True)),
-            ('bad-history-source', lambda c: c['history'][0].__setitem__('source_commit', {})),
-            ('duplicate-history-id', lambda c: c['history'][1].__setitem__('id', c['history'][0]['id'])),
-        ]
-        for label, mutate in mutations:
-            payload = copy.deepcopy(base)
-            mutate(payload)
-            await case(browser, label, payload)
-        actual = copy.deepcopy(DATA)
-        actual['schema'] = 999
-        await case(browser, 'actual-two-builds-schema-999', actual)
-        for transport in ['network', '404', 'invalid-json']:
-            await case(browser, transport, DATA, transport=transport)
-        await case(browser, 'detached-render-error', DATA, transport='render-error')
-        for width in [320, 375, 768, 1280]:
-            await case(browser, f'actual-full-history-{width}', DATA, width, False)
-        empty = copy.deepcopy(DATA)
-        empty['builds'] = []
-        empty['history'] = []
-        await case(browser, 'valid-empty-history', empty, negative=False)
-        appended = copy.deepcopy(DATA)
-        row = copy.deepcopy(DATA['history'][0])
-        row.update(id='synthetic-valid-append', title='Synthetic future source-only checkpoint', status='source-only')
-        appended['history'].append(row)
-        await case(browser, 'valid-future-append', appended, negative=False)
-        inert = copy.deepcopy(DATA)
-        inert['history'][0]['title'] = '<img src=x onerror="window.injected=true">'
-        await case(browser, 'inert-title-text', inert, negative=False)
+        if not args.product_only:
+            base = copy.deepcopy(DATA)
+            base['builds'] = base['builds'][:1]  # Same positive cardinality as independent evidence.
+            for width in [320, 375]:
+                await case(browser, f'positive-one-build-{width}', base, width, False)
+            mutations = [
+                ('null-history-last', lambda c: c['history'].__setitem__(-1, None)),
+                ('null-history-first', lambda c: c['history'].__setitem__(0, None)),
+                ('null-pro-model', lambda c: c['builds'][0]['models'].__setitem__('pro', None)),
+                ('schema-999', lambda c: c.__setitem__('schema', 999)),
+                ('forged-device-verified', lambda c: c['history'][0].__setitem__('status', 'DEVICE VERIFIED')),
+                ('null-build', lambda c: c['builds'].__setitem__(0, None)),
+                ('object-history', lambda c: c.__setitem__('history', {})),
+                ('array-models', lambda c: c['builds'][0].__setitem__('models', [])),
+                ('string-model-size', lambda c: c['builds'][0]['models']['pro'].__setitem__('size', '651392')),
+                ('object-product', lambda c: c['builds'][0]['models']['pro'].__setitem__('product', {})),
+                ('bad-model-hash', lambda c: c['builds'][0]['models']['pro'].__setitem__('sha256', 'bad')),
+                ('model-physical-claim', lambda c: c['builds'][0]['models']['pro'].__setitem__('device_verified', True)),
+                ('build-physical-claim', lambda c: c['builds'][0].__setitem__('hardware_tested', True)),
+                ('build-installable-claim', lambda c: c['builds'][0].__setitem__('installable_from_nightly_status', True)),
+                ('unsupported-build-status', lambda c: c['builds'][0].__setitem__('status', 'DEVICE VERIFIED')),
+                ('object-history-description', lambda c: c['history'][0].__setitem__('description', {'status':'DEVICE VERIFIED'})),
+                ('history-installable-claim', lambda c: c['history'][0].__setitem__('installable', True)),
+                ('history-physical-claim', lambda c: c['history'][0].__setitem__('device_verified', True)),
+                ('bad-history-source', lambda c: c['history'][0].__setitem__('source_commit', {})),
+                ('duplicate-history-id', lambda c: c['history'][1].__setitem__('id', c['history'][0]['id'])),
+            ]
+            for label, mutate in mutations:
+                payload = copy.deepcopy(base)
+                mutate(payload)
+                await case(browser, label, payload)
+            actual = copy.deepcopy(DATA)
+            actual['schema'] = 999
+            await case(browser, 'actual-two-builds-schema-999', actual)
+            for transport in ['network', '404', 'invalid-json']:
+                await case(browser, transport, DATA, transport=transport)
+            await case(browser, 'detached-render-error', DATA, transport='render-error')
+            for width in [320, 375, 768, 1280]:
+                await case(browser, f'actual-full-history-{width}', DATA, width, False)
+            empty = copy.deepcopy(DATA)
+            empty['builds'] = []
+            empty['history'] = []
+            await case(browser, 'valid-empty-history', empty, negative=False)
+            appended = copy.deepcopy(DATA)
+            row = copy.deepcopy(DATA['history'][0])
+            row.update(id='synthetic-valid-append', title='Synthetic future source-only checkpoint', status='source-only')
+            appended['history'].append(row)
+            await case(browser, 'valid-future-append', appended, negative=False)
+            inert = copy.deepcopy(DATA)
+            inert['history'][0]['title'] = '<img src=x onerror="window.injected=true">'
+            await case(browser, 'inert-title-text', inert, negative=False)
+        for width, height in [(1440, 900), (390, 844), (844, 390)]:
+            await product_history(browser, width, height)
         await browser.close()
     server.shutdown()
     failed = sum(not r['pass'] for r in results)

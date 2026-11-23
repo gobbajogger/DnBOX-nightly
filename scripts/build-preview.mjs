@@ -4,8 +4,6 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { inlineStandaloneFonts } from './standalone-fonts.mjs';
-
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (name) => readFileSync(join(root, name), 'utf8');
 const catalog = JSON.parse(read('preview-catalog.json'));
@@ -19,22 +17,49 @@ function replaceOnce(source, marker, replacement, where) {
 function stripModule(source) {
   return source.replace(/^export\s+/gm, '').replace(/^import .*?;\r?\n/gm, '');
 }
+// Standalone previews opened from disk do not have the hosted workspaces'
+// shared origin. Route those copies to actual files; served previews retain
+// the existing embedded workspaces and their single-owner guards.
+function withStandaloneInstaller(html) {
+  for (const path of ['breaks', 'projects']) {
+    const target = `../${path}/?embedded=1`;
+    html = replaceOnce(html, `src="${target}"`, `data-src="${target}"`, 'installer');
+  }
+  html = replaceOnce(html, '<script type="module">', `<script type="module">
+if (location.protocol === 'file:') document.querySelector('a.home').href = 'index.html#firmware';`, 'installer');
+  html = replaceOnce(html, 'function navigateWorkspace() {', `const standaloneTasks = location.protocol === 'file:' ? {
+  samples: '../breaks/index.html',
+  projects: '../projects/index.html'
+} : null;
+if (!standaloneTasks) {
+  for (const id of ['sample-frame', 'project-frame']) {
+    const frame = $(id);
+    frame.src = frame.dataset.src;
+  }
+}
+function navigateWorkspace() {`, 'installer');
+  return replaceOnce(html, '  // Release the current MIDI owner before activating another workspace.', `  if (standaloneTasks && task !== "firmware") {
+    location.replace(standaloneTasks[task]);
+    return;
+  }
+  // Release the current MIDI owner before activating another workspace.`, 'installer');
+}
 const installerLibraries = ['web/fm1pkg.js', 'web/fm1ota.js', 'web/x0x_breaks.js', 'web/product-site/install-reports.mjs']
   .map((name) => stripModule(read(name))).join('\n');
-let installer = replaceOnce(inlineStandaloneFonts(read('web/x0x_installer.html')), '/*LIB*/', installerLibraries, 'installer');
+let installer = replaceOnce(read('web/x0x_installer.html'), '/*LIB*/', installerLibraries, 'installer');
 installer = replaceOnce(installer, '/*CATALOG*/', JSON.stringify(catalog), 'installer');
 installer = replaceOnce(installer, '/*HARDWARE_TEST_DATA*/{"schema":1,"reports":[]}',
   JSON.stringify(JSON.parse(read('web/product-site/hardware-tests.json'))), 'installer');
 installer = replaceOnce(installer, '/*PACKAGE_VERSION_ASSIGNMENTS*/[]',
   JSON.stringify(JSON.parse(read('package-version-assignments.json')).assignments).replace(/</g, '\\u003c'), 'installer');
-const sampleImporter = replaceOnce(inlineStandaloneFonts(read('web/x0x_breaks.html')), '/*LIB*/',
+const sampleImporter = replaceOnce(read('web/x0x_breaks.html'), '/*LIB*/',
   stripModule(read('web/x0x_breaks.js')), 'sample importer');
-const projects = inlineStandaloneFonts(read('web/x0x_projects.html')).replace(
+const projects = read('web/x0x_projects.html').replace(
   /^import .* from "\.\/x0x_projects.js";$/m, '/*LIB*/');
 const projectPage = replaceOnce(projects, '/*LIB*/',
   ['web/x0x_breaks.js', 'web/x0x_projects.js'].map(name => stripModule(read(name))).join('\n'), 'projects');
 const outputs = {
-  'docs/install/index.html': installer,
+  'docs/install/index.html': withStandaloneInstaller(installer),
   'docs/breaks/index.html': sampleImporter,
   'docs/projects/index.html': projectPage,
   'docs/versions.json': JSON.stringify(catalog, null, 2) + '\n',
