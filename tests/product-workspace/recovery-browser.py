@@ -35,7 +35,10 @@ async def cases(origin):
       wave=page.locator('[data-native-param="source-sound/CHICAGO/0|1:2:0:0:0"]');await wave.press('Home');await wave.press('ArrowRight');await expect(wave).to_have_value('1')
       main_geometry=await geometry(page)
       await page.locator('#draft-file').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':b'invalid'})
-      await expect(page.locator('#draft-dialog')).to_be_visible();await expect(page.locator('#draft-replace')).to_be_disabled();assert await page.locator('#draft-preview').inner_text();await readable(page,'#draft-preview');await page.locator('#draft-cancel').click();await expect(wave).to_have_value('1')
+      await expect(page.locator('#draft-dialog')).to_be_visible();await expect(page.locator('#draft-replace')).to_be_disabled();assert await page.locator('#draft-preview').inner_text();await readable(page,'#draft-preview')
+      # The dialog close event is queued and invalidates in-flight reads; let it fire before choosing the next file.
+      await page.evaluate("()=>{window.__draftClosed=new Promise(r=>document.getElementById('draft-dialog').addEventListener('close',r,{once:true}))}")
+      await page.locator('#draft-cancel').click();await page.evaluate('()=>window.__draftClosed');await expect(wave).to_have_value('1')
       assert await geometry(page)==main_geometry,('Feedback must not shrink editing geometry',main_geometry,await geometry(page))
       status_box=await readable(page,'#status');assert status_box['width']>=100 and status_box['height']>=16,('Feedback must be visibly readable',status_box)
       # This longer real validation failure wraps on phones; every word remains available.
