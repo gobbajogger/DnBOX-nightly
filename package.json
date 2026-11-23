@@ -21,6 +21,7 @@
     "test:origin": "node --test tests/site-origin.test.mjs",
     "test:roadmap": "python3 tools/generate_roadmap.py --check --integration-sha \"${DNBOX_GATE_BASE_SHA:-$(git rev-parse HEAD)}\"",
     "test:visual": "python3 tests/visual/visual_gate.py",
-    "test:visual:update": "python3 tests/visual/visual_gate.py --update"
+    "test:visual:update": "python3 tests/visual/visual_gate.py --update",
+    "test:firmware-e2e": "python3 tests/product-remote/firmware-e2e-browser.py"
   }
 }
