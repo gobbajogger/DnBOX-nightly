@@ -948,6 +948,11 @@
       "sha256": "8a3d97787eb3f6bad508cd19845aa1b49dc9f62657e9a6074966c99f2b45e45d"
     },
     {
+      "path": "remote/midi-out.mjs",
+      "bytes": 4628,
+      "sha256": "ca7d532499b1117c650b49522fa612beb8866139bc7158724a2919f44983a850"
+    },
+    {
       "path": "remote/mix-aliases.mjs",
       "bytes": 1968,
       "sha256": "ce42742a4c3908e480d8511f52897ae7facbaf238662971671ca01523ef1a0c5"
