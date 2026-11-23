@@ -179,18 +179,18 @@
     },
     {
       "path": "builds/history-filter.mjs",
-      "bytes": 312,
-      "sha256": "9ebfb0b241de121011e7dabd3cecaf052060838f3009a9bf7d822bf4382b8cd7"
+      "bytes": 358,
+      "sha256": "c18c00e720b15879bd3d4c75bcce765870e0fc01b3a64ec04dc807904b79ed7a"
     },
     {
       "path": "builds/history.mjs",
-      "bytes": 810,
-      "sha256": "a009a008798a98d67b46832600dca3f69502770ac242b1f0635b8a19098d3080"
+      "bytes": 1530,
+      "sha256": "6bdba241f776adbfd10d8a365119daa2f48802529e62fe468026dcd56714e620"
     },
     {
       "path": "builds/index.html",
-      "bytes": 582149,
-      "sha256": "837c92671d5519852673bc28df4a6682fa53cca892836ee87d4e1d1f0709cb98"
+      "bytes": 581607,
+      "sha256": "6563ad6668e9d32945f198b961343ff26ae80f75a105041daa55072fde050ac3"
     },
     {
       "path": "components/archive/store.mjs",
