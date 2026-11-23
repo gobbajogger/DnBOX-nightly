@@ -270,6 +270,10 @@ async def shift_wheel_pan(page):
         'x=>document.getElementById("roll-scroll").scrollLeft===x', arg=left+48,
         timeout=10000)
     assert await position() == [left+48, top]
+    # Let the velocity lane's scroll sync settle; a pending sync event would otherwise pull the next pan back.
+    await page.wait_for_function(
+        'x=>document.getElementById("velocity").scrollLeft===x', arg=left+48, timeout=3000)
+    await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(r,0))))')
     await viewport.dispatch_event('wheel', dict(shiftKey=True, deltaX=29, deltaY=29,
                                                 bubbles=True, cancelable=True))
     # The gate run saw this read race the scroll update; wait for it, then assert exactly.

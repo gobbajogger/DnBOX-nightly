@@ -32,11 +32,11 @@ async def main(site):
      projects_topic=p.locator('.manual-topics a[href="#projects"]')
      projects_chapter=p.locator('.manual-chapter').filter(has=p.locator('#projects'))
      projects_body=projects_chapter.locator('.chapter-body')
-     # hashchange is queued after the URL updates; wait for the page to handle it before closing the chapter.
-     await p.evaluate("window.__projectsHash=new Promise(r=>addEventListener('hashchange',()=>r(location.hash),{once:true}));0")
+     # The topic link fires hashchange asynchronously; wait for it so its reveal cannot reopen the chapter after Enter closes it.
+     await p.evaluate("()=>{window.__projectsHash=new Promise(r=>addEventListener('hashchange',r,{once:true}))}")
      await projects_topic.click()
      await p.wait_for_url('**/manual/#projects')
-     assert await p.evaluate('window.__projectsHash')=='#projects'
+     await p.evaluate('()=>window.__projectsHash')
      await projects_body.wait_for(state='visible')
      await projects_chapter.locator('summary').press('Enter')
      assert not await projects_chapter.evaluate('(e)=>e.open')
