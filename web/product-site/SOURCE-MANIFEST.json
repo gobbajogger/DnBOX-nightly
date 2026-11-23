@@ -253,9 +253,24 @@
       "sha256": "f69e303d2aaf503c4ccd36b7385bf3bca6d3ffab773f4affcdaade93b71a7f6e"
     },
     {
+      "path": "help/ideas/inbox.mjs",
+      "bytes": 2169,
+      "sha256": "ed7b6d3c2d2b45eccf675baa7421497f5f3ab29702dc377c2598bdf071123902"
+    },
+    {
+      "path": "help/ideas/index.html",
+      "bytes": 1137,
+      "sha256": "f4cc01dde6b227bf71c72004ded013833dd226010f89f76e298534d0b0cc967f"
+    },
+    {
+      "path": "help/ideas/page.mjs",
+      "bytes": 1309,
+      "sha256": "b753b91ca07ccbd5273e30f4264a741713a5a9442db08f88fe6cc432bdeceeea"
+    },
+    {
       "path": "help/index.html",
-      "bytes": 2783,
-      "sha256": "147016fea6a6a2a530bc2e9610330c1afdc01301076585113776d242ac0603b1"
+      "bytes": 2831,
+      "sha256": "5ce9e2993953653c60a04dcf0f85136eeb49601a4f2773e67a261f93a069ad87"
     },
     {
       "path": "index.html",
