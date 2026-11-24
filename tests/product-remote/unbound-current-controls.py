@@ -33,6 +33,16 @@ async def run():
                     await sweep.gesture(page,item) # reproduces the panel re-render
                     assert await sweep.reselect_semantic(page,item)==outcome,(key,outcome)
                     print(f'PASS {key}: {outcome}',flush=True)
+                await sweep.open_view(page,'patterns')
+                await page.locator('[data-launch-part="0"][data-pattern="7"]').click()
+                await page.locator('[data-launch-part="1"][data-pattern="7"]').click()
+                item=next(x for x in await page.evaluate(sweep.MARK) if
+                    {'data-launch-part=0','data-pattern=7'} <= set(x['key'].split()))
+                assert item['current']
+                await sweep.gesture(page,item)
+                assert await sweep.reselect_semantic(page,item)=='confirmed'
+                assert await page.locator('[data-launch-part="1"][data-pattern="7"]').get_attribute('aria-pressed')=='true'
+                print('PASS Draft P8 reselect is scoped to 909; 808 P8 remains selected',flush=True)
                 await sweep.open_view(page,'files')
                 item=next(x for x in await page.evaluate(sweep.MARK) if 'data-project-action=open' in x['key'].split())
                 assert await sweep.gesture(page,item)=='filechooser'
