@@ -6,7 +6,7 @@
   python3 tests/visual/visual_gate.py --update   # write baselines; committing them through a merged PR is the approval
 
 Baselines: tests/visual/__snapshots__/<name>.png (approved reference, generated from the polished head).
-Header conformance is anchored to tests/visual/fixtures/page-01.png (the user's chosen top section).
+Remote header acceptance uses rendered control and interaction contracts. Historical Page-01 SSIM is reported separately.
 Deterministic: bundled Barlow, prefers-reduced-motion + animations/transitions off, fixed clock and random seed,
 DPR 1, Chromium. Diff images for failures go to $VISUAL_OUT (default test-results/visual/).
 """
@@ -213,6 +213,23 @@ def header_checks(h, w, fails):
     need(h['scrollW'] <= h['innerW'], f"horizontal overflow {h['scrollW']}>{h['innerW']}")
     need(not h['pageScrollable'], 'page scrolls')
 
+CURRENT_HEADER_JS = Path(__file__).with_name('remote_header_contract.js').read_text()
+
+def current_header_actions(page):
+    """Exercise the actual header, not an aria-current-only inspection."""
+    for view in ('sound', 'mix', 'patterns', 'files', 'roll'):
+        tab = page.locator(f'nav.tabs [data-view="{view}"]')
+        tab.click()
+        if tab.get_attribute('aria-current') != 'page':
+            raise AssertionError(f'{view} navigation did not select its workspace')
+    # No browser/firmware permissions: this visual gate runs Draft. The real native
+    # Web MIDI flow exercises the same rendered predicates in the scoped WASM test.
+    for key, expected in (('up', '126 BPM'), ('down', '125 BPM'), ('up', '126 BPM'), ('reset', '125 BPM')):
+        page.locator(f'[data-tempo="{key}"]').click()
+        if page.locator('#tempo').inner_text() != expected:
+            raise AssertionError(f'BPM {key} did not produce {expected} in Draft')
+
+
 def exit_status(results, header_fails, errors):
     # Proposals, empty/filtered coverage, browser errors and any failed check are non-passing.
     return int(bool(ONLY) or not results or any(r[1] not in ('PASS', 'NOBASE') for r in results) or bool(header_fails) or bool(errors))
@@ -323,6 +340,7 @@ def main():
     time.sleep(0.8)
     built = f'http://127.0.0.1:{p2}'
     results, header_fails, errors = [], [], []
+    historical = {}
     base = f'http://127.0.0.1:{p}'
     try:
         with sync_playwright() as pw, closing(viewport_contexts(pw)) as viewports:
@@ -361,14 +379,22 @@ def main():
                             # header_checks: BREAK moved to 3rd (firmware PART_ORDER, owner request 2026-11-24), which
                             # page-01 predates.
                             prep = lambda im: np.asarray(im.crop((0, 0, 720, 100)).filter(ImageFilter.GaussianBlur(2)))
-                            score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
-                            print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
+                            score = ssim(prep(shot), prep(ref))
+                            historical['page01_header_ssim_1024x640'] = {'score': score, 'previous_minimum': .90}
+                            print(f"HISTORICAL header SSIM vs retired page-01 = {score:.4f} (former minimum 0.90)")
                     try:
                         if act: act(pg); pg.wait_for_timeout(150)
                         screenshot = pg.screenshot()
                     except Exception as error:
                         raise RuntimeError(f'{full} interaction or screenshot failed: {error}') from error
-                    compare(full, screenshot, results); pg.close()
+                    compare(full, screenshot, results)
+                    if name == 'sequence':
+                        header_fails.extend(f'{tag}: {issue}' for issue in pg.evaluate(CURRENT_HEADER_JS, 'draft'))
+                        try:
+                            current_header_actions(pg)
+                        except AssertionError as error:
+                            header_fails.append(f'{tag}: {error}')
+                    pg.close()
                 for rel in SITE + ['remote/device/index.html']:
                     full = 'site-' + rel.replace('/index.html', '').replace('/', '-').replace('.html', '') + '-' + tag
                     if ONLY and not re.search(ONLY, full): continue
@@ -396,7 +422,7 @@ def main():
     nobase = sum(1 for r in results if r[1] == 'NOBASE')
     if nobase: print(f'NOTE {nobase} screens have no committed baseline (rendered and checked; pixel compare not run)')
     summary = {'screens': len(results), 'pass': passed, 'fail': failed, 'no_baseline': nobase, 'baseline_written': made, 'header_fail': len(header_fails), 'page_errors': len(errors)}
-    write_actual_output('summary.json', json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors}, indent=1).encode())
+    write_actual_output('summary.json', json.dumps({'summary': summary, 'results': results, 'header_fails': header_fails, 'errors': errors, 'historical_non_gating': historical}, indent=1).encode())
     print('VISUAL', json.dumps(summary))
     sys.exit(exit_status(results, header_fails, errors))
 

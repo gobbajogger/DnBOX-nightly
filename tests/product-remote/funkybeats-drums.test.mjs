@@ -44,3 +44,17 @@ test('near-grid hit toggles the displayed event rather than adding a duplicate',
   model.undo();assert.equal(model.notes[0].start,1);
  }
 });
+
+test('both kits show native R22 voice pictograms, not abbreviations, without changing step names', async()=>{
+ const {renderFunkyBeatsDrums}=await import('../../web/product-site/remote/funkybeats-view.mjs');
+ for(const kit of ['909','808']){
+  const html=renderFunkyBeatsDrums({kit,notes:[],endSample:88200,accents:Array(16).fill(false),selected:0});
+  assert.equal((html.match(/class="fw-drum-voice-icon"/g)||[]).length,12);
+  assert.match(html,/data-voice-glyph="KICK"/);
+  assert.match(html,/data-voice-glyph="SNARE"/);
+  assert.match(html,/data-voice-glyph="ACCENT"/);
+  assert.match(html,new RegExp('data-voice-glyph="'+(kit==='909'?'RIDE':'COWBELL')+'"'));
+  assert.doesNotMatch(html,/class="seq-channel-name"[^>]*>(BD|SD|AC)</);
+  assert.match(html,/aria-label="BD step 1 empty"/);
+ }
+});

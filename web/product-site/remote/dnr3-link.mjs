@@ -67,16 +67,18 @@ export function encodeEdit(edit, {epoch = 1, seq = 1} = {}) {
 export function mountDnr3Link({document: doc = globalThis.document, navigator: nav = globalThis.navigator,
   timeoutMs = Number.isFinite(globalThis.__DNBOX_MIDI_TIMEOUT) ? globalThis.__DNBOX_MIDI_TIMEOUT : 250, onChange = () => {}} = {}) {
   const $ = id => doc.getElementById(id);
-  const button = $('connect'), label = $('conn-state');
-  const close = $('close-connection'); if (close) close.addEventListener('click', () => { const panel = $('connection-result'); if (panel) panel.hidden = true; });
+  const button = $('connect'), label = $('conn-state'), draftProjectLabel = $('draft-project-label');
+  const close = $('close-connection'); if (close) close.addEventListener('click', () => { const panel = $('connection-result'); if (panel) panel.hidden = true; button?.focus?.(); });
   let client = null, transport = null, busy = false, hello = null;
   const listeners = new Set(), notifications = new Set();
   function show(state, note = '') {
+    // STATE reports active pattern IDs, not a device project title.
+    if (draftProjectLabel) draftProjectLabel.hidden = state === STATE.CONNECTED;
     if (label) { label.textContent = state === STATE.CONNECTED ? 'Connected' : 'Disconnected'; label.dataset.session = state; label.title = note; }
     if (button) { button.textContent = state === STATE.CONNECTED ? 'Disconnect' : 'Connect'; button.setAttribute('aria-pressed', String(state === STATE.CONNECTED)); }
     // A failed connect says why in the connection panel (dismissed with its Close button).
     const panel = $('connection-result'), message = $('connection-message');
-    if (panel && message) { message.textContent = state === STATE.CONNECTED ? '' : note; panel.hidden = !(state !== STATE.CONNECTED && note); }
+    if (panel && message) { message.textContent = state === STATE.CONNECTED ? '' : note; panel.hidden = !(state !== STATE.CONNECTED && note); if(!panel.hidden)close?.focus?.(); }
     for (const cb of listeners) { try { cb(state, note); } catch {} }
     onChange(state, note);
   }
@@ -96,12 +98,12 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
     let opening = null;
     try {
       const request = nav?.requestMIDIAccess;
-      if (typeof request !== 'function') { show(STATE.DISCONNECTED, 'Web MIDI is not available in this browser'); return; }
+      if (typeof request !== 'function') { show(STATE.DISCONNECTED, 'Web MIDI isn’t available in this browser. Keep editing the Draft here, or open Remote in a browser with Web MIDI to connect.'); return; }
       const access = await request.call(nav, {sysex: true});
       const dnbox = p => p.state === 'connected' && /\bDnBOX\b/i.test(p.name ?? '');
       const inputs = [...access.inputs.values()].filter(dnbox), outputs = [...access.outputs.values()].filter(dnbox);
       if (inputs.length !== 1 || outputs.length !== 1 || inputs[0].name !== outputs[0].name) {
-        show(STATE.DISCONNECTED, inputs.length > 1 || outputs.length > 1 ? 'Connect only one DnBOX' : 'No matching DnBOX MIDI ports'); return;
+        show(STATE.DISCONNECTED, inputs.length > 1 || outputs.length > 1 ? 'Connect just one DnBOX over USB, then try again.' : 'No DnBOX MIDI ports found. Connect it over USB, then try again.'); return;
       }
       const [input] = inputs, [output] = outputs;
       await input.open?.(); await output.open?.();
@@ -118,7 +120,7 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
     } catch (error) {
       try { await opening?.close(); } catch {}
       transport?.close(); transport = null; client = null; hello = null;
-      show(STATE.DISCONNECTED, error?.code === 'unavailable' || /timeout/i.test(String(error?.message)) ? 'DnBOX did not answer' : 'Could not connect');
+      show(STATE.DISCONNECTED, error?.code === 'unavailable' || /timeout/i.test(String(error?.message)) ? 'DnBOX didn’t answer. Check the USB connection, then try again.' : 'Could not connect. Allow MIDI access in your browser and try again.');
     } finally { busy = false; }
   }
   button?.addEventListener('click', () => { if (client) void disconnect(); else void connect(); });
@@ -162,6 +164,15 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
     sendMidi: bytes => { if (client && transport) transport.sendMidi(bytes); },
     describe: pref => readSession(c => c.describe(pref)),
     record: command => readSession(c => c.record(command)),
+    readTempo: () => readSession(async c => (await c.state()).bpm_x10),
+    writeTempo: value => readSession(async c => {
+      const {bpm_x10}=tempoEdit(value);
+      const reply=(await c.tempo(bpm_x10)).fields.bpm_x10;
+      if(c!==client||reply!==bpm_x10)throw Error('Tempo was not acknowledged');
+      const actual=(await c.state()).bpm_x10;
+      if(actual!==reply)throw Error('Tempo readback did not match');
+      return actual;
+    }),
     readTransport: () => readSession(async c => (await c.state()).playing),
     transport: action => readSession(async c => (await c.transportAction(action)).fields.playing),
     mixProvider(groups) {

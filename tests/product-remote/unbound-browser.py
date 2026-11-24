@@ -42,7 +42,7 @@ MARK = '''()=>{let n=window.__unboundProbe||0;const out=[];for(const e of docume
  const id='c'+(n++);e.dataset.unboundProbe=id;
  const label=(e.getAttribute('aria-label')||e.textContent||e.id||'').trim().replace(/\\s+/g,' ').slice(0,60);
  out.push({id,tag:e.tagName.toLowerCase(),type:e.type||'',role:e.getAttribute('role')||'',href:e.getAttribute('href'),
-  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(launch-part|drum-page|roll-source|view|engine|param|mix-|sound-|project-|tab|mode|break-view|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
+  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(launch-part|drum-page|roll-source|view|engine|param|mix-|sound-|project-|tab|mode|break-(?:view|loop|value|step|slice|on|open-slices)|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
   label,current:e.getAttribute('aria-current')==='page'||(e.getAttribute('aria-pressed')==='true'&&!e.matches('#rec,#multi,#snap'))});}
  window.__unboundProbe=n;return out;}'''
 
@@ -183,6 +183,73 @@ async def gesture(page, item):
     return None
 
 
+BREAK_DISCLOSURES=('[data-break-slot="0"]','[data-break-slot="1"]','details.break-picker')
+
+async def open_break_picker(page,selector):
+    menu=page.locator(selector)
+    if not await menu.evaluate('e=>e.open'):
+        await menu.locator('summary').click()
+    assert await menu.evaluate('e=>e.open'),(selector,'not open')
+    return menu
+
+async def witness_break_choice(page,item):
+    """Verify editors with changing visibility by stable slot/step/slice identity."""
+    parts=dict(token.split('=',1) for token in item['key'].split() if '=' in token)
+    if 'data-break-loop' in parts:
+        slot=parts['data-break-loop']; value=parts['data-break-value']
+        menu=await open_break_picker(page,f'[data-break-slot="{slot}"]')
+        choice=menu.locator(f'button[data-break-value="{value}"]')
+        if await choice.get_attribute('aria-pressed')=='true':
+            alternate=menu.locator(f'button[data-break-value]:not([data-break-value="{value}"])').first
+            await alternate.click()
+            menu=await open_break_picker(page,f'[data-break-slot="{slot}"]')
+            assert await choice.get_attribute('aria-pressed')=='false'
+        await choice.click()
+        assert not await menu.evaluate('e=>e.open'),(slot,value,'selection did not close picker')
+        assert await choice.get_attribute('aria-pressed')=='true',(slot,value,'selection not retained')
+        summary=menu.locator('[data-break-loop-name]')
+        assert await summary.inner_text()==(item['label'] if value else 'No loop selected'),(slot,value)
+        return True
+    if 'data-break-step' in parts:
+        step=parts['data-break-step']
+        cell=page.locator(f'[data-break-step="{step}"]')
+        values=page.locator('[data-break-step],[data-break-on]')
+        state=await values.evaluate_all("""els=>els.map(e=>e.hasAttribute('data-break-on')
+            ?e.getAttribute('aria-pressed'):e.getAttribute('data-value'))""")
+        target=page.locator('[data-break-target]')
+        if await cell.get_attribute('aria-pressed')=='true':
+            other=1 if step=='0' else 0
+            await page.locator(f'[data-break-step="{other}"]').click()
+            assert await target.inner_text()==f'Step {other+1}'
+        assert await cell.get_attribute('aria-pressed')=='false'
+        await cell.click()
+        assert await target.inner_text()==f'Step {int(step)+1}'
+        assert await cell.get_attribute('aria-pressed')=='true'
+        await cell.click()  # same selected step is deliberately idempotent
+        assert await target.inner_text()==f'Step {int(step)+1}'
+        assert await values.evaluate_all("""els=>els.map(e=>e.hasAttribute('data-break-on')
+            ?e.getAttribute('aria-pressed'):e.getAttribute('data-value'))""")==state,(step,'selection edited trigger or slice')
+        return True
+    if 'data-break-slice' in parts:
+        wanted=int(parts['data-break-slice'])
+        selected=page.locator('[data-break-step][aria-pressed=true]')
+        if await selected.get_attribute('data-value')==str(wanted):
+            if wanted:
+                await page.locator('[data-break-slice="0"]').click()
+            else:
+                menu=await open_break_picker(page,'details.break-picker')
+                await menu.locator('[data-break-slice="1"]').click()
+            assert await selected.get_attribute('data-value')!=str(wanted)
+        if wanted:
+            await open_break_picker(page,'details.break-picker')
+        await page.locator(f'[data-break-slice="{wanted}"]').click()
+        assert await selected.get_attribute('data-value')==str(wanted),(wanted,'not confirmed in Draft')
+        if wanted:
+            assert not await page.locator('details.break-picker').evaluate('e=>e.open')
+        return True
+    return False
+
+
 async def walk_section(browser, size, engine, view, seen):
     context = await browser.new_context(viewport={'width': size[0], 'height': size[1]}, has_touch=True, accept_downloads=True)
     await context.route('**/*', fb.serve)
@@ -209,7 +276,23 @@ async def walk_section(browser, size, engine, view, seen):
 
     unbound, checked, allowed, duplicates, attempted = [], 0, [], 0, []
     await fresh(engine, view)
-    items = await page.evaluate(MARK)
+    items=await page.evaluate(MARK)
+    if engine=='breaks' and view=='roll':
+        # Keep the original discovery order. Add controls actually reachable
+        # behind the three disclosures even if closed-details geometry differs.
+        original_keys={i['key'] for i in items}
+        for selector in BREAK_DISCLOSURES:
+            await open_break_picker(page,selector)
+        opened=await page.evaluate(MARK)
+        items.extend(i for i in opened if i['key'] not in original_keys
+                     and ('data-break-loop=' in i['key'] or 'data-break-slice=' in i['key']))
+        assert sum('data-break-loop=' in item['key'] for item in items)==12
+        assert sum('data-break-step=' in item['key'] for item in items)==16
+        assert sum('data-break-slice=' in item['key'] for item in items)==33
+        for selector in reversed(BREAK_DISCLOSURES):
+            menu=page.locator(selector)
+            if await menu.evaluate('e=>e.open'):
+                await menu.locator('summary').click()
     dirty = False
     occurrence = {}
     for item in items:
@@ -221,8 +304,22 @@ async def walk_section(browser, size, engine, view, seen):
             continue
         seen.add(sig)
         attempted.append(sig)
+        if engine=='breaks' and view=='roll' and any(k in item['key'] for k in ('data-break-loop=','data-break-step=','data-break-slice=')):
+            if dirty:
+                await fresh(engine,view)
+                dirty=False
+            try:
+                assert await witness_break_choice(page,item)
+                checked+=1
+            except Exception as error:
+                unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} semantic witness failed: {error}')
+                print('UNBOUND',unbound[-1],flush=True)
+                dirty=True
+            continue
         if item['href'] is not None:
-            target = urlparse(await page.locator(f'[data-unbound-probe="{item["id"]}"]').evaluate('e=>e.href'))
+            link_loc=await resolve(page,item)
+            assert link_loc is not None,(engine,view,item)
+            target = urlparse(await link_loc.evaluate('e=>e.href'))
             if target.netloc == urlparse(fb.ORIGIN).netloc:
                 ok = await page.evaluate('u=>fetch(u).then(r=>r.ok,()=>false)', target.geturl())
                 if not ok:

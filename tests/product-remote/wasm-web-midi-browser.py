@@ -127,9 +127,11 @@ async def main():
             ):
                 await page.locator('[data-engine="'+name+'"]').click()
                 if name=='breaks':
-                    await expect(page.locator('[data-break-slice="1"]')).to_be_visible()
+                    await expect(page.locator('[data-break-open-slices]')).to_be_visible()
                 await page.evaluate("""([ch,n])=>{fixture.deviceReceive([0x90|ch,n,107]);fixture.render(8);}""", [result['channels'][part],note])
                 await expect(page.locator(selector)).to_have_attribute('data-device-voice-note',str(note))
+                if name=='breaks':
+                    await expect(page.locator('[data-break-open-slices]')).to_have_css('outline-style','solid')
                 await page.evaluate("""([ch,n])=>{fixture.deviceReceive([0x80|ch,n,0]);fixture.render(8);}""",[result['channels'][part],note])
                 if name in ('chicago','miami'):
                     await expect(page.locator(selector)).to_have_count(0,timeout=1000)

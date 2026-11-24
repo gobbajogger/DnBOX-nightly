@@ -58,11 +58,13 @@ test('track order matches the firmware PART_ORDER with default banks (909, 808, 
 
 test('no extra connection mode; unsupported Drum controls are explicitly Draft', () => {
   const html = readFileSync(new URL('index.html', remote), 'utf8'), app = readFileSync(new URL('app.mjs', remote), 'utf8');
-  assert.doesNotMatch(html.replace(/<[^>]*>/g, ' '), /\b(?:draft|emulator|simulator)\b/i, 'no draft/emulator copy on the page');
+  assert.doesNotMatch(html.replace(/<[^>]*>/g, ' '), /\b(?:emulator|simulator)\b/i, 'no emulator/simulator mode');
+  assert.match(html, /id="edit-scope">Draft · Connect via USB MIDI to edit your DnBOX<\/p>/);
+  assert.doesNotMatch(html, /<(?:button|option)[^>]*>[^<]*Draft[^<]*<\/(?:button|option)>/i, 'Draft is edit scope, not an extra connection mode');
   assert.doesNotMatch(html, /Start emulator|Stop emulator|Apply to instrument|Download draft|Open draft|Not connected/);
   assert.match(html, /id="conn-state"[^>]*>Disconnected</);
   assert.match(app, /data-drum-source="draft">Draft \(not sent to the instrument\)/);
-  assert.doesNotMatch(app, /mountFirmwareLink|' · Draft|Draft · |Simulator connected/);
+  assert.doesNotMatch(app, /mountFirmwareLink|' · Draft|Simulator connected/);
   assert.match(app, /function soundSourceBar\(\)\{return '';\}/);
   assert.match(app, /function mixSourceBar\(\)\{return '';\}/);
   assert.match(app, /function connectionLabel\(\)\{return remoteLink\?\.connected\(\)\?'Connected':'Disconnected';\}/);

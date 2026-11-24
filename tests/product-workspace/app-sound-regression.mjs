@@ -1,7 +1,7 @@
 import fs from'node:fs';import assert from'node:assert/strict';import{pathToFileURL,fileURLToPath}from'node:url';import{resolve}from'node:path';
 const base=new URL('../../web/product-site/remote/',import.meta.url);let bootId=0;
 class Node {
- constructor(id=''){Object.assign(this,{id,handlers:{},dataset:{},style:{setProperty(){}},innerHTML:'',textContent:'',value:'',scrollLeft:0,scrollTop:0,clientHeight:300,disabled:false,captured:new Set(),attributes:{},hidden:false});this.classList={toggle:()=>false};}
+ constructor(id='',tagName=''){Object.assign(this,{id,tagName,children:[],className:'',handlers:{},dataset:{},style:{setProperty(){}},innerHTML:'',textContent:'',value:'',scrollLeft:0,scrollTop:0,clientHeight:300,disabled:false,captured:new Set(),attributes:{},hidden:false});this.classList={add:(...names)=>{this.className=[...new Set([...this.className.split(' ').filter(Boolean),...names])].join(' ');},toggle:(name,force)=>{const tokens=new Set(this.className.split(' ').filter(Boolean));const on=force??!tokens.has(name);if(on)tokens.add(name);else tokens.delete(name);this.className=[...tokens].join(' ');return on;}};}
  addEventListener(type,fn){(this.handlers[type]??=[]).push(fn)}
  removeEventListener(type,fn){this.handlers[type]=(this.handlers[type]??[]).filter(x=>x!==fn)}
  emit(type,e){for(const fn of this.handlers[type]??[])fn(e)}
@@ -9,14 +9,25 @@ class Node {
  setPointerCapture(p){this.captured.add(p)} hasPointerCapture(p){return this.captured.has(p)} releasePointerCapture(p){this.captured.delete(p)}
  getBoundingClientRect(){return{left:0,top:0,width:100,height:100}}
  closest(s){if(s==='button')return this;const m=s.match(/^\[data-(note|select|param|edge)\]$/);return m&&this.dataset[m[1]]!==undefined?this:null}
- querySelector(s){if(s==='span')return(this.span??=new Node());const m=s.match(/^\[data-(note|select)="([^"]+)"\]$/);if(m){const n=new Node();n.dataset[m[1]]=m[2];return n}return null}
+ append(...nodes){this.children.push(...nodes)}
+ replaceChildren(...nodes){this.children=nodes}
+ querySelectorAll(selectors){
+   const matches=(node,s)=>{
+     const attr=s.match(/^\[data-([a-z-]+)(?:="([^"]*)")?\]$/);
+     if(attr){const k=attr[1].replace(/-([a-z])/g,(_,c)=>c.toUpperCase());return Object.hasOwn(node.dataset,k)&&(attr[2]===undefined||String(node.dataset[k])===attr[2]);}
+     return s.startsWith('.')?node.className.split(' ').includes(s.slice(1)):node.tagName===s;
+   };
+   const parts=selectors.split(',').map(x=>x.trim());
+   return this.children.flatMap(n=>[...(parts.some(s=>matches(n,s))?[n]:[]),...n.querySelectorAll(selectors)]);
+ }
+ querySelector(s){const child=this.querySelectorAll(s)[0];if(child)return child;if(s==='span')return(this.span??=new Node());const m=s.match(/^\[data-(note|select)="([^"]+)"\]$/);if(m){const n=new Node();n.dataset[m[1]]=m[2];return n}return null}
  focus(){document.activeElement=this} showModal(){this.open=true}
 }
 async function boot(){
 const nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,new Node(id));return nodes.get(id)};
 const views=['roll','drums','locks','sound','mix','patterns','song','files'].map(v=>Object.assign(new Node(),{dataset:{view:v}})),modes=['select','move','draw','length','pan'].map(v=>Object.assign(new Node(),{dataset:{mode:v}}));
 const documentListeners={};
-globalThis.document={activeElement:null,getElementById:get,querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new Node(),addEventListener(t,f){(documentListeners[t]??=[]).push(f)}};
+globalThis.document={activeElement:null,getElementById:get,createElement:tag=>new Node('',tag),querySelectorAll:s=>s==='[data-view]'?views:s==='[data-mode]'?modes:[],querySelector:()=>new Node(),addEventListener(t,f){(documentListeners[t]??=[]).push(f)}};
 const windowListeners={};globalThis.window={addEventListener(t,f){(windowListeners[t]??=[]).push(f)}};
 globalThis.fetch=async p=>({ok:true,text:async()=>fs.readFileSync(new URL(p,base),'utf8'),json:async()=>JSON.parse(fs.readFileSync(new URL(p,base),'utf8'))});
 get('zoom').value='1';get('lane-kind').value='velocity';get('part').value='chicago';get('part').selectedOptions=[{textContent:'Bass A Chicago'}];

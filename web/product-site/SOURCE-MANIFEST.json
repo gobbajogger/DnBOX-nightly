@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 94091,
-      "sha256": "ed13e1eaeeb77eb36c3460125c65823e92f8db322bed663c66e757a004f816a0"
+      "bytes": 96896,
+      "sha256": "95bc35f435bd53b3dc7ab9b6acb632ea06b2efee34156fad436d6a008d2fccfa"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -794,8 +794,8 @@
     },
     {
       "path": "remote/break-sequence.mjs",
-      "bytes": 10534,
-      "sha256": "49a151a78bdcbe1546bb9ebc2e2723829f5115ed7b79a54593e7c48217e40ea3"
+      "bytes": 12587,
+      "sha256": "0e475bf9aff8a93b9b510bb2dec7831cc5a1fc02231e405b84b0f82a70bb451c"
     },
     {
       "path": "remote/catalog.json",
@@ -869,8 +869,8 @@
     },
     {
       "path": "remote/dnr3-bass-roll.mjs",
-      "bytes": 12780,
-      "sha256": "9e9f7d5adda766c53f1ec3f6dea998bb0cd1274f669565e94512aa2cf1ead00a"
+      "bytes": 12816,
+      "sha256": "7c08b23d9e33a267f5259695be7dd820a87fbcf6cacb3177bc57987d2dc69ecf"
     },
     {
       "path": "remote/dnr3-break-steps.mjs",
@@ -894,8 +894,8 @@
     },
     {
       "path": "remote/dnr3-link.mjs",
-      "bytes": 11630,
-      "sha256": "655853d1c786e943c274882162b4eb4ad420d82768e34a9ba4787e5b8d1836a3"
+      "bytes": 12565,
+      "sha256": "84ecf6dda070b831a7d0e86956c6a6e22ec03b41e45be0ed073d7176195dd044"
     },
     {
       "path": "remote/dnr3-mix.mjs",
@@ -931,6 +931,11 @@
       "path": "remote/drum-options.mjs",
       "bytes": 4770,
       "sha256": "d54952507892a6e4c367ce1cc626b344b28c2fddf21c049059c1c2683e1fbc13"
+    },
+    {
+      "path": "remote/drum-voice-icons.generated.mjs",
+      "bytes": 9855,
+      "sha256": "fcd8a2a9e863601e6fbb14536a2d2cf9d1d3bce12f922c70366a94fc351d74ff"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -974,8 +979,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 12466,
-      "sha256": "48f1b2bee32a5c6c455f119cd228976715c485e20a3fc7bf8469cc9dd5a32b15"
+      "bytes": 13267,
+      "sha256": "282179fe135cf82779880450ab8c2271fc21539b930fcd8742fd9169d29c3514"
     },
     {
       "path": "remote/fw-glyphs.mjs",
@@ -1024,8 +1029,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7456,
-      "sha256": "761be93b86df373d43f706c7d265c1ff81e17ea86dccacf55645b14673d2243a"
+      "bytes": 7944,
+      "sha256": "fb7a994e5b2cc91b74c5e042901f343738a630ad3a06036368956e3eedb496a6"
     },
     {
       "path": "remote/keybed-scroll.mjs",
@@ -1174,13 +1179,13 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 47526,
-      "sha256": "01f88e4d07f56dd2b38d83190c58134a22ec3c303542b41c55b732b04db89b7a"
+      "bytes": 51689,
+      "sha256": "0fefac38fcdfd3077a6eec47cbeecd84d4a96bbc6ae60030fe838db68dedc947"
     },
     {
       "path": "remote/tempo-control.mjs",
-      "bytes": 3386,
-      "sha256": "e3789b6098a79b4e6a5b799cd6f8b8842ca60c8bd7e1b9792e676c645bc8737e"
+      "bytes": 6388,
+      "sha256": "3b64983d6ea9c8ea8285c9bfedd3b989c1c7583d5262483c6b8e5aabbf553c07"
     },
     {
       "path": "remote/timeline.mjs",

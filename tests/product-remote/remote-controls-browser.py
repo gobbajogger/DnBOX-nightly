@@ -35,24 +35,32 @@ async def serve(route):
 # A Web MIDI port pair that answers DNR3 like the spec (REMOTE-FW-PROTOCOL.md), or stays silent.
 MOCK = r"""
 window.__dnr3Sent = [];
+window.__dnr3Replies = [];
 window.__installDnbox = async (answer) => {
   const d = await import('/remote/dnr3.mjs');
   const listeners = new Set();
+  let bpmX10 = 1250;
   const input = {name: 'DnBOX',state: 'connected', addEventListener: (t, f) => listeners.add(f), removeEventListener: (t, f) => listeners.delete(f), open: async () => {}};
-  const reply = (op, seq, fields) => { const frame = d.encodeReply(op, seq, d.STATUS.OK, 1, fields); setTimeout(() => listeners.forEach(f => f({data: frame})), 1); };
+  const reply = (op, seq, fields) => { const frame = d.encodeReply(op, seq, d.STATUS.OK, 1, fields); setTimeout(() => {
+    window.__dnr3Replies.push({op, fields}); listeners.forEach(f => f({data: frame}));
+  }, 1); };
   const output = {name: 'DnBOX',state: 'connected', open: async () => {}, send(bytes) {
     const b = Uint8Array.from(bytes);
     if (b[0] !== 0xF0) { window.__dnr3Sent.push({midi: Array.from(b)}); return; }
     const r = d.decodeRequest(b); window.__dnr3Sent.push({op: r.op, fields: r.fields});
     if (!answer) return;
     const f = r.fields;
+    if (r.op === d.OP.TEMPO) bpmX10 = f.bpm_x10;
     const out = {
       [d.OP.HELLO]: {proto: 3, minor: 0, fw_commit: Array(20).fill(0), board: 1, caps: 0, npat: 32, nsteps: 64, ntracks: 11, ndrum: 11, clip_mode: 0, clk_src: 0, watch_max_hz: 30},
       [d.OP.OPEN]: {epoch: 1, lease_ms: 5000}, [d.OP.KEEPALIVE]: {}, [d.OP.CLOSE]: {},
       [d.OP.STEP_SET]: {part: f.part, pat: f.pat, step: f.step, record: f.record, pattern_crc: 0},
       [d.OP.PARAM_SET]: {kind: f.kind, a: f.a, b: f.b, c: f.c, value: f.value},
       [d.OP.PART_SET]: {part: f.part, pat: f.pat, field: f.field, value: f.value},
-      [d.OP.TEMPO]: {bpm_x10: f.bpm_x10}}[r.op];
+      [d.OP.TEMPO]: {bpm_x10: bpmX10},
+      [d.OP.STATE]: {playing: 0, clk_src: 0, clip_mode: 0, send_notes: 0, bpm_x10: bpmX10,
+        ppat: Array(5).fill(0), pcue: Array(5).fill(127), mute: 0, vmute: 0, part_off: 0, song_on: 0,
+        song_pos: 0, ch: [0, 1, 2, 3, 4], step_pos: Array(5).fill(127), pattern_crc: Array(32).fill(0)}}[r.op];
     if (out) reply(r.op, r.seq, out);
   }};
   Object.defineProperty(navigator, 'requestMIDIAccess', {configurable: true, value: async () => ({inputs: new Map([['i', input]]), outputs: new Map([['o', output]])})});
@@ -127,15 +135,21 @@ async def break_screen(page, w, h):
     on = page.locator('#break-sequence [data-break-on="4"]')
     await on.click()
     await expect(on).to_have_attribute('aria-pressed', 'true')
-    await page.locator('#break-sequence [data-break-step="4"]').click()
-    await page.locator('#break-sequence [data-break-slice="7"]').click()
-    await expect(page.locator('#break-sequence [data-break-step="4"]')).to_have_text('7')
-    await page.locator('#break-sequence [data-break-step="4"]').dblclick()
-    await expect(page.locator('#break-sequence [data-break-step="4"]')).to_have_text('–')
-    # Tapping the selected step again steps its slice, so no step tap is a dead control.
-    await page.wait_for_timeout(400)
-    await page.locator('#break-sequence [data-break-step="4"]').click()
-    await expect(page.locator('#break-sequence [data-break-step="4"]')).to_have_text('1')
+    cell = page.locator('#break-sequence [data-break-step="4"]')
+    await cell.click()
+    await page.locator('[data-break-open-slices]').click()
+    await page.locator('[data-break-slice="7"]').click()
+    await expect(cell).to_have_attribute('data-value', '7')
+    await cell.dblclick()
+    await cell.press('ArrowUp')
+    await expect(cell).to_have_attribute('data-value', '7')
+    await cell.press('ArrowRight')
+    await expect(page.locator('[data-break-target]')).to_have_text('Step 6')
+    await cell.press('Enter')
+    await expect(page.locator('[data-break-target]')).to_have_text('Step 5')
+    await page.locator('[data-break-slice="0"]').click()
+    await expect(cell).to_have_attribute('data-value', '0')
+    await expect(on).to_have_attribute('aria-pressed', 'true')
 
 async def tempo(page, w, h):
     t = page.locator('#tempo')
@@ -205,6 +219,9 @@ async def connection(page, w, h):
     await page.evaluate('window.__installDnbox(true)')
     await page.locator('#connect').click()
     await expect(page.locator('#conn-state')).to_have_text('Connected', timeout=5000)
+    await page.wait_for_function('window.__dnr3Replies.some(r => r.op === 0x30 && r.fields.bpm_x10 === 1250)')
+    await expect(page.locator('#tempo')).to_have_text('125 BPM')
+    await expect(page.locator('#tempo-state')).to_have_text('Device')
     await page.evaluate('window.__dnr3Sent.length = 0')
     await page.locator('[data-engine="drum909"]').click()
     await expect(page.locator('[data-drum-source=draft]')).to_contain_text('not sent')
@@ -215,7 +232,7 @@ async def connection(page, w, h):
     await page.locator('[data-seq-opt="R_DRATE"][data-seq-value="1"]').click()
     await page.locator('[data-engine="breaks"]').click()
     await page.locator('#break-sequence [data-break-on="2"]').click()
-    await page.wait_for_timeout(200)
+    await page.wait_for_function('window.__dnr3Sent.some(r => r.op === 0x27 && r.fields.bpm_x10 === 1260)')
     sent = await page.evaluate('window.__dnr3Sent')
     ops = [(s['op'], s['fields']) for s in sent if 'op' in s]
     want = [
@@ -225,6 +242,19 @@ async def connection(page, w, h):
     assert not any(o in (0x21,0x22) for o,f in ops), ops # no STEP capability
     for op, ok in want:
         assert any(o == op and ok(f) for o, f in ops), (hex(op), ops)
+    await expect(page.locator('#tempo')).to_have_text('126 BPM')
+    await expect(page.locator('#tempo-state')).to_have_text('Device')
+    # Reopen the same fixture/firmware session target: read back retained BPM via STATE,
+    # not the prior receipt or a local retained optimistic value.
+    await page.evaluate('window.__dnr3Replies.length = 0')
+    await page.locator('#connect').click()
+    await page.wait_for_function('window.__dnr3Replies.some(r => r.op === 0x07)')
+    await expect(page.locator('#conn-state')).to_have_text('Disconnected')
+    await page.locator('#connect').click()
+    await expect(page.locator('#conn-state')).to_have_text('Connected')
+    await page.wait_for_function('window.__dnr3Replies.some(r => r.op === 0x30 && r.fields.bpm_x10 === 1260)')
+    await expect(page.locator('#tempo')).to_have_text('126 BPM')
+    await expect(page.locator('#tempo-state')).to_have_text('Device')
 
 async def fw_motion(page, w, h):
     # Firmware glyph motion: playhead column, hit flash, held pad, play beat flash, BREAK step playhead.

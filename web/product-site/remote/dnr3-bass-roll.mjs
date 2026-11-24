@@ -68,7 +68,7 @@ export async function writeBassLength(rpc, snapshot, length, current=()=>true) {
 }
 const pitch=n=>['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'][n%12]+(Math.floor(n/12)-1);
 
-export function mountBassRoll(root, link, getPart) {
+export function mountBassRoll(root, link, getPart, onScope=()=>{}) {
   const doc=root.ownerDocument, roll=doc.getElementById('roll-view');
   const node=doc.createElement('section');
   node.className='bass-live-roll';node.hidden=true;
@@ -93,8 +93,8 @@ export function mountBassRoll(root, link, getPart) {
   function visible(){return !roll.hidden&&part!==null;}
   function paint(){
     node.hidden=part===null;
-    if(part===null){delete roll.dataset.bassRollSource;return;}
-    roll.dataset.bassRollSource=source;
+    if(part===null){delete roll.dataset.bassRollSource;onScope();return;}
+    roll.dataset.bassRollSource=source;onScope();
     const focus=doc.activeElement?.closest('[data-roll-focus]')?.dataset.rollFocus;
     const count=snapshot?.length??0;
     const locked=desync||writing||!snapshot, unavailable=!(session&&capable());

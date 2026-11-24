@@ -1,4 +1,5 @@
 import{renderSvg}from'./glyph-render.mjs';
+import{DRUM_VOICE_GEOMETRY}from'./drum-voice-icons.generated.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX adapter for the actual MIT FunkyBeats DOM builder. The upstream methods,
 // not a screenshot recreation, construct the tree. Typed captured DnBOX events
@@ -21,6 +22,19 @@ export const DRUM_VOICES=Object.freeze({
  '909':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CH',42],['OH',46],['CR',49],['RD',51]]),
  '808':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CB',56],['CY',49],['OH',46],['CH',42]])
 });
+function addDrumVoiceIcon(info,kit,voice,selected=false){
+ const accent=voice===11;
+ const [label,d]=accent?['ACCENT','M7000 5000L12000 1000L17000 5000M7000 8000L12000 4000L17000 8000']:DRUM_VOICE_GEOMETRY[kit][voice];
+ const name=info.children.find(n=>n.className==='seq-channel-name');
+ name.textContent='';
+ if(selected)name.style.color='var(--bg)';
+ info.children=[name];
+ info.setAttribute('aria-label',label);info.setAttribute('title',label);
+ const svg=new Element('svg'),path=new Element('path');
+ for(const [key,value] of Object.entries({class:'fw-drum-voice-icon','data-voice-glyph':label,
+   viewBox:accent?'2000 -2000 20000 13000':'0 0 23000 12500',focusable:'false','aria-hidden':'true'}))svg.setAttribute(key,value);
+ path.setAttribute('d',d);svg.appendChild(path);name.appendChild(svg);
+}
 export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accents=null,offset=0,hits=null,length=null,live=null,selected=null}){
  if(!DRUM_VOICES[kit]||!Array.isArray(notes)||!Number.isInteger(endSample)||endSample<=0||!Number.isInteger(steps)||steps<1||steps>64)throw Error('Invalid local drum viewport');
  const track=kit==='808'?'drum808':'drum909',color=kit==='808'?'#ff4840':'#ff9628',voices=DRUM_VOICES[kit],channels=[...voices.map(([name])=>({name,type:'drum',color})),...(accents?[{name:'AC',type:'drum',color}]:[])];
@@ -43,10 +57,11 @@ export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accent
    step.setAttribute('aria-pressed',String(!!event));
    if(event){step.className+=' hit';if(event.id)step.dataset.hit=event.id;step.children[0].style.opacity=String(.3+modelStep.velocity*.7);step.children[1].style.height=(modelStep.velocity*100)+'%';}
   }
-  if(ch===selected){row.className+=' sel';const name=info.children.find(n=>n.className==='seq-channel-name');if(name)name.style.color='var(--bg)';}
+  if(ch===selected)row.className+=' sel';
+  addDrumVoiceIcon(info,kit,ch,ch===selected);
  }
  // Firmware total-accent row (pattern.h dpart_t.accent, DNR3 track 11).
- if(accents){const ch=voices.length,info=grid.children[ch].children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label','Accent');grid.children[ch].className+=' accent-row';
+ if(accents){const ch=voices.length,info=grid.children[ch].children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));addDrumVoiceIcon(info,kit,ch);grid.children[ch].className+=' accent-row';
   for(let s=0;s<steps;s++){const step=ui.stepElements[ch][s];if(live){Object.assign(step.dataset,{firmwareStep:offset+s,firmwareTrack:ch});if(!live.rows?.[ch]?.[s]||live.busy)step.setAttribute("disabled","");}else{step.dataset.drumAccent=offset+s;step.dataset.drumTrack=track;}step.dataset.col=offset+s;if(beyond(s))step.className+=' beyond';step.setAttribute('aria-label',`Accent step ${offset+s+1} ${accents[s]?'on':'off'}`);step.setAttribute('aria-pressed',String(!!accents[s]));if(accents[s]){step.className+=' hit accent';step.children[0].style.opacity='1';step.children[1].style.height='100%';}}}
  const header='<div class="seq-row seq-numbers"><span>VOICE</span>'+Array.from({length:Math.ceil(steps/4)},(_,g)=>'<div class="seq-step-group">'+Array.from({length:Math.min(4,steps-g*4)},(_,i)=>'<span>'+String(offset+g*4+i+1)+'</span>').join('')+'</div>').join('')+'</div>';
  return'<div class="drum-scroll funkybeats-sequencer fw-drum-grid" data-upstream="809e1e78" style="--track:'+color+'">'+header+serialize(grid)+'</div>';

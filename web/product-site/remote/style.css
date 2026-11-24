@@ -71,6 +71,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 
 /* Work area */
 main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px var(--margin) 8px;overflow:hidden}
+#edit-scope{margin:0 0 4px;color:var(--muted);font-size:var(--fs-sm);line-height:1.2}
 #roll-view{flex:1;min-height:0;display:flex}
 .roll-panel{flex:1;min-width:0;min-height:0;display:grid;grid-template-rows:20px minmax(0,1fr) var(--lane-h);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
 .roll-head{display:grid;grid-template-columns:var(--key-w) minmax(0,1fr);overflow:hidden}
@@ -424,20 +425,57 @@ dialog::backdrop{background:#000a}
 /* Accent row under the drum voices (firmware track 11). */
 .funkybeats-sequencer .seq-row.accent-row .seq-channel-info{color:var(--accent)}
 .funkybeats-sequencer .seq-row.accent-row .seq-step[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-/* BREAK: loop slots, ON row, SLICE row and slice pad, after the firmware BREAK screen. */
-.break-editor{display:grid;gap:12px;margin-bottom:16px;--track:#d678ff}
-.break-loops{display:grid;gap:6px}
-.break-loop-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
-.break-row-label{min-width:48px;font-size:12px;font-weight:700;color:var(--muted)}
-.break-chip{min-height:30px;padding:0 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control,4px);font:inherit;font-size:12px}
+/* BREAK keeps the numbered cells and their on/off buttons in one scroll strip. */
+.break-editor{display:grid;gap:8px;min-width:0;margin-bottom:16px;--track:#d678ff}
+.break-editor p{margin:0}
+.break-loops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.break-loop summary{display:grid;align-content:center;min-height:52px}
+.break-loop summary[aria-disabled=true]{cursor:default}
+.break-loop summary strong{overflow-wrap:anywhere}
+.break-loop-row,.break-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.break-loop-row{padding-block:4px}
+.break-row-label{font-size:12px;font-weight:700;color:var(--muted)}
+.break-chip{box-sizing:border-box;min-height:44px;padding:0 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control,4px);font:inherit;font-size:12px}
+summary.break-chip{cursor:pointer;list-style:none}
+summary.break-chip::-webkit-details-marker{display:none}
+.break-picker summary.break-chip{display:flex;align-items:center}
+.break-loop summary strong::after,.break-picker summary::after{content:" ▾"}
+.break-loop summary[aria-disabled=true] strong::after{content:none}
 .break-chip[aria-pressed=true]{border-color:var(--track);color:var(--track);background:var(--focus-col,var(--panel))}
-.break-grid{display:grid;gap:4px;overflow:auto}
-.break-row{display:grid;grid-template-columns:48px repeat(16,minmax(30px,1fr));gap:3px;align-items:stretch;min-width:560px}
-.break-grid .seq-step{min-height:34px;font-variant-numeric:tabular-nums}
+.break-grid{display:grid;gap:4px;overflow-x:auto;overscroll-behavior-inline:contain;padding-block:3px}
+.break-row{display:grid;grid-template-columns:repeat(16,minmax(44px,1fr));gap:4px}
+.break-editor .break-grid .seq-step{min-width:44px;min-height:44px;font-variant-numeric:tabular-nums}
 .break-grid .seq-step.beat{border-left:2px solid var(--line-strong,var(--line))}
+.break-grid .break-slice{display:grid;place-items:center;grid-template-rows:1fr 1fr}
+.break-step-number{font-size:10px;color:var(--muted)}
+.break-cell-value{font-size:13px}
 .break-grid .break-on.hit{background:var(--track);border-color:var(--track)}
 .break-grid .break-slice.selected{outline:2px solid var(--track);outline-offset:-2px;color:var(--track)}
-.break-pad{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:4px}
+.break-actions{position:relative}
+.break-picker{display:contents}
+.break-pad{display:grid;grid-template-columns:repeat(8,minmax(44px,1fr));gap:4px;margin-block:6px;width:100%;order:10}
+.break-picker:not([open]) .break-pad{display:none}
+/* Accepted native BREAK pulses stay visible when the slice picker is closed. */
+.break-picker:has(.device-voice) summary{outline:2px solid var(--track);outline-offset:-2px}
+@media (max-width:500px){.break-pad{grid-template-columns:repeat(6,minmax(44px,1fr))}}
+.break-scroll-hint{display:none}
+@media (max-width:800px){.break-scroll-hint{display:inline}}
+/* Keep both loop names and the primary editing controls above the grid in a short viewport. */
+@media (orientation:landscape) and (min-width:650px) and (max-height:500px){
+ .break-editor{grid-template-columns:minmax(0,1fr) auto;gap:5px 12px}
+ .break-editor>[data-break-source]{grid-column:1;grid-row:1}
+ .break-loops{grid-column:1;grid-row:2}
+ .break-loop summary{min-height:44px}
+ .break-actions{grid-column:2;grid-row:1 / span 2;align-self:center}
+ .break-help,.break-grid,.break-rate,.break-editor>[data-break-limit]{grid-column:1/-1}
+ .break-pad{position:absolute;z-index:4;top:100%;right:0;box-sizing:border-box;width:min(544px,calc(100vw - 30px));
+  grid-template-columns:repeat(11,minmax(44px,1fr));padding:6px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-control,4px);max-height:156px;overflow-y:auto}
+}
+
+@media (orientation:landscape) and (min-width:820px) and (max-height:500px){
+ .break-pad{width:780px;grid-template-columns:repeat(16,minmax(44px,1fr))}
+}
 /* Firmware-table bass engines (SYNTH ONE): same typed cells as the other engines. */
 .firmware-sound{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .firmware-sound .funkybeats-typed-unit{display:grid;grid-template-columns:28px 1fr;gap:6px;align-items:center;padding:6px;border:1px solid var(--line);background:var(--panel)}
@@ -519,6 +557,10 @@ dialog::backdrop{background:#000a}
 .break-slice.lit{color:var(--fw-hi,#ffb846)}
 @media (prefers-reduced-motion:reduce){.fw-drum-grid .seq-step::after{transition:none}}
 .preset-note{display:block;color:var(--fw-dim,#809294);font-size:12px;margin:2px 0 6px}
+.fw-drum-grid .seq-channel-info{justify-content:center;color:var(--muted)}
+.fw-drum-grid .seq-channel-name{display:grid;place-items:center;width:100%;min-width:0}
+.fw-drum-grid .fw-drum-voice-icon{display:block;width:min(100%,30px);height:auto;overflow:visible;fill:none;stroke:currentColor;stroke-width:1200;stroke-linecap:round;stroke-linejoin:round}
+.fw-drum-grid .accent-row .fw-drum-voice-icon,.fw-drum-grid .seq-row.fired:not(.sel) .fw-drum-voice-icon{color:var(--fw-white,#fff)}
 .fw-drum-grid .seq-row.fired .seq-channel-info{box-shadow:inset 0 0 0 2px var(--fw-white,#fff)}
 
 /* Voice labels remain readable on the selected-voice track fill. */
@@ -552,3 +594,24 @@ dialog::backdrop{background:#000a}
 #other-view .live-drum-velocity select{min-height:24px;padding:0 4px}
 #other-view .live-drum-velocity-point{margin:0;gap:0;align-items:stretch}
 #other-view .live-drum-velocity-point input{border:0;min-height:0;border-radius:0}
+
+/* A first beat in phone landscape: keep both kick and snare above the fold without shrinking cells. */
+@media (max-height:500px) and (orientation:landscape){
+ #other-view:has(.fw-drum-grid){padding-block:0 4px}
+ #other-view .drum-source{margin:0 0 6px}
+ #other-view .drum-nav{margin-block-end:3px}
+}
+
+/* BPM commands remain visible without opening an overflow menu. */
+.tempo-ctl{gap:2px;padding:1px;border:1px solid var(--line);border-radius:var(--r-control,4px);background:var(--surface,#101a1f)}
+.tempo-ctl .tempo-btn{min-width:34px;height:32px;border-color:var(--line);color:var(--fg);background:var(--panel,#17242a);font-size:14px}
+.tempo-ctl .tempo-btn.tap{min-width:38px;font-size:12px}
+.tempo-ctl .tempo-btn:active:not(:disabled){background:var(--accent);color:var(--accent-ink)}
+.tempo-ctl .tempo-btn:disabled{opacity:.52}
+.tempo-ctl .tempo-center{display:grid;align-content:center;justify-items:center;min-width:68px;line-height:1}
+.tempo-ctl .tempo-value{min-width:0;padding:0 3px;white-space:nowrap;font-size:13px}
+.tempo-state{font-size:9px;color:var(--muted);margin-top:2px}
+@media(orientation:portrait) and (max-width:600px){
+ .hdr:has(.tempo-ctl) .project-name{flex:1 1 22%}
+ .pattern-readout:has(.tempo-ctl){height:38px}
+}

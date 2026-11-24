@@ -501,10 +501,13 @@ async def break_and_tape(page):
     await expect(preview).to_have_attribute('aria-pressed','false',timeout=7000)
     await expect(preview).to_have_text('Play')
     await expect(page.locator('[data-break-loop="0"][data-break-value=""]')).to_have_attribute('aria-pressed','true')
+    await page.locator('[data-break-slot="0"] summary').click()
     await page.locator('[data-break-loop="0"][data-break-value="personal-br1-zone2"]').click()
+    await page.locator('[data-break-slot="1"] summary').click()
     await page.locator('[data-break-loop="1"][data-break-value="personal-br2-zone1"]').click()
     await page.locator('[data-break-rate="1/8"]').click()
     await page.locator('[data-break-step="15"]').click()
+    await page.locator('[data-break-open-slices]').click()
     await page.locator('[data-break-slice="32"]').click()
     await page.locator('#undo').click()
     await expect(page.locator('[data-break-step="15"]')).to_have_attribute('data-value','0')
@@ -555,8 +558,12 @@ async def break_and_tape(page):
     await expect(page.locator('#conn-state')).to_have_text('Disconnected')
     await page.route('**/sample-contract.json', lambda route:route.fulfill(status=200,body='{}'))
     await page.locator('[data-engine="breaks"]').click()
-    await expect(page.locator('#break-sequence')).to_contain_text('Starting breaks unavailable')
+    await expect(page.locator('#break-sequence')).to_contain_text('Starting break audio previews unavailable')
     await expect(page.locator('#break-sequence [data-action="play"]')).to_have_count(0)
+    await page.locator('[data-break-step="2"]').click()
+    await page.locator('[data-break-open-slices]').click()
+    await page.locator('[data-break-slice="6"]').click()
+    await expect(page.locator('[data-break-step="2"]')).to_have_attribute('data-value','6')
     assert await page.locator('#apply').count() == 0
 
 async def browser_cases():

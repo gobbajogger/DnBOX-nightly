@@ -35,7 +35,7 @@ class VisualViewportContract(unittest.TestCase):
 
                 def page():
                     pg = Mock()
-                    pg.evaluate.return_value = 0
+                    pg.evaluate.side_effect = lambda *args: [] if len(args)==2 else 0
                     pg.screenshot.return_value = image.getvalue()
 
                     def click(selector):
@@ -63,7 +63,7 @@ class VisualViewportContract(unittest.TestCase):
                 (gate.subprocess, 'Popen', Mock()), (gate.time, 'sleep', Mock()),
                 (gate, 'validate_capture_output', Mock()), (gate, 'write_actual_output', Mock()),
                 (gate, 'header_checks', Mock()), (gate, 'assert_grid_continuity', Mock(return_value={'samples': 1})),
-                (gate, 'ssim', Mock(return_value=1)), (gate, 'compare', record),
+                (gate, 'ssim', Mock(return_value=.4)), (gate, 'current_header_actions', Mock()), (gate, 'compare', record),
                 (gate, 'capture_full_page', Mock(return_value=image.getvalue())), (gate, 'ONLY', None),
             ]:
                 stack.enter_context(patch.object(module, attr, value))
