@@ -294,8 +294,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 650371,
-      "sha256": "007a0c2d548a5b9de304a4c8d2ed784f3cc838f9ddbc09e80c8a1ce2c98bada8"
+      "bytes": 651103,
+      "sha256": "e9f8f66143014422ca6b66f08dc94f2074e58d78eaddae49455bcdcb1cadbde8"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -1169,8 +1169,8 @@
     },
     {
       "path": "versions.json",
-      "bytes": 89057,
-      "sha256": "16ebb499832952dc93534865f6d69e7f0535aabcdab2aad2bafe1c811c059ce1"
+      "bytes": 91505,
+      "sha256": "44e80132cf74f902332e7f6568228f16379693a0cf34b2a397e3d247ce7eb695"
     }
   ],
   "notClaimed": [

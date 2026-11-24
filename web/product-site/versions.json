@@ -5,6 +5,39 @@
   "latest": "nightly-94197fc8-dev",
   "versions": [
     {
+      "version": "nightly-73749f55-dev",
+      "display_version": "0.0.27",
+      "label": "TEST BUILD — DEVICE NOT TESTED",
+      "status": "dev-checked",
+      "config": "X0X_DEV_PADCAL=0",
+      "hardware_tested": false,
+      "source_commit": "73749f55d17a0643f1ddd072114172d29eecc2ae",
+      "source_tree": "7d0dd434ee35cc7d16b292a1d6fed68327a43c7e",
+      "title": "DnBOX 0.0.27 test build",
+      "description": "TEST BUILD. Not hardware-tested. Synth One factory programs, SuperJ6, and the shared arpeggiator and step sequencer are enabled on both models. Known issue: the source lane's full qualification gate did not pass. One Chicago/Miami block in the host render-timing test took 9,149 µs against a 3,870 µs limit. Both native images fit; this test build is published as an exception, and the timing failure remains open. Release notes: https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/test-builds/73749f55d17a/. Source 73749f55d17a0643f1ddd072114172d29eecc2ae (tree 7d0dd434ee35cc7d16b292a1d6fed68327a43c7e), PR #1017. This build reserves part of sample slot 2 for the factory bank. Back up and verify your samples before installing.",
+      "evidence_url": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/test-builds/73749f55d17a/",
+      "models": {
+        "elite": {
+          "product": "SMK-37 Elite_900",
+          "sha256": "3cd2e16cc7119bf82e6274c3f46d2caad0dd576c0818dc43f9ab817a9dd1eee2",
+          "size": 726292,
+          "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
+          "controller_strategy": "bundled",
+          "controller_size": 61552,
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/3cd2e16cc7119bf82e6274c3f46d2caad0dd576c0818dc43f9ab817a9dd1eee2/DnBOX-0.0.27-SMK37-elite-73749f55-test.fwsc"
+        },
+        "pro": {
+          "product": "SMK-37 Pro_900",
+          "sha256": "e62b1dfe4a03c32abc57660dd228fe40ce575d0dd1f2b7cf8920cce82029c785",
+          "size": 726292,
+          "controller_sha256": "a334208b51f62bc7231ebb76a6de0dfa260033d7f7316e5b92053c540bc1d984",
+          "controller_strategy": "bundled",
+          "controller_size": 61552,
+          "pkg": "https://gobbajogger.github.io/x0x37-for-Loopy-Pro_nightly/artifacts/nightly-dev/e62b1dfe4a03c32abc57660dd228fe40ce575d0dd1f2b7cf8920cce82029c785/DnBOX-0.0.27-SMK37-pro-73749f55-test.fwsc"
+        }
+      }
+    },
+    {
       "version": "nightly-94197fc8-dev",
       "display_version": "0.0.26",
       "label": "OWNER HARDWARE TESTED — STARTUP AND RESTART OK ON ELITE AND PRO",
