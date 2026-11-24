@@ -25,12 +25,35 @@ class NativeKernel extends AudioWorkletProcessor{
    catch(error){this.port.postMessage({type:'snapshot-error',request:m.request,message:String(error.message??error)});}
    return;
   }
+  if(m?.type==='remote-caps'){const caps=this.ex?.web_remote_caps?this.ex.web_remote_caps():0;this.port.postMessage({type:'remote-caps',midi:!!this.ex?.web_midi,realtime:!!(caps&1),dnr3:!!(caps&2)});return;}
+  if(m?.type==='midi'){this.midiIn(m.bytes);return;}
+  if(m?.type==='sysex'){this.sysexIn(m.bytes);return;}
   if(!this.ex)throw Error('Kernel is not ready');let result;
   if(m?.type==='buttons'&&Number.isInteger(m.bits)&&m.bits>=0&&m.bits<2**14)result=this.ex.web_buttons(m.bits>>>0);
   else if(m?.type==='keys'&&Number.isInteger(m.bits)&&m.bits>=0&&m.bits<2**27)result=this.ex.web_keys(m.bits>>>0);
   else if(m?.type==='turn'&&Number.isInteger(m.role)&&m.role>=0&&m.role<=6&&Number.isInteger(m.delta)&&m.delta>=-64&&m.delta<=64)result=this.ex.web_turn(m.role,m.delta);
   else throw Error('Unknown input');
   if(result!==0)this.port.postMessage({type:'input-refused',result});
+ }
+ // Plain MIDI from the page: one message, delivered as USB MIDI input. Refusals are reported, never dropped silently.
+ midiIn(bytes){
+  const b=Array.isArray(bytes)||ArrayBuffer.isView(bytes)?Array.from(bytes):[];
+  const ok=this.ex?.web_midi&&b.length>=1&&b.length<=3&&b.every(v=>Number.isInteger(v)&&v>=0&&v<=255)&&b[0]>=0x80&&b.slice(1).every(v=>v<0x80);
+  const rc=ok?this.ex.web_midi(b[0],b[1]??0,b[2]??0):-1;
+  if(rc!==0)this.port.postMessage({type:'midi-refused',bytes:b,result:rc});
+ }
+ // DNR3 SysEx: one complete F0..F7 frame. -3 means this firmware build has no DNR3 handler.
+ sysexIn(bytes){
+  const b=ArrayBuffer.isView(bytes)||Array.isArray(bytes)?Uint8Array.from(bytes):null;
+  if(!this.ex?.web_sysex_in||!b||b.length<2||b.length>256){this.port.postMessage({type:'sysex-refused',result:-1});return;}
+  new Uint8Array(this.memory.buffer,this.ex.web_sysex_buffer(),b.length).set(b);
+  const rc=this.ex.web_sysex_in(b.length);
+  if(rc!==0)this.port.postMessage({type:'sysex-refused',result:rc});
+  this.sysexOut();
+ }
+ sysexOut(){
+  if(!this.ex?.web_sysex_out_take)return;
+  for(let n;(n=this.ex.web_sysex_out_take())>0;){const bytes=new Uint8Array(this.memory.buffer,this.ex.web_sysex_out(),n).slice();this.port.postMessage({type:'sysex-out',bytes},[bytes.buffer]);}
  }
  controlsError(m,message){this.port.postMessage({type:'controls-error',request:m.request,...this.controlPin,message});}
  controlsRequest(m){
@@ -108,7 +131,7 @@ class NativeKernel extends AudioWorkletProcessor{
    this.controlsBoundary();this.soundBoundary();
    const channels=outputs[0],count=channels[0].length;
    if(this.ex.web_render(count)!==0)throw Error('Native render refused');
-   this.controlsBoundary();this.soundBoundary();
+   this.controlsBoundary();this.soundBoundary();this.sysexOut();
    const pcm=new Int32Array(this.memory.buffer,this.ex.web_output(),count*2);
    for(let i=0;i<count;i++){channels[0][i]=pcm[i*2]/8388608;if(channels[1])channels[1][i]=pcm[i*2+1]/8388608;this.peak=Math.max(this.peak,Math.abs(pcm[i*2]),Math.abs(pcm[i*2+1]));}
    if(currentTime-this.lastFrame>=1/30){this.lastFrame=currentTime;if(this.observer)this.port.postMessage(this.observer());const framebuffer=new Uint16Array(this.memory.buffer,this.ex.web_framebuffer(),240*240).slice();this.port.postMessage({type:'frame',framebuffer,playing:this.ex.web_playing(),keys:this.ex.web_keys_lit(),dim:this.ex.web_keys_dim(),buttons:this.ex.web_buttons_lit(),peak:this.peak,time:this.ex.web_time()},[framebuffer.buffer]);}

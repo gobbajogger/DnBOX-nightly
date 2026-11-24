@@ -118,21 +118,21 @@
       </select>
     </label>
   </div>
-  <p id="import-help">Store fewer samples with a matching lower playback rate: retain the prepared loop’s duration and pitch at its original tempo, with less bandwidth and an oldschool texture. Other BREAK tempo and pitch settings still change playback. Off by default; original files stay untouched. First-bar and trim settings apply before rate reduction.</p>
+  <p id="import-help">Fit more loops with a darker sound. At the loop’s original tempo, its length and pitch stay the same. The setting starts off and leaves your original files untouched.</p>
   <section aria-labelledby="auditionTitle">
     <h2 id="auditionTitle">Listen locally before connecting</h2>
     <label for="auditionFile">Choose an audio file to compare</label>
     <input id="auditionFile" style="display:block;max-width:100%;margin:12px 0" type="file" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
-    <p class="small">Mono reference uses the same trim and bar cut, at the decoded source rate. Both paths are peak normalized, not perceived-loudness matched. Encoded loop plays the saved ADPCM and rate; compare texture rather than loudness. Device tempo and effects are not included.</p>
+    <p class="small">Use Mono reference to hear your cut before compression and Encoded loop to hear what gets saved. The previews may sound different in volume and play without the keyboard’s tempo or effects.</p>
     <div class="bar"><button type="button" class="quiet" id="auditionReference" disabled>Play mono reference</button><button type="button" id="auditionEncoded" disabled>Play encoded loop</button><button type="button" class="quiet" id="auditionStop">Stop audio</button></div>
-    <p id="auditionStatus" role="status" aria-live="polite">Choose a file above. Listening is local and does not require MIDI or change device samples.</p>
+    <p id="auditionStatus" role="status" aria-live="polite">Choose a file to listen on this computer. Your keyboard’s samples stay as they are.</p>
   </section>
   <div class="full"><div id="fill"></div></div>
   <p id="room"></p>
   <p id="savings" role="status" aria-live="polite"></p>
   <dialog id="previewDlg" aria-labelledby="previewTitle">
     <h2 id="previewTitle">Compare before adding</h2>
-    <p id="previewNotice">Mono reference uses the same trim and bar cut, at the decoded source rate. The reference and import are peak normalized; this is not perceived-loudness matching. Encoded loop plays the actual saved ADPCM at its saved playback rate. Compare texture rather than loudness. Device tempo, pitch and performance effects are not included.</p>
+    <p id="previewNotice">Use Mono reference to hear your cut before compression and Encoded loop to hear what gets saved. The previews may sound different in volume and play without the keyboard’s tempo, pitch settings or effects.</p>
     <div id="previewList"></div>
     <p id="previewStatus" role="status" aria-live="polite"></p>
     <div class="bar"><button type="button" class="quiet" id="previewStop">Stop audio</button><button type="button" id="previewGo">Add these loops</button><button type="button" class="quiet" id="previewCancel">Cancel</button></div>
@@ -154,11 +154,9 @@
   </div>
 
   <details class="sample-help"><summary>Loop playback &amp; file tips</summary><p class="small">Your loops appear as BR1, BR2 and so on, after the built-in loops. Choose BREAK → EDIT, then turn LOOP A or LOOP B.</p>
-  <p class="small">New loops are stored at 44.1 kHz. A one-bar loop at 120 BPM takes
-    about 86 KB; tick "22 kHz" to fit twice as many at a lower quality. Loops follow the tempo by playing faster or slower, so their pitch
-    follows it too; the break's PITCH knob shifts it. Removing a loop renumbers the ones after it, so patterns
-    that used them play the next loop instead.
-    <a href="https://github.com/gobbajogger/DnBOX/blob/main/docs/MANUAL.md#8-break" style="color:inherit">The manual's BREAK section</a> says how DnBOX plays a loop.</p></details>
+  <p class="small">Choose “22.05 kHz (more room)” to fit about twice as many loops, with a darker sound.</p>
+  <p class="small">Loops change pitch as they follow the song tempo. Use the PITCH knob to tune them.</p>
+  <p class="small">Removing a loop moves later loops up one slot. Patterns that used those slots will play different loops. <a href="https://github.com/gobbajogger/DnBOX/blob/main/docs/MANUAL.md#8-break" style="color:inherit">Read the BREAK manual</a>.</p></details>
   <p class="small">DnBOX builds on X0X and Felucca by Hügelton Instruments (GPL-3.0); the break generator is BB Gen's.
     <a href="https://github.com/gobbajogger/DnBOX" style="color:inherit">github.com/gobbajogger/DnBOX</a></p>
 </main>
@@ -1314,7 +1312,7 @@ function refreshAudition() {
 async function chooseAuditionFile(file) {
   const serial=++auditionSerial; stopLoopPreview(); auditionSource=null; auditionLoop=null;
   $("auditionReference").disabled=$("auditionEncoded").disabled=true;
-  if (!file) { $("auditionStatus").textContent="Choose a file above. Listening is local and does not require MIDI or change device samples."; return; }
+  if (!file) { $("auditionStatus").textContent="Choose a file to listen on this computer. Your keyboard’s samples stay as they are."; return; }
   $("auditionStatus").textContent="Decoding local audio…";
   try {
     const decoded=await decode(file);

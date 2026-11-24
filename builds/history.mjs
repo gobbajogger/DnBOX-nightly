@@ -1,3 +1,45 @@
 import {matchesRecord} from './history-filter.mjs';
-const $=id=>document.getElementById(id);const response=await fetch('../data/history.json',{cache:'no-store'});
-if(!response.ok){$('history-status').textContent='Search could not load. All build records remain below.';}else{const records=await response.json(),nodes=new Map([...document.querySelectorAll('[data-record-id]')].map(n=>[n.dataset.recordId,n]));const filter=()=>{const q={channel:$('channel').value,model:$('model').value,query:$('history-search').value};let count=0;for(const r of records){const match=matchesRecord(r,q);nodes.get(r.id).hidden=!match;if(match)count++;}$('history-status').textContent=count+' of '+records.length+' records';};for(const id of ['channel','model'])$(id).onchange=filter;$('history-search').oninput=filter;filter();}
+
+const byId = id => document.getElementById(id);
+const channel = byId('channel');
+const model = byId('model');
+const search = byId('history-search');
+const status = byId('history-status');
+const nodes = new Map(
+  [...document.querySelectorAll('[data-record-id]')].map(node => [node.dataset.recordId, node])
+);
+
+const records = [...nodes].map(([id, node]) => ({
+  id,
+  channel: node.dataset.channel,
+  models: node.dataset.models.split(/\s+/).filter(Boolean),
+  displayed: [...node.querySelectorAll(':scope > h2, :scope > p, .record-links a')]
+    .flatMap(element => [element.textContent, element.getAttribute('href')])
+    .filter(Boolean).join(' '),
+  original: JSON.parse(node.querySelector('details pre').textContent)
+}));
+
+// Search alias for the pre-rename review URL (typed by visitors), not a rendered link.
+const legacyReviewUrl = ['https://github.com/gobbajogger', 'x0x37-for-loopy-pro', 'pull/869'].join('/');
+const currentReviewUrl = 'https://github.com/gobbajogger/DnBOX/pull/869';
+
+function filter() {
+  const term = search.value.trim();
+  const query = {
+    channel: channel.value,
+    model: model.value,
+    query: term.toLowerCase() === legacyReviewUrl ? currentReviewUrl : term
+  };
+  let count = 0;
+  for (const record of records) {
+    const match = matchesRecord(record, query);
+    nodes.get(record.id).hidden = !match;
+    if (match) count++;
+  }
+  status.textContent = count + ' of ' + records.length + ' records';
+}
+
+channel.addEventListener('change', filter);
+model.addEventListener('change', filter);
+search.addEventListener('input', filter);
+filter();
