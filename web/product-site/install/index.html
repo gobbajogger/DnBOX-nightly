@@ -1592,11 +1592,15 @@ async function slotReq(link, cmd, args, ms = 3000, tries = 3, strictFraming = fa
 
 async function readSlotLayout(link, ms = 3000, tries = 3) { return parseInfo(await slotReq(link, 15, [], ms, tries)); }
 
-async function readSlotBytes(link, k, off, n, onPart) {
+async function readSlotBytes(link, k, off, n, onPart, addressed = false) {
   const out = new Uint8Array(n);
   for (let at = 0; at < n;) {
     const want = Math.min(224, n - at), adr = off + at;
-    const b = unpack78((await slotReq(link, 16, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1])).slice(4));
+    const args = [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1];
+    const reply = await slotReq(link, 16, args, 3000, 3, addressed);
+    if (addressed && args.slice(0,4).some((byte,i) => reply[i] !== byte))
+      throw new Error(`slot ${k + 1}: wrong readback address`);
+    const b = unpack78(reply.slice(4));
     if (!b.length) throw new Error(`slot ${k + 1}: no data`);
     out.set(b.subarray(0, Math.min(b.length, n - at)), at);
     at += Math.min(b.length, n - at);
@@ -1779,7 +1783,7 @@ async function cancelInstallSnapshot(link, snapshot) {
 async function installKeepingSlots(up, image, product, board, hooks) {
   const h = Object.assign({ step() {}, say() {}, save() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
   const fail = (code, msg, detail = "") => Object.assign(new Error(msg), { code, detail });
-  const strict = h.factoryData === true;
+  const strict = h.factoryData === true, protectedInstall = strict || h.startingBreaks === true;
   const expected = strict ? slotPackageFiles(image)?.["fdata.bin"] : null;
   const strictMap = strict ? packageSlotMap(image, board) : null;
   if (strict && (!expected || expected.length !== 0xF000 ||
@@ -1787,7 +1791,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       JSON.stringify(strictMap) !== JSON.stringify([
         {off:0xC2000,size:0x14000}, {off:0xD6000,size:0xF000}, {off:0xB3000,size:0x8000}
       ]))) throw fail("fdata", "Could not verify the protected factory-data and sample layout.");
-  let move = null, snapshot = null, unprotected = false;
+  let move = null, snapshot = null, unprotected = false, freshBreaks = false;
   const dev = await up.find((id) => !/^ota-/i.test(id.model));
   if (!dev) throw fail("notfound", "No running keyboard was found for sample preflight; no update was started.");
   if (!h.sameKeyboard(dev.id.model, product.split("_")[0])) {
@@ -1802,16 +1806,24 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       try {
         if (await hasInstallSnapshot(dev.link)) snapshot = await beginInstallSnapshot(dev.link);
       } catch (e) { throw fail("slotbackup", `The sample snapshot could not be established (${e.message}). No update was started.`); }
-      if (strict && !snapshot) throw fail("slotbackup", "Atomic sample backup is required. No update was started.");
+      if (protectedInstall && !snapshot) throw fail("slotbackup", "Atomic sample backup is required. No update was started.");
       let layout;
       try { layout = await readSlotLayout(dev.link, 1000, 2); }
       catch (e) {
         // Any unsupported/failed slot INFO uses the outer warning-only path.
         throw fail("slotbackup", `Sample layout unavailable (${e.message}); continuing without backup.`);
       }
-      if (strict && !layout) throw fail("slotbackup", "Sample layout could not be verified. No update was started.");
+      if (protectedInstall && !layout) throw fail("slotbackup", "Sample layout could not be verified. No update was started.");
       if (layout && !snapshot)
         throw fail("slotbackup", "Atomic sample backup unsupported; continuing without backup.");
+      if (h.startingBreaks && layout?.ext && layout.slots.every(sl => !sl.nz && !sl.used)) {
+        // Prove a fresh starting state under the OTA snapshot, not just a blank new map after reboot.
+        freshBreaks = true;
+        for (let k = 0; k < layout.count; k++) {
+          const header = await readSlotBytes(dev.link, k, 0, SLOT_HDR_LEN, undefined, true);
+          if (header.length !== SLOT_HDR_LEN || header.some(byte => byte !== 0xff)) { freshBreaks = false; break; }
+        }
+      }
       if (layout && layout.slots.some((sl) => sl.nz)) {
         const oldMap = flashMap(layout, board), newMap = strictMap || packageSlotMap(image, board);
         const risk = atRisk(layout, oldMap, newMap);
@@ -1828,7 +1840,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
             readArchive(file);                                // verify the in-memory archive
           } catch (e) { throw fail("slotbackup", e.message); }
           let retained;
-          try { retained = await (strict ? h.saveStrict : h.save)(file, st.name); }
+          try { retained = await (protectedInstall ? h.saveStrict : h.save)(file, st.name); }
           catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
           if (retained !== true)
             throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
@@ -1845,17 +1857,19 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       // independently by Updater.install() and admitted().
       await cancelInstallSnapshot(dev.link, snapshot);
       snapshot = null;
-      if (strict) throw e;
+      if (protectedInstall) throw e;
       move = null; // No verified recovery archive exists.
       unprotected = true;
       h.say("slotunprotectedwarning", e?.message || String(e));
     } finally { dev.link.close(); }
   }
-  if (!h.admitted()) throw fail("unapproved", "The selected package is no longer approved. No update was started.");
+  let choiceLocked = false;
+  const admitted = () => h.admitted() && (choiceLocked || !h.startingBreaks || !!h.sameBreaks?.());
+  if (!admitted()) throw fail("unapproved", "The selected package or breaks changed. No update was started.");
   const ran = await up.install(image, product, h.step,
-    snapshot ? (dev) => commitInstallSnapshot(dev.link, snapshot, h.admitted) : null, h.admitted,
+    snapshot ? async (dev) => { await commitInstallSnapshot(dev.link, snapshot, admitted); choiceLocked = true; } : null, admitted,
     strict ? link => verifyFactoryData(link, expected) : null);
-  if (!move || !move.newMap.length) return { product: ran, move, unprotected };
+  if (!move || !move.newMap.length) return { product: ran, move, unprotected, freshBreaks };
   h.say("slotback");
   const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
   if (!back) throw fail("slots", "the keyboard did not answer after the install", move.name);
@@ -1874,7 +1888,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
   } catch (e) {
     throw fail("slots", e.message, move.name);
   } finally { back.link.close(); }
-  return { product: ran, move, unprotected };
+  return { product: ran, move, unprotected, freshBreaks };
 }
 
 const $ = (id) => document.getElementById(id);
@@ -3189,14 +3203,26 @@ const startingBreakNames = (ids) => startingBreaks()?.names(ids) ?? ids;
 // After the firmware: write the chosen starting breaks with the slot writer, the way
 // fm1_install.py --fresh-install --default-breaks does (only into a keyboard with no samples; read back).
 // The firmware is already installed here, so a failure is reported, never thrown.
-async function writeStartingBreaks(up, images, ids) {
+async function writeStartingBreaks(up, images, ids, admitted = () => true, expectedMap = null) {
+  if (!up.verified || !up.application || !admitted()) return;
   sayK("breakswrite");
   const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
   if (!back) { sayK("breaksfailed", t("breaksnoanswer")); return; }
   try {
-    up.bind(back);
-    const io = { layout: () => readSlotLayout(back.link), readBytes: (k, off, n) => readSlotBytes(back.link, k, off, n),
-      writeSlot: (k, image, onPart) => writeSlotImage(back.link, k, image, onPart) };
+    if (back.id.text !== up.application.product) throw new Error("The verified firmware identity changed.");
+    const guard = () => {
+      if (!admitted()) throw new Error("The confirmed selection changed.");
+      up.singlePort(back.name);
+      up.assertContinuous(back);
+    };
+    guard();
+    const io = { layout: async () => {
+      const layout = await readSlotLayout(back.link);
+      if (!layout.ext || (expectedMap && JSON.stringify(flashMap(layout,"smk")) !== JSON.stringify(expectedMap)))
+        throw new Error("The verified package and actual sample map differ.");
+      return layout;
+    }, readBytes: (k, off, n) => readSlotBytes(back.link, k, off, n, undefined, true),
+      writeSlot: (k, image, onPart) => { guard(); return writeSlotImage(back.link, k, image, onPart); } };
     const r = await startingBreaks().fill(io, images, (d, n) => { $("bar").value = Math.min(100, d / n * 100); });
     log("starting breaks: " + (r.filled.length ? "slot(s) " + r.filled.join(", ") + " written and read back (" + ids.join(", ") + ")" : "not written (" + r.reason + ")"));
     if (r.filled.length) sayK("breaksdone", startingBreakNames(ids).join(", "));
@@ -3287,7 +3313,7 @@ async function run(img, product, opts = {}) {
     };
     const ota = await up.find((id) => /^ota-/i.test(id.model));
     if (opts.admitted && !opts.admitted()) { ota?.link.close(); throw new Error(t("unapproved")); }
-    if (ota && opts.factoryData) {
+    if (ota && (opts.factoryData || opts.breakImages?.size)) {
       ota.link.close();
       throw new Error("An atomic sample snapshot cannot start in update mode. No browser update was started; use the matching recovery instructions and retain your backup.");
     }
@@ -3312,9 +3338,9 @@ async function run(img, product, opts = {}) {
         progress: (f) => { $("bar").value = Math.min(up.verified ? 100 : 99, f * 100); },
         save: (file, name) => saveSlotBackup(file, name),
         saveStrict: saveVerifiedSlotBackup, factoryData: opts.factoryData === true,
+        startingBreaks: !!opts.breakImages?.size, sameBreaks: opts.sameBreaks,
       });
       unprotected = r.unprotected === true;
-      if (opts.factoryData) { $("bar").value = 100; sayK("done"); }
       if (opts.factoryData && !r.move) { $("bar").value = 100; sayK("done"); }
       if (r.move && !r.move.newMap.length) sayK("slotstock", r.move.name);
       else if (r.move) {
@@ -3323,8 +3349,12 @@ async function run(img, product, opts = {}) {
           sayK("slotspartial", r.move.skipped.join("; ") + ` (${r.move.name})`);
         } else sayK("slotsdone");
       }
+      if (opts.breakImages?.size) {
+        if (r.freshBreaks && up.verified) await writeStartingBreaks(up, opts.breakImages, opts.breakIds,
+          () => opts.admitted() && opts.sameBreaks(), opts.factoryData ? packageSlotMap(img,board) : null);
+        else sayK("breakskept");
+      }
     }
-    if (opts.breakImages && opts.breakImages.size) await writeStartingBreaks(up, opts.breakImages, opts.breakIds);
     await scan(true);
     // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
     if (!foreign && opts.receiptBuild && up.verified && up.application)
@@ -3347,6 +3377,7 @@ async function run(img, product, opts = {}) {
 }
 
 // Never ignore an Install press silently: say why it did not start.
+let preparingInstall = false;
 const installBlocked = (why) => { $("status").textContent = why; $("installhint").textContent = why; log("install not started: " + why); };
 $("go").parentElement.addEventListener("click", (e) => {
   if (e.target !== $("go") && !(e.target.contains && e.target.contains($("go")))) return;
@@ -3355,22 +3386,25 @@ $("go").parentElement.addEventListener("click", (e) => {
     : "Install is locked: the selected package is not downloaded and verified yet. Choose the model/version again and wait for 'Ready to install'.");
 });
 $("go").addEventListener("click", async () => {
-  if (writing) { installBlocked("An install is already running."); return; }
+  if (writing || preparingInstall) return;
   if (!$("devagree").checked) { installBlocked("Tick the firmware consent box above, then press Install."); return; }
   if ($("go").disabled || !hasCurrentVerifiedSelection()) { installBlocked("The selected package is not verified yet. Choose the model/version again and wait for 'Ready to install'."); return; }
+  preparingInstall = true;
+  try {
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
   const confirmProduct = selectedProduct, confirmSerial = loadSerial, breakIds = chosenStartingBreaks();
+  const sameBreaks = () => chosenStartingBreaks().join() === breakIds.join();
   const factoryData = !!slotPackageFiles(image)?.["fdata.bin"];
   if (!(await confirmWrite(selectedProduct, factoryData, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
   if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection() ||
-      chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
+      !sameBreaks()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
   // Fetch and verify the chosen breaks before anything is written.
   let breakImages = new Map();
   if (breakIds.length) {
     try { breakImages = await startingBreaks().load(breakIds); }
     catch (e) { installBlocked(t("breaksunavailable")); log("starting breaks: " + (e && e.message)); return; }
-    if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
+    if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !sameBreaks()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
   }
   const { version: ver, pkg } = currentSelection();
   const selectedImage = image, product = selectedProduct, controller = ctl, serial = loadSerial;
@@ -3398,14 +3432,15 @@ $("go").addEventListener("click", async () => {
   if (!bundled && ctl) {
     try { img = insertCtl(image, ctl); } catch (e) { sayK("ctlbad", e.message); updateInstallGate(); return; }
   }
-  if (!$("devagree").checked) { updateInstallGate(); return; }
+  if (!$("devagree").checked || !sameBreaks()) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, factoryData, breakImages, breakIds, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, factoryData, breakImages, breakIds, sameBreaks, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
+  } finally { preparingInstall = false; }
 });
 $("stockgo").addEventListener("click", async () => {
-  if (!stock || !$("stockconfirm").checked || writing) return;
+  if (!stock || !$("stockconfirm").checked || writing || preparingInstall) return;
   const st = stock;
   if (!(await confirmWrite(st.product)) || stock !== st || writing || !$("stockconfirm").checked) return;
   $("stockgo").disabled = true;

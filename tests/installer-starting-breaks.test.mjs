@@ -36,7 +36,7 @@ function runtime({blank = true, failWrite = false} = {}) {
   env.dnboxStartingBreaks = {selectedIds: () => [], names: ids => ids.map(id => startingBreakName(id, id)), fill: fillChosen};
   const ctx = createContext(env);
   new Script(slice('const startingBreaks = () =>', 'async function run(') + slice('let confirmPending = false;', '\n}\n') + '\n}\n' + '\nglobalThis.writeStartingBreaks = writeStartingBreaks;').runInContext(ctx);
-  const up = {bound: 0, waitFor: async () => ({link}), bind() { this.bound++; }};
+  const up = {verified:true, application:{product:'SMK-37 Pro_900'}, waitFor: async () => ({id:{text:'SMK-37 Pro_900'},link}), singlePort(){}, assertContinuous(){}};
   return {ctx, up, said, writes, link, flash, logs};
 }
 const names = ids => ids.map(id => startingBreakName(id, id)).join(', ');
@@ -59,7 +59,7 @@ test('some chosen: only those are written', async () => {
 });
 
 test('none chosen: the installer never starts the step', () => {
-  assert.match(html, /if \(opts\.breakImages && opts\.breakImages\.size\) await writeStartingBreaks\(up, opts\.breakImages, opts\.breakIds\);/);
+  assert.match(html, /if \(opts\.breakImages\?\.size\) \{\s+if \(r\.freshBreaks && up\.verified\) await writeStartingBreaks/);
   assert.match(html, /let breakImages = new Map\(\);\n  if \(breakIds\.length\) \{/);
   assert.match(html, /run\(img, selectedProduct, \{ foreign: false, factoryData, breakImages, breakIds,/);
 });
@@ -113,6 +113,19 @@ test('a factory-data build keeps the strict snapshot warning, the break list and
 test('the breaks are fetched and checked before the firmware is written, and the choice cannot change meanwhile', () => {
   const click = slice('$("go").addEventListener("click"', '$("stockgo").addEventListener');
   assert.ok(click.indexOf('startingBreaks().load(breakIds)') < click.indexOf('run(img, selectedProduct'));
-  assert.match(click, /chosenStartingBreaks\(\)\.join\(\) !== breakIds\.join\(\)/);
+  assert.match(click, /const sameBreaks = \(\) => chosenStartingBreaks\(\)\.join\(\) === breakIds\.join\(\)/);
+  assert.match(click, /if \(!\$\("devagree"\)\.checked \|\| !sameBreaks\(\)\)/);
   assert.match(click, /installBlocked\(t\("breaksunavailable"\)\)/);
+});
+
+test('unverified firmware, changed selection, wrong identity and wrong factory map never fill', async () => {
+  const ids=['personal-br1-zone1'], images=imagesFor(ids,zones);
+  for (const mode of ['unverified','changed','identity','wrong-map']) {
+    const r=runtime(), original=r.up.waitFor;
+    if (mode==='unverified') r.up.verified=false;
+    if (mode==='identity') r.up.waitFor=async()=>({...await original(),id:{text:'SMK-37 Pro_901'}});
+    if (mode==='wrong-map') r.ctx.flashMap=()=>[{off:7,size:4096}];
+    await r.ctx.writeStartingBreaks(r.up,images,ids,()=>mode!=='changed',mode==='wrong-map'?[{off:9,size:4096}]:null);
+    assert.deepEqual(r.writes,[],mode);
+  }
 });

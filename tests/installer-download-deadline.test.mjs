@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
-function fixture(path, phase, {holdDigest = phase === 'digest'} = {}) {
+function fixture(path, phase, {holdDigest = phase === 'digest', hasFactoryData = false} = {}) {
   const source = readFileSync(new URL(path, import.meta.url), 'utf8');
   function span(start, next) {
     const begin = source.indexOf(start), end = source.indexOf(next, begin);
@@ -58,6 +58,7 @@ function fixture(path, phase, {holdDigest = phase === 'digest'} = {}) {
       : Promise.resolve('good'),
     productOf: raw => raw[0] === 2 ? 'Elite' : 'Pro',
     logicalImage: raw => raw,
+    slotPackageFiles: () => hasFactoryData ? {"fdata.bin": new Uint8Array([0x53,0x31,0x50,0x4b])} : {},
     verifyBundledController: (logical, pkg) => new Promise((resolve, reject) => {
       controllers.set(pkg.product, {logical, resolve, reject});
     }),
@@ -262,3 +263,15 @@ for (const path of ['../web/x0x_installer.html', '../web/product-site/install/in
     assert.equal(f.timers.size, 0);
   });
 }
+
+test('a catalog FDATA package still needs verified bundled controller and explicit consent', async () => {
+  const f = fixture('../web/product-site/install/index.html', 'bundled', {hasFactoryData:true});
+  await f.flush();
+  const checked = pendingController(f, 'Pro');
+  checked.resolve();
+  await f.run;
+  assert.equal(f.c.image, checked.logical);
+  assert.equal(f.c.verifiedDownload.model, 'pro');
+  assert.equal(f.ui.go.disabled, true);
+  assert.equal(f.timers.size, 0);
+});

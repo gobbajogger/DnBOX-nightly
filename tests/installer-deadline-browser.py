@@ -57,7 +57,7 @@ async def main(site):
     if mode=='normal':
      # The installer embeds its own picker. A link to the separate page
      # cannot complete a selection the visitor just made here.
-     picker=p.locator('#sample-picker')
+     picker=p.locator('#starting-breaks #sample-picker')
      choices=picker.get_by_role('checkbox')
      await choices.first.wait_for()
      for choice in await choices.all():
