@@ -294,8 +294,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 303193,
-      "sha256": "cd6848ee069a635a62958676c6cf111162c796b3cde6ca756e504ac10023aecc"
+      "bytes": 306456,
+      "sha256": "8ff3766591cf06977d86f3def1e727e7573e8dc3be14a07ad2e61c2991074798"
     },
     {
       "path": "install/install.css",

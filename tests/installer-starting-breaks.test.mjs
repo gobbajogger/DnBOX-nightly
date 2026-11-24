@@ -29,21 +29,27 @@ function runtime({blank = true, failWrite = false} = {}) {
     t: k => { const v = {...en}[k]; assert.ok(v !== undefined, 'missing text ' + k); return v; },
     sayK: (k, a = '') => said.push([k, a]), log: l => logs.push(l), $: () => ({value: 0}),
     readSlotLayout: async () => layout,
+    sameSlotMap: (actual, expected) => actual.slots.every((sl,k)=>sl.off===expected[k].off && sl.size===expected[k].size),
     readSlotBytes: async (l, k, off, n) => flash[k].slice(off, off + n),
-    writeSlotImage: async (l, k, img) => { if (failWrite) throw Error('slot 1: write at 0x200 failed (3)'); writes.push(k); flash[k].fill(0xff); flash[k].set(img); },
+    writeSlotImage: async (l, k, img, _onPart, guard) => { guard(); if (failWrite) throw Error('slot 1: write at 0x200 failed (3)'); writes.push(k); flash[k].fill(0xff); flash[k].set(img); },
   };
   env.globalThis = env;
   env.dnboxStartingBreaks = {selectedIds: () => [], names: ids => ids.map(id => startingBreakName(id, id)), fill: fillChosen};
   const ctx = createContext(env);
   new Script(slice('const startingBreaks = () =>', 'async function run(') + slice('let confirmPending = false;', '\n}\n') + '\n}\n' + '\nglobalThis.writeStartingBreaks = writeStartingBreaks;').runInContext(ctx);
-  const up = {verified:true, application:{product:'SMK-37 Pro_900'}, waitFor: async () => ({id:{text:'SMK-37 Pro_900'},link}), singlePort(){}, assertContinuous(){}};
-  return {ctx, up, said, writes, link, flash, logs};
+  const up = {verified:true, application:{product:'SMK-37 Pro_900'}, waitFor: async () => ({id:{text:'SMK-37 Pro_900'},link}),
+    assertApplicationTarget(back,product,verified,admitted) {
+      if (back.id.text !== product || verified !== this.application || !admitted()) throw Error('Target changed');
+    }};
+  const expected = layout.slots.map(({off,size})=>({off,size}));
+  return {ctx, up, said, writes, link, flash, logs,
+    write: (images, ids, admitted=()=>true, map=expected)=>ctx.writeStartingBreaks(up,images,ids,admitted,map)};
 }
 const names = ids => ids.map(id => startingBreakName(id, id)).join(', ');
 
 test('all chosen: both slots written after the firmware, and the names reported', async () => {
   const r = runtime();
-  await r.ctx.writeStartingBreaks(r.up, imagesFor(STARTING_BREAK_IDS, zones), [...STARTING_BREAK_IDS]);
+  await r.write(imagesFor(STARTING_BREAK_IDS, zones), [...STARTING_BREAK_IDS]);
   assert.deepEqual(r.writes, [0, 1]);
   assert.deepEqual(r.said.at(-1), ['breaksdone', names(STARTING_BREAK_IDS)]);
   assert.match(r.said.at(-1)[1], /Hot Pants.*Tasty/);
@@ -52,7 +58,7 @@ test('all chosen: both slots written after the firmware, and the names reported'
 
 test('some chosen: only those are written', async () => {
   const ids = ['personal-br2-zone2'], r = runtime();
-  await r.ctx.writeStartingBreaks(r.up, imagesFor(ids, zones), ids);
+  await r.write(imagesFor(ids, zones), ids);
   assert.deepEqual(r.writes, [1]);
   assert.ok(r.flash[0].every(b => b === 0xff));
   assert.deepEqual(r.said.at(-1), ['breaksdone', 'Tasty']);
@@ -66,14 +72,14 @@ test('none chosen: the installer never starts the step', () => {
 
 test('a keyboard that already has samples keeps them', async () => {
   const r = runtime({blank: false});
-  await r.ctx.writeStartingBreaks(r.up, imagesFor(STARTING_BREAK_IDS, zones), [...STARTING_BREAK_IDS]);
+  await r.write(imagesFor(STARTING_BREAK_IDS, zones), [...STARTING_BREAK_IDS]);
   assert.deepEqual(r.writes, []);
   assert.deepEqual(r.said.at(-1), ['breakskept', '']);
 });
 
 test('a failed write is reported after the firmware, not thrown', async () => {
   const r = runtime({failWrite: true});
-  await r.ctx.writeStartingBreaks(r.up, imagesFor(['personal-br1-zone1'], zones), ['personal-br1-zone1']);
+  await r.write(imagesFor(['personal-br1-zone1'], zones), ['personal-br1-zone1']);
   assert.equal(r.said.at(-1)[0], 'breaksfailed');
   assert.equal(r.link.closed, 1);
 });
@@ -124,8 +130,7 @@ test('unverified firmware, changed selection, wrong identity and wrong factory m
     const r=runtime(), original=r.up.waitFor;
     if (mode==='unverified') r.up.verified=false;
     if (mode==='identity') r.up.waitFor=async()=>({...await original(),id:{text:'SMK-37 Pro_901'}});
-    if (mode==='wrong-map') r.ctx.flashMap=()=>[{off:7,size:4096}];
-    await r.ctx.writeStartingBreaks(r.up,images,ids,()=>mode!=='changed',mode==='wrong-map'?[{off:9,size:4096}]:null);
+    await r.ctx.writeStartingBreaks(r.up,images,ids,()=>mode!=='changed',mode==='wrong-map'?[{off:9,size:4096}]:undefined);
     assert.deepEqual(r.writes,[],mode);
   }
 });

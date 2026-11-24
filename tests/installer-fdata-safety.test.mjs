@@ -36,7 +36,7 @@ function fixture(mode){
   const input={name:'SMK',state:'connected'},output={name:'SMK',state:'connected'};
   const link={input,output,drain(){reply=null;},close(){},send(frame){
     trace.push([...frame]);
-    if(frame[4]===15)reply=info(15,mode==='bad-layout'?[0,0]:mode.startsWith('occupied')?occupiedSlots():mode.startsWith('fresh')?emptyExtended():zeroSlots());
+    if(frame[4]===15)reply=info(15,mode==='bad-layout'?[0,0]:mode.startsWith('occupied')?occupiedSlots():emptyExtended());
     if(frame[4]===16){
       const addr=frame.slice(5,9), data=new Uint8Array(frame[9]*2).fill(255);
       if(mode==='fresh-dirty-header')data[0]=1;
@@ -87,7 +87,7 @@ test('unretained archive and dirty snapshot stop; retained archive plus unchange
   const oldLayout={count:3,size:81920,ext:true,slots:[
    {nz:0,used:0,size:81920,off:0xC2000},{nz:1,used:70,size:122880,off:0xD6000},{nz:0,used:0,size:32768,off:0xB3000}
   ]};
-  assignBackup(async()=>({layout:oldLayout,images:[null,slot,null]}));
+  assignBackup(async(_link,_progress,preflight)=>({layout:preflight??oldLayout,images:[null,slot,null]}));
   const realFinish=state.up.finishApplication.bind(state.up);
   // Stop after exact application verification, before the separate sample
   // restoration exchange. The restore/map check runs in its own integration gate.
