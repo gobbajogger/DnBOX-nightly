@@ -38,9 +38,9 @@ window.__dnr3Sent = [];
 window.__installDnbox = async (answer) => {
   const d = await import('/remote/dnr3.mjs');
   const listeners = new Set();
-  const input = {state: 'connected', addEventListener: (t, f) => listeners.add(f), removeEventListener: (t, f) => listeners.delete(f), open: async () => {}};
+  const input = {name: 'DnBOX',state: 'connected', addEventListener: (t, f) => listeners.add(f), removeEventListener: (t, f) => listeners.delete(f), open: async () => {}};
   const reply = (op, seq, fields) => { const frame = d.encodeReply(op, seq, d.STATUS.OK, 1, fields); setTimeout(() => listeners.forEach(f => f({data: frame})), 1); };
-  const output = {state: 'connected', open: async () => {}, send(bytes) {
+  const output = {name: 'DnBOX',state: 'connected', open: async () => {}, send(bytes) {
     const b = Uint8Array.from(bytes);
     if (b[0] !== 0xF0) { window.__dnr3Sent.push({midi: Array.from(b)}); return; }
     const r = d.decodeRequest(b); window.__dnr3Sent.push({op: r.op, fields: r.fields});
@@ -207,6 +207,7 @@ async def connection(page, w, h):
     await expect(page.locator('#conn-state')).to_have_text('Connected', timeout=5000)
     await page.evaluate('window.__dnr3Sent.length = 0')
     await page.locator('[data-engine="drum909"]').click()
+    await expect(page.locator('[data-drum-source=draft]')).to_contain_text('not sent')
     await page.locator('#other-view [data-drum-note="38"]').nth(4).click()
     await page.locator('#other-view [data-drum-accent="5"]').click()
     await page.locator('[data-tempo="up"]').click()
@@ -218,12 +219,10 @@ async def connection(page, w, h):
     sent = await page.evaluate('window.__dnr3Sent')
     ops = [(s['op'], s['fields']) for s in sent if 'op' in s]
     want = [
-        (0x21, lambda f: f['part'] == 0 and f['step'] == 4 and f['record'] == {'track': 1, 'on': 1, 'vel': 127}),
-        (0x21, lambda f: f['part'] == 0 and f['step'] == 5 and f['record']['track'] == 11 and f['record']['on'] == 1),
         (0x27, lambda f: f['bpm_x10'] == 1260),
-        (0x22, lambda f: f['part'] == 0 and f['field'] == 1 and f['value'] == 1),
-        (0x21, lambda f: f['part'] == 4 and f['step'] == 2 and f['record'] == {'on': 1, 'slice': 0}),
     ]
+    assert await page.locator('[data-break-source]').get_attribute('data-break-source') == 'draft'
+    assert not any(o in (0x21,0x22) for o,f in ops), ops # no STEP capability
     for op, ok in want:
         assert any(o == op and ok(f) for o, f in ops), (hex(op), ops)
 
@@ -242,7 +241,7 @@ async def fw_motion(page, w, h):
         if (document.getElementById('play').classList.contains('beat')) beat = true;
         if (performance.now() - t0 > 4200) done({cols: [...seen], fired, beat}); else requestAnimationFrame(tick); })(); })""")
     assert len(cols['cols']) >= 4, cols
-    assert cols['fired'], 'a hit flashes when the playhead crosses it'
+    assert not cols['fired'], 'Draft playhead cannot claim that a firmware voice fired'
     assert cols['beat'], 'play triangle flashes white on the beat'
     ph_rows = await page.eval_on_selector_all('#other-view .fw-drum-grid .seq-step.ph', 'e => new Set(e.map(c => c.dataset.col)).size')
     assert ph_rows <= 1, 'one playhead column'

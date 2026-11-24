@@ -30,7 +30,10 @@ export class Dnr3Client {
     try { frame = d.decodeFrame(bytes); } catch { return; }
     if (frame.op === d.OP.NOTIFY) {
       let n; try { n = d.decodeNotify(bytes); } catch { return; }
-      const gap = this.rev !== null && ((n.rev - this.rev) & 0xFFFFFFF) !== 1;
+      const delta = this.rev === null ? 0 : (n.rev - this.rev) & 0xFFFFFFF;
+      // The firmware groups several notifications under one revision (including POSITION).
+      if (delta >= 0x8000000) return; // a stale notification must not move the clock backwards
+      const gap = delta > 1;
       this.rev = n.rev;
       this.emit({type: 'notify', ...n, gap});
       if (gap) this.emit({type: 'resync', reason: 'revision gap'});
@@ -66,11 +69,13 @@ export class Dnr3Client {
     this.queue = result.catch(() => {});
     return result;
   }
-  async connect({watch = 0x7F} = {}) {
+  async connect({watch = 0x7F, admit} = {}) {
     const h = await this.request(d.OP.HELLO, {client_proto: 3});
+    if (admit && !admit(h.fields)) throw new Dnr3Unavailable('This firmware is not approved for live Remote controls');
     this.hello = h.fields;
     const o = await this.request(d.OP.OPEN, {client_id: this.clientId});
     this.epoch = o.fields.epoch;
+    if (!(this.hello.caps & d.CAP.VOICE)) watch &= ~d.WATCH.VOICE;
     if (watch && (this.hello.caps & d.CAP.WATCH)) await this.request(d.OP.WATCH, {epoch: this.epoch, mask: watch});
     this.startKeepalive();
     return this.hello;
@@ -83,12 +88,22 @@ export class Dnr3Client {
   state() { return this.request(d.OP.STATE).then(r => r.fields); }
   describe(addr) { return this.request(d.OP.DESCRIBE, addr).then(r => r.fields); }
   paramGet(params) { return this.request(d.OP.PARAM_GET, {params}).then(r => r.fields.params); }
-  paramSet(addr, value, expect = d.KEEP) { return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value}); }
-  stepGet(part, pat, step) { return this.request(d.OP.STEP_GET, {part, pat, step}).then(r => r.fields); }
+  paramSet(addr, value, expect = d.KEEP, {bank} = {}) {
+    if (bank!==undefined && !this.has(d.CAP.BASS_BANK_GUARD)) return Promise.reject(new Dnr3Unavailable('Firmware cannot guard the live bass bank'));
+    return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value, expect_bank:bank});
+  }
+  stepGet(part, pat, step, track) { return this.request(d.OP.STEP_GET, {part, pat, step, track}).then(r => r.fields); }
   stepSet(part, pat, step, record, expectCrc = d.KEEP) { return this.request(d.OP.STEP_SET, {epoch: this.epoch, part, pat, step, expect_crc: expectCrc, record}); }
   partSet(part, pat, field, value) { return this.request(d.OP.PART_SET, {epoch: this.epoch, part, pat, field, value}); }
   cue(part, pat) { return this.request(d.OP.CUE, {epoch: this.epoch, part, pat: pat ?? 127}); }
   transportAction(action) { return this.request(d.OP.TRANSPORT, {epoch: this.epoch, action}); }
+  async record(command = 2) {
+    if (!this.has(d.CAP.RECORD)) throw new Dnr3Unavailable('Firmware cannot read or change Record');
+    if (![0, 1, 2].includes(command)) throw new RangeError('Invalid Record command');
+    const {record} = (await this.request(d.OP.RECORD, {epoch: this.epoch, command})).fields;
+    if (record !== 0 && record !== 1) throw Error('Invalid firmware Record state');
+    return record;
+  }
   tempo(bpmX10) { return this.request(d.OP.TEMPO, {epoch: this.epoch, bpm_x10: bpmX10}); }
   mute(bit, on, queued = 0) { return this.request(d.OP.MUTE, {epoch: this.epoch, bit, on: on ? 1 : 0, queued: queued ? 1 : 0}); }
   async patternDump(pat, chunk = 112) {

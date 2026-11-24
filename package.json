@@ -22,6 +22,15 @@
     "test:roadmap": "python3 tools/generate_roadmap.py --check --integration-sha \"${DNBOX_GATE_BASE_SHA:-$(git rev-parse HEAD)}\"",
     "test:visual": "python3 tests/visual/visual_gate.py",
     "test:visual:update": "python3 tests/visual/visual_gate.py --update",
-    "test:firmware-e2e": "python3 tests/product-remote/firmware-e2e-browser.py"
+    "test:firmware-e2e": "python3 tests/product-remote/firmware-e2e-browser.py",
+    "test:remote-device": "python3 tests/product-remote/wasm-web-midi-browser.py",
+    "test:remote-motion-device": "python3 tests/product-remote/wasm-live-motion-browser.py",
+    "test:remote-drum-device": "python3 tests/product-remote/drum-pages-wasm-browser.py",
+    "test:remote-mix-device": "python3 tests/product-remote/wasm-live-mix-browser.py",
+    "test:remote-bass-device": "python3 tests/product-remote/wasm-live-bass-roll-browser.py",
+    "test:remote-break-device": "python3 tests/product-remote/wasm-break-steps-browser.py",
+    "test:remote-clip-device": "python3 tests/product-remote/wasm-live-clip-browser.py",
+    "test:remote-chicago-device": "python3 tests/product-remote/wasm-live-chicago-browser.py",
+    "test:remote-glyph-device": "python3 tests/product-remote/wasm-live-glyph-browser.py"
   }
 }

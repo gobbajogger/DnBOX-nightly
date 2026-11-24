@@ -42,9 +42,42 @@ MARK = '''()=>{let n=window.__unboundProbe||0;const out=[];for(const e of docume
  const id='c'+(n++);e.dataset.unboundProbe=id;
  const label=(e.getAttribute('aria-label')||e.textContent||e.id||'').trim().replace(/\\s+/g,' ').slice(0,60);
  out.push({id,tag:e.tagName.toLowerCase(),type:e.type||'',role:e.getAttribute('role')||'',href:e.getAttribute('href'),
-  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(view|engine|param|mix-|sound-|project-|tab|mode|break-view|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
+  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(drum-page|roll-source|view|engine|param|mix-|sound-|project-|tab|mode|break-view|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
   label,current:e.getAttribute('aria-current')==='page'||(e.getAttribute('aria-pressed')==='true'&&!e.matches('#rec,#multi,#snap'))});}
  window.__unboundProbe=n;return out;}'''
+
+# Some source controls replace their entire panel when selected. Discover their
+# siblings by semantic role after that replacement, not a stale discovery ID.
+CURRENT_GROUPS = ('data-drum-page', 'data-mix-mode', 'data-roll-source')
+
+async def reselect_semantic(page, item):
+    key = next((part for part in item['key'].split() if
+                part.split('=',1)[0] in CURRENT_GROUPS and '=' in part), None)
+    if key is None:
+        return None
+    attr,value = key.split('=',1)
+    selected = page.locator(f'button[{attr}="{value}"]')
+    group = page.locator(f'button[{attr}]:visible')
+    assert await selected.get_attribute('aria-pressed') == 'true', (key,'not actually selected')
+    assert await page.locator(f'button[{attr}][aria-pressed=true]:visible').count() == 1, (key,'ambiguous selection')
+    alternatives=[]
+    for candidate in await group.all():
+        if await candidate.get_attribute(attr)!=value:
+            alternatives.append(candidate)
+    alternate=None
+    for candidate in alternatives:
+        if await candidate.is_enabled():
+            alternate=candidate
+            break
+    if alternate is None:
+        assert alternatives and all([await b.is_disabled() for b in alternatives]), (key,'no truthful disabled alternatives')
+        return 'disabled'
+    await alternate.click()
+    await page.locator(f'button[{attr}][aria-pressed=true]').wait_for()
+    assert await page.locator(f'button[{attr}][aria-pressed=true]').get_attribute(attr) != value, (key,'alternate did not select')
+    await selected.click()
+    assert await selected.get_attribute('aria-pressed') == 'true', (key,'could not return')
+    return 'confirmed'
 
 SIBLING = '''id=>{const e=document.querySelector('[data-unbound-probe="'+id+'"]');if(!e)return 'none';
  const kind=x=>x.tagName+'|'+[...x.attributes].map(a=>a.name).filter(n=>n.startsWith('data-')&&n!=='data-unbound-probe').sort().join(',')+'|'+x.className;
@@ -92,6 +125,14 @@ async def gesture(page, item):
     loc = await resolve(page, item)
     if loc is None or not await loc.is_visible() or not await loc.is_enabled():
         return 'gone'   # hidden or disabled by an earlier gesture: the caller retries from a fresh view
+    if 'data-project-action=open' in item['key']:
+        # Opening a real browser-owned file chooser is not a DOM mutation.
+        async with page.expect_file_chooser(timeout=2000) as cho:
+            await loc.click(timeout=2000)
+        chooser = await cho.value
+        assert await chooser.element.get_attribute('id') == 'draft-file', 'Wrong project chooser'
+        assert not chooser.is_multiple(), 'Expected one project file'
+        return 'filechooser'
     if 'data-note=' in item['key'] or 'data-lane-step=' in item['key']:
         before = await page.evaluate(STATE)
         await loc.focus()
@@ -226,9 +267,24 @@ async def walk(browser, size):
                 checked += 1
                 tested.add((item['key'], item['label']))
                 after = await page.evaluate(STATE)
-                if note not in ('download', 'file') and after == before and item.get('current'):
+                if note not in ('download', 'file', 'filechooser') and after == before and item.get('current'):
                     # Already selected: select a sibling of the same kind, then selecting this one must switch back.
-                    sibling = await page.evaluate(SIBLING, item['id'])
+                    try:
+                        semantic = await reselect_semantic(page,item)
+                    except Exception as error:
+                        unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} selection witness failed: {error}')
+                        print('UNBOUND', unbound[-1], flush=True)
+                        dirty=True
+                        continue
+                    if semantic == 'confirmed':
+                        dirty=True
+                        continue
+                    if semantic == 'disabled':
+                        allowed.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} (sole selected; all semantic alternatives disabled)')
+                        continue
+                    current_loc = await resolve(page,item)
+                    current_id = await current_loc.get_attribute('data-unbound-probe') if current_loc is not None else None
+                    sibling = await page.evaluate(SIBLING,current_id)
                     if sibling == 'disabled':
                         allowed.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} (alternatives unavailable in Draft)')
                         continue
@@ -241,7 +297,7 @@ async def walk(browser, size):
                             await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
                         after = await page.evaluate(STATE)
                         dirty = True
-                if note not in ('download', 'file') and after == before:
+                if note not in ('download', 'file', 'filechooser') and after == before:
                     unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r}' + (f' ({note})' if note else ''))
                     print('UNBOUND', unbound[-1], flush=True)
                 left = await page.evaluate("""v=>{const on=document.querySelector('[data-view="'+v+'"][aria-current="page"],[data-view="'+v+'"][aria-pressed="true"]');return !!document.querySelector('dialog[open]')||location.pathname!=='/remote/'||!on}""", view)

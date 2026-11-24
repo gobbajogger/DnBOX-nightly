@@ -94,3 +94,10 @@ Current owner handoff supersedes older Dot/Codex execution guidance and preserve
 - `tests/product-remote/firmware-glyphs-labels.test.mjs` regenerates both when a firmware checkout is at `DNBOX_FIRMWARE_DIR` (default /tmp/fw73) and checks every Remote parameter against the table; `remote-controls-browser.py fw_motion` checks the motion.
 - Not firmware-derived yet: the R22 knob/slider drawings (need the 73749f55 screen renderer rebuilt).
 - `remote/preset-banks.json` (`scripts/sync-preset-banks.mjs <firmware checkout> [<superj6 bank dir>]`): SuperJ6 and Synth One bank selector and presets per bank, original order and names. A preset is sent only when it has a firmware number within the preset select's range; SuperJ6 originals get numbers automatically once the firmware's SUPERJ6 list ends with them.
+
+
+For connected drum feedback, DNR3 POSITION moves the playhead column and a real
+DNR3 VOICE event flashes the sounding row. VOICE contains no step index or
+trigger source, so the page must not guess which programmed cell fired. Draft
+playback shows position only. Preset banks remain browsable with source names,
+but Draft choices do not select a preset on the instrument.

@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 80485,
-      "sha256": "9e645309fed6824dc4fe87a168dd68cfcdbde89bde8d4f4191bae459222c7f90"
+      "bytes": 94091,
+      "sha256": "ed13e1eaeeb77eb36c3460125c65823e92f8db322bed663c66e757a004f816a0"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -788,9 +788,14 @@
       "sha256": "66b0ed3948c69ea61004c81fd9ec0b4ab1a22c36579d137e16130e30e680adce"
     },
     {
+      "path": "remote/bass-live-roll.css",
+      "bytes": 2295,
+      "sha256": "f952f0bc00274cbb5b96b8b03d94a01bd793e98744be5a0ca254d26f29a235df"
+    },
+    {
       "path": "remote/break-sequence.mjs",
-      "bytes": 8800,
-      "sha256": "9a107df4d1060f3ca3bb69ea235759261afb04b9164caa8fbd9d0aab8184d519"
+      "bytes": 10534,
+      "sha256": "49a151a78bdcbe1546bb9ebc2e2723829f5115ed7b79a54593e7c48217e40ea3"
     },
     {
       "path": "remote/catalog.json",
@@ -863,19 +868,49 @@
       "sha256": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba"
     },
     {
+      "path": "remote/dnr3-bass-roll.mjs",
+      "bytes": 12780,
+      "sha256": "9e9f7d5adda766c53f1ec3f6dea998bb0cd1274f669565e94512aa2cf1ead00a"
+    },
+    {
+      "path": "remote/dnr3-break-steps.mjs",
+      "bytes": 3617,
+      "sha256": "374b44ccabb9d00db2b6dfe26a9cb85da0cd0a7c56713207dcef23176469486a"
+    },
+    {
+      "path": "remote/dnr3-chicago.mjs",
+      "bytes": 5613,
+      "sha256": "817b06c80ce26a800a6eeb77a97831e02820667af2f921ec35aef88abcd46155"
+    },
+    {
       "path": "remote/dnr3-client.mjs",
-      "bytes": 9112,
-      "sha256": "2e11dc1647af29c1851e4950473142e7f6404e857d1e951757eac3e4f028a70b"
+      "bytes": 10138,
+      "sha256": "4edd1cd07f63eae148ef207ff9452a236f1dc26f840a94d10a3126ac53747b38"
+    },
+    {
+      "path": "remote/dnr3-clips.mjs",
+      "bytes": 3444,
+      "sha256": "1b7e5ac04797e030d17e028ea9f7226a3a3025dd328386f8bda1e019862061d3"
     },
     {
       "path": "remote/dnr3-link.mjs",
-      "bytes": 8147,
-      "sha256": "d939dae08eaed84c3c586f546f8dc0cbc755b0122b377aaeb2d884a2193c3224"
+      "bytes": 11630,
+      "sha256": "655853d1c786e943c274882162b4eb4ad420d82768e34a9ba4787e5b8d1836a3"
+    },
+    {
+      "path": "remote/dnr3-mix.mjs",
+      "bytes": 3267,
+      "sha256": "aeaa385d052dad9d72668d77a2ffa0fabbd6cbdc93d91ffae9ec18dcec63098e"
+    },
+    {
+      "path": "remote/dnr3-motion.mjs",
+      "bytes": 5162,
+      "sha256": "2173ef5c6de9f6bd49b91d6cd370f52e5dccb8f95cda4bf2ca883e483cee4121"
     },
     {
       "path": "remote/dnr3.mjs",
-      "bytes": 14509,
-      "sha256": "df6ce82318ca178ad4d8f5f2cd800fd41f157406501a3886b192ead604c88c84"
+      "bytes": 15934,
+      "sha256": "eb905f942dbac8b0eb39f292e457ebdc76c9ef2a0d139771db97151d2e3fc16b"
     },
     {
       "path": "remote/draft-file.mjs",
@@ -894,8 +929,8 @@
     },
     {
       "path": "remote/drum-options.mjs",
-      "bytes": 4731,
-      "sha256": "f64f5da8d1fc7ff7059ef637953e5267556f324e1074fade5890f27fcc57ebff"
+      "bytes": 4770,
+      "sha256": "d54952507892a6e4c367ce1cc626b344b28c2fddf21c049059c1c2683e1fbc13"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -915,12 +950,12 @@
     {
       "path": "remote/firmware-glyphs.json",
       "bytes": 9532,
-      "sha256": "817f2f95fc96a7167768ba5fc5120ebf43342b3ecd7db52944dd7380cab3825d"
+      "sha256": "6f0e5d579bcf838f79c46c4a25d8c12630d389c260503969d2549efc742e0178"
     },
     {
       "path": "remote/firmware-labels.json",
       "bytes": 544827,
-      "sha256": "297bec1a6f90f8ed33345cd3623f496dec7cb224fe1e9df21a5bc46eabc2ee58"
+      "sha256": "1ad02333d6a67afc4ea4dacbc667dd289a185d6bd2f6ed80659165d5810dd6f1"
     },
     {
       "path": "remote/firmware-labels.mjs",
@@ -939,8 +974,8 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 11282,
-      "sha256": "2ba4e9f967396be38ae11beb58ffa2e9acab2eb12a75f31edc33caa7ddefbfd0"
+      "bytes": 12466,
+      "sha256": "48f1b2bee32a5c6c455f119cd228976715c485e20a3fc7bf8469cc9dd5a32b15"
     },
     {
       "path": "remote/fw-glyphs.mjs",
@@ -989,8 +1024,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7406,
-      "sha256": "cbcec38da68d9ba98920061e980476310d9ede03c10057f117c16c60410f19bd"
+      "bytes": 7456,
+      "sha256": "761be93b86df373d43f706c7d265c1ff81e17ea86dccacf55645b14673d2243a"
     },
     {
       "path": "remote/keybed-scroll.mjs",
@@ -1001,6 +1036,11 @@
       "path": "remote/lane.mjs",
       "bytes": 2792,
       "sha256": "bcbbf7e033f6774a731c6f2dd7e3045ef1b15d830503e039b19dfdd8b0030155"
+    },
+    {
+      "path": "remote/live-drum-pages.mjs",
+      "bytes": 6740,
+      "sha256": "a602fa48e470b57e4c727a350ef730cb05676a93d8020838c6a85db25b26edc9"
     },
     {
       "path": "remote/local-instrument.mjs",
@@ -1084,13 +1124,13 @@
     },
     {
       "path": "remote/runtime-mix-map.mjs",
-      "bytes": 2439,
-      "sha256": "b3a7f44bb361f970340a4349ae8c3838262cf8306690c0e78be35c6e2b4a3ec2"
+      "bytes": 2626,
+      "sha256": "5a628c1c4f14563ce596bc4cfa5a575e5eac26ac5c66029049abd57f7521fffc"
     },
     {
       "path": "remote/runtime-mix-state.mjs",
-      "bytes": 4116,
-      "sha256": "d241ce343a2622c0d0cc12aff53a7921fe1ba6855f2006a74083f782ecf897aa"
+      "bytes": 4853,
+      "sha256": "1faa83a4ab18ddb2825c251abdb6539ea3b00d887e3decc32afb99d28645e62e"
     },
     {
       "path": "remote/runtime-sound-map.mjs",
@@ -1134,8 +1174,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 43498,
-      "sha256": "848a4c6e26e05c5decf48dd067de478823598e4b63a9787821a57a195b4d8187"
+      "bytes": 47526,
+      "sha256": "01f88e4d07f56dd2b38d83190c58134a22ec3c303542b41c55b732b04db89b7a"
     },
     {
       "path": "remote/tempo-control.mjs",

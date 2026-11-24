@@ -35,7 +35,7 @@ export function changedBreakSteps(before, after) {
   return out;
 }
 
-export function mountBreakSequence(root, state, onEdit) {
+export function mountBreakSequence(root, state, onEdit, {device}={}) {
   let serial = 0, picker = null, selectedIds;
   function stop() {
     serial++;
@@ -43,17 +43,32 @@ export function mountBreakSequence(root, state, onEdit) {
     picker = null;
   }
   let selectedStep = 0;
+  const live=()=>device?.mode()==='firmware';
   function paint() {
-    for (const b of root.querySelectorAll('[data-break-loop]')) b.setAttribute('aria-pressed', String((state.loops[Number(b.dataset.breakLoop)] ?? '') === b.dataset.breakValue));
-    for (const b of root.querySelectorAll('[data-break-rate]')) b.setAttribute('aria-pressed', String(b.dataset.breakRate === state.rate));
-    for (const b of root.querySelectorAll('[data-break-on]')) { const i = Number(b.dataset.breakOn); b.setAttribute('aria-pressed', String(!!state.steps?.[i])); b.classList.toggle('hit', !!state.steps?.[i]); }
+    const {snapshot,working}=device?.state()??{};
+    const deviceMode=live(), records=deviceMode?snapshot?.rows:null;
+    const label=root.querySelector('[data-break-source]');
+    if(label) {
+      label.dataset.breakSource=deviceMode?'firmware':'draft';
+      label.textContent=deviceMode?(snapshot?.error||(!records?'Firmware · reading BREAK steps…':
+        'Firmware · P'+String(snapshot.pat+1).padStart(2,'0')+(snapshot.playing?' · Stop to edit':working?' · checking…':''))):
+        'Draft · steps and preview choices are not sent to the device.';
+    }
+    const limit=root.querySelector('[data-break-limit]');
+    if(limit) limit.hidden=!deviceMode;
+    for(const b of root.querySelectorAll('[data-break-loop],[data-break-rate]'))b.disabled=deviceMode;
+    for(const b of root.querySelectorAll('[data-break-on],[data-break-step],[data-break-slice]'))
+      b.disabled=deviceMode&&(!records||working||snapshot.playing);
+    for (const b of root.querySelectorAll('[data-break-loop]')) b.setAttribute('aria-pressed', String(!deviceMode&&(state.loops[Number(b.dataset.breakLoop)] ?? '') === b.dataset.breakValue));
+    for (const b of root.querySelectorAll('[data-break-rate]')) b.setAttribute('aria-pressed', String(!deviceMode&&b.dataset.breakRate === state.rate));
+    for (const b of root.querySelectorAll('[data-break-on]')) { const i = Number(b.dataset.breakOn); b.setAttribute('aria-pressed', deviceMode&&!records?'mixed':String(deviceMode?!!records[i].on:!!state.steps?.[i])); b.classList.toggle('hit',deviceMode?!!records?.[i]?.on:!!state.steps?.[i]); }
     for (const b of root.querySelectorAll('[data-break-step]')) {
-      const i = Number(b.dataset.breakStep), v = state.slices[i];
-      b.textContent = v ? String(v) : '–'; b.value = String(v); b.dataset.value = String(v);
-      b.setAttribute('aria-label', 'Step ' + (i + 1) + ' slice ' + (v ? v : 'auto')); b.title = i === selectedStep ? 'Tap again for the next slice' : 'Select step ' + (i + 1);
+      const i = Number(b.dataset.breakStep), v = deviceMode ? records?.[i]?.slice : state.slices[i];
+      b.textContent = v===undefined ? '…' : v ? String(v) : '–'; b.value = v===undefined?'':String(v); b.dataset.value = b.value;
+      b.setAttribute('aria-label', 'Step ' + (i + 1) + ' slice ' + (v===undefined?'unconfirmed':v ? v : 'auto')); b.title = i === selectedStep ? 'Tap again for the next slice' : 'Select step ' + (i + 1);
       b.setAttribute('aria-pressed', String(i === selectedStep)); b.classList.toggle('selected', i === selectedStep); b.classList.toggle('lit', !!v && !!state.steps?.[i]);
     }
-    for (const b of root.querySelectorAll('[data-break-slice]')) b.setAttribute('aria-pressed', String(Number(b.dataset.breakSlice) === state.slices[selectedStep]));
+    for (const b of root.querySelectorAll('[data-break-slice]')) b.setAttribute('aria-pressed', String(Number(b.dataset.breakSlice) === (deviceMode?records?.[selectedStep]?.slice:state.slices[selectedStep])));
   }
   async function show() {
     stop();
@@ -79,7 +94,7 @@ export function mountBreakSequence(root, state, onEdit) {
         const row = el('div', 'break-loop-row'); row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Loop ' + name);
         row.append(el('span', 'break-row-label', name));
         row.append(chip('–', {breakLoop: index, breakValue: ''}, false));
-        for (const a of assets) row.append(chip(startingBreakName(a.id, a.name), {breakLoop: index, breakValue: a.id}, false));
+        for (const a of assets) row.append(chip(startingBreakName(a.id,a.name), {breakLoop: index, breakValue: a.id}, false));
         loops.append(row);
       }
       const rateRow = el('div', 'break-loop-row break-rate'); rateRow.setAttribute('role', 'group'); rateRow.setAttribute('aria-label', 'Rate');
@@ -100,32 +115,39 @@ export function mountBreakSequence(root, state, onEdit) {
       const pad = el('div', 'break-pad'); pad.setAttribute('role', 'group'); pad.setAttribute('aria-label', 'Slice');
       pad.append(chip('AUTO', {breakSlice: 0}, false));
       for (let n = 1; n <= 32; n++) pad.append(chip(String(n), {breakSlice: n}, false));
-      editor.append(loops, grid, pad);
+      const source=el('p','break-row-label');source.dataset.breakSource='';
+      const limit=el('p','break-row-label','Loop names and rate are Draft only. Device slice numbers refer to its installed loop.');limit.dataset.breakLimit='';
+      editor.append(source,limit,loops, grid, pad);
       root.replaceChildren(editor, previews); paint();
     } catch {
       if (own === serial) root.textContent = 'Starting breaks unavailable. Reopen Sequence to retry.';
     }
   }
   function edit(mutate) { const next = validateBreakSequence(state); mutate(next); onEdit(validateBreakSequence(next)); paint(); }
+  function stepEdit(step, change) {
+    if(live()){void device.edit(step,change);return;}
+    edit(n=>{const r=change({on:n.steps[step]?1:0,slice:n.slices[step]});n.steps[step]=!!r.on;n.slices[step]=r.slice;});
+  }
+  function sliceEdit(step, operation){stepEdit(step,r=>({...r,slice:operation(r.slice)}));}
   root.addEventListener('click', e => {
-    const b = e.target.closest?.('button'); if (!b || !root.contains(b)) return;
+    const b = e.target.closest?.('button'); if (!b || !root.contains(b) || b.disabled) return;
     if (b.dataset.breakLoop !== undefined) edit(n => { n.loops[Number(b.dataset.breakLoop)] = b.dataset.breakValue || null; });
     else if (b.dataset.breakRate !== undefined) edit(n => { n.rate = b.dataset.breakRate; });
-    else if (b.dataset.breakOn !== undefined) edit(n => { const i = Number(b.dataset.breakOn); n.steps[i] = !n.steps[i]; });
+    else if (b.dataset.breakOn !== undefined) stepEdit(Number(b.dataset.breakOn),r=>({...r,on:1-r.on}));
     else if (b.dataset.breakStep !== undefined) {
       // First tap selects the step for the slice pad; tapping the selected step again steps its slice (AUTO, 1..32, AUTO).
       const i = Number(b.dataset.breakStep);
       if (i !== selectedStep) { selectedStep = i; paint(); }
-      else edit(n => { n.slices[i] = (n.slices[i] + 1) % 33; });
+      else sliceEdit(i,v=>(v+1)%33);
     }
-    else if (b.dataset.breakSlice !== undefined) edit(n => { n.slices[selectedStep] = Number(b.dataset.breakSlice); });
+    else if (b.dataset.breakSlice !== undefined) sliceEdit(selectedStep,()=>Number(b.dataset.breakSlice));
   });
   root.addEventListener('keydown', e => {
-    const b = e.target.closest?.('[data-break-step]'); if (!b || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    const b = e.target.closest?.('[data-break-step]'); if (!b || b.disabled || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
     e.preventDefault(); selectedStep = Number(b.dataset.breakStep);
-    edit(n => { n.slices[selectedStep] = Math.max(0, Math.min(32, n.slices[selectedStep] + (e.key === 'ArrowUp' ? 1 : -1))); });
+    sliceEdit(selectedStep,v=>Math.max(0,Math.min(32,v+(e.key==='ArrowUp'?1:-1))));
   });
   // Double-tap a slice cell: back to AUTO (the firmware default).
-  root.addEventListener('dblclick', e => { const b = e.target.closest?.('[data-break-step]'); if (b) edit(n => { n.slices[Number(b.dataset.breakStep)] = 0; }); });
+  root.addEventListener('dblclick', e => { const b = e.target.closest?.('[data-break-step]'); if (b && !b.disabled) sliceEdit(Number(b.dataset.breakStep),()=>0); });
   return {show, stop, paint};
 }

@@ -137,6 +137,12 @@ async def gesture_edits(page):
         print(f'PASS Undo + resize stable geometry {width}x{height}',flush=True)
 
 async def gesture_edits_at_size(page):
+    await expect(page.locator('#roll-grid .note').first).to_be_visible()
+    # At portrait fit, a one-step note can be narrower than the two pointer regions.
+    # Use the real editor's zoom input before testing its move and resize hit targets.
+    if await page.evaluate('innerWidth < 430'):
+        await page.locator('#zoom').evaluate('(el)=>{el.value="3";el.dispatchEvent(new Event("input"))}')
+    await page.wait_for_function("[...document.querySelectorAll('#roll-grid .note')].some(n=>n.getBoundingClientRect().width>24)", timeout=3500)
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
@@ -169,6 +175,8 @@ async def gesture_edits_at_size(page):
     await expect(page.locator('#roll-grid .note')).to_have_count(count)
 
 async def gesture_delete(page):
+    await expect(page.locator('#roll-grid .note').first).to_be_visible()
+    await page.wait_for_function("[...document.querySelectorAll('#roll-grid .note')].some(n=>n.getBoundingClientRect().width>24)", timeout=3500)
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()

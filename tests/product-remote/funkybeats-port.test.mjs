@@ -45,7 +45,7 @@ test('actual upstream launcher renders all five local rows without fake playback
  const html=renderFunkyBeatsLauncher({parts:['909','808','Bass A','Bass B','BREAK'],targets:[0,null,31,null,5]});
  assert.equal((html.match(/data-launch-part=/g)||[]).length,160);
  assert.equal((html.match(/aria-pressed="true"/g)||[]).length,3);
- assert.match(html,/Bass A P32, not loaded/);assert.doesNotMatch(html,/PERFORM MODE|next bar|queued|AudioContext/);
+ assert.match(html,/Bass A P32, selected in Draft, not loaded/);assert.doesNotMatch(html,/PERFORM MODE|next bar|queued|AudioContext/);
  assert.throws(()=>renderFunkyBeatsLauncher({parts:['909'],targets:[0]}));
 });
 

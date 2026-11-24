@@ -4,6 +4,8 @@
 // Nothing is simulated: without a DNR3 answer the page stays disconnected and sends no edits.
 import {Dnr3Client, webMidiTransport} from './dnr3-client.mjs';
 import * as d from './dnr3.mjs';
+import {createDnr3MixProvider} from './dnr3-mix.mjs';
+import {createChicagoSession} from './dnr3-chicago.mjs';
 
 export const PART = Object.freeze({drum909: 0, drum808: 1, chicago: 2, miami: 3, breaks: 4});
 export const ACCENT_TRACK = 11;            // §4.2: part 0/1 track 11 = accent row
@@ -68,7 +70,7 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
   const button = $('connect'), label = $('conn-state');
   const close = $('close-connection'); if (close) close.addEventListener('click', () => { const panel = $('connection-result'); if (panel) panel.hidden = true; });
   let client = null, transport = null, busy = false, hello = null;
-  const listeners = new Set();
+  const listeners = new Set(), notifications = new Set();
   function show(state, note = '') {
     if (label) { label.textContent = state === STATE.CONNECTED ? 'Connected' : 'Disconnected'; label.dataset.session = state; label.title = note; }
     if (button) { button.textContent = state === STATE.CONNECTED ? 'Disconnect' : 'Connect'; button.setAttribute('aria-pressed', String(state === STATE.CONNECTED)); }
@@ -79,29 +81,42 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
     onChange(state, note);
   }
   async function disconnect(note = '') {
-    const c = client, t = transport; client = null; transport = null; hello = null;
+    const c = client, t = transport;
+    if (!c || !t) return;
+    client = null; transport = null; hello = null;
+    busy = true;
+    show(STATE.DISCONNECTED, note);
     try { await c?.close(); } catch {}
     t?.close();
-    show(STATE.DISCONNECTED, note);
+    busy = false;
   }
   async function connect() {
     if (busy || client) return;
     busy = true;
+    let opening = null;
     try {
       const request = nav?.requestMIDIAccess;
       if (typeof request !== 'function') { show(STATE.DISCONNECTED, 'Web MIDI is not available in this browser'); return; }
       const access = await request.call(nav, {sysex: true});
-      const input = [...access.inputs.values()].find(p => p.state === 'connected');
-      const output = [...access.outputs.values()].find(p => p.state === 'connected');
-      if (!input || !output) { show(STATE.DISCONNECTED, 'No DnBOX found'); return; }
+      const dnbox = p => p.state === 'connected' && /\bDnBOX\b/i.test(p.name ?? '');
+      const inputs = [...access.inputs.values()].filter(dnbox), outputs = [...access.outputs.values()].filter(dnbox);
+      if (inputs.length !== 1 || outputs.length !== 1 || inputs[0].name !== outputs[0].name) {
+        show(STATE.DISCONNECTED, inputs.length > 1 || outputs.length > 1 ? 'Connect only one DnBOX' : 'No matching DnBOX MIDI ports'); return;
+      }
+      const [input] = inputs, [output] = outputs;
       await input.open?.(); await output.open?.();
       transport = webMidiTransport(input, output);
-      const c = new Dnr3Client({transport, clientId: 91, timeoutMs});
-      c.onNotify(e => { if (e?.type === 'lease-lost') void disconnect('Connection lost'); });
+      const c = opening = new Dnr3Client({transport, clientId: 91, timeoutMs});
+      c.onNotify(e => {
+        if (client !== c) return;
+        if (e?.type === 'lease-lost') { void disconnect('Connection lost'); return; }
+        if (e?.type === 'notify' || e?.type === 'resync') for (const cb of notifications) { try { cb(e); } catch {} }
+      });
       hello = await c.connect();
       client = c;
       show(STATE.CONNECTED);
     } catch (error) {
+      try { await opening?.close(); } catch {}
       transport?.close(); transport = null; client = null; hello = null;
       show(STATE.DISCONNECTED, error?.code === 'unavailable' || /timeout/i.test(String(error?.message)) ? 'DnBOX did not answer' : 'Could not connect');
     } finally { busy = false; }
@@ -118,10 +133,73 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
       return {sent: true, reply: r};
     } catch (error) { return {sent: false, error}; }
   }
+  async function readSession(operation) {
+    const c = client;
+    if (!c) return null;
+    const result = await operation(c);
+    return c === client ? result : null;
+  }
+  const bassClients = new WeakMap();
+  function bassRollClient() {
+    const c=client;
+    if (!c) return null;
+    if (!bassClients.has(c)) {
+      const bound=method=>(...args)=>{
+        if (client!==c) return Promise.reject(Error('DnBOX session changed'));
+        return c[method](...args);
+      };
+      bassClients.set(c,Object.freeze(Object.fromEntries(
+        ['state','paramGet','paramSet','stepGet','stepSet'].map(method=>[method,bound(method)])
+      )));
+    }
+    return bassClients.get(c);
+  }
   return {
+    bassRollClient,
     connected: () => !!client, hello: () => hello, send, connect, disconnect,
+    drumClient: () => client,
+    breakClient: () => client,
     sendMidi: bytes => { if (client && transport) transport.sendMidi(bytes); },
-    describe: async pref => client ? client.describe(pref) : null,
+    describe: pref => readSession(c => c.describe(pref)),
+    record: command => readSession(c => c.record(command)),
+    readTransport: () => readSession(async c => (await c.state()).playing),
+    transport: action => readSession(async c => (await c.transportAction(action)).fields.playing),
+    mixProvider(groups) {
+      const own=client;
+      return createDnr3MixProvider({client:own,current:()=>client===own,
+        onNotify(cb){notifications.add(cb);return ()=>notifications.delete(cb);}},groups);
+    },
+    readClips: () => readSession(c => c.state()),
+    confirmClip: (part,pat) => readSession(async c => {
+      const before=await c.state();
+      if(c!==client)throw Error('Connection changed');
+      if(before.clip_mode)return {blocked:true};
+      const reply=(await c.cue(part,pat)).fields;
+      if(reply.part!==part||reply.pat!==pat)throw Error('Wrong native pattern receipt');
+      const state=await c.state();
+      return state.clip_mode?{blocked:true}:state;
+    }),
+    chicagoSession(slot,bindings) {
+      const own=client;
+      return createChicagoSession(own,slot,bindings,()=>own===client);
+    },
+    onNotify(cb) { notifications.add(cb); return () => notifications.delete(cb); },
+    async readMotion(voice) {
+      const own=client;
+      if (!own?.has(d.CAP.MOTION_MIAMI_CARRIER)) throw Error('Firmware does not offer MIAMI Carrier motion');
+      const {ppat}=await own.state();
+      if (own!==client) throw Error('Connection changed');
+      const pat=ppat[2+voice];
+      const {points}=(await own.request(d.OP.MOTION_GET,{voice,pat})).fields;
+      if (own!==client) throw Error('Connection changed');
+      return {pat,points};
+    },
+    async writeMotion(voice,pat,step,expect,value) {
+      const own=client;
+      if (!own?.has(d.CAP.MOTION_MIAMI_CARRIER)) throw Error('Firmware does not offer MIAMI Carrier motion');
+      const confirmed=(await own.request(d.OP.MOTION_SET,{epoch:own.epoch,voice,pat,step,expect,value})).fields;
+      if (own!==client || confirmed.value!==value) throw Error('Motion write not confirmed');
+    },
     onState(cb) { listeners.add(cb); return () => listeners.delete(cb); },
   };
 }

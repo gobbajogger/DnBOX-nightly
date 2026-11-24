@@ -35,9 +35,9 @@ export const pagesFor = length => Math.max(1, Math.ceil(length / PAGE_STEPS));
 export function renderDrumNav({page, params, length}) {
   const pages = Array.from({length: PAGES}, (_, i) => {
     const from = i * PAGE_STEPS + 1, to = from + PAGE_STEPS - 1;
-    return '<button type="button" data-drum-page="' + i + '" aria-pressed="' + (!params && i === page) + '"' + (i >= pagesFor(length) ? ' class="beyond"' : '') + '>' + from + '–' + to + '</button>';
+    return '<button type="button" data-drum-page="' + i + '" aria-pressed="' + (!params && i === page) + '"' + (Number.isInteger(length) && i >= pagesFor(length) ? ' class="beyond"' : '') + '>' + from + '–' + to + '</button>';
   }).join('');
-  return '<nav class="drum-nav" aria-label="Steps">' + pages + '<span class="drum-len">LEN ' + length + '</span>' +
+  return '<nav class="drum-nav" aria-label="Steps">' + pages + '<span class="drum-len">LEN ' + (length ?? '…') + '</span>' +
     '<button type="button" data-drum-params aria-pressed="' + !!params + '">PARAMS</button></nav>';
 }
 export function renderDrumParams({kit, values, options = SEQ.drum}) {
