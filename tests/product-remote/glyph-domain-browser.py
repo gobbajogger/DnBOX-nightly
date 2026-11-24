@@ -18,7 +18,7 @@ async def cases(origin):
       actual=await control.evaluate("e=>{const g=e.closest('.funkybeats-typed-unit').querySelector('[data-glyph-fn]');return {raw:+e.value,target:g.glyphAnimator.target,domain:g.dataset.glyphDomain,pixels:g.querySelector('canvas').toDataURL()}}")
       assert actual['raw']==raw and abs(actual['target']-raw/127)<1e-12,actual;assert actual['domain']=='normalized';images[raw]=actual['pixels']
      assert images[1]!=images[127] and images[2]!=images[127]
-     await page.locator('[data-view="mix"]').click();drive=page.locator('[data-mix-param-label="Master Drive"]');await drive.press('Enter');field=page.locator('#parameter-value')
+     await page.locator('[data-view="mix"]').click();drive=page.locator('[data-mix-param-label="Master DRIVE"]');await drive.press('Enter');field=page.locator('#parameter-value')
      for raw in [0,1,2,127]:
       await field.fill(str(raw));await field.press('Tab');target=await drive.locator('[data-glyph-fn]').evaluate('e=>e.glyphAnimator.target');assert abs(target-raw/127)<1e-12,(raw,target)
      assert not errors,errors;assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')

@@ -238,6 +238,11 @@
       "sha256": "d0a47bbd74110b0fb21d46f0c8e83b90718117944c9caeca830f8e18f4f8d517"
     },
     {
+      "path": "emulator/index.html",
+      "bytes": 219,
+      "sha256": "8abb604672046666899c00905ed2d34d3bc8f407d19a75fac082a8fd7df5c441"
+    },
+    {
       "path": "hardware-status.mjs",
       "bytes": 1676,
       "sha256": "1d2c5da9edb0c010cb13074d1191dfa1a97932a4860f63cd9c324592072d67ef"
@@ -759,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 75884,
-      "sha256": "d18a79fc64969d02f583dbe4e69ff238c1ecee575089ee7579549f25953d8f93"
+      "bytes": 80485,
+      "sha256": "9e645309fed6824dc4fe87a168dd68cfcdbde89bde8d4f4191bae459222c7f90"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -779,13 +784,13 @@
     },
     {
       "path": "remote/bass-engines.mjs",
-      "bytes": 3204,
-      "sha256": "8555182f9bdedcffd0a8a4cc8fb275c1de148a319c115ef79f0d6c35d869ba56"
+      "bytes": 6722,
+      "sha256": "66b0ed3948c69ea61004c81fd9ec0b4ab1a22c36579d137e16130e30e680adce"
     },
     {
       "path": "remote/break-sequence.mjs",
-      "bytes": 8658,
-      "sha256": "b35d8f5c467db7db9f0e8352ae2988e8434f295faf3e6ae8f86e5f4d8ed20b10"
+      "bytes": 8712,
+      "sha256": "fbe1f6a51c84b08b836f0c39675314fc5ad7d8a25ed0aaaa5f952d7fbd2e7b53"
     },
     {
       "path": "remote/catalog.json",
@@ -889,8 +894,8 @@
     },
     {
       "path": "remote/drum-options.mjs",
-      "bytes": 4315,
-      "sha256": "5a0374ec55ebe03514dc2e4b6dda19c58cc3f7f3250c94c3d33c1ab329faf671"
+      "bytes": 4731,
+      "sha256": "f64f5da8d1fc7ff7059ef637953e5267556f324e1074fade5890f27fcc57ebff"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -908,6 +913,21 @@
       "sha256": "eca434dc622dcaa545f72b4ab0865ef3d37a9ae82432b0c5e94417bd100f15ad"
     },
     {
+      "path": "remote/firmware-glyphs.json",
+      "bytes": 9532,
+      "sha256": "817f2f95fc96a7167768ba5fc5120ebf43342b3ecd7db52944dd7380cab3825d"
+    },
+    {
+      "path": "remote/firmware-labels.json",
+      "bytes": 544827,
+      "sha256": "297bec1a6f90f8ed33345cd3623f496dec7cb224fe1e9df21a5bc46eabc2ee58"
+    },
+    {
+      "path": "remote/firmware-labels.mjs",
+      "bytes": 3060,
+      "sha256": "6afbdc3406ae6c47bcf905c06762b5fca40882e421b54524bac8e9afa83df5e8"
+    },
+    {
       "path": "remote/firmware-link.mjs",
       "bytes": 7423,
       "sha256": "93d859f66e503f6645641b0403234ea29487432e99e1cb8f78c21213c912f154"
@@ -919,8 +939,13 @@
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 11201,
-      "sha256": "9d5f7dcff429b9b10524c770fe107982db9f059959b2792756047d0e8d2c2493"
+      "bytes": 11282,
+      "sha256": "2ba4e9f967396be38ae11beb58ffa2e9acab2eb12a75f31edc33caa7ddefbfd0"
+    },
+    {
+      "path": "remote/fw-glyphs.mjs",
+      "bytes": 4601,
+      "sha256": "2659bc483532c4e6b923ec2d60e6496fbee4eb186e6fcc0c740074c70537ac9c"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -930,7 +955,7 @@
     {
       "path": "remote/glyph-registry.mjs",
       "bytes": 71505,
-      "sha256": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e"
+      "sha256": "a08a8494a910e8fe3201d40499e93b37707b502ba7e13036079fc55042031453"
     },
     {
       "path": "remote/glyph-render.mjs",
@@ -964,8 +989,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7917,
-      "sha256": "206ed87405650c0c8cd865b53e190345b2e2229e6f3b9bc6b9265895feabae0b"
+      "bytes": 7406,
+      "sha256": "cbcec38da68d9ba98920061e980476310d9ede03c10057f117c16c60410f19bd"
     },
     {
       "path": "remote/keybed-scroll.mjs",
@@ -1038,6 +1063,11 @@
       "sha256": "d2672234fc66bccbacda67cf40cad68e33e99371980e150fb18f685f2c6676a0"
     },
     {
+      "path": "remote/preset-banks.json",
+      "bytes": 110325,
+      "sha256": "84bc4e2891f002a5faa688c93f69008c841bd5b7eec8f0f408e1a80b6282f6e6"
+    },
+    {
       "path": "remote/remote.mjs",
       "bytes": 4547,
       "sha256": "edc5331481e0d6047fbdfdbe4845f07b4b623b3a852ae11af01875e164934dab"
@@ -1084,8 +1114,8 @@
     },
     {
       "path": "remote/sound.mjs",
-      "bytes": 3861,
-      "sha256": "22ada8759f185df6a5f88b991dac023ccb9954c5a8d980f201b679bacf5a36f6"
+      "bytes": 4092,
+      "sha256": "8b2b0db9bd2ada8b55afb091e954367f3463a06082ca7675db0896a87cf87c24"
     },
     {
       "path": "remote/source-sounds.json",
@@ -1104,8 +1134,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 39928,
-      "sha256": "154d292a96d4841a0c2849b3e091071f0906cad36d5a34770abe9ce6047c07f1"
+      "bytes": 43498,
+      "sha256": "848a4c6e26e05c5decf48dd067de478823598e4b63a9787821a57a195b4d8187"
     },
     {
       "path": "remote/tempo-control.mjs",

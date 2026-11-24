@@ -67,7 +67,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 .btn.icon{width:36px;min-width:0;padding:0}
 .btn.icon svg{width:16px;height:16px}
 .sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.transport #rec[aria-pressed=true]{color:#ff4841;border-color:#ff4841}
+.transport #rec[aria-pressed=true]{color:#ff4840;border-color:#ff4840}
 
 /* Work area */
 main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px var(--margin) 8px;overflow:hidden}
@@ -473,3 +473,40 @@ dialog::backdrop{background:#000a}
  .funkybeats-sequencer{--seq-label:36px}
  .funkybeats-sequencer .seq-step{min-height:18px;font-size:9px}
 }
+/* Firmware drum step grid (draw_drum at the pinned firmware; geometry and colours from firmware-glyphs.json
+   via fw-glyphs.mjs cssVars): empty LINE, playhead column DIM, hit = part colour at 8/16, the selected
+   voice's hits in full colour, a real hit lights a WHITE inner box for one sixteenth plus 20 ms, accent
+   row WHITE box / LINE dash, past the pattern length a LINE dot. A held pad lights like the keybed LED. */
+.fw-drum-grid .seq-step{background:var(--fw-line,#28383d);border:0;border-radius:var(--fw-cell-r,25% / 33%);padding:0;color:transparent;font-size:0}
+.fw-drum-grid .seq-step>*{display:none}
+.fw-drum-grid .seq-step.hit{background:color-mix(in srgb,var(--track) 50%,#000)}
+.fw-drum-grid .seq-row.sel .seq-step.hit{background:var(--track)}
+.fw-drum-grid .seq-step.ph:not(.hit){background:var(--fw-dim,#809294)}
+.fw-drum-grid .seq-step::after{content:"";position:absolute;left:var(--fw-fired-x);top:var(--fw-fired-y);width:var(--fw-fired-w);height:var(--fw-fired-h);border-radius:2px;background:var(--fw-white,#fff);opacity:0;pointer-events:none}
+.fw-drum-grid .seq-step.fired::after,.fw-drum-grid .seq-step.held::after{opacity:1}
+.fw-drum-grid .seq-row.sel .seq-channel-info,.fw-drum-grid .seq-row.sel>span:first-child{background:var(--track);color:#000;border-radius:6px}
+.fw-drum-grid .seq-row.accent-row .seq-step,.fw-drum-grid .seq-row.accent-row .seq-step[aria-pressed=true]{background:transparent;border:0}
+.fw-drum-grid .seq-row.accent-row .seq-step::before{content:"";position:absolute;left:var(--fw-acc-x);width:var(--fw-acc-w);top:var(--fw-accoff-y);height:var(--fw-accoff-h);border-radius:1px;background:var(--fw-line,#28383d)}
+.fw-drum-grid .seq-row.accent-row .seq-step.accent::before{top:var(--fw-acc-y);height:var(--fw-acc-h);border-radius:3px;background:var(--fw-white,#fff)}
+.fw-drum-grid .seq-step.beyond{opacity:1;background:transparent}
+.fw-drum-grid .seq-step.beyond::before{content:"";position:absolute;left:var(--fw-dot-x);top:var(--fw-dot-y);width:var(--fw-dot-w);height:var(--fw-dot-h);background:var(--fw-line,#28383d)}
+.fw-drum-grid .seq-step.beyond::after{display:none}
+/* Firmware HOME lane bar as the track identity (2x11 in the part colour). */
+.engine .fw-lane{display:inline-block;width:3px;height:16px;border-radius:1px;background:var(--engine);flex:none}
+/* Header transport glyphs: play triangle (DIM stopped, HI running, WHITE at the start of each beat), stopped square, REC dot. */
+.fw-transport{width:11px;height:13px;vertical-align:-2px;margin-right:6px}
+.fw-stop{width:7px;height:7px;vertical-align:0}
+.fw-rec{width:8px;height:8px;vertical-align:0}
+#play .fw-play{color:var(--fw-dim,#809294)}
+#play[aria-pressed=true] .fw-play{color:var(--fw-hi,#ffb846)}
+#play.beat .fw-play{color:var(--fw-white,#fff)}
+.fw-pictogram{width:13.5px;height:13.5px;vertical-align:-2px}
+/* Firmware BREAK footer: an 11x4 bar per step (part colour on, LINE off, WHITE at the playhead); slice text HI when set and on. */
+.break-on{background:var(--panel)}
+.break-on::before{content:"";position:absolute;left:12%;right:12%;top:50%;aspect-ratio:var(--fw-brk-bar-aspect,11 / 4);transform:translateY(-50%);border-radius:1px;background:var(--fw-line,#28383d)}
+.break-on.hit::before{background:var(--fw-part-4,#d678ff)}
+.break-on.ph::before{background:var(--fw-white,#fff)}
+.break-slice{color:var(--fw-dim,#809294)}
+.break-slice.lit{color:var(--fw-hi,#ffb846)}
+@media (prefers-reduced-motion:reduce){.fw-drum-grid .seq-step::after{transition:none}}
+.preset-note{display:block;color:var(--fw-dim,#809294);font-size:12px;margin:2px 0 6px}

@@ -39,7 +39,8 @@ OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 OFFLINE_BUILT = {'x0x_installer.html': 'install/index.html', 'x0x_breaks.html': 'breaks/index.html',
                  'x0x_projects.html': 'projects/index.html'}
 PAGE01 = {'bg': '#050a0d', 'panel': '#101a1f', 'line': '#293d43', 'ink': '#dde7de', 'muted': '#99aaa9', 'amber': '#ffb337'}
-ENGINES = {'909': '#ff9529', '808': '#ff4841', 'BASS A': '#82f05a', 'BASS B': '#46cdff', 'BREAK': '#d678ff'}
+# Firmware 73749f55 part colours (firmware-glyphs.json colours.parts).
+ENGINES = {'909': '#ff9628', '808': '#ff4840', 'BASS A': '#82f05a', 'BASS B': '#46cdff', 'BREAK': '#d678ff'}
 FREEZE_JS = """
 (()=>{const T=1794790800000;let n=0;const D=Date;class FD extends D{constructor(...a){super(...(a.length?a:[T]))}static now(){return T}}
 globalThis.Date=FD;let s=42;Math.random=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648};})();
@@ -165,7 +166,7 @@ HEADER_JS = """
   activeTabUnderline: active? (cs(active).borderBottomColor||'')+'|'+(cs(active).textDecorationColor||'')+'|'+cs(active).boxShadow+'|'+(cs(active,'::after'),getComputedStyle(active,'::after').backgroundColor): '',
   engines:engines.map(e=>e.innerText.replace(/\\s+/g,' ').trim()), engWrapped:engines.filter(e=>lines(e)>1).map(e=>e.innerText.trim()),
   engClipped:engines.filter(clipped).map(e=>e.innerText.trim()),
-  engineColors:Object.fromEntries(engines.map(e=>[e.innerText.trim(),getComputedStyle(e.querySelector('svg')||e).color])),
+  engineColors:Object.fromEntries(engines.map(e=>{const lane=e.querySelector('.fw-lane');return[e.innerText.trim(),lane?getComputedStyle(lane).backgroundColor:getComputedStyle(e.querySelector('svg')||e).color];})),
   partTitle:vis(q('#part-title'))?q('#part-title').innerText.trim():'',
   transport:['#play','#stop','#rec'].map(s=>vis(q(s))?q(s).innerText.trim():''),
   undoRedo:['#undo','#redo'].map(s=>vis(q(s))),

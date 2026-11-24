@@ -18,7 +18,7 @@ import{SequenceDraft}from'../../web/product-site/remote/sequence.mjs';
 test('shipped app binds every typed step without a tool mode and edits remain undoable',()=>{
  const app=readFileSync(new URL('../../web/product-site/remote/app.mjs',import.meta.url),'utf8');
  assert.match(app,/import\{[^}]*renderFunkyBeatsDrums[^}]*\}from'\.\/funkybeats-view\.mjs'/);
- assert.match(app,/renderFunkyBeatsDrums\(\{kit,notes:model.notes,endSample:trace.endSample,accents:accentsFor\(kit\)\.slice\(0,PAGE_STEPS\),length:len\}\)/);
+ assert.match(app,/renderFunkyBeatsDrums\(\{kit,notes:model.notes,endSample:trace.endSample,accents:accentsFor\(kit\)\.slice\(0,PAGE_STEPS\),length:len,selected:drumVoice\}\)/);
  assert.match(app,/if\(b.dataset.drumNote!==undefined\)\{model.toggleHit\(b.dataset.drumTrack,Number\(b.dataset.drumNote\),Number\(b.dataset.drumStart\)\)/);
  assert.doesNotMatch(app,/drumEdit&&b.dataset.drumNote/);
  const model=new SequenceDraft({trace:{sampleRate:44100,endSample:88200,events:[]}});

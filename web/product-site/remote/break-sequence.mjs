@@ -50,7 +50,7 @@ export function mountBreakSequence(root, state, onEdit) {
       const i = Number(b.dataset.breakStep), v = state.slices[i];
       b.textContent = v ? String(v) : '–'; b.value = String(v); b.dataset.value = String(v);
       b.setAttribute('aria-label', 'Step ' + (i + 1) + ' slice ' + (v ? v : 'auto')); b.title = i === selectedStep ? 'Tap again for the next slice' : 'Select step ' + (i + 1);
-      b.setAttribute('aria-pressed', String(i === selectedStep)); b.classList.toggle('selected', i === selectedStep);
+      b.setAttribute('aria-pressed', String(i === selectedStep)); b.classList.toggle('selected', i === selectedStep); b.classList.toggle('lit', !!v && !!state.steps?.[i]);
     }
     for (const b of root.querySelectorAll('[data-break-slice]')) b.setAttribute('aria-pressed', String(Number(b.dataset.breakSlice) === state.slices[selectedStep]));
   }

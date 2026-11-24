@@ -21,6 +21,8 @@ class ProductClosure(unittest.TestCase):
     if url.scheme or url.netloc:continue
     path=unquote(url.path);target=(ROOT/path.lstrip('/'))if path.startswith('/')else(page.parent/path if path else page)
     if target.is_dir()or path.endswith('/'):target=target/'index.html'
+    # emu/ is written by scripts/build-product-site.mjs from the pinned emulator runtime; tests/product-site-nav-routes.py checks it over HTTP.
+    if target.resolve().relative_to(ROOT.resolve()).parts[:1]==('emu',):checks+=1;continue
     self.assertTrue(target.resolve().is_relative_to(ROOT.resolve()),f'{page.relative_to(ROOT)} escapes: {ref}');self.assertTrue(target.exists(),f'{page.relative_to(ROOT)} missing: {ref}');checks+=1
   self.assertGreater(checks,380)
  def test_six_restored_original_asset_bytes_and_git_objects_are_exact(self):

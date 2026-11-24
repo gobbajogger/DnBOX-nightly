@@ -43,7 +43,7 @@ x.press('draft-save');const text=await x.download();assert.ok(text);const doc=JS
 x.press('undo');assert.notEqual(review(x),before);x.press('undo');assert.notEqual(review(x),before);
 await x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(text),text:async()=>text}]}});assert.equal(x.get('draft-dialog').open,true);assert.notEqual(review(x),before);x.press('draft-replace');assert.equal(review(x),before);assert.equal(x.get('undo').disabled,true);assert.equal(x.get('redo').disabled,true);assert.equal(x.get('part').value,'chicago');assert.match(x.get('other-view').innerHTML,/Sound · Bass A \/ MIAMI/);
 // New edits after restore participate in a fresh timeline and Undo returns to restored local data.
-x.view('mix');const value=drive(x,90).after;x.press('undo');assert.equal(review(x),before);x.press('redo');assert.ok(review(x).includes('Drive'));
+x.view('mix');const value=drive(x,90).after;x.press('undo');assert.equal(review(x),before);x.press('redo');assert.ok(review(x).includes('DRIVE'));
 // Actual app and draft-file lifecycle listeners both run, so a hidden page cannot revive a pending import.
 x.press('draft-save');const lifecycleText=await x.download();let resolveFile;
 const pendingRead=x.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(lifecycleText),text:()=>new Promise(r=>resolveFile=r)}]}});
@@ -60,7 +60,7 @@ const action=name=>projects.get('other-view').emit('click',{target:{closest:s=>s
 projects.get('draft-save').click=()=>projects.press('draft-save');projects.get('review').click=()=>projects.press('review');
 let pickerOpened=0;projects.get('draft-file').click=()=>pickerOpened++;
 action('save');const saved=await projects.download();assert.ok(saved);assert.ok(JSON.parse(saved).parameters.length);assert.match(projects.get('status').textContent,/Project saved/);
-action('review');const savedChanges=projects.get('changes').textContent;assert.match(savedChanges,/Drive/);
+action('review');const savedChanges=projects.get('changes').textContent;assert.match(savedChanges,/DRIVE/);
 projects.press('undo');action('open');assert.equal(pickerOpened,1);
 await projects.get('draft-file').onchange({target:{files:[{size:Buffer.byteLength(saved),text:async()=>saved}]}});assert.equal(projects.get('draft-dialog').open,true);projects.press('draft-replace');action('review');assert.equal(projects.get('changes').textContent,savedChanges);
 console.log('PASS Projects card clicks dispatch Save/Open/Review and round-trip edited draft; event doubles, not browser file-picker proof');

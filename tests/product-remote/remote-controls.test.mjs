@@ -6,7 +6,8 @@ import assert from 'node:assert/strict';
 import {readFileSync, existsSync} from 'node:fs';
 import * as d from '../../web/product-site/remote/dnr3.mjs';
 import {drumStepEdit, breakStepEdit, paramEdit, tempoEdit, partSetEdit, prefFromId, bassParamPref, encodeEdit, ACCENT_TRACK, PART} from '../../web/product-site/remote/dnr3-link.mjs';
-import {FIRMWARE_ENGINES, bankValues, engineOptions, presetSelect, firmwareSoundControls, publicName} from '../../web/product-site/remote/bass-engines.mjs';
+import {firmwarePages} from '../../web/product-site/remote/firmware-labels.mjs';
+import {FIRMWARE_ENGINES, bankValues, engineOptions, presetSelect, presetBanksFor, firmwareSoundControls, publicName} from '../../web/product-site/remote/bass-engines.mjs';
 import {drumOptions, optionEdit, formatOption, renderDrumParams, renderDrumNav, PAGES, PAGE_STEPS, optionDefaults} from '../../web/product-site/remote/drum-options.mjs';
 import {renderFunkyBeatsDrums} from '../../web/product-site/remote/funkybeats-view.mjs';
 import {bpmFromTaps} from '../../web/product-site/remote/tempo-control.mjs';
@@ -25,10 +26,15 @@ test('Remote engine list is the firmware list (BENGINE_N at the pinned tip)', ()
   for (const e of FIRMWARE_ENGINES.bassEngines) {
     assert.ok(e.params.length > 0 && e.presets.length > 0, e.name);
     const bank = e.name === 'SUPERJ6' ? 'JUNO' : e.name;
-    assert.equal((presetSelect(0, bank, 0).match(/<option/g) ?? []).length, e.presets.length, e.name + ' presets');
+    const banks = presetBanksFor(bank);
+    if (!banks) assert.equal((presetSelect(0, bank, 0).match(/<option/g) ?? []).length, e.presets.length, e.name + ' presets');
+    else assert.deepEqual(banks.flatMap(b => b.presets).filter(p => p.firmwareIndex !== null).map(p => p.firmwareIndex).sort((x, y) => x - y), e.presets.map((_, i) => i), e.name + ' presets reachable through the banks');
   }
-  const s1 = firmwareSoundControls('SYNTH ONE');
-  assert.equal((s1.match(/data-firmware-param=/g) ?? []).length, FIRMWARE_ENGINES.bassEngines.find(e => e.name === 'SYNTH ONE').params.length);
+  // Synth One is edited from the instrument's own pages: R_S1PATCH addresses, firmware names and value text.
+  const s1 = firmwareSoundControls('SYNTH ONE', new Map(), 0);
+  const refs = firmwarePages('PART', 2, {engine: 'SYNTH ONE'}).flatMap(p => p.refs).filter(r => r && ![41, 42, 43].includes(Number(r.split(':')[0])));
+  assert.equal((s1.match(/data-firmware-pref=/g) ?? []).length, refs.length);
+  for (const t of ['OSC BALANCE', 'FILTER ATTACK', 'AMP RELEASE', 'data-firmware-pref="51:2:0:0"', '>50 %<', '>2.0 kHz<']) assert.ok(s1.includes(t), t);
 });
 
 test('firmware-engines.json is regenerated from the firmware source when a checkout is given', {skip: !process.env.DNBOX_FIRMWARE_DIR && !existsSync('/tmp/fw73/firmware/src/app/ui.c')}, async () => {
@@ -117,10 +123,10 @@ test('tempo round-trips as TEMPO bpm_x10 and matches the spec vector', () => {
 test('drum parameter page: every firmware SEQUENCE option for drums, formatted and sent as DNR3', () => {
   assert.deepEqual(drumOptions().map(o => o.pref), ['R_DLEN', 'R_DRATE', 'R_SWING', 'R_ACCENT']);
   const [len, rate, swing, accent] = drumOptions();
-  assert.deepEqual([len.max, len.default, formatOption(len, 15), formatOption(len, 63)], [63, 15, '16', '64']);
+  assert.deepEqual([len.max, len.default, formatOption(len, 15), formatOption(len, 63)], [63, 15, '16 steps', '64 steps']);
   assert.deepEqual(rate.names, ['1/16', '1/16T', '1/32', '1/8T', '1/8', '1/4']);
-  assert.equal(formatOption(swing, 0), '50%'); assert.equal(formatOption(swing, 100), '75%');
-  assert.equal(formatOption(accent, 88), '69%');
+  assert.equal(formatOption(swing, 0), '50 %'); assert.equal(formatOption(swing, 100), '75 %');
+  assert.equal(formatOption(accent, 88), '69 %');
   const vec = vectors.requests.find(x => x.name === 'part-set-len');
   assert.equal(hex(encodeEdit(optionEdit(len, 'drum808', 0, 63), {epoch: 1, seq: vec.seq})), vec.frame_hex, 'LENGTH 64 = spec vector');
   const r = roundTrip(optionEdit(rate, 'drum909', 4, 5));

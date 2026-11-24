@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {firmwareValue} from './firmware-labels.mjs';
+const kitIndex = kit => String(kit) === '808' ? 1 : 0;
 // Drum sequencer pages and the pattern/track parameter page. Every option, range, default and
 // value name comes from the firmware's SEQUENCE page (firmware-engines.json sequenceOptions).
 import {FIRMWARE_ENGINES} from './bass-engines.mjs';
@@ -10,11 +12,15 @@ export const PAGES = SEQ.steps / PAGE_STEPS;
 export const drumOptions = () => SEQ.drum;
 export const optionDefaults = (list = SEQ.drum) => Object.fromEntries(list.map(o => [o.pref, o.default]));
 // The value as the firmware screen shows it (ui.c pref_get offsets and put_* formats).
-export function formatOption(o, v) {
+// The instrument's own value text (firmware-labels.json) where the option is on a firmware page;
+// otherwise the format read from ui.c pref_value_of by sync-firmware-engines.mjs.
+export function formatOption(o, v, a = 0) {
+  const fw = firmwareValue(o.kind + ':' + a + ':0:0', v);
+  if (fw !== null) return fw;
   switch (o.format) {
     case 'plus1': return String(v + 1);
-    case 'swing': return (50 + Math.floor(v / 4)) + '%';
-    case 'percent127': return Math.floor((v * 100 + 63) / 127) + '%';
+    case 'swing': return (50 + Math.floor(v / 4)) + ' %';
+    case 'percent127': return Math.floor((v * 100 + 63) / 127) + ' %';
     case 'transpose': return (v - 24 > 0 ? '+' : '') + (v - 24);
     default: return o.names?.[v] ?? String(v);
   }
@@ -37,10 +43,10 @@ export function renderDrumNav({page, params, length}) {
 export function renderDrumParams({kit, values, options = SEQ.drum}) {
   return '<section class="drum-params" aria-label="' + esc(kit) + ' pattern parameters">' + options.map(o => {
     const v = values[o.pref] ?? o.default, scope = o.scope === 'part' ? kit : o.scope === 'pattern' ? 'ALL PARTS' : 'GLOBAL';
-    const head = '<div class="seq-opt-head"><span>' + esc(o.label) + '</span><small>' + esc(scope) + '</small><output data-seq-value-of="' + o.pref + '">' + esc(formatOption(o, v)) + '</output></div>';
+    const head = '<div class="seq-opt-head"><span>' + esc(o.label) + '</span><small>' + esc(scope) + '</small><output data-seq-value-of="' + o.pref + '">' + esc(formatOption(o, v, kitIndex(kit))) + '</output></div>';
     const body = o.names && o.format === 'names'
       ? '<div class="seq-opt-chips" role="group" aria-label="' + esc(o.label) + '">' + o.names.map((n, i) => '<button type="button" data-seq-opt="' + o.pref + '" data-seq-value="' + i + '" aria-pressed="' + (i === v) + '">' + esc(n) + '</button>').join('') + '</div>'
-      : '<input type="range" min="0" max="' + o.max + '" step="1" value="' + v + '" data-seq-opt="' + o.pref + '" data-default="' + o.default + '" data-reset-key="seq-' + esc(kit) + '-' + o.pref + '" aria-label="' + esc(o.label) + '" aria-valuetext="' + esc(formatOption(o, v)) + '">';
+      : '<input type="range" min="0" max="' + o.max + '" step="1" value="' + v + '" data-seq-opt="' + o.pref + '" data-default="' + o.default + '" data-reset-key="seq-' + esc(kit) + '-' + o.pref + '" aria-label="' + esc(o.label) + '" aria-valuetext="' + esc(formatOption(o, v, kitIndex(kit))) + '">';
     return '<div class="seq-opt" data-seq-option="' + o.pref + '">' + head + body + '</div>';
   }).join('') + '</section>';
 }

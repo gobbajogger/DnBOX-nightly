@@ -1,0 +1,5530 @@
+{
+ "schema": 1,
+ "generator": "scripts/sync-preset-banks.mjs",
+ "firmwareSha": "73749f55d17a0643f1ddd072114172d29eecc2ae",
+ "sendMax": 255,
+ "engines": {
+  "SYNTH ONE": {
+   "source": "firmware assets/factory_banks/synthone AudioKit/AudioKitSynthOne@6466a3715c96b7ecf1dd255a218cbd571408a314",
+   "bankOrder": "AudioKitSynthOne initBanks",
+   "banks": [
+    {
+     "name": "INIT",
+     "firmwareOnly": true,
+     "presets": [
+      {
+       "name": "INIT",
+       "firmwareIndex": 0
+      }
+     ]
+    },
+    {
+     "name": "BankA",
+     "presets": [
+      {
+       "name": "Synthwave 1974",
+       "firmwareIndex": 1
+      },
+      {
+       "name": "Dat Bomb Bass, Yo",
+       "firmwareIndex": 2
+      },
+      {
+       "name": "BB Nonpareil 1989",
+       "firmwareIndex": 3
+      },
+      {
+       "name": "Dark Towers",
+       "firmwareIndex": 4
+      },
+      {
+       "name": "BB Driving Line",
+       "firmwareIndex": 5
+      },
+      {
+       "name": "Synth Dream Piano",
+       "firmwareIndex": 6
+      },
+      {
+       "name": "Myoclonic Pad",
+       "firmwareIndex": 7
+      },
+      {
+       "name": "BB Dandelions",
+       "firmwareIndex": 8
+      },
+      {
+       "name": "June Oh 06 Sqr",
+       "firmwareIndex": 9
+      },
+      {
+       "name": "JEC Digiharp",
+       "firmwareIndex": 10
+      },
+      {
+       "name": "ARP - Kiss Me, You Spy!",
+       "firmwareIndex": 11
+      },
+      {
+       "name": "ARP - Purple Nights",
+       "firmwareIndex": 12
+      },
+      {
+       "name": "BB Power Down",
+       "firmwareIndex": 13
+      },
+      {
+       "name": "Synth Snare",
+       "firmwareIndex": 14
+      },
+      {
+       "name": "LCD Sound Bass",
+       "firmwareIndex": 15
+      },
+      {
+       "name": "Yah Yah Bass",
+       "firmwareIndex": 16
+      },
+      {
+       "name": "BB Crush On The Choir",
+       "firmwareIndex": 17
+      },
+      {
+       "name": "ARP - Octavio",
+       "firmwareIndex": 18
+      },
+      {
+       "name": "BASS - Hey Jakob!",
+       "firmwareIndex": 19
+      },
+      {
+       "name": "Electro Clash Bass",
+       "firmwareIndex": 20
+      },
+      {
+       "name": "BB Cool Beans Epic Mega Pad",
+       "firmwareIndex": 21
+      },
+      {
+       "name": "Synthwave '76",
+       "firmwareIndex": 22
+      },
+      {
+       "name": "We, Robots, Run",
+       "firmwareIndex": 23
+      },
+      {
+       "name": "Voigt-Kampff Analyzer",
+       "firmwareIndex": 24
+      },
+      {
+       "name": "Frost Plucks",
+       "firmwareIndex": 25
+      },
+      {
+       "name": "Uppers and Downers Arp",
+       "firmwareIndex": 26
+      },
+      {
+       "name": "AM Pad",
+       "firmwareIndex": 27
+      },
+      {
+       "name": "Journey Thru Cosmos",
+       "firmwareIndex": 28
+      },
+      {
+       "name": "Tentacles Arp",
+       "firmwareIndex": 29
+      },
+      {
+       "name": "ARP - Modulator Mode",
+       "firmwareIndex": 30
+      },
+      {
+       "name": "Sources Arp",
+       "firmwareIndex": 31
+      },
+      {
+       "name": "Buchla Bells of Brooklyn",
+       "firmwareIndex": 32
+      },
+      {
+       "name": "Trancey Seq",
+       "firmwareIndex": 33
+      },
+      {
+       "name": "ARP - Poppin",
+       "firmwareIndex": 34
+      },
+      {
+       "name": "Upside Arp",
+       "firmwareIndex": 35
+      },
+      {
+       "name": "ARP - Neptune Drift",
+       "firmwareIndex": 36
+      },
+      {
+       "name": "Rhubarbed Lead",
+       "firmwareIndex": 37
+      },
+      {
+       "name": "Rising Sons Arp",
+       "firmwareIndex": 38
+      },
+      {
+       "name": "ARP - Bring it, Sucka!",
+       "firmwareIndex": 39
+      },
+      {
+       "name": "CS80 Dark Brass",
+       "firmwareIndex": 40
+      },
+      {
+       "name": "Elliot's Root Kit",
+       "firmwareIndex": 41
+      },
+      {
+       "name": "BB GoodLordItSoundsGOOD",
+       "firmwareIndex": 42
+      },
+      {
+       "name": "Atari Game",
+       "firmwareIndex": 43
+      },
+      {
+       "name": "Let’s Play",
+       "firmwareIndex": 44
+      },
+      {
+       "name": "erossthemysterious",
+       "firmwareIndex": 45
+      },
+      {
+       "name": "Modular Super Analog",
+       "firmwareIndex": 46
+      },
+      {
+       "name": "Saturn’s Harp Pad",
+       "firmwareIndex": 47
+      },
+      {
+       "name": "ARP - Blessing of Dean",
+       "firmwareIndex": 48
+      },
+      {
+       "name": "Agent R Deckard (1 finger)",
+       "firmwareIndex": 49
+      },
+      {
+       "name": "1979 Analog Arp",
+       "firmwareIndex": 50
+      },
+      {
+       "name": "Formant Robotix Arp",
+       "firmwareIndex": 51
+      },
+      {
+       "name": "80s Poly Synth",
+       "firmwareIndex": 52
+      },
+      {
+       "name": "Super PopCorn",
+       "firmwareIndex": 53
+      },
+      {
+       "name": "The Pulse (LFO Rate)",
+       "firmwareIndex": 54
+      },
+      {
+       "name": "ARP - 138 Trance Bass 1",
+       "firmwareIndex": 55
+      },
+      {
+       "name": "Bright Organ",
+       "firmwareIndex": 56
+      },
+      {
+       "name": "BB 80s Cop Drama",
+       "firmwareIndex": 57
+      },
+      {
+       "name": "Kid Astro’s Jet World",
+       "firmwareIndex": 58
+      },
+      {
+       "name": "60s SciFi",
+       "firmwareIndex": 59
+      },
+      {
+       "name": "Specktor of Sound",
+       "firmwareIndex": 60
+      },
+      {
+       "name": "Arcade Lead",
+       "firmwareIndex": 61
+      },
+      {
+       "name": "Dizzee Dance Bass",
+       "firmwareIndex": 62
+      },
+      {
+       "name": "Irresistible Forces Pad",
+       "firmwareIndex": 63
+      },
+      {
+       "name": "The Red Planet",
+       "firmwareIndex": 64
+      },
+      {
+       "name": "Harmonic Harp Pluck",
+       "firmwareIndex": 65
+      },
+      {
+       "name": "Pulsemonger",
+       "firmwareIndex": 66
+      },
+      {
+       "name": "Lead Snake Pluck",
+       "firmwareIndex": 67
+      },
+      {
+       "name": "SciFi Tension",
+       "firmwareIndex": 68
+      },
+      {
+       "name": "BB Slide Me Bass",
+       "firmwareIndex": 69
+      },
+      {
+       "name": "BB Everything U Do",
+       "firmwareIndex": 70
+      },
+      {
+       "name": "I, Robot, Walk",
+       "firmwareIndex": 71
+      },
+      {
+       "name": "97 Tears Keys",
+       "firmwareIndex": 72
+      },
+      {
+       "name": "1982 Analog Memories",
+       "firmwareIndex": 73
+      },
+      {
+       "name": "Euro-Saw Bass",
+       "firmwareIndex": 74
+      },
+      {
+       "name": "Hackers Gonna Hack",
+       "firmwareIndex": 75
+      },
+      {
+       "name": "Interstellar",
+       "firmwareIndex": 76
+      },
+      {
+       "name": "Dance Bass",
+       "firmwareIndex": 77
+      },
+      {
+       "name": "Odd Perc",
+       "firmwareIndex": 78
+      },
+      {
+       "name": "Ben Ah Say Bass",
+       "firmwareIndex": 79
+      },
+      {
+       "name": "Bass Crickets",
+       "firmwareIndex": 80
+      },
+      {
+       "name": "Whispering Sands",
+       "firmwareIndex": 81
+      },
+      {
+       "name": "Space Madness",
+       "firmwareIndex": 82
+      },
+      {
+       "name": "St John's Cathedral",
+       "firmwareIndex": 83
+      },
+      {
+       "name": "Detachable Bass",
+       "firmwareIndex": 84
+      },
+      {
+       "name": "Journey Thru Life",
+       "firmwareIndex": 85
+      },
+      {
+       "name": "Analog Runner",
+       "firmwareIndex": 86
+      },
+      {
+       "name": "ElectroTrash Bass",
+       "firmwareIndex": 87
+      },
+      {
+       "name": "House Bass",
+       "firmwareIndex": 88
+      },
+      {
+       "name": "Legacy: Step Arp",
+       "firmwareIndex": 89
+      },
+      {
+       "name": "Exorcist Bells XXL",
+       "firmwareIndex": 90
+      },
+      {
+       "name": "Sci Fi Drama",
+       "firmwareIndex": 91
+      },
+      {
+       "name": "Plucky 5ths",
+       "firmwareIndex": 92
+      },
+      {
+       "name": "Carpenter Arpenter",
+       "firmwareIndex": 93
+      },
+      {
+       "name": "Uhtari 2600 (Circuit-Bent)",
+       "firmwareIndex": 94
+      },
+      {
+       "name": "FM Drone Zone",
+       "firmwareIndex": 95
+      },
+      {
+       "name": "Journey to Metropolis Pad",
+       "firmwareIndex": 96
+      },
+      {
+       "name": "Maschinenmensch Keys",
+       "firmwareIndex": 97
+      },
+      {
+       "name": "C Strange Things",
+       "firmwareIndex": 98
+      },
+      {
+       "name": "Analog Boom Bass",
+       "firmwareIndex": 99
+      },
+      {
+       "name": "Analog Synth X Init",
+       "firmwareIndex": 100
+      },
+      {
+       "name": "Native Spirit Cry",
+       "firmwareIndex": 101
+      },
+      {
+       "name": "Mörtal Combat",
+       "firmwareIndex": 102
+      },
+      {
+       "name": "Radio Hut Analog",
+       "firmwareIndex": 103
+      },
+      {
+       "name": "Simply Square Lead",
+       "firmwareIndex": 104
+      },
+      {
+       "name": "Space Organ",
+       "firmwareIndex": 105
+      },
+      {
+       "name": "Bass One",
+       "firmwareIndex": 106
+      },
+      {
+       "name": "Starlight and Carlights",
+       "firmwareIndex": 107
+      },
+      {
+       "name": "Cazio Banjo Pluck",
+       "firmwareIndex": 108
+      },
+      {
+       "name": "Guitar ",
+       "firmwareIndex": 109
+      },
+      {
+       "name": "Disclosure 5th Bass",
+       "firmwareIndex": 110
+      },
+      {
+       "name": "erossholdthosedronenotes",
+       "firmwareIndex": 111
+      },
+      {
+       "name": "8-Bit Side Scroller",
+       "firmwareIndex": 112
+      },
+      {
+       "name": "Pure FM Pluck",
+       "firmwareIndex": 113
+      },
+      {
+       "name": "Dark Theater Organ",
+       "firmwareIndex": 114
+      },
+      {
+       "name": "I Dream in Analog",
+       "firmwareIndex": 115
+      },
+      {
+       "name": "Wavesss",
+       "firmwareIndex": 116
+      },
+      {
+       "name": "Vintage Organ",
+       "firmwareIndex": 117
+      },
+      {
+       "name": "BASS-ket Ball",
+       "firmwareIndex": 118
+      },
+      {
+       "name": "Cosmic Organ",
+       "firmwareIndex": 119
+      },
+      {
+       "name": "Cave of the Cybermen",
+       "firmwareIndex": 120
+      },
+      {
+       "name": "Cave of the Cyberwomen",
+       "firmwareIndex": 121
+      },
+      {
+       "name": "Castlevania",
+       "firmwareIndex": 122
+      },
+      {
+       "name": "GooGoo Dance",
+       "firmwareIndex": 123
+      },
+      {
+       "name": "Halt and Catch Fire",
+       "firmwareIndex": 124
+      },
+      {
+       "name": "erossmodwheelslinky",
+       "firmwareIndex": 125
+      },
+      {
+       "name": "Cazio Disco",
+       "firmwareIndex": 126
+      },
+      {
+       "name": "Cosmic Lead",
+       "firmwareIndex": 127
+      },
+      {
+       "name": "Sega Outrun",
+       "firmwareIndex": 128
+      },
+      {
+       "name": "Sahara Future Lead",
+       "firmwareIndex": 129
+      },
+      {
+       "name": "Pop Lead",
+       "firmwareIndex": 130
+      },
+      {
+       "name": "Rogue Lead",
+       "firmwareIndex": 131
+      },
+      {
+       "name": "This Lead Goes to 11",
+       "firmwareIndex": 132
+      },
+      {
+       "name": "Wood Pluck",
+       "firmwareIndex": 133
+      },
+      {
+       "name": "Amiga Bass",
+       "firmwareIndex": 134
+      },
+      {
+       "name": "Super Happy Fun Time",
+       "firmwareIndex": 135
+      }
+     ]
+    },
+    {
+     "name": "Brice Beasley",
+     "presets": [
+      {
+       "name": "BB Pressing On Seq",
+       "firmwareIndex": 136
+      },
+      {
+       "name": "BB Slasher Flick Seq",
+       "firmwareIndex": 137
+      },
+      {
+       "name": "BB Dandelions Seq",
+       "firmwareIndex": 138
+      },
+      {
+       "name": "BB Driving Line Seq",
+       "firmwareIndex": 139
+      },
+      {
+       "name": "BB “Kids” On G3 Seq",
+       "firmwareIndex": 140
+      },
+      {
+       "name": "BB Life Force Seq",
+       "firmwareIndex": 141
+      },
+      {
+       "name": "BB New Worlds Seq",
+       "firmwareIndex": 142
+      },
+      {
+       "name": "BB Nonpareil ‘89 Seq",
+       "firmwareIndex": 143
+      },
+      {
+       "name": "BB Orca Club Seq",
+       "firmwareIndex": 144
+      },
+      {
+       "name": "BB Bass Runner Seq",
+       "firmwareIndex": 145
+      },
+      {
+       "name": "BB Synth Party ‘83 Seq",
+       "firmwareIndex": 146
+      },
+      {
+       "name": "BB Arcade Angel Arp",
+       "firmwareIndex": 147
+      },
+      {
+       "name": "BB Dream With Me Arp",
+       "firmwareIndex": 148
+      },
+      {
+       "name": "BB Aquatica Arp",
+       "firmwareIndex": 149
+      },
+      {
+       "name": "BB Danger Inc. Drone",
+       "firmwareIndex": 150
+      },
+      {
+       "name": "BB Longitude Drone",
+       "firmwareIndex": 151
+      },
+      {
+       "name": "BB Kubrick Hall Drone",
+       "firmwareIndex": 152
+      },
+      {
+       "name": "BB Planet Manager Drone",
+       "firmwareIndex": 153
+      },
+      {
+       "name": "BB Power Down Drone",
+       "firmwareIndex": 154
+      },
+      {
+       "name": "BB Stunned By Splendor Drone",
+       "firmwareIndex": 155
+      },
+      {
+       "name": "BB Crush The Choir Pad",
+       "firmwareIndex": 156
+      },
+      {
+       "name": "BB Cool Beans Epic Mega Pad",
+       "firmwareIndex": 157
+      },
+      {
+       "name": "BB AmbiBrass Pad",
+       "firmwareIndex": 158
+      },
+      {
+       "name": "BB Phaedra Pad",
+       "firmwareIndex": 159
+      },
+      {
+       "name": "BB The Descenders Pad",
+       "firmwareIndex": 160
+      },
+      {
+       "name": "BB Sidechained Verb Pad",
+       "firmwareIndex": 161
+      },
+      {
+       "name": "BB Everything U Do Pad",
+       "firmwareIndex": 162
+      },
+      {
+       "name": "BB Castaspella Pad",
+       "firmwareIndex": 163
+      },
+      {
+       "name": "BB Hobbs Vox Pad",
+       "firmwareIndex": 164
+      },
+      {
+       "name": "BB Up To You Pad",
+       "firmwareIndex": 165
+      },
+      {
+       "name": "BB Solina String Pad",
+       "firmwareIndex": 166
+      },
+      {
+       "name": "BB Vibe Organ 1979 Poly",
+       "firmwareIndex": 167
+      },
+      {
+       "name": "BB Hughes Poly",
+       "firmwareIndex": 168
+      },
+      {
+       "name": "BB 80s Cop Poly",
+       "firmwareIndex": 169
+      },
+      {
+       "name": "BB Makeshift Organ Poly",
+       "firmwareIndex": 170
+      },
+      {
+       "name": "BB Slow Keys Poly",
+       "firmwareIndex": 171
+      },
+      {
+       "name": "BB Slide Wide Bass",
+       "firmwareIndex": 172
+      },
+      {
+       "name": "BB Monoblock Bass",
+       "firmwareIndex": 173
+      },
+      {
+       "name": "BB Röy’s Phaser Bass",
+       "firmwareIndex": 174
+      },
+      {
+       "name": "BB BedMau5 Bass",
+       "firmwareIndex": 175
+      },
+      {
+       "name": "BB Wildchild Singers Lead",
+       "firmwareIndex": 176
+      },
+      {
+       "name": "BB Lazy Day Lead",
+       "firmwareIndex": 177
+      },
+      {
+       "name": "BB The Silver Screen Lead",
+       "firmwareIndex": 178
+      },
+      {
+       "name": "BB Eazy-East Lead",
+       "firmwareIndex": 179
+      },
+      {
+       "name": "BB Extremity FX",
+       "firmwareIndex": 180
+      },
+      {
+       "name": "BB Synth Won Sign-off",
+       "firmwareIndex": 181
+      }
+     ]
+    },
+    {
+     "name": "DJ Puzzle",
+     "presets": [
+      {
+       "name": "Lost Sentinel",
+       "firmwareIndex": 182
+      },
+      {
+       "name": "Graphene",
+       "firmwareIndex": 183
+      },
+      {
+       "name": "Classic Wobble",
+       "firmwareIndex": 184
+      },
+      {
+       "name": "Gate Pad",
+       "firmwareIndex": 185
+      },
+      {
+       "name": "Cinematic Waves",
+       "firmwareIndex": 186
+      },
+      {
+       "name": "Noise Splash",
+       "firmwareIndex": 187
+      },
+      {
+       "name": "ZAP",
+       "firmwareIndex": 188
+      },
+      {
+       "name": "Interlocked",
+       "firmwareIndex": 189
+      },
+      {
+       "name": "Pi Eno",
+       "firmwareIndex": 190
+      },
+      {
+       "name": "Chopsticks In Space",
+       "firmwareIndex": 191
+      },
+      {
+       "name": "Mushroom",
+       "firmwareIndex": 192
+      },
+      {
+       "name": "Rhythm Pad",
+       "firmwareIndex": 193
+      },
+      {
+       "name": "Arcade Lead",
+       "firmwareIndex": 194
+      },
+      {
+       "name": "SciFi Tension",
+       "firmwareIndex": 195
+      },
+      {
+       "name": "EBM",
+       "firmwareIndex": 196
+      },
+      {
+       "name": "Melbourne Bounce",
+       "firmwareIndex": 197
+      },
+      {
+       "name": "Happy Hardcore",
+       "firmwareIndex": 198
+      },
+      {
+       "name": "Warehouse",
+       "firmwareIndex": 199
+      },
+      {
+       "name": "Bass Banger",
+       "firmwareIndex": 200
+      },
+      {
+       "name": "Sub Pulse",
+       "firmwareIndex": 201
+      },
+      {
+       "name": "Dublets",
+       "firmwareIndex": 202
+      },
+      {
+       "name": "Odd Perc",
+       "firmwareIndex": 203
+      },
+      {
+       "name": "Closed High Hat",
+       "firmwareIndex": 204
+      },
+      {
+       "name": "Open High Hat",
+       "firmwareIndex": 205
+      },
+      {
+       "name": "Noise Hats",
+       "firmwareIndex": 206
+      },
+      {
+       "name": "Soft Boomy Kick",
+       "firmwareIndex": 207
+      },
+      {
+       "name": "Snare 1",
+       "firmwareIndex": 208
+      },
+      {
+       "name": "Snare 2",
+       "firmwareIndex": 209
+      }
+     ]
+    },
+    {
+     "name": "Electronisounds",
+     "presets": [
+      {
+       "name": "ARP - Turtle Man",
+       "firmwareIndex": 210
+      },
+      {
+       "name": "BASS - Cheeze Trippin’",
+       "firmwareIndex": 211
+      },
+      {
+       "name": "ARP - 23 Skidoo",
+       "firmwareIndex": 212
+      },
+      {
+       "name": "BASS - Basssssic Subber",
+       "firmwareIndex": 213
+      },
+      {
+       "name": "ARP - 138 Trance Bass 2",
+       "firmwareIndex": 214
+      },
+      {
+       "name": "ARP - 138 Trance Bass 1",
+       "firmwareIndex": 215
+      },
+      {
+       "name": "ARP - Get the Invaders!",
+       "firmwareIndex": 216
+      },
+      {
+       "name": "ARP - Cat Lady",
+       "firmwareIndex": 217
+      },
+      {
+       "name": "LEAD - Get Zipped",
+       "firmwareIndex": 218
+      },
+      {
+       "name": "LEAD - Bouncy Boy",
+       "firmwareIndex": 219
+      },
+      {
+       "name": "LEAD - Lonely Club Room",
+       "firmwareIndex": 220
+      },
+      {
+       "name": "ARP - Purple Nights",
+       "firmwareIndex": 221
+      },
+      {
+       "name": "ARP - Kiss Me, You Spy!",
+       "firmwareIndex": 222
+      },
+      {
+       "name": "ARP - Eclestra",
+       "firmwareIndex": 223
+      },
+      {
+       "name": "LEAD - Acacia",
+       "firmwareIndex": 224
+      },
+      {
+       "name": "ARP - Dead Boy Techno",
+       "firmwareIndex": 225
+      },
+      {
+       "name": "POLY - Onscuuzi",
+       "firmwareIndex": 226
+      },
+      {
+       "name": "ARP - Rolling Some",
+       "firmwareIndex": 227
+      },
+      {
+       "name": "ARP - Blessing of Dean",
+       "firmwareIndex": 228
+      },
+      {
+       "name": "PLK - Play Something Sad",
+       "firmwareIndex": 229
+      },
+      {
+       "name": "ARP - Trapped",
+       "firmwareIndex": 230
+      },
+      {
+       "name": "BASS - Hey Jakob!",
+       "firmwareIndex": 231
+      },
+      {
+       "name": "ARP - Octavio",
+       "firmwareIndex": 232
+      },
+      {
+       "name": "ARP - Bass In Your Pocket",
+       "firmwareIndex": 233
+      },
+      {
+       "name": "ARP - Bass X",
+       "firmwareIndex": 234
+      },
+      {
+       "name": "ARP - Fuzzknocker",
+       "firmwareIndex": 235
+      },
+      {
+       "name": "PAD - Forgotten Stories",
+       "firmwareIndex": 236
+      },
+      {
+       "name": "PAD - Dub Blossom",
+       "firmwareIndex": 237
+      },
+      {
+       "name": "ARP - Lotharian",
+       "firmwareIndex": 238
+      },
+      {
+       "name": "ARP - Tekno Con Carne",
+       "firmwareIndex": 239
+      },
+      {
+       "name": "ARP - Deepest Dark Room",
+       "firmwareIndex": 240
+      },
+      {
+       "name": "ARP - Underscore",
+       "firmwareIndex": 241
+      },
+      {
+       "name": "ARP - Hold Big Chords",
+       "firmwareIndex": 242
+      },
+      {
+       "name": "ARP - Keep Running Bro",
+       "firmwareIndex": 243
+      },
+      {
+       "name": "ARP - Modulator Mode",
+       "firmwareIndex": 244
+      },
+      {
+       "name": "ARP - Poppin",
+       "firmwareIndex": 245
+      },
+      {
+       "name": "ARP - Bring it, Sucka!",
+       "firmwareIndex": 246
+      },
+      {
+       "name": "ARP - Wonker Boyz",
+       "firmwareIndex": 247
+      },
+      {
+       "name": "ARP - Zucrat",
+       "firmwareIndex": 248
+      },
+      {
+       "name": "ARP - Bloom",
+       "firmwareIndex": 249
+      },
+      {
+       "name": "ARP - Neptune Drift",
+       "firmwareIndex": 250
+      },
+      {
+       "name": "POLY - Play Me So Slowly",
+       "firmwareIndex": 251
+      },
+      {
+       "name": "BASS - Dubchill",
+       "firmwareIndex": 252
+      }
+     ]
+    },
+    {
+     "name": "Francis Preve",
+     "presets": [
+      {
+       "name": "Solaris",
+       "firmwareIndex": 253
+      },
+      {
+       "name": "Sky Terror",
+       "firmwareIndex": 254
+      },
+      {
+       "name": "Echo Stab",
+       "firmwareIndex": 255
+      },
+      {
+       "name": "Soprano",
+       "firmwareIndex": 257
+      },
+      {
+       "name": "The Pad",
+       "firmwareIndex": 256
+      },
+      {
+       "name": "8-Bit Woodwind",
+       "firmwareIndex": 258
+      },
+      {
+       "name": "Indie Ambient",
+       "firmwareIndex": 259
+      },
+      {
+       "name": "Big Octavia",
+       "firmwareIndex": 260
+      },
+      {
+       "name": "Electric Bass",
+       "firmwareIndex": 261
+      },
+      {
+       "name": "Dafty Duque",
+       "firmwareIndex": 262
+      },
+      {
+       "name": "Airbender",
+       "firmwareIndex": 263
+      },
+      {
+       "name": "Cathedral",
+       "firmwareIndex": 264
+      },
+      {
+       "name": "Jazz Organ",
+       "firmwareIndex": 265
+      },
+      {
+       "name": "80s Pulse",
+       "firmwareIndex": 266
+      },
+      {
+       "name": "Mello String",
+       "firmwareIndex": 267
+      },
+      {
+       "name": "Mello Flute",
+       "firmwareIndex": 268
+      },
+      {
+       "name": "Vintage Bells",
+       "firmwareIndex": 269
+      },
+      {
+       "name": "Stringmachine",
+       "firmwareIndex": 270
+      },
+      {
+       "name": "Printz",
+       "firmwareIndex": 271
+      },
+      {
+       "name": "Chyptoon",
+       "firmwareIndex": 272
+      },
+      {
+       "name": "Everypoly",
+       "firmwareIndex": 273
+      },
+      {
+       "name": "Wurlesque",
+       "firmwareIndex": 274
+      },
+      {
+       "name": "Crushbell",
+       "firmwareIndex": 275
+      },
+      {
+       "name": "Voxumana",
+       "firmwareIndex": 276
+      },
+      {
+       "name": "Power 5th",
+       "firmwareIndex": 277
+      },
+      {
+       "name": "Squarepad",
+       "firmwareIndex": 278
+      }
+     ]
+    },
+    {
+     "name": "JEC",
+     "presets": [
+      {
+       "name": "JEC Atmostrings 2",
+       "firmwareIndex": 290
+      },
+      {
+       "name": "JEC Slow Farfisa 2",
+       "firmwareIndex": 291
+      },
+      {
+       "name": "JEC Atmosquare Lead 2",
+       "firmwareIndex": 292
+      },
+      {
+       "name": "JEC Arpège Résonance 2",
+       "firmwareIndex": 293
+      },
+      {
+       "name": "JEC String Machine 2",
+       "firmwareIndex": 294
+      },
+      {
+       "name": "JEC Hollores Bass 2",
+       "firmwareIndex": 295
+      },
+      {
+       "name": "JEC Gentlemen Take Polaroids 2",
+       "firmwareIndex": 296
+      },
+      {
+       "name": "JEC Phat 2600 Bass 2",
+       "firmwareIndex": 297
+      },
+      {
+       "name": "JEC Softwah Lead 2",
+       "firmwareIndex": 298
+      },
+      {
+       "name": "JEC Flexatonal 2",
+       "firmwareIndex": 299
+      },
+      {
+       "name": "JEC DigeriBass 2",
+       "firmwareIndex": 300
+      },
+      {
+       "name": "JEC Forth of Bass 2",
+       "firmwareIndex": 301
+      },
+      {
+       "name": "JEC High Pass Poly 2",
+       "firmwareIndex": 302
+      },
+      {
+       "name": "JEC Log A Rhythm 2",
+       "firmwareIndex": 303
+      },
+      {
+       "name": "JEC Hats 2",
+       "firmwareIndex": 304
+      },
+      {
+       "name": "JEC ClaviBass 2",
+       "firmwareIndex": 305
+      },
+      {
+       "name": "JEC Alien Chatter 2",
+       "firmwareIndex": 306
+      },
+      {
+       "name": "JEC Come Back Calypso 2",
+       "firmwareIndex": 307
+      },
+      {
+       "name": "JEC Crushed Velvet Sequins 2",
+       "firmwareIndex": 308
+      },
+      {
+       "name": "JEC Filtered Dubrec! 2",
+       "firmwareIndex": 309
+      },
+      {
+       "name": "JEC Digiharp 5th 2",
+       "firmwareIndex": 310
+      },
+      {
+       "name": "JEC Hollow Band Bass 2",
+       "firmwareIndex": 311
+      },
+      {
+       "name": "JEC Melancholy Wow 2",
+       "firmwareIndex": 312
+      },
+      {
+       "name": "JEC Drone Bass 2",
+       "firmwareIndex": 313
+      },
+      {
+       "name": "JEC PolyVince 2",
+       "firmwareIndex": 314
+      },
+      {
+       "name": "JEC Dirty DO5 2",
+       "firmwareIndex": 315
+      },
+      {
+       "name": "JEC Resipop 2",
+       "firmwareIndex": 316
+      },
+      {
+       "name": "JEC Bass According To Garp 2",
+       "firmwareIndex": 317
+      },
+      {
+       "name": "JEC Alien Atmosphere 2",
+       "firmwareIndex": 318
+      },
+      {
+       "name": "JEC Shimmer Me Lead 2",
+       "firmwareIndex": 319
+      },
+      {
+       "name": "JEC Voxbass 2",
+       "firmwareIndex": 320
+      },
+      {
+       "name": "JEC Call Of Cathedral 2",
+       "firmwareIndex": 321
+      },
+      {
+       "name": "JEC Jabba Zarp 2",
+       "firmwareIndex": 322
+      },
+      {
+       "name": "JEC SynthVox 2",
+       "firmwareIndex": 323
+      },
+      {
+       "name": "JEC Calpamos LV-223 2",
+       "firmwareIndex": 324
+      },
+      {
+       "name": "JEC D-50 Cello 2",
+       "firmwareIndex": 325
+      },
+      {
+       "name": "JEC For Carpenter 2",
+       "firmwareIndex": 326
+      },
+      {
+       "name": "JEC Resonant Sweep Organ 2",
+       "firmwareIndex": 327
+      },
+      {
+       "name": "JEC Ambient Pizz 2",
+       "firmwareIndex": 328
+      },
+      {
+       "name": "JEC Alien Lullaby 2",
+       "firmwareIndex": 329
+      },
+      {
+       "name": "JEC Oily Can 2",
+       "firmwareIndex": 330
+      },
+      {
+       "name": "JEC DX7 Harmonica 2",
+       "firmwareIndex": 331
+      },
+      {
+       "name": "JEC Radio Koto 2",
+       "firmwareIndex": 332
+      },
+      {
+       "name": "JEC Moogy Glide Bass 2",
+       "firmwareIndex": 333
+      },
+      {
+       "name": "JEC Please Repeat Me 2",
+       "firmwareIndex": 334
+      },
+      {
+       "name": "JEC Magical Organ 2",
+       "firmwareIndex": 335
+      },
+      {
+       "name": "JEC RNDZap 2",
+       "firmwareIndex": 336
+      },
+      {
+       "name": "JEC Un Dallapé per Alessandro 2",
+       "firmwareIndex": 337
+      },
+      {
+       "name": "JEC Res Ohh Lead 2",
+       "firmwareIndex": 338
+      },
+      {
+       "name": "JEC On The Run 2 Use Hold! E2",
+       "firmwareIndex": 339
+      },
+      {
+       "name": "JEC Alarming!",
+       "firmwareIndex": 340
+      },
+      {
+       "name": "JEC Atmosresofone 2",
+       "firmwareIndex": 341
+      },
+      {
+       "name": "JEC French Accordion",
+       "firmwareIndex": 279
+      },
+      {
+       "name": "JEC Sweeper Organ",
+       "firmwareIndex": 342
+      },
+      {
+       "name": "JEC Pseudo S&H",
+       "firmwareIndex": 343
+      },
+      {
+       "name": "JEC Hybrid Drone Bass",
+       "firmwareIndex": 344
+      },
+      {
+       "name": "JEC I Feel Love Bass",
+       "firmwareIndex": 345
+      },
+      {
+       "name": "JEC Soft iVCS3",
+       "firmwareIndex": 346
+      },
+      {
+       "name": "JEC Echo Pips",
+       "firmwareIndex": 347
+      },
+      {
+       "name": "JEC 8 Bit Shot",
+       "firmwareIndex": 280
+      },
+      {
+       "name": "JEC Hollow Sweeper",
+       "firmwareIndex": 281
+      },
+      {
+       "name": "JEC Chroma Vox Combo",
+       "firmwareIndex": 348
+      },
+      {
+       "name": "JEC Eminent Combo",
+       "firmwareIndex": 282
+      },
+      {
+       "name": "JEC Delayed Strings",
+       "firmwareIndex": 349
+      },
+      {
+       "name": "JEC Classic Bass 1",
+       "firmwareIndex": 283
+      },
+      {
+       "name": "JEC Full Eminent Strings",
+       "firmwareIndex": 284
+      },
+      {
+       "name": "JEC Solina Strings Warm",
+       "firmwareIndex": 350
+      },
+      {
+       "name": "JEC Warm Steel Pans",
+       "firmwareIndex": 351
+      },
+      {
+       "name": "JEC JMJ Arpegiator",
+       "firmwareIndex": 352
+      },
+      {
+       "name": "JEC Rainbow Dome Synthi",
+       "firmwareIndex": 285
+      },
+      {
+       "name": "JEC Solina Strings Bright",
+       "firmwareIndex": 353
+      },
+      {
+       "name": "JEC Vince Attack Lead",
+       "firmwareIndex": 354
+      },
+      {
+       "name": "JEC Square Lead Clean",
+       "firmwareIndex": 355
+      },
+      {
+       "name": "JEC Slow Resonant Farfisa",
+       "firmwareIndex": 356
+      },
+      {
+       "name": "JEC Voxy Bass",
+       "firmwareIndex": 357
+      },
+      {
+       "name": "JEC Strings Fast",
+       "firmwareIndex": 358
+      },
+      {
+       "name": "JEC Resopad",
+       "firmwareIndex": 286
+      },
+      {
+       "name": "JEC Magic Organ Pad",
+       "firmwareIndex": 287
+      },
+      {
+       "name": "JEC Monster Bass ",
+       "firmwareIndex": 359
+      },
+      {
+       "name": "JEC Synthi Drone",
+       "firmwareIndex": 360
+      },
+      {
+       "name": "JEC Synthetic Harp 2",
+       "firmwareIndex": 361
+      },
+      {
+       "name": "JEC Deep Mono Pad",
+       "firmwareIndex": 362
+      },
+      {
+       "name": "JEC Sub Res Lead",
+       "firmwareIndex": 363
+      },
+      {
+       "name": "JEC New Infinity Arp",
+       "firmwareIndex": 364
+      },
+      {
+       "name": "JEC Slow Lesley",
+       "firmwareIndex": 365
+      },
+      {
+       "name": "JEC Resiwow Bass",
+       "firmwareIndex": 366
+      },
+      {
+       "name": "JEC Punchy Lead",
+       "firmwareIndex": 288
+      },
+      {
+       "name": "JEC Shimmer 'me Banjo",
+       "firmwareIndex": 289
+      }
+     ]
+    },
+    {
+     "name": "Red Sky Lullaby",
+     "presets": [
+      {
+       "name": "Deeper Space Pad",
+       "firmwareIndex": 367
+      },
+      {
+       "name": "AM Pad",
+       "firmwareIndex": 368
+      },
+      {
+       "name": "Fripping TremoPad",
+       "firmwareIndex": 369
+      },
+      {
+       "name": "Irresistible Forces Pad",
+       "firmwareIndex": 370
+      },
+      {
+       "name": "Subtlety Pad",
+       "firmwareIndex": 371
+      },
+      {
+       "name": "Flutterverb Pad",
+       "firmwareIndex": 372
+      },
+      {
+       "name": "SubSonic Pad",
+       "firmwareIndex": 373
+      },
+      {
+       "name": "Fripping MonoPad",
+       "firmwareIndex": 374
+      },
+      {
+       "name": "Negative Space Pad",
+       "firmwareIndex": 375
+      },
+      {
+       "name": "Myoclonic Pad",
+       "firmwareIndex": 376
+      },
+      {
+       "name": "Temporicide Pad",
+       "firmwareIndex": 377
+      },
+      {
+       "name": "Fluted Pad",
+       "firmwareIndex": 378
+      },
+      {
+       "name": "Deep Sea Pad",
+       "firmwareIndex": 379
+      },
+      {
+       "name": "Theoretical Evolution Pad",
+       "firmwareIndex": 380
+      },
+      {
+       "name": "Ethereal Modulator Pad",
+       "firmwareIndex": 381
+      },
+      {
+       "name": "Not Quite Right Pad",
+       "firmwareIndex": 382
+      },
+      {
+       "name": "Vintage Wobble Pad",
+       "firmwareIndex": 383
+      },
+      {
+       "name": "Windswept Pad",
+       "firmwareIndex": 384
+      },
+      {
+       "name": "Shimmershine Pad",
+       "firmwareIndex": 385
+      },
+      {
+       "name": "SupercalifragilisticexpiPADidocious",
+       "firmwareIndex": 386
+      },
+      {
+       "name": "Pulsating Ultraworlds",
+       "firmwareIndex": 387
+      },
+      {
+       "name": "Shadow Bass",
+       "firmwareIndex": 388
+      },
+      {
+       "name": "Dub Headphase Bass",
+       "firmwareIndex": 389
+      },
+      {
+       "name": "Yah Yah Bass",
+       "firmwareIndex": 390
+      },
+      {
+       "name": "Simpla Bass",
+       "firmwareIndex": 391
+      },
+      {
+       "name": "Filter Release Bass",
+       "firmwareIndex": 392
+      },
+      {
+       "name": "Jelly Bass",
+       "firmwareIndex": 393
+      },
+      {
+       "name": "Artificial Unintelligence",
+       "firmwareIndex": 394
+      },
+      {
+       "name": "Seventh Heaven Bass",
+       "firmwareIndex": 395
+      },
+      {
+       "name": "Phase Through Bass",
+       "firmwareIndex": 396
+      },
+      {
+       "name": "nths Bass",
+       "firmwareIndex": 397
+      },
+      {
+       "name": "Electric Haze Bass",
+       "firmwareIndex": 398
+      },
+      {
+       "name": "Lead Me To The Bass",
+       "firmwareIndex": 399
+      },
+      {
+       "name": "Steamer Bass",
+       "firmwareIndex": 400
+      },
+      {
+       "name": "Groover Bass",
+       "firmwareIndex": 401
+      },
+      {
+       "name": "Bassliner",
+       "firmwareIndex": 402
+      },
+      {
+       "name": "Bass Groover Arp",
+       "firmwareIndex": 403
+      },
+      {
+       "name": "Funkularist Bass Arp",
+       "firmwareIndex": 404
+      },
+      {
+       "name": "Easy Glider Bass Arp",
+       "firmwareIndex": 405
+      },
+      {
+       "name": "Resistance Arp",
+       "firmwareIndex": 406
+      },
+      {
+       "name": "Uppers and Downers Arp",
+       "firmwareIndex": 407
+      },
+      {
+       "name": "Odd Mod Arp",
+       "firmwareIndex": 408
+      },
+      {
+       "name": "Dryza Bone Arp",
+       "firmwareIndex": 409
+      },
+      {
+       "name": "Mode Red Arp",
+       "firmwareIndex": 410
+      },
+      {
+       "name": "Yeah Yare Yayr",
+       "firmwareIndex": 411
+      },
+      {
+       "name": "Sources Arp",
+       "firmwareIndex": 412
+      },
+      {
+       "name": "Hexadekany Arp",
+       "firmwareIndex": 413
+      },
+      {
+       "name": "Tentacles Arp",
+       "firmwareIndex": 414
+      },
+      {
+       "name": "Analog Bubblearp",
+       "firmwareIndex": 415
+      },
+      {
+       "name": "Night Riders Arp",
+       "firmwareIndex": 416
+      },
+      {
+       "name": "Upside Arp",
+       "firmwareIndex": 417
+      },
+      {
+       "name": "Synthwaverer Arp",
+       "firmwareIndex": 418
+      },
+      {
+       "name": "Slow Train Arp",
+       "firmwareIndex": 419
+      },
+      {
+       "name": "Formant Robotix Arp",
+       "firmwareIndex": 420
+      },
+      {
+       "name": "Rising Sons Arp",
+       "firmwareIndex": 421
+      },
+      {
+       "name": "DigiMarimba Arp",
+       "firmwareIndex": 422
+      },
+      {
+       "name": "Modal Trance Arp",
+       "firmwareIndex": 423
+      },
+      {
+       "name": "Trance Atlantic Arp",
+       "firmwareIndex": 424
+      },
+      {
+       "name": "Non Arpeggiating Arp",
+       "firmwareIndex": 425
+      },
+      {
+       "name": "WahMods Arp",
+       "firmwareIndex": 426
+      },
+      {
+       "name": "Hick Up Arp",
+       "firmwareIndex": 427
+      },
+      {
+       "name": "Hello Ween",
+       "firmwareIndex": 428
+      },
+      {
+       "name": "Up To The Sun",
+       "firmwareIndex": 429
+      },
+      {
+       "name": "Oddscale Riser",
+       "firmwareIndex": 430
+      },
+      {
+       "name": "Middle Age Kicks",
+       "firmwareIndex": 431
+      },
+      {
+       "name": "Everybody Needs A",
+       "firmwareIndex": 432
+      },
+      {
+       "name": "Everybody Needs B",
+       "firmwareIndex": 433
+      },
+      {
+       "name": "Trancematica",
+       "firmwareIndex": 434
+      },
+      {
+       "name": "Red Major",
+       "firmwareIndex": 435
+      },
+      {
+       "name": "Red Minor",
+       "firmwareIndex": 436
+      },
+      {
+       "name": "Looper Keys",
+       "firmwareIndex": 437
+      },
+      {
+       "name": "Wah Releaser Keys",
+       "firmwareIndex": 438
+      },
+      {
+       "name": "Fourth of May",
+       "firmwareIndex": 439
+      },
+      {
+       "name": "Basement Organ",
+       "firmwareIndex": 440
+      },
+      {
+       "name": "Carpsicord",
+       "firmwareIndex": 441
+      },
+      {
+       "name": "97 Tears Keys",
+       "firmwareIndex": 442
+      },
+      {
+       "name": "Lofi Keys",
+       "firmwareIndex": 443
+      },
+      {
+       "name": "Loaf Eye Keys",
+       "firmwareIndex": 444
+      },
+      {
+       "name": "Church Organs in Space",
+       "firmwareIndex": 445
+      },
+      {
+       "name": "Tremolo Synth",
+       "firmwareIndex": 446
+      },
+      {
+       "name": "Verbacious Lead",
+       "firmwareIndex": 447
+      },
+      {
+       "name": "Simple Monolead",
+       "firmwareIndex": 448
+      },
+      {
+       "name": "ElectroKoto",
+       "firmwareIndex": 449
+      },
+      {
+       "name": "Slide and Glide Lead",
+       "firmwareIndex": 450
+      },
+      {
+       "name": "Syncopated Keys",
+       "firmwareIndex": 451
+      },
+      {
+       "name": "Roobarbed Lead",
+       "firmwareIndex": 452
+      },
+      {
+       "name": "Pulsemonger",
+       "firmwareIndex": 453
+      },
+      {
+       "name": "Haunted Stadium Organ",
+       "firmwareIndex": 454
+      },
+      {
+       "name": "Plucky McDronerson",
+       "firmwareIndex": 455
+      },
+      {
+       "name": "Hold It Feeder Drone",
+       "firmwareIndex": 456
+      },
+      {
+       "name": "Awakening Drone",
+       "firmwareIndex": 457
+      },
+      {
+       "name": "FM Drone Zone",
+       "firmwareIndex": 458
+      },
+      {
+       "name": "4am Eternal",
+       "firmwareIndex": 459
+      },
+      {
+       "name": "Infinite Tension FX",
+       "firmwareIndex": 460
+      },
+      {
+       "name": "All LFO",
+       "firmwareIndex": 461
+      },
+      {
+       "name": "Deep Breath Drone",
+       "firmwareIndex": 462
+      },
+      {
+       "name": "The Return",
+       "firmwareIndex": 463
+      },
+      {
+       "name": "Kicks Hearts Subs",
+       "firmwareIndex": 464
+      },
+      {
+       "name": "Ad Infinitum",
+       "firmwareIndex": 465
+      },
+      {
+       "name": "Outer Limits",
+       "firmwareIndex": 466
+      }
+     ]
+    },
+    {
+     "name": "Spidericemidas",
+     "presets": [
+      {
+       "name": "🕷- Carousel Universe",
+       "firmwareIndex": 619
+      },
+      {
+       "name": "🕷- Springy",
+       "firmwareIndex": 620
+      },
+      {
+       "name": "🕷- Plucked out of thin Air",
+       "firmwareIndex": 621
+      },
+      {
+       "name": "🕷- Harpish",
+       "firmwareIndex": 622
+      },
+      {
+       "name": "🕷- Arpland",
+       "firmwareIndex": 623
+      },
+      {
+       "name": "🕷- Square 7",
+       "firmwareIndex": 624
+      },
+      {
+       "name": "🕷- Finger Picking Good",
+       "firmwareIndex": 625
+      },
+      {
+       "name": "🕷- Space is Deep",
+       "firmwareIndex": 626
+      },
+      {
+       "name": "🕷- Solitude",
+       "firmwareIndex": 627
+      },
+      {
+       "name": "🕷- Arp-Sea-Chord",
+       "firmwareIndex": 628
+      },
+      {
+       "name": "🕷- SunWings",
+       "firmwareIndex": 629
+      },
+      {
+       "name": "🕷- Strumming Squares",
+       "firmwareIndex": 630
+      },
+      {
+       "name": "🕷- Arpnotic",
+       "firmwareIndex": 631
+      },
+      {
+       "name": "🕷- Harmonix",
+       "firmwareIndex": 632
+      },
+      {
+       "name": "🕷- Sitarp",
+       "firmwareIndex": 633
+      },
+      {
+       "name": "🕷- Arpful Dodger",
+       "firmwareIndex": 634
+      },
+      {
+       "name": "🕷- Missing Time",
+       "firmwareIndex": 635
+      },
+      {
+       "name": "🕷- DubAqua",
+       "firmwareIndex": 636
+      },
+      {
+       "name": "🕷- ArpMind",
+       "firmwareIndex": 637
+      },
+      {
+       "name": "🕷- Eat Static",
+       "firmwareIndex": 638
+      },
+      {
+       "name": "🕷- Plasmoid",
+       "firmwareIndex": 639
+      },
+      {
+       "name": "🕷- The Binary Code",
+       "firmwareIndex": 640
+      },
+      {
+       "name": "🕷- Messages",
+       "firmwareIndex": 641
+      },
+      {
+       "name": "🕷- Particles",
+       "firmwareIndex": 642
+      },
+      {
+       "name": "🕷- Boiling Point",
+       "firmwareIndex": 643
+      },
+      {
+       "name": "🕷- Orbital Oceans",
+       "firmwareIndex": 644
+      },
+      {
+       "name": "🕷- Reefractals",
+       "firmwareIndex": 645
+      },
+      {
+       "name": "🕷- Filter Pluck",
+       "firmwareIndex": 646
+      },
+      {
+       "name": "🕷- Shifting Realms",
+       "firmwareIndex": 647
+      },
+      {
+       "name": "🕷 - Dotty",
+       "firmwareIndex": 648
+      },
+      {
+       "name": "🕷 - Boingo",
+       "firmwareIndex": 649
+      },
+      {
+       "name": "🕷- Farewell",
+       "firmwareIndex": 650
+      },
+      {
+       "name": "🕷- Distant Shores",
+       "firmwareIndex": 651
+      },
+      {
+       "name": "🕷- Eastern Promise",
+       "firmwareIndex": 652
+      },
+      {
+       "name": "🕷- Frozen",
+       "firmwareIndex": 653
+      },
+      {
+       "name": "🕷- Calm",
+       "firmwareIndex": 654
+      },
+      {
+       "name": "🕷- Chillout",
+       "firmwareIndex": 655
+      },
+      {
+       "name": "🕷- Into the Light",
+       "firmwareIndex": 656
+      },
+      {
+       "name": "🕷- Lost in Space",
+       "firmwareIndex": 657
+      },
+      {
+       "name": "🕷- Busy Bees",
+       "firmwareIndex": 658
+      },
+      {
+       "name": "🕷- Swirly Thing Alert!",
+       "firmwareIndex": 659
+      },
+      {
+       "name": "🕷- Tracers",
+       "firmwareIndex": 660
+      },
+      {
+       "name": "🕷- My God, it’s full of Stars",
+       "firmwareIndex": 661
+      },
+      {
+       "name": "🕷- Ed Wynne",
+       "firmwareIndex": 662
+      },
+      {
+       "name": "🕷- Microdots",
+       "firmwareIndex": 663
+      },
+      {
+       "name": "🕷- The Vindaloorians",
+       "firmwareIndex": 664
+      },
+      {
+       "name": "🕷- Arhythmatics",
+       "firmwareIndex": 665
+      },
+      {
+       "name": "🕷- Zhongqiujie",
+       "firmwareIndex": 666
+      },
+      {
+       "name": "🕷- Mooncake",
+       "firmwareIndex": 667
+      },
+      {
+       "name": "🕷- Sprinkles",
+       "firmwareIndex": 668
+      },
+      {
+       "name": "🕷- Electrogravitics",
+       "firmwareIndex": 669
+      },
+      {
+       "name": "🕷- Neural Pathways",
+       "firmwareIndex": 670
+      },
+      {
+       "name": "🕷- Synapse Collapse",
+       "firmwareIndex": 671
+      },
+      {
+       "name": "🕷- Flutterbies",
+       "firmwareIndex": 672
+      },
+      {
+       "name": "🕷- Fantasy Island",
+       "firmwareIndex": 673
+      },
+      {
+       "name": "🕷- Who Are You?",
+       "firmwareIndex": 674
+      },
+      {
+       "name": "🕷- Odd Bod",
+       "firmwareIndex": 675
+      },
+      {
+       "name": "🕷- Brass EP",
+       "firmwareIndex": 676
+      },
+      {
+       "name": "🕷- Frantic Tantric",
+       "firmwareIndex": 677
+      },
+      {
+       "name": "🕷- Puff Chuff",
+       "firmwareIndex": 678
+      },
+      {
+       "name": "🕷- Quackers!",
+       "firmwareIndex": 679
+      }
+     ]
+    },
+    {
+     "name": "Sound of Izrael",
+     "presets": [
+      {
+       "name": "Done that",
+       "firmwareIndex": 528
+      },
+      {
+       "name": "Let’s start",
+       "firmwareIndex": 518
+      },
+      {
+       "name": "Bassking",
+       "firmwareIndex": 519
+      },
+      {
+       "name": "Down Under",
+       "firmwareIndex": 520
+      },
+      {
+       "name": "The The",
+       "firmwareIndex": 521
+      },
+      {
+       "name": "Time squares",
+       "firmwareIndex": 522
+      },
+      {
+       "name": "Evil ringtone",
+       "firmwareIndex": 523
+      },
+      {
+       "name": "I miss you Daddy",
+       "firmwareIndex": 524
+      },
+      {
+       "name": "Ghosts in my bedroom",
+       "firmwareIndex": 525
+      },
+      {
+       "name": "The Voice Of Peace",
+       "firmwareIndex": 526
+      },
+      {
+       "name": "Digital Ocean",
+       "firmwareIndex": 527
+      },
+      {
+       "name": "Lead me far a way",
+       "firmwareIndex": 529
+      },
+      {
+       "name": "Not just noise",
+       "firmwareIndex": 530
+      },
+      {
+       "name": "Another Harmonic",
+       "firmwareIndex": 531
+      },
+      {
+       "name": "Vandelay industries",
+       "firmwareIndex": 532
+      },
+      {
+       "name": "Beboss",
+       "firmwareIndex": 533
+      },
+      {
+       "name": "Hunted pad",
+       "firmwareIndex": 534
+      },
+      {
+       "name": "Ping ponk",
+       "firmwareIndex": 535
+      },
+      {
+       "name": "Be square",
+       "firmwareIndex": 536
+      },
+      {
+       "name": "Soi Drum loop E",
+       "firmwareIndex": 537
+      },
+      {
+       "name": "Soi Walk Of life",
+       "firmwareIndex": 538
+      },
+      {
+       "name": "Soi Wild horses",
+       "firmwareIndex": 539
+      },
+      {
+       "name": "Pianocolada",
+       "firmwareIndex": 540
+      },
+      {
+       "name": "Birds of paradasi",
+       "firmwareIndex": 541
+      },
+      {
+       "name": "First flight",
+       "firmwareIndex": 542
+      },
+      {
+       "name": "After love dies",
+       "firmwareIndex": 543
+      },
+      {
+       "name": "Talking a bit",
+       "firmwareIndex": 544
+      },
+      {
+       "name": "Death by the sea",
+       "firmwareIndex": 545
+      },
+      {
+       "name": "Sweet Pepper",
+       "firmwareIndex": 546
+      },
+      {
+       "name": "Flue T",
+       "firmwareIndex": 547
+      },
+      {
+       "name": "Leaderman",
+       "firmwareIndex": 548
+      },
+      {
+       "name": "Donald",
+       "firmwareIndex": 549
+      },
+      {
+       "name": "Living inside a dream",
+       "firmwareIndex": 550
+      },
+      {
+       "name": "Arpilouge",
+       "firmwareIndex": 551
+      },
+      {
+       "name": "Tech That",
+       "firmwareIndex": 552
+      },
+      {
+       "name": "Drops",
+       "firmwareIndex": 553
+      },
+      {
+       "name": "Phase R",
+       "firmwareIndex": 554
+      },
+      {
+       "name": "Time after time",
+       "firmwareIndex": 555
+      },
+      {
+       "name": "Quarter to 4",
+       "firmwareIndex": 556
+      },
+      {
+       "name": "Flying Far",
+       "firmwareIndex": 557
+      },
+      {
+       "name": "Back Home",
+       "firmwareIndex": 558
+      },
+      {
+       "name": "Something",
+       "firmwareIndex": 559
+      },
+      {
+       "name": "Took Took",
+       "firmwareIndex": 560
+      },
+      {
+       "name": "SOI Took Took",
+       "firmwareIndex": 561
+      },
+      {
+       "name": "Baladi",
+       "firmwareIndex": 562
+      },
+      {
+       "name": "Pick a chu",
+       "firmwareIndex": 563
+      },
+      {
+       "name": "4 Am",
+       "firmwareIndex": 564
+      },
+      {
+       "name": "Seven heaven",
+       "firmwareIndex": 565
+      },
+      {
+       "name": "Pluck you",
+       "firmwareIndex": 566
+      },
+      {
+       "name": "Bassclum",
+       "firmwareIndex": 567
+      },
+      {
+       "name": "T302",
+       "firmwareIndex": 568
+      },
+      {
+       "name": "Padington",
+       "firmwareIndex": 569
+      },
+      {
+       "name": "Noise B",
+       "firmwareIndex": 570
+      },
+      {
+       "name": "Bass Ball",
+       "firmwareIndex": 571
+      },
+      {
+       "name": "Slow motion",
+       "firmwareIndex": 572
+      },
+      {
+       "name": "Under cover",
+       "firmwareIndex": 573
+      },
+      {
+       "name": "TomToom",
+       "firmwareIndex": 574
+      },
+      {
+       "name": "Rolling stoned",
+       "firmwareIndex": 575
+      },
+      {
+       "name": "Cuts you up",
+       "firmwareIndex": 576
+      },
+      {
+       "name": "Climbing down",
+       "firmwareIndex": 577
+      },
+      {
+       "name": "Metal rain",
+       "firmwareIndex": 578
+      },
+      {
+       "name": "Paka Paka",
+       "firmwareIndex": 579
+      },
+      {
+       "name": "Same",
+       "firmwareIndex": 580
+      },
+      {
+       "name": "Low life",
+       "firmwareIndex": 581
+      },
+      {
+       "name": "Basta",
+       "firmwareIndex": 582
+      },
+      {
+       "name": "shmaltz",
+       "firmwareIndex": 583
+      },
+      {
+       "name": "Tech Know",
+       "firmwareIndex": 584
+      },
+      {
+       "name": "Tech it",
+       "firmwareIndex": 585
+      },
+      {
+       "name": "Tech me on",
+       "firmwareIndex": 586
+      },
+      {
+       "name": "Tech on me",
+       "firmwareIndex": 587
+      },
+      {
+       "name": "Tech This",
+       "firmwareIndex": 588
+      },
+      {
+       "name": "Tech That",
+       "firmwareIndex": 589
+      },
+      {
+       "name": "SynthiT",
+       "firmwareIndex": 590
+      },
+      {
+       "name": "ArpUse",
+       "firmwareIndex": 591
+      },
+      {
+       "name": "Riding waves",
+       "firmwareIndex": 592
+      },
+      {
+       "name": "Gritting",
+       "firmwareIndex": 593
+      },
+      {
+       "name": "Good day",
+       "firmwareIndex": 594
+      },
+      {
+       "name": "Soi 7",
+       "firmwareIndex": 595
+      },
+      {
+       "name": "Endless goof",
+       "firmwareIndex": 596
+      },
+      {
+       "name": "Dark room",
+       "firmwareIndex": 597
+      },
+      {
+       "name": "SoftiT",
+       "firmwareIndex": 598
+      },
+      {
+       "name": "Nose Noise",
+       "firmwareIndex": 599
+      },
+      {
+       "name": "Wait for me",
+       "firmwareIndex": 600
+      },
+      {
+       "name": "I can be Agressive",
+       "firmwareIndex": 601
+      },
+      {
+       "name": "Pia No",
+       "firmwareIndex": 602
+      },
+      {
+       "name": "Mad toy",
+       "firmwareIndex": 603
+      },
+      {
+       "name": "Bug loop",
+       "firmwareIndex": 604
+      },
+      {
+       "name": "Plack",
+       "firmwareIndex": 605
+      },
+      {
+       "name": "Dance Arp",
+       "firmwareIndex": 606
+      },
+      {
+       "name": "After the storm",
+       "firmwareIndex": 607
+      },
+      {
+       "name": "Mr Swing",
+       "firmwareIndex": 608
+      },
+      {
+       "name": "I am an Arp",
+       "firmwareIndex": 609
+      },
+      {
+       "name": "Dangerous",
+       "firmwareIndex": 610
+      },
+      {
+       "name": "Glideness",
+       "firmwareIndex": 611
+      },
+      {
+       "name": "Drum loop A",
+       "firmwareIndex": 612
+      },
+      {
+       "name": "Drum loop B",
+       "firmwareIndex": 613
+      },
+      {
+       "name": "Drum loop C",
+       "firmwareIndex": 614
+      },
+      {
+       "name": "Drum loop D",
+       "firmwareIndex": 615
+      },
+      {
+       "name": "Bad cycle",
+       "firmwareIndex": 616
+      },
+      {
+       "name": "White Knows",
+       "firmwareIndex": 617
+      },
+      {
+       "name": "Adios Arp",
+       "firmwareIndex": 618
+      }
+     ]
+    },
+    {
+     "name": "Sound of Izrael 2",
+     "presets": [
+      {
+       "name": "Soi ARP 1",
+       "firmwareIndex": 467
+      },
+      {
+       "name": "Soi ARP 2",
+       "firmwareIndex": 468
+      },
+      {
+       "name": "Soi ARP 3",
+       "firmwareIndex": 469
+      },
+      {
+       "name": "Soi ARP 4 Tkick",
+       "firmwareIndex": 470
+      },
+      {
+       "name": "Soi ARP 5 Ttom",
+       "firmwareIndex": 471
+      },
+      {
+       "name": "Soi ARP 6 Tcym",
+       "firmwareIndex": 472
+      },
+      {
+       "name": "Soi ARP 7 Tcrushme",
+       "firmwareIndex": 473
+      },
+      {
+       "name": "Soi ARP 8",
+       "firmwareIndex": 474
+      },
+      {
+       "name": "Soi ARP 9",
+       "firmwareIndex": 475
+      },
+      {
+       "name": "Soi ARP 10",
+       "firmwareIndex": 476
+      },
+      {
+       "name": "Soi ARP 11",
+       "firmwareIndex": 477
+      },
+      {
+       "name": "Soi ARP 12",
+       "firmwareIndex": 478
+      },
+      {
+       "name": "Soi ARP 13",
+       "firmwareIndex": 479
+      },
+      {
+       "name": "Soi ARP 14",
+       "firmwareIndex": 480
+      },
+      {
+       "name": "Soi ARP 15",
+       "firmwareIndex": 481
+      },
+      {
+       "name": "Soi ARP 16",
+       "firmwareIndex": 482
+      },
+      {
+       "name": "Soi ARP 17",
+       "firmwareIndex": 483
+      },
+      {
+       "name": "Soi ARP 18",
+       "firmwareIndex": 484
+      },
+      {
+       "name": "Soi ARP 19",
+       "firmwareIndex": 485
+      },
+      {
+       "name": "Soi ARP 20",
+       "firmwareIndex": 486
+      },
+      {
+       "name": "Soi ARP 21",
+       "firmwareIndex": 487
+      },
+      {
+       "name": "Soi ARP 22",
+       "firmwareIndex": 488
+      },
+      {
+       "name": "Soi ARP 23",
+       "firmwareIndex": 489
+      },
+      {
+       "name": "Soi ARP 24",
+       "firmwareIndex": 490
+      },
+      {
+       "name": "Soi ARP 25",
+       "firmwareIndex": 491
+      },
+      {
+       "name": "Soi ARP 26",
+       "firmwareIndex": 492
+      },
+      {
+       "name": "Soi ARP 27",
+       "firmwareIndex": 493
+      },
+      {
+       "name": "Soi ARP 28",
+       "firmwareIndex": 494
+      },
+      {
+       "name": "Soi ARP 29",
+       "firmwareIndex": 495
+      },
+      {
+       "name": "Soi ARP 30",
+       "firmwareIndex": 496
+      },
+      {
+       "name": "Soi ARP 31",
+       "firmwareIndex": 497
+      },
+      {
+       "name": "Soi ARP 32",
+       "firmwareIndex": 498
+      },
+      {
+       "name": "Soi ARP 33",
+       "firmwareIndex": 499
+      },
+      {
+       "name": "Soi ARP 34",
+       "firmwareIndex": 500
+      },
+      {
+       "name": "Soi ARP 35",
+       "firmwareIndex": 501
+      },
+      {
+       "name": "Soi ARP 36",
+       "firmwareIndex": 502
+      },
+      {
+       "name": "Soi ARP 37",
+       "firmwareIndex": 503
+      },
+      {
+       "name": "Soi ARP 38",
+       "firmwareIndex": 504
+      },
+      {
+       "name": "Soi ARP 39",
+       "firmwareIndex": 505
+      },
+      {
+       "name": "Soi ARP 40",
+       "firmwareIndex": 506
+      },
+      {
+       "name": "Soi Make me arpej ",
+       "firmwareIndex": 507
+      },
+      {
+       "name": "Soi Triple Double ",
+       "firmwareIndex": 508
+      },
+      {
+       "name": "Soi Bassush",
+       "firmwareIndex": 509
+      },
+      {
+       "name": "Soi BossDrim",
+       "firmwareIndex": 510
+      },
+      {
+       "name": "Soi Noisa",
+       "firmwareIndex": 511
+      },
+      {
+       "name": "Soi On my side",
+       "firmwareIndex": 512
+      },
+      {
+       "name": "Soi You too",
+       "firmwareIndex": 513
+      },
+      {
+       "name": "Soi Gold star",
+       "firmwareIndex": 514
+      },
+      {
+       "name": "Soi Carpet Of love",
+       "firmwareIndex": 515
+      },
+      {
+       "name": "Soi Dream loud",
+       "firmwareIndex": 516
+      },
+      {
+       "name": "Soi Ok Balagan",
+       "firmwareIndex": 517
+      }
+     ]
+    },
+    {
+     "name": "Starter Bank",
+     "presets": [
+      {
+       "name": "Init",
+       "firmwareIndex": 680
+      },
+      {
+       "name": "BB BASICS - Sine INIT",
+       "firmwareIndex": 681
+      },
+      {
+       "name": "BB BASICS - Triangle INIT",
+       "firmwareIndex": 682
+      },
+      {
+       "name": "BB BASICS - Saw INIT",
+       "firmwareIndex": 683
+      },
+      {
+       "name": "BB BASICS - Square INIT",
+       "firmwareIndex": 684
+      },
+      {
+       "name": "BB BASICS - PWM INIT",
+       "firmwareIndex": 685
+      },
+      {
+       "name": "BB BASICS - PWM alt INIT",
+       "firmwareIndex": 686
+      },
+      {
+       "name": "BB BASICS - Detuned Saws INIT",
+       "firmwareIndex": 687
+      },
+      {
+       "name": "BB BASICS - FM INIT",
+       "firmwareIndex": 688
+      },
+      {
+       "name": "BB BASICS - Syn Key START",
+       "firmwareIndex": 689
+      },
+      {
+       "name": "BB BASICS - Pad START",
+       "firmwareIndex": 690
+      },
+      {
+       "name": "BB BASICS - Mono Lead START",
+       "firmwareIndex": 691
+      },
+      {
+       "name": "BB BASICS - Mono Bass START",
+       "firmwareIndex": 692
+      },
+      {
+       "name": "BB BASICS - Arp START",
+       "firmwareIndex": 693
+      },
+      {
+       "name": "BB BASICS - Seq START",
+       "firmwareIndex": 694
+      }
+     ]
+    }
+   ]
+  },
+  "SUPERJ6": {
+   "source": "original SuperJ6 bank files (12 banks, names and order only)",
+   "bankOrder": "midiBankChangeNumber",
+   "firmwareCarriesOriginalBanks": false,
+   "banks": [
+    {
+     "name": "DnBOX",
+     "firmwareOnly": true,
+     "presets": [
+      {
+       "name": "SUPERJ6 POLY",
+       "firmwareIndex": 0
+      },
+      {
+       "name": "SUPERJ6 PAD",
+       "firmwareIndex": 1
+      },
+      {
+       "name": "SUPERJ6 PLUCK",
+       "firmwareIndex": 2
+      },
+      {
+       "name": "SUPERJ6 BRASS",
+       "firmwareIndex": 3
+      }
+     ]
+    },
+    {
+     "name": "Intro Bank",
+     "midiBank": 0,
+     "presets": [
+      {
+       "name": "2025: Space Trip",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Hello J6 (Epic Poly)",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Compatible SEQ II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Blown MS20",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ArielsGlow Enja SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Velocity VHS Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Blade Brass II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BellTine-y Piano",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog High Strings",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sample and Hold",
+       "firmwareIndex": null
+      },
+      {
+       "name": "2025: Space Trip II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Raw J106 101",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DFA Records",
+       "firmwareIndex": null
+      },
+      {
+       "name": "90s TriForce Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PWM String Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Robots Rule",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sparkle Planet",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Into The Void Comp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Old Tremolo Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Vintage VeloBrass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP JP8 Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SNES Catchy SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ibiza Nights SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Airy Lo-Fi Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I Feel Love SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ana ChipTune Riser",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jupiter Sine",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Intersteller Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass that Knocks",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s ProphetVS Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "JN60 Comp Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS: Planetrise II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Triad Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Comp ACB FingerStacks",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jup VIII Chimes",
+       "firmwareIndex": null
+      },
+      {
+       "name": "VHS Brass II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SubbaBassa Boom DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "JNO Analog Strings",
+       "firmwareIndex": null
+      },
+      {
+       "name": "JNO Ana Strings II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro Synth One",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Galvatronic Bass II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro J6 Plop",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Everlong Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Woodblocks In Space",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Nap Cap Drifts",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tron’s Galaxy Glider",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Indie Boomerang Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jup-Dream Chimes",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Everybody loves a 30h3",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Boss Fight II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro EP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - Tube",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ancient Block PluckPad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Old Theremin",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wormhole 2025 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Kick random",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Indie Pop",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Eastern Electric Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Velocity Poly Expressive",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Slow Poly",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ascension SEQ II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Step Down Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Three Thousand Lead II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Up/Down Two Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SynthOne Nonpareil",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Classic Synth One",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Growing Discontent",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ArielsGlow Pluck",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass Station Alpha",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s Uplifting Keytar",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Distopian Drone",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Star Lights II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog 3 Kicks",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Drop THX DRONE ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RaveTek Lead II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Random Bell Arp II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Plucko Arpo",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Thailand Pluck ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Spiral Starcase",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro High Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Grit Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Castlevania",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Nostalgic Keys II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ming the Merciless Lead II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pole to Pole II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tek Acid SEQ II",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Dreamy High Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Modular Madness",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Riser",
+       "firmwareIndex": null
+      },
+      {
+       "name": "90s Arcade Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Running Towards",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Big Big Drum",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro Rez: NightDrive",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Mystic Lo-Fi: NightDrive",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Desert Hypnotic: NightDrive",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Heaven’s Gate Pad ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bend Da Bass (SID)",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Electric Vintage EP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Waterphonium Synapse",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s Uplifting Soundtrack",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Drum Plucky Plucks",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Retro Synth One SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Verb Gate Pluck",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Evolution Sequence II",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "DMT CYMATICS",
+     "midiBank": 2,
+     "presets": [
+      {
+       "name": "BRAINWAVE MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BUD STEP LFO WUB BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CAR CHASE MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CYKLOP MONO ARP BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DARK ENTITY RISE MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DUBSTEP GROWL MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FUNKEY BASS / SYNTH",
+       "firmwareIndex": null
+      },
+      {
+       "name": "GALVATRONIC BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "GALACTIC Overlord BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "HackerMan BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "JUNO SPACE MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PULSAR MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RATCHET MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RENEGADE MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Replica Snake Pulsing Club BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RETRO J6 MONO BASS / LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYNTHWAVE ARP BASS V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYNTHWAVE ARP BASS V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SONIC BOOM MONO BASS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s ITALO OCTAVE BASS V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s ITALO OCTAVE BASS V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s BRIGHT SYNTH V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s BRIGHT SYNTH V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s BRIGHT SYNTH V3",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BERLIN DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DarkSci-Fi Movie Atmos DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Melatonin DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MIND GENERATOR DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Odysey DREAMS DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "99 TON SOUND LEVITATION DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PERMUTATIONS DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Synaptic Exciter DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "80s B-MOVIE HORROR THRILLER PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Beyond Time DRONE / PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "COSMIC AMBIENT PAD V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "COSMIC AMBIENT PAD V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Didactic Mystic Dreams PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FIZZY 80s PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FLUCTUATE PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "HEAVENLY PAD / DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I N I DUB PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I N I DUB PAD V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MEGA PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MEGA PAD V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lunar Emotions PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Moksha PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "NEXUS SEQ / DRONE / PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ORB PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PRANA PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RISING IN LOVE PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SOFT STROBE PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SPACE ORGAN PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SUPER LUSH PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MAGIC KEYS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "NOSTALGIC KEYS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SWEET SPACIOUS KEYS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CHIP BOT LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "COBRA LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CORE MONO LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Martian Paradox LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MAD PROFESSOR LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MEGA LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MING THE MERCILESS MOVIE LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RAVETEK LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Space Sweeper LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SWEEPING LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYNAPSE LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SPOOKY CHOIR PAD N LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "WEST COAST HIPHOP LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Zorgon Sci-Fi LEAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ANTAGONIST BASS / SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ASCENSION SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ASCENSION SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Astral Realm SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS RIDER SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Cyber Runner SEQ / Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DISCO SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DOWN-TEMPO ACID SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DOWN-TEMPO ACID SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I FEEL LOVE SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "J6 MONO BASS SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Let The Music Play! SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Orbiting Memories SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Panning 3’s SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Psy Trance V1 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Psy Trance V2 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Psy Trance V3 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Trance SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Trance SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Rave Euphoria V1 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Rave Euphoria V2 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYNTHWAVE SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYNTHWAVE SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SynthWave Noir V1 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SynthWave Noir V2 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SynthWave Noir V3 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SynthWave Noir V4 SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TEK ACID SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TEK ACID SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TEK ACID SEQ V3",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TRANCE ACID SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "WANDERLUST DUB SEQ V1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "WANDERLUST DUB SEQ V2",
+       "firmwareIndex": null
+      },
+      {
+       "name": "WANDERLUST DUB SEQ V3",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ADRENALIN ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CHIPTUNE ONES N ZEROS ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DARK SIDE OF THE MOON ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DIGITAL POETRY ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "EVOLVING LIFE FORM ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "KEYGEN ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SKY TRAVELERS ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SPIRAL ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SYMPHONY OF STARS ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TIME TRAVEL ARP",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Metal FourFour Stomp DRUM",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CASCADE FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CYBERNETIC ARP FX FUN",
+       "firmwareIndex": null
+      },
+      {
+       "name": "POWER RISE FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sensory Injection FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "S&H RES POLY FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Spanish Hand Clapping FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Swarm! Atmospheric BG FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "TENSION RISER FX",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Electronisounds",
+     "midiBank": 3,
+     "presets": [
+      {
+       "name": "DelicateCutters-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CyberPad-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DubChord-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ArielsGlow-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RaverLead-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BeatSurferBass-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "LushoPaddo-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "VersatizeKeyz-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "AmbientBanjo-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RubberPumpBass-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "JungleKeys-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "HarmonyGlideBass-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PulsingPad-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RPG_ARPS-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "RandoBasso-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "CatchingFireflies-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SirArpingstonIII-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ObliqueLead-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "SubbaBassa-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "DeepBlue-DD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Chilled303-DD",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Moby Pixel",
+     "midiBank": 4,
+     "presets": [
+      {
+       "name": "MP Hello J6",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Magic Violin",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Saw Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Saturday Cartoons",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Analog Kick",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Hi Hats",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Wah Quack Wow",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Thriller Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Synthwave Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Saw Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Space Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP 80s Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Warm Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Bell Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Detuned Saw",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Burning Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Africa Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Slow Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Classic Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Saw Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Nova Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Chorus II Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Gray Matter Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Press & Hold SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Dark Mushroom SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Soft Glass SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Warm Brass SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Ghost Machine SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MP Game Over SEQ",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Red Sky Lullaby",
+     "midiBank": 5,
+     "presets": [
+      {
+       "name": "Faking The Funk",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wavering Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ice on Snow",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Swept Frequencies",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Dusty Sevenths",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Angular Squares",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Agitator Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Woodwinder Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Glitcher Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jazzy Seventh Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Decelerator Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Neverender Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Mover Harmonic Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Vintage Sines",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Digital Popcorn",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Upfront Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Disintegrator Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Two Schism",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tentacles Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Heaven Sent Pad ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Generative Holder",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Red Sky Groover",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Amber Waves of Grain",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Mostly Hollow",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Red Steel Drums",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Afterburner Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jupiter Landing",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lifequaker Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Venue Slider Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Flange Trancer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Minor One",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Major Seven One",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Harmonic One",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Richer Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Internal Workings",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Three Thousand Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Reuptaker Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Golden Ratio Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Squelch Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Red Leader",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Turquoise Patterns",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Nonsenseland East",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Nonsenseland West",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Hold It Ambience",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Subpulser",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wah Decelerator",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Threeism",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sunday Nighter",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Heart Trance Plant ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sparky Trance ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Subdued Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Cavern Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Spartan Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Kind o Melody",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Square Toothed Saw",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Up Downer Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Random Bell Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Eventual Resolution",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Muchly Tension",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Powder Silk Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "MultiMod Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Non Predictor",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seventy Seven",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Executive Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Three Octaves",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Flange Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wubular Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jig Saws Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Starlit Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Moonlit Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Mindstate Seq",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I Feel Ya",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tweety Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Roundhouser Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Digital Pluck Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Digital Slap Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "After Blast Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Cadence Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Works",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Yi Ya Yi Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Glitcher Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lofi Delayer Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Big Chimer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Disintegration",
+       "firmwareIndex": null
+      },
+      {
+       "name": "One Nine Seven Three",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bubbler FX",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sea C Sequence ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Multi Tapper",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pan Pulser",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Upper Downer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Technocrat Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Boss Fight",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Analog Rubber Band",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Puretone Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Callisto Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Spooked Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Laser Focus",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Risk of Repeating",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Evolution Sequence",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Noise Mods ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "VariArps Pad",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Sander R Wolff",
+     "midiBank": 6,
+     "presets": [
+      {
+       "name": "Flute Toot",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Stutterpad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass Chaos",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Laser Lead",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Laser base",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sweepy Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sirens Of Titan",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Silver Strings",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tine-y Piano",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Triad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sweetly Sweeping",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jitterbug",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Two Tone Rando",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tap Dance",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Swarm Of Fat Bees",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "SOi",
+     "midiBank": 7,
+     "presets": [
+      {
+       "name": "Flying horse",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Close to you",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Find your Soul",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The only way is up",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Stinky",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sine on you",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tri of a kind",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Going no where",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Chaos",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Human heart",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jumping fish",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Stumbling",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Fifth element",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Quarter to seven",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Running Chip",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Start up",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Home Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Stuck in D",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Basson",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Dont stuter",
+       "firmwareIndex": null
+      },
+      {
+       "name": "WarZone",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wild wind",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Who is it?",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Born cheesy",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Night guard",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bassch",
+       "firmwareIndex": null
+      },
+      {
+       "name": "I Doubt it",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluckable",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp rate",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Drops and Noise",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Jumper",
+       "firmwareIndex": null
+      },
+      {
+       "name": "One for all",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Slow bow",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Hnoise",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Exhibit 6",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Exhibit 7",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Exhibit 8",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Tinderness",
+       "firmwareIndex": null
+      },
+      {
+       "name": "After love dies",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Never Again",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Winter love",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Exhibit 9",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Exhibit 10",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Random Li",
+       "firmwareIndex": null
+      },
+      {
+       "name": "No brakes",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PiAknow",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sprinkler",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BasChs",
+       "firmwareIndex": null
+      },
+      {
+       "name": "New coat",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Frozen",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Wipe out",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Sound Test Room",
+     "midiBank": 8,
+     "presets": [
+      {
+       "name": "Singularity",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Interstellar Riser",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Apogee",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Barred Spiral Galexy",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Collimation",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Damocloid",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Irregular Galaxy",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Neutrino",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Oort Cloud",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Parsec",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Earth Sign",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Solstice",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Dark Star",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Particle Physics",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Alien Eight",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Saturn",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Explorer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Space Dust",
+       "firmwareIndex": null
+      },
+      {
+       "name": "First Contact",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Big Dipper",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Eclipse",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Ionosphere",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Kuiper Belt",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Luminosity",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Magnetograph",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Parallax ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Krell",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Frozen Wasteland",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Moon Leader",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Thing",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Planet Plucker",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Dust Kick",
+       "firmwareIndex": null
+      },
+      {
+       "name": "16th Hi Hats",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Woodblocks In Space",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Andromeda",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Transistor Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Event Horizon",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sub Atomic Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Space Race Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass Station Alpha",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Star Lights",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Hold One Note",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Floating",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Visible From Space",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Out There",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Galactic Tap Dancer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Big Space Pluck",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Imploding Star",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Warm Padding",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Medieval Sky",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Constellation Drift",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Theremetrics",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Safety Key",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Orbital Station",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bending The Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Final Decent",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Too Close To The Sun",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Space Brass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Classic 80s Poly",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Stratosphere",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Airlock",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sining Off",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Vintage Telescopic",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Galaxy Obscured",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "The GarageBand Guide",
+     "midiBank": 9,
+     "presets": [
+      {
+       "name": "Massively Effective",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Krystalline Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Fish Stick",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Big Boss Bass ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Sinclair Synth",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Hank Zammer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Horizon ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pathfinder",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Polythene Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pole to Pole",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Rezzy Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Heatsink Arp ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Moon Fall",
+       "firmwareIndex": null
+      },
+      {
+       "name": "The Spine",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BIOS",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Transponder Organ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Krystalline Khoir",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Aurora ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Papyrus Pad",
+       "firmwareIndex": null
+      },
+      {
+       "name": "LAN Party",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Spectrum",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Last Odyssey",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Underclock Arp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Golden Hour",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Nightlight",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Eris II",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Wabi Sabi Waves",
+     "midiBank": 10,
+     "presets": [
+      {
+       "name": "Arp - Accordion Scaleplay",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Cosmic Comping",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Henry Reform",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Kismet Spinners",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Oloids",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - PO-20",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Pocket Palms",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Raining Bleeps",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Arp - Soft Pachinko ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - 3 Tabs Deep",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - 6-FET",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - ACB FingerStacks",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - Lords",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - Mono Circuit",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - Mono Over",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Bass - Mono Under",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FX - Ataraxia Strobe",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FX - Spectral Jiu Jitsu",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Cross-Mod Cosciousness",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Peninsula Passage",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Pingable Clairvoyance",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Space Rover",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Telepathic Music Box",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Titanium Daydream",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Urban Telejazz",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Vapor Rubs",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Vermona Daze",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Keys - Vellotone Tides",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - Atlas Sounds",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - Holepunch Sunrise",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - Mac Sauce 1",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - Metropolie",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - Micro Shot",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Lead - PhunkPhonk ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Big Mod",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - In Science ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Remote Viewer",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Mirage or Deja Vú",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Mod Moon",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Plagal Swarm",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Shocking Pink Souvlaki Station",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pad - Zipline Stargate",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Perc - BD Teklife",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Perc - Skitter Juke",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluck - Aquatic Steel",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluck - Jupiter Procession",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluck - Pyramid Levels",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluck - Reverse Function",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Pluck - Waterphonium Synapse",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - 1 Finger Chem Broz",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - 1 Note Spaceship",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - 90s Grinder Comp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - Another Meditation",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - Dreamcast Devotional",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - Dub Funk House Comp",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - Economy Picking",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Seq - Neuwerk",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Template - Expressive Funk Bass",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Template - Expressive Lofi Keys",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Template - Saw Poly Expressive",
+       "firmwareIndex": null
+      },
+      {
+       "name": "Template - Expressive Casiotone",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Brice Beasley",
+     "midiBank": 11,
+     "presets": [
+      {
+       "name": "BB Monster SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Compatible SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Attack On Titan SEQ",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Wildchild DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Axial DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Synthara SYN",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Singular PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Drop Backdrop DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Anaosc PAD",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Deep Space DRONE",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB 1988 SYN",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BB Proper Wash PAD",
+       "firmwareIndex": null
+      }
+     ]
+    },
+    {
+     "name": "Stellar Anomalies",
+     "midiBank": 12,
+     "presets": [
+      {
+       "name": "ARP: Aural Glow [Red]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Aural Glow [Orange]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Aural Glow [Yellow]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Aural Glow [Green]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Aural Glow [Blue]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Aural Glow [Violet]",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Pop Chaos",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Drill Bit",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Error Condition",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Jump Point",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Damaged Machine",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Paranoid Humanoid",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Revelation",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Level Down",
+       "firmwareIndex": null
+      },
+      {
+       "name": "ARP: Synth Cicadas",
+       "firmwareIndex": null
+      },
+      {
+       "name": "LEAD: Glidekraft",
+       "firmwareIndex": null
+      },
+      {
+       "name": "LEAD: Shivering",
+       "firmwareIndex": null
+      },
+      {
+       "name": "KEYS: Echoing Green",
+       "firmwareIndex": null
+      },
+      {
+       "name": "KEYS: Lost My Warbles",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS: Planetrise",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS: Plasmatic",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS: Solidify",
+       "firmwareIndex": null
+      },
+      {
+       "name": "BASS: Wild Thing",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FX: Broken Dog Toy",
+       "firmwareIndex": null
+      },
+      {
+       "name": "FX: Disintegration",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Frozen Reflections",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: If Memory Serves",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Haunted Space",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Solar Storm",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: In Hibernation",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Reverie",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Steam Tunnels",
+       "firmwareIndex": null
+      },
+      {
+       "name": "PAD: Labyrinthine",
+       "firmwareIndex": null
+      }
+     ]
+    }
+   ],
+   "inputs": {
+    "Intro Bank": "b7130d817c26809aed3b10acbda07a2a6d39ed5487355d07a0debd8c666c1c78",
+    "DMT CYMATICS": "b5ca5dbbae9f52b10686a42f65d1dc5f5a7e4796b14d875625c3b8fe8381648b",
+    "Electronisounds": "82378445cf57b3cd48f873bf0e63aa9c92dcddd9166be34d88e213b72ac8b7fb",
+    "Moby Pixel": "d4607891e4a3132547a69afc5c470252a2d23197b02a816bef92bc6946edf17e",
+    "Red Sky Lullaby": "ec937f1e86c2bbed62b75c75509536b485c624dc7b77ddd191be8f39d9601309",
+    "Sander R Wolff": "0f97fd070aa266fb019df026d5f07c5052ee81b0b0ed9c1d0d3034d7b6bad4b9",
+    "SOi": "d14e8abbb2e42460d854d92c274166ce21ddcdd6413891ee601772aae9fbb577",
+    "Sound Test Room": "31f842a32f1a4f64cda30b92cccfbcce35913ac379e443d640b3bcb7c9ae19aa",
+    "The GarageBand Guide": "cf0951578f171da7755815ac630f03835fbe85490320c3cd90cf2fd032275eeb",
+    "Wabi Sabi Waves": "d146d5fbdb2d78d3bbb5220e5d75d39110fb9c907ecba6dc40f52a5a0b266671",
+    "Brice Beasley": "84058c8030cc1b5848627b9ce98386ff7a437b06d57033c58b89848f332c803b",
+    "Stellar Anomalies": "48f0ae778df63ff77cbe17dc0d89ab3f6ce76971d5df369cf1828dc5be5cad43"
+   }
+  }
+ }
+}
