@@ -46,9 +46,10 @@ const tick=async()=>{for(let i=0;i<20;i++)await Promise.resolve();};
 
 test('space-saving selector is visible, defaults Off, and explains actual rate rather than stretch promise',()=>{
  assert.match(html,/Oldschool space saver/);assert.match(html,/<option value="">Off<\/option>/);
- assert.match(html,/original files stay untouched/i);assert.match(html,/matching lower playback rate/);
- assert.match(html,/Mono reference uses the same trim and bar cut/);
- assert.match(html,/not perceived-loudness matching/);
+ assert.match(html,/original files stay untouched/i);assert.match(html,/Fit more loops with a darker sound/);
+ // R22 workspace: musician wording, the same original-versus-saved comparison.
+ assert.match(html,/\["Play original",true\],\["Play as saved",false\]/);
+ assert.doesNotMatch(html,/Mono reference|perceived-loudness/);
  const e=environment();assert.equal(e.settings().gritFactor,1);
 });
 
@@ -136,7 +137,7 @@ test('A/B reference uses the same trim and bar cut, mono peak target, and leaves
 
 test('visible local file audition works before MIDI or Add and refreshes settings without device draft writes',async()=>{
  const e=environment(),x=tone(),before=hash(x);e.decodeWith(x);
- assert.match(html,/<input id="auditionFile" style="display:block/);
+ assert.match(html,/<label class="ws-file" for="auditionFile">[\s\S]*?<input id="auditionFile" class="ws-file-input" type="file"/);
  assert.equal(e.ids.auditionReference.disabled,true);assert.equal(e.ids.auditionEncoded.disabled,true);
  assert.equal(e.state().readOk,false);
  await e.chooseAuditionFile({name:'local.wav'});

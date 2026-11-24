@@ -129,7 +129,7 @@ test('the project guide opens the musician workflow and keeps protocol details o
   const guide = read('manual/projects-guide.html');
   const introduction = guide.slice(guide.indexOf('<h1>'), guide.indexOf('<h2'));
   assert.match(introduction, /<a href="\.\.\/projects\/">Projects<\/a>/);
-  for (const label of ['Find USB MIDI keyboard', 'Connect selected ports']) {
+  for (const label of ['Connect USB', 'Connect selected ports']) {
     assert.ok(introduction.includes(label) && read('projects/index.html').includes('>' + label + '</button>'), label);
   }
   assert.doesNotMatch(introduction, /make_pages\.py|localhost|web\/x0x_projects\.html/);

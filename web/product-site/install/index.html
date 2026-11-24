@@ -16,7 +16,7 @@
 <a class="skip-link" href="#workspace-main">Skip to task</a>
 <main id="workspace-main">
   <div class="install-head">
-    <div class="hero"><h1 data-t="title">Install firmware</h1></div>
+    <div class="hero"><h1 id="page-title" data-t="title">Install firmware</h1></div>
     <nav class="workspace-nav" aria-label="Choose a task"><a href="#firmware" id="firmware-tab" aria-current="page">Install firmware</a><a href="#samples" id="samples-tab">Import samples</a><a href="#projects" id="projects-tab">Songs &amp; projects</a></nav>
     <button class="lang" id="lang" type="button" aria-label="Change language"></button>
   </div>
@@ -40,7 +40,8 @@
       <section class="step step-breaks" id="starting-breaks" aria-labelledby="breaks-title">
         <h2 class="step-kicker" id="breaks-title"><span class="no">02</span> Make it yours</h2>
         <div id="sample-picker"></div><p id="samples-status" role="status" aria-live="polite"></p>
-        <div class="breaks-actions"><button type="button" id="download-breaks" disabled>Download chosen breaks</button><a href="#samples">Load in Samples</a></div><p id="download-status" role="status" aria-live="polite"></p>
+        <p class="breaks-note" id="breaks-note">Chosen breaks go onto your keyboard with the firmware. None installs the firmware only.</p>
+        <div class="breaks-actions"><button type="button" id="download-breaks" disabled>Download chosen breaks</button></div><p id="download-status" role="status" aria-live="polite"></p>
       </section>
       <section class="step step-go" aria-labelledby="install-title">
         <h2 class="step-kicker" id="install-title"><span class="no">03</span> Ready to play</h2>
@@ -1916,7 +1917,16 @@ const TEXT = {
     slotcancel: "インストールをキャンセル",
     slotbackupconfirm: "バックアップの保存確認を受け付けませんでした。ファームウェアもサンプルも書き込んでいません。選択内容を確認し、保存できる状態で再試行してください: ",
     slotback: "スロットを書き戻しています",
+    titlesamples: "サンプル", titleprojects: "曲とプロジェクト",
     slotsdone: "完了。スロットを書き戻して確認しました。",
+    confirmbreaks: "\n\nスターティングブレーク: ", confirmbreaksif: "（サンプルがまだないキーボードに追加）", confirmbreaksnone: "なし",
+    breakswrite: "スターティングブレークを追加しています…",
+    breaksdone: "完了。ファームウェアをインストールし、スターティングブレークを追加しました: ",
+    breakskept: "完了。キーボードにサンプルがあるため、そのまま残し、スターティングブレークは追加していません。",
+    breaksnofit: "完了。このファームウェアにはスターティングブレークの空きがないため、追加していません。",
+    breaksfailed: "ファームウェアはインストールしましたが、スターティングブレークを追加できませんでした: ",
+    breaksnoanswer: "インストール後にキーボードが応答しませんでした。",
+    breaksunavailable: "選んだスターティングブレークを読み込めなかったため、何もインストールしていません。ページを再読み込みしてください。",
     slotspartial: "インストールは完了しましたが、復元できなかったサンプルがあります。ダウンロードした .x0xslots バックアップを確認し、容量を空けてブレークループの「Restore」で復元してください。未復元: ",
     slotskip: " 書き戻せなかったスロット（入りきらない）: ",
     slotstock: "完了。純正ファームウェアには X0X のスロットがありません。サンプルは次のファイルにあります（X0X を入れ直した後にブレークループのページの「Restore」で戻せます）: ",
@@ -2025,7 +2035,16 @@ const TEXT = {
     slotcancel: "Cancel installation",
     slotbackupconfirm: "Recovery backup confirmation was not accepted. No firmware or samples were written. Check your selection and retry when you can save the backup: ",
     slotback: "Writing the slots back",
+    titlesamples: "Samples", titleprojects: "Songs & projects",
     slotsdone: "Done. The slots were written back and checked.",
+    confirmbreaks: "\n\nStarting breaks: ", confirmbreaksif: " (added if your keyboard has no samples yet)", confirmbreaksnone: "none",
+    breakswrite: "Adding the starting breaks…",
+    breaksdone: "Done. Firmware installed and starting breaks added: ",
+    breakskept: "Done. Your keyboard already has samples, so they stay as they are and the starting breaks were not added.",
+    breaksnofit: "Done. This firmware has no room for the starting breaks, so they were not added.",
+    breaksfailed: "The firmware is installed, but the starting breaks could not be added: ",
+    breaksnoanswer: "the keyboard did not answer after the install.",
+    breaksunavailable: "The chosen starting breaks could not be loaded, so nothing was installed. Reload the page and try again.",
     slotspartial: "Installed, but some samples were NOT restored. Check the downloaded .x0xslots backup and use Restore on the break loops page after making room. Not restored: ",
     slotskip: " Not written back (no room): ",
     slotstock: "Done. The stock firmware has no X0X slots. Your samples are in this file (after you install X0X again, restore it with Restore on the break loops page): ",
@@ -2969,10 +2988,11 @@ function fillVersions() {
 }
 
 // In-page confirmation: iOS Web MIDI app webviews block or auto-dismiss window.confirm(), which made Install always "cancelled".
-function confirmWrite(product) {
+function confirmWrite(product, breakIds = null) {
   const from = lastId ? lastId.text : "(not connected yet — Connect first if you can)";
   const box = $("inconfirm");
-  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + t("confirmrisk");
+  const breaks = breakIds === null ? "" : t("confirmbreaks") + (breakIds.length ? startingBreakNames(breakIds).join(", ") + t("confirmbreaksif") : t("confirmbreaksnone"));
+  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + t("confirmrisk");
   box.hidden = false; box.scrollIntoView && box.scrollIntoView({ block: "center" });
   return new Promise((resolve) => {
     const done = (v) => { box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
@@ -3100,6 +3120,31 @@ async function saveSlotBackup(file, name) {
   return true; // Requested only; the browser cannot prove the file was retained.
 }
 
+const startingBreaks = () => globalThis.dnboxStartingBreaks || null;
+const chosenStartingBreaks = () => startingBreaks()?.selectedIds() ?? [];
+const startingBreakNames = (ids) => startingBreaks()?.names(ids) ?? ids;
+
+// After the firmware: write the chosen starting breaks with the slot writer, the way
+// fm1_install.py --fresh-install --default-breaks does (only into a keyboard with no samples; read back).
+// The firmware is already installed here, so a failure is reported, never thrown.
+async function writeStartingBreaks(up, images, ids) {
+  sayK("breakswrite");
+  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
+  if (!back) { sayK("breaksfailed", t("breaksnoanswer")); return; }
+  try {
+    up.bind(back);
+    const io = { layout: () => readSlotLayout(back.link), readBytes: (k, off, n) => readSlotBytes(back.link, k, off, n),
+      writeSlot: (k, image, onPart) => writeSlotImage(back.link, k, image, onPart) };
+    const r = await startingBreaks().fill(io, images, (d, n) => { $("bar").value = Math.min(100, d / n * 100); });
+    log("starting breaks: " + (r.filled.length ? "slot(s) " + r.filled.join(", ") + " written and read back (" + ids.join(", ") + ")" : "not written (" + r.reason + ")"));
+    if (r.filled.length) sayK("breaksdone", startingBreakNames(ids).join(", "));
+    else sayK(r.reason === "notblank" ? "breakskept" : "breaksnofit");
+  } catch (e) {
+    sayK("breaksfailed", e && e.message);
+    log(String(e && e.stack || e));
+  } finally { back.link.close(); }
+}
+
 async function run(img, product, opts = {}) {
   if (writing || !workspaceActive) { $("status").textContent = writing ? "An install is already running." : "Open the Firmware tab, then press Install again."; updateInstallGate(); return; }
   getSampleWorkspace()?.invalidate();
@@ -3168,6 +3213,7 @@ async function run(img, product, opts = {}) {
         } else sayK("slotsdone");
       }
     }
+    if (opts.breakImages && opts.breakImages.size) await writeStartingBreaks(up, opts.breakImages, opts.breakIds);
     await scan(true);
     // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
     if (!foreign && opts.receiptBuild && up.verified && up.application)
@@ -3203,9 +3249,17 @@ $("go").addEventListener("click", async () => {
   if ($("go").disabled || !hasCurrentVerifiedSelection()) { installBlocked("The selected package is not verified yet. Choose the model/version again and wait for 'Ready to install'."); return; }
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
-  const confirmProduct = selectedProduct, confirmSerial = loadSerial;
-  if (!(await confirmWrite(selectedProduct))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
-  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
+  const confirmProduct = selectedProduct, confirmSerial = loadSerial, breakIds = chosenStartingBreaks();
+  if (!(await confirmWrite(selectedProduct, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
+  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection() ||
+      chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
+  // Fetch and verify the chosen breaks before anything is written.
+  let breakImages = new Map();
+  if (breakIds.length) {
+    try { breakImages = await startingBreaks().load(breakIds); }
+    catch (e) { installBlocked(t("breaksunavailable")); log("starting breaks: " + (e && e.message)); return; }
+    if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
+  }
   const { version: ver, pkg } = currentSelection();
   const selectedImage = image, product = selectedProduct, controller = ctl, serial = loadSerial;
   $("go").disabled = true;
@@ -3234,7 +3288,7 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, breakImages, breakIds, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
 });
@@ -3278,6 +3332,8 @@ function navigateWorkspace() {
     $(name + "-tab").toggleAttribute("aria-current", task === name);
     if (task === name) $(name + "-tab").setAttribute("aria-current", "page");
   }
+  const title = $("page-title"); title.dataset.t = { firmware: "title", samples: "titlesamples", projects: "titleprojects" }[task];
+  title.textContent = t(title.dataset.t);
   $("workspace-message").textContent = "";
   if (location.hash === "#buildarchive") $("buildarchive").open = true;
 }

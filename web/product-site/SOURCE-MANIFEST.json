@@ -169,8 +169,8 @@
     },
     {
       "path": "breaks/index.html",
-      "bytes": 95746,
-      "sha256": "64402edb7a69a66d7cf46e271742afdde4860d247dd939516edb29f3f7a83bdc"
+      "bytes": 95638,
+      "sha256": "91d1321329df9bbe5e0f7d8fbdb2a77372f5da1ff01a64ccc983876e9f36eac3"
     },
     {
       "path": "build-status.json",
@@ -209,8 +209,8 @@
     },
     {
       "path": "components/break-panel/panel.mjs",
-      "bytes": 4516,
-      "sha256": "615c1257b15350023b6779a748a9878ac8de2eef2e7712bee8ac08059005a073"
+      "bytes": 4750,
+      "sha256": "809f2e6d2afe53a10b3443d89dc612b4cf41038a702ce429510932e001105cde"
     },
     {
       "path": "components/break-picker/picker.mjs",
@@ -294,18 +294,18 @@
     },
     {
       "path": "install.mjs",
-      "bytes": 2845,
-      "sha256": "6c4752e6c1094b8bca95f7cbb8d5eae6599705a01e1e60c0c0ca648f8ffc5f19"
+      "bytes": 3461,
+      "sha256": "b9946abc8e00fdc36f4ce4dc8d41a3af42d8386fac28d5afd46d4f02d1437466"
     },
     {
       "path": "install/index.html",
-      "bytes": 289585,
-      "sha256": "8f623896a5f6dd3bc5b49c11434932bfac9b886486084eff217fe67c1bff149a"
+      "bytes": 294423,
+      "sha256": "7caad5bb4818007c9a4664260e5ec90f3d8af6408ab074c4079b2b326e30989d"
     },
     {
       "path": "install/install.css",
-      "bytes": 16902,
-      "sha256": "9d3afb6c65ddb6aa6e5eb15cb069f399c9e3a44153fc3ba09e553fd018a3d7f1"
+      "bytes": 17366,
+      "sha256": "9b21f78e08cbb491a851ea1eaf1dfd1d9509e356b85ec23a7c6b1d15dc770274"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -574,8 +574,8 @@
     },
     {
       "path": "manual/projects-guide.html",
-      "bytes": 16321,
-      "sha256": "df765645514e17c04500034e736efd3dc7880780cdef62c330dcd0b418c36c92"
+      "bytes": 16310,
+      "sha256": "0d7b1b17340e5a042bbd4ea3ee0836bbdc00950e3e10cd6c0afe2ae518889214"
     },
     {
       "path": "manual/protocol.html",
@@ -684,8 +684,8 @@
     },
     {
       "path": "projects/index.html",
-      "bytes": 118004,
-      "sha256": "a358dfa5ba5bbc9074ab3d817f775bd2578b1556038ec438be45915e5123385e"
+      "bytes": 118077,
+      "sha256": "47bac4bb495840b976784120d2f26de8b18dac6c9dc68e6ed3fa46a31389f7e1"
     },
     {
       "path": "reference/current-ui.html",
@@ -789,8 +789,8 @@
     },
     {
       "path": "remote/break-sequence.mjs",
-      "bytes": 8712,
-      "sha256": "fbe1f6a51c84b08b836f0c39675314fc5ad7d8a25ed0aaaa5f952d7fbd2e7b53"
+      "bytes": 8800,
+      "sha256": "9a107df4d1060f3ca3bb69ea235759261afb04b9164caa8fbd9d0aab8184d519"
     },
     {
       "path": "remote/catalog.json",
@@ -1213,6 +1213,16 @@
       "sha256": "c9b9f4860202a4c69cdd3a427460770f9ebefafadd416b7d038cc8714a340846"
     },
     {
+      "path": "starting-break-install.mjs",
+      "bytes": 6738,
+      "sha256": "cfe2c1289ee11c9b33eb6fcaf247444741544d0f15d857f4ae5a2c659010479d"
+    },
+    {
+      "path": "starting-break-names.mjs",
+      "bytes": 1153,
+      "sha256": "b500968e5f309fb128386da274ba2d7889b1a078036375cd5413ae4d0f3be36e"
+    },
+    {
       "path": "starting-break-preview.mjs",
       "bytes": 2146,
       "sha256": "06cba7e5a4c31defff30b37c4ec3873568e80888876376f1cc2b95c1f7abdb15"
@@ -1241,6 +1251,11 @@
       "path": "versions.json",
       "bytes": 91491,
       "sha256": "f1d227fad8a729388e6be19911b7c96c692417877c0e1777178c4da480834f70"
+    },
+    {
+      "path": "workspace.css",
+      "bytes": 10149,
+      "sha256": "ccb06f29b8bcca87946e64c6e9a06c253060e4961422936bf879aa7ead9b9f93"
     }
   ],
   "notClaimed": [

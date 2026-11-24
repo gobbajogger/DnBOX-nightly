@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {startingBreakName} from '../starting-break-names.mjs';
 import {mountBreakPanel} from '../components/break-panel/panel.mjs';
 import {SAMPLE_CONTRACT_SHA256} from '../sample-pin.mjs';
 import {createStartingBreakPreview, normalizeStartingBreakSelection} from '../starting-break-preview.mjs';
@@ -78,7 +79,7 @@ export function mountBreakSequence(root, state, onEdit) {
         const row = el('div', 'break-loop-row'); row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Loop ' + name);
         row.append(el('span', 'break-row-label', name));
         row.append(chip('–', {breakLoop: index, breakValue: ''}, false));
-        for (const a of assets) row.append(chip(a.name, {breakLoop: index, breakValue: a.id}, false));
+        for (const a of assets) row.append(chip(startingBreakName(a.id, a.name), {breakLoop: index, breakValue: a.id}, false));
         loops.append(row);
       }
       const rateRow = el('div', 'break-loop-row break-rate'); rateRow.setAttribute('role', 'group'); rateRow.setAttribute('aria-label', 'Rate');

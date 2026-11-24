@@ -89,76 +89,79 @@
   .embedded p{font-weight:400}.embedded main>p:last-child{display:none}
 .empty{padding:14px 0}.embedded .empty{padding:14px 0}
 </style>
-<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
-<body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
-<main id="dnbox-tool-main">
+<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../workspace.css"></head>
+<body class="tool-surface ws-page"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
+<main id="dnbox-tool-main" class="ws">
   <a class="home" href="../">DnBOX</a>
-  <h1>Import samples</h1>
-  <p>Connect your keyboard by USB with DnBOX running. Use Chrome or Edge to add or replace loops.</p>
+  <div class="ws-head"><h1>Samples</h1><p class="ws-lede">Add your own loops, listen before you add them, and keep a backup. USB · Chrome or Edge.</p></div>
 
-  <div class="bar">
-    <button id="connect">Connect</button>
-    <span id="status" role="status" aria-live="polite"></span>
+  <div class="ws-connect">
+    <span class="led" aria-hidden="true"></span>
+    <p id="status" role="status" aria-live="polite">Not connected</p>
+    <button id="connect">Connect USB</button>
   </div>
 
-  <div id="list"><div class="empty">Connect to read your keyboard’s sample slots.</div></div>
-  <div class="bar">
-    <button class="quiet" id="add">Add loops</button>
-    <span class="small">or drop files here. Drop one on a loop to replace it.</span>
-    <label title="Keeps only the first bar of each file you add (its length tells how many bars it has), so more loops fit">
-      <input type="checkbox" id="bars" checked> Detect first bar</label>
-    <label title="Cuts the silence before and after the sound (below -60 dB). A loop's length sets its tempo, so this is off for loops">
-      <input type="checkbox" id="trim"> Trim silence</label>
-    <label title="Stores new loops at 22 kHz instead of 44.1 kHz: twice as many fit, but they sound duller">
-      <input type="checkbox" id="half"> 22.05 kHz (more room)</label>
-    <label for="grit">Oldschool space saver
-      <select id="grit" aria-describedby="import-help">
-        <option value="">Off</option><option value="light">Light · 1.5×</option>
-        <option value="medium">Medium · 2×</option><option value="heavy">Heavy · 3×</option><option value="max">Max · 4×</option>
-      </select>
-    </label>
-  </div>
-  <p id="import-help">Fit more loops with a darker sound. At the loop’s original tempo, its length and pitch stay the same. The setting starts off and leaves your original files untouched.</p>
-  <section aria-labelledby="auditionTitle">
-    <h2 id="auditionTitle">Listen locally before connecting</h2>
-    <label for="auditionFile">Choose an audio file to compare</label>
-    <input id="auditionFile" style="display:block;max-width:100%;margin:12px 0" type="file" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
-    <p class="small">Use Mono reference to hear your cut before compression and Encoded loop to hear what gets saved. The previews may sound different in volume and play without the keyboard’s tempo or effects.</p>
-    <div class="bar"><button type="button" class="quiet" id="auditionReference" disabled>Play mono reference</button><button type="button" id="auditionEncoded" disabled>Play encoded loop</button><button type="button" class="quiet" id="auditionStop">Stop audio</button></div>
-    <p id="auditionStatus" role="status" aria-live="polite">Choose a file to listen on this computer. Your keyboard’s samples stay as they are.</p>
+  <div class="ws-grid">
+  <section class="ws-panel ws-loops" aria-labelledby="loops-title">
+    <h2 class="ws-kicker" id="loops-title"><span class="no">01</span> Your loops</h2>
+    <div id="list"><div class="empty">Connect to see the loops on your keyboard.</div></div>
+    <div class="full"><div id="fill"></div></div>
+    <p id="room"></p>
+    <p id="savings" role="status" aria-live="polite"></p>
+    <div class="bar ws-add">
+      <button class="quiet" id="add">Add loops</button>
+      <span class="small">or drop files here. Drop one on a loop to replace it.</span>
+    </div>
+    <div class="ws-options">
+      <label title="Keeps only the first bar of each file you add, so more loops fit"><input type="checkbox" id="bars" checked> Detect first bar</label>
+      <label title="Cuts the silence before and after the sound. Off for loops, because a loop's length sets its tempo"><input type="checkbox" id="trim"> Trim silence</label>
+      <label title="Stores new loops at 22 kHz instead of 44.1 kHz: twice as many fit, with a darker sound"><input type="checkbox" id="half"> 22.05 kHz (more room)</label>
+      <label class="ws-select" for="grit">Oldschool space saver
+        <select id="grit" aria-describedby="import-help">
+          <option value="">Off</option><option value="light">Light · 1.5×</option>
+          <option value="medium">Medium · 2×</option><option value="heavy">Heavy · 3×</option><option value="max">Max · 4×</option>
+        </select>
+      </label>
+    </div>
+    <p id="import-help" class="small">Fit more loops with a darker sound. Your original files stay untouched.</p>
+    <div class="bar ws-send">
+      <button id="send" disabled>Send samples to device</button>
+      <button class="quiet" id="discard" hidden>Discard changes</button>
+    </div>
+    <progress id="progress" max="100" value="0" hidden></progress>
+    <input type="file" id="files" multiple accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
+    <input type="file" id="archive" accept=".x0xslots">
   </section>
-  <div class="full"><div id="fill"></div></div>
-  <p id="room"></p>
-  <p id="savings" role="status" aria-live="polite"></p>
+
+  <section class="ws-panel ws-listen" aria-labelledby="auditionTitle">
+    <h2 class="ws-kicker" id="auditionTitle"><span class="no">02</span> Listen first</h2>
+    <label class="ws-file" for="auditionFile"><span>Choose an audio file</span></label>
+    <input id="auditionFile" class="ws-file-input" type="file" accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
+    <div class="bar"><button type="button" class="quiet" id="auditionReference" disabled>Play original</button><button type="button" id="auditionEncoded" disabled>Play as saved</button><button type="button" class="quiet" id="auditionStop">Stop</button></div>
+    <p id="auditionStatus" role="status" aria-live="polite">Hear a loop on this computer before adding it. Your keyboard stays as it is.</p>
+  </section>
+
+  <section class="ws-panel ws-backup" aria-labelledby="backup-title">
+    <h2 class="ws-kicker" id="backup-title"><span class="no">03</span> Keep a copy</h2>
+    <p class="sample-warning">Back up first. Send replaces the loops you changed; Restore puts a backup back.</p>
+    <div class="bar">
+      <button class="quiet" id="backup" disabled>Back up all slots</button>
+      <button class="quiet" id="restore" disabled>Restore a backup</button>
+    </div>
+    <details class="sample-help"><summary>Tips</summary><p class="small">Your loops appear as BR1, BR2 and so on, after the built-in loops. Choose BREAK → EDIT, then turn LOOP A or LOOP B.</p>
+    <p class="small">Loops change pitch as they follow the song tempo. Use the PITCH knob to tune them.</p>
+    <p class="small">Removing a loop moves later loops up one slot, so patterns that used them play the next loop. <a href="https://github.com/gobbajogger/DnBOX/blob/main/docs/MANUAL.md#8-break">The manual's BREAK section</a></p></details>
+  </section>
+  </div>
+
   <dialog id="previewDlg" aria-labelledby="previewTitle">
     <h2 id="previewTitle">Compare before adding</h2>
-    <p id="previewNotice">Use Mono reference to hear your cut before compression and Encoded loop to hear what gets saved. The previews may sound different in volume and play without the keyboard’s tempo, pitch settings or effects.</p>
+    <p id="previewNotice">Play original to hear your cut, and Play as saved to hear it the way the keyboard stores it. They play without the keyboard’s tempo or effects.</p>
     <div id="previewList"></div>
     <p id="previewStatus" role="status" aria-live="polite"></p>
-    <div class="bar"><button type="button" class="quiet" id="previewStop">Stop audio</button><button type="button" id="previewGo">Add these loops</button><button type="button" class="quiet" id="previewCancel">Cancel</button></div>
+    <div class="bar"><button type="button" class="quiet" id="previewStop">Stop</button><button type="button" id="previewGo">Add these loops</button><button type="button" class="quiet" id="previewCancel">Cancel</button></div>
   </dialog>
-
-  <p class="sample-warning">Back up important slots first. Send replaces changed slots and applies removals; Restore replaces slots from your backup.</p>
-  <div class="bar">
-    <button id="send" disabled>Send samples to device</button>
-    <button class="quiet" id="discard" hidden>Discard changes</button>
-  </div>
-  <progress id="progress" max="100" value="0" hidden></progress>
-  <input type="file" id="files" multiple accept="audio/*,.wav,.aif,.aiff,.mp3,.flac,.m4a,.ogg">
-  <input type="file" id="archive" accept=".x0xslots">
-
-  <div class="bar" style="margin-top:24px">
-    <button class="quiet" id="backup" disabled>Back up all slots</button>
-    <button class="quiet" id="restore" disabled>Restore a backup</button>
-    
-  </div>
-
-  <details class="sample-help"><summary>Loop playback &amp; file tips</summary><p class="small">Your loops appear as BR1, BR2 and so on, after the built-in loops. Choose BREAK → EDIT, then turn LOOP A or LOOP B.</p>
-  <p class="small">Choose “22.05 kHz (more room)” to fit about twice as many loops, with a darker sound.</p>
-  <p class="small">Loops change pitch as they follow the song tempo. Use the PITCH knob to tune them.</p>
-  <p class="small">Removing a loop moves later loops up one slot. Patterns that used those slots will play different loops. <a href="https://github.com/gobbajogger/DnBOX/blob/main/docs/MANUAL.md#8-break" style="color:inherit">Read the BREAK manual</a>.</p></details>
-  <p class="small">DnBOX builds on X0X and Felucca by Hügelton Instruments (GPL-3.0); the break generator is BB Gen's.
-    <a href="https://github.com/gobbajogger/DnBOX" style="color:inherit">github.com/gobbajogger/DnBOX</a></p>
+  <p class="small ws-credit">DnBOX builds on Felucca by Hügelton Instruments (GPL-3.0); the break generator is BB Gen's. <a href="https://github.com/gobbajogger/DnBOX">Source</a></p>
 </main>
 <script type="module">
 // SPDX-License-Identifier: GPL-3.0-only
@@ -1351,7 +1354,7 @@ function reviewLoops(items, title, action) {
       (loop.isNew ? ` vs ${loop.baselineBytes.toLocaleString()} B clean 44.1 kHz (${loop.savedBytes.toLocaleString()} B saved)` : " · original file unavailable for a loop read from the device");
     row.appendChild(detail);
     const buttons = document.createElement("div"); buttons.className = "bar";
-    for (const [label,original] of [["Mono reference (same cut)",true],["Encoded loop",false]]) {
+    for (const [label,original] of [["Play original",true],["Play as saved",false]]) {
       const button = document.createElement("button"); button.type = "button"; button.className = "quiet"; button.textContent = label;
       button.disabled = original && !loop.reference;
       button.onclick = () => playLoopPreview(loop,original).catch(e => { $("previewStatus").textContent = `Preview unavailable: ${e.message || e}`; });
