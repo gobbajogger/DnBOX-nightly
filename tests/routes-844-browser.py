@@ -23,7 +23,7 @@ ROUTES = (
     'remote/identity/index.html', 'starting-breaks/index.html', 'tools/index.html',
 )
 REMOTE_TABS = ('roll', 'sound', 'mix', 'patterns', 'files')
-REMOTE_MENU = ('drums', 'locks', 'song')
+REMOTE_MENU = ('locks', 'song')  # the drum grid is Sequence on 909/808
 WIDTH, HEIGHT = 844, 390
 OVERFLOW = '''()=>{const d=document.documentElement,w=innerWidth;
  const wide=[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();

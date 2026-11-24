@@ -4,19 +4,34 @@ import {SAMPLE_CONTRACT_SHA256} from '../sample-pin.mjs';
 import {createStartingBreakPreview, normalizeStartingBreakSelection} from '../starting-break-preview.mjs';
 
 const rates = ['1/16', '1/8', '1/4'];
+// Firmware BREAK pattern part (seq/pattern.h brkpart_t): steps bit s = the break may sound on
+// 16th s (fresh pattern: all off), slice[16] 0 = the generator chooses / 1..32 = loop A slice,
+// slot A/B, rate 1/16, 1/8, 1/4.
 export function emptyBreakSequence() {
-  return {loops: [null, null], rate: rates[0], slices: Array(16).fill(0)};
+  return {loops: [null, null], rate: rates[0], slices: Array(16).fill(0), steps: Array(16).fill(false)};
 }
 
 export function validateBreakSequence(value) {
   const validLoop = id => id === null || typeof id === 'string' && normalizeStartingBreakSelection([id])?.length === 1;
-  if (!value || Object.keys(value).sort().join(',') !== 'loops,rate,slices' ||
+  const keys = value && Object.keys(value).sort().join(',');
+  if (!value || !['loops,rate,slices', 'loops,rate,slices,steps'].includes(keys) ||
       !Array.isArray(value.loops) || value.loops.length !== 2 || !value.loops.every(validLoop) ||
       !rates.includes(value.rate) || !Array.isArray(value.slices) || value.slices.length !== 16 ||
-      !value.slices.every(v => Number.isInteger(v) && v >= 0 && v <= 32)) {
-    throw Error('Local draft: invalid BREAK sequence');
+      !value.slices.every(v => Number.isInteger(v) && v >= 0 && v <= 32) ||
+      (value.steps !== undefined && !(Array.isArray(value.steps) && value.steps.length === 16 && value.steps.every(v => typeof v === 'boolean')))) {
+    throw Error('Invalid BREAK sequence');
   }
-  return structuredClone(value);
+  const out = structuredClone(value);
+  if (!out.steps) out.steps = Array(16).fill(false);
+  return out;
+}
+
+// Steps whose firmware step record (on, slice) differs between two sequences.
+export function changedBreakSteps(before, after) {
+  const out = [];
+  for (let i = 0; i < 16; i++)
+    if (!!before.steps?.[i] !== !!after.steps?.[i] || before.slices[i] !== after.slices[i]) out.push({step: i, on: !!after.steps[i], slice: after.slices[i]});
+  return out;
 }
 
 export function mountBreakSequence(root, state, onEdit) {
@@ -26,10 +41,18 @@ export function mountBreakSequence(root, state, onEdit) {
     picker?.destroy();
     picker = null;
   }
+  let selectedStep = 0;
   function paint() {
-    for (const select of root.querySelectorAll('[data-break-loop]')) select.value = state.loops[Number(select.dataset.breakLoop)] ?? '';
-    for (const select of root.querySelectorAll('[data-break-step]')) select.value = state.slices[Number(select.dataset.breakStep)];
-    if (root.querySelector('[data-break-rate]')) root.querySelector('[data-break-rate]').value = state.rate;
+    for (const b of root.querySelectorAll('[data-break-loop]')) b.setAttribute('aria-pressed', String((state.loops[Number(b.dataset.breakLoop)] ?? '') === b.dataset.breakValue));
+    for (const b of root.querySelectorAll('[data-break-rate]')) b.setAttribute('aria-pressed', String(b.dataset.breakRate === state.rate));
+    for (const b of root.querySelectorAll('[data-break-on]')) { const i = Number(b.dataset.breakOn); b.setAttribute('aria-pressed', String(!!state.steps?.[i])); b.classList.toggle('hit', !!state.steps?.[i]); }
+    for (const b of root.querySelectorAll('[data-break-step]')) {
+      const i = Number(b.dataset.breakStep), v = state.slices[i];
+      b.textContent = v ? String(v) : '–'; b.value = String(v); b.dataset.value = String(v);
+      b.setAttribute('aria-label', 'Step ' + (i + 1) + ' slice ' + (v ? v : 'auto')); b.title = i === selectedStep ? 'Tap again for the next slice' : 'Select step ' + (i + 1);
+      b.setAttribute('aria-pressed', String(i === selectedStep)); b.classList.toggle('selected', i === selectedStep);
+    }
+    for (const b of root.querySelectorAll('[data-break-slice]')) b.setAttribute('aria-pressed', String(Number(b.dataset.breakSlice) === state.slices[selectedStep]));
   }
   async function show() {
     stop();
@@ -46,33 +69,62 @@ export function mountBreakSequence(root, state, onEdit) {
       if (own !== serial) {panel.destroy(); return;}
       picker = panel;
       const assets = JSON.parse(new TextDecoder().decode(bytes)).assets;
-      const fields = document.createElement('div'), steps = document.createElement('div');
-      fields.className = 'break-assignment'; steps.className = 'break-steps';
-      function field(parent, label, key, index, values) {
-        const row = document.createElement('label'), select = document.createElement('select');
-        row.textContent = label; select.dataset[key] = index;
-        for (const [id, name] of values) select.add(new Option(name, id));
-        row.append(select); parent.append(row);
+      editor.className = 'break-editor';
+      const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
+      const chip = (label, data, pressed) => { const b = el('button', 'break-chip', label); b.type = 'button'; Object.assign(b.dataset, data); b.setAttribute('aria-pressed', String(pressed)); return b; };
+      // Loop A / Loop B: the firmware's two slots, chosen from the starting breaks.
+      const loops = el('div', 'break-loops');
+      for (const [index, name] of ['A', 'B'].entries()) {
+        const row = el('div', 'break-loop-row'); row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Loop ' + name);
+        row.append(el('span', 'break-row-label', name));
+        row.append(chip('–', {breakLoop: index, breakValue: ''}, false));
+        for (const a of assets) row.append(chip(a.name, {breakLoop: index, breakValue: a.id}, false));
+        loops.append(row);
       }
-      for (const [index, name] of ['Loop A','Loop B'].entries()) {
-        field(fields, name, 'breakLoop', index, [['','None'], ...assets.map(a => [a.id,a.name])]);
+      const rateRow = el('div', 'break-loop-row break-rate'); rateRow.setAttribute('role', 'group'); rateRow.setAttribute('aria-label', 'Rate');
+      for (const r of rates) rateRow.append(chip(r, {breakRate: r}, false));
+      loops.append(rateRow);
+      // ON row and SLICE row: one column per 16th, like the firmware footer (step number, slice or –).
+      const grid = el('div', 'break-grid funkybeats-sequencer');
+      const onRow = el('div', 'break-row'), sliceRow = el('div', 'break-row');
+      onRow.append(el('span', 'break-row-label', 'ON')); sliceRow.append(el('span', 'break-row-label', 'SLICE'));
+      for (let i = 0; i < 16; i++) {
+        const on = el('button', 'seq-step break-on'); on.type = 'button'; on.dataset.breakOn = i; on.setAttribute('aria-label', 'Step ' + (i + 1));
+        const slice = el('button', 'seq-step break-slice'); slice.type = 'button'; slice.dataset.breakStep = i;
+        if (i % 4 === 0) { on.classList.add('beat'); slice.classList.add('beat'); }
+        onRow.append(on); sliceRow.append(slice);
       }
-      field(fields, 'Rate', 'breakRate', '', rates.map(r => [r,r]));
-      const slices = Array.from({length:33}, (_,i) => [i,i ? String(i) : 'Auto']);
-      for (let i=0;i<16;i++) field(steps, 'Step '+(i+1), 'breakStep', i, slices);
-      editor.append(fields, steps);
+      grid.append(onRow, sliceRow);
+      // Slice pad: pick the selected step's slice (AUTO = the generator chooses), eight per page as on the firmware.
+      const pad = el('div', 'break-pad'); pad.setAttribute('role', 'group'); pad.setAttribute('aria-label', 'Slice');
+      pad.append(chip('AUTO', {breakSlice: 0}, false));
+      for (let n = 1; n <= 32; n++) pad.append(chip(String(n), {breakSlice: n}, false));
+      editor.append(loops, grid, pad);
       root.replaceChildren(editor, previews); paint();
     } catch {
       if (own === serial) root.textContent = 'Starting breaks unavailable. Reopen Sequence to retry.';
     }
   }
-  root.addEventListener('change', e => {
-    const input = e.target, next = structuredClone(state);
-    if (input.hasAttribute('data-break-loop')) next.loops[Number(input.dataset.breakLoop)] = input.value || null;
-    else if (input.hasAttribute('data-break-step')) next.slices[Number(input.dataset.breakStep)] = Number(input.value);
-    else if (input.hasAttribute('data-break-rate')) next.rate = input.value;
-    else return;
-    onEdit(validateBreakSequence(next)); paint();
+  function edit(mutate) { const next = validateBreakSequence(state); mutate(next); onEdit(validateBreakSequence(next)); paint(); }
+  root.addEventListener('click', e => {
+    const b = e.target.closest?.('button'); if (!b || !root.contains(b)) return;
+    if (b.dataset.breakLoop !== undefined) edit(n => { n.loops[Number(b.dataset.breakLoop)] = b.dataset.breakValue || null; });
+    else if (b.dataset.breakRate !== undefined) edit(n => { n.rate = b.dataset.breakRate; });
+    else if (b.dataset.breakOn !== undefined) edit(n => { const i = Number(b.dataset.breakOn); n.steps[i] = !n.steps[i]; });
+    else if (b.dataset.breakStep !== undefined) {
+      // First tap selects the step for the slice pad; tapping the selected step again steps its slice (AUTO, 1..32, AUTO).
+      const i = Number(b.dataset.breakStep);
+      if (i !== selectedStep) { selectedStep = i; paint(); }
+      else edit(n => { n.slices[i] = (n.slices[i] + 1) % 33; });
+    }
+    else if (b.dataset.breakSlice !== undefined) edit(n => { n.slices[selectedStep] = Number(b.dataset.breakSlice); });
   });
+  root.addEventListener('keydown', e => {
+    const b = e.target.closest?.('[data-break-step]'); if (!b || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    e.preventDefault(); selectedStep = Number(b.dataset.breakStep);
+    edit(n => { n.slices[selectedStep] = Math.max(0, Math.min(32, n.slices[selectedStep] + (e.key === 'ArrowUp' ? 1 : -1))); });
+  });
+  // Double-tap a slice cell: back to AUTO (the firmware default).
+  root.addEventListener('dblclick', e => { const b = e.target.closest?.('[data-break-step]'); if (b) edit(n => { n.slices[Number(b.dataset.breakStep)] = 0; }); });
   return {show, stop, paint};
 }

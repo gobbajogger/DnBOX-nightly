@@ -44,7 +44,7 @@ async def cases(origin):
       # This longer real validation failure wraps on phones; every word remains available.
       invalid=dict(schema='dnbox-local-workspace-draft/1',kind='local-preview-only',identity={k:'0'*64 for k in ['trace','catalog','components','source-sounds']},notes=[],parameters=[],motion={},launch=[],song=[],soundBanks=[],context={})
       await page.locator('#draft-file').set_input_files({'name':'wrong-source.json','mimeType':'application/json','buffer':json.dumps(invalid).encode()})
-      message='Local draft: source identity mismatch; no automatic migration'
+      message='source identity mismatch; no automatic migration'
       await expect(page.locator('#draft-preview')).to_have_text(message);await readable(page,'#draft-preview');await expect(page.locator('#draft-replace')).to_be_disabled();await page.locator('#draft-cancel').click();await expect(page.locator('#status')).to_have_text(message)
       assert await geometry(page)==main_geometry,'Long error feedback must not shrink editing geometry'
       await expect(wave).to_have_value('1');assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth');assert not errors,errors
