@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 96896,
-      "sha256": "95bc35f435bd53b3dc7ab9b6acb632ea06b2efee34156fad436d6a008d2fccfa"
+      "bytes": 96998,
+      "sha256": "b326955cf7cdc18d22029b04f6ec0604473745bf4173dd1c51d24272fcddb101"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -894,8 +894,8 @@
     },
     {
       "path": "remote/dnr3-link.mjs",
-      "bytes": 12565,
-      "sha256": "84ecf6dda070b831a7d0e86956c6a6e22ec03b41e45be0ed073d7176195dd044"
+      "bytes": 12961,
+      "sha256": "6402b8cf9fe84f2ef70d12be5126745532bafe3aa0f8e0094dd9adf406704963"
     },
     {
       "path": "remote/dnr3-mix.mjs",

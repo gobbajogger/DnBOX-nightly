@@ -104,7 +104,7 @@ function editorHistory(){
 function syncEditScope(){
  const el=$('edit-scope');if(!el)return;
  const history=editorHistory(),connected=remoteLink?.connected();
- const copy=!connected?'Draft · Connect via USB MIDI to edit your DnBOX':
+ const copy=!connected?(remoteLink?.noRemoteReply()?'Draft · MIDI found, but DnBOX didn’t answer Remote':'Draft · Connect via USB MIDI to edit your DnBOX'):
   history==='draft'?'Draft · Changes stay in this project':
   history==='mixed'?'Sound · Some controls change your DnBOX. Undo unavailable':
   history==='device'?'DnBOX · Undo unavailable in this editor':
@@ -422,7 +422,7 @@ const liveClips=createLiveClips({link:()=>remoteLink,onChange:next=>{
  if(grid&&old){grid.scrollLeft=scrollLeft;grid.scrollTop=scrollTop;}
  if(part!==undefined&&pat!==undefined)grid?.querySelector(`[data-launch-part="${part}"][data-pattern="${pat}"]`)?.focus({preventScroll:true});
 }});
-remoteLink=mountDnr3Link({onChange:()=>{if(view==='locks')other();}});
+remoteLink=mountDnr3Link({onChange:()=>{if(view==='locks')other();syncEditScope();}});
 remoteLink.onState(syncConnectionMix);
 remoteLink.onState(()=>void refreshPatternLabel());
 remoteLink.onNotify(event=>{

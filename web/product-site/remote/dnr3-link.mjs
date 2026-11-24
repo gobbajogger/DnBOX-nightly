@@ -69,9 +69,10 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
   const $ = id => doc.getElementById(id);
   const button = $('connect'), label = $('conn-state'), draftProjectLabel = $('draft-project-label');
   const close = $('close-connection'); if (close) close.addEventListener('click', () => { const panel = $('connection-result'); if (panel) panel.hidden = true; button?.focus?.(); });
-  let client = null, transport = null, busy = false, hello = null;
+  let client = null, transport = null, busy = false, hello = null, noRemoteReply = false;
   const listeners = new Set(), notifications = new Set();
-  function show(state, note = '') {
+  function show(state, note = '', noReply = false) {
+    noRemoteReply = noReply;
     // STATE reports active pattern IDs, not a device project title.
     if (draftProjectLabel) draftProjectLabel.hidden = state === STATE.CONNECTED;
     if (label) { label.textContent = state === STATE.CONNECTED ? 'Connected' : 'Disconnected'; label.dataset.session = state; label.title = note; }
@@ -120,7 +121,12 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
     } catch (error) {
       try { await opening?.close(); } catch {}
       transport?.close(); transport = null; client = null; hello = null;
-      show(STATE.DISCONNECTED, error?.code === 'unavailable' || /timeout/i.test(String(error?.message)) ? 'DnBOX didn’t answer. Check the USB connection, then try again.' : 'Could not connect. Allow MIDI access in your browser and try again.');
+      const noReply = Boolean(opening && !opening.hello && error?.code === 'timeout');
+      show(STATE.DISCONNECTED, noReply
+        ? 'DnBOX MIDI was detected, but DnBOX didn’t answer Remote. Edits stay in Draft. Check USB and use firmware that supports Remote, then try again.'
+        : error?.code === 'unavailable' || /timeout/i.test(String(error?.message))
+          ? 'DnBOX didn’t answer. Check the USB connection, then try again.'
+          : 'Could not connect. Allow MIDI access in your browser and try again.', noReply);
     } finally { busy = false; }
   }
   button?.addEventListener('click', () => { if (client) void disconnect(); else void connect(); });
@@ -158,7 +164,7 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
   }
   return {
     bassRollClient,
-    connected: () => !!client, hello: () => hello, send, connect, disconnect,
+    connected: () => !!client, noRemoteReply: () => noRemoteReply, hello: () => hello, send, connect, disconnect,
     drumClient: () => client,
     breakClient: () => client,
     sendMidi: bytes => { if (client && transport) transport.sendMidi(bytes); },

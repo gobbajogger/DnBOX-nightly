@@ -1,0 +1,19 @@
+{
+  "review_commit": "fa01a9c8bf1f713656cdacb5d8be803c64152819",
+  "product_identical_parent": "34127553a59dc91e3ce9c97581a434883349220a",
+  "parent_tree": "ac1360ca42736623f35d90ba48a1ced73f73f8d7",
+  "verified_tracked_blobs": 788,
+  "review_delta_paths": [
+    "docs/remote-verification/independent-midi-position/RECEIPT.md",
+    "docs/remote-verification/independent-midi-position/transport-final.log",
+    "tests/product-remote/wasm-midi-transport-position-browser.py"
+  ],
+  "built_changed_files": [
+    "remote/app.mjs",
+    "remote/dnr3-link.mjs"
+  ],
+  "asset_count": 298,
+  "chromium_sandbox": true,
+  "device": false,
+  "final_firmware_qualified": false
+}
