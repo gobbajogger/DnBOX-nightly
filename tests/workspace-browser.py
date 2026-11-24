@@ -35,7 +35,7 @@ async def main():
   await page.locator('#samples-tab').click();await child.wait_for_function('probe.state().active')
   check(await page.locator('#firmware-panel').is_hidden(),'one action panel visible')
   check(await child.locator('.home').is_hidden(),'embedded panel has no duplicate home control')
-  check(await child.evaluate('getComputedStyle(document.body).backgroundColor==="rgb(20, 25, 28)"'),'embedded sample panel matches workspace theme')
+  check(await child.evaluate('getComputedStyle(document.body).backgroundColor==="rgb(7, 16, 20)"'),'embedded sample panel matches workspace theme')
   check(await child.locator('#send').is_disabled(),'samples require real read before writing')
   await child.evaluate('probe.seed()')
   await child.locator('#files').set_input_files({'name':'loop-a.wav','mimeType':'audio/wav','buffer':wav(8820)})

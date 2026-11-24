@@ -73,16 +73,14 @@
   p{max-width:72ch}.embedded section[aria-labelledby="export-title"]{grid-column:1/-1}.embedded section[aria-labelledby="keyboard-title"]{grid-column:1/-1}.check{min-height:44px}button,a,input,select{touch-action:manipulation}
 details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--muted);cursor:pointer}details p{margin:8px 0 12px}
 </style>
-<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../tool-theme.css"></head>
-<body class="tool-surface"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
-<main id="dnbox-tool-main">
-  <nav aria-label="X0X"><a href="../install/#firmware">Install firmware</a><a href="../install/#samples">Import samples</a></nav>
-  <h1>Songs &amp; projects</h1>
-  <p class="small">Move your whole live project—song arrangement, patterns and sounds—to or from a file. Include samples for a portable copy.</p>
-  <section aria-labelledby="connection-title">
-    <h2 id="connection-title">Connect your keyboard</h2>
-    <p class="small">Connect by USB with X0X running. Stop playback, recording and performance mode; close other editors.</p>
-    <button id="find">Find USB MIDI keyboard</button>
+<link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../workspace.css"></head>
+<body class="tool-surface ws-page"><div id="dnbox-global-header"><a class="skip" href="#dnbox-tool-main">Skip to content</a><header><a class="brand" href="../index.html">DnBOX <small>INSTRUMENTS</small></a><nav aria-label="Main"><a href="../index.html#sounds">Sounds</a><a href="../remote/">Remote</a><a href="../breaks/">Samples</a><a href="../projects/">Projects</a><a href="../presets/">Presets</a><a href="../manual/">Manual</a><a href="../builds/">History</a><a class="install-link" href="../install/">Install nightly</a></nav></header></div>
+<main id="dnbox-tool-main" class="ws ws-projects">
+  <div class="ws-head"><h1>Songs &amp; projects</h1><p class="ws-lede">Keep your song, patterns and sounds together. Include samples to take them with you.</p></div><div class="ws-grid">
+  <section class="ws-panel ws-connection" aria-labelledby="connection-title">
+    <h2 class="ws-kicker" id="connection-title"><span class="no">01</span> Your keyboard</h2>
+    <p class="small">Connect by USB with DnBOX running. Stop playback and close other editors.</p>
+    <button id="find">Connect USB</button>
     <div id="ports" hidden>
       <div class="ports">
         <label>MIDI input<select id="midi-input"></select></label>
@@ -94,11 +92,11 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
     <progress id="progress" max="1" hidden aria-label="Project transfer progress"></progress>
   </section>
 
-  <section aria-labelledby="import-title">
-    <h2 id="import-title">Inspect or import a project</h2>
-    <label for="file" class="small">Choose an .x0xproject file</label>
-    <input id="file" type="file" accept=".x0xproject">
-    <p id="file-info" class="small">Inspect a file offline, or connect to prepare an import.</p>
+  <section class="ws-panel ws-import" aria-labelledby="import-title">
+    <h2 class="ws-kicker" id="import-title"><span class="no">02</span> Open a project</h2>
+    <label for="file" class="ws-file"><span>Choose a project file</span></label>
+    <input id="file" class="ws-file-input" type="file" accept=".x0xproject">
+    <p id="file-info" class="small">Choose a file to see what’s in it. Connect your keyboard to load it.</p>
     <button id="prepare" class="quiet" disabled>Prepare import</button>
     <div id="preview" hidden>
       <h3 id="preview-title"></h3>
@@ -119,17 +117,17 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
     </div>
   </section>
 
-  <section aria-labelledby="export-title">
-    <h2 id="export-title">Export a project</h2>
+  <section class="ws-panel ws-export" aria-labelledby="export-title">
+    <h2 class="ws-kicker" id="export-title"><span class="no">03</span> Keep a copy</h2>
     <label for="name" class="small">Project name</label>
-    <input id="name" type="text" maxlength="80" value="My X0X project" autocomplete="off">
-    <label class="check"><input id="portable" type="checkbox" checked><span>Include original samples <span class="small">— recommended for moving a project or keeping a complete backup.</span></span></label>
+    <input id="name" type="text" maxlength="80" value="My DnBOX project" autocomplete="off">
+    <label class="check"><input id="portable" type="checkbox" checked><span>Include original samples <span class="small">— so your loops travel with the song.</span></span></label>
     <details><summary>Details: project files</summary><p class="small">Portable files retain original sample bytes, playback rates and slot order. Without samples, a file imports only when every sample slot already matches.</p></details>
     <button id="export" disabled>Export project + samples</button>
   </section>
-  <section aria-labelledby="keyboard-title">
-    <h2 id="keyboard-title">On the keyboard</h2>
-    <p class="small">Load replaces the live project. Reset clears the song, patterns, sounds and project settings; samples stay. Reset turns autosave on and may overwrite the saved project. Export first to keep your work.</p>
+  <section class="ws-panel ws-keyboard" aria-labelledby="keyboard-title">
+    <h2 class="ws-kicker" id="keyboard-title"><span class="no">04</span> On the keyboard</h2>
+    <p class="small">Load replaces the live project. Reset clears the whole live project: song arrangement, patterns, sounds and project settings. Samples stay. Reset turns autosave on and may overwrite the saved project. Export first to keep your work.</p>
     <div class="bar">
       <button id="save" disabled>Save on keyboard</button>
       <button id="load" class="quiet" disabled>Load saved project</button>
@@ -142,7 +140,7 @@ details>summary{min-height:44px;align-content:center;font-size:14px;color:var(--
 
 
 
-</main>
+</div><details class="ws-midi"><summary>MIDI files</summary><section id="project-exchange-availability"><h2>MIDI export</h2><p>Browser MIDI export is unavailable. You can still check a project file or back up and restore full projects. A Remote draft is not a project file and cannot be exported as MIDI.</p></section><section id="project-exchange-root"></section></details></main>
 <script type="module">
 // SPDX-License-Identifier: GPL-3.0-only
 // X0X break loops in the browser: tools/upload_breaks.py and its helpers (tools/sampleio.py,
@@ -1379,7 +1377,7 @@ class ProjectDevice {
     this.projectLength = null; this.active = false; this.mode = 0; this.lastProject = 0;
   }
   async request(cmd, args, { tries = 1, timeout = this.timeout, accept = () => true } = {}) {
-    if (cmd !== 1 && !this.identity) throw fail("Connect to an identified X0X keyboard first.", "identity");
+    if (cmd !== 1 && !this.identity) throw fail("Connect your DnBOX keyboard first.", "identity");
     if (cmd !== 9 && this.active && this.now() - this.lastProject > 4000) await this.query();
     for (let attempt = 0; attempt < tries; attempt++) {
       this.link.drain();
@@ -1415,13 +1413,13 @@ class ProjectDevice {
     this.identity = null; this.mode = 0; this.active = false; this.projectLength = null;
     const r = await this.request(1, [], { tries: 2 }), z = r.indexOf(0);
     const id = z >= 0 ? String.fromCharCode(...r.slice(0, z)) : "";
-    if (!/^X0X [\x20-\x7e]{1,20}$/.test(id)) throw fail("This MIDI port is not running X0X. No project commands were sent.", "identity");
+    if (!/^X0X [\x20-\x7e]{1,20}$/.test(id)) throw fail("This is not a DnBOX keyboard. Nothing was sent.", "identity");
     this.identity = id;
     try { await this.query({ allowRecovery: true }); }
     catch (e) {
       this.identity = null;
       if (e.code === "busy") throw e;
-      throw fail(`This X0X firmware does not provide the supported project protocol. ${e.message}`, "unsupported");
+      throw fail(`This firmware cannot exchange projects. ${e.message}`, "unsupported");
     }
     return { identity: id, projectLength: this.projectLength, recovery: this.mode === 3 };
   }
@@ -1927,7 +1925,7 @@ $("file").onchange = () => {
   return run("Checking the project file…", async () => {
   clearPreview(); selected = null; const file = $("file").files[0];
   $("file-info").textContent = "Choose an .x0xproject file.";
-  if (file.size > PROJECT_MAX_FILE) throw new Error("This file is too large to be an X0X project bundle.");
+  if (file.size > PROJECT_MAX_FILE) throw new Error("This project file is too large.");
   selected = await readProjectFile(new Uint8Array(await file.arrayBuffer()));
   const n = selected.meta.slots.filter((s) => !s.empty).length;
   $("file-info").textContent = `${selected.meta.name} · ${selected.portable ? "Project + original samples" : "Project only"} · ${n} populated sample slots · ${human(file.size)}`;
@@ -2019,5 +2017,5 @@ if (typeof location !== "undefined" && new URLSearchParams(location.search).has(
 }
 controls();
 </script>
-<section id="project-exchange-availability" style="max-width:1100px;margin:40px auto;padding:24px"><h2>MIDI export</h2><p>Browser MIDI export is unavailable. You can still check a project file or back up and restore full projects. A Remote draft is not a project file and cannot be exported as MIDI.</p></section><section id="project-exchange-root" style="max-width:1100px;margin:40px auto;padding:24px"></section><script type="module" src="exchange/app.mjs"></script></body>
+<script type="module" src="exchange/app.mjs"></script></body>
 </html>

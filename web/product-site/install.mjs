@@ -2,6 +2,8 @@ import {bindStartingBreakExport} from './starting-break-export.mjs';
 import {mountPreparedChoices} from './components/installer-binding/binding.mjs';
 import {SAMPLE_CONTRACT_SHA256} from './sample-pin.mjs';
 import {createStartingBreakPreview,normalizeStartingBreakSelection} from './starting-break-preview.mjs';
+import {loadChosenImages,fillChosen} from './starting-break-install.mjs';
+import {startingBreakName} from './starting-break-names.mjs';
 const $=id=>document.getElementById(id);const SELECTION_KEY='dnbox-starting-break-selection';let panel=null,generation=0,suspended=false,disposed=false,savedSelection=undefined,download=null;
 try{const stored=JSON.parse(localStorage.getItem(SELECTION_KEY)||'');savedSelection=normalizeStartingBreakSelection(stored);}catch{}
 for(const b of document.querySelectorAll('[data-model]'))b.onclick=()=>{document.querySelectorAll('[data-model]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('model-status').textContent=`SMK-37 ${b.dataset.model} selected. Use its matching package in the installer.`;};
@@ -23,4 +25,12 @@ async function initialize(){
   download?.destroy();if($('download-breaks'))download=bindStartingBreakExport($('download-breaks'),{status:$('download-status'),getSelectedIds:()=>panel?.selectedIds()??[]});
  }catch{if(own===generation&&!suspended&&!disposed)$('samples-status').textContent='Starting breaks could not be loaded. Reload this preview to try again.';}
 }
+// The installer page (install/index.html) asks for the chosen breaks at Install and writes them after the firmware.
+// No picker (it failed to load, or another page): nothing is chosen and nothing is written.
+globalThis.dnboxStartingBreaks=Object.freeze({
+ selectedIds:()=>panel?[...panel.selectedIds()]:[],
+ names:ids=>ids.map(id=>startingBreakName(id,id)),
+ load:ids=>loadChosenImages(ids,{baseURL:import.meta.url}),
+ fill:(io,images,onPart)=>fillChosen(io,images,onPart),
+});
 await initialize();

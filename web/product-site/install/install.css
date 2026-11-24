@@ -191,3 +191,8 @@ body.install-r22{--bg:#071014;--card:#0d181c;--card-raised:#122126;--fg:#dde7de;
 .install-more details[open]>.archive-toggle{list-style-type:disclosure-open}
 .install-more .archive-toggle>span{display:inline}.archive-chevron{display:none}
 .install-more .archive-toggle>.archive-chevron{display:none}
+#samples-panel iframe,#projects-panel iframe{min-height:0;overflow:hidden}
+.breaks-note{font-size:14px;color:var(--dim);margin:12px 0 10px}
+.step-breaks .slot{display:block;color:var(--dim);font-size:11px;font-weight:500;line-height:1;white-space:nowrap}
+.breaks-note{margin:8px 0}
+@media (max-height:500px) and (min-width:700px){.breaks-note{font-size:13px;margin:6px 0}.step-breaks .break-rows li{min-height:38px}.step-breaks .break-rows label{min-height:36px}}

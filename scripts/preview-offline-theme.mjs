@@ -53,15 +53,15 @@ ${barlowLicense}
 ${fonts}
 :root.offline-tool:not([data-theme="light"]) {
   color-scheme: dark;
-  --bg: #101715;
-  --card: #1b2b20;
-  --fg: #e7eee2;
-  --ink: #e7eee2;
-  --dim: #b6c7af;
-  --muted: #b6c7af;
-  --rule: #3c5140;
-  --line: #3c5140;
-  --accent: #c8dfa7;
+  --bg: #071014;
+  --card: #0b181d;
+  --fg: #dce6e4;
+  --ink: #dce6e4;
+  --dim: #a6b9b9;
+  --muted: #a6b9b9;
+  --rule: #233b43;
+  --line: #233b43;
+  --accent: #ffb337;
 }
 .offline-tool body { font-family: Barlow, sans-serif; }
 ${fileControls}</style>`;
