@@ -1,0 +1,71 @@
+/* DnBOX R22 file workspaces. Presentation only: controls, import checks and write paths are retained. */
+:root, :root.embedded, body.ws-page {--bg:#071014;--card:#0b181d;--card-raised:#12242a;--fg:#dce6e4;--ink:#dce6e4;--dim:#a6b9b9;--muted:#a6b9b9;--line:#233b43;--rule:#233b43;--wave:#6c9298;--accent:#ffb337;--accent-ink:#231700;color-scheme:dark}
+*{box-sizing:border-box}
+body.ws-page{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 Barlow,sans-serif}
+.ws-page main.ws,.embedded .ws-page main.ws{display:block;max-width:1280px;margin:auto;padding:28px 48px 36px;background:var(--bg)}
+.ws-page h1,.ws-page h2,.ws-page h3,.ws-page input,.ws-page select,.ws-page button{font-family:Barlow,sans-serif}
+.ws-page h1{font-size:36px;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:0 0 10px}
+.ws-page .ws-head{margin:0 0 24px}.ws-page .ws-lede{max-width:62ch;font-size:16px;color:var(--dim);margin:0}
+.ws-page h2.ws-kicker{display:flex;align-items:center;gap:10px;margin:0 0 16px;font-size:13px;font-weight:700;line-height:1.2;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.ws-page .no{color:var(--accent);font-size:15px;letter-spacing:0}.ws-page h3{font-size:18px;margin:12px 0}
+.ws-page p{max-width:none;margin:0 0 12px;font-size:15px;overflow-wrap:anywhere}.ws-page .small{font-size:14px;line-height:1.45;color:var(--dim)}
+.ws-page a{color:inherit;text-underline-offset:4px}.ws-page .home{display:none}
+.ws-page .ws-connect{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;border:1px solid var(--line);border-radius:7px;background:var(--card);margin-bottom:12px}
+.ws-page .led{display:block;width:12px;height:12px;border-radius:50%;background:#415d64;box-shadow:0 0 0 4px #233b4344}
+.ws-page .ws-connect #status{flex:1;margin:0;font-size:16px;font-weight:600;color:var(--fg)}
+.ws-page .ws-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px;align-items:start}
+.ws-page section.ws-panel,.embedded .ws-page section.ws-panel{display:block;min-width:0;margin:0;padding:20px;border:1px solid var(--line);border-radius:7px;background:var(--card)}
+.ws-page .ws-loops{grid-row:span 2}.ws-page .ws-panel>:last-child{margin-bottom:0}
+.ws-page .bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0;padding:0}.ws-page .bar:empty{display:none}
+.ws-page button{min-height:44px;padding:10px 16px;border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:var(--accent-ink);font:700 15px/1.2 Barlow,sans-serif;cursor:pointer}
+.ws-page button.quiet,.ws-page .ws-connect button,.ws-page #find,.ws-page #connect{border-color:var(--line);background:var(--card-raised);color:var(--fg)}
+.ws-page button:hover:not(:disabled){border-color:var(--accent);filter:brightness(1.1)}.ws-page button:disabled{opacity:.42;cursor:default}
+.ws-page button.link{min-height:36px;border:0;background:none;color:var(--dim);padding:4px 6px;font-weight:500}
+.ws-page button:focus-visible,.ws-page a:focus-visible,.ws-page input:focus-visible,.ws-page select:focus-visible,.ws-page summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ws-page label{min-width:0;min-height:44px;display:flex;align-items:center;gap:10px;margin:0;font-size:15px;color:var(--fg)}
+.ws-page .ws-options{display:grid;grid-template-columns:minmax(0,1fr);margin:12px 0 8px;gap:4px}
+.ws-page input,.ws-page select{max-width:100%;font:inherit;color:var(--fg);accent-color:var(--accent)}
+.ws-page input[type=text],.ws-page select{min-height:44px;border:1px solid var(--line);border-radius:7px;background:var(--card-raised);padding:8px 12px}
+.ws-page input[type=text]{display:block;width:100%;margin-bottom:10px}.ws-page select{min-width:0}.ws-page .ws-select{flex-wrap:wrap}.ws-page .ws-select select{margin-left:auto}
+.ws-page input[type=checkbox]{appearance:none;display:grid;place-content:center;flex:none;width:20px;height:20px;margin:0;border:2px solid var(--muted);border-radius:4px;background:none;cursor:pointer}
+.ws-page input[type=checkbox]:checked{background:var(--accent);border-color:var(--accent)}
+.ws-page input[type=checkbox]:checked::after{content:"";width:10px;height:6px;border:solid var(--accent-ink);border-width:0 0 2.5px 2.5px;transform:translateY(-1px) rotate(-45deg)}
+.ws-page .check{align-items:flex-start;padding:4px 0;margin:6px 0 10px}.ws-page .check>input{margin-top:2px}.ws-page .check span.small{display:block}
+.ws-page input[type=file]{display:none}.ws-page .ws-file-input{display:block!important;font-size:14px;color:var(--dim);width:100%;margin:0 0 12px;padding:0;border:0;background:transparent}
+.ws-page .ws-file-input::file-selector-button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:8px 14px;background:var(--card-raised);color:var(--fg);font:700 15px Barlow,sans-serif;cursor:pointer;margin-right:10px}
+.ws-page .ws-file{display:none}.ws-page .ws-file-input:focus-visible{outline-offset:2px}
+.ws-page #list{border:1px solid var(--line);border-radius:7px;padding:0 12px;margin:0;background:var(--bg)}
+.ws-page .empty{padding:16px 0;color:var(--dim);font-size:15px;border:0}
+.ws-page .loop{display:grid;grid-template-columns:4em minmax(0,1fr) auto;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ws-page .loop .acts{display:flex;gap:4px;flex-wrap:wrap}.ws-page .loop canvas{display:block;width:100%;height:40px;min-width:0}
+.ws-page .full{height:5px;background:var(--line);border-radius:3px;margin:12px 0 6px;overflow:hidden}.ws-page .full>div{background:var(--accent);height:100%}
+.ws-page #room:empty,.ws-page #savings:empty,.ws-page #status:empty{display:none}.ws-page #room{font-size:14px;color:var(--dim)}
+.ws-page #auditionStatus{color:var(--dim);font-size:14px;margin-top:12px}.ws-page .sample-warning{color:var(--dim);font-size:15px;margin:0}
+.ws-page details{margin-top:14px}.ws-page summary{min-height:44px;align-content:center;cursor:pointer;color:var(--dim);font-size:14px;font-weight:600}.ws-page details p{font-size:14px;color:var(--dim)}
+.ws-page .ws-credit{color:var(--dim);font-size:13px;margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+.ws-page dialog{max-width:640px;width:calc(100% - 32px);max-height:85vh;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:7px;color:var(--fg)}.ws-page dialog::backdrop{background:#000b}
+.ws-page .preview-row{border-top:1px solid var(--line);padding:12px 0}.ws-page .preview-row .bar{margin:8px 0 0}
+.ws-page .table-wrap{overflow:auto;max-width:100%;margin:12px 0}.ws-page table{width:100%;font-size:14px;border-collapse:collapse}.ws-page th,.ws-page td{padding:8px;text-align:left;overflow-wrap:anywhere;border-bottom:1px solid var(--line)}
+.ws-page progress{width:100%;height:6px;accent-color:var(--accent);margin:12px 0}.ws-page #status{margin:12px 0 0;font-size:14px;color:var(--dim)}
+/* Embedded tools share the installer's single header and title, not a second set. */
+.embedded #dnbox-global-header,.embedded .ws-page .ws-head,.embedded .ws-page .ws-credit{display:none}
+.embedded body.ws-page{background:var(--bg)}.embedded .ws-page main.ws{max-width:none;padding:0;margin:0}
+.embedded .ws-page main.ws-projects{display:block}.embedded .ws-page main.ws>nav{display:none}
+@media(min-width:1000px){.ws-page .ws-projects>.ws-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.1fr)}.ws-page .ws-keyboard{grid-column:1/-1}.ws-page .ws-keyboard>.bar{display:inline-flex;margin:0 0 0 8px}.ws-page .ws-keyboard>p{max-width:80ch}}
+@media(max-width:799px){.ws-page main.ws{padding:24px 28px}.ws-page h1{font-size:30px}.ws-page .ws-grid{grid-template-columns:minmax(0,1fr)}.ws-page .ws-loops{grid-row:auto}.ws-page section.ws-panel{padding:16px}.ws-page .ws-options{grid-template-columns:repeat(2,minmax(0,1fr))}.ws-page .ws-select{grid-column:1/-1}}
+@media(max-width:599px){.ws-page main.ws{padding:20px 16px}.ws-page h1{font-size:28px}.ws-page .ws-options{grid-template-columns:1fr}.ws-page .loop{grid-template-columns:3.5em minmax(0,1fr)}.ws-page .loop .acts{grid-column:2}.ws-page .ws-connect{padding:12px;gap:10px}.ws-page .ws-connect button{padding-inline:12px}.ws-page section.ws-panel{padding:16px}.ws-page .ws-select select{margin-left:0;flex:1}.ws-page #dnbox-global-header .brand small{display:none}.ws-page #dnbox-global-header header{padding:12px 16px}}
+@media(max-height:500px) and (min-width:700px){.ws-page main.ws{padding:20px 28px}.ws-page .ws-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.ws-page .ws-options{gap:0}.ws-page .ws-loops{grid-row:span 2}.ws-page .ws-keyboard{grid-column:1/-1}.ws-page section.ws-panel{padding:16px}.ws-page .ws-head{margin-bottom:18px}.ws-page h1{font-size:28px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+[hidden]{display:none!important}
+.ws-page details.ws-midi{margin-top:16px;border-top:1px solid var(--line);padding-top:4px}
+.ws-page .ws-midi section{margin:12px 0;padding:16px;border:1px solid var(--line);border-radius:7px;background:var(--card)}
+.ws-page .ws-midi h2{font-size:20px;margin:0 0 10px}
+.embedded .ws-page .ws-projects>.ws-grid>.ws-export{grid-column:auto}
+.embedded .ws-page .ws-projects>.ws-grid>.ws-connection{grid-column:auto}
+.embedded .ws-page .ws-projects>.ws-grid>.ws-keyboard{grid-column:1/-1}
+.ws-page .ws-connect #status{margin:0;color:var(--fg);font-size:16px}
+.ws-page #dnbox-global-header header{flex-wrap:wrap;gap:12px}
+.ws-page #dnbox-global-header header nav{flex-wrap:wrap}
+@media(max-width:599px){.ws-page #dnbox-global-header header nav{gap:10px}.ws-page #dnbox-global-header .brand{font-size:26px}}
+@media(max-height:500px) and (min-width:700px){.ws-page #dnbox-global-header header{min-height:56px;padding:0 28px;flex-wrap:nowrap}.ws-page #dnbox-global-header nav{gap:18px;font-size:14px;flex-wrap:nowrap}.ws-page #dnbox-global-header .install-link{padding:6px 12px}.ws-page .ws-lede{font-size:15px}}
+@media(max-width:699px){.ws-page #dnbox-global-header header{min-height:0;padding:12px 16px;gap:8px 12px}.ws-page #dnbox-global-header nav{gap:6px 14px;font-size:14px}.ws-page #dnbox-global-header .install-link{padding:6px 10px}}

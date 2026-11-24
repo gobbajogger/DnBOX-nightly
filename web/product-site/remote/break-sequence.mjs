@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import {startingBreakName} from '../starting-break-names.mjs';
 import {mountBreakPanel} from '../components/break-panel/panel.mjs';
 import {SAMPLE_CONTRACT_SHA256} from '../sample-pin.mjs';
 import {createStartingBreakPreview, normalizeStartingBreakSelection} from '../starting-break-preview.mjs';
@@ -55,7 +56,7 @@ export function mountBreakSequence(root, state, onEdit) {
         row.append(select); parent.append(row);
       }
       for (const [index, name] of ['Loop A','Loop B'].entries()) {
-        field(fields, name, 'breakLoop', index, [['','None'], ...assets.map(a => [a.id,a.name])]);
+        field(fields, name, 'breakLoop', index, [['','None'], ...assets.map(a => [a.id,startingBreakName(a.id,a.name)])]);
       }
       field(fields, 'Rate', 'breakRate', '', rates.map(r => [r,r]));
       const slices = Array.from({length:33}, (_,i) => [i,i ? String(i) : 'Auto']);

@@ -47,7 +47,7 @@ def main():
             expect(page.locator("#go")).to_be_disabled()
             page.locator("#samples-tab").click()
             expect(page).to_have_url(samples, timeout=2500)
-            expect(page.get_by_role("heading", name="Import samples")).to_be_visible()
+            expect(page.get_by_role("heading", name="Samples", exact=True)).to_be_visible()
             page.locator("#auditionFile").set_input_files(audition_fixture())
             expect(page.locator("#auditionStatus")).to_contain_text("offline-loop.wav")
             expect(page.locator("#auditionReference")).to_be_enabled()
@@ -76,7 +76,8 @@ def main():
 
             base = f"http://127.0.0.1:{server.server_port}"
             page.goto(base + "/install/")
-            for task, frame, heading in (("samples", "sample", "Import samples"), ("projects", "project", "Songs & projects")):
+            # Embedded: the installer title names the tool, so the frame starts at its first numbered panel.
+            for task, frame, heading in (("samples", "sample", "Your loops"), ("projects", "project", "Your keyboard")):
                 page.locator(f"#{task}-tab").click()
                 assert page.url == base + "/install/#" + task
                 expect(page.frame_locator(f"#{frame}-frame").get_by_role("heading", name=heading)).to_be_visible()
