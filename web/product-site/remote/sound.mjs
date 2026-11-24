@@ -1,3 +1,4 @@
+import{firmwareName,firmwareValue}from'./firmware-labels.mjs';
 // Finite current-source controls for local drafts, never native engine/preset application.
 const SOURCE='ffd31a735acc5721d1f90a30fc1ceb283aad6fc5',BANKS={CHICAGO:0,MIAMI:1,JUNO:3};
 const copy=x=>structuredClone(x),integer=x=>Number.isSafeInteger(x),key=c=>[c.kind,c.target,c.voice,c.parameter,c.sourceBank].join(':');
@@ -19,7 +20,7 @@ export class SourceSounds{
     const reason=enabled?'':c.kind===12&&c.max===0?(c.raw>c.max?'Captured INVALID: no loaded loop domain':'No loaded loop domain'):c.readonly?'Captured source status, read only':'Native engine/preset command unavailable';
     if(c.kind===1&&c.target===2&&(typeof c.sourceSection!=='string'||!c.sourceSection||!integer(c.sourcePage)||typeof c.sourceSectionObservation!=='string'))throw Error('Exact source section required');
     const rowContext=context+(c.sourceSection?' / '+c.sourceSection:'');
-    const id='source-sound/'+group.bank+'/'+group.bassSlot+'|'+key(c),row={...c,id,label:c.name,context:rowContext,display:c.value+(c.unit?' '+c.unit:''),enabled,reason,step:1};rows.push(row);this.#controls.set(id,row);
+    const id='source-sound/'+group.bank+'/'+group.bassSlot+'|'+key(c),fw=[c.kind,c.target,c.voice,c.parameter].join(':'),row={...c,id,label:firmwareName(fw,group.bank)??c.name,firmwareIdentity:fw,context:rowContext,display:(c.raw>=0&&c.raw<=c.max?firmwareValue(fw,c.raw,group.bank):null)??(c.value+(c.unit?' '+c.unit:'')),enabled,reason,step:1};rows.push(row);this.#controls.set(id,row);
    }
    this.#groups.set(contextKey,rows);
   }

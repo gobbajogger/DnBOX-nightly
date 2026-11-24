@@ -4,7 +4,7 @@ export function mountExchange(root,{readProjectFile,provider=null,approvedSource
  const d=root.ownerDocument;root.replaceChildren();const make=(tag,text)=>{let x=d.createElement(tag);if(text)x.textContent=text;root.append(x);return x;};
  const admitted=canExportProjects(provider,approvedSources);
  if(availabilityNotice)availabilityNotice.hidden=admitted;
- if(admitted){make('h2','Take your sequences into Live');make('p','Export a project as MIDI tracks, with timing and pattern markers.');}
+ if(admitted){make('h2','Take your sequences into Live');make('p','Export a project as MIDI tracks. The saved song starts at bar 1; if there is no song, Pattern 1 plays. Use a portable project to include BREAK triggers.');}
  else make('h2','Check a project file');
  const label=make('label',admitted?'Choose a DnBOX project ':'Choose a DnBOX project file to check '),file=d.createElement('input');file.type='file';file.accept='.x0xproject';label.append(file);
  let button=null,seconds=null;

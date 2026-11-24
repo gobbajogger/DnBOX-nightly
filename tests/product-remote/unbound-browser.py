@@ -26,8 +26,9 @@ spec = importlib.util.spec_from_file_location('fb', Path(__file__).with_name('fu
 fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 
-VIEWS = ('roll', 'sound', 'mix', 'patterns', 'files', 'drums', 'locks', 'song')
-MENU_VIEWS = ('drums', 'locks', 'song')
+# 909/808 open the drum grid from Sequence ('roll'), so the drum grid is walked as each drum part's roll view.
+VIEWS = ('roll', 'sound', 'mix', 'patterns', 'files', 'locks', 'song')
+MENU_VIEWS = ('locks', 'song')
 ENGINES = tuple(os.environ.get('UNBOUND_ENGINES', 'drum909,drum808,chicago,miami,breaks').split(','))
 VIEWS = tuple(os.environ.get('UNBOUND_VIEWS', ','.join(VIEWS)).split(','))
 # Controls whose effect needs a prior state: the precondition gesture runs first.
@@ -97,6 +98,11 @@ async def gesture(page, item):
         await loc.press('ArrowUp')
         if await page.evaluate(STATE) != before:
             return None
+    if await loc.get_attribute('role') == 'slider':
+        # A slider (the BPM readout) moves with the arrow keys like a range input.
+        await loc.focus()
+        await loc.press('ArrowUp')
+        return None
     if item['tag'] == 'select':
         options = await loc.evaluate('e=>[...e.options].filter(o=>!o.disabled).map(o=>o.value)')
         current = await loc.input_value()
@@ -145,7 +151,7 @@ async def walk(browser, size):
 
     async def fresh(engine, view):
         await page.goto(fb.ORIGIN + '/remote/')
-        await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+        await page.wait_for_function('document.getElementById("status").textContent.includes("Disconnected")')
         await page.locator(f'[data-engine="{engine}"]').click()
         await open_view(page, view)
         # Panels such as the starting breaks finish loading after the view opens: wait until settled.
@@ -261,7 +267,7 @@ async def main():
             finally:
                 await browser.close()
     assert not errors, errors
-    if len(ENGINES) == 5 and len(VIEWS) == 8:
+    if len(ENGINES) == 5 and len(VIEWS) == 7:
         assert checked > 100, checked
     assert not unbound, f'{len(unbound)} unbound controls'
     print(f'UNBOUND_BROWSER PASS controls={checked} unbound=0', flush=True)

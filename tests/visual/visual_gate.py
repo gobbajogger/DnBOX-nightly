@@ -39,7 +39,8 @@ OFFLINE = ['x0x_installer.html', 'x0x_breaks.html', 'x0x_projects.html']
 OFFLINE_BUILT = {'x0x_installer.html': 'install/index.html', 'x0x_breaks.html': 'breaks/index.html',
                  'x0x_projects.html': 'projects/index.html'}
 PAGE01 = {'bg': '#050a0d', 'panel': '#101a1f', 'line': '#293d43', 'ink': '#dde7de', 'muted': '#99aaa9', 'amber': '#ffb337'}
-ENGINES = {'909': '#ff9529', '808': '#ff4841', 'BASS A': '#82f05a', 'BASS B': '#46cdff', 'BREAK': '#d678ff'}
+# Firmware 73749f55 part colours (firmware-glyphs.json colours.parts).
+ENGINES = {'909': '#ff9628', '808': '#ff4840', 'BASS A': '#82f05a', 'BASS B': '#46cdff', 'BREAK': '#d678ff'}
 FREEZE_JS = """
 (()=>{const T=1794790800000;let n=0;const D=Date;class FD extends D{constructor(...a){super(...(a.length?a:[T]))}static now(){return T}}
 globalThis.Date=FD;let s=42;Math.random=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648};})();
@@ -165,7 +166,7 @@ HEADER_JS = """
   activeTabUnderline: active? (cs(active).borderBottomColor||'')+'|'+(cs(active).textDecorationColor||'')+'|'+cs(active).boxShadow+'|'+(cs(active,'::after'),getComputedStyle(active,'::after').backgroundColor): '',
   engines:engines.map(e=>e.innerText.replace(/\\s+/g,' ').trim()), engWrapped:engines.filter(e=>lines(e)>1).map(e=>e.innerText.trim()),
   engClipped:engines.filter(clipped).map(e=>e.innerText.trim()),
-  engineColors:Object.fromEntries(engines.map(e=>[e.innerText.trim(),getComputedStyle(e.querySelector('svg')||e).color])),
+  engineColors:Object.fromEntries(engines.map(e=>{const lane=e.querySelector('.fw-lane');return[e.innerText.trim(),lane?getComputedStyle(lane).backgroundColor:getComputedStyle(e.querySelector('svg')||e).color];})),
   partTitle:vis(q('#part-title'))?q('#part-title').innerText.trim():'',
   transport:['#play','#stop','#rec'].map(s=>vis(q(s))?q(s).innerText.trim():''),
   undoRedo:['#undo','#redo'].map(s=>vis(q(s))),
@@ -184,15 +185,15 @@ def header_checks(h, w, fails):
         if not cond: fails.append(f'{w}: {msg}')
     need(h['brand'].upper().startswith('DNBOX') and 'REMOTE' in h['brand'].upper(), f"brand {h['brand']!r}")
     need(bool(h['project']), 'project name missing')
-    need('P01' in h['readout'] and '120 BPM' in h['readout'], f"readout {h['readout']!r}")
+    need('P01' in h['readout'] and '125 BPM' in h['readout'] and 'TAP' in h['readout'], f"readout {h['readout']!r}")
     need(h['connect'] == 'Connect', f"connect {h['connect']!r}")
-    need(h['connState'] == 'Not connected', f"connection state {h['connState']!r}")
+    need(h['connState'] in ('Connected', 'Disconnected'), f"connection state {h['connState']!r}")
     need(not h['connWrapped'], 'connection state wraps')
     need(h['connRow'] is not None and h['connectRow'] is not None and abs(h['connRow'] - h['connectRow']) < 24, f"connection state not in row 1 with Connect ({h['connRow']} vs {h['connectRow']})")
     need(h['rowOneOverflow'] == 0, "overflow '…' present in row 1")
     need(h['tabs'] == ['Sequence', 'Sound', 'Mix & FX', 'Patterns & Song', 'Projects'], f"tabs {h['tabs']}")
     need(not h['tabClipped'] and not h['tabWrapped'], f"tabs clipped {h['tabClipped']} wrapped {h['tabWrapped']}")
-    need([e.replace(' ', '') for e in h['engines']] == ['909', '808', 'BASSA', 'BASSB', 'BREAK'], f"engines {h['engines']}")
+    need([e.replace(' ', '') for e in h['engines']] == ['909', '808', 'BREAK', 'BASSA', 'BASSB'], f"engines {h['engines']}")
     need(not h['engWrapped'] and not h['engClipped'], f"engines wrapped {h['engWrapped']} clipped {h['engClipped']}")
     for k, v in ENGINES.items():
         got = rgb(h['engineColors'].get(k, ''))
@@ -356,7 +357,10 @@ def main():
                             shot = Image.open(__import__('io').BytesIO(pg.screenshot(clip={'x': 0, 'y': 0, 'width': 1024, 'height': 148}))).convert('L')
                             ref = Image.open(FIX).convert('L'); s = ref.width / 1024
                             ref = ref.crop((0, 0, ref.width, round(148 * s))).resize((1024, 148), Image.LANCZOS)
-                            prep = lambda im: np.asarray(im.crop((0, 0, 720, 148)).filter(ImageFilter.GaussianBlur(2)))
+                            # Pixels cover the header and tab rows (y 0..100). The engine row is checked structurally in
+                            # header_checks: BREAK moved to 3rd (firmware PART_ORDER, owner request 2026-11-24), which
+                            # page-01 predates.
+                            prep = lambda im: np.asarray(im.crop((0, 0, 720, 100)).filter(ImageFilter.GaussianBlur(2)))
                             score = ssim(prep(shot), prep(ref)); results.append(('header-ssim-1024x640', 'PASS' if score >= 0.9 else 'FAIL', score))
                             print(f"header SSIM vs page-01 = {score:.4f} (gate >= 0.90)")
                     try:

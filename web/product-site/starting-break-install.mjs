@@ -67,7 +67,7 @@ export function imagesFor(ids, zones) {
 
 // SMP_INFO layout -> [{k, img}]; [] unless EVERY slot is blank (default_breaks.plan_fill)
 export function planFill(layout, images) {
-  if (!layout || layout.slots.some(sl => sl.nz || sl.used)) return [];
+  if (!layout?.ext || layout.slots.some(sl => sl.nz || sl.used)) return [];
   const todo = [];
   for (const [slot, img] of [...images].sort((a, b) => a[0] - b[0])) {
     const k = slot - 1;
@@ -77,7 +77,7 @@ export function planFill(layout, images) {
     if (img.length > sl.size) continue;
     todo.push({k, img});
   }
-  return todo;
+  return todo.length === images.size ? todo : [];
 }
 
 // io: {layout(), readBytes(k, off, n), writeSlot(k, img, onPart)} on the reconnected keyboard.
@@ -86,13 +86,17 @@ export async function fillChosen(io, images, onPart) {
   if (!images.size) return {filled: [], reason: 'none'};
   const layout = await io.layout();
   const todo = planFill(layout, images);
-  if (!todo.length) return {filled: [], reason: layout.slots.some(sl => sl.nz || sl.used) ? 'notblank' : 'nofit'};
+  if (!todo.length) return {filled: [], reason: layout?.slots?.some(sl => sl.nz || sl.used) ? 'notblank' : 'nofit'};
   for (let k = 0; k < layout.count; k++) {               // every header still erased: nothing was there
     const head = await io.readBytes(k, 0, HDR_LEN);
-    if (head.some(b => b !== 0xff)) return {filled: [], reason: 'notblank'};
+    if (head.length !== HDR_LEN || head.some(b => b !== 0xff)) return {filled: [], reason: 'notblank'};
   }
   const filled = [];
   for (const {k, img} of todo) {
+    // Check the target header again immediately before asking for its first write.
+    const head = await io.readBytes(k, 0, HDR_LEN);
+    if (head.length !== HDR_LEN || head.some(b => b !== 0xff))
+      throw new Error(`slot ${k + 1}: no longer blank`);
     await io.writeSlot(k, img, onPart);
     const back = await io.readBytes(k, 0, img.length);
     if (back.length !== img.length || back.some((b, i) => b !== img[i]))

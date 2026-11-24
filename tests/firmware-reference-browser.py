@@ -6,6 +6,7 @@ import base64
 import hashlib
 import io
 import json
+import os
 import subprocess
 import tempfile
 from functools import partial
@@ -26,7 +27,7 @@ class Quiet(SimpleHTTPRequestHandler):
         pass
 
 
-def check_comparison(page, origin, expected):
+def check_comparison(page, origin, expected, oracle):
     url = origin + '/reference/screens/'
     name = 'home-playing'
     oracle_url = '**/native-rgb.tsv'
@@ -51,7 +52,7 @@ def check_comparison(page, origin, expected):
     page.select_option('#state', other)
     page.wait_for_function("s => document.querySelector('#lcd').dataset.state === s", arg=other)
     with page.expect_response(oracle_url):
-        held[0].fulfill(body=ORACLE.read_text())
+        held[0].fulfill(body=oracle.read_text())
     assert result.inner_text() == ''
     compare.click()
     page.wait_for_function("document.querySelector('#comparison').textContent === 'All 57,600 pixels match the native frame.'")
@@ -59,8 +60,8 @@ def check_comparison(page, origin, expected):
 
     # A valid, deliberately incorrect native hash must produce an explicit mismatch.
     wrong = '0' * 64
-    altered = ORACLE.read_text().replace(other + '\t' + expected[other], other + '\t' + wrong)
-    assert altered != ORACLE.read_text()
+    altered = oracle.read_text().replace(other + '\t' + expected[other], other + '\t' + wrong)
+    assert altered != oracle.read_text()
     page.route(oracle_url, lambda route: route.fulfill(body=altered))
     page.reload()
     page.wait_for_function("s => document.querySelector('#lcd').dataset.state === s", arg=other)
@@ -71,17 +72,22 @@ def check_comparison(page, origin, expected):
 
 
 def sweep(page, origin, site):
-    expected = dict(line.split('\t') for line in ORACLE.read_text().splitlines())
+    requested = os.environ.get('DNBOX_FWUI_REVISION')
+    oracle = Path(os.environ['DNBOX_FWUI_RUNTIME']) / 'native-rgb.tsv' if requested else ORACLE
+    expected = dict(line.split('\t') for line in oracle.read_text().splitlines())
     manifest = json.loads((site / 'reference/screens/states.json').read_text())
     states = manifest['states']
-    assert manifest['firmware'] == SHA
-    assert len(expected) == len(states) == 1838
+    source = requested or SHA
+    assert manifest['firmware'] == source
+    assert len(expected) == len(states) and len(states) > 0
+    if not requested:
+        assert len(states) == 1838
     assert {row[0] for row in states} == set(expected)
-    assert (site / 'reference/screens/native-rgb.tsv').read_bytes() == ORACLE.read_bytes()
-    check_comparison(page, origin, expected)
+    assert (site / 'reference/screens/native-rgb.tsv').read_bytes() == oracle.read_bytes()
+    check_comparison(page, origin, expected, oracle)
     page.goto(origin + '/reference/screens/')
     page.wait_for_selector('#lcd[data-state]')
-    assert page.locator('a[href$="' + SHA + '"]').count() == 1
+    assert page.locator('a[href$="' + source + '"]').count() == 1
     actual = {}
     observations = 0
     # Drive the same WASM program and paint function used by the public selector.
@@ -118,7 +124,8 @@ def sweep(page, origin, site):
         assert required <= captured, required - captured
         page.evaluate('delete window.screenSweep')
     assert actual == expected
-    assert observations == 1912, observations
+    if not requested:
+        assert observations == 1912, observations
     # Exercise visible selection, group routing, URL restoration, and actual 1:1 CSS size.
     for viewport in [(1440, 900), (390, 844), (844, 390)]:
         page.set_viewport_size(dict(zip(('width', 'height'), viewport)))
@@ -139,7 +146,7 @@ def sweep(page, origin, site):
                 assert hashlib.sha256(im.convert('RGB').tobytes()).hexdigest() == expected[name], name
     # Changing the group or pressing an arrow repeatedly must discard the old
     # walk before another large state selection can start behind it.
-    late = next(r for r in states if r[0] == 'window-part3-page3')
+    late = (states[-1] if requested else next(r for r in states if r[0] == 'window-part3-page3'))
     page.locator('#group').select_option(str(late[1]))
     page.evaluate("""target => {
       const control = document.querySelector('#state');

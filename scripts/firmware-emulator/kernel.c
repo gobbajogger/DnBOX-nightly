@@ -3,6 +3,7 @@
  * with RAM-only input/output boundaries, not USB/BLE or calibrated hardware I/O.
  * Browser scheduling is not a device CPU or timing measurement. */
 #include <stdint.h>
+static void web_trace_note(uint32_t);
 static void web_audio(const int32_t *, uint32_t);
 #ifdef X0X_WEB_SMK
 #define BOARD_SMK37 1
@@ -200,6 +201,8 @@ EXPORT int web_restore_store(uint32_t len){
  if(project_load_stage()!=0){failed=1;return -2;} /* discard this candidate instance */
  boot();return 0;
 }
+
+#include "midi-trace.h"
 
 #ifdef X0X_WEB_SMK
 /* Explicit physical events; do not pretend the existing logical-key bitmap is37keys. */

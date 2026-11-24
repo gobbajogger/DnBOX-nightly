@@ -55,17 +55,18 @@ async def cases():
                 await expect(head).to_have_attribute('aria-label', 'Playhead at start')
                 await expect(page.locator('#beat-ruler .current')).to_have_count(0)
                 assert abs(await offset(head) - start) < 0.5
-                # Record also runs the playhead.
-                await page.locator('#rec').click()
-                await expect(head).to_have_attribute('data-step', re.compile(r'\d+'))
-                await page.locator('#stop').click()
+                # Draft playback is allowed, but cannot pretend the instrument is recording.
+                # Actual Record panel and transport are covered through native WASM Web MIDI.
+                await expect(page.locator('#rec')).to_be_disabled()
+                await expect(page.locator('#rec')).to_have_attribute('aria-pressed', 'false')
+                await expect(head).to_have_attribute('aria-label', 'Playhead at start')
                 assert not errors, errors
                 assert await page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                 print('PLAYHEAD', width, height, 'steps', sorted(seen), flush=True)
                 await context.close()
         finally:
             await browser.close()
-    print('PLAYHEAD PASS: Play/Record sweep the roll playhead by step, Stop returns it to the start; Bar 1 outranks beats', flush=True)
+    print('PLAYHEAD PASS: Draft Play sweeps by step, Stop resets, and Record requires the instrument; Bar 1 outranks beats', flush=True)
 
 
 def main():

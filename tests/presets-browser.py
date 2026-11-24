@@ -78,19 +78,14 @@ async def main(site):
     try:
      await p.goto('https://dnbox.test/tools/',wait_until='networkidle')
      assert await p.evaluate('document.documentElement.scrollWidth===innerWidth')
-     help=p.locator('details summary');await help.focus();await p.keyboard.press('Enter')
-     assert await p.locator('details').evaluate('(e)=>e.open')
-     assert 'More actions' in await p.locator('details').inner_text()
-     await capture(p,out,'tools-help-expanded',w,h)
-     await p.keyboard.press('Enter');assert not await p.locator('details').evaluate('(e)=>e.open')
+     assert await p.locator('main details').count()==0,'no emulator walkthrough on Tools'
      # Tools copy must lead to real controls without silently starting audio.
      await capture(p,out,'tools',w,h)
      await p.locator('a.button[href="../remote/"]').click();await p.wait_for_url('**/remote/')
      await p.locator('#roll-grid .note').first.wait_for()
-     await p.locator('[data-view="mix"]').click();await p.locator('[data-mix-source="emulator"]').wait_for()
-     assert await p.locator('[data-mix-source="emulator"]').is_disabled()
-     menu=p.locator('.overflow summary');await menu.focus();await p.keyboard.press('Enter')
-     assert await p.locator('#emulator-start').is_visible()
+     await p.locator('[data-view="mix"]').click();await p.locator('#other-view').wait_for()
+     assert await p.locator('[data-mix-source]').count()==0 and await p.locator('#emulator-start').count()==0
+     assert await p.locator('#conn-state').inner_text()=='Disconnected'
      assert_no_requests(midi_requests,runtime_requests)
      await p.goto('https://dnbox.test/tools/',wait_until='networkidle')
      await p.locator('a.button[href="../presets/"]').click();await p.wait_for_url('**/presets/')

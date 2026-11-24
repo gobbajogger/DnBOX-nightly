@@ -119,7 +119,8 @@ test('a slot that does not read back fails the step', async () => {
 
 test('another flash map keeps the default out of the wrong place', () => {
   const lay = {count: 3, ext: true, slots: [{nz: 0, used: 0, off: 0xC0000, size: 0x14000}, {nz: 0, used: 0, off: 0xD6000, size: 0x14000}, {nz: 0, used: 0, off: 0xEA000, size: 0x14000}]};
-  assert.deepEqual(planFill(lay, imagesFor(STARTING_BREAK_IDS, zones)).map(t => t.k), [1]);
+  assert.deepEqual(planFill(lay, imagesFor(STARTING_BREAK_IDS, zones)), []);
+  assert.deepEqual(planFill(lay, imagesFor([STARTING_BREAK_IDS[3]], zones)).map(t => t.k), [1]);
 });
 
 test('loadChosenImages verifies the pinned contract and each loop before building', async () => {

@@ -18,21 +18,24 @@ export function readFirmwareReference(repoRoot, directory, requestedRevision) {
   // pin can opt in a different revision, independent of the historical default.
   const filename = explicit ? `firmware-reference-pins/${requestedRevision}.json` : 'firmware-reference-pin.json';
   const pin = readEmulatorPin(join(repoRoot, 'scripts', filename));
-  const expected = explicit ? {...limits, 'states.json':maxBytes, 'native-rgb.tsv':maxBytes} : limits;
+  const currentWalk = explicit && pin.profile === 'current-walk';
+  if (pin.profile !== undefined && !currentWalk) throw Error('Invalid firmware reference profile');
+  const renderers = currentWalk ? {'fwui.wasm':maxBytes} : limits;
+  const expected = explicit ? {...renderers, 'states.json':maxBytes, 'native-rgb.tsv':maxBytes} : renderers;
   if (!revision.test(pin.firmware) || (explicit && pin.firmware !== requestedRevision) ||
       !pin.files || Object.keys(pin.files).sort().join('|') !== Object.keys(expected).sort().join('|')) {
     throw Error('Invalid firmware screen renderer pin or revision mismatch');
   }
   const files = readRuntimeFiles({directory, files:pin.files, limits:expected, prefix});
-  if (explicit) verifyReference(pin.firmware, new Map(files.map(([name, bytes]) => [name.slice(prefix.length), bytes])));
+  if (explicit) verifyReference(pin.firmware, new Map(files.map(([name, bytes]) => [name.slice(prefix.length), bytes])), Object.keys(renderers), currentWalk);
   return files;
 }
 
-function verifyReference(firmware, files) {
+function verifyReference(firmware, files, renderers, currentWalk) {
   const {firmware:source, groups, kinds, modules, states} = JSON.parse(files.get('states.json'));
   const labels = xs => Array.isArray(xs) && xs.length > 0 && xs.every(x => typeof x === 'string' && x.trim());
   if (source !== firmware || !labels(groups) || !labels(kinds) || !labels(modules) ||
-      [...modules].sort().join('|') !== Object.keys(limits).sort().join('|') || !Array.isArray(states)) {
+      [...modules].sort().join('|') !== [...renderers].sort().join('|') || !Array.isArray(states)) {
     throw Error('Invalid firmware screen state manifest or revision mismatch');
   }
   const native = new Map();
@@ -60,7 +63,9 @@ function verifyReference(firmware, files) {
   if (native.size !== rows.size) throw Error('Native oracle and selector states differ');
 
   // These public state keys encode the model-specific register input family.
-  for (const [model, first] of [['elite', 0], ['pro', 2]]) {
+  if (currentWalk && !['home-playing','modal-clear-pattern'].every(id => rows.has(id)))
+    throw Error('Current firmware walk is missing its required Home/dialog states');
+  for (const [model, first] of (currentWalk ? [] : [['elite', 0], ['pro', 2]])) {
     for (const [suffix, family] of [['first-fault', first], ...['fault','post-crash','retry','safe'].map(x => ['safe-play-'+x, first+1])]) {
       const id = `guard-${model}-${suffix}`;
       const row = rows.get(id);
@@ -76,7 +81,10 @@ function verifyReference(firmware, files) {
     for (const [family, pending] of families) {
       // Same module/family dispatcher and first capture semantics as the browser.
       runFixture(wasm, family, (id, frame) => {
-        if (!pending.delete(id)) return;
+        if (!pending.delete(id)) {
+          if (currentWalk) throw Error('Current firmware produced an unexpected or duplicate state: '+id);
+          return;
+        }
         paintFrame(context, frame);
         for (let i = 0, j = 0; i < rgba.length; i += 4, j += 3) {
           rgb[j] = rgba[i]; rgb[j + 1] = rgba[i + 1]; rgb[j + 2] = rgba[i + 2];

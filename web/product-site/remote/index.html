@@ -7,15 +7,16 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../components/break-panel/panel.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bass-live-roll.css">
 </head>
 <body>
-<section id="workspace-error" role="alert" hidden><h1>Remote couldn’t open</h1><p>Reload to try again. Your saved draft files are unchanged.</p><button id="workspace-retry" class="btn" type="button">Reload Remote</button></section>
+<section id="workspace-error" role="alert" hidden><h1>Remote couldn’t open</h1><p>Reload to try again. Your saved project files are unchanged.</p><button id="workspace-retry" class="btn" type="button">Reload Remote</button></section>
 <header class="top">
 <div class="hdr">
 <a class="brand" href="../">DnBOX <small>REMOTE</small></a>
 <span class="project-name">Example project</span>
-<div class="pattern-readout"><strong id="pattern-no">P01</strong><i class="pattern-mark" aria-hidden="true"></i><span id="tempo">120 BPM</span></div>
-<span id="conn-state" class="conn-state">Not connected</span>
+<div class="pattern-readout"><strong id="pattern-no">P01</strong><i class="pattern-mark" aria-hidden="true"></i><span class="tempo-ctl" aria-label="Tempo"><span id="tempo" class="tempo-value">125 BPM</span><button type="button" class="tempo-btn" data-tempo="down" aria-label="Tempo down">−</button><button type="button" class="tempo-btn" data-tempo="up" aria-label="Tempo up">+</button><button type="button" class="tempo-btn tap" data-tempo="tap">TAP</button></span></div>
+<span id="conn-state" class="conn-state" data-session="disconnected">Disconnected</span>
 <div class="hdr-actions">
 <button id="connect" class="btn connect" type="button">Connect</button>
 </div>
@@ -29,14 +30,14 @@
 </nav>
 <div class="engines">
 <div class="engine-list">
-<button type="button" class="engine" data-engine="drum909" style="--engine:#ff9529"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3.9 8.85A4 4 0 1 1 6.1 8.85" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>909</span></button>
-<button type="button" class="engine" data-engine="drum808" style="--engine:#ff4841"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3.9 8.85A4 4 0 1 1 6.1 8.85" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>808</span></button>
-<button type="button" class="engine" data-engine="chicago" style="--engine:#82f05a" aria-pressed="true"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BASS A</span></button>
-<button type="button" class="engine" data-engine="miami" style="--engine:#46cdff"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BASS B</span></button>
-<button type="button" class="engine" data-engine="breaks" style="--engine:#d678ff"><svg viewBox="0 0 10 10" aria-hidden="true"><ellipse cx="5" cy="5" rx="4.2" ry="1.3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>BREAK</span></button>
+<button type="button" class="engine" data-engine="drum909" style="--engine:#ff9628"><i class="fw-lane" aria-hidden="true"></i><span>909</span></button>
+<button type="button" class="engine" data-engine="drum808" style="--engine:#ff4840"><i class="fw-lane" aria-hidden="true"></i><span>808</span></button>
+<button type="button" class="engine" data-engine="breaks" style="--engine:#d678ff"><i class="fw-lane" aria-hidden="true"></i><span>BREAK</span></button>
+<button type="button" class="engine" data-engine="chicago" style="--engine:#82f05a" aria-pressed="true"><i class="fw-lane" aria-hidden="true"></i><span>BASS A</span></button>
+<button type="button" class="engine" data-engine="miami" style="--engine:#46cdff"><i class="fw-lane" aria-hidden="true"></i><span>BASS B</span></button>
 </div>
 <strong id="part-title">CHICAGO / P01</strong>
-<select id="part" class="part" aria-label="Part" tabindex="-1"><option value="chicago">Bass A</option><option value="miami">Bass B</option><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option></select>
+<select id="part" class="part" aria-label="Part" tabindex="-1"><option value="drum909">909</option><option value="drum808">808</option><option value="breaks">BREAK</option><option value="chicago" selected>Bass A</option><option value="miami">Bass B</option></select>
 <div class="transport">
 <button id="play" class="btn" type="button">Play</button>
 <button id="stop" class="btn" type="button">Stop</button>
@@ -46,15 +47,9 @@
 <details class="overflow">
 <summary class="btn" aria-label="More actions">…</summary>
 <div class="overflow-list">
-<button id="review" class="btn" type="button">Review</button>
-<button id="draft-save" class="btn" type="button">Download draft</button>
-<label class="btn draft-open">Open draft<input id="draft-file" type="file" accept=".json,application/json"></label>
-<button id="emulator-start" class="btn" type="button">Start emulator</button>
-<button id="emulator-stop" class="btn" type="button">Stop emulator</button>
-<button id="apply" class="btn" type="button" disabled>Apply to instrument</button>
-<p id="firmware-safety" hidden></p>
-<div id="firmware-controls" hidden></div>
-<button class="btn" type="button" data-view="drums">Drums</button>
+<button id="review" class="btn" type="button">Changes</button>
+<button id="draft-save" class="btn" type="button">Save project</button>
+<label class="btn draft-open">Open project<input id="draft-file" type="file" accept=".json,application/json"></label>
 <button class="btn" type="button" data-view="locks">Motion</button>
 <button class="btn" type="button" data-view="song">Song</button>
 </div>
@@ -76,7 +71,7 @@
 <input id="zoom" type="range" min="1" max="4" step=".25" value="1" hidden aria-label="Zoom">
 </div>
 </header>
-<aside id="connection-result" aria-labelledby="connection-heading" hidden><h2 id="connection-heading">Connection</h2><p id="connection-message" role="status"></p><button type="button" id="close-connection">Return to draft</button></aside>
+<aside id="connection-result" aria-labelledby="connection-heading" hidden><h2 id="connection-heading">Connection</h2><p id="connection-message" role="status"></p><button type="button" id="close-connection">Close</button></aside>
 <main>
 <nav id="break-views" aria-label="BREAK editor" hidden><button type="button" data-break-view="slices" aria-pressed="true">Slices</button><button type="button" data-break-view="notes" aria-pressed="false">Notes</button></nav>
 <section id="roll-view">
@@ -103,8 +98,8 @@
 <section id="other-view" hidden></section>
 </main>
 <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>
-<dialog id="review-dialog"><form method="dialog"><h2>Local changes</h2><div id="changes"></div><button type="submit">Return</button></form></dialog>
-<dialog id="draft-dialog"><h2>Open draft</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Replace local draft</button></dialog>
+<dialog id="review-dialog"><form method="dialog"><h2>Changes</h2><div id="changes"></div><button type="submit">Return</button></form></dialog>
+<dialog id="draft-dialog"><h2>Open project</h2><p id="draft-preview"></p><button id="draft-cancel" type="button">Cancel</button><button id="draft-replace" type="button" disabled>Open</button></dialog>
 <script type="module" src="startup.mjs"></script>
 </body>
 </html>

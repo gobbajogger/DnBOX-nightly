@@ -1,6 +1,6 @@
 {
-  "firmware": "8f97fe7d2bbf4f878cd0061c657c13c6f4322ea6",
-  "kernel": "8f03c63dd3a7bc81058e78e1d6c2f8d032188620",
+  "firmware": "adf3eee64fcbfd9971fd402fd67ec6809c58251b",
+  "kernel": "b16d487dd6b6b9ffe1dddcddc99df7e45fed6f28",
   "previousFirmware": "06bd40c57cefcdf6c751b318b1cbaea0914fa8bb",
   "files": {
     "index.html": {
@@ -8,8 +8,8 @@
       "sha256": "f71232cecb99b66ef3ae8512f047e27bde4ff4a7a70c40c49614db0b7d6861df"
     },
     "kernel.wasm": {
-      "bytes": 1085724,
-      "sha256": "17f7c1160cc4ee9edf017db9dcbf58142d5cee4570d06c73790c6e38e570e8d1"
+      "bytes": 1131361,
+      "sha256": "92b81be4e2b8f8c59f34cdd94b7bb5cf28f2acf5f9350babb5ac5741c3729c65"
     },
     "native-session.mjs": {
       "bytes": 13837,
@@ -24,8 +24,8 @@
       "sha256": "f4348ebcbedc94495c60f6bcf93848567fc6a0d3d9961f08c81c613fab5d9966"
     },
     "runtime.json": {
-      "bytes": 275,
-      "sha256": "b384a6d1c2b98b93284e93f74ca3da01bfcd9339f15a4bb7fc666107ab8c0af4"
+      "bytes": 290,
+      "sha256": "1c0468e3d55b94fe9bb438a883f1bd97f4806f34e434b4db16605e0df6df286b"
     },
     "session-codec.mjs": {
       "bytes": 1982,

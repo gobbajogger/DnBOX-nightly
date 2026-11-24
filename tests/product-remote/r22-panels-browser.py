@@ -57,7 +57,8 @@ async def cases():
      await panels('connection', '#connection-result')
      await page.locator('#close-connection').click()
      await expect(page.locator('#connection-result')).to_be_hidden()
-     assert await page.evaluate('midiCalls') == 0
+     assert await page.evaluate('midiCalls') == 1, 'Connect asks Web MIDI once and nothing else touches a device'
+     await expect(page.locator('#conn-state')).to_have_text('Disconnected')
 
      async def fail_catalog(route):
       await route.fulfill(status=503, content_type='application/json', body='unavailable')

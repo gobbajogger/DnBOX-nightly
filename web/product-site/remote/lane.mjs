@@ -38,6 +38,8 @@ export function laneText(kind,n,base=n.note){
  if(kind==='pan') return formatPan(n.pan??PAN_CENTRE);
  return String(n.velocity);
 }
+// Firmware step defaults (fresh step): velocity 100, chance 100 %, pitch 0, pan centre.
+export function laneDefault(kind){return kind==='chance'?1:kind==='pitch'?0.5:kind==='pan'?fractionFromPan(PAN_CENTRE):(100-1)/126;}
 // Value at a pointer y inside the lane box (travel = height minus 20).
 export function laneP(y,top,height){const travel=Math.max(1,height-20);return clamp((top+height-10-y)/travel,0,1);}
 // The fader rail sits 7px right of the onset x. Rail x = onset x + 7.

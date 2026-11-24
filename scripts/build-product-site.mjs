@@ -158,6 +158,17 @@ export function buildProductSite({repoRoot=root,output=join(repoRoot,'.output/pr
     editions.push(['emu/previous/' + path.slice('emu/'.length), bytes]);
    }
   }
+  const metadata = JSON.parse(editions.find(([name])=>name==='emu/runtime.json')[1]);
+  if (metadata.midi_trace === 1) {
+   const name='projects/exchange/runtime-pin.json';
+   const i=inputs.findIndex(([path])=>path===name);
+   if(i<0)throw Error('Missing MIDI trace renderer fallback pin');
+   const compiled=new WebAssembly.Module(editions.find(([path])=>path==='emu/kernel.wasm')[1]);
+   const exported=new Set(WebAssembly.Module.exports(compiled).filter(x=>x.kind==='function').map(x=>x.name));
+   for(const fn of ['io','io_capacity','slot','start','render','events'])
+    if(!exported.has('web_trace_'+fn))throw Error('Missing native MIDI trace export: '+fn);
+   inputs[i]=[name,Buffer.from(JSON.stringify({schema:1,source:pin.firmware,...pin.files['kernel.wasm']})+'\n')];
+  }
   for(const [name,data] of editions){
    if(seen.has(name))throw Error('Native runtime output collision');seen.add(name);inputs.push([name,data]);
   }

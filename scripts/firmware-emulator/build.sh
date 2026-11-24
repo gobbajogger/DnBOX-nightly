@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: GPL-3.0-only
-# build.sh FIRMWARE_CHECKOUT PREVIOUS_RUNTIME OUTPUT_DIRECTORY
+# build.sh FIRMWARE_CHECKOUT PREVIOUS_RUNTIME OUTPUT_DIRECTORY [FIRMWARE_COMMIT]
 set -euo pipefail
 fw=8f97fe7d2bbf4f878cd0061c657c13c6f4322ea6
 here=$(cd "$(dirname "$0")" && pwd)
@@ -8,6 +8,10 @@ checkout=$(realpath "${1:?Firmware checkout required}")
 previous=$(realpath "${2:?Previous runtime directory required}")
 output=$(realpath -m "${3:?New output directory required}")
 zig=${ZIG:-zig}
+requested=${4:-$fw}
+[[ "$requested" =~ ^[a-f0-9]{40}$ ]] || { echo "Full firmware commit required" >&2; exit 2; }
+fw=$(git -C "$checkout" rev-parse --verify "$requested^{commit}")
+[[ "$fw" = "$requested" ]] || exit 2
 # The adapter sources must be committed: the runtime records their tree id.
 git -C "$here" diff --quiet HEAD -- . && test -z "$(git -C "$here" ls-files --others --exclude-standard -- .)"
 kernel_tree=$(git -C "$here" rev-parse HEAD:scripts/firmware-emulator)
@@ -18,7 +22,7 @@ trap 'rm -rf -- "$tmp"' EXIT
 mkdir -p "$tmp/src/web/emu" "$tmp/output/previous"
 cd "$tmp/src"
 # Extract only the pinned build inputs. Never modify the firmware checkout.
-git -C "$checkout" ls-tree -r "$fw" -- firmware/src host tools tests/host/original_build.sh \
+git -C "$checkout" ls-tree -r "$fw" -- firmware/src firmware/hal host tools tests/host/original_build.sh \
     experiments/original_synth experiments/wobble assets/fonts assets/909 assets/factory_banks assets/factory-breaks |
 while read -r mode type blob name; do
     test "$type" = blob
@@ -38,7 +42,7 @@ PY
 python3 tools/check_original_inputs.py --scope active
 sh host/build_host.sh --generate-only
 git apply "$here/web-hooks.patch"
-cp "$here"/{kernel.c,mix-transaction.h,sound-transaction.h,transaction-engine.c} web/emu/
+cp "$here"/{kernel.c,midi-trace.h,mix-transaction.h,sound-transaction.h,transaction-engine.c} web/emu/
 . tests/host/original_build.sh
 sources=${ORIGINAL_SOURCES/firmware\/src\/app\/engine.c/web\/emu\/transaction-engine.c}
 # Retain the full public firmware control surface of the previous runtime.
@@ -58,13 +62,14 @@ for (const [name,expected] of Object.entries(pin.files)) {
 const old=new WebAssembly.Module(fs.readFileSync(path.join(previous,'kernel.wasm')));
 const exports=WebAssembly.Module.exports(old).filter(e=>e.name.startsWith('web_'));
 // New Remote hooks (REMOTE-FW-PROTOCOL.md section 6) are added explicitly.
-const added=['web_remote_caps','web_sysex_buffer','web_sysex_out','web_sysex_dropped_count','web_sysex_in','web_sysex_out_take'];
+const added=['web_remote_caps','web_sysex_buffer','web_sysex_out','web_sysex_dropped_count','web_sysex_in','web_sysex_out_take','web_trace_io','web_trace_io_capacity','web_trace_slot','web_trace_start','web_trace_render','web_trace_events'];
 const names=[...new Set([...exports.map(e=>e.name),...added])];
 fs.writeFileSync('exports.txt',names.map(n=>'-Wl,--export='+n).join('\n')+'\n');
 JS
 mapfile -t exports < exports.txt
+fw_sha_bytes=$(python3 -c 'import sys; print("{" + ",".join(map(str, bytes.fromhex(sys.argv[1]))) + "}")' "$fw")
 "$zig" cc -target wasm32-wasi -mcpu=baseline -mexec-model=reactor -O2 -g0 -std=c99 \
-    -DX0X_HOST -DX0X_WEB -D_POSIX_C_SOURCE=200809L $ORIGINAL_FLAGS \
+    -DX0X_HOST -DX0X_WEB -D_POSIX_C_SOURCE=200809L "-DX0X_DNR3_GIT_SHA_BYTES=$fw_sha_bytes" $ORIGINAL_FLAGS \
     -Ifirmware/src -Ifirmware/src/dsp -Ibuild/gen web/emu/kernel.c $sources "${exports[@]}" \
     -Wl,-z,stack-size=1048576 -Wl,--initial-memory=33554432 -Wl,--strip-all -lm -o "$tmp/output/kernel.wasm"
 cp "$here"/{index.html,wasi.mjs,worklet.mjs} "$tmp/output/"
@@ -76,7 +81,7 @@ meta=json.loads((out/'previous/runtime.json').read_bytes())
 wasm=(out/'kernel.wasm').read_bytes()
 # kernel_source = git tree id of scripts/firmware-emulator (content address, survives squash merges).
 # firmware_source identifies its firmware.
-meta.update(firmware_source=sys.argv[2],kernel_source=sys.argv[3],wasm_bytes=len(wasm),wasm_sha256=hashlib.sha256(wasm).hexdigest())
+meta.update(midi_trace=1,firmware_source=sys.argv[2],kernel_source=sys.argv[3],wasm_bytes=len(wasm),wasm_sha256=hashlib.sha256(wasm).hexdigest())
 (out/'runtime.json').write_text(json.dumps(meta, separators=(',',':'))+'\n')
 PY
 mkdir -p "$(dirname "$output")"

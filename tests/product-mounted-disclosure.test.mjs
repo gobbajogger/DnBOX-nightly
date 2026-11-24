@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {mountExchange} from '../web/product-site/projects/exchange/panel.mjs';
-import {provider,approvedSources} from '../web/product-site/projects/exchange/provider.mjs';
+import {loadTraceProvider} from '../web/product-site/projects/exchange/provider.mjs';
+const {provider,approvedSources}=await loadTraceProvider(async()=>({ok:false}));
 class Node {
  constructor(tag=''){this.tag=tag;this.children=[];this.textContent='';this.disabled=false;this.hidden=false;}
  append(n){this.children.push(n);}

@@ -1,0 +1,18 @@
+{
+  "firmware": "adf3eee64fcbfd9971fd402fd67ec6809c58251b",
+  "profile": "current-walk",
+  "files": {
+    "fwui.wasm": {
+      "bytes": 1246698,
+      "sha256": "749b41f9ce6064617317e188317ba7150e59c78d53fc1ba5ddc849d858edd580"
+    },
+    "states.json": {
+      "bytes": 139596,
+      "sha256": "f0cbc4d5f42ee254914431582b78539c49bd8a413d1d5756fe3b2024366cd5c1"
+    },
+    "native-rgb.tsv": {
+      "bytes": 151618,
+      "sha256": "206ded68043fe5b8b218aec3f7fbde9b35d17255c82cd4f6feb08fbbff17be36"
+    }
+  }
+}

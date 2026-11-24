@@ -1,6 +1,16 @@
 --- a/host/x0x_host.c
 +++ b/host/x0x_host.c
-@@ -568,6 +568,9 @@
+@@ -167,6 +167,9 @@
+ void plat_midi_out(uint32_t pkt)
+ {
+     midi_out_count++;
++#ifdef X0X_WEB
++    web_trace_note(pkt);
++#endif
+     if ((((pkt >> 8) & 0xF0) == 0x90) && ((pkt >> 24) & 0x7F))
+         note_ons++;                                  /* the notes the sequence sent (expect noteons) */
+     if (((pkt >> 8) & 0xFF) >= 0xFA && ((pkt >> 8) & 0xFF) <= 0xFC)
+@@ -568,6 +571,9 @@
                  pr0[k] = eng_prof[k];
              engine_render(blk, 256);
              engine_volume(blk, 256);
