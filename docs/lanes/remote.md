@@ -13,6 +13,7 @@ Owner: Classic Remote (sole lane writer; Dot Remote frozen). Branch: `lane/remot
   - tests/product-remote/native-mix-browser.py (Mix → Emulator source)
   - tests/product-remote/native-sound-browser.py (Sound → Emulator source)
 - Test changes, not deletions: tests/visual/visual_gate.py compares header pixels with page-01 on rows 0..100 (header + tabs); the engine row is asserted structurally (order 909, 808, BREAK, BASS A, BASS B), because page-01 predates the owner's BREAK-3rd order. tests/product-remote/unbound-browser.py and tests/routes-844-browser.py no longer open the removed overflow Drums button; the drum grid is walked as Sequence on 909/808. r22-panels expects one Web MIDI request from Connect and a visible failure note.
+- tests/product-presets/test-retired-name-scan.mjs leaves out the generated firmware-engines.json from the git grep, because several firmware Synth One preset names contain the retired word. A second test scans that file, skipping only those preset names.
 - Steps 17–64 of drum pages 2–4 are sent over DNR3 but kept in Remote memory only (the project file's drum model holds one bar).
 
 ## Delivered footer correction and current native scope
