@@ -64,6 +64,8 @@ async def run(browser, packages):
     await page.locator('#devagree').check()
     await page.locator('#go').click()
     await expect(page.locator('#inconfirmtext')).to_contain_text('require an atomic sample snapshot')
+    await expect(page.locator('#inconfirmtext')).to_contain_text('Selected samples are download-only')
+    await expect(page.locator('#inconfirmtext')).to_contain_text('stop before restart')
     await page.locator('#inconfirmno').click()
     assert await page.evaluate('midiCalls===0')
     corrupt = True
@@ -81,6 +83,7 @@ async def run(browser, packages):
     await expect(page.locator('#stockgo')).to_be_disabled()
     choices = page.locator('#starting-breaks')
     await expect(choices.locator('[data-action=play]')).to_have_count(5)
+    await expect(choices.locator('#breaks-note')).to_contain_text('does not write samples after restart')
     await choices.locator('[data-action=none]').click()
     for button in await choices.locator('[data-action=play]').all():
         await button.click()

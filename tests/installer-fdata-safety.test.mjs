@@ -80,7 +80,7 @@ test('exact valid factory-data readback is needed before reporting verified',asy
   assert.equal(up.verified,mode==='empty');
  }
 });
-test('unretained archive and dirty snapshot stop; retained archive plus unchanged snapshot can proceed',async()=>{
+test('unretained, dirty or retained at-risk archive never enters OTA',async()=>{
  for(const mode of ['occupied-unretained','occupied-dirty','occupied-retained']){
   const state=fixture(mode);
   const saveEvents=[];
@@ -94,10 +94,10 @@ test('unretained archive and dirty snapshot stop; retained archive plus unchange
   state.up.finishApplication=async(...args)=>{await realFinish(...args);throw Error('post-write test boundary');};
   const install=installKeepingSlots(state.up,image,product,'smk',{factoryData:true,
    saveStrict:(file,name)=>{saveEvents.push([file.length,name]);if(mode==='occupied-dirty')state.snapshot.changed();return mode!=='occupied-unretained';}});
-  await assert.rejects(install,mode==='occupied-retained'?/post-write test boundary/:e=>e.code==='slotbackup'||e.code==='slotbackupconfirm');
+  await assert.rejects(install,e=>['sameunit','slotbackup','slotbackupconfirm'].includes(e.code));
   assert.equal(saveEvents.length,1);
-  assert.equal(state.trace.some(x=>x.join()===UPGRADE.join()),mode==='occupied-retained');
-  assert.equal(state.snapshot.commits,mode==='occupied-retained'?1:0);
+  assert.equal(state.trace.some(x=>x.join()===UPGRADE.join()),false);
+  assert.equal(state.snapshot.commits,0);
  }
 });
 test('strict slot bounds reject a package that overlaps reserved FDATA',async()=>{
@@ -136,20 +136,7 @@ test('retention UI checks the actual saved bytes instead of accepting a download
  cancel.onclick();assert.equal(await cancelled,false);assert.equal(revoke,2);
 });
 
-test('fresh starter permission is established under the snapshot before OTA, never from reboot alone',async()=>{
-  for(const mode of ['fresh-ok','fresh-dirty-header','fresh-wrong-address','no-snapshot','bad-readback']){
-    const {up,trace,snapshot}=fixture(mode), opts={factoryData:true,startingBreaks:true,sameBreaks:()=>true};
-    const operation=installKeepingSlots(up,image,product,'smk',opts);
-    if(['fresh-wrong-address','no-snapshot','bad-readback'].includes(mode)){
-      await assert.rejects(operation);
-      if(mode!=='bad-readback')assert.equal(trace.some(f=>f.join()===UPGRADE.join()),false);
-      continue;
-    }
-    const got=await operation;
-    assert.equal(got.freshBreaks,mode==='fresh-ok');
-    assert.deepEqual(snapshot.operations,[1,3]);
-    const read=trace.findIndex(f=>f[4]===16), upgrade=trace.findIndex(f=>f.join()===UPGRADE.join());
-    assert.ok(read>=0 && read<upgrade,mode);
-    assert.ok(trace.findIndex(f=>f[4]===52)>upgrade,mode);
-  }
+test('combined firmware transaction cannot dispatch automatic starter or restore writes',()=>{
+  assert.doesNotMatch(html,/await (writeStartingBreaks|restoreMapped)\(/);
+  assert.match(html,/firmware installer does not write samples after restart/);
 });

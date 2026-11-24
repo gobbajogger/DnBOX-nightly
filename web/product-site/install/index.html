@@ -40,7 +40,7 @@
       <section class="step step-breaks" id="starting-breaks" aria-labelledby="breaks-title">
         <h2 class="step-kicker" id="breaks-title"><span class="no">02</span> Make it yours</h2>
         <div id="sample-picker"></div><p id="samples-status" role="status" aria-live="polite"></p>
-        <p class="breaks-note" id="breaks-note">Chosen breaks go onto your keyboard with the firmware. None installs the firmware only.</p>
+        <p class="breaks-note" id="breaks-note">Preview and download your choices here. The firmware installer does not write samples after restart. To add the archive later, open Import samples and explicitly connect to your keyboard.</p>
         <div class="breaks-actions"><button type="button" id="download-breaks" disabled>Download chosen breaks</button></div><p id="download-status" role="status" aria-live="polite"></p>
       </section>
       <section class="step step-go" aria-labelledby="install-title">
@@ -1831,7 +1831,7 @@ async function cancelInstallSnapshot(link, snapshot) {
 async function installKeepingSlots(up, image, product, board, hooks) {
   const h = Object.assign({ step() {}, say() {}, save() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
   const fail = (code, msg, detail = "") => Object.assign(new Error(msg), { code, detail });
-  const strict = h.factoryData === true, protectedInstall = strict || h.startingBreaks === true;
+  const strict = h.factoryData === true, protectedInstall = strict;
   const expected = strict ? slotPackageFiles(image)?.["fdata.bin"] : null;
   const newMap = packageSlotMap(image, board, !protectedInstall);
   if (strict && (!expected || expected.length !== 0xF000 ||
@@ -1841,7 +1841,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       ]))) throw fail("fdata", "Could not verify the protected factory-data and sample layout.");
   if (protectedInstall && !newMap.length)
     throw fail("slotbackup", "The selected package has no verified sample map. No update was started.");
-  let move = null, snapshot = null, unprotected = false, freshBreaks = false;
+  let snapshot = null, unprotected = false, restoreRequired = false;
   const dev = await up.find((id) => !/^ota-/i.test(id.model));
   if (!dev) throw fail("notfound", "No running keyboard was found for sample preflight; no update was started.");
   if (!h.sameKeyboard(dev.id.model, product.split("_")[0])) {
@@ -1866,18 +1866,11 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       if (protectedInstall && !layout) throw fail("slotbackup", "Sample layout could not be verified. No update was started.");
       if (layout && !snapshot)
         throw fail("slotbackup", "Atomic sample backup unsupported; continuing without backup.");
-      if (h.startingBreaks && layout?.ext && layout.slots.every(sl => !sl.nz && !sl.used)) {
-        // Prove a fresh starting state under the OTA snapshot, not just a blank new map after reboot.
-        freshBreaks = true;
-        for (let k = 0; k < layout.count; k++) {
-          const header = await readSlotBytes(dev.link, k, 0, SLOT_HDR_LEN, undefined, true);
-          if (header.length !== SLOT_HDR_LEN || header.some(byte => byte !== 0xff)) { freshBreaks = false; break; }
-        }
-      }
       if (layout && layout.slots.some((sl) => sl.nz)) {
         const oldMap = flashMap(layout, board);
         const risk = atRisk(layout, oldMap, newMap);
         if (risk.length) {
+          restoreRequired = true;
           h.say("slotsave", risk.map((k) => k + 1).join(", "));
           let saved;
           try {
@@ -1895,11 +1888,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
           catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
           if (retained !== true)
             throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
-          // SMP_INFO can change while the backup is read. Use the exact verified
-          // snapshot for preservation, just as the Python SlotMove.backup does.
-          const savedMap = flashMap(saved.layout, board);
-          move = { risk: atRisk(saved.layout, savedMap, newMap), oldMap: savedMap, newMap,
-            layout: saved.layout, images: saved.images, name: st.name, todo: [], skipped: [] };
+          throw fail("sameunit", `No update was started. Keep ${st.name}. This update would require sample recovery, but the browser cannot verify which physical keyboard returns after restart. Export or relocate the affected samples on the connected keyboard before trying again.`);
         }
       }
     } catch (e) {
@@ -1908,14 +1897,12 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       // independently by Updater.install() and admitted().
       await cancelInstallSnapshot(dev.link, snapshot);
       snapshot = null;
-      if (protectedInstall) throw e;
-      move = null; // No verified recovery archive exists.
+      if (protectedInstall || restoreRequired) throw e;
       unprotected = true;
       h.say("slotunprotectedwarning", e?.message || String(e));
     } finally { dev.link.close(); }
   }
-  let choiceLocked = false;
-  const admitted = () => h.admitted() && (choiceLocked || !h.startingBreaks || !!h.sameBreaks?.());
+  const admitted = () => h.admitted();
   if (!admitted()) throw fail("unapproved", "The selected package or breaks changed. No update was started.");
   const ran = await up.install(image, product, h.step,
     snapshot ? async (current) => {
@@ -1923,35 +1910,11 @@ async function installKeepingSlots(up, image, product, board, hooks) {
           current.link.input !== dev.link.input || current.link.output !== dev.link.output))
         throw fail("slotbackup", "The keyboard connection changed before the snapshot was committed.");
       await commitInstallSnapshot(current.link, snapshot, admitted);
-      choiceLocked = true;
     } : null, admitted,
     strict ? link => verifyFactoryData(link, expected) : null);
-  if (!move || !move.newMap.length) return { product: ran, move, unprotected, freshBreaks };
-  h.say("slotback");
-  const verified = up.application;
-  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
-  if (!back) throw fail("slots", "the keyboard did not answer after the install", move.name);
-  try {
-    const guard = () => up.assertApplicationTarget(back, product, verified, admitted);
-    guard();
-    if (strict) await verifyFactoryData(back.link, expected);
-    const layout = await readSlotLayout(back.link, 3000, 3, protectedInstall);
-    if (protectedInstall && !sameSlotMap(layout, newMap, board))
-      throw fail("slots", "The new sample map differs from the package. No samples were restored.", move.name);
-    guard();
-    let plan = planMigration(move.images, move.risk, move.oldMap, layout, flashMap(layout, board));
-    plan = guardMigrationLoopMenu(move.layout, move.images, move.risk, move.oldMap, layout,
-      flashMap(layout, board), plan.todo, plan.skipped);
-    move.todo = plan.todo;
-    move.skipped = plan.skipped;
-    const total = plan.todo.length || 1;
-    if (plan.todo.length)
-      await restoreMapped(back.link, plan.todo, move.images, (j, d, n) => h.progress(d / n / total),
-        guard, protectedInstall ? newMap : null);
-  } catch (e) {
-    throw fail("slots", e.message, move.name);
-  } finally { back.link.close(); }
-  return { product: ran, move, unprotected, freshBreaks };
+  // Fresh application feedback is not proof of physical identity across reset.
+  // This workflow has no production post-reboot sample write path.
+  return { product: ran, move: null, unprotected, freshBreaks: false };
 }
 
 const $ = (id) => document.getElementById(id);
@@ -3125,8 +3088,8 @@ function confirmWrite(product, strict = false, breakIds = null) {
   confirmPending = true;
   const from = lastId ? lastId.text : "(not connected yet — Connect first if you can)";
   const box = $("inconfirm");
-  const breaks = breakIds === null ? "" : t("confirmbreaks") + (breakIds.length ? startingBreakNames(breakIds).join(", ") + t("confirmbreaksif") : t("confirmbreaksnone"));
-  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + (strict ? "\n\nThe test build is not hardware qualified. The browser will require an atomic sample snapshot and verify any required recovery backup before starting. Keep USB connected." : t("confirmrisk"));
+  const breaks = breakIds?.length ? "\n\nSelected samples are download-only. No samples will be added during this firmware update." : "";
+  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + (strict ? "\n\nThe test build is not hardware qualified. The browser will require an atomic sample snapshot and verify any required recovery backup before starting. Updates that would need automatic sample recovery stop before restart. Keep USB connected." : t("confirmrisk"));
   box.hidden = false; box.scrollIntoView && box.scrollIntoView({ block: "center" });
   return new Promise((resolve) => {
     const done = (v) => { confirmPending = false; box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
@@ -3261,36 +3224,6 @@ async function saveSlotBackup(file, name) {
 
 const startingBreaks = () => globalThis.dnboxStartingBreaks || null;
 const chosenStartingBreaks = () => startingBreaks()?.selectedIds() ?? [];
-const startingBreakNames = (ids) => startingBreaks()?.names(ids) ?? ids;
-
-// After the firmware: write the chosen starting breaks with the slot writer, the way
-// fm1_install.py --fresh-install --default-breaks does (only into a keyboard with no samples; read back).
-// The firmware is already installed here, so a failure is reported, never thrown.
-async function writeStartingBreaks(up, images, ids, admitted = () => true, expectedMap = null) {
-  if (!up.verified || !up.application || !admitted()) return;
-  sayK("breakswrite");
-  const verified = up.application;
-  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
-  if (!back) { sayK("breaksfailed", t("breaksnoanswer")); return; }
-  try {
-    const guard = () => up.assertApplicationTarget(back, verified.product, verified, admitted);
-    guard();
-    const io = { layout: async () => {
-      const layout = await readSlotLayout(back.link, 3000, 3, true);
-      if (!expectedMap || !sameSlotMap(layout, expectedMap, "smk"))
-        throw new Error("The verified package and actual sample map differ.");
-      return layout;
-    }, readBytes: (k, off, n) => readSlotBytes(back.link, k, off, n, undefined, true),
-      writeSlot: (k, image, onPart) => writeSlotImage(back.link, k, image, onPart, guard) };
-    const r = await startingBreaks().fill(io, images, (d, n) => { $("bar").value = Math.min(100, d / n * 100); });
-    log("starting breaks: " + (r.filled.length ? "slot(s) " + r.filled.join(", ") + " written and read back (" + ids.join(", ") + ")" : "not written (" + r.reason + ")"));
-    if (r.filled.length) sayK("breaksdone", startingBreakNames(ids).join(", "));
-    else sayK(r.reason === "notblank" ? "breakskept" : "breaksnofit");
-  } catch (e) {
-    sayK("breaksfailed", e && e.message);
-    log(String(e && e.stack || e));
-  } finally { back.link.close(); }
-}
 
 // The download click alone is not retention. Require the specific saved
 // file back, byte-for-byte, before consuming the pending atomic snapshot.
@@ -3372,7 +3305,7 @@ async function run(img, product, opts = {}) {
     };
     const ota = await up.find((id) => /^ota-/i.test(id.model));
     if (opts.admitted && !opts.admitted()) { ota?.link.close(); throw new Error(t("unapproved")); }
-    if (ota && (opts.factoryData || opts.breakImages?.size)) {
+    if (ota && opts.factoryData) {
       ota.link.close();
       throw new Error("An atomic sample snapshot cannot start in update mode. No browser update was started; use the matching recovery instructions and retain your backup.");
     }
@@ -3397,22 +3330,10 @@ async function run(img, product, opts = {}) {
         progress: (f) => { $("bar").value = Math.min(up.verified ? 100 : 99, f * 100); },
         save: (file, name) => saveSlotBackup(file, name),
         saveStrict: saveVerifiedSlotBackup, factoryData: opts.factoryData === true,
-        startingBreaks: !!opts.breakImages?.size, sameBreaks: opts.sameBreaks,
       });
       unprotected = r.unprotected === true;
       if (opts.factoryData && !r.move) { $("bar").value = 100; sayK("done"); }
-      if (r.move && !r.move.newMap.length) sayK("slotstock", r.move.name);
-      else if (r.move) {
-        $("bar").value = 100;
-        if (r.move.skipped.length) {
-          sayK("slotspartial", r.move.skipped.join("; ") + ` (${r.move.name})`);
-        } else sayK("slotsdone");
-      }
-      if (opts.breakImages?.size) {
-        if (r.freshBreaks && up.verified) await writeStartingBreaks(up, opts.breakImages, opts.breakIds,
-          () => opts.admitted() && opts.sameBreaks(), packageSlotMap(img, board, false));
-        else sayK("breakskept");
-      }
+
     }
     await scan(true);
     // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
@@ -3453,18 +3374,9 @@ $("go").addEventListener("click", async () => {
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
   const confirmProduct = selectedProduct, confirmSerial = loadSerial, breakIds = chosenStartingBreaks();
-  const sameBreaks = () => chosenStartingBreaks().join() === breakIds.join();
   const factoryData = !!slotPackageFiles(image)?.["fdata.bin"];
   if (!(await confirmWrite(selectedProduct, factoryData, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
-  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection() ||
-      !sameBreaks()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
-  // Fetch and verify the chosen breaks before anything is written.
-  let breakImages = new Map();
-  if (breakIds.length) {
-    try { breakImages = await startingBreaks().load(breakIds); }
-    catch (e) { installBlocked(t("breaksunavailable")); log("starting breaks: " + (e && e.message)); return; }
-    if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !sameBreaks()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
-  }
+  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
   const { version: ver, pkg } = currentSelection();
   const selectedImage = image, product = selectedProduct, controller = ctl, serial = loadSerial;
   $("go").disabled = true;
@@ -3491,9 +3403,9 @@ $("go").addEventListener("click", async () => {
   if (!bundled && ctl) {
     try { img = insertCtl(image, ctl); } catch (e) { sayK("ctlbad", e.message); updateInstallGate(); return; }
   }
-  if (!$("devagree").checked || !sameBreaks()) { updateInstallGate(); return; }
+  if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, factoryData, breakImages, breakIds, sameBreaks, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, factoryData, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
   } finally { preparingInstall = false; }

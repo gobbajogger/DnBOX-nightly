@@ -46,7 +46,7 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
   const packageBytes = logicalImage(makePackage(model, {slotMap: newMap, extraFiles: protectedInstall ? [[103, 'fdata.bin', fdata]] : []}));
   const oldFlash = oldMap.map(([, size]) => Buffer.alloc(size, 255));
   const newFlash = newMap.map(([, size]) => Buffer.alloc(size, 255));
-  if (mode !== 'legacy-normal') oldFlash[1].set(sampleImage);
+  if (!['legacy-normal','empty','empty-wrong-marker','empty-other-port','empty-dirty'].includes(mode)) oldFlash[1].set(sampleImage);
   const trace = [];
   let approved = true, oldInfoCount = 0, applicationCount = 0, findCount = 0, restored = false;
   let up;
@@ -68,7 +68,7 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
           const drift = (phase === 'old' && ++oldInfoCount === 2 && mode === 'backup-map-drift') ||
             (phase === 'restore' && (mode === 'restore-map' || (mode === 'restore-after-map' && restored)));
           const chosenMap = drift ? [map[0], [0xE2000, 0x8000], map[2]] : map;
-          bytes = slotInfo(chosenMap, (phase === 'old' && mode !== 'legacy-normal') || restored ? [null, sampleImage, null] : [], !legacy);
+          bytes = slotInfo(chosenMap, (phase === 'old' && !['legacy-normal','empty','empty-wrong-marker','empty-other-port','empty-dirty'].includes(mode)) || restored ? [null, sampleImage, null] : [], !legacy);
         } else if (cmd === 16) {
           const offset = a[1] | a[2] << 7 | a[3] << 14;
           const packed = [...pack78(flash[a[0]].subarray(offset, offset + a[4] * 2))];
@@ -80,7 +80,7 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
           bytes = [...echo, ...packed];
         } else if (cmd === 52) {
           bytes = [1, ...fdataHeader];
-          if (phase === 'restore' && mode === 'restore-factory-marker') bytes[1] ^= 1;
+          if (phase === 'app' && mode === 'empty-wrong-marker') bytes[1] ^= 1;
         } else if (cmd === 11) {
           flash[a[0]].fill(255);
           bytes = [a[0], 0];
@@ -118,7 +118,8 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
   select(old);
   up = new Updater(access);
   up.find = async () => {
-    if (++findCount === 2 && mode === 'precommit-other-port') {
+    if (++findCount === 2 && mode === 'empty-dirty') snapshot.changed();
+    if (findCount === 2 && mode === 'empty-other-port') {
       const other = endpoint('old');
       return select(other);
     }
@@ -155,32 +156,40 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
   return {install, snapshot, trace, retained, newFlash};
 }
 
-for (const model of ['elite', 'pro']) {
-  test(model + ' native SMP_READ shape supports multi-chunk header, odd final payload, and protected restore', async () => {
-    const f = fixture(model, 'normal');
-    const result = await f.install();
-    assert.deepEqual(JSON.parse(JSON.stringify(result.move.todo)), [{k: 1, j: 1}]);
-    assert.equal(f.snapshot.commits, 1);
-    assert.equal(f.retained.length, 1);
-    assert.deepEqual(f.newFlash[1].subarray(0, sampleImage.length), sampleImage);
-    for (const phase of ['old', 'restore']) {
-      const reads = f.trace.filter(t => t.phase === phase && t.cmd === 16);
-      assert.equal(reads.length, 5);
-      assert.deepEqual(Array.from(reads.at(-1).a), [1, 96, 5, 0, 4]); // 736 offset, last seven bytes rounded to four pairs
-    }
+for (const model of ['elite','pro']) {
+  test(model + ' retains exact addressed backup, but blocks any update that could need restore',async()=>{
+    const f=fixture(model,'normal');
+    await assert.rejects(f.install,e=>e.code==='sameunit'&&/No update was started/.test(e.message));
+    assert.equal(f.snapshot.commits,0);
+    assert.equal(f.retained.length,1);
+    assert.ok(!f.trace.some(t=>[11,12,13,14,52].includes(t.cmd)||t.frame.join()===UPGRADE.join()));
+    const reads=f.trace.filter(t=>t.phase==='old'&&t.cmd===16);
+    assert.equal(reads.length,5);
+    assert.deepEqual(Array.from(reads.at(-1).a),[1,96,5,0,4]);
+  });
+  test(model + ' no-risk install retains atomic snapshot and exact app marker readback, no sample writes',async()=>{
+    const f=fixture(model,'empty');
+    assert.equal((await f.install()).move,null);
+    assert.equal(f.snapshot.commits,1);
+    assert.equal(f.retained.length,0);
+    assert.ok(f.trace.some(t=>t.phase==='app'&&t.cmd===52));
+    assert.ok(!f.trace.some(t=>[11,12,13,14].includes(t.cmd)));
+    const bad=fixture(model,'empty-wrong-marker');
+    await assert.rejects(bad.install,/factory|bank/i);
+    assert.ok(!bad.trace.some(t=>[11,12,13,14].includes(t.cmd)));
   });
 }
 
 for (const mode of ['preflight-legacy', 'backup-map-drift', 'backup-header-slot', 'backup-data-address',
-  'backup-short', 'backup-malformed-frame', 'retention-denied', 'snapshot-dirty', 'precommit-other-port']) {
+  'backup-short', 'backup-malformed-frame', 'retention-denied', 'empty-dirty', 'empty-other-port']) {
   test(mode + ' stops before OTA or sample writes', async () => {
     const f = fixture('pro', mode);
     const errors = {
       'preflight-legacy': /extended sample layout/, 'backup-map-drift': /layout changed/,
       'backup-header-slot': /wrong readback address/, 'backup-data-address': /wrong readback address/,
       'backup-short': /malformed readback data/, 'backup-malformed-frame': /framing/,
-      'retention-denied': /confirm saving/, 'snapshot-dirty': /samples changed/,
-      'precommit-other-port': /connection changed/,
+      'retention-denied': /confirm saving/, 'empty-dirty': /samples changed/,
+      'empty-other-port': /connection changed/,
     };
     await assert.rejects(f.install, errors[mode]);
     assert.equal(f.snapshot.commits, 0);
@@ -188,32 +197,13 @@ for (const mode of ['preflight-legacy', 'backup-map-drift', 'backup-header-slot'
   });
 }
 
-for (const mode of ['restore-other-version', 'restore-other-port', 'restore-selection',
-  'restore-legacy', 'restore-map', 'restore-factory-marker', 'restore-port-reopened']) {
-  test(mode + ' keeps the verified backup and stops before sample writes', async () => {
-    const f = fixture('elite', mode);
-    await assert.rejects(f.install, error => error.code === 'slots' && /x0xslots/.test(error.detail));
-    assert.equal(f.retained.length, 1);
-    assert.equal(f.snapshot.commits, 1);
-    assert.ok(!f.trace.some(t => [11, 12, 13, 14].includes(t.cmd)));
-  });
-}
-
-for (const [mode, reason] of [
-  ['restore-data-address', /wrong readback address/],
-  ['restore-after-map', /map changed during restoration/],
-  ['restore-selection-between-writes', /selection changed/],
-]) {
-  test(mode + ' cannot report a verified restore', async () => {
-    const f = fixture('pro', mode);
-    await assert.rejects(f.install, error => error.code === 'slots' &&
-      /x0xslots/.test(error.detail) && reason.test(error.message));
-    assert.equal(f.retained.length, 1);
-    if (mode === 'restore-selection-between-writes')
-      assert.deepEqual(f.trace.filter(t => [11, 12, 13, 14].includes(t.cmd)).map(t => t.cmd), [11]);
-  });
-}
-
+test('indistinguishable post-reset substitution cannot be handed the saved sample',async()=>{
+    const f=fixture('pro','restore-other-port');
+    await assert.rejects(f.install,e=>e.code==='sameunit');
+    assert.equal(f.retained.length,1);
+    assert.equal(f.snapshot.commits,0);
+    assert.ok(!f.trace.some(t=>[11,12,13,14,52].includes(t.cmd)||t.frame.join()===UPGRADE.join()));
+});
 
 test('legacy non-protected install can use the legacy slot layout', async () => {
   const f = fixture('pro', 'legacy-normal', false);
@@ -263,8 +253,8 @@ test('the real backup reader and retention dialog block COMMIT until the exact d
     } else {
       input.files = [{size: bytes.length, arrayBuffer: async () => bytes.buffer}];
       await input.onchange();
-      await operation;
-      assert.equal(f.snapshot.commits, 1);
+      await assert.rejects(operation, error => error.code === "sameunit");
+      assert.equal(f.snapshot.commits, 0);
     }
   }
 });
