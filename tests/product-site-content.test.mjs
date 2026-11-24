@@ -116,7 +116,9 @@ test('published release records, backup workflows and history bookmarks survive 
 
 test('Loopy clip mode names DnBOX when returning from the host grid', () => {
   const instruction = 'return to normal DnBOX operation with KNOB BANK';
-  for (const path of ['docs/install/index.html', 'web/product-site/install/index.html']) {
+  // The published installer carries no feature explainers (user U674); the
+  // Loopy setup copy stays in the preview installer and the manual.
+  for (const path of ['docs/install/index.html']) {
     const html = readFileSync(new URL(path, root), 'utf8');
     const clipMode = html.match(/<li><b>Loopy clip mode:<\/b>([^<]*)<\/li>/)?.[1];
     assert.ok(clipMode?.includes(instruction), path + ' must name DnBOX in the return instruction');

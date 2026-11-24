@@ -46,9 +46,17 @@ const ALLOWED = [
   {
     id: 'slot-map-port-comment',
     reason: 'Source documents the 9fde4dbe slot-map port so a later render cannot drop it; live has the same pkHasSlotMap logic without this comment.',
-    renderOnly: ['  // Port of live gh-pages 9fde4dbe so a later site render cannot drop 0.0.25 packages.'],
+    renderOnly: ['  // Port of live gh-pages 9fde4dbe so a later site render cannot drop 0.0.25 packages.',
+      '    // Slot 2 shortened by the Synth One factory pack (FL_FDATA_SIZE 0xF000).',
+      '    [[0xC2000, 0x14000], [0xD6000, 0xF000], [0xB3000, 0x8000]],'],
     liveOnly: [],
   },
+  // 0.0.27 FDATA admission (gh-pages 130b93dd): ported from tools/package_nightly.py
+  // at firmware 73749f55; covered by tests/fdata-package-admission.test.mjs.
+  { id: 'fdata-optional-regions', reason: 'Optional xdata/fittab/fdata region table and S1PK factory-pack check for 0.0.27 packages.', hunk_sha256: '195b5705d6faa03b2d7aca8090c23040c636737f675b746219296c4da87b79f8' },
+  { id: 'fdata-file-count', reason: 'Strict NIGHTLY packages may carry 2 to 5 files; optional regions are bounds- and alignment-checked.', hunk_sha256: 'd9bc66732ef3d5de32301379f692c904d019a8f90f4a67f2cc3d61a26ef5bbe5' },
+  { id: 'fdata-slot-map', reason: 'A package with fdata is admitted only with the reserved slot-2 map.', hunk_sha256: '535d2061273e8dc779e9fcf93c4ff4e645f64c7081381f8e562d47bd129c44ab' },
+  { id: 'package-version-0.0.27', reason: 'package-version-assignments.json assigns 0.0.27 to nightly-73749f55-dev (gh-pages 133dd11c).', hunk_sha256: '4a95a17487a99c110af041283741393316584a30564b1fa6b06384eed111304d' },
   {
     // Adjacent comment + body are one unified-diff hunk.
     id: 'starry-alias-keyboardModel',

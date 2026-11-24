@@ -8,7 +8,9 @@ import {applyHardwarePublication} from '../scripts/hardware-publication.mjs';
 const read = path => readFileSync(new URL('../web/product-site/' + path, import.meta.url));
 const seed = JSON.parse(read('hardware-tests.json'));
 const source = JSON.parse(read('versions.json'));
-const current = source.versions[0], fallback = source.versions[1];
+// A newer test build may be listed above the owner-tested latest release.
+const latestAt = source.versions.findIndex(row => row.version === source.latest);
+const current = source.versions[latestAt], fallback = source.versions[latestAt + 1];
 const rawStatus = JSON.parse(read('build-status.json'));
 
 test('owner records bind version, firmware, model, package and controller separately', () => {

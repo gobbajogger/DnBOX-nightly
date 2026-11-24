@@ -17,7 +17,7 @@ async function initialize(){
   const staging=document.createElement('div');
   const candidate=await mountPreparedChoices(staging,{contractBytes,contractSha256:SAMPLE_CONTRACT_SHA256,initialSelectedIds:savedSelection,
    previewAvailable:true,...createStartingBreakPreview(),
-   onSelection:s=>{if(own!==generation||suspended||disposed)return;savedSelection=[...s.selectedIds];download?.refresh();try{localStorage.setItem(SELECTION_KEY,JSON.stringify(savedSelection));}catch{}if($('samples-status')) $('samples-status').textContent='Listen, choose, then download your starting breaks.';}});
+   onSelection:s=>{if(own!==generation||suspended||disposed)return;savedSelection=[...s.selectedIds];download?.refresh();try{localStorage.setItem(SELECTION_KEY,JSON.stringify(savedSelection));}catch{}if($('samples-status')) $('samples-status').textContent='';}});
   if(own!==generation||suspended||disposed){candidate.destroy();return;}
   panel?.destroy();panel=candidate;$('sample-picker').replaceChildren(staging);
   download?.destroy();if($('download-breaks'))download=bindStartingBreakExport($('download-breaks'),{status:$('download-status'),getSelectedIds:()=>panel?.selectedIds()??[]});
