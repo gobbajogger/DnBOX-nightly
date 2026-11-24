@@ -289,13 +289,13 @@
     },
     {
       "path": "install.mjs",
-      "bytes": 2896,
-      "sha256": "fd91de08ec568170320cb81cdc25b93fc76531bccaa85731171ab95c4028b84c"
+      "bytes": 2845,
+      "sha256": "6c4752e6c1094b8bca95f7cbb8d5eae6599705a01e1e60c0c0ca648f8ffc5f19"
     },
     {
       "path": "install/index.html",
-      "bytes": 651103,
-      "sha256": "e9f8f66143014422ca6b66f08dc94f2074e58d78eaddae49455bcdcb1cadbde8"
+      "bytes": 289585,
+      "sha256": "8f623896a5f6dd3bc5b49c11434932bfac9b886486084eff217fe67c1bff149a"
     },
     {
       "path": "install/legacy-hashes.js",
@@ -1169,8 +1169,13 @@
     },
     {
       "path": "versions.json",
-      "bytes": 91505,
-      "sha256": "44e80132cf74f902332e7f6568228f16379693a0cf34b2a397e3d247ce7eb695"
+      "bytes": 91491,
+      "sha256": "f1d227fad8a729388e6be19911b7c96c692417877c0e1777178c4da480834f70"
+    },
+    {
+      "path": "install/install.css",
+      "bytes": 16902,
+      "sha256": "9d3afb6c65ddb6aa6e5eb15cb069f399c9e3a44153fc3ba09e553fd018a3d7f1"
     }
   ],
   "notClaimed": [
