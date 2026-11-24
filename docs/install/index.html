@@ -880,6 +880,8 @@ function pkHasSlotMap(flash) {
     [[0xC2000, 0x14000], [0xD6000, 0x1E000]],
     [[0xC2000, 0x14000], [0xD6000, 0x1E000], [0xB0000, 0xB000]],
     [[0xC2000, 0x14000], [0xD6000, 0x1E000], [0xB3000, 0x8000]],
+    // Slot 2 shortened by the Synth One factory pack (FL_FDATA_SIZE 0xF000).
+    [[0xC2000, 0x14000], [0xD6000, 0xF000], [0xB3000, 0x8000]],
   ];
   const end = map + 20 + 8 * count;
   return flash.length >= end + 4 &&
@@ -892,6 +894,35 @@ function pkHasSlotMap(flash) {
 const CTL_NO_BLOCK = "the app code of this package goes into the Bluetooth block (flash 0x8B000-0x9AFFF). "
   + "It is an X0X from before the block. It takes no controller image (install it without one)";
 
+// Reviewed optional NIGHTLY regions after flash.bin and ota.bin: xdata (101, 8 KiB),
+// fittab (102, 4 KiB), and fdata (103, FL_FDATA_SIZE). Port of tools/package_nightly.py
+// at 73749f55. A 2-file package stays valid.
+const NIGHTLY_OPTIONAL = {
+  101: {name: "xdata.bin\0", size: 0x2000},
+  102: {name: "fittab.bin\0", size: 0x1000},
+  103: {name: "fdata.bin\0", size: 0xF000},
+};
+const FDATA_TYPE = 103;
+const FDATA_SLOTMAP = [[0xC2000, 0x14000], [0xD6000, 0xF000], [0xB3000, 0x8000]];
+
+function validFdata(data, size = 0xF000) {
+  if (!size || data.length !== size || data.length < 32 || !pkStarts(data, 0, "S1PK")) return false;
+  const version = pkU16(data, 4), programs = pkU16(data, 6);
+  const total = pkU32(data, 12), crc = pkU32(data, 16);
+  if (version !== 1 || programs !== 694 || total < 32 || total > data.length) return false;
+  if (pkCrc32(data, 32, total) !== crc) return false;
+  return data.subarray(total).every((b) => b === 0xFF);
+}
+
+function slotMapMatches(flash, slots) {
+  const map = 0x9CF00, end = map + 20 + 8 * slots.length;
+  return flash.length >= end + 4 &&
+    pkU32(flash, map + 16) === slots.length &&
+    slots.every(([off, size], j) =>
+      pkU32(flash, map + 20 + j * 8) === off && pkU32(flash, map + 24 + j * 8) === size) &&
+    pkU32(flash, end) === pkCrc32(flash, map, end);
+}
+
 // Shared decoder for insertion and read-only bundled-controller admission.
 // Strict admission checks the complete installed files and nested app CRCs.
 function pkOpenController(logical, strict = false) {
@@ -901,23 +932,32 @@ function pkOpenController(logical, strict = false) {
   pkEnc(hdr, 0, 0x40);
   if (pkCrc16(hdr, 2, 0x40) !== pkU16(hdr, 0)) throw new Error("package header CRC");
   const count = pkU16(hdr, 8);
-  if (strict && (count !== 2 || pkU32(hdr, 4) !== lg.length)) throw new Error("NIGHTLY package length/file layout");
+  if (strict && (count < 2 || count > 5 || pkU32(hdr, 4) !== lg.length)) throw new Error("NIGHTLY package length/file layout");
   if (strict && (count < 1 || count > 8 || 0x40 + 0x50 * count > lg.length)) throw new Error("package file list bounds");
   const lst = lg.slice(0x40, 0x40 + 0x50 * count);
   if (pkCrc16(lst) !== pkU16(hdr, 2)) throw new Error("package file list CRC");
   let priorEnd = 0x40 + 0x50 * count;
+  const nightlyTypes = []; let fdataRange = null;
   if (strict) for (let j = 0; j < count; j++) {
     const entry = lst.slice(j * 0x50, (j + 1) * 0x50);
     pkEnc(entry, 0, 0x50);
     const off = pkU32(entry, 8), size = pkU32(entry, 12), type = pkU16(entry, 0);
-    if (type !== (j === 0 ? 0 : 100) || !pkStarts(entry, 0x40, j === 0 ? "flash.bin\0" : "ota.bin\0"))
+    const optional = NIGHTLY_OPTIONAL[type];
+    const expectName = type === 0 ? "flash.bin\0" : type === 100 ? "ota.bin\0" : optional?.name;
+    if (!expectName || (j < 2 && type !== (j === 0 ? 0 : 100)) ||
+        (j >= 2 && !optional) || (nightlyTypes.length && type <= nightlyTypes[nightlyTypes.length - 1]) ||
+        !pkStarts(entry, 0x40, expectName))
       throw new Error("NIGHTLY package file identity");
+    if (optional && size !== optional.size)
+      throw new Error("NIGHTLY optional-region package size is invalid");
     if (type === 100 && !new TextDecoder().decode(lg.subarray(off, off + size)).includes("FELUCCA-LOADER-1"))
       throw new Error("NIGHTLY package has no Felucca update loader");
-    if (size === 0 || off < priorEnd || off + size > lg.length) throw new Error("package file bounds");
-    if ((type === 0 || type === 100) && pkCrc16(lg, off, off + size) !== pkU16(entry, 4))
+    if (size === 0 || off < priorEnd || off % 0x100 || off + size > lg.length) throw new Error("package file bounds");
+    if (pkCrc16(lg, off, off + size) !== pkU16(entry, 4))
       throw new Error("package file CRC");
     priorEnd = off + size;
+    nightlyTypes.push(type);
+    if (type === FDATA_TYPE) fdataRange = [off, size];
   }
   let i = 0, e = null;
   for (; i < count; i++) {
@@ -957,6 +997,13 @@ function pkOpenController(logical, strict = false) {
   const blockFree = area.subarray(lo, lo + CTL_SIZE).every((b) => b === 0xFF) || pkU32(area, lo) === 0x43423058
     || pkHasSlotMap(flash);
   if (!blockFree) throw new Error(CTL_NO_BLOCK);
+  if (strict) {
+    const hasFdata = fdataRange !== null;
+    if (hasFdata !== slotMapMatches(flash, FDATA_SLOTMAP))
+      throw new Error("NIGHTLY FDATA requires the reserved slot map and checked pack structure");
+    if (hasFdata && !validFdata(lg.subarray(fdataRange[0], fdataRange[0] + fdataRange[1]), fdataRange[1]))
+      throw new Error("NIGHTLY FDATA requires the reserved slot map and checked pack structure");
+  }
   return {lg, hdr, count, lst, i, e, off, size, flash, key, blk, n, area, slot, lo};
 }
 
