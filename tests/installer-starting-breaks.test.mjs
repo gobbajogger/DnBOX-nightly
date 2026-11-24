@@ -35,7 +35,7 @@ function runtime({blank = true, failWrite = false} = {}) {
   env.globalThis = env;
   env.dnboxStartingBreaks = {selectedIds: () => [], names: ids => ids.map(id => startingBreakName(id, id)), fill: fillChosen};
   const ctx = createContext(env);
-  new Script(slice('const startingBreaks = () =>', 'async function run(') + slice('function confirmWrite(', '\n}\n') + '\n}\n' + '\nglobalThis.writeStartingBreaks = writeStartingBreaks;').runInContext(ctx);
+  new Script(slice('const startingBreaks = () =>', 'async function run(') + slice('let confirmPending = false;', '\n}\n') + '\n}\n' + '\nglobalThis.writeStartingBreaks = writeStartingBreaks;').runInContext(ctx);
   const up = {bound: 0, waitFor: async () => ({link}), bind() { this.bound++; }};
   return {ctx, up, said, writes, link, flash, logs};
 }
@@ -61,7 +61,7 @@ test('some chosen: only those are written', async () => {
 test('none chosen: the installer never starts the step', () => {
   assert.match(html, /if \(opts\.breakImages && opts\.breakImages\.size\) await writeStartingBreaks\(up, opts\.breakImages, opts\.breakIds\);/);
   assert.match(html, /let breakImages = new Map\(\);\n  if \(breakIds\.length\) \{/);
-  assert.match(html, /run\(img, selectedProduct, \{ foreign: false, breakImages, breakIds,/);
+  assert.match(html, /run\(img, selectedProduct, \{ foreign: false, factoryData, breakImages, breakIds,/);
 });
 
 test('a keyboard that already has samples keeps them', async () => {
@@ -86,9 +86,28 @@ test('the confirm step names the chosen breaks, or none', () => {
   for (const [ids, want] of [[[...STARTING_BREAK_IDS], /Starting breaks: BR1 1, BR1 2, Hot Pants, BR2 1, Tasty \(added if your keyboard has no samples yet\)/],
     [[], /Starting breaks: none/]]) {
     r.ctx.t = k => en[k] ?? k;
-    r.ctx.confirmWrite('SMK37PRO_1', ids);
+    r.ctx.confirmWrite('SMK37PRO_1', false, ids);
     assert.match(dom.inconfirmtext.textContent, want);
+    dom.inconfirmok.onclick();
   }
+});
+
+// Dot's published factory-data fix (gh-pages 83781eb0) kept alongside the breaks.
+test('a factory-data build keeps the strict snapshot warning, the break list and the single pending confirm', async () => {
+  const r = runtime();
+  const dom = {};
+  const el = id => (dom[id] ??= {hidden: true, textContent: '', scrollIntoView() {}, onclick: null});
+  r.ctx.$ = el; r.ctx.lastId = null; r.ctx.t = k => en[k] ?? k;
+  const answer = r.ctx.confirmWrite('SMK37PRO_1', true, ['personal-br1-zone3']);
+  assert.match(dom.inconfirmtext.textContent, /Starting breaks: Hot Pants[\s\S]*atomic sample snapshot/);
+  assert.equal(await r.ctx.confirmWrite('SMK37PRO_1', true, []), false, 'a second confirm while one is open is refused');
+  dom.inconfirmok.onclick();
+  assert.equal(await answer, true);
+  const click = slice('$("go").addEventListener("click"', '$("stockgo").addEventListener');
+  assert.match(click, /const factoryData = !!slotPackageFiles\(image\)\?\.\["fdata\.bin"\];/);
+  assert.match(click, /confirmWrite\(selectedProduct, factoryData, breakIds\)/);
+  assert.match(html, /saveStrict: saveVerifiedSlotBackup, factoryData: opts\.factoryData === true,/);
+  assert.match(html, /<section id="strict-backup-panel"/);
 });
 
 test('the breaks are fetched and checked before the firmware is written, and the choice cannot change meanwhile', () => {

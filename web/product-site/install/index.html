@@ -49,6 +49,13 @@
         <label id="devagreewrap" hidden><input type="checkbox" id="devagree"><span id="consent-copy" data-t="devagree"></span></label>
         <button id="go" disabled data-t="install">Install firmware</button>
         <div id="inconfirm" role="alertdialog" aria-live="assertive" hidden><div id="inconfirmtext"></div><button id="inconfirmok" type="button">OK — write firmware</button><button id="inconfirmno" type="button">Cancel</button></div>
+        <section id="strict-backup-panel" class="backup-confirmation" aria-label="Retain sample backup" hidden>
+          <p>Save the sample backup before updating. If you can’t keep it, cancel the install.</p>
+          <p><a id="strict-backup-download">Download recovery backup</a></p>
+          <label>Select the saved backup to verify <input type="file" id="strict-backup-file" accept=".x0xslots"></label>
+          <p id="strict-backup-status" role="status" aria-live="polite"></p>
+          <button type="button" id="strict-backup-cancel">Cancel install</button>
+        </section>
         <p class="install-hint" id="installhint" aria-live="polite"></p><progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress><p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
         <section id="install-check" aria-label="Install checks" hidden><h3>Install checks</h3><p id="receipt-result" role="status"></p><p id="receipt-next"></p><details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details><button type="button" id="report-install" disabled>Report this install</button><p class="small">Review on GitHub before submitting.</p></section>
         <p id="backup-warning" class="backup-confirmation" role="alert" aria-live="assertive" hidden></p>
@@ -739,7 +746,7 @@ class Updater {
   }
 
   // full install: running firmware -> loader -> new firmware
-  async install(image, product, onStep, start = null, admitted = null) {
+  async install(image, product, onStep, start = null, admitted = null, checkApplication = null) {
     this.admitted = admitted;
     const step = onStep || (() => {});
     const dev = await this.find((id) => !IS_OTA(id));
@@ -773,12 +780,12 @@ class Updater {
     if (!ota) throw fail("noloader", "the update loader did not appear. Replug the USB cable and press Install again: the device stays in update mode until it is finished.");
     const s2 = await this.write(ota, image, step);
     if (!s2.finished) throw fail(s2.lost ? "lost" : "stopped", `the loader ${s2.lost ? "was disconnected" : "stopped"} after ${s2.served} requests. Replug and press Install again to resume.`);
-    return this.finishApplication(product, step);
+    return this.finishApplication(product, step, checkApplication);
   }
 
   // Observe a fresh application and its marker under the single-port guard.
   // The protocol has no unit serial or flash hash: this is not exact-byte proof.
-  async finishApplication(product, step) {
+  async finishApplication(product, step, checkApplication = null) {
     this.verified = false;
     this.application = null;
     step("reboot");
@@ -793,6 +800,12 @@ class Updater {
       if (!sameKeyboard(back.id.model, product.split("_")[0]))
         throw fail("model", `The selected keyboard changed model during the update: ${back.id.text}`);
       if (back.id.text !== product) throw fail("mismatch", `installed, but the device reports ${back.id.text}`, back.id.text);
+      if (checkApplication) {
+        await checkApplication(back.link);
+        this.singlePort();
+        this.assertContinuous(back);
+        if (back.link.lost) throw fail("noreturn", "The keyboard disconnected during factory-data readback.");
+      }
       this.targetName = back.name;
       this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};
     } finally { back.link.close(); }
@@ -1443,6 +1456,10 @@ function slotPackageFiles(image) {
         files[name] = data;
       }
     }
+    if (v.getUint16(0, true) === 103) {
+      if (files["fdata.bin"] || findBytes(entry.subarray(64), "fdata.bin\0") !== 0) return null;
+      files["fdata.bin"] = data;
+    }
     priorEnd = off + size;
   }
   return files["flash.bin"] ? files : null;
@@ -1554,7 +1571,7 @@ function unpack78(a) {
 }
 
 // one command -> the reply's bytes after the command; a lost frame is sent again (every slot command is safe to repeat)
-async function slotReq(link, cmd, args, ms = 3000, tries = 3) {
+async function slotReq(link, cmd, args, ms = 3000, tries = 3, strictFraming = false) {
   for (let t = 0; t < tries; t++) {
     link.drain();
     if (!link.send([...ED, cmd, ...args, 0xF7])) throw new Error("The USB connection was lost.");
@@ -1562,7 +1579,12 @@ async function slotReq(link, cmd, args, ms = 3000, tries = 3) {
     while (Date.now() < end) {
       const p = await link.read(end - Date.now());
       if (!p) break;
-      if (p.length > 5 && p[1] === ED[1] && p[2] === ED[2] && p[3] === ED[3] && p[4] === cmd) return p.slice(5, p.length - 1);
+      if (p.length > 5 && p[1] === ED[1] && p[2] === ED[2] && p[3] === ED[3] && p[4] === cmd) {
+        const payload=p.slice(5, -1);
+        if (strictFraming && (p[0] !== 0xf0 || p.at(-1) !== 0xf7 || payload.some(b => !Number.isInteger(b) || b < 0 || b > 127)))
+          throw new Error("Invalid SysEx readback framing.");
+        return payload;
+      }
     }
   }
   throw new Error(`The keyboard did not answer (slot command ${cmd}).`);
@@ -1722,6 +1744,23 @@ async function commitInstallSnapshot(link, snapshot, admitted = () => true) {
   await snapshotRequest(link, 3, snapshot.token, snapshot.ticket);
 }
 
+// ED_FDATA is read-only. The loader verifies sectors; the running application
+// must report the same 32-byte factory pack header before showing success.
+async function verifyFactoryData(link, expected) {
+  const error = message => Object.assign(new Error(message), {code:"fdata", detail:message});
+  if (expected.length !== 0xF000 || findBytes(expected.subarray(0,4), "S1PK") !== 0)
+    throw error("Invalid factory-data package.");
+  let reply;
+  try { reply = await slotReq(link, 52, [], 2000, 1, true); }
+  catch { throw error("The installed firmware did not answer the factory-data readback."); }
+  if (reply.length !== 65 || reply[0] !== 1) throw error("The installed firmware did not report a valid factory bank.");
+  for (let i=0;i<32;i++) {
+    const low=reply[1+2*i],high=reply[2+2*i];
+    if (low>127 || high>1 || (low | (high<<7)) !== expected[i])
+      throw error("The installed factory-bank header does not match the package.");
+  }
+}
+
 async function cancelInstallSnapshot(link, snapshot) {
   if (!snapshot || snapshot.consumed) return;
   snapshot.consumed = true;
@@ -1733,13 +1772,21 @@ async function cancelInstallSnapshot(link, snapshot) {
 // hooks: {step(k, a) for up.install, say(key, detail), save(bytes, name) -> true / Promise<true> only after the backup is retained, progress(f),
 // sameKeyboard(model, packageModel) (fm1ota.js's: the slots are read only when the install can go ahead)}.
 // 1. If slots are at risk, attempt an .x0xslots archive and download.
-//    Backup errors warn but never prevent OTA.
+//    Legacy backup errors warn; factory-data builds require atomic protection.
 //    2. Install. 3. Reconnect to the new firmware, write the slots back into its map, read them back.
 // Throws the install's errors as they are; a failure in step 3 throws code "slots" (the archive is saved).
 // -> {product, move: null or {risk, todo, skipped, name}}
 async function installKeepingSlots(up, image, product, board, hooks) {
   const h = Object.assign({ step() {}, say() {}, save() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
   const fail = (code, msg, detail = "") => Object.assign(new Error(msg), { code, detail });
+  const strict = h.factoryData === true;
+  const expected = strict ? slotPackageFiles(image)?.["fdata.bin"] : null;
+  const strictMap = strict ? packageSlotMap(image, board) : null;
+  if (strict && (!expected || expected.length !== 0xF000 ||
+      findBytes(expected.subarray(0,4), "S1PK") !== 0 || board !== "smk" ||
+      JSON.stringify(strictMap) !== JSON.stringify([
+        {off:0xC2000,size:0x14000}, {off:0xD6000,size:0xF000}, {off:0xB3000,size:0x8000}
+      ]))) throw fail("fdata", "Could not verify the protected factory-data and sample layout.");
   let move = null, snapshot = null, unprotected = false;
   const dev = await up.find((id) => !/^ota-/i.test(id.model));
   if (!dev) throw fail("notfound", "No running keyboard was found for sample preflight; no update was started.");
@@ -1755,16 +1802,18 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       try {
         if (await hasInstallSnapshot(dev.link)) snapshot = await beginInstallSnapshot(dev.link);
       } catch (e) { throw fail("slotbackup", `The sample snapshot could not be established (${e.message}). No update was started.`); }
+      if (strict && !snapshot) throw fail("slotbackup", "Atomic sample backup is required. No update was started.");
       let layout;
       try { layout = await readSlotLayout(dev.link, 1000, 2); }
       catch (e) {
         // Any unsupported/failed slot INFO uses the outer warning-only path.
         throw fail("slotbackup", `Sample layout unavailable (${e.message}); continuing without backup.`);
       }
+      if (strict && !layout) throw fail("slotbackup", "Sample layout could not be verified. No update was started.");
       if (layout && !snapshot)
         throw fail("slotbackup", "Atomic sample backup unsupported; continuing without backup.");
       if (layout && layout.slots.some((sl) => sl.nz)) {
-        const oldMap = flashMap(layout, board), newMap = packageSlotMap(image, board);
+        const oldMap = flashMap(layout, board), newMap = strictMap || packageSlotMap(image, board);
         const risk = atRisk(layout, oldMap, newMap);
         if (risk.length) {
           h.say("slotsave", risk.map((k) => k + 1).join(", "));
@@ -1779,7 +1828,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
             readArchive(file);                                // verify the in-memory archive
           } catch (e) { throw fail("slotbackup", e.message); }
           let retained;
-          try { retained = await h.save(file, st.name); }
+          try { retained = await (strict ? h.saveStrict : h.save)(file, st.name); }
           catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
           if (retained !== true)
             throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
@@ -1796,6 +1845,7 @@ async function installKeepingSlots(up, image, product, board, hooks) {
       // independently by Updater.install() and admitted().
       await cancelInstallSnapshot(dev.link, snapshot);
       snapshot = null;
+      if (strict) throw e;
       move = null; // No verified recovery archive exists.
       unprotected = true;
       h.say("slotunprotectedwarning", e?.message || String(e));
@@ -1803,7 +1853,8 @@ async function installKeepingSlots(up, image, product, board, hooks) {
   }
   if (!h.admitted()) throw fail("unapproved", "The selected package is no longer approved. No update was started.");
   const ran = await up.install(image, product, h.step,
-    snapshot ? (dev) => commitInstallSnapshot(dev.link, snapshot, h.admitted) : null, h.admitted);
+    snapshot ? (dev) => commitInstallSnapshot(dev.link, snapshot, h.admitted) : null, h.admitted,
+    strict ? link => verifyFactoryData(link, expected) : null);
   if (!move || !move.newMap.length) return { product: ran, move, unprotected };
   h.say("slotback");
   const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
@@ -1811,6 +1862,8 @@ async function installKeepingSlots(up, image, product, board, hooks) {
   try {
     up.bind(back);
     const layout = await readSlotLayout(back.link);
+    if (strict && (!layout.ext || JSON.stringify(flashMap(layout,board)) !== JSON.stringify(strictMap)))
+      throw fail("slots", "The new sample map differs from the package. No samples were restored.", move.name);
     let plan = planMigration(move.images, move.risk, move.oldMap, layout, flashMap(layout, board));
     plan = guardMigrationLoopMenu(move.layout, move.images, move.risk, move.oldMap, layout,
       flashMap(layout, board), plan.todo, plan.skipped);
@@ -2033,6 +2086,7 @@ const TEXT = {
     slotconfirmhelp: "The browser was asked to download this file, but cannot verify that it was saved. Find it in your downloads and keep it somewhere safe. Confirm only after you have the file; otherwise cancel. No firmware has been written yet.",
     slotretained: "I have saved this backup — continue",
     slotcancel: "Cancel installation",
+    fdata: "Factory-bank verification failed. Keep the sample backup. ",
     slotbackupconfirm: "Recovery backup confirmation was not accepted. No firmware or samples were written. Check your selection and retry when you can save the backup: ",
     slotback: "Writing the slots back",
     titlesamples: "Samples", titleprojects: "Songs & projects",
@@ -2988,14 +3042,17 @@ function fillVersions() {
 }
 
 // In-page confirmation: iOS Web MIDI app webviews block or auto-dismiss window.confirm(), which made Install always "cancelled".
-function confirmWrite(product, breakIds = null) {
+let confirmPending = false;
+function confirmWrite(product, strict = false, breakIds = null) {
+  if (confirmPending) return Promise.resolve(false);
+  confirmPending = true;
   const from = lastId ? lastId.text : "(not connected yet — Connect first if you can)";
   const box = $("inconfirm");
   const breaks = breakIds === null ? "" : t("confirmbreaks") + (breakIds.length ? startingBreakNames(breakIds).join(", ") + t("confirmbreaksif") : t("confirmbreaksnone"));
-  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + t("confirmrisk");
+  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + (strict ? "\n\nThe test build is not hardware qualified. The browser will require an atomic sample snapshot and verify any required recovery backup before starting. Keep USB connected." : t("confirmrisk"));
   box.hidden = false; box.scrollIntoView && box.scrollIntoView({ block: "center" });
   return new Promise((resolve) => {
-    const done = (v) => { box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
+    const done = (v) => { confirmPending = false; box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
     $("inconfirmok").onclick = () => done(true);
     $("inconfirmno").onclick = () => done(false);
   });
@@ -3054,7 +3111,12 @@ async function acceptStock(raw, requestId) {
       sayK("model", ` ${lastId.text} → ${product}`);
       return;
     }
-    stock = { image: logicalImage(raw), product, foreign: true, fm1Stock: isFm1Stock };
+    const logical = logicalImage(raw);
+    if (slotPackageFiles(logical)?.["fdata.bin"]) {
+      sayK("stockbad", " Use the matching command-line installer for a package with Synth One factory data.");
+      return;
+    }
+    stock = { image: logical, product, foreign: true, fm1Stock: isFm1Stock };
     $("dropmeta").textContent = `${product} · ${(raw.length / 1024).toFixed(0)} KB`;
     $("stockconfirm").disabled = false;
     $("stockgo").disabled = writing || !$("stockconfirm").checked;
@@ -3145,8 +3207,50 @@ async function writeStartingBreaks(up, images, ids) {
   } finally { back.link.close(); }
 }
 
+// The download click alone is not retention. Require the specific saved
+// file back, byte-for-byte, before consuming the pending atomic snapshot.
+async function saveVerifiedSlotBackup(file, name) {
+  const panel=$("strict-backup-panel"), download=$("strict-backup-download");
+  const fileInput=$("strict-backup-file"), reject=$("strict-backup-cancel");
+  const status=$("strict-backup-status"), url=URL.createObjectURL(new Blob([file], {type:"application/octet-stream"}));
+  download.href=url;download.download=name;fileInput.value="";panel.hidden=false;
+  status.textContent="Download the backup, then select that saved file here.";
+  panel.scrollIntoView({block:"center"});
+  return new Promise(resolve=>{
+    let closed=false;
+    const finish=retained=>{
+      if (closed) return;closed=true;
+      clearTimeout(timer);window.removeEventListener("pagehide",cancel);
+      fileInput.onchange=reject.onclick=null;fileInput.value="";
+      download.removeAttribute("href");panel.hidden=true;
+      URL.revokeObjectURL(url);resolve(retained);
+    };
+    const cancel=()=>finish(false);
+    const timer=setTimeout(cancel,45000);
+    reject.onclick=cancel;
+    window.addEventListener("pagehide",cancel,{once:true});
+    fileInput.onchange=async()=>{
+      const saved=fileInput.files?.[0];
+      if(!saved || saved.size!==file.length){status.textContent="Choose the full backup file you just downloaded.";return;}
+      try{
+        const bytes=new Uint8Array(await saved.arrayBuffer());
+        if (closed) return;
+        if(bytes.length!==file.length || !bytes.every((b,i)=>b===file[i])){
+          status.textContent="That file is different from this install’s backup. Choose the saved backup.";return;
+        }
+        finish(true);
+      }catch{if(!closed)status.textContent="The saved backup could not be read. Try again or cancel.";}
+    };
+  });
+}
+
 async function run(img, product, opts = {}) {
   if (writing || !workspaceActive) { $("status").textContent = writing ? "An install is already running." : "Open the Firmware tab, then press Install again."; updateInstallGate(); return; }
+  if (!!slotPackageFiles(img)?.["fdata.bin"] !== (opts.factoryData === true)) {
+    sayK("fdata", "No update was started. Choose the verified build again.");
+    updateInstallGate();
+    return;
+  }
   getSampleWorkspace()?.invalidate();
   getProjectWorkspace()?.invalidate();
   writing = true;
@@ -3179,10 +3283,14 @@ async function run(img, product, opts = {}) {
       if (k === "loader") sayK("loader");
       if (k === "write") { sayK("write"); $("bar").value = Math.min(99, ((74 + a) / total) * 100); }
       if (k === "reboot") sayK("reboot");
-      if (k === "done") { $("bar").value = 100; sayK(foreign ? "stockdone" : "done"); }
+      if (k === "done" && !opts.factoryData) { $("bar").value = 100; sayK(foreign ? "stockdone" : "done"); }
     };
     const ota = await up.find((id) => /^ota-/i.test(id.model));
     if (opts.admitted && !opts.admitted()) { ota?.link.close(); throw new Error(t("unapproved")); }
+    if (ota && opts.factoryData) {
+      ota.link.close();
+      throw new Error("An atomic sample snapshot cannot start in update mode. No browser update was started; use the matching recovery instructions and retain your backup.");
+    }
     if (ota) {
       // Interrupted upgrade/downgrade/stock write: finish with this package (same keyboard family).
       ota.link.close();
@@ -3203,8 +3311,11 @@ async function run(img, product, opts = {}) {
         },
         progress: (f) => { $("bar").value = Math.min(up.verified ? 100 : 99, f * 100); },
         save: (file, name) => saveSlotBackup(file, name),
+        saveStrict: saveVerifiedSlotBackup, factoryData: opts.factoryData === true,
       });
       unprotected = r.unprotected === true;
+      if (opts.factoryData) { $("bar").value = 100; sayK("done"); }
+      if (opts.factoryData && !r.move) { $("bar").value = 100; sayK("done"); }
       if (r.move && !r.move.newMap.length) sayK("slotstock", r.move.name);
       else if (r.move) {
         $("bar").value = 100;
@@ -3250,7 +3361,8 @@ $("go").addEventListener("click", async () => {
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
   const confirmProduct = selectedProduct, confirmSerial = loadSerial, breakIds = chosenStartingBreaks();
-  if (!(await confirmWrite(selectedProduct, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
+  const factoryData = !!slotPackageFiles(image)?.["fdata.bin"];
+  if (!(await confirmWrite(selectedProduct, factoryData, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
   if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection() ||
       chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
   // Fetch and verify the chosen breaks before anything is written.
@@ -3288,7 +3400,7 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, breakImages, breakIds, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, factoryData, breakImages, breakIds, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
 });
