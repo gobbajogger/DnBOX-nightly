@@ -1,0 +1,42 @@
+✔ blocks stale and unguardable patterns, never displays proposed edits (8.251909ms)
+✔ connect does HELLO, OPEN, WATCH and keeps the lease epoch (6.289837ms)
+✔ a lost reply is retried once with the identical frame, then times out (16.420055ms)
+✔ non-OK statuses reject with the status name; requests stay serialized (2.11033ms)
+✔ missing firmware handler surfaces as unavailable, not as success (0.711379ms)
+✔ NOTIFY updates the revision and flags gaps for a resync (1.937646ms)
+✔ PATTERN_DUMP reads every chunk and checks the CRC-14 (3.402895ms)
+✔ emulator transport speaks the worklet message names (0.92918ms)
+✔ vectors file is what the generator writes (116.613591ms)
+✔ every vector frame has a valid layout and an independent zlib CRC-32 (1.74372ms)
+✔ JS codec decodes and re-encodes every vector exactly (8.159412ms)
+✔ JS codec refuses out-of-range values instead of truncating (0.861129ms)
+✔ C reference reproduces every vector byte for byte (133.678957ms)
+✔ Remote engine list is the firmware list (BENGINE_N at the pinned tip) (5.372897ms)
+✔ firmware-engines.json is regenerated from the firmware source when a checkout is given (185.465991ms)
+✔ track order matches the firmware PART_ORDER with default banks (909, 808, BREAK, Bass A, Bass B) (0.684439ms)
+✔ no extra connection mode; unsupported Drum controls are explicitly Draft (1.684372ms)
+✔ drum tracks open the drum sequencer from the Sequence tab (1.023178ms)
+✔ drum steps: every voice, step and the accent row round-trip as STEP_SET (12.773872ms)
+✔ BREAK steps round-trip as STEP_SET part 4 and match the spec vector (0.817304ms)
+✔ parameters and engine choice round-trip as PARAM_SET at the firmware pref address (0.498955ms)
+✔ tempo round-trips as TEMPO bpm_x10 and matches the spec vector (0.4001ms)
+✔ drum parameter page: every firmware SEQUENCE option for drums, formatted and sent as DNR3 (1.05207ms)
+✔ drum pages: four pages of 16 cover the firmware 64 steps; steps past LENGTH are marked (8.407027ms)
+✔ double-tap defaults: lanes and the keybed use the firmware/model defaults (0.259943ms)
+✔ typed addressing 112/113, stable bank/slot, per-descriptor writable marker (5.663095ms)
+✔ old capability uses only guarded R_ENG, verified device-supported subset (0.952684ms)
+✔ readback mismatch, descriptor change, current-value change, bank/preset epoch and detach refuse (7.643073ms)
+✔ unmarked descriptor, failed discovery, active Chicago and incompatible firmware are not typed editors (1.32408ms)
+✔ QUEUED is an echo, polls and confirms only committed value without a second write (1.875634ms)
+✔ QUEUED timeout or owner transition never paints an edit or retries a write (3.014762ms)
+✔ typed PARAM_SET codec requires explicit guard, transports wrong bank for native rejection (1.153379ms)
+✔ audited original labels disambiguate 6-character display names; unknown ids stay explicit (0.84142ms)
+✔ actual client writes typed only once on cable timeout; legacy transport retry remains (26.687079ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 445.899521

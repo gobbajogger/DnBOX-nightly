@@ -1,0 +1,463 @@
+--- a/web/product-site/remote/app.mjs
++++ b/web/product-site/remote/app.mjs
+@@ -23,6 +23,7 @@
+ import{renderLiveMotion,bindLiveMotion}from'./dnr3-motion.mjs';
+ import{createLiveClips}from'./dnr3-clips.mjs';
+ import{createChicagoView}from'./dnr3-chicago.mjs';
++import{createSynthView}from'./dnr3-typed-synth.mjs';
+ import{SequenceDraft,chanceDomain,chanceFromDrag,Arrangement}from'./sequence.mjs';
+ import{ParameterGesture}from'./parameter.mjs';
+ import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs';
+@@ -282,7 +283,7 @@
+  if(view==='sound'&&nativeSoundMode){html=soundSourceBar()+nativeSoundControls();}
+  if(view==='sound'&&!nativeSoundMode){html=soundSourceBar()+`<h2>Sound · ${esc($('part').selectedOptions[0].textContent)}${part==='chicago'||part==='miami'?' / '+soundBanks[part==='chicago'?0:1]:''}</h2>`+(['drum909','drum808'].includes(part)?voiceSelector(part==='drum909'?'909':'808')+component((part==='drum909'?'909':'808')+'-voice-'+String(drumVoice).padStart(2,'0')+'.svg'):soundControls(part));}
+  if(view==='sound'&&remoteLink?.connected()&&soundSlot()>=0){
+-  const live=chicagoSoundSection();
++  const live=typedSynthSoundSection()??chicagoSoundSection();
+   html=live??'<p role="status">Live Sound edits are unavailable for this active engine. These are Draft controls.</p><section data-sound-source="draft">'+html+'</section>';
+  }
+  if(view==='mix'){html=mixSourceBar()+(nativeMixMode&&!['ready','busy'].includes(nativeMix.snapshot().phase)?'<p role="status">'+(nativeMix.snapshot().phase==='loading'?'Reading firmware Mix…':'Firmware Mix unavailable')+'</p>':renderMixWorkspace({mode:mixMode,parts:mixMode==='levels'?typedMixer():typedMixSends(mixMode),master:mixControlPanel('mix-master.svg','Master'),fx:mixControlPanel('fx-reverb-direct.svg','Reverb')+mixControlPanel('fx-delay-direct.svg','Delay')+wearPanel()}));}
+@@ -404,12 +405,40 @@
+  if(focus!==undefined)$('other-view').querySelector(`[data-live-chicago="${focus}"]`)?.focus({preventScroll:true});
+ }});
+ function syncChicagoView(){
++ syncTypedSynthView();
+  const slot=remoteLink?.connected()&&view==='sound'?soundSlot():-1;
+  if(slot===chicagoSlot)return;
+  chicagoSlot=slot;chicagoView.close();
+  if(slot>=0)chicagoView.open(slot);
+  else {confirmedChicago={phase:'unsupported'};if(view==='sound')other();}
+ }
++let typedSlot=null, confirmedTyped={phase:'unsupported'};
++const typedSynthView=createSynthView({link:()=>remoteLink,onChange:state=>{
++ confirmedTyped=state;
++ if(view!=='sound')return;
++ const focus=document.activeElement?.dataset.liveTypedSynth,top=$('other-view').scrollTop;
++ other();$('other-view').scrollTop=top;
++ if(focus!==undefined)$('other-view').querySelector(`[data-live-typed-synth="${focus}"]`)?.focus({preventScroll:true});
++}});
++function syncTypedSynthView(){
++ const slot=remoteLink?.connected()&&view==='sound'?soundSlot():-1;
++ if(typedSlot===slot)return;
++ typedSlot=slot;typedSynthView.close();
++ if(slot>=0)typedSynthView.open(slot);
++ else confirmedTyped={phase:'unsupported'};
++}
++function typedSynthSoundSection(){
++ const s=confirmedTyped,owner=s.owner;
++ if(typedSlot!==soundSlot()||!owner||owner.bank<2)return null;
++ const title=owner.bank===2?'Synth One':'SuperJ6';
++ if(!s.rows?.length)
++  return '<section data-sound-source="firmware"><h2>Sound · '+title+'</h2><p role="status">'+esc(s.message||'No mapped controls were confirmed on this firmware.')+'</p></section>';
++ const label=s.typed?'Typed firmware':'Firmware';
++ return '<section data-sound-source="firmware"><h2>Sound · '+title+'</h2><p role="status">'+label+(s.busy?' · verifying readback…':' · confirmed')+'</p><div class="encoder-grid">'+
++ s.rows.map(x=>'<label class="mix-panel"><span>'+esc(x.label)+'</span> '+(x.writable?
++  '<input type="number" min="0" max="'+x.max+'" step="1" aria-label="'+esc(x.label)+'" data-live-typed-synth="'+x.id+'" value="'+x.value+'" '+(s.busy?'disabled':'')+'>':
++  '<output>'+x.value+'</output> <small>Read only</small>')+'</label>').join('')+'</div></section>';
++}
+ let clipView={source:'draft',firmware:null};
+ const liveClips=createLiveClips({link:()=>remoteLink,onChange:next=>{
+  if(view!=='patterns')return;
+@@ -437,7 +466,15 @@
+ remoteLink.onNotify(liveClips.notify);
+ remoteLink.onState(syncChicagoView);
+ $('other-view').addEventListener('change',event=>{
+- const control=event.target;if(control.dataset.liveChicago===undefined)return;
++ const control=event.target;
++ if(control.dataset.liveTypedSynth!==undefined){
++  const id=Number(control.dataset.liveTypedSynth),value=control.valueAsNumber,confirmed=confirmedTyped.rows?.find(r=>r.id===id);
++  if(!confirmed)return;
++  control.value=String(confirmed.value);
++  if(view==='sound'&&typedSlot===soundSlot()&&!confirmedTyped.busy&&Number.isInteger(value))void typedSynthView.write(id,value);
++  return;
++ }
++ if(control.dataset.liveChicago===undefined)return;
+  const index=Number(control.dataset.liveChicago),value=Number(control.value);
+  const confirmed=confirmedChicago.rows?.find(row=>row.parameter===index);
+  if(!confirmed)return;
+--- a/web/product-site/remote/dnr3.mjs
++++ b/web/product-site/remote/dnr3.mjs
+@@ -16,7 +16,7 @@
+ export const STATUS = Object.freeze({OK:0, QUEUED:1, BAD:2, BUSY:3, STALE:4, CONFLICT:5, UNSUPPORTED:6, FULL:7, DENIED:8});
+ export const NOTIFY_KIND = Object.freeze({PARAM:0, STEP:1, CUE:2, TRANSPORT:3, MUTE:4, VOICE:5, POSITION:6, PATTERN:7});
+ export const WATCH = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, VOICE:32, POSITION:64});
+-export const CAP = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, WATCH:32, PATTERN_DUMP:64, PC_CLIP:128, VOICE:256, BASS_BANK_GUARD:512, RECORD:1024, MOTION_MIAMI_CARRIER:2048});
++export const CAP = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, WATCH:32, PATTERN_DUMP:64, PC_CLIP:128, VOICE:256, BASS_BANK_GUARD:512, RECORD:1024, MOTION_MIAMI_CARRIER:2048, TYPED_SYNTH:4096});
+ export const PARTS = 5, KEEP = 0x3FFF;
+ const NAME = Object.fromEntries(Object.entries(OP).map(([k, v]) => [v, k]));
+ 
+@@ -123,16 +123,28 @@
+     return track;
+   }
+ };
++const typedSynthPref = f => f.kind===112 || f.kind===113;
++const guardedBassPref = f => (f.kind===1 && f.a===2) ||
++  (typedSynthPref(f) && (f.a===2 || f.a===3) && (f.b===0 || f.b===1));
+ const expectBank = {
+   write(w,f) {
+-    if (f.expect_bank === undefined) return;
+-    if (f.kind!==1 || f.a!==2) fail('range','bank guard requires a bass engine address');
++    if (f.expect_bank === undefined) {
++      if(typedSynthPref(f))fail('range','typed synth address requires a bank guard');
++      return;
++    }
++    if (!guardedBassPref(f)) fail('range','bank guard requires a bass engine address');
++    if(typedSynthPref(f)&&(f.expect_bank<0||f.expect_bank>3))fail('range','unknown synth bank');
+     w.int('u7',f.expect_bank);
+   },
+   read(r,f) {
+-    if (r.at===r.b.length) return undefined;
+-    if (f.kind!==1 || f.a!==2) fail('range','bank guard requires a bass engine address');
+-    return r.int('u7');
++    if (r.at===r.b.length) {
++      if(typedSynthPref(f))fail('range','typed synth address requires a bank guard');
++      return undefined;
++    }
++    if (!guardedBassPref(f)) fail('range','bank guard requires a bass engine address');
++    const bank=r.int('u7');
++    if(typedSynthPref(f)&&bank>3)fail('range','unknown synth bank');
++    return bank;
+   }
+ };
+ const paramList = {
+--- a/web/product-site/remote/dnr3-client.mjs
++++ b/web/product-site/remote/dnr3-client.mjs
+@@ -46,7 +46,7 @@
+     p.done(reply);
+   }
+   refused(result) { this.pending?.done(null, new Dnr3Unavailable(result === -3 ? 'This firmware has no DNR3 handler' : `SysEx refused (${result})`)); }
+-  request(op, fields = {}, {allow = []} = {}) {
++  request(op, fields = {}, {allow = [], retry = true} = {}) {
+     const run = () => new Promise((resolve, reject) => {
+       if (this.closed) { reject(Error('DNR3 client closed')); return; }
+       const seq = this.nextSeq(), frame = d.encodeRequest(op, seq, fields);
+@@ -60,7 +60,7 @@
+       }};
+       const send = () => {
+         tries++;
+-        timer = this.timers.setTimeout(() => tries < 2 ? send() : p.done(null, Object.assign(Error('DNR3 timeout'), {code: 'timeout'})), this.timeoutMs);
++        timer = this.timers.setTimeout(() => retry && tries < 2 ? send() : p.done(null, Object.assign(Error('DNR3 timeout'), {code: 'timeout'})), this.timeoutMs);
+         try { this.transport.sendSysex(frame); } catch (e) { p.done(null, e); }
+       };
+       this.pending = p; send();
+@@ -88,9 +88,9 @@
+   state() { return this.request(d.OP.STATE).then(r => r.fields); }
+   describe(addr) { return this.request(d.OP.DESCRIBE, addr).then(r => r.fields); }
+   paramGet(params) { return this.request(d.OP.PARAM_GET, {params}).then(r => r.fields.params); }
+-  paramSet(addr, value, expect = d.KEEP, {bank} = {}) {
++  paramSet(addr, value, expect = d.KEEP, {bank,retry} = {}) {
+     if (bank!==undefined && !this.has(d.CAP.BASS_BANK_GUARD)) return Promise.reject(new Dnr3Unavailable('Firmware cannot guard the live bass bank'));
+-    return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value, expect_bank:bank});
++    return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value, expect_bank:bank}, {retry});
+   }
+   stepGet(part, pat, step, track) { return this.request(d.OP.STEP_GET, {part, pat, step, track}).then(r => r.fields); }
+   stepSet(part, pat, step, record, expectCrc = d.KEEP) { return this.request(d.OP.STEP_SET, {epoch: this.epoch, part, pat, step, expect_crc: expectCrc, record}); }
+--- a/web/product-site/remote/dnr3-link.mjs
++++ b/web/product-site/remote/dnr3-link.mjs
+@@ -6,6 +6,7 @@
+ import * as d from './dnr3.mjs';
+ import {createDnr3MixProvider} from './dnr3-mix.mjs';
+ import {createChicagoSession} from './dnr3-chicago.mjs';
++import {createSynthSession} from "./dnr3-typed-synth.mjs";
+ 
+ export const PART = Object.freeze({drum909: 0, drum808: 1, chicago: 2, miami: 3, breaks: 4});
+ export const ACCENT_TRACK = 11;            // §4.2: part 0/1 track 11 = accent row
+@@ -196,6 +197,7 @@
+       const state=await c.state();
+       return state.clip_mode?{blocked:true}:state;
+     }),
++    synthSession(slot) { const own=client; return createSynthSession(own,slot,()=>client===own); },
+     chicagoSession(slot,bindings) {
+       const own=client;
+       return createChicagoSession(own,slot,bindings,()=>own===client);
+--- /dev/null
++++ b/web/product-site/remote/dnr3-typed-synth.mjs
+@@ -0,0 +1,137 @@
++// SPDX-License-Identifier: GPL-3.0-only
++import {CAP, KEEP, STATUS, NOTIFY_KIND} from './dnr3.mjs';
++
++export const SYNTH_KIND={LOW:112,HIGH:113};
++export const SYNTH_UNIT={TYPED:32,WRITE:64};
++const LEGACY=1, T_303=2, BANK=41, PRESET=42, SETTLED=43;
++const LEGACY_LAST={2:2,3:17};
++// Original-ID crosswalk from the exact firmware panel descriptors. DESCRIBE's
++// 6 ASCII bytes are an identity/check source, not a unique presentation label.
++const ORIGINAL_LABEL={2:{2:'OSC Balance',5:'OSC 1 Level',16:'Cutoff',17:'Resonance',
++ 19:'Filter Envelope',22:'Filter Attack',23:'Filter Decay',24:'Filter Sustain',25:'Filter Release',
++ 26:'Amp Attack',27:'Amp Decay',28:'Amp Sustain',29:'Amp Release'},3:{7:'Cutoff'}};
++const same=(a,b)=>['kind','a','b','c'].every(k=>a?.[k]===b[k]);
++const int=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
++const native=(kind,slot)=>({kind,a:0,b:slot,c:0});
++export function synthAddress(bank,slot,id,typed=true){
++ if(!(bank in LEGACY_LAST)||!int(slot,0,1)||!int(id,0,typed?255:LEGACY_LAST[bank]))throw RangeError('Unknown synth control');
++ return typed?{kind:id<128?SYNTH_KIND.LOW:SYNTH_KIND.HIGH,a:bank,b:slot,c:id&127}
++             :{kind:LEGACY,a:T_303,b:slot,c:id};
++}
++export function createSynthSession(client,slot,isCurrent,{pause=ms=>new Promise(r=>setTimeout(r,ms))}={}){
++ if(!int(slot,0,1)||!client?.has(CAP.PARAM)||!client.has(CAP.WATCH)||!client.has(CAP.BASS_BANK_GUARD))return null;
++ let closed=false,owner=null, rows=new Map();
++ const typed=client.has(CAP.TYPED_SYNTH);
++ function current(){if(closed||!isCurrent())throw Error('Synth connection changed');}
++ async function identity(){
++  current();
++  const a=[native(BANK,slot),native(PRESET,slot),native(SETTLED,slot)];
++  const r=await client.paramGet(a);current();
++  if(r.length!==3||r.some((x,i)=>!same(x,a[i]))||!int(r[0].value,0,3)||
++    !int(r[1].value,0,KEEP-1)||r[2].value!==1)return null;
++  return {bank:r[0].value,preset:r[1].value};
++ }
++ const unchanged=(a,b)=>a!==null&&b!==null&&a.bank===b.bank&&a.preset===b.preset;
++ function available(x,a){return same(x,a)&&int(x.max,0,KEEP-1)&&int(x.value,0,x.max);}
++ async function read(){
++  rows.clear();owner=null;
++  const start=await identity();
++  if(!start||!(start.bank in LEGACY_LAST))return {owner:start,rows:[]};
++  const found=[];
++  const width=typed?256:LEGACY_LAST[start.bank]+1;
++  for(let base=0;base<width;base+=16){
++   const group=Array.from({length:Math.min(16,width-base)},(_,i)=>synthAddress(start.bank,slot,base+i,typed));
++   const data=await client.paramGet(group);current();
++   if(data.length!==group.length||data.some((x,i)=>!same(x,group[i])))throw Error('Synth data addresses changed');
++   for(let i=0;i<data.length;i++){
++    const a=group[i],x=data[i];if(!available(x,a))continue;
++    let desc;
++    try{desc=await client.describe(a);}catch(e){current(); if(e?.status===STATUS.UNSUPPORTED)continue;throw e;}
++    current();
++    if(!desc.name||desc.max!==x.max||!int(desc.def,0,x.max)||!int(desc.unit,0,127))continue;
++    if(typed&&!(desc.unit&SYNTH_UNIT.TYPED))continue;
++    const id=base+i;
++    const label=typed?(ORIGINAL_LABEL[start.bank][id]??`${desc.name} · ID ${id}`):desc.name;
++    found.push({id,address:a,label,descriptorName:desc.name,max:x.max,value:x.value,
++      writable:typed?!!(desc.unit&SYNTH_UNIT.WRITE):true,names:desc.names});
++   }
++  }
++  const end=await identity();
++  if(!unchanged(start,end))return {owner:end,rows:[]};
++  owner=end;rows=new Map(found.map(r=>[r.id,r]));
++  return {owner:end,rows:found};
++ }
++ async function write(id,value){
++  const row=rows.get(id),before=owner;
++  if(!row?.writable||!int(value,0,row.max))throw Error('Synth control unavailable');
++  if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++  if(typed){
++   const desc=await client.describe(row.address);current();
++   if(desc.name!==row.descriptorName||desc.max!==row.max||(desc.unit&(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))!==(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))
++    throw Error('Synth descriptor changed');
++  }
++  const [seen]=await client.paramGet([row.address]);current();
++  if(!available(seen,row.address)||seen.max!==row.max||seen.value!==row.value)throw Error('Synth value changed');
++  if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++  const a=row.address,ack=await client.paramSet(a,value,row.value,{bank:before.bank,...typed?{retry:false}:{}});current();
++  if(!same(ack.fields,a)||ack.fields.value!==value)throw Error('Synth write not acknowledged');
++  const queued=typed&&ack.status===STATUS.QUEUED;
++  // A QUEUED echo is not a committed value. Only poll independent reads;
++  // never send a second edit or let another bank/preset satisfy this write.
++  for(let i=0;i<(queued?6:1);i++){
++   if(i){await pause(30);current();}
++   if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++   const [check]=await client.paramGet([a]);current();
++   if(!available(check,a)||check.max!==row.max||
++      !unchanged(before,await identity()))throw Error('Synth write not confirmed by readback');
++   if(check.value===value){
++    row.value=value;
++    return {owner:before,rows:[...rows.values()]};
++   }
++   if(check.value!==row.value)break;
++  }
++  throw Error('Synth write not confirmed by readback');
++ }
++ const observes=e=>e.gap||e.type==='resync'||e.kind===NOTIFY_KIND.PARAM&&(e.fields.kind===127||
++   e.fields.b===slot&&[BANK,PRESET,SETTLED,LEGACY,SYNTH_KIND.LOW,SYNTH_KIND.HIGH].includes(e.fields.kind));
++ return {typed,read,write,observes,close(){closed=true;rows.clear();owner=null;}};
++}
++
++export function createSynthView({link,onChange}){
++ let active=null;
++ function close(){const a=active;active=null;a?.stop();a?.api.close();}
++ function open(slot){
++  close();
++  const connection=link(),api=connection?.synthSession(slot);
++  if(!api){onChange({phase:'unsupported'});return;}
++  const state=active={api,value:null,busy:false,dirty:false};
++  const current=()=>active===state;
++  const paint=(phase,message)=>{
++   if(current()) onChange({phase,message,typed:api.typed,busy:state.busy,
++    owner:state.value?.owner??null,rows:state.value?.rows??[]});
++  };
++  async function refresh(){
++   if(state.busy){state.dirty=true;return;}
++   state.busy=true;
++   if(state.value?.owner)paint('loading');
++   try{
++    do{state.dirty=false;state.value=await api.read();}while(current()&&state.dirty);
++    state.busy=false;
++    paint(state.value.owner?.bank<2?'not-synth':state.value.rows.length?'ready':'unavailable');
++   }catch{state.busy=false;state.value=null;paint('unavailable','Firmware synth readback was not confirmed.');}
++  }
++  state.stop=connection.onNotify(e=>{if(current()&&api.observes(e))void refresh();});
++  state.write=async(id,value)=>{
++   if(!current()||state.busy)return;
++   state.busy=true;paint('ready');
++   try{state.value=await api.write(id,value);}
++   catch{state.value=null;state.dirty=true;paint('loading','Edit not confirmed. Reading firmware…');}
++   finally{
++    state.busy=false;
++    if(current()){if(state.dirty)void refresh();else paint('ready');}
++   }
++  };
++  paint('loading');void refresh();
++ }
++ return {open,close,write:(id,value)=>active?.write(id,value)};
++}
+--- /dev/null
++++ b/tests/product-remote/typed-synth.test.mjs
+@@ -0,0 +1,148 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {Dnr3Client} from "../../web/product-site/remote/dnr3-client.mjs";
++import {CAP,KEEP,NOTIFY_KIND,STATUS,OP,encodeRequest,decodeRequest} from '../../web/product-site/remote/dnr3.mjs';
++import {createSynthSession,synthAddress} from '../../web/product-site/remote/dnr3-typed-synth.mjs';
++function device({typed=true,bank=2,slot=0,confirm=true}={}){
++ let preset=0,settled=1,valid=true;
++ const writes=[],gets=[],desc=[];
++ const map=new Map();
++ const add=(id,flags=96,value=5,max=100)=>{
++  const key=synthAddress(bank,slot,id,typed);
++  map.set(JSON.stringify(key),{key,unit:flags,value,max,name:'id'+id});
++ };
++ const client={
++  has(c){return [CAP.PARAM,CAP.WATCH,CAP.BASS_BANK_GUARD,...typed?[CAP.TYPED_SYNTH]:[]].includes(c);},
++  async paramGet(a){
++   gets.push(a);
++   return a.map(x=>{
++    let y=map.get(JSON.stringify(x));
++    if(x.kind===41)return {...x,value:bank,max:3};
++    if(x.kind===42)return {...x,value:preset,max:127};
++    if(x.kind===43)return {...x,value:settled,max:1};
++    return {...x,max:y?.max??0,value:y?.value??KEEP};
++   });
++  },
++  async describe(key){
++   desc.push(key);
++   const y=map.get(JSON.stringify(key));
++   if(!y)throw Object.assign(Error('UNSUPPORTED'),{status:STATUS.UNSUPPORTED});
++   return {name:y.name,max:y.max,def:0,unit:y.unit};
++  },
++  async paramSet(key,value,expect,guard){
++   const y=map.get(JSON.stringify(key));
++   assert.equal(guard.bank,bank);
++   assert.equal(expect,y.value);
++   writes.push({key,value,expect,guard});
++   if(confirm)y.value=value;
++   return {fields:{...key,value}};
++  }
++ };
++ return {add,client,gets,desc,writes,session:createSynthSession(client,slot,()=>valid),
++   reopen(){preset++;},
++   unset(){settled=0;},
++   disconnect(){valid=false;},
++   set(id,field,value){map.get(JSON.stringify(synthAddress(bank,slot,id,typed)))[field]=value;}};
++}
++test('typed addressing 112/113, stable bank/slot, per-descriptor writable marker',async()=>{
++ assert.deepEqual(synthAddress(3,1,202),{kind:113,a:3,b:1,c:74});
++ assert.deepEqual(synthAddress(2,0,127),{kind:112,a:2,b:0,c:127});
++ const f=device({bank:3,slot:1});
++ f.add(6);f.add(128);f.add(202,32,0,0);f.add(90,64);
++ const s=await f.session.read();
++ assert.deepEqual(s.rows.map(r=>[r.id,r.writable]),[[6,true],[128,true],[202,false]]);
++ await assert.rejects(f.session.write(202,1));
++ await assert.rejects(f.session.write(90,3));
++ assert.equal(f.writes.length,0);
++ const edited=await f.session.write(128,21);
++ assert.equal(edited.rows[1].value,21);
++ assert.deepEqual(f.writes,[{key:{kind:113,a:3,b:1,c:0},value:21,expect:5,guard:{bank:3,retry:false}}]);
++ assert.ok(!f.gets.flat().some(x=>x.kind===1));
++});
++test('old capability uses only guarded R_ENG, verified device-supported subset',async()=>{
++ const f=device({typed:false});
++ f.add(2,0);
++ assert.deepEqual((await f.session.read()).rows.map(x=>x.address),[{kind:1,a:2,b:0,c:2}]);
++ await f.session.write(2,9);
++ assert.equal(f.writes[0].guard.bank,2);
++ assert.ok(!f.gets.flat().some(x=>x.kind>=112));
++});
++test('readback mismatch, descriptor change, current-value change, bank/preset epoch and detach refuse',async()=>{
++ const f=device({confirm:false});f.add(2);
++ await f.session.read();
++ await assert.rejects(f.session.write(2,8),/readback/);
++ assert.equal((await f.session.read()).rows[0].value,5);
++ f.set(2,'unit',32);
++ await assert.rejects(f.session.write(2,8),/descriptor/);
++ f.set(2,'unit',96);f.set(2,'value',11);
++ await assert.rejects(f.session.write(2,8),/value changed/);
++ assert.equal(f.writes.length,1);
++ await f.session.read();f.reopen();
++ await assert.rejects(f.session.write(2,8),/owner changed/);
++ f.unset();assert.equal((await f.session.read()).rows.length,0);
++ f.disconnect();await assert.rejects(f.session.read(),/connection changed/);
++});
++test('unmarked descriptor, failed discovery, active Chicago and incompatible firmware are not typed editors',async()=>{
++ const f=device();f.add(13,0);
++ assert.deepEqual((await f.session.read()).rows,[]);
++ const chicago=device({bank:0});
++ assert.deepEqual(await chicago.session.read(),{owner:{bank:0,preset:0},rows:[]});
++ assert.equal(createSynthSession({has:()=>false},0,()=>true),null);
++ assert.equal(f.session.observes({kind:NOTIFY_KIND.PARAM,fields:{kind:113,b:0}}),true);
++ assert.equal(f.session.observes({kind:NOTIFY_KIND.PARAM,fields:{kind:113,b:1}}),false);
++});
++
++test('QUEUED is an echo, polls and confirms only committed value without a second write',async()=>{
++ const f=device();f.add(12);
++ const base=f.client.paramGet;
++ let attempts=0,writes=0;
++ f.client.paramGet=async a=>{if(writes&&a[0]?.kind===112&&++attempts===3)f.set(12,'value',9);return base(a);};
++ f.client.paramSet=async (key,value,_old,options)=>{
++  writes++;assert.equal(options.retry,false);
++  return {status:STATUS.QUEUED,fields:{...key,value}};
++ };
++ const s=createSynthSession(f.client,0,()=>true,{pause:async()=>{}});
++ await s.read();
++ const result=await s.write(12,9);
++ assert.equal(result.rows[0].value,9);
++ assert.equal(writes,1); assert.equal(attempts,3);
++});
++
++test('QUEUED timeout or owner transition never paints an edit or retries a write',async()=>{
++ const f=device();f.add(12);
++ let writes=0;
++ f.client.paramSet=async (key,value)=>{writes++;return {status:STATUS.QUEUED,fields:{...key,value}};};
++ const s=createSynthSession(f.client,0,()=>true,{pause:async()=>{}});
++ await s.read();
++ await assert.rejects(s.write(12,9),/readback/); assert.equal(writes,1);
++ assert.equal((await s.read()).rows[0].value,5);
++ const g=createSynthSession(f.client,0,()=>true,{pause:async()=>{f.reopen();}});
++ await g.read();await assert.rejects(g.write(12,9),/owner changed/);
++ assert.equal(writes,2);
++});
++
++test('typed PARAM_SET codec requires explicit guard, transports wrong bank for native rejection',()=>{
++ const key={kind:113,a:3,b:1,c:74}, fields={epoch:23,...key,expect:4,value:77,expect_bank:2};
++ assert.deepEqual(decodeRequest(encodeRequest(OP.PARAM_SET,4,fields)).fields,fields);
++ assert.throws(()=>encodeRequest(OP.PARAM_SET,4,{...fields,expect_bank:undefined}),/requires a bank guard/);
++ assert.throws(()=>encodeRequest(OP.PARAM_SET,4,{...fields,expect_bank:4}),/unknown synth bank/);
++ assert.throws(()=>encodeRequest(OP.PARAM_SET,4,{...fields,b:2}),/requires a bass engine address/);
++});
++
++test('audited original labels disambiguate 6-character display names; unknown ids stay explicit',async()=>{
++ const f=device({bank:2});f.add(22);f.add(26);f.add(190);
++ f.set(22,'name','Attack');f.set(26,'name','Attack');
++ const s=await f.session.read();
++ assert.deepEqual(s.rows.map(x=>x.label),['Filter Attack','Amp Attack','id190 · ID 190']);
++ await f.session.write(22,6);
++});
++
++test('actual client writes typed only once on cable timeout; legacy transport retry remains',async()=>{
++ const packets=[],client=new Dnr3Client({transport:{onSysex(){return ()=>{};},sendSysex(x){packets.push(decodeRequest(x));}},timeoutMs:8});
++ client.hello={caps:CAP.BASS_BANK_GUARD|CAP.TYPED_SYNTH};
++ client.epoch=41;
++ await assert.rejects(client.paramSet(synthAddress(2,0,16),7,0,{bank:2,retry:false}),/timeout/);
++ assert.equal(packets.length,1);assert.equal(packets[0].fields.kind,112);
++ await assert.rejects(client.paramSet(synthAddress(2,0,2,false),7,0,{bank:2}),/timeout/);
++ assert.equal(packets.length,3);assert.equal(packets[1].fields.kind,1);assert.equal(packets[1].seq,packets[2].seq);
++});
