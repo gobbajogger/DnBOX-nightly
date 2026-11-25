@@ -1,0 +1,25 @@
+--- a/wire.mjs
++++ b/wire.mjs
+@@ -90,7 +90,7 @@
+   }
+   const good=[];
+   assert.ok(link.hello().caps & 0x1000);
+-  for (const [bank,slot,ids,edit,status] of [[2,0,[2,5,16,17,19,22,23,24,25,26,27,28,29],16,d.STATUS.QUEUED],[3,1,[7],7,d.STATUS.OK]]) {
++  for (const [bank,slot,ids,edit,status] of [[2,0,[2,5,16,17,19,22,23,24,25,26,27,28,29,255],16,d.STATUS.QUEUED],[3,1,[7],7,d.STATUS.OK]]) {
+     const addr=(id)=>({kind:id<128?112:113,a:bank,b:slot,c:id&127});
+     const seen=[];
+     for(let n=0;n<256;n+=16){
+@@ -144,6 +144,13 @@
+     for(const id of seen){
+       const a=addr(id), dsc=await client.describe(a);
+       assert.equal(dsc.unit,0x60);
++      if(id===255){
++        assert.equal(dsc.name,'LINK'); assert.equal(dsc.max,1);
++        const oldLink=await read(a);
++        assert.ok(oldLink===0 || oldLink===1);
++        await assert.rejects(client.paramSet(a,2,oldLink,{bank}), e=>e.status===d.STATUS.BAD);
++        assert.equal(await read(a),oldLink);
++      }
+       const initial=await read(a);
+       const added=(initial+19)%(dsc.max+1);
+       const put=await client.paramSet(a,added,initial,{bank});

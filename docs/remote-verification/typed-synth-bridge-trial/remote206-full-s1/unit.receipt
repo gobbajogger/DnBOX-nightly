@@ -1,0 +1,11 @@
+✔ 145 source-backed disjoint identities, high bank bits and no collapsed sequencer fields (7.126592ms)
+✔ only discovered rows, read-only high control, stable LINK extension and future unknowns (2.323864ms)
+✔ partial, duplicate or unstable descriptor choices do not change wire values or authorize stale write (2.284847ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.558778
