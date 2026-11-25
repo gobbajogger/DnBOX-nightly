@@ -1,0 +1,86 @@
+--- a/firmware/src/dsp/s1c/s1c.c
++++ b/firmware/src/dsp/s1c/s1c.c
+@@ -572,6 +572,11 @@
+ static float xl_read(const s1c_dline *d, float del)
+ {
+     float pos = (float)d->w - del;
++    /* Disabled/short delay still advances its 16-word warm ring.
++     * For bounded binary32 pos, successive +16 moves toward zero
++     * exactly until the final wrap, so collapse all whole steps. */
++    if (d->len == 16 && pos < -16.0f && pos >= -0x1p23f)
++        pos += (float)(((unsigned)(-pos) >> 4) << 4);
+     while (pos < 0.0f) pos += (float)d->len;
+     int i = (int)pos; float f = pos - (float)i;
+     int j = i + 1 == d->len ? 0 : i + 1;
+@@ -854,11 +859,36 @@
+ #endif
+ #endif
+     (void)cr; (void)cw;
++#if S1C_FAST
++    uint32_t crush_hz_key = UINT32_MAX;
++#endif
++#if S1C_FAST && S1C_CSM && S1C_NO_SEQ
++    /* No internal sequencer changes t during this render span. Keep the
++     * multiply rounded separately, exactly as in the recurrence below. */
++    float port_target[sizeof s1c_smid];
++    uint8_t port_id[sizeof s1c_smid];
++    unsigned port_n = 0;
++    for (i = 0; i < sizeof s1c_smid; i++) {
++        const float t = c1 * s->t[s1c_smid[i]];
++        const s1c_fb cur = {.f=s->c[i]}, next = {.f=t+c2*cur.f};
++        if (next.u != cur.u) {
++            port_target[port_n] = t;
++            port_id[port_n++] = (uint8_t)i;
++        }
++    }
++#endif
+     for (f = 0; f < n; f++) {
+ #if S1C_FAST
+         int cu = (f & 3) == 0;
+ #if S1C_CSM
++#if S1C_NO_SEQ
++        for (i = 0; i < port_n; i++) {
++            const unsigned id = port_id[i];
++            s->c[id] = port_target[i] + c2 * s->c[id];
++        }
++#else
+         for (i = 0; i < (int)sizeof s1c_smid; i++) s->c[i] = c1 * s->t[s1c_smid[i]] + c2 * s->c[i];
++#endif
+ #else
+         for (i = 0; i < s1c_nsm; i++) { unsigned q = s1c_sm[i]; s->c[q] = c1 * s->t[q] + c2 * s->c[q]; }
+ #endif
+@@ -897,8 +927,18 @@
+         if ((f & 7) == 0)
+ #endif
+         {
++#if S1C_FAST
++            const s1c_fb hz = {.f=P(BCSR)};
++            if (f == 0 || P(LBC) != 0.0f || crush_hz_key != hz.u) {
++                /* Command clock writes only inc and does not advance the sample hold.
++                 * With LFO off and unchanged key this is the exact current inc. */
++                crush_hz_key = P(LBC) == 0.0f ? hz.u : UINT32_MAX;
++#endif
+             float bsr = log2f(P(BCSR)) + 4.0f * lfo01(s, P(LBC));
+             s1u_crush_clock(&s->crush, clampf(exp2f(bsr), 2048.0f, 48000.0f), s->sr);
++#if S1C_FAST
++            }
++#endif
+         }
+         y = s1u_crush_run(&s->crush, y);
+         y *= lfo10(s, P(LTREM));
+--- a/firmware/src/dsp/s1c/s1u.c
++++ b/firmware/src/dsp/s1c/s1u.c
+@@ -166,6 +166,13 @@
+ /* ---- auto-pan ---- */
+ void s1u_autopan(float *ph, float y, float rate, float amount, float sr, float *l, float *r)
+ {
++    /* At zero amount both table angles reflect onto sin_q[32]. Keep
++     * the oscillator warm, with exactly the normal phase step and wrap. */
++    if (amount == 0.0f) {
++        *ph += rate / sr; if (*ph >= 1.0f) *ph -= 1.0f;
++        *l = *r = y * sin_q[32];
++        return;
++    }
+     float pan = s1u_sin((uint32_t)(*ph * 4294967296.0f)) * amount;
+     *ph += rate / sr; if (*ph >= 1.0f) *ph -= 1.0f;
+     uint32_t pa = (uint32_t)((1.0f + pan) * 0.125f * 4294967296.0f);   /* angle / 2pi */
