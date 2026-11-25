@@ -207,6 +207,39 @@ async def reset_knob(page, w, h):
     await step.tap(); await step.tap()
     await expect(page.locator('#velocity [data-lane-step]').first).to_contain_text('100')
 
+async def midi_unavailable_and_denied(page, w, h):
+    # Exercise the unsupported API branch, not the generic exception in the default fixture.
+    await page.evaluate("""() => Object.defineProperty(navigator, 'requestMIDIAccess',
+        {configurable: true, value: undefined})""")
+    await page.locator('#connect').tap()
+    await expect(page.locator('#connection-message')).to_contain_text('Web MIDI isn’t available')
+    await expect(page.locator('#conn-state')).to_have_text('Disconnected')
+    await expect(page.locator('#draft-project-label')).to_be_visible()
+    await page.locator('#close-connection').tap()
+    await expect(page.locator('#connection-result')).to_be_hidden()
+
+    # Browser rejection happens before the port pair is accessible.
+    await page.evaluate("""() => {
+        window.__requestedMidi = [];
+        Object.defineProperty(navigator, 'requestMIDIAccess', {configurable: true,
+          value: async options => {
+            window.__requestedMidi.push(options);
+            throw new DOMException('Denied', 'NotAllowedError');
+          }});
+    }""")
+    await page.locator('#connect').tap()
+    await expect(page.locator('#connection-message')).to_contain_text('Allow MIDI access')
+    await expect(page.locator('#conn-state')).to_have_text('Disconnected')
+    assert await page.evaluate('window.__requestedMidi') == [{'sysex': True}]
+    await page.locator('#close-connection').tap()
+    await expect(page.locator('#draft-project-label')).to_be_visible()
+    await expect(page.locator('#tempo')).to_have_text('125 BPM')
+    await page.locator('[data-tempo="up"]').tap()
+    await expect(page.locator('#tempo')).to_have_text('126 BPM')
+    await expect(page.locator('#tempo-state')).to_have_text('Local')
+    assert await page.evaluate('window.__dnr3Sent') == []
+
+
 async def connection(page, w, h):
     html = await page.content()
     for gone in ('emulator-start', 'emulator-stop', 'data-sound-source', 'data-mix-source', 'Apply to instrument'):
@@ -401,7 +434,7 @@ async def main():
             n = 0
             try:
                 for w, h in SIZES:
-                    for case in (drums_default, pages_and_params, accent_row, break_screen, tempo, keybed, reset_knob, connection, fw_motion, preset_banks, adjacent_arp_steps):
+                    for case in (drums_default, pages_and_params, accent_row, break_screen, tempo, keybed, reset_knob, midi_unavailable_and_denied, connection, fw_motion, preset_banks, adjacent_arp_steps):
                         context, page, errors = await open_remote(browser, w, h)
                         await case(page, w, h)
                         assert not errors, errors

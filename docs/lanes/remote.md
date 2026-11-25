@@ -105,3 +105,7 @@ but Draft choices do not select a preset on the instrument.
 ## Typed Remote product draft · 2026-11-25
 The both-engine bridge is applied to product source with the ARP & Steps route beside (not replacing) Bass track notes. See [focused evidence and release blockers](../remote-verification/typed-product-admission/README.md). The website and full typed release are not promoted; native owner-generation and sandboxed Chromium gates remain.
 The client now negotiates the coherent synth owner token; a typed receiver without it is read-only in the new editor. Local typed host round-trips pass with the updated receiver; the touch browser and real target runtime gate are still open. Nothing is promoted or published.
+
+## Mobile MIDI admission checks · 2026-11-25
+- The product connection test now explicitly exercises a missing Web MIDI API and denial of its SysEx permission. Both must remain Disconnected with usable Draft controls and no outgoing edits; the denied case must actually request `{sysex: true}`.
+- Focused Node suite: 217 passed, eight skipped, zero failures. The new touch fixture compiles, but sandboxed Chromium did not start because the browser executable was missing. A mock touch pass would verify Remote gestures and navigation, not a real phone's USB or SysEx connection. No phone connection or new release is claimed.
