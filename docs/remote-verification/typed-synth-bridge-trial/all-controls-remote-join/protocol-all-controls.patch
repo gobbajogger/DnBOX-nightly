@@ -1,0 +1,68 @@
+--- a/firmware/src/app/remote_dnr3.c
++++ b/firmware/src/app/remote_dnr3.c
+@@ -270,6 +270,10 @@
+ }
+ /* ui.c; e: kind, a, b, c. -1: no such value (or set and read only); *d: its descriptor */
+ int ui_remote_pref(const uint8_t *e, int set, int v, const x0x_param_t **d);
++#if X0X_REMOTE_TYPED_SYNTH
++int ui_remote_synth(unsigned bank, unsigned voice, unsigned id, int set, int value,
++                    const x0x_param_t **dp, int *queued);
++#endif
+ RD_SIZE __attribute__((noinline)) static int rd_pget(const uint8_t *e, const x0x_param_t **d)
+ {
+     *d = 0;
+@@ -548,23 +552,9 @@
+ 
+ RD_SIZE static int rd_synth_read(const uint8_t *e,const x0x_param_t **d)
+ {
+-    unsigned id=rd_synth_id(e);
+-    if(!rd_synth_target(e)||rd_bass_guard(e[2],e[1]))return -1;
+-#if X0X_SYNTHONE_PATCH
+-    if(e[1]==ORIGINAL_SOUND_SYNTHONE){
+-        int slot=s1_patch_slot(id);
+-        s1_patch_value state;
+-        if(slot<0||!engine_s1_patch_read(e[2],id,&state))return -1;
+-        static x0x_param_t field={0,S1_PATCH_STEPS,0,0};
+-        field.name=s1_patch_at((unsigned)slot)->label;
+-        *d=&field;return state.position;
+-    }
+-#endif
+-    if(e[1]==ORIGINAL_SOUND_JUNO && id==7u){
+-        const uint8_t cutoff[]={R_ENG,T_303,e[2],2};
+-        return rd_pget(cutoff,d);
+-    }
+-    return -1;
++    if (!rd_synth_target(e) || rd_bass_guard(e[2],e[1])) return -1;
++    int queued;
++    return ui_remote_synth(e[1],e[2],rd_synth_id(e),0,0,d,&queued);
+ }
+ RD_SIZE static int rd_synth_write(const uint8_t *q)
+ {
+@@ -582,21 +572,13 @@
+     if(rd_g(q+4,2)!=(uint32_t)old){status=RS_CONFLICT;goto done;}
+     value=(int)rd_g(q+6,2);
+     if(value>(int)d->max){status=RS_BAD;goto done;}
+-#if X0X_SYNTHONE_PATCH
+-    if(q[1]==ORIGINAL_SOUND_SYNTHONE){
+-        unsigned id=rd_synth_id(q);
+-        s1_patch_value state;
+-        if(!engine_s1_patch_read(q[2],id,&state)||state.position!=old){status=RS_CONFLICT;goto done;}
+-        int applied=engine_s1_patch_set(q[2],state.revision,id,(unsigned)value);
+-        if(applied!=S1_EDIT_QUEUED){status=applied==S1_EDIT_BUSY?RS_BUSY:RS_CONFLICT;goto done;}
+-        ui.dirty=1;
+-        status=RS_QUEUED;  /* not visible until next audio boundary; client must read back */
+-    }else
+-#endif
+-    {
+-        const uint8_t cutoff[]={R_ENG,T_303,q[2],2};
+-        if(ui_remote_pref(cutoff,1,value,&d)!=value){status=RS_CONFLICT;goto done;}
++    int queued;
++    if (ui_remote_synth(q[1], q[2], rd_synth_id(q), 1, value, &d, &queued) != value) {
++        status=RS_CONFLICT;
++        goto done;
+     }
++    status=queued ? RS_QUEUED : RS_OK;
++    rd.dirty=1;
+     rd.synth_key=0;
+     rd_bytes(q,4,128);rd_u((uint32_t)value,2);
+ done:

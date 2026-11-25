@@ -1,0 +1,100 @@
+--- a/tools/build.py
++++ b/tools/build.py
+@@ -233,6 +233,7 @@
+ MODEL = "pro"                       # current USB app name variant, set by --model
+ VERSION = None                      # numeric X.Y.Z passed to the firmware as X0X_VERSION
+ GIT_SHA = None                      # short source revision, diagnostics only
++GIT_SHA_BYTES = None                # complete DNR3 source identity
+ RELEASE_LABEL = None                # display only, e.g. 0.1.3_openbeta; not part of the package identity
+ 
+ 
+@@ -582,7 +583,7 @@
+         flags.append(usb_name)  # app only: loader, VID/PID and package identity unchanged
+     if VERSION and os.environ.get("X0X_DEBUG") == "1":
+         raise SystemExit("X0X_DEBUG=1 (register peek / poke over USB) is for development builds only")
+-    for flag in ("X0X_CDC", "X0X_DEBUG", "X0X_DEV_WOBBLE", "X0X_WOBBLE", "X0X_LCD_TRACE"):
++    for flag in ("X0X_CDC", "X0X_DEBUG", "X0X_DEV_WOBBLE", "X0X_WOBBLE", "X0X_LCD_TRACE", "X0X_REMOTE_DNR3", "X0X_REMOTE_TYPED_SYNTH"):
+         v = os.environ.get(flag)    # unset: the default in firmware headers / below
+         if v in ("0", "1"):
+             flags.append(f"-D{flag}={v}")
+@@ -620,7 +621,7 @@
+             if not re.fullmatch(r"[0-8]", baud):
+                 raise SystemExit("X0X_SMK_LCD_BAUD: 0..8 (SPI clock = 60 MHz / (n + 1))")
+             flags.append(f"-DLCD_BAUD={baud}u")
+-    flags += version_defines(VERSION, RELEASE_LABEL, GIT_SHA)
++    flags += version_defines(VERSION, RELEASE_LABEL, GIT_SHA, GIT_SHA_BYTES)
+     units, objs = app_compile_commands(flags, original_synth, wobble)
+     for directory in {o.parent for o in objs}:
+         directory.mkdir(parents=True, exist_ok=True)
+@@ -963,10 +964,10 @@
+     version = canonical_version(text)
+     if not isinstance(git_sha, str) or not re.fullmatch(r"[0-9a-f]{40}", git_sha):
+         raise ValueError("Git SHA must be 40 lowercase hexadecimal characters")
+-    return {"version_macro": version, "git_sha": git_sha[:8]}
++    return {"version_macro": version, "git_sha": git_sha[:8], "git_sha_bytes": bytes.fromhex(git_sha)}
+ 
+ 
+-def version_defines(version, release_label, git_sha):
++def version_defines(version, release_label, git_sha, sha_bytes=None):
+     """Application-only defines shared by UI, editor and USB display text."""
+     flags = []
+     if version:
+@@ -975,11 +976,14 @@
+         flags.append(f'-DX0X_RELEASE_LABEL="{release_label}"')
+     if git_sha:
+         flags.append(f'-DX0X_GIT_SHA="{git_sha}"')
++    if sha_bytes is not None:
++        assert isinstance(sha_bytes, bytes) and len(sha_bytes) == 20
++        flags.append("-DX0X_DNR3_GIT_SHA_BYTES={" + ",".join(str(byte) for byte in sha_bytes) + "}")
+     return flags
+ 
+ 
+ def main():
+-    global PRODUCT, VERSION, GIT_SHA, RELEASE_LABEL, BOARD, MODEL, APP_SLOT, APP_CODE_MAX, OUT, GEN, LDR
++    global PRODUCT, VERSION, GIT_SHA, GIT_SHA_BYTES, RELEASE_LABEL, BOARD, MODEL, APP_SLOT, APP_CODE_MAX, OUT, GEN, LDR
+     ap = argparse.ArgumentParser()
+     versions = ap.add_mutually_exclusive_group()
+     versions.add_argument("--release", metavar="X.Y[.Z]", help="release build: numeric package identity and version string")
+@@ -1041,13 +1045,14 @@
+     # image from that directory, even if a host test is generating it concurrently.
+     GEN = OUT / ("native-gen" if BOARD == "fm1" else "gen")
+     name = f"{stem}.fwsc"
+-    VERSION = GIT_SHA = None
++    VERSION = GIT_SHA = GIT_SHA_BYTES = None
+     RELEASE_LABEL = None
+     if nightly:
+         if BOARD != "smk37" or MODEL not in ("elite", "pro"):
+             ap.error("--nightly-version supports SMK-37 Elite/Pro only")
+         VERSION = nightly["version_macro"]
+         GIT_SHA = nightly["git_sha"]
++        GIT_SHA_BYTES = nightly["git_sha_bytes"]
+     if a.release:
+         # identity FM-1_9 + major, minor, patch as two digits each (0.10 -> FM-1_9001000). FM-1 is the
+         # model the update tools match on; the number is ours (X0X 0.3..0.9 were FM-1_9XY, one digit
+--- a/firmware/src/app/engine.h
++++ b/firmware/src/app/engine.h
+@@ -31,6 +31,10 @@
+  * BUSY means a note lock or an earlier edit still owns the part. */
+ enum { S1_EDIT_REJECTED, S1_EDIT_QUEUED, S1_EDIT_BUSY };
+ int engine_s1_patch_pending(void);
++
++#if X0X_REMOTE_TYPED_SYNTH
++uint32_t engine_remote_synth_generation(unsigned voice);
++#endif
+ int engine_s1_patch_snapshot(unsigned voice, s1_patch_snapshot *out);
+ int engine_s1_patch_read(unsigned voice, unsigned factory_id, s1_patch_value *out);
+ int engine_s1_patch_set(unsigned voice, uint32_t revision, unsigned factory_id, unsigned position);
+--- a/firmware/src/app/original_presets.inc
++++ b/firmware/src/app/original_presets.inc
+@@ -70,6 +70,11 @@
+ int engine_s1_patch_pending(void)
+ { return s1_edit[0].pending || s1_edit[1].pending; }
+ 
++#if X0X_REMOTE_TYPED_SYNTH
++uint32_t engine_remote_synth_generation(unsigned voice)
++{ return s1_patch_identity(voice); }  /* validated voice on remote ingress */
++#endif
++
+ static void s1_patch_replaced(int voice)
+ {
+     ++s1_patch_revision[voice];
