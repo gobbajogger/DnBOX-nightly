@@ -238,6 +238,11 @@
       "sha256": "d0a47bbd74110b0fb21d46f0c8e83b90718117944c9caeca830f8e18f4f8d517"
     },
     {
+      "path": "emulator/index.html",
+      "bytes": 219,
+      "sha256": "8abb604672046666899c00905ed2d34d3bc8f407d19a75fac082a8fd7df5c441"
+    },
+    {
       "path": "hardware-status.mjs",
       "bytes": 1676,
       "sha256": "1d2c5da9edb0c010cb13074d1191dfa1a97932a4860f63cd9c324592072d67ef"
@@ -759,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 68088,
-      "sha256": "426bc57d43d3d85b3351055bf0f525aa34f0541e61403f49267b06d71432456b"
+      "bytes": 101705,
+      "sha256": "5ea606afb1d1175936d54cc10e5a6ae34fc7741d20123fe3a415e8792a72c4cf"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -778,9 +783,19 @@
       "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48"
     },
     {
+      "path": "remote/bass-engines.mjs",
+      "bytes": 6722,
+      "sha256": "66b0ed3948c69ea61004c81fd9ec0b4ab1a22c36579d137e16130e30e680adce"
+    },
+    {
+      "path": "remote/bass-live-roll.css",
+      "bytes": 2295,
+      "sha256": "f952f0bc00274cbb5b96b8b03d94a01bd793e98744be5a0ca254d26f29a235df"
+    },
+    {
       "path": "remote/break-sequence.mjs",
-      "bytes": 4256,
-      "sha256": "e7d1d1629419265e83ea87ffbff7ab99f21b95f0313e4c51e9b18452131b6b55"
+      "bytes": 12587,
+      "sha256": "0e475bf9aff8a93b9b510bb2dec7831cc5a1fc02231e405b84b0f82a70bb451c"
     },
     {
       "path": "remote/catalog.json",
@@ -853,19 +868,74 @@
       "sha256": "1ba2d5554e49540af599e8c65dbe26290b5d3d691229d5f55c866f69f1a344ba"
     },
     {
+      "path": "remote/dnr3-bass-roll.mjs",
+      "bytes": 12816,
+      "sha256": "7c08b23d9e33a267f5259695be7dd820a87fbcf6cacb3177bc57987d2dc69ecf"
+    },
+    {
+      "path": "remote/dnr3-break-steps.mjs",
+      "bytes": 3617,
+      "sha256": "374b44ccabb9d00db2b6dfe26a9cb85da0cd0a7c56713207dcef23176469486a"
+    },
+    {
+      "path": "remote/dnr3-chicago.mjs",
+      "bytes": 5613,
+      "sha256": "817b06c80ce26a800a6eeb77a97831e02820667af2f921ec35aef88abcd46155"
+    },
+    {
       "path": "remote/dnr3-client.mjs",
-      "bytes": 9112,
-      "sha256": "2e11dc1647af29c1851e4950473142e7f6404e857d1e951757eac3e4f028a70b"
+      "bytes": 10983,
+      "sha256": "d6d4a4479995be2df4af0d0e5cb5c325e5a29117eb87084c8b6ad2894bc89ae9"
+    },
+    {
+      "path": "remote/dnr3-clips.mjs",
+      "bytes": 3444,
+      "sha256": "1b7e5ac04797e030d17e028ea9f7226a3a3025dd328386f8bda1e019862061d3"
+    },
+    {
+      "path": "remote/dnr3-link.mjs",
+      "bytes": 13120,
+      "sha256": "c28f03aae39cecd393cd3554b6812777b43c2c5f5e5d5082cc77cdb47cef7bfd"
+    },
+    {
+      "path": "remote/dnr3-mix.mjs",
+      "bytes": 3267,
+      "sha256": "aeaa385d052dad9d72668d77a2ffa0fabbd6cbdc93d91ffae9ec18dcec63098e"
+    },
+    {
+      "path": "remote/dnr3-motion.mjs",
+      "bytes": 5162,
+      "sha256": "2173ef5c6de9f6bd49b91d6cd370f52e5dccb8f95cda4bf2ca883e483cee4121"
+    },
+    {
+      "path": "remote/dnr3-sj6-catalog.mjs",
+      "bytes": 8937,
+      "sha256": "4bcf5270a15bbc1381ca69d496eee14155a30d30743bd3a708cf60ed0e22b0fa"
+    },
+    {
+      "path": "remote/dnr3-synth-catalog.mjs",
+      "bytes": 10895,
+      "sha256": "1a1c5eccc7bbc7bb8f70642155ba7ebe2927a80913d3124de36590640e5e3023"
+    },
+    {
+      "path": "remote/dnr3-synth-editor.mjs",
+      "bytes": 3781,
+      "sha256": "adc33b34e5d0770cbe45f85ce88c2e42bf5bcc82bfcb540024996884c1620423"
+    },
+    {
+      "path": "remote/dnr3-typed-synth.mjs",
+      "bytes": 9750,
+      "sha256": "b0e4887746a3fd617370de0c402640c862be8217578e906044daa1474287ef52"
     },
     {
       "path": "remote/dnr3.mjs",
-      "bytes": 14509,
-      "sha256": "df6ce82318ca178ad4d8f5f2cd800fd41f157406501a3886b192ead604c88c84"
+      "bytes": 17262,
+      "sha256": "1c66ae4983a0f08c68708e4a5cf75874addef3a2e5c1b641b0d962be21afda19"
     },
     {
       "path": "remote/draft-file.mjs",
-      "bytes": 10024,
-      "sha256": "d7ddb5626840b315c42961b9220a3ecef784dff643a7c454b77888eae06c7416"
+      "bytes": 10016,
+      "sha256": "65fd7559a644b732b13a184f84e1f124b01a0380e07be88bab2a9ec2e09bf916"
     },
     {
       "path": "remote/draft-identity.mjs",
@@ -874,8 +944,18 @@
     },
     {
       "path": "remote/draft-ui.mjs",
-      "bytes": 2909,
-      "sha256": "a3021f3e3f995dd8c1d5917329a39ccaa77b057d2be2f11b66a252f66d2c7cbc"
+      "bytes": 2736,
+      "sha256": "7c9ab6587d329687fd3175c0b88239abd8c9080058bbc35651df56caf5e2959a"
+    },
+    {
+      "path": "remote/drum-options.mjs",
+      "bytes": 4770,
+      "sha256": "d54952507892a6e4c367ce1cc626b344b28c2fddf21c049059c1c2683e1fbc13"
+    },
+    {
+      "path": "remote/drum-voice-icons.generated.mjs",
+      "bytes": 9855,
+      "sha256": "fcd8a2a9e863601e6fbb14536a2d2cf9d1d3bce12f922c70366a94fc351d74ff"
     },
     {
       "path": "remote/envelope-observations.mjs",
@@ -888,19 +968,44 @@
       "sha256": "75dc2e79346fc70bf4ec927929e9368814eb1d40587fcc6116c423b9431b3b48"
     },
     {
+      "path": "remote/firmware-engines.json",
+      "bytes": 28530,
+      "sha256": "eca434dc622dcaa545f72b4ab0865ef3d37a9ae82432b0c5e94417bd100f15ad"
+    },
+    {
+      "path": "remote/firmware-glyphs.json",
+      "bytes": 9532,
+      "sha256": "6f0e5d579bcf838f79c46c4a25d8c12630d389c260503969d2549efc742e0178"
+    },
+    {
+      "path": "remote/firmware-labels.json",
+      "bytes": 544827,
+      "sha256": "1ad02333d6a67afc4ea4dacbc667dd289a185d6bd2f6ed80659165d5810dd6f1"
+    },
+    {
+      "path": "remote/firmware-labels.mjs",
+      "bytes": 3060,
+      "sha256": "6afbdc3406ae6c47bcf905c06762b5fca40882e421b54524bac8e9afa83df5e8"
+    },
+    {
       "path": "remote/firmware-link.mjs",
       "bytes": 7423,
       "sha256": "93d859f66e503f6645641b0403234ea29487432e99e1cb8f78c21213c912f154"
     },
     {
       "path": "remote/frame.mjs",
-      "bytes": 1584,
-      "sha256": "90e8ebb4f8e2630503e809736689998e44b38ac3dd13fd30b385ffe8dbe5348f"
+      "bytes": 1571,
+      "sha256": "bb10632b8431ddc1690e62f2bc99d5ed38ea13abbb5e4f3a24355006ae8ce510"
     },
     {
       "path": "remote/funkybeats-view.mjs",
-      "bytes": 9811,
-      "sha256": "16b31727418011124697795a87c178c659aa93e3587fb3ea07cab48e11569e2c"
+      "bytes": 13267,
+      "sha256": "282179fe135cf82779880450ab8c2271fc21539b930fcd8742fd9169d29c3514"
+    },
+    {
+      "path": "remote/fw-glyphs.mjs",
+      "bytes": 4601,
+      "sha256": "2659bc483532c4e6b923ec2d60e6496fbee4eb186e6fcc0c740074c70537ac9c"
     },
     {
       "path": "remote/glyph-live.mjs",
@@ -910,7 +1015,7 @@
     {
       "path": "remote/glyph-registry.mjs",
       "bytes": 71505,
-      "sha256": "210cddcd07e3f7423f3f290e48e37d18c1933f3d2b4dd54ab0a047e379a1a40e"
+      "sha256": "a08a8494a910e8fe3201d40499e93b37707b502ba7e13036079fc55042031453"
     },
     {
       "path": "remote/glyph-render.mjs",
@@ -944,13 +1049,23 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7964,
-      "sha256": "ec5075ddff2df9347a6149e744d51c2ab89a2d3633bf5d86dc03a95c0a4fbbbd"
+      "bytes": 8324,
+      "sha256": "9b55f5d3e119682d3e5fb560ebd9962e941964de382e02d7b3b579976ec201cb"
+    },
+    {
+      "path": "remote/keybed-scroll.mjs",
+      "bytes": 1692,
+      "sha256": "e207a701c17408bd26e7e08b0bcced443031ab869ee1e8317dc1be8d36723d87"
     },
     {
       "path": "remote/lane.mjs",
-      "bytes": 2570,
-      "sha256": "144af779aed9642acd7fdabc5a091f29f55413ffc9e3d682cb61e5d0f2855288"
+      "bytes": 2792,
+      "sha256": "bcbbf7e033f6774a731c6f2dd7e3045ef1b15d830503e039b19dfdd8b0030155"
+    },
+    {
+      "path": "remote/live-drum-pages.mjs",
+      "bytes": 6740,
+      "sha256": "a602fa48e470b57e4c727a350ef730cb05676a93d8020838c6a85db25b26edc9"
     },
     {
       "path": "remote/local-instrument.mjs",
@@ -1013,9 +1128,19 @@
       "sha256": "d2672234fc66bccbacda67cf40cad68e33e99371980e150fb18f685f2c6676a0"
     },
     {
+      "path": "remote/preset-banks.json",
+      "bytes": 110325,
+      "sha256": "84bc4e2891f002a5faa688c93f69008c841bd5b7eec8f0f408e1a80b6282f6e6"
+    },
+    {
       "path": "remote/remote.mjs",
       "bytes": 4547,
       "sha256": "edc5331481e0d6047fbdfdbe4845f07b4b623b3a852ae11af01875e164934dab"
+    },
+    {
+      "path": "remote/reset-gesture.mjs",
+      "bytes": 2942,
+      "sha256": "f6e6d61855f89faa1e4fb80cc8ee7854db81c5baa254d773a00be2433489cf99"
     },
     {
       "path": "remote/roll.mjs",
@@ -1024,13 +1149,13 @@
     },
     {
       "path": "remote/runtime-mix-map.mjs",
-      "bytes": 2439,
-      "sha256": "b3a7f44bb361f970340a4349ae8c3838262cf8306690c0e78be35c6e2b4a3ec2"
+      "bytes": 2626,
+      "sha256": "5a628c1c4f14563ce596bc4cfa5a575e5eac26ac5c66029049abd57f7521fffc"
     },
     {
       "path": "remote/runtime-mix-state.mjs",
-      "bytes": 4116,
-      "sha256": "d241ce343a2622c0d0cc12aff53a7921fe1ba6855f2006a74083f782ecf897aa"
+      "bytes": 4853,
+      "sha256": "1faa83a4ab18ddb2825c251abdb6539ea3b00d887e3decc32afb99d28645e62e"
     },
     {
       "path": "remote/runtime-sound-map.mjs",
@@ -1054,8 +1179,8 @@
     },
     {
       "path": "remote/sound.mjs",
-      "bytes": 3861,
-      "sha256": "22ada8759f185df6a5f88b991dac023ccb9954c5a8d980f201b679bacf5a36f6"
+      "bytes": 4092,
+      "sha256": "8b2b0db9bd2ada8b55afb091e954367f3463a06082ca7675db0896a87cf87c24"
     },
     {
       "path": "remote/source-sounds.json",
@@ -1074,8 +1199,13 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 34954,
-      "sha256": "cfb447d07fd3adf8f038ae5e3698154513731bd1fc95c897d8dec5730533be20"
+      "bytes": 52401,
+      "sha256": "c00cd1cf9acb9105a5e53af62d834256b5e3184a13db21784c7cea186b6e71c9"
+    },
+    {
+      "path": "remote/tempo-control.mjs",
+      "bytes": 6388,
+      "sha256": "3b64983d6ea9c8ea8285c9bfedd3b989c1c7583d5262483c6b8e5aabbf553c07"
     },
     {
       "path": "remote/timeline.mjs",
@@ -1174,8 +1304,8 @@
     },
     {
       "path": "tools/index.html",
-      "bytes": 2478,
-      "sha256": "60551425427fab441fc74385a04209615a937680bdbedb4ad71c9b1ee1fe6177"
+      "bytes": 2139,
+      "sha256": "d2fef629c51737c86def35b3f39a5db2cea275a2fc98ebc16abe447275ea9173"
     },
     {
       "path": "tools/tools.js",

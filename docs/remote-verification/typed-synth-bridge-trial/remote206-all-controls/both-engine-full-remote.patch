@@ -1,0 +1,361 @@
+--- a/web/product-site/remote/app.mjs
++++ b/web/product-site/remote/app.mjs
+@@ -23,6 +23,7 @@
+ import{renderLiveMotion,bindLiveMotion}from'./dnr3-motion.mjs';
+ import{createLiveClips}from'./dnr3-clips.mjs';
+ import{createChicagoView}from'./dnr3-chicago.mjs';
++import{renderSynthEditor}from'./dnr3-synth-editor.mjs';
+ import{createSynthView}from'./dnr3-typed-synth.mjs';
+ import{SequenceDraft,chanceDomain,chanceFromDrag,Arrangement}from'./sequence.mjs';
+ import{ParameterGesture}from'./parameter.mjs';
+@@ -413,31 +414,39 @@
+  else {confirmedChicago={phase:'unsupported'};if(view==='sound')other();}
+ }
+ let typedSlot=null, confirmedTyped={phase:'unsupported'};
++function renderSequenceSynth(){
++ const root=$('live-synth-sequence');
++ if(!root)return;
++ const state=typedSlot===soundSlot()?{...confirmedTyped,slot:typedSlot}:null;
++ const html=view==='roll'&&state?renderSynthEditor(state,'sequence'):null;
++ root.hidden=!html;
++ $('roll-view').hidden=view!=='roll'||!!html;
++ const modes=$('mode-tools');if(modes)modes.hidden=view!=='roll'||!!html;
++ if(html)root.innerHTML=html;
++ else if(root.innerHTML)root.innerHTML='';
++}
+ const typedSynthView=createSynthView({link:()=>remoteLink,onChange:state=>{
+  confirmedTyped=state;
+- if(view!=='sound')return;
+- const focus=document.activeElement?.dataset.liveTypedSynth,top=$('other-view').scrollTop;
+- other();$('other-view').scrollTop=top;
+- if(focus!==undefined)$('other-view').querySelector(`[data-live-typed-synth="${focus}"]`)?.focus({preventScroll:true});
++ const root=view==='sound'?$('other-view'):view==='roll'?$('live-synth-sequence'):null;
++ if(!root)return;
++ const focus=root.contains(document.activeElement)?document.activeElement?.dataset.liveTypedSynth:undefined,top=root.scrollTop;
++ if(view==='sound')other();else renderSequenceSynth();
++ root.scrollTop=top;
++ if(focus!==undefined)root.querySelector(`[data-live-typed-synth="${focus}"]`)?.focus({preventScroll:true});
+ }});
+ function syncTypedSynthView(){
+- const slot=remoteLink?.connected()&&view==='sound'?soundSlot():-1;
+- if(typedSlot===slot)return;
+- typedSlot=slot;typedSynthView.close();
++ const wanted=view==='sound'||view==='roll'&&!!(remoteLink?.hello()?.caps&CAP.TYPED_SYNTH);
++ const slot=remoteLink?.connected()&&wanted?soundSlot():-1;
++ if(typedSlot===slot){if(view==='roll')renderSequenceSynth();return;}
++ typedSlot=slot;
++ confirmedTyped={phase:'unsupported'};
++ typedSynthView.close();
++ if(view==='roll')renderSequenceSynth();
+  if(slot>=0)typedSynthView.open(slot);
+- else confirmedTyped={phase:'unsupported'};
+ }
+ function typedSynthSoundSection(){
+- const s=confirmedTyped,owner=s.owner;
+- if(typedSlot!==soundSlot()||!owner||owner.bank<2)return null;
+- const title=owner.bank===2?'Synth One':'SuperJ6';
+- if(!s.rows?.length)
+-  return '<section data-sound-source="firmware"><h2>Sound · '+title+'</h2><p role="status">'+esc(s.message||'No mapped controls were confirmed on this firmware.')+'</p></section>';
+- const label=s.typed?'Typed firmware':'Firmware';
+- return '<section data-sound-source="firmware"><h2>Sound · '+title+'</h2><p role="status">'+label+(s.busy?' · verifying readback…':' · confirmed')+'</p><div class="encoder-grid">'+
+- s.rows.map(x=>'<label class="mix-panel"><span>'+esc(x.label)+'</span> '+(x.writable?
+-  '<input type="number" min="0" max="'+x.max+'" step="1" aria-label="'+esc(x.label)+'" data-live-typed-synth="'+x.id+'" value="'+x.value+'" '+(s.busy?'disabled':'')+'>':
+-  '<output>'+x.value+'</output> <small>Read only</small>')+'</label>').join('')+'</div></section>';
++ if(typedSlot!==soundSlot())return null;
++ return renderSynthEditor({...confirmedTyped,slot:typedSlot});
+ }
+ let clipView={source:'draft',firmware:null};
+ const liveClips=createLiveClips({link:()=>remoteLink,onChange:next=>{
+@@ -465,15 +474,25 @@
+ remoteLink.onState(()=>{if(view==='patterns')liveClips.activate();});
+ remoteLink.onNotify(liveClips.notify);
+ remoteLink.onState(syncChicagoView);
+-$('other-view').addEventListener('change',event=>{
++function handleLiveSynthControl(event){
+  const control=event.target;
+  if(control.dataset.liveTypedSynth!==undefined){
+-  const id=Number(control.dataset.liveTypedSynth),value=control.valueAsNumber,confirmed=confirmedTyped.rows?.find(r=>r.id===id);
++  const id=Number(control.dataset.liveTypedSynth),confirmed=confirmedTyped.rows?.find(r=>r.id===id);
+   if(!confirmed)return;
+-  control.value=String(confirmed.value);
+-  if(view==='sound'&&typedSlot===soundSlot()&&!confirmedTyped.busy&&Number.isInteger(value))void typedSynthView.write(id,value);
++  const action=control.dataset.liveTypedAction==='1',offset=control.tagName==='SELECT'?0:confirmed.presentation?.offset??0;
++  const value=action?1:(control.tagName==='SELECT'?Number(control.value):control.valueAsNumber)-offset;
++  if(!action)control.value=String(confirmed.value+offset);
++  const section=view==='roll'?'sequence':'sound';
++  const routeValid=(view==='sound'||view==='roll')&&(!confirmedTyped.typed||section===(confirmed.presentation?.section??'sound'));
++  if(routeValid&&typedSlot===soundSlot()&&!confirmedTyped.busy&&Number.isInteger(value))void typedSynthView.write(id,value);
+   return;
+  }
++}
++$('live-synth-sequence')?.addEventListener('change',handleLiveSynthControl);
++$('other-view').addEventListener('click',e=>{if(e.target.dataset.liveTypedAction==='1')handleLiveSynthControl(e);});
++$('other-view').addEventListener('change',event=>{
++ const control=event.target;
++ if(control.dataset.liveTypedSynth!==undefined){handleLiveSynthControl(event);return;}
+  if(control.dataset.liveChicago===undefined)return;
+  const index=Number(control.dataset.liveChicago),value=Number(control.value);
+  const confirmed=confirmedChicago.rows?.find(row=>row.parameter===index);
+--- a/web/product-site/remote/index.html
++++ b/web/product-site/remote/index.html
+@@ -96,6 +96,7 @@
+ <aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
+ </section>
+ <section id="break-sequence" aria-label="BREAK sequence" hidden></section>
++<section id="live-synth-sequence" aria-label="Instrument sequence" hidden></section>
+ <section id="other-view" hidden></section>
+ </main>
+ <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>
+--- a/web/product-site/remote/style.css
++++ b/web/product-site/remote/style.css
+@@ -615,3 +615,11 @@
+  .hdr:has(.tempo-ctl) .project-name{flex:1 1 22%}
+  .pattern-readout:has(.tempo-ctl){height:38px}
+ }
++
++/* Negotiated instrument sequence lanes; no draft data in this table. */
++.synth-step-scroll {overflow-x:auto; max-width:100%}
++.synth-step-grid {width:100%; border-collapse:collapse; text-align:left}
++.synth-step-grid caption {text-align:left; font-weight:600; padding:0.6rem 0}
++.synth-step-grid th,.synth-step-grid td {padding:0.35rem; border-bottom:1px solid #8885}
++.synth-step-grid input,.synth-step-grid select {max-width:100%}
++.synth-step-grid input {width:5.5em}
+--- a/web/product-site/remote/dnr3-typed-synth.mjs
++++ b/web/product-site/remote/dnr3-typed-synth.mjs
+@@ -1,15 +1,11 @@
+ // SPDX-License-Identifier: GPL-3.0-only
++import {describeOriginalSynth} from './dnr3-synth-catalog.mjs';
+ import {CAP, KEEP, STATUS, NOTIFY_KIND} from './dnr3.mjs';
+ 
+ export const SYNTH_KIND={LOW:112,HIGH:113};
+ export const SYNTH_UNIT={TYPED:32,WRITE:64};
+ const LEGACY=1, T_303=2, BANK=41, PRESET=42, SETTLED=43;
+ const LEGACY_LAST={2:2,3:17};
+-// Original-ID crosswalk from the exact firmware panel descriptors. DESCRIBE's
+-// 6 ASCII bytes are an identity/check source, not a unique presentation label.
+-const ORIGINAL_LABEL={2:{2:'OSC Balance',5:'OSC 1 Level',16:'Cutoff',17:'Resonance',
+- 19:'Filter Envelope',22:'Filter Attack',23:'Filter Decay',24:'Filter Sustain',25:'Filter Release',
+- 26:'Amp Attack',27:'Amp Decay',28:'Amp Sustain',29:'Amp Release'},3:{7:'Cutoff'}};
+ const same=(a,b)=>['kind','a','b','c'].every(k=>a?.[k]===b[k]);
+ const int=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
+ const native=(kind,slot)=>({kind,a:0,b:slot,c:0});
+@@ -51,14 +47,25 @@
+     if(!desc.name||desc.max!==x.max||!int(desc.def,0,x.max)||!int(desc.unit,0,127))continue;
+     if(typed&&!(desc.unit&SYNTH_UNIT.TYPED))continue;
+     const id=base+i;
+-    const label=typed?(ORIGINAL_LABEL[start.bank][id]??`${desc.name} · ID ${id}`):desc.name;
++    if(typed&&start.bank===3&&(id===207||([240,241,243].includes(id)&&!describeOriginalSynth(3,id,x.max))))continue; // Reserved or malformed extension.
++    if(typed&&start.bank===2&&([240,241,242,243,245,255].includes(id)&&x.max!==1||id===245&&(x.value!==0||desc.def!==0)))continue;
++    if(typed&&start.bank===2&&id===140)continue; // Dedicated performance input, not a patch edit.
++    const presentation=typed?describeOriginalSynth(start.bank,id,x.max):undefined;
++    const label=typed?(presentation?.label??`${desc.name} · ID ${id}`):desc.name;
++    const names=Array.isArray(desc.names)?[...desc.names]:[];
++    const convention=x.max===1&&(presentation?.label==='Filter Link'||presentation?.type==='toggle'||presentation?.stepRole==='on')?['Off','On']:undefined;
++    const choices=presentation?.type==='velocity-curve'?['Soft','Medium','Hard']:
++      names.length===x.max+1&&names.every(v=>typeof v==='string'&&v.trim())&&new Set(names).size===names.length?names:
++      convention;
+     found.push({id,address:a,label,descriptorName:desc.name,max:x.max,value:x.value,
+-      writable:typed?!!(desc.unit&SYNTH_UNIT.WRITE):true,names:desc.names});
++      writable:typed?!!(desc.unit&SYNTH_UNIT.WRITE):true,names,choices,presentation,unit:desc.unit,def:desc.def});
+    }
+   }
+   const end=await identity();
+   if(!unchanged(start,end))return {owner:end,rows:[]};
+   owner=end;rows=new Map(found.map(r=>[r.id,r]));
++  const reset=typed&&owner.bank===2?rows.get(245):null;
++  if(reset&&![143,244].every(id=>rows.has(id)))reset.writable=false;
+   return {owner:end,rows:found};
+  }
+  async function write(id,value){
+@@ -67,14 +74,37 @@
+   if(!unchanged(before,await identity()))throw Error('Synth owner changed');
+   if(typed){
+    const desc=await client.describe(row.address);current();
+-   if(desc.name!==row.descriptorName||desc.max!==row.max||(desc.unit&(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))!==(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))
++   if(desc.name!==row.descriptorName||desc.max!==row.max||desc.def!==row.def||desc.unit!==row.unit||
++      JSON.stringify(desc.names??[])!==JSON.stringify(row.names)||(desc.unit&(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))!==(SYNTH_UNIT.TYPED|SYNTH_UNIT.WRITE))
+     throw Error('Synth descriptor changed');
+   }
+   const [seen]=await client.paramGet([row.address]);current();
+   if(!available(seen,row.address)||seen.max!==row.max||seen.value!==row.value)throw Error('Synth value changed');
+   if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++  const resetTargets=row.presentation?.type==='action'?[rows.get(143),rows.get(244)]:null;
++  if(resetTargets){
++   if(value!==1||row.value!==0||resetTargets.some(r=>!r))throw Error('Tuning reset unavailable');
++   for(const target of resetTargets){
++    const prior=await client.describe(target.address);current();
++    if(prior.name!==target.descriptorName||prior.def!==target.def||prior.max!==target.max||prior.unit!==target.unit)throw Error('Tuning descriptor changed');
++   }
++   const sample=await client.paramGet(resetTargets.map(x=>x.address));current();
++   if(sample.length!==2||sample.some((read,i)=>!available(read,resetTargets[i].address)||read.value!==resetTargets[i].value||read.max!==resetTargets[i].max))
++    throw Error('Tuning values changed');
++   if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++  }
+   const a=row.address,ack=await client.paramSet(a,value,row.value,{bank:before.bank,...typed?{retry:false}:{}});current();
+   if(!same(ack.fields,a)||ack.fields.value!==value)throw Error('Synth write not acknowledged');
++  if(resetTargets){
++   if(ack.status!==STATUS.OK)throw Error('Tuning reset not acknowledged');
++   const checks=[row,...resetTargets];
++   if(!unchanged(before,await identity()))throw Error('Synth owner changed');
++   const after=await client.paramGet(checks.map(r=>r.address));current();
++   if(after.length!==checks.length||after.some((x,i)=>!available(x,checks[i].address)||x.max!==checks[i].max||x.value!==checks[i].def)||
++      !unchanged(before,await identity()))throw Error('Tuning reset not confirmed by readback');
++   resetTargets.forEach(r=>{r.value=r.def;});
++   return {owner:before,rows:[...rows.values()]};
++  }
+   const queued=typed&&ack.status===STATUS.QUEUED;
+   // A QUEUED echo is not a committed value. Only poll independent reads;
+   // never send a second edit or let another bank/preset satisfy this write.
+--- /dev/null
++++ b/web/product-site/remote/dnr3-synth-catalog.mjs
+@@ -0,0 +1,69 @@
++// SPDX-License-Identifier: GPL-3.0-only
++import {sj6Catalog} from './dnr3-sj6-catalog.mjs';
++// Original enum/descriptor metadata: pinned S1Parameter.h and S1DSPKernel.hpp.
++// Original AU units are reference metadata, NOT the firmware detent format.
++const catalog=[
++["osc","Oscillators",[[0,"OSC 1 Morph","index1","Generic"],[1,"OSC 2 Morph","index2","Generic"],[2,"OSC Balance","morphBalance","Generic"],[3,"OSC 1 Semitones","morph1SemitoneOffset","RelativeSemiTones"],[4,"OSC 2 Semitones","morph2SemitoneOffset","RelativeSemiTones"],[5,"OSC 1 Level","morph1Volume","Generic"],[6,"OSC 2 Level","morph2Volume","Generic"],[30,"OSC 2 Detune","morph2Detuning","Generic"],[146,"Band Limit","oscBandlimitEnable","Generic"]]],
++["sub-fm","Sub, FM & noise",[[7,"Sub Level","subVolume","Generic"],[8,"Sub Octave","subOctaveDown","Generic"],[9,"Sub Wave","subIsSquare","Generic"],[10,"FM Level","fmVolume","Generic"],[11,"FM Index","fmAmount","Generic"],[12,"Noise Level","noiseVolume","Generic"]]],
++["filter","Filter",[[16,"Cutoff","cutoff","Hertz"],[17,"Resonance","resonance","Generic"],[19,"Filter Envelope","filterADSRMix","Generic"],[115,"Filter Type","filterType","Generic"],[149,"Envelope Pitch Tracking","adsrPitchTracking","Generic"],[255,"Filter Link",null,null]]],
++["filter-env","Filter envelope",[[22,"Filter Attack","filterAttackDuration","Seconds"],[23,"Filter Decay","filterDecayDuration","Seconds"],[24,"Filter Sustain","filterSustainLevel","Generic"],[25,"Filter Release","filterReleaseDuration","Seconds"]]],
++["amp-env","Amp envelope",[[26,"Amp Attack","attackDuration","Seconds"],[27,"Amp Decay","decayDuration","Seconds"],[28,"Amp Sustain","sustainLevel","Generic"],[29,"Amp Release","releaseDuration","Seconds"]]],
++["voice","Voice & output",[[20,"Mono","isMono","Generic"],[120,"Legato","monoIsLegato","Generic"],[21,"Glide","glide","Generic"],[32,"Output Level","masterVolume","Generic"],[121,"Stereo Widen","widen","Generic"],[144,"Parameter Smooth Time","portamentoHalfTime","Generic"]]],
++["tuning","Tuning & bend ranges",[[143,"A4 Reference","frequencyA4","Hertz"],[148,"Transpose","transpose","Generic"],[141,"Bend Down Range","pitchbendMinSemitones","Generic"],[142,"Bend Up Range","pitchbendMaxSemitones","Generic"]]],
++["lfo","LFO & sync",[[13,"LFO 1 Shape","lfo1Index","Generic"],[14,"LFO 1 Depth","lfo1Amplitude","Generic"],[15,"LFO 1 Rate","lfo1Rate","Rate"],[45,"LFO 2 Shape","lfo2Index","Generic"],[46,"LFO 2 Depth","lfo2Amplitude","Generic"],[47,"LFO 2 Rate","lfo2Rate","Generic"],[139,"Tempo Sync","tempoSyncToArpRate","Generic"]]],
++["mod","Modulation destinations",[[48,"Cutoff LFO","cutoffLFO","Generic"],[49,"Resonance LFO","resonanceLFO","Generic"],[50,"OSC Mix LFO","oscMixLFO","Generic"],[51,"Reverb Mix LFO","reverbMixLFO","Generic"],[52,"Amp Decay LFO","decayLFO","Generic"],[53,"Noise LFO","noiseLFO","Generic"],[54,"FM LFO","fmLFO","Generic"],[55,"Detune LFO","detuneLFO","Generic"],[56,"Filter Envelope LFO","filterEnvLFO","Generic"],[57,"Pitch LFO","pitchLFO","Generic"],[58,"Bitcrush LFO","bitcrushLFO","Generic"],[59,"Tremolo LFO","tremoloLFO","Generic"]]],
++["pan-crush","Auto pan & bitcrush",[[35,"Pan Depth","autoPanAmount","Generic"],[36,"Pan Rate","autoPanFrequency","Hertz"],[34,"Bitcrush Rate","bitCrushSampleRate","Hertz"]]],
++["reverb","Reverb",[[37,"Reverb Enable","reverbOn","Generic"],[38,"Reverb Feedback","reverbFeedback","Generic"],[39,"Reverb High-Pass","reverbHighPass","Generic"],[40,"Reverb Mix","reverbMix","Generic"]]],
++["delay","Delay",[[41,"Delay Enable","delayOn","Generic"],[42,"Delay Feedback","delayFeedback","Generic"],[43,"Delay Time","delayTime","Seconds"],[44,"Delay Mix","delayMix","Generic"],[137,"Delay Input Cutoff Tracking","delayInputCutoffTrackingRatio","Hertz"],[138,"Delay Input Resonance","delayInputResonance","Generic"]]],
++["phaser","Phaser",[[116,"Phaser Mix","phaserMix","Generic"],[117,"Phaser Rate","phaserRate","Hertz"],[118,"Phaser Feedback","phaserFeedback","Generic"],[119,"Phaser Notch Width","phaserNotchWidth","Hertz"]]],
++["comp-master","Master compressor",[[122,"Master compressor Ratio","compressorMasterRatio","Generic"],[125,"Master compressor Threshold","compressorMasterThreshold","Generic"],[128,"Master compressor Attack","compressorMasterAttack","Generic"],[131,"Master compressor Release","compressorMasterRelease","Generic"],[134,"Master compressor Makeup","compressorMasterMakeupGain","Generic"]]],
++["comp-in","Reverb input compressor",[[123,"Reverb input compressor Ratio","compressorReverbInputRatio","Generic"],[126,"Reverb input compressor Threshold","compressorReverbInputThreshold","Generic"],[129,"Reverb input compressor Attack","compressorReverbInputAttack","Generic"],[132,"Reverb input compressor Release","compressorReverbInputRelease","Generic"],[135,"Reverb input compressor Makeup","compressorReverbInputMakeupGain","Generic"]]],
++["comp-wet","Reverb wet compressor",[[124,"Reverb wet compressor Ratio","compressorReverbWetRatio","Generic"],[127,"Reverb wet compressor Threshold","compressorReverbWetThreshold","Generic"],[130,"Reverb wet compressor Attack","compressorReverbWetAttack","Generic"],[133,"Reverb wet compressor Release","compressorReverbWetRelease","Generic"],[136,"Reverb wet compressor Makeup","compressorReverbWetMakeupGain",null]]],
++["arp","Arpeggiator & sequencer",[[62,"Arp Enable","arpIsOn","Generic"],[65,"Sequencer Enable","arpIsSequencer","Generic"],[60,"Arp Direction","arpDirection","Generic"],[61,"Arp Interval","arpInterval","Generic"],[63,"Arp Octave Range","arpOctave","Generic"],[64,"Arp Source BPM","arpRate","BPM"],[66,"Sequence Length","arpTotalSteps","Generic"],[147,"Tempo Multiplier","arpSeqTempoMultiplier","Generic"]]],
++["seq-pitch","Sequencer pitches",[[67,"Step 1 Pitch","sequencerPattern00","Generic"],[68,"Step 2 Pitch","sequencerPattern01","Generic"],[69,"Step 3 Pitch","sequencerPattern02","Generic"],[70,"Step 4 Pitch","sequencerPattern03","Generic"],[71,"Step 5 Pitch","sequencerPattern04","Generic"],[72,"Step 6 Pitch","sequencerPattern05","Generic"],[73,"Step 7 Pitch","sequencerPattern06","Generic"],[74,"Step 8 Pitch","sequencerPattern07","Generic"],[75,"Step 9 Pitch","sequencerPattern08","Generic"],[76,"Step 10 Pitch","sequencerPattern09","Generic"],[77,"Step 11 Pitch","sequencerPattern10","Generic"],[78,"Step 12 Pitch","sequencerPattern11","Generic"],[79,"Step 13 Pitch","sequencerPattern12","Generic"],[80,"Step 14 Pitch","sequencerPattern13","Generic"],[81,"Step 15 Pitch","sequencerPattern14","Generic"],[82,"Step 16 Pitch","sequencerPattern15","Generic"]]],
++["seq-octave","Sequencer octaves",[[83,"Step 1 Octave","sequencerOctBoost00","Generic"],[84,"Step 2 Octave","sequencerOctBoost01","Generic"],[85,"Step 3 Octave","sequencerOctBoost02","Generic"],[86,"Step 4 Octave","sequencerOctBoost03","Generic"],[87,"Step 5 Octave","sequencerOctBoost04","Generic"],[88,"Step 6 Octave","sequencerOctBoost05","Generic"],[89,"Step 7 Octave","sequencerOctBoost06","Generic"],[90,"Step 8 Octave","sequencerOctBoost07","Generic"],[91,"Step 9 Octave","sequencerOctBoost08","Generic"],[92,"Step 10 Octave","sequencerOctBoost09","Generic"],[93,"Step 11 Octave","sequencerOctBoost10","Generic"],[94,"Step 12 Octave","sequencerOctBoost11","Generic"],[95,"Step 13 Octave","sequencerOctBoost12","Generic"],[96,"Step 14 Octave","sequencerOctBoost13","Generic"],[97,"Step 15 Octave","sequencerOctBoost14","Generic"],[98,"Step 16 Octave","sequencerOctBoost15","Generic"]]],
++["seq-on","Sequencer steps",[[99,"Step 1 Enable","sequencerNoteOn00","Generic"],[100,"Step 2 Enable","sequencerNoteOn01","Generic"],[101,"Step 3 Enable","sequencerNoteOn02","Generic"],[102,"Step 4 Enable","sequencerNoteOn03","Generic"],[103,"Step 5 Enable","sequencerNoteOn04","Generic"],[104,"Step 6 Enable","sequencerNoteOn05","Generic"],[105,"Step 7 Enable","sequencerNoteOn06","Generic"],[106,"Step 8 Enable","sequencerNoteOn07","Generic"],[107,"Step 9 Enable","sequencerNoteOn08","Generic"],[108,"Step 10 Enable","sequencerNoteOn09","Generic"],[109,"Step 11 Enable","sequencerNoteOn10","Generic"],[110,"Step 12 Enable","sequencerNoteOn11","Generic"],[111,"Step 13 Enable","sequencerNoteOn12","Generic"],[112,"Step 14 Enable","sequencerNoteOn13","Generic"],[113,"Step 15 Enable","sequencerNoteOn14","Generic"],[114,"Step 16 Enable","sequencerNoteOn15","Generic"]]],
++];
++const stepRole={ 'seq-pitch':'pitch','seq-octave':'octave','seq-on':'on' };
++const catalogMap=entries=>new Map(entries.flatMap(([key,title,items],groupOrder)=>items.map(([id,label,symbol,originalUnit],rowOrder)=>
++ [id,Object.freeze({key,title,groupOrder,rowOrder,label,symbol,originalUnit:originalUnit??null,
++   ...(key==='arp'?{section:'sequence'}:key in stepRole?{section:'sequence',step:rowOrder,stepRole:stepRole[key]}:{section:'sound'})})])));
++const rows=catalogMap(catalog),sj6=catalogMap(sj6Catalog);
++const extras=[
++ [240,'Hold','performance','Keyboard & MIDI',1,'toggle'],
++ [241,'White Keys Only','performance','Keyboard & MIDI',1,'toggle'],
++ [242,'MIDI Velocity Sensitive','performance','Keyboard & MIDI',1,'toggle'],
++ [243,'Microtonal Keys','performance','Keyboard & MIDI',1,'toggle'],
++ [244,'Scale','tuning','Tuning & bend ranges'],
++ [245,'Reset Tuning','tuning','Tuning & bend ranges',1,'action'],
++ [246,'Mod Wheel Destination','performance','Keyboard & MIDI'],
++];
++for(const [id,label,key,title,max,type] of extras) rows.set(id,Object.freeze({
++ id,key,title,label,groupOrder:key==='tuning'?6:6.5,rowOrder:id,section:'sound',max,type,originalUnit:null,symbol:null
++}));
++// DnBOX panel extensions are bank-qualified, never counted as original AU IDs.
++for(const [id,label,key,title,section,groupOrder,max,type] of [
++ [240,'Start Snap','arp','Arpeggiator & sequencer','sequence',16,1,'toggle'],
++ [241,'Sequence Lock','arp','Arpeggiator & sequencer','sequence',16,1,'toggle'],
++ [242,'Scale','tuning','Tuning & performance','sound',6],
++ [243,'MIDI Velocity Curve','tuning','Tuning & performance','sound',6,2,'velocity-curve'],
++]) sj6.set(id,Object.freeze({id,key,title,section,groupOrder,rowOrder:id,label,max,type,originalUnit:null,symbol:null}));
++export function describeOriginalSynth(bank,id,max){
++ if(bank===2){
++  const row=rows.get(id);
++  if(!row || (id===255&&max!==1) || (row.max!==undefined&&max!==row.max))return undefined;
++  if(row.stepRole==='pitch'&&max===24)return {...row,offset:-12};
++  return row;
++ }
++ if(bank===3){const row=sj6.get(id);return row?.max===undefined||row.max===max?row:undefined;}
++}
++export function groupSynthRows(rows){
++ const groups=new Map();
++ for(const row of rows){
++  const m=row.presentation;
++  const key=m?.key??'other';
++  if(!groups.has(key))groups.set(key,{key,title:m?.title??'Other firmware controls',order:m?.groupOrder??Infinity,rows:[]});
++  groups.get(key).rows.push(row);
++ }
++ return [...groups.values()].sort((a,b)=>a.order-b.order).map(g=>({...g,rows:g.rows.sort((a,b)=>(a.presentation?.rowOrder??a.id)-(b.presentation?.rowOrder??b.id))}));
++}
+--- /dev/null
++++ b/web/product-site/remote/dnr3-sj6-catalog.mjs
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-3.0-only
++// Generated source identities, not device capabilities or a claimed app knob count.
++export const sj6Catalog=[
++["osc","Oscillators",[[1,"OSC 1 Level","pulseVolume"],[3,"OSC 2 Level","sawVolume"],[82,"OSC 1 Waveform","layer1Waveform"],[83,"OSC 2 Waveform","layer2Waveform"],[86,"Oscillator Range","oscRange"],[72,"OSC 1 Semitones","layer1Semi"],[73,"OSC 2 Semitones","layer2Semi"],[74,"OSC 1 Fine Tune","layer1Detune"],[75,"OSC 2 Fine Tune","layer2Detune"],[78,"OSC 1 Pulse Width","layer1PWM"],[79,"OSC 2 Pulse Width","layer2PWM"],[210,"OSC 1 PWM Enable","layer1PWMEnable"],[211,"OSC 2 PWM Enable","layer2PWMEnable"],[201,"Noise Level","noiseVolume"],[202,"Sub Level","subVolume"]]],
++["filter","Filter",[[7,"Cutoff","cutoffLayer1"],[8,"Resonance","resonanceLayer1"],[28,"Instrument High-Pass","highPassCutoff"],[131,"Filter Key Tracking","filterTracking"],[136,"Filter Envelope Amount","filterStrength"],[137,"Filter Velocity","filterVelocity"],[116,"Filter Link","adsrFilterLinkEnable"]]],
++["amp-env","Amp envelope",[[36,"Amp Attack","attack"],[37,"Amp Decay","decay"],[38,"Amp Sustain","sustain"],[39,"Amp Release","release"]]],
++["filter-env","Filter envelope",[[132,"Filter Attack","filterAttack"],[133,"Filter Decay","filterDecay"],[134,"Filter Sustain","filterSustain"],[135,"Filter Release","filterRelease"]]],
++["pitch-env","Pitch envelope",[[138,"Pitch Attack","pitchAttack"],[139,"Pitch Decay","pitchDecay"],[140,"Pitch Sustain","pitchSustain"],[141,"Pitch Release","pitchRelease"],[57,"Pitch Envelope Amount","fmModCents"]]],
++["voice","Voice & output",[[0,"Output Level","volumeControl"],[16,"Stereo Widen","stereoWiden"],[32,"Mono","monoEnable"],[33,"Legato","legatoEnable"],[35,"Glide Time","glideTime"],[123,"Vintage Mode","vintageMode"],[59,"Unison Enable","unison"],[60,"Unison Detune","unisonDetune"],[61,"Unison Stereo","unisonStereo"],[62,"Unison Type","unisonType"]]],
++["tuning","Tuning & performance",[[179,"Mod Wheel Destination","modwheelDestination"],[205,"Fixed MIDI Velocity","fixedVelocityEnable"],[206,"A Reference","aTuning"],[212,"Key Lock Enable","keyLockEnable"],[213,"Key Lock Root","keyLockRoot"],[214,"Key Lock Scale","keyLockScale"]]],
++["lfo-1","LFO 1",[[87,"LFO 1Enable","lfo1Enable"],[88,"LFO 1Rate","lfo1Rate"],[89,"LFO 1Amount","lfo1Amount"],[91,"LFO 1Delay Time","lfo1DelayTime"],[94,"LFO 1Waveform","lfo1Waveform"],[181,"LFO 1 Destination","lfo1Dest1Param"],[192,"LFO 1Mode","lfo1Mode"],[195,"LFO 1 Hz Mode","lfo1HzEnable"],[198,"LFO 1 Snapback","lfoSnapbackEnable"]]],
++["lfo-2","LFO 2",[[95,"LFO 2Enable","lfo2Enable"],[96,"LFO 2Rate","lfo2Rate"],[97,"LFO 2Amount","lfo2Amount"],[98,"LFO 2Waveform","lfo2Waveform"],[185,"LFO 2 Destination A","lfo2Dest1Param"],[187,"LFO 2 Destination B","lfo2Dest2Param"],[193,"LFO 2Mode","lfo2Mode"],[196,"LFO 2 Hz Mode","lfo2HzEnable"],[199,"LFO 2 Snapback","lfo2SnapbackEnable"]]],
++["lfo-3","LFO 3",[[99,"LFO 3Enable","lfo3Enable"],[100,"LFO 3Rate","lfo3Rate"],[101,"LFO 3Amount","lfo3Amount"],[102,"LFO 3Waveform","lfo3Waveform"],[93,"LFO 3Delay Time","lfo3DelayTime"],[189,"LFO 3 Destination A","lfo3Dest1Param"],[191,"LFO 3 Destination B","lfo3Dest2Param"],[194,"LFO 3Mode","lfo3Mode"],[197,"LFO 3 Hz Mode","lfo3HzEnable"],[200,"LFO 3 Snapback","lfo3SnapbackEnable"]]],
++["vib-trem","Vibrato & tremolo",[[103,"Tremolo Depth","tremoloDepth"],[104,"Tremolo Rate","tremoloRate"],[105,"Vibrato Semitones","vibratoSemitones"],[106,"Vibrato Rate","vibratoRate"]]],
++["verb","Reverb",[[11,"Reverb Enable","verbEnable"],[12,"Reverb Type II","verbTypeII"],[13,"Reverb Size","verbSize"],[14,"Reverb Low Cut","verbLoCut"],[15,"Reverb Mix","verbMix"]]],
++["delay","Delay",[[24,"Delay Enable","delayEnable"],[25,"Delay Time","delayTime"],[26,"Delay Feedback","delayFeedback"],[27,"Delay Mix","delayMix"],[118,"Delay Tempo Sync","isTempoSyncd"]]],
++["chorus","Chorus",[[40,"Chorus I Enable","chorusIEnable"],[41,"Chorus II Enable","chorusIIEnable"],[42,"Chorus Rate","chorusRate"],[43,"Chorus Depth","chorusDepth"],[44,"Chorus Mix","chorusMix"],[208,"Chorus Version","chorusVersion"],[215,"Classic Chorus Rate","j60v2Rate"],[216,"Classic Chorus Depth","j60v2Depth"],[217,"Classic Chorus Mix","j60v2Mix"]]],
++["pan-crush","Auto pan & bitcrush",[[22,"Pan Rate","autopanRate"],[23,"Pan Depth","autopanDepth"],[107,"Crush Enable","crushEnable"],[108,"Crush Amount","crushAmount"]]],
++["compressor","Compressor",[[17,"Compressor Amount","compressorAmount"],[18,"Compressor Threshold","compThreshold"],[19,"Compressor Headroom","compHeadroom"],[20,"Compressor Attack","compAttack"],[21,"Compressor Post Gain","compPostGain"]]],
++["arp","Arpeggiator & sequencer",[[63,"Arp Enable","arpEnable"],[64,"Arp Type","arpType"],[65,"Arp Octave Range","arpOctave"],[66,"Arp Interval","arpInterval"],[142,"Sequencer Enable","seqEnable"],[143,"Arp Rate / Seq Division","seqDivision"],[144,"Sequence Gate","seqGate"],[145,"Sequence Length","seqTotalSteps"],[146,"Sequence Destination","seqDestination"]]],
++["seq-pitch","Sequencer pitches",[[147,"Step 1 Pitch Offset","seqStep1Offset"],[148,"Step 2 Pitch Offset","seqStep2Offset"],[149,"Step 3 Pitch Offset","seqStep3Offset"],[150,"Step 4 Pitch Offset","seqStep4Offset"],[151,"Step 5 Pitch Offset","seqStep5Offset"],[152,"Step 6 Pitch Offset","seqStep6Offset"],[153,"Step 7 Pitch Offset","seqStep7Offset"],[154,"Step 8 Pitch Offset","seqStep8Offset"],[155,"Step 9 Pitch Offset","seqStep9Offset"],[156,"Step 10 Pitch Offset","seqStep10Offset"],[157,"Step 11 Pitch Offset","seqStep11Offset"],[158,"Step 12 Pitch Offset","seqStep12Offset"],[159,"Step 13 Pitch Offset","seqStep13Offset"],[160,"Step 14 Pitch Offset","seqStep14Offset"],[161,"Step 15 Pitch Offset","seqStep15Offset"],[162,"Step 16 Pitch Offset","seqStep16Offset"]]],
++["seq-on","Sequencer steps",[[163,"Step 1 Enable","seqStep1Toggle"],[164,"Step 2 Enable","seqStep2Toggle"],[165,"Step 3 Enable","seqStep3Toggle"],[166,"Step 4 Enable","seqStep4Toggle"],[167,"Step 5 Enable","seqStep5Toggle"],[168,"Step 6 Enable","seqStep6Toggle"],[169,"Step 7 Enable","seqStep7Toggle"],[170,"Step 8 Enable","seqStep8Toggle"],[171,"Step 9 Enable","seqStep9Toggle"],[172,"Step 10 Enable","seqStep10Toggle"],[173,"Step 11 Enable","seqStep11Toggle"],[174,"Step 12 Enable","seqStep12Toggle"],[175,"Step 13 Enable","seqStep13Toggle"],[176,"Step 14 Enable","seqStep14Toggle"],[177,"Step 15 Enable","seqStep15Toggle"],[178,"Step 16 Enable","seqStep16Toggle"]]],
++["other-index","Other SuperJ6 controls",[[2,"Layer 1Osc Mode","layer1OscMode"],[4,"Layer 2Osc Mode","layer2OscMode"],[5,"Layer 1Sound","layer1Sound"],[6,"Layer 2Sound","layer2Sound"],[9,"Cutoff Layer 2","cutoffLayer2"],[10,"Resonance Layer 2","resonanceLayer2"],[29,"High Pass Rez","highPassRez"],[30,"Band Pass Width","bandPassWidth"],[31,"Free Form Hertz","freeFormHertz"],[34,"Glide Enable","glideEnable"],[45,"Layer 1Low Note","layer1LowNote"],[46,"Layer 1High Note","layer1HighNote"],[47,"Layer 2Low Note","layer2LowNote"],[48,"Layer 2High Note","layer2HighNote"],[49,"Flanger Enable","flangerEnable"],[50,"Flanger Rate","flangerRate"],[51,"Flanger Depth","flangerDepth"],[52,"Ring Mod","ringMod"],[53,"Ring Mod Depth","ringModDepth"],[54,"Ring Mod Mix","ringModMix"],[55,"Fm Drum Mode","fmDrumMode"],[56,"Fm Mod Time","fmModTime"],[58,"Fm Destination","fmDestination"],[67,"Osc Sync","oscSync"],[68,"Phaser Enable","phaserEnable"],[69,"Phaser Speed","phaserSpeed"],[70,"Phaser Feedback","phaserFeedback"],[71,"Phaser Notch","phaserNotch"],[76,"Layer 1Pan","layer1Pan"],[77,"Layer 2Pan","layer2Pan"],[80,"Layer 1Retro Mode","layer1RetroMode"],[81,"Layer 2Retro Mode","layer2RetroMode"],[84,"Layer 1Filter Type","layer1FilterType"],[85,"Layer 2Filter Type","layer2FilterType"],[90,"LFO 1Amount 2","lfo1Amount2"],[92,"LFO 2Delay Time","lfo2DelayTime"],[109,"Crush Bit Rate","crushBitRate"],[110,"Crush Mix","crushMix"],[111,"Distortion Enable","distortionEnable"],[112,"Distortion Amount","distortionAmount"],[113,"Distortion Mix","distortionMix"],[114,"Layer Mix","layerMix"],[115,"Adsr Link Enable","adsrLinkEnable"],[117,"Filter Link Enable","filterLinkEnable"],[119,"Attack 2","attack2"],[120,"Decay 2","decay2"],[121,"Sustain 2","sustain2"],[122,"Release 2","release2"],[124,"Global Bend","globalBend"],[125,"Layer 1Bend","layer1Bend"],[126,"Layer 2Bend","layer2Bend"],[127,"Filter Rez Boost Enable","filterRezBoostEnable"],[128,"Filter Enable","filterEnable"],[129,"Filter Cutoff","filterCutoff"],[130,"Filter Rez","filterRez"],[180,"LFO 1Dest 1Base Value","lfo1Dest1BaseValue"],[182,"LFO 1Dest 2Base Value","lfo1Dest2BaseValue"],[183,"LFO 1Dest 2Param","lfo1Dest2Param"],[184,"LFO 2Dest 1Base Value","lfo2Dest1BaseValue"],[186,"LFO 2Dest 2Base Value","lfo2Dest2BaseValue"],[188,"LFO 3Dest 1Base Value","lfo3Dest1BaseValue"],[190,"LFO 3Dest 2Base Value","lfo3Dest2BaseValue"],[203,"Pad 1Destination","pad1Destination"],[204,"Pad 2Destination","pad2Destination"],[209,"Filter Type","filterType"]]],
++];
+--- /dev/null
++++ b/web/product-site/remote/dnr3-synth-editor.mjs
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-3.0-only
++import {groupSynthRows} from './dnr3-synth-catalog.mjs';
++
++const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
++const title=bank=>bank===2?'Synth One':bank===3?'SuperJ6':null;
++const order=[['pitch','Pitch'],['octave','Octave'],['on','Enable']];
++
++function field(x,busy){
++ const common=' aria-label="'+esc(x.label)+'" data-live-typed-synth="'+x.id+'" '+(busy?'disabled':'');
++ if(x.presentation?.type==='action')return x.writable?
++  '<button type="button"'+common+' data-live-typed-action="1">'+esc(x.label)+'</button>':
++  '<small>Reset requires verified tuning readback.</small>';
++ const offset=x.presentation?.offset??0;
++ if(!x.writable)return '<output aria-label="'+esc(x.label)+'">'+esc(x.choices?.[x.value]??x.value+offset)+'</output> <small>Read only</small>';
++ if(x.choices&&!offset)return '<select'+common+'>'+x.choices.map((name,n)=>'<option value="'+n+'" '+(n===x.value?'selected':'')+'>'+esc(name)+'</option>').join('')+'</select>';
++ return '<input type="number" min="'+offset+'" max="'+(x.max+offset)+'" step="1"'+common+' value="'+(x.value+offset)+'">';
++}
++function group(rows,busy){
++ return groupSynthRows(rows).map(g=>'<h3>'+esc(g.title)+'</h3><div class="encoder-grid">'+g.rows.map(x=>
++   x.presentation?.type==='action'?'<div class="mix-panel">'+field(x,busy)+'</div>':'<label class="mix-panel"><span>'+esc(x.label)+'</span> '+field(x,busy)+'</label>').join('')+'</div>').join('');
++}
++function matrix(rows,busy){
++ const steps=new Map(rows.map(x=>[x.presentation.step+':'+x.presentation.stepRole,x]));
++ const roles=order.filter(([key])=>rows.some(x=>x.presentation.stepRole===key));
++ if(!roles.length)return '';
++ return '<div class="synth-step-scroll"><table class="synth-step-grid"><caption>16-step pattern</caption><thead><tr><th scope="col">Step</th>'+
++  roles.map(([,label])=>'<th scope="col">'+label+'</th>').join('')+'</tr></thead><tbody>'+
++  Array.from({length:16},(_,n)=>'<tr><th scope="row">'+(n+1)+'</th>'+
++   roles.map(([key])=>{const x=steps.get(n+':'+key);return '<td>'+(x?field(x,busy):'<span aria-label="Not reported by firmware">—</span>')+'</td>';}).join('')+'</tr>').join('')+'</tbody></table></div>';
++}
++export function renderSynthEditor(state,section='sound'){
++ const engine=title(state.owner?.bank);
++ if(!engine||section==='sequence'&&!state.typed)return null;
++ const rows=state.rows??[];
++ const controls=!state.typed?rows:rows.filter(row=>(row.presentation?.section??'sound')===section);
++ const label=section==='sound'?'Sound':'Sequence';
++ const slot=state.slot===1?' · Bass B':state.slot===0?' · Bass A':'';
++ let content='';
++ if(controls.length){
++   if(section==='sequence'){
++    content=group(controls.filter(x=>x.presentation.step===undefined),state.busy)+matrix(controls.filter(x=>x.presentation.step!==undefined),state.busy);
++   }else if(!state.typed){
++    content='<div class="encoder-grid">'+controls.map(x=>'<label class="mix-panel"><span>'+esc(x.label)+'</span> '+field(x,state.busy)+'</label>').join('')+'</div>';
++   }else content=group(controls,state.busy);
++ }
++ const caption=state.busy?'Verifying firmware readback…':controls.length?controls.length+' controls confirmed':'No controls for this view were reported by this firmware.';
++ return '<section data-synth-editor="'+section+'" data-sound-source="firmware"><h2>'+label+' · '+engine+slot+'</h2><p role="status">'+esc(caption)+'</p>'+
++   (state.message?'<p role="status">'+esc(state.message)+'</p>':'')+
++   (state.typed&&controls.length?'<p>Controls reported by this firmware. Numeric values are device detents.</p>':'')+
++   content+'</section>';
++}

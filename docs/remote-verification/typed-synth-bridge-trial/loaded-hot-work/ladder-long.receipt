@@ -1,0 +1,10 @@
+elite
+{"halves": 244, "worst_us": 10615, "raw_late": 0, "xruns": 0, "pcm_peak": 6970, "frames": 125440}
+6d1e568ea40dc5857c3220a1ff2ede41defe57253f60bf8c6955cc19b9a7ef73  /tmp/dnr3-ladder.npuO/long-elite/edit/audio.s16le
+XIP free: 4552 B
+pool margin: 512 B
+pro
+{"halves": 244, "worst_us": 10673, "raw_late": 0, "xruns": 0, "pcm_peak": 6970, "frames": 125440}
+ff41e534d16a4f2238a785c00c3495d1700dab77ddef578d7ea6491f207d8dc3  /tmp/dnr3-ladder.npuO/long-pro/edit/audio.s16le
+XIP free: 4564 B
+pool margin: 512 B

@@ -1,0 +1,25 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* The source strip sits above the existing Draft roll, never alongside it. */
+#roll-view[data-bass-roll-source]{flex-direction:column;gap:4px}
+#roll-view[data-bass-roll-source=firmware]>.roll-panel{display:none}
+.bass-live-roll{min-width:0;min-height:0;padding:4px}
+#roll-view[data-bass-roll-source=firmware]>.bass-live-roll{flex:1;overflow:auto;overscroll-behavior:contain}
+#roll-view[data-bass-roll-source=draft]>.bass-live-roll{flex:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bass-live-roll header,.bass-live-pages,.bass-live-fields{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.bass-live-roll p{margin:5px 0;color:var(--muted)}
+.bass-live-roll :is(button,input){min-height:30px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:var(--r-control);padding:0 8px}
+.bass-live-roll button[aria-pressed=true]{color:var(--accent);border-color:var(--accent)}
+.bass-live-roll button:disabled{color:var(--muted);cursor:default}
+.bass-live-roll input{width:4.5em;margin-inline-start:4px;accent-color:var(--accent)}
+.bass-live-pages,.bass-live-fields{margin-block:5px}
+.bass-live-steps{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:4px;padding:3px}
+.bass-live-steps button{display:grid;grid-template-rows:14px minmax(24px,1fr) auto;min-height:64px;min-width:0;gap:2px;padding:2px;justify-items:center}
+.bass-live-steps button small{font-size:var(--fs-xs);color:var(--muted)}
+.bass-live-steps button span{font-size:var(--fs-xs)}
+.bass-live-steps button i{width:var(--bass-gate);background:currentColor;height:3px;border-radius:2px}
+.bass-native-pitch{position:relative;width:100%;height:100%;min-height:24px;overflow:hidden;background:repeating-linear-gradient(to bottom,transparent 0 10px,var(--grid-16) 10px 11px)}
+.bass-native-pitch strong,.bass-native-pitch i{position:absolute;inset-inline:0;top:clamp(0px,var(--bass-pitch),calc(100% - 1rem))}
+.bass-native-pitch i{transform:translateY(1em)}
+@media(max-width:600px){.bass-live-steps{grid-template-columns:repeat(8,minmax(0,1fr))}}
+@media(max-height:450px){.bass-live-roll :is(button,input){min-height:28px}}
+.bass-live-steps [data-firmware-playhead=true]{box-shadow:inset 0 -2px 0 var(--accent);background:var(--focus-col)}

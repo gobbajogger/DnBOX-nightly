@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+import os,sys
+args=[os.getenv('AHEAD_ENG',x) if x=='firmware/src/app/engine.c' else 'tests/host/ahead-input.c' if x=='host/x0x_host.c' else x for x in sys.argv[1:]]
+os.execvp("cc",["cc",*args])

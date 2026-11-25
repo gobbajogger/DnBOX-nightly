@@ -1,4 +1,5 @@
 import{renderSvg}from'./glyph-render.mjs';
+import{DRUM_VOICE_GEOMETRY}from'./drum-voice-icons.generated.mjs';
 // SPDX-License-Identifier: GPL-3.0-only
 // DnBOX adapter for the actual MIT FunkyBeats DOM builder. The upstream methods,
 // not a screenshot recreation, construct the tree. Typed captured DnBOX events
@@ -21,43 +22,71 @@ export const DRUM_VOICES=Object.freeze({
  '909':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CH',42],['OH',46],['CR',49],['RD',51]]),
  '808':Object.freeze([['BD',36],['SD',38],['LT',41],['MT',45],['HT',50],['RS',37],['CP',39],['CB',56],['CY',49],['OH',46],['CH',42]])
 });
-export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16}){
+function addDrumVoiceIcon(info,kit,voice,selected=false){
+ const accent=voice===11;
+ const [label,d]=accent?['ACCENT','M7000 5000L12000 1000L17000 5000M7000 8000L12000 4000L17000 8000']:DRUM_VOICE_GEOMETRY[kit][voice];
+ const name=info.children.find(n=>n.className==='seq-channel-name');
+ name.textContent='';
+ if(selected)name.style.color='var(--bg)';
+ info.children=[name];
+ info.setAttribute('aria-label',label);info.setAttribute('title',label);
+ const svg=new Element('svg'),path=new Element('path');
+ for(const [key,value] of Object.entries({class:'fw-drum-voice-icon','data-voice-glyph':label,
+   viewBox:accent?'2000 -2000 20000 13000':'0 0 23000 12500',focusable:'false','aria-hidden':'true'}))svg.setAttribute(key,value);
+ path.setAttribute('d',d);svg.appendChild(path);name.appendChild(svg);
+}
+export function renderFunkyBeatsDrums({kit='909',notes,endSample,steps=16,accents=null,offset=0,hits=null,length=null,live=null,selected=null}){
  if(!DRUM_VOICES[kit]||!Array.isArray(notes)||!Number.isInteger(endSample)||endSample<=0||!Number.isInteger(steps)||steps<1||steps>64)throw Error('Invalid local drum viewport');
- const track=kit==='808'?'drum808':'drum909',color=kit==='808'?'#ff4841':'#ff9529',voices=DRUM_VOICES[kit],channels=voices.map(([name])=>({name,type:'drum',color}));
+ const track=kit==='808'?'drum808':'drum909',color=kit==='808'?'#ff4840':'#ff9628',voices=DRUM_VOICES[kit],channels=[...voices.map(([name])=>({name,type:'drum',color})),...(accents?[{name:'AC',type:'drum',color}]:[])];
+ if(accents!==null&&(!Array.isArray(accents)||accents.length!==steps))throw Error('Invalid local drum viewport');
+ if(!Number.isInteger(offset)||offset<0||offset+steps>64||(hits!==null&&(!Array.isArray(hits)||hits.length!==DRUM_VOICES[kit].length)))throw Error('Invalid local drum viewport');
+ const beyond=s=>Number.isInteger(length)&&offset+s>=length;
  const state=createSequencerState({channels,patternCount:1,defaultSteps:steps});
  const grid=new Element('div');grid.className='sequencer-grid';
  const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),querySelector:s=>s==='.sequencer-grid'?grid:null};
  const ui=createFunkyBeatsUI({document,channels,state});ui.buildSequencerGrid();
  for(let ch=0;ch<voices.length;ch++){
-  const row=grid.children[ch],info=row.children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);
+  const row=grid.children[ch],info=row.children[0]; row.dataset.drumRowNote=voices[ch][1];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));info.setAttribute('aria-label',voices[ch][0]);
   for(let s=0;s<steps;s++){
-   const start=Math.round(s*endSample/steps),event=notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];
+   const start=Math.round(s*endSample/steps),record=live?.rows?.[ch]?.[s],event=live?(record?.on?{velocity:record.vel||100,note:voices[ch][1],start}:null):hits?(hits[ch][s]?{velocity:100,note:voices[ch][1],start}:null):notes.find(n=>n.track===track&&n.note===voices[ch][1]&&Math.abs(n.start-start)<2),step=ui.stepElements[ch][s];
    const modelStep=state.getStep(ch,s);if(event)Object.assign(modelStep,{on:true,velocity:event.velocity/127,note:event.note});
-   Object.assign(step.dataset,{drumNote:voices[ch][1],drumStart:event?.start??start,drumTrack:track});
-   step.setAttribute('aria-label',`${voices[ch][0]} step ${s+1} ${event?'velocity '+event.velocity:'empty'}, toggle local hit`);
+   if(live){Object.assign(step.dataset,{firmwareStep:offset+s,firmwareTrack:ch});if(!record||live.busy)step.setAttribute("disabled","");}
+   else if(hits)Object.assign(step.dataset,{drumStep:offset+s,drumVoice:ch,drumTrack:track});else Object.assign(step.dataset,{drumNote:voices[ch][1],drumStart:event?.start??start,drumTrack:track});
+   step.dataset.col=offset+s;if(beyond(s))step.className+=' beyond';
+   step.setAttribute('aria-label',`${voices[ch][0]} step ${offset+s+1} ${event?'velocity '+event.velocity:'empty'}`);
    step.setAttribute('aria-pressed',String(!!event));
-   if(event){step.className+=' hit';step.dataset.hit=event.id;step.children[0].style.opacity=String(.3+modelStep.velocity*.7);step.children[1].style.height=(modelStep.velocity*100)+'%';step.textContent=String(event.velocity);}
+   if(event){step.className+=' hit';if(event.id)step.dataset.hit=event.id;step.children[0].style.opacity=String(.3+modelStep.velocity*.7);step.children[1].style.height=(modelStep.velocity*100)+'%';}
   }
+  if(ch===selected)row.className+=' sel';
+  addDrumVoiceIcon(info,kit,ch,ch===selected);
  }
- const header='<div class="seq-row seq-numbers"><span>VOICE</span>'+Array.from({length:Math.ceil(steps/4)},(_,g)=>'<div class="seq-step-group">'+Array.from({length:Math.min(4,steps-g*4)},(_,i)=>'<span>'+String(g*4+i+1)+'</span>').join('')+'</div>').join('')+'</div>';
- return'<div class="drum-scroll funkybeats-sequencer" data-upstream="809e1e78" style="--track:'+color+'">'+header+serialize(grid)+'</div>';
+ // Firmware total-accent row (pattern.h dpart_t.accent, DNR3 track 11).
+ if(accents){const ch=voices.length,info=grid.children[ch].children[0];info.children=info.children.filter(n=>!n.className?.includes('seq-channel-btns'));addDrumVoiceIcon(info,kit,ch);grid.children[ch].className+=' accent-row';
+  for(let s=0;s<steps;s++){const step=ui.stepElements[ch][s];if(live){Object.assign(step.dataset,{firmwareStep:offset+s,firmwareTrack:ch});if(!live.rows?.[ch]?.[s]||live.busy)step.setAttribute("disabled","");}else{step.dataset.drumAccent=offset+s;step.dataset.drumTrack=track;}step.dataset.col=offset+s;if(beyond(s))step.className+=' beyond';step.setAttribute('aria-label',`Accent step ${offset+s+1} ${accents[s]?'on':'off'}`);step.setAttribute('aria-pressed',String(!!accents[s]));if(accents[s]){step.className+=' hit accent';step.children[0].style.opacity='1';step.children[1].style.height='100%';}}}
+ const header='<div class="seq-row seq-numbers"><span>VOICE</span>'+Array.from({length:Math.ceil(steps/4)},(_,g)=>'<div class="seq-step-group">'+Array.from({length:Math.min(4,steps-g*4)},(_,i)=>'<span>'+String(offset+g*4+i+1)+'</span>').join('')+'</div>').join('')+'</div>';
+ return'<div class="drum-scroll funkybeats-sequencer fw-drum-grid" data-upstream="809e1e78" style="--track:'+color+'">'+header+serialize(grid)+'</div>';
 }
 
-// Actual upstream performance grid; local selection only, never queued playback.
-export function renderFunkyBeatsLauncher({parts,targets,patternCount=32}){
+// Actual upstream performance grid, using firmware cue state when attached.
+export function renderFunkyBeatsLauncher({parts,targets,firmware=null,busy=false,patternCount=32}){
  if(!Array.isArray(parts)||parts.length!==5||!Array.isArray(targets)||targets.length!==5||patternCount!==32||targets.some(v=>v!==null&&(!Number.isInteger(v)||v<0||v>=patternCount)))throw Error('Invalid local launch selection');
- const colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];
+ const colors=['#ff9628','#ff4840','#82f05a','#46cdff','#d678ff'];
  const channels=parts.map((name,i)=>({name:String(name),type:i<2?'drum':'synth',color:colors[i]}));
  const container=new Element('div');
  const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),getElementById:id=>id==='perform-content'?container:null};
  const ui=createFunkyBeatsUI({document,channels,state:null,patternCount,patternColors:Array(patternCount).fill('var(--line)')});
- Object.assign(ui,{performMode:false,playing:false,performChannelPatterns:[...targets],performQueuedChanges:{},autoSave(){}});
+ Object.assign(ui,{performMode:false,playing:false,performChannelPatterns:[...(firmware?.ppat??targets)],performQueuedChanges:{},autoSave(){}});
  ui.buildPerformGrid();
  const grid=container.children.find(n=>n.className==='perform-grid');
  grid.children=grid.children.filter(n=>n.className!=='perform-header');
  for(let ch=0;ch<parts.length;ch++)for(let p=0;p<patternCount;p++){
   const cell=ui.performCells[ch][p];cell.dataset.launchPart=ch;cell.textContent='P'+(p+1);cell.setAttribute('type','button');
-  cell.setAttribute('aria-pressed',String(targets[ch]===p));cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', not loaded');
+  const playing=firmware?.ppat?.[ch]===p, pending=firmware?.pcue?.[ch]===p;
+  if(busy)cell.setAttribute('aria-disabled','true');
+  if(firmware){cell.dataset.firmwarePattern=pending?'queued':playing?'active':'inactive';cell.setAttribute('aria-pressed',String(playing||pending));}
+  else cell.setAttribute('aria-pressed',String(targets[ch]===p));
+  if(pending||playing){const state=new Element('span');state.className='cue-state';state.setAttribute('aria-hidden','true');state.textContent=pending?'QUEUED':'ACTIVE';cell.appendChild(state);}
+  cell.setAttribute('aria-label',parts[ch]+' P'+(p+1)+', '+(pending?'queued':playing?'active':firmware?'not active':targets[ch]===p?'selected in Draft, not loaded':'not loaded'));
  }
  return '<div class="launch-scroll funkybeats-launcher" data-upstream="809e1e78">'+serialize(grid)+'</div>';
 }
@@ -83,7 +112,7 @@ export function renderTypedFunkyBeatsMixer({channels}){
  if(!Array.isArray(channels)||channels.length!==5||channels.some(c=>!c||typeof c.id!=='string'||typeof c.label!=='string'||typeof c.display!=='string'||![c.value,c.min,c.max,c.step].every(Number.isFinite)||c.min>c.max||c.step<=0||c.value<c.min||c.value>c.max))throw Error('Five typed source mixer channels required');
  if(channels.some((c,i)=>c.id.split('|').length!==2||c.id.split('|')[1]!=='1:5:'+i+':0'||c.id.split('|')[0]!==channels[0].id.split('|')[0]||c.min!==0||c.max!==127||c.step!==1||!Number.isInteger(c.value)))throw Error('Mixer source identity or domain mismatch');
  const container=new Element('div');const document={createElement:tag=>new Element(tag),createTextNode:s=>String(s),getElementById:id=>id==='mixer-channels'?container:null};
- const colors=['#ff9529','#ff4841','#82f05a','#46cdff','#d678ff'];
+ const colors=['#ff9628','#ff4840','#82f05a','#46cdff','#d678ff'];
  const ui=createFunkyBeatsUI({document,channels:channels.map((c,i)=>({name:c.label,color:colors[i],type:i<2?'drum':'synth'})),state:null});ui.buildMixer();
  const projected=container.children.slice(0,5).map((strip,i)=>{
   const c=channels[i],name=strip.children.find(n=>n.className==='mixer-channel-name'),box=strip.children.find(n=>n.className==='mixer-fader-container'),readout=strip.children.find(n=>n.className==='mixer-db'),input=box.children[0];

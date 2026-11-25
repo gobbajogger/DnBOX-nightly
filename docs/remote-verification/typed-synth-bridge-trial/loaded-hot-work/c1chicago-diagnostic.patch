@@ -1,0 +1,15 @@
+--- a/firmware/src/app/engine.c
++++ b/firmware/src/app/engine.c
+@@ -2857,6 +2857,12 @@
+     uint32_t m = (1u << JB_909) | (1u << JB_808) | (1u << JB_BRK);
+     if (original_bass[0].kind == ORIGINAL_SOUND_MIAMI) m |= 1u << JB_A;
+     if (original_bass[1].kind == ORIGINAL_SOUND_MIAMI) m |= 1u << JB_B;
++#ifdef X0X_DIAG_ONE_CHICAGO_CORE1
++    if (original_bass[0].kind == ORIGINAL_SOUND_CHICAGO &&
++        original_bass[1].kind == ORIGINAL_SOUND_SYNTHONE) m |= 1u << JB_A;
++    if (original_bass[1].kind == ORIGINAL_SOUND_CHICAGO &&
++        original_bass[0].kind == ORIGINAL_SOUND_SYNTHONE) m |= 1u << JB_B;
++#endif
+     return m;
+ }
+ /* before a stretch of n frames: the split to use (sticky; idle jobs stay on core 0) */

@@ -9,7 +9,7 @@ function domain(target,voice,parameter){
  if(target===6&&voice===0&&[6,12,13].includes(parameter))return 127;
  throw Error('Unsupported Mix identity');
 }
-export function mixControlBindings(catalog,components){
+export function mixControlBindings(catalog,components,{livePan=false}={}){
  const groups=new Map(),byId=new Map(),seenScreens=new Set();
  function add(id,target,voice,parameter){
   const max=domain(target,voice,parameter),key=`${target}:${voice}:${parameter}`;
@@ -33,6 +33,11 @@ export function mixControlBindings(catalog,components){
   }
  }
  add('catalog/1551',4,0,14);
- if(seenScreens.size!==screens.size||groups.size!==required.size||[...required].some(key=>!groups.has(key)))throw Error('Incomplete Mix presentation coverage');
+ const expected=new Set(required);
+ if(livePan)for(let voice=1;voice<5;voice++){
+  add('native-mix-pan|1:5:'+voice+':3',5,voice,3);
+  expected.add('5:'+voice+':3');
+ }
+ if(seenScreens.size!==screens.size||groups.size!==expected.size||[...expected].some(key=>!groups.has(key)))throw Error('Incomplete Mix presentation coverage');
  return{groups,byId};
 }

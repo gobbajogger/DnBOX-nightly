@@ -1,0 +1,12 @@
+elite
+{"halves": 244, "worst_us": 10715, "raw_late": 0, "xruns": 0, "pcm_peak": 6970, "frames": 125440}
+XIP free: 4600 B
+pool margin: 512 B
+fd2bce8473f82287d719d467adab97ddbaca5b4621a7468f07ba9d9aa4e999a4  /tmp/dnr3-sine.13mV/sine-elite.elf
+d5531843ae4f029b73410e92e7c10a221ef7182cc4ca86ac6494d66f8e12d7a8  /tmp/dnr3-sine.13mV/sine-elite.fwsc
+pro
+{"halves": 244, "worst_us": 10794, "raw_late": 0, "xruns": 0, "pcm_peak": 6970, "frames": 125440}
+XIP free: 4612 B
+pool margin: 512 B
+164970ac22edfce46b7608755b657f857ac044f821841a530ad6a62f4daa37b7  /tmp/dnr3-sine.13mV/sine-pro.elf
+69c52630b3b87365255f326830de1f20d0983c38d914025c6f9f972eadc10a3a  /tmp/dnr3-sine.13mV/sine-pro.fwsc

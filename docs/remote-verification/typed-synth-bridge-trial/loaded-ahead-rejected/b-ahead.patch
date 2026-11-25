@@ -1,0 +1,79 @@
+--- a/firmware/src/app/engine.c
++++ b/firmware/src/app/engine.c
+@@ -2493,6 +2493,8 @@
+ static original_runtime_workspace original_workspace_b X0X_XPOOL;
+ static uint32_t bass_quiet_next[NBASS];               /* the quiet count after this stretch's render */
+ static uint8_t bass_render_ok[NBASS];
++static uint8_t ahead_b_ready;
++static uint32_t ahead_b_ticks;
+ static volatile uint32_t eng_stage;                    /* mixes done this stretch: 1 909, 2 808, 3 basses */
+ static volatile uint8_t eng_c1_next;                   /* core 1: the next of its jobs to start */
+ static uint8_t eng_c1_mask;                            /* jobs on core 1 this stretch (bit per JB_*) */
+@@ -2624,6 +2626,17 @@
+     }
+ }
+ 
++/* Owner-local synthesis only. Shared bus shaping and additive mixes retain
++ * their original stage order. Do not call early for routed (core 1) owners. */
++static int bass_render_dsp(int b,unsigned n)
++{
++    float *bl=eng_bass_buf[2*b], *br=eng_bass_buf[2*b+1];
++    (void)original_runtime_prepare(&original_bass[b], seq_tempo(&seq));
++    bass_adapt_pre(b,n);
++    int status=original_runtime_render(&original_bass[b],b?&original_workspace_b:&original_workspace,bl,br,n);
++    bass_adapt_post(b,bl,br,n);
++    return status==ORIGINAL_RUNTIME_OK;
++}
+ /* one job, render and mix; core 1: not timed by the cycle counter (core 0's) */
+ static int run_job(int j, int core)
+ {
+@@ -2701,15 +2714,16 @@
+         float *bb[NBASS];
+         bb[bv] = bl; bb[1 - bv] = br;                     /* bass B renders right-left, as always */
+         PROF_T(pb);
+-        (void)original_runtime_prepare(&original_bass[bv], seq_tempo(&seq));
+-        bass_adapt_pre(bv, (unsigned)n);
+-        int status = original_runtime_render(&original_bass[bv], bv ? &original_workspace_b : &original_workspace,
+-                                             bb[bv], bb[1-bv], n);
+-        bass_adapt_post(bv, bb[bv], bb[1-bv], (unsigned)n);
++        int ok;
++        if(!core && bv==1 && ahead_b_ready) {
++            ahead_b_ready=0;
++            ok=bass_render_ok[1];
++            tk-=ahead_b_ticks;
++        } else ok=bass_render_dsp(bv,n);
+         if (!core)
+             PROF_ADD(2 + bv, pb);
+-        bass_render_ok[bv] = (uint8_t)(status == ORIGINAL_RUNTIME_OK);   /* recorder: core 0, after */
+-        if (status == ORIGINAL_RUNTIME_OK) {
++        bass_render_ok[bv] = (uint8_t)ok;   /* recorder: core 0, after */
++        if (ok) {
+             /* One coherent request decision per sub-block. Once note ownership is
+              * gone, fade residual insert output over 512 samples. Cancellation or
+              * a fresh owner ramps back smoothly; DSP histories keep advancing. */
+@@ -2736,7 +2750,7 @@
+         if (stage_wait((uint32_t)(2 + bv), core))         /* A mixes after the 808, B after A */
+             return 0;
+         wt = plat_ticks24() - w0;
+-        if (status == ORIGINAL_RUNTIME_OK) {
++        if (ok) {
+             /* A part that was silent when Solo excluded it must not leak a new
+              * note through the 10 ms mix glide-out: start its glides at zero.
+              * (The quiet count from before this stretch, as the one-core order read it.) */
+@@ -2965,6 +2979,16 @@
+     eng_dbg_nsub++;
+     uint32_t w0 = plat_ticks24();
+ #endif
++    ahead_b_ready=0;
++    /* B Chicago scratch is separate from A and from the 808 metal
++     * workspace when A is local. Keep the original mix join. */
++    if ((eng_c1_mask & ((1u<<JB_909)|(1u<<JB_A)|(1u<<JB_B)))==(1u<<JB_909) &&
++        original_bass[0].kind==ORIGINAL_SOUND_SYNTHONE && original_bass[1].kind==ORIGINAL_SOUND_CHICAGO) {
++        uint32_t at=plat_ticks24();
++        bass_render_ok[1]=(uint8_t)bass_render_dsp(1,n);
++        ahead_b_ticks=plat_ticks24()-at;
++        ahead_b_ready=1;
++    }
+     for (j = 0; j < JB_N; j++)
+         if (!(eng_c1_mask & (1u << j)))
+             (void)run_job(j, 0);

@@ -40,7 +40,7 @@ The [fixed-value Snare and Low Tom repro](https://github.com/gobbajogger/DnBOX/p
 
 ## Remote
 
-- Keep the approved page-01 header, compared in the same part, transport and layout state. Keep the copy short and musician-facing. Preserve the R22 grid, visible playhead and strong bar > beat > subdivision hierarchy on both black and white rows. The thin per-step lane stays below roll and drums; switch velocity/chance/pitch/pan by tapping its label. Dim unselected values.
+- Keep the Remote header musician-facing and test actual navigation, visible BPM actions, selected track and pattern context, and Draft vs. confirmed device ownership at desktop, portrait and phone-landscape widths. Page-01 is a retired reference; the gate records the historical SSIM but does not use it for approval. No replacement screenshot is approved by this change. Keep the copy short and musician-facing. Preserve the R22 grid, visible playhead and strong bar > beat > subdivision hierarchy on both black and white rows. The thin per-step lane stays below roll and drums; switch velocity/chance/pitch/pan by tapping its label. Dim unselected values.
 - Preserve mode-free gesture editing and zoom/pan: no permanent tool row or selected-note panel. Provide discoverable keyboard operation for essential edits and zoom. Separately provide an equivalent click/tap path without dragging or multipoint gestures unless that gesture is intrinsic. A keyboard shortcut does not replace a click/tap path. Preserve cancellation, Undo and focus. Keep rows at least 16 px; check labels, controls and touch targets at desktop, portrait and phone landscape. Keep contextual help off the working surface.
 
 ## References and review

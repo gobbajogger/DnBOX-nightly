@@ -1,0 +1,14 @@
+--- a/firmware/src/dsp/s1c/s1c.c
++++ b/firmware/src/dsp/s1c/s1c.c
+@@ -572,6 +572,11 @@
+ static float xl_read(const s1c_dline *d, float del)
+ {
+     float pos = (float)d->w - del;
++    /* Disabled/short delay still advances its 16-word warm ring.
++     * For bounded binary32 pos, successive +16 moves toward zero
++     * exactly until the final wrap, so collapse all whole steps. */
++    if (d->len == 16 && pos < -16.0f && pos >= -0x1p23f)
++        pos += (float)(((unsigned)(-pos) >> 4) << 4);
+     while (pos < 0.0f) pos += (float)d->len;
+     int i = (int)pos; float f = pos - (float)i;
+     int j = i + 1 == d->len ? 0 : i + 1;

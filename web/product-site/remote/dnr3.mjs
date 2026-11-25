@@ -11,12 +11,12 @@ export const HEADER = Object.freeze([0xF0, 0x7D, 0x44, 0x4E, 0x03]);
 export const MAX_FRAME = 256;
 export const MAX_PAYLOAD = MAX_FRAME - 16;
 export const OP = Object.freeze({HELLO:0x00, OPEN:0x01, KEEPALIVE:0x06, CLOSE:0x07, WATCH:0x08,
-  DESCRIBE:0x10, PARAM_GET:0x11, PARAM_SET:0x12, STEP_GET:0x20, STEP_SET:0x21, PART_SET:0x22,
-  PATTERN_DUMP:0x23, CUE:0x24, TRANSPORT:0x26, TEMPO:0x27, MUTE:0x28, STATE:0x30, NOTIFY:0x7F});
+  DESCRIBE:0x10, PARAM_GET:0x11, PARAM_SET:0x12, SYNTH_OWNER:0x13, STEP_GET:0x20, STEP_SET:0x21, PART_SET:0x22,
+  PATTERN_DUMP:0x23, CUE:0x24, TRANSPORT:0x26, TEMPO:0x27, MUTE:0x28, RECORD:0x29, MOTION_GET:0x2A, MOTION_SET:0x2B, STATE:0x30, NOTIFY:0x7F});
 export const STATUS = Object.freeze({OK:0, QUEUED:1, BAD:2, BUSY:3, STALE:4, CONFLICT:5, UNSUPPORTED:6, FULL:7, DENIED:8});
 export const NOTIFY_KIND = Object.freeze({PARAM:0, STEP:1, CUE:2, TRANSPORT:3, MUTE:4, VOICE:5, POSITION:6, PATTERN:7});
 export const WATCH = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, VOICE:32, POSITION:64});
-export const CAP = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, WATCH:32, PATTERN_DUMP:64, PC_CLIP:128, VOICE:256});
+export const CAP = Object.freeze({PARAM:1, STEP:2, CUE:4, TRANSPORT:8, MUTE:16, WATCH:32, PATTERN_DUMP:64, PC_CLIP:128, VOICE:256, BASS_BANK_GUARD:512, RECORD:1024, MOTION_MIAMI_CARRIER:2048, TYPED_SYNTH:4096, SYNTH_OWNER:8192});
 export const PARTS = 5, KEEP = 0x3FFF;
 const NAME = Object.fromEntries(Object.entries(OP).map(([k, v]) => [v, k]));
 
@@ -108,6 +108,57 @@ const stepRecord = {
     return Object.fromEntries(keys.map(k => [k, r.int('u7')]));
   }
 };
+// Firmware accepts an optional track selector on STEP_GET for drum parts.
+const stepTrack = {
+  write(w, f) {
+    if (f.track === undefined) return;
+    if (f.part >= 2 || f.track > 11) fail('range', 'drum step track');
+    w.int('u7', f.track);
+  },
+  read(r, f) {
+    if (r.at === r.b.length) return undefined;
+    if (f.part >= 2) fail('range', 'drum step part');
+    const track = r.int('u7');
+    if (track > 11) fail('range', 'drum step track');
+    return track;
+  }
+};
+const typedSynthPref = f => f.kind===112 || f.kind===113;
+const guardedBassPref = f => (f.kind===1 && f.a===2) ||
+  (typedSynthPref(f) && (f.a===2 || f.a===3) && (f.b===0 || f.b===1));
+const expectBank = {
+  write(w,f) {
+    if (f.expect_bank === undefined) {
+      if(typedSynthPref(f))fail('range','typed synth address requires a bank guard');
+      return;
+    }
+    if (!guardedBassPref(f)) fail('range','bank guard requires a bass engine address');
+    if(typedSynthPref(f)&&(f.expect_bank<0||f.expect_bank>3))fail('range','unknown synth bank');
+    w.int('u7',f.expect_bank);
+  },
+  read(r,f) {
+    if (r.at===r.b.length) {
+      if(typedSynthPref(f))fail('range','typed synth address requires a bank guard');
+      return undefined;
+    }
+    if (!guardedBassPref(f)) fail('range','bank guard requires a bass engine address');
+    const bank=r.int('u7');
+    if(typedSynthPref(f)&&bank>3)fail('range','unknown synth bank');
+    return bank;
+  }
+};
+const expectOwner = {
+  write(w,f) {
+    if(f.owner_generation===undefined)return; // old packet fixtures still decode; client never sends them
+    if(!typedSynthPref(f)||f.expect_bank===undefined)fail('range','owner token requires guarded typed address');
+    w.int('u32',f.owner_generation);
+  },
+  read(r,f) {
+    if(r.at===r.b.length)return undefined;
+    if(!typedSynthPref(f)||f.expect_bank===undefined)fail('range','owner token requires guarded typed address');
+    return r.int('u32');
+  }
+};
 const paramList = {
   write(w, f) { const list = f.params ?? []; if (list.length < 1 || list.length > 16) fail('range', 'count'); w.int('u7', list.length); for (const p of list) for (const [k] of pref) w.int('u7', p[k]); },
   read(r) { const n = r.int('u7'); if (n < 1 || n > 16) fail('range', 'count'); return Array.from({length: n}, () => Object.fromEntries(pref.map(([k]) => [k, r.int('u7')]))); }
@@ -133,12 +184,16 @@ export const REQUEST = {
   [OP.WATCH]: [['epoch', 'u28'], ['mask', 'u28']],
   [OP.DESCRIBE]: pref,
   [OP.PARAM_GET]: [['params', paramList]],
-  [OP.PARAM_SET]: [['epoch', 'u28'], ...pref, ['expect', 'u14'], ['value', 'u14']],
-  [OP.STEP_GET]: [['part', 'u7'], ['pat', 'u7'], ['step', 'u7']],
+  [OP.PARAM_SET]: [['epoch', 'u28'], ...pref, ['expect', 'u14'], ['value', 'u14'], ['expect_bank', expectBank], ['owner_generation', expectOwner]],
+  [OP.SYNTH_OWNER]: [['epoch','u28'], ['slot','u7']],
+  [OP.STEP_GET]: [['part', 'u7'], ['pat', 'u7'], ['step', 'u7'], ['track', stepTrack]],
   [OP.STEP_SET]: [['epoch', 'u28'], ['part', 'u7'], ['pat', 'u7'], ['step', 'u7'], ['expect_crc', 'u14'], ['record', stepRecord]],
   [OP.PART_SET]: [['epoch', 'u28'], ['part', 'u7'], ['pat', 'u7'], ['field', 'u7'], ['value', 'u14']],
   [OP.PATTERN_DUMP]: [['pat', 'u7'], ['offset', 'u14'], ['count', 'u7']],
   [OP.CUE]: [['epoch', 'u28'], ['part', 'u7'], ['pat', 'u7']],
+  [OP.RECORD]: [['epoch', 'u28'], ['command', 'u7']],
+  [OP.MOTION_GET]: [['voice', 'u7'], ['pat', 'u7']],
+  [OP.MOTION_SET]: [['epoch', 'u28'], ['voice', 'u7'], ['pat', 'u7'], ['step', 'u7'], ['expect', 'u14'], ['value', 'u14']],
   [OP.TRANSPORT]: [['epoch', 'u28'], ['action', 'u7']],
   [OP.TEMPO]: [['epoch', 'u28'], ['bpm_x10', 'u14']],
   [OP.MUTE]: [['epoch', 'u28'], ['bit', 'u7'], ['on', 'u7'], ['queued', 'u7']],
@@ -154,11 +209,15 @@ export const REPLY = {
   [OP.DESCRIBE]: [['name', {ascii: 6}], ['max', 'u14'], ['def', 'u14'], ['unit', 'u7'], ['names', switchNames]],
   [OP.PARAM_GET]: [['params', paramValues]],
   [OP.PARAM_SET]: [...pref, ['value', 'u14']],
+  [OP.SYNTH_OWNER]: [['slot','u7'], ['bank','u7'], ['preset','u14'], ['settled','u7'], ['owner_generation','u32']],
   [OP.STEP_GET]: [['part', 'u7'], ['pat', 'u7'], ['step', 'u7'], ['record', stepRecord]],
   [OP.STEP_SET]: [['part', 'u7'], ['pat', 'u7'], ['step', 'u7'], ['record', stepRecord], ['pattern_crc', 'u14']],
   [OP.PART_SET]: [['part', 'u7'], ['pat', 'u7'], ['field', 'u7'], ['value', 'u14']],
   [OP.PATTERN_DUMP]: [['pat', 'u7'], ['offset', 'u14'], ['total', 'u14'], ['bytes', dumpBytes], ['pattern_crc', 'u14']],
   [OP.CUE]: [['part', 'u7'], ['pat', 'u7'], ['ppat', ['u7', PARTS]], ['pcue', ['u7', PARTS]]],
+  [OP.RECORD]: [['record', 'u7']],
+  [OP.MOTION_GET]: [['points', ['u14', 16]]],
+  [OP.MOTION_SET]: [['value', 'u14']],
   [OP.TRANSPORT]: [['playing', 'u7']],
   [OP.TEMPO]: [['bpm_x10', 'u14']],
   [OP.MUTE]: [['mute', 'u32'], ['vmute', 'u32']],
@@ -193,7 +252,7 @@ function readFields(r, schema) {
     else if (Array.isArray(type)) f[key] = Array.from({length: type[1]}, () => r.int(type[0]));
     else if (type.raw) { const len = packedLength(type.raw); r.need(len); f[key] = unpack7(r.b.slice(r.at, r.at + len), type.raw); r.at += len; }
     else if (type.ascii) f[key] = r.ascii(type.ascii);
-    else f[key] = type.read(r, f);
+    else { const value = type.read(r, f); if (value !== undefined) f[key] = value; }
   }
   return f;
 }

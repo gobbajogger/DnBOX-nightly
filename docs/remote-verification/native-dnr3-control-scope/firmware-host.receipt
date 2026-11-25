@@ -1,0 +1,4 @@
+  remote-dnr3: 173 page values
+  remote-dnr3: 170 values set (min, max, max+1)
+  remote-dnr3: state 120 B RAM (+256 B host frame buffer; the device builds in the editor's ed_out)
+remote-dnr3: 1334 checks, 0 failed

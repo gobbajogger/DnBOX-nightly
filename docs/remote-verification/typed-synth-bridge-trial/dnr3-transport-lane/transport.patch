@@ -1,0 +1,78 @@
+--- a/firmware/src/app/editor.c
++++ b/firmware/src/app/editor.c
+@@ -69,6 +69,21 @@
+     if (ed_n < sizeof ed_out - 1u)
+         ed_out[ed_n++] = (uint8_t)(v & 0x7Fu);
+ }
++#if X0X_REMOTE_DNR3
++/* Fixed-width little-endian 7-bit fields in editor and Remote frames. */
++static __attribute__((noinline)) void ed_u(uint32_t v, int n)
++{
++    for (; n > 0; n--, v >>= 7)
++        ed_b(v);
++}
++static __attribute__((noinline)) uint32_t ed_g(const uint8_t *a, int n)
++{
++    uint32_t v = 0;
++    while (n--)
++        v = v << 7 | a[n];
++    return v;
++}
++#endif
+ static void ed_str(const char *s, uint32_t max)
+ {
+     uint32_t i;
+@@ -1147,12 +1162,18 @@
+ {
+     const uint8_t *p;
+     uint32_t n;
++#if X0X_REMOTE_BLE
++    ble_dnr3_service();                            /* dispatch still obeys the DNR3 maintenance/write gate */
++#endif
+     if (ED_MAINTENANCE_HELD()) {
+         /* No project timeout, boot housekeeping or editor dispatch while held.
+          * Future capture transport must have its own qualified dispatcher; all
+          * currently supported frames are refused, never replayed on release. */
+         if (ota_frame_get(&p, &n)) {
+             (void)ED_MAINTENANCE_ADMIT();
++#if X0X_REMOTE_DNR3
++            (void)remote_dnr3_frame(p, n);            /* a Remote write gets BUSY, a read its answer */
++#endif
+             ota_frame_done();
+         }
+         return 0;
+@@ -1160,8 +1181,17 @@
+     if (ed_project.mode && !ed_project.recovery && fm1_ms - ed_project.at >= 15000u)
+         ed_project_end(0);
+     boot_housekeep();
++#if X0X_REMOTE_DNR3
++    remote_dnr3_tick(plat_ms());
++#endif
+     if (!ota_frame_get(&p, &n))
+         return 0;
++#if X0X_REMOTE_DNR3
++    if (!remote_dnr3_frame(p, n)) {                  /* never the OTA's: answered here, also while busy */
++        ota_frame_done();
++        return 0;
++    }
++#endif
+     if (n < 4u || p[0] != ED_HDR0 || p[1] != ED_HDR1 || p[2] != ED_HDR2) {
+         if (ed_project.mode) {
+             ota_frame_done();                        /* OTA and project operations share scratch */
+--- a/firmware/src/x0x.c
++++ b/firmware/src/x0x.c
+@@ -195,8 +195,13 @@
+ #ifndef X0X_BLE
+ #define X0X_BLE BOARD_SMK37          /* Bluetooth MIDI through a separate controller image (src/ble.c) */
+ #endif
++#ifndef X0X_REMOTE_BLE
++#define X0X_REMOTE_BLE 0  /* USB DNR3 must not implicitly enable unqualified BLE Remote. */
++#endif
++#if X0X_REMOTE_BLE && (!X0X_BLE || !X0X_REMOTE_DNR3)
++#error "DNR3 over BLE requires both transports"
++#endif
+ #if X0X_BLE
+-#define X0X_REMOTE_BLE X0X_REMOTE_DNR3
+ #include "ble.c"
+ #endif
+ 

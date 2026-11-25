@@ -6,7 +6,7 @@ import{chanceDomain}from'./sequence.mjs';
 const clone=x=>structuredClone(x),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
 const TRACKS=['chicago','miami','drum909','drum808','breaks'],VIEWS=['roll','drums','locks','sound','mix','patterns','song','files'],BANKS=['CHICAGO','MIAMI','JUNO'];
 const SCHEMA='dnbox-local-workspace-draft/1',KIND='local-preview-only',MOTION='Bass B / MIAMI / CARRIER / WAVE',MAX_BYTES=4*1024*1024;
-function fail(message){throw Error('Local draft: '+message);}
+function fail(message){throw Error(String(message));}
 function keys(value,required,optional=[]){if(!value||typeof value!=='object'||Array.isArray(value)||required.some(k=>!Object.hasOwn(value,k))||Object.keys(value).some(k=>!required.includes(k)&&!optional.includes(k)))fail('unknown or missing fields');}
 function array(value,max,min=0){if(!Array.isArray(value)||value.length<min||value.length>max)fail('array bound');}
 // JSON.parse alone silently accepts repeated object keys. Reject those and excessive nesting first.

@@ -49,9 +49,8 @@ async def roll(page):
     await expect(target).to_have_attribute('aria-label', before)
 
 async def sequencer(page):
-    await page.locator('.overflow summary').click()
-    await page.locator('[data-view="drums"]').click()
-    await page.locator('.overflow summary').click()
+    # The drum tracks open the existing drum sequencer from the Sequence tab.
+    await page.locator('[data-engine="drum909"]').click()
     cells = page.locator('.funkybeats-sequencer [data-drum-note]')
     await expect(cells).to_have_count(176)
     cell = cells.first
@@ -133,11 +132,17 @@ async def gesture_edits(page):
     for width,height in [(844,390),(390,844),(1440,900)]:
         await page.set_viewport_size({'width':width,'height':height})
         await page.reload()
-        await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+        await page.wait_for_function('document.getElementById("status").textContent.includes("Disconnected")')
         await gesture_edits_at_size(page)
         print(f'PASS Undo + resize stable geometry {width}x{height}',flush=True)
 
 async def gesture_edits_at_size(page):
+    await expect(page.locator('#roll-grid .note').first).to_be_visible()
+    # At portrait fit, a one-step note can be narrower than the two pointer regions.
+    # Use the real editor's zoom input before testing its move and resize hit targets.
+    if await page.evaluate('innerWidth < 430'):
+        await page.locator('#zoom').evaluate('(el)=>{el.value="3";el.dispatchEvent(new Event("input"))}')
+    await page.wait_for_function("[...document.querySelectorAll('#roll-grid .note')].some(n=>n.getBoundingClientRect().width>24)", timeout=3500)
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
@@ -170,6 +175,8 @@ async def gesture_edits_at_size(page):
     await expect(page.locator('#roll-grid .note')).to_have_count(count)
 
 async def gesture_delete(page):
+    await expect(page.locator('#roll-grid .note').first).to_be_visible()
+    await page.wait_for_function("[...document.querySelectorAll('#roll-grid .note')].some(n=>n.getBoundingClientRect().width>24)", timeout=3500)
     identity = await page.locator('#roll-grid .note').evaluate_all('(ns)=>ns.find(n=>n.getBoundingClientRect().width>24).dataset.note')
     note = page.locator(f'#roll-grid [data-note="{identity}"]')
     await note.scroll_into_view_if_needed()
@@ -389,9 +396,6 @@ async def step_roll(page):
 async def step_drums(page):
     for kit in ['909','808']:
         await page.locator('[data-engine="drum'+kit+'"]').click()
-        await page.locator('.overflow summary').click()
-        await page.locator('[data-view="drums"]').click()
-        await page.locator('.overflow summary').click()
         cells = page.locator('#drum-lane [data-lane-step]')
         await expect(cells).to_have_count(16)
         if kit=='808':
@@ -412,8 +416,7 @@ async def step_drums(page):
                 if kind=='pitch': assert b['pitchOffset']==1
             if kind=='pitch':
                 await page.locator('[data-view="roll"]').click()
-                await expect(page.locator('#lane-value')).to_have_text('+1st')
-                await page.locator('[data-view="drums"]').evaluate('e=>e.click()')
+                await expect(page.locator('#drum-lane')).to_be_visible()
             await page.locator('#undo').click()
             assert (await draft_state(page))['notes']==before
             await page.locator('[data-lane-cycle]').click()
@@ -497,15 +500,19 @@ async def break_and_tape(page):
     await expect(preview).to_have_attribute('aria-pressed','true')
     await expect(preview).to_have_attribute('aria-pressed','false',timeout=7000)
     await expect(preview).to_have_text('Play')
-    assert await page.locator('[data-break-loop="0"]').input_value() == ''
-    await page.locator('[data-break-loop="0"]').select_option('personal-br1-zone2')
-    await page.locator('[data-break-loop="1"]').select_option('personal-br2-zone1')
-    await page.locator('[data-break-rate]').select_option('1/8')
-    await page.locator('[data-break-step="15"]').select_option('32')
+    await expect(page.locator('[data-break-loop="0"][data-break-value=""]')).to_have_attribute('aria-pressed','true')
+    await page.locator('[data-break-slot="0"] summary').click()
+    await page.locator('[data-break-loop="0"][data-break-value="personal-br1-zone2"]').click()
+    await page.locator('[data-break-slot="1"] summary').click()
+    await page.locator('[data-break-loop="1"][data-break-value="personal-br2-zone1"]').click()
+    await page.locator('[data-break-rate="1/8"]').click()
+    await page.locator('[data-break-step="15"]').click()
+    await page.locator('[data-break-open-slices]').click()
+    await page.locator('[data-break-slice="32"]').click()
     await page.locator('#undo').click()
-    await expect(page.locator('[data-break-step="15"]')).to_have_value('0')
+    await expect(page.locator('[data-break-step="15"]')).to_have_attribute('data-value','0')
     await page.locator('#redo').click()
-    await expect(page.locator('[data-break-step="15"]')).to_have_value('32')
+    await expect(page.locator('[data-break-step="15"]')).to_have_attribute('data-value','32')
     await page.locator('[data-view="mix"]').click()
     await page.locator('[data-mix-mode="fx"]').click()
     await expect(page.locator('[data-mix-mode="fx"]')).to_have_attribute('aria-pressed', 'true')
@@ -519,23 +526,23 @@ async def break_and_tape(page):
     await expect(wear.locator('output')).to_have_text('100%')
     await page.wait_for_function("before => document.querySelector('[data-mix-param-label=\"Tape Wear\"] canvas').toDataURL() !== before",arg=painted)
     state = await draft_state(page)
-    assert state['breakSequence'] == {'loops':['personal-br1-zone2','personal-br2-zone1'], 'rate':'1/8', 'slices':[0]*15+[32]}
+    assert state['breakSequence'] == {'loops':['personal-br1-zone2','personal-br2-zone1'], 'rate':'1/8', 'slices':[0]*15+[32], 'steps':[False]*16}
     assert {'id':'catalog/1551', 'value':127} in state['parameters']
     await load_draft(page, state)
     await expect(wear.locator('output')).to_have_text('100%')
     await page.locator('[data-view="roll"]').click()
-    await expect(page.locator('[data-break-step="15"]')).to_have_value('32')
+    await expect(page.locator('[data-break-step="15"]')).to_have_attribute('data-value','32')
     broken = dict(state, breakSequence=dict(state['breakSequence'],loops=['unknown-loop',None]))
     await page.locator('#draft-file').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':json.dumps(broken).encode()})
-    await expect(page.locator('#status')).to_have_text('Local draft: invalid BREAK sequence')
-    await expect(page.locator('[data-break-loop="0"]')).to_have_value('personal-br1-zone2')
+    await expect(page.locator('#status')).to_have_text('Invalid BREAK sequence')
+    await expect(page.locator('[data-break-loop="0"][data-break-value="personal-br1-zone2"]')).to_have_attribute('aria-pressed','true')
     old = dict(state)
     del old['breakSequence']
     old['notes'].append(dict(id='draft998', track='breaks', note=60, velocity=100, channel=0, start=0, end=500, sourceOrder=None, pulse=False))
     await load_draft(page, old)
     await page.locator('[data-view="roll"]').click()
-    await expect(page.locator('[data-break-step="15"]')).to_have_value('0')
-    await expect(page.locator('[data-break-loop="0"]')).to_have_value('')
+    await expect(page.locator('[data-break-step="15"]')).to_have_attribute('data-value','0')
+    await expect(page.locator('[data-break-loop="0"][data-break-value=""]')).to_have_attribute('aria-pressed','true')
     assert not await page.locator('#roll-view').is_visible()
     await page.locator('[data-break-view="notes"]').click()
     legacy = page.locator('[data-note="draft998"]')
@@ -548,14 +555,16 @@ async def break_and_tape(page):
     await page.locator('[data-engine="chicago"]').click()
     await expect(page.locator('#roll-view')).to_be_visible()
     await page.locator('#connect').click()
-    await expect(page.locator('#connection-message')).to_have_text('No reviewed firmware catalog. Apply stays off.')
-    await page.locator('#close-connection').click()
-    await expect(page.locator('#connection-result')).to_be_hidden()
+    await expect(page.locator('#conn-state')).to_have_text('Disconnected')
     await page.route('**/sample-contract.json', lambda route:route.fulfill(status=200,body='{}'))
     await page.locator('[data-engine="breaks"]').click()
-    await expect(page.locator('#break-sequence')).to_contain_text('Starting breaks unavailable')
+    await expect(page.locator('#break-sequence')).to_contain_text('Starting break audio previews unavailable')
     await expect(page.locator('#break-sequence [data-action="play"]')).to_have_count(0)
-    assert await page.locator('#apply').is_disabled()
+    await page.locator('[data-break-step="2"]').click()
+    await page.locator('[data-break-open-slices]').click()
+    await page.locator('[data-break-slice="6"]').click()
+    await expect(page.locator('[data-break-step="2"]')).to_have_attribute('data-value','6')
+    assert await page.locator('#apply').count() == 0
 
 async def browser_cases():
     notice = (ROOT / 'LICENSES/FunkyBeats-MIT.md').read_text()
@@ -571,7 +580,7 @@ async def browser_cases():
                 page.on('pageerror', lambda error: errors.append(str(error)))
                 await page.add_init_script('navigator.requestMIDIAccess=()=>{throw Error("Device access forbidden in local draft test")};')
                 await page.goto(ORIGIN + '/remote/')
-                await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+                await page.wait_for_function('document.getElementById("status").textContent.includes("Disconnected")')
                 await case(page)
                 assert not errors, errors
                 print(f'PASS FunkyBeats {case.__name__}', flush=True)

@@ -1,0 +1,28 @@
+--- a/firmware/src/dsp/s1c/s1u.c
++++ b/firmware/src/dsp/s1c/s1u.c
+@@ -55,18 +55,15 @@
+     0.980785251f, 0.985277653f, 0.989176512f, 0.992479563f, 0.99518472f, 0.997290432f, 0.99879545f, 0.999698818f,
+     1.0f
+ };
+-static float sin_at(uint32_t i)                 /* sin(i * 2 pi / 256) for i in 0..256, from a quarter wave */
+-{
+-    uint32_t k = i & 127u;
+-    float v = sin_q[k <= 64u ? k : 128u - k];
+-    return (i & 128u) ? -v : v;
+-}
+ float s1u_sin(uint32_t ph)
+ {
+-    uint32_t i = ph >> 24;
+-    float f = (float)(ph & 0xFFFFFFu) * (1.0f / 16777216.0f);
+-    float a = sin_at(i);
+-    return a + f * (sin_at(i + 1u) - a);
++    const uint32_t i=ph>>24, q=i&63u;
++    const float *p=sin_q+((i&64u)?64u-q:q);
++    float a=p[0], b=p[(i&64u)?-1:1];
++    if(i&128u)a=-a;
++    if((i+1u)&128u)b=-b;
++    const float f=(float)(ph&0xFFFFFFu)*(1.0f/16777216.0f);
++    return a+f*(b-a);
+ }
+ 
+ /* ---- LFO ---- */

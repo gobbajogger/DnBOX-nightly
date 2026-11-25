@@ -1,0 +1,4 @@
+390 LEGACY cap=1 realtime actual, two HELLO only, no replies or edits, dialog='DnBOX MIDI was detected, but DnBOX didn’t answer Remote. Edits stay in Draft. Check USB and use firmware that supports Remote, then try again.', dismissed='Draft · MIDI found, but DnBOX didn’t answer Remote'
+390 DNR3 native HELLO/OPEN/STATE confirmed, real Live controls and tempo, clears note on retry and disconnect
+1440 LEGACY cap=1 realtime actual, two HELLO only, no replies or edits, dialog='DnBOX MIDI was detected, but DnBOX didn’t answer Remote. Edits stay in Draft. Check USB and use firmware that supports Remote, then try again.', dismissed='Draft · MIDI found, but DnBOX didn’t answer Remote'
+1440 DNR3 native HELLO/OPEN/STATE confirmed, real Live controls and tempo, clears note on retry and disconnect

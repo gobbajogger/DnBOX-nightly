@@ -1,0 +1,26 @@
+--- a/firmware/src/dsp/s1c/s1u.c
++++ b/firmware/src/dsp/s1c/s1u.c
+@@ -84,14 +84,15 @@
+ }
+ float s1u_ladder(float *h, float in, float A, float fb)
+ {
+-    float o = 0.0f;
+-    for (int k = 0; k < 2; k++) {
+-        float tmp = h[3], v = in - fb * 0.5f * (h[3] + h[4]);
+-        float z1 = v + A * (h[0] - v), z2 = z1 + A * (h[1] - z1), z3 = z2 + A * (h[2] - z2), z4 = z3 + A * (h[3] - z3);
+-        h[0] = z1; h[1] = z2; h[2] = z3; h[3] = z4; h[4] = tmp;
+-        o += z4;
+-    }
+-    return 0.5f * o;
++    const float last = h[3], feedback=fb*0.5f;
++    float v = in-feedback*(last+h[4]);
++    const float z1=v+A*(h[0]-v), z2=z1+A*(h[1]-z1);
++    const float z3=z2+A*(h[2]-z2), z4=z3+A*(last-z3);
++    v = in-feedback*(z4+last);
++    const float w1=v+A*(z1-v), w2=w1+A*(z2-w1);
++    const float w3=w2+A*(z3-w2), w4=w3+A*(z4-w3);
++    h[0]=w1; h[1]=w2; h[2]=w3; h[3]=w4; h[4]=z4;
++    return 0.5f*((0.0f+z4)+w4);
+ }
+ float s1u_hp2(float *z, float x, float a1, float a4, float a5)
+ {

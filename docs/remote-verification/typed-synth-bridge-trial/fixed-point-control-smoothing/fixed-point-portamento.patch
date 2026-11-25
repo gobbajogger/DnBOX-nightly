@@ -1,0 +1,36 @@
+--- a/firmware/src/dsp/s1c/s1c.c
++++ b/firmware/src/dsp/s1c/s1c.c
+@@ -859,11 +859,33 @@
+ #endif
+ #endif
+     (void)cr; (void)cw;
++#if S1C_FAST && S1C_CSM && S1C_NO_SEQ
++    /* No internal sequencer changes t during this render span. Keep the
++     * multiply rounded separately, exactly as in the recurrence below. */
++    float port_target[sizeof s1c_smid];
++    uint8_t port_id[sizeof s1c_smid];
++    unsigned port_n = 0;
++    for (i = 0; i < sizeof s1c_smid; i++) {
++        const float t = c1 * s->t[s1c_smid[i]];
++        const s1c_fb cur = {.f=s->c[i]}, next = {.f=t+c2*cur.f};
++        if (next.u != cur.u) {
++            port_target[port_n] = t;
++            port_id[port_n++] = (uint8_t)i;
++        }
++    }
++#endif
+     for (f = 0; f < n; f++) {
+ #if S1C_FAST
+         int cu = (f & 3) == 0;
+ #if S1C_CSM
++#if S1C_NO_SEQ
++        for (i = 0; i < port_n; i++) {
++            const unsigned id = port_id[i];
++            s->c[id] = port_target[i] + c2 * s->c[id];
++        }
++#else
+         for (i = 0; i < (int)sizeof s1c_smid; i++) s->c[i] = c1 * s->t[s1c_smid[i]] + c2 * s->c[i];
++#endif
+ #else
+         for (i = 0; i < s1c_nsm; i++) { unsigned q = s1c_sm[i]; s->c[q] = c1 * s->t[q] + c2 * s->c[q]; }
+ #endif

@@ -1,0 +1,15 @@
+--- a/firmware/src/app/remote_dnr3.c
++++ b/firmware/src/app/remote_dnr3.c
+@@ -554,7 +554,11 @@
+     if(e[1]==ORIGINAL_SOUND_SYNTHONE){
+         int slot=s1_patch_slot(id);
+         s1_patch_value state;
+-        if(slot<0||!engine_s1_patch_read(e[2],id,&state))return -1;
++        if((slot<0 && id!=S1_LINK_ID)||!engine_s1_patch_read(e[2],id,&state))return -1;
++        if(id==S1_LINK_ID){
++            static const x0x_param_t link={"LINK",1,0,0};
++            *d=&link;return state.position;
++        }
+         static x0x_param_t field={0,S1_PATCH_STEPS,0,0};
+         field.name=s1_patch_at((unsigned)slot)->label;
+         *d=&field;return state.position;

@@ -1,0 +1,536 @@
+--- a/firmware/src/app/remote_dnr3.c
++++ b/firmware/src/app/remote_dnr3.c
+@@ -11,6 +11,12 @@
+  * fields". Lean on purpose (XIP and RAM budgets): one frame buffer (the editor's on the device), static
+  * tables, a 4-entry PARAM queue and fingerprints instead of copies of the sequencer state. */
+ #include "remote_dnr3.h"
++#if X0X_REMOTE_TYPED_SYNTH && !X0X_SYNTHONE_PATCH
++#error Remote typed exercise requires owner generation and original panel descriptors
++#endif
++#if X0X_REMOTE_TYPED_SYNTH && X0X_SYNTHONE_PATCH
++#include "s1c_part.h"
++#endif
+ #include "../crc32_nibble.h"
+ /* Native nightly builds supply the validated full source SHA as 20 bytes;
+  * the editor/About screen still uses its separate short display identity. */
+@@ -40,7 +46,19 @@
+ enum { RS_OK, RS_QUEUED, RS_BAD, RS_BUSY, RS_STALE, RS_CONFLICT, RS_UNSUPPORTED, RS_FULL, RS_DENIED };
+ enum { RN_PARAM, RN_STEP, RN_CUE, RN_TRANSPORT, RN_MUTE, RN_VOICE, RN_POSITION, RN_PATTERN, RN_N };
+ #define RD_WBIT(k) ((k) == RN_PATTERN ? 4u : 1u << (k))   /* the WATCH bit of a NOTIFY kind */
++#if X0X_REMOTE_TYPED_SYNTH && defined(__clang__)
++#define RD_SIZE __attribute__((minsize))
++#else
++#define RD_SIZE
++#endif
++#if X0X_REMOTE_TYPED_SYNTH
++#define RD_CAPS 0x1FFFu      /* negotiated original-ID synth descriptors */
++enum { RD_SYNTH_LO=112, RD_SYNTH_HI=113, RD_SYNTH_UNIT_WRITABLE=0x60 };
++RD_SIZE static int rd_typed(unsigned kind){return kind==RD_SYNTH_LO || kind==RD_SYNTH_HI;}
++#else
+ #define RD_CAPS 0xFFFu       /* PARAM..VOICE (0..8), guarded bass PARAM_SET (9), Record (10), MIAMI carrier motion (11) */
++#define rd_typed(kind) 0
++#endif
+ #define RD_WATCHABLE 0x7Fu
+ #define RD_LEASE_MS 2000u
+ #define RD_GAP_MS 20u        /* >= 20 ms between notifications: <= 50 frames/s (HELLO watch_max_hz) */
+@@ -53,6 +71,10 @@
+     volatile uint32_t voice;
+     uint32_t voice_seen;
+     uint16_t cseq;
++#if X0X_REMOTE_TYPED_SYNTH
++    uint32_t synth_generation;
++    uint16_t synth_key;
++#endif
+     uint8_t active, watch, dirty, pend, cop, clen, np;
+     volatile uint8_t voice_arm;
+     uint8_t voice_generation;
+@@ -67,7 +89,7 @@
+  * stamp:8, velocity:7, note:7, part:3; bursts may overwrite earlier pulses.
+  * The client times out pulses in addition to handling bass releases. */
+ 
+-__attribute__((noinline)) void remote_dnr3_voice(unsigned part, unsigned note, unsigned vel)
++RD_SIZE __attribute__((noinline)) void remote_dnr3_voice(unsigned part, unsigned note, unsigned vel)
+ {
+     uint32_t a = rd.voice_arm;
+     if (a)
+@@ -77,7 +99,7 @@
+ #if X0X_REMOTE_BLE
+ /* 0 = USB. A nonzero BLE token is only valid for one connection epoch. */
+ static uint32_t rd_wire, rd_lease_wire;
+-static void rd_out(const uint8_t *p, uint32_t n)
++RD_SIZE static void rd_out(const uint8_t *p, uint32_t n)
+ {
+     if (rd_wire) ble_dnr3_out(rd_wire, p, n);
+     else remote_dnr3_out(p, n);
+@@ -113,9 +135,9 @@
+     }
+     rd.pend |= (uint8_t)(1u << kind);
+ }
+-static int rd_playing(void) { return !seq.req_stop && (seq.playing || seq.req_start || seq.req_cont); }
+-__attribute__((noinline)) static uint32_t rd_bpm10(void) { return (uint32_t)(seq.bpm * 10.0f + 0.5f); }
+-static int rd_clip(void)
++RD_SIZE static int rd_playing(void) { return !seq.req_stop && (seq.playing || seq.req_start || seq.req_cont); }
++RD_SIZE __attribute__((noinline)) static uint32_t rd_bpm10(void) { return (uint32_t)(seq.bpm * 10.0f + 0.5f); }
++RD_SIZE static int rd_clip(void)
+ {
+ #if BOARD_SMK37
+     extern uint8_t smk_clip_mode_on(void);
+@@ -127,7 +149,7 @@
+ /* Sequencer state that changes outside the UI (the audio ISR: the bar's cue launch, transport edges,
+  * MIDI Start/Stop and Program Change, queued mutes; also HOME pads and SMC): a CRC fingerprint per
+  * NOTIFY kind, checked every main-loop pass. Then one rev step for everything that changed. */
+-__attribute__((noinline)) static void rd_sync(void)
++RD_SIZE __attribute__((noinline)) static void rd_sync(void)
+ {
+     static const uint8_t kind[4] = {RN_CUE, RN_PATTERN, RN_TRANSPORT, RN_MUTE};
+     uint32_t v[5];
+@@ -144,7 +166,7 @@
+     if (rd.dirty)
+         rd.dirty = 0, rd.rev = (rd.rev + 1u) & 0x0FFFFFFFu;
+ }
+-__attribute__((noinline)) static void rd_lease(uint32_t now)
++RD_SIZE __attribute__((noinline)) static void rd_lease(uint32_t now)
+ {
+     if (rd.active && ((int32_t)(now - rd.deadline) >= 0
+ #if X0X_REMOTE_BLE
+@@ -157,19 +179,19 @@
+ 
+ /* ---- frames out ------------------------------------------------------------------------------- */
+ #ifndef REMOTE_DNR3_OUTBUF
+-static void rd_b(uint32_t v)
++RD_SIZE static void rd_b(uint32_t v)
+ {
+     if (RD_N < RD_MAXOUT - 5u)
+         RD_OUT[RD_N++] = (uint8_t)(v & 127u);
+ }
+-static void rd_u(uint32_t v, int k)
++RD_SIZE static void rd_u(uint32_t v, int k)
+ {
+     for (; k > 0; k--, v >>= 7)
+         rd_b(v);
+ }
+ #endif
+ /* the header (status < 0: a notification of kind -1 - status) and the crc; then out */
+-__attribute__((noinline)) static void rd_send(int op, uint32_t sq, int status)
++RD_SIZE __attribute__((noinline)) static void rd_send(int op, uint32_t sq, int status)
+ {
+     static const uint8_t h[5] = {0xF0, 0x7D, 0x44, 0x4E, 0x03};
+     uint32_t n = RD_N;
+@@ -189,7 +211,7 @@
+ }
+ #ifndef REMOTE_DNR3_OUTBUF
+ /* ed_put7: per 7 bytes one byte of their high bits, then the 7 low parts */
+-static void rd_put7(const uint8_t *s, uint32_t n)
++RD_SIZE static void rd_put7(const uint8_t *s, uint32_t n)
+ {
+     while (n) {
+         uint32_t k = n < 7u ? n : 7u, j, hi = 0;
+@@ -202,28 +224,28 @@
+         n -= k;
+     }
+ }
+-static void rd_str(const char *s, int max)
++RD_SIZE static void rd_str(const char *s, int max)
+ {
+     for (int k = 0; s && s[k] && k < max; k++)
+         rd_b((uint8_t)s[k]);
+     rd_b(0);
+ }
+ #endif
+-static uint32_t rd_pcrc(int pat) { return x0x_crc32(&proj.pat[pat], sizeof(pattern_t)) & 0x3FFFu; }
+-__attribute__((noinline)) static void rd_bytes(const volatile uint8_t *s, int n, int none)
++RD_SIZE static uint32_t rd_pcrc(int pat) { return x0x_crc32(&proj.pat[pat], sizeof(pattern_t)) & 0x3FFFu; }
++RD_SIZE __attribute__((noinline)) static void rd_bytes(const volatile uint8_t *s, int n, int none)
+ {
+     while (n-- > 0) {
+         uint32_t b = *s++;                         /* one snapshot of each ISR-owned byte */
+         rd_b(b < (uint32_t)none ? b : 127u);
+     }
+ }
+-__attribute__((noinline)) static void rd_cues(void) { rd_bytes(seq.ppat, NTRACKS, 128); rd_bytes(seq.pcue, NTRACKS, NPAT); }
+-__attribute__((noinline)) static void rd_mutes(void) { rd_u(seq.mute, 5); rd_u(seq.vmute, 5); }
++RD_SIZE __attribute__((noinline)) static void rd_cues(void) { rd_bytes(seq.ppat, NTRACKS, 128); rd_bytes(seq.pcue, NTRACKS, NPAT); }
++RD_SIZE __attribute__((noinline)) static void rd_mutes(void) { rd_u(seq.mute, 5); rd_u(seq.vmute, 5); }
+ 
+ /* ---- the panel's values (pref_t), checked before ui.c indexes a table with them ----------------
+  * 0: no such value, 1: the Remote may set it, 2: readable only (settings that write flash, change
+  * radios or run the device; 4.1) */
+-__attribute__((noinline)) static int rd_pref_ok(unsigned kind, unsigned a, unsigned b, unsigned c)
++RD_SIZE __attribute__((noinline)) static int rd_pref_ok(unsigned kind, unsigned a, unsigned b, unsigned c)
+ {
+     enum { G = 1, PA, FP, BB, SW, KP, BP, GN, BS, SL, BR, SP, SR, EN, RO = 0x80 };
+     static const uint8_t LIM[EN][3] = {    /* the highest a, b, c of each kind of address (255: any) */
+@@ -248,7 +270,7 @@
+ }
+ /* ui.c; e: kind, a, b, c. -1: no such value (or set and read only); *d: its descriptor */
+ int ui_remote_pref(const uint8_t *e, int set, int v, const x0x_param_t **d);
+-__attribute__((noinline)) static int rd_pget(const uint8_t *e, const x0x_param_t **d)
++RD_SIZE __attribute__((noinline)) static int rd_pget(const uint8_t *e, const x0x_param_t **d)
+ {
+     *d = 0;
+     return rd_pref_ok(e[0], e[1], e[2], e[3]) ? ui_remote_pref(e, 0, 0, d) : -1;
+@@ -259,7 +281,7 @@
+  *   303:     note, gate, accent, slide, velocity, end
+  *   BREAK:   on, slice (0 = the generator, 1..32; steps 0..15 only)
+  * the record length, -1 for a bad address */
+-__attribute__((noinline)) static int rd_step_get(int part, int pat, int step, int track, uint8_t *rec)
++RD_SIZE __attribute__((noinline)) static int rd_step_get(int part, int pat, int step, int track, uint8_t *rec)
+ {
+     const pattern_t *p = &proj.pat[pat & (NPAT - 1)];
+     if ((unsigned)part >= NPARTS || (unsigned)pat >= NPAT || (unsigned)step >= NSTEPS)
+@@ -293,7 +315,7 @@
+     }
+ }
+ /* 0 written, RS_BAD a bad record, RS_FULL no room for a velocity lane or the note's sound */
+-__attribute__((noinline)) static int rd_step_set(int part, int pat, int step, const uint8_t *rec)
++RD_SIZE __attribute__((noinline)) static int rd_step_set(int part, int pat, int step, const uint8_t *rec)
+ {
+     pattern_t *p = &proj.pat[pat & (NPAT - 1)];
+     uint8_t now[6];
+@@ -340,7 +362,7 @@
+     remote_touch(RN_STEP, (uint32_t)part | (uint32_t)pat << 8 | (uint32_t)step << 16);
+     return 0;
+ }
+-__attribute__((noinline)) static int rd_step(int part, int pat, int step, int track)
++RD_SIZE __attribute__((noinline)) static int rd_step(int part, int pat, int step, int track)
+ {
+     uint8_t r[6];
+     int n = rd_step_get(part, pat, step, track, r);
+@@ -351,7 +373,7 @@
+ }
+ 
+ /* ---- notifications (only to the lease holder, for its WATCH bits) ------------------------------ */
+-__attribute__((noinline)) void remote_dnr3_tick(uint32_t now)
++RD_SIZE __attribute__((noinline)) void remote_dnr3_tick(uint32_t now)
+ {
+     const x0x_param_t *d;
+     int k, v;
+@@ -417,7 +439,7 @@
+ 
+ /* ---- requests --------------------------------------------------------------------------------- */
+ #ifndef REMOTE_DNR3_OUTBUF
+-__attribute__((noinline)) static uint32_t rd_g(const uint8_t *a, int k)
++RD_SIZE __attribute__((noinline)) static uint32_t rd_g(const uint8_t *a, int k)
+ {
+     uint32_t v = 0;
+     while (k--)
+@@ -435,7 +457,7 @@
+ 
+ /* Caller holds the bass edit boundary: queued/persisted and active identity
+  * must all agree without adopting a legacy cell or changing the base sound. */
+-__attribute__((noinline)) static int rd_bass_guard(int voice, int bank)
++RD_SIZE __attribute__((noinline)) static int rd_bass_guard(int voice, int bank)
+ {
+     if (engine_bass_preset_pending(voice))
+         return RS_BUSY;
+@@ -446,14 +468,14 @@
+ }
+ 
+ enum { RD_MPOINTS = 16, RD_MIAMI_CARRIER = 0 };
+-__attribute__((noinline)) static int rd_motion_busy(void)
++RD_SIZE __attribute__((noinline)) static int rd_motion_busy(void)
+ {
+     return ui.rec || seq.playing || seq.req_start || seq.req_stop || seq.req_cont;
+ }
+ /* These operations name only the verified MIAMI carrier, not Chicago Wave
+  * or the cross modulator. Stop transport/REC before edit; motion's retained
+  * audio-side record/ramp requests must never race a DNR3 transaction. */
+-__attribute__((noinline)) static int rd_motion(const uint8_t *a, uint32_t n, int write)
++RD_SIZE __attribute__((noinline)) static int rd_motion(const uint8_t *a, uint32_t n, int write)
+ {
+     int voice = a[0], pat = a[1], part = PART_303A + voice, status, lane, step, value, before;
+     const uint8_t *points;
+@@ -512,7 +534,81 @@
+     return status;
+ }
+ 
+-static int rd_pset(const uint8_t *q)
++#if X0X_REMOTE_TYPED_SYNTH
++/* Keep semantic original IDs separate from legacy saved-cell slot indices.
++ * A typed read is absent if the player has not selected that actual engine. */
++RD_SIZE static int rd_synth_target(const uint8_t *e)
++{
++    return e[1] >= ORIGINAL_SOUND_SYNTHONE && e[1] <= ORIGINAL_SOUND_JUNO && e[2] < NBASS;
++}
++RD_SIZE static unsigned rd_synth_id(const uint8_t *e)
++{ return (unsigned)e[3]+(e[0]==RD_SYNTH_HI?128u:0u); }
++static unsigned rd_synth_key(const uint8_t *e)
++{ return 1u + rd_synth_id(e) + (((e[1]&1u)*2u+e[2])*256u); }
++
++RD_SIZE static int rd_synth_read(const uint8_t *e,const x0x_param_t **d)
++{
++    unsigned id=rd_synth_id(e);
++    if(!rd_synth_target(e)||rd_bass_guard(e[2],e[1]))return -1;
++#if X0X_SYNTHONE_PATCH
++    if(e[1]==ORIGINAL_SOUND_SYNTHONE){
++        int slot=s1_patch_slot(id);
++        s1_patch_value state;
++        if(slot<0||!engine_s1_patch_read(e[2],id,&state))return -1;
++        static x0x_param_t field={0,S1_PATCH_STEPS,0,0};
++        field.name=s1_patch_at((unsigned)slot)->label;
++        *d=&field;return state.position;
++    }
++#endif
++    if(e[1]==ORIGINAL_SOUND_JUNO && id==7u){
++        const uint8_t cutoff[]={R_ENG,T_303,e[2],2};
++        return rd_pget(cutoff,d);
++    }
++    return -1;
++}
++RD_SIZE static int rd_synth_write(const uint8_t *q)
++{
++    int old,status,value;
++    const x0x_param_t *d;
++    if(!rd_synth_target(q)||q[8]!=q[1]||rd_g(q+4,2)==0x3fffu)return RS_BAD;
++    engine_bass_edit_hold(1);
++    status=rd_bass_guard(q[2],q[1]);
++    if(status)goto done;
++    if(rd.synth_key!=rd_synth_key(q)||rd.synth_generation!=engine_remote_synth_generation(q[2])){
++        status=RS_CONFLICT;goto done;
++    }
++    old=rd_synth_read(q,&d);
++    if(old<0){status=RS_UNSUPPORTED;goto done;}
++    if(rd_g(q+4,2)!=(uint32_t)old){status=RS_CONFLICT;goto done;}
++    value=(int)rd_g(q+6,2);
++    if(value>(int)d->max){status=RS_BAD;goto done;}
++#if X0X_SYNTHONE_PATCH
++    if(q[1]==ORIGINAL_SOUND_SYNTHONE){
++        unsigned id=rd_synth_id(q);
++        s1_patch_value state;
++        if(!engine_s1_patch_read(q[2],id,&state)||state.position!=old){status=RS_CONFLICT;goto done;}
++        int applied=engine_s1_patch_set(q[2],state.revision,id,(unsigned)value);
++        if(applied!=S1_EDIT_QUEUED){status=applied==S1_EDIT_BUSY?RS_BUSY:RS_CONFLICT;goto done;}
++        ui.dirty=1;
++        status=RS_QUEUED;  /* not visible until next audio boundary; client must read back */
++    }else
++#endif
++    {
++        const uint8_t cutoff[]={R_ENG,T_303,q[2],2};
++        if(ui_remote_pref(cutoff,1,value,&d)!=value){status=RS_CONFLICT;goto done;}
++    }
++    rd.synth_key=0;
++    rd_bytes(q,4,128);rd_u((uint32_t)value,2);
++done:
++    engine_bass_edit_hold(0);
++    return status;
++}
++#else
++#define rd_synth_read(e,d) (-1)
++#define RD_SYNTH_UNIT_WRITABLE 0
++#endif
++
++RD_SIZE static int rd_pset(const uint8_t *q)
+ {
+     const x0x_param_t *d;
+     int v;
+@@ -529,7 +625,7 @@
+     return 0;
+ }
+ 
+-__attribute__((noinline)) static int rd_op(uint32_t op, const uint8_t *a, uint32_t len)
++RD_SIZE __attribute__((noinline)) static int rd_op(uint32_t op, const uint8_t *a, uint32_t len)
+ {
+     const uint8_t *q = a + 4;                             /* a write's fields, after its epoch */
+     const x0x_param_t *d;
+@@ -569,6 +665,9 @@
+         rd_lease_wire = rd_wire;
+ #endif
+         rd.watch = rd.clen = rd.voice_arm = 0;
++#if X0X_REMOTE_TYPED_SYNTH
++        rd.synth_key=0;
++#endif
+         rd.deadline = plat_ms() + RD_LEASE_MS;
+         rd_u(rd.epoch, 4);
+         rd_u(RD_LEASE_MS, 2);
+@@ -590,12 +689,12 @@
+         rd_u(rd.watch, 4);
+         return 0;
+     case RD_DESCRIBE: {
+-        if (rd_pget(a, &d) < 0)
++        if ((rd_typed(a[0]) ? rd_synth_read(a,&d) : rd_pget(a,&d)) < 0)
+             return RS_UNSUPPORTED;
+         rd_str(d->name, 6);
+         rd_u(d->max, 2);
+         rd_u(d->def, 2);
+-        rd_b(0);                                          /* unit: the Remote formats it */
++        rd_b(rd_typed(a[0]) ? RD_SYNTH_UNIT_WRITABLE : 0); /* typed/writable flags */
+         v = d->names && d->max < 32u ? d->max + 1 : 0;    /* more switch names than fit: numbers */
+         rd_b((uint32_t)v);
+         for (k = 0; k < v; k++)
+@@ -608,13 +707,28 @@
+         rd_b(a[0]);
+         for (k = 0; k < a[0]; k++) {
+             const uint8_t *e = a + 1 + 4 * k;
+-            v = rd_pget(e, &d);
++#if X0X_REMOTE_TYPED_SYNTH
++            if(rd_typed(e[0])){
++                int observe=a[0]==1 && rd_synth_target(e) && rd.active;
++                uint32_t generation=observe?engine_remote_synth_generation(e[2]):0;
++                v=rd_synth_read(e,&d);
++                if(observe){
++                    rd.synth_key=v>=0 && generation==engine_remote_synth_generation(e[2])?
++                        (uint16_t)rd_synth_key(e):0;
++                    rd.synth_generation=generation;
++                }
++            }else
++#endif
++            v=rd_pget(e,&d);
+             rd_bytes(e, 4, 128);
+             rd_u(v < 0 ? 0x3FFFu : (uint32_t)v, 2);       /* 0x3FFF, max 0: not a value here */
+             rd_u(v < 0 ? 0u : d->max, 2);
+         }
+         return 0;
+     case RD_PSET:
++#if X0X_REMOTE_TYPED_SYNTH
++        if(rd_typed(q[0]))return len==13u?rd_synth_write(q):RS_BAD;
++#endif
+         if (len == 12u)                                  /* legacy parameter writes */
+             return rd_pset(q);
+         if (len != 13u || q[0] != R_ENG || q[1] != T_303 || q[2] >= NBASS || q[8] > ORIGINAL_SOUND_JUNO)
+@@ -761,9 +875,9 @@
+ 
+ /* p: the frame without F0/F7. 0: a DNR frame (answered or dropped), -1: not one (the editor's, OTA) */
+ #if X0X_REMOTE_BLE
+-__attribute__((noinline)) int remote_dnr3_frame_on(const uint8_t *p, uint32_t n, uint32_t wire)
++RD_SIZE __attribute__((noinline)) int remote_dnr3_frame_on(const uint8_t *p, uint32_t n, uint32_t wire)
+ #else
+-__attribute__((noinline)) int remote_dnr3_frame(const uint8_t *p, uint32_t n)
++RD_SIZE __attribute__((noinline)) int remote_dnr3_frame(const uint8_t *p, uint32_t n)
+ #endif
+ {
+     uint32_t i = 0, op, sq, len = 0, crc = 0, f = 0;
+@@ -824,10 +938,10 @@
+     st = rd_op(op, p + 9, len);
+     rd_sync();
+ reply:
+-    if (st)
++    if (st && st!=RS_QUEUED)
+         RD_N = RD_HEAD;
+     rd_send((int)(op | 0x40u), sq, st);
+-    if (!st && f & 0x80u && RD_N <= sizeof rd.cache) {
++    if ((st==RS_OK || st==RS_QUEUED) && f & 0x80u && RD_N <= sizeof rd.cache) {
+         memcpy(rd.cache, RD_OUT, RD_N);
+         rd.clen = (uint8_t)RD_N;
+         rd.cop = (uint8_t)op;
+@@ -843,7 +957,7 @@
+ }
+ 
+ #if X0X_REMOTE_BLE
+-int remote_dnr3_frame(const uint8_t *p, uint32_t n)
++RD_SIZE int remote_dnr3_frame(const uint8_t *p, uint32_t n)
+ {
+     return remote_dnr3_frame_on(p, n, 0);
+ }
+--- a/firmware/src/app/engine.h
++++ b/firmware/src/app/engine.h
+@@ -149,6 +149,9 @@
+ void engine_bass_cancel_preset(int voice);
+ /* Main-loop edit/undo snapshots defer preset application without muting audio. */
+ void engine_bass_edit_hold(int hold);
++#if X0X_REMOTE_TYPED_SYNTH
++uint32_t engine_remote_synth_generation(unsigned voice);
++#endif
+ int engine_bass_preview_changed(void);
+ void engine_bass_wheel_owners(uint8_t mask);
+ #endif
+@@ -189,6 +192,9 @@
+ void engine_bass_cancel_preset(int voice);
+ /* Main-loop edit/undo snapshots defer preset application without muting audio. */
+ void engine_bass_edit_hold(int hold);
++#if X0X_REMOTE_TYPED_SYNTH
++uint32_t engine_remote_synth_generation(unsigned voice);
++#endif
+ int engine_bass_preview_changed(void);
+ void engine_bass_wheel_owners(uint8_t mask);
+ #endif
+--- a/firmware/src/app/original_presets.inc
++++ b/firmware/src/app/original_presets.inc
+@@ -15,6 +15,11 @@
+ int engine_s1_patch_pending(void)
+ { return s1_edit[0].pending || s1_edit[1].pending; }
+ 
++#if X0X_REMOTE_TYPED_SYNTH
++uint32_t engine_remote_synth_generation(unsigned voice)
++{ return s1_patch_identity(voice); }  /* validated voice on remote ingress */
++#endif
++
+ static void s1_patch_replaced(int voice)
+ {
+     ++s1_patch_revision[voice];
+--- a/experiments/original_synth/chicago_packed.c
++++ b/experiments/original_synth/chicago_packed.c
+@@ -1,7 +1,41 @@
+ /* SPDX-License-Identifier: GPL-3.0-only */
+ #include "chicago_packed.h"
+ #include <stddef.h>
+-#ifdef X0X_CHICAGO_COMPACT_HEADERS
++#if defined(X0X_CHICAGO_FAST32) && X0X_CHICAGO_FAST32
++#include "p_a.h"
++#include "p_e.h"
++static uint16_t u16(const uint8_t *p){return (uint16_t)p[0]|(uint16_t)((uint16_t)p[1]<<8);}
++static uint32_t u32(const uint8_t *p){return (uint32_t)u16(p)|((uint32_t)u16(p+2)<<16);}
++static __attribute__((noinline)) uint32_t chicago_fast32_lookup(const unsigned char *t,unsigned idx){
++    unsigned i=idx&127,ns=u16(t+2);
++    const uint8_t *p=t+4+2*ns+u16(t+4+(idx>>7)*2);
++    unsigned degree=p[0]>>5,width=p[0]&31,q=p[9];
++    uint32_t base=u32(p+1),lo=u32(p+5);
++    p+=10;
++    int32_t coefficients[4];
++    for(unsigned j=0;j<=degree;j++){
++        uint32_t z=0;
++        unsigned b,count=0;
++        do{b=*p++;z|=(b&127u)<<count;count+=7;}while(b&128u);
++        coefficients[j]=(int32_t)((z>>1)^(0u-(z&1u)));
++    }
++    int32_t v=coefficients[degree];
++    for(unsigned j=degree;j>0;j--)v=coefficients[j-1]+((v*(int32_t)i)>>7);
++    if(q)v=(v+(int32_t)(1u<<(q-1)))>>q;
++    unsigned bit=i*width,shift=bit&7,rem=width;
++    uint32_t z=0;
++    p+=bit>>3;
++    if(rem){
++        unsigned take=8-shift;
++        if(take>rem)take=rem;
++        z=(unsigned)(*p++>>shift)&((1u<<take)-1u);
++        rem-=take;
++        while(rem){unsigned n=rem<8?rem:8;z|=((uint32_t)*p++&((1u<<n)-1u))<<take;take+=n;rem-=n;}
++    }
++    return base+lo+(uint32_t)v+z;
++}
++
++#elif defined(X0X_CHICAGO_COMPACT_HEADERS)
+ typedef struct {
+  const uint8_t *data;
+  const uint16_t *offset_base;
+@@ -76,7 +110,10 @@
+  uint32_t ab,eb,i0=last_index;
+  ab=last_a;eb=last_e;
+  if(i0!=index||last_index!=i0){
+-#ifdef X0X_CHICAGO_COMPACT_HEADERS
++#if defined(X0X_CHICAGO_FAST32) && X0X_CHICAGO_FAST32
++  if(index>16384u)return 0;
++  ab=chicago_fast32_lookup(p_a,index);eb=chicago_fast32_lookup(p_e,index);
++#elif defined(X0X_CHICAGO_COMPACT_HEADERS)
+   if(!chicago_compact_lookup(&original_chicago_packed_a,index,original_chicago_packed_a_prefix,&ab)||!chicago_compact_lookup(&original_chicago_packed_e,index,original_chicago_packed_e_prefix,&eb))return 0;
+ #else
+   if(!original_lossless_second16_lookup(&original_chicago_packed_a,index,&ab)||!original_lossless_second16_lookup(&original_chicago_packed_e,index,&eb))return 0;
+--- a/tools/build.py
++++ b/tools/build.py
+@@ -509,6 +509,8 @@
+                 uf = ["-Oz" if flag == "-Os" else flag for flag in uf]
+             if BOARD == "smk37" and MODEL in ("elite", "pro") and Path(u).stem == "chicago_packed":
+                 uf = [*uf, "-DX0X_CHICAGO_COMPACT_HEADERS=1"]
++                if os.environ.get("DNBOX_PRIVATE_FAST32_TABLES"):
++                    uf = [*uf, "-DX0X_CHICAGO_FAST32=1", "-I"+os.environ["DNBOX_PRIVATE_FAST32_TABLES"]]
+             if SUPERJ6_FACTORY == "1" and synthone_patch == "1":
+                 uf = ["-Oz" if flag == "-Os" else flag for flag in uf]
+             if SUPERJ6_FACTORY == "1" and Path(u).stem in {"dnbx_core", "juno6"}:
+@@ -555,7 +557,7 @@
+         flags.append(usb_name)  # app only: loader, VID/PID and package identity unchanged
+     if VERSION and os.environ.get("X0X_DEBUG") == "1":
+         raise SystemExit("X0X_DEBUG=1 (register peek / poke over USB) is for development builds only")
+-    for flag in ("X0X_CDC", "X0X_DEBUG", "X0X_DEV_WOBBLE", "X0X_WOBBLE", "X0X_LCD_TRACE", "X0X_REMOTE_DNR3"):
++    for flag in ("X0X_CDC", "X0X_DEBUG", "X0X_DEV_WOBBLE", "X0X_WOBBLE", "X0X_LCD_TRACE", "X0X_REMOTE_DNR3", "X0X_REMOTE_TYPED_SYNTH"):
+         v = os.environ.get(flag)    # unset: the default in firmware headers / below
+         if v in ("0", "1"):
+             flags.append(f"-D{flag}={v}")

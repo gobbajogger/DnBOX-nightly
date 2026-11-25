@@ -1,0 +1,19 @@
+--- a/firmware/src/app/engine.c
++++ b/firmware/src/app/engine.c
+@@ -995,9 +995,15 @@
+             }
+ #if X0X_BASS_TAGGED_SOUND
+     for(v=0;v<NBASS;v++) {
+-        int bank = v == 0 ? ORIGINAL_SOUND_MIAMI : ORIGINAL_SOUND_CHICAGO;
++        int bank = v == 0 ? ORIGINAL_SOUND_SYNTHONE : ORIGINAL_SOUND_CHICAGO;
+         (void)original_sound_init(s->v[T_303][v], (unsigned)bank, 0);
+         bass_tag_set(s, v, bank, 0, 0);
++        if(v==0){
++            engine_arp_cfg cfg;
++            (void)engine_arp_block_decode(NULL,&cfg);
++            cfg.on=1;cfg.range=2;
++            engine_arp_block_encode(&cfg,s->v[T_303][ARP_BLOCK_VOICE0]);
++        }
+     }
+ #endif
+     /* the factory mix: big beat (Chemical Brothers, Fatboy Slim), balanced by tools/mix_report.py

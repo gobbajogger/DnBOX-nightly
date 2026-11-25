@@ -9,7 +9,7 @@ export function sourceFrame(screen){
   const[l,t,r,bottom]=b;
   if(l<BODY.x||r>BODY.x+BODY.width||t<BODY.y||bottom>BODY.y+BODY.height)throw Error('Source control outside complete native body');
   const percent=v=>Number(v.toPrecision(12));
-  return `<button type="button" class="parameter source-hit" data-param="${esc(screen.path+'|'+c.identity)}" data-param-occurrence="${index}" aria-label="${esc(c.context.name)}, source example ${esc(c.context.display??'')}, local draft" style="left:${percent((l-BODY.x)/BODY.width*100)}%;top:${percent((t-BODY.y)/BODY.height*100)}%;width:${percent((r-l)/BODY.width*100)}%;height:${percent((bottom-t)/BODY.height*100)}%"></button>`;
+  return `<button type="button" class="parameter source-hit" data-param="${esc(screen.path+'|'+c.identity)}" data-param-occurrence="${index}" aria-label="${esc(c.context.name)}, source example ${esc(c.context.display??'')}" style="left:${percent((l-BODY.x)/BODY.width*100)}%;top:${percent((t-BODY.y)/BODY.height*100)}%;width:${percent((r-l)/BODY.width*100)}%;height:${percent((bottom-t)/BODY.height*100)}%"></button>`;
  }).join('');
  return `<div class="source-scene" data-source-frame="${esc(screen.path)}" data-runtime-admitted="false">${screen.body_svg}${buttons}</div>`;
 }

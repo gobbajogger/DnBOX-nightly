@@ -26,8 +26,9 @@ spec = importlib.util.spec_from_file_location('fb', Path(__file__).with_name('fu
 fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 
-VIEWS = ('roll', 'sound', 'mix', 'patterns', 'files', 'drums', 'locks', 'song')
-MENU_VIEWS = ('drums', 'locks', 'song')
+# 909/808 open the drum grid from Sequence ('roll'), so the drum grid is walked as each drum part's roll view.
+VIEWS = ('roll', 'sound', 'mix', 'patterns', 'files', 'locks', 'song')
+MENU_VIEWS = ('locks', 'song')
 ENGINES = tuple(os.environ.get('UNBOUND_ENGINES', 'drum909,drum808,chicago,miami,breaks').split(','))
 VIEWS = tuple(os.environ.get('UNBOUND_VIEWS', ','.join(VIEWS)).split(','))
 # Controls whose effect needs a prior state: the precondition gesture runs first.
@@ -41,9 +42,45 @@ MARK = '''()=>{let n=window.__unboundProbe||0;const out=[];for(const e of docume
  const id='c'+(n++);e.dataset.unboundProbe=id;
  const label=(e.getAttribute('aria-label')||e.textContent||e.id||'').trim().replace(/\\s+/g,' ').slice(0,60);
  out.push({id,tag:e.tagName.toLowerCase(),type:e.type||'',role:e.getAttribute('role')||'',href:e.getAttribute('href'),
-  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(view|engine|param|mix-|sound-|project-|tab|mode|break-view|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
+  key:[e.tagName.toLowerCase(),e.id&&'#'+e.id,...[...e.attributes].filter(a=>/^data-(launch-part|drum-page|roll-source|view|engine|param|mix-|sound-|project-|tab|mode|break-(?:view|loop|value|step|slice|on|open-slices)|note|lane-step|step|cell|pattern|song|lock|voice|action)/.test(a.name)).map(a=>a.name+'='+a.value)].filter(Boolean).join(' '),
   label,current:e.getAttribute('aria-current')==='page'||(e.getAttribute('aria-pressed')==='true'&&!e.matches('#rec,#multi,#snap'))});}
  window.__unboundProbe=n;return out;}'''
+
+# Some source controls replace their entire panel when selected. Discover their
+# siblings by semantic role after that replacement, not a stale discovery ID.
+CURRENT_GROUPS = ('data-drum-page', 'data-mix-mode', 'data-roll-source')
+
+async def reselect_semantic(page, item):
+    parts=dict(token.split('=',1) for token in item['key'].split() if '=' in token)
+    channel=parts.get('data-launch-part')
+    attr='data-pattern' if channel is not None else next((a for a in CURRENT_GROUPS if a in parts),None)
+    if attr is None:
+        return None
+    value=parts[attr]
+    prefix=f'button[data-launch-part="{channel}"]' if channel is not None else 'button'
+    selected = page.locator(f'{prefix}[{attr}="{value}"]')
+    group = page.locator(f'{prefix}[{attr}]:visible')
+    pressed = page.locator(f'{prefix}[{attr}][aria-pressed=true]:visible')
+    assert await selected.get_attribute('aria-pressed') == 'true', (key,'not actually selected')
+    assert await pressed.count() == 1, (key,'ambiguous selection')
+    alternatives=[]
+    for candidate in await group.all():
+        if await candidate.get_attribute(attr)!=value:
+            alternatives.append(candidate)
+    alternate=None
+    for candidate in alternatives:
+        if await candidate.is_enabled():
+            alternate=candidate
+            break
+    if alternate is None:
+        assert alternatives and all([await b.is_disabled() for b in alternatives]), (key,'no truthful disabled alternatives')
+        return 'disabled'
+    await alternate.click()
+    await pressed.wait_for()
+    assert await pressed.get_attribute(attr) != value, (key,'alternate did not select')
+    await selected.click()
+    assert await selected.get_attribute('aria-pressed') == 'true', (key,'could not return')
+    return 'confirmed'
 
 SIBLING = '''id=>{const e=document.querySelector('[data-unbound-probe="'+id+'"]');if(!e)return 'none';
  const kind=x=>x.tagName+'|'+[...x.attributes].map(a=>a.name).filter(n=>n.startsWith('data-')&&n!=='data-unbound-probe').sort().join(',')+'|'+x.className;
@@ -91,12 +128,25 @@ async def gesture(page, item):
     loc = await resolve(page, item)
     if loc is None or not await loc.is_visible() or not await loc.is_enabled():
         return 'gone'   # hidden or disabled by an earlier gesture: the caller retries from a fresh view
+    if 'data-project-action=open' in item['key']:
+        # Opening a real browser-owned file chooser is not a DOM mutation.
+        async with page.expect_file_chooser(timeout=2000) as cho:
+            await loc.click(timeout=2000)
+        chooser = await cho.value
+        assert await chooser.element.get_attribute('id') == 'draft-file', 'Wrong project chooser'
+        assert not chooser.is_multiple(), 'Expected one project file'
+        return 'filechooser'
     if 'data-note=' in item['key'] or 'data-lane-step=' in item['key']:
         before = await page.evaluate(STATE)
         await loc.focus()
         await loc.press('ArrowUp')
         if await page.evaluate(STATE) != before:
             return None
+    if await loc.get_attribute('role') == 'slider':
+        # A slider (the BPM readout) moves with the arrow keys like a range input.
+        await loc.focus()
+        await loc.press('ArrowUp')
+        return None
     if item['tag'] == 'select':
         options = await loc.evaluate('e=>[...e.options].filter(o=>!o.disabled).map(o=>o.value)')
         current = await loc.input_value()
@@ -133,7 +183,74 @@ async def gesture(page, item):
     return None
 
 
-async def walk(browser, size):
+BREAK_DISCLOSURES=('[data-break-slot="0"]','[data-break-slot="1"]','details.break-picker')
+
+async def open_break_picker(page,selector):
+    menu=page.locator(selector)
+    if not await menu.evaluate('e=>e.open'):
+        await menu.locator('summary').click()
+    assert await menu.evaluate('e=>e.open'),(selector,'not open')
+    return menu
+
+async def witness_break_choice(page,item):
+    """Verify editors with changing visibility by stable slot/step/slice identity."""
+    parts=dict(token.split('=',1) for token in item['key'].split() if '=' in token)
+    if 'data-break-loop' in parts:
+        slot=parts['data-break-loop']; value=parts['data-break-value']
+        menu=await open_break_picker(page,f'[data-break-slot="{slot}"]')
+        choice=menu.locator(f'button[data-break-value="{value}"]')
+        if await choice.get_attribute('aria-pressed')=='true':
+            alternate=menu.locator(f'button[data-break-value]:not([data-break-value="{value}"])').first
+            await alternate.click()
+            menu=await open_break_picker(page,f'[data-break-slot="{slot}"]')
+            assert await choice.get_attribute('aria-pressed')=='false'
+        await choice.click()
+        assert not await menu.evaluate('e=>e.open'),(slot,value,'selection did not close picker')
+        assert await choice.get_attribute('aria-pressed')=='true',(slot,value,'selection not retained')
+        summary=menu.locator('[data-break-loop-name]')
+        assert await summary.inner_text()==(item['label'] if value else 'No loop selected'),(slot,value)
+        return True
+    if 'data-break-step' in parts:
+        step=parts['data-break-step']
+        cell=page.locator(f'[data-break-step="{step}"]')
+        values=page.locator('[data-break-step],[data-break-on]')
+        state=await values.evaluate_all("""els=>els.map(e=>e.hasAttribute('data-break-on')
+            ?e.getAttribute('aria-pressed'):e.getAttribute('data-value'))""")
+        target=page.locator('[data-break-target]')
+        if await cell.get_attribute('aria-pressed')=='true':
+            other=1 if step=='0' else 0
+            await page.locator(f'[data-break-step="{other}"]').click()
+            assert await target.inner_text()==f'Step {other+1}'
+        assert await cell.get_attribute('aria-pressed')=='false'
+        await cell.click()
+        assert await target.inner_text()==f'Step {int(step)+1}'
+        assert await cell.get_attribute('aria-pressed')=='true'
+        await cell.click()  # same selected step is deliberately idempotent
+        assert await target.inner_text()==f'Step {int(step)+1}'
+        assert await values.evaluate_all("""els=>els.map(e=>e.hasAttribute('data-break-on')
+            ?e.getAttribute('aria-pressed'):e.getAttribute('data-value'))""")==state,(step,'selection edited trigger or slice')
+        return True
+    if 'data-break-slice' in parts:
+        wanted=int(parts['data-break-slice'])
+        selected=page.locator('[data-break-step][aria-pressed=true]')
+        if await selected.get_attribute('data-value')==str(wanted):
+            if wanted:
+                await page.locator('[data-break-slice="0"]').click()
+            else:
+                menu=await open_break_picker(page,'details.break-picker')
+                await menu.locator('[data-break-slice="1"]').click()
+            assert await selected.get_attribute('data-value')!=str(wanted)
+        if wanted:
+            await open_break_picker(page,'details.break-picker')
+        await page.locator(f'[data-break-slice="{wanted}"]').click()
+        assert await selected.get_attribute('data-value')==str(wanted),(wanted,'not confirmed in Draft')
+        if wanted:
+            assert not await page.locator('details.break-picker').evaluate('e=>e.open')
+        return True
+    return False
+
+
+async def walk_section(browser, size, engine, view, seen):
     context = await browser.new_context(viewport={'width': size[0], 'height': size[1]}, has_touch=True, accept_downloads=True)
     await context.route('**/*', fb.serve)
     page = await context.new_page()
@@ -145,7 +262,7 @@ async def walk(browser, size):
 
     async def fresh(engine, view):
         await page.goto(fb.ORIGIN + '/remote/')
-        await page.wait_for_function('document.getElementById("status").textContent.includes("Draft")')
+        await page.wait_for_function('document.getElementById("status").textContent.includes("Disconnected")')
         await page.locator(f'[data-engine="{engine}"]').click()
         await open_view(page, view)
         # Panels such as the starting breaks finish loading after the view opens: wait until settled.
@@ -157,95 +274,146 @@ async def walk(browser, size):
             last = now
             await page.wait_for_timeout(150)
 
-    unbound, checked, seen, current, tested, allowed = [], 0, set(), set(), set(), []
-    for engine in ENGINES:
-        for view in VIEWS:
+    unbound, checked, allowed, duplicates, attempted = [], 0, [], 0, []
+    await fresh(engine, view)
+    items=await page.evaluate(MARK)
+    if engine=='breaks' and view=='roll':
+        # Keep the original discovery order. Add controls actually reachable
+        # behind the three disclosures even if closed-details geometry differs.
+        original_keys={i['key'] for i in items}
+        for selector in BREAK_DISCLOSURES:
+            await open_break_picker(page,selector)
+        opened=await page.evaluate(MARK)
+        items.extend(i for i in opened if i['key'] not in original_keys
+                     and ('data-break-loop=' in i['key'] or 'data-break-slice=' in i['key']))
+        assert sum('data-break-loop=' in item['key'] for item in items)==12
+        assert sum('data-break-step=' in item['key'] for item in items)==16
+        assert sum('data-break-slice=' in item['key'] for item in items)==33
+        for selector in reversed(BREAK_DISCLOSURES):
+            menu=page.locator(selector)
+            if await menu.evaluate('e=>e.open'):
+                await menu.locator('summary').click()
+    dirty = False
+    occurrence = {}
+    for item in items:
+        item['nth'] = occurrence[(item['key'], item['label'])] = occurrence.get((item['key'], item['label']), -1) + 1
+    for item in items:
+        sig = (view, item['key'], item['label'], item['nth'])
+        if sig in seen:
+            duplicates += 1
+            continue
+        seen.add(sig)
+        attempted.append(sig)
+        if engine=='breaks' and view=='roll' and any(k in item['key'] for k in ('data-break-loop=','data-break-step=','data-break-slice=')):
+            if dirty:
+                await fresh(engine,view)
+                dirty=False
+            try:
+                assert await witness_break_choice(page,item)
+                checked+=1
+            except Exception as error:
+                unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} semantic witness failed: {error}')
+                print('UNBOUND',unbound[-1],flush=True)
+                dirty=True
+            continue
+        if item['href'] is not None:
+            link_loc=await resolve(page,item)
+            assert link_loc is not None,(engine,view,item)
+            target = urlparse(await link_loc.evaluate('e=>e.href'))
+            if target.netloc == urlparse(fb.ORIGIN).netloc:
+                ok = await page.evaluate('u=>fetch(u).then(r=>r.ok,()=>false)', target.geturl())
+                if not ok:
+                    unbound.append(f'{engine}/{view}: link {item["label"]!r} -> {target.path} not built')
+            checked += 1
+            continue
+        if dirty:
+            # The last gesture left this view (or opened a dialog): start this control fresh.
             await fresh(engine, view)
-            items = await page.evaluate(MARK)
+            fresh_items = await page.evaluate(MARK)
+            match = nth_match(fresh_items, item)
+            if match is not None:
+                match['nth'] = item['nth']
+            if match is None:
+                unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} not found again after reload')
+                print('UNBOUND', unbound[-1], flush=True)
+                continue
+            item = match
             dirty = False
-            occurrence = {}
-            for item in items:
-                item['nth'] = occurrence[(item['key'], item['label'])] = occurrence.get((item['key'], item['label']), -1) + 1
-            for item in items:
-                sig = (view, item['key'], item['label'], item['nth'])
-                if sig in seen:
-                    continue
-                seen.add(sig)
-                if item['href'] is not None:
-                    target = urlparse(await page.locator(f'[data-unbound-probe="{item["id"]}"]').evaluate('e=>e.href'))
-                    if target.netloc == urlparse(fb.ORIGIN).netloc:
-                        ok = await page.evaluate('u=>fetch(u).then(r=>r.ok,()=>false)', target.geturl())
-                        if not ok:
-                            unbound.append(f'{engine}/{view}: link {item["label"]!r} -> {target.path} not built')
-                    checked += 1
-                    continue
-                if dirty:
-                    # The last gesture left this view (or opened a dialog): start this control fresh.
-                    await fresh(engine, view)
-                    fresh_items = await page.evaluate(MARK)
-                    match = nth_match(fresh_items, item)
-                    if match is not None:
-                        match['nth'] = item['nth']
-                    if match is None:
-                        unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} not found again after reload')
-                        print('UNBOUND', unbound[-1], flush=True)
-                        continue
-                    item = match
-                    dirty = False
-                pre = next((sel for part, sel in PRECONDITION.items() if part in item['key'].split(' ')), None)
-                if pre:
-                    await page.locator(pre).click()
+        pre = next((sel for part, sel in PRECONDITION.items() if part in item['key'].split(' ')), None)
+        if pre:
+            await page.locator(pre).click()
+        before = await page.evaluate(STATE)
+        try:
+            loc = await resolve(page,item)
+            current_at_gesture = item.get('current')
+            if loc is not None:
+                current_at_gesture = await loc.evaluate('''e=>e.getAttribute("aria-current")==="page"||
+                    (e.getAttribute("aria-pressed")==="true"&&!e.matches("#rec,#multi,#snap"))''')
+            note = await gesture(page, item)
+        except Exception as error:
+            unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} gesture failed: {' | '.join(l.strip() for l in str(error).splitlines()[-4:])}')
+            print('UNBOUND', unbound[-1], flush=True)
+            dirty = True
+            continue
+        if note == 'gone':
+            # Re-rendered away by an earlier gesture: start fresh and try this control once more.
+            await fresh(engine, view)
+            again = nth_match(await page.evaluate(MARK), item)
+            if again is not None:
+                again['nth'] = item['nth']
+                item = again
+                current_at_gesture=item.get('current')
                 before = await page.evaluate(STATE)
-                try:
-                    note = await gesture(page, item)
-                except Exception as error:
-                    unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} gesture failed: {' | '.join(l.strip() for l in str(error).splitlines()[-4:])}')
-                    print('UNBOUND', unbound[-1], flush=True)
-                    dirty = True
-                    continue
-                if note == 'gone':
-                    # Re-rendered away by an earlier gesture: start fresh and try this control once more.
-                    await fresh(engine, view)
-                    again = nth_match(await page.evaluate(MARK), item)
-                    if again is not None:
-                        again['nth'] = item['nth']
-                        item = again
-                        before = await page.evaluate(STATE)
-                        note = await gesture(page, item)
-                if note == 'gone':
-                    unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} disappeared before its gesture')
-                    print('UNBOUND', unbound[-1], flush=True)
-                    dirty = True
-                    continue
-                checked += 1
-                tested.add((item['key'], item['label']))
+                note = await gesture(page, item)
+        if note == 'gone':
+            unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} disappeared before its gesture')
+            print('UNBOUND', unbound[-1], flush=True)
+            dirty = True
+            continue
+        checked += 1
+        after = await page.evaluate(STATE)
+        if note not in ('download', 'file', 'filechooser') and after == before and current_at_gesture:
+            # Already selected: select a sibling of the same kind, then selecting this one must switch back.
+            try:
+                semantic = await reselect_semantic(page,item)
+            except Exception as error:
+                unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} selection witness failed: {error}')
+                print('UNBOUND', unbound[-1], flush=True)
+                dirty=True
+                continue
+            if semantic == 'confirmed':
+                dirty=True
+                continue
+            if semantic == 'disabled':
+                allowed.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} (sole selected; all semantic alternatives disabled)')
+                continue
+            current_loc = await resolve(page,item)
+            current_id = await current_loc.get_attribute('data-unbound-probe') if current_loc is not None else None
+            sibling = await page.evaluate(SIBLING,current_id)
+            if sibling == 'disabled':
+                allowed.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} (alternatives unavailable in Draft)')
+                continue
+            if sibling == 'clicked':
+                await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+                before = await page.evaluate(STATE)
+                loc = await resolve(page, item)
+                if loc is not None:
+                    await loc.click(timeout=2000, force=True)
+                    await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
                 after = await page.evaluate(STATE)
-                if note not in ('download', 'file') and after == before and item.get('current'):
-                    # Already selected: select a sibling of the same kind, then selecting this one must switch back.
-                    sibling = await page.evaluate(SIBLING, item['id'])
-                    if sibling == 'disabled':
-                        allowed.append(f'{engine}/{view}: {item["key"]} {item["label"]!r} (alternatives unavailable in Draft)')
-                        continue
-                    if sibling == 'clicked':
-                        await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
-                        before = await page.evaluate(STATE)
-                        loc = await resolve(page, item)
-                        if loc is not None:
-                            await loc.click(timeout=2000, force=True)
-                            await page.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
-                        after = await page.evaluate(STATE)
-                        dirty = True
-                if note not in ('download', 'file') and after == before:
-                    unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r}' + (f' ({note})' if note else ''))
-                    print('UNBOUND', unbound[-1], flush=True)
-                left = await page.evaluate("""v=>{const on=document.querySelector('[data-view="'+v+'"][aria-current="page"],[data-view="'+v+'"][aria-pressed="true"]');return !!document.querySelector('dialog[open]')||location.pathname!=='/remote/'||!on}""", view)
-                dirty = dirty or left or bool(pre)
-            print(f'VIEW {engine}/{view} items={len(items)} checked={checked} unbound={len(unbound)}', flush=True)
+                dirty = True
+        if note not in ('download', 'file', 'filechooser') and after == before:
+            unbound.append(f'{engine}/{view}: {item["key"]} {item["label"]!r}' + (f' ({note})' if note else ''))
+            print('UNBOUND', unbound[-1], flush=True)
+        left = await page.evaluate("""v=>{const on=document.querySelector('[data-view="'+v+'"][aria-current="page"],[data-view="'+v+'"][aria-pressed="true"]');return !!document.querySelector('dialog[open]')||location.pathname!=='/remote/'||!on}""", view)
+        dirty = dirty or left or bool(pre)
+    print(f'VIEW {engine}/{view} items={len(items)} checked={checked} unbound={len(unbound)}', flush=True)
     # A selection control that was only ever already selected never proved it switches anything.
     for line in allowed:
         print('SELECTED_ONLY_OPTION', line, flush=True)
     await context.close()
-    return checked, unbound, errors
+    assert len(items) == len(attempted) + duplicates, (engine, view, len(items), len(attempted), duplicates)
+    return checked, unbound, errors, len(items), attempted, duplicates
 
 
 async def main():
@@ -255,13 +423,37 @@ async def main():
         fb.SOURCE = Path(output)
         subprocess.run(['node', 'scripts/build-product-site.mjs', '--output', output], cwd=ROOT, check=True)
         async with async_playwright() as pw:
-            browser = await pw.chromium.launch(chromium_sandbox=True)
-            try:
-                checked, unbound, errors = await walk(browser, (1440, 900))
-            finally:
-                await browser.close()
+            sections = tuple((engine,view) for engine in ENGINES for view in VIEWS)
+            seen, witnesses, checked, inventory, duplicates = set(), [], 0, 0, 0
+            processed, unbound, errors = [], [], []
+            # Navigations within a section keep exactly the old behavioral tests,
+            # but no renderer process survives into the next section.
+            for engine,view in sections:
+                DOWNLOADS.clear()
+                browser = await pw.chromium.launch(chromium_sandbox=True)
+                try:
+                    count, misses, exceptions, items, unique, reused = await walk_section(
+                        browser, (1440,900), engine, view, seen)
+                finally:
+                    await browser.close()
+                processed.append((engine,view))
+                checked += count
+                inventory += items
+                duplicates += reused
+                witnesses.extend(unique)
+                unbound.extend(misses)
+                errors.extend(exceptions)
+                print(f'INVENTORY {engine}/{view} discovered={items} attempted={len(unique)} '
+                      f'prior-identities={reused} checked={count} unbound={len(misses)}', flush=True)
+            assert tuple(processed)==sections, (processed,sections)
+            assert len(witnesses)==len(seen) and set(witnesses)==seen
+            assert inventory==len(witnesses)+duplicates, (inventory,len(witnesses),duplicates)
+            if not unbound:
+                assert checked==len(witnesses), (checked,len(witnesses))
+            print(f'INVENTORY total sections={len(processed)} discovered={inventory} '
+                  f'unique={len(witnesses)} prior-identities={duplicates} checked={checked}', flush=True)
     assert not errors, errors
-    if len(ENGINES) == 5 and len(VIEWS) == 8:
+    if len(ENGINES) == 5 and len(VIEWS) == 7:
         assert checked > 100, checked
     assert not unbound, f'{len(unbound)} unbound controls'
     print(f'UNBOUND_BROWSER PASS controls={checked} unbound=0', flush=True)

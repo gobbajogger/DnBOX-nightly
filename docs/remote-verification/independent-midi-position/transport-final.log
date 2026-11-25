@@ -1,0 +1,6 @@
+PASS MIDI FA/F8/FC drum909: 18 exact independent updates + stopped cursor; no browser writes
+PASS MIDI FA/F8/FC drum808: 19 exact independent updates + stopped cursor; no browser writes
+PASS MIDI FA/F8/FC chicago: 19 exact independent updates + stopped cursor; no browser writes
+PASS MIDI FA/F8/FC miami: 19 exact independent updates + stopped cursor; no browser writes
+PASS MIDI FA/F8/FC breaks: 19 exact independent updates + stopped cursor; no browser writes
+PASS native VOICE: 909 row only; 808 event did not highlight 909; no marks or writes on steps

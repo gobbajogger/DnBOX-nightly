@@ -1,0 +1,28 @@
+elite selected Synth One (strict emu)
+[  1311 ms] usb in:  f0 7d 44 4e 03 40 07 00 2a 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 7f 3f 00 00 20 40 0b 02 00 00 32 4c 02 59 69 05 f7
+[  1502 ms] usb in:  f0 7d 44 4e 03 41 08 00 0b 00 00 03 00 00 00 69 5d 00 00 50 0f 34 62 1b 55 06 f7
+[  1808 ms] usb in:  f0 7d 44 4e 03 52 09 00 0b 00 00 04 00 00 00 29 00 00 00 02 00 18 31 1e 4c 02 f7
+[  2479 ms] usb in:  f0 7d 44 4e 03 51 0a 00 16 00 00 04 00 00 00 02 29 00 00 00 02 00 03 00 2b 00 00 00 01 00 00 00 2a 3e 67 01 01 f7
+last 40 ms: 94% of instructions in ISRs = 111.7 M ISR instructions per second (clock 5760 MHz)
+work/panel.ppm at 2620 ms; LEDs lit: []; audio peak over the last 0.5 s: 0
+pro selected Synth One (strict emu)
+[  1311 ms] usb in:  f0 7d 44 4e 03 40 07 00 2a 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 7f 3f 00 00 20 40 0b 02 00 00 32 3c 27 22 55 02 f7
+[  1502 ms] usb in:  f0 7d 44 4e 03 41 08 00 0b 00 00 03 00 00 00 69 5d 00 00 50 0f 34 62 1b 55 06 f7
+[  1808 ms] usb in:  f0 7d 44 4e 03 52 09 00 0b 00 00 04 00 00 00 29 00 00 00 02 00 18 31 1e 4c 02 f7
+[  2478 ms] usb in:  f0 7d 44 4e 03 51 0a 00 16 00 00 04 00 00 00 02 29 00 00 00 02 00 03 00 2b 00 00 00 01 00 00 00 2a 3e 67 01 01 f7
+last 40 ms: 94% of instructions in ISRs = 111.9 M ISR instructions per second (clock 5760 MHz)
+work/panel.ppm at 2620 ms; LEDs lit: []; audio peak over the last 0.5 s: 0
+CONTROL (elite): prior DNR3 donor without typed protocol, identical Synth One adoption stimulus
+[  1311 ms] usb in:  f0 7d 44 4e 03 40 07 00 2a 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 7f 1f 00 00 20 40 0b 02 00 00 32 1c 05 2d 13 01 f7
+[  1502 ms] usb in:  f0 7d 44 4e 03 41 08 00 0b 00 00 03 00 00 00 69 5d 00 00 50 0f 34 62 1b 55 06 f7
+[  1808 ms] usb in:  f0 7d 44 4e 03 52 09 00 0b 00 00 04 00 00 00 29 00 00 00 02 00 18 31 1e 4c 02 f7
+[  2525 ms] usb in:  f0 7d 44 4e 03 51 0a 00 16 00 00 04 00 00 00 02 29 00 00 00 02 00 03 00 2b 00 00 00 01 00 00 00 2a 3e 67 01 01 f7
+last 40 ms: 94% of instructions in ISRs = 109.9 M ISR instructions per second (clock 5760 MHz)
+work/panel.ppm at 2620 ms; LEDs lit: []; audio peak over the last 0.5 s: 0
+CONTROL (pro): prior DNR3 donor without typed protocol, identical Synth One adoption stimulus
+[  1311 ms] usb in:  f0 7d 44 4e 03 40 07 00 2a 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 7f 1f 00 00 20 40 0b 02 00 00 32 6c 20 56 2f 06 f7
+[  1502 ms] usb in:  f0 7d 44 4e 03 41 08 00 0b 00 00 03 00 00 00 69 5d 00 00 50 0f 34 62 1b 55 06 f7
+[  1808 ms] usb in:  f0 7d 44 4e 03 52 09 00 0b 00 00 04 00 00 00 29 00 00 00 02 00 18 31 1e 4c 02 f7
+[  2525 ms] usb in:  f0 7d 44 4e 03 51 0a 00 16 00 00 04 00 00 00 02 29 00 00 00 02 00 03 00 2b 00 00 00 01 00 00 00 2a 3e 67 01 01 f7
+last 40 ms: 94% of instructions in ISRs = 109.7 M ISR instructions per second (clock 5760 MHz)
+work/panel.ppm at 2620 ms; LEDs lit: []; audio peak over the last 0.5 s: 0

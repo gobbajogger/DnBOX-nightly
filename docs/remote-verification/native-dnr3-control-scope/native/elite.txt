@@ -1,0 +1,7 @@
+XIP free: 76 B
+pool raw free: 8704 B
+pool reserve: 8192 B
+pool margin: 512 B
+  ok    image 552596 B; RAM .data+.bss 97048 B of 98304; pool 335360 B of 344064
+XDATA: 8156 B of 8192 (flash 0xad000), 36 B spare
+FDATA: 61208 B of 61440 (flash 0xe5000), 232 B spare

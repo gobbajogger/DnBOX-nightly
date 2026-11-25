@@ -1,0 +1,37 @@
+--- a/firmware/src/app/engine.c
++++ b/firmware/src/app/engine.c
+@@ -2848,15 +2848,22 @@
+  * A job renders as soon as its core is free; only its mix (about 1/16 of it) waits for the
+  * part before it (run_job: render, stage_wait, mix). Counting the whole job as waiting made
+  * every split with the 303s apart cost the same as one core, so 909-only won the tie. */
++static inline int ahead_a_eligible(uint32_t m)
++{
++    return (m & ((1u<<JB_909)|(1u<<JB_A)))==(1u<<JB_909) &&
++           original_bass[0].kind==ORIGINAL_SOUND_SYNTHONE;
++}
+ static uint32_t plan_cost(uint32_t m, const uint32_t *c)
+ {
+-    uint32_t t[2] = {0u, m ? ENG_C1_LAT : 0u}, s, x;
++    /* Model the owner-local render that precedes the stage-2 join. */
++    const uint32_t ahead=ahead_a_eligible(m)?c[JB_A]-(c[JB_A]>>3):0u;
++    uint32_t t[2] = {ahead, m ? ENG_C1_LAT : 0u}, s, x;
+     int k, j;
+     k = (int)(m & 1u); t[k] += c[JB_909]; s = t[k];
+     for (j = JB_808; j <= JB_B; j++) {
+         k = (int)(m >> j & 1u);
+         x = c[j] >> 4;
+-        t[k] += c[j] - x;                               /* render */
++        t[k] += c[j] - x - (j==JB_A ? ahead : 0u);      /* remaining render */
+         if (t[k] < s) t[k] = s;                         /* the part before it mixed */
+         t[k] += x; s = t[k];                            /* its mix */
+     }
+@@ -2983,8 +2990,7 @@
+     /* A local S1 has no DSP dependency on the preceding drum mix.
+      * While 909 runs remotely, compute the owner-local input and then
+      * join at the original stage. Existing scheduler mask is unchanged. */
+-    if ((eng_c1_mask & ((1u<<JB_909)|(1u<<JB_A)))==(1u<<JB_909) &&
+-        original_bass[0].kind==ORIGINAL_SOUND_SYNTHONE) {
++    if (ahead_a_eligible(eng_c1_mask)) {
+         uint32_t at=plat_ticks24();
+         bass_render_ok[0]=(uint8_t)bass_render_dsp(0,n);
+         ahead_a_ticks=plat_ticks24()-at;

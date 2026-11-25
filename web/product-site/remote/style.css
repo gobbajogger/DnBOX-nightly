@@ -67,10 +67,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,su
 .btn.icon{width:36px;min-width:0;padding:0}
 .btn.icon svg{width:16px;height:16px}
 .sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.transport #rec[aria-pressed=true]{color:#ff4841;border-color:#ff4841}
+.transport #rec[aria-pressed=true]{color:#ff4840;border-color:#ff4840}
 
 /* Work area */
 main{min-height:0;min-width:0;display:flex;flex-direction:column;padding:12px var(--margin) 8px;overflow:hidden}
+#edit-scope{margin:0 0 4px;color:var(--muted);font-size:var(--fs-sm);line-height:1.2}
 #roll-view{flex:1;min-height:0;display:flex}
 .roll-panel{flex:1;min-width:0;min-height:0;display:grid;grid-template-rows:20px minmax(0,1fr) var(--lane-h);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
 .roll-head{display:grid;grid-template-columns:var(--key-w) minmax(0,1fr);overflow:hidden}
@@ -273,7 +274,7 @@ dialog::backdrop{background:#000a}
 /* Actual FunkyBeats sequencer structure, restyled to the locked R22 panels. */
 .drum-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,360px);gap:16px;align-items:start}
 .drum-layout>section,.drum-layout>aside{min-width:0}
-.funkybeats-sequencer .seq-row{display:grid;grid-template-columns:60px repeat(4,minmax(176px,1fr));width:max(100%,764px);min-height:32px;gap:0}
+.funkybeats-sequencer .seq-row{display:grid;grid-template-columns:var(--seq-label,60px) repeat(4,minmax(0,1fr));width:100%;min-height:32px;gap:0}
 .funkybeats-sequencer .seq-steps{display:contents}
 .funkybeats-sequencer .seq-step-group{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-left:2px solid var(--r22-selected-edge,var(--line));gap:3px;padding:3px}
 .funkybeats-sequencer .seq-step{position:relative;isolation:isolate;min-height:26px;min-width:0;padding:2px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r22-panel-radius,0);color:var(--fg);font-size:12px;overflow:hidden}
@@ -350,7 +351,7 @@ dialog::backdrop{background:#000a}
 }
 
 /* FunkyBeats-style paintable step bars, using the shared R22 palette and type. */
-.drum-step-lane{height:48px;width:max(100%,764px);grid-template-columns:60px minmax(0,1fr)}
+.drum-step-lane{height:48px;width:100%;grid-template-columns:var(--seq-label,60px) minmax(0,1fr)}
 .drum-step-lane>button,#other-view .drum-step-lane>button{min-width:0;padding:2px;font-size:10px}
 #drum-lane{position:relative;min-width:0;overflow:hidden;touch-action:none}
 .step-slider,#other-view .step-slider{position:absolute;top:0;bottom:0;min-width:0;padding:0;border:0;border-right:1px solid var(--line);border-radius:0;background:none;touch-action:none;color:var(--fg);isolation:isolate}
@@ -413,3 +414,215 @@ dialog::backdrop{background:#000a}
 /* Reserve feedback space even while status is sr-only, so messages never move
    the roll, its resize edges or the step lane. Long feedback scrolls in its row. */
 #status.status-message{grid-row:3;position:static;min-width:0;width:auto;height:100%;clip:auto;padding:6px 12px calc(6px + env(safe-area-inset-bottom));min-height:0;border-top:1px solid var(--line);font-size:13px;line-height:1.3;white-space:normal;overflow:auto;overflow-wrap:anywhere;color:var(--fg)}
+
+/* Tempo: tap + fine adjust in the header readout. */
+.tempo-ctl{display:inline-flex;align-items:center;gap:4px}
+.tempo-ctl .tempo-btn{min-width:28px;height:24px;padding:0 6px;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:var(--r-control,4px);font:inherit;font-size:12px;font-weight:700;touch-action:manipulation}
+.tempo-ctl .tempo-btn.tap{color:var(--accent)}
+.tempo-ctl .tempo-btn.tap.armed{background:var(--accent);color:var(--accent-ink)}
+.tempo-ctl .tempo-btn:hover,.tempo-ctl .tempo-btn:focus-visible{border-color:var(--line);color:var(--fg)}
+.tempo-ctl .tempo-value{min-width:64px;text-align:center;font-variant-numeric:tabular-nums;cursor:ns-resize;touch-action:none;user-select:none}
+/* Accent row under the drum voices (firmware track 11). */
+.funkybeats-sequencer .seq-row.accent-row .seq-channel-info{color:var(--accent)}
+.funkybeats-sequencer .seq-row.accent-row .seq-step[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+/* BREAK keeps the numbered cells and their on/off buttons in one scroll strip. */
+.break-editor{display:grid;gap:8px;min-width:0;margin-bottom:16px;--track:#d678ff}
+.break-editor p{margin:0}
+.break-loops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.break-loop summary{display:grid;align-content:center;min-height:52px}
+.break-loop summary[aria-disabled=true]{cursor:default}
+.break-loop summary strong{overflow-wrap:anywhere}
+.break-loop-row,.break-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.break-loop-row{padding-block:4px}
+.break-row-label{font-size:12px;font-weight:700;color:var(--muted)}
+.break-chip{box-sizing:border-box;min-height:44px;padding:0 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control,4px);font:inherit;font-size:12px}
+summary.break-chip{cursor:pointer;list-style:none}
+summary.break-chip::-webkit-details-marker{display:none}
+.break-picker summary.break-chip{display:flex;align-items:center}
+.break-loop summary strong::after,.break-picker summary::after{content:" ▾"}
+.break-loop summary[aria-disabled=true] strong::after{content:none}
+.break-chip[aria-pressed=true]{border-color:var(--track);color:var(--track);background:var(--focus-col,var(--panel))}
+.break-grid{display:grid;gap:4px;overflow-x:auto;overscroll-behavior-inline:contain;padding-block:3px}
+.break-row{display:grid;grid-template-columns:repeat(16,minmax(44px,1fr));gap:4px}
+.break-editor .break-grid .seq-step{min-width:44px;min-height:44px;font-variant-numeric:tabular-nums}
+.break-grid .seq-step.beat{border-left:2px solid var(--line-strong,var(--line))}
+.break-grid .break-slice{display:grid;place-items:center;grid-template-rows:1fr 1fr}
+.break-step-number{font-size:10px;color:var(--muted)}
+.break-cell-value{font-size:13px}
+.break-grid .break-on.hit{background:var(--track);border-color:var(--track)}
+.break-grid .break-slice.selected{outline:2px solid var(--track);outline-offset:-2px;color:var(--track)}
+.break-actions{position:relative}
+.break-picker{display:contents}
+.break-pad{display:grid;grid-template-columns:repeat(8,minmax(44px,1fr));gap:4px;margin-block:6px;width:100%;order:10}
+.break-picker:not([open]) .break-pad{display:none}
+/* Accepted native BREAK pulses stay visible when the slice picker is closed. */
+.break-picker:has(.device-voice) summary{outline:2px solid var(--track);outline-offset:-2px}
+@media (max-width:500px){.break-pad{grid-template-columns:repeat(6,minmax(44px,1fr))}}
+.break-scroll-hint{display:none}
+@media (max-width:800px){.break-scroll-hint{display:inline}}
+/* Keep both loop names and the primary editing controls above the grid in a short viewport. */
+@media (orientation:landscape) and (min-width:650px) and (max-height:500px){
+ .break-editor{grid-template-columns:minmax(0,1fr) auto;gap:5px 12px}
+ .break-editor>[data-break-source]{grid-column:1;grid-row:1}
+ .break-loops{grid-column:1;grid-row:2}
+ .break-loop summary{min-height:44px}
+ .break-actions{grid-column:2;grid-row:1 / span 2;align-self:center}
+ .break-help,.break-grid,.break-rate,.break-editor>[data-break-limit]{grid-column:1/-1}
+ .break-pad{position:absolute;z-index:4;top:100%;right:0;box-sizing:border-box;width:min(544px,calc(100vw - 30px));
+  grid-template-columns:repeat(11,minmax(44px,1fr));padding:6px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-control,4px);max-height:156px;overflow-y:auto}
+}
+
+@media (orientation:landscape) and (min-width:820px) and (max-height:500px){
+ .break-pad{width:780px;grid-template-columns:repeat(16,minmax(44px,1fr))}
+}
+/* Firmware-table bass engines (SYNTH ONE): same typed cells as the other engines. */
+.firmware-sound{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.firmware-sound .funkybeats-typed-unit{display:grid;grid-template-columns:28px 1fr;gap:6px;align-items:center;padding:6px;border:1px solid var(--line);background:var(--panel)}
+.firmware-sound .param-group{display:grid;gap:2px;min-width:0}
+.firmware-sound input[type=range]{width:100%;accent-color:var(--accent);touch-action:none}
+.firmware-sound [data-param-value]{font-weight:700;font-variant-numeric:tabular-nums}
+#pitch-rail{touch-action:none}
+
+/* Drum sequencer: all 16 steps of a page fit every width; pages for steps 17-64; parameter page. */
+.funkybeats-sequencer .seq-step.beyond{opacity:.35}
+.drum-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:0 0 8px}
+.drum-nav button{min-height:30px;padding:0 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:var(--r-control,4px);font:inherit;font-size:12px;font-variant-numeric:tabular-nums}
+.drum-nav button.beyond{opacity:.55}
+.drum-nav button[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+.drum-nav .drum-len{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.drum-params{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.seq-opt{display:grid;gap:6px;padding:10px;border:1px solid var(--line);background:var(--panel)}
+.seq-opt-head{display:flex;align-items:baseline;gap:8px;font-size:12px;font-weight:700}
+.seq-opt-head small{color:var(--muted);font-weight:400;font-size:10px}
+.seq-opt-head output{margin-left:auto;color:var(--accent);font-size:var(--fs-value,16px);font-variant-numeric:tabular-nums}
+.seq-opt input[type=range]{width:100%;accent-color:var(--accent);touch-action:none}
+.seq-opt-chips{display:flex;flex-wrap:wrap;gap:4px}
+.seq-opt-chips button{min-height:30px;padding:0 8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:var(--r-control,4px);font:inherit;font-size:12px}
+.seq-opt-chips button[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+@media (max-width:600px){
+ .funkybeats-sequencer{--seq-label:30px}
+ .funkybeats-sequencer .seq-step-group{gap:1px;padding:1px}
+ .funkybeats-sequencer .seq-step{min-height:24px;padding:0;font-size:8px;border-radius:2px}
+ .funkybeats-sequencer .seq-channel-info{padding:0 2px;font-size:10px;gap:2px}
+ .funkybeats-sequencer .seq-numbers{font-size:9px}
+}
+@media (max-height:500px) and (orientation:landscape){
+ .funkybeats-sequencer{--seq-label:36px}
+ .funkybeats-sequencer .seq-step{min-height:18px;font-size:9px}
+}
+
+/* Firmware-confirmed note activity, independent of edit or selection state. */
+.device-voice { outline: 2px solid var(--engine, var(--track, #b1f97b)); outline-offset: -2px; }
+
+.motion-live-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:.25rem;margin-block:.5rem}
+.motion-live-grid button{min-width:0;padding:.2rem}
+.motion-live-grid button[aria-pressed=true]{outline:2px solid currentColor}
+[data-firmware-pattern=queued]{outline:2px dashed currentColor;outline-offset:-2px}
+
+/* Firmware drum step grid (draw_drum at the pinned firmware; geometry and colours from firmware-glyphs.json
+   via fw-glyphs.mjs cssVars): empty LINE, playhead column DIM, hit = part colour at 8/16, the selected
+   voice's hits in full colour, a real hit lights a WHITE inner box for one sixteenth plus 20 ms, accent
+   row WHITE box / LINE dash, past the pattern length a LINE dot. A held pad lights like the keybed LED. */
+.fw-drum-grid .seq-step{background:var(--fw-line,#28383d);border:0;border-radius:var(--fw-cell-r,25% / 33%);padding:0;color:transparent;font-size:0}
+.fw-drum-grid .seq-step>*{display:none}
+.fw-drum-grid .seq-step.hit{background:color-mix(in srgb,var(--track) 50%,#000)}
+.fw-drum-grid .seq-row.sel .seq-step.hit{background:var(--track)}
+.fw-drum-grid .seq-step.ph:not(.hit){background:var(--fw-dim,#809294)}
+.fw-drum-grid .seq-step::after{content:"";position:absolute;left:var(--fw-fired-x);top:var(--fw-fired-y);width:var(--fw-fired-w);height:var(--fw-fired-h);border-radius:2px;background:var(--fw-white,#fff);opacity:0;pointer-events:none}
+.fw-drum-grid .seq-step.fired::after,.fw-drum-grid .seq-step.held::after{opacity:1}
+.fw-drum-grid .seq-row.sel .seq-channel-info,.fw-drum-grid .seq-row.sel>span:first-child{background:var(--track);color:#000;border-radius:6px}
+.fw-drum-grid .seq-row.accent-row .seq-step,.fw-drum-grid .seq-row.accent-row .seq-step[aria-pressed=true]{background:transparent;border:0}
+.fw-drum-grid .seq-row.accent-row .seq-step::before{content:"";position:absolute;left:var(--fw-acc-x);width:var(--fw-acc-w);top:var(--fw-accoff-y);height:var(--fw-accoff-h);border-radius:1px;background:var(--fw-line,#28383d)}
+.fw-drum-grid .seq-row.accent-row .seq-step.accent::before{top:var(--fw-acc-y);height:var(--fw-acc-h);border-radius:3px;background:var(--fw-white,#fff)}
+.fw-drum-grid .seq-step.beyond{opacity:1;background:transparent}
+.fw-drum-grid .seq-step.beyond::before{content:"";position:absolute;left:var(--fw-dot-x);top:var(--fw-dot-y);width:var(--fw-dot-w);height:var(--fw-dot-h);background:var(--fw-line,#28383d)}
+.fw-drum-grid .seq-step.beyond::after{display:none}
+/* Firmware HOME lane bar as the track identity (2x11 in the part colour). */
+.engine .fw-lane{display:inline-block;width:3px;height:16px;border-radius:1px;background:var(--engine);flex:none}
+/* Header transport glyphs: play triangle (DIM stopped, HI running, WHITE at the start of each beat), stopped square, REC dot. */
+.fw-transport{width:11px;height:13px;vertical-align:-2px;margin-right:6px}
+.fw-stop{width:7px;height:7px;vertical-align:0}
+.fw-rec{width:8px;height:8px;vertical-align:0}
+#play .fw-play{color:var(--fw-dim,#809294)}
+#play[aria-pressed=true] .fw-play{color:var(--fw-hi,#ffb846)}
+#play.beat .fw-play{color:var(--fw-white,#fff)}
+.fw-pictogram{width:13.5px;height:13.5px;vertical-align:-2px}
+/* Firmware BREAK footer: an 11x4 bar per step (part colour on, LINE off, WHITE at the playhead); slice text HI when set and on. */
+.break-on{background:var(--panel)}
+.break-on::before{content:"";position:absolute;left:12%;right:12%;top:50%;aspect-ratio:var(--fw-brk-bar-aspect,11 / 4);transform:translateY(-50%);border-radius:1px;background:var(--fw-line,#28383d)}
+.break-on.hit::before{background:var(--fw-part-4,#d678ff)}
+.break-on.ph::before{background:var(--fw-white,#fff)}
+.break-slice{color:var(--fw-dim,#809294)}
+.break-slice.lit{color:var(--fw-hi,#ffb846)}
+@media (prefers-reduced-motion:reduce){.fw-drum-grid .seq-step::after{transition:none}}
+.preset-note{display:block;color:var(--fw-dim,#809294);font-size:12px;margin:2px 0 6px}
+.fw-drum-grid .seq-channel-info{justify-content:center;color:var(--muted)}
+.fw-drum-grid .seq-channel-name{display:grid;place-items:center;width:100%;min-width:0}
+.fw-drum-grid .fw-drum-voice-icon{display:block;width:min(100%,30px);height:auto;overflow:visible;fill:none;stroke:currentColor;stroke-width:1200;stroke-linecap:round;stroke-linejoin:round}
+.fw-drum-grid .accent-row .fw-drum-voice-icon,.fw-drum-grid .seq-row.fired:not(.sel) .fw-drum-voice-icon{color:var(--fw-white,#fff)}
+.fw-drum-grid .seq-row.fired .seq-channel-info{box-shadow:inset 0 0 0 2px var(--fw-white,#fff)}
+
+/* Voice labels remain readable on the selected-voice track fill. */
+.funkybeats-launcher .perform-cell .cue-state{display:block;font-size:var(--fs-xs);font-weight:500}
+.funkybeats-launcher .perform-cell[data-firmware-pattern=queued]{border-style:dashed}
+.funkybeats-launcher .perform-cell[data-firmware-pattern=active]{border-style:solid}
+[data-sound-source=firmware].source-sound-list .encoder-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-width:680px}
+[data-sound-source=firmware].source-sound-list label.parameter{display:grid;grid-template-rows:auto 26px auto auto;gap:3px;align-content:start;min-width:0;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-panel)}
+[data-sound-source=firmware].source-sound-list input{width:100%;min-width:0;min-height:32px;margin:0;accent-color:var(--accent)}
+@media(max-width:600px){[data-sound-source=firmware].source-sound-list .encoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-height:450px){.mix-parts-panel .mixer-fader-container{height:100px}}
+[data-sound-source=firmware].source-sound-list .parameter .glyph{height:26px;min-width:0;max-width:100%}
+[data-sound-source=firmware].source-sound-list .parameter .glyph svg{display:block;width:100%;height:26px}
+/* Confirmed native 909/808 velocity. Empty cells have no synthetic slider. */
+#other-view .fw-drum-grid:has(.live-drum-velocity){display:flex;flex-direction:column;max-height:calc(100dvh - 228px)}
+#other-view .fw-drum-grid:has(.live-drum-velocity)>.seq-numbers,.live-drum-velocity{flex-shrink:0}
+#other-view .fw-drum-grid:has(.live-drum-velocity)>.sequencer-grid{min-height:42px;overflow:auto;scrollbar-width:none}
+.live-drum-velocity{display:grid;grid-template-columns:var(--seq-label,60px) minmax(0,1fr);height:44px;border-top:1px solid var(--line)}
+.live-drum-velocity>label{display:flex;flex-direction:column;justify-content:center;font-size:10px;min-width:0;color:var(--muted)}
+.live-drum-velocity select{background:var(--panel);min-width:0;border:1px solid var(--line);color:var(--fg)}
+.live-drum-values{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));min-width:0;gap:3px}
+.live-drum-velocity-point{position:relative;display:grid;grid-template-rows:1fr 12px;justify-items:center;min-width:0;background:linear-gradient(to top,var(--line) calc(var(--v)*100%),transparent 0)}
+.live-drum-velocity-point input{writing-mode:vertical-lr;direction:rtl;accent-color:var(--accent);margin:0;width:100%;height:30px}
+.live-drum-velocity-point output{color:var(--fg);font-size:9px;text-overflow:clip;overflow:hidden;white-space:nowrap;max-width:100%}
+@media(max-width:600px) and (orientation:portrait){#other-view .fw-drum-grid:has(.live-drum-velocity){max-height:calc(100dvh - 280px)}}
+/* Use the actual available panel height rather than guessing wrapped header size. */
+#other-view:has(.live-drum-velocity){display:flex;flex-direction:column;overflow:hidden}
+#other-view:has(.live-drum-velocity)>.fw-drum-grid{min-height:0;max-height:none;flex:1}
+#other-view:has(.live-drum-velocity)>.fw-drum-grid>.sequencer-grid{min-height:40px;flex:1;overflow:auto}
+#other-view .live-drum-velocity>label{margin:0;gap:2px;align-items:stretch}
+#other-view .live-drum-velocity select{min-height:24px;padding:0 4px}
+#other-view .live-drum-velocity-point{margin:0;gap:0;align-items:stretch}
+#other-view .live-drum-velocity-point input{border:0;min-height:0;border-radius:0}
+
+/* A first beat in phone landscape: keep both kick and snare above the fold without shrinking cells. */
+@media (max-height:500px) and (orientation:landscape){
+ #other-view:has(.fw-drum-grid){padding-block:0 4px}
+ #other-view .drum-source{margin:0 0 6px}
+ #other-view .drum-nav{margin-block-end:3px}
+}
+
+/* BPM commands remain visible without opening an overflow menu. */
+.tempo-ctl{gap:2px;padding:1px;border:1px solid var(--line);border-radius:var(--r-control,4px);background:var(--surface,#101a1f)}
+.tempo-ctl .tempo-btn{min-width:34px;height:32px;border-color:var(--line);color:var(--fg);background:var(--panel,#17242a);font-size:14px}
+.tempo-ctl .tempo-btn.tap{min-width:38px;font-size:12px}
+.tempo-ctl .tempo-btn:active:not(:disabled){background:var(--accent);color:var(--accent-ink)}
+.tempo-ctl .tempo-btn:disabled{opacity:.52}
+.tempo-ctl .tempo-center{display:grid;align-content:center;justify-items:center;min-width:68px;line-height:1}
+.tempo-ctl .tempo-value{min-width:0;padding:0 3px;white-space:nowrap;font-size:13px}
+.tempo-state{font-size:9px;color:var(--muted);margin-top:2px}
+@media(orientation:portrait) and (max-width:600px){
+ .hdr:has(.tempo-ctl) .project-name{flex:1 1 22%}
+ .pattern-readout:has(.tempo-ctl){height:38px}
+}
+
+/* Negotiated instrument sequence lanes; no draft data in this table. */
+.synth-step-scroll {overflow-x:auto; max-width:100%}
+.synth-step-grid {width:100%; border-collapse:collapse; text-align:left}
+.synth-step-grid caption {text-align:left; font-weight:600; padding:0.6rem 0}
+.synth-step-grid th,.synth-step-grid td {padding:0.35rem; border-bottom:1px solid #8885}
+.synth-step-grid input,.synth-step-grid select {max-width:100%}
+.synth-step-grid input {width:5.5em}
+
+#synth-sequence-nav:not([hidden]) {display:flex;gap:4px;margin-bottom:8px;}
+#synth-sequence-nav button {border:1px solid var(--line);border-radius:var(--r-control);background:var(--panel);color:var(--fg);min-height:var(--hit);padding:0 14px;}

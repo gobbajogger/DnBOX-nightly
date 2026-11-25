@@ -1,0 +1,8 @@
+XIP free: 4552 B
+pool margin: 512 B
+  ok    image 548120 B; RAM .data+.bss 97064 B of 98304; pool 335360 B of 344064
+elite prior full-provider experiment: region `XIP' overflowed by 2048 bytes
+XIP free: 4564 B
+pool margin: 512 B
+  ok    image 548108 B; RAM .data+.bss 97064 B of 98304; pool 335360 B of 344064
+pro prior full-provider experiment: region `XIP' overflowed by 2040 bytes

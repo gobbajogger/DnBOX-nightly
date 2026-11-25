@@ -1,0 +1,4 @@
+REAL firmware reported only: {"bank":2,"slot":0,"groups":[["Oscillators",[2,5]],["Filter",[16,17,19,255]],["Filter envelope",[22,23,24,25]],["Amp envelope",[26,27,28,29]]]}
+PASS actual DnBOX-only Filter Link high ID255 read/toggle/independent read/restore, exact 13 authored values unchanged, one guarded SET per action {"old":0,"next":1,"restored":0}
+REAL firmware reported only: {"bank":3,"slot":1,"groups":[["Filter",[7]]]}
+PASS actual typed app adapter parsed both provider sets, confirmed and restored one edit on each, exactly one SET per action.

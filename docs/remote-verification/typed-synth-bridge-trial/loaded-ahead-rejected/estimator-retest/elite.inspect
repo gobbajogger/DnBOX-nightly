@@ -1,0 +1,10 @@
+eng_plan 01
+eng_c1_mask 01
+eng_job_cost 2ffc0000e911000052180100495100002a0d0000
+eng_c1_next 05
+eng_c1_waited 01
+fm1_c1_on 01000000
+fm1_c1_mb 1a09000000000000a49904025e0ded06000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001a0900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+stack_touch 2172 intact_low 2180
+core 0 [('s1_part_render', 15.91), ('fm1_lcd_wait', 7.99), ('s1u_comp', 5.36), ('cv_rect', 5.17), ('master_process_st', 3.72), ('run_job', 3.65), ('original_chicago_voice_span', 3.16), ('cv_text_clip', 3.05), ('xl_tick', 2.91), ('fm1_timer5_irq', 2.82), ('s1u_ladder', 2.51), ('s1u_lfo_tick', 2.31)]
+core 1 [('fm1_c1_main', 57.83), ('d9_render', 27.15), ('fx_reverb', 3.88), ('voice_run', 2.94), ('d9_render_clap', 2.39), ('d9_emit_block', 1.55), ('scale_glide', 0.57), ('d8_render', 0.56), ('run_job', 0.52), ('lane_mix', 0.46), ('fxbus_process_st', 0.33), ('memcpy', 0.25)]

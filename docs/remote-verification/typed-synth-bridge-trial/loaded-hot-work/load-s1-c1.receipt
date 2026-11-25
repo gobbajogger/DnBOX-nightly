@@ -1,0 +1,12 @@
+/tmp/dnr3-loaded.sLWw
+2fcb742ab2814fafc5edb2c84a83b359e1802e12e338f13de00928799b01a9e6  /tmp/dnr3-loaded.sLWw/src/build/smk37-elite/x0x.elf
+1508d9651e9a138fcb2815b8eccb7ba46b3b930b7a46e8ace6d7b9887959b1c0  /tmp/dnr3-loaded.sLWw/src/build/x0x-smk37-elite.fwsc
+70c396fea642c2d0002f62e216f6a36e8db90efc77c890fea72a04470b2b707d  /tmp/dnr3-loaded.sLWw/load/profile.csv
+{"halves": 641, "worst_us": 14776, "raw_late": 7, "xruns": 7, "pcm_peak": 13144, "frames": 331776}
+irq levels at the end: [3], ie true, skipped 0 cycles
+/tmp/dnr3-c1s1.sTZG
+bf53d68e8c6122dd1473cc5719afb6d27c7ea4e9272e19edc579608d11ed7ff6  /tmp/dnr3-c1s1.sTZG/src/build/smk37-elite/x0x.elf
+21bcb2431f5a35bcdffa4072206b59ec2e6b8eed200f56c3edc61d5169604285  /tmp/dnr3-c1s1.sTZG/src/build/x0x-smk37-elite.fwsc
+804051ca999973ba67be9e5d112b831a081e235a9098e87b56288c647b8e8ee6  /tmp/dnr3-c1s1.sTZG/load/profile.csv
+{"halves": 625, "worst_us": 12608, "raw_late": 23, "xruns": 23, "pcm_peak": 13193, "frames": 331776}
+irq levels at the end: [3], ie true, skipped 0 cycles

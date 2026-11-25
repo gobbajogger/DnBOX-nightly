@@ -1,0 +1,51 @@
+--- a/experiments/original_synth/chicago_packed.c
++++ b/experiments/original_synth/chicago_packed.c
+@@ -82,6 +82,21 @@
+ #endif
+ #include <string.h>
+ #include <stdint.h>
++/* The display-only lookup may run on Core 0 while the Chicago audio owner
++ * renders on Core 1. Read the immutable A coefficient without the pair cache. */
++int original_chicago_packed_cutoff_a(uint32_t index,float *a){
++ if(!a)return 0;
++ uint32_t ab;
++#if defined(X0X_CHICAGO_FAST32) && X0X_CHICAGO_FAST32
++ if(index>16384u)return 0;
++ ab=chicago_fast32_lookup(p_a,index);
++#elif defined(X0X_CHICAGO_COMPACT_HEADERS)
++ if(!chicago_compact_lookup(&original_chicago_packed_a,index,original_chicago_packed_a_prefix,&ab))return 0;
++#else
++ if(!original_lossless_second16_lookup(&original_chicago_packed_a,index,&ab))return 0;
++#endif
++ memcpy(a,&ab,4);return 1;
++}
+ int original_chicago_packed_lookup(const void *context,uint32_t index,float *a,float *e){
+  if(context||!a||!e||a==e)return 0;
+  /* The tables are constant: repeat the last decoded pair for the same index. Two
+--- a/experiments/original_synth/chicago_packed.h
++++ b/experiments/original_synth/chicago_packed.h
+@@ -4,5 +4,6 @@
+ #include <stdint.h>
+ /* Exact immutable 44100-derived A/E table provider for MP4 prepare_reader.
+  * Context must be NULL. Private coefficient payload, not approved for public use. */
++int original_chicago_packed_cutoff_a(uint32_t index,float *a);
+ int original_chicago_packed_lookup(const void *context,uint32_t index,float *a,float *e);
+ #endif
+--- a/firmware/src/dsp/original_chicago_backend.c
++++ b/firmware/src/dsp/original_chicago_backend.c
+@@ -556,13 +556,13 @@
+ int original_chicago_backend_cutoff_hz(float macro, float *hz)
+ {
+     original_chicago_program p;
+-    float c, a, e;
++    float c, a;
+     memset(&p, 0, sizeof p);
+     if (!hz || !original_chicago_program_set(&p, 2u, macro) || !original_chicago_program_native(&p, 24u, &c))
+         return 0;
+     float q = c * 16384.0f;
+     q = q < 0.0f ? 0.0f : q > 16384.0f ? 16384.0f : q;
+-    if (!original_chicago_packed_lookup(0, (uint32_t)q, &a, &e) || !(a >= 0.0f && a <= 1.0f)) return 0;
++    if (!original_chicago_packed_cutoff_a((uint32_t)q, &a) || !(a >= 0.0f && a <= 1.0f)) return 0;
+     float f = a > 0.0f ? -fm_logf(a) * (44100.0f / FM_TWO_PI) : 22050.0f;
+     *hz = f > 22050.0f ? 22050.0f : f < 0.0f ? 0.0f : f;
+     return 1;
