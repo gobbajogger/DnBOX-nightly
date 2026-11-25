@@ -1,0 +1,2 @@
+{"model": "elite", "halves": 203, "max_us": 12262, "late": 17, "xruns": 17, "frames": 112640, "peak": 7763, "pcm_sha256": "b0928846c769b71d00f1f2d33afbca6b8aa61c4d5fc3b5ccaa083a2e7df134a7"}
+{"model": "pro", "halves": 203, "max_us": 12286, "late": 17, "xruns": 17, "frames": 112640, "peak": 7763, "pcm_sha256": "b0928846c769b71d00f1f2d33afbca6b8aa61c4d5fc3b5ccaa083a2e7df134a7"}

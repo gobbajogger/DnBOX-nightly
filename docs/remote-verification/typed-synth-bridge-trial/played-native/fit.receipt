@@ -1,0 +1,12 @@
+base-build
+XIP free: 4792 B
+pool margin: 512 B
+  ok    image 547880 B; RAM .data+.bss 97048 B of 98304; pool 335360 B of 344064
+build
+XIP free: 4744 B
+pool margin: 512 B
+  ok    image 547928 B; RAM .data+.bss 97048 B of 98304; pool 335360 B of 344064
+pro-build
+XIP free: 4756 B
+pool margin: 512 B
+  ok    image 547916 B; RAM .data+.bss 97048 B of 98304; pool 335360 B of 344064
