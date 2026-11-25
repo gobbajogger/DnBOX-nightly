@@ -615,3 +615,14 @@ summary.break-chip::-webkit-details-marker{display:none}
  .hdr:has(.tempo-ctl) .project-name{flex:1 1 22%}
  .pattern-readout:has(.tempo-ctl){height:38px}
 }
+
+/* Negotiated instrument sequence lanes; no draft data in this table. */
+.synth-step-scroll {overflow-x:auto; max-width:100%}
+.synth-step-grid {width:100%; border-collapse:collapse; text-align:left}
+.synth-step-grid caption {text-align:left; font-weight:600; padding:0.6rem 0}
+.synth-step-grid th,.synth-step-grid td {padding:0.35rem; border-bottom:1px solid #8885}
+.synth-step-grid input,.synth-step-grid select {max-width:100%}
+.synth-step-grid input {width:5.5em}
+
+#synth-sequence-nav:not([hidden]) {display:flex;gap:4px;margin-bottom:8px;}
+#synth-sequence-nav button {border:1px solid var(--line);border-radius:var(--r-control);background:var(--panel);color:var(--fg);min-height:var(--hit);padding:0 14px;}

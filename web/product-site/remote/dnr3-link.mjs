@@ -6,6 +6,7 @@ import {Dnr3Client, webMidiTransport} from './dnr3-client.mjs';
 import * as d from './dnr3.mjs';
 import {createDnr3MixProvider} from './dnr3-mix.mjs';
 import {createChicagoSession} from './dnr3-chicago.mjs';
+import {createSynthSession} from "./dnr3-typed-synth.mjs";
 
 export const PART = Object.freeze({drum909: 0, drum808: 1, chicago: 2, miami: 3, breaks: 4});
 export const ACCENT_TRACK = 11;            // §4.2: part 0/1 track 11 = accent row
@@ -196,6 +197,7 @@ export function mountDnr3Link({document: doc = globalThis.document, navigator: n
       const state=await c.state();
       return state.clip_mode?{blocked:true}:state;
     }),
+    synthSession(slot) { const own=client; return createSynthSession(own,slot,()=>client===own); },
     chicagoSession(slot,bindings) {
       const own=client;
       return createChicagoSession(own,slot,bindings,()=>own===client);

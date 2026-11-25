@@ -764,8 +764,8 @@
     },
     {
       "path": "remote/app.mjs",
-      "bytes": 96998,
-      "sha256": "b326955cf7cdc18d22029b04f6ec0604473745bf4173dd1c51d24272fcddb101"
+      "bytes": 101705,
+      "sha256": "5ea606afb1d1175936d54cc10e5a6ae34fc7741d20123fe3a415e8792a72c4cf"
     },
     {
       "path": "remote/assets/Barlow-OFL.txt",
@@ -884,8 +884,8 @@
     },
     {
       "path": "remote/dnr3-client.mjs",
-      "bytes": 10138,
-      "sha256": "4edd1cd07f63eae148ef207ff9452a236f1dc26f840a94d10a3126ac53747b38"
+      "bytes": 10983,
+      "sha256": "d6d4a4479995be2df4af0d0e5cb5c325e5a29117eb87084c8b6ad2894bc89ae9"
     },
     {
       "path": "remote/dnr3-clips.mjs",
@@ -894,8 +894,8 @@
     },
     {
       "path": "remote/dnr3-link.mjs",
-      "bytes": 12961,
-      "sha256": "6402b8cf9fe84f2ef70d12be5126745532bafe3aa0f8e0094dd9adf406704963"
+      "bytes": 13120,
+      "sha256": "c28f03aae39cecd393cd3554b6812777b43c2c5f5e5d5082cc77cdb47cef7bfd"
     },
     {
       "path": "remote/dnr3-mix.mjs",
@@ -908,9 +908,29 @@
       "sha256": "2173ef5c6de9f6bd49b91d6cd370f52e5dccb8f95cda4bf2ca883e483cee4121"
     },
     {
+      "path": "remote/dnr3-sj6-catalog.mjs",
+      "bytes": 8937,
+      "sha256": "4bcf5270a15bbc1381ca69d496eee14155a30d30743bd3a708cf60ed0e22b0fa"
+    },
+    {
+      "path": "remote/dnr3-synth-catalog.mjs",
+      "bytes": 10895,
+      "sha256": "1a1c5eccc7bbc7bb8f70642155ba7ebe2927a80913d3124de36590640e5e3023"
+    },
+    {
+      "path": "remote/dnr3-synth-editor.mjs",
+      "bytes": 3781,
+      "sha256": "adc33b34e5d0770cbe45f85ce88c2e42bf5bcc82bfcb540024996884c1620423"
+    },
+    {
+      "path": "remote/dnr3-typed-synth.mjs",
+      "bytes": 9750,
+      "sha256": "b0e4887746a3fd617370de0c402640c862be8217578e906044daa1474287ef52"
+    },
+    {
       "path": "remote/dnr3.mjs",
-      "bytes": 15934,
-      "sha256": "eb905f942dbac8b0eb39f292e457ebdc76c9ef2a0d139771db97151d2e3fc16b"
+      "bytes": 17262,
+      "sha256": "1c66ae4983a0f08c68708e4a5cf75874addef3a2e5c1b641b0d962be21afda19"
     },
     {
       "path": "remote/draft-file.mjs",
@@ -1029,8 +1049,8 @@
     },
     {
       "path": "remote/index.html",
-      "bytes": 7944,
-      "sha256": "fb7a994e5b2cc91b74c5e042901f343738a630ad3a06036368956e3eedb496a6"
+      "bytes": 8324,
+      "sha256": "9b55f5d3e119682d3e5fb560ebd9962e941964de382e02d7b3b579976ec201cb"
     },
     {
       "path": "remote/keybed-scroll.mjs",
@@ -1179,8 +1199,8 @@
     },
     {
       "path": "remote/style.css",
-      "bytes": 51689,
-      "sha256": "0fefac38fcdfd3077a6eec47cbeecd84d4a96bbc6ae60030fe838db68dedc947"
+      "bytes": 52401,
+      "sha256": "c00cd1cf9acb9105a5e53af62d834256b5e3184a13db21784c7cea186b6e71c9"
     },
     {
       "path": "remote/tempo-control.mjs",

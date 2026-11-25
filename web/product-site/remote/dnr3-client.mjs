@@ -46,7 +46,7 @@ export class Dnr3Client {
     p.done(reply);
   }
   refused(result) { this.pending?.done(null, new Dnr3Unavailable(result === -3 ? 'This firmware has no DNR3 handler' : `SysEx refused (${result})`)); }
-  request(op, fields = {}, {allow = []} = {}) {
+  request(op, fields = {}, {allow = [], retry = true} = {}) {
     const run = () => new Promise((resolve, reject) => {
       if (this.closed) { reject(Error('DNR3 client closed')); return; }
       const seq = this.nextSeq(), frame = d.encodeRequest(op, seq, fields);
@@ -60,7 +60,7 @@ export class Dnr3Client {
       }};
       const send = () => {
         tries++;
-        timer = this.timers.setTimeout(() => tries < 2 ? send() : p.done(null, Object.assign(Error('DNR3 timeout'), {code: 'timeout'})), this.timeoutMs);
+        timer = this.timers.setTimeout(() => retry && tries < 2 ? send() : p.done(null, Object.assign(Error('DNR3 timeout'), {code: 'timeout'})), this.timeoutMs);
         try { this.transport.sendSysex(frame); } catch (e) { p.done(null, e); }
       };
       this.pending = p; send();
@@ -88,9 +88,20 @@ export class Dnr3Client {
   state() { return this.request(d.OP.STATE).then(r => r.fields); }
   describe(addr) { return this.request(d.OP.DESCRIBE, addr).then(r => r.fields); }
   paramGet(params) { return this.request(d.OP.PARAM_GET, {params}).then(r => r.fields.params); }
-  paramSet(addr, value, expect = d.KEEP, {bank} = {}) {
+  synthOwner(slot) {
+    if (!this.has(d.CAP.SYNTH_OWNER)) return Promise.reject(new Dnr3Unavailable('Firmware cannot confirm the synth owner'));
+    return this.request(d.OP.SYNTH_OWNER, {epoch:this.epoch,slot}, {retry:false}).then(r=>r.fields);
+  }
+  paramSet(addr, value, expect = d.KEEP, {bank,retry,ownerGeneration} = {}) {
     if (bank!==undefined && !this.has(d.CAP.BASS_BANK_GUARD)) return Promise.reject(new Dnr3Unavailable('Firmware cannot guard the live bass bank'));
-    return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value, expect_bank:bank});
+    const typed=addr.kind===112||addr.kind===113;
+    if (typed && (!this.has(d.CAP.TYPED_SYNTH) || !this.has(d.CAP.SYNTH_OWNER) || bank===undefined ||
+      !Number.isInteger(ownerGeneration) || ownerGeneration<0 || ownerGeneration>0xffffffff))
+      return Promise.reject(new Dnr3Unavailable('Firmware cannot guard the live synth owner'));
+    if(!typed&&ownerGeneration!==undefined)
+      return Promise.reject(new Dnr3Unavailable('Owner token requires a typed synth control'));
+    return this.request(d.OP.PARAM_SET, {epoch: this.epoch, ...addr, expect, value, expect_bank:bank,
+      owner_generation:ownerGeneration}, {retry:typed?false:retry});
   }
   stepGet(part, pat, step, track) { return this.request(d.OP.STEP_GET, {part, pat, step, track}).then(r => r.fields); }
   stepSet(part, pat, step, record, expectCrc = d.KEEP) { return this.request(d.OP.STEP_SET, {epoch: this.epoch, part, pat, step, expect_crc: expectCrc, record}); }

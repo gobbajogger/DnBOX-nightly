@@ -75,6 +75,10 @@
 <main aria-describedby="edit-scope">
 <p id="edit-scope">Draft · Connect via USB MIDI to edit your DnBOX</p>
 <nav id="break-views" aria-label="BREAK editor" hidden><button type="button" data-break-view="slices" aria-pressed="true">Slices</button><button type="button" data-break-view="notes" aria-pressed="false">Notes</button></nav>
+<nav id="synth-sequence-nav" aria-label="Bass sequence views" hidden>
+<button id="open-synth-sequence" type="button" aria-controls="live-synth-sequence">ARP &amp; steps</button>
+<button id="return-bass-roll" type="button" aria-controls="roll-view" hidden>Back to Piano Roll</button>
+</nav>
 <section id="roll-view">
 <div class="roll-panel">
 <div class="roll-head"><span class="key-head"></span><div class="beat-ruler" id="beat-ruler" aria-hidden="true"></div></div>
@@ -96,6 +100,7 @@
 <aside class="sound-panel" hidden><div class="glyph-card" id="glyph-card"></div><button type="button" id="open-sound" class="btn">Sound</button></aside>
 </section>
 <section id="break-sequence" aria-label="BREAK sequence" hidden></section>
+<section id="live-synth-sequence" aria-label="Instrument ARP and steps" hidden></section>
 <section id="other-view" hidden></section>
 </main>
 <footer id="status" class="sr-only" role="status" aria-live="polite"></footer>

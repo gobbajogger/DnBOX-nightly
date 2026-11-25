@@ -23,6 +23,8 @@ import{MotionDraft}from'./motion.mjs';
 import{renderLiveMotion,bindLiveMotion}from'./dnr3-motion.mjs';
 import{createLiveClips}from'./dnr3-clips.mjs';
 import{createChicagoView}from'./dnr3-chicago.mjs';
+import{renderSynthEditor}from'./dnr3-synth-editor.mjs';
+import{createSynthView}from'./dnr3-typed-synth.mjs';
 import{SequenceDraft,chanceDomain,chanceFromDrag,Arrangement}from'./sequence.mjs';
 import{ParameterGesture}from'./parameter.mjs';
 import{PARTS,DESTINATIONS,LaunchSelection,bindRollPointers}from'./workspace.mjs';
@@ -55,7 +57,7 @@ export function attachEnvelopeObserver(port,pin){
  old?.close();nativeEnvelopeBinding=next;next.render();
  return next;
 }
-const timeline=new WorkspaceTimeline();const motion=new MotionDraft();let drumVoice=0,drumEdit=false;let motionSelected=0;const arrangement=new Arrangement();const launch=new LaunchSelection();const model=new SequenceDraft({trace}),groups=groupsFromCatalog(catalog);let multi=false;let focusSelection=false;let selected=null,mode='auto',view='roll',disposed=false,width=1400,row=44,fitted=false;const grid=$('roll-grid'),scroll=$('roll-scroll'),names=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const timeline=new WorkspaceTimeline();const motion=new MotionDraft();let drumVoice=0,drumEdit=false;let motionSelected=0;const arrangement=new Arrangement();const launch=new LaunchSelection();const model=new SequenceDraft({trace}),groups=groupsFromCatalog(catalog);let multi=false;let focusSelection=false;let selected=null,mode='auto',view='roll',synthSequenceOpen=false,disposed=false,width=1400,row=44,fitted=false;const grid=$('roll-grid'),scroll=$('roll-scroll'),names=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
 let playheadState=null;function paintPlayhead(state){playheadState=state;fwAnimate(state);const head=grid.querySelector('.roll-playhead');if(head){if(state){head.style.transform=`translateX(${Math.max(0,state.position*width/STEPS_PER_BAR-1)}px)`;head.dataset.step=String(state.step+1);head.classList.toggle('on-beat',state.step%STEPS_PER_BEAT===0);head.setAttribute('aria-label',`Playhead at beat ${state.beat+1}, step ${state.step+1}`);}else{head.style.transform='';delete head.dataset.step;head.classList.remove('on-beat');head.setAttribute('aria-label','Playhead at start');}}document.querySelectorAll('#beat-ruler [data-beat]').forEach(e=>e.classList.toggle('current',Boolean(state)&&Number(e.dataset.beat)===state.beat+1));}const playhead=createPlayhead({bpm:()=>tempoFrom($('tempo')?.textContent),paint:paintPlayhead});
 const breakSequence = emptyBreakSequence();
 const breakSteps = createBreakSteps(()=>remoteLink?.breakClient(),()=>breakEditor?.paint());
@@ -77,7 +79,8 @@ function syncBreakView() {
  const active = editingBreak && breakView === 'slices';
  if ($('break-views')) $('break-views').hidden = !editingBreak;
  for (const button of document.querySelectorAll('[data-break-view]')) button.setAttribute('aria-pressed',String(button.dataset.breakView === breakView));
- $('roll-view').hidden = view !== 'roll' || active;
+ $('roll-view').hidden = view !== 'roll' || active || synthSequenceOpen;
+ const modes=$('mode-tools');if(modes)modes.hidden=view!=='roll'||synthSequenceOpen;
  liveBassRoll?.sync();
  if (breakEditor) {
   $('break-sequence').hidden = !active;
@@ -95,6 +98,7 @@ function editorHistory(){
   if(soundSlot()<0)return 'mixed';
   if(confirmedChicago?.phase==='ready'||confirmedChicago?.phase==='loading')return 'chicago';
  }
+ if(view==='roll'&&synthSequenceOpen)return 'device';
  if((view==='roll'&&$('roll-view')?.dataset.bassRollSource==='firmware')||
     (view==='roll'&&$('part')?.value==='breaks'&&breakView==='slices'&&breakSteps.mode()==='firmware')||
     (view==='drums'&&supportsDrumPages(remoteLink.drumClient()))||
@@ -282,7 +286,7 @@ function other(){const liveLaneFocus=document.activeElement?.dataset.drumVelocit
  if(view==='sound'&&nativeSoundMode){html=soundSourceBar()+nativeSoundControls();}
  if(view==='sound'&&!nativeSoundMode){html=soundSourceBar()+`<h2>Sound · ${esc($('part').selectedOptions[0].textContent)}${part==='chicago'||part==='miami'?' / '+soundBanks[part==='chicago'?0:1]:''}</h2>`+(['drum909','drum808'].includes(part)?voiceSelector(part==='drum909'?'909':'808')+component((part==='drum909'?'909':'808')+'-voice-'+String(drumVoice).padStart(2,'0')+'.svg'):soundControls(part));}
  if(view==='sound'&&remoteLink?.connected()&&soundSlot()>=0){
-  const live=chicagoSoundSection();
+  const live=typedSynthSoundSection()??chicagoSoundSection();
   html=live??'<p role="status">Live Sound edits are unavailable for this active engine. These are Draft controls.</p><section data-sound-source="draft">'+html+'</section>';
  }
  if(view==='mix'){html=mixSourceBar()+(nativeMixMode&&!['ready','busy'].includes(nativeMix.snapshot().phase)?'<p role="status">'+(nativeMix.snapshot().phase==='loading'?'Reading firmware Mix…':'Firmware Mix unavailable')+'</p>':renderMixWorkspace({mode:mixMode,parts:mixMode==='levels'?typedMixer():typedMixSends(mixMode),master:mixControlPanel('mix-master.svg','Master'),fx:mixControlPanel('fx-reverb-direct.svg','Reverb')+mixControlPanel('fx-delay-direct.svg','Delay')+wearPanel()}));}
@@ -335,9 +339,9 @@ function partTitle(){const part=$('part')?.value;
 function syncPartTitle(){syncPatternLabel();const el=$('part-title');if(el)el.textContent=partTitle();}
 function syncEngines(){const part=$('part')?.value;document.querySelectorAll('[data-engine]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.engine===part)));syncPartTitle();}
 function paintSoundPanel(){const root=$('glyph-card');if(!root)return;syncPartTitle();const part=$('part').value,slot=part==='chicago'?0:part==='miami'?1:-1,bank=slot<0?'':view==='sound'&&nativeSoundMode?'CHICAGO':soundBanks[slot];if(view==='sound'&&nativeSoundMode&&!['ready','busy'].includes(nativeSound()?.snapshot().phase)){root.innerHTML='<strong>Sound · Emulator</strong><output>—</output>';return;}const n=current(),lane=STEP_LANES.find(l=>l.id===laneKind())||STEP_LANES[0],readout=n?String(laneFigure(n)||'—'):'—';const titles={OSCILLATOR:'OSC',ENVELOPE:'ENV'};let sections='';if(slot>=0&&!firmwareOnlyBank(bank)){const rows=sourceSounds.controls(bank,slot).filter(c=>c.enabled);const order=bank==='CHICAGO'?['OSCILLATOR','FILTER 1','FILTER 2','ENVELOPE']:[...new Set(rows.map(c=>c.sourceSection))].filter(Boolean).slice(0,4);for(const section of order){const group=rows.filter(c=>c.sourceSection===section);if(!group.length)continue;const curve=section==='ENVELOPE'?envelopeGraph(bank,slot,group):'';sections+=`<div class="panel-section"><h3>${esc(titles[section]||section)}</h3><div class="panel-cells">${group.map(c=>`<div class="panel-cell">${curve?'':`<span class="glyph">${glyphFor(c.label,bank.toLowerCase(),(valueOfSound(c)-c.min)/(c.max-c.min||1),{live:false})}</span>`}<output>${esc(soundNativeId(c.id)?nativeSoundDisplay(c.id):curve?envelopeValue(c,valueOfSound(c)):c.display)}</output><span>${esc(c.label)}</span></div>`).join('')}</div>${curve}</div>`;}}root.innerHTML=`<strong>${esc(slot<0?partTitle():bank+' '+(slot?'B':'A'))}</strong>${sections}<output class="panel-readout"><small>${esc(lane.label)}</small>${esc(readout)}</output>`;}
-function setView(v){if(v==='roll'||v==='drums')v=drumPart()?'drums':'roll';if(v!=='drums')liveDrums206?.close();rollBinding.cancel();cancelParameters();if(v!==view)retireNativeSound();view=v;$('roll-view').hidden=v!=='roll';$('other-view').hidden=v==='roll';const modes=$('mode-tools');if(modes)modes.hidden=v!=='roll';const tab=v==='song'?'patterns':v==='drums'?'roll':v;document.querySelectorAll('[data-view]').forEach(b=>{const on=b.dataset.view===v||(b.dataset.tab&&b.dataset.view===tab);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if($('context-title'))$('context-title').textContent='';syncBreakView();if(v!=='roll')other();else paintNotes();paintSoundPanel();syncConnectionMix();syncChicagoView();if(v==='patterns')liveClips.activate();else liveClips.close();}
+function setView(v){if(v==='roll'||v==='drums')v=drumPart()?'drums':'roll';if(v!=='drums')liveDrums206?.close();rollBinding.cancel();cancelParameters();if(v!==view)retireNativeSound();synthSequenceOpen=false;view=v;$('roll-view').hidden=v!=='roll';$('other-view').hidden=v==='roll';const modes=$('mode-tools');if(modes)modes.hidden=v!=='roll';const tab=v==='song'?'patterns':v==='drums'?'roll':v;document.querySelectorAll('[data-view]').forEach(b=>{const on=b.dataset.view===v||(b.dataset.tab&&b.dataset.view===tab);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if($('context-title'))$('context-title').textContent='';syncBreakView();if(v!=='roll')other();else paintNotes();paintSoundPanel();syncConnectionMix();syncChicagoView();if(v==='patterns')liveClips.activate();else liveClips.close();}
 for(const b of document.querySelectorAll('[data-view]'))b.onclick=()=>setView(b.dataset.view);$('other-view').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.soundSource){void chooseSoundSource(b.dataset.soundSource);return;}if(b.dataset.soundRetry!==undefined){if(nativeSoundRetry)runSoundAction(nativeSoundRetry);return;}if(b.dataset.mixSource){void chooseMixSource(b.dataset.mixSource);return;}if(b.dataset.mixMode){if(!['levels','pan','sends','fx'].includes(b.dataset.mixMode))return;cancelParameters();mixMode=b.dataset.mixMode;other();document.querySelector('[data-mix-mode="'+mixMode+'"]')?.focus();return;}if(b.dataset.mixPart){if(!['drum909','drum808','chicago','miami','breaks'].includes(b.dataset.mixPart))return;cancelParameters();$('part').value=b.dataset.mixPart;$('part').onchange();setView('sound');return;}if(b.dataset.projectAction){const id={save:'draft-save',open:'draft-file',review:'review'}[b.dataset.projectAction];if(id)$(id)?.click?.();return;}if(b.id==='drum-edit'){drumEdit=!drumEdit;other();return;}if(b.dataset.drumAccent!==undefined){toggleAccent(b.dataset.drumTrack,Number(b.dataset.drumAccent));other();status();return;}if(b.dataset.drumNote!==undefined){model.toggleHit(b.dataset.drumTrack,Number(b.dataset.drumNote),Number(b.dataset.drumStart));other();status();return;}if(b.id==='song-add'){if(launch.targets.some(n=>n===null)){status('Select a pattern for all five parts first.');return;}arrangement.add(launch.targets);other();return;}if(b.id==='song-undo'){performHistory();return;}if(b.id==='song-redo'){performHistory(true);return;}if(b.dataset.step){$('step-detail').textContent='Step '+(Number(b.dataset.step)+1)+' · Not loaded';}if(b.dataset.pattern!==undefined){if(clipView.source==='firmware'){void liveClips.cue(Number(b.dataset.launchPart),Number(b.dataset.pattern));return;}const state=launch.choose(Number(b.dataset.launchPart),Number(b.dataset.pattern));other();document.querySelector(`[data-launch-part="${b.dataset.launchPart}"][data-pattern="${b.dataset.pattern}"]`)?.focus({preventScroll:true});status(`${state.part} · P${state.selected+1} selected · Not loaded`);}if(b.dataset.hit){const n=model.notes.find(n=>n.id===b.dataset.hit);$('part').value=n.track;selected=n.id;setView('roll');scroll.scrollTop=(127-n.note)*row-scroll.clientHeight/2;}});
-$('part').onchange=()=>{rollBinding.cancel();cancelParameters();retireNativeSound();model.selectIds([]);drumVoice=0;selected=null;syncEngines();if((view==='roll'||view==='drums')&&(drumPart()?'drums':'roll')!==view){setView('roll');return;}syncBreakView();if(view==='roll'){paintNotes();scroll.scrollTop=(127-(notes()[0]?.note??60))*row-scroll.clientHeight/2;}else other();syncChicagoView();};document.querySelectorAll('[data-engine]').forEach(b=>b.onclick=()=>{$('part').value=b.dataset.engine;$('part').onchange();});syncEngines();$('undo').onclick=()=>performHistory();$('redo').onclick=()=>performHistory(true);if($('inspector-toggle'))$('inspector-toggle').onclick=()=>{const closed=document.querySelector('.editor').classList.toggle('closed');$('inspector-toggle').setAttribute('aria-expanded',String(!closed));};$('review').onclick=()=>{rollBinding.cancel();cancelParameters();$('changes').textContent=changeLines().join('\n')||'No changes.';$('review-dialog').showModal();};
+$('part').onchange=()=>{synthSequenceOpen=false;rollBinding.cancel();cancelParameters();retireNativeSound();model.selectIds([]);drumVoice=0;selected=null;syncEngines();if((view==='roll'||view==='drums')&&(drumPart()?'drums':'roll')!==view){setView('roll');return;}syncBreakView();if(view==='roll'){paintNotes();scroll.scrollTop=(127-(notes()[0]?.note??60))*row-scroll.clientHeight/2;}else other();syncChicagoView();};document.querySelectorAll('[data-engine]').forEach(b=>b.onclick=()=>{$('part').value=b.dataset.engine;$('part').onchange();});syncEngines();$('undo').onclick=()=>performHistory();$('redo').onclick=()=>performHistory(true);if($('inspector-toggle'))$('inspector-toggle').onclick=()=>{const closed=document.querySelector('.editor').classList.toggle('closed');$('inspector-toggle').setAttribute('aria-expanded',String(!closed));};$('review').onclick=()=>{rollBinding.cancel();cancelParameters();$('changes').textContent=changeLines().join('\n')||'No changes.';$('review-dialog').showModal();};
 
 let chanceDrag=null,paramOwner=null,activeParameter=null,activePresentation=null;
 function lanePoint(e){return{x:e.clientX,y:e.clientY,fine:e.shiftKey};}
@@ -385,7 +389,7 @@ $('other-view').addEventListener('pointerdown',e=>{const t=e.target.closest('[da
 function motionPaint(){const el=$('motion-grid');if(!el)return;el.innerHTML=motion.values.map((v,i)=>`<button data-motion-step="${i}" style="left:${i/16*100}%;height:${v===null?6:Math.max(6,v/127*100)}%" aria-label="Step ${i+1}, ${v===null?'unset':v}" aria-pressed="${motionSelected===i}">${v??'—'}</button>`).join('');$('motion-step').value=motionSelected+1;$('motion-value').value=motion.values[motionSelected]??'';status();}
 function bindMotion(){motionPaint();const el=$('motion-grid'),point=e=>{const r=el.getBoundingClientRect();return{step:Math.max(0,Math.min(15,Math.floor((e.clientX-r.left)/r.width*16))),value:Math.max(0,Math.min(127,Math.round((1-(e.clientY-r.top)/r.height)*127)))}};el.onpointerdown=e=>{if(e.button!==0)return;el.setPointerCapture(e.pointerId);motion.begin(e.pointerId);const p=point(e);motionSelected=p.step;motion.draw(e.pointerId,p.step,p.value);motionPaint();e.preventDefault();};el.onpointermove=e=>{if(!motion.gesture)return;const p=point(e);motionSelected=p.step;motion.draw(e.pointerId,p.step,p.value);motionPaint();};el.onpointerup=e=>{motion.end(e.pointerId);motionPaint();};el.onpointercancel=el.onlostpointercapture=()=>{motion.cancel();motionPaint();};$('motion-step').onchange=()=>{motionSelected=Math.max(0,Math.min(15,Number($('motion-step').value)-1));motionPaint();};$('motion-value').onchange=()=>{const v=Number($('motion-value').value);try{motion.begin(-1);motion.draw(-1,motionSelected,v);motion.end(-1);}catch{motion.cancel();}motionPaint();};$('motion-clear').onclick=()=>{motion.clear(motionSelected);motionPaint();};$('motion-undo').onclick=()=>performHistory();$('motion-redo').onclick=()=>performHistory(true);}
 $('multi').onclick=()=>{multi=!multi;$('multi').setAttribute('aria-pressed',String(multi));if(!multi&&selected)model.selectIds([selected]);paintNotes();};$('copy').onclick=()=>{try{if(!model.selection.size&&selected)model.selectIds([selected]);status(model.copy()+' notes copied');}catch{status('Select notes first.');}};$('paste').onclick=()=>{try{const n=current();const ids=model.paste({track:$('part').value,start:n?.start??0,note:n?.note??60});selected=ids[0];paintNotes();}catch{status('The whole pasted group must fit.');}};$('delete').onclick=()=>{rollBinding.cancel();if(!model.selection.size&&selected)model.selectIds([selected]);model.deleteSelected();selected=null;paintNotes();};$('lane-kind').onchange=()=>{cancelParameters();paintNotes();syncLaneLabel();};if($('lane-param'))$('lane-param').onclick=()=>{$('lane-kind').value=nextLane(laneKind());$('lane-kind').onchange();};if($('open-sound'))$('open-sound').onclick=()=>document.querySelector('[data-view="sound"]')?.click();if($('zoom-step'))$('zoom-step').onclick=()=>{const steps=[1,1.5,2,3,4],cur=Number($('zoom').value)||1,next=steps.find(s=>s>cur+0.01)||steps[0];$('zoom').value=String(next);$('zoom').oninput?.();if($('zoom-step'))$('zoom-step').textContent='Zoom '+Math.round(next*100)+'%';};if($('snap'))$('snap').onclick=()=>$('snap').setAttribute('aria-pressed',$('snap').getAttribute('aria-pressed')==='true'?'false':'true');$('other-view').addEventListener('input',e=>{if(e.target.dataset.nativeParam)previewNativeInput(e.target);});$('other-view').addEventListener('change',e=>{if(e.target.dataset.nativeParam){commitNativeInput(e.target);return;}if(e.target.id==='sound-bank'){const slot=$('part').value==='chicago'?0:$('part').value==='miami'?1:-1;if(slot>=0&&bankValues().includes(e.target.value)){cancelParameters();soundBanks[slot]=e.target.value;bassPresets[slot]=0;bassPick[slot]=null;activeParameter=null;activePresentation=null;other();}return;}if(e.target.id==='sound-preset-bank'){const slot=soundSlot(),bank=Number(e.target.value);if(slot>=0)choosePreset(slot,{bank,preset:0});return;}if(e.target.id==='sound-preset'){const slot=soundSlot();const pair=e.target.value.split(':').map(Number);if(slot>=0&&pair.length===2)choosePreset(slot,{bank:pair[0],preset:pair[1]});else if(slot>=0&&Number.isInteger(pair[0])&&pair[0]>=0){bassPresets[slot]=pair[0];other();}return;}if(e.target.id==='sound-voice'){const value=Number(e.target.value);if(Number.isInteger(value)&&value>=0&&value<11){cancelParameters();drumVoice=value;other();}return;}if(e.target.dataset.songRow!==undefined){try{arrangement.update(Number(e.target.dataset.songRow),{repeats:Number(e.target.value)});}catch{status('Repeats must be 1–8.');}other();}});
-window.addEventListener('blur',()=>{rollBinding.cancel();cancelParameters();});document.addEventListener('visibilitychange',()=>{if(document.hidden){rollBinding.cancel();cancelParameters();}});window.addEventListener('pagehide',()=>{rollBinding.cancel();cancelParameters();breakSteps.stop();breakEditor?.stop();void localInstrument.stop();nativeEnvelopeBinding?.close();nativeEnvelopeBinding=null;disposed=true;});window.addEventListener('pageshow',e=>{if(e.persisted){disposed=false;syncBreakView();paintNotes();}});window.addEventListener('resize',()=>{if(view!=='roll'||disposed)return;const next=Math.round(rollBasis()*Number($('zoom').value||1));if(Math.abs(next-width)<2)return;width=next;paintNotes();});paintNotes();{const next=Math.round(rollBasis()*Number($('zoom').value||1));if(Math.abs(next-width)>=2){width=next;paintNotes();}}scroll.scrollTop=(127-(notes()[0]?.note??60))*row-scroll.clientHeight/2;
+window.addEventListener('blur',()=>{rollBinding.cancel();cancelParameters();});document.addEventListener('visibilitychange',()=>{if(document.hidden){rollBinding.cancel();cancelParameters();}});window.addEventListener('pagehide',()=>{rollBinding.cancel();cancelParameters();breakSteps.stop();breakEditor?.stop();void localInstrument.stop();nativeEnvelopeBinding?.close();nativeEnvelopeBinding=null;disposed=true;retireTypedSynthView();});window.addEventListener('pageshow',e=>{if(e.persisted){disposed=false;syncBreakView();paintNotes();syncTypedSynthView();}});window.addEventListener('resize',()=>{if(view!=='roll'||disposed)return;const next=Math.round(rollBasis()*Number($('zoom').value||1));if(Math.abs(next-width)<2)return;width=next;paintNotes();});paintNotes();{const next=Math.round(rollBasis()*Number($('zoom').value||1));if(Math.abs(next-width)>=2){width=next;paintNotes();}}scroll.scrollTop=(127-(notes()[0]?.note??60))*row-scroll.clientHeight/2;
 
 // Explicit local draft recovery. Every source hash and typed ref is validated before replacement.
 const draftState={breakSequence,model,motion,arrangement,launch,parameterDraft,parameterIdentity,timeline,soundBanks};
@@ -404,11 +408,81 @@ const chicagoView=createChicagoView({link:()=>remoteLink,bindings:runtimeSoundBi
  if(focus!==undefined)$('other-view').querySelector(`[data-live-chicago="${focus}"]`)?.focus({preventScroll:true});
 }});
 function syncChicagoView(){
+ syncTypedSynthView();
  const slot=remoteLink?.connected()&&view==='sound'?soundSlot():-1;
  if(slot===chicagoSlot)return;
  chicagoSlot=slot;chicagoView.close();
  if(slot>=0)chicagoView.open(slot);
  else {confirmedChicago={phase:'unsupported'};if(view==='sound')other();}
+}
+let typedSlot=null, confirmedTyped={phase:'unsupported'}, sequenceFocus=null;
+function renderSequenceSynth(){
+ const root=$('live-synth-sequence');
+ if(!root||!$('synth-sequence-nav'))return;
+ const state=typedSlot===soundSlot()?{...confirmedTyped,slot:typedSlot}:null;
+ const available=view==='roll'&&!!state?.typed&&!!state.rows?.some(row=>row.presentation?.section==='sequence');
+ if(!available)synthSequenceOpen=false;
+ const open=available&&synthSequenceOpen, wasOpen=!root.hidden;
+ $('synth-sequence-nav').hidden=!available;
+ $('open-synth-sequence').hidden=open;
+ $('return-bass-roll').hidden=!open;
+ root.hidden=!open;
+ if(open){
+   const focused=document.activeElement, inEditor=root.contains(focused);
+   if(inEditor)sequenceFocus=focused.dataset?.liveTypedSynth??null;
+   else if(focused&&focused!==document.body)sequenceFocus=null;
+   const left=root.querySelector('.synth-step-scroll')?.scrollLeft??0, top=root.scrollTop;
+   root.innerHTML=renderSynthEditor(state,'sequence')??'';
+   const steps=root.querySelector('.synth-step-scroll');
+   if(steps)steps.scrollLeft=left;
+   root.scrollTop=top;
+   if(sequenceFocus!==null&&!state.busy)
+     root.querySelector(`[data-live-typed-synth="${sequenceFocus}"]:not([disabled])`)?.focus({preventScroll:true});
+ }else{
+   sequenceFocus=null;
+   if(root.innerHTML)root.replaceChildren();
+ }
+ if(wasOpen!==open)syncBreakView();
+}
+function selectSynthSequence(open){
+ if(view!=='roll'||$('synth-sequence-nav').hidden||synthSequenceOpen===open)return;
+ rollBinding.cancel();cancelParameters();synthSequenceOpen=open;renderSequenceSynth();
+ if(!open)paintNotes();
+ $(open?'return-bass-roll':'open-synth-sequence').focus({preventScroll:true});
+}
+$('open-synth-sequence')?.addEventListener('click',()=>selectSynthSequence(true));
+$('return-bass-roll')?.addEventListener('click',()=>selectSynthSequence(false));
+const typedSynthView=createSynthView({link:()=>remoteLink,onChange:state=>{
+ confirmedTyped=state;
+ if(view==='roll'){renderSequenceSynth();return;}
+ const root=view==='sound'?$('other-view'):null;
+ if(!root)return;
+ const focus=root.contains(document.activeElement)?document.activeElement?.dataset.liveTypedSynth:undefined,top=root.scrollTop;
+ other();
+ root.scrollTop=top;
+ if(focus!==undefined)root.querySelector(`[data-live-typed-synth="${focus}"]`)?.focus({preventScroll:true});
+}});
+function retireTypedSynthView(){
+ typedSlot=null;
+ confirmedTyped={phase:'unsupported'};
+ synthSequenceOpen=false;
+ typedSynthView.close();
+ renderSequenceSynth();
+}
+function syncTypedSynthView(){
+ if(disposed)return;
+ const wanted=view==='sound'||view==='roll'&&!!(remoteLink?.hello()?.caps&CAP.TYPED_SYNTH);
+ const slot=remoteLink?.connected()&&wanted?soundSlot():-1;
+ if(typedSlot===slot){renderSequenceSynth();return;}
+ typedSlot=slot;
+ confirmedTyped={phase:'unsupported'};
+ typedSynthView.close();
+ renderSequenceSynth();
+ if(slot>=0)typedSynthView.open(slot);
+}
+function typedSynthSoundSection(){
+ if(typedSlot!==soundSlot())return null;
+ return renderSynthEditor({...confirmedTyped,slot:typedSlot});
 }
 let clipView={source:'draft',firmware:null};
 const liveClips=createLiveClips({link:()=>remoteLink,onChange:next=>{
@@ -436,8 +510,27 @@ remoteLink.onNotify(event=>{
 remoteLink.onState(()=>{if(view==='patterns')liveClips.activate();});
 remoteLink.onNotify(liveClips.notify);
 remoteLink.onState(syncChicagoView);
+function handleLiveSynthControl(event){
+ const control=event.target;
+ if(control.dataset.liveTypedSynth!==undefined){
+  const id=Number(control.dataset.liveTypedSynth),confirmed=confirmedTyped.rows?.find(r=>r.id===id);
+  if(!confirmed)return;
+  const action=control.dataset.liveTypedAction==='1',offset=control.tagName==='SELECT'?0:confirmed.presentation?.offset??0;
+  const value=action?1:(control.tagName==='SELECT'?Number(control.value):control.valueAsNumber)-offset;
+  if(!action)control.value=String(confirmed.value+offset);
+  const sequence=view==='roll'&&synthSequenceOpen;
+  const section=sequence?'sequence':'sound';
+  const routeValid=(view==='sound'||sequence)&&(!confirmedTyped.typed||section===(confirmed.presentation?.section??'sound'));
+  if(routeValid&&typedSlot===soundSlot()&&!confirmedTyped.busy&&Number.isInteger(value))void typedSynthView.write(id,value);
+  return;
+ }
+}
+$('live-synth-sequence')?.addEventListener('change',handleLiveSynthControl);
+$('other-view').addEventListener('click',e=>{if(e.target.dataset.liveTypedAction==='1')handleLiveSynthControl(e);});
 $('other-view').addEventListener('change',event=>{
- const control=event.target;if(control.dataset.liveChicago===undefined)return;
+ const control=event.target;
+ if(control.dataset.liveTypedSynth!==undefined){handleLiveSynthControl(event);return;}
+ if(control.dataset.liveChicago===undefined)return;
  const index=Number(control.dataset.liveChicago),value=Number(control.value);
  const confirmed=confirmedChicago.rows?.find(row=>row.parameter===index);
  if(!confirmed)return;
@@ -447,8 +540,8 @@ $('other-view').addEventListener('change',event=>{
 bindDevicePerformance(remoteLink);
 if(document.body)liveBassRoll=mountBassRoll(document.body,remoteLink,()=>$('part').value,syncHistory);
 // Fit the pattern once layout has settled, and again when the screen turns.
-if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>{fitted=false;if(view==='roll')paintNotes();});
-if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{fitted=false;if(view==='roll')paintNotes();});
+if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>{fitted=false;if(view==='roll'&&!synthSequenceOpen)paintNotes();});
+if(typeof window!=='undefined'&&window.addEventListener)window.addEventListener('resize',()=>{fitted=false;if(view==='roll'&&!synthSequenceOpen)paintNotes();});
 
 // The Web lane stages the qualified shared runtime under /emu/. No fallback
 // simulator is substituted when that deployment is unavailable.

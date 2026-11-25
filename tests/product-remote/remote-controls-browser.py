@@ -312,6 +312,84 @@ async def preset_banks(page, w, h):
     await expect(page.locator('#sound-preset')).to_have_value('1:4')
     await expect(page.locator('#sound-preset-bank')).to_have_value('1')
 
+# Spec-encoded Web MIDI fixture; this is not firmware evidence.
+TYPED_SEQUENCE_MOCK = MOCK.replace(
+    'let bpmX10 = 1250;', """let bpmX10 = 1250;
+    const vals = [12, 12], ctl = [82, 162];
+    function ours(q) { return q.b <= 1 && q.kind === 112 + q.b &&
+      q.a === q.b + 2 && (ctl[q.b] & 127) === q.c; }
+    """).replace(
+    'caps: 0, npat', 'caps: d.CAP.PARAM|d.CAP.WATCH|d.CAP.BASS_BANK_GUARD|d.CAP.TYPED_SYNTH|d.CAP.SYNTH_OWNER, npat'
+).replace(
+    '    const out = {', """    if (r.op === d.OP.SYNTH_OWNER) {reply(r.op,r.seq,{slot:f.slot,bank:f.slot+2,preset:0,settled:1,owner_generation:17});return;}
+    if (r.op === d.OP.DESCRIBE && ours(f)) {reply(r.op,r.seq,{name:'STEP',max:24,def:12,unit:96,names:[]});return;}
+    if (r.op === d.OP.PARAM_GET) {reply(r.op,r.seq,{params:f.params.map(q => ({...q,
+      value:q.kind===41?q.b+2:q.kind===42?0:q.kind===43?1:ours(q)?vals[q.b]:d.KEEP,
+      max:q.kind===41?3:q.kind===42?0:q.kind===43?1:ours(q)?24:0}))});return;}
+    if (r.op === d.OP.PARAM_SET && ours(f)) {
+      if(f.owner_generation!==17||f.expect_bank!==f.a||f.expect!==vals[f.b])return;
+      vals[f.b]=f.value;
+    }
+    if (r.op === d.OP.WATCH) {reply(r.op,r.seq,{mask:f.mask});return;}
+    const out = {"""
+)
+
+async def adjacent_arp_steps(page, w, h):
+    async def tap(selector):
+        await page.locator(selector).tap()
+    roll = page.locator('#roll-grid')
+    panel = page.locator('#live-synth-sequence')
+    nav = page.locator('#synth-sequence-nav')
+    await tap('[data-engine="chicago"]')
+    await expect(roll).to_be_visible()
+    await expect(nav).to_be_hidden()
+    await page.evaluate(TYPED_SEQUENCE_MOCK)
+    await page.evaluate('window.__installDnbox(true)')
+    await tap('#connect')
+    await expect(page.locator('#conn-state')).to_have_text('Connected')
+    for track, slot, cid, target, raw in [('chicago',0,82,'1',13), ('miami',1,162,'11',11)]:
+        await tap(f'[data-engine="{track}"]')
+        await expect(roll).to_be_visible()
+        await expect(panel).to_be_hidden()
+        await expect(nav).to_be_visible()
+        await tap('#open-synth-sequence')
+        await expect(roll).to_be_hidden()
+        await expect(panel).to_be_visible()
+        await expect(page.locator('#return-bass-roll')).to_be_focused()
+        await expect(panel.locator('.synth-step-grid tbody tr')).to_have_count(16)
+        control = panel.locator(f'[data-live-typed-synth="{cid}"]')
+        await control.fill(target)
+        await control.press('Tab')
+        await expect(control).to_have_attribute('value',target)
+        assert await page.evaluate("""async ([slot, id, value]) => {
+          const d = await import('/remote/dnr3.mjs');
+          const journal=window.__dnr3Sent;
+          const matches=q=>q.kind===112+slot&&q.a===slot+2&&q.b===slot&&q.c===(id&127);
+          const n=journal.findIndex(x=>x.op===d.OP.PARAM_SET&&matches(x.fields)&&
+             x.fields.expect_bank===slot+2&&x.fields.expect===12&&x.fields.value===value);
+          return n>=0&&journal.slice(n+1).some(x=>x.op===d.OP.PARAM_GET&&x.fields.params.some(matches));
+        }""",[slot,cid,raw])
+        await tap('#return-bass-roll')
+        await expect(roll).to_be_visible()
+        await expect(panel).to_be_hidden()
+        await expect(page.locator('#open-synth-sequence')).to_be_focused()
+    await tap('#open-synth-sequence')
+    for kit in ('drum909','drum808'):
+        await tap(f'[data-engine="{kit}"]')
+        await expect(roll).to_be_hidden()
+        await expect(nav).to_be_hidden()
+        await expect(page.locator('#other-view [data-drum-note]').first).to_be_visible()
+    await tap('[data-engine="breaks"]')
+    await expect(roll).to_be_hidden()
+    await expect(page.locator('#break-sequence')).to_be_visible()
+    await expect(nav).to_be_hidden()
+    await tap('[data-break-view="notes"]')
+    await expect(roll).to_be_visible()
+    await expect(nav).to_be_hidden()
+    await tap('[data-engine="miami"]')
+    await expect(roll).to_be_visible()
+    await expect(panel).to_be_hidden()
+
 async def main():
     global SOURCE
     out_root = ROOT / '.output'; out_root.mkdir(exist_ok=True)
@@ -323,7 +401,7 @@ async def main():
             n = 0
             try:
                 for w, h in SIZES:
-                    for case in (drums_default, pages_and_params, accent_row, break_screen, tempo, keybed, reset_knob, connection, fw_motion, preset_banks):
+                    for case in (drums_default, pages_and_params, accent_row, break_screen, tempo, keybed, reset_knob, connection, fw_motion, preset_banks, adjacent_arp_steps):
                         context, page, errors = await open_remote(browser, w, h)
                         await case(page, w, h)
                         assert not errors, errors
