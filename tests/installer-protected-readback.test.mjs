@@ -8,7 +8,7 @@ import {runInNewContext} from 'node:vm';
 import {makePackage} from './fixtures/bundled-synthetic.mjs';
 import {withInstallSnapshot} from './fixtures/install-snapshot.mjs';
 
-const html = readFileSync(new URL('../web/product-site/install/index.html', import.meta.url), 'utf8');
+const html = readFileSync(process.env.DNBOX_INSTALLER_HTML || new URL('../web/product-site/install/index.html', import.meta.url), 'utf8');
 const start = html.indexOf('const BLOCKS = 20');
 const end = html.indexOf('const $ = (id)', start);
 const {Updater, installKeepingSlots, logicalImage, readArchive, userSlotRaw, pack78, unpack78} =
@@ -44,7 +44,8 @@ function slotInfo(map, slots, extended = true) {
 function fixture(model, mode, protectedInstall = true, keepFile = null) {
   const product = 'SMK-37 ' + (model === 'pro' ? 'Pro' : 'Elite') + '_900';
   const packageBytes = logicalImage(makePackage(model, {slotMap: newMap, extraFiles: protectedInstall ? [[103, 'fdata.bin', fdata]] : []}));
-  const oldFlash = oldMap.map(([, size]) => Buffer.alloc(size, 255));
+  const liveMap = mode.startsWith('same-map') ? newMap : oldMap;
+  const oldFlash = liveMap.map(([, size]) => Buffer.alloc(size, 255));
   const newFlash = newMap.map(([, size]) => Buffer.alloc(size, 255));
   if (!['legacy-normal','empty','empty-wrong-marker','empty-other-port','empty-dirty'].includes(mode)) oldFlash[1].set(sampleImage);
   const trace = [];
@@ -54,7 +55,7 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
     const input = {name: product, state: 'connected'};
     const output = {...input};
     const flash = phase === 'old' ? oldFlash : newFlash;
-    const map = phase === 'old' ? oldMap : newMap;
+    const map = phase === 'old' ? liveMap : newMap;
     let reply;
     const link = {
       input, output, drain() { reply = null; }, close() {},
@@ -150,7 +151,7 @@ function fixture(model, mode, protectedInstall = true, keepFile = null) {
       assert.deepEqual(Buffer.from(archived.images[1]), sampleImage);
       retained.push(file.length);
       if (mode === 'snapshot-dirty') snapshot.changed();
-      return keepFile ? keepFile(file, name) : mode !== 'retention-denied';
+      return keepFile ? keepFile(file, name) : !mode.endsWith('retention-denied');
     },
   });
   return {install, snapshot, trace, retained, newFlash};
@@ -205,14 +206,34 @@ test('indistinguishable post-reset substitution cannot be handed the saved sampl
     assert.ok(!f.trace.some(t=>[11,12,13,14,52].includes(t.cmd)||t.frame.join()===UPGRADE.join()));
 });
 
-test('legacy non-protected install can use the legacy slot layout', async () => {
+test('non-FDATA without extended snapshot inventory refuses before OTA', async () => {
   const f = fixture('pro', 'legacy-normal', false);
-  const result = await f.install();
-  assert.equal(result.move, null);
-  assert.equal(f.snapshot.commits, 1);
-  assert.equal(f.retained.length, 0);
-  assert.ok(f.trace.some(t => t.frame.join() === UPGRADE.join()));
+  await assert.rejects(f.install, /extended sample layout/);
+  assert.equal(f.snapshot.commits, 0);
+  assert.ok(!f.trace.some(t => [11,12,13,14].includes(t.cmd) || t.frame.join() === UPGRADE.join()));
 });
+
+for (const model of ['elite','pro']) {
+  test(model + ' non-FDATA still requires a reread archive with same-map occupied data', async () => {
+    const denied = fixture(model, 'same-map-retention-denied', false);
+    await assert.rejects(denied.install, e => e.code === 'slotbackupconfirm');
+    assert.equal(denied.snapshot.commits, 0);
+    assert.ok(!denied.trace.some(t => [11,12,13,14].includes(t.cmd) || t.frame.join() === UPGRADE.join()));
+
+    const ready = fixture(model, 'same-map', false);
+    assert.equal((await ready.install()).move, null);
+    assert.equal(ready.snapshot.commits, 1);
+    assert.equal(ready.retained.length, 1);
+    assert.ok(!ready.trace.some(t => [11,12,13,14,52].includes(t.cmd)));
+  });
+  test(model + ' non-FDATA changing the occupied slot map blocks before reboot', async () => {
+    const f = fixture(model, 'normal', false);
+    await assert.rejects(f.install,e => e.code === 'sameunit');
+    assert.equal(f.retained.length, 1);
+    assert.equal(f.snapshot.commits, 0);
+    assert.ok(!f.trace.some(t => [11,12,13,14,52].includes(t.cmd) || t.frame.join() === UPGRADE.join()));
+  });
+}
 
 
 test('the real backup reader and retention dialog block COMMIT until the exact downloaded archive is reread', async () => {

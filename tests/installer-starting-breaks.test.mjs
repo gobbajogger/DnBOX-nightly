@@ -6,11 +6,16 @@ const html=readFileSync(new URL('../web/product-site/install/index.html',import.
 test('firmware confirms once and labels selected samples as download-only',async()=>{
   const els={};const get=id=>els[id]??={};
   const a=html.indexOf('let confirmPending = false;'),b=html.indexOf(' $("version")',a);
-  const fn=runInNewContext(html.slice(a,b)+'\nconfirmWrite',{lastId:null,$:get,t:x=>x});
+  const tStart=html.indexOf('const TEXT = {'),tEnd=html.indexOf('let lang =',tStart);
+  const fn=runInNewContext(html.slice(tStart,tEnd)+'\nconst t=k=>TEXT.en[k];\n'+html.slice(a,b)+'\nconfirmWrite',{lastId:null,$:get});
   const first=fn('SMK-37 Pro_900',true,['personal-br2-zone2']);
   assert.match(els.inconfirmtext.textContent,/download-only[\s\S]*atomic sample snapshot[\s\S]*stop before restart/);
   assert.equal(await fn('SMK-37 Pro_900',true,[]),false);
   els.inconfirmno.onclick();assert.equal(await first,false);
+  const regular=fn('SMK-37 Pro_900',false,[]);
+  assert.match(els.inconfirmtext.textContent,/atomic sample snapshot[\s\S]*stop before restart/);
+  assert.doesNotMatch(els.inconfirmtext.textContent,/not hardware qualified/);
+  els.inconfirmno.onclick();assert.equal(await regular,false);
 });
 test('firmware click leaves starting audio downloads independent of device writes',()=>{
   assert.doesNotMatch(html,/writeStartingBreaks|breakImages/);

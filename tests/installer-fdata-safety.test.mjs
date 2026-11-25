@@ -7,7 +7,7 @@ import {runInNewContext} from 'node:vm';
 import {makePackage} from './fixtures/bundled-synthetic.mjs';
 import {withInstallSnapshot} from './fixtures/install-snapshot.mjs';
 
-const html=readFileSync(new URL('../web/product-site/install/index.html',import.meta.url),'utf8');
+const html=readFileSync(process.env.DNBOX_INSTALLER_HTML || new URL('../web/product-site/install/index.html',import.meta.url),'utf8');
 const body=html.slice(html.indexOf('const BLOCKS = 20'),html.indexOf('const $ = (id)',html.indexOf('const BLOCKS = 20')));
 const ctx={TextEncoder,TextDecoder,crypto:globalThis.crypto,setTimeout:fn=>globalThis.setTimeout(fn,0),clearTimeout};
 runInNewContext(body+'\nthis.api={Updater,installKeepingSlots,verifyFactoryData,logicalImage,packageSlotMap,userSlotRaw,pack78};',ctx);
@@ -20,8 +20,8 @@ const liveHeader=[...fdata.subarray(0,32)].flatMap(b=>[b&127,b>>7]);
 const protocol=[0xf0,0x7d,0x46,0x4c];
 const info=(command,bytes)=>[...protocol,command,...bytes,0xf7];
 const UPGRADE=[0xf0,0x22,0x24,0x35,0x7f,0xf7];
-const bytes=[1,2,3,4];
-const rawSample=userSlotRaw('long',[{adpcm:Uint8Array.from(bytes),n:8,rate:22050}],0x1E000);
+const bytes=new Uint8Array(70 * 1024).fill(0x24);
+const rawSample=userSlotRaw('long',[{adpcm:bytes,n:bytes.length * 2,rate:22050}],0x1E000);
 const slot=new Uint8Array(512+rawSample.data.length).fill(255);
 slot.set(rawSample.hdr);slot.set(rawSample.data,512);
 const zeroSlots=()=>[3,80,0,0,0,0,0,0,0,0,0];
@@ -139,4 +139,19 @@ test('retention UI checks the actual saved bytes instead of accepting a download
 test('combined firmware transaction cannot dispatch automatic starter or restore writes',()=>{
   assert.doesNotMatch(html,/await (writeStartingBreaks|restoreMapped)\(/);
   assert.match(html,/firmware installer does not write samples after restart/);
+});
+
+test('supposedly empty slot rejects dirty header or wrong addressed reply before commit',async()=>{
+ for(const [mode,reason] of [['fresh-dirty-header',/did not verify as empty/],['fresh-wrong-address',/wrong readback address/]]){
+   const {up,trace,snapshot}=fixture(mode);
+   await assert.rejects(installKeepingSlots(up,image,product,'smk',{factoryData:true}),reason);
+   assert.equal(snapshot.commits,0);
+   assert.equal(trace.some(x=>x.join()===UPGRADE.join()),false);
+ }
+});
+test('non-FDATA with no atomic capability refuses before firmware write',async()=>{
+ const {up,trace}=fixture('no-snapshot');
+ const plain=logicalImage(makePackage('pro',{slotMap:nativeMap}));
+ await assert.rejects(installKeepingSlots(up,plain,product,'smk',{factoryData:false}),/Atomic sample backup is required/);
+ assert.equal(trace.some(x=>x.join()===UPGRADE.join()),false);
 });
