@@ -236,3 +236,8 @@ Recovered the four published SMK release-status sections from Pages 42d4027, inc
 - 2026-11-23 UTC: [#186](https://github.com/gobbajogger/DnBOX-nightly/pull/186) restored file-open Installer links to Samples and Projects while preserving hosted workspaces; head `74a2db85`, merged `8e5af820`; offline browser workflow, 130/130 focused Node tests, three hosted deadline controls and 237/237 hosted product byte matches passed.
 
 - 2026-11-23: #190 merged as `dc212587`; [exact-head proof](https://github.com/gobbajogger/DnBOX-nightly/pull/190#issuecomment-7090737396) qualifies the offline Installer, Samples and Projects theme/navigation fix.
+
+## Browser installer snapshot and restart safety
+The installer now requires the device's atomic sample snapshot before any browser update, verifies addressed inventory and an exact retained backup for occupied slots, and stops instead of moving user samples across a restart. It cannot resume in loader mode. A factory-data package additionally requires exact header readback after reboot. The firmware catalog, packages and sample audio are unchanged.
+
+Focused source checks: 108 passed. The matching narrowly scoped Pages overlay passed 35 actual-source checks. Browser qualification and direct Release asset byte comparison remain open; do not promote this source update as a qualified release.

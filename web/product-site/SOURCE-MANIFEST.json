@@ -294,8 +294,8 @@
     },
     {
       "path": "install/index.html",
-      "bytes": 294423,
-      "sha256": "7caad5bb4818007c9a4664260e5ec90f3d8af6408ab074c4079b2b326e30989d"
+      "bytes": 300351,
+      "sha256": "d5e841ff0c6b3497981fe9db0b96d86559f0a615a4e2b718f826b9615ca0177e"
     },
     {
       "path": "install/install.css",
@@ -1149,8 +1149,8 @@
     },
     {
       "path": "starting-break-install.mjs",
-      "bytes": 6738,
-      "sha256": "cfe2c1289ee11c9b33eb6fcaf247444741544d0f15d857f4ae5a2c659010479d"
+      "bytes": 7063,
+      "sha256": "98432c8b66c0899dd42b55a6a5485ffa4572baa8b4e1e62bb103e585416bda7a"
     },
     {
       "path": "starting-break-names.mjs",

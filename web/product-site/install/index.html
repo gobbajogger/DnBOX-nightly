@@ -40,7 +40,7 @@
       <section class="step step-breaks" id="starting-breaks" aria-labelledby="breaks-title">
         <h2 class="step-kicker" id="breaks-title"><span class="no">02</span> Make it yours</h2>
         <div id="sample-picker"></div><p id="samples-status" role="status" aria-live="polite"></p>
-        <p class="breaks-note" id="breaks-note">Chosen breaks go onto your keyboard with the firmware. None installs the firmware only.</p>
+        <p class="breaks-note" id="breaks-note">Preview and download your choices here. The firmware installer does not write samples after restart. To add the archive later, open Import samples and explicitly connect to your keyboard.</p>
         <div class="breaks-actions"><button type="button" id="download-breaks" disabled>Download chosen breaks</button></div><p id="download-status" role="status" aria-live="polite"></p>
       </section>
       <section class="step step-go" aria-labelledby="install-title">
@@ -49,6 +49,13 @@
         <label id="devagreewrap" hidden><input type="checkbox" id="devagree"><span id="consent-copy" data-t="devagree"></span></label>
         <button id="go" disabled data-t="install">Install firmware</button>
         <div id="inconfirm" role="alertdialog" aria-live="assertive" hidden><div id="inconfirmtext"></div><button id="inconfirmok" type="button">OK — write firmware</button><button id="inconfirmno" type="button">Cancel</button></div>
+        <section id="strict-backup-panel" class="backup-confirmation" aria-label="Retain sample backup" hidden>
+          <p>Save the sample backup before updating. If you can’t keep it, cancel the install.</p>
+          <p><a id="strict-backup-download">Download recovery backup</a></p>
+          <label>Select the saved backup to verify <input type="file" id="strict-backup-file" accept=".x0xslots"></label>
+          <p id="strict-backup-status" role="status" aria-live="polite"></p>
+          <button type="button" id="strict-backup-cancel">Cancel install</button>
+        </section>
         <p class="install-hint" id="installhint" aria-live="polite"></p><progress id="bar" max="100" value="0" aria-label="Firmware installation progress"></progress><p id="status" role="status" aria-live="polite" aria-atomic="true"></p>
         <section id="install-check" aria-label="Install checks" hidden><h3>Install checks</h3><p id="receipt-result" role="status"></p><p id="receipt-next"></p><details><summary>Install receipt</summary><pre id="receipt-json" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></details><button type="button" id="report-install" disabled>Report this install</button><p class="small">Review on GitHub before submitting.</p></section>
         <p id="backup-warning" class="backup-confirmation" role="alert" aria-live="assertive" hidden></p>
@@ -595,7 +602,10 @@ class Updater {
         // iOS Web MIDI hosts fire statechange on open/reopen and may swap port
         // objects/ids without any reconnect. Only a real disconnect counts; the
         // device is re-identified by its SysEx model reply before continuing.
-        if (p && p.state === "disconnected" && (p === binding.input || p === binding.output)) binding.lostPort = true;
+        if (p?.state !== "disconnected") return;
+        if (p === binding.input || p === binding.output) binding.lostPort = true;
+        const application = this.application;
+        if (application && (p === application.input || p === application.output)) application.lostPort = true;
       };
       if (binding.observed) this.access.addEventListener("statechange", this.onPortState);
     }
@@ -617,6 +627,19 @@ class Updater {
     this.onPortState = null;
     this.finishRetry = null;
     if (this.binding) this.binding.invalid = true;
+  }
+
+  assertApplicationTarget(dev, product, verified, admitted) {
+    if (!admitted()) throw fail("admission", "The authorized firmware selection changed.");
+    this.singlePort(dev.name);
+    this.assertContinuous(dev);
+    const { input, output } = dev.link;
+    if (!this.verified || !verified || this.application !== verified || verified.product !== product ||
+        dev.id.text !== product || verified.input !== input || verified.output !== output ||
+        verified.lostPort || dev.link.lost || ![...this.access.inputs.values()].includes(input) ||
+        ![...this.access.outputs.values()].includes(output) ||
+        input.state === "disconnected" || output.state === "disconnected")
+      throw fail("model", "The verified application or its USB connection changed. The backup is still available.");
   }
 
   assertAdmitted() {
@@ -739,7 +762,7 @@ class Updater {
   }
 
   // full install: running firmware -> loader -> new firmware
-  async install(image, product, onStep, start = null, admitted = null) {
+  async install(image, product, onStep, start = null, admitted = null, checkApplication = null) {
     this.admitted = admitted;
     const step = onStep || (() => {});
     const dev = await this.find((id) => !IS_OTA(id));
@@ -770,15 +793,15 @@ class Updater {
     step("loader");
     await sleep(3000);
     const ota = await this.waitFor(IS_OTA, 30000);
-    if (!ota) throw fail("noloader", "the update loader did not appear. Replug the USB cable and press Install again: the device stays in update mode until it is finished.");
+    if (!ota) throw fail("noloader", "the update loader did not appear. Use the matching recovery instructions; the browser cannot restart an update from loader mode.");
     const s2 = await this.write(ota, image, step);
-    if (!s2.finished) throw fail(s2.lost ? "lost" : "stopped", `the loader ${s2.lost ? "was disconnected" : "stopped"} after ${s2.served} requests. Replug and press Install again to resume.`);
-    return this.finishApplication(product, step);
+    if (!s2.finished) throw fail(s2.lost ? "lost" : "stopped", `the loader ${s2.lost ? "was disconnected" : "stopped"} after ${s2.served} requests. Use the matching recovery instructions and keep your sample backup.`);
+    return this.finishApplication(product, step, checkApplication);
   }
 
   // Observe a fresh application and its marker under the single-port guard.
   // The protocol has no unit serial or flash hash: this is not exact-byte proof.
-  async finishApplication(product, step) {
+  async finishApplication(product, step, checkApplication = null) {
     this.verified = false;
     this.application = null;
     step("reboot");
@@ -793,6 +816,12 @@ class Updater {
       if (!sameKeyboard(back.id.model, product.split("_")[0]))
         throw fail("model", `The selected keyboard changed model during the update: ${back.id.text}`);
       if (back.id.text !== product) throw fail("mismatch", `installed, but the device reports ${back.id.text}`, back.id.text);
+      if (checkApplication) {
+        await checkApplication(back.link);
+        this.singlePort();
+        this.assertContinuous(back);
+        if (back.link.lost) throw fail("noreturn", "The keyboard disconnected during factory-data readback.");
+      }
       this.targetName = back.name;
       this.application = {product: back.id.text, port_name: back.name, input: back.link.input, output: back.link.output};
     } finally { back.link.close(); }
@@ -1443,6 +1472,10 @@ function slotPackageFiles(image) {
         files[name] = data;
       }
     }
+    if (v.getUint16(0, true) === 103) {
+      if (files["fdata.bin"] || findBytes(entry.subarray(64), "fdata.bin\0") !== 0) return null;
+      files["fdata.bin"] = data;
+    }
     priorEnd = off + size;
   }
   return files["flash.bin"] ? files : null;
@@ -1450,7 +1483,7 @@ function slotPackageFiles(image) {
 
 // the slot map of a package's logical image (fm1pkg_make.slotmap_of): its slot map record; for an older X0X
 // (Felucca loader, no record) the equal 80 KiB slots of that time; [] for any other package (stock firmware)
-function packageSlotMap(image, board = "smk") {
+function packageSlotMap(image, board = "smk", allowLegacy = true) {
   const files = slotPackageFiles(image);
   if (!files) return [];
   const flash = files["flash.bin"], i = board === "fm1" ? 0x92F00 : 0x9CF00;
@@ -1464,7 +1497,7 @@ function packageSlotMap(image, board = "smk") {
     }
     return []; // A damaged current record cannot claim the legacy layout.
   }
-  if (!files["ota.bin"] || findBytes(files["ota.bin"], LOADER_MARK) < 0) return [];
+  if (!allowLegacy || !files["ota.bin"] || findBytes(files["ota.bin"], LOADER_MARK) < 0) return [];
   return Array.from({ length: board === "smk" ? 2 : 3 }, (_, k) => ({ off: LEGACY_BASE[board] + k * 0x14000, size: 0x14000 }));
 }
 
@@ -1554,27 +1587,54 @@ function unpack78(a) {
 }
 
 // one command -> the reply's bytes after the command; a lost frame is sent again (every slot command is safe to repeat)
-async function slotReq(link, cmd, args, ms = 3000, tries = 3) {
+async function slotReq(link, cmd, args, ms = 3000, tries = 3, strictFraming = false, guard) {
   for (let t = 0; t < tries; t++) {
+    guard?.();
     link.drain();
     if (!link.send([...ED, cmd, ...args, 0xF7])) throw new Error("The USB connection was lost.");
     const end = Date.now() + ms;
     while (Date.now() < end) {
       const p = await link.read(end - Date.now());
       if (!p) break;
-      if (p.length > 5 && p[1] === ED[1] && p[2] === ED[2] && p[3] === ED[3] && p[4] === cmd) return p.slice(5, p.length - 1);
+      if (p.length > 5 && p[1] === ED[1] && p[2] === ED[2] && p[3] === ED[3] && p[4] === cmd) {
+        const payload=p.slice(5, -1);
+        if (strictFraming && (p[0] !== 0xf0 || p.at(-1) !== 0xf7 || payload.some(b => !Number.isInteger(b) || b < 0 || b > 127)))
+          throw new Error("Invalid SysEx readback framing.");
+        return payload;
+      }
     }
   }
   throw new Error(`The keyboard did not answer (slot command ${cmd}).`);
 }
 
-async function readSlotLayout(link, ms = 3000, tries = 3) { return parseInfo(await slotReq(link, 15, [], ms, tries)); }
+async function readSlotLayout(link, ms = 3000, tries = 3, extended = false) {
+  const layout = parseInfo(await slotReq(link, 15, [], ms, tries, extended));
+  if (extended && !layout.ext) throw new Error("The keyboard did not return its extended sample layout.");
+  return layout;
+}
 
-async function readSlotBytes(link, k, off, n, onPart) {
+function sameSlotMap(layout, expected, board) {
+  const actual = flashMap(layout, board);
+  return actual.length === expected.length &&
+    actual.every((slot, k) => slot.off === expected[k].off && slot.size === expected[k].size);
+}
+
+async function readSlotBytes(link, k, off, n, onPart, addressed = false) {
   const out = new Uint8Array(n);
   for (let at = 0; at < n;) {
     const want = Math.min(224, n - at), adr = off + at;
-    const b = unpack78((await slotReq(link, 16, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1])).slice(4));
+    const args = [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, (want + 1) >> 1];
+    const reply = await slotReq(link, 16, args, 3000, 3, addressed);
+    if (addressed && args.slice(0,4).some((byte,i) => reply[i] !== byte))
+      throw new Error(`slot ${k + 1}: wrong readback address`);
+    const packed = reply.slice(4), b = unpack78(packed);
+    // Native SMP_READ rounds to byte pairs and packs each group of seven bytes
+    // with a mask. Match the entire reply before accepting any part of a chunk.
+    const canonical = addressed ? pack78(b) : null;
+    if (addressed && (b.length !== 2 * args[4] ||
+        canonical.length !== packed.length ||
+        !canonical.every((byte, i) => byte === packed[i])))
+      throw new Error(`slot ${k + 1}: malformed readback data`);
     if (!b.length) throw new Error(`slot ${k + 1}: no data`);
     out.set(b.subarray(0, Math.min(b.length, n - at)), at);
     at += Math.min(b.length, n - at);
@@ -1585,15 +1645,15 @@ async function readSlotBytes(link, k, off, n, onPart) {
 
 // slot k as an image (the 512-byte header area, then the data), or null if it is empty. Reads only.
 // Layout-aware callers pass the actual capacity; standalone legacy reads retain the 80 KiB default.
-async function readSlotImage(link, k, nz, onPart, capacity = SLOT_SIZE) {
+async function readSlotImage(link, k, nz, onPart, capacity = SLOT_SIZE, addressed = false) {
   if (!nz) return null;
   if (!Number.isSafeInteger(capacity) || capacity < SLOT_HDR_AREA)
     throw new Error(`slot ${k + 1}: invalid sample slot capacity`);
-  const area = await readSlotBytes(link, k, 0, SLOT_HDR_AREA), h = parseHeader(area.subarray(0, SLOT_HDR_LEN));
+  const area = await readSlotBytes(link, k, 0, SLOT_HDR_AREA, undefined, addressed), h = parseHeader(area.subarray(0, SLOT_HDR_LEN));
   if (!h) throw new Error(`slot ${k + 1}: occupied sample slot has an invalid header; backup stopped`);
   if (h.dataLen > capacity - SLOT_HDR_AREA)
     throw new Error(`slot ${k + 1}: sample data exceeds slot capacity`);
-  const data = await readSlotBytes(link, k, SLOT_HDR_AREA, h.dataLen, onPart);
+  const data = await readSlotBytes(link, k, SLOT_HDR_AREA, h.dataLen, onPart, addressed);
   if (crc32(data) !== h.crc) throw new Error(`slot ${k + 1}: the data read back does not match its CRC`);
   const img = new Uint8Array(SLOT_HDR_AREA + data.length);
   img.set(area);
@@ -1602,37 +1662,51 @@ async function readSlotImage(link, k, nz, onPart, capacity = SLOT_SIZE) {
 }
 
 // every slot -> {layout, images} (x0x_slots.backup): SMP_INFO and SMP_READ only
-async function backupSlots(link, onPart) {
-  const layout = await readSlotLayout(link), images = [];
-  for (let k = 0; k < layout.count; k++)
-    images.push(await readSlotImage(link, k, layout.slots[k].nz, onPart && ((d, n) => onPart(k, d, n)), slotSize(layout, k)));
+async function backupSlots(link, onPart, preflight = null) {
+  const addressed = preflight !== null;
+  const layout = await readSlotLayout(link, 3000, 3, addressed), images = [];
+  if (addressed && JSON.stringify(layout) !== JSON.stringify(preflight))
+    throw new Error("The sample layout changed during backup.");
+  for (const [k, slot] of layout.slots.entries()) {
+    const image = await readSlotImage(link, k, slot.nz, onPart && ((d, n) => onPart(k, d, n)), slot.size, addressed);
+    if (addressed && image) {
+      const header = parseHeader(image);
+      if (header.nz !== slot.nz || Math.ceil(header.dataLen / 1024) !== slot.used)
+        throw new Error(`slot ${k + 1}: the backup differs from the sample inventory`);
+    }
+    images.push(image);
+  }
   return { layout, images };
 }
 
 // erase slot k and write the image (null: erase only); throws on a device error (x0x_slots.write_slot)
-async function writeSlotImage(link, k, img, onPart) {
+async function writeSlotImage(link, k, img, onPart, guard) {
   if (!img) {
-    if ((await slotReq(link, 14, [k], 30000))[1]) throw new Error(`slot ${k + 1}: erase failed`);
+    if ((await slotReq(link, 14, [k], 30000, 3, !!guard, guard))[1]) throw new Error(`slot ${k + 1}: erase failed`);
     return;
   }
-  if ((await slotReq(link, 11, [k], 10000))[1]) throw new Error(`slot ${k + 1}: begin (erase) failed`);
+  if ((await slotReq(link, 11, [k], 10000, 3, !!guard, guard))[1]) throw new Error(`slot ${k + 1}: begin (erase) failed`);
   const data = img.subarray(SLOT_HDR_AREA);
   for (let off = 0; off < data.length; off += 256) {
     const adr = SLOT_HDR_AREA + off;
-    const r = await slotReq(link, 12, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, ...pack78(data.subarray(off, off + 256))]);
+    const r = await slotReq(link, 12, [k, adr & 0x7F, (adr >> 7) & 0x7F, (adr >> 14) & 0x7F, ...pack78(data.subarray(off, off + 256))], 3000, 3, !!guard, guard);
     if (r[4]) throw new Error(`slot ${k + 1}: write at 0x${adr.toString(16)} failed (${r[4]})`);
     if (onPart) onPart(Math.min(off + 256, data.length), data.length);
   }
-  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN))], 5000);
+  const e = await slotReq(link, 13, [k, ...pack78(img.subarray(0, img.subarray(SLOT_HDR_LEN, SLOT_HDR_AREA).some(byte => byte !== 0xff) ? SLOT_HDR_AREA : SLOT_HDR_LEN))], 5000, 3, !!guard, guard);
   if (e[1]) throw new Error(`slot ${k + 1}: the keyboard refused the header (${e[1]})`);
 }
 
 // write images[k] into new slot j for each {k, j}, then read each back and compare (x0x_slots.restore_mapped)
-async function restoreMapped(link, todo, images, onPart) {
-  for (const { k, j } of todo) await writeSlotImage(link, j, images[k], onPart && ((d, n) => onPart(j, d, n)));
-  const after = await readSlotLayout(link);
+async function restoreMapped(link, todo, images, onPart, guard, protectedMap = null) {
+  for (const { k, j } of todo) await writeSlotImage(link, j, images[k], onPart && ((d, n) => onPart(j, d, n)), guard);
+  const addressed = protectedMap !== null;
+  const after = await readSlotLayout(link, 3000, 3, addressed);
+  if (addressed && !sameSlotMap(after, protectedMap)) throw new Error("The sample map changed during restoration.");
   for (const { k, j } of todo) {
-    const got = await readSlotImage(link, j, after.slots[j].nz, undefined, slotSize(after, j));
+    guard?.();
+    const got = await readSlotImage(link, j, after.slots[j].nz, undefined, slotSize(after, j), addressed);
+    guard?.();
     if (!got || got.length !== images[k].length || crc32(got) !== crc32(images[k]) ||
         !got.every((byte, i) => byte === images[k][i]))
       throw new Error(`slot ${j + 1}: read back differs from the backup of slot ${k + 1}`);
@@ -1653,7 +1727,7 @@ const snapshotFail = (message) => Object.assign(new Error(message), { code: "slo
 // stock and other custom firmware must not receive an unknown write command.
 async function hasInstallSnapshot(link) {
   let info;
-  try { info = await slotReq(link, 1, [], 1000, 1); }
+  try { info = await slotReq(link, 1, [], 1000, 1, true); }
   catch (e) {
     if (/did not answer \(slot command 1\)/.test(e.message)) return false;
     throw e;
@@ -1722,6 +1796,23 @@ async function commitInstallSnapshot(link, snapshot, admitted = () => true) {
   await snapshotRequest(link, 3, snapshot.token, snapshot.ticket);
 }
 
+// ED_FDATA is read-only. The loader verifies sectors; the running application
+// must report the same 32-byte factory pack header before showing success.
+async function verifyFactoryData(link, expected) {
+  const error = message => Object.assign(new Error(message), {code:"fdata", detail:message});
+  if (expected.length !== 0xF000 || findBytes(expected.subarray(0,4), "S1PK") !== 0)
+    throw error("Invalid factory-data package.");
+  let reply;
+  try { reply = await slotReq(link, 52, [], 2000, 1, true); }
+  catch { throw error("The installed firmware did not answer the factory-data readback."); }
+  if (reply.length !== 65 || reply[0] !== 1) throw error("The installed firmware did not report a valid factory bank.");
+  for (let i=0;i<32;i++) {
+    const low=reply[1+2*i],high=reply[2+2*i];
+    if (low>127 || high>1 || (low | (high<<7)) !== expected[i])
+      throw error("The installed factory-bank header does not match the package.");
+  }
+}
+
 async function cancelInstallSnapshot(link, snapshot) {
   if (!snapshot || snapshot.consumed) return;
   snapshot.consumed = true;
@@ -1729,99 +1820,85 @@ async function cancelInstallSnapshot(link, snapshot) {
   catch (_) { /* A passive watch holds no audio, UI or storage; preserve the original error. */ }
 }
 
-// The install with the slots kept (fm1_install.py's flow, for the installer page). up: fm1ota.js's Updater;
-// hooks: {step(k, a) for up.install, say(key, detail), save(bytes, name) -> true / Promise<true> only after the backup is retained, progress(f),
-// sameKeyboard(model, packageModel) (fm1ota.js's: the slots are read only when the install can go ahead)}.
-// 1. If slots are at risk, attempt an .x0xslots archive and download.
-//    Backup errors warn but never prevent OTA.
-//    2. Install. 3. Reconnect to the new firmware, write the slots back into its map, read them back.
-// Throws the install's errors as they are; a failure in step 3 throws code "slots" (the archive is saved).
-// -> {product, move: null or {risk, todo, skipped, name}}
+// Establish a device-bound snapshot before inventory. Retain an exact archive
+// for all occupied layouts; verify empty inventory under the same snapshot.
+// Never resume without a snapshot or write user samples after reboot.
 async function installKeepingSlots(up, image, product, board, hooks) {
-  const h = Object.assign({ step() {}, say() {}, save() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
+  const h = Object.assign({ step() {}, say() {}, progress() {}, sameKeyboard: () => true, admitted: () => true }, hooks);
   const fail = (code, msg, detail = "") => Object.assign(new Error(msg), { code, detail });
-  let move = null, snapshot = null, unprotected = false;
+  const files = slotPackageFiles(image);
+  const strict = h.factoryData === true;
+  if (!files || Boolean(files["fdata.bin"]) !== strict)
+    throw fail("fdata", "Could not verify package type before the sample snapshot.");
+  const expected = strict ? files["fdata.bin"] : null;
+  const newMap = packageSlotMap(image, board, false);
+  if (strict && (!expected || expected.length !== 0xF000 ||
+      findBytes(expected.subarray(0,4), "S1PK") !== 0 || board !== "smk" ||
+      JSON.stringify(newMap) !== JSON.stringify([
+        {off:0xC2000,size:0x14000}, {off:0xD6000,size:0xF000}, {off:0xB3000,size:0x8000}
+      ]))) throw fail("fdata", "Could not verify the protected factory-data and sample layout.");
+  if (!newMap.length || newMap.some(({off,size}, k) => !off || !size ||
+      (off & 0xfff) || (size & 0xfff) || off + size > 0x100000 ||
+      newMap.slice(0,k).some(m => off < m.off+m.size && m.off < off+size)))
+    throw fail("slotbackup", "The selected package has no verified sample map. No update was started.");
+  let snapshot = null;
   const dev = await up.find((id) => !/^ota-/i.test(id.model));
   if (!dev) throw fail("notfound", "No running keyboard was found for sample preflight; no update was started.");
   if (!h.sameKeyboard(dev.id.model, product.split("_")[0])) {
     dev.link.close();
     throw fail("model", "The keyboard does not match this package; no update was started.");
   }
-  {
+  try {
     up.bind(dev);
     try {
-      // Arm before FIRST layout/occupancy/risk reads, including empty slots.
-      // Otherwise empty-to-occupied and in-progress-import races escape backup.
+      if (await hasInstallSnapshot(dev.link)) snapshot = await beginInstallSnapshot(dev.link);
+    } catch (e) { throw fail("slotbackup", `The sample snapshot could not be established (${e.message}). No update was started.`); }
+    if (!snapshot) throw fail("slotbackup", "Atomic sample backup is required. No update was started.");
+    let layout;
+    try { layout = await readSlotLayout(dev.link, 1000, 2, true); }
+    catch (e) { throw fail("slotbackup", `Sample layout could not be verified (${e.message}). No update was started.`); }
+    const occupied = layout.slots.some(sl => sl.nz);
+    if (occupied) {
+      const oldMap = flashMap(layout, board);
+      h.say("slotsave", layout.slots.flatMap((slot,k) => slot.nz ? [k+1] : []).join(", "));
+      let saved, file;
+      const st = archiveStamp();
       try {
-        if (await hasInstallSnapshot(dev.link)) snapshot = await beginInstallSnapshot(dev.link);
-      } catch (e) { throw fail("slotbackup", `The sample snapshot could not be established (${e.message}). No update was started.`); }
-      let layout;
-      try { layout = await readSlotLayout(dev.link, 1000, 2); }
-      catch (e) {
-        // Any unsupported/failed slot INFO uses the outer warning-only path.
-        throw fail("slotbackup", `Sample layout unavailable (${e.message}); continuing without backup.`);
-      }
-      if (layout && !snapshot)
-        throw fail("slotbackup", "Atomic sample backup unsupported; continuing without backup.");
-      if (layout && layout.slots.some((sl) => sl.nz)) {
-        const oldMap = flashMap(layout, board), newMap = packageSlotMap(image, board);
-        const risk = atRisk(layout, oldMap, newMap);
-        if (risk.length) {
-          h.say("slotsave", risk.map((k) => k + 1).join(", "));
-          let saved;
-          try {
-            saved = await backupSlots(dev.link, (k, d, n) => h.progress((k + d / n) / layout.count));
-          } catch (e) { throw fail("slotbackup", e.message); }
-          const st = archiveStamp();
-          let file;
-          try {
-            file = makeArchive(saved.layout, saved.images, st.created);
-            readArchive(file);                                // verify the in-memory archive
-          } catch (e) { throw fail("slotbackup", e.message); }
-          let retained;
-          try { retained = await h.save(file, st.name); }
-          catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
-          if (retained !== true)
-            throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
-          // SMP_INFO can change while the backup is read. Use the exact verified
-          // snapshot for preservation, just as the Python SlotMove.backup does.
-          const savedMap = flashMap(saved.layout, board);
-          move = { risk: atRisk(saved.layout, savedMap, newMap), oldMap: savedMap, newMap,
-            layout: saved.layout, images: saved.images, name: st.name, todo: [], skipped: [] };
-        }
-      }
-    } catch (e) {
-      // Sample preservation is best effort on legacy firmware. Never bypass
-      // keyboard model or package/controller admission: those remain enforced
-      // independently by Updater.install() and admitted().
-      await cancelInstallSnapshot(dev.link, snapshot);
-      snapshot = null;
-      move = null; // No verified recovery archive exists.
-      unprotected = true;
-      h.say("slotunprotectedwarning", e?.message || String(e));
-    } finally { dev.link.close(); }
-  }
-  if (!h.admitted()) throw fail("unapproved", "The selected package is no longer approved. No update was started.");
-  const ran = await up.install(image, product, h.step,
-    snapshot ? (dev) => commitInstallSnapshot(dev.link, snapshot, h.admitted) : null, h.admitted);
-  if (!move || !move.newMap.length) return { product: ran, move, unprotected };
-  h.say("slotback");
-  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
-  if (!back) throw fail("slots", "the keyboard did not answer after the install", move.name);
-  try {
-    up.bind(back);
-    const layout = await readSlotLayout(back.link);
-    let plan = planMigration(move.images, move.risk, move.oldMap, layout, flashMap(layout, board));
-    plan = guardMigrationLoopMenu(move.layout, move.images, move.risk, move.oldMap, layout,
-      flashMap(layout, board), plan.todo, plan.skipped);
-    move.todo = plan.todo;
-    move.skipped = plan.skipped;
-    const total = plan.todo.length || 1;
-    await restoreMapped(back.link, plan.todo, move.images, (j, d, n) => h.progress(d / n / total));
+        saved = await backupSlots(dev.link, (k, d, n) => h.progress((k + d / n) / layout.count), layout);
+        file = makeArchive(saved.layout, saved.images, st.created);
+        readArchive(file);
+      } catch (e) { throw fail("slotbackup", e.message); }
+      let retained;
+      try { retained = await h.saveStrict(file, st.name); }
+      catch (e) { throw fail("slotbackup", "The recovery backup could not be downloaded (" + e.message + ")."); }
+      if (retained !== true)
+        throw fail("slotbackupconfirm", "The browser could not confirm saving the recovery backup.", st.name);
+      // Use verified byte length, not the rounded inventory; moving an
+      // occupied slot to another index can also change saved LOOP IDs.
+      if (saved.images.some((img,k) => img && (newMap[k]?.off !== oldMap[k].off || img.length > newMap[k].size)))
+        throw fail("sameunit", `No update was started. Keep ${st.name}. This update would require sample recovery, but the browser cannot verify which physical keyboard returns after restart. Export or relocate the affected samples on the connected keyboard before trying again.`);
+    }
+    // Never interpret a damaged or unreadable supposedly empty header
+    // as a safe empty slot. Only recognized empty markers need no archive.
+    for (const [k, slot] of layout.slots.entries()) if (!slot.nz) {
+      let header;
+      try { header = await readSlotBytes(dev.link, k, 0, 32, null, true); }
+      catch (e) { throw fail("slotbackup", e.message); }
+      if (![0,255].some(empty => header.every(b => b === empty)))
+        throw fail("slotbackup", `Slot ${k+1} did not verify as empty. No update was started.`);
+    }
+    if (!h.admitted()) throw fail("unapproved", "The selected package or breaks changed. No update was started.");
   } catch (e) {
-    throw fail("slots", e.message, move.name);
-  } finally { back.link.close(); }
-  return { product: ran, move, unprotected };
+    await cancelInstallSnapshot(dev.link, snapshot);
+    throw e;
+  } finally { dev.link.close(); }
+  const admitted = () => h.admitted();
+  const ran = await up.install(image, product, h.step, async (current) => {
+    if (current.id.text !== dev.id.text || current.link.input !== dev.link.input || current.link.output !== dev.link.output)
+      throw fail("slotbackup", "The keyboard connection changed before the snapshot was committed.");
+    await commitInstallSnapshot(current.link, snapshot, admitted);
+  }, admitted, strict ? link => verifyFactoryData(link, expected) : null);
+  return { product: ran, move: null, unprotected: false, freshBreaks: false };
 }
 
 const $ = (id) => document.getElementById(id);
@@ -1838,10 +1915,10 @@ const TEXT = {
     pickheading: "ビルドを選択", versionlabel: "パッケージのバージョン", modelheading: "機種を選択",
     diagnostics: "技術情報・動作ログ", guidelabel: "始める前に", guideheading: "サンプルを安全に保管",
     guide1: "PC の Chrome または Edge と USB データケーブルを使用してください。",
-    guide2: "大切なサンプルは先に個別に書き出してください。必要時に自動バックアップしますが、別のコピーも推奨します。",
+    guide2: "大切なサンプルは先に個別に書き出してください。インストール前に保存したバックアップを確認してください。ファームウェアのインストーラーは再起動後にサンプルを書き込みません。",
     guide3: "完了するまで USB ケーブルを抜かないでください。",
     guidebackup: "サンプルのバックアップと復元", helpbadge: "ヘルプ", helpheading: "接続と復旧",
-    helptext: "見つからない場合は他の MIDI アプリを閉じてください。中断した更新は再開できます。",
+    helptext: "機器が見つからない場合は他の MIDI アプリを閉じてください。書き込みモードのままの場合は、機種に合った復旧手順を使用してください。ブラウザーでは書き込みを再開しません。",
     helpmanual: "マニュアルを開く", hintblocked: "検証済みの機種別パッケージが必要です。",
     hintverifying: "パッケージの読み込み・整合性確認を待ってください。",
     hintack: "開発版の注意事項を確認し、チェックを入れてください。",
@@ -1864,7 +1941,7 @@ const TEXT = {
     install: "ファームウェアを書き込む", other: "English", connect: "USB 接続",
     connhelp: "Chrome か Edge で開き、USB でつないでから接続を押してください。",
     connected: "接続済み", notconnected: "未接続", looking: "探しています…",
-    otahelp: "書き込みモードです。パッケージを選んでインストールを押すと続きから書けます。",
+    otahelp: "書き込みモードです。ブラウザーでは再開できません。機種に合った復旧手順を使用してください。",
     flashother: "別の機種名で書き込む",
     modelwhy: "同じファームウェアを別の機種名で書き込みます。キーボード本来の機種（古い Elite は Pro と出ることがあります）を選ぶと、あとで M-VAVE の純正に戻せます。Starrykey 37 Play は SMK-37 Pro を使います。",
     manual: "マニュアル（英語）", whatsnew: "更新内容", download: "このパッケージをダウンロード",
@@ -1880,7 +1957,7 @@ const TEXT = {
     stockwhy: "アップグレード・ダウングレード、別のカスタム、純正への復帰は同じ手順です。キーボードの機種名は保たれ、キャリブレーションとペアリングは触りません。スロットが消える場合は先に .x0xslots へ保存します。",
     stock1: "純正が必要なら機種の公式 .fwsc を入手:",
     stock2: "任意の .fwsc を下にドロップ（または選択）。",
-    stock3: "USB で接続し、確認にチェックして書き込む。途中で止まったら挿し直して同じファイルでもう一度。",
+    stock3: "USB で接続し、機種を確認して、サンプル領域を検証できるパッケージを使用してください。書き込みモードのままの場合は、機種に合った復旧手順を使用してください。",
     stockdrop: "ここに .fwsc をドロップ、またはクリックして選択",
     stockconfirm: "これはこのキーボード向けのファームウェアです（機種が合っている）",
     stockinstall: "このパッケージを書き込む",
@@ -1893,16 +1970,16 @@ const TEXT = {
     stockdone: "完了。デバイスは新しいファームウェアで起動しました。",
     confirm: "書き込みますか？\n\n接続中: ",
     confirmto: "\n書き込む: ",
-    confirmrisk: "\n\nキャリブレーションとペアリングは触りません。バックアップに失敗しても警告を表示して自動的にインストールを続行します。サンプルが永久に失われる可能性があります。USB を抜かないでください。",
+    confirmrisk: "\n\nキャリブレーションとペアリングは変更しません。開始前にアトミックなサンプルスナップショットと、必要な復旧用バックアップを確認します。サンプルの自動復元が必要な更新は再起動前に停止します。完了まで USB を抜かないでください。",
     nomidi: "このブラウザでは使えません。Chrome か Edge で開いてください。", loadfail: "読み込めませんでした: ",
     start: "開始します", verify: "確認中", loader: "書き込みモードに切り替え中", write: "書き込み中",
-    reboot: "再起動中", done: "完了しました", stopped: "途中で止まりました。USB を挿し直してもう一度押してください。",
+    reboot: "再起動中", done: "完了しました", stopped: "途中で止まりました。書き込みモードのままの場合は、機種に合った復旧手順を使用してください。",
     error: "エラー: ",
     denied: "MIDI（SysEx）の使用が許可されませんでした。アドレスバーのサイト設定で MIDI を許可して、もう一度押してください。",
     notfound: "機器が見つかりません。USB ケーブル（データ通信用か）を確かめ、MIDI を使う他のアプリを閉じてから、もう一度押してください。",
     model: "接続されている機器はこのパッケージ向けではありません。",
-    lost: "USB の接続が切れました。挿し直してもう一度押してください。",
-    noloader: "書き込みモードの機器が見つかりません。USB を挿し直してもう一度押してください。",
+    lost: "USB の接続が切れました。再接続し、書き込みモードのままの場合は、機種に合った復旧手順を使用してください。",
+    noloader: "書き込みモードの機器が見つかりません。機種に合った復旧手順を使用してください。",
     noreturn: "機器が戻ってきません。電源を入れ直してください。",
     mismatch: "書き込みは終わりましたが、別のバージョンを報告しています: ",
     badpkg: "インストールするファイルが壊れています。ページを再読み込みしてください。",
@@ -1956,10 +2033,10 @@ const TEXT = {
     pickheading: "Choose your build", versionlabel: "Firmware", modelheading: "Keyboard model",
     diagnostics: "Activity log", guidelabel: "Before you begin", guideheading: "Keep your samples safe",
     guide1: "Use Chrome or Edge on a computer with a USB data cable.",
-    guide2: "Export important samples first. Automatic slot backup runs when needed, but keep a separate copy.",
+    guide2: "Export important samples first. Verify the retained backup before installing. The firmware installer does not write samples after restart.",
     guide3: "Keep USB connected until the installation finishes.",
     guidebackup: "Backup and restore samples", helpbadge: "Need help?", helpheading: "Connection or recovery",
-    helptext: "Close other MIDI apps if the keyboard is not detected. Interrupted updates can be resumed.",
+    helptext: "Close other MIDI apps if the keyboard is not detected. If it stays in update mode, use the recovery instructions for your model; the browser will not resume the write.",
     helpmanual: "Open the manual", hintblocked: "Choose a verified package for the selected keyboard model.",
     hintverifying: "Waiting for the firmware download and integrity check.",
     hintack: "Confirm the model and consent above to continue.",
@@ -1982,7 +2059,7 @@ const TEXT = {
     install: "Install firmware", other: "日本語", connect: "Connect USB",
     connhelp: "USB · Chrome or Edge",
     connected: "Connected", notconnected: "Not connected", looking: "Looking for the device…",
-    otahelp: "Update mode. Choose a package and press Install to finish (or resume) the write.",
+    otahelp: "Update mode. The browser cannot resume the write. Use the recovery instructions for your model.",
     flashother: "Flash another keyboard version",
     modelwhy: "The same firmware under another model name. Pick your keyboard's own model (an Elite running an older build may report SMK-37 Pro), so M-VAVE's updater accepts its factory firmware again. Starrykey 37 Play: use SMK-37 Pro.",
     manual: "The manual", whatsnew: "What's new", download: "Download firmware",
@@ -1998,7 +2075,7 @@ const TEXT = {
     stockwhy: "Choose a .fwsc package for this keyboard model. Calibration and pairing stay in place. Sample slots are backed up automatically if the update would overwrite them.",
     stock1: "For stock, get the official .fwsc for your model:",
     stock2: "Drop any .fwsc below (or click to choose it).",
-    stock3: "Connect by USB, tick the confirmation, and install. If a write stops halfway, replug and install the same file again to resume.",
+    stock3: "Connect by USB, confirm the matching model, and use a package with a verified sample layout. If the keyboard stays in update mode, follow its recovery instructions.",
     stockdrop: "Drop the .fwsc file here, or click to choose it",
     stockconfirm: "This package is for this keyboard (matching model)",
     stockinstall: "Install this package",
@@ -2011,16 +2088,16 @@ const TEXT = {
     stockdone: "Done. The device has restarted with the new firmware.",
     confirm: "Install this firmware?\n\nConnected: ",
     confirmto: "\nWill write: ",
-    confirmrisk: "\n\nCalibration and pairing are never touched. Sample backup is attempted but cannot block installation. If it fails, a warning will appear and saved samples may be lost permanently. Keep USB connected until Done.",
+    confirmrisk: "\n\nCalibration and pairing are never touched. The browser will require an atomic sample snapshot and verify any required recovery backup before starting. Updates that would need automatic sample recovery stop before restart. Keep USB connected until Done.",
     nomidi: "Web MIDI is unavailable. Use desktop Chrome or Edge over HTTPS or localhost, and allow MIDI / SysEx permission. Safari and iOS browsers are unsupported.", loadfail: "Could not load: ",
     start: "Starting", verify: "Verifying", loader: "Switching to update mode", write: "Writing",
-    reboot: "Restarting", done: "Done", stopped: "Stopped. Replug the USB cable and press Install again.",
+    reboot: "Restarting", done: "Done", stopped: "Stopped. Use the matching recovery instructions if the keyboard stays in update mode.",
     error: "Error: ",
     denied: "MIDI (SysEx) access was not allowed. Allow MIDI in the site settings (address bar) and press Install again.",
     notfound: "Device not found. Check the USB cable (a data cable), close other apps that use MIDI, and press Install again.",
     model: "The connected device does not match this package.",
-    lost: "The USB connection was lost. Replug it and press Install again.",
-    noloader: "The device in update mode was not found. Replug the USB cable and press Install again.",
+    lost: "The USB connection was lost. Reconnect; if it stays in update mode, use the matching recovery instructions.",
+    noloader: "The device in update mode was not found. Use the matching recovery instructions.",
     noreturn: "The device did not come back. Power-cycle it.",
     mismatch: "Written, but the device reports another version: ",
     badpkg: "The file to install is damaged. Reload the page.",
@@ -2033,6 +2110,7 @@ const TEXT = {
     slotconfirmhelp: "The browser was asked to download this file, but cannot verify that it was saved. Find it in your downloads and keep it somewhere safe. Confirm only after you have the file; otherwise cancel. No firmware has been written yet.",
     slotretained: "I have saved this backup — continue",
     slotcancel: "Cancel installation",
+    fdata: "Factory-bank verification failed. Keep the sample backup. ",
     slotbackupconfirm: "Recovery backup confirmation was not accepted. No firmware or samples were written. Check your selection and retry when you can save the backup: ",
     slotback: "Writing the slots back",
     titlesamples: "Samples", titleprojects: "Songs & projects",
@@ -2429,7 +2507,7 @@ async function scanWorkspaceDevice(allowPostWrite = false) {
     if (!isCurrent()) return;
     const restartTicket = midiAccess.restartCheck?.ticket();
     const up = new Updater(access, () => {});
-    // Prefer a running app; if only the update loader is present, resume from there.
+    // Detect an update loader only to show recovery help; browser writes require a running app.
     let dev = await up.find((id) => !/^ota-/i.test(id.model));
     if (!isCurrent()) { dev?.link.close(); return; }
     let inOta = false;
@@ -2988,14 +3066,17 @@ function fillVersions() {
 }
 
 // In-page confirmation: iOS Web MIDI app webviews block or auto-dismiss window.confirm(), which made Install always "cancelled".
-function confirmWrite(product, breakIds = null) {
+let confirmPending = false;
+function confirmWrite(product, strict = false, breakIds = null) {
+  if (confirmPending) return Promise.resolve(false);
+  confirmPending = true;
   const from = lastId ? lastId.text : "(not connected yet — Connect first if you can)";
   const box = $("inconfirm");
-  const breaks = breakIds === null ? "" : t("confirmbreaks") + (breakIds.length ? startingBreakNames(breakIds).join(", ") + t("confirmbreaksif") : t("confirmbreaksnone"));
-  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + t("confirmrisk");
+  const breaks = breakIds?.length ? "\n\nSelected samples are download-only. No samples will be added during this firmware update." : "";
+  $("inconfirmtext").textContent = t("confirm") + from + t("confirmto") + product + breaks + (strict ? "\n\nThe test build is not hardware qualified." : "") + t("confirmrisk");
   box.hidden = false; box.scrollIntoView && box.scrollIntoView({ block: "center" });
   return new Promise((resolve) => {
-    const done = (v) => { box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
+    const done = (v) => { confirmPending = false; box.hidden = true; $("inconfirmok").onclick = $("inconfirmno").onclick = null; resolve(v); };
     $("inconfirmok").onclick = () => done(true);
     $("inconfirmno").onclick = () => done(false);
   });
@@ -3054,7 +3135,14 @@ async function acceptStock(raw, requestId) {
       sayK("model", ` ${lastId.text} → ${product}`);
       return;
     }
-    stock = { image: logicalImage(raw), product, foreign: true, fm1Stock: isFm1Stock };
+    const logical = logicalImage(raw);
+    const files = slotPackageFiles(logical);
+    if (!files) { sayK("stockbad"); return; }
+    if (files["fdata.bin"]) {
+      sayK("stockbad", " Use the matching command-line installer for a package with Synth One factory data.");
+      return;
+    }
+    stock = { image: logical, product, foreign: true, fm1Stock: isFm1Stock };
     $("dropmeta").textContent = `${product} · ${(raw.length / 1024).toFixed(0)} KB`;
     $("stockconfirm").disabled = false;
     $("stockgo").disabled = writing || !$("stockconfirm").checked;
@@ -3122,31 +3210,52 @@ async function saveSlotBackup(file, name) {
 
 const startingBreaks = () => globalThis.dnboxStartingBreaks || null;
 const chosenStartingBreaks = () => startingBreaks()?.selectedIds() ?? [];
-const startingBreakNames = (ids) => startingBreaks()?.names(ids) ?? ids;
 
-// After the firmware: write the chosen starting breaks with the slot writer, the way
-// fm1_install.py --fresh-install --default-breaks does (only into a keyboard with no samples; read back).
-// The firmware is already installed here, so a failure is reported, never thrown.
-async function writeStartingBreaks(up, images, ids) {
-  sayK("breakswrite");
-  const back = await up.waitFor((id) => !/^ota-/i.test(id.model), 20000);
-  if (!back) { sayK("breaksfailed", t("breaksnoanswer")); return; }
-  try {
-    up.bind(back);
-    const io = { layout: () => readSlotLayout(back.link), readBytes: (k, off, n) => readSlotBytes(back.link, k, off, n),
-      writeSlot: (k, image, onPart) => writeSlotImage(back.link, k, image, onPart) };
-    const r = await startingBreaks().fill(io, images, (d, n) => { $("bar").value = Math.min(100, d / n * 100); });
-    log("starting breaks: " + (r.filled.length ? "slot(s) " + r.filled.join(", ") + " written and read back (" + ids.join(", ") + ")" : "not written (" + r.reason + ")"));
-    if (r.filled.length) sayK("breaksdone", startingBreakNames(ids).join(", "));
-    else sayK(r.reason === "notblank" ? "breakskept" : "breaksnofit");
-  } catch (e) {
-    sayK("breaksfailed", e && e.message);
-    log(String(e && e.stack || e));
-  } finally { back.link.close(); }
+// The download click alone is not retention. Require the specific saved
+// file back, byte-for-byte, before consuming the pending atomic snapshot.
+async function saveVerifiedSlotBackup(file, name) {
+  const panel=$("strict-backup-panel"), download=$("strict-backup-download");
+  const fileInput=$("strict-backup-file"), reject=$("strict-backup-cancel");
+  const status=$("strict-backup-status"), url=URL.createObjectURL(new Blob([file], {type:"application/octet-stream"}));
+  download.href=url;download.download=name;fileInput.value="";panel.hidden=false;
+  status.textContent="Download the backup, then select that saved file here.";
+  panel.scrollIntoView({block:"center"});
+  return new Promise(resolve=>{
+    let closed=false;
+    const finish=retained=>{
+      if (closed) return;closed=true;
+      clearTimeout(timer);window.removeEventListener("pagehide",cancel);
+      fileInput.onchange=reject.onclick=null;fileInput.value="";
+      download.removeAttribute("href");panel.hidden=true;
+      URL.revokeObjectURL(url);resolve(retained);
+    };
+    const cancel=()=>finish(false);
+    const timer=setTimeout(cancel,45000);
+    reject.onclick=cancel;
+    window.addEventListener("pagehide",cancel,{once:true});
+    fileInput.onchange=async()=>{
+      const saved=fileInput.files?.[0];
+      if(!saved || saved.size!==file.length){status.textContent="Choose the full backup file you just downloaded.";return;}
+      try{
+        const bytes=new Uint8Array(await saved.arrayBuffer());
+        if (closed) return;
+        if(bytes.length!==file.length || !bytes.every((b,i)=>b===file[i])){
+          status.textContent="That file is different from this install’s backup. Choose the saved backup.";return;
+        }
+        finish(true);
+      }catch{if(!closed)status.textContent="The saved backup could not be read. Try again or cancel.";}
+    };
+  });
 }
 
 async function run(img, product, opts = {}) {
   if (writing || !workspaceActive) { $("status").textContent = writing ? "An install is already running." : "Open the Firmware tab, then press Install again."; updateInstallGate(); return; }
+  const files = slotPackageFiles(img);
+  if (!files || Boolean(files["fdata.bin"]) !== (opts.factoryData === true)) {
+    sayK("fdata", "No update was started. Choose the verified build again.");
+    updateInstallGate();
+    return;
+  }
   getSampleWorkspace()?.invalidate();
   getProjectWorkspace()?.invalidate();
   writing = true;
@@ -3159,7 +3268,7 @@ async function run(img, product, opts = {}) {
   midiAccess.reports?.reset();
   midiAccess.restartCheck = null;
   const foreign = !!opts.foreign;   // stock / other custom: identity text after reboot may differ
-  let access, up, unprotected = false;
+  let access, up;
   try { access = await midiAccess(); }
   catch (e) {
     writing = false;
@@ -3179,51 +3288,33 @@ async function run(img, product, opts = {}) {
       if (k === "loader") sayK("loader");
       if (k === "write") { sayK("write"); $("bar").value = Math.min(99, ((74 + a) / total) * 100); }
       if (k === "reboot") sayK("reboot");
-      if (k === "done") { $("bar").value = 100; sayK(foreign ? "stockdone" : "done"); }
+      if (k === "done" && !opts.factoryData) { $("bar").value = 100; sayK(foreign ? "stockdone" : "done"); }
     };
     const ota = await up.find((id) => /^ota-/i.test(id.model));
-    if (opts.admitted && !opts.admitted()) { ota?.link.close(); throw new Error(t("unapproved")); }
     if (ota) {
-      // Interrupted upgrade/downgrade/stock write: finish with this package (same keyboard family).
       ota.link.close();
-      const ok = await up.resume(img, step, product, opts.admitted);
-      if (!ok) sayK("stopped"); // Successful completion is emitted only after application readback.
-    } else {
-      const board = /^(SMK|MKE|STARRY)/i.test(product) ? "smk" : "fm1";
-      const r = await installKeepingSlots(up, img, product, board, {
-        step, sameKeyboard, admitted: opts.admitted,
-        say: (k, a) => {
-          if (k === "slotsave") sayK("slotsave", a + t("slotsave2"));
-          else if (k === "slotunprotectedwarning") {
-            $("backup-warning").textContent = t(k) + (a ?? "");
-            $("backup-warning").hidden = false;
-            sayK(k, a || "");
-          } else sayK(k);
-          log(k + " " + (a ?? ""));
-        },
-        progress: (f) => { $("bar").value = Math.min(up.verified ? 100 : 99, f * 100); },
-        save: (file, name) => saveSlotBackup(file, name),
-      });
-      unprotected = r.unprotected === true;
-      if (r.move && !r.move.newMap.length) sayK("slotstock", r.move.name);
-      else if (r.move) {
-        $("bar").value = 100;
-        if (r.move.skipped.length) {
-          sayK("slotspartial", r.move.skipped.join("; ") + ` (${r.move.name})`);
-        } else sayK("slotsdone");
-      }
+      throw new Error("An atomic sample snapshot cannot start in update mode. No browser update was started; use the matching recovery instructions and retain your backup.");
     }
-    if (opts.breakImages && opts.breakImages.size) await writeStartingBreaks(up, opts.breakImages, opts.breakIds);
+    if (opts.admitted && !opts.admitted()) throw new Error(t("unapproved"));
+    const board = /^(SMK|MKE|STARRY)/i.test(product) ? "smk" : "fm1";
+    await installKeepingSlots(up, img, product, board, {
+      step, sameKeyboard, admitted: opts.admitted,
+      say: (k, a) => {
+        if (k === "slotsave") sayK("slotsave", a + t("slotsave2"));
+        else sayK(k);
+        log(k + " " + (a ?? ""));
+      },
+      progress: (f) => { $("bar").value = Math.min(up.verified ? 100 : 99, f * 100); },
+      saveStrict: saveVerifiedSlotBackup, factoryData: opts.factoryData === true,
+    });
+    if (opts.factoryData) { $("bar").value = 100; sayK("done"); }
+
     await scan(true);
-    // Slot restoration and post-write scans have finished. It is now safe to ask for a physical replug.
+    // Firmware verification and the read-only scan finished. No sample writes follow reboot.
     if (!foreign && opts.receiptBuild && up.verified && up.application)
       midiAccess.restartCheck = midiAccess.reports?.observed(access, up.application, opts.receiptBuild);
-    if (unprotected) {
-      sayK("slotunprotecteddone");
-      log("Firmware installed without a recoverable sample-slot backup.");
-    }
   } catch (e) {
-    if (e && e.code && TEXT[lang][e.code]) sayK(e.code, e.detail || "");
+    if (e && e.code && TEXT[lang][e.code]) sayK(e.code, e.detail || (e.code === "slotbackup" ? e.message : ""));
     else sayK("error", e && e.message);
     log(String(e && e.stack || e));
     led("err");
@@ -3236,6 +3327,7 @@ async function run(img, product, opts = {}) {
 }
 
 // Never ignore an Install press silently: say why it did not start.
+let preparingInstall = false;
 const installBlocked = (why) => { $("status").textContent = why; $("installhint").textContent = why; log("install not started: " + why); };
 $("go").parentElement.addEventListener("click", (e) => {
   if (e.target !== $("go") && !(e.target.contains && e.target.contains($("go")))) return;
@@ -3244,22 +3336,17 @@ $("go").parentElement.addEventListener("click", (e) => {
     : "Install is locked: the selected package is not downloaded and verified yet. Choose the model/version again and wait for 'Ready to install'.");
 });
 $("go").addEventListener("click", async () => {
-  if (writing) { installBlocked("An install is already running."); return; }
+  if (writing || preparingInstall) return;
   if (!$("devagree").checked) { installBlocked("Tick the firmware consent box above, then press Install."); return; }
   if ($("go").disabled || !hasCurrentVerifiedSelection()) { installBlocked("The selected package is not verified yet. Choose the model/version again and wait for 'Ready to install'."); return; }
+  preparingInstall = true;
+  try {
   $("status").textContent = "Starting install…";
   $("status").textContent = "Confirm below: press OK — write firmware.";
   const confirmProduct = selectedProduct, confirmSerial = loadSerial, breakIds = chosenStartingBreaks();
-  if (!(await confirmWrite(selectedProduct, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
-  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection() ||
-      chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
-  // Fetch and verify the chosen breaks before anything is written.
-  let breakImages = new Map();
-  if (breakIds.length) {
-    try { breakImages = await startingBreaks().load(breakIds); }
-    catch (e) { installBlocked(t("breaksunavailable")); log("starting breaks: " + (e && e.message)); return; }
-    if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || chosenStartingBreaks().join() !== breakIds.join()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
-  }
+  const factoryData = !!slotPackageFiles(image)?.["fdata.bin"];
+  if (!(await confirmWrite(selectedProduct, factoryData, breakIds))) { installBlocked("Install cancelled. Press Install again and choose OK — write firmware."); return; }
+  if (writing || loadSerial !== confirmSerial || selectedProduct !== confirmProduct || !$("devagree").checked || !hasCurrentVerifiedSelection()) { installBlocked("Selection changed while confirming. Press Install again."); return; }
   const { version: ver, pkg } = currentSelection();
   const selectedImage = image, product = selectedProduct, controller = ctl, serial = loadSerial;
   $("go").disabled = true;
@@ -3288,16 +3375,17 @@ $("go").addEventListener("click", async () => {
   }
   if (!$("devagree").checked) { updateInstallGate(); return; }
   $("go").disabled = true;   // sync before the first await in run()
-  run(img, selectedProduct, { foreign: false, breakImages, breakIds, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
+  run(img, selectedProduct, { foreign: false, factoryData, receiptBuild: selectedInstallBuild(ver, pkg, chosenModel), admitted: () => loadSerial === serial &&
     image === selectedImage && (bundled || ctl === controller) && $("devagree").checked &&
     hasCurrentVerifiedSelection() });
+  } finally { preparingInstall = false; }
 });
 $("stockgo").addEventListener("click", async () => {
-  if (!stock || !$("stockconfirm").checked || writing) return;
+  if (!stock || !$("stockconfirm").checked || writing || preparingInstall) return;
   const st = stock;
   if (!(await confirmWrite(st.product)) || stock !== st || writing || !$("stockconfirm").checked) return;
   $("stockgo").disabled = true;
-  run(stock.image, stock.product, { foreign: true });
+  run(st.image, st.product, { foreign: true, admitted: () => stock === st && $("stockconfirm").checked });
 });
 
 
