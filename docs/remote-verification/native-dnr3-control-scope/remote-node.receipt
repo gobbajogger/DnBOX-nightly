@@ -1,0 +1,20 @@
+✔ Remote engine list is the firmware list (BENGINE_N at the pinned tip) (3.490013ms)
+﹣ firmware-engines.json is regenerated from the firmware source when a checkout is given (0.099216ms) # SKIP
+✔ track order matches the firmware PART_ORDER with default banks (909, 808, BREAK, Bass A, Bass B) (0.407991ms)
+✔ no extra connection mode; unsupported Drum controls are explicitly Draft (1.146269ms)
+✔ drum tracks open the drum sequencer from the Sequence tab (0.939344ms)
+✔ drum steps: every voice, step and the accent row round-trip as STEP_SET (10.862606ms)
+✔ BREAK steps round-trip as STEP_SET part 4 and match the spec vector (0.810654ms)
+✔ parameters and engine choice round-trip as PARAM_SET at the firmware pref address (0.464034ms)
+✔ tempo round-trips as TEMPO bpm_x10 and matches the spec vector (0.363986ms)
+✔ drum parameter page: every firmware SEQUENCE option for drums, formatted and sent as DNR3 (1.081544ms)
+✔ drum pages: four pages of 16 cover the firmware 64 steps; steps past LENGTH are marked (7.331212ms)
+✔ double-tap defaults: lanes and the keybed use the firmware/model defaults (0.407791ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 169.81695
